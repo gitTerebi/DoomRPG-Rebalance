@@ -164,9 +164,6 @@ NamedScript DECORATE OptionalArgs(1) void DisableAugs(bool NoDrain)
             SetFont("AugDView");
             HudMessage("A");
             EndHudMessage(HUDMSG_FADEOUT | HUDMSG_ADDBLEND, 0, "Untranslated", 320.0, 240.0, 3.0, 0.5);
-            
-            // Payout
-            Player.Payout.AugsDisrupted++;
         }
     }
     
@@ -280,7 +277,6 @@ void CheckAugs()
         if (Player.Augs.SlotsUsed > 0 && (Timer() % 35) == 0)
         {
             Player.Augs.Battery -= (Player.Augs.BatteryDrain / 10);
-            Player.Payout.AugBatteryUsed += Player.Augs.BatteryDrain;
             DrawBattery();
         }
         

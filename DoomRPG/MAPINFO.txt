@@ -33,30 +33,13 @@ map Outpost "UAC Outpost"
     levelnum = 999
     cluster = 999
     sky1 = "SKY1"
-    music = "Outpost"
     
     nointermission
-}
-
-// UAC Outpost 2.0 (WIP)
-map Outpost2 "UAC Outpost (WIP)"
-{
- // levelnum = 999
-    cluster = 999
-    sky1 = "textures/outpost/Outpost_Sky.png"
-    music = "OutpostN"
-    
-    VertWallShade = 8
-    HorizWallShade = -8
-    
-    nointermission
-    smoothlighting
 }
 
 cluster 999
 {
     entertext = " "
-    music = "Outpost"
     pic = "PostPic"
 }
 

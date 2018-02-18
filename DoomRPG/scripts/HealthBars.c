@@ -17,86 +17,15 @@ int RPGMap HealthBarClipWidth;
 
 void DrawBarText(HUDBarInfo *Info, str Text)
 {
-    if (GetActivatorCVar("drpg_healthbars_world"))
-    {
-        int Width = 800;
-        int Height = 600;
-        fixed BaseViewHeight = (CompatMode == COMPAT_DRLA ? 48 : 41);
-        fixed HeightAdd;
-        fixed Dist;
-        fixed DrawDist;
-        fixed DrawScale;
-        fixed Angle;
-        fixed VAngle;
-        fixed Pitch;
-        fixed X;
-        fixed Y;
-        
-        // Calculate X/Y and distance
-        X = Info->X - GetActorX(0);
-        Y = Info->Y - GetActorY(0);
-        DrawDist = Distance3D(Info->X, Info->Y, Info->Z, GetActorX(0), GetActorY(0), GetActorZ(0));
-        if (DrawDist > 1024.0)
-            DrawDist = 1024.0;
-        if (DrawDist < 128.0)
-            DrawDist = 128.0;
-        DrawScale = DrawDist / 256;
-        // DrawScale *= (fixed)GetPlayerInfo(PlayerNumber(), PLAYERINFO_DESIREDFOV) / 90.0;
-        SetHudSize(Width * DrawScale, Height * DrawScale, true);
-        
-        // Calculate angles
-        VAngle = VectorAngle(X, Y);
-        Angle = (VAngle - GetActorAngle(0));
-        
-        // Special height adjustments because most monsters heights are just flat out wrong
-        if (Contains(Info->Actor, "Cacodemon"))
-            HeightAdd = 16.0;
-        else if (Contains(Info->Actor, "HellKnight") || Contains(Info->Actor, "BaronOfHell"))
-            HeightAdd = 16.0;
-        else if (Contains(Info->Actor, "PainElemental"))
-            HeightAdd = 16.0;
-        else if (Contains(Info->Actor, "Fatso") || Contains(Info->Actor, "Mancubus"))
-            HeightAdd = 8.0;
-        else if (Contains(Info->Actor, "Revenant"))
-            HeightAdd = 40.0;
-        else if (Contains(Info->Actor, "Archvile"))
-            HeightAdd = 24.0;
-        else if (Contains(Info->Actor, "Cyberdemon"))
-            HeightAdd = 16.0;
-        else if (Contains(Info->Actor, "SpiderMastermind"))
-            HeightAdd = 24.0;
-        
-        if ((Angle < 0.2 || Angle > 0.8))
-        {
-            Pitch = VectorAngle(VectorLength(X, Y), Info->Z + Info->Height + 28.0 + HeightAdd - (GetActorZ(0) - BaseViewHeight + GetActorViewHeight(0)));
-            
-            X = (Width / 2 - ((Width / 2) * Sin(Angle))) * DrawScale;
-            Y = (Height / 2 - ((Height / 2) * Sin(Pitch) * 3 / 2) - ((Height / 2) * Sin(GetActorPitch(0)) * 3 / 2)) * DrawScale;
-            
-            if (HealthBarClipEnabled)
-                SetHudClipRect(X + HealthBarClipX, Y + HealthBarClipY, HealthBarClipWidth, HealthBarClipHeight);
-            HudMessage("%S", Text);
-            EndHudMessage(HUDMSG_FADEOUT | HUDMSG_ALPHA, HBAR_ID + HealthBarID++, "Untranslated", (int)X + HealthBarX, (int)Y + HealthBarY, 0.05, 0.1, HealthBarAlpha);
-            SetHudClipRect(0, 0, 0, 0);
-        }
-        else
-        {
-            HudMessage("");
-            EndHudMessage(HUDMSG_PLAIN, 0, "Untranslated", 0, 0, 0);
-        }
-    }
-    else
-    {
-        fixed X = GetActivatorCVar("drpg_healthbars_x");
-        fixed Y = GetActivatorCVar("drpg_healthbars_y");
-        
-        SetHudSize(GetActivatorCVar("drpg_healthbars_width"), GetActivatorCVar("drpg_healthbars_height"), false);
-        if (HealthBarClipEnabled)
-            SetHudClipRect(X + HealthBarClipX, Y + HealthBarClipY, HealthBarClipWidth, HealthBarClipHeight);
-        HudMessage("%S", Text);
-        EndHudMessage(HUDMSG_FADEOUT | HUDMSG_ALPHA, HBAR_ID + HealthBarID++, "Untranslated", X + HealthBarX, Y + HealthBarY, 0.05, 0.1, HealthBarAlpha);
-        SetHudClipRect(0, 0, 0, 0);
-    }
+    fixed X = GetActivatorCVar("drpg_healthbars_x");
+    fixed Y = GetActivatorCVar("drpg_healthbars_y");
+    
+    SetHudSize(GetActivatorCVar("drpg_healthbars_width"), GetActivatorCVar("drpg_healthbars_height"), false);
+    if (HealthBarClipEnabled)
+        SetHudClipRect(X + HealthBarClipX, Y + HealthBarClipY, HealthBarClipWidth, HealthBarClipHeight);
+    HudMessage("%S", Text);
+    EndHudMessage(HUDMSG_FADEOUT | HUDMSG_ALPHA, HBAR_ID + HealthBarID++, "Untranslated", X + HealthBarX, Y + HealthBarY, 0.05, 0.1, HealthBarAlpha);
+    SetHudClipRect(0, 0, 0, 0);
 }
 
 void DrawBarSprite(HUDBarInfo *Info, str Sprite)

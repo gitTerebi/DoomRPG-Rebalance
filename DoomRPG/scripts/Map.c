@@ -257,21 +257,6 @@ NamedScript Type_OPEN void MapInit()
                 
                 return;
             }
-            
-            // Tip
-            for (int i = 0; i < MAX_PLAYERS; i++)
-            {
-                // Player is not in-game
-                if (!PlayerInGame(i)) continue;
-                
-                // Player has the tips CVAR disabled
-                if (!GetUserCVar(i, "drpg_tips")) continue;
-                
-                SetActivator(0, AAPTR_PLAYER1 << i);
-                GiveTip();
-                SetActivator(0, AAPTR_NULL);
-            }
-            
             CurrentLevel->NeedsRealInfo = false;
         }
         
@@ -287,7 +272,7 @@ NamedScript Type_OPEN void MapInit()
     if (CurrentLevel->UACBase)
         DefaultOutpost = CurrentLevel;
     
-    //WadSmoosh
+    // WadSmoosh
     InitWadSmoosh();
     
     if (CurrentLevel->UACBase || CurrentLevel->UACArena)
@@ -322,23 +307,24 @@ NamedScript Type_OPEN void MapInit()
     // Set up the currently in-effect map event
     SetupMapEvent();
     
-    // Also give a tip for events if they're new to the player
-    if (CurrentLevel->Event != MAPEVENT_NONE)
-        for (int i = 0; i < MAX_PLAYERS; i++)
-        {
-            // Player is not in-game
-            if (!PlayerInGame(i)) continue;
-            
-            // Player has the tips CVAR disabled
-            if (!GetUserCVar(i, "drpg_tips")) continue;
-            
-            // Player has seen this event before
-            if (Players(i).SeenEventTip[CurrentLevel->Event]) continue;
-            
-            SetActivator(Players(i).TID);
-            GiveTip();
-            SetActivator(0, AAPTR_NULL);
-        }
+    // Tip
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        // Player is not in-game
+        if (!PlayerInGame(i)) continue;
+        
+        // Player has the tips CVAR disabled
+        if (!GetUserCVar(i, "drpg_tips")) continue;
+        
+        // Give a tip for events instead if they're new to the player
+        if (CurrentLevel->Event != MAPEVENT_NONE)
+        	// Player has seen this event before
+        	if (Players(i).SeenEventTip[CurrentLevel->Event]) continue;
+        
+        SetActivator(Players(i).TID);
+        GiveTip();
+        SetActivator(0, AAPTR_NULL);
+    }
     
     // Initialize the Dynamic Loot Generator
     // [KS] Call it here so that events can modify the loot it spawns
@@ -368,6 +354,10 @@ NamedScript Type_OPEN void MapInit()
     
     if (CurrentLevel)
         MapLoop();
+        // Jimmy's Jukebox Randomizer compatibility.
+        if (GetCVar("drpg_jjirandomizer_compat"))
+        	if (CurrentLevel->Event == MAPEVENT_NONE) 
+        		CallACS("jjirandomizer");
 }
 
 NamedScriptSync void ReduceMonsterCount()
@@ -469,8 +459,6 @@ NamedScript void MapLoop()
     {
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            Players(i).Payout.ItemsFound++;
-
             if (!PlayerInGame(i) || Players(i).Mission.Type != MT_ITEMS)
                 continue;
             
@@ -491,8 +479,6 @@ NamedScript void MapLoop()
             
             RankBonus = (long int)(RankTable[Players(i).RankLevel]) / 100l;
             Players(i).Rank += RankBonus;
-
-            Players(i).Payout.SecretsFound++;
             
             if (Players(i).Mission.Type != MT_SECRETS)
                 continue;
@@ -628,6 +614,7 @@ NamedScript void MapLoop()
         // All Auras and Harmonized Destruction events are ended by killing everything on the map
         if (Timer() > 4)
         {
+        	SetMusic("");
             AmbientSound("misc/secret", 127);
             SetFont("BIGFONT");
             HudMessage("Everything falls silent.");
@@ -814,7 +801,6 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret)
             EndHudMessage(HUDMSG_FADEOUT, 0, "Gold", 1.5, 0.5, 3.0, 2.0);
             
             Players(i).Rank += RankBonus;
-            Players(i).Payout.ParTimesBeaten++;
         }
         
         AmbientSound("misc/parbonus", 127);
@@ -829,14 +815,6 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret)
         CurrentLevel->EventCompleted = true; // These don't actually end until you leave the map normally
     
     CurrentLevel->Completed = true; // We finished the map
-    
-    // Payout
-    for (int i = 0; i < MAX_PLAYERS; i++)
-    {
-        if (!PlayerInGame(i)) continue;
-        
-        Players(i).Payout.MapsCompleted++;
-    }
     
     UsedSecretExit = Secret;
     PreviousLevel = CurrentLevel;
@@ -1101,7 +1079,6 @@ void MapEventReward()
             
             ActivatorSound("mission/complete", 127);
             PrintMessage(Message);
-            Player.Payout.EventsCompleted++;
         }
     }
 }
@@ -1838,19 +1815,6 @@ NamedScript void EnvironmentalHazardDamage()
         for (int i = 0; i < 65536; i++)
             SectorDamage(i, Damage, "Radiation", "PowerIronFeet", DAMAGE_PLAYERS | DAMAGE_IN_AIR | DAMAGE_SUBCLASSES_PROTECT);
         
-        // Damage Turrets
-        for (int i = 0; i < MAX_PLAYERS; i++)
-        {
-            // Player is not in-game
-            if (!PlayerInGame(i)) continue;
-            
-            // Don't have a turret or it isn't out
-            if (!Players(i).Turret.Upgrade[TU_BUILD] || !Players(i).Turret.Active) continue;
-            
-            Thing_Damage2(Players(i).Turret.TID, Damage, "Radiation");
-            SetUserVariable(Players(i).Turret.TID, "user_damage_type", DT_RADIATION);
-        }
-        
         Delay(32);
     }
 }
@@ -1915,7 +1879,6 @@ NamedScript void ThermonuclearBombEvent()
     int MaxKeys = GameSkill() + 3;
     bool BombSpawned = false;
     bool BombDisarmed = false;
-    bool JC = (!Random(0, 9));
     
     // Calculate bomb time
     CurrentLevel->BombTime = (GetLevelInfo(LEVELINFO_PAR_TIME) ? GetLevelInfo(LEVELINFO_PAR_TIME) * 2 : GetCVar("drpg_default_par_seconds") * 2) * 35;
@@ -1951,16 +1914,8 @@ NamedScript void ThermonuclearBombEvent()
         Delay(1);
     }
     
-    if (JC)
-    {
-        SetMusic("Bomb2");
-        Delay(35 * 3);
-    }
-    else
-    {
-        SetMusic("");
-        Delay(35);
-    }
+    SetMusic("");
+    Delay(35);
     
     // Warning message
     SetHudSize(640, 480, false);
@@ -1973,8 +1928,7 @@ NamedScript void ThermonuclearBombEvent()
     
     Delay(35 * 4);
     
-    if (!JC)
-        SetMusic("Bomb");
+    SetMusic("Bomb");
     
     // Set bomb's active state
     SetActorState(BombTID, "SpawnActive");
@@ -2257,9 +2211,12 @@ NamedScript void OneMonsterEvent()
     
     Delay(35); // Allow the replacements to actually spawn.
     
+    SetMusic("OneMonst");
+    
     while (ThingCountName(GetMissionMonsterActor(CurrentLevel->SelectedMonster->Actor), 0) > 0)
         Delay(1);
     
+    SetMusic("");
     AmbientSound("misc/secret", 127);
     HudMessage("Everything falls silent.");
     EndHudMessageBold(HUDMSG_FADEOUT, 0, "LightBlue", 0.5, 0.7, 5.0, 5.0);
@@ -2708,6 +2665,7 @@ NamedScript Type_RESPAWN void DoomsdaySupplement()
 NamedScript void ViciousDownpourEvent()
 {
     SetMusic("AcidRain");
+    ChangeSky("ACIDSKY", "-");
     SpawnForced("DRPGRainAmbiance", 0, 0, 0, 0, 0);
     
     for (int i = 0; i < MAX_PLAYERS; i++)
@@ -2740,7 +2698,7 @@ NamedScript void DarkZoneEvent()
     int LastColor = 0;
     
     SetMusic("DarkZone");
-    ChangeSky("BlackSky", "-");
+    ChangeSky("DZONESK", "-");
     
     for (int i = 0; i < 65536; i++)
         Light_Fade(i, 16, ShadowTime);

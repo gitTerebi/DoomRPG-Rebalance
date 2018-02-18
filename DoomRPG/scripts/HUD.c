@@ -1009,103 +1009,6 @@ NamedScript Type_ENTER void MultiplayerHUD()
     goto Start;
 }
 
-NamedScript Type_ENTER void TurretHUD()
-{
-    str const AmmoColors[5] =
-    {
-        "Brick",
-        "Orange",
-        "Gray",
-        "LightBlue",
-        "Green"
-    };
-
-    InterpData Health;
-    Health.TimerMaxCap = 2;
-
-    fixed X, Y;
-    str AmmoIcon;
-    int Ammo[TW_MAX];
-    
-    Start: NOP;
-
-    if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
-    {
-        Delay(1);
-        goto Start;
-    }
-
-    while (Player.Turret.Active || Player.Turret.Maintenance || GetActivatorCVar("drpg_hud_preview"))
-    {
-        X = GetActivatorCVar("drpg_turret_x");
-        Y = GetActivatorCVar("drpg_turret_y");
-
-        Ammo[TW_BULLET] = Player.Turret.BulletAmmo;
-        Ammo[TW_PELLET] = Player.Turret.ShellAmmo;
-        Ammo[TW_ROCKET] = Player.Turret.RocketAmmo;
-        Ammo[TW_PLASMA] = Player.Turret.PlasmaAmmo;
-        Ammo[TW_RAILGUN] = Player.Turret.RailAmmo;
-
-        AmmoIcon = "";
-
-        SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
-
-        Health.Value = Player.Turret.Health;
-
-        // Interpolation
-        Interpolate(&Health);
-
-        // Determine Ammo Icon
-        switch (Player.Turret.Weapon)
-        {
-            case TW_BULLET:                     AmmoIcon = "CLIPA0";    break;
-            case TW_PELLET:                     AmmoIcon = "SHELA0";    break;
-            case TW_ROCKET:                     AmmoIcon = "ROCKA0";    break;
-            case TW_PLASMA: case TW_RAILGUN:    AmmoIcon = "CELLA0";    break;
-        }
-
-        if (Player.Turret.Maintenance)
-        {
-            // Icon
-            PrintSprite("TMaint", 0, X + -16.1, Y - 4.0 + (int)(Sin((fixed)Timer() / 128.0) * 8.0), 0.05);
-
-            // Timers
-            SetFont("BIGFONT");
-            HudMessage("%S", FormatTime(Player.Turret.ChargeTimer * 35));
-            EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 24.1, Y - 16.0, 0.05);
-            HudMessage("%S", FormatTime(Player.Turret.RepairTimer * 35));
-            EndHudMessage(HUDMSG_PLAIN, 0, (Player.Turret.PaidForRepair ? "Brick" : "Red"), X + 24.1, Y, 0.05);
-            HudMessage("%S", FormatTime(Player.Turret.RefitTimer * 35));
-            EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", X + 24.1, Y + 16.0, 0.05);
-        }
-        else if (!Player.Turret.Maintenance || GetActivatorCVar("drpg_hud_preview"))
-        {
-            // Icons
-            PrintSprite("PTURA3A7", 0, X + 0.1, Y + (int)(Sin((fixed)Timer() / 64.0) * 8.0), 0.05);
-            if (Player.Turret.Weapon > 0)
-                PrintSprite(AmmoIcon, 0, X + 0.1, Y + 24.0, 0.05);
-
-            // Health, Battery, Ammo
-            SetFont("BIGFONT");
-            HudMessage("%ld", Health.DisplayValue);
-            EndHudMessage(HUDMSG_PLAIN, 0, "Red", X + 24.1, Y - 16.0, 0.05);
-            HudMessage("%S", FormatTime(Player.Turret.Battery * 35));
-            EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 24.1, Y, 0.05);
-            if (Player.Turret.Weapon != TW_NONE)
-            {
-                HudMessage("%d", Ammo[Player.Turret.Weapon]);
-                EndHudMessage(HUDMSG_PLAIN, 0, AmmoColors[Player.Turret.Weapon - 1], X + 24.1, Y + 16.0, 0.05);
-            }
-        }
-
-        Health.OldValue = Player.Turret.Health;
-        Delay(1);
-    }
-
-    Delay(1);
-    goto Start;
-}
-
 NamedScript Type_ENTER void StatHUD()
 {
     int *Stats[STAT_MAX] =
@@ -1281,8 +1184,6 @@ NamedScript Type_ENTER void DRLAHUD()
     };
 
     str Name, Color;
-    str BarGraphic;
-    fixed Alpha;
     
     Start: NOP;
 
@@ -1309,7 +1210,7 @@ NamedScript Type_ENTER void DRLAHUD()
     {
         fixed XOff = X - 54.0; // +27.0 offset
 
-        if (Devices > 0 || GetCVar("drpg_hud_preview"))
+        if (Devices > 0)
         {
             SetFont("BIGFONT");
             if (Devices >= DRLA_DEVICE_MAX)
@@ -1325,7 +1226,7 @@ NamedScript Type_ENTER void DRLAHUD()
             PrintSprite("PHS1I0", 0, XOff - 7.0, Y, 0.05);
             XOff -= 27.0;
         }
-        if (Skulls > 0 || GetCVar("drpg_hud_preview"))
+        if (Skulls > 0)
         {
             SetFont("BIGFONT");
             if (Skulls >= DRLA_SKULL_MAX)
@@ -1341,7 +1242,7 @@ NamedScript Type_ENTER void DRLAHUD()
             PrintSprite("ISKLC0", 0, XOff + 11.0, Y + 16.0, 0.05);
             XOff -= 27.0;
         }
-        if (ModPacks > 0 || GetCVar("drpg_hud_preview"))
+        if (ModPacks > 0)
         {
             SetFont("BIGFONT");
             if ((!IsTechnician && ModPacks >= 4) || (IsTechnician && ModPacks >= 8))
@@ -1357,7 +1258,7 @@ NamedScript Type_ENTER void DRLAHUD()
             PrintSprite("GMODICON", 0, XOff + 1.0, Y, 0.05);
             XOff -= 27.0;
         }
-        if (Armors > 0 || GetCVar("drpg_hud_preview"))
+        if (Armors > 0)
         {
             SetFont("BIGFONT");
             if (Armors >= DRLA_ARMOR_MAX)
@@ -1373,7 +1274,7 @@ NamedScript Type_ENTER void DRLAHUD()
             PrintSprite("HARMOR", 0, XOff + 1.0, Y + 4.0, 0.05);
             XOff -= 27.0;
         }
-        if (Weapons > 0 || GetCVar("drpg_hud_preview"))
+        if (Weapons > 0)
         {
             SetFont("BIGFONT");
             if (Weapons >= 6)
@@ -1578,82 +1479,82 @@ NamedScript Type_ENTER void DRLAHUD()
                     EndHudMessage(HUDMSG_PLAIN, 0, "White", X - 50.0, Y + 12.0, 0.05);
                 }
                 */
-                if (Power[0] > 0 || GetCVar("drpg_hud_preview"))
+                if (Power[0] > 0)
                 {
                     HudMessage("%d", Power[0]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Red", X - 30.0, Y + 20.0, 0.05);
                 }
-                if (Bulk[0] > 0 || GetCVar("drpg_hud_preview"))
+                if (Bulk[0] > 0)
                 {
                     HudMessage("%d", Bulk[0]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Blue", X - 20.0, Y + 20.0, 0.05);
                 }
-                if (Agility[0] > 0 || GetCVar("drpg_hud_preview"))
+                if (Agility[0] > 0)
                 {
                     HudMessage("%d", Agility[0]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Green", X - 10.0, Y + 20.0, 0.05);
                 }
-                if (Tech[0] > 0 || GetCVar("drpg_hud_preview"))
+                if (Tech[0] > 0)
                 {
                     HudMessage("%d", Tech[0]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X, Y + 20.0, 0.05);
                 }
-                if (Sniper[0] > 0 || GetCVar("drpg_hud_preview"))
+                if (Sniper[0] > 0)
                 {
                     HudMessage("%d", Sniper[0]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Purple", X + 10.0, Y + 20.0, 0.05);
                 }
-                if (Firestorm[0] > 0 || GetCVar("drpg_hud_preview"))
+                if (Firestorm[0] > 0)
                 {
                     HudMessage("%d", Firestorm[0]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Orange", X + 20.0, Y + 20.0, 0.05);
                 }
-                if (Nano[0] > 0 || GetCVar("drpg_hud_preview"))
+                if (Nano[0] > 0)
                 {
                     HudMessage("%d", Nano[0]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 30.0, Y + 20.0, 0.05);
                 }
-                if (DemonArtifacts[0] > 0 || GetCVar("drpg_hud_preview"))
+                if (DemonArtifacts[0] > 0)
                 {
                     HudMessage("%d", DemonArtifacts[0]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "DarkRed", X + 40.0, Y + 20.0, 0.05);
                 }
-                if (Power[1] > 0 || GetCVar("drpg_hud_preview"))
+                if (Power[1] > 0)
                 {
                     HudMessage("%d", Power[1]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Red", X - 30.0, Y + 32.0, 0.05);
                 }
-                if (Bulk[1] > 0 || GetCVar("drpg_hud_preview"))
+                if (Bulk[1] > 0)
                 {
                     HudMessage("%d", Bulk[1]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Blue", X - 20.0, Y + 32.0, 0.05);
                 }
-                if (Agility[1] > 0 || GetCVar("drpg_hud_preview"))
+                if (Agility[1] > 0)
                 {
                     HudMessage("%d", Agility[1]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Green", X - 10.0, Y + 32.0, 0.05);
                 }
-                if (Tech[1] > 0 || GetCVar("drpg_hud_preview"))
+                if (Tech[1] > 0)
                 {
                     HudMessage("%d", Tech[1]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X, Y + 32.0, 0.05);
                 }
-                if (Sniper[1] > 0 || GetCVar("drpg_hud_preview"))
+                if (Sniper[1] > 0)
                 {
                     HudMessage("%d", Sniper[1]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Purple", X + 10.0, Y + 32.0, 0.05);
                 }
-                if (Firestorm[1] > 0 || GetCVar("drpg_hud_preview"))
+                if (Firestorm[1] > 0)
                 {
                     HudMessage("%d", Firestorm[1]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "Orange", X + 20.0, Y + 32.0, 0.05);
                 }
-                if (Nano[1] > 0 || GetCVar("drpg_hud_preview"))
+                if (Nano[1] > 0)
                 {
                     HudMessage("%d", Nano[1]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 30.0, Y + 32.0, 0.05);
                 }
-                if (DemonArtifacts[1] > 0 || GetCVar("drpg_hud_preview"))
+                if (DemonArtifacts[1] > 0)
                 {
                     HudMessage("%d", DemonArtifacts[1]);
                     EndHudMessage(HUDMSG_PLAIN, 0, "DarkRed", X + 40.0, Y + 32.0, 0.05);
@@ -1661,7 +1562,7 @@ NamedScript Type_ENTER void DRLAHUD()
             }
 
             // Drop Icon
-            if (CheckInventory("RLWeaponDrop") || CheckInventory("RLScavengerDrop") || GetCVar("drpg_hud_preview"))
+            if (CheckInventory("RLWeaponDrop") || CheckInventory("RLScavengerDrop"))
                 PrintSpritePulse("DROPICON", 0, X - 30.0, Y + 12.0, 0.75, 32.0, 0.25);
 
             // Icon
@@ -1696,37 +1597,7 @@ NamedScript Type_ENTER void DRLAHUD()
             break;
         }
     }
-    
-    // Stamina Bar
-    for (int i = 0; i < 15; i++)
-    {
-        if (i * 6.66 > CheckInventory("RLStamina"))
-            break;
-        
-        if (i >= 0 && i <= 2)
-        {
-            BarGraphic = "RankEmb5";
-            Alpha = 0.9 + Sin((Timer() + (i * 4)) / 16.0) * 0.1;
-        }
-        if (i >= 3 && i <= 5)
-        {
-            BarGraphic = "RankEmb4";
-            Alpha = 0.9 + Sin((Timer() + (i * 4)) / 32.0) * 0.1;
-        }
-        if (i >= 6 && i <= 9)
-        {
-            BarGraphic = "RankEmb3";
-            Alpha = 0.9 + Sin((Timer() + (i * 4)) / 48.0) * 0.1;
-        }
-        if (i >= 10 && i <= 14)
-        {
-            BarGraphic = "RankEmb2";
-            Alpha = 0.9 + Sin((Timer() + (i * 4)) / 64.0) * 0.1;
-        }
-        
-        PrintSpriteAlpha(BarGraphic, 0, X - 160 + (i * 8), Y + 32, 0.05, Alpha);
-    }
-    
+
     Delay(1);
     goto Start;
 }

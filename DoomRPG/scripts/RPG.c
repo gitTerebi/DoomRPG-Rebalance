@@ -2,8 +2,6 @@
 
 #include "Arena.h"
 #include "Augs.h"
-#include "GUI.h"
-#include "GUIMenu.h"
 #include "HealthBars.h"
 #include "HUD.h"
 #include "ItemData.h"
@@ -19,11 +17,10 @@
 #include "Skills.h"
 #include "Stats.h"
 #include "Stims.h"
-#include "Turret.h"
 #include "Utils.h"
 
 // Version
-const str Version = "v0.10.1 Beta - Powered by GDCC!";
+const str Version = "SE BUILD 18 - Powered by GDCC!";
 
 // Flags
 bool Transported;
@@ -114,9 +111,6 @@ NamedScript Type_OPEN void GlobalInit()
     // Initial build of SkillData
     BuildSkillData();
 
-    // Initial build of TurretUpgradeData
-    BuildTurretData();
-
     // Initialize the Item handling script
     ItemHandler();
 }
@@ -161,9 +155,8 @@ NamedScript Type_ENTER void Init()
         GiveInventory("DRPGCredits", GetActivatorCVar("drpg_start_credits"));
         Player.PrevCredits = CheckInventory("DRPGCredits");
         GiveInventory("DRPGModule", GetActivatorCVar("drpg_start_modules"));
-        GiveInventory("DRPGTurretPart", GetActivatorCVar("drpg_start_turretparts"));
 
-        // Level/Rank/PP
+        // Level/Rank
         if (GetCVar("drpg_start_level") > 0)
         {
             Player.Level = GetActivatorCVar("drpg_start_level");
@@ -174,8 +167,6 @@ NamedScript Type_ENTER void Init()
             Player.RankLevel = GetActivatorCVar("drpg_start_rank");
             Player.Rank = RankTable[Player.RankLevel - 1];
         }
-        if (GetCVar("drpg_start_pp") > 0)
-            Player.PP = GetCVar("drpg_start_pp");
 
         // Stats
         Player.Strength = GetActivatorCVar("drpg_start_strength");
@@ -234,12 +225,6 @@ NamedScript Type_ENTER void Init()
                 Player.NewShieldParts[i][j] = true;
         for (int i = 0; i < MAX_ACCESSORIES; i++)
             Player.NewShieldAccessoryParts[i] = true;
-
-        // Setup first payout
-        Player.PayTimer = 35 * 60 * GetCVar("drpg_pay_interval");
-
-        // Build this player's GUI menu
-        CreateGUIMenu();
 
         // Done first run
         Player.FirstRun = true;
@@ -352,7 +337,6 @@ NamedScript void Loop()
 
     // Handle the pulsating menu colors
     MenuCursorColor = CursorColors[(Timer() / 3) % 6];
-    PayReadyColor = PayReadyColors[(Timer() / 3) % 4];
 
     // Calculate Shop Discount
     Player.ShopDiscount = (int)((Player.RankLevel * 2.1) + (CurrentLevel->UACBase ? (Player.ShopCard * 5) : 0));
@@ -514,7 +498,6 @@ NamedScript void PlayerDamage()
             StatusDamage(DamageTaken, RandomFixed(0.0, 100.0), Critical);
         ResetRegen();
         DamageHUD(DamageTaken, Critical);
-        Player.Payout.DamageTaken += DamageTaken;
     }
 
     // Reset attacker's ID and critical damage state
@@ -564,7 +547,6 @@ NamedScript void PlayerDamage()
                 Player.ActualHealth = Player.HealthMax;
                 ActivatorSound("health/resurrect", 127);
                 TakeInventory("DRPGLife", 1);
-                Player.Payout.LivesUsed++;
 
                 SetHudSize(320, 200, false);
                 SetFont("BIGFONT");
@@ -620,12 +602,6 @@ NamedScript void MoneyChecker()
     Delay(1);
 
     AfterCredits = CheckInventory("DRPGCredits");
-
-    // Payout
-    if (AfterCredits > BeforeCredits)
-        Player.Payout.CreditsFound += AfterCredits - BeforeCredits;
-    if (AfterCredits < BeforeCredits)
-        Player.Payout.CreditsSpent -= AfterCredits - BeforeCredits;
 
     goto Start;
 }
@@ -704,12 +680,10 @@ NamedScript void GiveTip()
         { "\CjLevel",                           "Your level determines your basic strength and progress through the game. Your level is increased by killing monsters, completing missions and achieving combos.", },
         { "\CkRank",                            "Your rank determines your standing within the UAC. Rank will determine how much money you are paid by the UAC as well as the discount you will receive when purchasing items from the shop.", },
         { "\CtCombo",                           "The combo system allows you to kill enemies in rapid succession in order to gain bonus XP and Rank. When an enemy is killed, you will gain +1 to your combo counter and your combo timer will reset. When your timer reaches its cooldown point, indicated by the split between the red and green in the bar, it will add the indicated XP and Rank to your totals and calculate a bonus (the green number). If you keep incrementing your combo during the cooldown period, you can keep stacking XP and Rank into the bonus. When the combo timer ends, your combo will be completely reset and your bonus will be added to your totals.", },
-        // TODO: PP Hint
 
         // Currencies
         { "\CfCredits",                         "Credits are the universal currency used by the UAC and are used for purchasing goods in the shop.", },
         { "\CdModules",                         "Modules are used to upgrade your stats and skills. They are typically given by level ups, missions and completing level events as well as occasionally being dropped by monsters and found in the world.", },
-        { "\CcTurret Parts",                    "Turret parts are used to build and upgrade your turret. They can be found by disassembling broken-down turrets you find in the world.", },
 
         // Stats
         { "\CgStrength",                        "Your Strength stat determines the extra damage you deal with all types of attacks.", },
@@ -750,12 +724,6 @@ NamedScript void GiveTip()
         { "\CcStim Booster Vials",              "Booster vials are special vials which have unique stat-related effects. Purifier vials increase the duration that stat vials will last. Potency vials increase all stats at once.", },
         { "\CcStim Powerup Vials",              "Powerup vials give various special powers for a limited duration. Unlike the Stat stims, they are unaffected by Purifier vials, and their time is affected solely by the amount of vials put into the Stim.", },
         { "\CdToxicity",                        "Toxicity is a measure of the radiation and toxins in your body. Toxicity is increased by taking radiation or toxin related damage, such as standing on damage floors. The higher your toxicity levels get, the more penalties you will suffer. If your toxicity levels reach 100%, you will die. Toxicity will naturally dissipate over time, the speed of which is determined by your Regeneration stat.", },
-
-        // Turrets
-        { "\CdTurrets",                         "Turrets are portable sentry drones which can be built and equipped with multiple offensive and defensive upgrades and abilities to aid the user. Turrets must initially be built from turret parts, at which point the turret may be used and upgraded further as more parts become available.", },
-        { "\CdDestroyed Turrets",               "In the world, you will find destroyed turrets. These turrets can be scavenged for spare turret parts. Some turrets will be in better condition than others, allowing for more parts to be scavenged.", },
-        { "\CdTurret Maintenance",              StrParam("Your turret will need routine maintenance performed on it in order to keep it in working condition. There are three components to maintenance: charging, repairing and refitting. Charging will charge the turret's internal battery, allowing it to stay active on the field. Repairing will patch up the turret, restoring it's health. Refitting occurs when upgrades are performed on the turret, and must be allowed to finish before the turret can be used again. In order for maintenance to begin and to continue, a steady supply of Credits will be deducted from your account. To send the turret in for maintenance, in either the turret menu or with the turret command wheel open, press \Cd%jS\C-.", "+speed"), },
-        { "\CdTurret Deployment",               StrParam("To quickly deploy or deactivate your turret, use \Cd%jS\C- + \Cd%jS\C-.", "+speed", "+user2"), },
 
         // Monsters
         { "\CgMonster Stats",                   "Like you, monsters also have a level and stats which will affect their abilities in various ways.", },
@@ -1511,8 +1479,6 @@ NamedScript Type_DEATH void Dead()
             GiveActorInventory(Players(i).TID, "DRPGShieldAvengerDefense", 1);
         }
     }
-
-    Player.Payout.Deaths++;
 
     // Remove TID
     Thing_ChangeTID(Player.TID, 0);

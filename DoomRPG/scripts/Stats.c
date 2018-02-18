@@ -9,7 +9,6 @@
 #include "Outpost.h"
 #include "Skills.h"
 #include "Augs.h"
-#include "Payout.h"
 
 // Globals
 long int XPCurve;
@@ -95,14 +94,12 @@ NamedScript DECORATE void TryStatusEffect(int Type, int Time, int Intensity)
     if (RandomFixed(0.0, 100.0) <= Player.StatusEffectResist)
     {
         ActivatorSound("health/statuseffect2", 127);
-        Player.Payout.StatusEffectsEvaded++;
     }
     else // Apply status effect
     {
         ActivatorSound("health/statuseffect", 127);
         Player.StatusTypeHUD = Type;
         StatusEffect(Type, Time, Intensity);
-        Player.Payout.StatusEffectHit++;
     }
 }
 
@@ -116,9 +113,6 @@ NamedScript void AddXP(int PlayerNum, long int XP, long int Rank)
     
     Players(PlayerNum).XPGained += XP;
     Players(PlayerNum).RankGained += Rank;
-    
-    Players(PlayerNum).Payout.XP += XP;
-    Players(PlayerNum).Payout.Rank += Rank;
     
     if (Players(PlayerNum).Aura.Type[AURA_WHITE].Active)
     {
@@ -156,7 +150,7 @@ NamedScript KeyBind void UseMedkit()
     Player.ActualHealth += HealAmount;
     Player.Medkit -= HealAmount;
     
-    ActivatorSound("items/health", 127);
+    ActivatorSound("items/healthuse", 127);
 }
 
 void InitXPTable()
@@ -259,7 +253,6 @@ void CheckLevel()
         
         // Level Up
         Player.Level++;
-        Player.Payout.Levels++;
         GiveInventory("DRPGModule", Modules);
         
         if (GetCVar("drpg_levelup_heal"))
@@ -298,7 +291,6 @@ void CheckRank()
     if (Player.RankLevel > 0 && Player.Rank < RankTable[Player.RankLevel - 1])
     {
         Player.RankLevel--;
-        Player.Payout.RankLevels--;
         FadeRange(255, 0, 64, 0.25, 255, 0, 64, 0, 2.0);
         
         PrintMessage(StrParam("\CaYou have been demoted to rank %d: %S", Player.RankLevel, LongRanks[Player.RankLevel]), RANKUP_ID, 32);
@@ -310,7 +302,6 @@ void CheckRank()
         int NewItems;
         
         Player.RankLevel++;
-        Player.Payout.RankLevels++;
 
         ActivatorSound("misc/rankup", 96);
         FadeRange(255, 255, 0, 0.5, 255, 255, 0, 0, 2.0);
@@ -328,17 +319,6 @@ void CheckRank()
         // Tells you if you've unlocked new items in the Shop
         if (NewItems > 0)
             PrintMessage(StrParam("\CcYou have unlocked \Cf%d\Cc new items in the shop", NewItems), RANKUP_ID + 1, 96);
-    }
-    
-    // Payout
-    if (!CheckInventory("PowerTimeFreezer") && !Player.PayingOut)
-        Player.PayTimer--;
-    if (Player.PayTimer <= 0)
-    {
-        // CalculatePayout();
-        PayoutReady();
-    
-        Player.PayTimer = 35 * 60 * GetCVar("drpg_pay_interval");
     }
 }
 
@@ -896,9 +876,6 @@ void CheckBurnout()
         // Energy Perk
         if (Player.Perks[STAT_ENERGY])
             Player.EPTime /= 2;
-            
-        // Payout
-        Player.Payout.SkillBurnout++;
     }
 }
 

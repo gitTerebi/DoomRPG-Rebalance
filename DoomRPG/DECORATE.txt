@@ -47,26 +47,6 @@ const int IC_MELEE = 2;
 const int IC_FIRE = 3;
 const int IC_PLASMA = 4;
 
-// Turret Weapons
-const int TW_NONE = 0;
-const int TW_BULLET = 1;
-const int TW_PELLET = 2;
-const int TW_ROCKET = 3;
-const int TW_PLASMA = 4;
-const int TW_RAILGUN = 5;
-
-// Turret Projectiles
-const int TP_ROCKET = 0;
-const int TP_PLASMA = 1;
-
-// Turret Commands
-const int TC_NONE = 0;
-const int TC_IDLE = 1;
-const int TC_WANDER = 2;
-const int TC_ORBIT = 3;
-const int TC_TARGET = 4;
-const int TC_CONTROL = 5;
-
 #include "actors/Ammo.txt"
 #include "actors/Armor.txt"
 #include "actors/Augs.txt"
@@ -92,7 +72,6 @@ const int TC_CONTROL = 5;
 #include "actors/Shields.txt"
 #include "actors/Skills.txt"
 #include "actors/Stims.txt"
-#include "actors/Turret.txt"
 #include "actors/Weapons.txt"
 
 // Randomizers

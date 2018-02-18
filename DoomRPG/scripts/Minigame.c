@@ -32,13 +32,34 @@ NamedScript void ItemRoulette(bool Rare)
     
     Player.InMinigame = true;
     
-    // Set Resolution
-    SetHudSize(640, 480, false);
-    
     int Buttons, OldButtons, Duds, Index;
+    
+    // Set the HUD Size
+    SetHudSize(640, 480, false);
     
     while (!Finished)
     {
+        // Draw Border & Background
+        // These are pushed back by -10 so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+        	DrawBorder("Bor", -1, 8, 85.0, 5.0, 470, 470);
+        if (GetActivatorCVar("drpg_menu_background_image"))
+        	PrintSpriteAlpha("GUIBack", -1, 85.1, 5.1, 0.25, 0.1);
+        
+        // Header.
+        SetFont("BIGFONT");
+        HudMessage("ITEM ROULETTE");
+        EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 235.1, 25.0, 0.05);
+        
+        // Help
+        if (GetActivatorCVar("drpg_menuhelp"))
+        {
+        	SetFont("SMALLFONT");
+            HudMessage("Navigate/Change: \Cd%jS/%jS/%jS/%jS\C-\nReady/Play: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                       "+forward", "+back", "+moveleft", "+moveright", "+use", "+speed");
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", 90.1, 460.0, 0.05);
+        }
+        
         // Buttons
         Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
         OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
@@ -132,7 +153,7 @@ NamedScript void ItemRoulette(bool Rare)
         
         // Sound Loop
         if (Started)
-            PlaySound(0, "transfer/loop", CHAN_BODY, 1.0, true, ATTN_NORM);
+            PlaySound(0, "menu/click", CHAN_BODY, 0.8, true, ATTN_NORM);
         
         // Input Handling
         if (Buttons & BT_USE && !(OldButtons & BT_USE) && Spinning)

@@ -53,7 +53,6 @@ NamedScript KeyBind  void PurgeDrops();
 NamedScript Console  void CheckArmorStats();
 
 bool StatsCapped();
-OptionalArgs(1) int CalculatePay(int);
 int AveragePlayerLevel();
 int AveragePlayerRank();
 int AveragePlayerCredits();
@@ -126,6 +125,7 @@ void DrawShieldModel(int, fixed, fixed, int);
 void DrawMissionInfo(MissionInfo *, fixed, fixed, bool);
 OptionalArgs(1) void DrawBar(str, int, int, int, bool);
 void DrawProgressBar(str, int);
+void DrawBorder(str, int, int, int, int, int, int);
 
 // Compatibility/Extensions
 void RemoveDRLAItem(int, int);
@@ -142,7 +142,6 @@ fixed AbsFixed(fixed);
 fixed Min(fixed, fixed);
 fixed Max(fixed, fixed);
 fixed Distance(int, int);
-fixed Distance3D(fixed, fixed, fixed, fixed, fixed, fixed);
 fixed Distance2D(int, int, int, int);
 fixed Lerp(fixed, fixed, fixed);
 int LerpInt(int, int, int);

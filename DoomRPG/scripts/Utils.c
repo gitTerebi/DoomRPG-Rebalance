@@ -1653,42 +1653,14 @@ NamedScript void DrawStatUp(int Stat)
         case STAT_LUCK:         FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0.0, 0.5);    break;
     }
     
-    int Time = 35 * 5;
-    int DisplayTime = Time;
     fixed TextX = 0.1 + ((Stat % 4) * 0.25);
     fixed TextY = 0.75 + (Stat >= 4 ? 0.05 : 0);
-    fixed Radius = 0.25;
     
-    // Text and whooshy icon
-    if (!GetActivatorCVar("drpg_toaster") && GetActivatorCVar("drpg_fancy_statup"))
-    {
-        while (DisplayTime-- > 0)
-        {
-            fixed Angle = (0.1 * Stat) + (fixed)Timer() / 64.0;
-            fixed XOff = Cos(Angle) * Radius;
-            fixed YOff = Sin(Angle) * Radius;
-            fixed Alpha = (fixed)DisplayTime / (fixed)Time;
-            
-            SetHudSize(0, 0, false);
-            SetFont("BIGFONT");
-
-            HudMessage("%S +", StatNames[Stat]);
-            EndHudMessage(HUDMSG_ALPHA, 0, "White", TextX, TextY, 0.05, Alpha);
-            PrintSpriteAlpha(StrParam("STAT%d", Stat + 1), 0, 0.525 + XOff, 0.5 + YOff, 0.05, Alpha);
-            
-            Radius -= 0.0025;
-            
-            Delay(1);
-        }
-    }
-    else
-    {
-        SetHudSize(0, 0, false);
-        SetFont("BIGFONT");
-        
-        HudMessage("%S +", StatNames[Stat]);
-        EndHudMessage(HUDMSG_FADEOUT, 0, "White", TextX, TextY, 3.0, 2.0);
-    }
+    SetHudSize(0, 0, false);
+    SetFont("BIGFONT");
+    
+    HudMessage("%S +", StatNames[Stat]);
+    EndHudMessage(HUDMSG_FADEOUT, 0, "White", TextX, TextY, 3.0, 2.0);
 }
 
 // PrintSprite Utility Functions
@@ -1779,26 +1751,26 @@ void DrawShieldInfo(int ID, fixed X, fixed Y, int DrawID)
         
         // Shield Name
         HudMessage("%S", ShieldName);
-        EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X + 0.1, Y + 0.1, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X, Y, 0.05);
         
         // Shield Stats
         HudMessage(" \CvCapacity: %d / %d", CurrentPlayer->Shield.Charge, CurrentPlayer->Shield.Capacity);
-        EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X + 0.1, Y + 8.1, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X, Y + 15.0, 0.05);
         if (CurrentPlayer->Shield.Accessory && CurrentPlayer->Shield.Accessory->PassiveEffect == SHIELD_PASS_KILLSCHARGE)
         {
             HudMessage(" \CgDoes not recharge automatically");
-            EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X + 0.1, Y + 16.1, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X, Y + 15.0, 0.05);
         }
         else
         {
             HudMessage(" \CdCharge: %d", CurrentPlayer->Shield.ChargeRate);
-            EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X + 0.1, Y + 16.1, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X, Y + 30.0, 0.05);
             HudMessage(" \CaDelay: %.2k", CurrentPlayer->Shield.DelayRate);
-            EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X + 0.1, Y + 24.1, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, (DrawID == 0 ? 0 : DrawID++), "White", X, Y + 45.0, 0.05);
         }
         
         // Draw Shield Model
-        DrawShieldModel(ID, X - 14.0, Y + 33.0, DrawID);
+        DrawShieldModel(ID, X + 15.0, Y + 25.0, DrawID);
     }
 }
 
@@ -1827,52 +1799,62 @@ void DrawShieldModel(int ID, fixed X, fixed Y, int DrawID)
 
 void DrawMissionInfo(MissionInfo *Mission, fixed X, fixed Y, bool Active)
 {
-    // Basic Info
+	// Header
     SetFont("BIGFONT");
+    HudMessage("- MISSION INFO -");
+    EndHudMessage(HUDMSG_PLAIN, 0, "Grey", X + 0.1, Y, 0.05);
+    HudMessage("- REWARD -");
+    EndHudMessage(HUDMSG_PLAIN, 0, "Grey", X + 250.1, Y, 0.05);
+    
+    // Mission Info
+    SetFont("SMALLFONT");
     HudMessage("Type: %S", MissionTypes[Mission->Type]);
-    EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y, 0.05);
-    HudMessage("Difficulty: %S", MissionDifficulties[Mission->Difficulty]);
     EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 16.0, 0.05);
-    HudMessage("XP: %lu", Mission->RewardXP);
+    HudMessage("Difficulty: %S", MissionDifficulties[Mission->Difficulty]);
     EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 32.0, 0.05);
+    // Reward
+    HudMessage("XP: %lu", Mission->RewardXP);
+    EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 250.1, Y + 16.0, 0.05);
     HudMessage("Rank: %lu", Mission->RewardRank);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 0.1, Y + 48.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 250.1, Y + 32.0, 0.05);
     HudMessage("Credits: %d", Mission->RewardCredits);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Gold", X + 0.1, Y + 64.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Gold", X + 250.1, Y + 48.0, 0.05);
     HudMessage("Modules: %d", Mission->RewardModules);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Green", X + 0.1, Y + 80.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Green", X + 250.1, Y + 64.0, 0.05);
     HudMessage("\CiItem: \C-%S", Mission->RewardItem->Name);
-    EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 96.1, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 250.1, Y + 80.0, 0.05);
     
     // Mission Objective
     switch (Mission->Type)
     {
     case MT_COLLECT:
-        HudMessage("Type: \Ci%S", Mission->Item->Name);
-        EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+        HudMessage("Item: \Ci%S", Mission->Item->Name);
+        EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         if (Active)
         {
             HudMessage("Amount: \Cd%d / %d", Mission->Current, Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 144.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 64.0, 0.05);
         }
         else
         {
-            HudMessage("Amount: \Cd%3d\C-        You have: \Cd%3d", Mission->Amount, CheckInventory(Mission->Item->Actor));
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 144.0, 0.05);
+            HudMessage("Amount: \Cd%d", Mission->Amount);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 64.0, 0.05);
+            HudMessage("Carrying: \Cd%d", CheckInventory(Mission->Item->Actor));
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 80.0, 0.05);
         }
         break;
     case MT_KILL:
-        HudMessage("Type: \Cg%S", Mission->Monster->Name);
-        EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+        HudMessage("Target: \Cg%S", Mission->Monster->Name);
+        EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         if (Active)
         {
             HudMessage("Amount: \Ca%d / %d", Mission->Current, Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 144.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 64.0, 0.05);
         }
         else
         {
             HudMessage("Amount: \Ca%d", Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 144.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 64.0, 0.05);
         }
         break;
     case MT_KILLAURAS:
@@ -1880,52 +1862,52 @@ void DrawMissionInfo(MissionInfo *Mission, fixed X, fixed Y, bool Active)
         if (Active)
         {
             HudMessage("Amount: \Ca%d / %d", Mission->Current, Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         }
         else
         {
             HudMessage("Amount: \Ca%d", Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         }
         break;
     case MT_ASSASSINATION:
-        HudMessage("Type: \Cg%S", Mission->Monster->Name);
-        EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+        HudMessage("Target: \Cg%S", Mission->Monster->Name);
+        EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         break;
     case MT_SECRETS:
         if (Active)
         {
             HudMessage("Amount: \Ck%d / %d", Mission->Current, Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         }
         else
         {
             HudMessage("Amount: \Ck%d", Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         }
         break;
     case MT_ITEMS:
         if (Active)
         {
             HudMessage("Amount: \Cn%d / %d", Mission->Current, Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         }
         else
         {
             HudMessage("Amount: \Cn%d", Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         }
         break;
     case MT_COMBO:
         if (Active)
         {
             HudMessage("Amount: \Ct%d / %d", Mission->Current, Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         }
         else
         {
             HudMessage("Amount: \Ct%d", Mission->Amount);
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 128.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 0.1, Y + 48.0, 0.05);
         }
         break;
     }
@@ -1951,6 +1933,26 @@ void DrawProgressBar(str Message, int Percent)
     EndHudMessage(HUDMSG_PLAIN, 0, "Green", 160.4, 200.4, 0.05);
     SetHudClipRect(60, 200 - 6, (int)((fixed)Percent * 2.02), 200 + 6);
     PrintSpritePulse("FillBar", 0, 160.4, 200.4, 0.75, 32.0, 0.25, true);
+    SetHudClipRect(0, 0, 0, 0);
+}
+
+void DrawBorder(str Prefix, int StartID, int BorderSize, int X, int Y, int Width, int Height)
+{
+    // Border corners
+    PrintSprite(StrParam("%STL", Prefix), (StartID == 0 ? 0 : StartID++), X + 0.1, Y + 0.1, 0.03);
+    PrintSprite(StrParam("%STR", Prefix), (StartID == 0 ? 0 : StartID++), X + Width + 0.2, Y + 0.1, 0.03);
+    PrintSprite(StrParam("%SBL", Prefix), (StartID == 0 ? 0 : StartID++), X + 0.1, Y + Height + 0.2, 0.03);
+    PrintSprite(StrParam("%SBR", Prefix), (StartID == 0 ? 0 : StartID++), X + Width + 0.2, Y + Height + 0.2, 0.03);
+    
+    // Border sides
+    SetHudClipRect(X, Y + BorderSize, BorderSize, Height - (BorderSize * 2));
+    PrintSprite(StrParam("%SL", Prefix), (StartID == 0 ? 0 : StartID++), X + 0.1, Y + 0.1, 0.03);
+    SetHudClipRect(X + Width - BorderSize, Y + BorderSize, BorderSize, Height - (BorderSize * 2));
+    PrintSprite(StrParam("%SR", Prefix), (StartID == 0 ? 0 : StartID++), X + Width + 0.2, Y + 0.1, 0.03);
+    SetHudClipRect(X + BorderSize, Y, Width - (BorderSize * 2), BorderSize);
+    PrintSprite(StrParam("%ST", Prefix), (StartID == 0 ? 0 : StartID++), X + BorderSize + 0.1, Y + 0.1, 0.03);
+    SetHudClipRect(X + BorderSize, Y + Height - BorderSize, Width - (BorderSize * 2), BorderSize);
+    PrintSprite(StrParam("%SB", Prefix), (StartID == 0 ? 0 : StartID), X + BorderSize + 0.1, Y + Height + 0.2, 0.03);
     SetHudClipRect(0, 0, 0, 0);
 }
 
@@ -2110,7 +2112,7 @@ int Abs(int x)
 }
 
 // Rounds a fixed to the nearest integer
-int RoundInt(fixed x)
+int RoundInt(fixed x) // Renamed to avoid definition conflict with GDCC.
 {
     return (int)(x + 0.5);
 }
@@ -2146,16 +2148,6 @@ fixed Distance(int TID1, int TID2)
     fixed X = GetActorX(TID1) - GetActorX(TID2);
     fixed Y = GetActorY(TID1) - GetActorY(TID2);
     fixed Z = GetActorZ(TID1) - GetActorZ(TID2);
-    
-    return VectorLength(VectorLength(X, Y), Z);
-}
-
-// Gets the distance between two points
-fixed Distance3D(fixed X1, fixed Y1, fixed Z1, fixed X2, fixed Y2, fixed Z2)
-{
-    fixed X = X1 - X2;
-    fixed Y = Y1 - Y2;
-    fixed Z = Z1 - Z2;
     
     return VectorLength(VectorLength(X, Y), Z);
 }
@@ -2590,7 +2582,6 @@ Start:
     Player.Input.Modifier  = Buttons & BT_SPEED;
     
     Player.Input.SkillWheel  = Buttons & BT_USER1;
-    Player.Input.TurretWheel = Buttons & BT_USER2;
     Player.Input.DRPGMenu    = Buttons & BT_USER3;
     
     Player.Input.Forward = YAxis > 0;
@@ -2606,7 +2597,6 @@ Start:
     Player.OldInput.Modifier  = Player.Input.Modifier;
     
     Player.OldInput.SkillWheel  = Player.Input.SkillWheel;
-    Player.OldInput.TurretWheel = Player.Input.TurretWheel;
     Player.OldInput.DRPGMenu    = Player.Input.DRPGMenu;
     
     Player.OldInput.Forward = Player.Input.Forward;
@@ -2626,7 +2616,6 @@ OptionalArgs(1) bool CheckInput(int Key, int State)
         &Player.Input.Modifier,
         
         &Player.Input.SkillWheel,
-        &Player.Input.TurretWheel,
         &Player.Input.DRPGMenu,
         
         &Player.Input.Forward,
@@ -2642,7 +2631,6 @@ OptionalArgs(1) bool CheckInput(int Key, int State)
         &Player.OldInput.Modifier,
         
         &Player.OldInput.SkillWheel,
-        &Player.OldInput.TurretWheel,
         &Player.OldInput.DRPGMenu,
         
         &Player.OldInput.Forward,
@@ -2692,7 +2680,6 @@ void ClearInfo(CharSaveInfo *Info)
     // Level / Rank Level
     Info->Level = 0;
     Info->RankLevel = 0;
-    Info->PP = 0;
     
     // Stats
     for (i=0; i < STAT_MAX; i++)
@@ -2715,10 +2702,6 @@ void ClearInfo(CharSaveInfo *Info)
     // Stims
     for (i=0; i < STIM_MAX; i++)
         Info->Stims[i] = 0;
-    
-    // Turret Upgrades
-    for (i=0; i < TU_MAX; i++)
-        Info->TurretUpgrades[i] = 0;
     
     // Misc
     Info->Credits = 0;

@@ -49,21 +49,7 @@ OptionValue "ShopSpecialCategories"
     3, "\cdArmor"
     4, "\cqPowerups"
     5, "\cvShield Parts"
-    6, "\ckStims/Augs/Turret"
-}
-
-OptionValue "RunPickupBehavior"
-{
-    0, "None"
-    1, "\cfAuto-Sell"
-    2, "\cvAuto-Store"
-}
-
-OptionValue "TurretAggression"
-{
-	0, "Stay close"
-	1, "Pursue enemies"
-    2, "Pursue if required"
+    6, "\ckStims/Augs"
 }
 
 OptionValue "WheelSpeed"
@@ -166,31 +152,6 @@ OptionString "OutpostStartLevel"
     "E4M1",    "E4M1 (Ultimate Doom)"
     "MAP01",   "MAP01 (Doom II)"
     "LEVEL01", "LEVEL01 (Doom II BFG)"
-}
-
-OptionMenu "OptionsMenu"
-{
-	Title "OPTIONS"
-	SubMenu "Doom RPG Options",			"DoomRPG"
-	StaticText " "
-	Submenu "Customize Controls",		"CustomizeControls"
-	Submenu "Mouse options",			"MouseOptions"
-	Submenu "Joystick options",			"JoystickOptions"
-	StaticText " "
-	Submenu "Player Setup",				"PlayerMenu"
-	Submenu "Gameplay Options",			"GameplayOptions"
-	Submenu "Compatibility Options",	"CompatibilityOptions"
-	Submenu "Automap Options",			"AutomapOptions"
-	Submenu "HUD Options",				"HUDOptions"
-	Submenu "Miscellaneous Options",	"MiscOptions"
-	Submenu "Network Options",			"NetworkOptions"
-	Submenu "Sound Options",			"SoundOptions"
-	Submenu "Display Options",			"VideoOptions"
-	Submenu "Set video mode",			"VideoModeMenu"
-	StaticText " "
-	SafeCommand "Reset to defaults",	"reset2defaults"
-	SafeCommand	"Reset to last saved",	"reset2saved"
-	Command "Go to console",			"menuconsole"
 }
 
 OptionMenu "DoomRPGXPSystem"
@@ -325,7 +286,6 @@ OptionMenu "DoomRPGHealthBars"
 	
     Option "Monster Health Bars", "drpg_healthbars", "OnOff"
 	Option "Names on Health Bars", "drpg_healthbars_names", "OnOff"
-	Option "3D Health Bars", "drpg_healthbars_world", "OnOff"
 	StaticText ""
     
     Slider "Health Bars Width", "drpg_healthbars_width", 640, 1920, 1
@@ -368,25 +328,7 @@ OptionMenu "DoomRPGShop"
     Slider "Shop Special Discount", "drpg_Shopspecial_discount", 0, 75, 1
     StaticText ""
     
-    Option "Run Pickup Behavior", "drpg_pickup_behavior", "RunPickupBehavior"
     Option "Auto-Store if Auto-Sell Unavailable", "drpg_autosell_lockerfallback", "OnOff"
-}
-
-OptionMenu "DoomRPGTurret"
-{
-	Title "Turret"
-    
-    Option "Aggression Style", "drpg_turret_aggression", "TurretAggression"
-    Slider "Movement Speed", "drpg_turret_movespeed", 0.1, 4.0, 0.1
-    StaticText ""
-    
-    Slider "Player Safe Dist.", "drpg_turret_playerdist", 64.0, 384.0, 8.0
-    Slider "Enemy Safe Dist.", "drpg_turret_enemydist", 64.0, 384.0, 8.0
-    Slider "Sensor Beam Dist.", "drpg_turret_sensordist", 64, 32768.0, 64.0
-    StaticText ""
-    
-    Slider "Pursuit Time (Sec.)", "drpg_turret_pursuittime", 1.0, 20.0, 1.0
-    Slider "Teleport Wait Time (Sec.)", "drpg_turret_telewaittime", 2.0, 20.0, 1.0
 }
 
 OptionMenu "DoomRPGMenus"
@@ -401,10 +343,10 @@ OptionMenu "DoomRPGMenus"
 	Slider "Menu Repeat Delay", "drpg_menu_repeat", 0.25, 3.0, 0.05
 	Slider "Menu Width", "drpg_menu_width", 480, 1920, 5
 	Slider "Menu Height", "drpg_menu_height", 460, 1080, 5
-    StaticText ""
+	StaticText ""
 	
-	Slider "Mouse Sensitivity X", "drpg_menu_sensitivity_x", 1, 100, 1
-	Slider "Mouse Sensitivity Y", "drpg_menu_sensitivity_y", 1, 100, 1
+	Option "Menu background border", "drpg_menu_background_border", "OnOff"
+	Option "Menu background image", "drpg_menu_background_image", "OnOff"
 }
 
 OptionMenu "DoomRPGHUD"
@@ -479,14 +421,9 @@ OptionMenu "DoomRPGHUD"
     Slider "Multiplayer Y Position", "drpg_multiplayer_y", -240, 1080, 1
 	StaticText ""
     
-    Slider "Turret Info X Position", "drpg_turret_x", -320, 1920, 1
-    Slider "Turret Info Y Position", "drpg_turret_y", -240, 1080, 1
-	StaticText ""
-    
     Option "Skill Wheel Animation Speed", "drpg_skill_wheelspeed", "WheelSpeed"
     Option "Always Show Stats", "drpg_stats_alwaysshow", "OnOff"
     Option "Always Show Aug Battery", "drpg_aug_alwaysshow", "OnOff"
-    Option "Fancy Stat-Up Effects", "drpg_fancy_statup", "OnOff"
 }
 
 OptionMenu "DoomRPGMisc"
@@ -501,8 +438,6 @@ OptionMenu "DoomRPGMisc"
     Option "Disable Fancy Auras", "drpg_simple_auras", "SimpleAuras"
     StaticText ""
     
-    Slider "Rank Payout Interval (Minutes)", "drpg_pay_interval", 5, 60, 1
-    Option "Quick Rank Payout Display", "drpg_pay_quick", "OnOff"
 	Slider "Autosave Interval (Minutes)", "drpg_autosave", 0, 60, 1
 	Option "Auto Reactivate Augs Disabled By EMP", "drpg_augs_autoreactivate", "OnOff"
 	Option "Place quick-use items on the Inventory Bar", "drpg_give_quickinventory", "OnOff"
@@ -516,15 +451,15 @@ OptionMenu "DoomRPGCharacter"
     Title "Character"
     
 	StaticText "Respec", 1
-	Command "Respec Stats", "drpg_respec_stats"
-	Command "Respec Skills", "drpg_respec_skills"
-	Command "Respec All", "drpg_respec_all"
+	Command "Respec Stats", "pukename Respec 1 0"
+	Command "Respec Skills", "pukename Respec 0 1"
+	Command "Respec All", "pukename Respec 1 1"
 	StaticText ""
 
 	StaticText "Save/Load", 1
-	Command "Save Character", "drpg_savechar"
-	Command "Load Character", "drpg_loadchar"
-	Command "Clear Character", "drpg_clearchar"
+	Command "Save Character", "pukename SaveCharacter"
+	Command "Load Character", "pukename LoadCharacter"
+	Command "Clear Character", "pukename ClearCharacter"
 	StaticText ""
 }
 
@@ -542,13 +477,11 @@ OptionMenu "DoomRPGStart"
 	StaticText "Funds", 1
     Slider "Credits", "drpg_start_credits", 0, 10000, 100
     Slider "Modules", "drpg_start_modules", 0, 10000, 25
-    Slider "Turret Parts", "drpg_start_turretParts", 0, 1000, 1
 	StaticText ""
     
-    StaticText "Level/Rank/PP", 1
+    StaticText "Level/Rank/", 1
     Slider "Level", "drpg_start_level", 0, 100, 1
     Slider "Rank", "drpg_start_rank", 0, 24, 1
-    Slider "PP", "drpg_start_pp", 0, 1000000, 100
 	StaticText ""
     
     StaticText "Stats", 1
@@ -631,10 +564,34 @@ OptionMenu "DoomRPG"
     SubMenu "Health Bars",                  "DoomRPGHealthBars"
     SubMenu "Multiplayer",                  "DoomRPGMultiplayer"
     SubMenu "Shop",                         "DoomRPGShop"
-    SubMenu "Turret",                       "DoomRPGTurret"
     SubMenu "Menus",                        "DoomRPGMenus"
     SubMenu "HUD",                          "DoomRPGHUD"
     SubMenu "Misc",                         "DoomRPGMisc"
     SubMenu "Character",                    "DoomRPGCharacter"
     SubMenu "Starting Options",             "DoomRPGStart"
+}
+
+OptionMenu "OptionsMenu"
+{
+	Title "OPTIONS"
+	SubMenu "Doom RPG Options",			"DoomRPG"
+	StaticText " "
+	Submenu "Customize Controls",		"CustomizeControls"
+	Submenu "Mouse options",			"MouseOptions"
+	Submenu "Joystick options",			"JoystickOptions"
+	StaticText " "
+	Submenu "Player Setup",				"PlayerMenu"
+	Submenu "Gameplay Options",			"GameplayOptions"
+	Submenu "Compatibility Options",	"CompatibilityOptions"
+	Submenu "Automap Options",			"AutomapOptions"
+	Submenu "HUD Options",				"HUDOptions"
+	Submenu "Miscellaneous Options",	"MiscOptions"
+	Submenu "Network Options",			"NetworkOptions"
+	Submenu "Sound Options",			"SoundOptions"
+	Submenu "Display Options",			"VideoOptions"
+	Submenu "Set video mode",			"VideoModeMenu"
+	StaticText " "
+	SafeCommand "Reset to defaults",	"reset2defaults"
+	SafeCommand	"Reset to last saved",	"reset2saved"
+	Command "Go to console",			"menuconsole"
 }

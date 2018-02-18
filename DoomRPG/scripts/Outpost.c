@@ -27,7 +27,6 @@ int RPGMap NotorietySpotTID = 1301;
 int RPGMap MarineTID = 1400;
 int RPGMap MarineMaxTID = 1419;
 int RPGMap MarineBossTID = 1421;
-int RPGMap TurretTID = 1450;
 int RPGMap BossSpotTID = 1475;
 int RPGMap ForcefieldID = 1500;
 int RPGMap ForcefieldGeneratorID = 1501;
@@ -40,6 +39,7 @@ int RPGMap CreditsBlockerID = 1900;
 
 // Timers
 int RPGMap ForcefieldTimer = 0;
+int RPGMap RegenAreaEPCooldownTimer = 0;
 
 // Choices
 int RPGMap LevelChoice = 0;
@@ -51,9 +51,10 @@ bool RPGMap MarinesHostile = false;
 bool RPGMap PowerOut = false;
 bool RPGMap BossDead = false;
 bool RPGMap Invasion = false;
+bool RPGMap RegenAreaEPCooldown = false;
 
 NamedScript MapSpecial void EnterOutpost()
-{
+{	
     ForcefieldTimer = 35 * 60 * GameSkill(); // 1 Minute per skill level
     
     SetHudSize(320, 240, true);
@@ -69,9 +70,6 @@ NamedScript MapSpecial void EnterOutpost()
     
     // Spawn the Shop Special item
     SpawnShopSpecialItem();
-    
-    // Make the Portable Turret not attack Outpost Turrets
-    SetActorProperty(TurretTID, APROP_Friendly, true);
     
     // Boss Placement
     PlaceBoss();
@@ -96,6 +94,11 @@ NamedScript MapSpecial void EnterOutpost()
             PrintSpritePulse("M_DOOM", 1, 160.0 + 8.0, 80.0 - 8.0, 0.75, 64.0, 0.25);
             Delay(1);
         }
+    }
+    else
+    {
+    	// Music
+    	SetOutpostMusic(OUTPOST_MUSIC_NORMAL);
     }
 }
 
@@ -224,6 +227,26 @@ NamedScript MapSpecial void RegenArea(int ID)
         {
             if (CheckInventory("DRPGCredits") < 1 || Player.EP >= Player.EPMax) return;
             
+            // EP pad Cooldown
+            // Default timer is 5 mins.
+            int CurrentTime = Timer() / 35;
+            if (!RegenAreaEPCooldown)
+            {
+            	RegenAreaEPCooldownTimer = CurrentTime;
+            	RegenAreaEPCooldownTimer += 300;
+            	RegenAreaEPCooldown = true;
+            }
+            else
+            {
+            	if (CurrentTime >= RegenAreaEPCooldownTimer)
+            		RegenAreaEPCooldown = false;
+            		else
+            			SetFont("BIGFONT");
+            			HudMessage("EP pad is cooling down: %i seconds remaining", RegenAreaEPCooldownTimer - CurrentTime);
+            			EndHudMessage(HUDMSG_FADEOUT, 0, "LightBlue", 0.5, 0.33, 2.0, 0.5);
+            			return;
+            }
+            
             int EPCharges = (Player.EPMax - Player.EP) / 5;
             if (Player.EP % 5 > 0)
                 EPCharges++;
@@ -281,8 +304,6 @@ NamedScript MapSpecial void LevelTransport()
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
     Player.OutpostMenu = OMENU_LEVELTRANSPORT;
     
-    SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
-    
     while (true)
     {
         // Stop Underflow
@@ -294,6 +315,16 @@ NamedScript MapSpecial void LevelTransport()
             LevelChoice = KnownLevels->Position - 1;
         
         LevelInfo *TeleDest = &((LevelInfo *)KnownLevels->Data)[LevelChoice];
+        
+        // Set the HUD Size
+        SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+        
+        // Draw Border & Background
+        // These are pushed back by -10 so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
+        if (GetActivatorCVar("drpg_menu_background_image"))
+        	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
         
         // Text
         SetFont("BIGFONT");
@@ -591,7 +622,7 @@ NamedScript MapSpecial void LevelTransport()
                 LevelChoice += 10;
             }
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE && !Player.PayingOut)
+        if (Buttons == BT_USE && OldButtons != BT_USE)
         {
             if (CurrentLevel == TeleDest)
             {
@@ -695,10 +726,20 @@ NamedScript MapSpecial void SkillComputer()
         if (GetCVar("drpg_menudim"))
             FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
 
+        // Set the HUD Size
+        SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+        
+        // Draw Border & Background
+        // These are pushed back by -10 so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
+        if (GetActivatorCVar("drpg_menu_background_image"))
+        	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+
         // Text
         SetFont("BIGFONT");
         HudMessage("Skill Level: \Cj%d (%S\Cj)", SkillChoice + 1, SkillLevels[SkillChoice]);
-        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "Gold", 0.5, 0.5, 0.05, 0.5);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "Gold", 100.1, 200.0, 0.05, 0.5);
         
         // Input
         int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
@@ -801,10 +842,20 @@ NamedScript MapSpecial void SelectArenaWave()
         if (GetCVar("drpg_menudim"))
             FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
         
+        // Set the HUD Size
+        SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+        
+        // Draw Border & Background
+        // These are pushed back by -10 so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
+        if (GetActivatorCVar("drpg_menu_background_image"))
+        	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+        
         // Text
         SetFont("BIGFONT");
         HudMessage("Wave: \Cd%d\C-/\Cd%d", WaveChoice, ArenaMaxWave);
-        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", 0.5, 0.5, 0.05, 1.0);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", 200.0, 200.0, 0.05, 1.0);
         
         // Input
         int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
@@ -891,10 +942,6 @@ NamedScript MapSpecial void PissOffMarines(bool Steal)
     // Combat music
     SetOutpostMusic((PowerOut ? OUTPOST_MUSIC_LOWPOWER_COMBAT : OUTPOST_MUSIC_COMBAT));
     
-    // Remove Friendly flag from turrets
-    if (!InTitle)
-        SetActorProperty(TurretTID, APROP_Friendly, false);
-    
     // Iterate Marines post-Delay
     for (int i = MarineTID; i <= MarineMaxTID; i++)
     {
@@ -910,26 +957,9 @@ NamedScript MapSpecial void PissOffMarines(bool Steal)
         SetActorInventory(i, "DRPGCredits", Random(10, 1000));
     }
     
-    // Enrage Turrets
-    if (ClassifyActor(TurretTID) & ACTOR_ALIVE && !InTitle)
-    {
-        SetActorState(TurretTID, "Enraged", false);
-        
-        // Power-down Turrets for Large Powersuit
-        if (OutpostNotoriety >= 3)
-            SetActorState(TurretTID, "PoweredDown", false);
-    }
-    
     // Enrage placeholder bosses
     if (!InTitle)
         SetActorState(MarineBossTID - 1, "Enraged", false);
-    
-    // Sector Lighting
-    for (int i = 0; i <= MAX_OUTPOST_ID; i++)
-    {
-        Sector_SetColor(i, 255, 0, 0, 0);
-        Light_Glow(i, 160, 192, 30);
-    }
     
     // Drop the Credits room blocker
     Ceiling_LowerToFloor(CreditsBlockerID, 256);
@@ -955,9 +985,6 @@ NamedScript MapSpecial void PissOffMarines(bool Steal)
     {
         // Create Hell Rifts
         SpawnSpotForced("DRPGTeleportRift", RiftSpotTID, RiftSpotTID, 0);
-        
-        Thing_Hate(TurretTID, RiftSpotTID + 1, 6);
-        SetActorState(TurretTID, "Enraged", false);
         
         // Alert the Marines
         for (int i = MarineTID; i <= MarineMaxTID; i++)
@@ -1339,6 +1366,13 @@ NamedScript MapSpecial void MissionBBS()
         // Set the HUD Size
         SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
         
+        // Draw Border & Background
+        // These are pushed back by -10 so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 500, 470); 
+        if (GetActivatorCVar("drpg_menu_background_image"))
+        	PrintSpriteAlpha("GUIBackM", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+        
         // Title
         SetFont("BIGFONT");
         HudMessage("\CdMission BBS\n\CjDifficulty: (%S\C-)", MissionDifficulties[Difficulty]);
@@ -1516,9 +1550,6 @@ NamedScript MapSpecial void PowerOutage()
     Line_SetBlocking(ForcefieldID, 0, 1023);
     SetLineTexture(ForcefieldID, SIDE_FRONT, TEXTURE_MIDDLE, "");
     
-    // Send Turrets into PoweredDown state
-    SetActorState(TurretTID, "PoweredDown");
-    
     // Randomized delay for the power to come back on
     Delay(Random(35 * 3, 35 * 5));
     
@@ -1538,13 +1569,8 @@ NamedScript MapSpecial void PowerOutage()
 
 NamedScript void AlarmLoop()
 {
-    while (true)
-    {
-        if ((Timer() % 30) == 0)
-            AmbientSound("misc/alarm", 127);
-        
-        Delay(1);
-    }
+	// Animate Outpost alarm
+	SetActorState(1600, "ACTIVE");
 }
 
 NamedScript void PlaceBoss()
@@ -1617,7 +1643,6 @@ void SpawnShopSpecialItem()
         Thing_Remove(ShopSpecialTID + 1);
         
         // Spawn new item
-        SpawnSpotForced("DRPGTurretTeleport", ShopSpecialTID, 0, 0);
         SpawnSpotForced(ShopSpecialItem->Actor, ShopSpecialTID, ShopSpecialTID + 1, 0);
         SetActorProperty(ShopSpecialTID + 1, APROP_Invulnerable, true);
         Thing_SetSpecial(ShopSpecialTID + 1, 80, 8);
@@ -1631,7 +1656,7 @@ void SetOutpostMusic(int Type)
     switch (Type)
     {
     case OUTPOST_MUSIC_NORMAL:
-        Music = "Outpost";
+    	Music = StrParam("OUTPO1_%i", Random(1, 4));
         break;
     case OUTPOST_MUSIC_COMBAT:
         Music = "Outpost2";

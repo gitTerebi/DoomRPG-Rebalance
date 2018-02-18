@@ -258,86 +258,6 @@ typedef enum
 } ENodeTypes;
 
 // --------------------------------------------------
-// GUI
-//
-
-#define GUI_WIDTH       800
-#define GUI_HEIGHT      600
-
-#define MAX_TABS        21
-#define MAX_CONTROLS    64
-#define MAX_LIST        256
-#define MAX_OPTIONS     16
-
-#define WINDOW_X        0
-#define WINDOW_Y        0
-
-#define GUI_CURSOR_ID   600
-#define GUI_TOOLTIP_ID  700
-#define GUI_CONTENTS_ID 1000
-#define GUI_PANEL_ID    (MAKE_ID('P', 'A', 'N', 'L'))
-#define GUI_BACK_ID     (MAKE_ID('Z', 'Z', 'Z', 'Z'))
-
-typedef enum
-{
-    GUI_BAR_PIXEL,
-    GUI_BAR_FADE,
-    GUI_BAR_CLIP
-} EGUIBarTypes;
-
-// Control Types
-typedef enum
-{
-    CTL_ANY, // [KS] For searching
-    CTL_LABEL,
-    CTL_ICON,
-    CTL_BUTTON,
-    CTL_BAR,
-    CTL_LIST,
-    CTL_GRID,
-    CTL_BORDER,
-    CTL_MAX
-} EControlTypes;
-
-// Panels
-typedef enum
-{
-    PANEL_MAIN,
-    PANEL_STATS,
-    PANEL_AUGS,
-    PANEL_SKILLS,
-    PANEL_SHIELD,
-    PANEL_STIMS,
-    PANEL_TURRET,
-    PANEL_SHOP,
-    PANEL_PAYOUT,
-    PANEL_MISSION,
-    PANEL_TRANSPORT,
-    PANEL_TEAM,
-    PANEL_TIPS,
-    PANEL_MAX
-} EPanelTypes;
-
-// Label Alignments
-typedef enum
-{
-    LA_CENTER,
-    LA_LEFT,
-    LA_RIGHT,
-    LA_CENTERTOP,
-    LA_LEFTTOP,
-    LA_RIGHTTOP
-} ELabelAlignment;
-
-// Tooltip Types
-typedef enum
-{
-    TT_BASIC,
-    TT_TITLE,
-    TT_BIG
-} ETooltipType;
-
-// --------------------------------------------------
 // Health Bars
 //
 
@@ -431,8 +351,7 @@ typedef enum
 // Menu
 //
 
-#define MAX_MENU                7
-#define TURRET_PAGE_MAX         36
+#define MAX_MENU                6
 #define MENU_ID                 (MAKE_ID('M', 'E', 'N', 'U'))
 #define TOXMETER_ID             (MAKE_ID('T', 'O', 'X', 'I'))
 
@@ -444,7 +363,6 @@ typedef enum
     MENUPAGE_SKILLS,
     MENUPAGE_SHIELD,
     MENUPAGE_STIMS,
-    MENUPAGE_TURRET,
     MENUPAGE_MAX
 } EMenuPages;
 
@@ -465,13 +383,6 @@ typedef enum
     SHIELDPAGE_ACCESSORY,
     SHIELDPAGE_MAX
 } EShieldPages;
-
-typedef enum
-{
-    TURRETPAGE_COMMAND,
-    TURRETPAGE_UPGRADE,
-    TURRETPAGE_MAX
-} ETurretPages;
 
 // --------------------------------------------------
 // Minigame
@@ -599,17 +510,6 @@ typedef enum
 } EShopSpecialType;
 
 // --------------------------------------------------
-// Payout
-// 
-
-#define PAYOUT_VALUES_MAX       10
-#define PAYOUT_DATA_MAX         10
-#define PAYOUT_TOTAL_X          200
-#define PAYOUT_TOTAL_Y          40
-#define PAYOUT_TEXT_X           20
-#define PAYOUT_TEXT_Y           100
-
-// --------------------------------------------------
 // Popoffs
 // 
 
@@ -637,7 +537,7 @@ typedef enum
 #define ASAVE_SAFETIME          20 * 35
 #define ASAVE_RETRYTIME         5 * 35
 #define MAX_ITEMS               65535
-#define MAX_TIPS                75
+#define MAX_TIPS                70
 
 #define LOADOUT_WEAPONS         8
 #define LOADOUT_ARMORS          10
@@ -777,9 +677,7 @@ typedef enum
 #define COMBO_STOP              (35 * 2)
 #define LEVELUP_ID              (MAKE_ID('L', 'V', 'U', 'P'))
 #define RANKUP_ID               (MAKE_ID('R', 'K', 'U', 'P'))
-#define PAYOUT_ID               (MAKE_ID('P', 'P', 'A', 'Y'))
 #define CONFUSION_ID            (MAKE_ID('C', 'O', 'N', 'F'))
-#define CONFUSION_NONSENSE_ID   (MAKE_ID('C', 'O', 'N', '2'))
 
 #define MODULE_STAT_MULT        25
 #define MODULE_SKILL_MULT       250
@@ -888,140 +786,6 @@ typedef enum
 } EStimCompounds;
 
 // --------------------------------------------------
-// Turret
-//
-
-#define MAX_UPGRADES            70
-#define MAX_COMMANDS            20
-#define TURRET_BATTERY_CHARGE   60 * 3
-
-typedef enum
-{
-    // Build
-    TU_BUILD,
-
-    // Weapons
-    TU_WEAPON_BULLET,
-    TU_WEAPON_BULLET_DAMAGE,
-    TU_WEAPON_BULLET_CAPACITY,
-    TU_WEAPON_BULLET_ROF,
-    TU_WEAPON_PELLET,
-    TU_WEAPON_PELLET_DAMAGE,
-    TU_WEAPON_PELLET_CAPACITY,
-    TU_WEAPON_PELLET_ROF,
-    TU_WEAPON_PELLET_SPREAD,
-    TU_WEAPON_PELLET_AMOUNT,
-    TU_WEAPON_ROCKET,
-    TU_WEAPON_ROCKET_DAMAGE,
-    TU_WEAPON_ROCKET_CAPACITY,
-    TU_WEAPON_ROCKET_ROF,
-    TU_WEAPON_ROCKET_SEEKING,
-    TU_WEAPON_PLASMA,
-    TU_WEAPON_PLASMA_DAMAGE,
-    TU_WEAPON_PLASMA_CAPACITY,
-    TU_WEAPON_PLASMA_ROF,
-    TU_WEAPON_RAILGUN,
-    TU_WEAPON_RAILGUN_DAMAGE,
-    TU_WEAPON_RAILGUN_CAPACITY,
-    TU_WEAPON_RAILGUN_ROF,
-    TU_WEAPON_RAILGUN_RIPPING,
-    TU_AMMO_AUTOLOADER,
-    TU_AMMO_NANOGEN,
-    TU_AMMO_NANOGEN_BULLET,
-    TU_AMMO_NANOGEN_SHELL,
-    TU_AMMO_NANOGEN_ROCKET,
-    TU_AMMO_NANOGEN_CELL,
-    TU_WEAPON_SELFDESTRUCT,
-
-    // Armor
-    TU_ARMOR_PLATING,
-    TU_ARMOR_PLATING_MELEE,
-    TU_ARMOR_PLATING_BULLET,
-    TU_ARMOR_PLATING_FIRE,
-    TU_ARMOR_PLATING_PLASMA,
-    TU_ARMOR_PLATING_BLAST,
-    TU_ARMOR_MODULE_REFLECT,
-    TU_ARMOR_MODULE_REPAIR,
-    TU_ARMOR_MODULE_PHASE,
-
-    // Assist
-    TU_ASSIST_HEALTH,
-    TU_ASSIST_ARMOR,
-    TU_ASSIST_AUG,
-    TU_ASSIST_SHIELD,
-    TU_ASSIST_INJECTOR,
-    TU_ASSIST_INJECTOR_TYPE,
-    TU_ASSIST_INJECTOR_AMOUNT,
-    TU_ASSIST_INJECTOR_POTENCY,
-    TU_ASSIST_TELEPORT,
-    TU_ASSIST_TEAM,
-
-    // Sensors
-    TU_SENSORS,
-    TU_SENSORS_MODULEFINDER,
-    TU_SENSORS_ITEMFINDER,
-    TU_SENSORS_SUPPLYFINDER,
-
-    // Battery
-    TU_BATTERY_CAPACITY,
-    TU_BATTERY_GENERATOR_KINETIC,
-    TU_BATTERY_GENERATOR_ILLUMINATION,
-    TU_BATTERY_GENERATOR_FORCE,
-    TU_BATTERY_GENERATOR_THERMAL,
-    TU_BATTERY_GENERATOR_PLASMA,
-    TU_BATTERY_GENERATOR_NUCLEAR,
-
-    // Hardware
-    TU_HARDWARE_BATTERY,
-    TU_HARDWARE_BUILD,
-    TU_HARDWARE_PART,
-    TU_HARDWARE_SPECS,
-    TU_HARDWARE_FABRICATION,
-
-    // Commands
-    TU_COMMAND_RECALL,
-    TU_COMMAND_DRAW_FIRE,
-    TU_COMMAND_HOLD_POSITION,
-
-    // Maximum
-    TU_MAX
-} ETurretUpgrades;
-
-typedef enum
-{
-    TW_NONE,
-    TW_BULLET,
-    TW_PELLET,
-    TW_ROCKET,
-    TW_PLASMA,
-    TW_RAILGUN,
-    TW_MAX
-} ETurretWeapon;
-
-typedef enum
-{
-    TP_ROCKET,
-    TP_PLASMA,
-    TP_MAX
-} ETurretProjectile;
-
-typedef enum
-{
-    TSM_NONE,
-    TSM_MODULES,
-    TSM_ITEMS,
-    TSM_CRATE
-} ETurretSensorModes;
-
-typedef enum
-{
-    TC_NONE,
-    TC_DRAW_FIRE,
-    TC_HOLD_POSITION,
-    TC_MAX
-} ETurretCommands;
-
-// --------------------------------------------------
 // Utils
 //
 
@@ -1072,7 +836,6 @@ typedef enum
     KEYNUM_MODIFIER,
     
     KEYNUM_SKILLS,
-    KEYNUM_TURRET,
     KEYNUM_MENU,
     
     KEYNUM_FORWARD,
@@ -1113,36 +876,6 @@ typedef struct AugInfo_S            AugInfo;
 // Charsave
 typedef struct CharSaveInfo_S       CharSaveInfo;
 
-// GUI
-// [KS] This is how it's basically gonna look:
-// GUIData
-// +--GUIMouseInfo
-// |  +--GUIContextMenu
-// |  +--GUITooltip
-// +--GUITabStrip
-//    +--GUIPanel
-//       +--GUILabel
-//       +--GUIIcon
-//       +--GUIButton
-//       +--GUIBar
-//       +--GUIList
-//       +--GUIGrid
-//       +--GUIBorder
-typedef struct GUIData_S            GUIData;
-typedef struct GUIMouseInfo_S       GUIMouseInfo;
-typedef struct GUIContextMenu_S     GUIContextMenu;
-typedef struct GUITooltip_S         GUITooltip;
-typedef struct GUITabStrip_S        GUITabStrip;
-typedef struct GUIPanel_S           GUIPanel;
-typedef struct GUIControl_S         GUIControl;
-typedef struct GUILabel_S           GUILabel;
-typedef struct GUIIcon_S            GUIIcon;
-typedef struct GUIButton_S          GUIButton;
-typedef struct GUIBar_S             GUIBar;
-typedef struct GUIList_S            GUIList;
-typedef struct GUIGrid_S            GUIGrid;
-typedef struct GUIBorder_S          GUIBorder;
-
 // Health Bars
 typedef struct HUDBarInfo_S         HUDBarInfo;
 
@@ -1173,18 +906,8 @@ typedef struct MissionInfo_S        MissionInfo;
 // Minigames
 typedef struct MinigameData_S       MinigameData;
 
-// Turret
-typedef struct TurretUpgrade_S      TurretUpgrade;
-typedef struct TurretSensorItem_S   TurretSensorItem;
-
 // Map
 typedef struct LevelInfo_S          LevelInfo;
-
-// PDA
-typedef struct PDAMessage_S         PDAMessage;
-
-typedef struct Payout_S             Payout;
-typedef struct PayoutData_S         PayoutData;
 
 // RPG
 typedef struct PlayerData_S         PlayerData;
@@ -1217,7 +940,6 @@ typedef MonsterInfo const           *MonsterInfoPtr;
 typedef MegabossInfo const          *MegabossInfoPtr;
 typedef ShieldPart const            *ShieldPartPtr;
 typedef ShieldAccessory const       *ShieldAccsPtr;
-typedef TurretUpgrade RPGMap        *TurretUpgradePtr;
 
 // Globals
 typedef ItemInfo RPGGlobal          *ItemInfoPtr;

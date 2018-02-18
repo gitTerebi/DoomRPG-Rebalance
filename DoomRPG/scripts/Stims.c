@@ -7,7 +7,6 @@
 #include "RPG.h"
 #include "Stats.h"
 #include "Stims.h"
-#include "Turret.h"
 #include "Utils.h"
 
 str const CompoundNames[STIM_MAX] =
@@ -73,52 +72,20 @@ int const StimPowerupEnd = STIM_MAX;
 
 NamedScript KeyBind void UseStim(bool Force)
 {
-    bool Turret = false;
     int Size;
     int Injector[STIM_MAX];
     
     // If you're dead, terminate
     if (GetActorProperty(0, APROP_Health) <= 0) return;
     
-    // Generate and Activate Turret Stim
-    if (GetPlayerInput(PlayerNumber(), INPUT_BUTTONS) & BT_SPEED && Player.Turret.Active)
-    {
-        Turret = true;
-        
-        // Focused injection handling
-        if (Player.Turret.StimFocused && Player.Turret.StimTimer <= 0)
-        {
-            Player.Turret.StimPicked = false;
-            TurretPickStimMenu();
-            
-            // Wait for the player to pick a vial type
-            while (!Player.Turret.StimPicked)
-                Delay(1);
-            
-            // If the player cancelled out of the menu, return
-            if (Player.Turret.StimVialType == -1)
-                return;
-        }
-        
-        // Store Injector for restore later
-        Size = Player.Stim.Size;
-        for (int i = 0; i < STIM_MAX; i++)
-            Injector[i] = Player.Stim.Current[i];
-        
-        if (!TurretStim())
-            return;
-        
-        Delay(1);
-    }
-    
-    if (!Force && Player.Stim.Size == 0 && !Turret)
+    if (!Force && Player.Stim.Size == 0)
     {
         PrintError("You don't have an injector ready");
         ActivatorSound("menu/error", 127);
         return;
     }
     
-    if (!Force && Player.Stim.Amount == 0 && !Turret)
+    if (!Force && Player.Stim.Amount == 0)
     {
         PrintError("Your current injector is empty");
         ActivatorSound("menu/error", 127);
@@ -140,44 +107,23 @@ NamedScript KeyBind void UseStim(bool Force)
     
     // Set Timer for Stat bonuses
     int InitialTime;
-    if (Turret)
-    {
-        if (Player.Turret.StimFocused && Player.Turret.StimVialType == STIM_PURIFIER)
-            InitialTime = 35 * (60 * Player.Turret.Upgrade[TU_ASSIST_INJECTOR_AMOUNT] * 2);
-        else if (Player.Turret.StimFocused && Player.Turret.StimVialType == STIM_POTENCY)
-            InitialTime = 35 * 60;
+    for (int i = StimStatsStart; i < StimStatsEnd + 2; i++)
+      if (Player.Stim.Current[i] > 0)
+      {
+      	if (i == STIM_PURIFIER)
+          InitialTime += 15 * (Player.Stim.Current[STIM_PURIFIER] * 30);
         else
-            InitialTime = 35 * (60 + ((Player.Turret.Upgrade[TU_ASSIST_INJECTOR_AMOUNT] - 1) * 60));
-        
+          InitialTime += 15 * 30;
+    
         // Immunity penalty
         InitialTime -= InitialTime * Player.StimImmunity / 100;
-        
+    
         Player.Stim.Active = true;
         Player.Stim.Timer += InitialTime;
-        
+    
         if (Player.Stim.Timer >= Player.Stim.TimerMax)
-            Player.Stim.TimerMax = Player.Stim.Timer;
-    }
-    else
-    {
-        for (int i = StimStatsStart; i < StimStatsEnd + 2; i++)
-            if (Player.Stim.Current[i] > 0)
-            {
-                if (i == STIM_PURIFIER)
-                    InitialTime += 35 * (Player.Stim.Current[STIM_PURIFIER] * 60);
-                else
-                    InitialTime += 35 * 60;
-                
-                // Immunity penalty
-                InitialTime -= InitialTime * Player.StimImmunity / 100;
-                
-                Player.Stim.Active = true;
-                Player.Stim.Timer += InitialTime;
-                
-                if (Player.Stim.Timer >= Player.Stim.TimerMax)
-                    Player.Stim.TimerMax = Player.Stim.Timer;
-            }
-    }
+        	Player.Stim.TimerMax = Player.Stim.Timer;
+      }
     
     // Apply Multiplier and Potency
     for (int i = StimStatsStart; i < StimStatsEnd; i++)
@@ -197,7 +143,7 @@ NamedScript KeyBind void UseStim(bool Force)
     for (int i = StimPowerupStart; i < StimPowerupEnd; i++)
         if (Player.Stim.Current[i] > 0)
         {
-            int InitialTime = (35 * Player.Stim.Current[i]) * 30;
+            int InitialTime = (15 * Player.Stim.Current[i]) * 10;
             InitialTime -= InitialTime * Player.StimImmunity / 100;
             
             Player.Stim.PowerupTimer[i] += InitialTime;
@@ -213,30 +159,15 @@ NamedScript KeyBind void UseStim(bool Force)
     
     // Add Toxicity
     Player.Toxicity += Player.Stim.Toxicity;
-    Player.Payout.StimToxicity += Player.Stim.Toxicity;
-    
-    // Prevent Toxicity death with turret injections
-    if (Turret && Player.Toxicity >= 100)
-        Player.Toxicity = 99;
     
     // Add Immunity
     Player.StimImmunity += Player.Stim.Toxicity * 5;
-    Player.Payout.StimImmunity += Player.Stim.Toxicity * 5;
     if (Player.StimImmunity > 100)
         Player.StimImmunity = 100;
     
     // Apply current Stim to last used Stim
     for (int i = 0; i < STIM_MAX; i++)
         Player.Stim.Last[i] += Player.Stim.Current[i];
-    
-    // Restore Injector if it was saved from a turret
-    if (Turret)
-    {
-        Size = Player.Stim.Size;
-        
-        for (int i = 0; i < STIM_MAX; i++)
-            Player.Stim.Current[i] = Injector[i];
-    }
     
     // Clear the Stim
     Player.Stim.Size = 0;
@@ -250,11 +181,6 @@ NamedScript KeyBind void UseStim(bool Force)
     if (Random(0, 100) == 0) // DRUGS
         ActivatorSound("misc/drugs", 127);
     FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0, 1.0);
-    if (!Turret)
-        TossStim();
-    
-    // Payout
-    Player.Payout.StimsUsed++;
 }
 
 NamedScript KeyBind void ThrowAwayStim()
@@ -629,7 +555,4 @@ void SetStim(int Type)
     if (Type == 1) TakeInventory("DRPGStimMedium", 1);
     if (Type == 2) TakeInventory("DRPGStimLarge", 1);
     if (Type == 3) TakeInventory("DRPGStimXL", 1);
-    
-    // Payout
-    Player.Payout.StimsMade++;
 }

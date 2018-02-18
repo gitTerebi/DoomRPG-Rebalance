@@ -83,7 +83,6 @@ NamedScript void UpdateShopAutoList()
                 LogMessage(StrParam("Adding %S to auto-store @ %p", ItemData[i][j].Name, Item), LOG_DEBUG);
                 ((ItemInfoPtr *)Player.AutoStoreList.Data)[Player.AutoStoreList.Position++] = Item;
             }
-            
             // LogMessage(StrParam("Completed Item #%i, %S", j, ItemData[i][j].Name), LOG_DEBUG);
         }
     }
@@ -108,22 +107,12 @@ void ShopItemTryAutoDeposit(ItemInfoPtr Item)
 }
 
 NamedScript void ShopItemAutoHandler()
-{
-    // These are actually too big for the script auto handler to allocate properly, so they need to be static-scope here.
-    RPGMap static int Items[ITEM_CATEGORIES][ITEM_MAX];
-    RPGMap static int PrevItems[ITEM_CATEGORIES][ITEM_MAX];
-    
+{    
     UpdateShopAutoList();
     
     while (true)
     {
         int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        
-        // For post-checks
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0)
-            for (int i = 0; i < ItemCategories; i++)
-                for (int j = 0; j < ItemMax[i]; j++)
-                    Items[i][j] = CheckInventory(ItemData[i][j].Actor);
         
         // Auto-Sell
         bool CanSellItems = Player.RankLevel > 0 || CurrentLevel->UACBase;
@@ -157,31 +146,7 @@ NamedScript void ShopItemAutoHandler()
                     ShopItemTryAutoDeposit(Item);
             }
         
-        // Run-pickup behavior stuff
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons & BT_SPEED)
-        {
-            for (int i = 0; i < ItemCategories; i++)
-                for (int j = 0; j < ItemMax[i]; j++)
-                {
-                    ItemInfoPtr Item = &ItemData[i][j];
-                    
-                    // Auto-Sell
-                    if (!Player.InShop && GetActivatorCVar("drpg_pickup_behavior") == 1 && Items[i][j] > PrevItems[i][j])
-                        if (CheckInventory(Item->Actor) > 0)
-                            SellItem(Item->Actor, 1, true);
-                    
-                    // Auto-Store
-                    if (!Player.InShop && GetActivatorCVar("drpg_pickup_behavior") == 2 && Items[i][j] > PrevItems[i][j])
-                        ShopItemTryAutoDeposit(Item);
-                }
-        }
-        
         Delay(4);
-        
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0)
-            for (int i = 0; i < ItemCategories; i++)
-                for (int j = 0; j < ItemMax[i]; j++)
-                    PrevItems[i][j] = Items[i][j];
     }
 }
 
@@ -200,9 +165,16 @@ void ShopLoop()
 
     // Get the sell price
     SellPrice = GetSellPrice(NULL, 1);
-    
+     
     // Set the HUD Size
     SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+     
+    // Draw Border & Background
+    // These are pushed back by -10 so the border doesn't overlap anything
+    if (GetActivatorCVar("drpg_menu_background_border"))
+    	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
+    if (GetActivatorCVar("drpg_menu_background_image"))
+    	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
 
     // Force Locker mode if the Shop Anywhere CVAR is off
     if (!GetCVar("drpg_shoptype") && !CurrentLevel->UACBase)
@@ -412,7 +384,8 @@ void ShopLoop()
         {
             for (int i = 0; i < ItemMax[Player.ShopPage]; i++)
                 while (Player.Locker[Player.ShopPage][i] > 0)
-                    WithdrawItem(Player.ShopPage, i);
+                    if (WithdrawItem(Player.ShopPage, i) == 0)
+                    	break;
         }
         else
         {
@@ -537,7 +510,7 @@ int GetSellPrice(str Item, int Amount)
 int SellItem(str Item, int SellAmount, bool AutoSold)
 {
     int SellCost;
-    
+
     // You must be at least Rank 1 or in the Outpost to sell items
     if (Player.RankLevel == 0 && !CurrentLevel->UACBase)
     {
@@ -663,17 +636,17 @@ void DepositItem(int Page, int Index, bool CharSave, bool NoSound)
     }
 }
 
-void WithdrawItem(int Page, int Index)
+int WithdrawItem(int Page, int Index)
 {
     ItemInfoPtr ItemPtr = &ItemData[Page][Index];
     int *LockerAmount = &Player.Locker[Page][Index];
     
     // Stop if this item cannot be withdrawn
-    if (ItemCategoryFlags[Page] & CF_NOSTORE) return;
+    if (ItemCategoryFlags[Page] & CF_NOSTORE) return 0;
     
     // Stop if you're trying to withdraw your final copy while Keep is enabled
     if (Player.ItemKeep[Page][Index] && *LockerAmount <= 1)
-        return;
+    	return 0;
     
     // Spawning
     if ((Player.EP >= LOCKER_EPRATE || CurrentLevel->UACBase) && *LockerAmount > 0)
@@ -685,7 +658,7 @@ void WithdrawItem(int Page, int Index)
             {
                 PrintError("You are already carrying this type of weapon");
                 ActivatorSound("menu/error", 127);
-                return;
+                return 0;
             }
             
             int WeaponTID = UniqueTID();
@@ -736,6 +709,8 @@ void WithdrawItem(int Page, int Index)
             PrintError("Locker does not contain any of the specified item");
         ActivatorSound("menu/error", 127);
     }
+    
+    return 1;
 }
 
 void DrawItemGrid()

@@ -753,6 +753,29 @@ void CrateTakeItem()
     }
 }
 
+void CrateTakeAll()
+{
+	// Save player's index inside the crate so it doesn't get flung around by the code below.
+	int Index = Player.CrateIndex;
+	
+	for (Player.CrateIndex = 0; Player.CrateIndex < Crates[Player.CrateID].Amount; Player.CrateIndex++)
+	{
+		bool Spawned = SpawnForced(Crates[Player.CrateID].Item[Player.CrateIndex]->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+        
+        if (Spawned)
+        {
+        SetActorVelocity(Player.TID, 0.01, 0.01, 0, true, false);
+        
+        Crates[Player.CrateID].Active[Player.CrateIndex] = false;
+        Crates[Player.CrateID].Item[Player.CrateIndex] = NULL;
+        }
+    
+    }
+    
+    // Restore index.
+    Player.CrateIndex = Index;
+}
+
 bool CrateEmpty(int ID)
 {
     for (int i = 0; i < CRATE_MAX_ITEMS; i++)
@@ -877,6 +900,11 @@ void CrateInput()
     {
         ActivatorSound("menu/move", 127);
         CrateTakeItem();
+    }
+    if (Buttons & BT_ALTATTACK && !(OldButtons & BT_ALTATTACK))
+    {
+        ActivatorSound("transfer/complete", 127);
+        CrateTakeAll();
     }
     if (Buttons & BT_FORWARD && !(OldButtons & BT_FORWARD))
     {

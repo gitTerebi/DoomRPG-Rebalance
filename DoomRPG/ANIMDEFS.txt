@@ -13,30 +13,6 @@ texture FIRESK00
 // --------------------------------------------------
 // MENU
 
-// GUI Background Static
-texture GStatic1
-	pic GStatic1 tics 1
-	pic GStatic2 tics 1
-	pic GStatic3 tics 1
-	pic GStatic4 tics 1
-	pic GStatic1 tics 1
-	pic GStatic3 tics 1
-	pic GStatic4 tics 1
-	pic GStatic2 tics 1
-	pic GStatic3 tics 1
-	pic GStatic1 tics 1
-	pic GStatic4 tics 1
-	pic GStatic2 tics 1
-	pic GStatic1 tics 1
-	pic GStatic3 tics 1
-	pic GStatic2 tics 1
-	pic GStatic4 tics 1
-
-// Payout Tab
-texture TPayout
-	pic TPayout rand 350 1400
-	pic TPayout2 rand 5 35
-
 // Doomguy
 texture PLAYA1
 	pic PLAYA1 tics 6
@@ -159,20 +135,6 @@ texture LT12A0
     pic LT12A0 tics 6
     pic LT12B0 tics 6
 
-// Turret Parts
-texture TPRTA0
-    pic TPRTA0 tics 6
-    pic TPRTB0 tics 6
-    pic TPRTC0 tics 6
-    pic TPRTD0 tics 6
-
-// Turret Parts Crate
-texture TCRTA0
-    pic TCRTA0 tics 6
-    pic TCRTB0 tics 6
-    pic TCRTC0 tics 6
-    pic TCRTD0 tics 6
-
 // --------------------------------------------------
 // HUD
 
@@ -293,13 +255,6 @@ texture GCELA0
     pic GCELD0 tics 6
     pic GCELC0 tics 6
     pic GCELB0 tics 6
-
-// Payout PDA
-texture PAYPDA
-	pic PAYPDA tics 2
-	pic PAYPDA2 tics 2
-	pic PAYPDA3 tics 2
-	pic PAYPDA4 tics 2
 
 // --------------------------------------------------
 // INVENTORY BAR

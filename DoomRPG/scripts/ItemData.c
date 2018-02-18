@@ -297,8 +297,8 @@ NamedScript void BuildItemData()
         ItemIndex++;
     };
     
-    // Stims/Augmentations/Turret Parts
-    ITEMDATA_CATEGORY(6, "\CkStims/Augs/Turret", CF_NONE);
+    // Stims/Augmentations
+    ITEMDATA_CATEGORY(6, "\CkStims/Augs", CF_NONE);
         ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                         1000, 0, 1, "STIMB0", 16, 29);
         ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                        2500, 2, 2, "STIMB0", 16, 29);
         ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                         5000, 4, 4, "STIMB0", 16, 29);
@@ -333,8 +333,6 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                      1000, 4, 1, "BATTA0",  5, 13);
         ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      2500, 8, 2, "BATTB0", 14, 21);
         
-        ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                        1000, 1, 1, "TPRTA0", 29, 21);
-        ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                50000, 4, 4, "TCRTA0", 29, 26);
     ITEMDATA_CATEGORY_END;
     
     // Generic Loot
@@ -413,8 +411,8 @@ NamedScript void BuildItemData()
             
             // Exotic Weapons
             ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                  550,  2, 0, "BLASX0", 12, 14);
-            ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           1350,  3, 1, "OLOKX0", 10, 13);
-            ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              1800,  4, 1, "DEAPX0", 11, 14);
+            ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           1350,  3, 1, "GLOKX0", 10, 13);
+            ITEMDATA_DEF("RLDesertEagle",                           "Handcannon \Ct[Exotic]\C-",                              1800,  4, 1, "DEAPX0", 11, 14);
             ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                         2500,  4, 2, "MRKPX0",  9, 12);
             ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                           2500,  4, 2, "NSSGX0", 27,  9);
             ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                         3000,  4, 3, "ASHOX0", 31, 27);
@@ -434,8 +432,8 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLMarksmanRifle",                         "Marksman Rifle \Ci[Superior]\C-",                       18000, 12, 5, "MRKRX0", 26, 18);
             ITEMDATA_DEF("RLVanguardRifle",                         "Vanguard Rifle \Ci[Superior]\C-",                       17500, 12, 5, "VANRX0", 26, 13);
             ITEMDATA_DEF("RLHuntingRevolver",                       "Hunting Revolver \Ci[Superior]\C-",                     25000, 12, 5, "HREVX0", 12, 14);
-            ITEMDATA_DEF("RLThompson",                              "Tommy Gun \Ci[Superior]\C-",                            16000, 12, 5, "TGUNX0", 23, 17);
-            ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  15000, 12, 5, "BPP7X0", 8, 10);
+            ITEMDATA_DEF("RLThompson",                              "Tommy Gun \Ci[Superior]\C-",                            16000, 12, 5, "TGUNX0", 25, 17);
+            ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  15000, 12, 5, "BPP7X0", 10, 12);
             ITEMDATA_DEF("RLHuntingShotgun",                        "Hunting Shotgun \Ci[Superior]\C-",                      28000, 12, 5, "HUNTX0", 32, 12);
             ITEMDATA_DEF("RLRCP90",                                 "RC-P90 \Ci[Superior]\C-",                               26000, 12, 5, "RCP9X0", 24, 15);
             
@@ -459,13 +457,13 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLSteelBeast",                            "Steel Beast \Cd[Unique]\C-",                            30000, -1, 6, "STBEX0", 36, 11);
             ITEMDATA_DEF("RLPlasmaRedirectionCannon",               "Plasma Redirection Cannon \Cd[Unique]\C-",              35000, -1, 6, "PRDCX0", 32, 24);
             ITEMDATA_DEF("RLSussGun",                               "Suss Gun \Cd[Unique]\C-",                               50000, -1, 7, "SUSSX0", 38, 37);
-            ITEMDATA_DEF("RLMIRVLauncher",                          "MIRV Launcher \Cd[Unique]\C-",                          75000, -1, 8, "MIRVX0", 20, 16);
+            ITEMDATA_DEF("RLMIRVLauncher",                          "MIRV Launcher \Cd[Unique]\C-",                          75000, -1, 8, "MIRVX0", 27, 17);
             ITEMDATA_DEF("RLMarathonAssaultRifle",                  "MA-75B Assault Rifle \Cd[Unique]\C-",                   52000, -1, 7, "MA75Y0",  0,  0);
             ITEMDATA_DEF("RLMarathonShotguns",                      "WSTE-M5 Shotgun \Cd[Unique]\C-",                        70000, -1, 8, "WSTEY0",  6,  6);
             ITEMDATA_DEF("RLWidowmakerSMG",                         "Widowmaker SMG \Cd[Unique]\C-",                         30000, -1, 6, "WSMGX0", 24, 20);
             ITEMDATA_DEF("RLChameleonRifle",                        "Chameleon Rifle \Cd[Unique]\C-",                       160000, -1, 8, "CRM1X0", 26, 18);
             ITEMDATA_DEF("RLNanomachicArmamentGenerator",           "Nanomachic Armament Generator \Cd[Unique]\C-",         200000, -1, 8, "NAG0X0", 13, 19);
-            ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     380000, -1, 8, "NKO0X0", 29, 54);
+            ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     380000, -1, 8, "NKO0X0", 38, 37);
          // ITEMDATA_DEF("RLSubtleKnife",                           "Subtle Knife \Cd[Unique]\C-",                           30000, -1, "SUBKX0", 38, 37);
          // ITEMDATA_DEF("RLFusionMortar",                          "Fusion Mortar \Cd[Unique]\C-",                          90000, -1, "FMORX0", 38, 37);
          // ITEMDATA_DEF("RLSpectreRevolver",                       "The Spectre \Cd[Unique]\C-",                            31000, -1, "SPERX0", 38, 37);
@@ -484,7 +482,7 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLJudgeOfTheDead",                        "Judge Of The Dead \Cf[Legendary]\C-",                 2500000, -1, 10, "JOTDX0", 19, 12);
             ITEMDATA_DEF("RLHurricaneCannon",                       "Hurricane Cannon \Cf[Legendary]\C-",                  2200000, -1, 10, "HURRX0", 20, 18);
             ITEMDATA_DEF("RLNeuralStunner",                         "Neural Stunner \Cf[Legendary]\C-",                    2000000, -1, 10, "NEURB0",  7, 13);
-            ITEMDATA_DEF("RLBaronBlaster",                          "Baron Blaster \Cf[Legendary]\C-",                     1600000, -1, 10, "BABLX0", 11, 14);
+            ITEMDATA_DEF("RLBaronBlaster",                          "Baron Blaster \Cf[Legendary]\C-",                     1600000, -1, 10, "BABLX0", 18, 16);
             ITEMDATA_DEF("RLDuke2Rifle",                            "Rigelatin Assault Weapon \Cf[Legendary]\C-",          3000000, -1, 10, "DN2RX0", 28,  9);
             ITEMDATA_DEF("RLBFGInfinity",                           "BFG Infinity \Cf[Legendary]\C-",                     75000000, -1, 10, "BFGIX0", 25, 20);
             ITEMDATA_DEF("RLRealityDistortionArray",                "Reality Distortion Array \Cf[Legendary]\C-",        123456789, -1, 10, "RD1NX0", 25, 20);
@@ -492,8 +490,8 @@ NamedScript void BuildItemData()
             // Basic Assembled Weapons
             ITEMDATA_DEF("RLSpeedloaderPistol",                     "Revolver \Cv[Assembled]\C-",                              800, -1, -1, "REVOX0", 16, 20);
             ITEMDATA_DEF("RLSilencedPistol",                        "Silenced Pistol \Cv[Assembled]\C-",                       500, -1, -1, "SILPX0", 17, 15);
-            ITEMDATA_DEF("RLStealthRifle",                          "Stealth Rifle \Cv[Assembled]\C-",                        1800, -1, -1, "STELX0", 25, 14);
-            ITEMDATA_DEF("RLShredderPistol",                        "Shredder Pistol \Cv[Assembled]\C-",                      1200, -1, -1, "SRPSX0", 10, 13);
+            ITEMDATA_DEF("RLStealthRifle",                          "Stealth Rifle \Cv[Assembled]\C-",                        1800, -1, -1, "STELX0", 17, 15);
+            ITEMDATA_DEF("RLShredderPistol",                        "Shredder Pistol \Cv[Assembled]\C-",                      1200, -1, -1, "SHRPX0", 10, 13);
             ITEMDATA_DEF("RLShredderShotgun",                       "Shredder Shotgun \Cv[Assembled]\C-",                     6000, -1, -1, "SHRSX0", 23, 12);
             ITEMDATA_DEF("RLElephantGun",                           "Elephant Gun \Cv[Assembled]\C-",                         1800, -1, -1, "ELEGX0", 21, 13);
             ITEMDATA_DEF("RLGatlingGun",                            "Gatling Gun \Cv[Assembled]\C-",                          2500, -1, -1, "DGTGX0", 38, 19);
@@ -519,14 +517,14 @@ NamedScript void BuildItemData()
          // ITEMDATA_DEF("RLPiercingMace",                          "Piercing Mace \Cv[Assembled]\C-",                        2800, -1, "PMCEX0", 11, 13);
             
             // High Power Assembled Weapons
-            ITEMDATA_DEF("RLHighPowerPistol",                       "High Power Pistol \Cv[Assembled]\C-",                     700, -1, -1, "QPISX0", 16, 15);
+            ITEMDATA_DEF("RLHighPowerPistol",                       "High Power Pistol \Cv[Assembled]\C-",                     700, -1, -1, "PISGX0", 11, 13);
             ITEMDATA_DEF("RLHighPowerChaingun",                     "High Power Chaingun \Cv[Assembled]\C-",                  2100, -1, -1, "QCHGX0", 26, 20);
             ITEMDATA_DEF("RLHighPowerBattleRifle",                  "High Power Battle Rifle \Cv[Assembled]\C-",              2100, -1, -1, "QRIFX0", 23, 15);
             ITEMDATA_DEF("RLHighPowerPlasmaRifle",                  "High Power Plasma Rifle \Cv[Assembled]\C-",              7000, -1, -1, "QPLSX0", 28, 22);
             ITEMDATA_DEF("RLHighPowerBFG9000",                      "High Power BFG9000 \Cv[Assembled]\C-",                  11000, -1, -1, "BFGGX0", 31, 38);
             ITEMDATA_DEF("RLHighPowerBlaster",                      "High Power Blaster \Cv[Assembled]\C-",                   1600, -1, -1, "QBLAX0", 12, 15);
             ITEMDATA_DEF("RLHighPowerCombatPistol",                 "High Power Combat Pistol \Cv[Assembled]\C-",             2000, -1, -1, "QCPSX0", 10, 13);
-            ITEMDATA_DEF("RLHighPowerHandCannon",                   "High Power Handcannon \Cv[Assembled]\C-",                4200, -1, -1, "QDEAX0", 12, 15);
+            ITEMDATA_DEF("RLHighPowerDesertEagle",                  "High Power Handcannon \Cv[Assembled]\C-",                4200, -1, -1, "QDEAX0", 12, 15);
             ITEMDATA_DEF("RLHighPowerMarksmanPistol",               "High Power Marksman Pistol \Cv[Assembled]\C-",           5000, -1, -1, "QMRKX0", 11, 14);
             ITEMDATA_DEF("RLHighPowerUzi",                          "High Power Uzi \Cv[Assembled]\C-",                       3600, -1, -1, "QUZIX0", 20, 26);
             ITEMDATA_DEF("RLHighPowerMinigun",                      "High Power Minigun \Cv[Assembled]\C-",                  38000, -1, -1, "QMINX0", 23, 20);
@@ -539,7 +537,7 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLHighPowerMarksmanRifle",                "High Power Marksman Rifle \Cv[Assembled]\C-",           22500, -1, -1, "MRKRX0", 26, 18);
             ITEMDATA_DEF("RLHighPowerVanguardRifle",                "High Power Vanguard Rifle \Cv[Assembled]\C-",           21000, -1, -1, "QVANX0", 20, 15);
             ITEMDATA_DEF("RLHighPowerHuntingRevolver",              "High Power Hunting Revolver \Cv[Assembled]\C-",         35000, -1, -1, "HREVX0", 12, 14);
-            ITEMDATA_DEF("RLHighPowerThompson",                     "High Power Tommy Gun \Cv[Assembled]\C-",                20000, -1, -1, "TGUNX0", 23, 17);
+            ITEMDATA_DEF("RLHighPowerThompson",                     "High Power Tommy Gun \Cv[Assembled]\C-",                20000, -1, -1, "TGUNX0", 26, 13);
             ITEMDATA_DEF("RLHighPowerPP7",                          "High Power PP7 \Cv[Assembled]\C-",                      18000, -1, -1, "BPP7X0", 10, 12);
             ITEMDATA_DEF("RLHighPowerRCP90",                        "RC-P120 \Cv[Assembled]\C-",                             50000, -1, -1, "RCP1X0", 17, 16);
             
@@ -557,14 +555,14 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLTacticalRocketLauncher",                "Tactical Rocket Launcher \Cv[Assembled]\C-",            12000, -1, -1, "TROKX0", 27, 14);
             ITEMDATA_DEF("RLStormPistol",                           "Storm Pistol \Cv[Assembled]\C-",                         2600, -1, -1, "SPISX0", 10, 12);
             ITEMDATA_DEF("RLStormCombatPistol",                     "Storm Combat Pistol \Cv[Assembled]\C-",                  4500, -1, -1, "SPISX0", 10, 12);
-            ITEMDATA_DEF("RLStormHandCannon",                       "Storm Handcannon \Cv[Assembled]\C-",                     9000, -1, -1, "SDEAX0", 11, 16);
+            ITEMDATA_DEF("RLStormDesertEagle",                      "Storm Handcannon \Cv[Assembled]\C-",                     9000, -1, -1, "SDEAX0", 11, 16);
             ITEMDATA_DEF("RLStormMarksmanPistol",                   "Storm Marksman Pistol \Cv[Assembled]\C-",               10000, -1, -1, "MRKPX0",  9, 12);
             ITEMDATA_DEF("RLStormUzi",                              "Dual Uzis \Cv[Assembled]\C-",                           24000, -1, -1, "SUZIX0", 22, 30);
             ITEMDATA_DEF("RLStormBlaster",                          "Storm Blaster \Cv[Assembled]\C-",                        4200, -1, -1, "BLASX0", 12, 14);
             ITEMDATA_DEF("RLStormNuclearPlasmaPistol",              "Storm Nuclear Plasma Pistol \Cv[Assembled]\C-",         75000, -1, -1, "NUSPX0", 13, 15);
             ITEMDATA_DEF("RLPlasmaPistol",                          "Plasma Pistol \Cv[Assembled]\C-",                        3200, -1, -1, "CTPPX0", 11, 15);
             ITEMDATA_DEF("RLPlasmaCombatPistol",                    "Plasma Combat Pistol \Cv[Assembled]\C-",                 5800, -1, -1, "CPP1X0", 11, 15);
-            ITEMDATA_DEF("RLPlasmaHandCannon",                      "Plasma Handcannon \Cv[Assembled]\C-",                   15000, -1, -1, "PDEAX0", 12, 14);
+            ITEMDATA_DEF("RLPlasmaDesertEagle",                     "Plasma Handcannon \Cv[Assembled]\C-",                   15000, -1, -1, "PDEAX0", 12, 14);
             ITEMDATA_DEF("RLPlasmaUzi",                             "Plasma Uzi \Cv[Assembled]\C-",                          16000, -1, -1, "PUZIX0", 21, 26);
             ITEMDATA_DEF("RLPlasmaMarksmanPistol",                  "Plasma Marksman Pistol \Cv[Assembled]\C-",              20000, -1, -1, "PMRPX0", 12, 11);
             ITEMDATA_DEF("RLOverchargedBlaster",                    "Overcharged Blaster \Cv[Assembled]\C-",                 35000, -1, -1, "OBLAX0", 14, 14);
@@ -575,8 +573,8 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLHyperBlaster",                          "Hyperblaster \Cv[Assembled]\C-",                         6500, -1, -1, "HYPEX0", 28, 16);
             ITEMDATA_DEF("RLBulletstormChaingun",                   "Bulletstorm Chaingun \Cv[Assembled]\C-",                11500, -1, -1, "BSCHX0", 33, 23);
             ITEMDATA_DEF("RLBulletstormRifle",                      "Bulletstorm Rifle \Cv[Assembled]\C-",                   11500, -1, -1, "BULRX0", 27, 14);
-            ITEMDATA_DEF("RLAutoshotgun",                           "Auto Shotgun \Cv[Assembled]\C-",                        20000, -1, -1, "AUTSX0", 25, 11);
-            ITEMDATA_DEF("RLAutoDoubleShotgun",                     "Auto Double Shotgun \Cv[Assembled]\C-",                 35000, -1, -1, "AUTDX0", 27, 12);
+            ITEMDATA_DEF("RLAutoshotgun",                           "Auto Shotgun \Cv[Assembled]\C-",                        20000, -1, -1, "AUTSX0", 31, 15);
+            ITEMDATA_DEF("RLAutoDoubleShotgun",                     "Auto Double Shotgun \Cv[Assembled]\C-",                 35000, -1, -1, "AUTDX0", 27,  9);
             ITEMDATA_DEF("RLMiniMissilePistol",                     "Mini-Missile Pistol \Cv[Assembled]\C-",                 14000, -1, -1, "FRGNX0", 12, 11);
             ITEMDATA_DEF("RLPlasmaRifleMkII",                       "Plasma Rifle Mk.II \Cv[Assembled]\C-",                  11000, -1, -1, "2PLAX0", 24, 15);
             ITEMDATA_DEF("RLPlasmaShotgunMkII",                     "Plasma Shotgun Mk.II \Cv[Assembled]\C-",                11000, -1, -1, "P2SHX0", 21, 11);
@@ -635,7 +633,7 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLHeavyPulseBlaster",                     "Heavy Pulse Blaster \Cv[Assembled]\C-",                 65000, -1, -1, "HBLAX0", 14, 12);
             ITEMDATA_DEF("RLInfusionLauncher",                      "Plascharge Launcher \Cv[Assembled]\C-",                110000, -1, -1, "RLAUX0", 43, 19);
             ITEMDATA_DEF("RLLaserPulseLauncher",                    "Defence Drone Launcher \Cv[Assembled]\C-",             180000, -1, -1, "DDRLX0", 19, 18);
-            ITEMDATA_DEF("RLIncinerationDeviceLauncher",            "Incineration Device Launcher \Cv[Assembled]\C-",       180000, -1, -1, "IDLAX0", 23, 21);
+            ITEMDATA_DEF("RLIncinerationDeviceLauncher",            "Incineration Device Launcher \Cv[Assembled]\C-",       180000, -1, -1, "NAPAX0", 22, 20);
             
             // Nanomanufacture Assembled Weapons
             ITEMDATA_DEF("RLNanoManufactureAmmoPistol",             "Nanomachic Pistol \Cv[Assembled]\C-",                   50000, -1, -1, "MPISX0", 11, 13);
@@ -644,8 +642,8 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLNanoManufactureAmmoRocketLauncher",     "Nanomachic Rocket Launcher \Cv[Assembled]\C-",         100000, -1, -1, "MROKX0", 31, 14);
             ITEMDATA_DEF("RLNanoManufactureAmmoPlasmaRifle",        "Nanomachic Plasma Rifle \Cv[Assembled]\C-",             70000, -1, -1, "PLSRX0", 27, 19);
             ITEMDATA_DEF("RLNanoManufactureAmmoBlaster",            "Nanomachic Blaster \Cv[Assembled]\C-",                  55000, -1, -1, "BLASX0", 12, 14);
-            ITEMDATA_DEF("RLNanoManufactureAmmoCombatPistol",       "Nanomachic Combat Pistol \Cv[Assembled]\C-",            55000, -1, -1, "OLOKX0", 10, 13);
-            ITEMDATA_DEF("RLNanoManufactureAmmoHandCannon",         "Nanomachic Handcannon \Cv[Assembled]\C-",               55000, -1, -1, "DEAPX0", 11, 14);
+            ITEMDATA_DEF("RLNanoManufactureAmmoCombatPistol",       "Nanomachic Combat Pistol \Cv[Assembled]\C-",            55000, -1, -1, "GLOKX0", 10, 13);
+            ITEMDATA_DEF("RLNanoManufactureAmmoDesertEagle",        "Nanomachic Handcannon \Cv[Assembled]\C-",               55000, -1, -1, "DEAPX0", 11, 14);
             ITEMDATA_DEF("RLNanoManufactureAmmoMarksmanPistol",     "Nanomachic Marksman Pistol \Cv[Assembled]\C-",          60000, -1, -1, "MRKPX0",  9, 12);
             ITEMDATA_DEF("RLNanoManufactureAmmoUzi",                "Nanomachic Uzi \Cv[Assembled]\C-",                     120000, -1, -1, "RUZIX0", 20, 26);
             ITEMDATA_DEF("RLNanoManufactureAmmoMinigun",            "Nanomachic Minigun \Cv[Assembled]\C-",                 150000, -1, -1, "ZGGGX0", 30, 20);
@@ -659,14 +657,11 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLDemolitionAmmoChaingun",                "Demolition Ammo Chaingun \Cv[Assembled]\C-",           150000, -1, -1, "DCHGX0", 27, 15);
             ITEMDATA_DEF("RLDemolitionAmmoBattleRifle",             "Demolition Ammo Battle Rifle \Cv[Assembled]\C-",       150000, -1, -1, "DEMRX0", 23, 15);
             ITEMDATA_DEF("RLDemolitionAmmoCombatPistol",            "Demolition Ammo Combat Pistol \Cv[Assembled]\C-",      160000, -1, -1, "DGLKX0", 10, 13);
-            ITEMDATA_DEF("RLDemolitionAmmoHandCannon",              "Demolition Ammo Handcannon \Cv[Assembled]\C-",         180000, -1, -1, "DDEAX0", 11, 14);
+            ITEMDATA_DEF("RLDemolitionAmmoDesertEagle",             "Demolition Ammo Handcannon \Cv[Assembled]\C-",         180000, -1, -1, "DDEAX0", 11, 14);
             ITEMDATA_DEF("RLDemolitionAmmoMarksmanPistol",          "Demolition Marksman Pistol \Cv[Assembled]\C-",         160000, -1, -1, "MRKPX0",  9, 12);
             ITEMDATA_DEF("RLDemolitionAmmoUzi",                     "Demolition Ammo Uzi \Cv[Assembled]\C-",                150000, -1, -1, "DUZIX0", 20, 26);
             ITEMDATA_DEF("RLDemolitionAmmoMinigun",                 "Demolition Ammo Minigun \Cv[Assembled]\C-",            200000, -1, -1, "ZGGGX0", 30, 20);
         ITEMDATA_CATEGORY_END;
-        
-        // Hack to remove the garbage at the end of this list, not sure what's causing it
-        ItemMax[0] -= 12;
         
         // Figure out which modpacks can be applied to which weapons
         int TID = UniqueTID();
@@ -754,7 +749,7 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLArmorBonusPickup",                              "Armor Bonus",                                         100, 0, -1, "BON2A0",  7, 13);
             ITEMDATA_DEF("RLGreenArmorPickup",                              "Security Armor",                                      250, 0, 0, "ARM1A0", 15, 17);
             ITEMDATA_DEF("RLBlueArmorPickup",                               "Combat Armor",                                        500, 0, 0, "ARM2A0", 15, 17);
-            ITEMDATA_DEF("RLRedArmorPickup",                                "Commando Armor",                                     1000, 0, 0, "ARM3A0", 16, 18);
+            ITEMDATA_DEF("RLRedArmorPickup",                                "Commando Armor",                                     1000, 0, 0, "HEVAA0", 16, 18);
             
             // Assembled Armors
             ITEMDATA_DEF("RLCerberusArmorPickup",                           "Cerberus Armor \Cv[Assembled]\C-",                  18000, 8, 4, "CERAA0", 15, 30);
@@ -906,7 +901,7 @@ NamedScript void BuildItemData()
             ITEMDATA_DEF("RLArmorModItem",          "Armor Modpack",        50000, 2, 4, "AMK1A0", 10, 20);
             
             // Demon Artifact
-            ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 4, 6, "DMNAA0", 19, 65);
+            ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 4, 6, "DMNAA0", 19, 48);
         ITEMDATA_CATEGORY_END;
         
         // Boots
@@ -919,6 +914,7 @@ NamedScript void BuildItemData()
             // Assembled Boots
             ITEMDATA_DEF("RLCerberusBootsPickup",               "Cerberus Boots \Cv[Assembled]\C-",                      18000, 4, 6, "CERBA0", 13, 24);
             ITEMDATA_DEF("RLTacticalBootsPickup",               "Tactical Boots \Cv[Assembled]\C-",                      14000, 4, 6, "TACBA0", 14, 21);
+			
             ITEMDATA_DEF("RLAntigravSteelBootsPickup",          "Anti-Grav Steel Boots \Cv[Assembled]\C-",                2000, 1, 2, "AGSBA0", 14, 27);
             ITEMDATA_DEF("RLAntigravProtectiveBootsPickup",     "Anti-Grav Protective Boots \Cv[Assembled]\C-",           3000, 1, 3, "AGGBA0", 14, 27);
             ITEMDATA_DEF("RLAntigravPlasteelBootsPickup",       "Anti-Grav Plasteel Boots \Cv[Assembled]\C-",             4000, 1, 4, "AGBBA0", 14, 27);
@@ -1082,7 +1078,7 @@ ItemInfoPtr GetRewardItem(int Difficulty)
                 return Reward;
             }
         }
-        else if (Random(0, 100) < 20) // Stims/Augs/Turret
+        else if (Random(0, 100) < 20) // Stims/Augs
         {
             Cap = 0;
             
@@ -1110,7 +1106,12 @@ ItemInfoPtr GetRewardItem(int Difficulty)
         }
     }
     
-    Index = Random(0, RewardsCount[Difficulty] - 1);
+    // For some reason only Legendary (rarity 10) items fail here so here's a special hack for them until I can find the source. Maybe a GDCC bug?
+    if (Difficulty == 10)
+    	Index = Random(0, RewardsCount[Difficulty - 1]);
+    	else
+    		Index = Random(0, RewardsCount[Difficulty] - 1);
+    
     Reward = RewardList[Difficulty][Index];
     
     if (GetCVar("drpg_debug"))
@@ -1153,7 +1154,6 @@ NamedScript DECORATE void SpawnLuckItem()
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 30.57) ActorToSpawn = "DRPGAmmoDropper";
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 23.35) ActorToSpawn = "DRPGChipDropper";
     if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 17.12) ActorToSpawn = "DRPGBatteryDropper";
-    if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 12.25) ActorToSpawn = "DRPGTurretDropper";
     if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=  6.13) ActorToSpawn = "DRPGCrate";
     
     if (Luck >= LUCK_HEALTHDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXHEALTHCHANCE)  ActorToSpawn = "DRPGHealthDropper";

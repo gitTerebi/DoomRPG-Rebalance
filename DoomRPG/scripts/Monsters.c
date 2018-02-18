@@ -260,7 +260,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Store Actor Name
     Stats->Actor = GetActorClass(0);
     
-    Delay(1); // Allow map events to modify our stats/replacements (see Map.ds:18)
+    Delay(5); // Allow map events to modify our stats/replacements (see Map.ds:18)
     while (WaitingForReplacements)
         Delay(1);
     
@@ -1956,21 +1956,6 @@ NamedScript void MonsterDeath()
         }
     }
     
-    // Add a kill to the payout kills
-    if (Killer > -1 && !(Stats->Flags & MF_NOPAYKILL))
-    {
-        int PPKills = 1;
-        if (Stats->Flags & MF_BOSS)
-            PPKills = 4;
-        else if (Stats->Flags & MF_MEGABOSS)
-            PPKills = 8;
-        
-        if (Players(Killer).Shield.Accessory && Players(Killer).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH && Players(Killer).Shield.Active)
-            PPKills *= 3;
-        
-        Players(Killer).Payout.Kills += PPKills;
-    }
-    
     // Mission Handling
     MissionDeathCheck(Killer, Stats);
     
@@ -2259,11 +2244,6 @@ NamedScript int WhoKilledMe()
     // Killed by a player
     if (PlayerNumber() > -1)
         return PlayerNumber();
-    
-    // Killed by a player's turret
-    for (int i = 0; i < MAX_PLAYERS; i++)
-        if (ActivatorTID() == Players(i).Turret.TID)
-            return i;
     
     // Killed by a player's summons
     if (ClassifyActor(0) & ACTOR_MONSTER && GetMonsterID(0) && GetActorProperty(0, APROP_MasterTID))

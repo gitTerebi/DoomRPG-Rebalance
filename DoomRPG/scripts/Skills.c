@@ -668,7 +668,7 @@ NamedScript Type_ENTER void SkillWheel()
     
     // Open the wheel
 
-    if (!((Player.InMenu && Player.Menu != 3) || Player.InShop || Player.OutpostMenu > 0 || Player.Turret.WheelOpen))
+    if (!((Player.InMenu && Player.Menu != 3) || Player.InShop || Player.OutpostMenu > 0))
     {
         if (CheckInput(KEYNUM_SKILLS, KEY_PRESSED))
         {
@@ -876,8 +876,14 @@ NamedScript KeyBind void UseSkill(int Key)
     // Using a skill will disturb your Focus
     Player.Focusing = false;
     
-    // You can't use skills if you're Silenced
-    if (Player.StatusType[SE_SILENCE]) return;
+    // You cannot use skills while Silenced
+    if (Player.StatusType[SE_SILENCE])
+    {
+    	ActivatorSound("skills/silence", 127);
+    	SetFont("BIGFONT");
+    	PrintError("You cannot use skills while silenced");
+    	return;
+    }
     
     // Quickuse
     if (Index == -1)
@@ -988,11 +994,6 @@ NamedScript KeyBind void UseSkill(int Key)
             // Blue Aura Refund
             if (Player.SkillRefundMult > 0)
                 Player.EP += EPCost * Player.SkillRefundMult;
-            
-            // Payout
-            Player.Payout.SkillsUsed++;
-            if (Player.Overdrive)
-                Player.Payout.SkillsOverdrive++;
         }
     }
     else // Not enough EP
@@ -1191,9 +1192,6 @@ NamedScript Console bool Powerup(SkillLevelInfo *SkillLevel, void *Data)
         break;
     }
     
-    // Payout
-    Player.Payout.PowerupsUsed++;
-    
     return true;
 }
 
@@ -1365,9 +1363,6 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
     
     // Aura Cost Multiplier
     Player.SkillCostMult += 10;
-    
-    // Payout
-    Player.Payout.AurasUsed++;
     
     ActivatorSound("skills/buff", 127);
     return true;
@@ -2066,9 +2061,6 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         Stats->Flags |= MF_NODROPS;
         Stats->NeedReinit = true;
         
-        // Payout
-        Player.Payout.SkillSummons++;
-        
         return true;
     }
     else
@@ -2523,7 +2515,7 @@ NamedScript void TransportOutFX(int tid)
     ActivatorSound("misc/transport", 96);
     SpawnForced("DRPGTransportEffect", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
     SetActorProperty(0, APROP_RenderStyle, STYLE_AddStencil);
-    SetActorProperty(0, APROP_StencilColor, 0x00FF00);
+    SetActorProperty(0, APROP_StencilColor, 0x0096FF);
     for (int ticker = 0; ticker < 70; ticker++)
     {
         SetActorVelocity(0, 0, 0, 0, false, false);

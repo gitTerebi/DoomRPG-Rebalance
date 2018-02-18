@@ -248,8 +248,8 @@ NamedScript MapSpecial void ArenaChooseBonus()
     
     while (true)
     {
-        X = 48.1;
-        Y = 50.0;
+        X = 150.1;
+        Y = 100.0;
         Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
         OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
         
@@ -262,10 +262,17 @@ NamedScript MapSpecial void ArenaChooseBonus()
         // Set the HUD Size
         SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
         
+        // Draw Border & Background
+        // These are pushed back by -10 so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
+        if (GetActivatorCVar("drpg_menu_background_image"))
+        	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+        
         // Title
         SetFont("BIGFONT");
         HudMessage("Choose a Bonus");
-        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 24.1, 24.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 150.1, 50.0, 0.05);
         
         // Input
         if (Buttons == BT_FORWARD && OldButtons != BT_FORWARD)
@@ -304,7 +311,7 @@ NamedScript MapSpecial void ArenaChooseBonus()
             if (i == BonusChoice)
             {
                 HudMessage("-->");
-                EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor, X - 24.0, Y, 0.05);
+                EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor, X - 25.0, Y, 0.05);
             }
             
             // Bonus String
@@ -453,7 +460,6 @@ void DropArenaItem(str Item)
         YSpeed = GetCVarFixed("drpg_monster_dropdist");
         ZSpeed = 8.0;
         
-        SpawnForced("DRPGTurretTeleport", X, Y, Z, 0, 0);
         Success = SpawnForced(Item, X, Y, Z, TID, 0);
         
         if (Success)

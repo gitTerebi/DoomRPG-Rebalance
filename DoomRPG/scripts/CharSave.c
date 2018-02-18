@@ -29,7 +29,6 @@
     Level / Rank Level
         - Only Level and Rank Level are stored, the XP to give is determined from these
         - Both Level and Rank Level are stored in 1 byte each
-        - PP is stored in 4 bytes
     Stats
         - Each is stored in 1 byte since they will never go above 200 by normal means
           [KS] They can be negative but we can't handle that so just ignore it in that case
@@ -44,8 +43,6 @@
         - Each augmentation's level is stored in 1 byte
     Stims
         - Each stim vial type is stored in 4 bytes
-    Turret
-        - Each turret upgrade is stored in 1 byte
     Misc
         - Credits
           - Stored in 4 bytes
@@ -468,7 +465,6 @@ NamedScript MenuEntry void LoadCharacter()
         Player.RankLevel = Info.RankLevel;
         Player.Rank = RankTable[Player.RankLevel - 1];
     }
-    Player.PP = Info.PP;
     
     // Misc
     SetInventory("DRPGCredits", Info.Credits);
@@ -538,10 +534,6 @@ NamedScript MenuEntry void LoadCharacter()
     // Stims
     for (int i = 0; i < STIM_MAX; i++)
         Player.Stim.Vials[i] = Info.Stims[i];
-    
-    // Turret
-    for (int i = 0; i < TU_MAX; i++)
-        Player.Turret.Upgrade[i] = Info.TurretUpgrades[i];
     
     Delay(1);
     
@@ -692,7 +684,6 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
     // Level / Rank Level
     Info->Level = Player.Level;
     Info->RankLevel = Player.RankLevel;
-    Info->PP = Player.PP;
     
     // Stats
     Info->Stats[0] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_STRENGTH] : Player.Strength);
@@ -731,11 +722,8 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
     // Stims
     for (int i = 0; i < STIM_MAX; i++)
         Info->Stims[i] = Player.Stim.Vials[i];
-    
-    for (int i = 0; i < TU_MAX; i++)
-        Info->TurretUpgrades[i] = Player.Turret.Upgrade[i];
 
-      // Misc
+    // Misc
     Info->Credits = CheckInventory("DRPGCredits");
     Info->Modules = CheckInventory("DRPGModule");
     Info->Medkit = Player.Medkit;
@@ -812,8 +800,6 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     StringPos += 2;
     Info->RankLevel = HexToInteger(String + StringPos, 2);
     StringPos += 2;
-    Info->PP = HexToInteger(String + StringPos, 8);
-    StringPos += 8;
     
     // Stats
     for (int i = 0; i < STAT_MAX; i++)
@@ -850,13 +836,6 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     {
         Info->Stims[i] = HexToInteger(String + StringPos, 8);
         StringPos += 8;
-    }
-    
-    // Turret
-    for (int i = 0; i < TU_MAX; i++)
-    {
-        Info->TurretUpgrades[i] = HexToInteger(String + StringPos, 1);
-        StringPos += 1;
     }
     
     // Misc
@@ -969,17 +948,6 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
     SaveString[pos + 0] = ToHexChar(Info->Level >> 4);
     pos += 4;
     
-    // PP
-    SaveString[pos + 7] = ToHexChar(Info->PP);
-    SaveString[pos + 6] = ToHexChar(Info->PP >> 4);
-    SaveString[pos + 5] = ToHexChar(Info->PP >> 8);
-    SaveString[pos + 4] = ToHexChar(Info->PP >> 12);
-    SaveString[pos + 3] = ToHexChar(Info->PP >> 16);
-    SaveString[pos + 2] = ToHexChar(Info->PP >> 20);
-    SaveString[pos + 1] = ToHexChar(Info->PP >> 24);
-    SaveString[pos + 0] = ToHexChar(Info->PP >> 28);
-    pos += 8;
-    
     // Stats
     for (int i = 0; i < STAT_MAX; i++)
     {
@@ -1027,13 +995,6 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
         SaveString[pos + 1] = ToHexChar(Info->Stims[i] >> 24);
         SaveString[pos + 0] = ToHexChar(Info->Stims[i] >> 28);
         pos += 8;
-    }
-    
-    // Turret
-    for (int i = 0; i < TU_MAX; i++)
-    {
-        SaveString[pos + 0] = ToHexChar(Info->TurretUpgrades[i]);
-        pos += 1;
     }
     
     // Misc

@@ -72,7 +72,6 @@ struct CharSaveInfo_S
     // Level / Rank Level
     int Level;
     int RankLevel;
-    int PP;
 
     // Stats
     int Stats[STAT_MAX];
@@ -88,9 +87,6 @@ struct CharSaveInfo_S
 
     // Stims
     int Stims[STIM_MAX];
-
-    // Turret Upgrades
-    int TurretUpgrades[TU_MAX];
 
     // Misc
     int Credits;
@@ -121,226 +117,11 @@ struct CharSaveInfo_S
     unsigned int Checksum;
 };
 
-// GUI
-
-// Pre-define control structs for the GUI
-struct GUIData_S;
-
-struct GUIMouseInfo_S;
-struct GUITooltip_S;
-struct GUIContextMenu_S;
-
-struct GUITabStrip_S;
-struct GUIPanel_S;
-struct GUIControl_S;
-struct GUILabel_S;
-struct GUIIcon_S;
-struct GUIButton_S;
-struct GUIBar_S;
-struct GUIList_S;
-struct GUIGrid_S;
-
-typedef void (*PanelUpdateFunc) (struct GUIPanel_S *) NamedScript;
-typedef void (*PanelCloseFunc) (struct GUIPanel_S *) NamedScript;
-typedef void (*ContextMenuSelectFunc) ();
-
-// GUI Event Function Pointers
-typedef void (*ControlUpdateFunc) (struct GUIControl_S *) NamedScript;
-typedef void (*ControlClickFunc) (struct GUIControl_S *) NamedScript;
-typedef void (*ControlHoverFunc) (struct GUIControl_S *) NamedScript;
-
-struct GUITooltip_S
-{
-    int Type;
-    str Title;
-    str Text;
-    str Color;
-    int Width;
-    int Height;
-    bool NoBack;
-    bool Visible;
-};
-
-struct GUIContextMenu_S
-{
-    int X;
-    int Y;
-
-    struct
-    {
-        str Name;
-        ContextMenuSelectFunc Select;
-    } Options[MAX_OPTIONS];
-};
-
-struct GUIControl_S
-{
-    str Name;
-    EControlTypes Kind;
-    struct GUIPanel_S *Owner;
-
-    // Display Properties
-    int X;
-    int Y;
-    int Width;
-    int Height;
-    int id;
-    bool Visible;
-
-    struct GUITooltip_S *Tooltip;
-    struct GUIContextMenu_S *ContextMenu;
-
-    // Events
-    ControlUpdateFunc Update;
-    ControlClickFunc Click;
-    ControlHoverFunc Hover;
-};
-
-struct GUILabel_S
-{
-    struct GUIControl_S Control;
-
-    str Text;
-    int Alignment;
-    str Color;
-    bool Big;
-};
-
-struct GUIIcon_S
-{
-    struct GUIControl_S Control;
-
-    str Texture;
-    int XOff;
-    int YOff;
-    bool CalculateSize;
-    fixed Pulse;
-    fixed Alpha;
-    fixed Radius;
-    bool Enabled;
-};
-
-struct GUIButton_S
-{
-    struct GUIControl_S Control;
-
-    str Text;
-    str Color;
-    str HoverColor;
-    bool Big;
-};
-
-struct GUIBar_S
-{
-    struct GUIControl_S Control;
-
-    int Value;
-    int ValueMax;
-    str Texture;
-    EGUIBarTypes Type;
-    bool FadePrint;
-    fixed FadeLength;
-};
-
-struct GUIList_S
-{
-    struct GUIControl_S Control;
-
-    int Shown;
-    int Offset;
-    int Selected;
-    str Entries[MAX_LIST];
-    str Colors[MAX_LIST];
-    str HoverColors[MAX_LIST];
-};
-
-struct GUIGrid_S
-{
-    struct GUIControl_S Control;
-
-    int NumItems;
-    int ItemsPerRow;
-
-    str BackFrame;
-    str SelectionFrame;
-
-    struct
-    {
-        str Name;
-        str Graphic;
-        str Tokens[];
-    } Items[];
-};
-
-struct GUIBorder_S
-{
-    struct GUIControl_S Control;
-    str Texture;
-    int BorderSize;
-};
-
-struct GUIPanel_S
-{
-    PanelUpdateFunc Update;
-    PanelCloseFunc Close;
-
-    int NumControls;
-    struct GUIControl_S **Controls;
-};
-
-struct GUITabStrip_S
-{
-    int X;
-    int Y;
-    int TabHeight;
-    int TabWidth;
-    int TabSpacing;
-
-    struct
-    {
-        str Icon;
-        str HighlightedIcon;
-        str Title;
-        bool Enabled;
-        struct GUITooltip_S *Tooltip;
-        struct GUIPanel_S *Panel;
-    } Tabs[MAX_TABS];
-
-    int ActiveTab;
-};
-
-struct GUIMouseInfo_S
-{
-    int X;
-    int Y;
-    int XAdd;
-    int YAdd;
-    int Buttons;
-    int OldButtons;
-    bool LeftButton;
-    bool RightButton;
-    bool LeftButtonDown;
-    bool RightButtonDown;
-
-    struct GUITooltip_S *ActiveTooltip;
-    struct GUIContextMenu_S *ActiveContextMenu;
-    struct GUIControl_S *EditItem;
-};
-
 // Base GUI Data
 struct GUIData_S
 {
     bool Created;
     bool Open;
-
-    struct
-    {
-        int Position;
-        int Delay;
-    } GlowLine;
-
-    struct GUIMouseInfo_S Mouse;
-    struct GUITabStrip_S TabStrip;
 };
 
 // Items
@@ -362,7 +143,8 @@ struct ItemInfo_S
         int XOff;
         int YOff;
     } Sprite;
-
+    
+    // Compat stuff.
     unsigned int CompatMods;
     int Category;
     int Index;
@@ -628,27 +410,6 @@ struct MinigameData_S
     bool Ingame;
 };
 
-// Turret
-
-struct TurretUpgrade_S
-{
-    str Name;
-    int MaxLevel;
-    int Cost;
-
-    str Description;
-    str UpgradeInfo;
-    str CommandInfo;
-
-    struct TurretUpgrade_S *Prereq;
-};
-
-struct TurretSensorItem_S
-{
-    int TID;
-    int Category;
-};
-
 // Map
 
 struct LevelInfo_S
@@ -738,109 +499,6 @@ struct LevelInfo_S
     int DoomTime;
 };
 
-// PDA
-
-struct PDAMessage_S
-{
-    str Text;
-    fixed X;
-    fixed Y;
-    int ID;
-};
-
-// Payout
-struct Payout_S
-{
-    // Totals
-    struct
-    {
-        int Level;
-        int Damage;
-        int Credits;
-        int Skills;
-        int Augs;
-        int Stims;
-        int Shields;
-        int Turret;
-        int Missions;
-        int Maps;
-    } Total;
-
-    // Level & Rank
-    int XP;
-    int Levels;
-    int Rank;
-    int RankLevels;
-
-    // Damage
-    int Kills;
-    int Deaths;
-    int DamageTaken;
-    int StatusEffectHit;
-    int StatusEffectsEvaded;
-    int LivesUsed;
-
-    // Credits
-    int CreditsFound;
-    int CreditsSpent;
-
-    // Skills
-    int SkillsUsed;
-    int SkillsOverdrive;
-    int SkillBurnout;
-    int PowerupsUsed;
-    int AurasUsed;
-    int SkillHealed;
-    int SkillRepaired;
-    int SkillSummons;
-
-    // Augs
-    int AugBatteryUsed;
-    int AugsDisrupted;
-
-    // Shields
-    int ShieldDamage;
-    int ShieldBreaks;
-
-    // Stims
-    int StimsMade;
-    int StimsUsed;
-    int StimToxicity;
-    int StimImmunity;
-
-    // Turret
-    int TurretDamageTaken;
-    int TurretMaintenanceCost;
-    int TurretChargeTime;
-    int TurretRepairTime;
-    int TurretRefitTime;
-
-    // Missions
-    // TODO: Each mission sub-type?
-    int MissionsCompleted;
-    int EventsCompleted;
-
-    // Map
-    int MapsCompleted;
-    int ParTimesBeaten;
-    int ItemsFound;
-    int SecretsFound;
-};
-
-struct PayoutData_S
-{
-    str Name;
-    str Sound;
-    str Color;
-    int *Total;
-
-    struct
-    {
-        str Name;
-        int Value;
-    } Values[PAYOUT_VALUES_MAX];
-};
-
 // RPG
 
 struct PlayerData_S
@@ -857,7 +515,6 @@ struct PlayerData_S
         bool Modifier;
 
         bool SkillWheel;
-        bool TurretWheel;
         bool DRPGMenu;
 
         bool Forward;
@@ -947,12 +604,6 @@ struct PlayerData_S
     long int Rank;
     long int RankNext;
 
-    // Payout
-    bool PayReady;
-    bool PayingOut;
-    int PP;
-    int PayTimer;
-
     // Combo System
     int Combo;
     int ComboTimer;
@@ -1000,7 +651,6 @@ struct PlayerData_S
     bool NewShieldParts[3][MAX_PARTS];
     bool NewShieldAccessoryParts[MAX_ACCESSORIES];
     int StimSelected;
-    int TurretPage;
     int ShopIndex;
     int ShopPage;
 
@@ -1161,97 +811,7 @@ struct PlayerData_S
         int TimerMax;
         int Toxicity;
     } Stim;
-
-    struct
-    {
-        // Flags
-        bool Init;
-        bool Active;
-        bool Destroyed;
-        bool Maintenance;
-        bool PaidForRepair;
-
-        // TID
-        int TID;
-
-        // Command Wheel
-        bool WheelOpen;
-        int WheelCommand;
-
-        // Upgrades
-        int Upgrade[MAX_UPGRADES];
-
-        // Health
-        int Health;
-        int HealthMax;
-
-        // Weapons/Ammo
-        int Weapon;
-        int BulletAmmo;
-        int BulletAmmoMax;
-        int ShellAmmo;
-        int ShellAmmoMax;
-        int RocketAmmo;
-        int RocketAmmoMax;
-        int PlasmaAmmo;
-        int PlasmaAmmoMax;
-        int RailAmmo;
-        int RailAmmoMax;
-        bool Autoload;
-        bool SelfDestruct;
-
-        // Assist
-        bool TeleportEnabled;
-        bool StimFocused;
-        bool StimPicked;
-        int StimTimer;
-        int StimVialType;
-
-        // Sensors
-        bool SensorsActive;
-        int SensorMode;
-        int SensorPercent;
-        int ModulesCollected;
-
-        struct
-        {
-            bool Enabled;
-            struct DynamicArray_S Array;
-            int CurrentPosition;
-            int PulseDelay;
-            int CheckDelay;
-        } SensorItemData;
-
-        struct
-        {
-            bool Enabled;
-            struct DynamicArray_S Array;
-            int CurrentPosition;
-            int PulseDelay;
-            int CheckDelay;
-        } SensorCrateData;
-
-        // Command
-        int Command;
-
-        // Battery
-        int Battery;
-        int BatteryMax;
-
-        // Timers
-        int HitTimer;
-        int TeleportTimer;
-        int ChargeTimer;
-        int RepairTimer;
-        int RefitTimer;
-
-        // Offsets
-        fixed AngleOffset;
-        fixed DistanceOffset;
-        fixed HeightOffset;
-    } Turret;
-
-    struct Payout_S Payout;
+    
     struct MissionInfo_S Mission;
 };
 
