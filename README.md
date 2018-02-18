@@ -1,6 +1,7 @@
-Some notes:
-This is compatible with DoomRL Arsenal - [1.05] [MP-B6.2].
-If you wish to compile this please use GDCC v0.12.0 64-bit as it's the version I found most stable.
+**Some notes**
+
+1. This is compatible with DoomRL Arsenal - [1.05] [MP-B6.2].
+2. If you wish to compile this please use GDCC v0.12.0 64-bit as it's the version I found most stable.
 
 I'm just a fan of DoomRPG and want to keep it functioning. I'm not experienced, and very much learning as I go, so feel free to offer any comments. I'm also looking at the TODO list and seeing which I can accomplish. Starting with the small tasks of course!
 
