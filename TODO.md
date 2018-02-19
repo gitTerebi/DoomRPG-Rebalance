@@ -55,7 +55,7 @@ QoL
 
 Bugs
 ===
-- CharSave/Load causes save bloat (2-5x original size) degrades performance (fps) a lot.
+- CharSave/Load causes save bloat (2-5x original size) and degrades performance (fps) a lot. free() does not appear to be doing its job?.
 - Modpack save/load is broken
 - Infinite ammo related buffs are broken
 - Furious Fusion stops working every time you sell a weapon?
