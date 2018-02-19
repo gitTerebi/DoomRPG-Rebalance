@@ -51,10 +51,11 @@ Sounds
 
 QoL
 ===
-- Add a way to take everything out of a crate similar to bulk withdrawal from the Locker
+
 
 Bugs
 ===
+- CharSave/Load causes save bloat (2-5x original size) degrades performance (fps) a lot.
 - Modpack save/load is broken
 - Infinite ammo related buffs are broken
 - Furious Fusion stops working every time you sell a weapon?
