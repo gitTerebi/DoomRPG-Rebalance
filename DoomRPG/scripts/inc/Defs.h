@@ -305,7 +305,8 @@ typedef enum
 #define NUKE_ID                 (MAKE_ID('N', 'U', 'K', 'E'))
 #define MAX_NUKE_KEYS           9
 
-#define MAP_EXIT_SCRIPTNUM      30000
+#define MAP_EXIT_SCRIPTNUM          30000
+#define MAP_EXIT_TELEPORT_SCRIPTNUM 30001
 
 typedef enum
 {

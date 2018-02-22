@@ -146,3 +146,12 @@ Renamed DRPGMath_Round to RoundInt.
 Fixed Demon Artifact alignment in Shop/Locker.
 Fixed missing Shredder Pistol sprite in Shop/Locker.
 Updated PostPic.png to reflect Outpost changes.
+
+02/21/2018 - BUILD 19 - Compiled with GDCC v0.12.0 64-bit.
+GetMissionMonsterActor() now checks for empty strings which resolved GZDoom spewing: "Warning: ACS function strlen called with invalid string argument."
+xlat is no more. Level exits are now replaced via ZSCRIPT which allows compatibility for all map types. GZDoom v3.2.5 is now mandatory.
+- Some UDMF maps exit via scripts, bypassing DRPG's own script. Those will need to edited manually in SLADE. Replace the following exits in SLADE:
+-- Exit_Normal(0); is replaced with: ACS_Execute(30000, 0, 0, 0, 0);
+--- Exit_Secret(0); is replaced with: ACS_Execute(30000, 0, 1, 0, 0);
+---- Teleport_NewMap(X,Y,Z); is replaced with: ACS_Execute(30001, 0, X, Y, Z); - Replace X,Y,Z with the arguments from Teleport_NewMap()
+----- Then compile the edited script in SLADE and then delete the old BEHAVIOUR file (should be just after the map marker) after the new one is spat out.

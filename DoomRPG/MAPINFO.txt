@@ -12,9 +12,6 @@ gameinfo
 
     // Inventory
     definventorymaxamount = 1000
-
-    // Translator
-    translator = "xlat/DoomRPG.txt"
     
     // Menus/UI
     dimamount = 0
@@ -25,6 +22,9 @@ gameinfo
     menufontcolor_header = "white"
     menufontcolor_highlight = "green"
     menufontcolor_selection = "green"
+    
+    // ZScript
+    AddEventHandlers = "DRPGExitsReplacer"
 }
 
 // UAC Outpost

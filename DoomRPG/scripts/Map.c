@@ -26,7 +26,7 @@ bool WaitingForReplacements;
 int AllBonusMaps; // For the OCD Shield
 int CurrentSkill; // Keeps track of skill changes based on events
 
-//WadSmoosh
+// WadSmoosh
 bool MapPackActive[MAX_WSMAPPACKS];
 
 // Local
@@ -718,9 +718,14 @@ NamedScript MapSpecial void AddUnknownMap(str Name, str DisplayName, int LevelNu
     NewMap->NeedsRealInfo = true;
 }
 
+// Level exit script for Teleport_NewMap
+NumberedScript(MAP_EXIT_TELEPORT_SCRIPTNUM) MapSpecial void MapExitTeleport(int map, int pos, int face)
+{
+	MapExit(false, true, map, pos, face);
+}
+
 // Level exit script
-// Can't use NamedExecute in xlat, lame
-NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret)
+NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Teleport, int map, int pos, int face)
 {
     int ParTime = GetLevelInfo(LEVELINFO_PAR_TIME);
     bool Waiting = true;
@@ -822,7 +827,14 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret)
     if (!CurrentLevel->SecretMap)
         PreviousPrimaryLevelNum = CurrentLevel->LevelNum;
 
-    // Now exit the level
+    // Exits
+    
+    if (Teleport)
+    {
+    	Teleport_NewMap(map, pos, face);
+    	return;
+    }
+    
     if (Secret)
         Exit_Secret(0);
     else

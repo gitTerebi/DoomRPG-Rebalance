@@ -508,6 +508,13 @@ int CalculateAverageDifficulty()
 
 str GetMissionMonsterActor(str Actor)
 {
+	// Skip empty strings. Resolves GZDoom warning about invalid strlen args.
+	if (Actor[0] == '\0') 
+	{
+		// Return something.
+		return ("NOTHING");
+	}
+	
     if (CompatMode == COMPAT_DRLA || CompatMode == COMPAT_LEGENDOOM)
         return StrParam("%SRPG", Actor);
     else if (CompatMode == COMPAT_EXTRAS)
