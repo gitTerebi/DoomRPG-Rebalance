@@ -155,3 +155,8 @@ xlat is no more. Level exits are now replaced via ZSCRIPT which allows compatibi
 --- Exit_Secret(0); is replaced with: ACS_Execute(30000, 0, 1, 0, 0);
 ---- Teleport_NewMap(X,Y,Z); is replaced with: ACS_Execute(30001, 0, X, Y, Z); - Replace X,Y,Z with the arguments from Teleport_NewMap()
 ----- Then compile the edited script in SLADE and then delete the old BEHAVIOUR file (should be just after the map marker) after the new one is spat out.
+
+02/24/2018 - BUILD 20 - Compiled with GDCC v0.12.0 64-bit.
+Events that altered lighting now get sector counts instead of iterating up to 65536, resulting in a massive speed up.
+A proper fix has replaced the GetMissionMonsterActor() hack fix from BUILD 19.
+New "Skill Up" sound from Prey (2017);

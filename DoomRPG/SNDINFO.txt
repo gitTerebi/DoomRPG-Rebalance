@@ -163,9 +163,9 @@ aug/disable				AUGDIS
 aug/dead                AUGDEAD
 
 // Misc Sounds
-misc/levelup			LEVELUP3
-misc/rankup				LEVELUP4
-misc/statup             LEVELUP5
+misc/levelup			LEVELUP
+misc/rankup				RANKUP
+misc/statup             STATUP
 misc/secret				SECRET
 misc/edgar				LOLEDGAR
 misc/drugs              DRUGS

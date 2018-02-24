@@ -157,21 +157,21 @@ NamedScript void MissionDeathCheck(int Killer, MonsterStatsPtr Stats)
         // Kill Mission
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            // Determine actor name
-            str Actor = GetActorClass(0);
-            str NeededActor = GetMissionMonsterActor(Players(i).Mission.Monster->Actor);
-            int Match;
-
             // Player is not in-game
             if (!PlayerInGame(i)) continue;
 
-            // Check to see if we match
-            Match = StrCmp(Actor, NeededActor);
-
             // Perform actor -> needed actor match checking
-            if (Match == 0)
-                if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL)
-                    Players(i).Mission.Current++;
+            if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL)
+            {
+            	// Determine actor name
+            	str Actor = GetActorClass(0);
+            	str NeededActor = GetMissionMonsterActor(Players(i).Mission.Monster->Actor);
+            	// Check to see if we match
+            	int Match = StrCmp(Actor, NeededActor);
+            	Log("NeededActor: %S", NeededActor);
+            	if (Match == 0)
+            		Players(i).Mission.Current++;
+            }
         }
 
         // Kill Auras Mission
@@ -508,13 +508,6 @@ int CalculateAverageDifficulty()
 
 str GetMissionMonsterActor(str Actor)
 {
-	// Skip empty strings. Resolves GZDoom warning about invalid strlen args.
-	if (Actor[0] == '\0') 
-	{
-		// Return something.
-		return ("NOTHING");
-	}
-	
     if (CompatMode == COMPAT_DRLA || CompatMode == COMPAT_LEGENDOOM)
         return StrParam("%SRPG", Actor);
     else if (CompatMode == COMPAT_EXTRAS)

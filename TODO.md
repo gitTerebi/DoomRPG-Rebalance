@@ -28,14 +28,6 @@ Events
 - Sinstorm's demon spawn cubes spawn monsters inside of walls and each other, which frankly looks silly as hell
 - Event object spawning (Power column, Radiation Neutralizer) needs to be randomized so that it doesn't consistently spawn in awkward places
 
-Turret
-===
-- Change turret maintenance timers to percentages instead of times since timers lose accuracy with upgrades
-- Revamp overheat system's numbers for the addition of upgrades for it
-- Add a beam/team skill to slowly clean Toxicity from the player
-- Empty crates should be omitted from the crate sensor beam iteration
-  - Add a FindCrate() function which takes a TID and returns the found crate with that TID to help with this
-
 Brightmaps
 ===
 - Low Power Generator
@@ -46,7 +38,6 @@ Sounds
 ===
 - Many skill usage sounds are placeholders and need replacing
 - Status effect hit and avoid sounds are also placeholders
-- Extra Life pickup and use sounds
 - Add ambient stingers for when the music is off, just to fuck with you :D
 
 QoL
