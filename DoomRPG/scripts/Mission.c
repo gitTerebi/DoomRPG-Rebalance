@@ -167,9 +167,7 @@ NamedScript void MissionDeathCheck(int Killer, MonsterStatsPtr Stats)
             	str Actor = GetActorClass(0);
             	str NeededActor = GetMissionMonsterActor(Players(i).Mission.Monster->Actor);
             	// Check to see if we match
-            	int Match = StrCmp(Actor, NeededActor);
-            	Log("NeededActor: %S", NeededActor);
-            	if (Match == 0)
+            	if (StrCmp(Actor, NeededActor) == 0)
             		Players(i).Mission.Current++;
             }
         }
