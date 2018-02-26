@@ -20,7 +20,7 @@
 #include "Utils.h"
 
 // Version
-const str Version = "SE BUILD 20.1 - Powered by GDCC!";
+const str Version = "SE BUILD 20.2 - Powered by GDCC!";
 
 // Flags
 bool Transported;
@@ -125,7 +125,8 @@ NamedScript Type_ENTER void Init()
     Delay(3);
 
     // [KS] This needs to be done on its' own, so death exits don't rob you of your TID and break EVERYTHING EVER FFS
-    if (ActivatorTID() == 0)
+    int ATID = ActivatorTID();
+    if (ATID == 0 || ATID == 30000) // 30000 is DRLA's PID.
     {
         AssignTIDs();
         if (!InTitle) // Don't give equipment on the title screen

@@ -163,3 +163,6 @@ New "Skill Up" sound from Prey (2017);
 
 02/25/2018 - BUILD 20.1 - Compiled with GDCC v0.12.0 64-bit.
 Fixed broken reinforcement mission caused by the "monsters not being replaced/removed fix" from BUILD 16.
+
+02/26/2018 - BUILD 20.2 - Compiled with GDCC v0.12.0 64-bit.
+Fixed broken DRLA starting options (RPG.c Init needed DRLA ATID check).
