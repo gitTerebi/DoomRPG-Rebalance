@@ -160,3 +160,6 @@ xlat is no more. Level exits are now replaced via ZSCRIPT which allows compatibi
 Events that altered lighting now get sector counts instead of iterating up to 65536, resulting in a massive speed up.
 A proper fix has replaced the GetMissionMonsterActor() hack fix from BUILD 19.
 New "Skill Up" sound from Prey (2017);
+
+02/25/2018 - BUILD 20.1 - Compiled with GDCC v0.12.0 64-bit.
+Fixed broken reinforcement mission caused by the "monsters not being replaced/removed fix" from BUILD 16.

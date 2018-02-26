@@ -20,7 +20,7 @@
 #include "Utils.h"
 
 // Version
-const str Version = "SE BUILD 20 - Powered by GDCC!";
+const str Version = "SE BUILD 20.1 - Powered by GDCC!";
 
 // Flags
 bool Transported;
