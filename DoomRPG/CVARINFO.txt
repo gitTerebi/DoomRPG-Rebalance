@@ -76,6 +76,9 @@ user    int     drpg_healthbars_height = 600;
 user	int		drpg_healthbars_x = 400;
 user	int		drpg_healthbars_y = 100;
 
+// Stims
+server  int     drpg_stim_time_multiplier = 1;
+
 // Multiplayer
 server	bool	drpg_multi_takexp = true;
 server	int	    drpg_multi_takexp_percent = 10;

@@ -32,7 +32,7 @@ map Outpost "UAC Outpost"
 {
     levelnum = 999
     cluster = 999
-    sky1 = "SKY1"
+    sky1 = "textures/outpost/outpost_sky.png"
     
     nointermission
 }

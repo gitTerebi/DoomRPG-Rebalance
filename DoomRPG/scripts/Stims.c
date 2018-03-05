@@ -107,13 +107,14 @@ NamedScript KeyBind void UseStim(bool Force)
     
     // Set Timer for Stat bonuses
     int InitialTime;
+    int InitialTimeMultiplier = GetCVar("drpg_stim_time_multiplier");
     for (int i = StimStatsStart; i < StimStatsEnd + 2; i++)
       if (Player.Stim.Current[i] > 0)
       {
       	if (i == STIM_PURIFIER)
-          InitialTime += 15 * (Player.Stim.Current[STIM_PURIFIER] * 30);
+          InitialTime += 15 * (Player.Stim.Current[STIM_PURIFIER] * 30 * InitialTimeMultiplier);
         else
-          InitialTime += 15 * 30;
+          InitialTime += 15 * 30 * InitialTimeMultiplier;
     
         // Immunity penalty
         InitialTime -= InitialTime * Player.StimImmunity / 100;
@@ -143,7 +144,7 @@ NamedScript KeyBind void UseStim(bool Force)
     for (int i = StimPowerupStart; i < StimPowerupEnd; i++)
         if (Player.Stim.Current[i] > 0)
         {
-            int InitialTime = (15 * Player.Stim.Current[i]) * 10;
+            int InitialTime = (15 * Player.Stim.Current[i]) * 10 * InitialTimeMultiplier;
             InitialTime -= InitialTime * Player.StimImmunity / 100;
             
             Player.Stim.PowerupTimer[i] += InitialTime;

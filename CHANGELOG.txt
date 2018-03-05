@@ -166,3 +166,12 @@ Fixed broken reinforcement mission caused by the "monsters not being replaced/re
 
 02/26/2018 - BUILD 20.2 - Compiled with GDCC v0.12.0 64-bit.
 Fixed broken DRLA starting options (RPG.c Init needed DRLA ATID check).
+
+03/04/2018 - BUILD 21 - Compiled with GDCC v0.12.0 64-bit.
+Stim times can now be multiplied via the new slider located in the "Stats System" options.
+Stim starting options were lowered to prevent runaway script (this would never happen really unless you set the values really high).
+Outpost got a new single skybox texture. Also removed a lot of Skybox pickers (no longer needed) which should help with FPS a bit.
+Moved Outpost teleport next to 1st player spawn.
+Reorganised Health Bar and its stats. I think it's much nicer now.
+Brightmap for Low Power Event Generator.
+Minor text fixes.

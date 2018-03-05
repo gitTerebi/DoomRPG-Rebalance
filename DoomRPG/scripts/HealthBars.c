@@ -233,6 +233,13 @@ void DrawBarBase(HUDBarInfo *Info)
     HealthBarX += 108.0;
     HealthBarY += 1.0;
     
+    // Level Icon
+    HealthBarX += 113.0;
+    HealthBarY -= 1.0;
+    DrawBarSprite(Info, "MonLevel");
+    HealthBarX -= 113.0;
+    HealthBarY += 1.0;
+    
     // Draw Aura Overlays
     int NumAuras = 0;
     int Auras[AURA_MAX];
@@ -377,52 +384,61 @@ void DrawBarFill(HUDBarInfo *Info)
 }
 
 void DrawBarStats(HUDBarInfo *Info)
-{
-    HealthBarX = -96.1;
-    HealthBarY = 48.0;
-    
+{    
+	int StatsX = -90.0;
+	int StatsY = 70.0;
+	int SpaceX = 30.0;
+	int SpaceY = 30.0;
+	int MonLevelX = 225.0;
+	int MonLevelY = 47.0;
+	
+	HealthBarX = StatsX;
+    HealthBarY = StatsY;
+	
     // Stat Amounts
     SetFont("BIGFONT");
-    DrawBarText(Info, StrParam("\Cj%d", Info->Level));
-    HealthBarY += 20.0;
+    // Level
+    HealthBarX += MonLevelX;
+    HealthBarY -= MonLevelY;
+    DrawBarText(Info, StrParam("\Cf%d", Info->Level));
+    HealthBarX -= MonLevelX;
+    HealthBarY += MonLevelY;
+    // Others
+    // These have to be pushed back a bit so they line up with the sprites.
+    HealthBarX -= 12.0;
     DrawBarText(Info, StrParam("\Cg%d", Info->Strength));
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarText(Info, StrParam("\Cd%d", Info->Defense));
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarText(Info, StrParam("\Ca%d", Info->Vitality));
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarText(Info, StrParam("\Cn%d", Info->Energy));
-    HealthBarX = -96.1;
-    HealthBarY += 20.0;
+    HealthBarX += SpaceX;
     DrawBarText(Info, StrParam("\Ct%d", Info->Regeneration));
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarText(Info, StrParam("\Ci%d", Info->Agility));
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarText(Info, StrParam("\Ch%d", Info->Capacity));
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarText(Info, StrParam("\Cf%d", Info->Luck));
     
-    HealthBarX = -107.0;
-    HealthBarY = 48.0;
+   	HealthBarX = StatsX;
+    HealthBarY = StatsY;
     
     // Stat Icons
-    DrawBarSprite(Info, "MonLevel");
-    HealthBarX = -96.0;
-    HealthBarY += 40.0;
     DrawBarSprite(Info, "STAT1S");
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarSprite(Info, "STAT2S");
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarSprite(Info, "STAT3S");
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarSprite(Info, "STAT4S");
-    HealthBarX = -96.0;
-    HealthBarY += 20.0;
+    HealthBarX += SpaceX;
     DrawBarSprite(Info, "STAT5S");
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarSprite(Info, "STAT6S");
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarSprite(Info, "STAT7S");
-    HealthBarX += 56.0;
+    HealthBarX += SpaceX;
     DrawBarSprite(Info, "STAT8S");
 }
