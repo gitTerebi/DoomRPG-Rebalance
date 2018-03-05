@@ -5,6 +5,12 @@
 3. A custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
 4. If you wish to compile this please use GDCC v0.12.0 64-bit as it's the version I found most stable.
 
+
+### Last 5 builds:
+##### [BUILD 19](https://github.com/Sumwunn/DoomRPG/tree/5b5665ca03012541cb14a0f70ef2f8657631fda2)
+##### [BUILD 18](https://github.com/Sumwunn/DoomRPG/tree/320a41f2b2e42404fdb01c67ab4ed03c69e0910f)
+
+
 I'm just a fan of DoomRPG and want to keep it functioning. I'm not experienced, and very much learning as I go, so feel free to offer any comments. I'm also looking at the TODO list and seeing which I can accomplish. Starting with the small tasks of course!
 
 Former notes from Kyle873:
