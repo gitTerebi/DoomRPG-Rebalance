@@ -107,12 +107,23 @@ void ShopItemTryAutoDeposit(ItemInfoPtr Item)
 }
 
 NamedScript void ShopItemAutoHandler()
-{    
+{
+	bool ItemsCurrent = false;
+    // These are actually too big for the script auto handler to allocate properly, so they need to be static-scope here.
+    RPGMap static int Items[ITEM_CATEGORIES][ITEM_MAX];
+    RPGMap static int PrevItems[ITEM_CATEGORIES][ITEM_MAX];
+	
     UpdateShopAutoList();
     
     while (true)
     {
         int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
+        
+        // For post-checks
+        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons & BT_SPEED)
+            for (int i = 0; i < ItemCategories; i++)
+                for (int j = 0; j < ItemMax[i]; j++)
+                    Items[i][j] = CheckInventory(ItemData[i][j].Actor);
         
         // Auto-Sell
         bool CanSellItems = Player.RankLevel > 0 || CurrentLevel->UACBase;
@@ -145,8 +156,37 @@ NamedScript void ShopItemAutoHandler()
                 if (CheckInventory(Item->Actor) > 0)
                     ShopItemTryAutoDeposit(Item);
             }
+            
+        // Run-pickup behavior stuff
+        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && ItemsCurrent && Buttons & BT_SPEED)
+        {
+            for (int i = 0; i < ItemCategories; i++)
+                for (int j = 0; j < ItemMax[i]; j++)
+                {
+                    ItemInfoPtr Item = &ItemData[i][j];
+                    
+                    // Auto-Sell
+                    if (!Player.InShop && GetActivatorCVar("drpg_pickup_behavior") == 1 && Items[i][j] > PrevItems[i][j])
+                        if (CheckInventory(Item->Actor) > 0)
+                            SellItem(Item->Actor, true, true);
+                    
+                    // Auto-Store
+                    if (!Player.InShop && GetActivatorCVar("drpg_pickup_behavior") == 2 && Items[i][j] > PrevItems[i][j])
+                        ShopItemTryAutoDeposit(Item);
+                }
+        }
         
-        Delay(4);
+        Delay(1);
+        
+        // Prevent using old Items so we don't sell picked up stuff
+        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons != BT_SPEED)
+        	ItemsCurrent = false;
+        
+        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons & BT_SPEED)
+        	ItemsCurrent = true;
+            for (int i = 0; i < ItemCategories; i++)
+                for (int j = 0; j < ItemMax[i]; j++)
+                    PrevItems[i][j] = Items[i][j];
     }
 }
 

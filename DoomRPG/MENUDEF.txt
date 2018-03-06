@@ -52,6 +52,13 @@ OptionValue "ShopSpecialCategories"
     6, "\ckStims/Augs"
 }
 
+OptionValue "RunPickupBehavior"
+{
+    0, "None"
+    1, "\cfAuto-Sell"
+    2, "\cvAuto-Store"
+}
+
 OptionValue "WheelSpeed"
 {
     8, "Normal"
@@ -331,6 +338,7 @@ OptionMenu "DoomRPGShop"
     Slider "Shop Special Discount", "drpg_Shopspecial_discount", 0, 75, 1
     StaticText ""
     
+    Option "Run Pickup Behavior", "drpg_pickup_behavior", "RunPickupBehavior"
     Option "Auto-Store if Auto-Sell Unavailable", "drpg_autosell_lockerfallback", "OnOff"
 }
 
