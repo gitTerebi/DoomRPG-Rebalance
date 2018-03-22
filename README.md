@@ -3,7 +3,7 @@
 1. GZDoom v3.2.5 or higher is required to play this mod.
 2. This is compatible with DoomRL Arsenal - [1.05] [MP-B6.2].
 3. A custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
-4. If you wish to compile this please use GDCC v0.12.0 64-bit as it's the version I found most stable.
+4. If you wish to compile this please use GDCC v0.12.0 64-bit (grab updated headers too: https://github.com/DavidPH/GDCC/tree/master/lib/inc/C/ACS_ZDoom) as it's the version I found most stable.
 
 
 ### Last 5 builds:
