@@ -1898,7 +1898,7 @@ NamedScript void MonsterDeath()
     }
     
     // Credit Rain
-    if (Killer > -1 && (Players(Killer).Luck >= 100 || CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS) && Random(1, 256) == 1)
+    if (Killer > -1 && (Players(Killer).LuckTotal >= 100 || CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS) && Random(1, 256) == 1)
     {
         fixed Z = GetActorCeilingZ(Players(Killer).TID) - GetActorPropertyFixed(Players(Killer).TID, APROP_Height);
         fixed Radius = GetActorPropertyFixed(Players(Killer).TID, APROP_Radius);
@@ -2059,7 +2059,7 @@ NamedScript void MonsterDeath()
     // Drop Credits
     if (!(Stats->Flags & MF_NODROPS) && CheckInventory("DRPGCredits") > 0)
     {
-        int LuckMult = 100 + Players(Killer).Luck;
+        int LuckMult = 100 + Players(Killer).LuckTotal;
         int CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
         int CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
         int CreditsAmount = Random(CreditsMin, CreditsMax);

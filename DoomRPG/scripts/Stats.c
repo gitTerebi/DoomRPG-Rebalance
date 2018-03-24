@@ -356,36 +356,45 @@ void CheckStats()
 {
     // VERY IMPORTANT CODE RIGHT HERE
     // If you're reading this and you'd like to modify stat curves, this is where you'd do it
+	Player.StrengthTotal = Player.Strength + Player.StrengthNat;
+	Player.DefenseTotal = Player.Defense + Player.DefenseNat;
+	Player.VitalityTotal = Player.Vitality + Player.VitalityNat;
+	Player.EnergyTotal = Player.Energy + Player.EnergyNat;
+	Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat;
+	Player.AgilityTotal = Player.Agility + Player.AgilityNat;
+	Player.CapacityTotal = Player.Capacity + Player.CapacityNat;
+	Player.LuckTotal = Player.Luck + Player.LuckNat;
+	
     Player.LevelDamage = Player.Level * (10 - GameSkill());
-    Player.BonusDamage = Player.Strength;
+    Player.BonusDamage = Player.StrengthTotal;
     Player.DamageMult = 0;
     Player.TotalDamage = Player.LevelDamage + Player.BonusDamage;
-    if (Player.Defense > 0)
-        Player.DamageFactor = (Player.Defense > 200 ? 0.25 : 1.0 - Curve((fixed)Player.Defense, 0, 200, 0.01, 0.75));
+    if (Player.DefenseTotal > 0)
+        Player.DamageFactor = (Player.DefenseTotal > 200 ? 0.25 : 1.0 - Curve((fixed)Player.DefenseTotal, 0, 200, 0.01, 0.75));
     else
-        Player.DamageFactor = 1.0 + AbsFixed(((fixed)Player.Defense / 100.0));
-    Player.Mass = 100 + (Player.Defense * 10);
-	Player.HealthMax = Player.Vitality * 10;
-    Player.StatusEffectResist = (fixed)Player.Vitality / 4.0;
-    Player.EPMax = Player.Energy * 10;
-    Player.Aura.Range = Player.Energy * 16;
-    Player.ToxicityRegenBonus = Player.Regeneration / 10;
-    Player.Speed = 1.0 + 0.25 * ((fixed)Player.Agility / 100);
-    Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.Agility / 100));
-    Player.WeaponSpeed = Player.Agility;
-    SetAmmoCapacity("Clip", Player.Capacity * 20);
-    SetAmmoCapacity("Shell", Player.Capacity * 5);
-    SetAmmoCapacity("RocketAmmo", Player.Capacity * 5);
-    SetAmmoCapacity("Cell", Player.Capacity * 30);
-    Player.Stim.VialMax = Player.Capacity * 10;
-    Player.SurvivalBonus = (fixed)Player.Agility / 10.0;
+        Player.DamageFactor = 1.0 + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
+    Player.Mass = 100 + (Player.DefenseTotal * 10);
+	Player.HealthMax = Player.VitalityTotal * 10;
+    Player.StatusEffectResist = (fixed)Player.VitalityTotal / 4.0;
+    Player.EPMax = Player.EnergyTotal * 10;
+    Player.Aura.Range = Player.EnergyTotal * 16;
+    Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
+    Player.Speed = 1.0 + 0.25 * ((fixed)Player.AgilityTotal / 100);
+    Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.AgilityTotal / 100));
+    Player.WeaponSpeed = Player.AgilityTotal;
+    SetAmmoCapacity("Clip", Player.CapacityTotal * 20);
+    SetAmmoCapacity("Shell", Player.CapacityTotal * 5);
+    SetAmmoCapacity("RocketAmmo", Player.CapacityTotal * 5);
+    SetAmmoCapacity("Cell", Player.CapacityTotal * 30);
+    Player.Stim.VialMax = Player.CapacityTotal * 10;
+    Player.SurvivalBonus = (fixed)Player.AgilityTotal / 10.0;
     if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
     {
         SetAmmoCapacity("RLArmorInInventory", DRLA_ARMOR_MAX);
         SetAmmoCapacity("RLSkullLimit", DRLA_SKULL_MAX);
         SetAmmoCapacity("RLPhaseDeviceLimit", DRLA_DEVICE_MAX);
     }
-    Player.MedkitMax = Player.Capacity * 10;
+    Player.MedkitMax = Player.CapacityTotal * 10;
     
     // Determine current stat cap
     Player.StatCap = SoftStatCap + Player.Level;
@@ -393,64 +402,64 @@ void CheckStats()
     // Per-stat leveling
     if (GetCVar("drpg_levelup_natural"))
     {
-        if (Player.StrengthXP >= StatTable[Player.Strength] && Player.Strength < Player.StatCap)
+        if (Player.StrengthXP >= StatTable[Player.StrengthNat] && Player.StrengthNat < NATURALCAP)
         {
-            Player.Strength++;
+            Player.StrengthNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_STRENGTH);
         }
         
-        if (Player.DefenseXP >= StatTable[Player.Defense] && Player.Defense < Player.StatCap)
+        if (Player.DefenseXP >= StatTable[Player.DefenseNat] && Player.DefenseNat < NATURALCAP)
         {
-            Player.Defense++;
+            Player.DefenseNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_DEFENSE);
         }
         
-        if (Player.VitalityXP >= StatTable[Player.Vitality] && Player.Vitality < Player.StatCap)
+        if (Player.VitalityXP >= StatTable[Player.VitalityNat] && Player.VitalityNat < NATURALCAP)
         {
-            Player.Vitality++;
+            Player.VitalityNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_VITALITY);
         }
         
-        if (Player.EnergyXP >= StatTable[Player.Energy] && Player.Energy < Player.StatCap)
+        if (Player.EnergyXP >= StatTable[Player.EnergyNat] && Player.EnergyNat < NATURALCAP)
         {
-            Player.Energy++;
+            Player.EnergyNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_ENERGY);
         }
         
-        if (Player.RegenerationXP >= StatTable[Player.Regeneration] && Player.Regeneration < Player.StatCap)
+        if (Player.RegenerationXP >= StatTable[Player.RegenerationNat] && Player.RegenerationNat < NATURALCAP)
         {
-            Player.Regeneration++;
+            Player.RegenerationNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_REGENERATION);
         }
         
-        if (Player.AgilityXP >= StatTable[Player.Agility] && Player.Agility < Player.StatCap)
+        if (Player.AgilityXP >= StatTable[Player.AgilityNat] && Player.AgilityNat < NATURALCAP)
         {
-            Player.Agility++;
+            Player.AgilityNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_AGILITY);
         }
         
-        if (Player.CapacityXP >= StatTable[Player.Capacity] && Player.Capacity < Player.StatCap)
+        if (Player.CapacityXP >= StatTable[Player.CapacityNat] && Player.CapacityNat < NATURALCAP)
         {
-            Player.Capacity++;
+            Player.CapacityNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_CAPACITY);
         }
         
-        if (Player.LuckXP >= StatTable[Player.Luck] && Player.Luck < Player.StatCap)
+        if (Player.LuckXP >= StatTable[Player.LuckNat] && Player.LuckNat < NATURALCAP)
         {
-            Player.Luck++;
+            Player.LuckNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_LUCK);
         }
         
         // Add Regeneration XP for having low Health and/or EP
-        if ((Player.ActualHealth < Player.HealthMax || Player.EP < Player.EPMax || Player.Focusing) && !Player.Stim.Active)
+        if ((Player.ActualHealth < Player.HealthMax || Player.EP < Player.EPMax || Player.Focusing))
         {
             if (Timer() % 7 == 0)
             {
@@ -467,7 +476,7 @@ void CheckStats()
         }
         
         // Add Defense XP for decreases in Health
-        if (Player.PrevHealth != Player.ActualHealth && !Player.Stim.Active)
+        if (Player.PrevHealth != Player.ActualHealth)
         {
             if (Player.ActualHealth < Player.PrevHealth)
             {
@@ -485,7 +494,7 @@ void CheckStats()
         }
         
         // Add Luck XP for increases in Credits
-        if (Player.PrevCredits != CheckInventory("DRPGCredits") && !Player.Stim.Active)
+        if (Player.PrevCredits != CheckInventory("DRPGCredits"))
         {
             if (CheckInventory("DRPGCredits") > Player.PrevCredits)
             {
@@ -503,7 +512,7 @@ void CheckStats()
         
         // Add Agility XP for maintaining high X/Y velocity
         fixed Velocity = AbsFixed(GetActorVelX(0)) + AbsFixed(GetActorVelY(0));
-        if (Timer() % 7 == 0 && !Player.Stim.Active)
+        if (Timer() % 7 == 0)
         {
             fixed Scale = GetCVarFixed("drpg_agility_scalexp");
             if (GetCVar("drpg_allow_spec"))
@@ -516,29 +525,29 @@ void CheckStats()
     }
     
     // Scale Health with Vitality changes
-    if (Player.PrevVitality != Player.Vitality)
+    if (Player.PrevVitality != Player.VitalityTotal)
     {
         if (Player.ActualHealth <= Player.HealthMax)
         {
-            int HealthMax = Player.Vitality * 10;
+            int HealthMax = Player.VitalityTotal * 10;
             fixed Ratio = ((fixed)Player.ActualHealth + 0.5) / ((fixed)Player.PrevVitality * 10);
             Player.ActualHealth = Ratio * HealthMax;
         }
         
-        Player.PrevVitality = Player.Vitality;
+        Player.PrevVitality = Player.VitalityTotal;
     }
 	
     // Scale EP with Energy changes
-    if (Player.PrevEnergy != Player.Energy && Player.EP > 0)
+    if (Player.PrevEnergy != Player.EnergyTotal && Player.EP > 0)
     {
         if (Player.EP <= Player.EPMax)
         {
-            int EPMax = Player.Energy * 10;
+            int EPMax = Player.EnergyTotal * 10;
             fixed Ratio = ((fixed)Player.EP + 0.5) / ((fixed)Player.PrevEnergy * 10);
             Player.EP = Ratio * EPMax;
         }
         
-        Player.PrevEnergy = Player.Energy;
+        Player.PrevEnergy = Player.EnergyTotal;
     }
     
     // Status Effect Checking
@@ -581,8 +590,8 @@ void CheckStatBonus()
 void CheckRegen()
 {
     // Determine the max timer amounts
-    Player.HPTime = (int)(350k - ((fixed)Player.Regeneration * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
-    Player.EPTime = (int)(350k - ((fixed)Player.Regeneration * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
+    Player.HPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
+    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
     
     // Cap Times
     if (Player.HPTime < 35)
@@ -591,8 +600,8 @@ void CheckRegen()
         Player.EPTime = 35;
     
     // Determine the max regen amounts
-    Player.HPAmount = 1 + Player.Vitality / 50;
-    Player.EPAmount = 1 + Player.Energy / 50;
+    Player.HPAmount = 1 + Player.VitalityTotal / 50;
+    Player.EPAmount = 1 + Player.EnergyTotal / 50;
 }
 
 // Regeneration
@@ -816,25 +825,25 @@ void CheckStatBounds()
 // Luck Chances
 void CheckLuck()
 {
-    Player.HealthDrop =     (Player.Luck >= LUCK_HEALTHDROP ? true : false);
-    Player.EPDrop =         (Player.Luck >= LUCK_EPDROP ? true : false);
-    Player.ArmorDrop =      (Player.Luck >= LUCK_ARMORDROP ? true : false);
-    Player.WeaponDrop =     (Player.Luck >= LUCK_WEAPONDROP ? true : false);
-    Player.PowerupDrop =    (Player.Luck >= LUCK_POWERUPDROP ? true : false);
-    Player.StimDrop =       (Player.Luck >= LUCK_STIMDROP ? true : false);
-    Player.ModuleDrop =     (Player.Luck >= LUCK_MODULEDROP ? true : false);
-    Player.AugDrop =        (Player.Luck >= LUCK_AUGDROP ? true : false);
-    Player.ShieldDrop =     (Player.Luck >= LUCK_SHIELDDROP ? true : false);
+    Player.HealthDrop =     (Player.LuckTotal >= LUCK_HEALTHDROP ? true : false);
+    Player.EPDrop =         (Player.LuckTotal >= LUCK_EPDROP ? true : false);
+    Player.ArmorDrop =      (Player.LuckTotal >= LUCK_ARMORDROP ? true : false);
+    Player.WeaponDrop =     (Player.LuckTotal >= LUCK_WEAPONDROP ? true : false);
+    Player.PowerupDrop =    (Player.LuckTotal >= LUCK_POWERUPDROP ? true : false);
+    Player.StimDrop =       (Player.LuckTotal >= LUCK_STIMDROP ? true : false);
+    Player.ModuleDrop =     (Player.LuckTotal >= LUCK_MODULEDROP ? true : false);
+    Player.AugDrop =        (Player.LuckTotal >= LUCK_AUGDROP ? true : false);
+    Player.ShieldDrop =     (Player.LuckTotal >= LUCK_SHIELDDROP ? true : false);
     
-    Player.HealthChance =   Curve(Player.Luck, LUCK_HEALTHDROP, 1000, LUCK_HEALTHCHANCE, LUCK_MAXHEALTHCHANCE);
-    Player.EPChance =       Curve(Player.Luck, LUCK_EPDROP, 1000, LUCK_EPCHANCE, LUCK_MAXEPCHANCE);
-    Player.ArmorChance =    Curve(Player.Luck, LUCK_ARMORDROP, 1000, LUCK_ARMORCHANCE, LUCK_MAXARMORCHANCE);
-    Player.WeaponChance =   Curve(Player.Luck, LUCK_WEAPONDROP, 1000, LUCK_WEAPONCHANCE, LUCK_MAXWEAPONCHANCE);
-    Player.PowerupChance =  Curve(Player.Luck, LUCK_POWERUPDROP, 1000, LUCK_POWERUPCHANCE, LUCK_MAXPOWERUPCHANCE);
-    Player.StimChance =     Curve(Player.Luck, LUCK_STIMDROP, 1000, LUCK_STIMCHANCE, LUCK_MAXSTIMCHANCE);
-    Player.ModuleChance =   Curve(Player.Luck, LUCK_MODULEDROP, 1000, LUCK_MODULECHANCE, LUCK_MAXMODULECHANCE);
-    Player.ShieldChance =   Curve(Player.Luck, LUCK_SHIELDDROP, 1000, LUCK_SHIELDCHANCE, LUCK_MAXSHIELDCHANCE);
-    Player.AugChance =      Curve(Player.Luck, LUCK_AUGDROP, 1000, LUCK_AUGCHANCE, LUCK_MAXAUGCHANCE);
+    Player.HealthChance =   Curve(Player.LuckTotal, LUCK_HEALTHDROP, 1000, LUCK_HEALTHCHANCE, LUCK_MAXHEALTHCHANCE);
+    Player.EPChance =       Curve(Player.LuckTotal, LUCK_EPDROP, 1000, LUCK_EPCHANCE, LUCK_MAXEPCHANCE);
+    Player.ArmorChance =    Curve(Player.LuckTotal, LUCK_ARMORDROP, 1000, LUCK_ARMORCHANCE, LUCK_MAXARMORCHANCE);
+    Player.WeaponChance =   Curve(Player.LuckTotal, LUCK_WEAPONDROP, 1000, LUCK_WEAPONCHANCE, LUCK_MAXWEAPONCHANCE);
+    Player.PowerupChance =  Curve(Player.LuckTotal, LUCK_POWERUPDROP, 1000, LUCK_POWERUPCHANCE, LUCK_MAXPOWERUPCHANCE);
+    Player.StimChance =     Curve(Player.LuckTotal, LUCK_STIMDROP, 1000, LUCK_STIMCHANCE, LUCK_MAXSTIMCHANCE);
+    Player.ModuleChance =   Curve(Player.LuckTotal, LUCK_MODULEDROP, 1000, LUCK_MODULECHANCE, LUCK_MAXMODULECHANCE);
+    Player.ShieldChance =   Curve(Player.LuckTotal, LUCK_SHIELDDROP, 1000, LUCK_SHIELDCHANCE, LUCK_MAXSHIELDCHANCE);
+    Player.AugChance =      Curve(Player.LuckTotal, LUCK_AUGDROP, 1000, LUCK_AUGCHANCE, LUCK_MAXAUGCHANCE);
     
     // Hell Unleashed Map Event
     if (CurrentLevel->Event == MAPEVENT_HELLUNLEASHED)
@@ -884,14 +893,14 @@ void CheckPerks()
     // If you're dead, return
     if (GetActorProperty(Player.TID, APROP_Health) <= 0) return;
     
-    if (Player.Strength >= 100)     Player.Perks[STAT_STRENGTH] = true;     else Player.Perks[STAT_STRENGTH] = false;
-    if (Player.Defense >= 100)      Player.Perks[STAT_DEFENSE] = true;      else Player.Perks[STAT_DEFENSE] = false;
-    if (Player.Vitality >= 100)     Player.Perks[STAT_VITALITY] = true;     else Player.Perks[STAT_VITALITY] = false;
-    if (Player.Energy >= 100)       Player.Perks[STAT_ENERGY] = true;       else Player.Perks[STAT_ENERGY] = false;
-    if (Player.Regeneration >= 100) Player.Perks[STAT_REGENERATION] = true; else Player.Perks[STAT_REGENERATION] = false;
-    if (Player.Agility >= 100)      Player.Perks[STAT_AGILITY] = true;      else Player.Perks[STAT_AGILITY] = false;
-    if (Player.Capacity >= 100)     Player.Perks[STAT_CAPACITY] = true;     else Player.Perks[STAT_CAPACITY] = false;
-    if (Player.Luck >= 100)         Player.Perks[STAT_LUCK] = true;         else Player.Perks[STAT_LUCK] = false;
+    if (Player.StrengthTotal >= 100)     Player.Perks[STAT_STRENGTH] = true;     else Player.Perks[STAT_STRENGTH] = false;
+    if (Player.DefenseTotal >= 100)      Player.Perks[STAT_DEFENSE] = true;      else Player.Perks[STAT_DEFENSE] = false;
+    if (Player.VitalityTotal >= 100)     Player.Perks[STAT_VITALITY] = true;     else Player.Perks[STAT_VITALITY] = false;
+    if (Player.EnergyTotal >= 100)       Player.Perks[STAT_ENERGY] = true;       else Player.Perks[STAT_ENERGY] = false;
+    if (Player.RegenerationTotal >= 100) Player.Perks[STAT_REGENERATION] = true; else Player.Perks[STAT_REGENERATION] = false;
+    if (Player.AgilityTotal >= 100)      Player.Perks[STAT_AGILITY] = true;      else Player.Perks[STAT_AGILITY] = false;
+    if (Player.CapacityTotal >= 100)     Player.Perks[STAT_CAPACITY] = true;     else Player.Perks[STAT_CAPACITY] = false;
+    if (Player.LuckTotal >= 100)         Player.Perks[STAT_LUCK] = true;         else Player.Perks[STAT_LUCK] = false;
     
     fixed StrengthPercent = ((fixed)Player.ActualHealth / (fixed)Player.HealthMax * 100);
     fixed DefensePercent = ((fixed)Player.ActualHealth / (fixed)Player.HealthMax);

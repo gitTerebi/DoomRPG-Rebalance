@@ -75,6 +75,7 @@ struct CharSaveInfo_S
 
     // Stats
     int Stats[STAT_MAX];
+	int StatsNat[STAT_MAX];
 
     // Skills
     int Skills[MAX_CATEGORIES][MAX_SKILLS];
@@ -546,6 +547,26 @@ struct PlayerData_S
     int HealthMax;      // Max player Health
     int PrevHealth;     // Player's Health from last tic
     int PrevCredits;    // Player's held Credits from last tic
+
+	// Natural Stat Increases
+	int StrengthNat;
+    int DefenseNat;
+    int VitalityNat;
+    int EnergyNat;
+    int RegenerationNat;
+    int AgilityNat;
+    int CapacityNat;
+    int LuckNat;
+
+	// Total Stat Values
+	int StrengthTotal;
+    int DefenseTotal;
+    int VitalityTotal;
+    int EnergyTotal;
+    int RegenerationTotal;
+    int AgilityTotal;
+    int CapacityTotal;
+    int LuckTotal;
 
     // Stat Bonuses
     int StrengthBonus;
