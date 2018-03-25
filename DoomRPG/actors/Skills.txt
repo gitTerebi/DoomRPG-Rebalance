@@ -70,7 +70,12 @@ actor DRPGAura : Inventory
 // Aura Skills
 actor DRPGGreenAuraIronFeet : PowerIronFeet             { Powerup.Duration 5 }
 actor DRPGPinkAuraDrain : PowerDrain                    { Powerup.Duration 5 }
-actor DRPGDarkBlueAuraInfiniteAmmo : PowerInfiniteAmmo  { Powerup.Duration 5 }
+//actor DRPGDarkBlueAuraInfiniteAmmo2 : PowerInfiniteAmmo  { Powerup.Duration 5 }
+actor DRPGDarkBlueAuraInfiniteAmmo2 : PowerupGiver {
+    +Inventory.AutoActivate
+    Powerup.Type PowerInfiniteAmmo
+    Powerup.Duration 5
+}
 
 // Bullet-Time Skill
 actor DRPGSkillBulletTime : PowerupGiver
@@ -673,4 +678,3 @@ actor DRPGSkillPlasmaBeam3DarkElectricSpark : DRPGSkillPlasmaBeam3ElectricSpark
 {
     RenderStyle Subtract
 }
-

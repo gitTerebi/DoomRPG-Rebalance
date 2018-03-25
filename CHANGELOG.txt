@@ -183,3 +183,9 @@ Deleted unconnected lines in Outpost.
 03/24/2018 - BUILD 21.2 - Compiled with GDCC v0.12.0 64-bit.
 Separated natural stat increases from base values.
 New M_DOOMs with RGB lighting.
+
+03/25/2018 - BUILD 21.3 - Compiled with GDCC v0.12.0 64-bit.
+- Manually merged: https://github.com/worldendDominator/DoomRPG/commit/3035874a21b1205b8bb8a25887e2810b17803267
+Fixed runaway termination in starting vials script (it never happened anyway).
+Fixed infinite ammo powerups not working with DRLA.
+Extra lives now teleports you to the start of the map.

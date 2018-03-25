@@ -386,7 +386,7 @@ void CheckStim()
     {
         "DRPGPowerStimIndestructible",
         "DRPGPowerStimShadow",
-        "DRPGPowerStimInfinity",
+        "DRPGPowerStimInfinity2",
         "DRPGPowerStimChrono",
         "DRPGPowerStimAdrenaline",
         "DRPGPowerStimGravity",

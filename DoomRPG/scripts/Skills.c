@@ -2895,7 +2895,7 @@ void CheckAuras()
                 if ((Timer() % (35 / 2)) == 0)
                     GiveInventory("Cell", AmmoRegenMult);
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 7 || Player.SoulActive[SOUL_DARKBLUE])
-                GiveInventory("DRPGDarkBlueAuraInfiniteAmmo", 1);
+                GiveInventory("DRPGDarkBlueAuraInfiniteAmmo2", 1);
         }
         
         // Yellow Aura

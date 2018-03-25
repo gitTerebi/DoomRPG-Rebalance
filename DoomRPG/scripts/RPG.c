@@ -20,7 +20,7 @@
 #include "Utils.h"
 
 // Version
-const str Version = "SE BUILD 21.2 - Powered by GDCC!";
+const str Version = "SE BUILD 21.3 - Powered by GDCC!";
 
 // Flags
 bool Transported;
@@ -567,6 +567,8 @@ NamedScript void PlayerDamage()
             {
                 Player.ActualHealth = Player.HealthMax;
                 ActivatorSound("health/resurrect", 127);
+				if (!CurrentLevel->UACBase)
+					GiveInventory("DRPGLifeTeleport", 1);
                 TakeInventory("DRPGLife", 1);
 
                 SetHudSize(320, 200, false);
@@ -1911,18 +1913,16 @@ NamedScript void Loadout_GiveVials()
     int Vials = 0;
     int MaxVials = GetActivatorCVar("drpg_start_stim_vials");
     if (MaxVials > 3000) MaxVials = 3000;
+	int Capacity = Player.Capacity * 10;
+	int Types = 8;
+	if (GetActivatorCVar("drpg_start_stim_boosters")) Types += 2;
+	if (GetActivatorCVar("drpg_start_stim_powerups")) Types += 9;
+	if (MaxVials > Types * Capacity) MaxVials = Types * Capacity;
     int Type;
 
     while (Vials < MaxVials)
     {
         Type = Random(0, STIM_MAX - 1);
-        bool Maxed = true;
-
-        // Check to make sure all the vials aren't maxed
-        for (int i = 0; i < STIM_MAX; i++)
-            if (Player.Stim.Vials[i] < Player.CapacityTotal * 10)
-                Maxed = false;
-        if (Maxed) break;
 
         // Don't include Boosters
         if (!GetActivatorCVar("drpg_start_stim_boosters") && Type >= StimStatsEnd && Type <= StimPowerupStart) continue;
@@ -1931,7 +1931,7 @@ NamedScript void Loadout_GiveVials()
         if (!GetActivatorCVar("drpg_start_stim_powerups") && Type >= StimPowerupStart && Type <= StimPowerupEnd) continue;
 
         // Skip this one if this vial type is full
-        if (Player.Stim.Vials[Type] >= Player.CapacityTotal * 10) continue;
+        if (Player.Stim.Vials[Type] >= Capacity) continue;
 
         Player.Stim.Vials[Type]++;
         Vials++;
