@@ -118,14 +118,14 @@ NamedScript void HealthBars()
             Info.Shield = Players(ID).Shield.Charge;
             Info.ShieldMax = Players(ID).Shield.Capacity;
             
-            Info.Strength = Players(ID).Strength;
-            Info.Defense = Players(ID).Defense;
-            Info.Vitality = Players(ID).Vitality;
-            Info.Energy = Players(ID).Energy;
-            Info.Regeneration = Players(ID).Regeneration;
-            Info.Agility = Players(ID).Agility;
-            Info.Capacity = Players(ID).Capacity;
-            Info.Luck = Players(ID).Luck;
+            Info.Strength = Players(ID).StrengthTotal;
+            Info.Defense = Players(ID).DefenseTotal;
+            Info.Vitality = Players(ID).VitalityTotal;
+            Info.Energy = Players(ID).EnergyTotal;
+            Info.Regeneration = Players(ID).RegenerationTotal;
+            Info.Agility = Players(ID).AgilityTotal;
+            Info.Capacity = Players(ID).CapacityTotal;
+            Info.Luck = Players(ID).LuckTotal;
             
             Info.X = GetActorX(0);
             Info.Y = GetActorY(0);

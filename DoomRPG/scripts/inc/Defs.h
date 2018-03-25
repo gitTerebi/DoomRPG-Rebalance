@@ -723,11 +723,13 @@ typedef enum
 #define LUCK_SHIELDINC          0.0005
 #define LUCK_AUGINC             0.00025
 
-#define AURA_CALCTIME           (((35 * 30) + (Player.Energy * 5.25)) * (Player.AuraBonus + 1))
+#define AURA_CALCTIME           (((35 * 30) + (Player.EnergyTotal * 5.25)) * (Player.AuraBonus + 1))
 #define DRLA_WEAPON_MAX         6
-#define DRLA_ARMOR_MAX          2 + (Player.Capacity / 25)
+#define DRLA_ARMOR_MAX          2 + (Player.CapacityTotal / 25)
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX
-#define DRLA_DEVICE_MAX         4 + (Player.Capacity / 50)
+#define DRLA_DEVICE_MAX         4 + (Player.CapacityTotal / 50)
+
+#define NATURALCAP				100//((Player.Level>10) ? (Player.Level) : 10)
 
 typedef enum
 {

@@ -970,7 +970,7 @@ NamedScript void AmericaShieldMod()
 
 NamedScript void GhettoLuckMod()
 {
-    int Luck = 50 - (Player.Luck / 2);
+    int Luck = 50 - (Player.LuckTotal / 2);
     
     Player.HealthChance += Luck * LUCK_HEALTHCHANCE;
     Player.EPChance += Luck * LUCK_EPCHANCE;
@@ -985,9 +985,9 @@ NamedScript void GhettoLuckMod()
 
 NamedScript void SuperSqueezyScalarMod()
 {
-    Player.Shield.Capacity = Player.Shield.Capacity * (1.0 + (Player.Capacity * 0.005)) + 1;
-    Player.Shield.ChargeRate += (Player.Energy / 10);
-    Player.Shield.DelayRate = Player.Shield.DelayRate - ((fixed)Player.Regeneration / 50.0);
+    Player.Shield.Capacity = Player.Shield.Capacity * (1.0 + (Player.CapacityTotal * 0.005)) + 1;
+    Player.Shield.ChargeRate += (Player.EnergyTotal / 10);
+    Player.Shield.DelayRate = Player.Shield.DelayRate - ((fixed)Player.RegenerationTotal / 50.0);
 }
 
 NamedScript void ReflectionMod()
@@ -1072,14 +1072,14 @@ NamedScript void RegenShieldMod()
 NamedScript void MLGNoScopeShieldMod()
 {
     int Extra = 0;
-    if (Player.Strength     >= 100) Extra += 100;
-    if (Player.Defense      >= 100) Extra += 100;
-    if (Player.Vitality     >= 100) Extra += 100;
-    if (Player.Energy       >= 100) Extra += 100;
-    if (Player.Regeneration >= 100) Extra += 100;
-    if (Player.Agility      >= 100) Extra += 100;
-    if (Player.Capacity     >= 100) Extra += 100;
-    if (Player.Luck         >= 100) Extra += 100;
+    if (Player.StrengthTotal     >= 100) Extra += 100;
+    if (Player.DefenseTotal      >= 100) Extra += 100;
+    if (Player.VitalityTotal     >= 100) Extra += 100;
+    if (Player.EnergyTotal       >= 100) Extra += 100;
+    if (Player.RegenerationTotal >= 100) Extra += 100;
+    if (Player.AgilityTotal      >= 100) Extra += 100;
+    if (Player.CapacityTotal     >= 100) Extra += 100;
+    if (Player.LuckTotal         >= 100) Extra += 100;
     
     Player.Shield.Capacity += Extra;
 }
@@ -1184,7 +1184,7 @@ NamedScript void LuckyBastardMod()
 {
     if (Player.Shield.Active)
     {
-        int CombinedStat = Player.Agility + Player.Luck;
+        int CombinedStat = Player.AgilityTotal + Player.LuckTotal;
         
         Player.SurvivalBonus = (fixed)CombinedStat / 10.0;
         

@@ -181,19 +181,39 @@ NamedScript Type_ENTER void Init()
         Player.Capacity = GetActivatorCVar("drpg_start_capacity");
         Player.Luck = GetActivatorCVar("drpg_start_luck");
 
+		// Total Stat Values
+        Player.StrengthTotal = Player.Strength;
+        Player.DefenseTotal = Player.Defense;
+        Player.VitalityTotal = Player.Vitality;
+        Player.EnergyTotal = Player.Energy;
+        Player.RegenerationTotal = Player.Regeneration;
+        Player.AgilityTotal = Player.Agility;
+        Player.CapacityTotal = Player.Capacity;
+        Player.LuckTotal = Player.Luck;
+
+		// Natural Bonuses
+        Player.StrengthNat = 0;
+        Player.DefenseNat = 0;
+        Player.VitalityNat = 0;
+        Player.EnergyNat = 0;
+        Player.RegenerationNat = 0;
+        Player.AgilityNat = 0;
+        Player.CapacityNat = 0;
+        Player.LuckNat = 0;
+
         // Stat XP
-        Player.StrengthXP = StatTable[Player.Strength - 1];
-        Player.DefenseXP = StatTable[Player.Defense - 1];
-        Player.VitalityXP = StatTable[Player.Vitality - 1];
-        Player.EnergyXP = StatTable[Player.Energy - 1];
-        Player.RegenerationXP = StatTable[Player.Regeneration - 1];
-        Player.AgilityXP = StatTable[Player.Agility - 1];
-        Player.CapacityXP = StatTable[Player.Capacity - 1];
-        Player.LuckXP = StatTable[Player.Luck - 1];
+        Player.StrengthXP = 0;
+        Player.DefenseXP = 0;
+        Player.VitalityXP = 0;
+        Player.EnergyXP = 0;
+        Player.RegenerationXP = 0;
+        Player.AgilityXP = 0;
+        Player.CapacityXP = 0;
+        Player.LuckXP = 0;
 
         // Default Health/EP
-        Player.EP = Player.Energy * 10;
-        Player.ActualHealth = Player.Vitality * 10;
+        Player.EP = Player.EnergyTotal * 10;
+        Player.ActualHealth = Player.VitalityTotal * 10;
         Player.PrevHealth = Player.ActualHealth;
         SetActorProperty(0, APROP_Health, Player.ActualHealth);
 
@@ -218,7 +238,7 @@ NamedScript Type_ENTER void Init()
         Player.SkillSelected = -1;
 
         // Fill Augmentation Battery
-        Player.Augs.Battery = Player.Capacity * 10;
+        Player.Augs.Battery = Player.CapacityTotal * 10;
 
         // Setup the New! shield parts arrays
         for (int i = 0; i < SHIELDPAGE_MAX; i++)
@@ -841,7 +861,7 @@ NamedScript void WeaponSpeed()
 
     Start:
 
-    if (Player.Agility <= 100)
+    if (Player.AgilityTotal <= 100)
         Time = Abs(RoundInt(Player.WeaponSpeed * 0.35 - 35.0));
     else
         Time = 0;
@@ -1375,7 +1395,7 @@ NamedScript KeyBind void ToggleFocusMode()
 NamedScript void FocusMode()
 {
     int PrevEP = Player.EP;
-    int RegenWindupSpeed = ((35 * 40) - ((35 * 35) * Player.Regeneration / 200));
+    int RegenWindupSpeed = ((35 * 40) - ((35 * 35) * Player.RegenerationTotal / 200));
     if (RegenWindupSpeed < 35) // Enforce a 1-second wind-up at least
         RegenWindupSpeed = 35;
     int StartWindupSpeed = RegenWindupSpeed;
@@ -1520,14 +1540,14 @@ NamedScript Type_RESPAWN void Respawn()
     // Give a box of ammo if a specific ammo type is empty if the CVAR is set
     if (GetCVar("drpg_multi_restoreammo"))
     {
-        if (CheckInventory("Clip") < GetAmmoAmount("Clip") * (Player.Capacity / 10))
-            SetInventory("Clip", GetAmmoAmount("Clip") * (Player.Capacity / 10));
-        if (CheckInventory("Shell") < GetAmmoAmount("Shell") * (Player.Capacity / 10))
-            SetInventory("Shell", GetAmmoAmount("Shell") * (Player.Capacity / 10));
-        if (CheckInventory("RocketAmmo") < GetAmmoAmount("RocketAmmo") * (Player.Capacity / 10))
-            SetInventory("RocketAmmo", GetAmmoAmount("RocketAmmo") * (Player.Capacity / 10));
-        if (CheckInventory("Cell") < GetAmmoAmount("Cell") * (Player.Capacity / 10))
-            SetInventory("Cell", GetAmmoAmount("Cell") * (Player.Capacity / 10));
+        if (CheckInventory("Clip") < GetAmmoAmount("Clip") * (Player.CapacityTotal / 10))
+            SetInventory("Clip", GetAmmoAmount("Clip") * (Player.CapacityTotal / 10));
+        if (CheckInventory("Shell") < GetAmmoAmount("Shell") * (Player.CapacityTotal / 10))
+            SetInventory("Shell", GetAmmoAmount("Shell") * (Player.CapacityTotal / 10));
+        if (CheckInventory("RocketAmmo") < GetAmmoAmount("RocketAmmo") * (Player.CapacityTotal / 10))
+            SetInventory("RocketAmmo", GetAmmoAmount("RocketAmmo") * (Player.CapacityTotal / 10));
+        if (CheckInventory("Cell") < GetAmmoAmount("Cell") * (Player.CapacityTotal / 10))
+            SetInventory("Cell", GetAmmoAmount("Cell") * (Player.CapacityTotal / 10));
     }
 
     // Apply camera textures and vars
@@ -1900,7 +1920,7 @@ NamedScript void Loadout_GiveVials()
 
         // Check to make sure all the vials aren't maxed
         for (int i = 0; i < STIM_MAX; i++)
-            if (Player.Stim.Vials[i] < Player.Capacity * 10)
+            if (Player.Stim.Vials[i] < Player.CapacityTotal * 10)
                 Maxed = false;
         if (Maxed) break;
 
@@ -1911,7 +1931,7 @@ NamedScript void Loadout_GiveVials()
         if (!GetActivatorCVar("drpg_start_stim_powerups") && Type >= StimPowerupStart && Type <= StimPowerupEnd) continue;
 
         // Skip this one if this vial type is full
-        if (Player.Stim.Vials[Type] >= Player.Capacity * 10) continue;
+        if (Player.Stim.Vials[Type] >= Player.CapacityTotal * 10) continue;
 
         Player.Stim.Vials[Type]++;
         Vials++;

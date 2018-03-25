@@ -178,7 +178,7 @@ NamedScript DECORATE int CheckAugBatteryMax()
 // Get the max inventory size
 NamedScript DECORATE int CheckInventoryMax()
 {
-    int MaxItems = Player.Capacity * 2;
+    int MaxItems = Player.CapacityTotal * 2;
     
     if (MaxItems > 200)
         MaxItems = 200;
@@ -292,7 +292,7 @@ NamedScript DECORATE int GetTimer()
 // Returns the Agility for A_SetTics calls in DECORATE
 NamedScript DECORATE int GetSpeed(int Tics)
 {
-    return (Tics + 1) - (Tics * Player.Agility / 100);
+    return (Tics + 1) - (Tics * Player.AgilityTotal / 100);
 }
 
 // Used by DECORATE to check if both your Health and EP are at max
@@ -547,7 +547,7 @@ int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed
 // Used by the RegenSphere to temporarily increase regen rates
 NamedScript DECORATE void RegenBoost()
 {
-    Player.RegenBoostTimer += (35 * 5) + ((Player.Regeneration / 13.33) * 35);
+    Player.RegenBoostTimer += (35 * 5) + ((Player.RegenerationTotal / 13.33) * 35);
 }
 
 // Set Skill Level during the game
@@ -605,14 +605,24 @@ NamedScript KeyBind void Respec(bool DoStats, bool DoSkills)
         Player.Capacity = 10;
         Player.Luck = 0;
         
+        // Reset Natural Bonuses
+        Player.StrengthNat = 0;
+        Player.DefenseNat = 0;
+        Player.VitalityNat = 0;
+        Player.EnergyNat = 0;
+        Player.RegenerationNat = 0;
+        Player.AgilityNat = 0;
+        Player.CapacityNat = 0;
+        Player.LuckNat = 0;
+        
         // Reset Stat XP
         Player.StrengthXP = 0;
         Player.DefenseXP = 0;
-        Player.VitalityXP = XPTable[9];
-        Player.EnergyXP = XPTable[9];
+        Player.VitalityXP = 0;
+        Player.EnergyXP = 0;
         Player.RegenerationXP = 0;
         Player.AgilityXP = 0;
-        Player.CapacityXP = XPTable[9];
+        Player.CapacityXP = 0;
         Player.LuckXP = 0;
         
         // Reset Shield
@@ -814,7 +824,7 @@ int AveragePlayerLuck()
         // Skip player if they're not ingame
         if (!PlayerInGame(i)) continue;
         
-        TotalLuck += Players(i).Luck;
+        TotalLuck += Players(i).LuckTotal;
         NumPlayers++;
     }
     
@@ -1624,21 +1634,21 @@ NamedScript void DrawStatUp(int Stat)
     
     int StatAmount[STAT_MAX] =
     {
-        Player.Strength,
-        Player.Defense,
-        Player.Vitality,
-        Player.Energy,
-        Player.Regeneration,
-        Player.Agility,
-        Player.Capacity,
-        Player.Luck
+        Player.StrengthNat,
+        Player.DefenseNat,
+        Player.VitalityNat,
+        Player.EnergyNat,
+        Player.RegenerationNat,
+        Player.AgilityNat,
+        Player.CapacityNat,
+        Player.LuckNat
     };
     
     // Log
     if (InMultiplayer)
-        Log("%tS\C-'s %S\C- has increased to \C%c%d", PlayerNumber() + 1, StatNames[Stat], StatNames[Stat][1], StatAmount[Stat]);
+        Log("%tS\C-'s %S\C- bonus has increased to \C%c%d", PlayerNumber() + 1, StatNames[Stat], StatNames[Stat][1], StatAmount[Stat]);
     else
-        Log("Your %S\C- has increased to \C%c%d", StatNames[Stat], StatNames[Stat][1], StatAmount[Stat]);
+        Log("Your %S\C- bonus has increased to \C%c%d", StatNames[Stat], StatNames[Stat][1], StatAmount[Stat]);
     
     // Fade
     switch (Stat)
@@ -2500,14 +2510,14 @@ NamedScript Console void FullLocker(int Amount)
 // Give all Stim Compounds
 NamedScript Console void GiveCompounds(int Amount)
 {
-    GiveInventory("DRPGStimSmall", Player.Capacity);
-    GiveInventory("DRPGStimMedium", Player.Capacity);
-    GiveInventory("DRPGStimLarge", Player.Capacity);
-    GiveInventory("DRPGStimXL", Player.Capacity);
+    GiveInventory("DRPGStimSmall", Player.CapacityTotal);
+    GiveInventory("DRPGStimMedium", Player.CapacityTotal);
+    GiveInventory("DRPGStimLarge", Player.CapacityTotal);
+    GiveInventory("DRPGStimXL", Player.CapacityTotal);
     
     for (int i = 0; i < STIM_MAX; i++)
         if (Amount == 0)
-            Player.Stim.Vials[i] = Player.Capacity * 10;
+            Player.Stim.Vials[i] = Player.CapacityTotal * 10;
         else
             Player.Stim.Vials[i] += Amount;
 }

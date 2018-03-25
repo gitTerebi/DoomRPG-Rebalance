@@ -1013,26 +1013,26 @@ NamedScript Type_ENTER void StatHUD()
 {
     int *Stats[STAT_MAX] =
     {
-        &Player.Strength,
-        &Player.Defense,
-        &Player.Vitality,
-        &Player.Energy,
-        &Player.Regeneration,
-        &Player.Agility,
-        &Player.Capacity,
-        &Player.Luck
+        &Player.StrengthTotal,
+        &Player.DefenseTotal,
+        &Player.VitalityTotal,
+        &Player.EnergyTotal,
+        &Player.RegenerationTotal,
+        &Player.AgilityTotal,
+        &Player.CapacityTotal,
+        &Player.LuckTotal
     };
 
     int PrevStats[STAT_MAX] =
     {
-        Player.Strength,
-        Player.Defense,
-        Player.Vitality,
-        Player.Energy,
-        Player.Regeneration,
-        Player.Agility,
-        Player.Capacity,
-        Player.Luck
+        Player.StrengthTotal,
+        Player.DefenseTotal,
+        Player.VitalityTotal,
+        Player.EnergyTotal,
+        Player.RegenerationTotal,
+        Player.AgilityTotal,
+        Player.CapacityTotal,
+        Player.LuckTotal
     };
 
     bool Change[STAT_MAX];

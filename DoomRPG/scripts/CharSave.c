@@ -491,19 +491,39 @@ NamedScript MenuEntry void LoadCharacter()
     Player.Agility      = Info.Stats[5];
     Player.Capacity     = Info.Stats[6];
     Player.Luck         = Info.Stats[7];
+	
+	// Natural Bonuses
+    Player.StrengthNat     = Info.StatsNat[0];
+    Player.DefenseNat      = Info.StatsNat[1];
+    Player.VitalityNat     = Info.StatsNat[2];
+    Player.EnergyNat       = Info.StatsNat[3];
+    Player.RegenerationNat = Info.StatsNat[4];
+    Player.AgilityNat      = Info.StatsNat[5];
+    Player.CapacityNat     = Info.StatsNat[6];
+    Player.LuckNat         = Info.StatsNat[7];
+	
+	// Total values
+	Player.StrengthTotal = Player.Strength + Player.StrengthNat;
+	Player.DefenseTotal = Player.Defense + Player.DefenseNat;
+	Player.VitalityTotal = Player.Vitality + Player.VitalityNat;
+	Player.EnergyTotal = Player.Energy + Player.EnergyNat;
+	Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat;
+	Player.AgilityTotal = Player.Agility + Player.AgilityNat;
+	Player.CapacityTotal = Player.Capacity + Player.CapacityNat;
+	Player.LuckTotal = Player.Luck + Player.LuckNat;
     
     // Stat XP
-    Player.StrengthXP = StatTable[Info.Stats[0] - 1];
-    Player.DefenseXP = StatTable[Info.Stats[1] - 1];
-    Player.VitalityXP = StatTable[Info.Stats[2] - 1];
-    Player.EnergyXP = StatTable[Info.Stats[3] - 1];
-    Player.RegenerationXP = StatTable[Info.Stats[4] - 1];
-    Player.AgilityXP = StatTable[Info.Stats[5] - 1];
-    Player.CapacityXP = StatTable[Info.Stats[6] - 1];
-    Player.LuckXP = StatTable[Info.Stats[7] - 1];
+    Player.StrengthXP = StatTable[Info.StatsNat[0] - 1];
+    Player.DefenseXP = StatTable[Info.StatsNat[1] - 1];
+    Player.VitalityXP = StatTable[Info.StatsNat[2] - 1];
+    Player.EnergyXP = StatTable[Info.StatsNat[3] - 1];
+    Player.RegenerationXP = StatTable[Info.StatsNat[4] - 1];
+    Player.AgilityXP = StatTable[Info.StatsNat[5] - 1];
+    Player.CapacityXP = StatTable[Info.StatsNat[6] - 1];
+    Player.LuckXP = StatTable[Info.StatsNat[7] - 1];
     
-    Player.EP = Player.Energy * 10;
-    Player.HealthMax = Player.Vitality * 10;
+    Player.EP = Player.EnergyTotal * 10;
+    Player.HealthMax = Player.VitalityTotal * 10;
     Player.ActualHealth = Player.HealthMax;
     SetActorProperty(0, APROP_Health, Player.HealthMax);
     
@@ -699,6 +719,16 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
         if (Info->Stats[i] < 0)
             Info->Stats[i] = 0;
 
+	// Natural Bonuses
+	Info->StatsNat[0] = Player.StrengthNat;
+	Info->StatsNat[1] = Player.DefenseNat;
+	Info->StatsNat[2] = Player.VitalityNat;
+	Info->StatsNat[3] = Player.EnergyNat;
+	Info->StatsNat[4] = Player.RegenerationNat;
+	Info->StatsNat[5] = Player.AgilityNat;
+	Info->StatsNat[6] = Player.CapacityNat;
+	Info->StatsNat[7] = Player.LuckNat;
+
     // Skills
     for (int i = 0; i < MAX_CATEGORIES; i++)
         for (int j = 0; j < MAX_SKILLS; j++)
@@ -805,6 +835,13 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     for (int i = 0; i < STAT_MAX; i++)
     {
         Info->Stats[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
+    }
+    
+    // Natural Bonuses
+    for (int i = 0; i < STAT_MAX; i++)
+    {
+        Info->StatsNat[i] = HexToInteger(String + StringPos, 2);
         StringPos += 2;
     }
     
@@ -953,6 +990,14 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
     {
         SaveString[pos + 1] = ToHexChar(Info->Stats[i]);
         SaveString[pos + 0] = ToHexChar(Info->Stats[i] >> 4);
+        pos += 2;
+    }
+    
+    // Natural Bonuses
+    for (int i = 0; i < STAT_MAX; i++)
+    {
+        SaveString[pos + 1] = ToHexChar(Info->StatsNat[i]);
+        SaveString[pos + 0] = ToHexChar(Info->StatsNat[i] >> 4);
         pos += 2;
     }
     

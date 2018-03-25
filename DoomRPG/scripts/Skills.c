@@ -1316,7 +1316,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
         // Aura stacking handling with Energy perk
         if (Player.Perks[STAT_ENERGY])
         {
-            int StackMax = 1 + ((Player.Energy - 100) / 10);
+            int StackMax = 1 + ((Player.EnergyTotal - 100) / 10);
             int Auras = 0;
             
             Log("\CnAura Max Stack: %d", StackMax);
@@ -1537,7 +1537,7 @@ NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
             Players(PlayerNum).Aura.Type[i].Active = true;
             
             // Determine Level
-            int Level = Players(PlayerNum).Energy / 25 + 1;
+            int Level = Players(PlayerNum).EnergyTotal / 25 + 1;
             if (Level > Skills[2][i].MaxLevel)
                 Level = Skills[2][i].MaxLevel;
             Players(PlayerNum).Aura.Type[i].Level = Level;
@@ -2046,7 +2046,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         // Setup Stats
         Delay(4); // We need this initial delay to make sure the ID is valid
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(NewID)];
-        fixed Modifier = 1.0 + (fixed)Player.Level * ((fixed)Player.Energy / 20.0);
+        fixed Modifier = 1.0 + (fixed)Player.Level * ((fixed)Player.EnergyTotal / 20.0);
         Stats->Level = (int)Modifier;
         Stats->Strength = (int)Modifier + Random(0, Stats->Level / GameSkill());
         Stats->Defense = (int)Modifier + Random(0, Stats->Level / GameSkill());
@@ -2130,8 +2130,8 @@ NamedScript Console bool ForceWall(SkillLevelInfo *SkillLevel, void *Data)
         
         // Determine Defense and Health
         Stats->SpawnHealth = GetActorProperty(0, APROP_SpawnHealth);
-        Stats->Defense = Player.Energy * 5;
-        Stats->Vitality = Player.Energy * 5;
+        Stats->Defense = Player.EnergyTotal * 5;
+        Stats->Vitality = Player.EnergyTotal * 5;
         Stats->HealthMax = CalculateMonsterMaxHealth(Stats);
         SetActorProperty(TID, APROP_Health, Stats->HealthMax);
         

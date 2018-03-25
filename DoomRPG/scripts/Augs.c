@@ -245,7 +245,7 @@ void CheckAugs()
         Player.Augs.SlotsUsed = 0;
     
     // Determine max Battery
-    Player.Augs.BatteryMax = Player.Capacity * 10;
+    Player.Augs.BatteryMax = Player.CapacityTotal * 10;
     
     // Play energy drained sound
     if (Player.Augs.Battery <= 0 && Player.Augs.SlotsUsed > 0)
@@ -422,10 +422,10 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_CAPACITY] >= 3)
             Player.Stim.VialMax *= 2;
         
-        SetAmmoCapacity("Clip", Player.Capacity * 20 * AmmoMult);
-        SetAmmoCapacity("Shell", Player.Capacity * 5 * AmmoMult);
-        SetAmmoCapacity("RocketAmmo", Player.Capacity * 5 * AmmoMult);
-        SetAmmoCapacity("Cell", Player.Capacity * 30 * AmmoMult);
+        SetAmmoCapacity("Clip", Player.CapacityTotal * 20 * AmmoMult);
+        SetAmmoCapacity("Shell", Player.CapacityTotal * 5 * AmmoMult);
+        SetAmmoCapacity("RocketAmmo", Player.CapacityTotal * 5 * AmmoMult);
+        SetAmmoCapacity("Cell", Player.CapacityTotal * 30 * AmmoMult);
     }
 
     // Luck Aug
