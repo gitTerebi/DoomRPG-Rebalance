@@ -1085,9 +1085,3 @@ HardwareShader Sprite SHCAO0
 	Shader "shaders/ShieldColorPulse.fp"
 	Speed 0.5
 }
-
-HardwareShader Texture M_DOOM
-{
-	Shader "shaders/AuraIcon.fp"
-	Speed 0.5
-}
