@@ -179,3 +179,7 @@ Minor text fixes.
 03/05/2018 - BUILD 21.1 - Compiled with GDCC v0.12.0 64-bit.
 Reintroduced Run Pickup Behaviour with some optimisation.
 Deleted unconnected lines in Outpost.
+
+03/24/2018 - BUILD 21.2 - Compiled with GDCC v0.12.0 64-bit.
+Separated natural stat increases from base values.
+New M_DOOMs with RGB lighting.

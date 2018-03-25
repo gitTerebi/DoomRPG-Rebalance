@@ -8,6 +8,7 @@ Utilities/Doom RPG Launcher/*.suo
 Utilities/Doom RPG Launcher/obj
 Utilities/Doom RPG Launcher/bin
 Utilities/GDCC
+Utilities/Python
 IR/*.obj
 IR/dummy.file
 *.zip
