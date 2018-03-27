@@ -189,3 +189,7 @@ New M_DOOMs with RGB lighting.
 Fixed runaway termination in starting vials script (it never happened anyway).
 Fixed infinite ammo powerups not working with DRLA.
 Extra lives now teleports you to the start of the map.
+
+03/26/2018 - BUILD 21.4 - Compiled with GDCC v0.12.0 64-bit.
+Fixed missing textures on Outpost teleport pad.
+Moved Shield Menu's bindings help lower to prevent Shield Component Descripton from overlapping it. 

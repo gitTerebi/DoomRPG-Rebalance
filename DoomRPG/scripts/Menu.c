@@ -2243,7 +2243,7 @@ void MenuHelp()
         case MENUPAGE_SHIELD:
             HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nEquip Part: \Cd%jS\C-\nUnequip Part: \Cd%jS + %jS\C-",
                        "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "+speed", "+use");
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y + 45.0, 0.05); // This help is pushed down so shield component description doesn't overlap it.
             break;
         case MENUPAGE_STIMS:
             HudMessage("Navigate: \Cd%jS/%jS\C-\nSelect Stim Size: \Cd%jS/%jS\C-\nChoose Stim/Add Compound to Stim: \Cd%jS\C-",

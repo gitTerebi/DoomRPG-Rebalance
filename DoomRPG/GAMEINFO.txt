@@ -1,2 +1,2 @@
-startuptitle = "Doom RPG SE BUILD 21.3"
+startuptitle = "Doom RPG SE BUILD 21.4"
 startupcolors = "0092FF", "000000"
