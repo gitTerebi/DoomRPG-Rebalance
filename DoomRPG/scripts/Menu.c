@@ -203,8 +203,8 @@ void DrawMainMenu()
     // Show mission info when holding specific input keys
     if (GetPlayerInput(PlayerNumber(), INPUT_BUTTONS) & BT_SPEED && Player.Mission.Active) 
     {
-    	DrawMissionInfo(&Player.Mission, 16, 188, true);
-    	return;
+        DrawMissionInfo(&Player.Mission, 16, 188, true);
+        return;
     }
     
     // Draw headers
@@ -217,15 +217,15 @@ void DrawMainMenu()
     HudMessage("- PLAYER STATS -");
     EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 10.0, 0.05);
     HudMessage("- LEVEL STATS -");
-    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 95.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 100.0, 0.05);
     HudMessage("- SHIELD -");
-    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 165.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 175.0, 0.05);
     HudMessage("- AUG ITEMS -");
-    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          0.1, 165.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          0.1, 175.0, 0.05);
     HudMessage("- STIM ITEMS -");
-    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          0.1, 275.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          0.1, 290.0, 0.05);
     HudMessage("- STIM 'N TOXICITY -");
-    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 275.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 290.0, 0.05);
     
     // Draw Menu
     for (int i = 0; i < MAX_MENU; i++)
@@ -266,37 +266,37 @@ void DrawMainMenu()
     EndHudMessage(HUDMSG_PLAIN, 0, "Green",          115.1, 110.0, 0.05);
     // Augs
     HudMessage("%d", AugCanisters);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Green",          40.1, 190.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Green",          40.1, 200.0, 0.05);
     HudMessage("%d", AugUpgradeCanisters);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Green",          40.1, 210.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Green",          40.1, 220.0, 0.05);
     HudMessage("%d / %d", Player.Augs.SlotsUsed, Player.Augs.Slots);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Green",          40.1, 230.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Green",          40.1, 240.0, 0.05);
     HudMessage("%d%%", (int)Player.Augs.Battery);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Yellow",         40.1, 250.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Yellow",         40.1, 260.0, 0.05);
     // Stim
     HudMessage("S: %d\nM: %d\nL: %d\nXL: %d", SmallStims, MediumStims, LargeStims, XLStims);
-    EndHudMessage(HUDMSG_PLAIN, 0, "White",          40.1, 315.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "White",          40.1, 330.0, 0.05);
     // Modules
     PrintSprite("UMODA0", 0, 100.1, 120.1, 0.05);
     // Augs
-    PrintSprite("AUGCA0", 0, 16.1, 200.1, 0.05);
-    PrintSprite("AUGUA0", 0, 16.1, 215.1, 0.05);
-    PrintSprite("AUGUB0", 0, 16.1, 240.1, 0.05);
+    PrintSprite("AUGCA0", 0, 16.1, 210.1, 0.05);
+    PrintSprite("AUGUA0", 0, 16.1, 225.1, 0.05);
+    PrintSprite("AUGUB0", 0, 16.1, 250.1, 0.05);
     // Aug battery
-    PrintSprite("AUGBATT", 0, 16.1, 255.1, 0.05);
+    PrintSprite("AUGBATT", 0, 16.1, 265.1, 0.05);
     // Stim
-    PrintSprite("STIMB0", 0, 16.1, 315.1, 0.05);
+    PrintSprite("STIMB0", 0, 16.1, 340.1, 0.05);
     
     // Level Stats
     if (!CurrentLevel->UACBase)
     {
         SetFont("SMALLFONT");
         HudMessage("Monsters: %d / %d", CurrentKills, TotalKills);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? MenuCursorColor : "Brick"),       180.1, 115.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? MenuCursorColor : "Brick"),       180.1, 120.0, 0.05);
         HudMessage("Items: %d / %d", CurrentItems, TotalItems);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllItems ? MenuCursorColor : "LightBlue"),   180.1, 130.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllItems ? MenuCursorColor : "LightBlue"),   180.1, 135.0, 0.05);
         HudMessage("Secrets: %d / %d", CurrentSecretsFound, TotalSecretsFound);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? MenuCursorColor : "Yellow"),    180.1, 145.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? MenuCursorColor : "Yellow"),    180.1, 150.0, 0.05);
     }
     
     // Chips
@@ -312,7 +312,7 @@ void DrawMainMenu()
     SetHudClipRect(0, 0, 0, 0);
     
     // Shield
-    DrawShieldInfo(-1, 180.1, 185.0, 0);
+    DrawShieldInfo(-1, 180.1, 195.0, 0);
     
     // Current Stim
     if (Player.Stim.Size > 0)
@@ -323,22 +323,22 @@ void DrawMainMenu()
         if (Player.Stim.Size == 1)
         {
             HudMessage("Small Stim: %d/%d", Player.Stim.Amount, Player.Stim.Capacity);
-            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 295.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 310.0, 0.05);
         }
         else if (Player.Stim.Size == 2)
         {
             HudMessage("Medium Stim: %d/%d", Player.Stim.Amount, Player.Stim.Capacity);
-            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 295.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 310.0, 0.05);
         }
         else if (Player.Stim.Size == 3)
         {
             HudMessage("Large Stim: %d/%d", Player.Stim.Amount, Player.Stim.Capacity);
-            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 295.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 310.0, 0.05);
         }
         else if (Player.Stim.Size == 4)
         {
             HudMessage("Extra-Large Stim: %d/%d", Player.Stim.Amount, Player.Stim.Capacity);
-            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 295.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 310.0, 0.05);
         }
         
         // Stim Compound Bar
@@ -346,14 +346,14 @@ void DrawMainMenu()
             for (int i = 0; i < STIM_MAX; i++)
                 if (Player.Stim.Current[i] > 0)
                 {
-                    DrawBar(StrParam("Stim%d", i + 1), 180.1 + X, 310.0, Player.Stim.Current[i], true);
+                    DrawBar(StrParam("Stim%d", i + 1), 180.1 + X, 325.0, Player.Stim.Current[i], true);
                     X += Player.Stim.Current[i];
                 }
     }
     
     // Toxicity
     if (Player.Toxicity > 0 || Player.Stim.Size > 0)
-        DrawToxicityBar(180.1, 320.0, false);
+        DrawToxicityBar(180.1, 335.0, false);
 }
 
 void DrawStatsMenu()
