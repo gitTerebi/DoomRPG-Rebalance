@@ -517,6 +517,7 @@ OptionMenu "DoomRPGStart"
 	StaticText "Funds", 1
     Slider "Credits", "drpg_start_credits", 0, 10000, 100
     Slider "Modules", "drpg_start_modules", 0, 10000, 25
+    Slider "Turret Parts", "drpg_start_turretparts", 0, 1000, 1
 	StaticText ""
     
     StaticText "Level/Rank", 1

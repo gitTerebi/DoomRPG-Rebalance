@@ -380,9 +380,9 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
     },
     {
         "Commands - Hold Position", 1, 10,
-        "The turret will stay and defend its' current position",
+        "The turret will stay and defend its current position",
         "",
-        "Issuing this command will set the turret to hold its' position"
+        "Issuing this command will set the turret to hold its position"
     },
 };
 
@@ -546,20 +546,28 @@ NamedScript Type_ENTER void TurretLoop()
             // Damage-based Generators
             if (Health < PrevHealth)
             {
-                if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE] > 0 && GetUserVariable(Player.Turret.TID, "user_damage_type") == DT_NORMAL)
-                    Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE];
-                if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE] > 0 && GetUserVariable(Player.Turret.TID, "user_damage_type") == DT_MELEE)
-                    Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE];
-                if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_THERMAL] > 0 && GetUserVariable(Player.Turret.TID, "user_damage_type") == DT_FIRE)
-                    Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_THERMAL];
-                if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA] > 0 && GetUserVariable(Player.Turret.TID, "user_damage_type") == DT_PLASMA)
-                    Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA];
-                if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA] > 0 && GetUserVariable(Player.Turret.TID, "user_damage_type") == DT_LIGHTNING)
-                    Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA];
-                if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR] > 0 && GetUserVariable(Player.Turret.TID, "user_damage_type") == DT_TOXIC)
-                    Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR];
-                if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR] > 0 && GetUserVariable(Player.Turret.TID, "user_damage_type") == DT_RADIATION)  
-                    Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR];
+                switch (GetUserVariable(Player.Turret.TID, "user_damage_type"))
+                {
+                    case DT_NORMAL:
+                    case DT_MELEE:
+                        if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE] > 0)
+                            Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE];
+                        break;
+                    case DT_FIRE:
+                        if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_THERMAL] > 0)
+                            Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_THERMAL];
+                        break;
+                    case DT_PLASMA:
+                    case DT_LIGHTNING:
+                        if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA] > 0)
+                            Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA];
+                        break;
+                    case DT_TOXIC:
+                    case DT_RADIATION:
+                        if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR] > 0)
+                            Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR];
+                        break;
+                }
             }
         }
         
@@ -726,7 +734,7 @@ NamedScript Type_ENTER void TurretCommandWheel()
 {
     int const Commands[MAX_COMMANDS] =
     {
-		TU_BUILD,
+        TU_BUILD,
         TU_WEAPON_BULLET,
         TU_WEAPON_BULLET_CAPACITY,
         TU_WEAPON_PELLET,
@@ -966,18 +974,6 @@ NamedScript void TurretAI(int TID)
     
     if (ClassifyActor(0) == ACTOR_WORLD)
         return;
-    
-    if (GetUserVariable(0, "user_selfdestruction") || GetUserVariable(0, "user_doing_sensor_stuff"))
-    {
-        SetActorVelocity(0, GetActorVelX(0) * 0.90625, GetActorVelY(0) * 0.90625, GetActorVelZ(0) * 0.90625, false, false);
-        SetActorVelocity(0, 0, 0, 0.125 * Sin((fixed)Timer() / 70.0), true, false);
-        
-        if (AbsFixed(GetActorVelX(0)) < 0.01 && AbsFixed(GetActorVelY(0)) < 0.01 && AbsFixed(GetActorVelZ(0)) < 0.01)
-            SetActorVelocity(0, 0, 0, 0, false, false); // Dead stop if we're going too slow
-        
-        Delay(1);
-        goto Start;
-    }
     
     // Just in case it was changed
     TurretSpeed = GetUserCVarFixed(PlayerID, "drpg_turret_movespeed");
@@ -1330,7 +1326,7 @@ NamedScript void TurretAI(int TID)
     
     /* Aim debugging assist
     if (GetCVar("drpg_debug"))
-      SpawnForced("DRPGTurretParticleAssistHealth",
+      SpawnForced("DRPGTurretTeleportParticle",
                   GetActorX(0) + (64.0 * Cos(GetActorAngle(0)) * Cos(-GetActorPitch(0))),
                   GetActorY(0) + (64.0 * Sin(GetActorAngle(0)) * Cos(-GetActorPitch(0))),
                   GetActorZ(0) + (64.0 * Sin(-GetActorPitch(0))), 0, 0); */
@@ -1498,7 +1494,7 @@ NamedScript bool TurretWantsToSwitchToPlayerTarget()
 
 void BuildTurretData()
 {
-	TurretUpgradeData[TU_BUILD].CommandInfo = StrParam("Issuing this command will enable or disable the turret.\nPress \Cd%jS\C- + \Cd%jS\C- to quickly deploy or recall the turret.", "+speed", "+user2");
+    TurretUpgradeData[TU_BUILD].CommandInfo = StrParam("Issuing this command will enable or disable the turret\n\Ck(\Cd%jS\C- + \Cd%jS\Ck for quick use)", "+speed", "+user2");
     TurretUpgradeData[TU_COMMAND_DRAW_FIRE].CommandInfo = StrParam("When issued, use \Cd%jS\C- + \Cd%jS\Ck to force a target switch", "+speed", "+attack");
 }
 

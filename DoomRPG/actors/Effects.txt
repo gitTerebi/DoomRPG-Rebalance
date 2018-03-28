@@ -1117,18 +1117,9 @@ actor DRPGTurretTeleport
     }
 }
 
-actor DRPGTurretTeleportParticle
+actor DRPGTurretTeleportParticle : DRPGTransportEffectParticle
 {
-    +NOTIMEFREEZE
-    +NOINTERACTION
-    +NOTONAUTOMAP
-    
-    YScale 0.125
-    
     Alpha 0.25
-    RenderStyle Add
-    
-    Translation "0 : 255 = %[0.0, 0.0, 0.0] : [0.0, 0.25, 0.0]"
     
     States
     {

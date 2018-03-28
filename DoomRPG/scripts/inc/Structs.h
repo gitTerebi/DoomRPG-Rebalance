@@ -75,7 +75,7 @@ struct CharSaveInfo_S
 
     // Stats
     int Stats[STAT_MAX];
-	int StatsNat[STAT_MAX];
+    int StatsNat[STAT_MAX];
 
     // Skills
     int Skills[MAX_CATEGORIES][MAX_SKILLS];
@@ -427,12 +427,6 @@ struct TurretUpgrade_S
     str CommandInfo;
 
     struct TurretUpgrade_S *Prereq;
-};
-
-struct TurretSensorItem_S
-{
-    int TID;
-    int Category;
 };
 
 // Map

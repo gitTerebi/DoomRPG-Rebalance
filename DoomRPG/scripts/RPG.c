@@ -160,6 +160,7 @@ NamedScript Type_ENTER void Init()
         GiveInventory("DRPGCredits", GetActivatorCVar("drpg_start_credits"));
         Player.PrevCredits = CheckInventory("DRPGCredits");
         GiveInventory("DRPGModule", GetActivatorCVar("drpg_start_modules"));
+        GiveInventory("DRPGTurretPart", GetActivatorCVar("drpg_start_turretparts"));
 
         // Level/Rank
         if (GetCVar("drpg_start_level") > 0)
@@ -185,7 +186,7 @@ NamedScript Type_ENTER void Init()
         Player.Capacity = GetActivatorCVar("drpg_start_capacity");
         Player.Luck = GetActivatorCVar("drpg_start_luck");
 
-		// Total Stat Values
+        // Total Stat Values
         Player.StrengthTotal = Player.Strength;
         Player.DefenseTotal = Player.Defense;
         Player.VitalityTotal = Player.Vitality;
@@ -195,7 +196,7 @@ NamedScript Type_ENTER void Init()
         Player.CapacityTotal = Player.Capacity;
         Player.LuckTotal = Player.Luck;
 
-		// Natural Bonuses
+        // Natural Bonuses
         Player.StrengthNat = 0;
         Player.DefenseNat = 0;
         Player.VitalityNat = 0;
@@ -571,8 +572,10 @@ NamedScript void PlayerDamage()
             {
                 Player.ActualHealth = Player.HealthMax;
                 ActivatorSound("health/resurrect", 127);
-				if (!CurrentLevel->UACBase)
-					GiveInventory("DRPGLifeTeleport", 1);
+                if (!CurrentLevel->UACBase) {
+                    SetInventory("ArtiTeleport", 1);
+                    UseInventory("ArtiTeleport");
+                }
                 TakeInventory("DRPGLife", 1);
 
                 SetHudSize(320, 200, false);
@@ -1924,11 +1927,11 @@ NamedScript void Loadout_GiveVials()
     int Vials = 0;
     int MaxVials = GetActivatorCVar("drpg_start_stim_vials");
     if (MaxVials > 3000) MaxVials = 3000;
-	int Capacity = Player.Capacity * 10;
-	int Types = 8;
-	if (GetActivatorCVar("drpg_start_stim_boosters")) Types += 2;
-	if (GetActivatorCVar("drpg_start_stim_powerups")) Types += 9;
-	if (MaxVials > Types * Capacity) MaxVials = Types * Capacity;
+    int Capacity = Player.Capacity * 10;
+    int Types = 8;
+    if (GetActivatorCVar("drpg_start_stim_boosters")) Types += 2;
+    if (GetActivatorCVar("drpg_start_stim_powerups")) Types += 9;
+    if (MaxVials > Types * Capacity) MaxVials = Types * Capacity;
     int Type;
 
     while (Vials < MaxVials)
