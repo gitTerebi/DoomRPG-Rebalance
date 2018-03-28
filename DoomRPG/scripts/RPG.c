@@ -17,6 +17,7 @@
 #include "Skills.h"
 #include "Stats.h"
 #include "Stims.h"
+#include "Turret.h"
 #include "Utils.h"
 
 // Version
@@ -110,6 +111,9 @@ NamedScript Type_OPEN void GlobalInit()
 
     // Initial build of SkillData
     BuildSkillData();
+
+    // Initial build of TurretUpgradeData
+    BuildTurretData();
 
     // Initialize the Item handling script
     ItemHandler();
@@ -707,6 +711,7 @@ NamedScript void GiveTip()
         // Currencies
         { "\CfCredits",                         "Credits are the universal currency used by the UAC and are used for purchasing goods in the shop.", },
         { "\CdModules",                         "Modules are used to upgrade your stats and skills. They are typically given by level ups, missions and completing level events as well as occasionally being dropped by monsters and found in the world.", },
+        { "\CcTurret Parts",                    "Turret parts are used to build and upgrade your turret. They can be found by disassembling broken-down turrets you find in the world.", },
 
         // Stats
         { "\CgStrength",                        "Your Strength stat determines the extra damage you deal with all types of attacks.", },
@@ -747,6 +752,12 @@ NamedScript void GiveTip()
         { "\CcStim Booster Vials",              "Booster vials are special vials which have unique stat-related effects. Purifier vials increase the duration that stat vials will last. Potency vials increase all stats at once.", },
         { "\CcStim Powerup Vials",              "Powerup vials give various special powers for a limited duration. Unlike the Stat stims, they are unaffected by Purifier vials, and their time is affected solely by the amount of vials put into the Stim.", },
         { "\CdToxicity",                        "Toxicity is a measure of the radiation and toxins in your body. Toxicity is increased by taking radiation or toxin related damage, such as standing on damage floors. The higher your toxicity levels get, the more penalties you will suffer. If your toxicity levels reach 100%, you will die. Toxicity will naturally dissipate over time, the speed of which is determined by your Regeneration stat.", },
+
+        // Turrets
+        { "\CdTurrets",                         "Turrets are portable sentry drones which can be built and equipped with multiple offensive and defensive upgrades. Turrets must initially be built from turret parts, at which point the turret may be used and upgraded further as more parts become available.", },
+        { "\CdDestroyed Turrets",               "In the world, you will find destroyed turrets. These turrets can be scavenged for spare turret parts. Some turrets will be in better condition than others, allowing for more parts to be scavenged.", },
+        { "\CdTurret Maintenance",              StrParam("Your turret will need routine maintenance performed on it in order to keep it in working condition. There are three components to maintenance: charging, repairing and refitting. Charging will charge the turret's internal battery, allowing it to stay active on the field. Repairing will patch up the turret, restoring it's health. Refitting occurs when upgrades are performed on the turret, and must be allowed to finish before the turret can be used again. In order for maintenance to begin and to continue, a steady supply of Credits will be deducted from your account. To send the turret in for maintenance, in either the turret menu or with the turret command wheel open, press \Cd%jS\C-.", "+speed"), },
+        { "\CdTurret Deployment",               StrParam("To quickly deploy or deactivate your turret, use \Cd%jS\C- + \Cd%jS\C-.", "+speed", "+user2"), },
 
         // Monsters
         { "\CgMonster Stats",                   "Like you, monsters also have a level and stats which will affect their abilities in various ways.", },

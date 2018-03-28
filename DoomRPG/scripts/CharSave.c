@@ -43,6 +43,8 @@
         - Each augmentation's level is stored in 1 byte
     Stims
         - Each stim vial type is stored in 4 bytes
+    Turret
+        - Each turret upgrade is stored in 1 byte
     Misc
         - Credits
           - Stored in 4 bytes
@@ -555,6 +557,10 @@ NamedScript MenuEntry void LoadCharacter()
     for (int i = 0; i < STIM_MAX; i++)
         Player.Stim.Vials[i] = Info.Stims[i];
     
+    // Turret
+    for (int i = 0; i < TU_MAX; i++)
+        Player.Turret.Upgrade[i] = Info.TurretUpgrades[i];
+    
     Delay(1);
     
     // Locker
@@ -752,7 +758,9 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
     // Stims
     for (int i = 0; i < STIM_MAX; i++)
         Info->Stims[i] = Player.Stim.Vials[i];
-
+    for (int i = 0; i < TU_MAX; i++)
+        Info->TurretUpgrades[i] = Player.Turret.Upgrade[i];
+    
     // Misc
     Info->Credits = CheckInventory("DRPGCredits");
     Info->Modules = CheckInventory("DRPGModule");
@@ -873,6 +881,13 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     {
         Info->Stims[i] = HexToInteger(String + StringPos, 8);
         StringPos += 8;
+    }
+    
+    // Turret
+    for (int i = 0; i < TU_MAX; i++)
+    {
+        Info->TurretUpgrades[i] = HexToInteger(String + StringPos, 1);
+        StringPos += 1;
     }
     
     // Misc
@@ -1040,6 +1055,13 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
         SaveString[pos + 1] = ToHexChar(Info->Stims[i] >> 24);
         SaveString[pos + 0] = ToHexChar(Info->Stims[i] >> 28);
         pos += 8;
+    }
+    
+    // Turret
+    for (int i = 0; i < TU_MAX; i++)
+    {
+        SaveString[pos + 0] = ToHexChar(Info->TurretUpgrades[i]);
+        pos += 1;
     }
     
     // Misc

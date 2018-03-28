@@ -99,6 +99,14 @@ server  int     drpg_shopspecial_discount = 25;
 user    int     drpg_pickup_behavior = 0;
 user    bool    drpg_autosell_lockerfallback = false;
 
+// Turret
+user    int     drpg_turret_aggression = 0;
+user    float   drpg_turret_movespeed = 1.0;
+user    float   drpg_turret_playerdist = 144.0;
+user    float   drpg_turret_enemydist = 176.0;
+user    int     drpg_turret_pursuittime = 6;
+user    int     drpg_turret_telewaittime = 8;
+
 // Menus
 server 	bool 	drpg_menudim = true;
 user	bool	drpg_menuhelp = true;
@@ -144,6 +152,8 @@ user    int     drpg_coopview_y = 0;
 user    bool    drpg_multiplayer_hud = false;
 user    int     drpg_multiplayer_x = 80;
 user    int     drpg_multiplayer_y = 8;
+user    int     drpg_turret_x = 22;
+user    int     drpg_turret_y = 334;
 user    int     drpg_skill_wheelspeed = 32;
 user    bool    drpg_stats_alwaysshow = false;
 user    bool    drpg_aug_alwaysshow = false;
@@ -193,6 +203,7 @@ server  bool    drpg_addstartmap = false;
 // Funds
 user    int     drpg_start_credits = 100;
 user    int     drpg_start_modules = 250;
+user    int     drpg_start_turretparts = 0;
 
 // Level/Rank
 user    int     drpg_start_level = 0;

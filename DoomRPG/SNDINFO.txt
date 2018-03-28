@@ -134,6 +134,38 @@ $random shield/lightning
 $alias shield/explosion weapons/rocklx
 $limit shield/explosion 3
 
+// Turret
+turret/spawn            TSPAWN
+turret/despawn          TDSPAWN
+turret/hum              THUM
+turret/beep             TBEEP
+turret/targeting        TTARGET
+turret/cooldown         TCOOLDN
+turret/upgrade          TUPGRAD
+turret/fire             TSHOT
+turret/loadbullet       TLDBULL
+turret/loadpellet       TLDPELL
+turret/loadrocket       TLDROCK
+turret/loadplasma       TLDPLAS
+turret/loadrail         TLDRAIL
+turret/reloadbullet     TRLDBULL
+turret/reloadpellet     TRLDPELL
+turret/reloadrocket     TRLDROCK
+turret/reloadplasma     TRLDPLAS
+turret/reloadrail       TRLDRAIL
+turret/maintenance      TMAINT
+turret/maintenancedone  TMAINTDN
+turret/chargedone       TCHRDONE
+turret/repairdone       TRPRDONE
+turret/refitdone        TRFTDONE
+turret/spark1           TSPARK1
+turret/spark2           TSPARK2
+$random turret/spark
+{
+    turret/spark1
+    turret/spark2
+}
+
 // Hums
 hums/stat				HUMSTAT
 hums/skill				HUMSKILL
@@ -282,6 +314,8 @@ items/cell				CELLGET
 items/stim				STIMUSE
 items/battery           BATTGET
 items/loot              LOOTGET
+items/turret            TURRGET
+items/turretcrate       TURCGET
 items/module            GOTMODU
 
 // Keys

@@ -19,11 +19,15 @@ void DrawAugsMenu();
 void DrawSkillMenu();
 void DrawShieldMenu();
 void DrawStimsMenu();
+void DrawTurretMenu();
+void DrawTurretInfo(fixed, fixed, int);
+void DrawTurretTimers(fixed, fixed);
 
 void MenuInput();
 
 void IncreaseStat(int);
 void IncreaseSkill(int, int);
+void UpgradeTurret(int);
 void PrintStatError();
 void MenuHelp();
 

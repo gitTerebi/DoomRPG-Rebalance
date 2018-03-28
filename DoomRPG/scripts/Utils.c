@@ -2592,6 +2592,7 @@ Start:
     Player.Input.Modifier  = Buttons & BT_SPEED;
     
     Player.Input.SkillWheel  = Buttons & BT_USER1;
+    Player.Input.TurretWheel = Buttons & BT_USER2;
     Player.Input.DRPGMenu    = Buttons & BT_USER3;
     
     Player.Input.Forward = YAxis > 0;
@@ -2607,6 +2608,7 @@ Start:
     Player.OldInput.Modifier  = Player.Input.Modifier;
     
     Player.OldInput.SkillWheel  = Player.Input.SkillWheel;
+    Player.OldInput.TurretWheel = Player.Input.TurretWheel;
     Player.OldInput.DRPGMenu    = Player.Input.DRPGMenu;
     
     Player.OldInput.Forward = Player.Input.Forward;
@@ -2626,6 +2628,7 @@ OptionalArgs(1) bool CheckInput(int Key, int State)
         &Player.Input.Modifier,
         
         &Player.Input.SkillWheel,
+        &Player.Input.TurretWheel,
         &Player.Input.DRPGMenu,
         
         &Player.Input.Forward,
@@ -2641,6 +2644,7 @@ OptionalArgs(1) bool CheckInput(int Key, int State)
         &Player.OldInput.Modifier,
         
         &Player.OldInput.SkillWheel,
+        &Player.OldInput.TurretWheel,
         &Player.OldInput.DRPGMenu,
         
         &Player.OldInput.Forward,
@@ -2712,6 +2716,10 @@ void ClearInfo(CharSaveInfo *Info)
     // Stims
     for (i=0; i < STIM_MAX; i++)
         Info->Stims[i] = 0;
+    
+    // Turret Upgrades
+    for (i=0; i < TU_MAX; i++)
+        Info->TurretUpgrades[i] = 0;
     
     // Misc
     Info->Credits = 0;

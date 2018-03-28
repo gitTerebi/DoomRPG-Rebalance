@@ -14,6 +14,7 @@ NamedScript Type_ENTER void PowerupHUD();
 NamedScript Type_ENTER void EventHUD();
 NamedScript Type_ENTER void CoopViewHUD();
 NamedScript Type_ENTER void MultiplayerHUD();
+NamedScript Type_ENTER void TurretHUD();
 NamedScript Type_ENTER void StatHUD();
 NamedScript void DamageHUD(int, bool);
 

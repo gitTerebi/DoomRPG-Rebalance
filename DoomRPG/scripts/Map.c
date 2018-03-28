@@ -1830,6 +1830,19 @@ NamedScript void EnvironmentalHazardDamage()
         for (int i = 0; i < LevelSectorCount; i++)
             SectorDamage(i, Damage, "Radiation", "PowerIronFeet", DAMAGE_PLAYERS | DAMAGE_IN_AIR | DAMAGE_SUBCLASSES_PROTECT);
         
+        // Damage Turrets
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            // Player is not in-game
+            if (!PlayerInGame(i)) continue;
+            
+            // Don't have a turret or it isn't out
+            if (!Players(i).Turret.Upgrade[TU_BUILD] || !Players(i).Turret.Active) continue;
+            
+            Thing_Damage2(Players(i).Turret.TID, Damage, "Radiation");
+            SetUserVariable(Players(i).Turret.TID, "user_damage_type", DT_RADIATION);
+        }
+        
         Delay(32);
     }
 }

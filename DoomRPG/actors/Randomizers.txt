@@ -61,6 +61,7 @@ actor DRPGGenericDropper : RandomSpawner
     DropItem "DRPGStimDropper"                  255 1
     DropItem "DRPGVialDropper"                  255 1
     DropItem "DRPGChipDropper"                  255 5
+    DropItem "DRPGTurretDropper"                255 3
 }
 
 actor DRPGGenericBossDropper : RandomSpawner
@@ -79,6 +80,7 @@ actor DRPGGenericBossDropper : RandomSpawner
     DropItem "DRPGStimDropper"
     DropItem "DRPGVialDropper"
     DropItem "DRPGChipDropper"
+    DropItem "DRPGTurretDropper"
 }
 
 actor DRPGMoneyDropper : RandomSpawner 20000
@@ -357,6 +359,12 @@ actor DRPGVialDropperRare : RandomSpawner 20014
     DropItem "DRPGVialMagnetic"
 }
 
+actor DRPGTurretDropper : RandomSpawner 20015
+{
+    DropItem "DRPGDestroyedTurret"  255 90
+    DropItem "DRPGTurretPartCrate"  255 10
+}
+
 actor DRPGChipDropper : RandomSpawner 20016
 {
     DropItem "DRPGChipGold"         255 32
@@ -558,6 +566,7 @@ actor DRPGShopPowerupRandomizer : RandomSpawner 11005
 
 actor DRPGShopMiscRandomizer : RandomSpawner 11006
 {
+    DropItem "DRPGTurretPart"
 }
 
 actor DRPGShopShieldRandomizer : DRPGShieldDropper 11007 {}

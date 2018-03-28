@@ -7,7 +7,7 @@ OptionValue "ShopSpecialCategories"
     3, "\cdArmor"
     4, "\cqPowerups"
     5, "\cvShield Parts"
-    6, "\ckStims/Augs"
+    6, "\ckStims/Augs/Turret"
     8, "\ctModpacks"
     9, "\ccBoots"
 }
