@@ -75,7 +75,7 @@ struct CharSaveInfo_S
 
     // Stats
     int Stats[STAT_MAX];
-	int StatsNat[STAT_MAX];
+    int StatsNat[STAT_MAX];
 
     // Skills
     int Skills[MAX_CATEGORIES][MAX_SKILLS];
@@ -88,6 +88,9 @@ struct CharSaveInfo_S
 
     // Stims
     int Stims[STIM_MAX];
+
+    // Turret Upgrades
+    int TurretUpgrades[TU_MAX];
 
     // Misc
     int Credits;
@@ -411,6 +414,21 @@ struct MinigameData_S
     bool Ingame;
 };
 
+// Turret
+
+struct TurretUpgrade_S
+{
+    str Name;
+    int MaxLevel;
+    int Cost;
+
+    str Description;
+    str UpgradeInfo;
+    str CommandInfo;
+
+    struct TurretUpgrade_S *Prereq;
+};
+
 // Map
 
 struct LevelInfo_S
@@ -516,6 +534,7 @@ struct PlayerData_S
         bool Modifier;
 
         bool SkillWheel;
+        bool TurretWheel;
         bool DRPGMenu;
 
         bool Forward;
@@ -548,8 +567,8 @@ struct PlayerData_S
     int PrevHealth;     // Player's Health from last tic
     int PrevCredits;    // Player's held Credits from last tic
 
-	// Natural Stat Increases
-	int StrengthNat;
+    // Natural Stat Increases
+    int StrengthNat;
     int DefenseNat;
     int VitalityNat;
     int EnergyNat;
@@ -558,8 +577,8 @@ struct PlayerData_S
     int CapacityNat;
     int LuckNat;
 
-	// Total Stat Values
-	int StrengthTotal;
+    // Total Stat Values
+    int StrengthTotal;
     int DefenseTotal;
     int VitalityTotal;
     int EnergyTotal;
@@ -672,6 +691,7 @@ struct PlayerData_S
     bool NewShieldParts[3][MAX_PARTS];
     bool NewShieldAccessoryParts[MAX_ACCESSORIES];
     int StimSelected;
+    int TurretPage;
     int ShopIndex;
     int ShopPage;
 
@@ -832,6 +852,64 @@ struct PlayerData_S
         int TimerMax;
         int Toxicity;
     } Stim;
+
+
+    struct
+    {
+        // Flags
+        bool Init;
+        bool Active;
+        bool Destroyed;
+        bool Maintenance;
+        bool PaidForRepair;
+
+        // TID
+        int TID;
+
+        // Command Wheel
+        bool WheelOpen;
+        int WheelCommand;
+
+        // Upgrades
+        int Upgrade[MAX_UPGRADES];
+
+        // Health
+        int Health;
+        int HealthMax;
+
+        // Weapons/Ammo
+        int Weapon;
+        int BulletAmmo;
+        int BulletAmmoMax;
+        int ShellAmmo;
+        int ShellAmmoMax;
+        int RocketAmmo;
+        int RocketAmmoMax;
+        int PlasmaAmmo;
+        int PlasmaAmmoMax;
+        int RailAmmo;
+        int RailAmmoMax;
+        bool Autoload;
+
+        // Command
+        int Command;
+
+        // Battery
+        int Battery;
+        int BatteryMax;
+
+        // Timers
+        int HitTimer;
+        //int TeleportTimer;
+        int ChargeTimer;
+        int RepairTimer;
+        int RefitTimer;
+
+        // Offsets
+        fixed AngleOffset;
+        fixed DistanceOffset;
+        fixed HeightOffset;
+    } Turret;
     
     struct MissionInfo_S Mission;
 };

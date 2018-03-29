@@ -1009,6 +1009,103 @@ NamedScript Type_ENTER void MultiplayerHUD()
     goto Start;
 }
 
+NamedScript Type_ENTER void TurretHUD()
+{
+    str const AmmoColors[5] =
+    {
+        "Brick",
+        "Orange",
+        "Gray",
+        "LightBlue",
+        "Green"
+    };
+
+    InterpData Health;
+    Health.TimerMaxCap = 2;
+
+    fixed X, Y;
+    str AmmoIcon;
+    int Ammo[TW_MAX];
+    
+    Start: NOP;
+
+    if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
+    {
+        Delay(1);
+        goto Start;
+    }
+
+    while (Player.Turret.Active || Player.Turret.Maintenance || GetActivatorCVar("drpg_hud_preview"))
+    {
+        X = GetActivatorCVar("drpg_turret_x");
+        Y = GetActivatorCVar("drpg_turret_y");
+
+        Ammo[TW_BULLET] = Player.Turret.BulletAmmo;
+        Ammo[TW_PELLET] = Player.Turret.ShellAmmo;
+        Ammo[TW_ROCKET] = Player.Turret.RocketAmmo;
+        Ammo[TW_PLASMA] = Player.Turret.PlasmaAmmo;
+        Ammo[TW_RAILGUN] = Player.Turret.RailAmmo;
+
+        AmmoIcon = "";
+
+        SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
+
+        Health.Value = Player.Turret.Health;
+
+        // Interpolation
+        Interpolate(&Health);
+
+        // Determine Ammo Icon
+        switch (Player.Turret.Weapon)
+        {
+            case TW_BULLET:                     AmmoIcon = "CLIPA0";    break;
+            case TW_PELLET:                     AmmoIcon = "SHELA0";    break;
+            case TW_ROCKET:                     AmmoIcon = "ROCKA0";    break;
+            case TW_PLASMA: case TW_RAILGUN:    AmmoIcon = "CELLA0";    break;
+        }
+
+        if (Player.Turret.Maintenance)
+        {
+            // Icon
+            PrintSprite("TMaint", 0, X + -16.1, Y - 4.0 + (int)(Sin((fixed)Timer() / 128.0) * 8.0), 0.05);
+
+            // Timers
+            SetFont("BIGFONT");
+            HudMessage("%S", FormatTime(Player.Turret.ChargeTimer * 35));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 24.1, Y - 16.0, 0.05);
+            HudMessage("%S", FormatTime(Player.Turret.RepairTimer * 35));
+            EndHudMessage(HUDMSG_PLAIN, 0, (Player.Turret.PaidForRepair ? "Brick" : "Red"), X + 24.1, Y, 0.05);
+            HudMessage("%S", FormatTime(Player.Turret.RefitTimer * 35));
+            EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", X + 24.1, Y + 16.0, 0.05);
+        }
+        else if (!Player.Turret.Maintenance || GetActivatorCVar("drpg_hud_preview"))
+        {
+            // Icons
+            PrintSprite("PTURA3A7", 0, X + 0.1, Y + (int)(Sin((fixed)Timer() / 64.0) * 8.0), 0.05);
+            if (Player.Turret.Weapon > 0)
+                PrintSprite(AmmoIcon, 0, X + 0.1, Y + 24.0, 0.05);
+
+            // Health, Battery, Ammo
+            SetFont("BIGFONT");
+            HudMessage("%ld", Health.DisplayValue);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Red", X + 24.1, Y - 16.0, 0.05);
+            HudMessage("%S", FormatTime(Player.Turret.Battery * 35));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 24.1, Y, 0.05);
+            if (Player.Turret.Weapon != TW_NONE)
+            {
+                HudMessage("%d", Ammo[Player.Turret.Weapon]);
+                EndHudMessage(HUDMSG_PLAIN, 0, AmmoColors[Player.Turret.Weapon - 1], X + 24.1, Y + 16.0, 0.05);
+            }
+        }
+
+        Health.OldValue = Player.Turret.Health;
+        Delay(1);
+    }
+
+    Delay(1);
+    goto Start;
+}
+
 NamedScript Type_ENTER void StatHUD()
 {
     int *Stats[STAT_MAX] =

@@ -259,12 +259,6 @@ ACTOR DRPGLife : Inventory
     Inventory.PickupSound "health/1up"
 }
 
-ACTOR DRPGLifeTeleport : ArtiTeleport
-{
-    +INVENTORY.AUTOACTIVATE
-    +INVENTORY.ALWAYSPICKUP
-}
-
 ACTOR DRPG1Up : CustomInventory 20036
 {
     -INVBAR

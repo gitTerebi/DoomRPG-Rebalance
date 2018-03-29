@@ -1455,10 +1455,6 @@ actor DRPGShieldTimePause : PowerupGiver
     Powerup.Duration -0x7FFFFFFF
 }
 
-/*actor PowerShieldInfiniteAmmo : PowerInfiniteAmmo
-{
-    Powerup.Duration -0x7FFFFFFF
-}*/
 actor PowerShieldInfiniteAmmo : PowerupGiver
 {
     +Inventory.AutoActivate

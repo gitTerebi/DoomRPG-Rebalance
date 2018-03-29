@@ -49,7 +49,15 @@ OptionValue "ShopSpecialCategories"
     3, "\cdArmor"
     4, "\cqPowerups"
     5, "\cvShield Parts"
-    6, "\ckStims/Augs"
+    6, "\ckStims/Augs/Turret"
+}
+
+
+OptionValue "TurretAggression"
+{
+    0, "Stay close"
+    1, "Pursue enemies"
+    2, "Pursue if required"
 }
 
 OptionValue "RunPickupBehavior"
@@ -342,6 +350,23 @@ OptionMenu "DoomRPGShop"
     Option "Auto-Store if Auto-Sell Unavailable", "drpg_autosell_lockerfallback", "OnOff"
 }
 
+OptionMenu "DoomRPGTurret"
+{
+	Title "Turret"
+    
+    Option "Aggression Style", "drpg_turret_aggression", "TurretAggression"
+    Slider "Movement Speed", "drpg_turret_movespeed", 0.1, 4.0, 0.1
+    StaticText ""
+    
+    Slider "Player Safe Dist.", "drpg_turret_playerdist", 64.0, 384.0, 8.0
+    Slider "Enemy Safe Dist.", "drpg_turret_enemydist", 64.0, 384.0, 8.0
+    //delet Slider "Sensor Beam Dist.", "drpg_turret_sensordist", 64, 32768.0, 64.0
+    StaticText ""
+    
+    Slider "Pursuit Time (Sec.)", "drpg_turret_pursuittime", 1.0, 20.0, 1.0
+    Slider "Teleport Wait Time (Sec.)", "drpg_turret_telewaittime", 2.0, 20.0, 1.0
+} 
+
 OptionMenu "DoomRPGMenus"
 {
 	Title "Menus"
@@ -432,6 +457,10 @@ OptionMenu "DoomRPGHUD"
     Slider "Multiplayer Y Position", "drpg_multiplayer_y", -240, 1080, 1
 	StaticText ""
     
+    Slider "Turret Info X Position", "drpg_turret_x", -320, 1920, 1
+    Slider "Turret Info Y Position", "drpg_turret_y", -240, 1080, 1
+	StaticText ""
+    
     Option "Skill Wheel Animation Speed", "drpg_skill_wheelspeed", "WheelSpeed"
     Option "Always Show Stats", "drpg_stats_alwaysshow", "OnOff"
     Option "Always Show Aug Battery", "drpg_aug_alwaysshow", "OnOff"
@@ -488,6 +517,7 @@ OptionMenu "DoomRPGStart"
 	StaticText "Funds", 1
     Slider "Credits", "drpg_start_credits", 0, 10000, 100
     Slider "Modules", "drpg_start_modules", 0, 10000, 25
+    Slider "Turret Parts", "drpg_start_turretparts", 0, 1000, 1
 	StaticText ""
     
     StaticText "Level/Rank", 1
@@ -575,6 +605,7 @@ OptionMenu "DoomRPG"
     SubMenu "Health Bars",                  "DoomRPGHealthBars"
     SubMenu "Multiplayer",                  "DoomRPGMultiplayer"
     SubMenu "Shop",                         "DoomRPGShop"
+    SubMenu "Turret",                       "DoomRPGTurret"
     SubMenu "Menus",                        "DoomRPGMenus"
     SubMenu "HUD",                          "DoomRPGHUD"
     SubMenu "Misc",                         "DoomRPGMisc"

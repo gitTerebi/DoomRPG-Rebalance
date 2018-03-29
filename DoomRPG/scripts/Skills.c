@@ -668,7 +668,7 @@ NamedScript Type_ENTER void SkillWheel()
     
     // Open the wheel
 
-    if (!((Player.InMenu && Player.Menu != 3) || Player.InShop || Player.OutpostMenu > 0))
+    if (!((Player.InMenu && Player.Menu != 3) || Player.InShop || Player.OutpostMenu > 0 || Player.Turret.WheelOpen))
     {
         if (CheckInput(KEYNUM_SKILLS, KEY_PRESSED))
         {

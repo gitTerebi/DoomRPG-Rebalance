@@ -2245,6 +2245,11 @@ NamedScript int WhoKilledMe()
     if (PlayerNumber() > -1)
         return PlayerNumber();
     
+    // Killed by a player's turret
+    for (int i = 0; i < MAX_PLAYERS; i++)
+        if (ActivatorTID() == Players(i).Turret.TID)
+            return i;
+    
     // Killed by a player's summons
     if (ClassifyActor(0) & ACTOR_MONSTER && GetMonsterID(0) && GetActorProperty(0, APROP_MasterTID))
     {

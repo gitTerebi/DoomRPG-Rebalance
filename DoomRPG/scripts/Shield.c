@@ -805,6 +805,10 @@ NamedScript void FlanExplosion() // This gets called on full charge too
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
         GiveActorInventory(Players(i).TID, "DRPGShieldRadialExplosionResist", 1);
+        
+        // Turret needs protection too
+        if (Players(i).Turret.Active)
+            GiveActorInventory(Players(i).Turret.TID, "DRPGShieldRadialExplosionResist", 1);
     }
     
     GiveInventory("DRPGShieldRadialExplosionMaker", 1);

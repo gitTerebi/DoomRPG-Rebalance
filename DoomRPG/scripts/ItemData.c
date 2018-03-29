@@ -297,8 +297,8 @@ NamedScript void BuildItemData()
         ItemIndex++;
     };
     
-    // Stims/Augmentations
-    ITEMDATA_CATEGORY(6, "\CkStims/Augs", CF_NONE);
+    // Stims/Augmentations/Turret Parts
+    ITEMDATA_CATEGORY(6, "\CkStims/Augs/Turret", CF_NONE);
         ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                         1000, 0, 1, "STIMB0", 16, 29);
         ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                        2500, 2, 2, "STIMB0", 16, 29);
         ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                         5000, 4, 4, "STIMB0", 16, 29);
@@ -333,6 +333,8 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                      1000, 4, 1, "BATTA0",  5, 13);
         ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      2500, 8, 2, "BATTB0", 14, 21);
         
+        ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                        1000, 1, 1, "TPRTA0", 29, 21);
+        ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                50000, 4, 4, "TCRTA0", 29, 26);
     ITEMDATA_CATEGORY_END;
     
     // Generic Loot
@@ -1078,7 +1080,7 @@ ItemInfoPtr GetRewardItem(int Difficulty)
                 return Reward;
             }
         }
-        else if (Random(0, 100) < 20) // Stims/Augs
+        else if (Random(0, 100) < 20) // Stims/Augs/Turret
         {
             Cap = 0;
             
@@ -1154,6 +1156,7 @@ NamedScript DECORATE void SpawnLuckItem()
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 30.57) ActorToSpawn = "DRPGAmmoDropper";
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 23.35) ActorToSpawn = "DRPGChipDropper";
     if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 17.12) ActorToSpawn = "DRPGBatteryDropper";
+    if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 12.25) ActorToSpawn = "DRPGTurretDropper";
     if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=  6.13) ActorToSpawn = "DRPGCrate";
     
     if (Luck >= LUCK_HEALTHDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXHEALTHCHANCE)  ActorToSpawn = "DRPGHealthDropper";

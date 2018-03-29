@@ -31,6 +31,9 @@ alias drpg_throwawaystim "pukename ThrowAwayStim"
 // Skill Wheel
 addmenukey "Skill Wheel" "+user1"
 
+// Turret Command Wheel
+addmenukey "Turret Command Wheel" "+user2"
+
 // Use Skill
 addmenukey "Use Skill" drpg_useskill
 alias drpg_useskill "pukename UseSkill"
