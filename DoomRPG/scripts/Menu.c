@@ -137,12 +137,10 @@ void MenuLoop()
     // Set the HUD Size
     SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
     
-    // Draw Border & Background
-    // These are pushed back by -10 so the border doesn't overlap anything
+    // Draw Border
+    // These are pushed back a bit so the border doesn't overlap anything
     if (GetActivatorCVar("drpg_menu_background_border"))
-    	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
-    if (GetActivatorCVar("drpg_menu_background_image"))
-    	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+    	DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
     
     // Draw current menu
     if (Player.Menu == MENUPAGE_MAIN)   DrawMainMenu();
@@ -218,10 +216,10 @@ void DrawMainMenu()
     EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 10.0, 0.05);
     HudMessage("- LEVEL STATS -");
     EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 100.0, 0.05);
-    HudMessage("- SHIELD -");
-    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 175.0, 0.05);
     HudMessage("- AUG ITEMS -");
     EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          0.1, 175.0, 0.05);
+    HudMessage("- SHIELD -");
+    EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          180.1, 175.0, 0.05);
     HudMessage("- STIM ITEMS -");
     EndHudMessage(HUDMSG_PLAIN, 0, "Grey",          0.1, 290.0, 0.05);
     HudMessage("- STIM 'N TOXICITY -");
@@ -263,7 +261,7 @@ void DrawMainMenu()
     SetFont("BIGFONT");
     // Modules amount
     HudMessage("%d", Modules);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Green",          115.1, 110.0, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Green",          120.1, 100.0, 0.05);
     // Augs
     HudMessage("%d", AugCanisters);
     EndHudMessage(HUDMSG_PLAIN, 0, "Green",          40.1, 200.0, 0.05);
@@ -276,8 +274,11 @@ void DrawMainMenu()
     // Stim
     HudMessage("S: %d\nM: %d\nL: %d\nXL: %d", SmallStims, MediumStims, LargeStims, XLStims);
     EndHudMessage(HUDMSG_PLAIN, 0, "White",          40.1, 330.0, 0.05);
+    // Turret parts
+    HudMessage("%d", TurretParts);
+    EndHudMessage(HUDMSG_PLAIN, 0, "White",          105.1, 127.0, 0.05);
     // Modules
-    PrintSprite("UMODA0", 0, 100.1, 120.1, 0.05);
+    PrintSprite("UMODA0", 0, 105.1, 110.1, 0.05);
     // Augs
     PrintSprite("AUGCA0", 0, 16.1, 210.1, 0.05);
     PrintSprite("AUGUA0", 0, 16.1, 225.1, 0.05);
@@ -286,6 +287,8 @@ void DrawMainMenu()
     PrintSprite("AUGBATT", 0, 16.1, 265.1, 0.05);
     // Stim
     PrintSprite("STIMB0", 0, 16.1, 340.1, 0.05);
+    // Turret parts
+    PrintSprite("TPRTA0", 0, 130.1, 135.1, 0.05);
     
     // Level Stats
     if (!CurrentLevel->UACBase)
@@ -302,14 +305,11 @@ void DrawMainMenu()
     // Chips
     SetFont("BIGFONT");
     HudMessage("%d", GoldChips);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 156.0, 132.1, 0.05);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 110.0, 150.1, 0.05);
     HudMessage("%d", PlatinumChips);
-    EndHudMessage(HUDMSG_PLAIN, 0, "White", 156.0, 146.1, 0.05);
-    SetHudClipRect(140, 125, 16, 64);
-    PrintSprite("CHIPGOLD", 0, 140.1, 128.1, 0.05);
-    SetHudClipRect(156, 125, 16, 64);
-    PrintSprite("CHIPPLAT", 0, 140.1, 128.1, 0.05);
-    SetHudClipRect(0, 0, 0, 0);
+    EndHudMessage(HUDMSG_PLAIN, 0, "White", 150.0, 150.1, 0.05);
+    PrintSprite("CHIPGOLD", 0, 95.1, 140.1, 0.05);
+    PrintSprite("CHIPPLAT", 0, 135.1, 140.1, 0.05);
     
     // Shield
     DrawShieldInfo(-1, 180.1, 195.0, 0);

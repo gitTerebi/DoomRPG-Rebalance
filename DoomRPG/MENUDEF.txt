@@ -382,7 +382,6 @@ OptionMenu "DoomRPGMenus"
 	StaticText ""
 	
 	Option "Menu background border", "drpg_menu_background_border", "OnOff"
-	Option "Menu background image", "drpg_menu_background_image", "OnOff"
 }
 
 OptionMenu "DoomRPGHUD"

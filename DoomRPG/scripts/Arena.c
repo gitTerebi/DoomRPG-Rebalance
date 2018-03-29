@@ -262,12 +262,10 @@ NamedScript MapSpecial void ArenaChooseBonus()
         // Set the HUD Size
         SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
         
-        // Draw Border & Background
-        // These are pushed back by -10 so the border doesn't overlap anything
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
         if (GetActivatorCVar("drpg_menu_background_border"))
-        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
-        if (GetActivatorCVar("drpg_menu_background_image"))
-        	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+        	DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
         
         // Title
         SetFont("BIGFONT");

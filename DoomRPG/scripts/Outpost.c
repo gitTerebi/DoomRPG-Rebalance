@@ -319,12 +319,10 @@ NamedScript MapSpecial void LevelTransport()
         // Set the HUD Size
         SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
         
-        // Draw Border & Background
-        // These are pushed back by -10 so the border doesn't overlap anything
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
         if (GetActivatorCVar("drpg_menu_background_border"))
-        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
-        if (GetActivatorCVar("drpg_menu_background_image"))
-        	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+        	DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
         
         // Text
         SetFont("BIGFONT");
@@ -724,17 +722,15 @@ NamedScript MapSpecial void SkillComputer()
     {
         // Draw the background
         if (GetCVar("drpg_menudim"))
-            FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
+            FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
 
         // Set the HUD Size
         SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
         
-        // Draw Border & Background
-        // These are pushed back by -10 so the border doesn't overlap anything
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
         if (GetActivatorCVar("drpg_menu_background_border"))
-        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
-        if (GetActivatorCVar("drpg_menu_background_image"))
-        	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+        	DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
 
         // Text
         SetFont("BIGFONT");
@@ -840,17 +836,15 @@ NamedScript MapSpecial void SelectArenaWave()
         
         // Draw the background
         if (GetCVar("drpg_menudim"))
-            FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
+            FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
         
         // Set the HUD Size
         SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
         
-        // Draw Border & Background
-        // These are pushed back by -10 so the border doesn't overlap anything
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
         if (GetActivatorCVar("drpg_menu_background_border"))
-        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 470, 470); 
-        if (GetActivatorCVar("drpg_menu_background_image"))
-        	PrintSpriteAlpha("GUIBack", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+        	DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
         
         // Text
         SetFont("BIGFONT");
@@ -1276,7 +1270,7 @@ NamedScript MapSpecial void ShopSpecial()
         
         // Draw the background
         if (GetCVar("drpg_menudim"))
-            FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
+            FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
         
         // Input
         if (Buttons == BT_USE && OldButtons != BT_USE)
@@ -1366,12 +1360,10 @@ NamedScript MapSpecial void MissionBBS()
         // Set the HUD Size
         SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
         
-        // Draw Border & Background
-        // These are pushed back by -10 so the border doesn't overlap anything
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
         if (GetActivatorCVar("drpg_menu_background_border"))
-        	DrawBorder("Bor", -1, 8, -10.0, 0.0, 500, 470); 
-        if (GetActivatorCVar("drpg_menu_background_image"))
-        	PrintSpriteAlpha("GUIBackM", -1, 0.1 - 10.0, 0.1, 0.25, 0.1);
+        	DrawBorder("Bor", -1, 8, -5.0, 0.0, 500, 470); 
         
         // Title
         SetFont("BIGFONT");

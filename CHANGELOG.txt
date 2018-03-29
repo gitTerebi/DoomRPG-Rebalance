@@ -1,3 +1,5 @@
+This will no longer be updated. Please refer to Releases/Commits for future changes.
+
 BUILDs 1 - 3 are based on DoomRPG Sep 22 2016 v0.10.1. BUILD 4 brings it up to date with the GitHub version minus DRLA compat fixes for unreleased version.
 
 11/29/2017 - BUILD 1 - Compiled with GDCC v0.13.2 64-bit.

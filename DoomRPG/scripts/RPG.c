@@ -21,7 +21,7 @@
 #include "Utils.h"
 
 // Version
-const str Version = "SE BUILD 21.4 - Powered by GDCC!";
+const str Version = "SE BUILD 22 - Powered by GDCC!";
 
 // Flags
 bool Transported;
@@ -379,7 +379,7 @@ NamedScript void Loop()
     if (Player.InMenu || Player.InShop || Player.OutpostMenu > 0)
     {
         if (GetCVar("drpg_menudim") && !Player.StatusType[SE_BLIND])
-            FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
+            FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
     }
 
     // Menu-specific Help

@@ -39,12 +39,9 @@ NamedScript void ItemRoulette(bool Rare)
     
     while (!Finished)
     {
-        // Draw Border & Background
-        // These are pushed back by -10 so the border doesn't overlap anything
+        // Draw Border
         if (GetActivatorCVar("drpg_menu_background_border"))
         	DrawBorder("Bor", -1, 8, 85.0, 5.0, 470, 470);
-        if (GetActivatorCVar("drpg_menu_background_image"))
-        	PrintSpriteAlpha("GUIBack", -1, 85.1, 5.1, 0.25, 0.1);
         
         // Header.
         SetFont("BIGFONT");
@@ -70,7 +67,7 @@ NamedScript void ItemRoulette(bool Rare)
         
         // Freeze and Fade
         SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
-        FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
+        FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
         
         // Populate Wheel Items
         if (Repick)
