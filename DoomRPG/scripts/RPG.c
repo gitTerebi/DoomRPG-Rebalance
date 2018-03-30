@@ -1410,7 +1410,6 @@ NamedScript KeyBind void ToggleFocusMode()
 // Focus Mode Script
 NamedScript void FocusMode()
 {
-    int PrevEP = Player.EP;
     int RegenWindupSpeed = ((35 * 40) - ((35 * 35) * Player.RegenerationTotal / 200));
     if (RegenWindupSpeed < 35) // Enforce a 1-second wind-up at least
         RegenWindupSpeed = 35;

@@ -1330,7 +1330,6 @@ bool crc_table_computed = false;
 /* Make the table for a fast CRC. */
 NamedScript void make_crc_table()
 {
-    unsigned long c;
     int n;
 
     for (n = 0; n < 64; n++)

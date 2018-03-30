@@ -517,10 +517,9 @@ int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed
     fixed YSpeed = GetCVarFixed("drpg_monster_dropdist") + YVelAdd;
     fixed ZSpeed = 8.0 + ZVelAdd;
     int ItemTID = UniqueTID();
-    bool Success = false;
     
     // Spawn the Item
-    Success = SpawnForced(Item, X, Y, Z, ItemTID, Angle);
+    bool Success = SpawnForced(Item, X, Y, Z, ItemTID, Angle);
     
     // Spawn successful
     if (Success)
@@ -2502,7 +2501,6 @@ NamedScript Console void FullLocker(int Amount)
     for (int i = 0; i < ItemCategories; i++)
         for (int j = 0; j < ItemMax[i]; j++)
         {
-            ItemInfoPtr ItemPtr = &ItemData[i][j];
             Player.Locker[i][j] = Amount;
         }
 }

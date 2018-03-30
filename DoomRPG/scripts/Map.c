@@ -1281,7 +1281,6 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
     {
         bool DRLA = (CompatMode == COMPAT_DRLA);
         
-        int Amount;
         MonsterInfoPtr PotentialMonsters[MAX_TEMP_MONSTERS];
         int NumPotentialMonsters;
         int MonsterDataAmount;
@@ -2181,9 +2180,6 @@ NamedScript DECORATE void PowerGeneratorActivate()
 
 NamedScript void OneMonsterEvent()
 {
-    bool Extras = (CompatMode == COMPAT_EXTRAS);
-    bool DRLA = (CompatMode == COMPAT_DRLA);
-
     for (int i = 0; i < MonsterID; i++)
     {
         if (!Monsters[i].Init)

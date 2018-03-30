@@ -893,7 +893,6 @@ NamedScript KeyBind void UseSkill(int Key)
     }
     
     int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-    int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
     int EPCost = ScaleEPCost(CurrentSkill->Cost * SkillLevel->CurrentLevel);
     bool Success;
     

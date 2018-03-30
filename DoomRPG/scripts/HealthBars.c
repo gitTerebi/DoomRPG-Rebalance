@@ -388,7 +388,6 @@ void DrawBarStats(HUDBarInfo *Info)
 	int StatsX = -90.0;
 	int StatsY = 70.0;
 	int SpaceX = 30.0;
-	int SpaceY = 30.0;
 	int MonLevelX = 225.0;
 	int MonLevelY = 47.0;
 	

@@ -72,9 +72,6 @@ int const StimPowerupEnd = STIM_MAX;
 
 NamedScript KeyBind void UseStim(bool Force)
 {
-    int Size;
-    int Injector[STIM_MAX];
-    
     // If you're dead, terminate
     if (GetActorProperty(0, APROP_Health) <= 0) return;
     

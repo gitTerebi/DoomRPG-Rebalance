@@ -401,9 +401,6 @@ void CheckMission()
 
         // Clear the Mission
         ClearMission();
-
-        // Reset the completion flag
-        Complete = false;
     }
 }
 

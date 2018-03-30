@@ -352,8 +352,13 @@ void DrawMainMenu()
     }
     
     // Toxicity
-    if (Player.Toxicity > 0 || Player.Stim.Size > 0)
-        DrawToxicityBar(180.1, 335.0, false);
+    if (Player.Toxicity > 0 || Player.Stim.Size > 0) 
+    {
+    	SetFont("SMALLFONT");
+    	HudMessage("Toxicity: %d%%", Player.Toxicity);
+    	EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 335.0, 0.05);
+    	DrawToxicityBar(180.1, 335.0, false);
+    }
 }
 
 void DrawStatsMenu()
@@ -1006,8 +1011,13 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", 306.1, 228.0, 0.05);
         
         // Toxicity
-        if (PlayerPtr->Toxicity > 0 || PlayerPtr->Stim.Size > 0)
-            DrawToxicityBar(276.0, 250.0, true);
+        if (PlayerPtr->Toxicity > 0 || PlayerPtr->Stim.Size > 0) 
+        {
+        	SetFont("BIGFONT");
+        	HudMessage("Toxicity: %d%%", Player.Toxicity);
+        	EndHudMessage(HUDMSG_PLAIN, 0, "Green", 276.1, 250.0, 0.05);
+        	DrawToxicityBar(276.1, 250.0, true);
+        }
         
         // Shield
         DrawShieldInfo(Player.MenuIndex, 232, 281, 0);
@@ -1551,8 +1561,6 @@ void DrawShieldMenu()
                         // Name
                         Description = StrParam("%S", CurrentAccessory->Name);
                         
-                        str Prepend;
-                        
                         // Extra Description
                         if (CurrentAccessory->Description != "")
                             Description = StrParam("%S\n%S", Description, CurrentAccessory->Description);
@@ -1666,10 +1674,12 @@ void DrawStimsMenu()
     }
     
     // Toxicity
-    DrawToxicityBar(50.0, 240.0, false);
+    DrawToxicityBar(40.1, 240.0, false);
+    SetFont("BIGFONT");
+    HudMessage("Toxicity: %d%%", Player.Toxicity);
+    EndHudMessage(HUDMSG_PLAIN, 0, "Green", 40.1, 240.0, 0.05);
     
     // Immunity
-    SetFont("BIGFONT");
     HudMessage("Immunity: %d%%", Player.StimImmunity);
     EndHudMessage(HUDMSG_PLAIN, 0, "DarkRed", 256.0, 240.0, 0.05);
 }
@@ -2705,12 +2715,6 @@ void DrawPlayerSprite(int PlayerNum, fixed X, fixed Y)
 
 void DrawToxicityBar(fixed X, fixed Y, bool HideInfo)
 {
-    // Title
-    SetFont("SMALLFONT");
-    HudMessage("Toxicity: %d%%", Player.Toxicity);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Green", X, Y, 0.05);
-    SetFont("BIGFONT");
-    
     // Pixel Color
     str Color;
     if (Player.Toxicity >= 0 && Player.Toxicity <= 24)

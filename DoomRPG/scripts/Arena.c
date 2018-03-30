@@ -450,7 +450,6 @@ void DropArenaItem(str Item)
         if (!PlayerInGame(i)) continue;
         
         TID = UniqueTID();
-        Success = false;
         X = GetActorX(Players(i).TID);
         Y = GetActorY(Players(i).TID);
         Z = GetActorCeilingZ(Players(i).TID) - 32.0;

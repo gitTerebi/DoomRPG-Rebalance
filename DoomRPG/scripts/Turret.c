@@ -1388,8 +1388,6 @@ NamedScript bool TurretCheckPlayerTarget()
 NamedScript bool TurretCheckTargetSuitable()
 {
     bool Suitable = true;
-    int OriginalTargetTID;
-    int NewTargetTID = UniqueTID();
     
     if (!SetActivator(0, AAPTR_TARGET))
         return false;
@@ -1404,8 +1402,6 @@ NamedScript bool TurretCheckTargetSuitable()
 NamedScript bool TurretCheckTargetDead()
 {
     bool TargetDead = false;
-    int OriginalTargetTID;
-    int NewTargetTID = UniqueTID();
     
     if (!SetActivator(0, AAPTR_TARGET))
         return true;
@@ -1899,7 +1895,6 @@ void TurretSpawn()
     }
     
     int TID = UniqueTID();
-    const fixed Distance = 80.0;
     fixed X = GetActorX(0) + (80.0 * Cos(GetActorAngle(0)));
     fixed Y = GetActorY(0) + (80.0 * Sin(GetActorAngle(0)));
     fixed Z = GetActorZ(0) + 32.0;
