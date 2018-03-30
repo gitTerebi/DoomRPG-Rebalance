@@ -387,9 +387,6 @@ NamedScript MenuEntry void LoadCharacter()
     char *SaveString;
     //CharSaveInfo Info;
     
-    EncodedSaveString = calloc(4000, sizeof(char));
-    EncodedSaveString[0] = '\x00';
-    
     int NumCVars = GetActivatorCVar("drpg_char_data_len");
     if (NumCVars <= 0)
     {
@@ -406,6 +403,9 @@ NamedScript MenuEntry void LoadCharacter()
     SetFont("SMALLFONT");
     HudMessage("Make sure to withdraw your items from the shop!");
     EndHudMessage(HUDMSG_PLAIN, 71, "Orange", 0.5, 0.35, 0);
+    
+    EncodedSaveString = calloc(4000, sizeof(char));
+    EncodedSaveString[0] = '\x00';
     
     for (int i = 0; i < NumCVars; i++)
     {
