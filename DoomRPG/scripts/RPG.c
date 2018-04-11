@@ -335,7 +335,6 @@ NamedScript void Loop()
     // Update Functions
     CheckCombo();
     CheckStats();
-    CheckStatBonus();
     CheckHardStatCaps();
     CheckRegen();
     CheckLuck();
@@ -648,7 +647,7 @@ NamedScript DECORATE int AddHealth(int HealthPercent, int MaxPercent)
         HealthAmount = RealMax - Player.ActualHealth;
 
     // Add Vitality XP for using healing items
-    if (GetCVar("drpg_levelup_natural") && !Player.Stim.Active)
+    if (GetCVar("drpg_levelup_natural"))
     {
         fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
         if (GetCVar("drpg_allow_spec"))
@@ -676,7 +675,7 @@ NamedScript DECORATE int AddHealthDirect(int HealthAmount, int MaxPercent)
         HealthAmount = RealMax - Player.ActualHealth;
 
     // Add Vitality XP for using healing items
-    if (GetCVar("drpg_levelup_natural") && !Player.Stim.Active)
+    if (GetCVar("drpg_levelup_natural"))
     {
         fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
         if (GetCVar("drpg_allow_spec"))
@@ -894,7 +893,7 @@ NamedScript void StatRandomizer()
 {
     Start:
 
-    if (GetActivatorCVar("drpg_auto_spend") && !Player.Stim.Active)
+    if (GetActivatorCVar("drpg_auto_spend"))
     {
         while (CheckInventory("DRPGModule") > 0 && !StatsCapped())
         {

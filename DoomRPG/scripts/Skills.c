@@ -440,7 +440,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = Summon,
             .Description =
             {
-                "Summons a Imp"
+                "Summons an Imp"
             }
         },
         {
@@ -530,7 +530,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = Summon,
             .Description =
             {
-                "Summons a Arachnotron"
+                "Summons an Arachnotron"
             }
         },
         {
@@ -540,7 +540,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = Summon,
             .Description =
             {
-                "Summons a Arch-Vile"
+                "Summons an Arch-Vile"
             }
         },
         {
@@ -879,10 +879,10 @@ NamedScript KeyBind void UseSkill(int Key)
     // You cannot use skills while Silenced
     if (Player.StatusType[SE_SILENCE])
     {
-    	ActivatorSound("skills/silence", 127);
-    	SetFont("BIGFONT");
-    	PrintError("You cannot use skills while silenced");
-    	return;
+        ActivatorSound("skills/silence", 127);
+        SetFont("BIGFONT");
+        PrintError("You cannot use skills while silenced");
+        return;
     }
     
     // Quickuse
@@ -971,7 +971,7 @@ NamedScript KeyBind void UseSkill(int Key)
         if (Success)
         {
             // Energy Stat XP for skill usage
-            if (GetCVar("drpg_levelup_natural") && !Player.Stim.Active)
+            if (GetCVar("drpg_levelup_natural"))
             {
                 fixed Scale = GetCVarFixed("drpg_energy_scalexp");
                 if (GetCVar("drpg_allow_spec"))

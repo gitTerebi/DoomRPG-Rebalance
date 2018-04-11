@@ -89,26 +89,13 @@ NamedScript KeyBind void UseStim(bool Force)
         return;
     }
     
-    // Store previous states
-    if (!Player.Stim.Active)
-    {
-        Player.Stim.PrevStats[0] = Player.Strength;
-        Player.Stim.PrevStats[1] = Player.Defense;
-        Player.Stim.PrevStats[2] = Player.Vitality;
-        Player.Stim.PrevStats[3] = Player.Energy;
-        Player.Stim.PrevStats[4] = Player.Regeneration;
-        Player.Stim.PrevStats[5] = Player.Agility;
-        Player.Stim.PrevStats[6] = Player.Capacity;
-        Player.Stim.PrevStats[7] = Player.Luck;
-    }
-    
     // Set Timer for Stat bonuses
     int InitialTime;
     int InitialTimeMultiplier = GetCVar("drpg_stim_time_multiplier");
     for (int i = StimStatsStart; i < StimStatsEnd + 2; i++)
       if (Player.Stim.Current[i] > 0)
       {
-      	if (i == STIM_PURIFIER)
+        if (i == STIM_PURIFIER)
           InitialTime += 15 * (Player.Stim.Current[STIM_PURIFIER] * 30 * InitialTimeMultiplier);
         else
           InitialTime += 15 * 30 * InitialTimeMultiplier;
@@ -120,7 +107,7 @@ NamedScript KeyBind void UseStim(bool Force)
         Player.Stim.Timer += InitialTime;
     
         if (Player.Stim.Timer >= Player.Stim.TimerMax)
-        	Player.Stim.TimerMax = Player.Stim.Timer;
+            Player.Stim.TimerMax = Player.Stim.Timer;
       }
     
     // Apply Multiplier and Potency
@@ -478,14 +465,14 @@ void CheckStim()
             Player.Stim.Active = false;
             
             // Restore previous stats
-            Player.Strength = Player.Stim.PrevStats[STAT_STRENGTH];
-            Player.Defense = Player.Stim.PrevStats[STAT_DEFENSE];
-            Player.Vitality = Player.Stim.PrevStats[STAT_VITALITY];
-            Player.Energy = Player.Stim.PrevStats[STAT_ENERGY];
-            Player.Regeneration = Player.Stim.PrevStats[STAT_REGENERATION];
-            Player.Agility = Player.Stim.PrevStats[STAT_AGILITY];
-            Player.Capacity = Player.Stim.PrevStats[STAT_CAPACITY];
-            Player.Luck = Player.Stim.PrevStats[STAT_LUCK];
+            Player.StrengthBonus -= Player.Stim.Last[STAT_STRENGTH];
+            Player.DefenseBonus -= Player.Stim.Last[STAT_DEFENSE];
+            Player.VitalityBonus -= Player.Stim.Last[STAT_VITALITY];
+            Player.EnergyBonus -= Player.Stim.Last[STAT_ENERGY];
+            Player.RegenerationBonus -= Player.Stim.Last[STAT_REGENERATION];
+            Player.AgilityBonus -= Player.Stim.Last[STAT_AGILITY];
+            Player.CapacityBonus -= Player.Stim.Last[STAT_CAPACITY];
+            Player.LuckBonus -= Player.Stim.Last[STAT_LUCK];
             
             for (int i = 0; i < StimStatsEnd; i++)
             {

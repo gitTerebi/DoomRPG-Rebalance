@@ -1940,7 +1940,7 @@ NamedScript void MonsterDeath()
             if (Killer == i)
             {
                 AddXP(i, XPAmount, RankAmount);
-                if (GetCVar("drpg_levelup_natural") && !Players(i).Stim.Active)
+                if (GetCVar("drpg_levelup_natural"))
                 {
                     fixed Scale = GetCVarFixed("drpg_strength_scalexp");
                     if (GetCVar("drpg_allow_spec"))

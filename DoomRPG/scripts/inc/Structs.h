@@ -841,8 +841,6 @@ struct PlayerData_S
         int PowerupTimer[STIM_MAX];
         int PowerupTimerMax[STIM_MAX];
 
-        int PrevStats[STAT_MAX];
-
         bool Active;
         int Size;
         int Amount;

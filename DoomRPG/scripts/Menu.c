@@ -140,7 +140,7 @@ void MenuLoop()
     // Draw Border
     // These are pushed back a bit so the border doesn't overlap anything
     if (GetActivatorCVar("drpg_menu_background_border"))
-    	DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
+        DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
     
     // Draw current menu
     if (Player.Menu == MENUPAGE_MAIN)   DrawMainMenu();
@@ -354,10 +354,10 @@ void DrawMainMenu()
     // Toxicity
     if (Player.Toxicity > 0 || Player.Stim.Size > 0) 
     {
-    	SetFont("SMALLFONT");
-    	HudMessage("Toxicity: %d%%", Player.Toxicity);
-    	EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 335.0, 0.05);
-    	DrawToxicityBar(180.1, 335.0, false);
+        SetFont("SMALLFONT");
+        HudMessage("Toxicity: %d%%", Player.Toxicity);
+        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 335.0, 0.05);
+        DrawToxicityBar(180.1, 335.0, false);
     }
 }
 
@@ -418,110 +418,110 @@ void DrawStatsMenu()
         SetFont("BIGFONT");
         if (Player.MenuIndex == 0)
         {
-			if (Player.StrengthNat > 0)
-				HudMessage("Strength: %d (+%d)", Player.Strength, Player.StrengthNat);
-			else
-				HudMessage("Strength: %d", Player.Strength);
+            if (Player.StrengthNat > 0)
+                HudMessage("Strength: %d (+%d)", Player.Strength, Player.StrengthNat);
+            else
+                HudMessage("Strength: %d", Player.Strength);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    25.0,   0.05);
         }
         if (Player.MenuIndex == 1)
         {
-			if (Player.DefenseNat > 0)
-				HudMessage("Defense: %d (+%d)", Player.Defense, Player.DefenseNat);
-			else
-				HudMessage("Defense: %d", Player.Defense);
+            if (Player.DefenseNat > 0)
+                HudMessage("Defense: %d (+%d)", Player.Defense, Player.DefenseNat);
+            else
+                HudMessage("Defense: %d", Player.Defense);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  25.0,   0.05);
         }
         if (Player.MenuIndex == 2)
         {
-			if (Player.VitalityNat > 0)
-				HudMessage("Vitality: %d (+%d)", Player.Vitality, Player.VitalityNat);
-			else
-				HudMessage("Vitality: %d", Player.Vitality);
+            if (Player.VitalityNat > 0)
+                HudMessage("Vitality: %d (+%d)", Player.Vitality, Player.VitalityNat);
+            else
+                HudMessage("Vitality: %d", Player.Vitality);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    75.0,   0.05);
         }
         if (Player.MenuIndex == 3)
         {
-			if (Player.EnergyNat > 0)
-				HudMessage("Energy: %d (+%d)", Player.Energy, Player.EnergyNat);
-			else
-				HudMessage("Energy: %d", Player.Energy);
+            if (Player.EnergyNat > 0)
+                HudMessage("Energy: %d (+%d)", Player.Energy, Player.EnergyNat);
+            else
+                HudMessage("Energy: %d", Player.Energy);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  75.0,   0.05);
         }
         if (Player.MenuIndex == 4)
         {
- 			if (Player.RegenerationNat > 0)
-				HudMessage("Regen: %d (+%d)", Player.Regeneration, Player.RegenerationNat);
-			else
-				HudMessage("Regen: %d", Player.Regeneration);
+             if (Player.RegenerationNat > 0)
+                HudMessage("Regen: %d (+%d)", Player.Regeneration, Player.RegenerationNat);
+            else
+                HudMessage("Regen: %d", Player.Regeneration);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    125.0,  0.05);
         }
         if (Player.MenuIndex == 5)
         {
-			if (Player.AgilityNat > 0)
-				HudMessage("Agility: %d (+%d)", Player.Agility, Player.AgilityNat);
-			else
-				HudMessage("Agility: %d", Player.Agility);
+            if (Player.AgilityNat > 0)
+                HudMessage("Agility: %d (+%d)", Player.Agility, Player.AgilityNat);
+            else
+                HudMessage("Agility: %d", Player.Agility);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  125.0,  0.05);
         }
-        if (Player.MenuIndex == 6) 
+        if (Player.MenuIndex == 6)
         {
- 			if (Player.CapacityNat > 0)
-				HudMessage("Capacity: %d (+%d)", Player.Capacity, Player.CapacityNat);
-			else
-				HudMessage("Capacity: %d", Player.Capacity);
+             if (Player.CapacityNat > 0)
+                HudMessage("Capacity: %d (+%d)", Player.Capacity, Player.CapacityNat);
+            else
+                HudMessage("Capacity: %d", Player.Capacity);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    175.0,  0.05);
         }
         if (Player.MenuIndex == 7)
         {
-			if (Player.LuckNat > 0)
-				HudMessage("Luck: %d (+%d)", Player.Luck, Player.LuckNat);
-			else
-				HudMessage("Luck: %d", Player.Luck);
+            if (Player.LuckNat > 0)
+                HudMessage("Luck: %d (+%d)", Player.Luck, Player.LuckNat);
+            else
+                HudMessage("Luck: %d", Player.Luck);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  175.0,  0.05);
         }
 
         // Primary Stats
         SetFont("BIGFONT");
-		if (Player.StrengthNat > 0)
-			HudMessage("Strength: %d (+%d)", Player.Strength, Player.StrengthNat);
-		else
-			HudMessage("Strength: %d", Player.Strength);
+        if (Player.StrengthNat > 0)
+            HudMessage("Strength: %d (+%d)", Player.Strength, Player.StrengthNat);
+        else
+            HudMessage("Strength: %d", Player.Strength);
         EndHudMessage(HUDMSG_PLAIN, 0, "Red",        0.1,    25.0,   0.05);
-		if (Player.DefenseNat > 0)
-			HudMessage("Defense: %d (+%d)", Player.Defense, Player.DefenseNat);
-		else
-			HudMessage("Defense: %d", Player.Defense);
+        if (Player.DefenseNat > 0)
+            HudMessage("Defense: %d (+%d)", Player.Defense, Player.DefenseNat);
+        else
+            HudMessage("Defense: %d", Player.Defense);
         EndHudMessage(HUDMSG_PLAIN, 0, "Green",      200.1,  25.0,   0.05);
-		if (Player.VitalityNat > 0)
-			HudMessage("Vitality: %d (+%d)", Player.Vitality, Player.VitalityNat);
-		else
-			HudMessage("Vitality: %d", Player.Vitality);
+        if (Player.VitalityNat > 0)
+            HudMessage("Vitality: %d (+%d)", Player.Vitality, Player.VitalityNat);
+        else
+            HudMessage("Vitality: %d", Player.Vitality);
         EndHudMessage(HUDMSG_PLAIN, 0, "Brick",      0.1,    75.0,   0.05);
-		if (Player.EnergyNat > 0)
-			HudMessage("Energy: %d (+%d)", Player.Energy, Player.EnergyNat);
-		else
-			HudMessage("Energy: %d", Player.Energy);
+        if (Player.EnergyNat > 0)
+            HudMessage("Energy: %d (+%d)", Player.Energy, Player.EnergyNat);
+        else
+            HudMessage("Energy: %d", Player.Energy);
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",  200.1,  75.0,   0.05);
-		if (Player.RegenerationNat > 0)
-			HudMessage("Regen: %d (+%d)", Player.Regeneration, Player.RegenerationNat);
-		else
-			HudMessage("Regen: %d", Player.Regeneration);
+        if (Player.RegenerationNat > 0)
+            HudMessage("Regen: %d (+%d)", Player.Regeneration, Player.RegenerationNat);
+        else
+            HudMessage("Regen: %d", Player.Regeneration);
         EndHudMessage(HUDMSG_PLAIN, 0, "Purple",     0.1,    125.0,  0.05);
-		if (Player.AgilityNat > 0)
-			HudMessage("Agility: %d (+%d)", Player.Agility, Player.AgilityNat);
-		else
-			HudMessage("Agility: %d", Player.Agility);
+        if (Player.AgilityNat > 0)
+            HudMessage("Agility: %d (+%d)", Player.Agility, Player.AgilityNat);
+        else
+            HudMessage("Agility: %d", Player.Agility);
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",     200.1,  125.0,  0.05);
-		if (Player.CapacityNat > 0)
-			HudMessage("Capacity: %d (+%d)", Player.Capacity, Player.CapacityNat);
-		else
-			HudMessage("Capacity: %d", Player.Capacity);
+        if (Player.CapacityNat > 0)
+            HudMessage("Capacity: %d (+%d)", Player.Capacity, Player.CapacityNat);
+        else
+            HudMessage("Capacity: %d", Player.Capacity);
         EndHudMessage(HUDMSG_PLAIN, 0, "Blue",       0.1,    175.0,  0.05);
-		if (Player.LuckNat > 0)
-			HudMessage("Luck: %d (+%d)", Player.Luck, Player.LuckNat);
-		else
-			HudMessage("Luck: %d", Player.Luck);
+        if (Player.LuckNat > 0)
+            HudMessage("Luck: %d (+%d)", Player.Luck, Player.LuckNat);
+        else
+            HudMessage("Luck: %d", Player.Luck);
         EndHudMessage(HUDMSG_PLAIN, 0, "Gold",       200.1,  175.0,  0.05);
         
         // Ammo Amounts
@@ -670,55 +670,55 @@ void DrawStatsMenu()
         PrintSprite("UMODA0", 0, 257.0, 282.0, 0.05);
         PrintSprite("SHPAA0", 0, 302.0, 293.0, 0.05);
         PrintSprite("AUGCA0", 0, 334.0, 282.0, 0.05);
-		SetFont("SMALLFONT");
+        SetFont("SMALLFONT");
         if (Player.LuckTotal > 0)
         {
             HudMessage("\CfCredit\C- Drop Rate: \Cf+%d%%", Player.LuckTotal);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 292.0, 0.05);
         }
-		if (Player.HealthDrop)
+        if (Player.HealthDrop)
         {
-			HudMessage("\CaHealth\C- Drop Rate: \Cf%k%%", Player.HealthChance);
+            HudMessage("\CaHealth\C- Drop Rate: \Cf%k%%", Player.HealthChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 300.0, 0.05);
         }
-		if (Player.EPDrop)
+        if (Player.EPDrop)
         {
-			HudMessage("\CnEP\C- Drop Rate: \Cf%k%%", Player.EPChance);
+            HudMessage("\CnEP\C- Drop Rate: \Cf%k%%", Player.EPChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 308.0, 0.05);
         }
-		if (Player.ArmorDrop)
+        if (Player.ArmorDrop)
         {
-			HudMessage("\CdArmor\C- Drop Rate: \Cf%k%%", Player.ArmorChance);
+            HudMessage("\CdArmor\C- Drop Rate: \Cf%k%%", Player.ArmorChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 316.0, 0.05);
         }
-		if (Player.WeaponDrop)
+        if (Player.WeaponDrop)
         {
-			HudMessage("\CgWeapon\C- Drop Rate: \Cf%k%%", Player.WeaponChance);
+            HudMessage("\CgWeapon\C- Drop Rate: \Cf%k%%", Player.WeaponChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 324.0, 0.05);
         }
-		if (Player.PowerupDrop)
+        if (Player.PowerupDrop)
         {
-			HudMessage("\CqPowerup\C- Drop Rate: \Cf%k%%", Player.PowerupChance);
+            HudMessage("\CqPowerup\C- Drop Rate: \Cf%k%%", Player.PowerupChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 332.0, 0.05);
         }
-		if (Player.StimDrop)
+        if (Player.StimDrop)
         {
-			HudMessage("\CrStim\C- Drop Rate: \Cf%k%%", Player.StimChance);
+            HudMessage("\CrStim\C- Drop Rate: \Cf%k%%", Player.StimChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 340.0, 0.05);
         }
-		if (Player.ModuleDrop)
+        if (Player.ModuleDrop)
         {
-			HudMessage("\CdModule\C- Drop Rate: \Cf%k%%", Player.ModuleChance);
+            HudMessage("\CdModule\C- Drop Rate: \Cf%k%%", Player.ModuleChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 348.0, 0.05);
         }
-		if (Player.ShieldDrop)
+        if (Player.ShieldDrop)
         {
-			HudMessage("\CvShield\C- Drop Rate: \Cf%k%%", Player.ShieldChance);
+            HudMessage("\CvShield\C- Drop Rate: \Cf%k%%", Player.ShieldChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 356.0, 0.05);
         }
-		if (Player.AugDrop)
+        if (Player.AugDrop)
         {
-			HudMessage("\CkAug\C- Drop Rate: \Cf%k%%", Player.AugChance);
+            HudMessage("\CkAug\C- Drop Rate: \Cf%k%%", Player.AugChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 364.0, 0.05);
         }
         
@@ -1013,10 +1013,10 @@ void DrawStatsMenu()
         // Toxicity
         if (PlayerPtr->Toxicity > 0 || PlayerPtr->Stim.Size > 0) 
         {
-        	SetFont("BIGFONT");
-        	HudMessage("Toxicity: %d%%", Player.Toxicity);
-        	EndHudMessage(HUDMSG_PLAIN, 0, "Green", 276.1, 250.0, 0.05);
-        	DrawToxicityBar(276.1, 250.0, true);
+            SetFont("BIGFONT");
+            HudMessage("Toxicity: %d%%", Player.Toxicity);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 276.1, 250.0, 0.05);
+            DrawToxicityBar(276.1, 250.0, true);
         }
         
         // Shield
@@ -2419,18 +2419,6 @@ void IncreaseStat(int Stat)
         &Player.Luck
     };
     
-    // Don't allow increasing of stats while you have a stim active
-    if (Player.Stim.Active)
-    {
-        if (!GetActivatorCVar("drpg_auto_spend"))
-        {
-            PrintError("You cannot increase stats while a stim is active");
-            ActivatorSound("menu/error", 127);
-        }
-        
-        return;
-    }
-    
     // Determine the cost of the stat upgrade
     int Cost = (int)((((fixed)*Stats[Stat] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
     if (Cost < 0)
@@ -2561,15 +2549,15 @@ void MenuHelp()
         switch (Player.Menu)
         {
         case MENUPAGE_MAIN:
-        	// Mission Help
-        	if (Player.Mission.Active) 
-        	{
+            // Mission Help
+            if (Player.Mission.Active) 
+            {
             HudMessage("Navigate: \Cd%jS/%jS\C-\nSelect: \Cd%jS\C-\nMission Info: \CiHOLD \Cd%jS\C-",
             "+forward", "+back", "+use", "+speed");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
-        	}
-        	else
-        	{
+            }
+            else
+            {
             HudMessage("Navigate: \Cd%jS/%jS\C-\nSelect: \Cd%jS\C-\nNo mission currently active.",
                        "+forward", "+back", "+use");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
