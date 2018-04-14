@@ -409,7 +409,7 @@ NamedScript void Loop()
         Player.Mass *= 128;
 
     // Apply Stats
-    SetActorPropertyFixed(Player.TID, APROP_DamageMultiplier, (1.0 + ((fixed)Player.TotalDamage / 100.0)) * (Player.DamageMult > 1 ? Player.DamageMult : 1));
+    SetActorPropertyFixed(Player.TID, APROP_DamageMultiplier, (1.0 + ((fixed)Player.TotalDamage / 100.0)) * Player.DamageMult);
     SetActorPropertyFixed(Player.TID, APROP_DamageFactor, Player.DamageFactor);
     SetActorProperty(Player.TID, APROP_Mass, Player.Mass);
     SetActorProperty(Player.TID, APROP_SpawnHealth, Player.HealthMax);

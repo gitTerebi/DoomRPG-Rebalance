@@ -165,12 +165,12 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = UseAura,
             .Description =
             {
-                "1.25x Damage",
-                "1.5x Damage",
-                "1.75x Damage",
-                "2x Damage",
-                "3x Damage",
-                "4x Damage"
+                "+25% Damage",
+                "+50% Damage",
+                "+75% Damage",
+                "+100% Damage",
+                "+200% Damage",
+                "+300% Damage"
             }
         },
         {
@@ -2776,19 +2776,19 @@ void CheckAuras()
         if (Player.Aura.Type[AURA_RED].Active)
         {
             if (Player.SoulActive[SOUL_RED])
-                Player.DamageMult += 4;
-            else if (Player.Aura.Type[AURA_RED].Level == 1)
-                Player.DamageMult += 1.25;
-            else if (Player.Aura.Type[AURA_RED].Level == 2)
-                Player.DamageMult += 1.5;
-            else if (Player.Aura.Type[AURA_RED].Level == 3)
-                Player.DamageMult += 1.75;
-            else if (Player.Aura.Type[AURA_RED].Level == 4)
-                Player.DamageMult += 2;
-            else if (Player.Aura.Type[AURA_RED].Level == 5)
                 Player.DamageMult += 3;
+            else if (Player.Aura.Type[AURA_RED].Level == 1)
+                Player.DamageMult += 0.25;
+            else if (Player.Aura.Type[AURA_RED].Level == 2)
+                Player.DamageMult += 0.5;
+            else if (Player.Aura.Type[AURA_RED].Level == 3)
+                Player.DamageMult += 0.75;
+            else if (Player.Aura.Type[AURA_RED].Level == 4)
+                Player.DamageMult += 1;
+            else if (Player.Aura.Type[AURA_RED].Level == 5)
+                Player.DamageMult += 2;
             else if (Player.Aura.Type[AURA_RED].Level == 6)
-                Player.DamageMult += 4;
+                Player.DamageMult += 3;
         }
         
         // Green Aura
@@ -2864,7 +2864,7 @@ void CheckAuras()
         }
         
         // Orange Aura
-        if (Player.Aura.Type[AURA_ORANGE].Level)
+        if (Player.Aura.Type[AURA_ORANGE].Active)
         {
             if (Player.Aura.Type[AURA_ORANGE].Level >= 1 || Player.SoulActive[SOUL_ORANGE])
                 Player.Speed *= 2;

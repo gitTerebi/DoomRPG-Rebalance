@@ -367,7 +367,7 @@ void CheckStats()
     
     Player.LevelDamage = Player.Level * (10 - GameSkill());
     Player.BonusDamage = Player.StrengthTotal;
-    Player.DamageMult = 0;
+    Player.DamageMult = 1.0;
     Player.TotalDamage = Player.LevelDamage + Player.BonusDamage;
     if (Player.DefenseTotal > 0)
         Player.DamageFactor = (Player.DefenseTotal > 200 ? 0.25 : 1.0 - Curve((fixed)Player.DefenseTotal, 0, 200, 0.01, 0.75));
