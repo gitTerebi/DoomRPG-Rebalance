@@ -180,11 +180,11 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = UseAura,
             .Description =
             {
-                "+5% Damage Reduction",
-                "+10% Damage Reduction",
-                "+15% Damage Reduction\nDamage Floor Protection",
-                "+20% Damage Reduction\nDamage Floor Protection",
-                "+25% Damage Reduction\nDamage Floor Protection"
+                "5% Damage Reduction",
+                "10% Damage Reduction",
+                "15% Damage Reduction\nDamage Floor Protection",
+                "20% Damage Reduction\nDamage Floor Protection",
+                "25% Damage Reduction\nDamage Floor Protection"
             }
         },
         {
@@ -237,7 +237,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
                 "2x HP/EP Regen Amount",
                 "3x HP/EP Regen Amount",
                 "4x HP/EP Regen Amount",
-                "4x HP/EP Regen Amount\n-2x HP/EP Regen Timers"
+                "4x HP/EP Regen Amount\n1/2 HP/EP Regen Timers"
             }
         },
         {
@@ -2765,7 +2765,7 @@ void CheckAuras()
                 }
     if (Player.Aura.DefenseBoost)
     {
-        Player.DamageFactor += 0.2;
+        Player.DamageFactor *= 0.8;
         Player.Aura.DefenseBoost = false;
     }
     
@@ -2795,7 +2795,7 @@ void CheckAuras()
         if (Player.Aura.Type[AURA_GREEN].Active)
         {
             if (Player.Aura.Type[AURA_GREEN].Level >= 1)
-                Player.DamageFactor -= (fixed)Player.Aura.Type[AURA_GREEN].Level / 20.0;
+                Player.DamageFactor *= (1.0 - (fixed)Player.Aura.Type[AURA_GREEN].Level * 0.05);
             if (Player.Aura.Type[AURA_GREEN].Level >= 3 || Player.SoulActive[SOUL_GREEN])
                 GiveInventory("DRPGGreenAuraIronFeet", 1);
         }

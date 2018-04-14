@@ -33,11 +33,11 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 5,
         .Description =
         {
-            "+5% Damage Reduction",
-            "+10% Damage Reduction",
-            "+15% Damage Reduction",
-            "+20% Damage Reduction",
-            "+25% Damage Reduction"
+            "5% Damage Reduction",
+            "10% Damage Reduction",
+            "15% Damage Reduction",
+            "20% Damage Reduction",
+            "25% Damage Reduction"
         },
         .TokenActor = "DRPGAugTokenDefense"
     },
@@ -79,13 +79,13 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .Description =
         {
             "2x HP/EP Regen Amounts",
-            "-2x HP/EP Regen Timers",
+            "1/2 HP/EP Regen Timers",
             "4x HP/EP Regen Amounts",
-            "-4x HP/EP Regen Timers",
-            "+5 Second Toxicity Regen Time",
-            "+10 Second Toxicity Regen Time",
-            "+15 Second Toxicity Regen Time",
-            "+20 Second Toxicity Regen Time"
+            "1/4 HP/EP Regen Timers",
+            "-5 Seconds Toxicity Regen Timer",
+            "-10 Seconds Toxicity Regen Timer",
+            "-15 Seconds Toxicity Regen Timer",
+            "-20 Seconds Toxicity Regen Timer"
         },
         .TokenActor = "DRPGAugTokenRegen"
     },
@@ -320,7 +320,7 @@ void CheckAugs()
     
     // Defense Aug
     if (Player.Augs.Active[AUG_DEFENSE])
-        Player.DamageFactor -= (fixed)Player.Augs.Level[AUG_DEFENSE] / 20.0;
+        Player.DamageFactor *= (1.0 - (fixed)Player.Augs.Level[AUG_DEFENSE] * 0.05);
     
     // Vitality Aug
     if (Player.Augs.Active[AUG_VITALITY])

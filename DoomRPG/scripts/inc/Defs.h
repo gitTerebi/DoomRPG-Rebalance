@@ -547,7 +547,7 @@ typedef enum
 #define ASAVE_SAFETIME          20 * 35
 #define ASAVE_RETRYTIME         5 * 35
 #define MAX_ITEMS               65535
-#define MAX_TIPS                75
+#define MAX_TIPS                76
 
 #define LOADOUT_WEAPONS         8
 #define LOADOUT_ARMORS          10
@@ -738,7 +738,7 @@ typedef enum
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX
 #define DRLA_DEVICE_MAX         4 + (Player.CapacityTotal / 50)
 
-#define NATURALCAP				100//((Player.Level>10) ? (Player.Level) : 10)
+#define NATURALCAP              100
 
 typedef enum
 {

@@ -91,35 +91,28 @@ NamedScript void InitMission()
             if (!Monsters[i].Init) // Skip removed monsters
                 continue;
 
-            str ActorToCheck;
+            str ActorToCheck = StrParam("DRPG%S", Player.Mission.Monster->Actor);
 
-            for (int j = 0; j < MAX_PLAYERS; j++)
+            if (CompatMode == COMPAT_DRLA)
+                ActorToCheck = Player.Mission.Monster->Actor;
+
+            if (CompatMode == COMPAT_LEGENDOOM)
             {
-                if (!PlayerInGame(j)) continue;
-
-                ActorToCheck = StrParam("DRPG%S", Players(j).Mission.Monster->Actor);
-
-                if (CompatMode == COMPAT_DRLA)
-                    ActorToCheck = Players(j).Mission.Monster->Actor;
-
-                if (CompatMode == COMPAT_LEGENDOOM)
-                {
-                    ActorToCheck = StrParam("%S", Players(j).Mission.Monster->Actor);
-                    if (ActorToCheck == "LDFatso") ActorToCheck = "LDMancubus";
-                }
-                
-                LogMessage(StrParam("Checking: %S - Looking For: %S",Monsters[i].Actor, ActorToCheck), LOG_DEBUG);
-                
-                if (StartsWith(Monsters[i].Actor, ActorToCheck, true))
-                {
-                    if (PotentialTargets.Position == PotentialTargets.Size)
-                        ArrayResize(&PotentialTargets);
-
-                    ((int *)PotentialTargets.Data)[PotentialTargets.Position++] = i;
-                }
-
-                if (!(i % 1000)) Delay(1);
+                ActorToCheck = StrParam("%S", Player.Mission.Monster->Actor);
+                if (ActorToCheck == "LDFatso") ActorToCheck = "LDMancubus";
             }
+
+            LogMessage(StrParam("Checking: %S - Looking For: %S", Monsters[i].Actor, ActorToCheck), LOG_DEBUG);
+
+            if (StartsWith(Monsters[i].Actor, ActorToCheck, true))
+            {
+                if (PotentialTargets.Position == PotentialTargets.Size)
+                ArrayResize(&PotentialTargets);
+
+                ((int *)PotentialTargets.Data)[PotentialTargets.Position++] = i;
+            }
+
+            if (!(i % 1000)) Delay(1);
         }
 
         if (PotentialTargets.Position)
@@ -163,12 +156,12 @@ NamedScript void MissionDeathCheck(int Killer, MonsterStatsPtr Stats)
             // Perform actor -> needed actor match checking
             if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL)
             {
-            	// Determine actor name
-            	str Actor = GetActorClass(0);
-            	str NeededActor = GetMissionMonsterActor(Players(i).Mission.Monster->Actor);
-            	// Check to see if we match
-            	if (StrCmp(Actor, NeededActor) == 0)
-            		Players(i).Mission.Current++;
+                // Determine actor name
+                str Actor = GetActorClass(0);
+                str NeededActor = GetMissionMonsterActor(Players(i).Mission.Monster->Actor);
+                // Check to see if we match
+                if (StrCmp(Actor, NeededActor) == 0)
+                    Players(i).Mission.Current++;
             }
         }
 
@@ -201,14 +194,9 @@ NamedScript void MissionDeathCheck(int Killer, MonsterStatsPtr Stats)
         // Assassination Mission
         if (Stats->Target)
         {
-            for (int i = 0; i < MAX_PLAYERS; i++)
-            {
-                // Player is not in-game
-                if (!PlayerInGame(i)) continue;
-
-                if (Players(i).Mission.Active && Players(i).Mission.Type == MT_ASSASSINATION)
-                    Players(i).Mission.Current++;
-            }
+            int Target = Stats->Target - 1;
+            if (PlayerInGame(Target) && (Players(Target).Mission.Active && Players(Target).Mission.Type == MT_ASSASSINATION))
+                Players(Target).Mission.Current++;
         }
     }
 }

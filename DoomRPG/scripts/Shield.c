@@ -360,14 +360,14 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory34",
         "\CdTEEM-AU5",   "SHA2H0",  50000,
-        "While under the effects of an aura, each other person affected by that aura gains \Cd+20% Damage Reduction\C-\n\CuThis does not stack with multiple auras",
+        "While under the effects of an aura, each other person affected by that aura gains \Cd20% Damage Reduction\C-\n\CuThis does not stack with multiple auras",
         SHIELD_PASS_DATAURA,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },
     {
         "DRPGShieldAccessory35",
         "\CgVENG-R",     "SHA2I0",  62000,
-        "When an ally is killed, you gain \Cg1.5x Damage\C- and \Cd+50% Damage Reduction\C- for 30 seconds",
+        "When an ally is killed, you gain \Cg1.5x Damage\C- and \Cd50% Damage Reduction\C- for 30 seconds",
         SHIELD_PASS_AVENGER,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },
@@ -381,7 +381,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory37",
         "\CdNAKD-N0W",   "SHA2K0",  20000,
-        "While you \Caaren't wearing armor\C-, you have \Cd+25% Damage Reduction\C-",
+        "While you \Caaren't wearing armor\C-, you have \Cd25% Damage Reduction\C-",
         SHIELD_PASS_NONE,
         NakedMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },
@@ -402,7 +402,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory40",
         "\CdPHA-LX2",   "SHA2N0",   33000,
-        "You gain an additional \Cd+10% Damage Reduction\C- for every player using this accessory",
+        "You gain an additional \Cd10% Damage Reduction\C- for every player using this accessory",
         SHIELD_PASS_FRIENDSHIPISDEFENSE,
         FriendshipShieldMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },
@@ -1018,8 +1018,7 @@ NamedScript void ScarletWeatherRhapsodyShieldMod()
         return;
     }
     
-    fixed BaseFactorMinus = 1.0 - Player.DamageFactor;
-    Player.DamageFactor -= (0.75 - BaseFactorMinus) - ((0.75 - BaseFactorMinus) * ((fixed)(Player.Shield.Charge - 1) / (fixed)(Player.Shield.Capacity - 1)));
+    Player.DamageFactor *= (1 - (0.75 * (1 - (fixed)(Player.Shield.Charge - 1) / (fixed)(Player.Shield.Capacity - 1))));
 }
 
 NamedScript void SanicMod()
@@ -1063,7 +1062,7 @@ NamedScript void FriendshipShieldMod()
         TotalDefense += 0.1;
     }
     
-    Player.DamageFactor -= TotalDefense;
+    Player.DamageFactor *= (1.0 - TotalDefense);
 }
 
 NamedScript void RegenShieldMod()

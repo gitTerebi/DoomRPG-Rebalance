@@ -814,8 +814,12 @@ void DrawStatsMenu()
                 StatPercent = 100;
             if (StatPercent > 100)
                 StatPercent = 100;
-            DrawBar(StrParam("StatBar%d", i + 1), 40.1, 48.0 + (i * 44.0), StatPercent * 3, false);
-            DrawBar("StatBarB", 40.1, 48.0 + (i * 44.0), 100 * 3, false);
+            /*DrawBar(StrParam("StatBar%d", i + 1), 40.1, 48.0 + (i * 44.0), StatPercent * 3, false);
+            DrawBar("StatBarB", 40.1, 48.0 + (i * 44.0), 100 * 3, false);*/
+            SetHudClipRect(40.1, 40.0 + (i * 44.0), StatPercent * 3, 56.0 + (i * 44.0));
+            PrintSprite(StrParam("StatBar%d", i + 1), 0, 40.1, 48.0 + (i * 44.0), 0.05);
+            SetHudClipRect(0, 0, 0, 0);
+            PrintSprite("StatBarB", 0, 40.1, 48.0 + (i * 44.0), 0.05);
         }
     }
     
