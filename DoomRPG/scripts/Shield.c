@@ -178,7 +178,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory8",
         "\CfREK-T50",   "SHACH0",   15000,
-        "\Cd-100% Damage Reduction\C-\nTriples monster killing \Cfpayout bonus",
+        "\Cd+100% Damage Taken\C-\nTriples the amount of \CfCredits\C- dropped by monsters",
         SHIELD_PASS_EPICMEGACASH,
         RektMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },
@@ -437,7 +437,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory45",
         "\CiRUS-ROU1",  "SHA2S0",   48000,
-        "\Cd-1000% Damage Reduction\n\Ci5 In 6 Survival Bonus\C-",
+        "\Cd+1000% Damage Taken\n\Ci5 In 6 Survival Bonus\C-",
         SHIELD_PASS_ROULETTE, // To bypass the 75% survival cap
         RussianRouletteMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },

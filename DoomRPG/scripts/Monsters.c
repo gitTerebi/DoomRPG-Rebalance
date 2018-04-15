@@ -2064,6 +2064,10 @@ NamedScript void MonsterDeath()
         int CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
         int CreditsAmount = Random(CreditsMin, CreditsMax);
         
+        // REK-T50 accessory
+        if (Players(Killer).Shield.Active && Players(Killer).Shield.Accessory && Players(Killer).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
+            CreditsAmount *= 3;
+        
         // RAINBOWS Event
         if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
             CreditsAmount *= 4;

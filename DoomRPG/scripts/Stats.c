@@ -562,8 +562,12 @@ void CheckStats()
     
     // DRLA Checking
     if (CompatMode == COMPAT_DRLA)
+    {
         if (CheckInventory("RLTacticalBootsToken"))
             Player.SurvivalBonus += 20.0;
+        if (PlayerClass(PlayerNumber()) == 1)
+            Player.JumpHeight *= 1.25;
+    }
 }
 
 void CheckRegen()
