@@ -165,12 +165,12 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = UseAura,
             .Description =
             {
-                "1.25x Damage",
-                "1.5x Damage",
-                "1.75x Damage",
-                "2x Damage",
-                "3x Damage",
-                "4x Damage"
+                "+25% Damage",
+                "+50% Damage",
+                "+75% Damage",
+                "+100% Damage",
+                "+200% Damage",
+                "+300% Damage"
             }
         },
         {
@@ -180,11 +180,11 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = UseAura,
             .Description =
             {
-                "+5% Damage Reduction",
-                "+10% Damage Reduction",
-                "+15% Damage Reduction\nDamage Floor Protection",
-                "+20% Damage Reduction\nDamage Floor Protection",
-                "+25% Damage Reduction\nDamage Floor Protection"
+                "5% Damage Reduction",
+                "10% Damage Reduction",
+                "15% Damage Reduction\nDamage Floor Protection",
+                "20% Damage Reduction\nDamage Floor Protection",
+                "25% Damage Reduction\nDamage Floor Protection"
             }
         },
         {
@@ -237,7 +237,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
                 "2x HP/EP Regen Amount",
                 "3x HP/EP Regen Amount",
                 "4x HP/EP Regen Amount",
-                "4x HP/EP Regen Amount\n-2x HP/EP Regen Timers"
+                "4x HP/EP Regen Amount\n1/2 HP/EP Regen Timers"
             }
         },
         {
@@ -440,7 +440,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = Summon,
             .Description =
             {
-                "Summons a Imp"
+                "Summons an Imp"
             }
         },
         {
@@ -530,7 +530,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = Summon,
             .Description =
             {
-                "Summons a Arachnotron"
+                "Summons an Arachnotron"
             }
         },
         {
@@ -540,7 +540,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = Summon,
             .Description =
             {
-                "Summons a Arch-Vile"
+                "Summons an Arch-Vile"
             }
         },
         {
@@ -879,10 +879,10 @@ NamedScript KeyBind void UseSkill(int Key)
     // You cannot use skills while Silenced
     if (Player.StatusType[SE_SILENCE])
     {
-    	ActivatorSound("skills/silence", 127);
-    	SetFont("BIGFONT");
-    	PrintError("You cannot use skills while silenced");
-    	return;
+        ActivatorSound("skills/silence", 127);
+        SetFont("BIGFONT");
+        PrintError("You cannot use skills while silenced");
+        return;
     }
     
     // Quickuse
@@ -971,7 +971,7 @@ NamedScript KeyBind void UseSkill(int Key)
         if (Success)
         {
             // Energy Stat XP for skill usage
-            if (GetCVar("drpg_levelup_natural") && !Player.Stim.Active)
+            if (GetCVar("drpg_levelup_natural"))
             {
                 fixed Scale = GetCVarFixed("drpg_energy_scalexp");
                 if (GetCVar("drpg_allow_spec"))
@@ -2765,7 +2765,7 @@ void CheckAuras()
                 }
     if (Player.Aura.DefenseBoost)
     {
-        Player.DamageFactor += 0.2;
+        Player.DamageFactor *= 0.8;
         Player.Aura.DefenseBoost = false;
     }
     
@@ -2776,26 +2776,26 @@ void CheckAuras()
         if (Player.Aura.Type[AURA_RED].Active)
         {
             if (Player.SoulActive[SOUL_RED])
-                Player.DamageMult += 4;
-            else if (Player.Aura.Type[AURA_RED].Level == 1)
-                Player.DamageMult += 1.25;
-            else if (Player.Aura.Type[AURA_RED].Level == 2)
-                Player.DamageMult += 1.5;
-            else if (Player.Aura.Type[AURA_RED].Level == 3)
-                Player.DamageMult += 1.75;
-            else if (Player.Aura.Type[AURA_RED].Level == 4)
-                Player.DamageMult += 2;
-            else if (Player.Aura.Type[AURA_RED].Level == 5)
                 Player.DamageMult += 3;
+            else if (Player.Aura.Type[AURA_RED].Level == 1)
+                Player.DamageMult += 0.25;
+            else if (Player.Aura.Type[AURA_RED].Level == 2)
+                Player.DamageMult += 0.5;
+            else if (Player.Aura.Type[AURA_RED].Level == 3)
+                Player.DamageMult += 0.75;
+            else if (Player.Aura.Type[AURA_RED].Level == 4)
+                Player.DamageMult += 1;
+            else if (Player.Aura.Type[AURA_RED].Level == 5)
+                Player.DamageMult += 2;
             else if (Player.Aura.Type[AURA_RED].Level == 6)
-                Player.DamageMult += 4;
+                Player.DamageMult += 3;
         }
         
         // Green Aura
         if (Player.Aura.Type[AURA_GREEN].Active)
         {
             if (Player.Aura.Type[AURA_GREEN].Level >= 1)
-                Player.DamageFactor -= (fixed)Player.Aura.Type[AURA_GREEN].Level / 20.0;
+                Player.DamageFactor *= (1.0 - (fixed)Player.Aura.Type[AURA_GREEN].Level * 0.05);
             if (Player.Aura.Type[AURA_GREEN].Level >= 3 || Player.SoulActive[SOUL_GREEN])
                 GiveInventory("DRPGGreenAuraIronFeet", 1);
         }
@@ -2864,7 +2864,7 @@ void CheckAuras()
         }
         
         // Orange Aura
-        if (Player.Aura.Type[AURA_ORANGE].Level)
+        if (Player.Aura.Type[AURA_ORANGE].Active)
         {
             if (Player.Aura.Type[AURA_ORANGE].Level >= 1 || Player.SoulActive[SOUL_ORANGE])
                 Player.Speed *= 2;

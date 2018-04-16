@@ -308,10 +308,14 @@ NamedScript void CrateHack()
         // Nodes
         for (int i = 0; i < MAX_NODES; i++)
             if (Crate->Nodes[i].Active)
-                DrawBar(StrParam("HackNod%d", Crate->Nodes[i].Type + 1), 10 + Crate->Nodes[i].Start, 120, Crate->Nodes[i].End, true);
+            {
+                SetHudClipRect(10 + Crate->Nodes[i].Start, 120 - 8, Crate->Nodes[i].End, 120 + 8);
+                PrintSprite(StrParam("HackNod%d", Crate->Nodes[i].Type + 1), 0, 10.0 + Crate->Nodes[i].Start, 120.0, 0.05);
+                SetHudClipRect(0, 0, 0, 0);
+            }
         
         // Back
-        DrawBar(StrParam("HackBor%d", Crate->Tries), 10, 120, 300, true);
+        PrintSprite(StrParam("HackBor%d", Crate->Tries), 0, 10.1, 120.0, 0.05);
         PrintSprite("HackBack", 0, 10.1, 120.0, 0.05);
         
         // Move Cursor
@@ -755,12 +759,12 @@ void CrateTakeItem()
 
 void CrateTakeAll()
 {
-	// Save player's index inside the crate so it doesn't get flung around by the code below.
-	int Index = Player.CrateIndex;
-	
-	for (Player.CrateIndex = 0; Player.CrateIndex < Crates[Player.CrateID].Amount; Player.CrateIndex++)
-	{
-		bool Spawned = SpawnForced(Crates[Player.CrateID].Item[Player.CrateIndex]->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+    // Save player's index inside the crate so it doesn't get flung around by the code below.
+    int Index = Player.CrateIndex;
+    
+    for (Player.CrateIndex = 0; Player.CrateIndex < Crates[Player.CrateID].Amount; Player.CrateIndex++)
+    {
+        bool Spawned = SpawnForced(Crates[Player.CrateID].Item[Player.CrateIndex]->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
         
         if (Spawned)
         {

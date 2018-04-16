@@ -1940,7 +1940,7 @@ NamedScript void MonsterDeath()
             if (Killer == i)
             {
                 AddXP(i, XPAmount, RankAmount);
-                if (GetCVar("drpg_levelup_natural") && !Players(i).Stim.Active)
+                if (GetCVar("drpg_levelup_natural"))
                 {
                     fixed Scale = GetCVarFixed("drpg_strength_scalexp");
                     if (GetCVar("drpg_allow_spec"))
@@ -2063,6 +2063,10 @@ NamedScript void MonsterDeath()
         int CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
         int CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
         int CreditsAmount = Random(CreditsMin, CreditsMax);
+        
+        // REK-T50 accessory
+        if (Players(Killer).Shield.Active && Players(Killer).Shield.Accessory && Players(Killer).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
+            CreditsAmount *= 3;
         
         // RAINBOWS Event
         if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)

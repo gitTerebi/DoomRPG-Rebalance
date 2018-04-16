@@ -335,7 +335,6 @@ NamedScript void Loop()
     // Update Functions
     CheckCombo();
     CheckStats();
-    CheckStatBonus();
     CheckHardStatCaps();
     CheckRegen();
     CheckLuck();
@@ -410,7 +409,7 @@ NamedScript void Loop()
         Player.Mass *= 128;
 
     // Apply Stats
-    SetActorPropertyFixed(Player.TID, APROP_DamageMultiplier, (1.0 + ((fixed)Player.TotalDamage / 100.0)) * (Player.DamageMult > 1 ? Player.DamageMult : 1));
+    SetActorPropertyFixed(Player.TID, APROP_DamageMultiplier, (1.0 + ((fixed)Player.TotalDamage / 100.0)) * Player.DamageMult);
     SetActorPropertyFixed(Player.TID, APROP_DamageFactor, Player.DamageFactor);
     SetActorProperty(Player.TID, APROP_Mass, Player.Mass);
     SetActorProperty(Player.TID, APROP_SpawnHealth, Player.HealthMax);
@@ -648,7 +647,7 @@ NamedScript DECORATE int AddHealth(int HealthPercent, int MaxPercent)
         HealthAmount = RealMax - Player.ActualHealth;
 
     // Add Vitality XP for using healing items
-    if (GetCVar("drpg_levelup_natural") && !Player.Stim.Active)
+    if (GetCVar("drpg_levelup_natural"))
     {
         fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
         if (GetCVar("drpg_allow_spec"))
@@ -676,7 +675,7 @@ NamedScript DECORATE int AddHealthDirect(int HealthAmount, int MaxPercent)
         HealthAmount = RealMax - Player.ActualHealth;
 
     // Add Vitality XP for using healing items
-    if (GetCVar("drpg_levelup_natural") && !Player.Stim.Active)
+    if (GetCVar("drpg_levelup_natural"))
     {
         fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
         if (GetCVar("drpg_allow_spec"))
@@ -746,6 +745,7 @@ NamedScript void GiveTip()
         { "\CvShield Components",               "Shields are built from 4 basic components which you can collect and customize during the game. The body is named after the manufacturer and is generally responsible for modifying the capacity of the Shield, but also evenly modifies the other stats as well. The battery is generally responsible for modifying the charge rate of the shield. The capacitor is generally responsible for modifying the charge rate and delay rate of the shield. Accessories give the shield unique effects and abilities which can be triggered in various ways.", },
         { "\CvShield Stats",                    "Each shield has 4 stats which govern it's behavior and ability. Capacity determines the total amount of charge the shield can hold. Charge Rate determines the amount the charge pool will regenerate when a charge cycle is completed. Delay Rate determines the wait time that occurs when a charge cycle is interrupted before charging will resume again. Charge interval determines the length between charge cycles.", },
         { "\CvShield Charge Cycle",             "A charging cycle occurs based on the Charge Interval (default of 1 second) and increases the Shield's charge pool, determined by the Charge Rate. When the shield is struck, the charging cycle is interrupted and a waiting period, determined by the Delay Rate, must complete before charging cycles will resume again.", },
+        { "\CvQuick Shield Recharge",           StrParam("You can quickly recharge your shield at the cost of EP by holding \Cd%jS\C- + \Cd%jS\C-.", "+speed", "+use"), },
 
         // Stims
         { "\CcStims",                           "Stims are portable injected temporary stat increases. There are three forms of Stim vials that can be encountered: Stat vials, Booster vials and Powerup vials.", },
@@ -894,7 +894,7 @@ NamedScript void StatRandomizer()
 {
     Start:
 
-    if (GetActivatorCVar("drpg_auto_spend") && !Player.Stim.Active)
+    if (GetActivatorCVar("drpg_auto_spend"))
     {
         while (CheckInventory("DRPGModule") > 0 && !StatsCapped())
         {

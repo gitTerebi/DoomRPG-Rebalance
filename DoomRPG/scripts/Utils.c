@@ -193,7 +193,7 @@ NamedScript DECORATE int CheckCapacity()
     int MaxItems = CheckInventoryMax();
     
     // Add Capacity XP for total carried items
-    if (GetCVar("drpg_levelup_natural") && Timer() % 7 == 0 && !Player.Stim.Active)
+    if (GetCVar("drpg_levelup_natural") && Timer() % 7 == 0)
     {
         fixed Scale = GetCVarFixed("drpg_capacity_scalexp");
         if (GetCVar("drpg_allow_spec"))
@@ -749,7 +749,7 @@ NamedScript Console void CheckArmorStats()
     Log("\C[Green]Max Full Absorb: \C[Brick]%i%%", GetArmorInfo(ARMORINFO_MAXFULLABSORB));
 }
 
-// Returns whether your stats are all currently capped or not1
+// Returns whether your stats are all currently capped or not
 bool StatsCapped()
 {
     return (Player.Strength >= Player.StatCap &&
@@ -1808,7 +1808,7 @@ void DrawShieldModel(int ID, fixed X, fixed Y, int DrawID)
 
 void DrawMissionInfo(MissionInfo *Mission, fixed X, fixed Y, bool Active)
 {
-	// Header
+    // Header
     SetFont("BIGFONT");
     HudMessage("- MISSION INFO -");
     EndHudMessage(HUDMSG_PLAIN, 0, "Grey", X + 0.1, Y, 0.05);

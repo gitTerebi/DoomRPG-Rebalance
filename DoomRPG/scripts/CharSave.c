@@ -493,8 +493,8 @@ NamedScript MenuEntry void LoadCharacter()
     Player.Agility      = Info.Stats[5];
     Player.Capacity     = Info.Stats[6];
     Player.Luck         = Info.Stats[7];
-	
-	// Natural Bonuses
+    
+    // Natural Bonuses
     Player.StrengthNat     = Info.StatsNat[0];
     Player.DefenseNat      = Info.StatsNat[1];
     Player.VitalityNat     = Info.StatsNat[2];
@@ -503,16 +503,16 @@ NamedScript MenuEntry void LoadCharacter()
     Player.AgilityNat      = Info.StatsNat[5];
     Player.CapacityNat     = Info.StatsNat[6];
     Player.LuckNat         = Info.StatsNat[7];
-	
-	// Total values
-	Player.StrengthTotal = Player.Strength + Player.StrengthNat;
-	Player.DefenseTotal = Player.Defense + Player.DefenseNat;
-	Player.VitalityTotal = Player.Vitality + Player.VitalityNat;
-	Player.EnergyTotal = Player.Energy + Player.EnergyNat;
-	Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat;
-	Player.AgilityTotal = Player.Agility + Player.AgilityNat;
-	Player.CapacityTotal = Player.Capacity + Player.CapacityNat;
-	Player.LuckTotal = Player.Luck + Player.LuckNat;
+    
+    // Total values
+    Player.StrengthTotal = Player.Strength + Player.StrengthNat;
+    Player.DefenseTotal = Player.Defense + Player.DefenseNat;
+    Player.VitalityTotal = Player.Vitality + Player.VitalityNat;
+    Player.EnergyTotal = Player.Energy + Player.EnergyNat;
+    Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat;
+    Player.AgilityTotal = Player.Agility + Player.AgilityNat;
+    Player.CapacityTotal = Player.Capacity + Player.CapacityNat;
+    Player.LuckTotal = Player.Luck + Player.LuckNat;
     
     // Stat XP
     Player.StrengthXP = StatTable[Info.StatsNat[0] - 1];
@@ -712,28 +712,28 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
     Info->RankLevel = Player.RankLevel;
     
     // Stats
-    Info->Stats[0] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_STRENGTH] : Player.Strength);
-    Info->Stats[1] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_DEFENSE] : Player.Defense);
-    Info->Stats[2] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_VITALITY] : Player.Vitality);
-    Info->Stats[3] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_ENERGY] : Player.Energy);
-    Info->Stats[4] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_REGENERATION] : Player.Regeneration);
-    Info->Stats[5] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_AGILITY] : Player.Agility);
-    Info->Stats[6] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_CAPACITY] : Player.Capacity);
-    Info->Stats[7] = (Player.Stim.Active ? Player.Stim.PrevStats[STAT_LUCK] : Player.Luck);
+    Info->Stats[0] = Player.Strength;
+    Info->Stats[1] = Player.Defense;
+    Info->Stats[2] = Player.Vitality;
+    Info->Stats[3] = Player.Energy;
+    Info->Stats[4] = Player.Regeneration;
+    Info->Stats[5] = Player.Agility;
+    Info->Stats[6] = Player.Capacity;
+    Info->Stats[7] = Player.Luck;
     
     for (int i = 0; i < STAT_MAX; i++)
         if (Info->Stats[i] < 0)
             Info->Stats[i] = 0;
 
-	// Natural Bonuses
-	Info->StatsNat[0] = Player.StrengthNat;
-	Info->StatsNat[1] = Player.DefenseNat;
-	Info->StatsNat[2] = Player.VitalityNat;
-	Info->StatsNat[3] = Player.EnergyNat;
-	Info->StatsNat[4] = Player.RegenerationNat;
-	Info->StatsNat[5] = Player.AgilityNat;
-	Info->StatsNat[6] = Player.CapacityNat;
-	Info->StatsNat[7] = Player.LuckNat;
+    // Natural Bonuses
+    Info->StatsNat[0] = Player.StrengthNat;
+    Info->StatsNat[1] = Player.DefenseNat;
+    Info->StatsNat[2] = Player.VitalityNat;
+    Info->StatsNat[3] = Player.EnergyNat;
+    Info->StatsNat[4] = Player.RegenerationNat;
+    Info->StatsNat[5] = Player.AgilityNat;
+    Info->StatsNat[6] = Player.CapacityNat;
+    Info->StatsNat[7] = Player.LuckNat;
 
     // Skills
     for (int i = 0; i < MAX_CATEGORIES; i++)

@@ -356,25 +356,25 @@ void CheckStats()
 {
     // VERY IMPORTANT CODE RIGHT HERE
     // If you're reading this and you'd like to modify stat curves, this is where you'd do it
-	Player.StrengthTotal = Player.Strength + Player.StrengthNat;
-	Player.DefenseTotal = Player.Defense + Player.DefenseNat;
-	Player.VitalityTotal = Player.Vitality + Player.VitalityNat;
-	Player.EnergyTotal = Player.Energy + Player.EnergyNat;
-	Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat;
-	Player.AgilityTotal = Player.Agility + Player.AgilityNat;
-	Player.CapacityTotal = Player.Capacity + Player.CapacityNat;
-	Player.LuckTotal = Player.Luck + Player.LuckNat;
-	
+    Player.StrengthTotal = Player.Strength + Player.StrengthNat + Player.StrengthBonus;
+    Player.DefenseTotal = Player.Defense + Player.DefenseNat + Player.DefenseBonus;
+    Player.VitalityTotal = Player.Vitality + Player.VitalityNat + Player.VitalityBonus;
+    Player.EnergyTotal = Player.Energy + Player.EnergyNat + Player.EnergyBonus;
+    Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat + Player.RegenerationBonus;
+    Player.AgilityTotal = Player.Agility + Player.AgilityNat + Player.AgilityBonus;
+    Player.CapacityTotal = Player.Capacity + Player.CapacityNat + Player.CapacityBonus;
+    Player.LuckTotal = Player.Luck + Player.LuckNat + Player.LuckBonus;
+    
     Player.LevelDamage = Player.Level * (10 - GameSkill());
     Player.BonusDamage = Player.StrengthTotal;
-    Player.DamageMult = 0;
+    Player.DamageMult = 1.0;
     Player.TotalDamage = Player.LevelDamage + Player.BonusDamage;
     if (Player.DefenseTotal > 0)
         Player.DamageFactor = (Player.DefenseTotal > 200 ? 0.25 : 1.0 - Curve((fixed)Player.DefenseTotal, 0, 200, 0.01, 0.75));
     else
         Player.DamageFactor = 1.0 + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
     Player.Mass = 100 + (Player.DefenseTotal * 10);
-	Player.HealthMax = Player.VitalityTotal * 10;
+    Player.HealthMax = Player.VitalityTotal * 10;
     Player.StatusEffectResist = (fixed)Player.VitalityTotal / 4.0;
     Player.EPMax = Player.EnergyTotal * 10;
     Player.Aura.Range = Player.EnergyTotal * 16;
@@ -536,7 +536,7 @@ void CheckStats()
         
         Player.PrevVitality = Player.VitalityTotal;
     }
-	
+    
     // Scale EP with Energy changes
     if (Player.PrevEnergy != Player.EnergyTotal && Player.EP > 0)
     {
@@ -562,29 +562,12 @@ void CheckStats()
     
     // DRLA Checking
     if (CompatMode == COMPAT_DRLA)
+    {
         if (CheckInventory("RLTacticalBootsToken"))
             Player.SurvivalBonus += 20.0;
-}
-
-void CheckStatBonus()
-{
-    Player.Strength += Player.StrengthBonus;
-    Player.Defense += Player.DefenseBonus;
-    Player.Vitality += Player.VitalityBonus;
-    Player.Energy += Player.EnergyBonus;
-    Player.Regeneration += Player.RegenerationBonus;
-    Player.Agility += Player.AgilityBonus;
-    Player.Capacity += Player.CapacityBonus;
-    Player.Luck += Player.LuckBonus;
-    
-    Player.StrengthBonus = 0;
-    Player.DefenseBonus = 0;
-    Player.VitalityBonus = 0;
-    Player.EnergyBonus = 0;
-    Player.RegenerationBonus = 0;
-    Player.AgilityBonus = 0;
-    Player.CapacityBonus = 0;
-    Player.LuckBonus = 0;
+        if (PlayerClass(PlayerNumber()) == 1)
+            Player.JumpHeight *= 1.25;
+    }
 }
 
 void CheckRegen()
