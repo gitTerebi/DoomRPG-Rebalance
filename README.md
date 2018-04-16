@@ -6,12 +6,6 @@
 4. If you wish to compile this please use GDCC v0.12.0 64-bit (grab updated headers too: https://github.com/DavidPH/GDCC/tree/master/lib/inc/C/ACS_ZDoom) as it's the version I found most stable.
 
 
-### Last 5 builds:
-##### [BUILD 21.4](https://github.com/Sumwunn/DoomRPG/tree/5fae42d87786df51872d380770c13b7c9a4510a1)
-##### [BUILD 20.2](https://github.com/Sumwunn/DoomRPG/tree/ce92f760eeb7399133215dd64bd150a5e24d6ef5)
-##### [BUILD 19](https://github.com/Sumwunn/DoomRPG/tree/5b5665ca03012541cb14a0f70ef2f8657631fda2)
-##### [BUILD 18](https://github.com/Sumwunn/DoomRPG/tree/320a41f2b2e42404fdb01c67ab4ed03c69e0910f)
-
 
 I'm just a fan of DoomRPG and want to keep it functioning. I'm not experienced, and very much learning as I go, so feel free to offer any comments. I'm also looking at the TODO list and seeing which I can accomplish. Starting with the small tasks of course!
 
