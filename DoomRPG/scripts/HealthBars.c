@@ -217,8 +217,16 @@ void DrawBarBase(HUDBarInfo *Info)
     // Name
     if (GetActivatorCVar("drpg_healthbars_names"))
     {
+    	  // Make room for Player rank emblems.
+    	  if (Info->IsPlayer && Info->Rank > 0)
+    	  	  HealthBarY -= 20.0;
+    		
         SetFont("BIGFONT");
         DrawBarText(Info, StrParam("%S%S", Info->NameColor, Info->Name));
+        
+        // Make room for Player rank emblems.
+        if (Info->IsPlayer && Info->Rank > 0)
+        	  HealthBarY += 20.0;
     }
     
     HealthBarY += 24.0;
@@ -296,13 +304,13 @@ void DrawBarBase(HUDBarInfo *Info)
 
 void DrawBarEmblems(HUDBarInfo *Info)
 {
-    HealthBarY = 48.0;
+    HealthBarY = 0.0;
     
     if (Info->IsPlayer)
     {
         for (int i = 0; i < Info->Rank; i++)
         {
-            HealthBarX = -55.0 + (i * 7.0);
+            HealthBarX = -75.0 + (i * 7.0);
             DrawBarSprite(Info, "RankEmb");
         }
     }
