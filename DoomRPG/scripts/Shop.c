@@ -7,6 +7,7 @@
 #include "Minigame.h"
 #include "Shield.h"
 #include "Shop.h"
+#include "Stats.h"
 #include "Utils.h"
 
 // Global Shop Card Rank
@@ -108,11 +109,11 @@ void ShopItemTryAutoDeposit(ItemInfoPtr Item)
 
 NamedScript void ShopItemAutoHandler()
 {
-	bool ItemsCurrent = false;
+    bool ItemsCurrent = false;
     // These are actually too big for the script auto handler to allocate properly, so they need to be static-scope here.
     RPGMap static int Items[ITEM_CATEGORIES][ITEM_MAX];
     RPGMap static int PrevItems[ITEM_CATEGORIES][ITEM_MAX];
-	
+    
     UpdateShopAutoList();
     
     while (true)
@@ -180,10 +181,10 @@ NamedScript void ShopItemAutoHandler()
         
         // Prevent using old Items so we don't sell picked up stuff
         if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons != BT_SPEED)
-        	ItemsCurrent = false;
+            ItemsCurrent = false;
         
         if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons & BT_SPEED)
-        	ItemsCurrent = true;
+            ItemsCurrent = true;
             for (int i = 0; i < ItemCategories; i++)
                 for (int j = 0; j < ItemMax[i]; j++)
                     PrevItems[i][j] = Items[i][j];
@@ -212,7 +213,7 @@ void ShopLoop()
     // Draw Border
     // These are pushed back a bit so the border doesn't overlap anything
     if (GetActivatorCVar("drpg_menu_background_border"))
-    	DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
+        DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470); 
 
     // Force Locker mode if the Shop Anywhere CVAR is off
     if (!GetCVar("drpg_shoptype") && !CurrentLevel->UACBase)
@@ -423,7 +424,7 @@ void ShopLoop()
             for (int i = 0; i < ItemMax[Player.ShopPage]; i++)
                 while (Player.Locker[Player.ShopPage][i] > 0)
                     if (WithdrawItem(Player.ShopPage, i) == 0)
-                    	break;
+                        break;
         }
         else
         {
@@ -451,7 +452,7 @@ void BuyItem(str Item)
     {
         if (Player.DelayTimer <= 35.0 * GetActivatorCVarFixed("drpg_menu_repeat"))
         {
-            PrintError("You are not a high enough Rank to buy this item");
+            PrintError(StrParam("You need Rank %d (%S) to buy this item", ItemPtr->Rank, LongRanks[ItemPtr->Rank]));
             ActivatorSound("menu/error", 127);
         }
         
@@ -684,7 +685,7 @@ int WithdrawItem(int Page, int Index)
     
     // Stop if you're trying to withdraw your final copy while Keep is enabled
     if (Player.ItemKeep[Page][Index] && *LockerAmount <= 1)
-    	return 0;
+        return 0;
     
     // Spawning
     if ((Player.EP >= LOCKER_EPRATE || CurrentLevel->UACBase) && *LockerAmount > 0)
@@ -881,7 +882,7 @@ void DrawItemGrid()
             {
                 SetFont("BIGFONT");
                 HudMessage("%S", Name);
-                EndHudMessage(HUDMSG_PLAIN, 0, ((!Player.LockerMode && CanAfford) || Player.LockerMode ? "White" : "Red"), 24.1, 344.1, 0.05);
+                EndHudMessage(HUDMSG_PLAIN, 0, ((!Player.LockerMode && (CanAfford || !CanBuy)) || Player.LockerMode ? "White" : "Red"), 24.1, 344.1, 0.05);
             }
             
             // Increment X

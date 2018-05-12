@@ -2045,16 +2045,16 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         // Setup Stats
         Delay(4); // We need this initial delay to make sure the ID is valid
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(NewID)];
-        fixed Modifier = 1.0 + (fixed)Player.Level * ((fixed)Player.EnergyTotal / 20.0);
-        Stats->Level = (int)Modifier;
-        Stats->Strength = (int)Modifier + Random(0, Stats->Level / GameSkill());
-        Stats->Defense = (int)Modifier + Random(0, Stats->Level / GameSkill());
-        Stats->Vitality = (int)Modifier + Random(0, Stats->Level / GameSkill());
-        Stats->Energy = (int)Modifier + Random(0, Stats->Level / GameSkill());
-        Stats->Regeneration = (int)Modifier + Random(0, Stats->Level / GameSkill());
-        Stats->Agility = (int)Modifier + Random(0, Stats->Level / GameSkill());
-        Stats->Capacity = (int)Modifier + Random(0, Stats->Level / GameSkill());
-        Stats->Luck = (int)Modifier + Random(0, Stats->Level / GameSkill());
+        int Modifier = Player.Level * ((fixed)Player.EnergyTotal / 30.0);
+        Stats->LevelAdd += Modifier;
+        Stats->Strength += Random(0, Modifier / GameSkill());
+        Stats->Defense += Random(0, Modifier / GameSkill());
+        Stats->Vitality += Random(0, Modifier / GameSkill());
+        Stats->Energy += Random(0, Modifier / GameSkill());
+        Stats->Regeneration += Random(0, Modifier / GameSkill());
+        Stats->Agility += Random(0, Modifier / GameSkill());
+        Stats->Capacity += Random(0, Modifier / GameSkill());
+        Stats->Luck += Random(0, Modifier / GameSkill());
         Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(NewID)]);
         Stats->Flags |= MF_NOXP;
         Stats->Flags |= MF_NODROPS;

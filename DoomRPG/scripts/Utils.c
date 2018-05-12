@@ -262,7 +262,6 @@ NamedScript DECORATE int CheckCapacity()
                 "InvulnerabilityCharge2",
                 "RadSuit2",
                 "InvisibilityCharge2",
-                "RadSuit2",
                 "Infrared2",
                 "Berserk2",
                 
@@ -327,11 +326,11 @@ NamedScript DECORATE int PowersuitCheck()
             CheckInventory("PowerTimeFreezer") ||
             CheckInventory("DRPGPowerStimIndestructible") ||
             CheckInventory("DRPGPowerImmunityBullet") ||
-            CheckInventory("DRPGPowerImmunityBullet") ||
             CheckInventory("DRPGPowerImmunityMelee") ||
-            CheckInventory("DRPGPowerImmunityPlasma") ||
-            CheckInventory("RLPlasmaShieldArmorToken"))
+            CheckInventory("DRPGPowerImmunityPlasma"))
             return 4; // Powerups/Immunities for Anti Demon Field
+        else
+            return 0;
     }
     else
         return -1;

@@ -150,6 +150,20 @@ NamedScript KeyBind void UseMedkit()
     Player.ActualHealth += HealAmount;
     Player.Medkit -= HealAmount;
     
+    // Add Vitality XP for using healing items
+    if (GetCVar("drpg_levelup_natural"))
+    {
+        fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
+        if (GetCVar("drpg_allow_spec"))
+        {
+            if (GetActivatorCVar("drpg_character_spec") == 3)
+                Scale *= 2;
+        }
+    
+        int Factor = CalcPercent(HealAmount, Player.HealthMax);
+        Player.VitalityXP += (int)(Factor * Scale * 10);
+    }
+    
     ActivatorSound("items/healthuse", 127);
 }
 

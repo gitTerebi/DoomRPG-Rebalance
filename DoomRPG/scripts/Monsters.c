@@ -197,11 +197,13 @@ int NewMonsterID()
     Monsters[CurrentID].Reinforcement = false;
     Monsters[CurrentID].Target = 0;
     Monsters[CurrentID].Level = 0;
+    Monsters[CurrentID].LevelAdd = 0;
     Monsters[CurrentID].Aura.Time = 0;
     for (int i = 0; i < AURA_MAX; i++)
     {
         Monsters[CurrentID].Aura.Type[i].Active = false;
         Monsters[CurrentID].Aura.Type[i].Level = 0;
+        Monsters[CurrentID].AuraAdd[i] = false;
     }
     Monsters[CurrentID].Threat = 0;
     Monsters[CurrentID].Strength = 0;
@@ -351,9 +353,9 @@ NamedScript Console void MonsterSet(int Level, int Aura, int Flags)
     
     // Set Stats/Flags
     if (Level > 0)
-        Stats->Level = Level;
+        Stats->LevelAdd = Level;
     if (Aura > 0)
-        Stats->Aura.Type[Aura - 1].Active = true;
+        Stats->AuraAdd[Aura - 1] = true;
     if (Flags > 0)
         Stats->Flags = Flags;
     
@@ -372,7 +374,7 @@ NamedScript Console void MonsterSetShadow()
     
     // Apply all Auras
     for (int i = 0; i < AURA_MAX; i++)
-        Stats->Aura.Type[i].Active = true;
+        Stats->AuraAdd[i] = true;
     
     // Needs reinitialization to apply new info
     Stats->NeedReinit = true;
@@ -481,8 +483,10 @@ NamedScript Console void MonsterDamage(int Amount, int Type)
 OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 {
     // Move Activator to whoever the player is targeting
-    if (StatFlags & SF_PLAYERTARGET)
+    if (StatFlags & SF_PLAYERTARGET) {
         SetActivatorToTarget(Player.TID);
+        StatFlags |= SF_RECREATE;
+    }
     
     if (ClassifyActor(0) & ACTOR_WORLD)
         return; // The Monster Reducer can remove a monster before it attains stats, so if that happens, don't bother.
@@ -496,373 +500,409 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
     
-    int MonsterLevel = Stats->Level;
-    int MonsterThreat = Stats->Threat;
-    fixed MonsterSpeed = Stats->Speed;
-    int MonsterStrength = Stats->Strength;
-    int MonsterDefense = Stats->Defense;
-    int MonsterVitality = Stats->Vitality;
-    int MonsterEnergy = Stats->Energy;
-    int MonsterRegeneration = Stats->Regeneration;
-    int MonsterAgility = Stats->Agility;
-    int MonsterCapacity = Stats->Capacity;
-    int MonsterLuck = Stats->Luck;
-    int LevelType = GetCVar("drpg_monster_levels");
-    fixed LevelWeight = GetCVarFixed("drpg_monster_level_weight");
-    fixed MapWeight = GetCVarFixed("drpg_monster_map_weight");
-    fixed RandomMinWeight = GetCVarFixed("drpg_monster_random_min_mult");
-    fixed RandomMaxWeight = GetCVarFixed("drpg_monster_random_max_mult");
-    int LevelNum = CurrentLevel->LevelNum;
-    int NumPlayers;
     int StatEffect[8];
     int MonsterStatPool;
     
-    // Cap Level Number to 100
-    if (LevelNum > 100)
-        LevelNum = 100;
-    
-    // If the Arena is active, base the Monster Levels Map Number portion on the current wave
-    if (CurrentLevel->UACBase && ArenaActive)
-        LevelNum = ArenaWave / 3;
-    
-    // Calculate Monster Level
-    if (LevelType == 1 || LevelType == 3) // Player Level
-        MonsterLevel += (int)((fixed)AveragePlayerLevel() * LevelWeight);
-    if (LevelType == 2 || LevelType == 3) // Map Number
-        MonsterLevel += (int)((fixed)LevelNum * MapWeight);
-    if (AveragePlayerLuck() < 0)
-        MonsterLevel += -AveragePlayerLuck();
-    
-    // Randomization Weight
-    if (RandomMinWeight > RandomMaxWeight)
-        Log("\CgERROR: \C-Monster Random Min Multiplier cannot be above Monster Random Max Multiplier!");
-    else
-        MonsterLevel = (int)(MonsterLevel * RandomFixed(RandomMinWeight, RandomMaxWeight));
-    
-    // If the monster is friendly, it has the average level of all players in the game
-    if (GetActorProperty(0, APROP_Friendly))
-        MonsterLevel = AveragePlayerLevel();
-    
-    // Special case for Bosses
-    if (Stats->Flags & MF_BOSS)
-        MonsterLevel += (GameSkill() * 10);
-    
-    // Special case for Megabosses
-    if (Stats->Flags & MF_MEGABOSS)
-        MonsterLevel += ((1000 / MAX_PLAYERS) * PlayerCount());
-    
-    // Special case for Powersuit Mk. II
-    if (GetActorClass(0) == "DRPGSuperPowerSuit")
-        MonsterLevel = 1000;
-    
-    MonsterStatPool = 40 + GameSkill() * MonsterLevel;
-    
-    // Calculate the monster's cut and special stats
-    if (GetCVar("drpg_monster_specialize"))
+    if (!(StatFlags & SF_RECREATE))
     {
-        // [KS] Here's a fun and fast little way of doing it:
+        int LevelType = GetCVar("drpg_monster_levels");
+        fixed LevelWeight = GetCVarFixed("drpg_monster_level_weight");
+        fixed MapWeight = GetCVarFixed("drpg_monster_map_weight");
+        fixed RandomMinWeight = GetCVarFixed("drpg_monster_random_min_mult");
+        fixed RandomMaxWeight = GetCVarFixed("drpg_monster_random_max_mult");
+        int LevelNum = CurrentLevel->LevelNum;
         
-        // 2 specialized stats
-        StatEffect[0] = 2;
-        StatEffect[1] = 2;
+        // Cap Level Number to 100
+        if (LevelNum > 100)
+            LevelNum = 100;
         
-        // 2 normal stats
-        StatEffect[2] = 0;
-        StatEffect[3] = 0;
+        // If the Arena is active, base the Monster Levels Map Number portion on the current wave
+        if (CurrentLevel->UACBase && ArenaActive)
+            LevelNum = ArenaWave / 3;
         
-        // 4 cut stats
-        StatEffect[4] = 1;
-        StatEffect[5] = 1;
-        StatEffect[6] = 1;
-        StatEffect[7] = 1;
+        // Calculate Monster Level
+        if (LevelType == 1 || LevelType == 3) // Player Level
+            Stats->Level += (int)((fixed)AveragePlayerLevel() * LevelWeight);
+        if (LevelType == 2 || LevelType == 3) // Map Number
+            Stats->Level += (int)((fixed)LevelNum * MapWeight);
+        if (AveragePlayerLuck() < 0)
+            Stats->Level += -AveragePlayerLuck();
         
-        // Shuffle 'em up!
-        for (int i = 0; i < STAT_MAX; i++)
+        // Randomization Weight
+        if (RandomMinWeight > RandomMaxWeight)
+            Log("\CgERROR: \C-Monster Random Min Multiplier cannot be above Monster Random Max Multiplier!");
+        else
+            Stats->Level = (int)(Stats->Level * RandomFixed(RandomMinWeight, RandomMaxWeight));
+        
+        // If the monster is friendly, it has the average level of all players in the game
+        if (GetActorProperty(0, APROP_Friendly))
+            Stats->Level = AveragePlayerLevel();
+        
+        // Special case for Bosses
+        if (Stats->Flags & MF_BOSS)
+            Stats->Level += (GameSkill() * 10);
+        
+        // Special case for Megabosses
+        if (Stats->Flags & MF_MEGABOSS)
+            Stats->Level += ((1000 / MAX_PLAYERS) * PlayerCount());
+        
+        // Special case for Powersuit Mk. II
+        if (GetActorClass(0) == "DRPGSuperPowerSuit")
+            Stats->Level = 1000;
+        
+        MonsterStatPool = 40 + GameSkill() * Stats->Level;
+        
+        // Calculate the monster's cut and special stats
+        if (GetCVar("drpg_monster_specialize"))
         {
-            int SwapWith = Random(0, STAT_MAX - 1);
-            int Temp = StatEffect[i];
+            // [KS] Here's a fun and fast little way of doing it:
             
-            StatEffect[i] = StatEffect[SwapWith];
-            StatEffect[SwapWith] = Temp;
-        }
-        
-        // Next, create a weighted list of stats.
-        // Specialized stats are preferred over normal stats, and cut stats are avoided.
-        int StatSelector[14];
-        int j = 0;
-        
-        for (int i = 0; i < STAT_MAX; i++)
-        {
-            if (StatEffect[i] == 2)
+            // 2 specialized stats
+            StatEffect[0] = 2;
+            StatEffect[1] = 2;
+            
+            // 2 normal stats
+            StatEffect[2] = 0;
+            StatEffect[3] = 0;
+            
+            // 4 cut stats
+            StatEffect[4] = 1;
+            StatEffect[5] = 1;
+            StatEffect[6] = 1;
+            StatEffect[7] = 1;
+            
+            // Shuffle 'em up!
+            for (int i = 0; i < STAT_MAX; i++)
             {
-                StatSelector[j++] = i;
-                StatSelector[j++] = i;
-                StatSelector[j++] = i;
+                int SwapWith = Random(0, STAT_MAX - 1);
+                int Temp = StatEffect[i];
+                
+                StatEffect[i] = StatEffect[SwapWith];
+                StatEffect[SwapWith] = Temp;
             }
-            else if (StatEffect[i] == 0)
+            
+            // Next, create a weighted list of stats.
+            // Specialized stats are preferred over normal stats, and cut stats are avoided.
+            int StatSelector[14];
+            int j = 0;
+            
+            for (int i = 0; i < STAT_MAX; i++)
             {
-                StatSelector[j++] = i;
-                StatSelector[j++] = i;
+                if (StatEffect[i] == 2)
+                {
+                    StatSelector[j++] = i;
+                    StatSelector[j++] = i;
+                    StatSelector[j++] = i;
+                }
+                else if (StatEffect[i] == 0)
+                {
+                    StatSelector[j++] = i;
+                    StatSelector[j++] = i;
+                }
+                else
+                    StatSelector[j++] = i;
             }
-            else
-                StatSelector[j++] = i;
-        }
-        
-        // Finally, distribute the points with our weighted list.
-        while (MonsterStatPool > 0)
-        {
-            switch (StatSelector[Random (0, 13)])
+            
+            // Finally, distribute the points with our weighted list.
+            while (MonsterStatPool > 0)
             {
-                case 0:
-                    MonsterStrength++;
-                    break;
-                case 1:
-                    MonsterDefense++;
-                    break;
-                case 2:
-                    MonsterVitality++;
-                    break;
-                case 3:
-                    MonsterEnergy++;
-                    break;
-                case 4:
-                    MonsterRegeneration++;
-                    break;
-                case 5:
-                    MonsterAgility++;
-                    break;
-                case 6:
-                    MonsterCapacity++;
-                    break;
-                case 7:
-                    MonsterLuck++;
-                    break;
+                switch (StatSelector[Random (0, 13)])
+                {
+                    case 0:
+                        Stats->Strength++;
+                        break;
+                    case 1:
+                        Stats->Defense++;
+                        break;
+                    case 2:
+                        Stats->Vitality++;
+                        break;
+                    case 3:
+                        Stats->Energy++;
+                        break;
+                    case 4:
+                        Stats->Regeneration++;
+                        break;
+                    case 5:
+                        Stats->Agility++;
+                        break;
+                    case 6:
+                        Stats->Capacity++;
+                        break;
+                    case 7:
+                        Stats->Luck++;
+                        break;
+                }
+                MonsterStatPool--;
             }
-            MonsterStatPool--;
         }
-    }
-    else
-    {
-        // Distribute entirely at random
-        while (MonsterStatPool > 0)
+        else
         {
-            switch (Random (0, STAT_MAX - 1))
+            // Distribute entirely at random
+            while (MonsterStatPool > 0)
             {
-                case 0:
-                    MonsterStrength++;
-                    break;
-                case 1:
-                    MonsterDefense++;
-                    break;
-                case 2:
-                    MonsterVitality++;
-                    break;
-                case 3:
-                    MonsterEnergy++;
-                    break;
-                case 4:
-                    MonsterRegeneration++;
-                    break;
-                case 5:
-                    MonsterAgility++;
-                    break;
-                case 6:
-                    MonsterCapacity++;
-                    break;
-                case 7:
-                    MonsterLuck++;
-                    break;
+                switch (Random (0, STAT_MAX - 1))
+                {
+                    case 0:
+                        Stats->Strength++;
+                        break;
+                    case 1:
+                        Stats->Defense++;
+                        break;
+                    case 2:
+                        Stats->Vitality++;
+                        break;
+                    case 3:
+                        Stats->Energy++;
+                        break;
+                    case 4:
+                        Stats->Regeneration++;
+                        break;
+                    case 5:
+                        Stats->Agility++;
+                        break;
+                    case 6:
+                        Stats->Capacity++;
+                        break;
+                    case 7:
+                        Stats->Luck++;
+                        break;
+                }
+                MonsterStatPool--;
             }
-            MonsterStatPool--;
         }
-    }
-    
-    // Pity Points
-    if (MonsterStrength < 1)     MonsterStrength = 1;
-    if (MonsterDefense < 1)      MonsterDefense = 1;
-    if (MonsterVitality < 1)     MonsterVitality = 1;
-    if (MonsterEnergy < 1)       MonsterEnergy = 1;
-    if (MonsterRegeneration < 1) MonsterRegeneration = 1;
-    if (MonsterAgility < 1)      MonsterAgility = 1;
-    if (MonsterCapacity < 1)     MonsterCapacity = 1;
-    if (MonsterLuck < 1)         MonsterLuck = 1;
-    
-    // Map Event - RAINBOWS!
-    if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
-        MonsterCapacity *= Random(2, 4);
-    
-    // Apply Aura
-    if (!GetActorProperty(0, APROP_Friendly) && !(Stats->Flags & MF_NOAURA) && !(Stats->Flags & MF_NOAURAGEN) && !StatFlags)
-    {
-        // Check to see if any players have a Kill Auras mission
-        int AuraMissionAdd = 0;
-        if (CurrentLevel && !CurrentLevel->UACBase && !CurrentLevel->UACArena)
-            for (int i = 0; i < MAX_PLAYERS; i++)
-                if (Players(i).Mission.Type == MT_KILLAURAS)
-                    AuraMissionAdd += Players(i).Mission.Amount;
         
-        // Hell skill and above always has an additional +5% chance
-        if (GameSkill() >= 5)
-            AuraMissionAdd += 5;
+        // Pity Points
+        if (Stats->Strength < 1)     Stats->Strength = 1;
+        if (Stats->Defense < 1)      Stats->Defense = 1;
+        if (Stats->Vitality < 1)     Stats->Vitality = 1;
+        if (Stats->Energy < 1)       Stats->Energy = 1;
+        if (Stats->Regeneration < 1) Stats->Regeneration = 1;
+        if (Stats->Agility < 1)      Stats->Agility = 1;
+        if (Stats->Capacity < 1)     Stats->Capacity = 1;
+        if (Stats->Luck < 1)         Stats->Luck = 1;
         
-        // 1st roll: Chance of having an aura at all
-        bool HasAura = true;
-        if (CurrentLevel->Event != MAPEVENT_ALLAURAS)
+        // Map Event - RAINBOWS!
+        if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
+            Stats->Capacity *= Random(2, 4);
+        
+        // Apply Aura
+        if (!GetActorProperty(0, APROP_Friendly) && !(Stats->Flags & MF_NOAURA) && !(Stats->Flags & MF_NOAURAGEN))
         {
-            int AuraChance = 31 + ((GetCVar("drpg_aura_curve") * 100 / 97) + (MonsterLuck * 100 / 97));
-            if (AuraChance < 0)    AuraChance = 0;
-            if (AuraChance > 1000) AuraChance = 1000;
-            AuraChance *= AuraChance;
-            AuraChance /= 1000;
-            if (AuraMissionAdd > 0)
-                AuraChance += (AuraMissionAdd * 10);
-            HasAura = (Random(0, 1000) < AuraChance);
-        }
-        
-        // 2nd roll: Number of auras to have
-        int AuraRand = Random(MonsterEnergy / 10, 200);
-        int AuraNumber = (AuraRand * AuraRand) / 4000;
-        if (AuraNumber < 1) AuraNumber = 1;
-        if (AuraNumber > AURA_MAX) AuraNumber = AURA_MAX;
-        if (!HasAura) AuraNumber = 0;
+            // Check to see if any players have a Kill Auras mission
+            int AuraMissionAdd = 0;
+            if (CurrentLevel && !CurrentLevel->UACBase && !CurrentLevel->UACArena)
+                for (int i = 0; i < MAX_PLAYERS; i++)
+                    if (Players(i).Mission.Type == MT_KILLAURAS)
+                        AuraMissionAdd += Players(i).Mission.Amount;
+            
+            // Hell skill and above always has an additional +5% chance
+            if (GameSkill() >= 5)
+                AuraMissionAdd += 5;
+            
+            // 1st roll: Chance of having an aura at all
+            bool HasAura = true;
+            if (CurrentLevel->Event != MAPEVENT_ALLAURAS)
+            {
+                int AuraChance = 31 + ((GetCVar("drpg_aura_curve") * 100 / 97) + (Stats->Luck * 100 / 97));
+                if (AuraChance < 0)    AuraChance = 0;
+                if (AuraChance > 1000) AuraChance = 1000;
+                AuraChance *= AuraChance;
+                AuraChance /= 1000;
+                if (AuraMissionAdd > 0)
+                    AuraChance += (AuraMissionAdd * 10);
+                HasAura = (Random(0, 1000) < AuraChance);
+            }
+            
+            // 2nd roll: Number of auras to have
+            int AuraRand = Random(Stats->Energy / 10, 200);
+            int AuraNumber = (AuraRand * AuraRand) / 4000;
+            if (AuraNumber < 1) AuraNumber = 1;
+            if (AuraNumber > AURA_MAX) AuraNumber = AURA_MAX;
+            if (!HasAura) AuraNumber = 0;
 
-        // Run through and decide on which Auras it should have
-        for (int i = 0; i < AURA_MAX; i++)
-        {
-            if (AuraNumber == 0)
-                break;
-            
-            Stats->Aura.Type[i].Active = true;
-            AuraNumber--;
-            
-            int SwapWith = Random(0, AURA_MAX - 1);
-            bool Temp = Stats->Aura.Type[i].Active;
-            
-            Stats->Aura.Type[i].Active = Stats->Aura.Type[SwapWith].Active;
-            Stats->Aura.Type[SwapWith].Active = Temp;
-        }
-        
-        // Are You A Bad Enough Dude?
-        if (GetCVar("drpg_monster_shadows"))
+            // Run through and decide on which Auras it should have
             for (int i = 0; i < AURA_MAX; i++)
-                Stats->Aura.Type[i].Active = true;
-        
-        if (CurrentLevel->Event == MAPEVENT_HARMONIZEDAURAS)
-        {
-            if (CurrentLevel->AuraType == AURA_MAX)
-                for (int j = 0; j < AURA_MAX; j++)
-                    Stats->Aura.Type[j].Active = true;
-            else
-                Stats->Aura.Type[CurrentLevel->AuraType].Active = true;
+            {
+                if (AuraNumber == 0)
+                    break;
+                
+                Stats->AuraAdd[i] = true;
+                AuraNumber--;
+                
+                int SwapWith = Random(0, AURA_MAX - 1);
+                bool Temp = Stats->AuraAdd[i];
+                
+                Stats->AuraAdd[i] = Stats->AuraAdd[SwapWith];
+                Stats->AuraAdd[SwapWith] = Temp;
+            }
+            
+            // Are You A Bad Enough Dude?
+            if (GetCVar("drpg_monster_shadows"))
+                for (int i = 0; i < AURA_MAX; i++)
+                    Stats->AuraAdd[i] = true;
+            
+            if (CurrentLevel->Event == MAPEVENT_HARMONIZEDAURAS)
+            {
+                if (CurrentLevel->AuraType == AURA_MAX)
+                    for (int j = 0; j < AURA_MAX; j++)
+                        Stats->AuraAdd[j] = true;
+                else
+                    Stats->AuraAdd[CurrentLevel->AuraType] = true;
+            }
         }
     }
+    
+    if (Stats->AuraAdd[AURA_WHITE] || Stats->Aura.Type[AURA_WHITE].Active)
+        Stats->LevelAdd *= 2;
     
     // Apply the aura effects
-    if (Stats->Aura.Type[AURA_WHITE].Active) // White Aura - XP
+    if (Stats->AuraAdd[AURA_WHITE] && !Stats->Aura.Type[AURA_WHITE].Active) // White Aura - XP
     {
-        int OldMonsterLevel = MonsterLevel;
-        MonsterLevel *= 2;
-        
-        MonsterStatPool = GameSkill() * (MonsterLevel - OldMonsterLevel);
-        
-        // Distribute those new stats now.
-        while (MonsterStatPool > 0)
-        {
-            switch (Random (0, STAT_MAX - 1))
-            {
-                case 0:
-                    MonsterStrength++;
-                    break;
-                case 1:
-                    MonsterDefense++;
-                    break;
-                case 2:
-                    MonsterVitality++;
-                    break;
-                case 3:
-                    MonsterEnergy++;
-                    break;
-                case 4:
-                    MonsterRegeneration++;
-                    break;
-                case 5:
-                    MonsterAgility++;
-                    break;
-                case 6:
-                    MonsterCapacity++;
-                    break;
-                case 7:
-                    MonsterLuck++;
-                    break;
-            }
-            MonsterStatPool--;
-        }
-        
+        Stats->Aura.Type[AURA_WHITE].Active = true;
+        Stats->AuraAdd[AURA_WHITE] = false;
+        Stats->LevelAdd += Stats->Level;
         GiveInventory("DRPGWhiteAuraGiver", 1);
         MonsterLevelupHandler();
     }
-    if (Stats->Aura.Type[AURA_RED].Active) // Red Aura - Strength
+    if (Stats->AuraAdd[AURA_RED] && !Stats->Aura.Type[AURA_RED].Active) // Red Aura - Strength
     {
-        MonsterStrength *= 2;
+        Stats->Aura.Type[AURA_RED].Active = true;
+        Stats->AuraAdd[AURA_RED] = false;
+        Stats->Strength *= 2;
         GiveInventory("DRPGRedAuraGiver", 1);
         MonsterDamageRetaliationHandler();
     }
-    if (Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
+    if (Stats->AuraAdd[AURA_GREEN] && !Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
     {
-        MonsterDefense *= 2;
+        Stats->Aura.Type[AURA_GREEN].Active = true;
+        Stats->AuraAdd[AURA_GREEN] = false;
+        Stats->Defense *= 2;
         GiveInventory("DRPGGreenAuraGiver", 1);
     }
-    if (Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
+    if (Stats->AuraAdd[AURA_PINK] && !Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
     {
-        MonsterVitality *= 2;
+        Stats->Aura.Type[AURA_PINK].Active = true;
+        Stats->AuraAdd[AURA_PINK] = false;
+        Stats->Vitality *= 2;
         GiveInventory("DRPGPinkAuraGiver", 1);
         MonsterFellowResurrectionHandler();
     }
-    if (Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
+    if (Stats->AuraAdd[AURA_BLUE] && !Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
     {
-        MonsterEnergy *= 2;
+        Stats->Aura.Type[AURA_BLUE].Active = true;
+        Stats->AuraAdd[AURA_BLUE] = false;
+        Stats->Energy *= 2;
         GiveInventory("DRPGBlueAuraGiver", 1);
         MonsterEPDrainHandler();
     }
-    if (Stats->Aura.Type[AURA_PURPLE].Active) // Purple Aura - Regeneration
-        MonsterRegeneration *= 2;
-    if (Stats->Aura.Type[AURA_ORANGE].Active) // Orange Aura - Agility
+    if (Stats->AuraAdd[AURA_PURPLE] && !Stats->Aura.Type[AURA_PURPLE].Active) // Purple Aura - Regeneration
     {
-        MonsterAgility *= 2;
+        Stats->Aura.Type[AURA_PURPLE].Active = true;
+        Stats->AuraAdd[AURA_PURPLE] = false;
+        Stats->Regeneration *= 2;
+    }
+    if (Stats->AuraAdd[AURA_ORANGE] && !Stats->Aura.Type[AURA_ORANGE].Active) // Orange Aura - Agility
+    {
+        Stats->Aura.Type[AURA_ORANGE].Active = true;
+        Stats->AuraAdd[AURA_ORANGE] = false;
+        Stats->Agility *= 2;
         GiveInventory("DRPGOrangeAuraGiver", 1);
         MonsterEpicVisitTimeHandler();
     }
-    if (Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
+    if (Stats->AuraAdd[AURA_DARKBLUE] && !Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
     {
-        MonsterCapacity *= 2;
+        Stats->Aura.Type[AURA_DARKBLUE].Active = true;
+        Stats->AuraAdd[AURA_DARKBLUE] = false;
+        Stats->Capacity *= 2;
         MonsterAmmoDrainHandler();
     }
-    if (Stats->Aura.Type[AURA_YELLOW].Active) // Yellow Aura - Luck
+    if (Stats->AuraAdd[AURA_YELLOW] && !Stats->Aura.Type[AURA_YELLOW].Active) // Yellow Aura - Luck
     {
-        MonsterLuck *= 2;
+        Stats->Aura.Type[AURA_YELLOW].Active = true;
+        Stats->AuraAdd[AURA_YELLOW] = false;
+        Stats->Luck *= 2;
         MonsterMoneyDrainHandler();
     }
     
     // Calculate Aura time
-    Stats->Aura.Time = (30 * 35) + (int)((fixed)MonsterEnergy * 0.57) * 35;
+    Stats->Aura.Time = (30 * 35) + (int)((fixed)Stats->Energy * 0.57) * 35;
+    
+    // Apply extra levels from white aura and any other sources
+    if (Stats->LevelAdd > 0) {
+        if (Stats->Level + Stats->LevelAdd >= 1000)
+            Stats->LevelAdd = 1000 - Stats->Level;
+        MonsterStatPool = GameSkill() * Stats->LevelAdd;
+        
+        int StrengthAdd = 0;
+        int DefenseAdd = 0;
+        int VitalityAdd = 0;
+        int EnergyAdd = 0;
+        int RegenerationAdd = 0;
+        int AgilityAdd = 0;
+        int CapacityAdd = 0;
+        int LuckAdd = 0;
+        
+        // Distribute those new stats now.
+        while (MonsterStatPool > 0)
+        {
+            switch (Random(0, STAT_MAX - 1))
+            {
+                case 0:
+                    StrengthAdd++;
+                    break;
+                case 1:
+                    DefenseAdd++;
+                    break;
+                case 2:
+                    VitalityAdd++;
+                    break;
+                case 3:
+                    EnergyAdd++;
+                    break;
+                case 4:
+                    RegenerationAdd++;
+                    break;
+                case 5:
+                    AgilityAdd++;
+                    break;
+                case 6:
+                    CapacityAdd++;
+                    break;
+                case 7:
+                    LuckAdd++;
+                    break;
+            }
+            MonsterStatPool--;
+        }
+        
+        if (Stats->Aura.Type[AURA_RED].Active) StrengthAdd *= 2;
+        if (Stats->Aura.Type[AURA_GREEN].Active) DefenseAdd *= 2;
+        if (Stats->Aura.Type[AURA_PINK].Active) VitalityAdd *= 2;
+        if (Stats->Aura.Type[AURA_BLUE].Active) EnergyAdd *= 2;
+        if (Stats->Aura.Type[AURA_PURPLE].Active) RegenerationAdd *= 2;
+        if (Stats->Aura.Type[AURA_ORANGE].Active) AgilityAdd *= 2;
+        if (Stats->Aura.Type[AURA_DARKBLUE].Active) CapacityAdd *= 2;
+        if (Stats->Aura.Type[AURA_YELLOW].Active) LuckAdd *= 2;
+        
+        Stats->Strength += StrengthAdd;
+        Stats->Defense += DefenseAdd;
+        Stats->Vitality += VitalityAdd;
+        Stats->Energy += EnergyAdd;
+        Stats->Regeneration += RegenerationAdd;
+        Stats->Agility += AgilityAdd;
+        Stats->Capacity += CapacityAdd;
+        Stats->Luck += LuckAdd;
+    
+        Stats->Level += Stats->LevelAdd;
+        Stats->LevelAdd = 0;
+    }
     
     // Cap Level and Stats
     CapMonsterStats(Stats);
     
     // We need to make sure we only pass the speed to the monster if it's being initially created
-    MonsterSpeed = GetActorPropertyFixed(0, APROP_Speed);
-    
-    // Apply the stats to the monster
-    Stats->Level = MonsterLevel;
-    Stats->Speed = MonsterSpeed;
-    Stats->Strength = MonsterStrength;
-    Stats->Defense = MonsterDefense;
-    Stats->Vitality = MonsterVitality;
-    Stats->Energy = MonsterEnergy;
-    Stats->Regeneration = MonsterRegeneration;
-    Stats->Agility = MonsterAgility;
-    Stats->Capacity = MonsterCapacity;
-    Stats->Luck = MonsterLuck;
+    Stats->Speed = GetActorPropertyFixed(0, APROP_Speed);
     
     // [KS] We only need to do a health check here since the other checks are handled below.
     // Calculate Health
@@ -932,7 +972,7 @@ NamedScript void MonsterAggressionHandler()
     
     if (Aggression < 1.0)
     {
-        if (RandomFixed(0.0, 1.0) < Aggression)
+        if (RandomFixed(0.0, 1.0) > Aggression)
             GiveInventory("DRPGMonsterDontAttack", 1);
     }
     else
@@ -1413,7 +1453,10 @@ NamedScript void MonsterRegenerationHandler()
     if (GetActorProperty(0, APROP_Health) > Stats->HealthMax)
         SetActorProperty(0, APROP_Health, Stats->HealthMax);
     
-    Delay(35 * (Stats->Aura.Type[AURA_PURPLE].Active ? 10 : 30));
+    if (Stats->Aura.Type[AURA_PURPLE].Active && !CheckInventory("DRPGMonsterDisrupted"))
+        Delay(35 * 10);
+    else
+        Delay(35 * 30);
     goto Start;
 }
 

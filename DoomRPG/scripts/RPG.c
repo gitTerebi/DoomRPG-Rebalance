@@ -877,15 +877,15 @@ NamedScript void WeaponSpeed()
 
     Start:
 
-    if (Player.AgilityTotal <= 100)
-        Time = Abs(RoundInt(Player.WeaponSpeed * 0.35 - 35.0));
+    if (Player.Stim.PowerupTimer[STIM_RAGE] > 0 || Player.WeaponSpeed >= 100 || Player.WeaponSpeed <= 0)
+        Time = 4;
     else
-        Time = 0;
-
-    if (GetActivatorCVar("drpg_stat_weaponspeed") || Player.Stim.PowerupTimer[STIM_RAGE] > 0)
+        Time = (int)(4 * (100.0 / Player.WeaponSpeed - 0.05)) + 1;
+    
+    if (Player.Stim.PowerupTimer[STIM_RAGE] > 0 || (Player.WeaponSpeed > 0 && GetActivatorCVar("drpg_stat_weaponspeed")))
         SetInventory("DRPGSpeed", 1);
-
-    Delay((Player.Stim.PowerupTimer[STIM_RAGE] > 0 ? 1 : Time + 1));
+    
+    Delay(Time);
     goto Start;
 }
 
