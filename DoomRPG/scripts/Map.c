@@ -3050,7 +3050,6 @@ NamedScript void WhispersofDarknessEvent()
             MonsterIndex = GetMonsterID(TID);
             
             Monsters[MonsterIndex].LevelAdd += ((250 / MAX_PLAYERS) * PlayerCount());
-            //Monsters[MonsterIndex].Level /= 4;
             Monsters[MonsterIndex].NeedReinit = true;
             
             // Shadow Aura

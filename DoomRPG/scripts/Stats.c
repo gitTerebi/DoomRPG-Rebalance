@@ -402,7 +402,7 @@ void CheckStats()
     SetAmmoCapacity("Cell", Player.CapacityTotal * 30);
     Player.Stim.VialMax = Player.CapacityTotal * 10;
     Player.SurvivalBonus = (fixed)Player.AgilityTotal / 10.0;
-    if (CompatMode == COMPAT_DRLA) // DRLA - Total Weapons, Armors/Boots, Skulls
+    if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
     {
         SetAmmoCapacity("RLArmorInInventory", DRLA_ARMOR_MAX);
         SetAmmoCapacity("RLSkullLimit", DRLA_SKULL_MAX);

@@ -120,7 +120,7 @@ NamedScript void InitMission()
             int Chosen = ((int *)PotentialTargets.Data)[Random(0, PotentialTargets.Position - 1)];
 
             int LevelMod = Player.Mission.Difficulty * Player.Level;
-			LevelMod = (int)(LevelMod * RandomFixed(1.0, 1.25));
+            LevelMod = (int)(LevelMod * RandomFixed(1.0, 1.25));
             Monsters[Chosen].LevelAdd += LevelMod;
             Monsters[Chosen].Target = PlayerNumber() + 1;
 
