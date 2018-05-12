@@ -321,8 +321,8 @@ NamedScript Type_OPEN void MapInit()
         
         // Give a tip for events instead if they're new to the player
         if (CurrentLevel->Event != MAPEVENT_NONE)
-        	// Player has seen this event before
-        	if (Players(i).SeenEventTip[CurrentLevel->Event]) continue;
+            // Player has seen this event before
+            if (Players(i).SeenEventTip[CurrentLevel->Event]) continue;
         
         SetActivator(Players(i).TID);
         GiveTip();
@@ -359,8 +359,8 @@ NamedScript Type_OPEN void MapInit()
         MapLoop();
         // Jimmy's Jukebox Randomizer compatibility.
         if (GetCVar("drpg_jjirandomizer_compat"))
-        	if (CurrentLevel->Event == MAPEVENT_NONE) 
-        		CallACS("jjirandomizer");
+            if (CurrentLevel->Event == MAPEVENT_NONE) 
+                CallACS("jjirandomizer");
 }
 
 NamedScriptSync void ReduceMonsterCount()
@@ -617,7 +617,7 @@ NamedScript void MapLoop()
         // All Auras and Harmonized Destruction events are ended by killing everything on the map
         if (Timer() > 4)
         {
-        	SetMusic("");
+            SetMusic("");
             AmbientSound("misc/secret", 127);
             SetFont("BIGFONT");
             HudMessage("Everything falls silent.");
@@ -724,7 +724,7 @@ NamedScript MapSpecial void AddUnknownMap(str Name, str DisplayName, int LevelNu
 // Level exit script for Teleport_NewMap
 NumberedScript(MAP_EXIT_TELEPORT_SCRIPTNUM) MapSpecial void MapExitTeleport(int map, int pos, int face)
 {
-	MapExit(false, true, map, pos, face);
+    MapExit(false, true, map, pos, face);
 }
 
 // Level exit script
@@ -834,8 +834,8 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
     
     if (Teleport)
     {
-    	Teleport_NewMap(map, pos, face);
-    	return;
+        Teleport_NewMap(map, pos, face);
+        return;
     }
     
     if (Secret)
@@ -852,18 +852,18 @@ NamedScript void AddMiniboss()
     if (MonsterID <= 1) return; // No monsters, no miniboss.
     
     int Chosen = Random(1, MonsterID - 1);
-    int LevelMod = (4 + (GameSkill() - 5)) * Player.Level + Random(0, 100);
-    
     while (!Monsters[Chosen].Init)
         Chosen = Random(1, MonsterID - 1);
     
-    Monsters[Chosen].Level += LevelMod;
-    Monsters[Chosen].Level /= 4;
-    Monsters[Chosen].NeedReinit = true;
+    int LevelMod = (4 + (GameSkill() - 5)) * AveragePlayerLevel();
+    LevelMod = (int)(LevelMod * RandomFixed(1.0, 1.33));
+    Monsters[Chosen].LevelAdd += LevelMod;
     
     // Shadow Aura
     for (int i = 0; i < AURA_MAX; i++)
-        Monsters[Chosen].Aura.Type[i].Active = true;
+        Monsters[Chosen].AuraAdd[i] = true;
+    
+    Monsters[Chosen].NeedReinit = true;
     
     // EVIL LAUGH OF WARNING
     if (Monsters[Chosen].Threat >= 10)
@@ -2122,8 +2122,8 @@ NamedScript void LowPowerEvent()
     for (int i = 0; i < LevelSectorCount; i++)
     {
         Light_Stop(i);
-    	Light_Flicker(i, 48, 96);
-    	Sector_SetColor(i, 64, 96, 255, 0);
+        Light_Flicker(i, 48, 96);
+        Sector_SetColor(i, 64, 96, 255, 0);
     }
     
     // Spawn the Generator
@@ -2146,9 +2146,9 @@ NamedScript void LowPowerEvent()
     for (int i = 0; i < LevelSectorCount; i++)
     {
         Light_Stop(i);
-    	Light_Glow(i, 160, 96, 35 * 3);
-    	Sector_SetColor(i, 255, 128, 32, 0);
-	}
+        Light_Glow(i, 160, 96, 35 * 3);
+        Sector_SetColor(i, 255, 128, 32, 0);
+    }
     
     MapEventReward();
     
@@ -2329,8 +2329,8 @@ NamedScript void HellUnleashedSpawnMonsters()
             Spawn("TeleportFog", CurrentPosition->X, CurrentPosition->Y, CurrentPosition->Z, 0, CurrentPosition->Angle);
             // Setup Stats
             Stats = &Monsters[GetMonsterID(TID)];
-            Stats->Level += (int)CurrentLevel->LevelAdd;
-            Stats->NeedReinit = true;        
+            Stats->LevelAdd += (int)CurrentLevel->LevelAdd;
+            Stats->NeedReinit = true;
         }
         // Stagger the loop here so that we can make monsters appear to spawn in semi-randomly
         Delay(Random(1, 10));
@@ -2537,7 +2537,7 @@ NamedScript void DoomsdayEvent()
         if (!Monsters[i].Init || Random(0, 3))
             continue;
         
-        Monsters[i].Aura.Type[AURA_RED].Active = true;
+        Monsters[i].AuraAdd[AURA_RED] = true;
         
         Monsters[i].NeedReinit = true;
     }
@@ -2732,7 +2732,7 @@ NamedScript void DarkZoneEvent()
                 Thing_Raise(Monsters[i].TID);
             
             for (int a = 0; a < AURA_MAX; ++a)
-                Monsters[i].Aura.Type[a].Active = true;
+                Monsters[i].AuraAdd[a] = true;
             
             Monsters[i].NeedReinit = true;
             SpawnSpotFacing("ArchvileFire", Monsters[i].TID, 0);
@@ -2771,7 +2771,7 @@ NamedScript void SinstormEvent()
             continue;
         
         for (int j = 0; j < AURA_MAX; j++)
-            Monsters[i].Aura.Type[j].Active = true;
+            Monsters[i].AuraAdd[j] = true;
         
         Monsters[i].NeedReinit = true;
     }
@@ -3049,13 +3049,13 @@ NamedScript void WhispersofDarknessEvent()
             Delay(1);
             MonsterIndex = GetMonsterID(TID);
             
-            Monsters[MonsterIndex].Level += ((250 / MAX_PLAYERS) * PlayerCount());
-            Monsters[MonsterIndex].Level /= 4;
+            Monsters[MonsterIndex].LevelAdd += ((250 / MAX_PLAYERS) * PlayerCount());
+            //Monsters[MonsterIndex].Level /= 4;
             Monsters[MonsterIndex].NeedReinit = true;
             
             // Shadow Aura
             for (int i = 0; i < AURA_MAX; i++)
-                Monsters[MonsterIndex].Aura.Type[i].Active = true;
+                Monsters[MonsterIndex].AuraAdd[i] = true;
 
             if (GetCVar("drpg_debug"))
                 Log("\CdDEBUG: \CgShadow Overmind successfully spawned");

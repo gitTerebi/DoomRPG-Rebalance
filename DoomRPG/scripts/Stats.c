@@ -150,6 +150,20 @@ NamedScript KeyBind void UseMedkit()
     Player.ActualHealth += HealAmount;
     Player.Medkit -= HealAmount;
     
+    // Add Vitality XP for using healing items
+    if (GetCVar("drpg_levelup_natural"))
+    {
+        fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
+        if (GetCVar("drpg_allow_spec"))
+        {
+            if (GetActivatorCVar("drpg_character_spec") == 3)
+                Scale *= 2;
+        }
+    
+        int Factor = CalcPercent(HealAmount, Player.HealthMax);
+        Player.VitalityXP += (int)(Factor * Scale * 10);
+    }
+    
     ActivatorSound("items/healthuse", 127);
 }
 
@@ -388,7 +402,7 @@ void CheckStats()
     SetAmmoCapacity("Cell", Player.CapacityTotal * 30);
     Player.Stim.VialMax = Player.CapacityTotal * 10;
     Player.SurvivalBonus = (fixed)Player.AgilityTotal / 10.0;
-    if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
+    if (CompatMode == COMPAT_DRLA) // DRLA - Total Weapons, Armors/Boots, Skulls
     {
         SetAmmoCapacity("RLArmorInInventory", DRLA_ARMOR_MAX);
         SetAmmoCapacity("RLSkullLimit", DRLA_SKULL_MAX);

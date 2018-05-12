@@ -118,17 +118,18 @@ NamedScript void InitMission()
         if (PotentialTargets.Position)
         {
             int Chosen = ((int *)PotentialTargets.Data)[Random(0, PotentialTargets.Position - 1)];
-            int LevelMod = Player.Mission.Difficulty * Player.Level + Random(0, 100);
 
+            int LevelMod = Player.Mission.Difficulty * Player.Level;
+			LevelMod = (int)(LevelMod * RandomFixed(1.0, 1.25));
+            Monsters[Chosen].LevelAdd += LevelMod;
             Monsters[Chosen].Target = PlayerNumber() + 1;
-            Monsters[Chosen].Level += LevelMod;
-            Monsters[Chosen].Level /= 4; // Shadow Auras always double their level, and double their stats on top
-            Monsters[Chosen].NeedReinit = true;
 
             // Shadow Aura
             for (int i = 0; i < AURA_MAX; i++)
-                Monsters[Chosen].Aura.Type[i].Active = true;
+                Monsters[Chosen].AuraAdd[i] = true;
 
+            Monsters[Chosen].NeedReinit = true;
+            
             // EVIL LAUGH OF WARNING
             if (Monsters[Chosen].Threat >= 10)
                 LocalAmbientSound("mission/gottarget2", 127);

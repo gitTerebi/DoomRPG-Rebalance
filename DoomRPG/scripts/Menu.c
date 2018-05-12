@@ -598,7 +598,7 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "Brick",              30.1,   136.0,  0.05);
         HudMessage("EP Timer: %.2k Sec", (fixed)(Player.EPTime / (35.0K * 2.0K)));
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",          30.1,   144.0,  0.05);
-        HudMessage("Regen Bonus: %d Sec", (int)(5.0 + ((fixed)Player.RegenerationTotal / 13.33)));
+        HudMessage("Regen Sphere: %d Sec", (int)(5.0 + ((fixed)Player.RegenerationTotal / 13.33)));
         EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
         HudMessage("Toxicity Regen: %d Sec", 30 - Player.ToxicityRegenBonus);
         EndHudMessage(HUDMSG_PLAIN, 0, "Green",              30.1,   160.0,  0.05);
@@ -606,7 +606,7 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",             230.1,  136.0,  0.05);
         HudMessage("Jump Height: %.2k", Player.JumpHeight);
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",             230.1,  144.0,  0.05);
-        HudMessage("%d%% Weapon Speed", Player.WeaponSpeed);
+        HudMessage("+%d%% Weapon Speed", Player.WeaponSpeed);
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",             230.1,  152.0,  0.05);
         HudMessage("%.2k%% Survival Bonus", Player.SurvivalBonus);
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",             230.1,  160.0,  0.05);
@@ -841,7 +841,7 @@ void DrawStatsMenu()
             
             // Vitality
             {
-                "No Movement Penalties",
+                "No movement penalties at low health",
                 "2x HP regeneration rate below 10% health",
                 NULL
             },

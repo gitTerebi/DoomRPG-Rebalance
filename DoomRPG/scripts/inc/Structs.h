@@ -314,6 +314,9 @@ struct MonsterStats_S
 
     // Auras
     struct AuraInfo_S Aura;
+
+    int LevelAdd;
+    bool AuraAdd[AURA_MAX];
 };
 
 struct MonsterInfo_S
