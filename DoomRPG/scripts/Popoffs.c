@@ -137,9 +137,8 @@ NamedScript DECORATE void ModulePopoffs()
 // Spawn a popoff number
 void Popoff(int TID, int Value, int Color, str DigitType, bool FloatAway)
 {
-    int Digits[DNUM_DIGITS];
     int DigitTID = UniqueTID();
-    int DigitBase = 1;
+    int DigitPos = 1;
     fixed X = GetActorX(TID);
     fixed Y = GetActorY(TID);
     fixed Z = GetActorZ(TID);
@@ -154,35 +153,18 @@ void Popoff(int TID, int Value, int Color, str DigitType, bool FloatAway)
     if (CheckFlag(TID, "CEILINGHUGGER"))
         Z = GetActorZ(TID) - Monsters[GetMonsterID(TID)].Height;
     
+    if (Value < 0)
+        Value *= -1;
+    
     // Prevent digit overflow
     if (Value > 9999999)
         Value = 9999999;
     
-    // Put the digits into the array
-    for (int i = 0; i < DNUM_DIGITS; i++)
-        Digits[i] = GetDigit(Abs(Value), i);
-    
-    // Digit Spawning
-    for (int i = 0; i < DNUM_DIGITS; i++)
+    while (Value > 0)
     {
-        str DigitActor = StrParam("%S%dNum%d", DigitType, i + 1, Digits[i]);
-        
-        if (Value >= DigitBase || Value <= -DigitBase)
-            switch (Digits[1])
-            {
-            case 0: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 1: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 2: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 3: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 4: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 5: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 6: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 7: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 8: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            case 9: Spawn(DigitActor, X, Y, Z, DigitTID, 0);    break;
-            }
-        
-        DigitBase *= 10;
+        Spawn(StrParam("%S%dNum%d", DigitType, DigitPos, Value % 10), X, Y, Z, DigitTID, 0);
+        Value /= 10;
+        DigitPos++;
     }
     
     // Color
@@ -200,11 +182,6 @@ void Popoff(int TID, int Value, int Color, str DigitType, bool FloatAway)
         else
             SetActorVelocity(DigitTID, RandomFixed(-1.0, 1.0), RandomFixed(-1.0, 1.0), 0.5, 0, 0);
     }
-}
-
-int GetDigit(int Num, int Digit)
-{
-    return (Num / Pow(10, Digit)) % 10;
 }
 
 int GetDamageNumbersDelay()
