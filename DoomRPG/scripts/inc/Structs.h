@@ -528,24 +528,6 @@ struct PlayerData_S
     int TID;
     int PlayerView;
 
-    // Inputs
-    struct
-    {
-        bool Attack;
-        bool AltAttack;
-        bool Use;
-        bool Modifier;
-
-        bool SkillWheel;
-        bool TurretWheel;
-        bool DRPGMenu;
-
-        bool Forward;
-        bool Back;
-        bool Right;
-        bool Left;
-    } Input, OldInput;
-
     // Flags
     bool FirstRun;
     bool InMenu;
@@ -718,6 +700,8 @@ struct PlayerData_S
     int SkillCostMult;
     int SkillPowerupCooldown;
     int SkillSupplyCooldown;
+    bool EPPadCooldown;
+    int EPPadCooldownTimer;
     bool Focusing;
     bool Overdrive;
 

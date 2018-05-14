@@ -645,8 +645,6 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
 NamedScript Type_ENTER void SkillWheel()
 {
     bool Close = false;
-    int Buttons;
-    int OldButtons;
     int Radius = 128;
     int CurrentRadius = 0;
     int Cost = 0;
@@ -670,7 +668,7 @@ NamedScript Type_ENTER void SkillWheel()
 
     if (!((Player.InMenu && Player.Menu != 3) || Player.InShop || Player.OutpostMenu > 0 || Player.Turret.WheelOpen))
     {
-        if (CheckInput(KEYNUM_SKILLS, KEY_PRESSED))
+        if (CheckInput(BT_USER1, KEY_HELD, false, PlayerNumber()))
         {
             ActivatorSound("menu/click", 127);
             Player.SkillWheelOpen = true;
@@ -684,10 +682,6 @@ NamedScript Type_ENTER void SkillWheel()
         {
             SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
             
-            // Check Input
-            Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-            OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
-            
             // Setup lerp location
             Increment = 1.0 / MAX_SKILLKEYS;
             Location = (Increment * (fixed)Player.WheelSelection);
@@ -697,7 +691,7 @@ NamedScript Type_ENTER void SkillWheel()
                 OldLocation += 1.0;
             
             // Check for release
-            if (!CheckInput(KEYNUM_SKILLS, KEY_PRESSED) && !CheckInput(KEYNUM_MODIFIER, KEY_PRESSED))
+            if (!CheckInput(BT_USER1, KEY_HELD, false, PlayerNumber()) && !CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Player.WheelSelection != -1)
                 {
@@ -740,7 +734,7 @@ NamedScript Type_ENTER void SkillWheel()
             // Input
             if (!Close)
             {
-                if (CheckInput(KEYNUM_LEFT, KEY_DOWN))
+                if (CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber()))
                 {
                     ActivatorSound("menu/click", 127);
                     Player.WheelSelection--;
@@ -748,7 +742,7 @@ NamedScript Type_ENTER void SkillWheel()
                     LerpPos = 0;
                     if (Player.WheelSelection < 0) Player.WheelSelection = MAX_SKILLKEYS - 1;
                 }
-                if (CheckInput(KEYNUM_RIGHT, KEY_DOWN))
+                if (CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber()))
                 {
                     ActivatorSound("menu/click", 127);
                     Player.WheelSelection++;
@@ -756,26 +750,26 @@ NamedScript Type_ENTER void SkillWheel()
                     LerpPos = 0;
                     if (Player.WheelSelection > MAX_SKILLKEYS - 1) Player.WheelSelection = 0;
                 }
-                if (CheckInput(KEYNUM_MODIFIER, KEY_PRESSED) && Player.SkillCategory[Player.WheelSelection] != -1 && Player.SkillIndex[Player.WheelSelection] != -1)
+                if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && Player.SkillCategory[Player.WheelSelection] != -1 && Player.SkillIndex[Player.WheelSelection] != -1)
                 {
                     SkillLevel = &Player.SkillLevel[Player.SkillCategory[Player.WheelSelection]][Player.SkillIndex[Player.WheelSelection]];
                     
                     // Decrease selected skill level
-                    if (CheckInput(KEYNUM_BACK, KEY_DOWN) && SkillLevel->CurrentLevel > 1)
+                    if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()) && SkillLevel->CurrentLevel > 1)
                     {
                         SkillLevel->CurrentLevel--;
                         AmbientSound("menu/move", 127);
                     }
                     
                     // Increase selected skill level
-                    if (CheckInput(KEYNUM_FORWARD, KEY_DOWN) && SkillLevel->CurrentLevel < SkillLevel->Level)
+                    if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()) && SkillLevel->CurrentLevel < SkillLevel->Level)
                     {
                         SkillLevel->CurrentLevel++;
                         AmbientSound("menu/move", 127);
                     }
                     
                     // Clear Skill
-                    if (CheckInput(KEYNUM_USE, KEY_DOWN))
+                    if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
                     {
                         Player.SkillCategory[Player.WheelSelection] = -1;
                         Player.SkillIndex[Player.WheelSelection] = -1;
@@ -892,13 +886,12 @@ NamedScript KeyBind void UseSkill(int Key)
         SkillLevel = &Player.SkillLevel[Player.SkillPage][Player.MenuIndex];
     }
     
-    int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
     int EPCost = ScaleEPCost(CurrentSkill->Cost * SkillLevel->CurrentLevel);
     bool Success;
     
     // Overdrive?
     Player.Overdrive = false;
-    if (Buttons & BT_SPEED && (!Player.InMenu && !Player.InShop))
+    if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && (!Player.InMenu && !Player.InShop))
         Player.Overdrive = true;
     
     // Overdriving an unlearnt skill will learn it
@@ -2379,15 +2372,13 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
                 // Skip input checks if you've already voted
                 if (Voted[i]) continue;
                 
-                int Buttons = GetPlayerInput(i, INPUT_BUTTONS);
-                
-                if (Buttons == BT_USE)
+                if (CheckInput(BT_USE, KEY_ONLYHELD, false, PlayerNumber()))
                 {
                     ActivatorSound("menu/move", 127);
                     PlayersApprove++;
                     Voted[i] = true;
                 }
-                if (Buttons == BT_SPEED)
+                if (CheckInput(BT_SPEED, KEY_ONLYHELD, false, PlayerNumber()))
                 {
                     ActivatorSound("menu/move", 127);
                     PlayersDeny++;

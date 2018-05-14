@@ -872,9 +872,7 @@ NamedScript void AmpShieldMod()
         
         if (Player.Shield.Charge >= Player.Shield.Capacity)
         {
-            int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-
-            if (Buttons & BT_ATTACK && !Player.InMenu && !Player.InShop && !Player.OutpostMenu)
+            if (CheckInput(BT_ATTACK, KEY_HELD, false, PlayerNumber()) && !Player.InMenu && !Player.InShop && !Player.OutpostMenu)
             {
                 PlaySound(0, "shield/amp", 5, 1.0, false, 1.0);
                 FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0.0, 0.5);
@@ -1490,8 +1488,7 @@ void CheckShields()
             DeactivateShield();
     
     // EP -> Shield Charging
-    int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-    if (Player.Shield.Active && (!Player.InMenu && !Player.InShop) && Buttons & BT_SPEED && Buttons & BT_USE && Player.Shield.Charge < Player.Shield.Capacity)
+    if (Player.Shield.Active && (!Player.InMenu && !Player.InShop) && CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()) && Player.Shield.Charge < Player.Shield.Capacity)
     {
         bool SkipEPCharge = false;
         

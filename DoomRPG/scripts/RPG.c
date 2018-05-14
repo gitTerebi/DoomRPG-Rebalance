@@ -20,9 +20,6 @@
 #include "Turret.h"
 #include "Utils.h"
 
-// Version
-const str Version = "SE BUILD 24 - Powered by GDCC!";
-
 // Flags
 bool Transported;
 bool GlobalsInitialized;
@@ -78,7 +75,7 @@ NamedScript Type_OPEN void GlobalInit()
     if (!GlobalsInitialized)
     {
         // Version Info
-        Log("\CnDoom RPG %S (Compiled on %S at %S) loaded!", Version, __DATE__, __TIME__);
+        Log("\CnDoom RPG SE (GDCC) (Compiled on %S) loaded!", __DATE__);
 
         // Compatibility checking
         CheckCompatibility();
@@ -1415,7 +1412,7 @@ NamedScript void FocusMode()
         RegenWindupSpeed = 35;
     int StartWindupSpeed = RegenWindupSpeed;
     int RegenDelay = (RegenWindupSpeed * (Player.EPTime / 4)) / StartWindupSpeed;
-    int Buttons, Percent;
+    int Percent;
 
     // [KS] Someone did this!
     if (GetActorProperty(0, APROP_Health) <= 0) return;
@@ -1427,7 +1424,6 @@ NamedScript void FocusMode()
 
     while (Player.Focusing)
     {
-        Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
         Percent = 100 - (RegenWindupSpeed * 100 / StartWindupSpeed);
         fixed X = GetActorX(0) + Cos((fixed)Timer() / 64.0) * 32.0;
         fixed Y = GetActorY(0) + Sin((fixed)Timer() / 64.0) * 32.0;
@@ -1458,7 +1454,7 @@ NamedScript void FocusMode()
             RegenDelay = (RegenWindupSpeed * (Player.EPTime / 4)) / StartWindupSpeed;
         }
 
-        if (Buttons > 0 || Player.EP >= Player.EPMax)
+        if (CheckInput(0, KEY_NOTIDLE, false, PlayerNumber()) || Player.EP >= Player.EPMax)
             Player.Focusing = false;
 
         Delay(1);
@@ -1589,7 +1585,7 @@ NamedScript Type_RESPAWN void Respawn()
     }
 
     // Quick Teleport
-    if (GetPlayerInput(PlayerNumber(), INPUT_BUTTONS) & BT_SPEED)
+    if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
     {
         int PlayerNum = -1;
         while (PlayerNum == -1 || PlayerNum == PlayerNumber() || !PlayerInGame(PlayerNum))

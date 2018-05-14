@@ -39,7 +39,7 @@ NamedScript KeyBind void OpenShop(bool OpenLocker)
     Player.InMenu = false;
     
     // Sanity check for pressing use while the shop is open in front of the counter in the Outpost
-    if (Player.InShop && GetPlayerInput(PlayerNumber(), INPUT_BUTTONS) & BT_USE) return;
+    if (Player.InShop && CheckInput(BT_USE, KEY_HELD, false, PlayerNumber())) return;
     
     if (Player.InShop)
     {
@@ -110,6 +110,7 @@ void ShopItemTryAutoDeposit(ItemInfoPtr Item)
 NamedScript void ShopItemAutoHandler()
 {
     bool ItemsCurrent = false;
+    bool ButtonHeld = false;
     // These are actually too big for the script auto handler to allocate properly, so they need to be static-scope here.
     RPGMap static int Items[ITEM_CATEGORIES][ITEM_MAX];
     RPGMap static int PrevItems[ITEM_CATEGORIES][ITEM_MAX];
@@ -118,10 +119,15 @@ NamedScript void ShopItemAutoHandler()
     
     while (true)
     {
-        int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        
+    	// Standby loop.
+    	while (!GetActivatorCVar("drpg_pickup_behavior"))
+    	       Delay(35);
+    	
+    	// Get input.
+    	ButtonHeld = CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber());
+    	
         // For post-checks
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons & BT_SPEED)
+        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && ButtonHeld)
             for (int i = 0; i < ItemCategories; i++)
                 for (int j = 0; j < ItemMax[i]; j++)
                     Items[i][j] = CheckInventory(ItemData[i][j].Actor);
@@ -159,7 +165,7 @@ NamedScript void ShopItemAutoHandler()
             }
             
         // Run-pickup behavior stuff
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && ItemsCurrent && Buttons & BT_SPEED)
+        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && ItemsCurrent && ButtonHeld)
         {
             for (int i = 0; i < ItemCategories; i++)
                 for (int j = 0; j < ItemMax[i]; j++)
@@ -179,11 +185,11 @@ NamedScript void ShopItemAutoHandler()
         
         Delay(1);
         
-        // Prevent using old Items so we don't sell picked up stuff
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons != BT_SPEED)
+        // Prevent using old Items so we don't sell recently picked up stuff.
+        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && !ButtonHeld)
             ItemsCurrent = false;
         
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && Buttons & BT_SPEED)
+        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && ButtonHeld)
             ItemsCurrent = true;
             for (int i = 0; i < ItemCategories; i++)
                 for (int j = 0; j < ItemMax[i]; j++)
@@ -194,8 +200,6 @@ NamedScript void ShopItemAutoHandler()
 void ShopLoop()
 {
     ItemInfoPtr ItemPtr = &ItemData[Player.ShopPage][Player.ShopIndex];
-    int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-    int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
     int Cost = ItemPtr->Price - ItemPtr->Price * Player.ShopDiscount / 100;
     int Rank = ItemPtr->Rank;
     int SellPrice;
@@ -306,27 +310,27 @@ void ShopLoop()
     }
     
     // Check Input
-    if (Buttons & BT_FORWARD && !(OldButtons & BT_FORWARD))
+    if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
-        if (Buttons & BT_SPEED)
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             Player.ShopIndex -= 54;
         else
             Player.ShopIndex -= 9;
         if (Player.ShopIndex < 0) Player.ShopIndex = 0;
     };
-    if (Buttons & BT_BACK && !(OldButtons & BT_BACK))
+    if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
-        if (Buttons & BT_SPEED)
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             Player.ShopIndex += 54;
         else
             Player.ShopIndex += 9;
         if (Player.ShopIndex > ItemMax[Player.ShopPage] - 1) Player.ShopIndex = ItemMax[Player.ShopPage] - 1;
     }
-    if ((Buttons & BT_LEFT && !(OldButtons & BT_LEFT)) ||
-        (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT)))
-        if (Buttons & BT_SPEED)
+    if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
+        (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.ShopPage--;
@@ -339,9 +343,9 @@ void ShopLoop()
             Player.ShopIndex--;
             if (Player.ShopIndex < 0) Player.ShopIndex = 0;
         }
-    if ((Buttons & BT_RIGHT && !(OldButtons & BT_RIGHT)) ||
-        (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT)))
-        if (Buttons & BT_SPEED)
+    if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
+        (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.ShopPage++;
@@ -354,8 +358,8 @@ void ShopLoop()
             Player.ShopIndex++;
             if (Player.ShopIndex > ItemMax[Player.ShopPage] - 1) Player.ShopIndex = ItemMax[Player.ShopPage] - 1;
         }
-    if (Buttons & BT_USE && (Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat") ? true : !(OldButtons & BT_USE)) && !Player.MenuBlock)
-        if (Buttons & BT_SPEED)
+    if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()) && !Player.MenuBlock)
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         {
             if (Player.LockerMode)
                 WithdrawItem(Player.ShopPage, Player.ShopIndex);
@@ -369,12 +373,12 @@ void ShopLoop()
             else if (Player.ItemAutoMode[Player.ShopPage][Player.ShopIndex] != AT_SELL)
                 BuyItem(ItemPtr->Actor);
         }
-    if (Buttons & BT_JUMP && !(OldButtons & BT_JUMP) && (GetCVar("drpg_shoptype") || CurrentLevel->UACBase))
+    if (CheckInput(BT_JUMP, KEY_PRESSED, false, PlayerNumber()) && (GetCVar("drpg_shoptype") || CurrentLevel->UACBase))
     {
         Player.LockerMode = !Player.LockerMode;
         ActivatorSound("menu/move", 127);
     }
-    if (Buttons & BT_ZOOM && !(OldButtons & BT_ZOOM))
+    if (CheckInput(BT_ZOOM, KEY_PRESSED, false, PlayerNumber()))
         if (!(ItemCategoryFlags[Player.ShopPage] & CF_NODROP) && CheckInventory(ItemPtr->Actor) > 0 && !(CompatMode == COMPAT_DRLA && (Player.ShopPage == 0 || Player.ShopPage == 3 || Player.ShopPage == 8 || Player.ShopPage == 9)))
         {
             int Success = DropPlayerItem(ItemPtr->Actor);
@@ -386,11 +390,11 @@ void ShopLoop()
                 ActivatorSound("menu/error", 127);
             }
         }
-    if (Buttons & BT_USE || (Buttons & BT_USE && Buttons & BT_SPEED))
+    if (CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()) || (CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()) && CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber())))
         Player.DelayTimer++;
-    if (Buttons & BT_ATTACK && !(OldButtons & BT_ATTACK))
+    if (CheckInput(BT_ATTACK, KEY_PRESSED, false, PlayerNumber()))
     {
-        if (Buttons & BT_SPEED)
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         {
             Player.ItemKeep[Player.ShopPage][Player.ShopIndex] = !Player.ItemKeep[Player.ShopPage][Player.ShopIndex];
             ActivatorSound("menu/move", 127);
@@ -417,7 +421,7 @@ void ShopLoop()
         
         UpdateShopAutoList();
     }
-    if (Buttons == BT_ALTATTACK && OldButtons != BT_ALTATTACK && Player.LockerMode)
+    if (CheckInput(BT_ALTATTACK, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.LockerMode)
     {
         if (CurrentLevel->UACBase)
         {
@@ -434,7 +438,7 @@ void ShopLoop()
     }
     
     // Reset the Delay Timer if no buttons are pressed
-    if (Buttons == 0 && OldButtons == 0)
+    if (CheckInput(0, KEY_IDLE, false, PlayerNumber()))
         Player.DelayTimer = 0;
     
     // Reset the menu block

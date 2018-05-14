@@ -32,7 +32,7 @@ NamedScript void ItemRoulette(bool Rare)
     
     Player.InMinigame = true;
     
-    int Buttons, OldButtons, Duds, Index;
+    int Duds, Index;
     
     // Set the HUD Size
     SetHudSize(640, 480, false);
@@ -56,10 +56,6 @@ NamedScript void ItemRoulette(bool Rare)
                        "+forward", "+back", "+moveleft", "+moveright", "+use", "+speed");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 90.1, 460.0, 0.05);
         }
-        
-        // Buttons
-        Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
         
         // Keep menus closed - This is technically a hack and shouldn't be here
         Player.InMenu = false;
@@ -153,7 +149,7 @@ NamedScript void ItemRoulette(bool Rare)
             PlaySound(0, "menu/click", CHAN_BODY, 0.8, true, ATTN_NORM);
         
         // Input Handling
-        if (Buttons & BT_USE && !(OldButtons & BT_USE) && Spinning)
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()) && Spinning)
         {
             ActivatorSound("menu/move", 127);
             if (!Started)
@@ -161,24 +157,24 @@ NamedScript void ItemRoulette(bool Rare)
             else
                 Spinning = false;
         }
-        if (Buttons & BT_SPEED && Spinning)
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && Spinning)
         {
             StopSound(0, CHAN_BODY);
             Finished = true;
         }
-        if (Buttons & BT_FORWARD && !(OldButtons & BT_FORWARD) && !Started)
+        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()) && !Started)
         {
             ActivatorSound("menu/move", 127);
             ChipIndex--;
             if (ChipIndex < 0) ChipIndex = 3;
         }
-        if (Buttons & BT_BACK && !(OldButtons & BT_BACK) && !Started)
+        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()) && !Started)
         {
             ActivatorSound("menu/move", 127);
             ChipIndex++;
             if (ChipIndex > 3) ChipIndex = 0;
         }
-        if (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT) && !Started)
+        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()) && !Started)
         {
             switch (ChipIndex)
             {
@@ -219,7 +215,7 @@ NamedScript void ItemRoulette(bool Rare)
                 break;
             }
         }
-        if (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT) && !Started && ChipTotal < (Rare ? CheckInventory("DRPGChipPlatinum") : CheckInventory("DRPGChipGold")))
+        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()) && !Started && ChipTotal < (Rare ? CheckInventory("DRPGChipPlatinum") : CheckInventory("DRPGChipGold")))
         {
             switch (ChipIndex)
             {

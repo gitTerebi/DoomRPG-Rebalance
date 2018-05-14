@@ -67,7 +67,7 @@ str const ArenaMonsters[MAX_DEF_MONSTERS] =
 // Arena Script
 NamedScript MapSpecial void ArenaLoop()
 {
-    int BonusRandomizer, Buttons, OldButtons;
+    int BonusRandomizer;
     bool Ready;
     ArenaSetEnvironment(AEVENT_NONE);
     
@@ -96,8 +96,6 @@ NamedScript MapSpecial void ArenaLoop()
         }
         else if (ArenaState == ARENA_WAITING)
         {
-            Buttons = GetPlayerInput(ArenaPlayerNumber, INPUT_BUTTONS);
-            OldButtons = GetPlayerInput(ArenaPlayerNumber, INPUT_OLDBUTTONS);
             Ready = true;
             
             SetHudSize(0, 0, false);
@@ -111,7 +109,7 @@ NamedScript MapSpecial void ArenaLoop()
                     EndHudMessage(HUDMSG_PLAIN, 0, "White", 1.5, 0.75, 0.05);
                 }
                 
-                if (Buttons & BT_USE && (!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
+                if (CheckInput(BT_USE, KEY_HELD, false, ArenaPlayerNumber) && (!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
                 {
                     // Check to see if others are still in the menu
                     for (int i = 0; i < MAX_PLAYERS; i++)
@@ -146,7 +144,7 @@ NamedScript MapSpecial void ArenaLoop()
                         ActivatorSound("menu/error", 127);
                     }
                 }
-                else if (Buttons & BT_SPEED && (!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen))
+                else if (CheckInput(BT_SPEED, KEY_HELD, false, ArenaPlayerNumber) && (!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen))
                 {
                     ArenaKeyTimer++;
                     ArenaKeyTimerType = AKTIMER_STOP;
@@ -160,7 +158,7 @@ NamedScript MapSpecial void ArenaLoop()
                     ArenaKeyTimer = 0;
                 
                 // Reset menu block
-                if (Buttons == 0 && OldButtons == 0)
+                if (CheckInput(0, KEY_IDLE, false, ArenaPlayerNumber))
                     Player.MenuBlock = false;
             }
         }
@@ -239,7 +237,6 @@ NamedScript MapSpecial void ArenaChooseBonus()
     int BonusChoice = 1;
     bool CanChooseKey = false;
     fixed X, Y;
-    int Buttons, OldButtons;
     
     // There's a 1/4 chance you can use Drop Key
     if (Random(1, 4) == 1) CanChooseKey = true;
@@ -250,8 +247,6 @@ NamedScript MapSpecial void ArenaChooseBonus()
     {
         X = 150.1;
         Y = 100.0;
-        Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
         
         SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
         
@@ -273,21 +268,21 @@ NamedScript MapSpecial void ArenaChooseBonus()
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 150.1, 50.0, 0.05);
         
         // Input
-        if (Buttons == BT_FORWARD && OldButtons != BT_FORWARD)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             BonusChoice--;
             if (BonusChoice < 1) BonusChoice = ABONUS_MAX - (CanChooseKey ? 1 : 2);
             if (BonusChoice == ABONUS_MODDROP && CompatMode != COMPAT_DRLA) BonusChoice--;
         }
-        if (Buttons == BT_BACK && OldButtons != BT_BACK)
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             BonusChoice++;
             if (BonusChoice == ABONUS_MODDROP && CompatMode != COMPAT_DRLA) BonusChoice++;
             if (BonusChoice > ABONUS_MAX - (CanChooseKey ? 1 : 2)) BonusChoice = 1;
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
             ArenaGetBonus(BonusChoice);

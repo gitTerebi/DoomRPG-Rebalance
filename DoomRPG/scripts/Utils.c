@@ -2571,93 +2571,62 @@ void CreateTranslations()
     CreateTranslationEnd();
 }
 
-NamedScript Type_ENTER void UpdatePlayerInputs()
+bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
 {
-    int Buttons;
-    int XAxis, YAxis;
+	int Input;
+	int InputOld;
+	int Buttons;
+	int OldButtons;
+	
+	if (ModInput)
+	{
+		Input = MODINPUT_BUTTONS;
+		InputOld = MODINPUT_OLDBUTTONS;
+	}
+	else
+	{
+		Input = INPUT_BUTTONS;
+		InputOld = INPUT_OLDBUTTONS;
+	}
+	
+	Buttons = GetPlayerInput(PlayerNumber, Input);
+    OldButtons = GetPlayerInput(PlayerNumber, InputOld);
     
-Start:
-    Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
+    if (State == KEY_PRESSED) 
+    {
+    	if (Buttons & Key && !(OldButtons & Key))
+    		return true;
+    }
     
-    // These need a bit more care
-    XAxis = GetPlayerInput(PlayerNumber(), INPUT_SIDEMOVE);
-    YAxis = GetPlayerInput(PlayerNumber(), INPUT_FORWARDMOVE);
+    else if (State == KEY_ONLYPRESSED)
+    {
+    	if (Buttons == Key && OldButtons != Key)
+    		return true;
+    }
     
-    Player.Input.Attack    = Buttons & BT_ATTACK;
-    Player.Input.AltAttack = Buttons & BT_ALTATTACK;
-    Player.Input.Use       = Buttons & BT_USE;
-    Player.Input.Modifier  = Buttons & BT_SPEED;
+    else if (State == KEY_HELD)
+    {
+    	if (Buttons & Key)
+    		return true;
+    }
     
-    Player.Input.SkillWheel  = Buttons & BT_USER1;
-    Player.Input.TurretWheel = Buttons & BT_USER2;
-    Player.Input.DRPGMenu    = Buttons & BT_USER3;
+    else if (State == KEY_ONLYHELD)
+    {
+    	if (Buttons == Key)
+    		return true;
+    }
     
-    Player.Input.Forward = YAxis > 0;
-    Player.Input.Back    = YAxis < 0;
-    Player.Input.Right   = XAxis > 0;
-    Player.Input.Left    = XAxis < 0;
+    else if (State == KEY_IDLE) 
+    {
+    	if (Buttons == 0 && OldButtons == 0)
+    		return true;
+    }
     
-    Delay(1);
-    
-    Player.OldInput.Attack    = Player.Input.Attack;
-    Player.OldInput.AltAttack = Player.Input.AltAttack;
-    Player.OldInput.Use       = Player.Input.Use;
-    Player.OldInput.Modifier  = Player.Input.Modifier;
-    
-    Player.OldInput.SkillWheel  = Player.Input.SkillWheel;
-    Player.OldInput.TurretWheel = Player.Input.TurretWheel;
-    Player.OldInput.DRPGMenu    = Player.Input.DRPGMenu;
-    
-    Player.OldInput.Forward = Player.Input.Forward;
-    Player.OldInput.Back    = Player.Input.Back;
-    Player.OldInput.Right   = Player.Input.Right;
-    Player.OldInput.Left    = Player.Input.Left;
-    
-    goto Start;
-}
-
-OptionalArgs(1) bool CheckInput(int Key, int State)
-{
-    bool *Inputs[] = {
-        &Player.Input.Attack,
-        &Player.Input.AltAttack,
-        &Player.Input.Use,
-        &Player.Input.Modifier,
-        
-        &Player.Input.SkillWheel,
-        &Player.Input.TurretWheel,
-        &Player.Input.DRPGMenu,
-        
-        &Player.Input.Forward,
-        &Player.Input.Back,
-        &Player.Input.Right,
-        &Player.Input.Left
-    };
-    
-    bool *OldInputs[] = {
-        &Player.OldInput.Attack,
-        &Player.OldInput.AltAttack,
-        &Player.OldInput.Use,
-        &Player.OldInput.Modifier,
-        
-        &Player.OldInput.SkillWheel,
-        &Player.OldInput.TurretWheel,
-        &Player.OldInput.DRPGMenu,
-        
-        &Player.OldInput.Forward,
-        &Player.OldInput.Back,
-        &Player.OldInput.Right,
-        &Player.OldInput.Left
-    };
-    
-    if (State == KEY_PRESSED)
-        return *Inputs[Key];
-    if (State == KEY_ONLYPRESSED)
-        return *Inputs[Key];
-    if (State == KEY_DOWN)
-        return *Inputs[Key] && !(*OldInputs[Key]);
-    if (State == KEY_UP)
-        return !(*Inputs[Key]) && *OldInputs[Key];
+    else if (State == KEY_NOTIDLE) 
+    {
+    	if (Buttons > 0)
+    		return true;
+    }
     
     return false;
 }

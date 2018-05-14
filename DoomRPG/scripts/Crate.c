@@ -270,8 +270,6 @@ NamedScript void CrateHack()
     bool Hacking = true;
     int X = Random(25, 275);
     int Direction = (Random(1, 2) == 1 ? -1 : 1);
-    int Buttons;
-    int OldButtons;
     long int XPBonus;
     long int RankBonus;
     
@@ -286,9 +284,6 @@ NamedScript void CrateHack()
     
     while (Hacking)
     {
-        Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
-        
         SetHudSize(320, 240, false);
         
         // HACKIFICATIONS
@@ -334,7 +329,7 @@ NamedScript void CrateHack()
         }
         
         // Input
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             bool HitNothing = true;
             XPBonus = XPTable[Player.Level] / 100l;
@@ -436,7 +431,7 @@ NamedScript void CrateHack()
                 }
             }
         }
-        if (Buttons & BT_SPEED)
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         {
             ActivatorSound("hacking/select", 127);
             Hacking = false;
@@ -885,10 +880,7 @@ void DrawCrate()
 
 void CrateInput()
 {
-    int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-    int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
-    
-    if (Buttons & BT_SPEED && !(OldButtons & BT_SPEED))
+    if (CheckInput(BT_SPEED, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("crate/close", 127);
         Player.CrateOpen = false;
@@ -900,37 +892,37 @@ void CrateInput()
             Crates[Player.CrateID].Empty = true;
         }
     }
-    if (Buttons & BT_USE && !(OldButtons & BT_USE))
+    if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
         CrateTakeItem();
     }
-    if (Buttons & BT_ALTATTACK && !(OldButtons & BT_ALTATTACK))
+    if (CheckInput(BT_ALTATTACK, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("transfer/complete", 127);
         CrateTakeAll();
     }
-    if (Buttons & BT_FORWARD && !(OldButtons & BT_FORWARD))
+    if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
         Player.CrateIndex -= 9;
         if (Player.CrateIndex < 0) Player.CrateIndex = 0;
     }
-    if (Buttons & BT_BACK && !(OldButtons & BT_BACK))
+    if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
         Player.CrateIndex += 9;
         if (Player.CrateIndex > CRATE_MAX_ITEMS - 1) Player.CrateIndex = CRATE_MAX_ITEMS - 1;
     }
-    if ((Buttons & BT_LEFT && !(OldButtons & BT_LEFT)) ||
-        (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT)))
+    if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
+        (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
     {
         ActivatorSound("menu/move", 127);
         Player.CrateIndex--;
         if (Player.CrateIndex < 0) Player.CrateIndex = 0;
     }
-    if ((Buttons & BT_RIGHT && !(OldButtons & BT_RIGHT)) ||
-        (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT)))
+    if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
+        (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
     {
         ActivatorSound("menu/move", 127);
         Player.CrateIndex++;

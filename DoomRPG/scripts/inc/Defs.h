@@ -935,8 +935,10 @@ typedef enum
 {
     KEY_PRESSED,
     KEY_ONLYPRESSED,
-    KEY_UP,
-    KEY_DOWN
+    KEY_HELD,
+    KEY_ONLYHELD,
+    KEY_IDLE,
+    KEY_NOTIDLE
 } EKeyStates;
 
 typedef enum
@@ -946,23 +948,6 @@ typedef enum
     LOG_WARNING,
     LOG_ERROR
 } ELogLevels;
-
-typedef enum
-{
-    KEYNUM_ATTACK,
-    KEYNUM_ALTATTACK,
-    KEYNUM_USE,
-    KEYNUM_MODIFIER,
-    
-    KEYNUM_SKILLS,
-    KEYNUM_TURRET,
-    KEYNUM_MENU,
-    
-    KEYNUM_FORWARD,
-    KEYNUM_BACK,
-    KEYNUM_RIGHT,
-    KEYNUM_LEFT
-} EKeyNumbers;
 
 // --------------------------------------------------
 // Address Spaces

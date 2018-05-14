@@ -637,9 +637,6 @@ void DoRegen()
     if (Player.EPRate >= Player.EPTime)
         Player.EPRate = 0;
     
-    // Now increment the timers
-    int Buttons = GetPlayerInput(PlayerNumber(), MODINPUT_BUTTONS);
-    
     // Regen Boost
     if (Player.RegenBoostTimer > 0)
     {
@@ -685,7 +682,7 @@ void DoRegen()
             Player.HPRate += HPAmount;
             Player.EPRate += EPAmount;
         }
-        else if (Buttons & BT_CROUCH) // Crouch - 150% Regen Rate
+        else if (CheckInput(BT_CROUCH, KEY_HELD, true, PlayerNumber())) // Crouch - 150% Regen Rate
         {
             Player.HPRate += HPAmount + 3;
             Player.EPRate += EPAmount + 3;

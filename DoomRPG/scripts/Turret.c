@@ -752,8 +752,6 @@ NamedScript Type_ENTER void TurretCommandWheel()
     bool Close = false;
     int CurrentCommands[MAX_COMMANDS];
     int CurrentCommandsCount = 0;
-    int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-    int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
     int Radius = 160;
     int CurrentRadius = 0;
     fixed LerpPos = 0;
@@ -764,9 +762,9 @@ NamedScript Type_ENTER void TurretCommandWheel()
             CurrentCommands[CurrentCommandsCount++] = Commands[i];
     
     // Open the wheel or quickly activate/deactivate the turret
-    if (Buttons & BT_SPEED && Buttons & BT_USER2 && !(OldButtons & BT_USER2))
+    if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && CheckInput(BT_USER2, KEY_PRESSED, false, PlayerNumber()))
         TurretCommand(TU_BUILD);
-    else if (!(Buttons & BT_SPEED) && Buttons & BT_USER2 && !((Player.InMenu && Player.Menu != 3) || Player.InShop || Player.OutpostMenu > 0 || Player.SkillWheelOpen) && Player.Turret.Init)
+    else if (!CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && CheckInput(BT_USER2, KEY_HELD, false, PlayerNumber()) && !((Player.InMenu && Player.Menu != 3) || Player.InShop || Player.OutpostMenu > 0 || Player.SkillWheelOpen) && Player.Turret.Init)
     {
         ActivatorSound("menu/click", 127);
         Player.Turret.WheelOpen = true;
@@ -790,12 +788,8 @@ NamedScript Type_ENTER void TurretCommandWheel()
         // Freeze player
         SetPlayerProperty(0, 1, PROP_FROZEN);
         
-        // Check Input
-        Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
-        
         // Check for release
-        if (!(Buttons & BT_USER2) && !Close)
+        if (!CheckInput(BT_USER2, KEY_HELD, false, PlayerNumber()) && !Close)
             Close = true;
         
         // Lerp position
@@ -854,11 +848,11 @@ NamedScript Type_ENTER void TurretCommandWheel()
         // Input
         if (!Close)
         {
-            if (Buttons & BT_USE && !(OldButtons & BT_USE))
+            if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
                 TurretCommand(CurrentCommands[Player.Turret.WheelCommand]);
-            if (Buttons & BT_SPEED && !(OldButtons & BT_SPEED))
+            if (CheckInput(BT_SPEED, KEY_PRESSED, false, PlayerNumber()))
                 TurretMaintenance();
-            if (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT))
+            if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
             {
                 ActivatorSound("menu/click", 127);
                 Player.Turret.WheelCommand--;
@@ -866,7 +860,7 @@ NamedScript Type_ENTER void TurretCommandWheel()
                 LerpPos = 0;
                 if (Player.Turret.WheelCommand < 0) Player.Turret.WheelCommand = CurrentCommandsCount - 1;
             }
-            if (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT))
+            if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
             {
                 ActivatorSound("menu/click", 127);
                 Player.Turret.WheelCommand++;
@@ -1481,7 +1475,7 @@ NamedScript bool TurretWantsToSwitchToPlayerTarget()
     if (!SetActivator(0, AAPTR_FRIENDPLAYER))
         return false;
     
-    return GetPlayerInput(-1, MODINPUT_BUTTONS) & BT_ATTACK && GetPlayerInput(-1, MODINPUT_BUTTONS) & BT_SPEED;
+    return CheckInput(BT_ATTACK, KEY_HELD, true, -1) && CheckInput(BT_SPEED, KEY_HELD, true, -1);
 }
 
 void BuildTurretData()

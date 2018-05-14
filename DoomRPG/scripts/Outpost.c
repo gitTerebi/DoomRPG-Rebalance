@@ -39,7 +39,6 @@ int RPGMap CreditsBlockerID = 1900;
 
 // Timers
 int RPGMap ForcefieldTimer = 0;
-int RPGMap RegenAreaEPCooldownTimer = 0;
 
 // Choices
 int RPGMap LevelChoice = 0;
@@ -51,7 +50,6 @@ bool RPGMap MarinesHostile = false;
 bool RPGMap PowerOut = false;
 bool RPGMap BossDead = false;
 bool RPGMap Invasion = false;
-bool RPGMap RegenAreaEPCooldown = false;
 
 NamedScript MapSpecial void EnterOutpost()
 {	
@@ -198,7 +196,7 @@ NamedScript MapSpecial void RegenArea(int ID)
     if (ID == OREGEN_EP)
     {
         // Holding Run will restore your Shield capacity
-        if (GetPlayerInput(PlayerNumber(), INPUT_BUTTONS) & BT_SPEED && CheckShieldValid())
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && CheckShieldValid())
         {
             if (CheckInventory("DRPGCredits") < 1 || Player.Shield.Charge >= Player.Shield.Capacity) return;
             
@@ -227,22 +225,22 @@ NamedScript MapSpecial void RegenArea(int ID)
         {
             if (CheckInventory("DRPGCredits") < 1 || Player.EP >= Player.EPMax) return;
             
-            // EP pad Cooldown
+            // EP pad Cooldown.
             // Default timer is 5 mins.
-            int CurrentTime = Timer() / 35;
-            if (!RegenAreaEPCooldown)
+            int CurrentTime = Timer();
+            if (!Player.EPPadCooldown)
             {
-            	RegenAreaEPCooldownTimer = CurrentTime;
-            	RegenAreaEPCooldownTimer += 300;
-            	RegenAreaEPCooldown = true;
+            	Player.EPPadCooldownTimer = CurrentTime;
+            	Player.EPPadCooldownTimer += 35 * 60 * 5;
+            	Player.EPPadCooldown = true;
             }
             else
             {
-            	if (CurrentTime >= RegenAreaEPCooldownTimer)
-            		RegenAreaEPCooldown = false;
+            	if (CurrentTime >= Player.EPPadCooldownTimer)
+            		Player.EPPadCooldown = false;
             		else
             			SetFont("BIGFONT");
-            			HudMessage("EP pad is cooling down: %i seconds remaining", RegenAreaEPCooldownTimer - CurrentTime);
+            			HudMessage("EP pad is cooling down: %S remaining", FormatTime(Player.EPPadCooldownTimer - CurrentTime));
             			EndHudMessage(HUDMSG_FADEOUT, 0, "LightBlue", 0.5, 0.33, 2.0, 0.5);
             			return;
             }
@@ -521,15 +519,12 @@ NamedScript MapSpecial void LevelTransport()
         }
         
         // Input
-        int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
-
-        if (Buttons == BT_FORWARD && OldButtons != BT_FORWARD && LevelChoice > 0)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice > 0)
         {
             ActivatorSound("menu/move", 127);
             LevelChoice--;
         }
-        if (Buttons == BT_BACK && OldButtons != BT_BACK && LevelChoice < KnownLevels->Position - 1)
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice < KnownLevels->Position - 1)
         {
             ActivatorSound("menu/move", 127);
             LevelChoice++;
@@ -538,7 +533,7 @@ NamedScript MapSpecial void LevelTransport()
         //Wadsmoosh change MapPack support
         if (WadSmoosh)
         {
-            if ((Buttons & BT_MOVELEFT) && (Buttons & BT_SPEED) && !(OldButtons & BT_MOVELEFT))
+            if ((CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())) && (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber())))
             {
                 int MapPack = Player.SelectedMapPack;
                 do
@@ -566,13 +561,13 @@ NamedScript MapSpecial void LevelTransport()
                     ActivatorSound("menu/error", 127);
                 }
             }
-            else if (Buttons == BT_MOVELEFT && OldButtons != BT_MOVELEFT && LevelChoice > 0)
+            else if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice > 0)
             {
                 ActivatorSound("menu/move", 127);
                 LevelChoice -= 10;
             }
             
-            if ((Buttons & BT_MOVERIGHT) && (Buttons & BT_SPEED) && !(OldButtons & BT_MOVERIGHT))
+            if ((CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())) && (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber())))
             {
                 int MapPack = Player.SelectedMapPack;
                 do
@@ -600,7 +595,7 @@ NamedScript MapSpecial void LevelTransport()
                     ActivatorSound("menu/error", 127);
                 }
             }
-            else if (Buttons == BT_MOVERIGHT && OldButtons != BT_MOVERIGHT && LevelChoice < KnownLevels->Position - 1)
+            else if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice < KnownLevels->Position - 1)
             {
                 ActivatorSound("menu/move", 127);
                 LevelChoice += 10;
@@ -608,19 +603,19 @@ NamedScript MapSpecial void LevelTransport()
         }
         else
         {
-            if (Buttons == BT_MOVELEFT && OldButtons != BT_MOVELEFT && LevelChoice > 0)
+            if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice > 0)
             {
                 ActivatorSound("menu/move", 127);
                 LevelChoice -= 10;
             }
         
-            if (Buttons == BT_MOVERIGHT && OldButtons != BT_MOVERIGHT && LevelChoice < KnownLevels->Position - 1)
+            if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice < KnownLevels->Position - 1)
             {
                 ActivatorSound("menu/move", 127);
                 LevelChoice += 10;
             }
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             if (CurrentLevel == TeleDest)
             {
@@ -649,10 +644,9 @@ NamedScript MapSpecial void LevelTransport()
                 {
                     // Calculate percentage complete and input
                     int TransportPercent = (int)Abs(100 - ((fixed)TransportTimer / (fixed)TransportTimerMax) * 100.0);
-                    Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
                     
                     // Transfer is cancelled either by death or input
-                    if (GetActorProperty(0, APROP_Health) <= 0 || Buttons & BT_SPEED)
+                    if (GetActorProperty(0, APROP_Health) <= 0 || CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
                     {
                         PlaySound(0, "transfer/fail", CHAN_BODY, 1.0, false, ATTN_NORM);
                         SetPlayerProperty(0, 0, PROP_FROZEN);
@@ -738,27 +732,24 @@ NamedScript MapSpecial void SkillComputer()
         EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "Gold", 100.1, 200.0, 0.05, 0.5);
         
         // Input
-        int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
-
-        if (Buttons == BT_FORWARD && OldButtons != BT_FORWARD && SkillChoice > 0)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) && SkillChoice > 0)
         {
             ActivatorSound("menu/move", 127);
             SkillChoice--;
         }
-        if (Buttons == BT_BACK && OldButtons != BT_BACK && SkillChoice < (CompatMode == COMPAT_DRLA ? 5 : 4))
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && SkillChoice < (CompatMode == COMPAT_DRLA ? 5 : 4))
         {
             ActivatorSound("menu/move", 127);
             SkillChoice++;
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             SetSkill(SkillChoice);
             SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
             Player.OutpostMenu = 0;
             return;
         }
-        if (Buttons == BT_SPEED)
+        if (CheckInput(BT_SPEED, KEY_ONLYHELD, false, PlayerNumber()))
         {
             SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
             Player.OutpostMenu = 0;
@@ -852,34 +843,31 @@ NamedScript MapSpecial void SelectArenaWave()
         EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", 200.0, 200.0, 0.05, 1.0);
         
         // Input
-        int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
-
-        if (Buttons == BT_FORWARD && OldButtons != BT_FORWARD && WaveChoice > 1)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) && WaveChoice > 1)
         {
             ActivatorSound("menu/move", 127);
             WaveChoice--;
         }
-        if (Buttons == BT_BACK && OldButtons != BT_BACK && WaveChoice < ArenaMaxWave)
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && WaveChoice < ArenaMaxWave)
         {
             ActivatorSound("menu/move", 127);
             WaveChoice++;
         }
-        if ((Buttons == BT_LEFT && OldButtons != BT_LEFT) ||
-            (Buttons == BT_MOVELEFT && OldButtons != BT_MOVELEFT))
+        if ((CheckInput(BT_LEFT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber())))
         {
             ActivatorSound("menu/move", 127);
             WaveChoice -= 10;
             if (WaveChoice <= 0) WaveChoice = 1;
         }
-        if ((Buttons == BT_RIGHT && OldButtons != BT_RIGHT) ||
-            (Buttons == BT_MOVERIGHT && OldButtons != BT_MOVERIGHT))
+        if ((CheckInput(BT_RIGHT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber())))
         {
             ActivatorSound("menu/move", 127);
             WaveChoice += 10;
             if (WaveChoice > ArenaMaxWave) WaveChoice = ArenaMaxWave;
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             if (WaveChoice > 1)
                 ArenaWave = WaveChoice - 1;
@@ -891,7 +879,7 @@ NamedScript MapSpecial void SelectArenaWave()
             Player.OutpostMenu = 0;
             return;
         }
-        if (Buttons == BT_SPEED)
+        if (CheckInput(BT_SPEED, KEY_ONLYHELD, false, PlayerNumber()))
         {
             SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
             Player.OutpostMenu = 0;
@@ -1248,8 +1236,6 @@ NamedScript MapSpecial void ShopSpecial()
     
     while (true)
     {
-        int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
         str Name = ShopSpecialItem->Name;
         int Discount = GetCVar("drpg_shopspecial_discount") + Player.ShopDiscount;
         // Cap the Shop Special Discount at 75%
@@ -1273,7 +1259,7 @@ NamedScript MapSpecial void ShopSpecial()
             FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
         
         // Input
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             // Buy Item
             if (CheckInventory("DRPGCredits") >= Cost)
@@ -1297,7 +1283,7 @@ NamedScript MapSpecial void ShopSpecial()
                 ActivatorSound("menu/error", 127);
             }
         }
-        if (Buttons == BT_SPEED)
+        if (CheckInput(BT_SPEED, KEY_ONLYHELD, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
@@ -1353,8 +1339,6 @@ NamedScript MapSpecial void MissionBBS()
     
     while (Player.OutpostMenu == OMENU_BBS)
     {
-        int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-        int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
         MissionInfo *Mission = &Missions[Difficulty][Index];
         
         // Set the HUD Size
@@ -1390,24 +1374,24 @@ NamedScript MapSpecial void MissionBBS()
         DrawMissionInfo(Mission, 0, 216, false);
         
         // Input
-        if (Buttons & BT_FORWARD && !(OldButtons & BT_FORWARD))
+        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Index -= MAX_MISSIONS / 3;
             if (Index < 0)
                 Index = 0;
         };
-        if (Buttons & BT_BACK && !(OldButtons & BT_BACK))
+        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Index += MAX_MISSIONS / 3;
             if (Index > MAX_MISSIONS - 1)
                 Index = MAX_MISSIONS - 1;
         };
-        if (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT))
+        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Difficulty > 0)
                     Difficulty--;
@@ -1419,10 +1403,10 @@ NamedScript MapSpecial void MissionBBS()
                     Index = 0;
             }
         };
-        if (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT))
+        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Difficulty < Player.RankLevel - 1)
                 {
@@ -1441,7 +1425,7 @@ NamedScript MapSpecial void MissionBBS()
                     Index = MAX_MISSIONS - 1;
             }
         };
-        if (Buttons == BT_USE && OldButtons != BT_USE && !Player.Mission.Active)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()) && !Player.Mission.Active)
         {
             ActivatorSound("mission/get", 127);
             Mission->Active = true;
@@ -1449,7 +1433,7 @@ NamedScript MapSpecial void MissionBBS()
             CreateMissionAt(Difficulty, Index);
         };
 
-        if (Buttons == BT_ATTACK && OldButtons != BT_ATTACK && Player.Mission.Active)
+        if (CheckInput(BT_ATTACK, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.Mission.Active)
         {
             ActivatorSound("mission/fail", 127);
             SetFont("BIGFONT");
@@ -1472,7 +1456,7 @@ NamedScript MapSpecial void MinigameHandler()
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
     
     // TODO: This will just play Roulette for now
-    if (GetPlayerInput(PlayerNumber(), INPUT_BUTTONS) & BT_SPEED)
+    if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
     {
         if (CheckInventory("DRPGChipPlatinum") > 0)
         {

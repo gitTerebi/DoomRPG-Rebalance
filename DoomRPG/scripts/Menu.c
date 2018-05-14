@@ -199,7 +199,7 @@ void DrawMainMenu()
     EndHudMessage(HUDMSG_PLAIN, MAKE_ID('2','T','I','P'), "Untranslated", 0, 0, 0.05);
     
     // Show mission info when holding specific input keys
-    if (GetPlayerInput(PlayerNumber(), INPUT_BUTTONS) & BT_SPEED && Player.Mission.Active) 
+    if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && Player.Mission.Active) 
     {
         DrawMissionInfo(&Player.Mission, 16, 188, true);
         return;
@@ -1949,28 +1949,25 @@ void DrawTurretTimers(fixed X, fixed Y)
 
 void MenuInput()
 {
-    int Buttons = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
-    int OldButtons = GetPlayerInput(PlayerNumber(), INPUT_OLDBUTTONS);
-    
     // Reset the menu block
     Player.MenuBlock = false;
     
     // Main Menu
     if (Player.Menu == MENUPAGE_MAIN)
     {
-        if (Buttons == BT_FORWARD && OldButtons != BT_FORWARD)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex--;
             if (Player.MenuIndex < 0) Player.MenuIndex = MAX_MENU - 1;
         }
-        if (Buttons == BT_BACK && OldButtons != BT_BACK)
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex++;
             if (Player.MenuIndex > MAX_MENU - 1) Player.MenuIndex = 0;
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             Player.MenuBlock = true;
             
@@ -1990,7 +1987,7 @@ void MenuInput()
     // Stats menu
     if (Player.Menu == MENUPAGE_STATS && !Player.MenuBlock)
     {
-        if (Buttons & BT_FORWARD && !(OldButtons & BT_FORWARD))
+        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
         {
             if (Player.StatPage == STATPAGE_STATS)
             {
@@ -2006,7 +2003,7 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = PlayerCount() - 1;
             }
         }
-        if (Buttons & BT_BACK && !(OldButtons & BT_BACK))
+        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
         {
             if (Player.StatPage == STATPAGE_STATS)
             {
@@ -2022,10 +2019,10 @@ void MenuInput()
                 if (Player.MenuIndex > PlayerCount() - 1) Player.MenuIndex = 0;
             }
         }
-        if ((Buttons & BT_LEFT && !(OldButtons & BT_LEFT)) ||
-            (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT)))
+        if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
         {
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Player.StatPage > 0)
                 {
@@ -2043,10 +2040,10 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = STAT_MAX - 1;
             }
         }
-        if ((Buttons & BT_RIGHT && !(OldButtons & BT_RIGHT)) ||
-            (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT)))
+        if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
         {
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Player.StatPage < STATPAGE_MAX - (InMultiplayer ? 1 : 2))
                 {
@@ -2064,7 +2061,7 @@ void MenuInput()
                 if (Player.MenuIndex > STAT_MAX - 1) Player.MenuIndex = 0;
             }
         }
-        if (Buttons == BT_USE && (OldButtons != BT_USE || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat")))
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()) || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat"))
             if (Player.StatPage == STATPAGE_STATS)
                 IncreaseStat(Player.MenuIndex);
             else if (Player.StatPage == STATPAGE_TEAM && Player.MenuIndex != PlayerNumber())
@@ -2076,61 +2073,61 @@ void MenuInput()
                 Player.InMenu = false;
                 SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
             }
-        if (Buttons == BT_ATTACK && OldButtons != BT_ATTACK && Player.StatPage == STATPAGE_TEAM)
+        if (CheckInput(BT_ATTACK, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.StatPage == STATPAGE_TEAM)
         {
             Player.PlayerView = Player.MenuIndex;
             ActivatorSound("menu/move", 127);
         }
-        if (Buttons == BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYHELD, false, PlayerNumber()))
             Player.DelayTimer++;
     }
     
     // Augmentations menu
     if (Player.Menu == MENUPAGE_AUGS && !Player.MenuBlock)
     {
-        if (Buttons == BT_FORWARD && OldButtons != BT_FORWARD && Player.MenuIndex > 0)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex -= 5;
             if (Player.MenuIndex < 0) Player.MenuIndex = 0;
         }
-        if (Buttons == BT_BACK && OldButtons != BT_BACK && Player.MenuIndex < AUG_MAX - 1)
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.MenuIndex < AUG_MAX - 1)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex += 5;
             if (Player.MenuIndex > AUG_MAX - 1) Player.MenuIndex = AUG_MAX - 1;
         }
-        if (((Buttons == BT_LEFT && OldButtons != BT_LEFT) ||
-            (Buttons == BT_MOVELEFT && OldButtons != BT_MOVELEFT))
+        if (((CheckInput(BT_LEFT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber())))
             && Player.MenuIndex > 0)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex--;
         }
-        if (((Buttons == BT_RIGHT && OldButtons != BT_RIGHT) ||
-            (Buttons == BT_MOVERIGHT && OldButtons != BT_MOVERIGHT))
+        if (((CheckInput(BT_RIGHT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber())))
             && Player.MenuIndex < AUG_MAX - 1)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex++;
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             EquipAug(Player.MenuIndex);
             
             // If the player starts manually toggling augs, don't try to automatically activate any later.
             ClearDisabledAugs();
         }
-        if (Buttons & BT_SPEED && !(OldButtons & BT_SPEED))
+        if (CheckInput(BT_SPEED, KEY_PRESSED, false, PlayerNumber()))
             LevelUpAug(Player.MenuIndex);
     }
     
     // Skills Menu
     if (Player.Menu == MENUPAGE_SKILLS && !Player.MenuBlock && !Player.SkillWheelOpen)
     {
-        if (Buttons & BT_FORWARD && !(OldButtons & BT_FORWARD))
+        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
         {
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Player.SkillLevel[Player.SkillPage][Player.MenuIndex].CurrentLevel > 1)
                 {
@@ -2145,9 +2142,9 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = 0;
             }
         }
-        if (Buttons & BT_BACK && !(OldButtons & BT_BACK))
+        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
         {
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Player.SkillLevel[Player.SkillPage][Player.MenuIndex].CurrentLevel < Player.SkillLevel[Player.SkillPage][Player.MenuIndex].Level)
                 {
@@ -2162,10 +2159,10 @@ void MenuInput()
                 if (Player.MenuIndex > SkillCategoryMax[Player.SkillPage] - 1) Player.MenuIndex = SkillCategoryMax[Player.SkillPage] - 1;
             }
         }
-        if ((Buttons & BT_LEFT && !(OldButtons & BT_LEFT)) ||
-            (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT)))
+        if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
         {
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 ActivatorSound("menu/move", 127);
                 Player.MenuIndex = 0;
@@ -2178,10 +2175,10 @@ void MenuInput()
                 Player.MenuIndex--;
             }
         }
-        if ((Buttons & BT_RIGHT && !(OldButtons & BT_RIGHT)) ||
-            (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT)))
+        if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
         {
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 ActivatorSound("menu/move", 127);
                 Player.MenuIndex = 0;
@@ -2194,9 +2191,9 @@ void MenuInput()
                 Player.MenuIndex++;
             }
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
             IncreaseSkill(Player.SkillPage, Player.MenuIndex);
-        if (Buttons & BT_ATTACK && !(OldButtons & BT_ATTACK))
+        if (CheckInput(BT_ATTACK, KEY_PRESSED, false, PlayerNumber()))
             UseSkill(0);
     }
     
@@ -2218,22 +2215,22 @@ void MenuInput()
             PartsMax = ShieldPartsMax[Player.ShieldPage];
         }
         
-        if (Buttons == BT_FORWARD && OldButtons != BT_FORWARD)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex -= 10;
             if (Player.MenuIndex < 0) Player.MenuIndex = 0;
         }
-        if (Buttons == BT_BACK && OldButtons != BT_BACK)
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex += 10;
             if (Player.MenuIndex > PartsMax - 1) Player.MenuIndex = PartsMax - 1;
         }
-        if ((Buttons & BT_LEFT && !(OldButtons & BT_LEFT)) ||
-            (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT)))
+        if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
         {
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Player.ShieldPage > 0)
                 {
@@ -2249,10 +2246,10 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = PartsMax - 1;
             }
         }
-        if ((Buttons & BT_RIGHT && !(OldButtons & BT_RIGHT)) ||
-            (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT)))
+        if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
         {
-            if (Buttons & BT_SPEED)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
                 if (Player.ShieldPage < 3)
                 {
@@ -2268,7 +2265,7 @@ void MenuInput()
                 if (Player.MenuIndex > PartsMax - 1) Player.MenuIndex = 0;
             }
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             if (Player.MenuIndex < PartsMax)
             {
@@ -2291,7 +2288,7 @@ void MenuInput()
                     }
             }
         }
-        if (Buttons & BT_USE && !(OldButtons & BT_USE) && Buttons & BT_SPEED)
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()) && CheckInput(BT_SPEED, KEY_PRESSED, false, PlayerNumber()))
         {
             if (Player.MenuIndex < PartsMax)
                 for (int i = 0; i < SHIELDPAGE_MAX; i++)
@@ -2310,24 +2307,24 @@ void MenuInput()
     // Stims Menu
     if (Player.Menu == MENUPAGE_STIMS && !Player.MenuBlock)
     {
-        if (Buttons == BT_FORWARD && (OldButtons != BT_FORWARD || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat")))
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat"))
         {
             Player.MenuIndex--;
             ActivatorSound("menu/move", 127);
             if (Player.MenuIndex < 0) Player.MenuIndex = STIM_MAX;
         }
-        if (Buttons == BT_FORWARD)
+        if (CheckInput(BT_FORWARD, KEY_ONLYHELD, false, PlayerNumber()))
             Player.DelayTimer++;
-        if (Buttons == BT_BACK && (OldButtons != BT_BACK || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat")))
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat"))
         {
             Player.MenuIndex++;
             ActivatorSound("menu/move", 127);
             if (Player.MenuIndex > STIM_MAX) Player.MenuIndex = 0;
         }
-        if (Buttons == BT_BACK)
+        if (CheckInput(BT_BACK, KEY_ONLYHELD, false, PlayerNumber()))
             Player.DelayTimer++;
-        if (((Buttons == BT_LEFT && OldButtons != BT_LEFT) ||
-            (Buttons == BT_MOVELEFT && OldButtons != BT_MOVELEFT))
+        if (((CheckInput(BT_LEFT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber())))
             && Player.StimSelected > 0)
         {
             if (Player.Stim.Size > 0) return;
@@ -2335,8 +2332,8 @@ void MenuInput()
             Player.StimSelected--;
             ActivatorSound("menu/move", 127);
         }
-        if (((Buttons == BT_RIGHT && OldButtons != BT_RIGHT) ||
-            (Buttons == BT_MOVERIGHT && OldButtons != BT_MOVERIGHT))
+        if (((CheckInput(BT_RIGHT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber())))
             && Player.StimSelected < 4 - 1)
         {
             if (Player.Stim.Size > 0) return;
@@ -2344,56 +2341,56 @@ void MenuInput()
             Player.StimSelected++;
             ActivatorSound("menu/move", 127);
         }
-        if (Buttons == BT_USE && (OldButtons != BT_USE || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat")))
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()) || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat"))
         {
             if (Player.MenuIndex == 0)
                 SetStim(Player.StimSelected);
             else
                 MixStim(Player.MenuIndex - 1);
         }
-        if (Buttons == BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYHELD, false, PlayerNumber()))
             Player.DelayTimer++;
     }
     
     // Turret Menu
     if (Player.Menu == MENUPAGE_TURRET && !Player.MenuBlock)
     {
-        if (Buttons & BT_FORWARD && !(OldButtons & BT_FORWARD) && Player.MenuIndex > 0)
+        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
             Player.MenuIndex -= TURRET_PAGE_MAX / 4;
             if (Player.MenuIndex < 0) Player.MenuIndex = 0;
             ActivatorSound("menu/move", 127);
         }
-        if (Buttons & BT_BACK && !(OldButtons & BT_BACK) && Player.MenuIndex < MAX_UPGRADES - 1)
+        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()) && Player.MenuIndex < MAX_UPGRADES - 1)
         {
             Player.MenuIndex += TURRET_PAGE_MAX / 4;
             if (Player.MenuIndex >= MAX_UPGRADES - 1) Player.MenuIndex = MAX_UPGRADES - 1;
             ActivatorSound("menu/move", 127);
         }
-        if (((Buttons & BT_LEFT && !(OldButtons & BT_LEFT)) ||
-            (Buttons & BT_MOVELEFT && !(OldButtons & BT_MOVELEFT)))
+        if (((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
             && Player.MenuIndex > 0)
         {
             Player.MenuIndex--;
             ActivatorSound("menu/move", 127);
         }
-        if (((Buttons & BT_RIGHT && !(OldButtons & BT_RIGHT)) ||
-            (Buttons & BT_MOVERIGHT && !(OldButtons & BT_MOVERIGHT)))
+        if (((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
+            (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
             && Player.MenuIndex < MAX_UPGRADES - 1)
         {
             Player.MenuIndex++;
             ActivatorSound("menu/move", 127);
         }
-        if (Buttons == BT_USE && OldButtons != BT_USE)
+        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             if (Player.TurretPage == TURRETPAGE_COMMAND)
                 TurretCommand(Player.MenuIndex);
             else if (Player.TurretPage == TURRETPAGE_UPGRADE)
                 UpgradeTurret(Player.MenuIndex);
         }
-        if (Buttons == BT_SPEED && OldButtons != BT_SPEED)
+        if (CheckInput(BT_SPEED, KEY_ONLYPRESSED, false, PlayerNumber()))
             TurretMaintenance();
-        if (Buttons == BT_JUMP && OldButtons != BT_JUMP)
+        if (CheckInput(BT_JUMP, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             Player.TurretPage++;
             if (Player.TurretPage >= TURRETPAGE_MAX)
@@ -2403,7 +2400,7 @@ void MenuInput()
     }
     
     // Reset the Delay Timer if no buttons are pressed
-    if (Buttons == 0 && OldButtons == 0)
+    if (CheckInput(0, KEY_IDLE, false, PlayerNumber()))
         Player.DelayTimer = 0;
 }
 
