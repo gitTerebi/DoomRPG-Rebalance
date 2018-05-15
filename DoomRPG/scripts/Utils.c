@@ -22,6 +22,8 @@
 // 
 
 int const AuraTID = 20000;
+static bool CheckInputRepeat;
+static int CheckInputRepeatTimer;
 
 str const ColorNames[22] =
 {
@@ -2626,6 +2628,28 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
     {
     	if (Buttons > 0)
     		return true;
+    }
+    
+    else if (State == KEY_REPEAT)
+    {
+        if (Buttons & Key)
+        {
+            int CurrentTime = Timer();
+            if (!CheckInputRepeat)
+            {
+                CheckInputRepeatTimer = CurrentTime;
+                CheckInputRepeatTimer += 5;
+                CheckInputRepeat = true;
+                return true;
+            }
+            else
+            {
+                if (CurrentTime >= CheckInputRepeatTimer)
+                	CheckInputRepeat = false;
+                	else
+                    	return false;
+            }
+        }
     }
     
     return false;

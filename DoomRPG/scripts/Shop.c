@@ -310,7 +310,7 @@ void ShopLoop()
     }
     
     // Check Input
-    if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
+    if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
         if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
@@ -319,7 +319,7 @@ void ShopLoop()
             Player.ShopIndex -= 9;
         if (Player.ShopIndex < 0) Player.ShopIndex = 0;
     };
-    if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
+    if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
         if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
@@ -328,8 +328,8 @@ void ShopLoop()
             Player.ShopIndex += 9;
         if (Player.ShopIndex > ItemMax[Player.ShopPage] - 1) Player.ShopIndex = ItemMax[Player.ShopPage] - 1;
     }
-    if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
-        (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
+    if ((CheckInput(BT_LEFT, KEY_REPEAT, false, PlayerNumber())) ||
+        (CheckInput(BT_MOVELEFT, KEY_REPEAT, false, PlayerNumber())))
         if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
@@ -343,8 +343,8 @@ void ShopLoop()
             Player.ShopIndex--;
             if (Player.ShopIndex < 0) Player.ShopIndex = 0;
         }
-    if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
-        (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
+    if ((CheckInput(BT_RIGHT, KEY_REPEAT, false, PlayerNumber())) ||
+        (CheckInput(BT_MOVERIGHT, KEY_REPEAT, false, PlayerNumber())))
         if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
