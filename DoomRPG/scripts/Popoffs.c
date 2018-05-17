@@ -129,6 +129,9 @@ NamedScript DECORATE void ModulePopoffs()
 {
     while (!(ClassifyActor(0) == ACTOR_WORLD))
     {
+    	// Standby loop.
+    	while (!GetCVar("drpg_modulenumbers")) Delay(35);
+
         Popoff(0, GetUserVariable(0, "user_amount"), 0, "DRPGDigitalDigit", false);
         Delay(1);
     }

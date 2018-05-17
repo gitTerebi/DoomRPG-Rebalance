@@ -296,6 +296,8 @@ OptionMenu "DoomRPGPopoffs"
 	Option "Damage Number Popoffs", "drpg_damagenumbers", "OnOff"
 	Slider "Damage Numbers Fadeout Time", "drpg_damagenumbers_fade", 1, 100, 1
 	Option "Player Damage Numbers on HUD", "drpg_damagenumbers_hud", "OnOff"
+	StaticText ""
+	Option "Module Number Popoffs", "drpg_modulenumbers", "OnOff"
 }
 
 OptionMenu "DoomRPGHealthBars"

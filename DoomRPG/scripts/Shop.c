@@ -120,8 +120,7 @@ NamedScript void ShopItemAutoHandler()
     while (true)
     {
     	// Standby loop.
-    	while (!GetActivatorCVar("drpg_pickup_behavior"))
-    	       Delay(35);
+    	while (!GetActivatorCVar("drpg_pickup_behavior")) Delay(35);
     	
     	// Get input.
     	ButtonHeld = CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber());

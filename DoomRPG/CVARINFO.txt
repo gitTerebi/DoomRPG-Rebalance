@@ -64,10 +64,11 @@ user 	bool 	drpg_auto_heal = true;
 user 	int 	drpg_auto_heal_percent = 2;
 user	int		drpg_auto_heal_order = 1;
 
-// Damage Numbers & Health Bars
+// Damage, Module Numbers & Health Bars
 server 	bool	drpg_popoffs = true;
 server	bool	drpg_damagenumbers = true;
 server	int		drpg_damagenumbers_fade = 40;
+server  bool    drpg_modulenumbers = true;
 user	bool	drpg_damagenumbers_hud = true;
 user	bool	drpg_healthbars = true;
 user	bool	drpg_healthbars_names = true;
