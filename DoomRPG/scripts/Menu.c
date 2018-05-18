@@ -2019,8 +2019,7 @@ void MenuInput()
                 if (Player.MenuIndex > PlayerCount() - 1) Player.MenuIndex = 0;
             }
         }
-        if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2040,8 +2039,7 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = STAT_MAX - 1;
             }
         }
-        if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2097,16 +2095,12 @@ void MenuInput()
             Player.MenuIndex += 5;
             if (Player.MenuIndex > AUG_MAX - 1) Player.MenuIndex = AUG_MAX - 1;
         }
-        if (((CheckInput(BT_LEFT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber())))
-            && Player.MenuIndex > 0)
+        if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex--;
         }
-        if (((CheckInput(BT_RIGHT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber())))
-            && Player.MenuIndex < AUG_MAX - 1)
+        if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.MenuIndex < AUG_MAX - 1)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex++;
@@ -2159,8 +2153,7 @@ void MenuInput()
                 if (Player.MenuIndex > SkillCategoryMax[Player.SkillPage] - 1) Player.MenuIndex = SkillCategoryMax[Player.SkillPage] - 1;
             }
         }
-        if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2175,8 +2168,7 @@ void MenuInput()
                 Player.MenuIndex--;
             }
         }
-        if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2227,8 +2219,7 @@ void MenuInput()
             Player.MenuIndex += 10;
             if (Player.MenuIndex > PartsMax - 1) Player.MenuIndex = PartsMax - 1;
         }
-        if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2246,8 +2237,7 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = PartsMax - 1;
             }
         }
-        if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2323,18 +2313,14 @@ void MenuInput()
         }
         if (CheckInput(BT_BACK, KEY_ONLYHELD, false, PlayerNumber()))
             Player.DelayTimer++;
-        if (((CheckInput(BT_LEFT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber())))
-            && Player.StimSelected > 0)
+        if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.StimSelected > 0)
         {
             if (Player.Stim.Size > 0) return;
             
             Player.StimSelected--;
             ActivatorSound("menu/move", 127);
         }
-        if (((CheckInput(BT_RIGHT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber())))
-            && Player.StimSelected < 4 - 1)
+        if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.StimSelected < 4 - 1)
         {
             if (Player.Stim.Size > 0) return;
             
@@ -2367,16 +2353,12 @@ void MenuInput()
             if (Player.MenuIndex >= MAX_UPGRADES - 1) Player.MenuIndex = MAX_UPGRADES - 1;
             ActivatorSound("menu/move", 127);
         }
-        if (((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
-            && Player.MenuIndex > 0)
+        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
             Player.MenuIndex--;
             ActivatorSound("menu/move", 127);
         }
-        if (((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
-            && Player.MenuIndex < MAX_UPGRADES - 1)
+        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()) && Player.MenuIndex < MAX_UPGRADES - 1)
         {
             Player.MenuIndex++;
             ActivatorSound("menu/move", 127);

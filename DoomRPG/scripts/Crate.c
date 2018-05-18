@@ -914,15 +914,13 @@ void CrateInput()
         Player.CrateIndex += 9;
         if (Player.CrateIndex > CRATE_MAX_ITEMS - 1) Player.CrateIndex = CRATE_MAX_ITEMS - 1;
     }
-    if ((CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber())) ||
-        (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())))
+    if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
         Player.CrateIndex--;
         if (Player.CrateIndex < 0) Player.CrateIndex = 0;
     }
-    if ((CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber())) ||
-        (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber())))
+    if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
         Player.CrateIndex++;

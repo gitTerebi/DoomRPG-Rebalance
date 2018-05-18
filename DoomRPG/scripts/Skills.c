@@ -734,7 +734,7 @@ NamedScript Type_ENTER void SkillWheel()
             // Input
             if (!Close)
             {
-                if (CheckInput(BT_LEFT, KEY_PRESSED, false, PlayerNumber()))
+                if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
                 {
                     ActivatorSound("menu/click", 127);
                     Player.WheelSelection--;
@@ -742,7 +742,7 @@ NamedScript Type_ENTER void SkillWheel()
                     LerpPos = 0;
                     if (Player.WheelSelection < 0) Player.WheelSelection = MAX_SKILLKEYS - 1;
                 }
-                if (CheckInput(BT_RIGHT, KEY_PRESSED, false, PlayerNumber()))
+                if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
                 {
                     ActivatorSound("menu/click", 127);
                     Player.WheelSelection++;

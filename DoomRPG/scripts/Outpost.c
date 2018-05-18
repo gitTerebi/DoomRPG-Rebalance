@@ -853,15 +853,13 @@ NamedScript MapSpecial void SelectArenaWave()
             ActivatorSound("menu/move", 127);
             WaveChoice++;
         }
-        if ((CheckInput(BT_LEFT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             WaveChoice -= 10;
             if (WaveChoice <= 0) WaveChoice = 1;
         }
-        if ((CheckInput(BT_RIGHT, KEY_ONLYPRESSED, false, PlayerNumber())) ||
-            (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber())))
+        if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             WaveChoice += 10;
