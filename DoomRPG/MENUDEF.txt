@@ -290,8 +290,11 @@ OptionMenu "DoomRPGPopoffs"
 {
 	Title "Popoffs"
 	
-    Option "Player Info Popoffs", "drpg_popoffs", "OnOff"
+	Slider "Popoffs Draw Distance", "drpg_popoffs_drawdistance", 100, 2000, 10
 	StaticText ""
+	
+    Option "Player Info Popoffs", "drpg_popoffs", "OnOff"
+    StaticText ""
     
 	Option "Damage Number Popoffs", "drpg_damagenumbers", "OnOff"
 	Slider "Damage Numbers Fadeout Time", "drpg_damagenumbers_fade", 1, 100, 1

@@ -65,6 +65,7 @@ user 	int 	drpg_auto_heal_percent = 2;
 user	int		drpg_auto_heal_order = 1;
 
 // Damage, Module Numbers & Health Bars
+server  int     drpg_popoffs_drawdistance = 800;
 server 	bool	drpg_popoffs = true;
 server	bool	drpg_damagenumbers = true;
 server	int		drpg_damagenumbers_fade = 40;

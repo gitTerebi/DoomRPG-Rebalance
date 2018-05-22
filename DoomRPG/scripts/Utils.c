@@ -879,6 +879,21 @@ int FindPlayerID(int TID)
     return -1;
 }
 
+// Returns true if a player is inside the TIDs draw distance.
+bool IsPlayerNearTID(int TID, int DrawDistance)
+{
+	for (int i = 0; i < MAX_PLAYERS; i++)
+	{
+		// Player is not in-game
+		if (!PlayerInGame(i)) break;
+		
+		int d = Distance(Players(i).TID, TID);
+		if (d < DrawDistance) return true;
+	}
+	
+	return false;
+}
+
 OptionalArgs(1) bool SetActivatorToTargetExtended(int TID, int NumCycles)
 {
     if (NumCycles == 0) NumCycles = 31;
