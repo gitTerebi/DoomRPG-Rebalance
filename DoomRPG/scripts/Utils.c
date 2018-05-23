@@ -879,8 +879,8 @@ int FindPlayerID(int TID)
     return -1;
 }
 
-// Returns true if a player is inside the TIDs draw distance.
-bool IsPlayerNearTID(int TID, int DrawDistance)
+// Returns true if any players are within TID's specified distance.
+bool CheckPlayersDistanceTID(int TID, int DistanceTID)
 {
 	for (int i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -888,7 +888,7 @@ bool IsPlayerNearTID(int TID, int DrawDistance)
 		if (!PlayerInGame(i)) break;
 		
 		int d = Distance(Players(i).TID, TID);
-		if (d < DrawDistance) return true;
+		if (d < DistanceTID) return true;
 	}
 	
 	return false;
