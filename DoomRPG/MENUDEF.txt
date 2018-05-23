@@ -290,9 +290,6 @@ OptionMenu "DoomRPGPopoffs"
 {
 	Title "Popoffs"
 	
-	Slider "Popoffs Draw Distance", "drpg_popoffs_drawdistance", 100, 2000, 10
-	StaticText ""
-	
     Option "Player Info Popoffs", "drpg_popoffs", "OnOff"
     StaticText ""
     
@@ -478,16 +475,25 @@ OptionMenu "DoomRPGMisc"
     Option "Transport On New Map", "drpg_transport_on_new_map", "OnOff"
     StaticText ""
     
-    Option "Toaster Mode", "drpg_toaster", "OnOff"
-    Option "Disable Fancy Auras", "drpg_simple_auras", "SimpleAuras"
-    StaticText ""
-    
 	Slider "Autosave Interval (Minutes)", "drpg_autosave", 0, 60, 1
 	Option "Auto Reactivate Augs Disabled By EMP", "drpg_augs_autoreactivate", "OnOff"
 	Option "Place quick-use items on the Inventory Bar", "drpg_give_quickinventory", "OnOff"
     StaticText ""
     
     Slider "Monster Drop Distance", "drpg_monster_dropdist", 0.1, 16.0, 0.1
+}
+
+OptionMenu "DoomRPGPerformance"
+{
+	Title "Performance"
+    
+    Option "Toaster Mode", "drpg_toaster", "OnOff"
+    Option "Disable Fancy Auras", "drpg_simple_auras", "SimpleAuras"
+    StaticText ""
+    
+    Slider "Auras Draw Distance", "drpg_auras_drawdistance", 0, 5000, 10
+    Slider "Popoffs Draw Distance", "drpg_popoffs_drawdistance", 0, 5000, 10
+    
 }
 
 OptionMenu "DoomRPGCharacter"
@@ -613,6 +619,7 @@ OptionMenu "DoomRPG"
     SubMenu "Menus",                        "DoomRPGMenus"
     SubMenu "HUD",                          "DoomRPGHUD"
     SubMenu "Misc",                         "DoomRPGMisc"
+    SubMenu "Performance",                  "DoomRPGPerformance"
     SubMenu "Character",                    "DoomRPGCharacter"
     SubMenu "Starting Options",             "DoomRPGStart"
 }

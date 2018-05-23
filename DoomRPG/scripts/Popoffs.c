@@ -24,7 +24,7 @@ NamedScript void DamageNumbers()
     
     while (GetCVar("drpg_damagenumbers"))
     {
-    	// Standby loop if players are not near any monsters.
+    	// Standby loop for when players are outside the specified draw distance.
     	while (!CheckPlayersDistanceTID(0, GetCVar("drpg_popoffs_drawdistance"))) Delay(35);
     	
         Health = GetActorProperty(0, APROP_Health);
@@ -135,7 +135,7 @@ NamedScript DECORATE void ModulePopoffs()
     	// Standby loop.
     	while (!GetCVar("drpg_modulenumbers")) Delay(35);
     	
-    	// Standby loop when players are not near any modules.
+    	// Standby loop for when players are outside the specified draw distance.
     	while (!CheckPlayersDistanceTID(0, GetCVar("drpg_popoffs_drawdistance"))) Delay(35);
     	
         Popoff(0, GetUserVariable(0, "user_amount"), 0, "DRPGDigitalDigit", false);

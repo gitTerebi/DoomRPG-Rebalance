@@ -65,7 +65,6 @@ user 	int 	drpg_auto_heal_percent = 2;
 user	int		drpg_auto_heal_order = 1;
 
 // Damage, Module Numbers & Health Bars
-server  int     drpg_popoffs_drawdistance = 800;
 server 	bool	drpg_popoffs = true;
 server	bool	drpg_damagenumbers = true;
 server	int		drpg_damagenumbers_fade = 40;
@@ -164,8 +163,6 @@ server  bool    drpg_debug = false;
 server  bool    drpg_debug_gui = false;
 server  int     drpg_debug_drla = 0;
 user    bool    drpg_tips = true;
-user    bool    drpg_toaster = false;
-server	int	    drpg_simple_auras = 0;
 server	bool 	drpg_regen_movement = true;
 server	int		drpg_autosave = 5;
 server  float   drpg_monster_dropdist = 4.0;
@@ -173,6 +170,12 @@ server  bool    drpg_transport_on_new_map = false;
 server	bool	drpg_shotguns = false;
 user    bool    drpg_augs_autoreactivate = false;
 user    bool    drpg_give_quickinventory = false;
+
+// Performance
+user    bool    drpg_toaster = false;
+server	int	    drpg_simple_auras = 0;
+server  int     drpg_auras_drawdistance = 1000;
+server  int     drpg_popoffs_drawdistance = 1000;
 
 // Stored Character
 user    int     drpg_char_data_len = 0;

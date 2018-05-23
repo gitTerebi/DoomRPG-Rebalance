@@ -1212,6 +1212,9 @@ NamedScript void MonsterAuraDisplayHandler()
     
     Start:
     
+    // Standby loop for when players are outside the specified draw distance.
+    while (!CheckPlayersDistanceTID(0, GetCVar("drpg_auras_drawdistance"))) Delay(35);
+    
     if (GetActorProperty(0, APROP_Health) <= 0)
     {
         Delay(35);
