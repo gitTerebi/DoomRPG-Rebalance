@@ -491,8 +491,8 @@ OptionMenu "DoomRPGPerformance"
     Option "Disable Fancy Auras", "drpg_simple_auras", "SimpleAuras"
     StaticText ""
     
-    Slider "Auras Draw Distance", "drpg_auras_drawdistance", 0, 5000, 10
-    Slider "Popoffs Draw Distance", "drpg_popoffs_drawdistance", 0, 5000, 10
+    Slider "Auras Draw Distance", "drpg_auras_drawdistance", 0, 5000, 100
+    Slider "Popoffs Draw Distance", "drpg_popoffs_drawdistance", 0, 5000, 100
     
 }
 
