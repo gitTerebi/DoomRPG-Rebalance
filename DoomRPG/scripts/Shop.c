@@ -114,23 +114,14 @@ NamedScript void ShopItemAutoHandler()
     // These are actually too big for the script auto handler to allocate properly, so they need to be static-scope here.
     RPGMap static int Items[ITEM_CATEGORIES][ITEM_MAX];
     RPGMap static int PrevItems[ITEM_CATEGORIES][ITEM_MAX];
-    
+
     UpdateShopAutoList();
-    
+
     while (true)
     {
-    	// Standby loop.
-    	while (!GetActivatorCVar("drpg_pickup_behavior")) Delay(35);
-    	
-    	// Get input.
-    	ButtonHeld = CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber());
-    	
-        // For post-checks
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && ButtonHeld)
-            for (int i = 0; i < ItemCategories; i++)
-                for (int j = 0; j < ItemMax[i]; j++)
-                    Items[i][j] = CheckInventory(ItemData[i][j].Actor);
-        
+    	// Auto-Sell/Store doesn't need to run constantly like run-pickup does.
+    	if (!GetActivatorCVar("drpg_pickup_behavior")) Delay(35);
+
         // Auto-Sell
         bool CanSellItems = Player.RankLevel > 0 || CurrentLevel->UACBase;
         bool UseAutoDepositFallback = GetActivatorCVar("drpg_autosell_lockerfallback");
@@ -139,11 +130,11 @@ NamedScript void ShopItemAutoHandler()
             {
                 ItemInfoPtr Item = ((ItemInfoPtr *)Player.AutoSellList.Data)[i];
                 int Quantity = CheckInventory(Item->Actor);
-                
+
                 // Keep
                 if (Player.ItemKeep[Item->Category][Item->Index])
                     Quantity--;
-                
+
                 if (Quantity > 0 && !(Player.Mission.Active && Player.Mission.Type == MT_COLLECT && !StrCmp(Player.Mission.Item->Actor, Item->Actor)))
                 {
                     if (CanSellItems)
@@ -152,7 +143,7 @@ NamedScript void ShopItemAutoHandler()
                         ShopItemTryAutoDeposit(Item);
                 }
             }
-        
+
         // Auto-Store
         if (Player.EP >= LOCKER_EPRATE || CurrentLevel->UACBase)
             for (int i = 0; i < Player.AutoStoreList.Position; i++)
@@ -162,37 +153,51 @@ NamedScript void ShopItemAutoHandler()
                 if (CheckInventory(Item->Actor) > 0)
                     ShopItemTryAutoDeposit(Item);
             }
-            
-        // Run-pickup behavior stuff
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && ItemsCurrent && ButtonHeld)
-        {
-            for (int i = 0; i < ItemCategories; i++)
-                for (int j = 0; j < ItemMax[i]; j++)
-                {
-                    ItemInfoPtr Item = &ItemData[i][j];
-                    
-                    // Auto-Sell
-                    if (!Player.InShop && GetActivatorCVar("drpg_pickup_behavior") == 1 && Items[i][j] > PrevItems[i][j])
-                        if (CheckInventory(Item->Actor) > 0)
-                            SellItem(Item->Actor, true, true);
-                    
-                    // Auto-Store
-                    if (!Player.InShop && GetActivatorCVar("drpg_pickup_behavior") == 2 && Items[i][j] > PrevItems[i][j])
-                        ShopItemTryAutoDeposit(Item);
-                }
-        }
-        
-        Delay(1);
-        
-        // Prevent using old Items so we don't sell recently picked up stuff.
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && !ButtonHeld)
-            ItemsCurrent = false;
-        
-        if (GetActivatorCVar("drpg_pickup_behavior") > 0 && ButtonHeld)
-            ItemsCurrent = true;
-            for (int i = 0; i < ItemCategories; i++)
-                for (int j = 0; j < ItemMax[i]; j++)
-                    PrevItems[i][j] = Items[i][j];
+
+		// Run-pickup.
+		if (GetActivatorCVar("drpg_pickup_behavior")) 
+		{
+        	// Get input.
+        	ButtonHeld = CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber());
+
+            // For post-checks
+            if (ButtonHeld)
+                for (int i = 0; i < ItemCategories; i++)
+                    for (int j = 0; j < ItemMax[i]; j++)
+                        Items[i][j] = CheckInventory(ItemData[i][j].Actor);
+
+            // Run-pickup behavior stuff
+            if (ItemsCurrent && ButtonHeld)
+            {
+                for (int i = 0; i < ItemCategories; i++)
+                    for (int j = 0; j < ItemMax[i]; j++)
+                    {
+                        ItemInfoPtr Item = &ItemData[i][j];
+
+                        // Auto-Sell
+                        if (!Player.InShop && GetActivatorCVar("drpg_pickup_behavior") == 1 && Items[i][j] > PrevItems[i][j])
+                            if (CheckInventory(Item->Actor) > 0)
+                                SellItem(Item->Actor, true, true);
+
+                        // Auto-Store
+                        if (!Player.InShop && GetActivatorCVar("drpg_pickup_behavior") == 2 && Items[i][j] > PrevItems[i][j])
+                            ShopItemTryAutoDeposit(Item);
+                    }
+            }
+
+			// Run-pickup has to run constantly or it might miss what the player ran over.
+            Delay(1);
+
+            // Prevent using old Items so we don't sell recently picked up stuff.
+            if (!ButtonHeld)
+                ItemsCurrent = false;
+
+            if (ButtonHeld)
+                ItemsCurrent = true;
+                for (int i = 0; i < ItemCategories; i++)
+                    for (int j = 0; j < ItemMax[i]; j++)
+                        PrevItems[i][j] = Items[i][j];
+		}
     }
 }
 
