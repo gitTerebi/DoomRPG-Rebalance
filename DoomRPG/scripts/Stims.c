@@ -20,11 +20,11 @@ str const CompoundNames[STIM_MAX] =
     "Agility",
     "Capacity",
     "Luck",
-    
+
     // Boosters
     "Purifier",
     "Potency",
-    
+
     // Powerups
     "Indestructible",
     "Shadow",
@@ -48,11 +48,11 @@ str const CompoundColors[STIM_MAX] =
     "Orange",
     "Blue",
     "Gold",
-    
+
     // Boosters
     "DarkGray",
     "White",
-    
+
     // Powerups
     "DarkGreen",
     "DarkRed",
@@ -74,46 +74,46 @@ NamedScript KeyBind void UseStim(bool Force)
 {
     // If you're dead, terminate
     if (GetActorProperty(0, APROP_Health) <= 0) return;
-    
+
     if (!Force && Player.Stim.Size == 0)
     {
         PrintError("You don't have an injector ready");
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     if (!Force && Player.Stim.Amount == 0)
     {
         PrintError("Your current injector is empty");
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     // Set Timer for Stat bonuses
     int InitialTime;
     int InitialTimeMultiplier = GetCVar("drpg_stim_time_multiplier");
     for (int i = StimStatsStart; i < StimStatsEnd + 2; i++)
-      if (Player.Stim.Current[i] > 0)
-      {
-        if (i == STIM_PURIFIER)
-          InitialTime += 15 * (Player.Stim.Current[STIM_PURIFIER] * 30 * InitialTimeMultiplier);
-        else
-          InitialTime += 15 * 30 * InitialTimeMultiplier;
-    
-        // Immunity penalty
-        InitialTime -= InitialTime * Player.StimImmunity / 100;
-    
-        Player.Stim.Active = true;
-        Player.Stim.Timer += InitialTime;
-    
-        if (Player.Stim.Timer >= Player.Stim.TimerMax)
-            Player.Stim.TimerMax = Player.Stim.Timer;
-      }
-    
+        if (Player.Stim.Current[i] > 0)
+        {
+            if (i == STIM_PURIFIER)
+                InitialTime += 15 * (Player.Stim.Current[STIM_PURIFIER] * 30 * InitialTimeMultiplier);
+            else
+                InitialTime += 15 * 30 * InitialTimeMultiplier;
+
+            // Immunity penalty
+            InitialTime -= InitialTime * Player.StimImmunity / 100;
+
+            Player.Stim.Active = true;
+            Player.Stim.Timer += InitialTime;
+
+            if (Player.Stim.Timer >= Player.Stim.TimerMax)
+                Player.Stim.TimerMax = Player.Stim.Timer;
+        }
+
     // Apply Multiplier and Potency
     for (int i = StimStatsStart; i < StimStatsEnd; i++)
         Player.Stim.Current[i] = (Player.Stim.Current[i] * 5) + (Player.Stim.Current[STIM_POTENCY] * 5);
-    
+
     // Apply Stat Bonuses
     Player.StrengthBonus += Player.Stim.Current[STIM_STRENGTH];
     Player.DefenseBonus += Player.Stim.Current[STIM_DEFENSE];
@@ -123,43 +123,43 @@ NamedScript KeyBind void UseStim(bool Force)
     Player.AgilityBonus += Player.Stim.Current[STIM_AGILITY];
     Player.CapacityBonus += Player.Stim.Current[STIM_CAPACITY];
     Player.LuckBonus += Player.Stim.Current[STIM_LUCK];
-    
+
     // Setup Powerup Timers
     for (int i = StimPowerupStart; i < StimPowerupEnd; i++)
         if (Player.Stim.Current[i] > 0)
         {
             int InitialTime = (15 * Player.Stim.Current[i]) * 10 * InitialTimeMultiplier;
             InitialTime -= InitialTime * Player.StimImmunity / 100;
-            
+
             Player.Stim.PowerupTimer[i] += InitialTime;
-            
+
             if (Player.Stim.PowerupTimer[i] > Player.Stim.PowerupTimerMax[i])
                 Player.Stim.PowerupTimerMax[i] = Player.Stim.PowerupTimer[i];
         }
-    
+
     // Apply Active Flags
     for (int i = 0; i < STIM_MAX; i++)
         if (Player.Stim.Current[i] > 0)
             Player.Stim.ActiveBonus[i] = true;
-    
+
     // Add Toxicity
     Player.Toxicity += Player.Stim.Toxicity;
-    
+
     // Add Immunity
     Player.StimImmunity += Player.Stim.Toxicity * 5;
     if (Player.StimImmunity > 100)
         Player.StimImmunity = 100;
-    
+
     // Apply current Stim to last used Stim
     for (int i = 0; i < STIM_MAX; i++)
         Player.Stim.Last[i] += Player.Stim.Current[i];
-    
+
     // Clear the Stim
     Player.Stim.Size = 0;
     Player.Stim.Amount = 0;
     for (int i = 0; i < STIM_MAX; i++)
         Player.Stim.Current[i] = 0;
-    
+
     // FX
     ClearToxicityMeter();
     ActivatorSound("items/stim", 127);
@@ -176,7 +176,7 @@ NamedScript KeyBind void ThrowAwayStim()
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     if (Player.Stim.Amount == 0)
     {
         switch (Player.Stim.Size)
@@ -194,13 +194,13 @@ NamedScript KeyBind void ThrowAwayStim()
             GiveInventory("DRPGStimXL", 1);
             break;
         }
-        
+
         Player.Stim.Size = 0;
         PrintMessage("Stored away the empty injector for later use");
         ActivatorSound("menu/leave", 127);
         return;
     }
-    
+
     // [KS] I'm witty.
     if (Player.Stim.Toxicity >= 200)
     {
@@ -292,11 +292,11 @@ NamedScript KeyBind void ThrowAwayStim()
     Player.Stim.Amount = 0;
     for (int i = 0; i < STIM_MAX; i++)
         Player.Stim.Current[i] = 0;
-    
+
     // FX
     ClearToxicityMeter();
     TossStim();
-    
+
     ActivatorSound("menu/leave", 127);
 }
 
@@ -307,7 +307,7 @@ NamedScript DECORATE void TossStim()
     fixed Angle = GetActorAngle(0);
     fixed VelX;
     fixed VelY;
-    
+
     // Injector size
     switch (Player.Stim.Size)
     {
@@ -322,13 +322,13 @@ NamedScript DECORATE void TossStim()
         break;
     case 0: // Detox
     case 4: // XL
-        StimTossActor = "DRPGStimXLTossed";  
+        StimTossActor = "DRPGStimXLTossed";
         break;
     }
-    
+
     // Spawn the empty injector
     SpawnForced(StimTossActor, GetActorX(0), GetActorY(0), GetActorZ(0) + 48.0, TID, 0);
-    
+
     // Toss direction
     switch (Random(1, 3))
     {
@@ -342,10 +342,10 @@ NamedScript DECORATE void TossStim()
         Angle -= 0.5;
         break;
     }
-    
+
     VelX = Cos(Angle);
     VelY = Sin(Angle);
-    
+
     // Adjust the trajectory
     SetActorVelocity(TID, VelX * RandomFixed(2.0, 4.0), VelY * RandomFixed(2.0, 4.0), 0.0, false, false);
 }
@@ -353,7 +353,7 @@ NamedScript DECORATE void TossStim()
 NamedScript DECORATE void AddCompound(int Type, int Amount)
 {
     Player.Stim.Vials[Type] += Amount;
-    
+
     if (Player.Stim.Vials[Type] > Player.Stim.VialMax)
         Player.Stim.Vials[Type] = Player.Stim.VialMax;
 }
@@ -378,10 +378,10 @@ void CheckStim()
         "DRPGPowerStimRage",
         "DRPGPowerStimMagnetic",
     };
-    
+
     // Toxicity multiplier for Potency and Purifier stims
     int StimToxicityMultiplier = 1 + Player.Stim.Current[STIM_POTENCY] + Player.Stim.Current[STIM_PURIFIER];
-    
+
     // Stim maximum capacities
     if (Player.Stim.Size == 1) // Small
         Player.Stim.Capacity = 10;
@@ -391,30 +391,30 @@ void CheckStim()
         Player.Stim.Capacity = 50;
     if (Player.Stim.Size == 4) // Extra-Large
         Player.Stim.Capacity = 100;
-    
+
     // Reset toxicity var
     Player.Stim.Toxicity = 0;
-    
+
     // Toxicity From amount of different compounds
     for (int i = 0; i < STIM_MAX; i++)
         if (Player.Stim.Current[i] > 0)
             Player.Stim.Toxicity += StimToxicityMultiplier;
-    
+
     // Toxicity from total amount of compounds
     Player.Stim.Toxicity += (Player.Stim.Amount * StimToxicityMultiplier) / 5;
-    
+
     // Toxicity added Based on Skill
     Player.Stim.Toxicity += GameSkill() * StimToxicityMultiplier;
-    
+
     // Calculate the current Stim amount
     Player.Stim.Amount = 0;
     for (int i = 0; i < STIM_MAX; i++)
         Player.Stim.Amount += Player.Stim.Current[i];
-    
+
     // Mugshot
     if (Player.Stim.Timer > 0)
         SetMugShotState("Ouch");
-    
+
     if ((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && Timer() > 4)
     {
         // Stim Timer handling
@@ -425,7 +425,7 @@ void CheckStim()
             Player.Stim.Timer = 0;
             Player.Stim.TimerMax = 0;
         }
-        
+
         // Powerup Timer Handling
         for (int i = StimPowerupStart; i < StimPowerupEnd; i++)
         {
@@ -433,22 +433,22 @@ void CheckStim()
             if (Player.Stim.PowerupTimer[i] > 0)
             {
                 if (i != STIM_CHRONO &&     // Skip these as they have their own handling
-                    i != STIM_ADRENALINE &&
-                    i != STIM_RAGE &&
-                    i != STIM_MAGNETIC)
+                        i != STIM_ADRENALINE &&
+                        i != STIM_RAGE &&
+                        i != STIM_MAGNETIC)
                     GiveInventory(StrParam("%S", StimPowerupActors[i - StimPowerupStart]), 1);
-                
+
                 Player.Stim.PowerupTimer[i]--;
             }
-            
+
             // Time Freeze Handling
             if (i == STIM_CHRONO && !IsPlayerMoving() && Player.Stim.PowerupTimer[i] > 0)
                 GiveInventory(StrParam("%S", StimPowerupActors[i - StimPowerupStart]), 1);
-            
+
             // Regeneration Handling
             if (i == STIM_ADRENALINE && Player.Stim.PowerupTimer[i] > 0)
                 Player.RegenBoostTimer = Player.Stim.PowerupTimer[i];
-            
+
             // Reset timer maximums and active state
             if (Player.Stim.PowerupTimer[i] <= 0)
             {
@@ -458,12 +458,12 @@ void CheckStim()
                 Player.Stim.PowerupTimerMax[i] = 0;
             }
         }
-        
+
         // Remove bonuses and active flags when Stim has expired
         if (Player.Stim.Timer <= 0 && Player.Stim.Active)
         {
             Player.Stim.Active = false;
-            
+
             // Restore previous stats
             Player.StrengthBonus -= Player.Stim.Last[STAT_STRENGTH];
             Player.DefenseBonus -= Player.Stim.Last[STAT_DEFENSE];
@@ -473,7 +473,7 @@ void CheckStim()
             Player.AgilityBonus -= Player.Stim.Last[STAT_AGILITY];
             Player.CapacityBonus -= Player.Stim.Last[STAT_CAPACITY];
             Player.LuckBonus -= Player.Stim.Last[STAT_LUCK];
-            
+
             for (int i = 0; i < StimStatsEnd; i++)
             {
                 Player.Stim.ActiveBonus[i] = false;
@@ -493,21 +493,21 @@ void MixStim(int Type)
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     if (Player.Stim.Vials[Type] <= 0)
     {
         PrintError("You don't have any vials of this type left");
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     if (Player.Stim.Amount >= Player.Stim.Capacity)
     {
         PrintError("The injector is currently full");
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     // Add from vial to stim
     ActivatorSound("menu/move", 127);
     Player.Stim.Vials[Type]--;
@@ -516,26 +516,26 @@ void MixStim(int Type)
 
 void SetStim(int Type)
 {
-    if ((Type == 0 && !CheckInventory("DRPGStimSmall")) || 
-        (Type == 1 && !CheckInventory("DRPGStimMedium")) ||
-        (Type == 2 && !CheckInventory("DRPGStimLarge")) ||
-        (Type == 3 && !CheckInventory("DRPGStimXL")))
+    if ((Type == 0 && !CheckInventory("DRPGStimSmall")) ||
+            (Type == 1 && !CheckInventory("DRPGStimMedium")) ||
+            (Type == 2 && !CheckInventory("DRPGStimLarge")) ||
+            (Type == 3 && !CheckInventory("DRPGStimXL")))
     {
         PrintError("You have no injectors of this type");
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     if (Player.Stim.Size > 0)
     {
         PrintError("You already have a stim ready");
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     Player.Stim.Size = Type + 1;
     ActivatorSound("menu/move", 127);
-    
+
     if (Type == 0) TakeInventory("DRPGStimSmall", 1);
     if (Type == 1) TakeInventory("DRPGStimMedium", 1);
     if (Type == 2) TakeInventory("DRPGStimLarge", 1);

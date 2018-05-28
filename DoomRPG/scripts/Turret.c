@@ -19,11 +19,11 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         "" // Generated in BuildTurretData()
     },
-    
+
     // --------------------------------------------------
     // Weapons
-    // 
-    
+    //
+
     // Bullet
     {
         "Weapon Module - Bullet", 1, 2,
@@ -49,7 +49,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         ""
     },
-    
+
     // Pellet
     {
         "Weapon Module - Pellet", 1, 3,
@@ -87,7 +87,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         ""
     },
-    
+
     // Rocket
     {
         "Weapon Module - Rocket", 1, 5,
@@ -119,7 +119,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         ""
     },
-    
+
     // Plasma
     {
         "Weapon Module - Plasma", 1, 10,
@@ -145,7 +145,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         ""
     },
-    
+
     // Railgun
     {
         "Weapon Module - Railgun", 1, 20,
@@ -177,7 +177,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         ""
     },
-    
+
     // Ammo
     {
         "Ammo Module - Autoloader", 1, 5,
@@ -215,11 +215,11 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         ""
     },
-    
+
     // --------------------------------------------------
     // Armor
-    // 
-    
+    //
+
     // Plating
     {
         "Armor Plating - Reinforcement", 10, 5,
@@ -257,7 +257,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         ""
     },
-    
+
     // Modules
     {
         "Armor Module - Projectile Reflection", 3, 10,
@@ -277,18 +277,18 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Upgrades increase the time that the turret can stay invisible",
         ""
     },
-    
+
     // --------------------------------------------------
     // Battery
-    // 
-    
+    //
+
     {
         "Battery - Capacity", 10, 5,
         "Increases the capacity of the turret's battery",
         "Upgrades increase maximum battery capacity",
         ""
     },
-    
+
     // Generators
     {
         "Generator - Kinetic", 10, 5,
@@ -326,11 +326,11 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Upgrades increase charge amount when recieving this kind of damage",
         ""
     },
-    
+
     // --------------------------------------------------
     // Hardware
-    // 
-    
+    //
+
     {
         "Hardware - Battery Charge Bus", 10, 5,
         "Decreases the time it takes for the turret's battery to be recharged when sent back to the Outpost",
@@ -361,11 +361,11 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Upgrades decrease cash flow required when in maintenance",
         ""
     },
-    
+
     // --------------------------------------------------
     // Commands
-    // 
-    
+    //
+
     {
         "Commands - Recall", 1, 10,
         "A module that recalls the turret to you, cancelling other commands",
@@ -391,14 +391,14 @@ NamedScript Type_ENTER void TurretLoop()
     int PlayerNum = PlayerNumber();
     int Health;
     int PrevHealth;
-    
-    Start:
-    
+
+Start:
+
     // Horrible hack
     // Just entered the level, despawn the turret
     if (Timer() <= 4 && Player.Turret.Init && Player.Turret.Active)
         TurretDespawn();
-    
+
     // Turret first time init
     if (Player.Turret.Upgrade[TU_BUILD] && !Player.Turret.Init)
     {
@@ -417,44 +417,44 @@ NamedScript Type_ENTER void TurretLoop()
             Player.Turret.Upgrade[TU_ARMOR_PLATING] = 1;
         if (!Player.Turret.Upgrade[TU_BATTERY_CAPACITY])
             Player.Turret.Upgrade[TU_BATTERY_CAPACITY] = 1;
-        
+
         // Reset the current weapon
         Player.Turret.Weapon = TW_NONE;
-        
+
         // Small delay to let the initial upgrades kick in and for total to be calculated
         Delay(1);
-        
+
         // Initial Health
         if (Player.Turret.TID != 0)
             SetActorProperty(Player.Turret.TID, APROP_Health, Player.Turret.HealthMax);
-        
+
         // Initial Battery Charge
         Player.Turret.Battery = Player.Turret.BatteryMax;
-        
+
         // Set Flags
         Player.Turret.Init = true;
         Player.Turret.PaidForRepair = true;
     }
-    
+
     // Sanity check. Without this, using `kill monsters` (or being really unlucky) while the turret is active will semi-destroy it, making it impossible to deploy or repair.
     if (Player.Turret.Health >= Player.Turret.HealthMax)
     {
         Player.Turret.Destroyed = false;
         Player.Turret.PaidForRepair = true;
     }
-    
+
     while (Player.Turret.Active && Player.Turret.TID != 0)
     {
         // Pre-health check
         Health = GetActorProperty(Player.Turret.TID, APROP_Health);
-        
+
         // Prevent Health overflow
         if (Health > Player.Turret.HealthMax)
         {
             Health = Player.Turret.HealthMax;
             SetActorProperty(Player.Turret.TID, APROP_Health, Health);
         }
-        
+
         // Despawn the turret if itself or the owning player dies
         if (GetActorProperty(Player.TID, APROP_Health) <= 0 || GetActorProperty(Player.Turret.TID, APROP_Health) <= 0)
         {
@@ -463,17 +463,17 @@ NamedScript Type_ENTER void TurretLoop()
             TurretDespawn();
             break;
         }
-        
+
         // Nametag
         SetActorPropertyString(Player.Turret.TID, APROP_NameTag, StrParam("%tS\C-'s Turret", PlayerNumber() + 1));
-        
+
         // Battery is drained
         if (Player.Turret.Battery <= 0)
         {
             TurretDespawn();
             break;
         }
-        
+
         // Autoloader
         if (Player.Turret.Upgrade[TU_AMMO_AUTOLOADER] && Player.Turret.Autoload)
         {
@@ -488,7 +488,7 @@ NamedScript Type_ENTER void TurretLoop()
             if (Player.Turret.Upgrade[TU_WEAPON_RAILGUN] && Player.Turret.RailAmmo <= 0)
                 TurretLoadAmmo(TU_WEAPON_RAILGUN);
         }
-        
+
         // Nano Ammo Generators
         if (Player.Turret.Upgrade[TU_AMMO_NANOGEN] > 0 && (Timer() % (35 * (15 - Player.Turret.Upgrade[TU_AMMO_NANOGEN]))) == 0)
         {
@@ -503,9 +503,10 @@ NamedScript Type_ENTER void TurretLoop()
             if (Player.Turret.Upgrade[TU_AMMO_NANOGEN_CELL] && Player.Turret.RailAmmo < Player.Turret.RailAmmoMax)
                 Player.Turret.RailAmmo++;
         }
-        
+
         // Armor/Protection
-        if (Timer() % 5 == 0) {
+        if (Timer() % 5 == 0)
+        {
             if (Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] > 0)
                 GiveActorInventory(Player.Turret.TID, StrParam("DRPGTurretProtectionMelee%d", Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE]), 1);
             if (Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] > 0)
@@ -534,7 +535,7 @@ NamedScript Type_ENTER void TurretLoop()
             SetActorProperty(Player.Turret.TID, APROP_RenderStyle, STYLE_Normal);
             SetActorPropertyFixed(Player.Turret.TID, APROP_Alpha, 1.0);
         }
-        
+
         // Generators
         if (Player.Turret.HitTimer <= 0)
         {
@@ -542,63 +543,63 @@ NamedScript Type_ENTER void TurretLoop()
                 Player.Turret.Battery++;
             if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_ILLUMINATION] > 0 && GetActorLightLevel(Player.Turret.TID) >= 192 && (Timer() % (35 * (11 - Player.Turret.Upgrade[TU_BATTERY_GENERATOR_ILLUMINATION]))) == 0)
                 Player.Turret.Battery++;
-            
+
             // Damage-based Generators
             if (Health < PrevHealth)
             {
                 switch (GetUserVariable(Player.Turret.TID, "user_damage_type"))
                 {
-                    case DT_NORMAL:
-                    case DT_MELEE:
-                        if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE] > 0)
-                            Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE];
-                        break;
-                    case DT_FIRE:
-                        if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_THERMAL] > 0)
-                            Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_THERMAL];
-                        break;
-                    case DT_PLASMA:
-                    case DT_LIGHTNING:
-                        if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA] > 0)
-                            Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA];
-                        break;
-                    case DT_TOXIC:
-                    case DT_RADIATION:
-                        if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR] > 0)
-                            Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR];
-                        break;
+                case DT_NORMAL:
+                case DT_MELEE:
+                    if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE] > 0)
+                        Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_FORCE];
+                    break;
+                case DT_FIRE:
+                    if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_THERMAL] > 0)
+                        Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_THERMAL];
+                    break;
+                case DT_PLASMA:
+                case DT_LIGHTNING:
+                    if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA] > 0)
+                        Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_PLASMA];
+                    break;
+                case DT_TOXIC:
+                case DT_RADIATION:
+                    if (Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR] > 0)
+                        Player.Turret.Battery += Player.Turret.Upgrade[TU_BATTERY_GENERATOR_NUCLEAR];
+                    break;
                 }
             }
         }
-        
+
         // Timers
         if (Health < PrevHealth && GetUserVariable(Player.Turret.TID, "user_damage_type") != DT_TOXIC && GetUserVariable(Player.Turret.TID, "user_damage_type") != DT_RADIATION)
             Player.Turret.HitTimer = 35 * 5;
         if (Player.Turret.HitTimer > 0)
             Player.Turret.HitTimer--;
-        
+
         // Drain Battery
         if (Player.Turret.Battery > 0 && (Timer() % 35) == 0)
             Player.Turret.Battery--;
-        
+
         // Prevent battery overflow
         if (Player.Turret.Battery > Player.Turret.BatteryMax)
             Player.Turret.Battery = Player.Turret.BatteryMax;
-        
+
         // Pass info to uservars
         TurretPassVars();
-        
+
         // Reset damage type
         SetUserVariable(Player.Turret.TID, "user_damage_type", DT_NONE);
-        
+
         Delay(1);
-        
+
         // Post-health check
         PrevHealth = Health;
         Player.Turret.Health = Health;
-        
+
     }
-    
+
     Delay(1);
     goto Start;
 }
@@ -606,9 +607,9 @@ NamedScript Type_ENTER void TurretLoop()
 NamedScript Type_ENTER void TurretLoopMaintenance()
 {
     int MaintCost = 0;
-    
-    Start:
-    
+
+Start:
+
     // Stats which need to be kept updated
     Player.Turret.HealthMax = 100 * Player.Turret.Upgrade[TU_ARMOR_PLATING];
     Player.Turret.BatteryMax = TURRET_BATTERY_CHARGE * Player.Turret.Upgrade[TU_BATTERY_CAPACITY];
@@ -617,7 +618,7 @@ NamedScript Type_ENTER void TurretLoopMaintenance()
     Player.Turret.RocketAmmoMax = 50 * Player.Turret.Upgrade[TU_WEAPON_ROCKET_CAPACITY];
     Player.Turret.PlasmaAmmoMax = 300 * Player.Turret.Upgrade[TU_WEAPON_PLASMA_CAPACITY];
     Player.Turret.RailAmmoMax = 10 * Player.Turret.Upgrade[TU_WEAPON_RAILGUN_CAPACITY];
-    
+
     // Prevent ammo overflow
     if (Player.Turret.BulletAmmo > Player.Turret.BulletAmmoMax)
         Player.Turret.BulletAmmo = Player.Turret.BulletAmmoMax;
@@ -629,14 +630,14 @@ NamedScript Type_ENTER void TurretLoopMaintenance()
         Player.Turret.PlasmaAmmo = Player.Turret.PlasmaAmmoMax;
     if (Player.Turret.RailAmmo > Player.Turret.RailAmmoMax)
         Player.Turret.RailAmmo = Player.Turret.RailAmmoMax;
-    
+
     // Calculate Maintenance Timers
     Player.Turret.ChargeTimer = Player.Turret.BatteryMax - Player.Turret.Battery;
     Player.Turret.RepairTimer = Player.Turret.HealthMax - Player.Turret.Health;
-    
+
     // Reset maintenance cost this tic
     MaintCost = 0;
-    
+
     // No Credits for payment
     if (Player.Turret.Maintenance && !CheckInventory("DRPGCredits"))
     {
@@ -644,7 +645,7 @@ NamedScript Type_ENTER void TurretLoopMaintenance()
         PrintError("Maintenance has been postponed because you have run out of money");
         ActivatorSound("menu/error", 127);
     }
-    
+
     // Maintenance
     if (Player.Turret.Maintenance)
     {
@@ -653,12 +654,12 @@ NamedScript Type_ENTER void TurretLoopMaintenance()
             if (Player.Turret.ChargeTimer > 0)
             {
                 Player.Turret.Battery++;
-                
+
                 // Done
                 if (Player.Turret.Battery >= Player.Turret.BatteryMax)
                     ActivatorSound("turret/chargedone", 127);
             }
-        
+
         // Repairing
         if ((Timer() % (35 - (Player.Turret.Upgrade[TU_HARDWARE_PART] * 3))) == 0)
         {
@@ -668,7 +669,7 @@ NamedScript Type_ENTER void TurretLoopMaintenance()
                 if (Player.Turret.Destroyed && !Player.Turret.PaidForRepair)
                 {
                     int Parts = Player.Turret.Upgrade[TU_ARMOR_PLATING] - Player.Turret.Upgrade[TU_HARDWARE_BUILD];
-                    
+
                     // If the parts upgrade outweighs the plating upgrade, there is no cost
                     if (Parts <= 0)
                         Player.Turret.PaidForRepair = true;
@@ -678,10 +679,10 @@ NamedScript Type_ENTER void TurretLoopMaintenance()
                         TakeInventory("DRPGTurretPart", Parts);
                     }
                 }
-                
+
                 if (Player.Turret.PaidForRepair)
                     Player.Turret.Health++;
-                
+
                 // Done
                 if (Player.Turret.Health >= Player.Turret.HealthMax)
                 {
@@ -690,18 +691,18 @@ NamedScript Type_ENTER void TurretLoopMaintenance()
                 }
             }
         }
-        
+
         // Refitting
         if ((Timer() % (35 - (Player.Turret.Upgrade[TU_HARDWARE_SPECS] * 3))) == 0)
             if (Player.Turret.RefitTimer > 0)
             {
                 Player.Turret.RefitTimer--;
-                
+
                 // Done
                 if (Player.Turret.RefitTimer <= 0)
                     ActivatorSound("turret/refitdone", 127);
             }
-        
+
         // Calculate maintenance cost for this tic
         if (Player.Turret.ChargeTimer > 0)
             MaintCost++;
@@ -709,19 +710,19 @@ NamedScript Type_ENTER void TurretLoopMaintenance()
             MaintCost++;
         if (Player.Turret.RefitTimer > 0)
             MaintCost++;
-        
+
         // Steady credit loss while maintenance is happening
         if ((Player.Turret.ChargeTimer > 0 || (Player.Turret.PaidForRepair && Player.Turret.RepairTimer > 0) || Player.Turret.RefitTimer > 0) && (Timer() % (5 + (Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] * 3))) == 0)
             TakeInventory("DRPGCredits", MaintCost);
     }
-    
+
     // Maintenance is done
     if (Player.Turret.Maintenance && Player.Turret.ChargeTimer <= 0 && Player.Turret.RepairTimer <= 0 && Player.Turret.RefitTimer <= 0)
     {
         Player.Turret.Maintenance = false;
         ActivatorSound("turret/maintenancedone", 127);
     }
-    
+
     Delay(1);
     goto Start;
 }
@@ -746,21 +747,22 @@ NamedScript Type_ENTER void TurretCommandWheel()
         TU_COMMAND_DRAW_FIRE,
         TU_COMMAND_HOLD_POSITION
     };
-    
-    Start: NOP;
-    
+
+Start:
+    NOP;
+
     bool Close = false;
     int CurrentCommands[MAX_COMMANDS];
     int CurrentCommandsCount = 0;
     int Radius = 160;
     int CurrentRadius = 0;
     fixed LerpPos = 0;
-    
+
     // Rebuild currently known commands
     for (int i = 0; i < MAX_COMMANDS; i++)
         if (Player.Turret.Upgrade[Commands[i]] > 0)
             CurrentCommands[CurrentCommandsCount++] = Commands[i];
-    
+
     // Open the wheel or quickly activate/deactivate the turret
     if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && CheckInput(BT_USER2, KEY_PRESSED, false, PlayerNumber()))
         TurretCommand(TU_BUILD);
@@ -770,7 +772,7 @@ NamedScript Type_ENTER void TurretCommandWheel()
         Player.Turret.WheelOpen = true;
         LerpPos = 1.0;
     }
-    
+
     while (Player.Turret.WheelOpen || CurrentRadius > 0)
     {
         fixed Increment = 1.0 / CurrentCommandsCount;
@@ -779,30 +781,30 @@ NamedScript Type_ENTER void TurretCommandWheel()
         fixed Angle;
         fixed X;
         fixed Y;
-        
+
         if (Location < 0.5 && OldLocation > 0.5 && OldLocation - Location > 0.5)
             OldLocation -= 1.0;
         else if (Location > 0.5 && OldLocation < 0.5 && Location - OldLocation > 0.5)
             OldLocation += 1.0;
-        
+
         // Freeze player
         SetPlayerProperty(0, 1, PROP_FROZEN);
-        
+
         // Check for release
         if (!CheckInput(BT_USER2, KEY_HELD, false, PlayerNumber()) && !Close)
             Close = true;
-        
+
         // Lerp position
         if (LerpPos <= 1.0)
             LerpPos += 0.1;
         if (LerpPos > 1.0)
             LerpPos = 1.0;
-        
+
         // Animate wheel closed/open
         if (Close)
         {
             CurrentRadius -= 32;
-            
+
             // Closed
             if (CurrentRadius <= 0)
             {
@@ -812,39 +814,39 @@ NamedScript Type_ENTER void TurretCommandWheel()
         }
         else if (CurrentRadius < Radius)
             CurrentRadius += 32;
-        
+
         // Set Resolution
         SetHudSize(640, 480, false);
-        
+
         // Turret Timers
         DrawTurretTimers(206.0, 32.0);
-        
+
         // Command Icons/Info
         for (int i = 0; i < CurrentCommandsCount; i++)
         {
             Angle = 0.25 + Lerp(OldLocation, Location, LerpPos) - (Increment * i);
             X = 320.0 + (CurrentRadius * Cos(Angle));
             Y = 240.0 + (CurrentRadius * Sin(Angle));
-            
+
             if (Player.Turret.Upgrade[CurrentCommands[i]] > 0)
                 DrawTurretInfo((int)X, (int)Y, CurrentCommands[i]);
-            
+
             PrintSprite(StrParam("T_UPG%d", CurrentCommands[i] + 1), 0, (int)X, (int)Y, 0.05);
         }
-        
+
         // Box
         PrintSprite("ItemBoxH", 0, 320, 240 + CurrentRadius, 0.05);
-        
+
         // Name
         SetFont("BIGFONT");
         HudMessage("%S", TurretUpgradeData[CurrentCommands[Player.Turret.WheelCommand]].Name);
         EndHudMessage(HUDMSG_PLAIN, 0, "White", 320, 240 + CurrentRadius + 32, 0.05);
-        
+
         // Description
         SetFont("SMALLFONT");
         HudMessage("%S", TurretUpgradeData[CurrentCommands[Player.Turret.WheelCommand]].CommandInfo);
         EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", 320.4, 240.1 + CurrentRadius + 48, 0.05);
-        
+
         // Input
         if (!Close)
         {
@@ -869,10 +871,10 @@ NamedScript Type_ENTER void TurretCommandWheel()
                 if (Player.Turret.WheelCommand > CurrentCommandsCount - 1) Player.Turret.WheelCommand = 0;
             }
         }
-        
+
         Delay(1);
     }
-    
+
     Delay(1);
     goto Start;
 }
@@ -887,7 +889,7 @@ NamedScript DECORATE void TurretSetOffset(int AngleOffset, int DistanceOffset, i
 NamedScript DECORATE void TurretUseAmmo(int Type)
 {
     SetActivator(GetActorProperty(0, APROP_MasterTID)); // Transfer from Turret to Player
-    
+
     if (Type == TW_BULLET)
         Player.Turret.BulletAmmo--;
     else if (Type == TW_PELLET)
@@ -904,12 +906,12 @@ NamedScript DECORATE int TurretGetProjectileDamage(int Type)
 {
     SetActivator(GetActorProperty(0, APROP_TargetTID)); // Transfer from missile to Turret
     SetActivator(GetActorProperty(0, APROP_MasterTID)); // Transfer from Turret to Player
-    
+
     if (Type == TP_ROCKET)
         return (100 * (Player.Turret.Upgrade[TU_WEAPON_ROCKET_DAMAGE] + 1));
     else if (Type == TP_PLASMA)
         return (10 * (Player.Turret.Upgrade[TU_WEAPON_PLASMA_DAMAGE] + 1));
-    
+
     return 0;
 }
 
@@ -917,10 +919,10 @@ NamedScript DECORATE int TurretGetProjectileProperty(int Type)
 {
     SetActivator(GetActorProperty(0, APROP_TargetTID)); // Transfer from missile to Turret
     SetActivator(GetActorProperty(0, APROP_MasterTID)); // Transfer from Turret to Player
-    
+
     if (Type == TP_ROCKET)
         return Player.Turret.Upgrade[TU_WEAPON_ROCKET_SEEKING];
-    
+
     return 0;
 }
 
@@ -929,7 +931,7 @@ NamedScript DECORATE int TurretGetProjectileProperty(int Type)
 NamedScript void TurretAI(int TID)
 {
     SetActivator(TID);
-    
+
     int Weapon = GetUserVariable(0, "user_weapon");
     int Ammo = 0;
     int PlayerTID = GetActorProperty(0, APROP_MasterTID);
@@ -959,12 +961,12 @@ NamedScript void TurretAI(int TID)
     fixed EnemyPitch;
     fixed DodgeDirection;
     fixed TurretIdleRotation = 0.0;
-    
-    Start:
-    
+
+Start:
+
     if (ClassifyActor(0) == ACTOR_WORLD)
         return;
-    
+
     // Just in case it was changed
     TurretSpeed = GetUserCVarFixed(PlayerID, "drpg_turret_movespeed");
     TurretPlayerDistance = GetUserCVarFixed(PlayerID, "drpg_turret_playerdist");
@@ -972,9 +974,9 @@ NamedScript void TurretAI(int TID)
     AggressionType = GetUserCVar(PlayerID, "drpg_turret_aggression");
     MaxInterestTime = GetUserCVar(PlayerID, "drpg_turret_pursuittime");
     TeleportWaitTime = GetUserCVar(PlayerID, "drpg_turret_telewaittime");
-    
+
     CurrentCommand = GetUserVariable(0, "user_command");
-    
+
     Weapon = GetUserVariable(0, "user_weapon");
     switch (Weapon)
     {
@@ -994,7 +996,7 @@ NamedScript void TurretAI(int TID)
         Ammo = GetUserVariable(0, "user_ammo_rail");
         break;
     }
-    
+
     // Target handling
     HasTarget = TurretCheckTarget() && !TurretCheckTargetIsSelf();
     if (HasTarget)
@@ -1008,7 +1010,7 @@ NamedScript void TurretAI(int TID)
         TargetTID = 0;
         TargetOriginalTID = 0;
     }
-    
+
     if (HasTarget)
     {
         if ((!TurretCheckTargetSuitable() && !TargetForced) || TurretCheckTargetDead())
@@ -1022,7 +1024,7 @@ NamedScript void TurretAI(int TID)
             if (!CheckSight(0, TargetTID, CSF_NOFAKEFLOORS) && !TargetForced)
             {
                 LosingInterestTime++;
-                
+
                 if (LosingInterestTime >= 35 * MaxInterestTime)
                 {
                     SetPointer(AAPTR_TARGET, 0, AAPTR_NULL);
@@ -1033,13 +1035,13 @@ NamedScript void TurretAI(int TID)
             else
             {
                 LosingInterestTime = 0;
-                
+
                 if (CurrentCommand == TC_DRAW_FIRE)
                     TurretGetAttention(TargetTID, ActivatorTID());
             }
         }
     }
-    
+
     // Player is ordering us to switch targets
     if (CurrentCommand == TC_DRAW_FIRE && TurretCheckPlayerTarget() && TurretWantsToSwitchToPlayerTarget())
     {
@@ -1049,35 +1051,35 @@ NamedScript void TurretAI(int TID)
         SetActorState(0, "Targeting");
         AnnouncedTarget = true;
     }
-    
+
     // Air friction, don't slide away helplessly like cacodemons do.
     SetActorVelocity(0, GetActorVelX(0) * 0.90625, GetActorVelY(0) * 0.90625, GetActorVelZ(0) * 0.90625, false, false);
-    
+
     // Float bobbing
     SetActorVelocity(0, 0, 0, 0.125 * Sin((fixed)Timer() / 70.0), true, false);
-    
+
     if (AbsFixed(GetActorVelX(0)) < 0.01 && AbsFixed(GetActorVelY(0)) < 0.01 && AbsFixed(GetActorVelZ(0)) < 0.01)
         SetActorVelocity(0, 0, 0, 0, false, false); // Dead stop if we're going too slow
-    
+
     // Movement
-    
+
     // Stay off the floor
     if (GetActorZ(0) - GetActorFloorZ(0) < 32)
         SetActorVelocity(0, 0, 0, TurretSpeed, true, false);
-    
+
     // Teleport detection - If the player suddenly poofs into another part of the map, we need to go with them.
     if (GetActorProperty(PlayerTID, APROP_ReactionTime) > 0 && Distance(0, PlayerTID) > 96.0)
         NeedsTeleport = true;
-    
+
     if (GetUserVariable(0, "user_needs_teleport"))
     {
         NeedsTeleport = true;
         SetUserVariable(0, "user_needs_teleport", 0);
     }
-    
+
     if (NeedsTeleport)
         NeedsTeleport = !TurretTeleport(PlayerTID);
-    
+
     // Spawn a goal flag if we need to hold our position
     if (CurrentCommand == TC_HOLD_POSITION)
     {
@@ -1095,30 +1097,30 @@ NamedScript void TurretAI(int TID)
             SetUserVariable(0, "user_goal_tid", 0);
         }
     }
-    
+
     /* Turret Status Debug
     SetHudSize(640, 480, 1);
     HudMessage("Turret Status\n\nHas Target: %S\nTarget Forced: %S\nTarget Original TID: %d\nTarget TID: %d\nInterest Time: %d", HasTarget? "Yes" : "No", TargetForced? "Yes" : "No", TargetOriginalTID, TargetTID, LosingInterestTime);
     EndhudMessage(HUDMSG_FADEOUT, 864, "Green", 32.1, 32.1, 1.0, 1.0);
     */
-    
+
     if (!HasTarget)
     {
         // Idle routine
-        
+
         if (AnnouncedTarget)
             AnnouncedTarget = false;
-        
+
         if (CurrentCommand == TC_HOLD_POSITION)
         {
             if (Distance(0, GetUserVariable(0, "user_goal_tid")) > 80.0)
             {
                 TurretAngle = VectorAngle(GetActorX(GetUserVariable(0, "user_goal_tid")) - GetActorX(0), GetActorY(GetUserVariable(0, "user_goal_tid")) - GetActorY(0));
                 TurretPitch = VectorAngle(Distance(0, GetUserVariable(0, "user_goal_tid")), GetActorZ(GetUserVariable(0, "user_goal_tid")) - GetActorZ(0));
-                
+
                 TurretTurn(TurretAngle, TurretPitch);
                 TurretFly(TurretAngle, TurretPitch, TurretSpeed);
-                
+
                 TurretIdleRotation = 0.0;
                 TravelTime++;
             }
@@ -1126,11 +1128,11 @@ NamedScript void TurretAI(int TID)
             {
                 TurretAngle = (GetActorAngle(GetUserVariable(0, "user_goal_tid")) + TurretIdleRotation) % 1.0;
                 TurretTurn(TurretAngle, 0);
-                
+
                 TurretIdleRotation += 0.007;
                 TurretIdleRotation %= 1.0;
             }
-            
+
             if (Weapon != TW_NONE && !(Timer() % 35))
             {
                 SetActorState(0, "ScanForEnemies");
@@ -1143,23 +1145,23 @@ NamedScript void TurretAI(int TID)
                 if (TravelTime > 35 * TeleportWaitTime && (AbsFixed(GetActorVelX(0)) < 0.1 || AbsFixed(GetActorVelY(0)) < 0.1))
                     // Been trying to reach the player for the specified seconds and going nowhere, so give up and teleport to them if possible
                     NeedsTeleport = true;
-                
+
                 TurretAngle = VectorAngle(GetActorX(PlayerTID) - GetActorX(0), GetActorY(PlayerTID) - GetActorY(0));
                 TurretPitch = VectorAngle(Distance(0, PlayerTID), GetActorZ(PlayerTID) - GetActorZ(0));
-                
+
                 TurretTurn(TurretAngle, TurretPitch);
                 TurretFly(TurretAngle, TurretPitch, TurretSpeed);
-                
+
                 TravelTime++;
             }
             else
             {
                 if (TravelTime)
                     TravelTime = 0;
-                
+
                 TurretTurn(GetActorAngle(PlayerTID), -GetActorPitch(PlayerTID));
             }
-            
+
             if (Weapon != TW_NONE && !(Timer() % 35))
             {
                 if (TurretCheckPlayerTarget())
@@ -1175,13 +1177,13 @@ NamedScript void TurretAI(int TID)
     else if (TargetAssignedTID)
     {
         // Battle routine - Circle around the target and fire at it, keeping a distance away.
-        
+
         if (!AnnouncedTarget)
         {
             SetActorState(0, "Targeting");
             AnnouncedTarget = true;
         }
-        
+
         if (CurrentCommand == TC_DRAW_FIRE)
             AggressionMode = 1;
         else if (CurrentCommand == TC_HOLD_POSITION)
@@ -1195,42 +1197,42 @@ NamedScript void TurretAI(int TID)
         }
         else
             AggressionMode = AggressionType;
-        
+
         // We can't be aggressive if we can't fight back
         if (Weapon == TW_NONE || Ammo < 1)
             AggressionMode = 0;
-        
+
         EnemyAngle = VectorAngle(GetActorX(TargetTID) - GetActorX(0), GetActorY(TargetTID) - GetActorY(0));
         EnemyPitch = VectorAngle(Distance(0, TargetTID), GetActorZ(TargetTID) - GetActorZ(0));
-        
+
         TurretTurn(EnemyAngle, EnemyPitch);
         GiveInventory("DRPGTurretTargetingLaser", 1);
-        
+
         if (Distance(0, TargetTID) <= GetActorPropertyFixed(TargetTID, APROP_Radius) + TurretEnemyDistance)
         {
             // Invading our personal space, back away
             TurretFly(EnemyAngle, 0, -TurretSpeed);
         }
-        
+
         if (AggressionMode == 0)
         {
             // Passive Fire - Stay in slow orbit by the player and only fire at the enemy
-            
+
             if (CurrentCommand == TC_HOLD_POSITION)
             {
-                 if (GetActorZ(TargetTID) - GetActorZ(0) < -32)
+                if (GetActorZ(TargetTID) - GetActorZ(0) < -32)
                     SetActorVelocity(0, 0, 0, -TurretSpeed, true, false);
                 else if (GetActorZ(TargetTID) - GetActorZ(0) > 32)
                     SetActorVelocity(0, 0, 0, TurretSpeed, true, false);
-                
+
                 if (Distance(0, TargetTID) > GetActorPropertyFixed(TargetTID, APROP_Radius) + TurretEnemyDistance || LosingInterestTime)
                     TurretFly(EnemyAngle, -EnemyPitch, TurretSpeed);
-                
+
                 TurretFly(EnemyAngle - 0.25, 0, TurretSpeed);
-                
+
                 TurretAngle = VectorAngle(GetActorX(GetUserVariable(0, "user_goal_tid")) - GetActorX(0), GetActorY(GetUserVariable(0, "user_goal_tid")) - GetActorY(0));
                 TurretPitch = VectorAngle(Distance(0, GetUserVariable(0, "user_goal_tid")), GetActorZ(GetUserVariable(0, "user_goal_tid")) - GetActorZ(0));
-                
+
                 if (Distance(0, GetUserVariable(0, "user_goal_tid")) > 80.0)
                 {
                     TurretFly(TurretAngle, TurretPitch, TurretSpeed);
@@ -1241,31 +1243,31 @@ NamedScript void TurretAI(int TID)
             {
                 TurretAngle = VectorAngle(GetActorX(PlayerTID) - GetActorX(0), GetActorY(PlayerTID) - GetActorY(0));
                 TurretPitch = VectorAngle(Distance(0, PlayerTID), GetActorZ(PlayerTID) - GetActorZ(0));
-                
+
                 if (Distance(0, PlayerTID) > TurretPlayerDistance)
                     TurretFly(TurretAngle, TurretPitch, TurretSpeed);
                 else
                     TurretFly(TurretAngle, 0, -TurretSpeed);
-                
+
                 TurretFly(TurretAngle - 0.25, 0, TurretSpeed / 3.0);
             }
         }
         else
         {
             // Aggressive Fire - Orbit the enemy and draw them away from the player aggressively
-            
+
             // Stay level with the target so we have a better time shooting it
             if (GetActorZ(TargetTID) - GetActorZ(0) < -32)
                 SetActorVelocity(0, 0, 0, -TurretSpeed, true, false);
             else if (GetActorZ(TargetTID) - GetActorZ(0) > 32)
                 SetActorVelocity(0, 0, 0, TurretSpeed, true, false);
-            
+
             if (Distance(0, TargetTID) > GetActorPropertyFixed(TargetTID, APROP_Radius) + TurretEnemyDistance || LosingInterestTime)
                 TurretFly(EnemyAngle, -EnemyPitch, TurretSpeed);
-            
+
             TurretFly(EnemyAngle - 0.25, 0, TurretSpeed);
         }
-        
+
         // Unload all you've got!
         if (Ammo > 0 && !Cooldown && HeatLevel < 100 && !GetUserVariable(0, "user_firing") && CheckSight(0, TargetTID, CSF_NOFAKEFLOORS) && (Weapon != TW_ROCKET || ((Distance(0, TargetTID) > 176.0 || GetUserArray(0, "user_upgrades", TU_ARMOR_PLATING_BLAST)) && Distance(PlayerID, TargetTID) > 176.0)))
         {
@@ -1290,7 +1292,7 @@ NamedScript void TurretAI(int TID)
             }
         }
     }
-    
+
     if (HeatLevel > 0)
     {
         if (HeatLevel >= 100 && !GetUserVariable(0, "user_firing") && !Cooldown)
@@ -1298,31 +1300,31 @@ NamedScript void TurretAI(int TID)
             SetActorState(0, "Cooldown");
             Cooldown = true;
         }
-        
+
         if (Cooldown)
             SpawnForced("DRPGTurretCooldownIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + 40.0, 0, 0);
-        
+
         if (!(Timer() % 16))
             HeatLevel -= 8;
     }
     else if (Cooldown)
         Cooldown = false;
-    
+
     if (TargetAssignedTID)
     {
         Thing_ChangeTID(TargetTID, TargetOriginalTID);
         TargetAssignedTID = false;
     }
-    
+
     /* Aim debugging assist
     if (GetCVar("drpg_debug"))
       SpawnForced("DRPGTurretTeleportParticle",
                   GetActorX(0) + (64.0 * Cos(GetActorAngle(0)) * Cos(-GetActorPitch(0))),
                   GetActorY(0) + (64.0 * Sin(GetActorAngle(0)) * Cos(-GetActorPitch(0))),
                   GetActorZ(0) + (64.0 * Sin(-GetActorPitch(0))), 0, 0); */
-    
+
     Delay(1);
-    
+
     goto Start;
 }
 
@@ -1335,12 +1337,12 @@ void TurretTurn(fixed NewAngle, fixed NewPitch)
 {
     fixed OldAngle = GetActorAngle(0);
     fixed OldPitch = GetActorPitch(0);
-    
+
     NewPitch = -(((0.5 + NewPitch) % 1.0) - 0.5);
-    
+
     if (OldAngle == NewAngle && OldPitch == NewPitch)
         return;
-    
+
     if (OldAngle != NewAngle)
     {
         if (OldAngle < NewAngle && NewAngle - OldAngle < 0.5)
@@ -1352,7 +1354,7 @@ void TurretTurn(fixed NewAngle, fixed NewPitch)
         else
             SetActorAngle(0, OldAngle + Clamp(0, (NewAngle + 1.0) - OldAngle, 0.03));
     }
-    
+
     if (OldPitch != NewPitch)
         SetActorPitch(0, OldPitch + Clamp(-0.03, NewPitch - OldPitch, 0.03));
 }
@@ -1371,35 +1373,35 @@ NamedScript bool TurretCheckPlayerTarget()
 {
     if (!SetActivator(0, AAPTR_FRIENDPLAYER))
         return false;
-    
+
     return SetActivator(0, AAPTR_PLAYER_GETTARGET);
 }
 
 NamedScript bool TurretCheckTargetSuitable()
 {
     bool Suitable = true;
-    
+
     if (!SetActivator(0, AAPTR_TARGET))
         return false;
-    
+
     int ActorInfo = ClassifyActor(0);
     if (ActorInfo == ACTOR_WORLD || ActorInfo & ACTOR_DEAD || CheckFlag(0, "NONSHOOTABLE") || !CheckFlag(0, "SHOOTABLE") || CheckFlag(0, "FRIENDLY") || CheckFlag(0, "NEVERTARGET") || !CheckFlag(0, "ISMONSTER"))
         Suitable = false;
-    
+
     return Suitable;
 }
 
 NamedScript bool TurretCheckTargetDead()
 {
     bool TargetDead = false;
-    
+
     if (!SetActivator(0, AAPTR_TARGET))
         return true;
 
     int ActorInfo = ClassifyActor(0);
     if (ActorInfo == ACTOR_WORLD || ActorInfo & ACTOR_DEAD)
         TargetDead = true;
-    
+
     return TargetDead;
 }
 
@@ -1407,20 +1409,20 @@ NamedScript void TurretGetAttention(int MonsterTID, int TurretTID)
 {
     if (!SetActivator(MonsterTID))
         return;
-    
+
     SetPointer(AAPTR_TARGET, TurretTID);
 }
 
 NamedScript bool TurretForceTargetTID(int NewTID)
 {
     SetActivator(0, AAPTR_TARGET | AAPTR_NULL);
-    
+
     if (ClassifyActor(0) != ACTOR_WORLD)
     {
         Thing_ChangeTID(0, NewTID);
         return true;
     }
-    
+
     return false;
 }
 
@@ -1431,26 +1433,26 @@ NamedScript void TurretSyncWithPlayerTarget()
     int TurretOriginalTID = ActivatorTID();
     int TurretTID = UniqueTID();
     Thing_ChangeTID(0, TurretTID);
-    
+
     if (!SetActivator(0, AAPTR_FRIENDPLAYER))
     {
         Thing_ChangeTID(TurretTID, TurretOriginalTID);
         return;
     }
-    
+
     if (SetActivator(0, AAPTR_PLAYER_GETTARGET | AAPTR_NULL) && ClassifyActor(0) != ACTOR_WORLD)
     {
         EnemyOriginalTID = ActivatorTID();
         EnemyTID = UniqueTID();
         Thing_ChangeTID(0, EnemyTID);
-        
+
         SetActivator(TurretTID);
         SetPointer(AAPTR_TARGET, EnemyTID);
     }
-    
+
     if (EnemyTID != 0)
         Thing_ChangeTID(EnemyTID, EnemyOriginalTID);
-    
+
     Thing_ChangeTID(TurretTID, TurretOriginalTID);
 }
 
@@ -1458,7 +1460,7 @@ NamedScript int TurretGetOwningPlayer()
 {
     if (!SetActivator(0, AAPTR_FRIENDPLAYER))
         return -1;
-    
+
     return PlayerNumber();
 }
 
@@ -1466,7 +1468,7 @@ NamedScript int TurretGetTargetTID()
 {
     if (SetActivator(0, AAPTR_TARGET | AAPTR_NULL) && ClassifyActor(0) != ACTOR_WORLD)
         return ActivatorTID();
-    
+
     return 0;
 }
 
@@ -1474,7 +1476,7 @@ NamedScript bool TurretWantsToSwitchToPlayerTarget()
 {
     if (!SetActivator(0, AAPTR_FRIENDPLAYER))
         return false;
-    
+
     return CheckInput(BT_ATTACK, KEY_HELD, true, -1) && CheckInput(BT_SPEED, KEY_HELD, true, -1);
 }
 
@@ -1502,18 +1504,18 @@ bool TurretTeleport(int DestTID)
         GetActorY(DestTID) + (64.0 * Sin(GetActorAngle(DestTID)))
     };
     fixed TeleZ = GetActorZ(DestTID) + 32.0;
-    
+
     bool Teleported = false;
     for (int i = 0; i < 3; i++)
     {
         // Try left, right, then in front
         Teleported = SetActorPosition(0, TeleX[i], TeleY[i], TeleZ, false);
-        
+
         if (Teleported && CheckSight(DestTID, 0, CSF_NOFAKEFLOORS))
         {
             PlaySound(0, "turret/spawn", CHAN_BODY, 1.0, false, ATTN_NORM);
             SpawnForced("DRPGTurretTeleport", TeleX[i], TeleY[i], TeleZ - 32.0, 0, 0);
-            
+
             SetPointer(AAPTR_TARGET, 0, AAPTR_NULL);
             break;
         }
@@ -1523,10 +1525,10 @@ bool TurretTeleport(int DestTID)
             continue;
         }
     }
-    
+
     if (!Teleported)
         SetActorPosition(0, OldX, OldY, OldZ, false);
-    
+
     return Teleported;
 }
 
@@ -1534,10 +1536,10 @@ void TurretMaintenance()
 {
     // Don't do anything if the turret isn't built yet
     if (!Player.Turret.Upgrade[TU_BUILD]) return;
-    
+
     // Don't send for maintenance if there is no maintenance to be done
     if (!Player.Turret.Maintenance && Player.Turret.ChargeTimer <= 0 && Player.Turret.RepairTimer <= 0 && Player.Turret.RefitTimer <= 0) return;
-    
+
     // You don't have any money to begin maintenance
     if (!CheckInventory("DRPGCredits"))
     {
@@ -1545,7 +1547,7 @@ void TurretMaintenance()
         PrintError("Cannot perform maintenance because you have no money");
         return;
     }
-    
+
     if (!Player.Turret.Maintenance)
     {
         ActivatorSound("menu/move", 127);
@@ -1595,17 +1597,27 @@ bool TurretLoadAmmo(int Type)
         &Player.Turret.RailAmmoMax
     };
     int AmmoType;
-    
+
     // Determine proper ammo type from param
     switch (Type)
     {
-    case TU_WEAPON_BULLET:  AmmoType = 0; break;
-    case TU_WEAPON_PELLET:  AmmoType = 1; break;
-    case TU_WEAPON_ROCKET:  AmmoType = 2; break;
-    case TU_WEAPON_PLASMA:  AmmoType = 3; break;
-    case TU_WEAPON_RAILGUN: AmmoType = 4; break;
+    case TU_WEAPON_BULLET:
+        AmmoType = 0;
+        break;
+    case TU_WEAPON_PELLET:
+        AmmoType = 1;
+        break;
+    case TU_WEAPON_ROCKET:
+        AmmoType = 2;
+        break;
+    case TU_WEAPON_PLASMA:
+        AmmoType = 3;
+        break;
+    case TU_WEAPON_RAILGUN:
+        AmmoType = 4;
+        break;
     }
-    
+
     if (CheckInventory(AmmoActor[AmmoType]) >= MinAmount[AmmoType] && AmmoType == 4) // Railgun special case
     {
         (*Ammo[AmmoType])++;
@@ -1636,7 +1648,7 @@ void TurretCommand(int Index)
 {
     // Don't issue the command if you don't have the base upgrade yet
     if (!Player.Turret.Upgrade[Index]) return;
-    
+
     if (Index == TU_BUILD)
     {
         if (Player.Turret.Active)
@@ -1644,10 +1656,10 @@ void TurretCommand(int Index)
         else
             TurretSpawn();
     }
-    
+
     // Do these checks after TurretSpawn/TurretDespawn, because TurretSpawn will print its own errors for these conditions, and these conditions aren't even possible for TurretDespawn.
     if (Player.Turret.Destroyed || Player.Turret.Maintenance) return;
-    
+
     if (Index == TU_WEAPON_BULLET && Player.Turret.Active)
     {
         if (Player.Turret.Weapon != TW_BULLET)
@@ -1661,7 +1673,7 @@ void TurretCommand(int Index)
             ThingSound(Player.Turret.TID, "turret/cooldown", 127);
         }
     }
-    
+
     if (Index == TU_WEAPON_BULLET_CAPACITY && Player.Turret.BulletAmmo < Player.Turret.BulletAmmoMax && Player.Turret.Active)
     {
         if (!TurretLoadAmmo(TU_WEAPON_BULLET))
@@ -1670,7 +1682,7 @@ void TurretCommand(int Index)
             PrintError("You need at least \Ca50 Bullets\C- to load into the turret");
         }
     }
-    
+
     if (Index == TU_WEAPON_PELLET && Player.Turret.Active)
     {
         if (Player.Turret.Weapon != TW_PELLET)
@@ -1693,7 +1705,7 @@ void TurretCommand(int Index)
             PrintError("You need at least \Ci20 Shells\C- to load into the turret");
         }
     }
-    
+
     if (Index == TU_WEAPON_ROCKET && Player.Turret.Active)
     {
         if (Player.Turret.Weapon != TW_ROCKET)
@@ -1716,7 +1728,7 @@ void TurretCommand(int Index)
             PrintError("You need at least \Cc5 Rockets\C- to load into the turret");
         }
     }
-    
+
     if (Index == TU_WEAPON_PLASMA && Player.Turret.Active)
     {
         if (Player.Turret.Weapon != TW_PLASMA)
@@ -1730,7 +1742,7 @@ void TurretCommand(int Index)
             ThingSound(Player.Turret.TID, "turret/cooldown", 127);
         }
     }
-    
+
     if (Index == TU_WEAPON_PLASMA_CAPACITY && Player.Turret.PlasmaAmmo < Player.Turret.PlasmaAmmoMax && Player.Turret.Active)
     {
         if (!TurretLoadAmmo(TU_WEAPON_PLASMA))
@@ -1739,7 +1751,7 @@ void TurretCommand(int Index)
             PrintError("You need at least \Cd100 Cells\C- to load into the turret");
         }
     }
-    
+
     if (Index == TU_WEAPON_RAILGUN && Player.Turret.Active)
     {
         if (Player.Turret.Weapon != TW_RAILGUN)
@@ -1753,7 +1765,7 @@ void TurretCommand(int Index)
             ThingSound(Player.Turret.TID, "turret/cooldown", 127);
         }
     }
-    
+
     if (Index == TU_WEAPON_RAILGUN_CAPACITY && Player.Turret.RailAmmo < Player.Turret.RailAmmoMax && Player.Turret.Active)
     {
         if (!TurretLoadAmmo(TU_WEAPON_RAILGUN))
@@ -1762,20 +1774,20 @@ void TurretCommand(int Index)
             PrintError("You need at least \Cd50 Cells\C- to load into the turret");
         }
     }
-    
+
     if (Index == TU_AMMO_AUTOLOADER)
     {
         ActivatorSound("menu/move", 127);
         Player.Turret.Autoload = !Player.Turret.Autoload;
     }
-    
+
     if (Index == TU_COMMAND_RECALL && Player.Turret.Active)
     {
         ActivatorSound("menu/move", 127);
         Player.Turret.Command = TC_NONE;
         SetUserVariable(Player.Turret.TID, "user_needs_teleport", 1);
     }
-    
+
     if (Index == TU_COMMAND_DRAW_FIRE && Player.Turret.Active)
     {
         ActivatorSound("menu/move", 127);
@@ -1784,7 +1796,7 @@ void TurretCommand(int Index)
         else
             Player.Turret.Command = TC_NONE;
     }
-    
+
     if (Index == TU_COMMAND_HOLD_POSITION && Player.Turret.Active)
     {
         ActivatorSound("menu/move", 127);
@@ -1798,7 +1810,7 @@ void TurretCommand(int Index)
 int TurretUpgradeCost(int Index)
 {
     int Cost = TurretUpgradeData[Index].Cost * (Player.Turret.Upgrade[Index] + 1);
-    
+
     // Technician gets a 25% cost reduction bonus
     if (CompatMode == COMPAT_DRLA && PlayerClass(PlayerNumber()) == 2)
         return (int)(Cost * 0.75);
@@ -1810,42 +1822,42 @@ void TurretPassVars()
 {
     // Master TID
     SetUserVariable(Player.Turret.TID, "user_master", Player.TID);
-    
+
     // Upgrade info
     for (int i = 0; i < MAX_UPGRADES; i++)
         SetUserArray(Player.Turret.TID, "user_upgrade", i, Player.Turret.Upgrade[i]);
-    
+
     // Weapon Type
     SetUserVariable(Player.Turret.TID, "user_weapon", Player.Turret.Weapon);
-    
+
     // Bullet
     SetUserVariable(Player.Turret.TID, "user_bullet_damage", Player.Turret.Upgrade[TU_WEAPON_BULLET_DAMAGE]);
     SetUserVariable(Player.Turret.TID, "user_bullet_rof", Player.Turret.Upgrade[TU_WEAPON_BULLET_ROF]);
-    
+
     // Pellet
     SetUserVariable(Player.Turret.TID, "user_pellet_damage", Player.Turret.Upgrade[TU_WEAPON_PELLET_DAMAGE]);
     SetUserVariable(Player.Turret.TID, "user_pellet_rof", Player.Turret.Upgrade[TU_WEAPON_PELLET_ROF]);
     SetUserVariable(Player.Turret.TID, "user_pellet_spread", Player.Turret.Upgrade[TU_WEAPON_PELLET_SPREAD]);
     SetUserVariable(Player.Turret.TID, "user_pellet_amount", Player.Turret.Upgrade[TU_WEAPON_PELLET_AMOUNT]);
-    
+
     // Rocket
     SetUserVariable(Player.Turret.TID, "user_rocket_rof", Player.Turret.Upgrade[TU_WEAPON_ROCKET_ROF]);
-    
+
     // Plasma
     SetUserVariable(Player.Turret.TID, "user_plasma_rof", Player.Turret.Upgrade[TU_WEAPON_PLASMA_ROF]);
-    
+
     // Railgun
     SetUserVariable(Player.Turret.TID, "user_railgun_damage", Player.Turret.Upgrade[TU_WEAPON_RAILGUN_DAMAGE]);
     SetUserVariable(Player.Turret.TID, "user_railgun_rof", Player.Turret.Upgrade[TU_WEAPON_RAILGUN_ROF]);
     SetUserVariable(Player.Turret.TID, "user_railgun_ripping", Player.Turret.Upgrade[TU_WEAPON_RAILGUN_RIPPING] * 2);
-    
+
     // Ammo
     SetUserVariable(Player.Turret.TID, "user_ammo_bullet", Player.Turret.BulletAmmo);
     SetUserVariable(Player.Turret.TID, "user_ammo_shell", Player.Turret.ShellAmmo);
     SetUserVariable(Player.Turret.TID, "user_ammo_rocket", Player.Turret.RocketAmmo);
     SetUserVariable(Player.Turret.TID, "user_ammo_plasma", Player.Turret.PlasmaAmmo);
     SetUserVariable(Player.Turret.TID, "user_ammo_rail", Player.Turret.RailAmmo);
-    
+
     // Misc
     SetUserVariable(Player.Turret.TID, "user_command", Player.Turret.Command);
 }
@@ -1855,43 +1867,43 @@ void TurretPassVars()
 void TurretSpawn()
 {
     if (GetActorProperty(0, APROP_Health) <= 0) return;
-    
+
     if (Player.Turret.Battery <= 0)
     {
         ActivatorSound("menu/error", 127);
         PrintError("Your turret's battery is depleted");
         return;
     }
-    
+
     if (Player.Turret.Destroyed)
     {
         ActivatorSound("menu/error", 127);
         PrintError("Your turret is destroyed and must be repaired");
         return;
     }
-    
+
     if (Player.Turret.Maintenance)
     {
         ActivatorSound("menu/error", 127);
         PrintError("Your turret is currently in the Outpost for maintenance");
         return;
     }
-    
+
     if (Player.Turret.RefitTimer > 0)
     {
         ActivatorSound("menu/error", 127);
         PrintError("Your turret is currently being refitted with upgrades");
         return;
     }
-    
+
     int TID = UniqueTID();
     fixed X = GetActorX(0) + (80.0 * Cos(GetActorAngle(0)));
     fixed Y = GetActorY(0) + (80.0 * Sin(GetActorAngle(0)));
     fixed Z = GetActorZ(0) + 32.0;
-    
+
     bool Spawned = Spawn("DRPGPortableTurret", X, Y, Z, TID, GetActorAngle(0) * 256);
     bool CanSee = CheckSight(Player.TID, TID, 0);
-    
+
     if (Spawned && CanSee)
     {
         PlaySound(TID, "turret/spawn", CHAN_BODY, 1.0, false, ATTN_NORM);
@@ -1899,12 +1911,12 @@ void TurretSpawn()
         SetActorProperty(TID, APROP_MasterTID, Player.TID);
         Thing_SetTranslation(TID, -1);
         SpawnForced("DRPGTurretTeleport", X, Y, Z - 32.0, 0, 0);
-        
+
         if (Player.Turret.Health > 0)
             SetActorProperty(TID, APROP_Health, Player.Turret.Health);
-        
+
         TurretAI(TID);
-        
+
         Player.Turret.Active = true;
     }
     else
@@ -1918,10 +1930,10 @@ void TurretSpawn()
 void TurretDespawn()
 {
     if (!Player.Turret.Active) return;
-    
+
     Player.Turret.Active = false;
     Thing_Remove(GetUserVariable(Player.Turret.TID, "user_goal_tid"));
-    
+
     PlaySound(Player.Turret.TID, "turret/despawn", CHAN_BODY, 1.0, false, ATTN_NORM);
     SpawnForced("DRPGTurretTeleport", GetActorX(Player.Turret.TID), GetActorY(Player.Turret.TID), GetActorZ(Player.Turret.TID) - 32.0, 0, 0);
     Thing_Remove(Player.Turret.TID);
@@ -1938,14 +1950,14 @@ NamedScript Console void GiveTurret()
 NamedScript Console void FullTurret()
 {
     Player.Turret.Upgrade[TU_BUILD] = true;
-    
+
     Delay(1);
-    
+
     for (int i = 1; i < TU_MAX; i++)
         Player.Turret.Upgrade[i] = TurretUpgradeData[i].MaxLevel;
-        
+
     Delay(1);
-    
+
     Player.Turret.Health = Player.Turret.HealthMax;
     TurretSpawn();
 }

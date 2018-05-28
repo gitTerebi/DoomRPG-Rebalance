@@ -51,21 +51,22 @@ NamedScript Type_ENTER void StatusEffectHUD()
         "Green"
     };
 
-    Start: NOP; // [KS] C doesn't allow declarations after labels, so we need this.
+Start:
+    NOP; // [KS] C doesn't allow declarations after labels, so we need this.
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
         Delay(1);
         goto Start;
     }
-    
+
     fixed X = GetActivatorCVar("drpg_stateffect_x");
     fixed Y = GetActivatorCVar("drpg_stateffect_y");
 
     str Icon;
     str Fill;
     int TimerPercent;
-    
+
     for (int i = 0; i < SE_MAX; i++)
     {
         Icon = "";
@@ -74,16 +75,46 @@ NamedScript Type_ENTER void StatusEffectHUD()
 
         switch (i)
         {
-        case SE_BLIND:      Icon = "SE_Blnd";   Fill = "BarSBlnd";    break;
-        case SE_CONFUSION:  Icon = "SE_Conf";   Fill = "BarSConf";    break;
-        case SE_POISON:     Icon = "SE_Pois";   Fill = "BarSPois";    break;
-        case SE_CORROSION:  Icon = "SE_Corr";   Fill = "BarSCorr";    break;
-        case SE_FATIGUE:    Icon = "SE_Fati";   Fill = "BarSFati";    break;
-        case SE_VIRUS:      Icon = "SE_Viru";   Fill = "BarSViru";    break;
-        case SE_SILENCE:    Icon = "SE_Sile";   Fill = "BarSSile";    break;
-        case SE_CURSE:      Icon = "SE_Curs";   Fill = "BarSCurs";    break;
-        case SE_EMP:        Icon = "SE_EMP";    Fill = "BARSEmp";     break;
-        case SE_RADIATION:  Icon = "SE_Radi";   Fill = "BARSRadi";    break;
+        case SE_BLIND:
+            Icon = "SE_Blnd";
+            Fill = "BarSBlnd";
+            break;
+        case SE_CONFUSION:
+            Icon = "SE_Conf";
+            Fill = "BarSConf";
+            break;
+        case SE_POISON:
+            Icon = "SE_Pois";
+            Fill = "BarSPois";
+            break;
+        case SE_CORROSION:
+            Icon = "SE_Corr";
+            Fill = "BarSCorr";
+            break;
+        case SE_FATIGUE:
+            Icon = "SE_Fati";
+            Fill = "BarSFati";
+            break;
+        case SE_VIRUS:
+            Icon = "SE_Viru";
+            Fill = "BarSViru";
+            break;
+        case SE_SILENCE:
+            Icon = "SE_Sile";
+            Fill = "BarSSile";
+            break;
+        case SE_CURSE:
+            Icon = "SE_Curs";
+            Fill = "BarSCurs";
+            break;
+        case SE_EMP:
+            Icon = "SE_EMP";
+            Fill = "BARSEmp";
+            break;
+        case SE_RADIATION:
+            Icon = "SE_Radi";
+            Fill = "BARSRadi";
+            break;
         }
 
         if (Player.StatusType[i] || GetActivatorCVar("drpg_hud_preview"))
@@ -164,8 +195,9 @@ NamedScript Type_ENTER void OverviewHUD()
     int CreditColor;
 
     fixed X, Y;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     // If we're on the title map, terminate
     if (InTitle) return;
@@ -229,12 +261,12 @@ NamedScript Type_ENTER void OverviewHUD()
     PrintSprite("MEDKA0", 0, X, Y + 80.0, 0.05);
     SetFont("BIGFONT");
     HudMessage("%ld", Medkit.DisplayValue);
-	if (Medkit.DisplayValue >= Player.MedkitMax)
-		EndHudMessage(HUDMSG_PLAIN, 0, "BrickPink", X + 16.1, Y + 56.0, 0.05);
-	else if (Medkit.DisplayValue == 0)
-		EndHudMessage(HUDMSG_PLAIN, 0, "Red", X + 16.1, Y + 56.0, 0.05);
-	else
-		EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 16.1, Y + 56.0, 0.05);
+    if (Medkit.DisplayValue >= Player.MedkitMax)
+        EndHudMessage(HUDMSG_PLAIN, 0, "BrickPink", X + 16.1, Y + 56.0, 0.05);
+    else if (Medkit.DisplayValue == 0)
+        EndHudMessage(HUDMSG_PLAIN, 0, "Red", X + 16.1, Y + 56.0, 0.05);
+    else
+        EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 16.1, Y + 56.0, 0.05);
 
     // Collection timer handling
     if (CreditsCollectionTimer > 0)
@@ -269,8 +301,9 @@ NamedScript Type_ENTER void ComboHUD()
     Bonus.TimerMaxCap = 1;
 
     fixed X, Y;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     // If we're on the title map, terminate
     if (InTitle) return;
@@ -350,8 +383,9 @@ NamedScript Type_ENTER void SkillHUD()
     fixed X, Y;
     int Cost;
     str Color;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -400,8 +434,9 @@ NamedScript Type_ENTER void StimHUD()
 {
     fixed X, Y;
     int TimerPercent;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -472,8 +507,9 @@ NamedScript Type_ENTER void MissionHUD()
 {
     int OldAmount;
     fixed X, Y;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -542,8 +578,9 @@ NamedScript Type_ENTER void AuraTimerHUD()
 {
     fixed Offset, X, Y, Angle, XOff, YOff;
     int AuraCount, AuraAdd, Radius;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -616,8 +653,9 @@ NamedScript Type_ENTER void PowerupHUD()
     int GridCount, InvulnTime, InvisTime, ShadowTime, GhostTime, ActualInvisTime, Lives;
     int FreezeTime, LightAmpPowerupTime, LightAmpTime, IronFeetPowerTime, IronFeetTime;
     bool HaveIronFeet;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -639,7 +677,7 @@ NamedScript Type_ENTER void PowerupHUD()
     {
         SetFont("SMALLFONT");
         HudMessage("%S", FormatTime(InvulnTime));
-        EndHudMessage(HUDMSG_PLAIN, 0, "Green", X, Y , 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "Green", X, Y, 0.05);
         PrintSpritePulse("PINVA0", 0, X + 10.0, Y + 22.0, 0.75, 32.0, 0.25);
         X += 36.0;
         GridCount++;
@@ -795,7 +833,7 @@ NamedScript Type_ENTER void PowerupHUD()
             X = BaseX - 40.0;
         SetFont("SMALLFONT");
         HudMessage("%d", Lives);
-        EndHudMessage(HUDMSG_PLAIN, 0, "Gold", X, Y + 16.0  , 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "Gold", X, Y + 16.0, 0.05);
         PrintSpritePulse("P1UPA0", 0, X + 14.0, Y + 88.0, 0.75, 32.0, 0.25);
     }
 
@@ -821,8 +859,9 @@ NamedScript Type_ENTER void EventHUD()
     fixed X, Y;
     int KeyOffset;
     str GeneratorStatus;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -919,8 +958,9 @@ NamedScript Type_ENTER void EventHUD()
 NamedScript Type_ENTER void CoopViewHUD()
 {
     fixed X, Y;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -951,8 +991,9 @@ NamedScript Type_ENTER void MultiplayerHUD()
 {
     fixed X, Y, Alpha;
     int HealthPercent, ShieldPercent;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -1026,8 +1067,9 @@ NamedScript Type_ENTER void TurretHUD()
     fixed X, Y;
     str AmmoIcon;
     int Ammo[TW_MAX];
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -1058,10 +1100,19 @@ NamedScript Type_ENTER void TurretHUD()
         // Determine Ammo Icon
         switch (Player.Turret.Weapon)
         {
-            case TW_BULLET:                     AmmoIcon = "CLIPA0";    break;
-            case TW_PELLET:                     AmmoIcon = "SHELA0";    break;
-            case TW_ROCKET:                     AmmoIcon = "ROCKA0";    break;
-            case TW_PLASMA: case TW_RAILGUN:    AmmoIcon = "CELLA0";    break;
+        case TW_BULLET:
+            AmmoIcon = "CLIPA0";
+            break;
+        case TW_PELLET:
+            AmmoIcon = "SHELA0";
+            break;
+        case TW_ROCKET:
+            AmmoIcon = "ROCKA0";
+            break;
+        case TW_PLASMA:
+        case TW_RAILGUN:
+            AmmoIcon = "CELLA0";
+            break;
         }
 
         if (Player.Turret.Maintenance)
@@ -1134,8 +1185,9 @@ NamedScript Type_ENTER void StatHUD()
 
     bool Change[STAT_MAX];
     fixed X, Y;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
     {
@@ -1179,7 +1231,7 @@ NamedScript Type_ENTER void StatHUD()
 NamedScript void DamageHUD(int Amount, bool Critical)
 {
     if (Player.GUI.Open || (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDWeaponInfoScreenActive")))
-        return; 
+        return;
 
     // Return if the CVAR is disabled
     if (!GetActivatorCVar("drpg_damagenumbers_hud")) return;
@@ -1197,11 +1249,23 @@ NamedScript void DamageHUD(int Amount, bool Critical)
     // Color
     switch (Player.DamageType)
     {
-    case DT_NORMAL:                     Color = "White";       break;
-    case DT_TOXIC: case DT_RADIATION:   Color = "Green";       break;
-    case DT_MELEE:                      Color = "Gray";        break;
-    case DT_FIRE:                       Color = "Red";         break;
-    case DT_PLASMA: case DT_LIGHTNING:  Color = "LightBlue";   break;
+    case DT_NORMAL:
+        Color = "White";
+        break;
+    case DT_TOXIC:
+    case DT_RADIATION:
+        Color = "Green";
+        break;
+    case DT_MELEE:
+        Color = "Gray";
+        break;
+    case DT_FIRE:
+        Color = "Red";
+        break;
+    case DT_PLASMA:
+    case DT_LIGHTNING:
+        Color = "LightBlue";
+        break;
     }
 
     if (Amount > 0 && Amount < SHIELD_HEALTH - Player.HealthMax - Amount)
@@ -1281,13 +1345,18 @@ NamedScript Type_ENTER void DRLAHUD()
     };
 
     str Name, Color;
-    
-    Start: NOP;
+
+Start:
+    NOP;
 
     // If we're on the title map, terminate
     if (InTitle) return;
 
-    if (Player.GUI.Open || Player.InMenu || Player.InShop || Player.OutpostMenu) { Delay(1); goto Start;}
+    if (Player.GUI.Open || Player.InMenu || Player.InShop || Player.OutpostMenu)
+    {
+        Delay(1);
+        goto Start;
+    }
 
     // Offset = 0.0;
 
@@ -1683,9 +1752,9 @@ NamedScript Type_ENTER void DRLAHUD()
             else
             {
                 if (CheckInventory("RLUsePowerMod") || CheckInventory("RLUseBulkMod") ||
-                    CheckInventory("RLUseAgilityMod") || CheckInventory("RLUseTechnicalMod") ||
-                    CheckInventory("RLUseFirestormMod") || CheckInventory("RLUseSniperMod") ||
-                    CheckInventory("RLUseNanoMod") || CheckInventory("RLUseDemonArtifact"))
+                        CheckInventory("RLUseAgilityMod") || CheckInventory("RLUseTechnicalMod") ||
+                        CheckInventory("RLUseFirestormMod") || CheckInventory("RLUseSniperMod") ||
+                        CheckInventory("RLUseNanoMod") || CheckInventory("RLUseDemonArtifact"))
                     PrintSpritePulse(ItemPtr->Sprite.Name, 0, X + ItemPtr->Sprite.XOff, Y + ItemPtr->Sprite.YOff, 0.75, 32.0, 0.25);
                 else
                     PrintSprite(ItemPtr->Sprite.Name, 0, X + ItemPtr->Sprite.XOff, Y + ItemPtr->Sprite.YOff, 0.05);
@@ -1703,8 +1772,9 @@ NamedScript Type_ENTER void LegenDoomHUD()
 {
     if (CompatMode != COMPAT_LEGENDOOM)
         return;
-    
-    LegendaryDef const LegendaryTypesCommon[] = {
+
+    LegendaryDef const LegendaryTypesCommon[] =
+    {
         {"Exorcist", "R_EXORCI"},
         {"Extinguishing", "R_EXTING"},
         {"Wrangler", "R_WRANGL"},
@@ -1720,8 +1790,9 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Hoarder", "R_HOARDE"},
         {"Survivor", "R_SURVIV"}
     };
-    
-    LegendaryDef const LegendaryTypesUncommon[] = {
+
+    LegendaryDef const LegendaryTypesUncommon[] =
+    {
         {"Unlikely", "R_UNLIKE"},
         {"Antiair", "R_ANTIAI"},
         {"Berserker", "R_BERSER"},
@@ -1738,7 +1809,8 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Hunting", "R_HUNTIN"}
     };
 
-    LegendaryDef const LegendaryTypesRare[] = {
+    LegendaryDef const LegendaryTypesRare[] =
+    {
         {"Improbable", "R_IMPROB"},
         {"Scrapper", "R_SCRAPP"},
         {"Blessed", "R_BLESSE"},
@@ -1760,8 +1832,9 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Extended", "R_EXTEND"},
         {"CQC", "R_CQC"}
     };
-    
-    LegendaryDef const LegendaryTypesEpic[] = {
+
+    LegendaryDef const LegendaryTypesEpic[] =
+    {
         {"Impossible", "R_IMPOSS"},
         {"Heroic", "R_HEROIC"},
         {"Murderous", "R_MURDER"},
@@ -1776,15 +1849,17 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Gauss", "R_GAUSS"}
     };
 
-    LegendaryDef const LegendaryFistsRarity[] = {
+    LegendaryDef const LegendaryFistsRarity[] =
+    {
         {"Standard", "IFISSTAN"},
         {"Common", "IFISCOMM"},
         {"Uncommon", "IFISUNCO"},
         {"Rare", "IFISRARE"},
         {"Epic", "IFISEPIC"}
     };
-    
-    LegendaryDef const LegendaryChainsawRarity[] = {
+
+    LegendaryDef const LegendaryChainsawRarity[] =
+    {
         {"Standard", "ISAWSTAN"},
         {"Common", "ISAWCOMM"},
         {"Uncommon", "ISAWUNCO"},
@@ -1792,7 +1867,8 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Epic", "ISAWEPIC"}
     };
 
-    LegendaryDef const LegendaryPistolRarity[] = {
+    LegendaryDef const LegendaryPistolRarity[] =
+    {
         {"Standard", "IPISSTAN"},
         {"Common", "IPISCOMM"},
         {"Uncommon", "IPISUNCO"},
@@ -1800,7 +1876,8 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Epic", "IPISEPIC"}
     };
 
-    LegendaryDef const LegendaryShotgunRarity[] = {
+    LegendaryDef const LegendaryShotgunRarity[] =
+    {
         {"Standard", "ISH1STAN"},
         {"Common", "ISH1COMM"},
         {"Uncommon", "ISH1UNCO"},
@@ -1808,7 +1885,8 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Epic", "ISH1EPIC"}
     };
 
-    LegendaryDef const LegendarySuperShotgunRarity[] = {
+    LegendaryDef const LegendarySuperShotgunRarity[] =
+    {
         {"Standard", "ISH2STAN"},
         {"Common", "ISH2COMM"},
         {"Uncommon", "ISH2UNCO"},
@@ -1816,7 +1894,8 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Epic", "ISH2EPIC"}
     };
 
-    LegendaryDef const LegendaryChaingunRarity[] = {
+    LegendaryDef const LegendaryChaingunRarity[] =
+    {
         {"Standard", "ICHGSTAN"},
         {"Common", "ICHGCOMM"},
         {"Uncommon", "ICHGUNCO"},
@@ -1824,7 +1903,8 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Epic", "ICHGEPIC"}
     };
 
-    LegendaryDef const LegendaryRocketLauncherRarity[] = {
+    LegendaryDef const LegendaryRocketLauncherRarity[] =
+    {
         {"Standard", "IRLASTAN"},
         {"Common", "IRLACOMM"},
         {"Uncommon", "IRLAUNCO"},
@@ -1832,7 +1912,8 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Epic", "IRLAEPIC"}
     };
 
-    LegendaryDef const LegendaryPlasmaRifleRarity[] = {
+    LegendaryDef const LegendaryPlasmaRifleRarity[] =
+    {
         {"Standard", "IPLSSTAN"},
         {"Common", "IPLSCOMM"},
         {"Uncommon", "IPLSUNCO"},
@@ -1840,7 +1921,8 @@ NamedScript Type_ENTER void LegenDoomHUD()
         {"Epic", "IPLSEPIC"}
     };
 
-    LegendaryDef const LegendaryBFG9000Rarity[] = {
+    LegendaryDef const LegendaryBFG9000Rarity[] =
+    {
         {"Standard", "IBFGSTAN"},
         {"Common", "IBFGCOMM"},
         {"Uncommon", "IBFGUNCO"},
@@ -1854,9 +1936,10 @@ NamedScript Type_ENTER void LegenDoomHUD()
     str ChaingunIcon, ChaingunEffect, RocketLauncherIcon, RocketLauncherEffect;
     str PlasmaRifleIcon, PlasmaRifleEffect, BFG9000Icon, BFG9000Effect;
     int i;
-    
-    Start: NOP;
-    
+
+Start:
+    NOP;
+
     // If we're on the title map, terminate
     if (InTitle) return;
 
@@ -1865,19 +1948,19 @@ NamedScript Type_ENTER void LegenDoomHUD()
         Delay(1);
         goto Start;
     }
-    
+
     X = GetActivatorCVar("drpg_ld_x");
     Y = GetActivatorCVar("drpg_ld_y");
 
     // ----------------------------------------
     // Update
-    
+
     // Fists
     if (!CheckInventory("LDFists"))
     {
         FistsIcon = "";
         FistsEffect = "";
-    }        
+    }
     else if (!CheckInventory("LDFistsEffectActive"))
     {
         FistsIcon = LegendaryFistsRarity[0].Image;
@@ -1893,24 +1976,24 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                FistsEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDFistsEffect_");
-                break;
-            
-            case LD_UNCOMMON:
-                FistsEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDFistsEffect_");
-                break;
-            
-            case LD_RARE:
-                FistsEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDFistsEffect_");
-                break;
-                
-            case LD_EPIC:
-                FistsEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDFistsEffect_");
-                break;
+        case LD_COMMON:
+            FistsEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDFistsEffect_");
+            break;
+
+        case LD_UNCOMMON:
+            FistsEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDFistsEffect_");
+            break;
+
+        case LD_RARE:
+            FistsEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDFistsEffect_");
+            break;
+
+        case LD_EPIC:
+            FistsEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDFistsEffect_");
+            break;
         }
     }
 
@@ -1919,7 +2002,7 @@ NamedScript Type_ENTER void LegenDoomHUD()
     {
         ChainsawIcon = "";
         ChainsawEffect = "";
-    }  
+    }
     else if (!CheckInventory("LDChainsawEffectActive"))
     {
         ChainsawIcon = LegendaryChainsawRarity[0].Image;
@@ -1935,33 +2018,33 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                ChainsawEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDChainsawEffect_");
-                break;
-            
-            case LD_UNCOMMON:
-                ChainsawEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDChainsawEffect_");
-                break;
-            
-            case LD_RARE:
-                ChainsawEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDChainsawEffect_");
-                break;
-                
-            case LD_EPIC:
-                ChainsawEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDChainsawEffect_");
-                break;
+        case LD_COMMON:
+            ChainsawEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDChainsawEffect_");
+            break;
+
+        case LD_UNCOMMON:
+            ChainsawEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDChainsawEffect_");
+            break;
+
+        case LD_RARE:
+            ChainsawEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDChainsawEffect_");
+            break;
+
+        case LD_EPIC:
+            ChainsawEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDChainsawEffect_");
+            break;
         }
     }
-    
+
     // Pistol
     if (!CheckInventory("LDPistol"))
     {
         PistolIcon = "";
         PistolEffect = "";
-    }  
+    }
     else if (!CheckInventory("LDPistolEffectActive"))
     {
         PistolIcon = LegendaryPistolRarity[0].Image;
@@ -1977,33 +2060,33 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                PistolEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDPistolEffect_");
-                break;
-            
-            case LD_UNCOMMON:
-                PistolEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDPistolEffect_");
-                break;
-            
-            case LD_RARE:
-                PistolEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDPistolEffect_");
-                break;
-                
-            case LD_EPIC:
-                PistolEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDPistolEffect_");
-                break;
+        case LD_COMMON:
+            PistolEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDPistolEffect_");
+            break;
+
+        case LD_UNCOMMON:
+            PistolEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDPistolEffect_");
+            break;
+
+        case LD_RARE:
+            PistolEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDPistolEffect_");
+            break;
+
+        case LD_EPIC:
+            PistolEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDPistolEffect_");
+            break;
         }
     }
-    
+
     // Shotgun
     if (!CheckInventory("LDShotgun"))
     {
         ShotgunIcon = "";
         ShotgunEffect = "";
-    }  
+    }
     else if (!CheckInventory("LDShotgunEffectActive"))
     {
         ShotgunIcon = LegendaryShotgunRarity[0].Image;
@@ -2019,33 +2102,33 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                ShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDShotgunEffect_");
-                break;
-            
-            case LD_UNCOMMON:
-                ShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDShotgunEffect_");
-                break;
-            
-            case LD_RARE:
-                ShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDShotgunEffect_");
-                break;
-                
-            case LD_EPIC:
-                ShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDShotgunEffect_");
-                break;
+        case LD_COMMON:
+            ShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDShotgunEffect_");
+            break;
+
+        case LD_UNCOMMON:
+            ShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDShotgunEffect_");
+            break;
+
+        case LD_RARE:
+            ShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDShotgunEffect_");
+            break;
+
+        case LD_EPIC:
+            ShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDShotgunEffect_");
+            break;
         }
     }
-    
+
     // Super Shotgun
     if (!CheckInventory("LDSuperShotgun"))
     {
         SuperShotgunIcon = "";
         SuperShotgunEffect = "";
-    }  
+    }
     else if (!CheckInventory("LDSuperShotgunEffectActive"))
     {
         SuperShotgunIcon = LegendarySuperShotgunRarity[0].Image;
@@ -2061,33 +2144,33 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                SuperShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDSuperShotgunEffect_");
-                break;
-            
-            case LD_UNCOMMON:
-                SuperShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDSuperShotgunEffect_");
-                break;
-            
-            case LD_RARE:
-                SuperShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDSuperShotgunEffect_");
-                break;
-                
-            case LD_EPIC:
-                SuperShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDSuperShotgunEffect_");
-                break;
+        case LD_COMMON:
+            SuperShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDSuperShotgunEffect_");
+            break;
+
+        case LD_UNCOMMON:
+            SuperShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDSuperShotgunEffect_");
+            break;
+
+        case LD_RARE:
+            SuperShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDSuperShotgunEffect_");
+            break;
+
+        case LD_EPIC:
+            SuperShotgunEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDSuperShotgunEffect_");
+            break;
         }
     }
-    
+
     // Chaingun
     if (!CheckInventory("LDChaingun"))
     {
         ChaingunIcon = "";
         ChaingunEffect = "";
-    }  
+    }
     else if (!CheckInventory("LDChaingunEffectActive"))
     {
         ChaingunIcon = LegendaryChaingunRarity[0].Image;
@@ -2103,33 +2186,33 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                ChaingunEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDChaingunEffect_");
-                break;
-            
-            case LD_UNCOMMON:
-                ChaingunEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDChaingunEffect_");
-                break;
-            
-            case LD_RARE:
-                ChaingunEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDChaingunEffect_");
-                break;
-                
-            case LD_EPIC:
-                ChaingunEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDChaingunEffect_");
-                break;
+        case LD_COMMON:
+            ChaingunEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDChaingunEffect_");
+            break;
+
+        case LD_UNCOMMON:
+            ChaingunEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDChaingunEffect_");
+            break;
+
+        case LD_RARE:
+            ChaingunEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDChaingunEffect_");
+            break;
+
+        case LD_EPIC:
+            ChaingunEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDChaingunEffect_");
+            break;
         }
     }
-    
+
     // Rocket Launcher
     if (!CheckInventory("LDRocketLauncher"))
     {
         RocketLauncherIcon = "";
         RocketLauncherEffect = "";
-    }  
+    }
     else if (!CheckInventory("LDRocketLauncherEffectActive"))
     {
         RocketLauncherIcon = LegendaryRocketLauncherRarity[0].Image;
@@ -2145,33 +2228,33 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                RocketLauncherEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDRocketLauncherEffect_");
-                break;
-            
-            case LD_UNCOMMON:
-                RocketLauncherEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDRocketLauncherEffect_");
-                break;
-            
-            case LD_RARE:
-                RocketLauncherEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDRocketLauncherEffect_");
-                break;
-                
-            case LD_EPIC:
-                RocketLauncherEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDRocketLauncherEffect_");
-                break;
+        case LD_COMMON:
+            RocketLauncherEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDRocketLauncherEffect_");
+            break;
+
+        case LD_UNCOMMON:
+            RocketLauncherEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDRocketLauncherEffect_");
+            break;
+
+        case LD_RARE:
+            RocketLauncherEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDRocketLauncherEffect_");
+            break;
+
+        case LD_EPIC:
+            RocketLauncherEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDRocketLauncherEffect_");
+            break;
         }
     }
-    
+
     // Plasma Rifle
     if (!CheckInventory("LDPlasmaRifle"))
     {
         PlasmaRifleIcon = "";
         PlasmaRifleEffect = "";
-    }  
+    }
     else if (!CheckInventory("LDPlasmaRifleEffectActive"))
     {
         PlasmaRifleIcon = LegendaryPlasmaRifleRarity[0].Image;
@@ -2187,33 +2270,33 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                PlasmaRifleEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDPlasmaRifleEffect_");
-                break;
-            
-            case LD_UNCOMMON:
-                PlasmaRifleEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDPlasmaRifleEffect_");
-                break;
-            
-            case LD_RARE:
-                PlasmaRifleEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDPlasmaRifleEffect_");
-                break;
-                
-            case LD_EPIC:
-                PlasmaRifleEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDPlasmaRifleEffect_");
-                break;
+        case LD_COMMON:
+            PlasmaRifleEffect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDPlasmaRifleEffect_");
+            break;
+
+        case LD_UNCOMMON:
+            PlasmaRifleEffect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDPlasmaRifleEffect_");
+            break;
+
+        case LD_RARE:
+            PlasmaRifleEffect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDPlasmaRifleEffect_");
+            break;
+
+        case LD_EPIC:
+            PlasmaRifleEffect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDPlasmaRifleEffect_");
+            break;
         }
     }
-    
+
     // BFG9000
     if (!CheckInventory("LDBFG9000"))
     {
         BFG9000Icon = "";
         BFG9000Effect = "";
-    }  
+    }
     else if (!CheckInventory("LDBFG9000EffectActive"))
     {
         BFG9000Icon = LegendaryBFG9000Rarity[0].Image;
@@ -2229,107 +2312,107 @@ NamedScript Type_ENTER void LegenDoomHUD()
                 break;
             }
         }
-        
+
         switch(i)
         {
-            case LD_COMMON:
-                BFG9000Effect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDBFG9000Effect_");
-                break;
-            
-            case LD_UNCOMMON:
-                BFG9000Effect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDBFG9000Effect_");
-                break;
-            
-            case LD_RARE:
-                BFG9000Effect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDBFG9000Effect_");
-                break;
-                
-            case LD_EPIC:
-                BFG9000Effect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDBFG9000Effect_");
-                break;
+        case LD_COMMON:
+            BFG9000Effect = GetLegendaryEffectImage(&LegendaryTypesCommon[0], sizeof(LegendaryTypesCommon), "LDBFG9000Effect_");
+            break;
+
+        case LD_UNCOMMON:
+            BFG9000Effect = GetLegendaryEffectImage(&LegendaryTypesUncommon[0], sizeof(LegendaryTypesUncommon), "LDBFG9000Effect_");
+            break;
+
+        case LD_RARE:
+            BFG9000Effect = GetLegendaryEffectImage(&LegendaryTypesRare[0], sizeof(LegendaryTypesRare), "LDBFG9000Effect_");
+            break;
+
+        case LD_EPIC:
+            BFG9000Effect = GetLegendaryEffectImage(&LegendaryTypesEpic[0], sizeof(LegendaryTypesEpic), "LDBFG9000Effect_");
+            break;
         }
     }
-    
+
     // ----------------------------------------
     // HUD Preview
-    
+
     if (GetActivatorCVar("drpg_hud_preview"))
     {
         if (FistsIcon == "")
             FistsIcon = LegendaryFistsRarity[0].Image;
         if (FistsEffect == "")
             FistsEffect = LegendaryTypesCommon[0].Image;
-        
+
         if (ChainsawIcon == "")
             ChainsawIcon = LegendaryChainsawRarity[0].Image;
         if (ChainsawEffect == "")
             ChainsawEffect = LegendaryTypesCommon[0].Image;
-        
+
         if (PistolIcon == "")
             PistolIcon = LegendaryPistolRarity[0].Image;
         if (PistolEffect == "")
             PistolEffect = LegendaryTypesCommon[0].Image;
-        
+
         if (ShotgunIcon == "")
             ShotgunIcon = LegendaryShotgunRarity[0].Image;
         if (ShotgunEffect == "")
             ShotgunEffect = LegendaryTypesCommon[0].Image;
-        
+
         if (SuperShotgunIcon == "")
             SuperShotgunIcon = LegendarySuperShotgunRarity[0].Image;
         if (SuperShotgunEffect == "")
             SuperShotgunEffect = LegendaryTypesCommon[0].Image;
-        
+
         if (ChaingunIcon == "")
             ChaingunIcon = LegendaryChaingunRarity[0].Image;
         if (ChaingunEffect == "")
             ChaingunEffect = LegendaryTypesCommon[0].Image;
-        
+
         if (RocketLauncherIcon == "")
             RocketLauncherIcon = LegendaryRocketLauncherRarity[0].Image;
         if (RocketLauncherEffect == "")
             RocketLauncherEffect = LegendaryTypesCommon[0].Image;
-        
+
         if (PlasmaRifleIcon == "")
             PlasmaRifleIcon = LegendaryPlasmaRifleRarity[0].Image;
         if (PlasmaRifleEffect == "")
             PlasmaRifleEffect = LegendaryTypesCommon[0].Image;
-        
+
         if (BFG9000Icon == "")
             BFG9000Icon = LegendaryBFG9000Rarity[0].Image;
         if (BFG9000Effect == "")
             BFG9000Effect = LegendaryTypesCommon[0].Image;
     }
-    
+
     // ----------------------------------------
     // Draw
-    
+
     SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
-    
+
     // Fists
     if (FistsIcon != "")
         PrintSprite(FistsIcon, 0, X + 0.1, Y + 0.1, 0.05);
     if (FistsEffect != "")
         PrintSprite(FistsEffect, 0, X + 4 + 0.1, Y + 16 + 0.1, 0.05);
-    
+
     // Chainsaw
     if (ChainsawIcon != "")
         PrintSprite(ChainsawIcon, 0, X + 24 + 0.1, Y + 0.1, 0.05);
     if (ChainsawEffect != "")
         PrintSprite(ChainsawEffect, 0, X + 24 + 4 + 0.1, Y + 16 + 0.1, 0.05);
-    
+
     // Pistol
     if (PistolIcon != "")
         PrintSprite(PistolIcon, 0, X + 48 + 0.1, Y + 0.1, 0.05);
     if (PistolEffect != "")
         PrintSprite(PistolEffect, 0, X + 48 + 4 + 0.1, Y + 16 + 0.1, 0.05);
-    
+
     // Shotgun
     if (ShotgunIcon != "")
         PrintSprite(ShotgunIcon, 0, X + 72 + 0.1, Y + 0.1, 0.05);
     if (ShotgunEffect != "")
         PrintSprite(ShotgunEffect, 0, X + 72 + 4 + 0.1, Y + 16 + 0.1, 0.05);
-    
+
     // Super Shotgun
     if (SuperShotgunIcon != "")
         PrintSprite(SuperShotgunIcon, 0, X + 96 + 0.1, Y + 0.1, 0.05);
@@ -2341,25 +2424,25 @@ NamedScript Type_ENTER void LegenDoomHUD()
         PrintSprite(ChaingunIcon, 0, X + 120 + 0.1, Y + 0.1, 0.05);
     if (ChaingunEffect != "")
         PrintSprite(ChaingunEffect, 0, X + 120 + 4 + 0.1, Y + 16 + 0.1, 0.05);
-    
+
     // Rocket Launcher
     if (RocketLauncherIcon != "")
         PrintSprite(RocketLauncherIcon, 0, X + 144 + 0.1, Y + 0.1, 0.05);
     if (RocketLauncherEffect != "")
         PrintSprite(RocketLauncherEffect, 0, X + 144 + 4 + 0.1, Y + 16 + 0.1, 0.05);
-    
+
     // Plasma Rifle
     if (PlasmaRifleIcon != "")
         PrintSprite(PlasmaRifleIcon, 0, X + 168 + 0.1, Y + 0.1, 0.05);
     if (PlasmaRifleEffect != "")
         PrintSprite(PlasmaRifleEffect, 0, X + 168 + 4 + 0.1, Y + 16 + 0.1, 0.05);
-    
+
     // BFG9000
     if (BFG9000Icon != "")
         PrintSprite(BFG9000Icon, 0, X + 192 + 0.1, Y + 0.1, 0.05);
     if (BFG9000Effect != "")
         PrintSprite(BFG9000Effect, 0, X + 192 + 4 + 0.1, Y + 16 + 0.1, 0.05);
-    
+
     Delay(1);
     goto Start;
 }
@@ -2367,7 +2450,7 @@ NamedScript Type_ENTER void LegenDoomHUD()
 str GetLegendaryEffectImage(LegendaryDef const *Type, int Length, str Prefix)
 {
     str Image;
-    
+
     for (int i = 0; i < Length; i++)
     {
         if (CheckInventory(StrParam("%S%S", Prefix, Type[i].Effect)))
@@ -2376,6 +2459,6 @@ str GetLegendaryEffectImage(LegendaryDef const *Type, int Length, str Prefix)
             break;
         }
     }
-    
+
     return Image;
 }

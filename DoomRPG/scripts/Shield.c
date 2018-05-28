@@ -22,18 +22,18 @@ ShieldPart const ShieldParts[3][MAX_PARTS] =
     // Actor, Name, Icon, Description, Capacity, Charge Rate, Delay Rate
 
     /*  Shield Part Color Revamp by Yhollikins
-        
+
         Basically, because each part kinda has a thing it tries to do the most, it'll default to that unless other stuff happens.
         I'm not sure that sentence made much sense. Whatever I DONT CAAAAARrrrreeee
         ~ how2english with Yholl
-        
+
         Light Blue	\Cv		Increased Capacity
         Blue		\Ch		Decreased Capacity
         Green		\Cd		Increased Charge
         Dark Green	\Cq		Decreased Charge
         Dark Red	\Cr		Increased Delay
         Red			\Cg		Decreased Delay
-        
+
     */
 
     // Bodies
@@ -104,7 +104,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     /*
         [KS] For regular shield modifiers, the same convention applies as standard shield parts.
         For stat-based or mechanic-based shields, they're colored by their stats, as below
-        
+
         Red         \Cg     Strength / Damaging Accessories
         Pink        \Ca     Vitality / Health Accessories
         Orange      \Ci     Agility / Speed Accessories
@@ -117,15 +117,15 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
         Grey        \Cc     Augmentation-related Accessories
         Dark Green  \Cq     Powerup-related Accessories
         White       \Cj     Miscellaneous / Multi-Category Accessories
-        
+
         White       \Cj     Bullet
         Grey        \Cc     Melee
         Red         \Cg     Fire
         Blue        \Cn     Plasma
-        
+
         Sorry, there is no color for Propane and Propane Accessories
     */
-    
+
     {
         "DRPGShieldAccessory1",
         "\CgX-7",       "SHACA0",   18000,
@@ -594,7 +594,7 @@ NamedScript DECORATE void AMShieldCharge()
 {
     if (!Player.Shield.Active || !Player.Shield.Accessory || Player.Shield.Accessory->PassiveEffect != SHIELD_PASS_HATEHATEHATE)
         return;
-    
+
     GiveInventory("DRPGShieldHateHateHateDefense", 1);
 }
 
@@ -604,7 +604,7 @@ NamedScript DECORATE void AMShieldCharge()
 NamedScript void HealthConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
-    
+
     while (Player.Shield.AccessoryBattery >= 5)
     {
         // FadeRange(255, 0, 255, 0.25, 255, 0, 255, 0, 0.25);
@@ -616,7 +616,7 @@ NamedScript void HealthConversion(int Charge)
 NamedScript void EPConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
-    
+
     while (Player.Shield.AccessoryBattery >= 2)
     {
         // FadeRange(0, 255, 255, 0.25, 0, 255, 255, 0, 0.25);
@@ -628,7 +628,7 @@ NamedScript void EPConversion(int Charge)
 NamedScript void BatteryConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
-    
+
     while (Player.Shield.AccessoryBattery >= 32)
     {
         // FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 0.25);
@@ -640,7 +640,7 @@ NamedScript void BatteryConversion(int Charge)
 NamedScript void AmmoConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
-    
+
     while (Player.Shield.AccessoryBattery >= 4)
     {
         // FadeRange(0, 0, 255, 0.25, 0, 0, 255, 0, 0.25);
@@ -654,17 +654,17 @@ NamedScript void AmmoConversion(int Charge)
 NamedScript int LightningCharge(int ChargeAmount)
 {
     if (Player.Shield.Full) return ChargeAmount;
-    
+
     int NumBolts = 0;
     for (int i = 0; i < ChargeAmount; i++)
         if (!Random(0, 3))
             NumBolts++;
-    
+
     if (!NumBolts) return ChargeAmount;
-    
+
     for (; NumBolts > 0; NumBolts--)
         GiveInventory("DRPGShieldLightningAttack", 1);
-    
+
     PlaySound(0, "shield/lightning", CHAN_AUTO, 1.0, false, 1.0);
     return ChargeAmount;
 }
@@ -673,19 +673,19 @@ NamedScript int RegenShieldCharge(int ChargeAmount)
 {
     if (Player.Shield.AccessoryBattery < 20)
         Player.Shield.AccessoryBattery++;
-    
+
     return ChargeAmount;
 }
 // Fast Charging
 NamedScript bool CellFastCharge()
 {
     if (CheckInventory("Cell") < 1) return true;
-    
+
     TakeInventory("Cell", 1);
     FadeRange(0, 255, 255, 0.1, 0, 255, 255, 0.0, 0.5);
     ActivatorSound("regen/shield", 64);
     AddShield(10);
-    
+
     return true;
 }
 
@@ -696,7 +696,7 @@ NamedScript void BoosterShieldDamage(int DamageAmount)
     Chance += 19 * DamageAmount / 65;
     if (Chance > 25)
         Chance = 25;
-    
+
     if (Random(1, 100) <= Chance)
     {
         int TID = UniqueTID();
@@ -706,7 +706,7 @@ NamedScript void BoosterShieldDamage(int DamageAmount)
         fixed DirX = Cos(Angle);
         fixed DirY = Sin(Angle);
         fixed Z = GetActorZ(0);
-        
+
         Spawn("DRPGShieldBooster", X, Y, Z, TID, Angle);
         SetActorVelocity(TID, DirX * RandomFixed(8.0, 16.0), DirY * RandomFixed(8.0, 16.0), RandomFixed(4.0, 8.0), false, false);
     }
@@ -722,9 +722,9 @@ NamedScript void TimeyWimeyHurtyBallZDoomSucks()
 {
     // Note for future endeavours: PowerTimeFreezer will always work on an even tic, but never odd ones.
     // See: https://github.com/rheit/zdoom/blob/master/src/g_shared/a_artifacts.cpp#L1502
-    
+
     while (Timer() & 1) Delay(1);
-    
+
     GiveInventory("DRPGShieldTimePause", 1);
     Delay(35);
     TakeInventory("PowerShieldTimeFreezer", 1);
@@ -782,12 +782,24 @@ NamedScript void AdaptiveBreak()
 {
     switch (Player.DamageType)
     {
-    case DT_NORMAL:     GiveInventory("DRPGShieldAdaptiveNormalResist", 1);     break;
-    case DT_TOXIC:      GiveInventory("DRPGShieldAdaptiveToxicResist", 1);      break;
-    case DT_MELEE:      GiveInventory("DRPGShieldAdaptiveMeleeResist", 1);      break;
-    case DT_FIRE:       GiveInventory("DRPGShieldAdaptiveFireResist", 1);       break;
-    case DT_PLASMA:     GiveInventory("DRPGShieldAdaptivePlasmaResist", 1);     break;
-    case DT_LIGHTNING:  GiveInventory("DRPGShieldAdaptiveLightningResist", 1);  break;
+    case DT_NORMAL:
+        GiveInventory("DRPGShieldAdaptiveNormalResist", 1);
+        break;
+    case DT_TOXIC:
+        GiveInventory("DRPGShieldAdaptiveToxicResist", 1);
+        break;
+    case DT_MELEE:
+        GiveInventory("DRPGShieldAdaptiveMeleeResist", 1);
+        break;
+    case DT_FIRE:
+        GiveInventory("DRPGShieldAdaptiveFireResist", 1);
+        break;
+    case DT_PLASMA:
+        GiveInventory("DRPGShieldAdaptivePlasmaResist", 1);
+        break;
+    case DT_LIGHTNING:
+        GiveInventory("DRPGShieldAdaptiveLightningResist", 1);
+        break;
     }
 }
 
@@ -801,16 +813,16 @@ NamedScript void StaticChargeShieldBreak()
 NamedScript void FlanExplosion() // This gets called on full charge too
 {
     if (CurrentLevel->UACBase && !ArenaActive) return;
-    
+
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
         GiveActorInventory(Players(i).TID, "DRPGShieldRadialExplosionResist", 1);
-        
+
         // Turret needs protection too
         if (Players(i).Turret.Active)
             GiveActorInventory(Players(i).Turret.TID, "DRPGShieldRadialExplosionResist", 1);
     }
-    
+
     GiveInventory("DRPGShieldRadialExplosionMaker", 1);
 }
 
@@ -826,7 +838,7 @@ NamedScript void SpaghettiShieldBreak()
         if (CheckInventory("Armor") == 0 || CheckInventory("Armor") >= GetArmorInfo(ARMORINFO_SAVEAMOUNT) || !Player.Shield.AccessoryBattery)
             return;
     }
-    
+
     FadeRange(0, 255, 0, 0.5, 0, 255, 0, 0, 1.0);
     if (GetCVar("drpg_shield_armorremove"))
         Player.Shield.ArmorAmount = Player.Shield.ArmorMax;
@@ -869,7 +881,7 @@ NamedScript void AmpShieldMod()
             Player.TotalDamage *= 2;
             Player.Shield.AccessoryBattery--;
         }
-        
+
         if (Player.Shield.Charge >= Player.Shield.Capacity)
         {
             if (CheckInput(BT_ATTACK, KEY_HELD, false, PlayerNumber()) && !Player.InMenu && !Player.InShop && !Player.OutpostMenu)
@@ -973,7 +985,7 @@ NamedScript void AmericaShieldMod()
 NamedScript void GhettoLuckMod()
 {
     int Luck = 50 - (Player.LuckTotal / 2);
-    
+
     Player.HealthChance += Luck * LUCK_HEALTHCHANCE;
     Player.EPChance += Luck * LUCK_EPCHANCE;
     Player.ArmorChance += Luck * LUCK_ARMORCHANCE;
@@ -1009,23 +1021,23 @@ NamedScript void ScarletWeatherRhapsodyShieldMod()
 {
     if (!Player.Shield.Active || Player.Shield.Capacity < 1)
         return;
-    
+
     if (Player.Shield.Charge < 1)
     {
         Player.DamageFactor = 1.0;
         return;
     }
-    
+
     Player.DamageFactor *= (1 - (0.75 * (1 - (fixed)(Player.Shield.Charge - 1) / (fixed)(Player.Shield.Capacity - 1))));
 }
 
 NamedScript void SanicMod()
 {
     int Movement = VectorLength(GetActorVelX(0), GetActorVelY(0));
-    
+
     if (Movement > 30)
         Movement = 30;
-    
+
     Player.Shield.Interval -= Movement;
 }
 
@@ -1047,7 +1059,7 @@ NamedScript void BloodyShieldSoRealMod()
 NamedScript void FriendshipShieldMod()
 {
     fixed TotalDefense = 0;
-    
+
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
         if (!PlayerInGame(i))
@@ -1056,10 +1068,10 @@ NamedScript void FriendshipShieldMod()
             continue;
         if (!Players(i).Shield.Accessory || Players(i).Shield.Accessory->PassiveEffect != SHIELD_PASS_FRIENDSHIPISDEFENSE)
             continue;
-        
+
         TotalDefense += 0.1;
     }
-    
+
     Player.DamageFactor *= (1.0 - TotalDefense);
 }
 
@@ -1081,7 +1093,7 @@ NamedScript void MLGNoScopeShieldMod()
     if (Player.AgilityTotal      >= 100) Extra += 100;
     if (Player.CapacityTotal     >= 100) Extra += 100;
     if (Player.LuckTotal         >= 100) Extra += 100;
-    
+
     Player.Shield.Capacity += Extra;
 }
 
@@ -1139,10 +1151,10 @@ NamedScript void OhYeahMod()
 NamedScript void McDuckMod()
 {
     int Capacity = CheckInventory("DRPGCredits") / 10000 * 50;
-    
+
     if (Capacity > 5000)
         Capacity = 5000;
-    
+
     Player.Shield.Capacity += Capacity;
 }
 
@@ -1186,12 +1198,12 @@ NamedScript void LuckyBastardMod()
     if (Player.Shield.Active)
     {
         int CombinedStat = Player.AgilityTotal + Player.LuckTotal;
-        
+
         Player.SurvivalBonus = (fixed)CombinedStat / 10.0;
-        
+
         if (Player.Augs.Level[AUG_AGILITY] >= 4)
             Player.SurvivalBonus *= 2;
-        
+
         if (Player.Perks[STAT_AGILITY])
             Player.SurvivalBonus += 30;
     }
@@ -1212,7 +1224,7 @@ NamedScript void HoarderMod()
 {
     int BaseCharge = Player.Shield.ChargeRate;
     int AddCharge;
-    
+
     if (CheckInventory("PowerInvulnerable"))
         AddCharge += BaseCharge;
     if (CheckInventory("PowerInvisibility") || CheckInventory("PowerShadow"))
@@ -1225,7 +1237,7 @@ NamedScript void HoarderMod()
         AddCharge += BaseCharge;
     if (CheckInventory("PowerStrength"))
         AddCharge += BaseCharge;
-    
+
     Player.Shield.ChargeRate += AddCharge;
 }
 
@@ -1238,17 +1250,17 @@ NamedScript void ShieldTimer()
             // Inventory items for multiplayer/health bar handling
             SetInventory("DRPGShieldCharge", Player.Shield.Charge);
             SetInventory("DRPGShieldChargeMax", Player.Shield.Capacity);
-            
+
             if (Player.Shield.Charge < Player.Shield.Capacity)
                 Player.Shield.Full = false;
-            
+
             // Increase Charge
             if (Player.Shield.Timer <= 0)
             {
                 int ChargeRate = Player.Shield.ChargeRate;
                 if (Player.Shield.Accessory && Player.Shield.Accessory->Charge)
                     ChargeRate = Player.Shield.Accessory->Charge(ChargeRate);
-                
+
                 if (ChargeRate && (!Player.Shield.Accessory || Player.Shield.Accessory->PassiveEffect != SHIELD_PASS_KILLSCHARGE))
                 {
                     if (Player.Shield.Charge < 1)
@@ -1257,9 +1269,9 @@ NamedScript void ShieldTimer()
                         PlaySound(0, "shield/charge", 5, 0.25, false, 2.0);
                     Player.Shield.Charge += ChargeRate;
                 }
-                
+
                 Player.Shield.Timer = Player.Shield.Interval;
-                
+
                 if (Player.Shield.Charge >= Player.Shield.Capacity)
                 {
                     // Shield is Full
@@ -1270,24 +1282,24 @@ NamedScript void ShieldTimer()
                         if (Player.Shield.Accessory && Player.Shield.Accessory->FullCharge)
                             Player.Shield.Accessory->FullCharge();
                     }
-                    
+
                     int OverCharge = Player.Shield.Charge - Player.Shield.Capacity;
 
                     if (OverCharge > 0 && Player.Shield.Accessory && Player.Shield.Accessory->Overcharge)
                         Player.Shield.Accessory->Overcharge(OverCharge);
-                    
+
                     Player.Shield.Charge = Player.Shield.Capacity;
                 }
             }
-            
+
             // Shield Timer
             if (Player.Shield.Timer > 0)
                 Player.Shield.Timer--;
         }
-        
+
         // Terminate if you are dead
         if (GetActorProperty(0, APROP_Health) <= 0) return;
-        
+
         Delay(1);
     }
 }
@@ -1295,7 +1307,7 @@ NamedScript void ShieldTimer()
 NamedScript void ShieldDamage(int Amount)
 {
     Player.Shield.Full = false;
-    
+
     PlaySound(0, "shield/hit", 5, 1.0, false, 1.0);
     if (Player.Shield.Accessory && Player.Shield.Accessory->Damage)
         Player.Shield.Accessory->Damage(Amount);
@@ -1304,7 +1316,7 @@ NamedScript void ShieldDamage(int Amount)
 NamedScript void ShieldBroken()
 {
     PlaySound(0, "shield/empty", 5, 1.0, false, 1.0);
-    
+
     if (Player.Shield.Accessory && Player.Shield.Accessory->Break)
         Player.Shield.Accessory->Break();
 }
@@ -1318,21 +1330,21 @@ NamedScript bool ActivateShield()
 {
     if (Player.Shield.Active)
         return true;
-    
+
     if (!Player.Shield.Body || !Player.Shield.Battery || !Player.Shield.Capacitor)
     {
         PrintError("Your shield is incomplete and is missing one or more parts");
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     if (Player.StatusType[SE_EMP])
     {
         PrintError("Your shield cannot be activated while EMP is active");
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     if (Player.Shield.Capacity <= 0)
     {
         PrintError("Your shield has no charge capacity and cannot be activated");
@@ -1341,10 +1353,10 @@ NamedScript bool ActivateShield()
     }
 
     FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0.0, 0.25);
-    
+
     if (Player.Shield.Accessory && Player.Shield.Accessory->Equip)
         Player.Shield.Accessory->Equip();
-    
+
     GiveInventory("DRPGShieldOn", 1);
     PlaySound(0, "shield/on", 5, 1.0, false, 1.0);
     Player.Shield.Active = true;
@@ -1353,7 +1365,7 @@ NamedScript bool ActivateShield()
         Player.Shield.ArmorType = GetArmorInfoString(ARMORINFO_CLASSNAME);
         Player.Shield.ArmorAmount = CheckInventory("Armor");
         Player.Shield.ArmorMax = GetArmorInfo(ARMORINFO_SAVEAMOUNT);
-        
+
         // DRLA Compatibility
         if (CompatMode != COMPAT_DRLA)
             TakeInventory("BasicArmor", Player.Shield.ArmorAmount);
@@ -1361,7 +1373,7 @@ NamedScript bool ActivateShield()
         {
             TakeInventory("BasicArmor", Player.Shield.ArmorAmount);
             RemoveDRLAArmorToken(Player.Shield.ArmorType);
-            
+
             TakeInventory("RL100ArmorWorn", 1);
             TakeInventory("RL150ArmorWorn", 1);
             TakeInventory("RL200ArmorWorn", 1);
@@ -1370,7 +1382,7 @@ NamedScript bool ActivateShield()
         }
     }
     ShieldTimerReset();
-    
+
     return true;
 }
 
@@ -1378,9 +1390,9 @@ NamedScript bool DeactivateShield()
 {
     if (!Player.Shield.Active)
         return true;
-    
+
     FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0.0, 0.25);
-    
+
     if (Player.Shield.Accessory && Player.Shield.Accessory->Unequip)
         Player.Shield.Accessory->Unequip(Player.StatusType[SE_EMP]);
 
@@ -1392,12 +1404,12 @@ NamedScript bool DeactivateShield()
     {
         GiveInventory(Player.Shield.ArmorType, 1);
         TakeInventory("BasicArmor", Player.Shield.ArmorMax - Player.Shield.ArmorAmount);
-                
+
         // DRLA Compatibility
         if (CompatMode == COMPAT_DRLA)
         {
             GiveDRLAArmorToken(Player.Shield.ArmorType);
-            
+
             if (Player.Shield.ArmorMax == 100)
                 GiveInventory("RL100ArmorWorn", 1);
             else if (Player.Shield.ArmorMax == 150)
@@ -1414,7 +1426,7 @@ NamedScript bool DeactivateShield()
     }
     if (GetCVar("drpg_shield_reset") || Player.StatusType[SE_EMP])
         Player.Shield.Charge = 0;
-    
+
     return true;
 }
 
@@ -1422,7 +1434,7 @@ NamedScript KeyBind void ToggleShield()
 {
     // If you're dead, terminate
     if (GetActorProperty(0, APROP_Health) <= 0) return;
-    
+
     if (!Player.Shield.Active)
         ActivateShield();
     else
@@ -1435,7 +1447,7 @@ void RemoveShieldAccessory()
     //needs fixing
     if (Player.Shield.Accessory->Unequip)
         Player.Shield.Accessory->Unequip(false);
-    
+
     Player.Shield.AccessoryBattery = 0;
     Player.Shield.Accessory = NULL;
 }
@@ -1453,7 +1465,7 @@ void SetShieldAccessory(ShieldAccsPtr Accessory)
 NamedScript DECORATE void AddShield(int Amount)
 {
     if (Player.Shield.Charge >= Player.Shield.Capacity) return;
-    
+
     if (Player.Shield.Active)
     {
         if (Player.Shield.Charge < 1)
@@ -1464,7 +1476,7 @@ NamedScript DECORATE void AddShield(int Amount)
     FadeRange(0, 255, 255, 0.25, 0, 255, 255, 0, 0.25);
     if (Player.Shield.Charge + Amount > Player.Shield.Capacity)
         Amount = Player.Shield.Capacity - Player.Shield.Charge;
-    
+
     Player.Shield.Charge += Amount;
 }
 
@@ -1481,20 +1493,20 @@ void CheckShields()
     ShieldPartPtr BatteryPtr = Player.Shield.Battery;
     ShieldPartPtr CapacitorPtr = Player.Shield.Capacitor;
     ShieldAccsPtr AccessoryPtr = Player.Shield.Accessory;
-    
+
     // Check to make sure the Shield has components
     if (!CheckShieldValid())
         if (Player.Shield.Active)
             DeactivateShield();
-    
+
     // EP -> Shield Charging
     if (Player.Shield.Active && (!Player.InMenu && !Player.InShop) && CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()) && Player.Shield.Charge < Player.Shield.Capacity)
     {
         bool SkipEPCharge = false;
-        
+
         if (Player.Shield.Accessory && Player.Shield.Accessory->FastCharge)
             SkipEPCharge = Player.Shield.Accessory->FastCharge();
-        
+
         if (!SkipEPCharge && Player.EP > 0)
         {
             FadeRange(0, 255, 255, 0.1, 0, 255, 255, 0.0, 0.5);
@@ -1503,13 +1515,13 @@ void CheckShields()
             Player.Shield.Charge++;
         }
     }
-    
+
     // If a part is sold/dropped/nuked from orbit/etc, unequip it
     if (BodyPtr &&      !CheckInventory(BodyPtr->Actor))        Player.Shield.Body = NULL;
     if (BatteryPtr &&   !CheckInventory(BatteryPtr->Actor))     Player.Shield.Battery = NULL;
     if (CapacitorPtr && !CheckInventory(CapacitorPtr->Actor))   Player.Shield.Capacitor = NULL;
     if (AccessoryPtr && !CheckInventory(AccessoryPtr->Actor))   RemoveShieldAccessory();
-    
+
     // Apply Components stats to Shield
     Player.Shield.Capacity = (BodyPtr ? BodyPtr->Capacity : 0) + (BatteryPtr ? BatteryPtr->Capacity : 0) + (CapacitorPtr ? CapacitorPtr->Capacity : 0);
     Player.Shield.ChargeRate = (BodyPtr ? BodyPtr->ChargeRate : 0) + (BatteryPtr ? BatteryPtr->ChargeRate : 0) + (CapacitorPtr ? CapacitorPtr->ChargeRate : 0);
@@ -1528,6 +1540,6 @@ bool CheckShieldValid()
     ShieldPartPtr BodyPtr = Player.Shield.Body;
     ShieldPartPtr BatteryPtr = Player.Shield.Battery;
     ShieldPartPtr CapacitorPtr = Player.Shield.Capacitor;
-    
+
     return (BodyPtr && BatteryPtr && CapacitorPtr);
 }

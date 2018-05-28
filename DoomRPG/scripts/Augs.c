@@ -12,7 +12,7 @@
 AugInfo RPGMap AugData[AUG_MAX] =
 {
     // Name, Max Level, Description...
-    
+
     // Augs
     {
         .Name = "Muscle Replacer",
@@ -158,7 +158,7 @@ NamedScript DECORATE OptionalArgs(1) void DisableAugs(bool NoDrain)
             // Disable Aug
             Player.Augs.Active[i] = false;
             SetInventory(AugData[i].TokenActor, Player.Augs.Level[i]);
-            
+
             // Screen fuckery
             SetHudSize(640, 480, false);
             SetFont("AugDView");
@@ -166,14 +166,14 @@ NamedScript DECORATE OptionalArgs(1) void DisableAugs(bool NoDrain)
             EndHudMessage(HUDMSG_FADEOUT | HUDMSG_ADDBLEND, 0, "Untranslated", 320.0, 240.0, 3.0, 0.5);
         }
     }
-    
+
     // Reset Aug slots
     Player.Augs.SlotsUsed = 0;
-    
+
     // Halve your current battery amount
     if (!NoDrain)
         Player.Augs.Battery /= 2;
-    
+
     // Disabled sound
     ActivatorSound("aug/disable", 127);
 }
@@ -183,17 +183,17 @@ NamedScript KeyBind void ReactivateDisabledAugs()
     // Check that we *can* activate augs.
     if (Player.StatusType[SE_EMP] || Player.Augs.Battery <= 0)
         return;
-    
+
     for (int i = 0; i < AUG_MAX; i++)
     {
         // If there aren't enough slots left to equip any more augs, then don't try to activate any more.
         if (Player.Augs.SlotsUsed >= Player.Augs.Slots)
             break;
-        
+
         if (CheckInventory(AugData[i].TokenActor) && !Player.Augs.Active[i] && Player.Augs.Level[i] > 0)
             EquipAug(i);
     }
-    
+
     ClearDisabledAugs();
 }
 
@@ -206,12 +206,12 @@ void ClearDisabledAugs()
 NamedScript DECORATE void AddBattery(int Amount)
 {
     int PrevBattery = Player.Augs.Battery;
-    
+
     Player.Augs.Battery += Amount;
-    
+
     if (Player.Augs.Battery > Player.Augs.BatteryMax)
         Player.Augs.Battery = Player.Augs.BatteryMax;
-    
+
     if (PrevBattery != Player.Augs.Battery)
         DrawBattery();
 }
@@ -219,14 +219,14 @@ NamedScript DECORATE void AddBattery(int Amount)
 void CheckAugSlots()
 {
     Player.Augs.Slots = Player.Augs.BaseSlots + CheckInventory("DRPGAugSlotUpgrade");
-    
+
     // AW-G01 Accessory handling
     if (Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_AUGSLOT && Player.Shield.Active)
         Player.Augs.Slots++;
-    
+
     // Cap max Aug slots at the max amount of available Augs
     if (Player.Augs.Slots > AUG_MAX) Player.Augs.Slots = AUG_MAX;
-    
+
     // Unequip Augs if you pass the limit (sell a slot upgrade, change difficulty, etc)
     if (Player.Augs.SlotsUsed > Player.Augs.Slots)
         for (int i = AUG_MAX - 1; i >= 0 && Player.Augs.SlotsUsed > Player.Augs.Slots; i--)
@@ -243,48 +243,48 @@ void CheckAugs()
     // Sanity check to prevent negative slots used
     if (Player.Augs.SlotsUsed < 0)
         Player.Augs.SlotsUsed = 0;
-    
+
     // Determine max Battery
     Player.Augs.BatteryMax = Player.CapacityTotal * 10;
-    
+
     // Play energy drained sound
     if (Player.Augs.Battery <= 0 && Player.Augs.SlotsUsed > 0)
         ActivatorSound("aug/dead", 127);
-    
+
     // Disable Augs if your battery is dead
     if (Player.Augs.Battery <= 0)
     {
         for (int i = 0; i < AUG_MAX; i++)
             if (Player.Augs.Active[i])
                 Player.Augs.Active[i] = false;
-        
+
         // Reset the amount of slots used
         Player.Augs.SlotsUsed = 0;
     }
-    
+
     // Battery Handling
     if ((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && !CheckInventory("PowerTimeFreezer"))
     {
         // Reset drain
         Player.Augs.BatteryDrain = 0;
-        
+
         // Calculate Battery Drain
         for (int i = 0; i < AUG_MAX; i++)
             if (Player.Augs.Active[i] && i != AUG_BATTERY)
                 Player.Augs.BatteryDrain += Player.Augs.Level[i];
-        
+
         // Decrease Battery
         if (Player.Augs.SlotsUsed > 0 && (Timer() % 35) == 0)
         {
             Player.Augs.Battery -= (Player.Augs.BatteryDrain / 10);
             DrawBattery();
         }
-        
+
         // Permanently Display battery amount on the HUD if CVAR is set
         if ((Player.Augs.SlotsUsed > 0 && GetActivatorCVar("drpg_aug_alwaysshow")) || GetActivatorCVar("drpg_hud_preview"))
             DrawBattery();
     }
-    
+
     // Sanity check to prevent battery from going negative
     if (Player.Augs.Battery < 0)
         Player.Augs.Battery = 0;
@@ -292,7 +292,7 @@ void CheckAugs()
     // Sanity check to prevent Battery from exceeding max amount
     if (Player.Augs.Battery > Player.Augs.BatteryMax)
         Player.Augs.Battery = Player.Augs.BatteryMax;
-    
+
     // Battery Recharging
     if ((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && Player.Augs.Active[AUG_BATTERY] && Player.Augs.Battery < Player.Augs.BatteryMax)
         if ((Timer() % 35) == 0 && !IsPlayerMoving())
@@ -300,7 +300,7 @@ void CheckAugs()
             Player.Augs.Battery += (fixed)Player.Augs.Level[AUG_BATTERY] / 2.0;
             DrawBattery();
         }
-    
+
     // Strength Aug
     if (Player.Augs.Active[AUG_STRENGTH])
     {
@@ -317,11 +317,11 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_STRENGTH] >= 6)
             Player.DamageMult += 3;
     }
-    
+
     // Defense Aug
     if (Player.Augs.Active[AUG_DEFENSE])
         Player.DamageFactor *= (1.0 - (fixed)Player.Augs.Level[AUG_DEFENSE] * 0.05);
-    
+
     // Vitality Aug
     if (Player.Augs.Active[AUG_VITALITY])
     {
@@ -340,7 +340,7 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_VITALITY] >= 7)
             Player.StatusEffectResist += 25;
     }
-    
+
     // Energy Aug
     if (Player.Augs.Active[AUG_ENERGY])
     {
@@ -355,7 +355,7 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_ENERGY] >= 4)
             Player.Aura.Range *= 2;
     }
-    
+
     // Regeneration Aug
     if (Player.Augs.Active[AUG_REGENERATION])
     {
@@ -409,19 +409,19 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_AGILITY] >= 8)
             Player.SurvivalBonus += 25;
     }
-    
+
     // Capacity Aug
     if (Player.Augs.Active[AUG_CAPACITY])
     {
         int AmmoMult;
-        
+
         if (Player.Augs.Level[AUG_CAPACITY] == 1)
             AmmoMult = 2;
         if (Player.Augs.Level[AUG_CAPACITY] >= 2)
             AmmoMult = 4;
         if (Player.Augs.Level[AUG_CAPACITY] >= 3)
             Player.Stim.VialMax *= 2;
-        
+
         SetAmmoCapacity("Clip", Player.CapacityTotal * 20 * AmmoMult);
         SetAmmoCapacity("Shell", Player.CapacityTotal * 5 * AmmoMult);
         SetAmmoCapacity("RocketAmmo", Player.CapacityTotal * 5 * AmmoMult);
@@ -432,7 +432,7 @@ void CheckAugs()
     if (Player.Augs.Active[AUG_LUCK])
     {
         fixed LuckMult;
-        
+
         if (Player.Augs.Level[AUG_LUCK] == 1)
             LuckMult = 1.25;
         if (Player.Augs.Level[AUG_LUCK] == 2)
@@ -445,7 +445,7 @@ void CheckAugs()
             LuckMult = 3;
         if (Player.Augs.Level[AUG_LUCK] >= 6)
             LuckMult = 4;
-        
+
         Player.HealthChance *= LuckMult;
         Player.EPChance *= LuckMult;
         Player.ArmorChance *= LuckMult;
@@ -474,7 +474,7 @@ void EquipAug(int Aug)
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     // If battery is dead, return
     if (Player.Augs.Battery <= 0)
     {
@@ -482,7 +482,7 @@ void EquipAug(int Aug)
         ActivatorSound("menu/error", 127);
         return;
     }
-    
+
     if (Player.Augs.Level[Aug] > 0)
     {
         if (Player.Augs.Active[Aug])
@@ -494,7 +494,7 @@ void EquipAug(int Aug)
         else
         {
             Player.Augs.SlotsUsed++;
-            
+
             if (Player.Augs.SlotsUsed > Player.Augs.Slots)
             {
                 PrintError("You are already using all of your aug slots");
@@ -515,7 +515,7 @@ void LevelUpAug(int AugIndex)
     if (Player.Augs.Level[AugIndex] < AugData[AugIndex].MaxLevel)
     {
         bool CanLevel = true;
-        
+
         if (Player.Augs.Level[AugIndex] == 0)
         {
             if (CheckInventory("DRPGAugCanister"))
@@ -526,7 +526,7 @@ void LevelUpAug(int AugIndex)
             else
                 CanLevel = false;
         }
-        else 
+        else
         {
             if (CheckInventory("DRPGAugCanister") && CheckInventory("DRPGAugUpgradeCanister") >= Player.Augs.Level[AugIndex] + 1)
             {
@@ -537,14 +537,14 @@ void LevelUpAug(int AugIndex)
             else
                 CanLevel = false;
         }
-        
+
         if (!CanLevel)
         {
             PrintError("You cannot upgrade this aug");
             ActivatorSound("menu/error", 127);
             return;
         }
-        
+
         Player.Augs.Level[AugIndex]++;
     }
 }

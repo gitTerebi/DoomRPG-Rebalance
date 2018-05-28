@@ -66,7 +66,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             }
         },
     },
-    
+
     // Powerups
     {
         {
@@ -155,7 +155,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             }
         }
     },
-    
+
     // Auras
     {
         {
@@ -283,7 +283,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             }
         }
     },
-    
+
     // Attacks
     {
         {
@@ -384,7 +384,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         }
         */
     },
-    
+
     // Summons
     {
         {
@@ -564,7 +564,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             }
         }
     },
-    
+
     // Utility
     {
         {
@@ -659,11 +659,11 @@ NamedScript Type_ENTER void SkillWheel()
     fixed Y;
     SkillPtr CurrentSkill;
     SkillLevelInfo *SkillLevel;
-    
+
     Location = OldLocation = (Increment * (fixed)Player.WheelSelection);
-    
-    Start:
-    
+
+Start:
+
     // Open the wheel
 
     if (!((Player.InMenu && Player.Menu != 3) || Player.InShop || Player.OutpostMenu > 0 || Player.Turret.WheelOpen))
@@ -674,14 +674,14 @@ NamedScript Type_ENTER void SkillWheel()
             Player.SkillWheelOpen = true;
         }
     }
-    
+
     // Wheel Loop
     if (Player.SkillWheelOpen)
     {
         while (Player.SkillWheelOpen)
         {
             SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
-            
+
             // Setup lerp location
             Increment = 1.0 / MAX_SKILLKEYS;
             Location = (Increment * (fixed)Player.WheelSelection);
@@ -689,7 +689,7 @@ NamedScript Type_ENTER void SkillWheel()
                 OldLocation -= 1.0;
             else if (Location > 0.5 && OldLocation < 0.5 && Location - OldLocation > 0.5)
                 OldLocation += 1.0;
-            
+
             // Check for release
             if (!CheckInput(BT_USER1, KEY_HELD, false, PlayerNumber()) && !CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -703,18 +703,18 @@ NamedScript Type_ENTER void SkillWheel()
                     else
                         Player.SkillSelected = Player.WheelSelection;
                 }
-                
+
                 if (!Player.InMenu)
                     SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
-                
+
                 Close = true;
             }
-            
+
             // Animate Wheel
             if (Close)
             {
                 CurrentRadius -= GetActivatorCVar("drpg_skill_wheelspeed");
-                
+
                 // Closed
                 if (CurrentRadius <= 0)
                 {
@@ -724,13 +724,13 @@ NamedScript Type_ENTER void SkillWheel()
             }
             else if (CurrentRadius < Radius)
                 CurrentRadius += GetActivatorCVar("drpg_skill_wheelspeed");
-            
+
             // Lerp position
             if (LerpPos <= 1.0)
                 LerpPos += 0.1 * (fixed)GetActivatorCVar("drpg_skill_wheelspeed") / 16.0;
             if (LerpPos > 1.0)
                 LerpPos = 1.0;
-            
+
             // Input
             if (!Close)
             {
@@ -753,21 +753,21 @@ NamedScript Type_ENTER void SkillWheel()
                 if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && Player.SkillCategory[Player.WheelSelection] != -1 && Player.SkillIndex[Player.WheelSelection] != -1)
                 {
                     SkillLevel = &Player.SkillLevel[Player.SkillCategory[Player.WheelSelection]][Player.SkillIndex[Player.WheelSelection]];
-                    
+
                     // Decrease selected skill level
                     if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()) && SkillLevel->CurrentLevel > 1)
                     {
                         SkillLevel->CurrentLevel--;
                         AmbientSound("menu/move", 127);
                     }
-                    
+
                     // Increase selected skill level
                     if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()) && SkillLevel->CurrentLevel < SkillLevel->Level)
                     {
                         SkillLevel->CurrentLevel++;
                         AmbientSound("menu/move", 127);
                     }
-                    
+
                     // Clear Skill
                     if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
                     {
@@ -777,7 +777,7 @@ NamedScript Type_ENTER void SkillWheel()
                     }
                 }
             }
-            
+
             // Draw Wheel
             SetHudSize(640, 480, false);
             for (int i = 0; i < MAX_SKILLKEYS; i++)
@@ -788,7 +788,7 @@ NamedScript Type_ENTER void SkillWheel()
                 Level = Player.SkillLevel[Player.SkillCategory[i]][Player.SkillIndex[i]].Level;
                 CurrentLevel = Player.SkillLevel[Player.SkillCategory[i]][Player.SkillIndex[i]].CurrentLevel;
                 Cost = ScaleEPCost(Skills[Player.SkillCategory[i]][Player.SkillIndex[i]].Cost * CurrentLevel);
-                
+
                 // Slot Number, Cost, Levels
                 SetFont("SMALLFONT");
                 HudMessage("%d", i + 1);
@@ -800,32 +800,32 @@ NamedScript Type_ENTER void SkillWheel()
                     HudMessage("%d/%d", CurrentLevel, Level);
                     EndHudMessage(HUDMSG_PLAIN, 0, (Level > 0 ? "Green" : "Red"), (int)X, (int)(Y + 18), 0.05);
                 }
-                
+
                 // Icon
                 if (Player.SkillCategory[i] != -1 && Player.SkillIndex[i] != -1)
                     PrintSprite(Skills[Player.SkillCategory[i]][Player.SkillIndex[i]].Icon, 0, (int)X, (int)Y, 0.05);
                 else
                     PrintSprite("SprNone", 0, (int)X, (int)Y, 0.05);
             }
-            
+
             // Cursor
             PrintSprite("ItemBoxH", 0, 320, 240 + CurrentRadius, 0.05);
-            
+
             // Name
             if (Player.SkillCategory[Player.WheelSelection] != -1 && Player.SkillIndex[Player.WheelSelection] != -1)
             {
                 CurrentSkill = &SkillData[Player.SkillCategory[Player.WheelSelection]][Player.SkillIndex[Player.WheelSelection]];
                 Level = Player.SkillLevel[Player.SkillCategory[Player.WheelSelection]][Player.SkillIndex[Player.WheelSelection]].Level;
-                
+
                 SetFont("BIGFONT");
                 HudMessage("%S", CurrentSkill->Name);
                 EndHudMessage(HUDMSG_PLAIN, 0, (Level > 0 ? "White" : "Red"), 320, 240 + CurrentRadius + 32, 0.05);
             }
-            
+
             Delay(1);
         }
     }
-    
+
     // Update the Skill Wheel CVARS
     if (Player.FirstRun)
         for (int i = 0; i < MAX_SKILLKEYS; i++)
@@ -833,7 +833,7 @@ NamedScript Type_ENTER void SkillWheel()
             SetCVar(StrParam("drpg_skillwheel_category_%d", i + 1), Player.SkillCategory[i]);
             SetCVar(StrParam("drpg_skillwheel_index_%d", i + 1), Player.SkillIndex[i]);
         }
-    
+
     Delay(8);
     goto Start;
 }
@@ -844,7 +844,7 @@ NamedScript KeyBind void UseSkill(int Key)
     int Index = (Player.InMenu && Player.Menu == 3 ? -1 : Player.SkillSelected);
     SkillPtr CurrentSkill;
     SkillLevelInfo *SkillLevel;
-    
+
     // Quick Use handling
     if (Key > 0)
     {
@@ -856,20 +856,20 @@ NamedScript KeyBind void UseSkill(int Key)
         CurrentSkill = &Skills[Player.SkillCategory[Index]][Player.SkillIndex[Index]];
         SkillLevel = &Player.SkillLevel[Player.SkillCategory[Index]][Player.SkillIndex[Index]];
     }
-    
+
     // If you're dead, terminate
     if (GetActorProperty(0, APROP_Health) <= 0) return;
-    
+
     // If you have no current skill selected, terminate
     if (Player.SkillSelected == -1 && !Player.InMenu) return;
-    
+
     // If the key is unassigned, terminate
     if (Index != -1)
         if (Player.SkillCategory[Index] == -1 || Player.SkillIndex[Index] == -1) return;
-    
+
     // Using a skill will disturb your Focus
     Player.Focusing = false;
-    
+
     // You cannot use skills while Silenced
     if (Player.StatusType[SE_SILENCE])
     {
@@ -878,22 +878,22 @@ NamedScript KeyBind void UseSkill(int Key)
         PrintError("You cannot use skills while silenced");
         return;
     }
-    
+
     // Quickuse
     if (Index == -1)
     {
         CurrentSkill = &Skills[Player.SkillPage][Player.MenuIndex];
         SkillLevel = &Player.SkillLevel[Player.SkillPage][Player.MenuIndex];
     }
-    
+
     int EPCost = ScaleEPCost(CurrentSkill->Cost * SkillLevel->CurrentLevel);
     bool Success;
-    
+
     // Overdrive?
     Player.Overdrive = false;
     if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && (!Player.InMenu && !Player.InShop))
         Player.Overdrive = true;
-    
+
     // Overdriving an unlearnt skill will learn it
     if (Player.Overdrive && CheckInventory("DRPGModule") >= MODULE_SKILL_MULT && SkillLevel->Level == 0)
     {
@@ -904,7 +904,7 @@ NamedScript KeyBind void UseSkill(int Key)
         ActivatorSound("health/epcapsule", 127);
         return;
     }
-    
+
     // Check if the Skill has been learned yet
     if (SkillLevel->Level == 0)
     {
@@ -922,7 +922,7 @@ NamedScript KeyBind void UseSkill(int Key)
         ActivatorSound("skills/fail", 127);
         return;
     }
-    
+
     // Use the Skill
     if (Player.EP >= EPCost || Player.Overdrive)
     {
@@ -930,17 +930,17 @@ NamedScript KeyBind void UseSkill(int Key)
         void *Data = NULL;
         auto int DataCategory = (Index == -1 ? Player.SkillPage : Player.SkillCategory[Player.SkillSelected]);
         auto int DataIndex = (Index == -1 ? Player.MenuIndex : Player.SkillIndex[Player.SkillSelected]);
-        
+
         if (Key > 0)
         {
             DataCategory = Player.SkillCategory[Key - 1];
             DataIndex = Player.SkillIndex[Key - 1];
         }
-        
+
         // Powerups, Auras and Summons need their index passed
         if (DataCategory == 1 || DataCategory == 2 || DataCategory == 4)
             Data = &DataIndex;
-        
+
         // Debugging
         if (GetCVar("drpg_debug"))
         {
@@ -948,18 +948,18 @@ NamedScript KeyBind void UseSkill(int Key)
             Log("\CdDEBUG: \C-Data Category/Index: \Cd%d\C-, \Cd%d", DataCategory, DataIndex);
             Log("\CdDEBUG: \C-Skill Data passed: \Cd%d", *(int *)Data);
         }
-        
+
         // PWAA-9001 Accessory Handling - Increase skill level intermittently
         if (Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_SKILLPLUS && Player.Shield.Active && SkillLevel->CurrentLevel < CurrentSkill->MaxLevel)
             SkillLevel->CurrentLevel++;
-        
+
         // Use Skill
         Success = CurrentSkill->Use(SkillLevel, Data);
-        
+
         // PWAA-9001 Accessory Handling - Change back to previous level
         if (Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_SKILLPLUS && Player.Shield.Active && SkillLevel->CurrentLevel < CurrentSkill->MaxLevel)
             SkillLevel->CurrentLevel--;
-        
+
         // Check if the skill use was successful
         if (Success)
         {
@@ -974,15 +974,15 @@ NamedScript KeyBind void UseSkill(int Key)
                 }
                 Player.EnergyXP += (int)(EPCost * 10 * Scale);
             }
-            
+
             // EFF-C13 Shield Accessory
             if (!Player.Shield.Accessory || Player.Shield.Accessory->PassiveEffect != SHIELD_PASS_MORESKILLS || Random(1, 4) == 1)
                 Player.EP -= EPCost;
-            
+
             // TUFF-MAG3 Shield Accessory
             if (Player.Shield.Active && Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_SKILLTOSHIELD)
                 Player.Shield.Charge += EPCost / 10;
-            
+
             // Blue Aura Refund
             if (Player.SkillRefundMult > 0)
                 Player.EP += EPCost * Player.SkillRefundMult;
@@ -1000,7 +1000,7 @@ NamedScript Console bool Heal(SkillLevelInfo *SkillLevel, void *Data)
 {
     int PlayerTID = Player.TID;
     bool Team = (SkillLevel->CurrentLevel >= 3);
-    
+
     // Refund - If your health is max or above at levels lower than 3 or you don't have a status effect
     if ((SkillLevel->CurrentLevel < 3 && Player.ActualHealth >= Player.HealthMax) && !HaveStatusEffect())
     {
@@ -1008,16 +1008,16 @@ NamedScript Console bool Heal(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Healing
     if (Team)
     {
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
             if (!PlayerInGame(i)) continue;
-            
+
             SetActivator(Players(i).TID);
-            
+
             if (SkillLevel->CurrentLevel >= 4)
             {
                 AddHealth(200, 200);
@@ -1026,7 +1026,7 @@ NamedScript Console bool Heal(SkillLevelInfo *SkillLevel, void *Data)
             else
                 AddHealth(100, 100);
         }
-        
+
         SetActivator(PlayerTID);
     }
     else
@@ -1039,7 +1039,7 @@ NamedScript Console bool Heal(SkillLevelInfo *SkillLevel, void *Data)
         else
             AddHealth(100, 100);
     }
-    
+
     // Remove Status Effects
     if (SkillLevel->CurrentLevel >= 2)
     {
@@ -1048,30 +1048,30 @@ NamedScript Console bool Heal(SkillLevelInfo *SkillLevel, void *Data)
             for (int i = 0; i < MAX_PLAYERS; i++)
             {
                 if (!PlayerInGame(i)) continue;
-                
+
                 SetActivator(Players(i).TID);
-                
+
                 ClearStatusEffects();
             }
-            
+
             SetActivator(PlayerTID);
         }
         else
             ClearStatusEffects();
     }
-    
+
     if (Team)
     {
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
             if (!PlayerInGame(i)) continue;
-            
+
             SetActivator(Players(i).TID);
-            
+
             FadeRange(255, 0, 255, 0.5, 255, 0, 255, 0, 1.0);
             ActivatorSound("skills/heal", (Players(i).TID == PlayerTID ? 127 : 64));
         }
-        
+
         SetActivator(PlayerTID);
     }
     else
@@ -1079,7 +1079,7 @@ NamedScript Console bool Heal(SkillLevelInfo *SkillLevel, void *Data)
         FadeRange(255, 0, 255, 0.5, 255, 0, 255, 0, 1.0);
         ActivatorSound("skills/heal", 127);
     }
-    
+
     return true;
 }
 
@@ -1092,18 +1092,18 @@ NamedScript Console bool HealSummons(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     FadeRange(255, 0, 255, 0.5, 255, 0, 255, 0, 1.0);
-    
+
     for (int i = 0; i < MAX_SUMMONS; i++)
         if (Player.SummonTID[i] > 0)
         {
             MonsterStatsPtr Stats = &Monsters[GetMonsterID(Player.SummonTID[i])];
             SetActorProperty(Player.SummonTID[i], APROP_Health, Stats->HealthMax);
         }
-    
+
     ActivatorSound("skills/heal2", 127);
-    
+
     return true;
 }
 
@@ -1115,15 +1115,15 @@ NamedScript Console bool Decontaminate(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     Player.Toxicity = 0;
     ClearToxicityMeter();
-    
+
     ActivatorSound("skills/decontaminate", 127);
     FadeRange(0, 255, 0, 0.5, 0, 255, 0, 0.0, 1.0);
-    
+
     Player.SkillCostMult += 25;
-    
+
     return true;
 }
 
@@ -1135,19 +1135,19 @@ NamedScript Console bool Repair(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     FadeRange(0, 255, 0, 0.5, 0, 255, 0, 0, 1.0);
     GiveInventory(GetArmorInfoString(ARMORINFO_CLASSNAME), 1);
-    
+
     ActivatorSound("skills/repair", 127);
-    
+
     return true;
 }
 
 NamedScript Console bool Powerup(SkillLevelInfo *SkillLevel, void *Data)
 {
     int Index = *(int *)Data;
-    
+
     switch (Index)
     {
     case 0: // Invulnerability
@@ -1183,7 +1183,7 @@ NamedScript Console bool Powerup(SkillLevelInfo *SkillLevel, void *Data)
         GiveInventory("DRPGAllMapScanner", 1);
         break;
     }
-    
+
     return true;
 }
 
@@ -1195,7 +1195,7 @@ NamedScript Console bool BulletTime(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     if (SkillLevel->CurrentLevel == 1) // Stutter Time
     {
         BulletTimeTimer = 350;
@@ -1210,7 +1210,7 @@ NamedScript Console bool BulletTime(SkillLevelInfo *SkillLevel, void *Data)
         GiveInventory("DRPGTimeFreezer", 1);
         Player.SkillPowerupCooldown = 35 * 60 * 10;
     }
-    
+
     return true;
 }
 
@@ -1221,18 +1221,32 @@ NamedScript Console bool DropWeapon(SkillLevelInfo *SkillLevel, void *Data)
     fixed Y = GetActorY(0) + Sin(Angle) * 96.0;
     fixed Z = GetActorZ(0) + 48.0;
     str Weapon;
-    
+
     switch (SkillLevel->CurrentLevel)
     {
-    case 1: Weapon = "Pistol";          break;
-    case 2: Weapon = "Shotgun";         break;
-    case 3: Weapon = "SuperShotgun";    break;
-    case 4: Weapon = "Chaingun";        break;
-    case 5: Weapon = "RocketLauncher";  break;
-    case 6: Weapon = "PlasmaRifle";     break;
-    case 7: Weapon = "BFG9000";         break;
+    case 1:
+        Weapon = "Pistol";
+        break;
+    case 2:
+        Weapon = "Shotgun";
+        break;
+    case 3:
+        Weapon = "SuperShotgun";
+        break;
+    case 4:
+        Weapon = "Chaingun";
+        break;
+    case 5:
+        Weapon = "RocketLauncher";
+        break;
+    case 6:
+        Weapon = "PlasmaRifle";
+        break;
+    case 7:
+        Weapon = "BFG9000";
+        break;
     }
-    
+
     if (Spawn(Weapon, X, Y, Z, 0, Angle))
     {
         ActivatorSound("skills/drop", 127);
@@ -1245,7 +1259,7 @@ NamedScript Console bool DropWeapon(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     return false;
 }
 
@@ -1256,15 +1270,15 @@ NamedScript Console bool DropSupply(SkillLevelInfo *SkillLevel, void *Data)
     fixed Y = GetActorY(0) + Sin(Angle) * 96.0;
     fixed Z = GetActorZ(0) + 48.0;
     bool Spawned = false;
-    
+
     if (Player.SkillSupplyCooldown > 0)
     {
         PrintError(StrParam("You must wait %S before calling in new supplies", FormatTime(Player.SkillSupplyCooldown)));
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
-    
+
+
     switch (SkillLevel->CurrentLevel)
     {
     case 1:
@@ -1277,7 +1291,7 @@ NamedScript Console bool DropSupply(SkillLevelInfo *SkillLevel, void *Data)
         Spawned = Spawn("DRPGBigBackpack", X, Y, Z, 0, Angle);
         break;
     }
-    
+
     if (Spawned)
     {
         ActivatorSound("skills/drop", 127);
@@ -1290,7 +1304,7 @@ NamedScript Console bool DropSupply(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     return false;
 }
 
@@ -1298,11 +1312,11 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
 {
     int Index = *(int *)Data;
     bool Stack = false;
-    
+
     // Is the Aura you used the same as the one you already have active?
     if (Player.Aura.Type[Index].Active)
         Stack = true;
-    
+
     if (!Stack)
     {
         // Aura stacking handling with Energy perk
@@ -1310,14 +1324,14 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
         {
             int StackMax = 1 + ((Player.EnergyTotal - 100) / 10);
             int Auras = 0;
-            
+
             Log("\CnAura Max Stack: %d", StackMax);
-            
+
             // Count the current Auras
             for (int i = 0; i < AURA_MAX; i++)
                 if (Player.Aura.Type[i].Active)
                     Auras++;
-            
+
             // Make sure the proper Aura stack is maintained
             while (Auras >= StackMax)
             {
@@ -1325,7 +1339,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
                 {
                     // Variance
                     if (Random(1, 2) == 1) continue;
-                    
+
                     if (Player.Aura.Type[i].Active)
                     {
                         Player.Aura.Type[i].Active = false;
@@ -1333,7 +1347,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
                         break;
                     }
                 }
-                
+
                 if ((Timer() % 5) == 0)
                     Delay(1);
             }
@@ -1342,20 +1356,20 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
             for (int i = 0; i < AURA_MAX; i++)
                 Player.Aura.Type[i].Active = false;
     }
-    
+
     // Should the timer be stacked because you used the same Aura?
     if (Stack || Player.Perks[STAT_ENERGY])
         Player.Aura.Time += AURA_CALCTIME;
     else
         Player.Aura.Time = AURA_CALCTIME;
-    
+
     // Apply Aura
     Player.Aura.Type[Index].Active = true;
     Player.Aura.Type[Index].Level = SkillLevel->CurrentLevel;
-    
+
     // Aura Cost Multiplier
     Player.SkillCostMult += 10;
-    
+
     ActivatorSound("skills/buff", 127);
     return true;
 }
@@ -1364,12 +1378,12 @@ NamedScript Console bool Weaken(SkillLevelInfo *SkillLevel, void *Data)
 {
     int PlayerNum = PlayerNumber();
     int StatDivide;
-    
+
     SetActivatorToTargetExtended(Players(PlayerNum).TID);
-    
+
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-    
+
     // Refund - If the Player has no target
     if (ActivatorTID() == Players(PlayerNum).TID)
     {
@@ -1377,7 +1391,7 @@ NamedScript Console bool Weaken(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target isn't actually a valid monster
     if (!Stats->Init || !(ClassifyActor(0) & ACTOR_MONSTER))
     {
@@ -1385,7 +1399,7 @@ NamedScript Console bool Weaken(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target is immune to Weaken
     if (Stats->Flags & MF_NOWEAKEN)
     {
@@ -1393,25 +1407,34 @@ NamedScript Console bool Weaken(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Determine stat division
     // TODO: formula-ify this?
     switch (SkillLevel->CurrentLevel)
     {
-    case 1:         StatDivide = 16;    break;
-    case 2:         StatDivide = 8;     break;
-    case 3:         StatDivide = 4;     break;
-    case 4: case 5: StatDivide = 2;     break;
+    case 1:
+        StatDivide = 16;
+        break;
+    case 2:
+        StatDivide = 8;
+        break;
+    case 3:
+        StatDivide = 4;
+        break;
+    case 4:
+    case 5:
+        StatDivide = 2;
+        break;
     }
-    
+
     // Bosses will double the divider
     if (Stats->Flags & MF_BOSS)
         StatDivide *= 2;
-    
+
     // MegaBosses will quadruple the divider
     if (Stats->Flags & MF_MEGABOSS)
         StatDivide *= 4;
-    
+
     // Halve the monster's level and stats
     Stats->Level -= (Stats->Level / StatDivide);
     Stats->Strength -= (Stats->Strength / StatDivide);
@@ -1422,24 +1445,24 @@ NamedScript Console bool Weaken(SkillLevelInfo *SkillLevel, void *Data)
     Stats->Agility -= (Stats->Agility / StatDivide);
     Stats->Capacity -= (Stats->Capacity / StatDivide);
     Stats->Luck -= (Stats->Luck / StatDivide);
-    
+
     // Destroy Aura
     if (SkillLevel->CurrentLevel >= 5)
         RemoveMonsterAura(Stats);
-    
+
     // Cap Level
     if (Stats->Level < 1)
         Stats->Level = 1;
-    
+
     // Re-calculate the monster's threat level
     Stats->Threat = CalculateMonsterThreatLevel(0);
-    
+
     // Red Aura retaliates! (if it still can)
     SetInventory("DRPGMonsterEPAttacked", 1);
-    
+
     // Reset Activator
     SetActivator(Players(PlayerNum).TID);
-    
+
     FadeRange(0, 0, 0, 0.25, 0, 0, 0, 0.0, 1.0);
     ActivatorSound("skills/weaken", 127);
     return true;
@@ -1453,7 +1476,7 @@ NamedScript Console bool Translocate(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     FireProjectile("DRPGTranslocateBall");
     return true;
 }
@@ -1462,21 +1485,21 @@ NamedScript Console bool Repulse(SkillLevelInfo *SkillLevel, void *Data)
 {
     SetInventory(StrParam("DRPGSkillBlast%d", SkillLevel->CurrentLevel), 1);
     UseInventory(StrParam("DRPGSkillBlast%d", SkillLevel->CurrentLevel));
-    
+
     FadeRange(255, 255, 0, 0.1, 255, 255, 0, 0.0, 0.5 + (0.25 * SkillLevel->CurrentLevel));
-    
+
     return true;
 }
 
 NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
 {
     int PlayerNum = PlayerNumber();
-    
+
     SetActivatorToTargetExtended(Players(PlayerNum).TID);
-    
+
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-    
+
     // Refund - If the Player has no target
     if (ActivatorTID() == Players(PlayerNum).TID)
     {
@@ -1485,7 +1508,7 @@ NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target isn't actually a valid monster
     if (!Stats->Init || !(ClassifyActor(0) & ACTOR_MONSTER))
     {
@@ -1494,7 +1517,7 @@ NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target doesn't have an Aura
     if (!MonsterHasAura(Stats))
     {
@@ -1503,7 +1526,7 @@ NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Refund - If you already have an Aura
     if (PlayerHasAura(PlayerNum))
     {
@@ -1512,7 +1535,7 @@ NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target has a shadow Aura
     if (MonsterHasShadowAura(Stats))
     {
@@ -1521,26 +1544,26 @@ NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     for (int i = 0; i < AURA_MAX; i++)
         if (Stats->Aura.Type[i].Active)
         {
             // Transfer
             Players(PlayerNum).Aura.Type[i].Active = true;
-            
+
             // Determine Level
             int Level = Players(PlayerNum).EnergyTotal / 25 + 1;
             if (Level > Skills[2][i].MaxLevel)
                 Level = Skills[2][i].MaxLevel;
             Players(PlayerNum).Aura.Type[i].Level = Level;
         }
-    
+
     // Add Time
     Players(PlayerNum).Aura.Time += Stats->Aura.Time;
-    
+
     // Remove from enemy
     RemoveMonsterAura(Stats);
-    
+
     ActivatorSound("skills/aurasteal", 127);
     return true;
 }
@@ -1559,7 +1582,7 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
         "DRPGSoulDarkBlue",
         "DRPGSoulYellow"
     };
-    
+
     str const SoulTypesStat[SOUL_MAX] =
     {
         "DRPGSoulRed",
@@ -1571,11 +1594,11 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
         "DRPGSoulDarkBlue",
         "DRPGSoulYellow"
     };
-    
+
     int PlayerNum = PlayerNumber();
     int UniqueMonsterTID = UniqueTID();
     int RealMonsterTID;
-    
+
     // Refund - If the Player has no target
     if (!SetActivatorToTargetExtended(Players(PlayerNum).TID))
     {
@@ -1584,10 +1607,10 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-    
+
     // Refund - If the target is too far away
     if (Distance(0, Players(PlayerNum).TID) > 1024.0)
     {
@@ -1596,7 +1619,7 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target isn't actually a valid monster
     if (!Stats->Init || !(ClassifyActor(0) & ACTOR_MONSTER))
     {
@@ -1605,7 +1628,7 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target is a boss or can never have an aura to begin with
     if (Stats->Flags & MF_BOSS || Stats->Flags & MF_NOAURA || Stats->Flags & MF_MEGABOSS || CheckFlag(0, "BOSS"))
     {
@@ -1614,7 +1637,7 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target is not weak enough (Below 25% Health)
     if (CalcPercent(GetActorProperty(0, APROP_Health), Stats->HealthMax) > 25)
     {
@@ -1623,16 +1646,16 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Don't gain XP from this
     Stats->Flags |= MF_NOXP;
-    
+
     // Temporary changing of TID to handle missions properly
     RealMonsterTID = ActivatorTID();
     Thing_ChangeTID(0, UniqueMonsterTID);
-    
+
     int LeechAmount = GetActorProperty(0, APROP_Health);
-    
+
     // Kill it
     SetActivator(Players(PlayerNum).TID);
     SetActorProperty(UniqueMonsterTID, APROP_Health, 0);
@@ -1647,16 +1670,16 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
     }
     else
         DropMonsterItem(PlayerNum, 0, SoulTypesStat[BestStat(Stats)], 256);
-    
+
     // Move activation back to the user
     SetActivator(Players(PlayerNum).TID);
-    
+
     // Reset the temporary TID
     Thing_ChangeTID(UniqueMonsterTID, RealMonsterTID);
-    
+
     // Heal the user
     AddHealthDirect(LeechAmount, 100);
-    
+
     FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
     ActivatorSound("skills/soulsteal", 127);
     return true;
@@ -1670,7 +1693,7 @@ NamedScript Console bool Disruption(SkillLevelInfo *SkillLevel, void *Data)
     int BeforeHealthAmount;
     int AfterHealthAmount;
     bool AllowsXP;
-    
+
     if (SkillLevel->CurrentLevel >= 4)
     {
         if (SkillLevel->CurrentLevel == 5)
@@ -1680,10 +1703,10 @@ NamedScript Console bool Disruption(SkillLevelInfo *SkillLevel, void *Data)
 
         FadeRange(0, 64, 255, 0.5, 0, 64, 255, 0.0, 0.25);
         ActivatorSound("skills/disruption", 127);
-        
+
         return true;
     }
-    
+
     // Move activation to the user's target
     if (!SetActivatorToTargetExtended(Players(PlayerNum).TID))
     {
@@ -1692,10 +1715,10 @@ NamedScript Console bool Disruption(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-    
+
     // Refund - If the target isn't actually a valid monster
     if (!Stats->Init || !(ClassifyActor(0) & ACTOR_MONSTER))
     {
@@ -1704,7 +1727,7 @@ NamedScript Console bool Disruption(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     // Refund - If the target can't be disrupted (eg. has no aura)
     if (!MonsterHasAura(Stats) || (MonsterHasShadowAura(Stats) && SkillLevel->CurrentLevel < 2))
     {
@@ -1713,7 +1736,7 @@ NamedScript Console bool Disruption(SkillLevelInfo *SkillLevel, void *Data)
         ThingSound(Players(PlayerNum).TID, "menu/error", 127);
         return false;
     }
-    
+
     if (SkillLevel->CurrentLevel == 3)
     {
         // Drop stolen ammo
@@ -1740,7 +1763,7 @@ NamedScript Console bool Disruption(SkillLevelInfo *SkillLevel, void *Data)
                 TakeInventory("Cell", 20);
             }
         }
-        
+
         // Drop stolen credits
         int StolenCredits = CheckInventory("DRPGCredits") - Stats->Capacity;
         if (Stats->Aura.Type[AURA_YELLOW].Active && StolenCredits > 0)
@@ -1749,15 +1772,15 @@ NamedScript Console bool Disruption(SkillLevelInfo *SkillLevel, void *Data)
             TakeInventory("DRPGCredits", StolenCredits);
         }
     }
-    
+
     SetInventory("DRPGMonsterDisrupted", 35 * 30);
-    
+
     // Move activation back to the user
     SetActivator(Players(PlayerNum).TID);
-    
+
     // Reset the temporary TID
     Thing_ChangeTID(UniqueMonsterTID, RealMonsterTID);
-    
+
     FadeRange(0, 64, 255, 0.5, 0, 64, 255, 0.0, 0.25);
     ActivatorSound("skills/disruption", 127);
     return true;
@@ -1778,16 +1801,16 @@ NamedScript Console bool PlasmaBeam(SkillLevelInfo *SkillLevel, void *Data)
         PlasmaBeam3();
         break;
     }
-    
+
     return true;
 }
 
 NamedScript Console void PlasmaBeam1()
 {
     int BeamTime = 35;
-    
+
     ActivatorSound("skills/plasmabeam1", 127);
-    
+
     while (BeamTime--)
     {
         GiveInventory("DRPGSkillPlasmaBeam1", 1);
@@ -1798,10 +1821,10 @@ NamedScript Console void PlasmaBeam1()
 NamedScript Console void PlasmaBeam2()
 {
     int BeamTime = 35;
-    
+
     ActivatorSound("skills/plasmabeam1", 63);
     ActivatorSound("skills/plasmabeam2", 64);
-    
+
     while (BeamTime--)
     {
         GiveInventory("DRPGSkillPlasmaBeam2", 1);
@@ -1812,9 +1835,9 @@ NamedScript Console void PlasmaBeam2()
 NamedScript Console void PlasmaBeam3()
 {
     int BeamTime = 35;
-    
+
     ActivatorSound("skills/plasmabeam3", 127);
-    
+
     while (BeamTime--)
     {
         GiveInventory("DRPGSkillPlasmaBeam3", 1);
@@ -1833,7 +1856,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
     bool Success;
     fixed Radius;
     str Name;
-    
+
     str const Summons[] =
     {
         "ZombieMan",
@@ -1853,7 +1876,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         "Cyberdemon",
         "SpiderMastermind"
     };
-    
+
     str const DRLASummons[][6] =
     {
         // Former Human
@@ -1862,27 +1885,27 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
             "RLDRPGSummonedEliteHuman",
             "RLDRPGSummonedFormerCaptain"
         },
-        
+
         // Former Sergeant
         {
             "RLDRPGSummonedFormerSergeant",
             "RLDRPGSummonedEliteSergeant"
         },
-        
+
         // Former Commando
         {
             "RLDRPGSummonedFormerCommando",
             "RLDRPGSummonedEliteCommando",
             "RLDRPGSummonedEliteCaptain2"
         },
-        
+
         // Imp
         {
             "RLDRPGSummonedImp",
             "RLDRPGSummonedNightmareImp",
             "RLDRPGSummonedCyberneticImp"
         },
-        
+
         // Demon
         {
             "RLDRPGSummonedDemon",
@@ -1892,80 +1915,80 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
             "RLDRPGSummonedCyberneticDemon",
             "RLDRPGSummonedCyberneticSpectre"
         },
-        
+
         // Cacodemon
         {
             "RLDRPGSummonedCacodemon",
             "RLDRPGSummonedNightmareCacodemon"
         },
-        
+
         // Hell Knight
         {
             "RLDRPGSummonedHellKnight",
             "RLDRPGSummonedNightmareHellKnight",
             "RLDRPGSummonedCyberneticHellKnight"
         },
-        
+
         // Baron of Hell
         {
             "RLDRPGSummonedBaronOfHell",
             "RLDRPGSummonedNightmareBaronOfHell",
             "RLDRPGSummonedCyberneticBaronOfHell"
         },
-        
+
         // Lost Soul
         {
             "RLDRPGSummonedLostSoul",
             "RLDRPGSummonedNightmareLostSoul",
             "RLDRPGSummonedCyberneticLostSoul"
         },
-        
+
         // Pain Elemental
         {
             "RLDRPGSummonedPainElemental",
             "RLDRPGSummonedNightmarePainElemental"
         },
-        
+
         // Revenant
         {
             "RLDRPGSummonedRevenant",
             "RLDRPGSummonedNightmareRevenant",
             "RLDRPGSummonedCyberneticRevenant"
         },
-        
+
         // Mancubus
         {
             "RLDRPGSummonedMancubus",
             "RLDRPGSummonedNightmareMancubus",
             "RLDRPGSummonedCyberneticMancubus"
         },
-        
+
         // Arachnotron
         {
             "RLDRPGSummonedArachnotron",
             "RLDRPGSummonedNightmareArachnotron",
             "RLDRPGSummonedCyberneticArachnotron"
         },
-        
+
         // Arch-Vile
         {
             "RLDRPGSummonedArchVile",
             "RLDRPGSummonedNightmareArchVile"
         },
-        
+
         // Cyberdemon
         {
             "RLDRPGSummonedCyberdemon",
             "RLDRPGSummonedNightmareCyberdemon"
         },
-        
+
         // Spider Mastermind
         {
             "RLDRPGSummonedSpiderMastermind",
             "RLDRPGSummonedCyberneticSpiderMastermind"
         }
     };
-    
+
     // Stop if you're in the Outpost
     if (CurrentLevel->UACBase)
     {
@@ -1973,7 +1996,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Stop if you already have the maximum amount of summons
     if (Player.Summons >= MAX_SUMMONS)
     {
@@ -1981,18 +2004,32 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     if (Index == 0) // Marines
     {
         switch (SkillLevel->CurrentLevel)
         {
-        case 1: Name = "DRPGMarineGuardPistolSummoned";    break;
-        case 2: Name = "DRPGMarineShotgunSummoned";        break;
-        case 3: Name = "DRPGMarineDoubleShotgunSummoned";  break;
-        case 4: Name = "DRPGMarineChaingunSummoned";;      break;
-        case 5: Name = "DRPGMarineRocketLauncherSummoned"; break;
-        case 6: Name = "DRPGMarinePlasmaRifleSummoned";    break;
-        case 7: Name = "DRPGMarineBFG9000Summoned";        break;
+        case 1:
+            Name = "DRPGMarineGuardPistolSummoned";
+            break;
+        case 2:
+            Name = "DRPGMarineShotgunSummoned";
+            break;
+        case 3:
+            Name = "DRPGMarineDoubleShotgunSummoned";
+            break;
+        case 4:
+            Name = "DRPGMarineChaingunSummoned";;
+            break;
+        case 5:
+            Name = "DRPGMarineRocketLauncherSummoned";
+            break;
+        case 6:
+            Name = "DRPGMarinePlasmaRifleSummoned";
+            break;
+        case 7:
+            Name = "DRPGMarineBFG9000Summoned";
+            break;
         };
     }
     else // Monsters
@@ -2004,17 +2041,17 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         else
             Name = StrParam("DRPG%S", Summons[Index - 1]);
     }
-    
+
     // Perform a dummy summon to get the Radius and add it to X and Y
     SpawnForced(Name, 0, 0, 0, NewID, 0);
     Radius = GetActorPropertyFixed(NewID, APROP_Radius);
     X += Cos(Angle) * (Radius * 1.5 + 16.0);
     Y += Sin(Angle) * (Radius * 1.5 + 16.0);
     Thing_Remove(NewID);
-    
+
     // With the new radius, try and summon the actual monster
     Success = Spawn(Name, X, Y, Z, NewID, Angle);
-    
+
     if (Success)
     {
         SpawnForced("TeleportFog", X, Y, Z, 0, Angle);
@@ -2025,7 +2062,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         GiveActorInventory(NewID, "DRPGFriendlyBooster", 1);
         if (Index != 0) // Marines need to run their Spawn state
             SetActorState(NewID, "See");
-        
+
         // Add summon to your summon array
         for (int i = 0; i < MAX_SUMMONS; i++)
             if (Player.SummonTID[i] == 0)
@@ -2034,7 +2071,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
                 Player.Summons++;
                 break;
             }
-        
+
         // Setup Stats
         Delay(4); // We need this initial delay to make sure the ID is valid
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(NewID)];
@@ -2052,7 +2089,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         Stats->Flags |= MF_NOXP;
         Stats->Flags |= MF_NODROPS;
         Stats->NeedReinit = true;
-        
+
         return true;
     }
     else
@@ -2061,14 +2098,14 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     return false;
 }
 
 NamedScript Console bool BreakdownArmor(SkillLevelInfo *SkillLevel, void *Data)
 {
     int Armor = CheckInventory("BasicArmor");
-    
+
     // Kind of hackish to prevent breaking down Armors that use high values for indestructibleness
     if (CompatMode == COMPAT_DRLA && Armor >= 99999)
     {
@@ -2076,7 +2113,7 @@ NamedScript Console bool BreakdownArmor(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     if (Armor > 0)
     {
         // DoomRL Compatibility
@@ -2089,10 +2126,10 @@ NamedScript Console bool BreakdownArmor(SkillLevelInfo *SkillLevel, void *Data)
             TakeInventory("RL100RegenArmorWorn", 1);
             TakeInventory("RLIndestructibleArmorWorn", 1);
         }
-        
+
         TakeInventory("BasicArmor", Armor);
         GiveInventory("DRPGCredits", Armor);
-        
+
         ActivatorSound("skills/breakdown", 127);
         return true;
     }
@@ -2102,7 +2139,7 @@ NamedScript Console bool BreakdownArmor(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     return false;
 }
 
@@ -2113,20 +2150,20 @@ NamedScript Console bool ForceWall(SkillLevelInfo *SkillLevel, void *Data)
     fixed X = GetActorX(0) + Cos(Angle) * 96.0;
     fixed Y = GetActorY(0) + Sin(Angle) * 96.0;
     fixed Z = GetActorZ(0);
-    
+
     if (Spawn("DRPGForceWall", X, Y, Z, TID, Angle))
     {
         Delay(4);
-        
+
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(TID)];
-        
+
         // Determine Defense and Health
         Stats->SpawnHealth = GetActorProperty(0, APROP_SpawnHealth);
         Stats->Defense = Player.EnergyTotal * 5;
         Stats->Vitality = Player.EnergyTotal * 5;
         Stats->HealthMax = CalculateMonsterMaxHealth(Stats);
         SetActorProperty(TID, APROP_Health, Stats->HealthMax);
-        
+
         return true;
     }
     else
@@ -2135,7 +2172,7 @@ NamedScript Console bool ForceWall(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     return false;
 }
 
@@ -2145,7 +2182,7 @@ NamedScript Console bool Rally(SkillLevelInfo *SkillLevel, void *Data)
     fixed Y = GetActorY(0);
     fixed Z = GetActorZ(0);
     fixed Angle = GetActorAngle(0);
-    
+
     // Fail if you have no summons active
     if (Player.Summons == 0)
     {
@@ -2153,13 +2190,13 @@ NamedScript Console bool Rally(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     SpawnForced("TeleportFog", X, Y, Z, 0, Angle);
-    
+
     for (int i = 0; i < MAX_SUMMONS; i++)
         if (Player.SummonTID[i] > 0)
             SetActorPosition(Player.SummonTID[i], X, Y, Z, 0);
-    
+
     ActivatorSound("skills/rally", 127);
     return true;
 }
@@ -2167,7 +2204,7 @@ NamedScript Console bool Rally(SkillLevelInfo *SkillLevel, void *Data)
 NamedScript Console bool Unsummon(SkillLevelInfo *SkillLevel, void *Data)
 {
     int EPAdd;
-    
+
     // Fail if you have no summons active
     if (Player.Summons == 0)
     {
@@ -2175,33 +2212,33 @@ NamedScript Console bool Unsummon(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     for (int i = 0; i < MAX_SUMMONS; i++)
     {
         // Continue if there's no summon in this slot
         if (Player.SummonTID[i] == 0) continue;
-        
+
         if (SkillLevel->CurrentLevel == 2 && GetActorProperty(Player.SummonTID[i], APROP_Health) > 0)
             EPAdd += (int)((fixed)Player.EPMax * 0.01) + 1;
-        
+
         // Player.Overdrive - Remove summons (teleport out) instead of killing them
         if (GetActorProperty(Player.SummonTID[i], APROP_Health) > 0)
         {
             SpawnForced("TeleportFog", GetActorX(Player.SummonTID[i]), GetActorY(Player.SummonTID[i]), GetActorZ(Player.SummonTID[i]), 0, 0);
             Thing_Remove(Player.SummonTID[i]);
         }
-        
+
         // Remove the summon from the array
         Player.SummonTID[i] = 0;
     }
-    
-    
+
+
     Log("EPAdd: %d", EPAdd);
     if (SkillLevel->CurrentLevel == 2)
         Player.EP += EPAdd;
 
     Player.Summons = 0;
-    
+
     FadeRange(192, 0, 0, 0.5, 192, 0, 0, 0.0, 1.0);
     ActivatorSound("skills/unsummon", 127);
     return true;
@@ -2216,7 +2253,7 @@ NamedScript Console bool Recall(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-        
+
     SetInventory("ArtiTeleport", 1);
     UseInventory("ArtiTeleport");
     return true;
@@ -2232,7 +2269,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
     int AngleDivide;
     fixed AngleAdd;
     int CreditCount;
-    
+
     // Count Credits
     for (int i = 0; i < Player.DropTID.Position; i++)
         if (ThingCount(0, TID[i]) > 0 && StartsWith(GetActorClass(TID[i]), "DRPGCredits"))
@@ -2251,27 +2288,27 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
                 CreditCount += 100;
             if (GetActorClass(TID[i]) == "DRPGCredits1000")
                 CreditCount += 1000;
-            
+
             int HolderTID = UniqueTID();
             SpawnSpot("DRPGCreditsEmpty", TID[i], HolderTID, Random(0, 255));
             SetActorVelocity(HolderTID, RandomFixed(-8, 8), RandomFixed(-8, 8), RandomFixed(2, 8), false, false);
             Thing_Remove(TID[i]);
         }
-    
+
     // Give calculated Credits
     if (CreditCount > 0)
     {
         if (Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_DOSHMAGNET)
             CreditCount *= 3;
-        
+
         GiveInventory("DRPGCredits", CreditCount);
         ActivatorSound("credits/pickup", 127);
     }
-    
+
     CleanDropTIDArray();
-    
+
     AngleDivide = Player.DropTID.Position;
-    
+
     // Refund - If there are no items in the array
     if (Player.DropTID.Position == 0 && CreditCount == 0)
     {
@@ -2279,7 +2316,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Overdrive - Pull the items on top of you and pick them all up
     if (Player.Overdrive)
     {
@@ -2288,16 +2325,16 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
             SetActorPosition(TID[i], X, Y, Z, 0);
             SetActorVelocity(TID[i], 0, 0, 0, false, false);
         }
-        
+
         SetActorVelocity(0, 0.01, 0.01, 0, true, false);
-        
+
         FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 1.0);
         ActivatorSound("skills/magnet", 127);
         return true;
     }
-    
+
     AngleAdd = 1.0 / AngleDivide;
-    
+
     for (int i = 0; i < Player.DropTID.Position; i++)
     {
         X = GetActorX(0) + Cos(Angle) * 64.0;
@@ -2306,7 +2343,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
         SetActorVelocity(TID[i], 0, 0, 0, false, false);
         Angle += AngleAdd;
     }
-    
+
     FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 1.0);
     ActivatorSound("skills/magnet", 127);
     return true;
@@ -2316,14 +2353,14 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
 {
     // If you're dead, terminate
     if (GetActorProperty(0, APROP_Health) <= 0) return false;
-    
+
     // [marrub] For Seryder
     if (CheckInventory("DRPGDisallowTransport"))
     {
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Don't allow Transport while the arena is active, if the Marines are hostile, or you're in an Outpost-related menu
     if (ArenaActive || MarinesHostile || Player.OutpostMenu > 0)
     {
@@ -2331,7 +2368,7 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Don't allow Transport during the Hell Unleashed event
     if (CurrentLevel && CurrentLevel->Event == MAPEVENT_HELLUNLEASHED && CurrentLevel->HellUnleashedActive)
     {
@@ -2339,7 +2376,7 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Same for Feeding Frenzy
     if (CurrentLevel && CurrentLevel->Event == MAPEVENT_DRLA_FEEDINGFRENZY)
     {
@@ -2347,31 +2384,31 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
         ActivatorSound("menu/error", 127);
         return false;
     }
-    
+
     // Multiplayer
     if (InMultiplayer && PlayerCount() > 1)
     {
         int Players = PlayerCount();
-        bool Ready = false; 
+        bool Ready = false;
         bool Force = (Arbitrator && Player.Overdrive);
         bool Voted[MAX_PLAYERS];
         int PlayersApprove = 0;
         int PlayersDeny = 0;
-        
+
         for (int i = 0; i < MAX_PLAYERS; i++)
             Voted[i] = false;
-        
+
         while (!Ready && !Force)
         {
             // Freeze all players
             SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
-            
+
             // Input
             for (int i = 0; i < Players; i++)
             {
                 // Skip input checks if you've already voted
                 if (Voted[i]) continue;
-                
+
                 if (CheckInput(BT_USE, KEY_ONLYHELD, false, PlayerNumber()))
                 {
                     ActivatorSound("menu/move", 127);
@@ -2385,7 +2422,7 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
                     Voted[i] = true;
                 }
             }
-            
+
             // Check that everyone has voted
             Ready = true;
             for (int i = 0; i < Players; i++)
@@ -2394,23 +2431,23 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
                     Ready = false;
                     break;
                 }
-            
+
             // Drawing
             SetFont("BIGFONT");
             HudMessage("\Cd%tS\C- has requested Transport\n\C-Players: %d (\Cd%d\C-/\Cg%d\C-)\n\n\Cd%jS\C- to Approve\n\Cd%jS\C- to Deny",
                        PlayerNumber() + 1, Players, PlayersApprove, PlayersDeny, "+use", "+speed");
             EndHudMessageBold(HUDMSG_FADEOUT, MENU_ID, "White", 0.5, 0.75, 1.0, 4.0);
-            
+
             Delay(1);
         }
-        
+
         // Ready - tally votes and confirm/deny Transport
         if (Ready || Force)
         {
             Transported = true;
-            
+
             SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
-            
+
             // Approved
             if (PlayersApprove > PlayersDeny || Force)
             {
@@ -2418,18 +2455,18 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
                 {
                     // Player is not in-game
                     if (!PlayerInGame(i)) continue;
-                    
+
                     SpawnForced("DRPGTransportEffect", GetActorX(Players(i).TID), GetActorY(Players(i).TID), GetActorZ(Players(i).TID), 0, 0);
                     TransportOutFX(Players(i).TID);
                     ThingSound(Players(i).TID, "misc/transport", 96);
                 }
-                
+
                 SetFont("BIGFONT");
                 HudMessage("Transport Approved!");
                 EndHudMessageBold(HUDMSG_FADEOUT, 0, "Green", 0.5, 0.5, 1.0, 1.0);
                 Delay(35 * 2);
             }
-            
+
             // Denied
             else if (PlayersDeny > PlayersApprove)
             {
@@ -2438,7 +2475,7 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
                 EndHudMessageBold(HUDMSG_FADEOUT, 0, "Red", 0.5, 0.5, 1.0, 2.0);
                 return false;
             }
-            
+
             // Draw
             else if (PlayersApprove > 0 && PlayersDeny > 0 && PlayersApprove == PlayersDeny)
             {
@@ -2447,7 +2484,7 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
                 EndHudMessageBold(HUDMSG_FADEOUT, 0, "White", 0.5, 0.5, 1.0, 2.0);
                 return false;
             }
-            
+
             // Error
             else
             {
@@ -2470,19 +2507,19 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
     else // Single Player
     {
         Transported = true;
-        
+
         // Transport FX
         TransportOutFX(0);
-        
+
         // Delay and unfreeze Player
         Delay(35 * 2);
     }
-    
+
     // Transport
     if (!CurrentLevel->UACBase)
     {
         TransporterLevel = FindLevelInfo();
-       
+
         ChangeLevel(DefaultOutpost->LumpName, 0, CHANGELEVEL_NOINTERMISSION, CurrentSkill);
         return true;
     }
@@ -2498,7 +2535,7 @@ NamedScript void TransportOutFX(int tid)
 {
     if (tid != 0)
         SetActivator(tid);
-    
+
     if (GetActorZ(0) == GetActorFloorZ(0))
         SetActorPosition(0, GetActorX(0), GetActorY(0), GetActorZ(0)+1, false);
     GiveInventory("DRPGTransportSetNonShootable", 1);
@@ -2518,7 +2555,7 @@ NamedScript void TransportInFX(int tid)
 {
     if (tid != 0)
         SetActivator(tid);
-    
+
     GiveInventory("DRPGTransportUnsetNonShootable", 1);
     ActivatorSound("misc/transport", 96);
     SpawnForced("DRPGTransportEffect", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
@@ -2530,7 +2567,7 @@ NamedScript DECORATE void RemoveAura()
 {
     Player.Aura.Time = 0;
     Player.Aura.Team = false;
-    
+
     for (int i = 0; i < AURA_MAX; i++)
     {
         Player.Aura.Type[i].Active = false;
@@ -2544,7 +2581,7 @@ NamedScript DECORATE void ClearStatusEffects()
     {
         if (i == SE_RADIATION && Player.StatusType[i])
             StopSound(Player.TID, 7);
-        
+
         Player.StatusType[i] = false;
         Player.StatusTypeHUD = SE_NONE;
         Player.StatusIntensity[i] = 0;
@@ -2583,12 +2620,12 @@ void BuildSkillData()
         // DoomRL Marines use slightly different weapons
         Skills[4][0].Description[2] = "Summons a Marine\n\CjDouble Shotgun";
         Skills[4][0].Description[3] = "Summons a Marine\n\CjBattle Rifle";
-        
+
         // Summoning Skills - Names
         Skills[4][1].Name = "Summon Former Human";
         Skills[4][2].Name = "Summon Former Sergeant";
         Skills[4][3].Name = "Summon Former Commando";
-        
+
         // Summoning Skills - Levels
         Skills[4][1].MaxLevel = 3;
         Skills[4][2].MaxLevel = 2;
@@ -2606,7 +2643,7 @@ void BuildSkillData()
         Skills[4][14].MaxLevel = 2;
         Skills[4][15].MaxLevel = 2;
         Skills[4][16].MaxLevel = 2;
-        
+
         // Summoning Skills - Descriptions
         Skills[4][1].Description[0] = "Summons a Former Human";
         Skills[4][1].Description[1] = "Summons an Elite Human";
@@ -2641,7 +2678,7 @@ void BuildSkillData()
         Skills[4][15].Description[1] = "Summons a Nightmare Cyberdemon";
         Skills[4][16].Description[1] = "Summons a Spider Overmind";
     }
-    
+
     // Icons
     for (int i = 0; i < MAX_CATEGORIES; i++)
         for (int j = 0; j < MAX_SKILLS; j++)
@@ -2651,15 +2688,15 @@ void BuildSkillData()
 int ScaleEPCost(int Cost)
 {
     int ScaleCost = Cost;
-    
+
     // Multiplier CVAR
     ScaleCost *= (int)(GetCVarFixed("drpg_skill_costscale") * 100.0);
     ScaleCost /= 100;
-    
+
     // Aura Multiplier
     if (Player.SkillCostMult > 0)
         ScaleCost += (Player.SkillCostMult * ScaleCost) / 100;
-    
+
     return ScaleCost;
 }
 
@@ -2667,7 +2704,7 @@ void CheckSkills()
 {
     // Reset the Skill refund multiplier from the Blue Aura and Energy Augmentation
     Player.SkillRefundMult = 0;
-    
+
     // Level 4 and 5 of the Energy Augmentation increase skill refund rate
     if (Player.Augs.Active[AUG_ENERGY])
     {
@@ -2682,7 +2719,7 @@ void CheckSkills()
         else if (Player.Augs.Level[AUG_ENERGY] >= 8)
             Player.SkillRefundMult += 0.25;
     }
-    
+
     // Summoned Monsters Handling
     for (int i = 0; i < MAX_SUMMONS; i++)
         if (Player.SummonTID[i] != 0 && GetActorProperty(Player.SummonTID[i], APROP_Health) <= 0)
@@ -2692,26 +2729,26 @@ void CheckSkills()
             Player.SummonTID[i] = 0;
             Player.Summons--;
         }
-    
+
     // Powerup cooldown timer handling
     if (Player.SkillPowerupCooldown > 0)
         Player.SkillPowerupCooldown--;
-    
+
     // Supply Drop cooldown timer handling
     if (Player.SkillSupplyCooldown > 0)
         Player.SkillSupplyCooldown--;
-    
+
     // Cost multiplier timer handling
     if ((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && Player.SkillCostMult > 0 && !PlayerHasAura(PlayerNumber()))
         if ((Timer() % (35 * GetCVar("drpg_skill_costcooldown"))) == 0)
             Player.SkillCostMult--;
-    
+
     // Bullet-Time timer handling
     if (BulletTimeTimer > 0)
     {
         if (BulletTimeTimer % 3)
             GiveInventory("DRPGTimeFreezerQuick", 1);
-        
+
         BulletTimeTimer--;
     }
 }
@@ -2725,18 +2762,18 @@ void CheckAuras()
     int Angle = GetActorAngle(0) * 256;
     int AmmoRegenMult = 1;
     bool Shadow = PlayerHasShadowAura(PlayerNumber());
-    
+
     // Team Aura Handling
     if (InMultiplayer && Player.Aura.Time > 0)
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
             // Skip yourself
             if (Player.TID == Players(i).TID) continue;
-            
+
             if (Distance(Player.TID, Players(i).TID) <= Player.Aura.Range)
             {
                 Players(i).Aura.Team = true;
-                
+
                 for (int j = 0; j < AURA_MAX; j++)
                     if (Player.Aura.Type[j].Active && Player.Aura.Type[j].Level >= Players(i).Aura.Type[j].Level)
                         Players(i).Aura.Type[j] = Player.Aura.Type[j];
@@ -2744,7 +2781,7 @@ void CheckAuras()
             else
                 Players(i).Aura.Team = false;
         }
-    
+
     // TEEM-AU5 Shield Accessory Handling
     if (Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_DATAURA && Player.Shield.Active)
         for (int i = 0; i < MAX_PLAYERS; i++)
@@ -2759,7 +2796,7 @@ void CheckAuras()
         Player.DamageFactor *= 0.8;
         Player.Aura.DefenseBoost = false;
     }
-    
+
     // Aura handling
     if (Player.Aura.Time > 0 || Player.Aura.Team)
     {
@@ -2781,7 +2818,7 @@ void CheckAuras()
             else if (Player.Aura.Type[AURA_RED].Level == 6)
                 Player.DamageMult += 3;
         }
-        
+
         // Green Aura
         if (Player.Aura.Type[AURA_GREEN].Active)
         {
@@ -2790,7 +2827,7 @@ void CheckAuras()
             if (Player.Aura.Type[AURA_GREEN].Level >= 3 || Player.SoulActive[SOUL_GREEN])
                 GiveInventory("DRPGGreenAuraIronFeet", 1);
         }
-        
+
         // White Aura
         if (Player.Aura.Type[AURA_WHITE].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
         {
@@ -2806,12 +2843,12 @@ void CheckAuras()
                 if ((Timer() % (35 * 2)) == 1)
                     Player.XPGained += XPTable[Player.Level] / 100 / (Player.Level + 1);
         }
-        
+
         // Pink Aura
         if (Player.Aura.Type[AURA_PINK].Active)
             if (Player.Aura.Type[AURA_PINK].Level >= 2 || Player.SoulActive[SOUL_PINK])
                 GiveInventory("DRPGPinkAuraDrain", 1);
-        
+
         // Blue Aura
         if (Player.Aura.Type[AURA_BLUE].Active)
         {
@@ -2826,7 +2863,7 @@ void CheckAuras()
             if (Player.Aura.Type[AURA_BLUE].Level >= 5 || Player.SoulActive[SOUL_BLUE])
                 Player.SkillRefundMult += 0.25;
         }
-        
+
         // Purple Aura
         if (Player.Aura.Type[AURA_PURPLE].Active)
         {
@@ -2853,7 +2890,7 @@ void CheckAuras()
                 Player.EPTime /= 2;
             }
         }
-        
+
         // Orange Aura
         if (Player.Aura.Type[AURA_ORANGE].Active)
         {
@@ -2887,7 +2924,7 @@ void CheckAuras()
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 7 || Player.SoulActive[SOUL_DARKBLUE])
                 GiveInventory("DRPGDarkBlueAuraInfiniteAmmo2", 1);
         }
-        
+
         // Yellow Aura
         if (Player.Aura.Type[AURA_YELLOW].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
         {
@@ -2903,7 +2940,7 @@ void CheckAuras()
                 LuckMult = 4;
             if (Player.Aura.Type[AURA_YELLOW].Level >= 5 || Player.SoulActive[SOUL_YELLOW])
                 LuckMult = 8;
-            
+
             Player.HealthChance *= LuckMult;
             Player.EPChance *= LuckMult;
             Player.ArmorChance *= LuckMult;
@@ -2914,12 +2951,12 @@ void CheckAuras()
             Player.ShieldChance *= LuckMult;
             Player.StimChance *= LuckMult;
         }
-        
+
         // Spawn Aura
         if (PlayerHasAura(PlayerNumber()))
             SpawnAuras(Player.TID, false);
     }
-    
+
     // Decrease Aura Timer
     if (!CurrentLevel->UACBase || ArenaActive || MarinesHostile)
         for (int i = 0; i < AURA_MAX; i++)
@@ -2929,7 +2966,7 @@ void CheckAuras()
                     Player.Aura.Time--;
                     break; // Remove this for Yholl-style behavior, still contemplating
                 }
-    
+
     // Reset Aura and Soul States
     if (Player.Aura.Time <= 0 || !Player.Aura.Team)
     {
@@ -2940,7 +2977,7 @@ void CheckAuras()
                 Player.Aura.Type[i].Active = false;
                 Player.Aura.Type[i].Level = 0;
             }
-        
+
         // Reset Souls
         for (int i = 0; i < SOUL_MAX; i++)
             Player.SoulActive[i] = false;

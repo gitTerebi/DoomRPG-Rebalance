@@ -316,7 +316,7 @@ NamedScript Type_ENTER void Init()
 // Loop Script
 NamedScript void Loop()
 {
-    Start:
+Start:
 
     // If we're on the title map, terminate
     if (InTitle)
@@ -446,7 +446,7 @@ NamedScript void PlayerDamage()
     fixed LuckChance;
     fixed EnergyLevel;
 
-    Start:
+Start:
 
     // If the player's dead, terminate
     if (GetActorProperty(0, APROP_Health) <= 0) return;
@@ -568,7 +568,8 @@ NamedScript void PlayerDamage()
             {
                 Player.ActualHealth = Player.HealthMax;
                 ActivatorSound("health/resurrect", 127);
-                if (!CurrentLevel->UACBase) {
+                if (!CurrentLevel->UACBase)
+                {
                     SetInventory("ArtiTeleport", 1);
                     UseInventory("ArtiTeleport");
                 }
@@ -621,7 +622,7 @@ NamedScript void MoneyChecker()
     int BeforeCredits;
     int AfterCredits;
 
-    Start:
+Start:
 
     BeforeCredits = CheckInventory("DRPGCredits");
 
@@ -872,16 +873,16 @@ NamedScript void WeaponSpeed()
 {
     int Time;
 
-    Start:
+Start:
 
     if (Player.Stim.PowerupTimer[STIM_RAGE] > 0 || Player.WeaponSpeed >= 100 || Player.WeaponSpeed <= 0)
         Time = 4;
     else
         Time = (int)(4 * (100.0 / Player.WeaponSpeed - 0.05)) + 1;
-    
+
     if (Player.Stim.PowerupTimer[STIM_RAGE] > 0 || (Player.WeaponSpeed > 0 && GetActivatorCVar("drpg_stat_weaponspeed")))
         SetInventory("DRPGSpeed", 1);
-    
+
     Delay(Time);
     goto Start;
 }
@@ -889,7 +890,7 @@ NamedScript void WeaponSpeed()
 // Stat Randomizer Script
 NamedScript void StatRandomizer()
 {
-    Start:
+Start:
 
     if (GetActivatorCVar("drpg_auto_spend"))
     {
@@ -935,7 +936,7 @@ NamedScript void AutosaveHandler()
             Safe = true;
 
             if (DamageTimer < ASAVE_SAFETIME ||
-                GetActorProperty(Player.TID, APROP_Health) <= GetActorProperty(Player.TID, APROP_SpawnHealth) / 10)
+                    GetActorProperty(Player.TID, APROP_Health) <= GetActorProperty(Player.TID, APROP_SpawnHealth) / 10)
                 Safe = false;
 
             if (Safe)
@@ -957,7 +958,7 @@ NamedScript Type_OPEN void ShopSpecialHandler()
 {
     bool ValidItem;
     int Tries, MinValue, MaxValue, Category, Index;
-    Start:
+Start:
 
     // Reset the item
     if (ShopSpecialTimer <= 0)
@@ -1110,7 +1111,7 @@ NamedScript void ItemHandler()
 
             // This item was picked up or otherwise removed
             if (ClassifyActor(ItemTIDs[i]) == ACTOR_NONE || ClassifyActor(ItemTIDs[i]) == ACTOR_WORLD) continue;
-            
+
             NoClip = false;
             // Iterate players and check distances
             for (int j = 0; j < MAX_PLAYERS; j++)
@@ -1151,7 +1152,7 @@ NamedScript void ItemHandler()
             else
                 SetActorInventory(ItemTIDs[i], "DRPGItemNoClipOff", 1);
         }
-        
+
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
             // Skip this player if they aren't in the game
@@ -1162,10 +1163,10 @@ NamedScript void ItemHandler()
 
             // Skip this player if they are dead
             if (GetActorProperty(Players(i).TID, APROP_Health) <= 0) continue;
-            
-            
+
+
             int *ItemTID = (int *)Player.DropTID.Data;
-            
+
             for (int j = 0; j < Players(i).DropTID.Position; j++)
             {
                 NoClip = false;
@@ -1190,7 +1191,7 @@ NamedScript void ItemHandler()
 
                 SetActorVelocity(ItemTID[j], X, Y, Z, true, false);
                 NoClip = true;
-                
+
                 if (NoClip)
                     SetActorInventory(ItemTID[j], "DRPGItemNoClip", 1);
                 else
@@ -1206,7 +1207,7 @@ NamedScript void ItemHandler()
 NamedScript DECORATE void ItemInit()
 {
     int TID;
-    
+
     // Delay while the Items array is being initialized
     while (!ItemTIDsInitialized) Delay(1);
 
@@ -1783,7 +1784,7 @@ NamedScript void Loadout_GiveAugs()
     // Active Augs
     int ActiveAugs = 0;
     int Type;
-    
+
     while (ActiveAugs < GetActivatorCVar("drpg_start_aug_amount"))
     {
         Type = Random(0, AUG_MAX - 1);
@@ -2194,7 +2195,7 @@ void CheckCompatibility()
 
     CompatMode = COMPAT_NONE;
     WadSmoosh = false;
-    
+
     //WadSmoosh
     Success = SpawnForced("DRPGWadSmooshActive", 0, 0, 0, TID, 0);
     if (Success)

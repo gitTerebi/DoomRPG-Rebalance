@@ -24,7 +24,7 @@ extern int RPGMap ItemTIDs[MAX_ITEMS];
 
 // --------------------------------------------------
 // Multiplayer HUD
-// 
+//
 
 // Energy Points (EP)
 extern int EPArray Address(0) EP[MAX_PLAYERS];

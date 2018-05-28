@@ -285,7 +285,7 @@ typedef enum
     CF_NODROP   = 0x8,
 } ECategoryFlags;
 
-typedef enum 
+typedef enum
 {
     RL_POWER_MOD = 0x01,
     RL_BULK_MOD = 0x02,
@@ -471,7 +471,7 @@ typedef enum
 
 // --------------------------------------------------
 // Outpost
-// 
+//
 
 #define MAX_OUTPOST_ID          2000
 
@@ -521,7 +521,7 @@ typedef enum
 
 // --------------------------------------------------
 // Popoffs
-// 
+//
 
 #define DNUM_DIGITS             7
 #define DNUM_MONSTER_DIV        500
@@ -542,7 +542,7 @@ typedef enum
 
 // --------------------------------------------------
 // RPG
-// 
+//
 
 #define ASAVE_SAFETIME          20 * 35
 #define ASAVE_RETRYTIME         5 * 35
@@ -565,7 +565,8 @@ typedef enum
     COMPAT_LEGENDOOM
 } ECompatibilityMode;
 
-typedef enum {
+typedef enum
+{
     LD_STANDARD,
     LD_COMMON,
     LD_UNCOMMON,
@@ -593,7 +594,7 @@ typedef enum
 
 // --------------------------------------------------
 // Shield
-// 
+//
 
 #define SHIELD_HEALTH           1000000
 #define MAX_PARTS               22
@@ -627,7 +628,7 @@ typedef enum
 
 // --------------------------------------------------
 // Shop
-// 
+//
 
 #define LOCKER_EPRATE           (Player.EPMax * 100 / 10000)
 
@@ -641,7 +642,7 @@ typedef enum
 
 // --------------------------------------------------
 // Skills
-// 
+//
 
 #define MAX_CATEGORIES          6
 #define MAX_SKILLS              17

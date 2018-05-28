@@ -19,7 +19,7 @@ void DrawBarText(HUDBarInfo *Info, str Text)
 {
     fixed X = GetActivatorCVar("drpg_healthbars_x");
     fixed Y = GetActivatorCVar("drpg_healthbars_y");
-    
+
     SetHudSize(GetActivatorCVar("drpg_healthbars_width"), GetActivatorCVar("drpg_healthbars_height"), false);
     if (HealthBarClipEnabled)
         SetHudClipRect(X + HealthBarClipX, Y + HealthBarClipY, HealthBarClipWidth, HealthBarClipHeight);
@@ -40,7 +40,7 @@ NamedScript void HealthBars()
     int PlayerNum = PlayerNumber();
     bool HideBar, DrawStats;
     int ID;
-    
+
     // Initialize HUD information struct
     auto HUDBarInfo Info =
     {
@@ -52,63 +52,83 @@ NamedScript void HealthBars()
         0, 0, 0, 0, 0, 0, 0, 0,     // Stats
         0.0, 0.0, 0.0, 0.0,         // Position
     };
-    
-    Start:
-    
+
+Start:
+
     while (GetUserCVar(PlayerNum, "drpg_healthbars"))
     {
         SetActivatorToTargetExtended(Players(PlayerNum).TID);
-        
+
         Delay(1);
-        
+
         // Don't continue if you're in a menu
         if (Players(PlayerNum).InMenu || Players(PlayerNum).InShop || Players(PlayerNum).OutpostMenu > 0 || Players(PlayerNum).InMinigame)
         {
             SetActivator(Players(PlayerNum).TID);
             goto Start;
         }
-        
+
         // Reset bar drawing globals
         HealthBarX = 0;
         HealthBarY = 0;
         HealthBarAlpha = 1.0;
-        
+
         HideBar = false;
         DrawStats = true;
-        
+
         //reset HUD Info struct
         Info.TID = 0;
-        Info.IsPlayer = false; Info.Friendly = false;
-        Info.Actor = ""; Info.NameColor = ""; Info.Name = "";
-        Info.Level = 0; Info.Rank = 0; Info.Flags = 0;
-        Info.Health = 0; Info.HealthMax = 0; Info.SpawnHealth = 0; Info.Armor = 0;
-        Info.ArmorMax = 0; Info.ShieldActive = false; Info.Shield = 0; Info.ShieldMax = 0;
-        Info.Strength = 0; Info.Defense = 0; Info.Vitality = 0; Info.Energy = 0;
-        Info.Regeneration = 0; Info.Agility = 0; Info.Capacity = 0; Info.Luck = 0;
-        Info.X = 0.0; Info.Y = 0.0; Info.Z = 0.0; Info.Height = 0.0;
-        
+        Info.IsPlayer = false;
+        Info.Friendly = false;
+        Info.Actor = "";
+        Info.NameColor = "";
+        Info.Name = "";
+        Info.Level = 0;
+        Info.Rank = 0;
+        Info.Flags = 0;
+        Info.Health = 0;
+        Info.HealthMax = 0;
+        Info.SpawnHealth = 0;
+        Info.Armor = 0;
+        Info.ArmorMax = 0;
+        Info.ShieldActive = false;
+        Info.Shield = 0;
+        Info.ShieldMax = 0;
+        Info.Strength = 0;
+        Info.Defense = 0;
+        Info.Vitality = 0;
+        Info.Energy = 0;
+        Info.Regeneration = 0;
+        Info.Agility = 0;
+        Info.Capacity = 0;
+        Info.Luck = 0;
+        Info.X = 0.0;
+        Info.Y = 0.0;
+        Info.Z = 0.0;
+        Info.Height = 0.0;
+
         // Actor
         Info.Actor = GetActorClass(0);
-        
+
         // Friendly
         if (GetActorProperty(0, APROP_Friendly))
             Info.Friendly = true;
-        
+
         // Populate Stats
         if (ClassifyActor(0) & ACTOR_PLAYER)
         {
             ID = FindPlayerID(ActivatorTID());
-            
+
             Info.TID = Players(ID).TID;
-            
+
             Info.IsPlayer = true;
-            
+
             Info.NameColor = "";
             Info.Name = StrParam("%tS", ID + 1);
             Info.Level = Players(ID).Level;
             Info.Rank = Players(ID).RankLevel;
             Info.Aura = Players(ID).Aura;
-            
+
             Info.Health = Players(ID).ActualHealth;
             Info.HealthMax = Players(ID).HealthMax;
             Info.SpawnHealth = 100;
@@ -117,7 +137,7 @@ NamedScript void HealthBars()
             Info.ShieldActive = Players(ID).Shield.Active;
             Info.Shield = Players(ID).Shield.Charge;
             Info.ShieldMax = Players(ID).Shield.Capacity;
-            
+
             Info.Strength = Players(ID).StrengthTotal;
             Info.Defense = Players(ID).DefenseTotal;
             Info.Vitality = Players(ID).VitalityTotal;
@@ -126,7 +146,7 @@ NamedScript void HealthBars()
             Info.Agility = Players(ID).AgilityTotal;
             Info.Capacity = Players(ID).CapacityTotal;
             Info.Luck = Players(ID).LuckTotal;
-            
+
             Info.X = GetActorX(0);
             Info.Y = GetActorY(0);
             Info.Z = GetActorZ(0);
@@ -135,24 +155,24 @@ NamedScript void HealthBars()
         else
         {
             MonsterStatsPtr MonStats = &Monsters[GetMonsterID(0)];
-            
+
             // Conditions to not do things
             if (!MonStats->HealthBar)
                 goto Start;
             if (MonStats->Flags & MF_NOSTATS || GetCVar("drpg_monster_levels") == 0)
                 DrawStats = false;
-            
+
             Info.TID = MonStats->TID;
-            
+
             Info.IsPlayer = false;
-            
+
             Info.NameColor = DetermineBestStatColor(MonStats);
             Info.Name = GetActorPropertyString(0, APROP_NameTag);
             Info.Level = MonStats->Level;
             Info.Rank = MonStats->Threat;
             Info.Flags = MonStats->Flags;
             Info.Aura = MonStats->Aura;
-            
+
             Info.Health = GetActorProperty(0, APROP_Health);
             Info.HealthMax = MonStats->HealthMax;
             Info.SpawnHealth = MonStats->SpawnHealth;
@@ -161,7 +181,7 @@ NamedScript void HealthBars()
             Info.ShieldActive = false;
             Info.Shield = 0;
             Info.ShieldMax = 0;
-            
+
             Info.Strength = MonStats->Strength;
             Info.Defense = MonStats->Defense;
             Info.Vitality = MonStats->Vitality;
@@ -170,21 +190,21 @@ NamedScript void HealthBars()
             Info.Agility = MonStats->Agility;
             Info.Capacity = MonStats->Capacity;
             Info.Luck = MonStats->Luck;
-            
+
             Info.X = GetActorX(0);
             Info.Y = GetActorY(0);
             Info.Z = GetActorZ(0);
             Info.Height = GetActorPropertyFixed(0, APROP_Height);
         }
-        
+
         // Valid target
         if (ActivatorTID() != Players(PlayerNum).TID && ClassifyActor(0) & ACTOR_ALIVE && !(ClassifyActor(0) & ACTOR_WORLD))
         {
             SetActivator(Players(PlayerNum).TID);
-            
+
             // Reset the health bar drawing ID
             HealthBarID = 0;
-            
+
             // Draw the bar's components
             DrawBarBase(&Info);
             DrawBarFill(&Info);
@@ -193,21 +213,21 @@ NamedScript void HealthBars()
                 DrawBarEmblems(&Info);
                 DrawBarStats(&Info);
             }
-            
+
             // LegenDoom Legendary Skull
             if (CompatMode == COMPAT_LEGENDOOM && CheckActorInventory(Info.TID, "LDLegendaryMonsterToken"))
             {
                 HealthBarX -= 192.0;
                 HealthBarY -= 65.0 + (int)(Sin(Timer() / 64.0) * 4);
-                
+
                 DrawBarSprite(&Info, "SCULC0");
             }
         }
-        
+
         // Terminate if the player is dead
         if (GetActorProperty(Players(PlayerNum).TID, APROP_Health) <= 0) return;
     }
-    
+
     Delay(1);
     goto Start;
 }
@@ -220,9 +240,9 @@ void DrawBarBase(HUDBarInfo *Info)
         SetFont("BIGFONT");
         DrawBarText(Info, StrParam("%S%S", Info->NameColor, Info->Name));
     }
-    
+
     HealthBarY += 24.0;
-    
+
     // Bar Cross
     HealthBarX -= 108.0;
     HealthBarY -= 1.0;
@@ -232,14 +252,14 @@ void DrawBarBase(HUDBarInfo *Info)
         DrawBarSprite(Info, "HPCross");
     HealthBarX += 108.0;
     HealthBarY += 1.0;
-    
+
     // Level Icon
     HealthBarX += 113.0;
     HealthBarY -= 1.0;
     DrawBarSprite(Info, "MonLevel");
     HealthBarX -= 113.0;
     HealthBarY += 1.0;
-    
+
     // Draw Aura Overlays
     int NumAuras = 0;
     int Auras[AURA_MAX];
@@ -253,7 +273,7 @@ void DrawBarBase(HUDBarInfo *Info)
         int Aura = (Timer() / 35) % NumAuras;
         DrawBarSprite(Info, StrParam("HPBarA%d", Auras[Aura] + 1));
     }
-    
+
     // Bar
     if (Info->Flags & MF_BOSS)
         DrawBarSprite(Info, "HPBarB");
@@ -268,7 +288,7 @@ void DrawBarBase(HUDBarInfo *Info)
         DrawBarSprite(Info, "HPBarM");
     else
         DrawBarSprite(Info, "HPBar");
-    
+
     // HP/Max HP and Armor
     // TODO: Do this better? It's kinda shit atm, build up a string instead maybe?
     SetFont("SMALLFONT");
@@ -297,7 +317,7 @@ void DrawBarBase(HUDBarInfo *Info)
 void DrawBarEmblems(HUDBarInfo *Info)
 {
     HealthBarY = -15.0;
-    
+
     if (Info->IsPlayer)
     {
         for (int i = 0; i < Info->Rank; i++)
@@ -319,7 +339,7 @@ void DrawBarEmblems(HUDBarInfo *Info)
 void DrawBarFill(HUDBarInfo *Info)
 {
     int HealthPercent = 0;
-    
+
     // Divide-by-zero check
     if (Info->HealthMax <= 0)
         HealthPercent = 0;
@@ -327,16 +347,16 @@ void DrawBarFill(HUDBarInfo *Info)
         HealthPercent = (Info->Health * 100) / 100;
     else
         HealthPercent = (Info->Health * 100) / Info->SpawnHealth;
-    
+
     // Prevent bar Underflow/overflow
     if (HealthPercent < 0)
         HealthPercent = 0;
     if (HealthPercent > 1000)
         HealthPercent = 1000;
-    
+
     // Position the X coordinate for fill drawing
     HealthBarX = -96.1;
-    
+
     // Shield Fill
     if (Info->ShieldActive)
     {
@@ -346,10 +366,10 @@ void DrawBarFill(HUDBarInfo *Info)
         HealthBarClipY = (int)(HealthBarY - 6);
         HealthBarClipWidth = ShieldPercent * 203 / 100;
         HealthBarClipHeight = (int)(HealthBarY + 6);
-        
+
         DrawBarSprite(Info, "FillShld");
     }
-    
+
     // Health fills
     for (int i = 9; i >= 0; i--)
         if (HealthPercent > 100 * i)
@@ -359,10 +379,10 @@ void DrawBarFill(HUDBarInfo *Info)
             HealthBarClipY = (int)(HealthBarY - 6);
             HealthBarClipWidth = (HealthPercent - (100 * i)) * 203 / 100;
             HealthBarClipHeight = (int)(HealthBarY + 6);
-            
+
             DrawBarSprite(Info, StrParam("Fill%d", i + 1));
         }
-    
+
     // Reset Clipping Rectangle
     HealthBarClipEnabled = false;
     HealthBarClipX = 0;
@@ -372,16 +392,16 @@ void DrawBarFill(HUDBarInfo *Info)
 }
 
 void DrawBarStats(HUDBarInfo *Info)
-{    
-	int StatsX = -110.0;
-	int StatsY = 70.0;
-	int SpaceX = 35.0;
-	int MonLevelX = 250.0;
-	int MonLevelY = 47.0;
-	
-	HealthBarX = StatsX;
+{
+    int StatsX = -110.0;
+    int StatsY = 70.0;
+    int SpaceX = 35.0;
+    int MonLevelX = 250.0;
+    int MonLevelY = 47.0;
+
+    HealthBarX = StatsX;
     HealthBarY = StatsY;
-	
+
     // Stat Amounts
     SetFont("BIGFONT");
     // Level
@@ -408,10 +428,10 @@ void DrawBarStats(HUDBarInfo *Info)
     DrawBarText(Info, StrParam("\Ch%d", Info->Capacity));
     HealthBarX += SpaceX;
     DrawBarText(Info, StrParam("\Cf%d", Info->Luck));
-    
-   	HealthBarX = StatsX;
+
+    HealthBarX = StatsX;
     HealthBarY = StatsY;
-    
+
     // Stat Icons
     DrawBarSprite(Info, "STAT1S");
     HealthBarX += SpaceX;

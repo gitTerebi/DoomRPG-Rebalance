@@ -147,7 +147,7 @@ struct ItemInfo_S
         int XOff;
         int YOff;
     } Sprite;
-    
+
     // Compat stuff.
     unsigned int CompatMods;
     int Category;
@@ -682,7 +682,7 @@ struct PlayerData_S
 
     // WadSmoosh
     int SelectedMapPack;
-    
+
     // Skill Info
     struct SkillLevelInfo_S SkillLevel[MAX_CATEGORIES][MAX_SKILLS];
     struct AuraInfo_S Aura;
@@ -895,7 +895,7 @@ struct PlayerData_S
         fixed DistanceOffset;
         fixed HeightOffset;
     } Turret;
-    
+
     struct MissionInfo_S Mission;
 };
 

@@ -107,7 +107,7 @@ NamedScript void InitMission()
             if (StartsWith(Monsters[i].Actor, ActorToCheck, true))
             {
                 if (PotentialTargets.Position == PotentialTargets.Size)
-                ArrayResize(&PotentialTargets);
+                    ArrayResize(&PotentialTargets);
 
                 ((int *)PotentialTargets.Data)[PotentialTargets.Position++] = i;
             }
@@ -129,7 +129,7 @@ NamedScript void InitMission()
                 Monsters[Chosen].AuraAdd[i] = true;
 
             Monsters[Chosen].NeedReinit = true;
-            
+
             // EVIL LAUGH OF WARNING
             if (Monsters[Chosen].Threat >= 10)
                 LocalAmbientSound("mission/gottarget2", 127);
@@ -341,8 +341,8 @@ void CheckMission()
 
     // Generic Checking
     if (Player.Mission.Type == MT_KILL || Player.Mission.Type == MT_KILLAURAS ||
-        Player.Mission.Type == MT_REINFORCEMENTS || Player.Mission.Type == MT_SECRETS ||
-        Player.Mission.Type == MT_ITEMS)
+            Player.Mission.Type == MT_REINFORCEMENTS || Player.Mission.Type == MT_SECRETS ||
+            Player.Mission.Type == MT_ITEMS)
         if (Player.Mission.Current >= Player.Mission.Amount)
             Complete = true;
 
@@ -439,13 +439,13 @@ void GetTargetMonster(MissionInfo *Mission)
         if (Mission->Type != MT_KILL)
         {
             if (TempMonster->Difficulty > ((Mission->Difficulty + 1) * 11) - 11 &&
-                TempMonster->Difficulty < ((Mission->Difficulty + 1) * 11) + 11)
+                    TempMonster->Difficulty < ((Mission->Difficulty + 1) * 11) + 11)
                 PotentialMonsters[NumPotentialMonsters++] = TempMonster;
         }
         else
         {
             if (!TempMonster->Boss && TestAmount >= 5 &&
-                TestAmount <= 40)
+                    TestAmount <= 40)
                 PotentialMonsters[NumPotentialMonsters++] = TempMonster;
         }
     }
