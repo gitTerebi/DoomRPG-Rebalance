@@ -519,15 +519,15 @@ NamedScript MapSpecial void LevelTransport()
         }
 
         // Input
-        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice > 0)
-        {
-            ActivatorSound("menu/move", 127);
-            LevelChoice--;
-        }
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice < KnownLevels->Position - 1)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice < KnownLevels->Position - 1)
         {
             ActivatorSound("menu/move", 127);
             LevelChoice++;
+        }
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice > 0)
+        {
+            ActivatorSound("menu/move", 127);
+            LevelChoice--;
         }
 
         //Wadsmoosh change MapPack support
