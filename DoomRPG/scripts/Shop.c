@@ -120,7 +120,7 @@ NamedScript void ShopItemAutoHandler()
     while (true)
     {
         // Auto-Sell/Store doesn't need to run constantly like run-pickup does.
-        if (!GetActivatorCVar("drpg_pickup_behavior")) Delay(35);
+        if (!GetActivatorCVar("drpg_pickup_behavior")) Delay(5);
 
         // Auto-Sell
         bool CanSellItems = Player.RankLevel > 0 || CurrentLevel->UACBase;

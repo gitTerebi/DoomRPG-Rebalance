@@ -2297,22 +2297,18 @@ void MenuInput()
     // Stims Menu
     if (Player.Menu == MENUPAGE_STIMS && !Player.MenuBlock)
     {
-        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat"))
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             Player.MenuIndex--;
             ActivatorSound("menu/move", 127);
             if (Player.MenuIndex < 0) Player.MenuIndex = STIM_MAX;
         }
-        if (CheckInput(BT_FORWARD, KEY_ONLYHELD, false, PlayerNumber()))
-            Player.DelayTimer++;
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) || Player.DelayTimer > 35.0 * GetActivatorCVarFixed("drpg_menu_repeat"))
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             Player.MenuIndex++;
             ActivatorSound("menu/move", 127);
             if (Player.MenuIndex > STIM_MAX) Player.MenuIndex = 0;
         }
-        if (CheckInput(BT_BACK, KEY_ONLYHELD, false, PlayerNumber()))
-            Player.DelayTimer++;
         if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.StimSelected > 0)
         {
             if (Player.Stim.Size > 0) return;
