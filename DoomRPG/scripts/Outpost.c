@@ -293,6 +293,9 @@ NamedScript MapSpecial void RegenArea(int ID)
 
 NamedScript MapSpecial void LevelTransport()
 {
+    fixed X = 100.1;
+    fixed Y = 32.0;
+
     // if you're already in a menu, terminate
     if (Player.InMenu || Player.InShop || Player.OutpostMenu == OMENU_LEVELTRANSPORT) return;
 
@@ -325,7 +328,7 @@ NamedScript MapSpecial void LevelTransport()
         // Text
         SetFont("BIGFONT");
         HudMessage("Level Transporter");
-        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", 32.1, 32.1, 0.05, 0.5);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X, Y, 0.05, 0.5);
 
         str TitleColor = "Gold";
         if (TeleDest->NeedsRealInfo || !(TeleDest->Completed))
@@ -341,17 +344,17 @@ NamedScript MapSpecial void LevelTransport()
         if (TeleDest->UACArena)
             MapType = "UAC Arena";
         HudMessage("%S", TeleDest->NiceName);
-        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, TitleColor, 32.1, 64.1, 0.05, 0.5);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, TitleColor, X, Y + 32.1, 0.05, 0.5);
         SetFont("SMALLFONT");
         if (TeleDest->LevelNum > 0)
         {
             HudMessage("%S, level %d - %S", TeleDest->LumpName, TeleDest->LevelNum, MapType);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "Orange", 32.1, 80.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "Orange", X, Y + 48.1, 0.05, 0.5);
         }
         else
         {
             HudMessage("%S - %S", TeleDest->LumpName, MapType);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "DarkGreen", 32.1, 80.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "DarkGreen", X, Y + 48.1, 0.05, 0.5);
         }
 
         if (!TeleDest->NeedsRealInfo && !TeleDest->UACBase && !TeleDest->UACArena)
@@ -372,33 +375,33 @@ NamedScript MapSpecial void LevelTransport()
             if (TeleDest->MaxTotalMonsters > 0)
             {
                 HudMessage("Kills: %d / %d (%d%%)", TeleDest->MaxMonstersKilled, TeleDest->MaxTotalMonsters, TeleDest->MaxMonsterPercentage);
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, KillColor, 32.1, 96.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, KillColor, X, Y + 64.1, 0.05, 0.5);
             }
             if (TeleDest->MaxTotalItems > 0)
             {
                 HudMessage("Items: %d / %d (%d%%)", TeleDest->MaxItemsFound, TeleDest->MaxTotalItems, TeleDest->MaxItemPercentage);
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, ItemColor, 32.1, 104.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, ItemColor, X, Y + 72.1, 0.05, 0.5);
             }
             if (TeleDest->MaxTotalSecrets > 0)
             {
                 HudMessage("Secrets: %d / %d (%d%%)", TeleDest->MaxSecretsFound, TeleDest->MaxTotalSecrets, TeleDest->MaxSecretPercentage);
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, SecretColor, 32.1, 112.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, SecretColor, X, Y + 80.1, 0.05, 0.5);
             }
 
             if (TeleDest->Par > 0)
             {
                 HudMessage("Par Time: %S", FormatTime(TeleDest->Par * 35));
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, ParColor, 32.1, 128.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, ParColor, X, Y + 96.1, 0.05, 0.5);
             }
             if (TeleDest->ShortestTime < 0x7FFFFFFF)
             {
                 HudMessage("Completion Time: %S", FormatTime(TeleDest->ShortestTime * 35));
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, ParColor, 32.1, 136.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, ParColor, X, Y + 104.1, 0.05, 0.5);
             }
             else
             {
                 HudMessage("Completion Time: \C[Red]N/A");
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, ParColor, 32.1, 136.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, ParColor, X, Y + 104.1, 0.05, 0.5);
             }
 
             str AreaText = "No anomalies detected";
@@ -488,12 +491,12 @@ NamedScript MapSpecial void LevelTransport()
 
             SetFont("BIGFONT");
             HudMessage("Area Status");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "Green", 32.1, 152.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "Green", X, Y + 120.1, 0.05, 0.5);
             SetFont("SMALLFONT");
             HudMessage("Monster level (Approx.): %d - %d", MonsterMinLevel, MonsterMaxLevel);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", 32.1, 168.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X, Y + 136.1, 0.05, 0.5);
             HudMessage("%S", AreaText);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", 32.1, 184.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X, Y + 152.1, 0.05, 0.5);
         }
         else if (!TeleDest->NeedsRealInfo && TeleDest->UACBase)
         {
@@ -504,33 +507,39 @@ NamedScript MapSpecial void LevelTransport()
             else if (Invasion || MarinesHostile)
                 AreaText = "\C[Brick]Detected: Security Breach";
             HudMessage("This is a secure UAC military base.");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "DarkGreen", 32.1, 96.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "DarkGreen", X, Y + 64.1, 0.05, 0.5);
             SetFont("BIGFONT");
             HudMessage("Area Status");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "Green", 32.1, 152.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "Green", X, Y + 120.1, 0.05, 0.5);
             SetFont("SMALLFONT");
             HudMessage("%S", AreaText);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", 32.1, 168.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X, Y + 136.1, 0.05, 0.5);
         }
         else if (!TeleDest->NeedsRealInfo && TeleDest->UACArena)
         {
             HudMessage("This is a known UAC battle arena site.");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "LightBlue", 32.1, 96.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "LightBlue", X, Y + 64.1, 0.05, 0.5);
         }
 
         // Input
-        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice < KnownLevels->Position - 1)
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
-            LevelChoice++;
+            if (LevelChoice < KnownLevels->Position - 1)
+                LevelChoice++;
+            else
+                LevelChoice = 0;
         }
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && LevelChoice > 0)
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
-            LevelChoice--;
+            if (LevelChoice > 0)
+                LevelChoice--;
+            else
+                LevelChoice = KnownLevels->Position - 1;
         }
 
-        //Wadsmoosh change MapPack support
+        // Wadsmoosh change MapPack support
         if (WadSmoosh)
         {
             if ((CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())) && (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber())))
