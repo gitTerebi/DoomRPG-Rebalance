@@ -37,7 +37,7 @@ NamedScript void ItemRoulette(bool Rare)
     // Set the HUD Size
     SetHudSize(640, 480, false);
 
-    while (!Finished)
+    while (!Finished && Player.InMinigame)
     {
         // Draw Border
         if (GetActivatorCVar("drpg_menu_background_border"))
@@ -53,7 +53,7 @@ NamedScript void ItemRoulette(bool Rare)
         {
             SetFont("SMALLFONT");
             HudMessage("Navigate/Change: \Cd%jS/%jS/%jS/%jS\C-\nReady/Play: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                       "+forward", "+back", "+moveleft", "+moveright", "+use", "+speed");
+                       "+forward", "+back", "+moveleft", "+moveright", "+use", "drpg_menu");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 90.1, 460.0, 0.05);
         }
 
@@ -156,11 +156,6 @@ NamedScript void ItemRoulette(bool Rare)
                 Started = true;
             else
                 Spinning = false;
-        }
-        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && Spinning)
-        {
-            StopSound(0, CHAN_BODY);
-            Finished = true;
         }
         if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()) && !Started)
         {

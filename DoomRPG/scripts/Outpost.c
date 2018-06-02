@@ -721,7 +721,7 @@ NamedScript MapSpecial void SkillComputer()
     Player.OutpostMenu = OMENU_SKILLCOMPUTER;
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
 
-    while (true)
+    while (Player.OutpostMenu == OMENU_SKILLCOMPUTER)
     {
         // Draw the background
         if (GetCVar("drpg_menudim"))
@@ -830,7 +830,7 @@ NamedScript MapSpecial void SelectArenaWave()
 
     Delay(1);
 
-    while (true)
+    while (Player.OutpostMenu == OMENU_WAVESELECTOR)
     {
         SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
 
@@ -1126,7 +1126,7 @@ NamedScript MapSpecial void CreditRoom(int ID)
         {
             if (Random(1, 3) == 1) VarString = StrParam("%S%S", VarString, "Var");
             HudMessage("%S", VarString);
-            EndHudMessage(HUDMSG_FADEOUT, 0, ColorNames[Random(1, 21)], RandomFixed(0.0, 1.0), RandomFixed(0.0, 1.0), 3.0, 2.0);
+            EndHudMessage(HUDMSG_FADEOUT, 0, ColorNames[Random(1, 25)], RandomFixed(0.0, 1.0), RandomFixed(0.0, 1.0), 3.0, 2.0);
             Delay(1);
         }
     }
@@ -1240,7 +1240,7 @@ NamedScript MapSpecial void ShopSpecial()
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
     Player.OutpostMenu = OMENU_SHOPSPECIAL;
 
-    while (true)
+    while (Player.OutpostMenu == OMENU_SHOPSPECIAL)
     {
         str Name = ShopSpecialItem->Name;
         int Discount = GetCVar("drpg_shopspecial_discount") + Player.ShopDiscount;
@@ -1288,13 +1288,6 @@ NamedScript MapSpecial void ShopSpecial()
                 PrintError("You don't have enough Credits to buy this item");
                 ActivatorSound("menu/error", 127);
             }
-        }
-        if (CheckInput(BT_SPEED, KEY_ONLYHELD, false, PlayerNumber()))
-        {
-            ActivatorSound("menu/move", 127);
-            SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
-            Player.OutpostMenu = 0;
-            return;
         }
 
         // Drawing

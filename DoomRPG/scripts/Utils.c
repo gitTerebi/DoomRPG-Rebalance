@@ -25,7 +25,7 @@ int const AuraTID = 20000;
 static bool CheckInputRepeat;
 static int CheckInputRepeatTimer;
 
-str const ColorNames[22] =
+str const ColorNames[26] =
 {
     "Brick",
     "Tan",
@@ -49,9 +49,13 @@ str const ColorNames[22] =
     "Purple",
     "Dark Grey",
     "Cyan"
+    "Ice"
+    "Fire"
+    "Sapphire"
+    "Teal"
 };
 
-str const ColorCodes[22] =
+str const ColorCodes[26] =
 {
     "\Ca",
     "\Cb",
@@ -75,6 +79,10 @@ str const ColorCodes[22] =
     "\Ct",
     "\Cu",
     "\Cv"
+    "\Cw"
+    "\Cx"
+    "\Cy"
+    "\Cz"
 };
 
 

@@ -267,7 +267,6 @@ NamedScript void CrateHack()
         while (!GenerateCrateNodes(Crate));
     };
 
-    bool Hacking = true;
     int X = Random(25, 275);
     int Direction = (Random(1, 2) == 1 ? -1 : 1);
     long int XPBonus;
@@ -282,7 +281,7 @@ NamedScript void CrateHack()
     Crates[Player.CrateID].Hacking = PlayerNumber();
     Player.CrateHacking = true;
 
-    while (Hacking)
+    while (Player.CrateHacking)
     {
         SetHudSize(320, 240, false);
 
@@ -294,7 +293,7 @@ NamedScript void CrateHack()
             for (int i = 0; i < 16; i++)
             {
                 HudMessage("%d", Random(0, 1));
-                EndHudMessage(HUDMSG_FADEOUT, 0, "Green", 10.0 + (8.0 * Random(1, 36)), 150.0 + (8.0 * Random(1, 10)), 0.25, 0.75);
+                EndHudMessage(HUDMSG_FADEOUT, 0, ColorNames[Random(1, 25)], 10.0 + (8.0 * Random(1, 36)), 140.0 + (8.0 * Random(1, 10)), 0.25, 0.75);
             }
 
         // Cursor
@@ -352,7 +351,7 @@ NamedScript void CrateHack()
                             EndHudMessage(HUDMSG_FADEOUT, 0, "Red", 160.0, 140.0, 2.0, 1.0);
                             Crates[Player.CrateID].HackingCooldown += 35 * 60;
                             Crate->Tries = 3;
-                            Hacking = false;
+                            Player.CrateHacking = false;
                             break;
                         case NODE_EXPLODE:
                             ActivatorSound("hacking/critfail", 127);
@@ -360,7 +359,7 @@ NamedScript void CrateHack()
                             HudMessage("Explosive Device Triggered!");
                             EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 160.0, 140.0, 2.0, 1.0);
                             SetActorState(Crates[Player.CrateID].TID, "Explode");
-                            Hacking = false;
+                            Player.CrateHacking = false;
                             Player.CrateOpen = false;
                             break;
                         case NODE_UNLOCK:
@@ -371,7 +370,7 @@ NamedScript void CrateHack()
                             Crates[Player.CrateID].Firewall = false;
                             SetActorState(Crates[Player.CrateID].TID, "Normal");
                             SetUserVariable(Crates[Player.CrateID].TID, "user_firewall", (int)Crates[CrateID].Firewall);
-                            Hacking = false;
+                            Player.CrateHacking = false;
                             break;
                         case NODE_XP:
                             ActivatorSound("hacking/select", 127);
@@ -427,14 +426,9 @@ NamedScript void CrateHack()
                     ActivatorSound("hacking/fail", 127);
                     Crates[Player.CrateID].HackingCooldown += 35 * 30;
                     Crate->Tries = 3;
-                    Hacking = false;
+                    Player.CrateHacking = false;
                 }
             }
-        }
-        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
-        {
-            ActivatorSound("hacking/select", 127);
-            Hacking = false;
         }
 
         Delay(1);
@@ -880,27 +874,18 @@ void DrawCrate()
 
 void CrateInput()
 {
-    if (CheckInput(BT_SPEED, KEY_PRESSED, false, PlayerNumber()))
-    {
-        ActivatorSound("crate/close", 127);
-        Player.CrateOpen = false;
-
-        // Set the crate to it's inactive state if it's empty
-        if (CrateEmpty(Player.CrateID))
-        {
-            SetActorState(Crates[Player.CrateID].TID, "Empty");
-            Crates[Player.CrateID].Empty = true;
-        }
-    }
     if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
     {
         ActivatorSound("menu/move", 127);
         CrateTakeItem();
     }
-    if (CheckInput(BT_ALTATTACK, KEY_PRESSED, false, PlayerNumber()))
+    if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
     {
-        ActivatorSound("transfer/complete", 127);
-        CrateTakeAll();
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("transfer/complete", 127);
+            CrateTakeAll();
+        }
     }
     if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
     {

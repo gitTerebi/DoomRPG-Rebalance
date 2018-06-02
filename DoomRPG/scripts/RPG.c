@@ -379,7 +379,7 @@ Start:
     }
 
     // Menu-specific Help
-    if (Player.InMenu || Player.InShop || Player.OutpostMenu > 0 || Player.CrateOpen)
+    if (Player.InMenu || Player.InShop || Player.OutpostMenu > 0 || Player.CrateOpen || Player.CrateHacking)
         MenuHelp();
 
     // Menu icon in multiplayer

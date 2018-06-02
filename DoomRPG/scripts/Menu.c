@@ -70,23 +70,42 @@ NamedScript KeyBind void OpenMenu()
     // If you're dead, terminate
     if (GetActorProperty(0, APROP_Health) <= 0) return;
 
-    //If in the Mission BBS menu or Transport Menu
-    if (Player.OutpostMenu == OMENU_BBS || Player.OutpostMenu == OMENU_LEVELTRANSPORT)
+    // Exit handling for Outpost menus.
+    if (Player.OutpostMenu > 0)
     {
         ActivatorSound("menu/leave", 127);
         SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
         Player.OutpostMenu = 0;
         return;
     }
+    // Exit handling for Crates.
+    else if (Player.CrateOpen)
+    {
+        ActivatorSound("crate/close", 127);
+        Player.CrateOpen = false;
 
-    // If you're in an Outpost menu, return
-    if (Player.OutpostMenu > 0) return;
+        // Set the crate to it's inactive state if it's empty
+        if (CrateEmpty(Player.CrateID))
+        {
+            SetActorState(Crates[Player.CrateID].TID, "Empty");
+            Crates[Player.CrateID].Empty = true;
+        }
 
-    // If you're in any minigames, terminate
-    if (Player.InMinigame) return;
-
-    // If you're looking inside a crate, return
-    if (Player.CrateOpen) return;
+        return;
+    }
+    else if (Player.CrateHacking)
+    {
+        ActivatorSound("hacking/select", 127);
+        Player.CrateHacking = false;
+        return;
+    }
+    // Exit handling for Minigames.
+    else if (Player.InMinigame)
+    {
+        Player.InMinigame = false;
+        StopSound(0, CHAN_BODY);
+        return;
+    }
 
     if (Player.InShop && CurrentLevel->UACBase)
     {
@@ -2624,19 +2643,19 @@ void MenuHelp()
             break;
         case OMENU_SKILLCOMPUTER:
             HudMessage("Navigate: \Cd%jS/%jS\C-\nChange Skill: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                       "+forward", "+back", "+use", "+speed");
+                       "+forward", "+back", "+use", "drpg_menu");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case OMENU_MODULECONVERTER:
             break;
         case OMENU_WAVESELECTOR:
             HudMessage("Choose Wave: \Cd%jS/%jS/%jS/%jS\C-\nChange Wave: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                       "+forward", "+back", "+moveleft", "+moveright", "+use", "+speed");
+                       "+forward", "+back", "+moveleft", "+moveright", "+use", "drpg_menu");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case OMENU_SHOPSPECIAL:
             HudMessage("Buy: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                       "+use", "+speed");
+                       "+use", "drpg_menu");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case OMENU_BONUSSELECTOR:
@@ -2654,9 +2673,18 @@ void MenuHelp()
 
     // Crate Help
     if (Player.CrateOpen && Crates[Player.CrateID].Hacking == -1)
+    {
         HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nTake Item: \Cd%jS\C-\nTake All: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                   "+forward", "+back", "+moveleft", "+moveright", "+use", "+altattack", "+speed");
-    EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+                   "+forward", "+back", "+moveleft", "+moveright", "+use", "+altattack", "drpg_menu");
+        EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+    }
+    // Crate Hacking Help
+    else if (Player.CrateHacking)
+    {
+        HudMessage("Select: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                   "+use", "drpg_menu");
+        EndHudMessage(HUDMSG_PLAIN, 0, "White", X + 30, Y - 125, 0.05);
+    }
 }
 
 void DrawPlayerSprite(int PlayerNum, fixed X, fixed Y)

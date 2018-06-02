@@ -4,8 +4,8 @@
 #include "Defs.h"
 
 extern int const AuraTID;
-extern str const ColorNames[22];
-extern str const ColorCodes[22];
+extern str const ColorNames[26];
+extern str const ColorCodes[26];
 extern str const SkillLevels[6];
 extern str const AuraIcons[AURA_MAX + 1];
 
