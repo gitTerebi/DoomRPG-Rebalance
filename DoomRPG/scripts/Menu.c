@@ -2674,8 +2674,8 @@ void MenuHelp()
     // Crate Help
     if (Player.CrateOpen && Crates[Player.CrateID].Hacking == -1)
     {
-        HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nTake Item: \Cd%jS\C-\nTake All: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                   "+forward", "+back", "+moveleft", "+moveright", "+use", "+altattack", "drpg_menu");
+        HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nTake Item: \Cd%jS\C-\nTake All: \Cd%jS + %jS\C-\nExit: \Cd%jS\C-",
+                   "+forward", "+back", "+moveleft", "+moveright", "+use", "+speed", "+use", "drpg_menu");
         EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
     }
     // Crate Hacking Help
