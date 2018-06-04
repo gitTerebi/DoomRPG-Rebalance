@@ -2710,7 +2710,7 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
         if (Buttons & Key)
         {
             int CurrentTime = Timer();
-            if (CurrentTime + 6 < CheckInputRepeatTimer) CheckInputRepeatTimer = 0;
+            if (CurrentTime + 5 + 1 < CheckInputRepeatTimer) CheckInputRepeat = false;
             if (!CheckInputRepeat)
             {
                 CheckInputRepeatTimer = CurrentTime;

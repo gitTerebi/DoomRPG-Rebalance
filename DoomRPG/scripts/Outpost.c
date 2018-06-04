@@ -228,6 +228,7 @@ NamedScript MapSpecial void RegenArea(int ID)
             // EP pad Cooldown.
             // Default timer is 5 mins.
             int CurrentTime = Timer();
+            if (CurrentTime + 35 * 60 * 5 + 1 < Player.EPPadCooldownTimer) Player.EPPadCooldown = false;
             if (!Player.EPPadCooldown)
             {
                 Player.EPPadCooldownTimer = CurrentTime;
@@ -237,12 +238,16 @@ NamedScript MapSpecial void RegenArea(int ID)
             else
             {
                 if (CurrentTime >= Player.EPPadCooldownTimer)
+                {
                     Player.EPPadCooldown = false;
+                }
                 else
+                {
                     SetFont("BIGFONT");
-                HudMessage("EP pad is cooling down: %S remaining", FormatTime(Player.EPPadCooldownTimer - CurrentTime));
-                EndHudMessage(HUDMSG_FADEOUT, 0, "LightBlue", 0.5, 0.33, 2.0, 0.5);
-                return;
+                    HudMessage("EP pad is cooling down: %S remaining", FormatTime(Player.EPPadCooldownTimer - CurrentTime));
+                    EndHudMessage(HUDMSG_FADEOUT, 0, "LightBlue", 0.5, 0.33, 2.0, 0.5);
+                    return;
+                }
             }
 
             int EPCharges = (Player.EPMax - Player.EP) / 5;
