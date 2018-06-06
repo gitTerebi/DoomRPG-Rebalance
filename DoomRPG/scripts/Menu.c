@@ -1974,13 +1974,13 @@ void MenuInput()
     // Main Menu
     if (Player.Menu == MENUPAGE_MAIN)
     {
-        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex--;
             if (Player.MenuIndex < 0) Player.MenuIndex = MAX_MENU - 1;
         }
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex++;
@@ -2006,7 +2006,7 @@ void MenuInput()
     // Stats menu
     if (Player.Menu == MENUPAGE_STATS && !Player.MenuBlock)
     {
-        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()))
         {
             if (Player.StatPage == STATPAGE_STATS)
             {
@@ -2022,7 +2022,7 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = PlayerCount() - 1;
             }
         }
-        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()))
         {
             if (Player.StatPage == STATPAGE_STATS)
             {
@@ -2038,7 +2038,7 @@ void MenuInput()
                 if (Player.MenuIndex > PlayerCount() - 1) Player.MenuIndex = 0;
             }
         }
-        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_MOVELEFT, KEY_REPEAT, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2058,7 +2058,7 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = STAT_MAX - 1;
             }
         }
-        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_MOVERIGHT, KEY_REPEAT, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2102,24 +2102,24 @@ void MenuInput()
     // Augmentations menu
     if (Player.Menu == MENUPAGE_AUGS && !Player.MenuBlock)
     {
-        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.MenuIndex > 0)
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex -= 5;
             if (Player.MenuIndex < 0) Player.MenuIndex = 0;
         }
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.MenuIndex < AUG_MAX - 1)
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex < AUG_MAX - 1)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex += 5;
             if (Player.MenuIndex > AUG_MAX - 1) Player.MenuIndex = AUG_MAX - 1;
         }
-        if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.MenuIndex > 0)
+        if (CheckInput(BT_MOVELEFT, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex--;
         }
-        if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()) && Player.MenuIndex < AUG_MAX - 1)
+        if (CheckInput(BT_MOVERIGHT, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex < AUG_MAX - 1)
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex++;
@@ -2131,14 +2131,14 @@ void MenuInput()
             // If the player starts manually toggling augs, don't try to automatically activate any later.
             ClearDisabledAugs();
         }
-        if (CheckInput(BT_SPEED, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_SPEED, KEY_ONLYPRESSED, false, PlayerNumber()))
             LevelUpAug(Player.MenuIndex);
     }
 
     // Skills Menu
     if (Player.Menu == MENUPAGE_SKILLS && !Player.MenuBlock && !Player.SkillWheelOpen)
     {
-        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2155,7 +2155,7 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = 0;
             }
         }
-        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2172,7 +2172,7 @@ void MenuInput()
                 if (Player.MenuIndex > SkillCategoryMax[Player.SkillPage] - 1) Player.MenuIndex = SkillCategoryMax[Player.SkillPage] - 1;
             }
         }
-        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_MOVELEFT, KEY_REPEAT, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2187,7 +2187,7 @@ void MenuInput()
                 Player.MenuIndex--;
             }
         }
-        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_MOVERIGHT, KEY_REPEAT, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2226,19 +2226,19 @@ void MenuInput()
             PartsMax = ShieldPartsMax[Player.ShieldPage];
         }
 
-        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex -= 10;
             if (Player.MenuIndex < 0) Player.MenuIndex = 0;
         }
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Player.MenuIndex += 10;
             if (Player.MenuIndex > PartsMax - 1) Player.MenuIndex = PartsMax - 1;
         }
-        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_MOVELEFT, KEY_REPEAT, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2256,7 +2256,7 @@ void MenuInput()
                 if (Player.MenuIndex < 0) Player.MenuIndex = PartsMax - 1;
             }
         }
-        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_MOVERIGHT, KEY_REPEAT, false, PlayerNumber()))
         {
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
@@ -2297,32 +2297,35 @@ void MenuInput()
                     }
             }
         }
-        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()) && CheckInput(BT_SPEED, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         {
-            if (Player.MenuIndex < PartsMax)
-                for (int i = 0; i < SHIELDPAGE_MAX; i++)
-                    if (i == Player.ShieldPage)
-                    {
-                        if (i == SHIELDPAGE_BODY) Player.Shield.Body = NULL;
-                        if (i == SHIELDPAGE_BATTERY) Player.Shield.Battery = NULL;
-                        if (i == SHIELDPAGE_CAPACITOR) Player.Shield.Capacitor = NULL;
-                        if (i == SHIELDPAGE_ACCESSORY) RemoveShieldAccessory();
+            if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+            {
+                if (Player.MenuIndex < PartsMax)
+                    for (int i = 0; i < SHIELDPAGE_MAX; i++)
+                        if (i == Player.ShieldPage)
+                        {
+                            if (i == SHIELDPAGE_BODY) Player.Shield.Body = NULL;
+                            if (i == SHIELDPAGE_BATTERY) Player.Shield.Battery = NULL;
+                            if (i == SHIELDPAGE_CAPACITOR) Player.Shield.Capacitor = NULL;
+                            if (i == SHIELDPAGE_ACCESSORY) RemoveShieldAccessory();
 
-                        ActivatorSound("shield/unequip", 127);
-                    }
+                            ActivatorSound("shield/unequip", 127);
+                        }
+            }
         }
     }
 
     // Stims Menu
     if (Player.Menu == MENUPAGE_STIMS && !Player.MenuBlock)
     {
-        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()))
         {
             Player.MenuIndex--;
             ActivatorSound("menu/move", 127);
             if (Player.MenuIndex < 0) Player.MenuIndex = STIM_MAX;
         }
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()))
         {
             Player.MenuIndex++;
             ActivatorSound("menu/move", 127);
@@ -2356,24 +2359,24 @@ void MenuInput()
     // Turret Menu
     if (Player.Menu == MENUPAGE_TURRET && !Player.MenuBlock)
     {
-        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()) && Player.MenuIndex > 0)
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
             Player.MenuIndex -= TURRET_PAGE_MAX / 4;
             if (Player.MenuIndex < 0) Player.MenuIndex = 0;
             ActivatorSound("menu/move", 127);
         }
-        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()) && Player.MenuIndex < MAX_UPGRADES - 1)
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex < MAX_UPGRADES - 1)
         {
             Player.MenuIndex += TURRET_PAGE_MAX / 4;
             if (Player.MenuIndex >= MAX_UPGRADES - 1) Player.MenuIndex = MAX_UPGRADES - 1;
             ActivatorSound("menu/move", 127);
         }
-        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()) && Player.MenuIndex > 0)
+        if (CheckInput(BT_MOVELEFT, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
             Player.MenuIndex--;
             ActivatorSound("menu/move", 127);
         }
-        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()) && Player.MenuIndex < MAX_UPGRADES - 1)
+        if (CheckInput(BT_MOVERIGHT, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex < MAX_UPGRADES - 1)
         {
             Player.MenuIndex++;
             ActivatorSound("menu/move", 127);
@@ -2595,8 +2598,8 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y + 45.0, 0.05); // This help is pushed down so shield component description doesn't overlap it.
             break;
         case MENUPAGE_STIMS:
-            HudMessage("Navigate: \Cd%jS/%jS\C-\nSelect Stim Size: \Cd%jS/%jS\C-\nChoose Stim/Add Compound to Stim: \Cd%jS\C-",
-                       "+forward", "+back", "+moveleft", "+moveright", "+use");
+            HudMessage("Navigate: \Cd%jS/%jS\C-\nSelect Stim Size: \Cd%jS/%jS\C-\nChoose Stim/Add Compound to Stim: \Cd%jS\C-\nUse Stim: \Cd%jS\C-\nDispose Stim: \Cd%jS\C-",
+                       "+forward", "+back", "+moveleft", "+moveright", "+use", "drpg_usestim", "drpg_throwawaystim");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case MENUPAGE_TURRET:

@@ -1378,21 +1378,21 @@ NamedScript MapSpecial void MissionBBS()
         DrawMissionInfo(Mission, 0, 216, false);
 
         // Input
-        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Index -= MAX_MISSIONS / 3;
             if (Index < 0)
                 Index = 0;
         };
-        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             Index += MAX_MISSIONS / 3;
             if (Index > MAX_MISSIONS - 1)
                 Index = MAX_MISSIONS - 1;
         };
-        if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_MOVELEFT, KEY_REPEAT, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
@@ -1407,7 +1407,7 @@ NamedScript MapSpecial void MissionBBS()
                     Index = 0;
             }
         };
-        if (CheckInput(BT_MOVERIGHT, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_MOVERIGHT, KEY_REPEAT, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
