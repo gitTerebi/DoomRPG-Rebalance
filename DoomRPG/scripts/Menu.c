@@ -2204,7 +2204,7 @@ void MenuInput()
         }
         if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
             IncreaseSkill(Player.SkillPage, Player.MenuIndex);
-        if (CheckInput(BT_ATTACK, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_ATTACK, KEY_ONLYPRESSED, false, PlayerNumber()))
             UseSkill(0);
     }
 
