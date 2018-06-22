@@ -56,7 +56,7 @@ str const ArenaBonus[ABONUS_MAX] =
     "\CjKey Drop"
 };
 
-str const ArenaMonsters[MAX_DEF_MONSTERS] =
+str const ArenaMonsters[MAX_DEF_MONSTERS_DF] =
 {
     "ZombieMan", "ShotgunGuy", "DoomImp", "Demon", "Spectre", "ChaingunGuy",
     "HellKnight", "BaronOfHell", "Cacodemon", "LostSoul",

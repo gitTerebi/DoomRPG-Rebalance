@@ -91,16 +91,7 @@ NamedScript void InitMission()
             if (!Monsters[i].Init) // Skip removed monsters
                 continue;
 
-            str ActorToCheck = StrParam("DRPG%S", Player.Mission.Monster->Actor);
-
-            if (CompatMode == COMPAT_DRLA)
-                ActorToCheck = Player.Mission.Monster->Actor;
-
-            if (CompatMode == COMPAT_LEGENDOOM)
-            {
-                ActorToCheck = StrParam("%S", Player.Mission.Monster->Actor);
-                if (ActorToCheck == "LDFatso") ActorToCheck = "LDMancubus";
-            }
+            str ActorToCheck = GetMissionMonsterActor(Player.Mission.Monster->Actor);
 
             LogMessage(StrParam("Checking: %S - Looking For: %S", Monsters[i].Actor, ActorToCheck), LOG_DEBUG);
 
@@ -411,27 +402,14 @@ void ClearMission()
 
 void GetTargetMonster(MissionInfo *Mission)
 {
-    bool DRLA = (CompatMode == COMPAT_DRLA);
     int Amount;
     MonsterInfoPtr PotentialMonsters[MAX_TEMP_MONSTERS];
     int NumPotentialMonsters;
-    int MonsterDataAmount;
-
-    if (DRLA)
-        MonsterDataAmount = MAX_DEF_MONSTERS_DRLA;
-    else
-        MonsterDataAmount = MAX_DEF_MONSTERS;
 
     // Generate a list based on monsters' threat levels.
     for (int i = 0; i < MonsterDataAmount; i++)
     {
-        MonsterInfoPtr TempMonster;
-        if (DRLA)
-            TempMonster = &MonsterDataDRLA[i];
-        else if (CompatMode == COMPAT_LEGENDOOM)
-            TempMonster = &MonsterDataLD[i];
-        else
-            TempMonster = &MonsterData[i];
+        MonsterInfoPtr TempMonster = &MonsterData[i];
 
         int TestDifficulty = TempMonster->Difficulty + (10 * TempMonster->ThreatLevel);
         int TestAmount = (30 + (320 * Mission->Difficulty)) / TestDifficulty;
@@ -492,7 +470,7 @@ int CalculateAverageDifficulty()
 
 str GetMissionMonsterActor(str Actor)
 {
-    if (CompatMode == COMPAT_DRLA || CompatMode == COMPAT_LEGENDOOM)
+    if (CompatMonMode != COMPAT_NONE)
         return StrParam("%SRPG", Actor);
     else if (CompatMode == COMPAT_EXTRAS)
         return StrParam("DRPG%SExtras", Actor);

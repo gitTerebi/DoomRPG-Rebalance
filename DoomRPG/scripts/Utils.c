@@ -565,7 +565,7 @@ NamedScript DECORATE void RegenBoost()
 // Set Skill Level during the game
 NamedScript KeyBind void SetSkill(int NewSkill)
 {
-    if (NewSkill < 0 || NewSkill > (CompatMode == COMPAT_DRLA ? 5 : 4))
+    if (NewSkill < 0 || NewSkill > (CompatMonMode == COMPAT_DRLA ? 5 : 4))
     {
         HudMessage("Invalid Skill Level");
         EndHudMessage(HUDMSG_FADEOUT, 0, "Red", 0.5, 0.5, 2.0, 1.0);

@@ -536,7 +536,7 @@ str NameColors[NAME_MAX_COLORS] =
 str GenerateName(str Actor, str Tag)
 {
     // Humans
-    if (CompatMode == COMPAT_DRLA)
+    if (CompatMonMode == COMPAT_DRLA)
     {
         if (Contains(Tag, "Human"))
         {

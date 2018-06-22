@@ -24,6 +24,7 @@
 bool Transported;
 bool GlobalsInitialized;
 int CompatMode;
+int CompatMonMode;
 bool WadSmoosh;
 
 // Arrays
@@ -2194,9 +2195,17 @@ void CheckCompatibility()
         Log("\CdDEBUG: \C-Checking Compatibility...");
 
     CompatMode = COMPAT_NONE;
+    CompatMonMode = COMPAT_NONE;
+
+    MonsterData = MonsterDataDF;
+    MonsterDataAmount = MAX_DEF_MONSTERS_DF;
+
+    MegaBosses = MegaBossesDF;
+    MegaBossesAmount = MAX_MEGABOSSES_DF;
+
     WadSmoosh = false;
 
-    //WadSmoosh
+    // WadSmoosh
     Success = SpawnForced("DRPGWadSmooshActive", 0, 0, 0, TID, 0);
     if (Success)
     {
@@ -2214,41 +2223,6 @@ void CheckCompatibility()
             Log("\CdDEBUG: \CaExtras\C- detected");
         CompatMode = COMPAT_EXTRAS;
         Thing_Remove(TID);
-        return;
-    }
-
-    // DoomRL
-    Success = SpawnForced("RLKateMatterstormHarnessArmorToken", 0, 0, 0, TID, 0);
-    if (Success)
-    {
-        if (GetCVar("drpg_debug"))
-            Log("\CdDEBUG: \CdDoomRL \C-detected");
-        CompatMode = COMPAT_DRLA;
-        SetInventory("DRPGDRLAActive", 1);
-        Thing_Remove(TID);
-
-        Success = SpawnForced("RLBaronOfHell", 0, 0, 0, TID, 0);
-        if (!Success)
-        {
-            SetHudSize(640, 480);
-            FadeRange(0, 0, 0, 1.0, 0, 0, 0, 1.0, 0);
-
-            HudMessage("\CgLISTEN UP\n\n\C-You currently have \CfDoomRL Arsenal\C- loaded. In order for this mod to work with DoomRPG, you also need the \CfDoomRL Monster Pack\C-. Go here to download it: http://tinyurl.com/DoomRLArsenal\n\nThanks.");
-            EndHudMessageBold(HUDMSG_PLAIN | HUDMSG_LOG, 772, "White", 0.1, 0.1, 0.01);
-
-            SetFont("BigFont");
-            HudMessage("LISTEN UP");
-            EndHudMessageBold(HUDMSG_PLAIN, 772, "Red", 320.4, 200.0, 0.01);
-
-            SetFont("SmallFont");
-            HudMessage("You currently have \CfDoomRL Arsenal\C- loaded. In order for this mod to work with DoomRPG, you also need the \CfDoomRL Monster Pack\C-. Go here to download it: http://tinyurl.com/DoomRLArsenal\n\nThanks.");
-            EndHudMessageBold(HUDMSG_PLAIN, 773, "White", 320.4, 232.0, 0.01);
-        }
-        else
-        {
-            Thing_Remove(TID);
-            return;
-        }
     }
 
     // LegenDoom
@@ -2257,10 +2231,55 @@ void CheckCompatibility()
     {
         if (GetCVar("drpg_debug"))
             Log("\CdDEBUG: \CdLegenDoom\C- detected");
+
         CompatMode = COMPAT_LEGENDOOM;
+        CompatMonMode = COMPAT_LEGENDOOM;
+        MonsterData = MonsterDataLD;
         Thing_Remove(TID);
-        return;
     }
+
+    // DoomRL Arsenal
+    Success = SpawnForced("RLPistolPickup", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (GetCVar("drpg_debug"))
+            Log("\CdDEBUG: \CdDoomRL \C-detected");
+
+        CompatMode = COMPAT_DRLA;
+        SetInventory("DRPGDRLAActive", 1);
+        Thing_Remove(TID);
+    }
+
+    // DoomRL Monsters
+    Success = SpawnForced("RLBaronOfHell", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (GetCVar("drpg_debug"))
+            Log("\CdDEBUG: \CdDoomRL Monsters \C-detected");
+
+        CompatMonMode = COMPAT_DRLA;
+        MonsterData = MonsterDataDRLA;
+        MonsterDataAmount = MAX_DEF_MONSTERS_DRLA;
+        Thing_Remove(TID);
+    }
+
+    // Colourful Hell
+    Success = SpawnForced("RedZombie", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (GetCVar("drpg_debug"))
+            Log("\CdDEBUG: \CdColourful Hell \C-detected");
+
+        CompatMonMode = COMPAT_CH;
+        MonsterData = MonsterDataCH;
+        MonsterDataAmount = MAX_DEF_MONSTERS_CH;
+        MegaBosses = MegaBossesCH;
+        MegaBossesAmount = MAX_MEGABOSSES_CH;
+        Thing_Remove(TID);
+    }
+
+    if (GetCVar("drpg_debug") && CompatMode == COMPAT_NONE && CompatMonMode == COMPAT_NONE && !WadSmoosh)
+        Log("\CdDEBUG: \C-No compatible mods found");
 }
 
 void AssignTIDs()

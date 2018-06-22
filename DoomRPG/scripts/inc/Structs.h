@@ -337,7 +337,6 @@ struct MonsterInfo_S
 struct MegabossInfo_S
 {
     str Actor;
-    str Music;
 };
 
 // Health Bars

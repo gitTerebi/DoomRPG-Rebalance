@@ -875,8 +875,6 @@ NamedScript void HellSkillTransport(int player)
 {
     SetActivator(Players(player).TID);
 
-    bool DRLA = (CompatMode == COMPAT_DRLA);
-    int MonsterDataAmount;
     MonsterInfoPtr MonsterList[MAX_TEMP_MONSTERS];
     int MonsterListLength;
     int BossesSpawned = 0;
@@ -884,20 +882,9 @@ NamedScript void HellSkillTransport(int player)
     Delay(35 * 60); // Grace Period
 
     // Build a list of monsters
-    if (DRLA)
-        MonsterDataAmount = MAX_DEF_MONSTERS_DRLA;
-    else
-        MonsterDataAmount = MAX_DEF_MONSTERS;
-
     for (int i = 0; i < MonsterDataAmount && MonsterListLength < MAX_TEMP_MONSTERS; i++)
     {
-        MonsterInfoPtr TempMonster;
-        if (DRLA)
-            TempMonster = &MonsterDataDRLA[i];
-        else if (CompatMode == COMPAT_LEGENDOOM)
-            TempMonster = &MonsterDataLD[i];
-        else
-            TempMonster = &MonsterData[i];
+        MonsterInfoPtr TempMonster = &MonsterData[i];
 
         if (TempMonster->Difficulty <= 2 + AveragePlayerLevel() * 2)
             MonsterList[MonsterListLength++] = TempMonster;
@@ -1013,12 +1000,12 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
         return true;
 
     case MAPEVENT_DRLA_FEEDINGFRENZY:
-        if (CompatMode != COMPAT_DRLA || AveragePlayerLevel() < 20)
+        if (CompatMonMode != COMPAT_DRLA || AveragePlayerLevel() < 20)
             return false;
         return true;
 
     case MAPEVENT_DRLA_OVERMIND:
-        if (CompatMode != COMPAT_DRLA || AveragePlayerLevel() < 40)
+        if (CompatMonMode != COMPAT_DRLA || AveragePlayerLevel() < 40)
             return false;
         return true;
 
@@ -1043,7 +1030,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
             return false;
         if (CurrentSkill >= 5)
             return false;
-        if (CompatMode != COMPAT_DRLA || AveragePlayerLevel() < 10)
+        if (CompatMonMode != COMPAT_DRLA || AveragePlayerLevel() < 10)
             return false;
         return true;
 
@@ -1267,7 +1254,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 
     if (TargetLevel->Event == MAPEVENT_MEGABOSS)
     {
-        TargetLevel->MegabossActor = &MegaBosses[Random(0, MAX_MEGABOSSES - 1)];
+        TargetLevel->MegabossActor = &MegaBosses[Random(0, MegaBossesAmount - 1)];
 
         if (GetCVar("drpg_debug"))
             Log("\CdDEBUG: Chosen Boss: \Cg%S", TargetLevel->MegabossActor->Actor);
@@ -1279,37 +1266,26 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
     }
     else if (TargetLevel->Event == MAPEVENT_ONEMONSTER)
     {
-        bool DRLA = (CompatMode == COMPAT_DRLA);
-
         MonsterInfoPtr PotentialMonsters[MAX_TEMP_MONSTERS];
         int NumPotentialMonsters;
-        int MonsterDataAmount;
         fixed MonsterLevelDivisor;
 
-        if (DRLA)
+        // Going to leave this enabled without DRLA's monsters because DRLA's weapons are powerful.
+        if (CompatMode == COMPAT_DRLA)
         {
-            MonsterDataAmount = MAX_DEF_MONSTERS_DRLA;
             MonsterLevelDivisor = 2.5;
         }
         else
         {
-            MonsterDataAmount = MAX_DEF_MONSTERS;
             MonsterLevelDivisor = 1.25;
         }
 
         // Generate a list based on monsters' threat levels.
         for (int i = 0; i < MonsterDataAmount; i++)
         {
-            MonsterInfoPtr TempMonster;
+            MonsterInfoPtr TempMonster = &MonsterData[i];
             int RequiredLevel;
             int AverageLevel = AveragePlayerLevel();
-
-            if (DRLA)
-                TempMonster = &MonsterDataDRLA[i];
-            else if (CompatMode == COMPAT_LEGENDOOM)
-                TempMonster = &MonsterDataLD[i];
-            else
-                TempMonster = &MonsterData[i];
 
             RequiredLevel = (fixed)(TempMonster->Difficulty + ((TempMonster->ThreatLevel) * 20)) / MonsterLevelDivisor;
             RequiredLevel = Clamp(0, RequiredLevel, 80);
@@ -1593,7 +1569,7 @@ NamedScript void MegaBossEvent()
     SetMusic(StrParam("MBossA%d", Random(1, 2)));
 
     // Pick Boss
-    CurrentLevel->MegabossActor = &MegaBosses[Random(0, MAX_MEGABOSSES - 1)];
+    CurrentLevel->MegabossActor = &MegaBosses[Random(0, MegaBossesAmount - 1)];
 
     // Replace them with nothing
     for (int i = 1; i < MonsterID; i++)
@@ -1665,7 +1641,7 @@ NamedScript void MegaBossEvent()
             for (int i = 0; i < MAX_PLAYERS; i++)
                 if (CheckSight(TID, Players(i).TID, 0))
                 {
-                    SetMusic(CurrentLevel->MegabossActor->Music);
+                    SetMusic(StrParam("MBoss%d", Random(1, 8)));
                     Spotted = true;
                     break;
                 }
@@ -2197,8 +2173,6 @@ NamedScript void OneMonsterEvent()
 
     Delay(35); // Allow the replacements to actually spawn.
 
-    SetMusic("OneMonst");
-
     while (ThingCountName(GetMissionMonsterActor(CurrentLevel->SelectedMonster->Actor), 0) > 0)
         Delay(1);
 
@@ -2315,13 +2289,7 @@ NamedScript void HellUnleashedSpawnMonsters()
         Position *CurrentPosition = &((Position *)CurrentLevel->MonsterPositions.Data)[i];; // Totally leaving this typo here because IT'S CRYING OKAY, I AM TOO
 
         // Determine a monster
-        MonsterInfoPtr Monster;
-        if (CompatMode == COMPAT_DRLA)
-            Monster = &MonsterDataDRLA[Random(0, MAX_DEF_MONSTERS_DRLA - 1)];
-        else if (CompatMode == COMPAT_LEGENDOOM)
-            Monster = &MonsterDataLD[Random(0, MAX_DEF_MONSTERS - 1)];
-        else
-            Monster = &MonsterData[Random(0, MAX_DEF_MONSTERS - 1)];
+        MonsterInfoPtr Monster = &MonsterData[Random(0, MonsterDataAmount - 1)];
 
         Success = Spawn(Monster->Actor, CurrentPosition->X, CurrentPosition->Y, CurrentPosition->Z, TID, CurrentPosition->Angle);
         if (Success)
@@ -2488,7 +2456,6 @@ Start:
 
 NamedScript void TeleporterCrack(int Source, int Destination)
 {
-    bool DRLA = (CompatMode == COMPAT_DRLA);
     int SpawnEnemyTimer = 0;
     bool CloseToPlayer;
     str TempMonster;
@@ -2508,10 +2475,12 @@ Start:
     if (++SpawnEnemyTimer >= 263 && Random(1, 4096) == 1 && CloseToPlayer)
     {
         TempMonster = "";
-        if (DRLA)
+        if (CompatMonMode == COMPAT_DRLA)
             TempMonster = "RLArmageddonPainElemental";
+        else if (CompatMonMode == COMPAT_CH)
+            TempMonster = "RedSP1";
         else
-            TempMonster = "ArchVile";
+            TempMonster = "Archvile";
 
         if (SpawnSpotFacing(GetMissionMonsterActor(TempMonster), Destination))
             SpawnSpotFacing("TeleportFog", Destination);

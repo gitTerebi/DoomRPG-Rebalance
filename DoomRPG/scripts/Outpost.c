@@ -84,7 +84,7 @@ NamedScript MapSpecial void EnterOutpost()
         PissOffMarines(false);
 
         ActivatorSound("misc/skillchange", 127);
-        if (CompatMode == COMPAT_DRLA)
+        if (CompatMonMode == COMPAT_DRLA)
             AmbientSound("nightmarecyberdemon/sight", 127);
 
         while (InTitle)
@@ -751,7 +751,7 @@ NamedScript MapSpecial void SkillComputer()
             ActivatorSound("menu/move", 127);
             SkillChoice--;
         }
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && SkillChoice < (CompatMode == COMPAT_DRLA ? 5 : 4))
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && SkillChoice < (CompatMonMode == COMPAT_DRLA ? 5 : 4))
         {
             ActivatorSound("menu/move", 127);
             SkillChoice++;
@@ -1008,7 +1008,7 @@ NamedScript MapSpecial void PissOffMarines(bool Steal)
                 for (int i = HallTeleportSpotID; i < HallTeleportSpotID + 8; i++)
                 {
                     SpawnSpotForced("TeleportFog", i, 0, 0);
-                    if (CompatMode == COMPAT_DRLA)
+                    if (CompatMonMode == COMPAT_DRLA)
                         SpawnSpotFacingForced("DRPGMarineReinforcementDRLASpawner", i, MarineTID);
                     else
                         SpawnSpotFacingForced("DRPGMarineReinforcementSpawner", i, MarineTID);
@@ -1018,7 +1018,7 @@ NamedScript MapSpecial void PissOffMarines(bool Steal)
             {
                 if (OutpostNotoriety == 2) // Special handling for Chasing Minigunners
                     SpawnSpotFacingForced("DRPGMarineMinigunHuntingYerAss", MarineSpotTID, MarineTID);
-                else if (CompatMode == COMPAT_DRLA)
+                else if (CompatMonMode == COMPAT_DRLA)
                     SpawnSpotFacingForced("DRPGMarineReinforcementDRLASpawner", MarineSpotTID, MarineTID);
                 else
                     SpawnSpotFacingForced("DRPGMarineReinforcementSpawner", MarineSpotTID, MarineTID);

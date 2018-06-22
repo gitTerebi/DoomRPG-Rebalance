@@ -1,7 +1,0 @@
-class DRPGZUtilities
-{
-    static int GetLevelSectorCount()
-    {
-    	return level.Sectors.Size();
-    }
-}

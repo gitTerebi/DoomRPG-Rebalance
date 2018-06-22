@@ -1989,6 +1989,121 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         }
     };
 
+    str const CHSummons[][6] =
+    {
+        // Former Human
+        {
+            "CommonZombie",
+            "GreenZombie",
+            "BlueZombie"
+        },
+
+        // Former Sergeant
+        {
+            "CommonSG",
+            "GreenSG",
+            "BlueSG"
+        },
+
+        // Former Commando
+        {
+            "CommonCguy",
+            "GreenCguy",
+            "BlueCguy"
+        },
+
+        // Imp
+        {
+            "CommonImp",
+            "GreenImp",
+            "BlueImp"
+        },
+
+        // Demon
+        {
+            "CommonDemon",
+            "GreenDemon",
+            "BlueDemon"
+        },
+
+        // Cacodemon
+        {
+            "CommonCaco",
+            "GreenCaco",
+            "BlueCaco"
+        },
+
+        // Hell Knight
+        {
+            "CommonHK",
+            "GreenHK",
+            "BlueHK"
+        },
+
+        // Baron of Hell
+        {
+            "CommonBaron",
+            "GreenBaron",
+            "BlueBaron"
+        },
+
+        // Lost Soul
+        {
+            "CommonLSoul",
+            "GreenLSoul",
+            "BlueLSoul"
+        },
+
+        // Pain Elemental
+        {
+            "CommonPE",
+            "GreenPE",
+            "BluePE"
+        },
+
+        // Revenant
+        {
+            "CommonRevenant",
+            "GreenRevenant",
+            "BlueRevenant"
+        },
+
+        // Mancubus
+        {
+            "CommonFatso",
+            "GreenFatso",
+            "BlueFatso"
+        },
+
+        // Arachnotron
+        {
+            "CommonSP1",
+            "GreenSP1",
+            "BlueSP1"
+        },
+
+        // Arch-Vile
+        {
+            "CommonArch",
+            "GreenArch",
+            "BlueArch"
+        },
+
+        // Cyberdemon
+        {
+            "CommonCybie",
+            "GreenCybie",
+            "BlueCybie"
+        },
+
+        // Spider Mastermind
+        {
+            "CommonMind",
+            "GreenMind",
+            "BlueMind"
+        }
+    };
+
     // Stop if you're in the Outpost
     if (CurrentLevel->UACBase)
     {
@@ -2034,8 +2149,10 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
     }
     else // Monsters
     {
-        if (CompatMode == COMPAT_DRLA)
+        if (CompatMonMode == COMPAT_DRLA)
             Name = DRLASummons[Index - 1][SkillLevel->CurrentLevel - 1];
+        else if (CompatMonMode == COMPAT_CH)
+            Name = CHSummons[Index - 1][SkillLevel->CurrentLevel - 1];
         else if (CompatMode == COMPAT_EXTRAS)
             Name = StrParam("DRPG%SExtras", Summons[Index - 1]);
         else
@@ -2533,6 +2650,9 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
 
 NamedScript void TransportOutFX(int tid)
 {
+    // Automatically close DRPG menu.
+    Player.InMenu = 0;
+
     if (tid != 0)
         SetActivator(tid);
 
@@ -2616,7 +2736,11 @@ void BuildSkillData()
         // DoomRLA has different damage types than usual
         Skills[3][6].Description[1] = "Unleashes a beam of searing flames and crackling plasma\n\CdDeals \CgFire\Cd and \CnPlasma\Cd damage\n\CdPierces through enemies";
         Skills[3][6].Description[2] = "Unleashes a beam of deadly and powerful dark energies\n\CdDeals \CuPiercing\Cd damage\n\CdPierces through enemies\n\CdIgnores armors and defenses";
+    }
 
+    // DoomRL Monsters Compatibility
+    if (CompatMonMode == COMPAT_DRLA)
+    {
         // DoomRL Marines use slightly different weapons
         Skills[4][0].Description[2] = "Summons a Marine\n\CjDouble Shotgun";
         Skills[4][0].Description[3] = "Summons a Marine\n\CjBattle Rifle";
@@ -2677,6 +2801,92 @@ void BuildSkillData()
         Skills[4][14].Description[1] = "Summons a Nightmare Arch-Vile";
         Skills[4][15].Description[1] = "Summons a Nightmare Cyberdemon";
         Skills[4][16].Description[1] = "Summons a Spider Overmind";
+    }
+    // Colourful Hell Compatibility
+    else if (CompatMonMode == COMPAT_CH)
+    {
+        // Summoning Skills - Levels
+        Skills[4][1].MaxLevel = 3;
+        Skills[4][2].MaxLevel = 3;
+        Skills[4][3].MaxLevel = 3;
+        Skills[4][4].MaxLevel = 3;
+        Skills[4][5].MaxLevel = 3;
+        Skills[4][6].MaxLevel = 3;
+        Skills[4][7].MaxLevel = 3;
+        Skills[4][8].MaxLevel = 3;
+        Skills[4][9].MaxLevel = 3;
+        Skills[4][10].MaxLevel = 3;
+        Skills[4][11].MaxLevel = 3;
+        Skills[4][12].MaxLevel = 3;
+        Skills[4][13].MaxLevel = 3;
+        Skills[4][14].MaxLevel = 3;
+        Skills[4][15].MaxLevel = 3;
+        Skills[4][16].MaxLevel = 3;
+
+        // Summoning Skills - Descriptions
+        Skills[4][1].Description[0] = "Summons a Former Human";
+        Skills[4][1].Description[1] = "Summons a Uncommon Former Human";
+        Skills[4][1].Description[2] = "Summons a Rare Former Human";
+
+        Skills[4][2].Description[0] = "Summons a Former Sergeant";
+        Skills[4][2].Description[1] = "Summons a Uncommon Former Sergeant";
+        Skills[4][2].Description[2] = "Summons a Rare Former Sergeant";
+
+        Skills[4][3].Description[0] = "Summons a Former Commando";
+        Skills[4][3].Description[1] = "Summons a Uncommon Former Commando";
+        Skills[4][3].Description[2] = "Summons a Rare Former Commando";
+
+        Skills[4][4].Description[0] = "Summons a Imp";
+        Skills[4][4].Description[1] = "Summons a Uncommon Imp";
+        Skills[4][4].Description[2] = "Summons a Rare Imp";
+
+        Skills[4][5].Description[0] = "Summons a Demon";
+        Skills[4][5].Description[1] = "Summons a Uncommon Demon";
+        Skills[4][5].Description[2] = "Summons a Rare Demon";
+
+        Skills[4][6].Description[0] = "Summons a Cacodemon";
+        Skills[4][6].Description[1] = "Summons a Uncommon Cacodemon";
+        Skills[4][6].Description[2] = "Summons a Rare Cacodemon";
+
+        Skills[4][7].Description[0] = "Summons a Hell Knight";
+        Skills[4][7].Description[1] = "Summons a Uncommon Hell Knight";
+        Skills[4][7].Description[2] = "Summons a Rare Hell Knight";
+
+        Skills[4][8].Description[0] = "Summons a Baron of Hell";
+        Skills[4][8].Description[1] = "Summons a Uncommon Baron of Hell";
+        Skills[4][8].Description[2] = "Summons a Rare Baron of Hell";
+
+        Skills[4][9].Description[0] = "Summons a Lost Soul";
+        Skills[4][9].Description[1] = "Summons a Uncommon Lost Soul";
+        Skills[4][9].Description[2] = "Summons a Rare Lost Soul";
+
+        Skills[4][10].Description[0] = "Summons a Pain Elemental";
+        Skills[4][10].Description[1] = "Summons a Uncommon Pain Elemental";
+        Skills[4][10].Description[2] = "Summons a Rare Pain Elemental";
+
+        Skills[4][11].Description[0] = "Summons a Revenant";
+        Skills[4][11].Description[1] = "Summons a Uncommon Revenant";
+        Skills[4][11].Description[2] = "Summons a Rare Revenant";
+
+        Skills[4][12].Description[0] = "Summons a Mancubus";
+        Skills[4][12].Description[1] = "Summons a Uncommon Mancubus";
+        Skills[4][12].Description[2] = "Summons a Rare Mancubus";
+
+        Skills[4][13].Description[0] = "Summons a Arachnotron";
+        Skills[4][13].Description[1] = "Summons a Uncommon Arachnotron";
+        Skills[4][13].Description[2] = "Summons a Rare Arachnotron";
+
+        Skills[4][14].Description[0] = "Summons a Arch-Vile";
+        Skills[4][14].Description[1] = "Summons a Uncommon Arch-Vile";
+        Skills[4][14].Description[2] = "Summons a Rare Arch-Vile";
+
+        Skills[4][15].Description[0] = "Summons a Cyberdemon";
+        Skills[4][15].Description[1] = "Summons a Uncommon Cyberdemon";
+        Skills[4][15].Description[2] = "Summons a Rare Cyberdemon";
+
+        Skills[4][16].Description[0] = "Summons a Spider Mastermind";
+        Skills[4][16].Description[1] = "Summons a Uncommon Spider Mastermind";
+        Skills[4][16].Description[2] = "Summons a Rare Spider Mastermind";
     }
 
     // Icons

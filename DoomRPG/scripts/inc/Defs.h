@@ -427,10 +427,12 @@ typedef enum
 // Monsters
 //
 #define MAX_MONSTERS            16384
-#define MAX_DEF_MONSTERS        17
+#define MAX_DEF_MONSTERS_DF     17
 #define MAX_DEF_MONSTERS_DRLA   72
-#define MAX_TEMP_MONSTERS       100
-#define MAX_MEGABOSSES          2
+#define MAX_DEF_MONSTERS_CH		130
+#define MAX_TEMP_MONSTERS       150
+#define MAX_MEGABOSSES_DF       2
+#define MAX_MEGABOSSES_CH       2
 
 typedef enum
 {
@@ -561,8 +563,9 @@ typedef enum
 {
     COMPAT_NONE,
     COMPAT_EXTRAS,
+    COMPAT_LEGENDOOM,
     COMPAT_DRLA,
-    COMPAT_LEGENDOOM
+    COMPAT_CH
 } ECompatibilityMode;
 
 typedef enum
