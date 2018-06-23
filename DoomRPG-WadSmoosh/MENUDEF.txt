@@ -1,12 +1,13 @@
 OptionMenu "DoomRPG"
 {
-	Title "Doom RPG Options"
-	
-	SubMenu "XP System",                    "DoomRPGXPSystem"
-	SubMenu "Monster Levels/Stat System",   "DoomRPGMonsters"
-	SubMenu "Game Difficulty",              "DoomRPGDifficulty"
-	SubMenu "Stat System",                  "DoomRPGStats"
-	SubMenu "Natural Stat Leveling",        "DoomRPGStatsNatural"
+    Title "Doom RPG Options"
+    
+    SubMenu "XP System",                    "DoomRPGXPSystem"
+    SubMenu "Monster Levels/Stat System",   "DoomRPGMonsters"
+    SubMenu "Game Difficulty",              "DoomRPGDifficulty"
+    SubMenu "Map Events",                   "DoomRPGMapEvents"
+    SubMenu "Stat System",                  "DoomRPGStats"
+    SubMenu "Natural Stat Leveling",        "DoomRPGStatsNatural"
     SubMenu "Popoffs",                      "DoomRPGPopoffs"
     SubMenu "Health Bars",                  "DoomRPGHealthBars"
     SubMenu "Multiplayer",                  "DoomRPGMultiplayer"

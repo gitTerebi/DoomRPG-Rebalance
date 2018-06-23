@@ -343,17 +343,12 @@ NamedScript Type_OPEN void MapInit()
     WaitingForReplacements = false;
 
     // Hell Skill has some additional challenges
-    if (GameSkill() >= 5)
-    {
+    if (GetCVar("drpg_minibosses") == 1 && GameSkill() >= 5 || GetCVar("drpg_minibosses") == 2)
         AddMiniboss();
+    if (GetCVar("drpg_reinforcements") == 1 && GameSkill() >= 5 || GetCVar("drpg_reinforcements") == 2)
         for (int i = 0; i < MAX_PLAYERS; i++)
-        {
-            if (!PlayerInGame(i))
-                continue;
-
-            HellSkillTransport(i);
-        }
-    }
+            if (PlayerInGame(i))
+                HellSkillTransport(i);
 
     if (CurrentLevel)
         MapLoop();
@@ -855,7 +850,7 @@ NamedScript void AddMiniboss()
     while (!Monsters[Chosen].Init)
         Chosen = Random(1, MonsterID - 1);
 
-    int LevelMod = (4 + (GameSkill() - 5)) * AveragePlayerLevel();
+    int LevelMod = (GameSkill() - 1) * AveragePlayerLevel();
     LevelMod = (int)(LevelMod * RandomFixed(1.0, 1.33));
     Monsters[Chosen].LevelAdd += LevelMod;
 
@@ -976,71 +971,77 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 {
     switch (Event)
     {
+    case MAPEVENT_MEGABOSS:
+        return (GetCVar("drpg_mapevent_megaboss") &&
+                AveragePlayerLevel() >= 50);
+
+    case MAPEVENT_TOXICHAZARD:
+        return (GetCVar("drpg_mapevent_toxichazard"));
+
+    case MAPEVENT_NUCLEARBOMB:
+        return (GetCVar("drpg_mapevent_nuclearbomb"));
+
+    case MAPEVENT_LOWPOWER:
+        return (GetCVar("drpg_mapevent_lowpower"));
+
+    case MAPEVENT_ALLAURAS:
+        return (GetCVar("drpg_mapevent_allauras") &&
+                AveragePlayerLevel() >= 20);
+
+    case MAPEVENT_ONEMONSTER:
+        return (GetCVar("drpg_mapevent_onemonster"));
+
+    case MAPEVENT_HELLUNLEASHED:
+        return (GetCVar("drpg_mapevent_hellunleashed") &&
+                AveragePlayerLevel() >= 20);
+
+    case MAPEVENT_HARMONIZEDAURAS:
+        return (GetCVar("drpg_mapevent_harmonizedauras") &&
+                AveragePlayerLevel() >= 10);
+
+    case MAPEVENT_TELEPORTCRACKS:
+        return (GetCVar("drpg_mapevent_teleportcracks"));
+
+    case MAPEVENT_DOOMSDAY:
+        return (GetCVar("drpg_mapevent_doomsday") &&
+                AveragePlayerLevel() >= 20 &&
+                !Random(0, 3) &&
+                !TargetLevel->Completed);
+
+    case MAPEVENT_ACIDRAIN:
+        return (GetCVar("drpg_mapevent_acidrain"));
+
+    case MAPEVENT_DARKZONE:
+        return (GetCVar("drpg_mapevent_darkzone"));
+
+    case MAPEVENT_DRLA_FEEDINGFRENZY:
+        return (CompatMode == COMPAT_DRLA &&
+                GetCVar("drpg_mapevent_feedingfrenzy") &&
+                AveragePlayerLevel() >= 20);
+
+    case MAPEVENT_DRLA_OVERMIND:
+        return (GetCVar("drpg_mapevent_overmind") &&
+                CompatMode == COMPAT_DRLA &&
+                AveragePlayerLevel() >= 40);
+
+    case MAPEVENT_BONUS_RAINBOWS:
+        return (GetCVar("drpg_mapevent_rainbows") &&
+                !Random(0, 15));
+
+    case MAPEVENT_SKILL_HELL:
+        return (GetCVar("drpg_mapevent_skill_hell") &&
+                AveragePlayerLevel() >= 10 &&
+                CurrentSkill < 4);
+
+    case MAPEVENT_SKILL_ARMAGEDDON:
+        return (CompatMode == COMPAT_DRLA &&
+                GetCVar("drpg_mapevent_skill_armageddon") &&
+                AveragePlayerLevel() >= 10 &&
+                CurrentSkill < 5);
+
     case MAPEVENT_SPECIAL_SINSTORM:
         return false;
 
-    case MAPEVENT_MEGABOSS:
-        if (AveragePlayerLevel() < 50)
-            return false;
-        return true;
-
-    case MAPEVENT_ALLAURAS:
-        if (AveragePlayerLevel() < 20)
-            return false;
-        return true;
-
-    case MAPEVENT_HARMONIZEDAURAS:
-        if (AveragePlayerLevel() < 10)
-            return false;
-        return true;
-
-    case MAPEVENT_DOOMSDAY:
-        if (AveragePlayerLevel() < 20 || Random(0, 3) || TargetLevel->Completed)
-            return false;
-        return true;
-
-    case MAPEVENT_DRLA_FEEDINGFRENZY:
-        if (CompatMonMode != COMPAT_DRLA || AveragePlayerLevel() < 20)
-            return false;
-        return true;
-
-    case MAPEVENT_DRLA_OVERMIND:
-        if (CompatMonMode != COMPAT_DRLA || AveragePlayerLevel() < 40)
-            return false;
-        return true;
-
-    case MAPEVENT_BONUS_RAINBOWS:
-        if (Random(0, 15) || !GetCVar("drpg_bonus_events"))
-            return false;
-        return true;
-
-    case MAPEVENT_HELLUNLEASHED:
-        if (AveragePlayerLevel() < 20)
-            return false;
-        return true;
-
-    case MAPEVENT_SKILL_HELL:
-        if (AveragePlayerLevel() < 10)
-            return false;
-        if (CurrentSkill >= 4)
-            return false;
-        return true;
-    case MAPEVENT_SKILL_ARMAGEDDON:
-        if (AveragePlayerLevel() < 10)
-            return false;
-        if (CurrentSkill >= 5)
-            return false;
-        if (CompatMonMode != COMPAT_DRLA || AveragePlayerLevel() < 10)
-            return false;
-        return true;
-
-    case MAPEVENT_TOXICHAZARD:
-    case MAPEVENT_NUCLEARBOMB:
-    case MAPEVENT_LOWPOWER:
-    case MAPEVENT_ONEMONSTER:
-    case MAPEVENT_TELEPORTCRACKS:
-    case MAPEVENT_ACIDRAIN:
-    case MAPEVENT_DARKZONE:
     default:
         return true;
     }
@@ -1104,6 +1105,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
         "Harmonized Destruction",
         "Cracks in the Veil",
         "12 Hours 'til Doomsday",
+        "Vicious Downpour",
         "The Dark Zone",
 
         "Feeding Frenzy",
@@ -1112,7 +1114,9 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
         "RAINBOWS!",
 
         "Skills - Hell",
-        "Skills - Armageddon"
+        "Skills - Armageddon",
+
+        "Sinstorm"
     };
 
     if (TargetLevel->UACBase)
@@ -1205,15 +1209,15 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
     {
         // Icon of Sin
         // Blurb about a demon spitter and the game ending finale here.
-
-        TargetLevel->Event = MAPEVENT_SPECIAL_SINSTORM;
+        if (GetCVar("drpg_mapevent_sinstorm"))
+            TargetLevel->Event = MAPEVENT_SPECIAL_SINSTORM;
         return;
     }
 
     if (!FakeIt)
     {
         // Don't bother creating an event if the level has no monsters
-        if (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) == 0)
+        if (TargetLevel->MaxTotalMonsters == 0)
         {
             TargetLevel->Event = MAPEVENT_NONE;
             return;
@@ -1225,26 +1229,19 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
             return; // No special event
         }
 
-        int Rerolls = 256; // Just in case *no* events are possible for some reason
-        while (TargetLevel->Event == MAPEVENT_NONE && Rerolls)
+        int PotentialEvents[MAPEVENT_MAX];
+        int NumPotentialEvents = 0; // Has to be set to zero explicitly or bad stuff happens
+        for (int i = MAPEVENT_NONE + 1; i < MAPEVENT_MAX; i++)
+            if (CheckMapEvent(i, TargetLevel))
+                PotentialEvents[NumPotentialEvents++] = i;
+
+        if (NumPotentialEvents == 0)
         {
-            TargetLevel->Event = Random(MAPEVENT_NONE + 1, MAPEVENT_MAX - 1);
-
-            if (GetCVar("drpg_debug"))
-                Log("\CdDEBUG: Trying \Cj%S", EventNames[TargetLevel->Event]);
-
-            if (!CheckMapEvent(TargetLevel->Event, TargetLevel))
-            {
-                if (GetCVar("drpg_debug"))
-                    Log("\CdDEBUG: \Cj%S\Cg not possible", EventNames[TargetLevel->Event]);
-                TargetLevel->Event = MAPEVENT_NONE;
-            }
-
-            Rerolls--;
+            TargetLevel->Event = MAPEVENT_NONE;
+            return;
         }
 
-        if (TargetLevel->Event == MAPEVENT_NONE)
-            return;
+        TargetLevel->Event = PotentialEvents[Random(0, NumPotentialEvents - 1)];
     }
 
     if (GetCVar("drpg_debug") && TargetLevel->Event != MAPEVENT_NONE)
@@ -1267,7 +1264,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
     else if (TargetLevel->Event == MAPEVENT_ONEMONSTER)
     {
         MonsterInfoPtr PotentialMonsters[MAX_TEMP_MONSTERS];
-        int NumPotentialMonsters;
+        int NumPotentialMonsters = 0; // BAD STUFF HAPPENS
         fixed MonsterLevelDivisor;
 
         // Going to leave this enabled without DRLA's monsters because DRLA's weapons are powerful.
@@ -1296,9 +1293,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
                 PotentialMonsters[NumPotentialMonsters++] = TempMonster;
         }
 
-        for (int i = 0; i < NumPotentialMonsters; i++)
-
-            TargetLevel->SelectedMonster = PotentialMonsters[Random(0, NumPotentialMonsters - 1)];
+        TargetLevel->SelectedMonster = PotentialMonsters[Random(0, NumPotentialMonsters - 1)];
 
         if (GetCVar("drpg_debug"))
             Log("\CdDEBUG: Chosen Monster: \Cg%S", TargetLevel->SelectedMonster->Name);
