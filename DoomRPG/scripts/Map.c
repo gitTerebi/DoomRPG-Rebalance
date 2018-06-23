@@ -1015,13 +1015,13 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
         return (GetCVar("drpg_mapevent_darkzone"));
 
     case MAPEVENT_DRLA_FEEDINGFRENZY:
-        return (CompatMode == COMPAT_DRLA &&
+        return (CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_feedingfrenzy") &&
                 AveragePlayerLevel() >= 20);
 
     case MAPEVENT_DRLA_OVERMIND:
         return (GetCVar("drpg_mapevent_overmind") &&
-                CompatMode == COMPAT_DRLA &&
+                CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
                 AveragePlayerLevel() >= 40);
 
     case MAPEVENT_BONUS_RAINBOWS:
@@ -1034,7 +1034,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
                 CurrentSkill < 4);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
-        return (CompatMode == COMPAT_DRLA &&
+        return (CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_skill_armageddon") &&
                 AveragePlayerLevel() >= 10 &&
                 CurrentSkill < 5);
