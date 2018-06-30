@@ -3293,9 +3293,9 @@ NamedScript void InitWadSmoosh()
         "E1M1",
         "MAP01",
         "ML_MAP01",
-        "NERVE_MAP01",
-        "PLUT_MAP01",
-        "TNT_MAP01"
+        "NV_MAP01",
+        "PL_MAP01",
+        "TN_MAP01"
     };
     int i;
     bool BlankStart;
