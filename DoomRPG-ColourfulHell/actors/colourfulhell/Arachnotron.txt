@@ -211,3 +211,19 @@ ACTOR FireBluSP2RPG : FireBluSP2 Replaces FireBluSP2
 		Goto Super::See
 	}
 }
+
+// Abyss Arachnotron
+ACTOR AbyssSP2RPG : AbyssSP2 Replaces AbyssSP2
+{
+	Tag "Abyssal Arachnotron"
+
+	States
+	{
+	Spawn:
+		ABSP A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		ABSP A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}

@@ -212,3 +212,19 @@ ACTOR FireBluArch2RPG : FireBluArch2 Replaces FireBluArch2
 		Goto Super::See
 	}
 }
+
+// Abyss Archvile
+ACTOR AbyssVileRPG : AbyssVile Replaces AbyssVile
+{
+	Tag "Abyssal Archvile"
+
+	States
+	{
+	Spawn:
+		DGRD A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		DGRD A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}

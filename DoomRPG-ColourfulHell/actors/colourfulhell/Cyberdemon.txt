@@ -195,3 +195,19 @@ ACTOR Graycybie2RPG : Graycybie2 Replaces Graycybie2
 		Goto Super::See
 	}
 }
+
+// Abyss Cyberdemon
+ACTOR AbyssCybie2RPG : AbyssCybie2 Replaces AbyssCybie2
+{
+	Tag "Abyssal Cyberdemon"
+
+	States
+	{
+	Spawn:
+		TERM A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TERM A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}

@@ -151,6 +151,22 @@ ACTOR WhiteSG2RPG : WhiteSG2 Replaces WhiteSG2
 	}
 }
 
+// White Shotgunner EX
+ACTOR WhiteSGEXRPG : WhiteSGEX Replaces WhiteSGEX
+{
+	Tag "Benellus, God of Shotguns, Angrier"
+
+	States
+	{
+	Spawn:
+		BENE A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		BENE A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 // Fireblu Shotgunner
 ACTOR FireBluSG2RPG : FireBluSG2 Replaces FireBluSG2
 {
@@ -179,6 +195,22 @@ ACTOR AbyssSG2RPG : AbyssSG2 Replaces AbyssSG2
 		Goto Super::Spawn
 	See:
 		ASGZ A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Gray Shotgunner
+ACTOR GraySG2RPG : GraySG2 Replaces GraySG2
+{
+	Tag "Gray Sergeant"
+
+	States
+	{
+	Spawn:
+		HMZP A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		HMZP A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }

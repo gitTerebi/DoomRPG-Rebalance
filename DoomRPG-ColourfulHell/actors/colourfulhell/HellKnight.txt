@@ -121,8 +121,20 @@ ACTOR SpecialImpRPG : SpecialImp Replaces SpecialImp
 // Black Hell Knight
 ACTOR BlackHK2RPG : BlackHK2 Replaces BlackHK2
 {
-	Tag "The Terminator"
+	States
+	{
+	Spawn:
+		BRUC A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		BRUC A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
 
+// Black Hell Knight
+ACTOR BlackHKEXRPG : BlackHKEX Replaces BlackHKEX
+{
 	States
 	{
 	Spawn:

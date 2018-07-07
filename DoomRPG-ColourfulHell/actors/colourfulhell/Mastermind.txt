@@ -149,3 +149,19 @@ ACTOR FireBluMind2RPG : FireBluMind2 Replaces FireBluMind2
 		Goto Super::See
 	}
 }
+
+// Gray Mastermind
+ACTOR GrayMind2RPG : GrayMind2 Replaces GrayMind2
+{
+	Tag "Gray Spider Mastermind"
+
+	States
+	{
+	Spawn:
+		SPID A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		SPID A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
