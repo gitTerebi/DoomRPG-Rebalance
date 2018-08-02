@@ -238,3 +238,19 @@ ACTOR AbyssImp2RPG : AbyssImp2 Replaces AbyssImp2
 		Goto Super::See
 	}
 }
+
+// FireBlu Imp
+ACTOR FireBluImp2RPG : FireBluImp2 Replaces FireBluImp2
+{
+	Tag "FireBlu Imp"
+
+	States
+	{
+	Spawn:
+		TROO A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TROO A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}

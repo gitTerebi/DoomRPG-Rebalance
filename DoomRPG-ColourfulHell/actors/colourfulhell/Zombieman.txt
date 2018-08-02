@@ -106,8 +106,20 @@ ACTOR RedZombieRPG : RedZombie Replaces RedZombie
 // Black Zombie
 ACTOR BlackZombie1RPG : BlackZombie1 Replaces BlackZombie1
 {
-	Tag "Player 9"
+	States
+	{
+	Spawn:
+		PLAY A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		PLAY A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
 
+// Black Zombie EX
+ACTOR BlackZombieEXRPG : BlackZombieEX Replaces BlackZombieEX
+{
 	States
 	{
 	Spawn:
@@ -179,6 +191,39 @@ ACTOR AbyssZombie2RPG : AbyssZombie2 Replaces AbyssZombie2
 		Goto Super::Spawn
 	See:
 		ZUNM A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+
+// FireBlu Zombieman.
+ACTOR FireBluZombie2RPG : FireBluZombie2 Replaces FireBluZombie2
+{
+	Tag "FireBlu Former Human"
+
+	States
+	{
+	Spawn:
+		POSS A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		POSS A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Gray Zombieman.
+ACTOR GrayZombie2RPG : GrayZombie2 Replaces GrayZombie2
+{
+	Tag "Gray Former Human"
+
+	States
+	{
+	Spawn:
+		POSS A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		POSS A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }

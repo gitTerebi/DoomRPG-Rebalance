@@ -259,3 +259,24 @@ ACTOR FireBluLSoul2RPG : FireBluLSoul2 Replaces FireBluLSoul2
 		Goto Super::See
 	}
 }
+
+
+// Abyss Lost Soul
+ACTOR AbyssLSoul2RPG : AbyssLSoul2 Replaces AbyssLSoul2
+{
+	Tag "Beetlejuice"
+	
+	-COUNTKILL
+
+	States
+	{
+	Spawn:
+		BST7 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NODROPS)
+		TNT1 A 0
+		Goto Super::Spawn
+	See:
+		BST7 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NODROPS)
+		TNT1 A 0
+		Goto Super::See
+	}
+}

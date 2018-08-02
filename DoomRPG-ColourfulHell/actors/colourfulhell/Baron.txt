@@ -226,3 +226,22 @@ ACTOR AbyssBaron2RPG : AbyssBaron2 Replaces AbyssBaron2
 		Goto Super::See
 	}
 }
+
+ACTOR AbyssBaronSoulRPG : AbyssBaronSoul Replaces AbyssBaronSoul
+{
+    Tag "???"
+
+	-COUNTKILL
+
+	States
+	{
+	Spawn:
+		SSUL A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
+		TNT1 A 0
+		Goto Super::Spawn
+	See:
+		SSUL A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
+		TNT1 A 0
+		Goto Super::See
+	}
+}

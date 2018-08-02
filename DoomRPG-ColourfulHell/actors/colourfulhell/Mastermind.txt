@@ -165,3 +165,19 @@ ACTOR GrayMind2RPG : GrayMind2 Replaces GrayMind2
 		Goto Super::See
 	}
 }
+
+// Abyss Mastermind
+ACTOR AbyssMind2RPG : AbyssMind2 Replaces AbyssMind2
+{
+	Tag "Abyssal Mastermind"
+
+	States
+	{
+	Spawn:
+		AMIN A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		AMIN A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}

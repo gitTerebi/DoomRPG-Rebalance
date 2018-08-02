@@ -290,3 +290,19 @@ ACTOR BoomPEBluRPG : BoomPEBlu Replaces BoomPEBlu
 		Stop
 	}
 }
+
+// Abyss Pain Elemental
+ACTOR AbyssPE2RPG : AbyssPE2 Replaces AbyssPE2
+{
+	Tag "Abyssal Elemental"
+
+	States
+	{
+	Spawn:
+		AYPE A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		AYPE A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
