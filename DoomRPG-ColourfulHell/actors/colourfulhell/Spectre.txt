@@ -153,7 +153,7 @@ ACTOR WakawakaRPG : Wakawaka Replaces Wakawaka
 // Gray Spectre
 ACTOR GraySpectre2RPG : GraySpectre2 Replaces GraySpectre2
 {
-	Tag "Gray Spectre"
+	Tag "Ancient Spectre"
 
 	States
 	{
@@ -172,7 +172,7 @@ ACTOR GraySpectre2RPG : GraySpectre2 Replaces GraySpectre2
 // FireBlu Spectre
 ACTOR FireBluSpectre2RPG : FireBluSpectre2 Replaces FireBluSpectre2
 {
-	Tag "FireBlu Spectre"
+	Tag "Enchanted Spectre"
 
 	States
 	{

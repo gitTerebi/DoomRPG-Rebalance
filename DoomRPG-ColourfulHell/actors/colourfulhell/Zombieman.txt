@@ -199,7 +199,7 @@ ACTOR AbyssZombie2RPG : AbyssZombie2 Replaces AbyssZombie2
 // FireBlu Zombieman.
 ACTOR FireBluZombie2RPG : FireBluZombie2 Replaces FireBluZombie2
 {
-	Tag "FireBlu Former Human"
+	Tag "Enchanted Former Human"
 
 	States
 	{
@@ -215,7 +215,7 @@ ACTOR FireBluZombie2RPG : FireBluZombie2 Replaces FireBluZombie2
 // Gray Zombieman.
 ACTOR GrayZombie2RPG : GrayZombie2 Replaces GrayZombie2
 {
-	Tag "Gray Former Human"
+	Tag "Ancient Former Human"
 
 	States
 	{

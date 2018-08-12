@@ -137,7 +137,7 @@ ACTOR BlackMind2RPG : BlackMind2 Replaces BlackMind2
 // Fireblu Mastermind
 ACTOR FireBluMind2RPG : FireBluMind2 Replaces FireBluMind2
 {
-	Tag "Flaming Spider Mastermind"
+	Tag "Enchanted Spider Mastermind"
 
 	States
 	{
@@ -153,7 +153,7 @@ ACTOR FireBluMind2RPG : FireBluMind2 Replaces FireBluMind2
 // Gray Mastermind
 ACTOR GrayMind2RPG : GrayMind2 Replaces GrayMind2
 {
-	Tag "Gray Spider Mastermind"
+	Tag "Ancient Spider Mastermind"
 
 	States
 	{

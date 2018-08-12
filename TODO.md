@@ -10,7 +10,6 @@ General
 - Rework the way auras drop items; in particular, use the Inventory Transfer flag to make enemies drop backpacks
 - Add more CVARs to customize the loot generator (how it calculates max items in particular, player level, player luck, map number, combinations, etc)
 - Add a ticker/notice display for different events (shop special item changes, rolling events, reinforcement spawns, etc)
-- Review all Colourful Hell monster tags. Make sure they are up to date.
 
 DRLA
 ===
@@ -31,7 +30,6 @@ Events
 
 Brightmaps
 ===
-- Low Power Generator
 - Turret parts crate
 - UAC supply crate
 

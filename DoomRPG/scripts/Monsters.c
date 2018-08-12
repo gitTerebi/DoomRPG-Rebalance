@@ -244,7 +244,7 @@ MonsterInfo const MonsterDataCH[MAX_DEF_MONSTERS_CH] =
     { "YellowCaco",                           "Cacolich",                         22,     2, false, "Screeches drown out all other sound!" },
     { "RedCaco",                              "Demonic Cacodemon",                30,     3, false, "Screeches drown out all other sound!" },
     { "BlackCaco2",                           "Shockmaster",                      56,     4, true,  "Screeches drown out all other sound!" },
-    { "WhiteCaco2",                           "White Cacodemon",                  87,     5, true,  "Screeches drown out all other sound!" },
+    { "WhiteCaco2",                           "Terrifying Cacodemon",             87,     5, true,  "Screeches drown out all other sound!" },
 
     // Hell Knight
     { "CommonHK",                             "Hell Knight",                      20,     0, false, "A battle cry chants in the distance!" },
@@ -312,7 +312,7 @@ MonsterInfo const MonsterDataCH[MAX_DEF_MONSTERS_CH] =
     { "YellowSP1",                            "Brainchotron",                     67,     3, false, "Leg servos squeak and whirr nearby!" },
     { "RedSP1",                               "Raging Arachnotron",               78,     4, false, "Leg servos squeak and whirr nearby!" },
     { "BlackSP2",                             "Explosive Arachnotron",            87,     5, true,  "Leg servos squeak and whirr nearby!" },
-    { "WhiteSP11",                            "White Spider",                     90,     5, true,  "Leg servos squeak and whirr nearby!" },
+    { "WhiteSP11",                            "Ungoliant",                        92,     5, true,  "Leg servos squeak and whirr nearby!" },
 
     // Archvile
     { "CommonArch",                           "Archvile",                         70,     0, false, "You hear crackling flames!" },

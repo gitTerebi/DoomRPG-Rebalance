@@ -210,7 +210,7 @@ ACTOR SpecialImp7RPG : SpecialImp7 Replaces SpecialImp7
 // Gray Imp
 ACTOR GrayImp2RPG : GrayImp2 Replaces GrayImp2
 {
-	Tag "Stoned Imp"
+	Tag "Ancient Imp"
 
 	States
 	{
@@ -219,6 +219,22 @@ ACTOR GrayImp2RPG : GrayImp2 Replaces GrayImp2
 		Goto Super::Spawn
 	See:
 		PRIM A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// FireBlu Imp
+ACTOR FireBluImp2RPG : FireBluImp2 Replaces FireBluImp2
+{
+	Tag "Enchanted Imp"
+
+	States
+	{
+	Spawn:
+		TROO A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TROO A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
@@ -235,22 +251,6 @@ ACTOR AbyssImp2RPG : AbyssImp2 Replaces AbyssImp2
 		Goto Super::Spawn
 	See:
 		TRO4 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// FireBlu Imp
-ACTOR FireBluImp2RPG : FireBluImp2 Replaces FireBluImp2
-{
-	Tag "FireBlu Imp"
-
-	States
-	{
-	Spawn:
-		TROO A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		TROO A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }

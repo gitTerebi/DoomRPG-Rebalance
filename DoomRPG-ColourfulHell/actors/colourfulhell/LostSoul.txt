@@ -260,7 +260,6 @@ ACTOR FireBluLSoul2RPG : FireBluLSoul2 Replaces FireBluLSoul2
 	}
 }
 
-
 // Abyss Lost Soul
 ACTOR AbyssLSoul2RPG : AbyssLSoul2 Replaces AbyssLSoul2
 {

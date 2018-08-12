@@ -167,7 +167,7 @@ ACTOR BlackCybie2RPG : BlackCybie2 Replaces BlackCybie2
 // Fireblu Cyberdemon
 ACTOR FireBluCybie2RPG : FireBluCybie2 Replaces FireBluCybie2
 {
-	Tag "FireBlu Cyberdemon"
+	Tag "Enchanted Cyberdemon"
 
 	States
 	{
@@ -183,7 +183,7 @@ ACTOR FireBluCybie2RPG : FireBluCybie2 Replaces FireBluCybie2
 // Gray Cyberdemon
 ACTOR Graycybie2RPG : Graycybie2 Replaces Graycybie2
 {
-	Tag "Stoner Cyberdemon"
+	Tag "Ancient Cyberdemon"
 
 	States
 	{

@@ -267,7 +267,7 @@ ACTOR GrayPE2RPG : GrayPE2 Replaces GrayPE2
 // Fireblu Pain Elemental
 ACTOR FireBluPE2RPG : FireBluPE2 Replaces FireBluPE2
 {
-	Tag "FireBlu Elemental"
+	Tag "Enchanted Elemental"
 
 	States
 	{

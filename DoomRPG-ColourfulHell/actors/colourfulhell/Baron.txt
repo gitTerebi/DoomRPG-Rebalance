@@ -182,7 +182,7 @@ ACTOR RoseTentacleRPG : RoseTentacle Replaces RoseTentacle
 // Gray Baron
 ACTOR GrayBaron2RPG : GrayBaron2 Replaces GrayBaron2
 {
-	Tag "A Statue?"
+	Tag "Ancient Baron of Hell"
 
 	States
 	{
@@ -198,7 +198,7 @@ ACTOR GrayBaron2RPG : GrayBaron2 Replaces GrayBaron2
 // Fireblu Baron
 ACTOR FireBluBaron2RPG : FireBluBaron2 Replaces FireBluBaron2
 {
-	Tag "FireBlu Baron of Hell"
+	Tag "Enchanted Baron of Hell"
 
 	States
 	{

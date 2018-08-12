@@ -154,7 +154,7 @@ ACTOR WhiteDemon2RPG : WhiteDemon2 Replaces WhiteDemon2
 // Gray Demon
 ACTOR GreyDemon2RPG : GreyDemon2 Replaces GreyDemon2
 {
-	Tag "Demon Worm"
+	Tag "Ancient Demonic Worm"
 
 	States
 	{
@@ -165,6 +165,22 @@ ACTOR GreyDemon2RPG : GreyDemon2 Replaces GreyDemon2
 	//See:
 	//	WORM A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 	//	Goto Super::See
+	}
+}
+
+// FireBlu Demon
+ACTOR FireBluDemon2RPG : FireBluDemon2 Replaces FireBluDemon2
+{
+	Tag "Enchanted Demon"
+
+	States
+	{
+	Spawn:
+		SARG A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SARG A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
 	}
 }
 
@@ -180,22 +196,6 @@ ACTOR AbyssDemon2RPG : AbyssDemon2 Replaces AbyssDemon2
 		Goto Super::Spawn
 	See:
 		HDOG A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// FireBlu Demon
-ACTOR FireBluDemon2RPG : FireBluDemon2 Replaces FireBluDemon2
-{
-	Tag "FireBlu Demon"
-
-	States
-	{
-	Spawn:
-		SARG A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		SARG A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }

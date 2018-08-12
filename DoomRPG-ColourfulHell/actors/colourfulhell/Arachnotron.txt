@@ -122,7 +122,7 @@ ACTOR BlackSP2RPG : BlackSP2 Replaces BlackSP2
 // White Arachnotron
 ACTOR WhiteSP11RPG : WhiteSP11 Replaces WhiteSP11
 {
-	Tag "White Spider"
+	Tag "Ungoliant"
 
 	States
 	{
@@ -137,7 +137,7 @@ ACTOR WhiteSP11RPG : WhiteSP11 Replaces WhiteSP11
 
 ACTOR WhiteSP3RPG : WhiteSP3 Replaces WhiteSP3
 {
-	Tag "White Spider"
+	Tag "Ungoliant Progeny"
 
 	States
 	{
@@ -152,7 +152,7 @@ ACTOR WhiteSP3RPG : WhiteSP3 Replaces WhiteSP3
 
 ACTOR WhiteSP2RPG : WhiteSP2 Replaces WhiteSP2
 {
-	Tag "White Spider"
+	Tag "Ungoliant Progeny"
 
 	States
 	{
@@ -167,7 +167,7 @@ ACTOR WhiteSP2RPG : WhiteSP2 Replaces WhiteSP2
 
 ACTOR MiniSP1RPG : MiniSP1 Replaces MiniSP1
 {
-	Tag "White Spider"
+	Tag "Spiderling"
 
 	States
 	{
@@ -183,7 +183,7 @@ ACTOR MiniSP1RPG : MiniSP1 Replaces MiniSP1
 // Gray Arachnotron
 ACTOR GraySP2RPG : GraySP2 Replaces GraySP2
 {
-	Tag "Metal Spider"
+	Tag "Ancient Arachnotron"
 
 	States
 	{
@@ -199,7 +199,7 @@ ACTOR GraySP2RPG : GraySP2 Replaces GraySP2
 // FireBlu Arachnotron
 ACTOR FireBluSP2RPG : FireBluSP2 Replaces FireBluSP2
 {
-	Tag "Ugly Floater"
+	Tag "Enchanted Brainchotron"
 
 	States
 	{
@@ -215,7 +215,7 @@ ACTOR FireBluSP2RPG : FireBluSP2 Replaces FireBluSP2
 // Abyss Arachnotron
 ACTOR AbyssSP2RPG : AbyssSP2 Replaces AbyssSP2
 {
-	Tag "Abyssal Arachnotron"
+	Tag "Abyssal Dweller"
 
 	States
 	{

@@ -184,7 +184,7 @@ ACTOR WhitevileRPG : Whitevile Replaces Whitevile
 // Gray Archvile
 ACTOR GrayArch2RPG : GrayArch2 Replaces GrayArch2
 {
-	Tag "Stone Archvile"
+	Tag "Ancient Archvile"
 
 	States
 	{
@@ -200,7 +200,7 @@ ACTOR GrayArch2RPG : GrayArch2 Replaces GrayArch2
 // Fireblu Archvile
 ACTOR FireBluArch2RPG : FireBluArch2 Replaces FireBluArch2
 {
-	Tag "FireBlu Archvile"
+	Tag "Enchanted Archvile"
 
 	States
 	{

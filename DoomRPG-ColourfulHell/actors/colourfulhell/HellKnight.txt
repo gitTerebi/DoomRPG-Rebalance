@@ -205,7 +205,7 @@ ACTOR MiniPhantomRPG : MiniPhantom Replaces MiniPhantom
 // Fireblu Hell Knight
 ACTOR FireBluHK2RPG : FireBluHK2 Replaces FireBluHK2
 {
-	Tag "Clown Knight"
+	Tag "Enchanted Knight"
 
 	States
 	{
@@ -221,7 +221,7 @@ ACTOR FireBluHK2RPG : FireBluHK2 Replaces FireBluHK2
 // Gray Hell Knight
 ACTOR GrayHK2RPG : GrayHK2 Replaces GrayHK2
 {
-	Tag "Gray Knight"
+	Tag "Ancient Knight"
 
 	States
 	{

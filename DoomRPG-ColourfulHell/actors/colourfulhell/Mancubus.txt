@@ -154,7 +154,7 @@ ACTOR WhiteFatso2RPG : WhiteFatso2 Replaces WhiteFatso2
 // Fireblu Mancubus
 ACTOR FireBluFatso2RPG : FireBluFatso2 Replaces FireBluFatso2
 {
-	Tag "Mancublu"
+	Tag "Enchanted Beast"
 
 	States
 	{
@@ -170,7 +170,7 @@ ACTOR FireBluFatso2RPG : FireBluFatso2 Replaces FireBluFatso2
 // Gray Mancubus
 ACTOR GrayFatso2RPG : GrayFatso2 Replaces GrayFatso2
 {
-	Tag "Gray Mancubus"
+	Tag "Ancient Mancubus"
 
 	States
 	{

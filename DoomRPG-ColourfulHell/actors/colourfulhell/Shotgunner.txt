@@ -170,7 +170,7 @@ ACTOR WhiteSGEXRPG : WhiteSGEX Replaces WhiteSGEX
 // Fireblu Shotgunner
 ACTOR FireBluSG2RPG : FireBluSG2 Replaces FireBluSG2
 {
-	Tag "Flame Sergeant"
+	Tag "Enchanted Sergeant"
 
 	States
 	{
@@ -202,7 +202,7 @@ ACTOR AbyssSG2RPG : AbyssSG2 Replaces AbyssSG2
 // Gray Shotgunner
 ACTOR GraySG2RPG : GraySG2 Replaces GraySG2
 {
-	Tag "Gray Sergeant"
+	Tag "Ancient Sergeant"
 
 	States
 	{

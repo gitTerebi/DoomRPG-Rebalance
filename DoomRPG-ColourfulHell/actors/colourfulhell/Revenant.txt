@@ -152,7 +152,7 @@ ACTOR BlackRev2RPG : BlackRev2 Replaces BlackRev2
 // Fireblu Revenant
 ACTOR FireBLURevenant2RPG : FireBLURevenant2 Replaces FireBLURevenant2
 {
-	Tag "Flaming Revenant"
+	Tag "Enchanted Revenant"
 
 	States
 	{
@@ -168,7 +168,7 @@ ACTOR FireBLURevenant2RPG : FireBLURevenant2 Replaces FireBLURevenant2
 // Gray Revenant
 ACTOR GrayRevenant2RPG : GrayRevenant2 Replaces GrayRevenant2
 {
-	Tag "Boxing Revenant"
+	Tag "Ancient Revenant"
 
 	States
 	{
