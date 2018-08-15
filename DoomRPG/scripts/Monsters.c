@@ -402,9 +402,6 @@ int NewMonsterID()
 // Monster Init Script
 NamedScript DECORATE void MonsterInit(int Flags)
 {
-    // This cannot be defined this above because for some reason it breaks Namegen. Whaaaaaaaaaaaaaaaaa.
-    MonsterInitDelay = 5;
-
     // Get a new ID for the monster
     if (GetMonsterID(0) == 0)
         SetMonsterID(0, NewMonsterID());
@@ -446,6 +443,8 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Store Actor Name
     Stats->Actor = GetActorClass(0);
 
+    // This cannot be defined this above because for some reason it breaks Namegen. Whaaaaaaaaaaaaaaaaa.
+    MonsterInitDelay = 5;
     Delay(MonsterInitDelay); // Allow map events to modify our stats/replacements (see Map.ds:18)
     while (WaitingForReplacements)
         Delay(1);
