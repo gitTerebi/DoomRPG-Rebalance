@@ -899,8 +899,7 @@ bool CheckPlayersDistanceTID(int TID, int DistanceTID)
         // Player is not in-game
         if (!PlayerInGame(i)) break;
 
-        int d = Distance(Players(i).TID, TID);
-        if (d < DistanceTID) return true;
+        if (Distance(Players(i).TID, TID) < DistanceTID) return true;
     }
 
     return false;

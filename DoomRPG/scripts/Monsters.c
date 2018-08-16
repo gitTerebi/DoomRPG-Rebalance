@@ -10,7 +10,7 @@
 #include "Stats.h"
 #include "Utils.h"
 
-static int MonsterInitDelay;
+static int const MonsterInitDelay = 5;
 int RPGMap MonsterID = 1;
 
 MonsterInfoPtr MonsterData;
@@ -443,8 +443,6 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Store Actor Name
     Stats->Actor = GetActorClass(0);
 
-    // This cannot be defined this above because for some reason it breaks Namegen. Whaaaaaaaaaaaaaaaaa.
-    MonsterInitDelay = 5;
     Delay(MonsterInitDelay); // Allow map events to modify our stats/replacements (see Map.ds:18)
     while (WaitingForReplacements)
         Delay(1);
