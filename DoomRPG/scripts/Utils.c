@@ -2164,7 +2164,7 @@ int Abs(int x)
 }
 
 // Rounds a fixed to the nearest integer
-int RoundInt(fixed x) // Renamed to avoid definition conflict with GDCC.
+int RoundInt(fixed x)
 {
     return (int)(x + 0.5);
 }

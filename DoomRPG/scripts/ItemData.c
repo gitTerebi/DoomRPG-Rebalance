@@ -1078,6 +1078,7 @@ ItemInfoPtr GetRewardItem(int Difficulty)
             if (Difficulty == 2) Cap = 4;   // Basic modpacks only
             else                 Cap = 10;  // All modpacks
 
+            // An overflow happens here very rarely. You'll see "Reward Item: ENTEROUTPOST" in the console.
             if (Random(0, 100) < 25)
             {
                 Index = Random(0, Cap - 1);

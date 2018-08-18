@@ -5,6 +5,7 @@
 #include "Utils.h"
 #include "Outpost.h"
 #include "Menu.h"
+#include "Monsters.h"
 
 int RPGGlobal ArenaMaxWave;
 
@@ -54,14 +55,6 @@ str const ArenaBonus[ABONUS_MAX] =
     "\CiCrate Drop",
     "\CtMod Drop",
     "\CjKey Drop"
-};
-
-str const ArenaMonsters[MAX_DEF_MONSTERS_DF] =
-{
-    "ZombieMan", "ShotgunGuy", "DoomImp", "Demon", "Spectre", "ChaingunGuy",
-    "HellKnight", "BaronOfHell", "Cacodemon", "LostSoul",
-    "PainElemental", "Revenant", "Fatso", "Arachnotron", "ArchVile",
-    "Cyberdemon", "SpiderMastermind"
 };
 
 // Arena Script
@@ -550,9 +543,44 @@ void ArenaCheckMod()
 
 void ArenaSpawnMobs()
 {
-    int MonsterID = 1;
+    int MonsterDiffLimit = 2 + ArenaWave;
     int Spawned;
+    bool Boss = false;
 
+    // Slots 0 - 2 are for normal monsters. Slot 3 is for boss. Slot 4 is NULL.
+    MonsterInfoPtr MonsterList[3];
+    MonsterInfoPtr TempMonster;
+    // Store 3 monster actors.
+    for (int i = 0; i < (2 + 1); i++)
+    {
+        TempMonster = &MonsterData[Random(0, MonsterDataAmount - 1)];
+
+        // Skip bosses & monsters above difficulty limit.
+        if (!TempMonster->Boss && TempMonster->Difficulty <= MonsterDiffLimit)
+        {
+            MonsterList[i] = TempMonster;
+        }
+        else
+            i--;
+    }
+    // Decide if boss should spawn.
+    Boss = (ArenaWave >= 50) && !Random(0, 8);
+    // Store 1 boss actor.
+    // This was a part of the above loop but was separated because it could complete before a boss was found.
+    if (Boss)
+        for (int i = 0; i < 1; i++)
+        {
+            TempMonster = &MonsterData[Random(0, MonsterDataAmount - 1)];
+
+            if (TempMonster->Boss)
+            {
+                MonsterList[3] = TempMonster;
+            }
+            else
+                i--;
+        }
+
+    // Monsters.
     for (int i = ArenaSpotSpawns; i <= ArenaSpotSpawns + 30; i++)
     {
         // Check to make sure there wasn't a chance that nothing at all spawned
@@ -564,25 +592,15 @@ void ArenaSpawnMobs()
                 break;
         }
 
-        // Get a random monster from the list
-        MonsterID = Random(-5, ArenaWave / 5);
-
-        if (MonsterID > 14)
-            MonsterID = 14;
-
-        if (MonsterID < 0)
-            MonsterID = 0;
-
         // Spawn the monster
-        if (!Random(0, 2) && SpawnSpotFacing(ArenaMonsters[MonsterID], i, ArenaMonstersTID))
+        if (!Random(0, 5) > 0 && SpawnSpotFacing(MonsterList[Random(0, 2)]->Actor, i, ArenaMonstersTID))
         {
             SpawnSpotForced("TeleportFog", i, 0, 0);
             Spawned++;
         }
     }
 
-    bool Boss = (ArenaWave >= 75) && !Random(0, 7);
-
+    // Bosses.
     if (Boss)
     {
         int SpotTID;
@@ -591,7 +609,7 @@ void ArenaSpawnMobs()
         {
             SpotTID = ArenaSpotSpawns + Random(0, 30);
 
-            if (SpawnSpotFacing(ArenaMonsters[Random(15, 16)], SpotTID, ArenaMonstersTID))
+            if (SpawnSpotFacing(MonsterList[3]->Actor, SpotTID, ArenaMonstersTID))
             {
                 SpawnSpot("TeleportFog", SpotTID, 0, 0);
                 break;
