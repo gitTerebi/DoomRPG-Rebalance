@@ -826,6 +826,11 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
         PreviousPrimaryLevelNum = CurrentLevel->LevelNum;
 
     // Exits
+    if (CurrentLevel->UACArena)
+    {
+        ChangeLevel("Outpost", 0, CHANGELEVEL_NOINTERMISSION, -1);
+        return;
+    }
 
     if (Teleport)
     {

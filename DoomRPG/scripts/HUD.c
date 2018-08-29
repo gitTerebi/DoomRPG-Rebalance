@@ -824,6 +824,8 @@ Start:
     }
 
     // 1-Ups
+    str LivesSprite;
+    str LivesTextColour;
     Lives = CheckInventory("DRPGLife");
     if (Lives > 0 || GetActivatorCVar("drpg_hud_preview"))
     {
@@ -831,10 +833,27 @@ Start:
             X -= 40.0;
         else if (GridCount > 0)
             X = BaseX - 40.0;
-        SetFont("SMALLFONT");
+
+        if (Lives < 3)
+        {
+            LivesSprite = "P1UBA0";
+            LivesTextColour = "Green";
+        }
+        else if (Lives >= 3 && Lives < 5)
+        {
+            LivesSprite = "P3UBA0";
+            LivesTextColour = "Blue";
+        }
+        else if (Lives >= 5)
+        {
+            LivesSprite = "P5UBA0";
+            LivesTextColour = "Red";
+        }
+
+        SetFont("BIGFONT");
         HudMessage("%d", Lives);
-        EndHudMessage(HUDMSG_PLAIN, 0, "Gold", X, Y + 16.0, 0.05);
-        PrintSpritePulse("P1UPA0", 0, X + 14.0, Y + 88.0, 0.75, 32.0, 0.25);
+        EndHudMessage(HUDMSG_PLAIN, 0, LivesTextColour, X + 1.0, Y + 24.0, 0.05);
+        PrintSpritePulse(LivesSprite, 0, X + 14.0, Y + 88.0, 0.75, 32.0, 0.25);
     }
 
     Delay(1);

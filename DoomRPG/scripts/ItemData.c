@@ -127,6 +127,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGMedkitRefill",    "Medkit",                5000, 2, 4, "MEDKA0", 14, 19);
     ITEMDATA_DEF("DRPGSoulsphere",      "Soulsphere",            2000, 2, 3, "SOULA0", 14, 39);
     ITEMDATA_DEF("DRPG1Up",             "1-Up",                 50000, 4, 7, "P1UPA0", 13, 74);
+    ITEMDATA_DEF("DRPG3Up",             "3-Up",                125000, 8, 9, "P3UPA0", 13, 74);
     ITEMDATA_CATEGORY_END;
 
     // Armor
@@ -1078,7 +1079,6 @@ ItemInfoPtr GetRewardItem(int Difficulty)
             if (Difficulty == 2) Cap = 4;   // Basic modpacks only
             else                 Cap = 10;  // All modpacks
 
-            // An overflow happens here very rarely. You'll see "Reward Item: ENTEROUTPOST" in the console.
             if (Random(0, 100) < 25)
             {
                 Index = Random(0, Cap - 1);

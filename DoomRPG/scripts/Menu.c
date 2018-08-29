@@ -2588,8 +2588,8 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case MENUPAGE_SKILLS:
-            HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nLearn/Upgrade Skill: \Cd%jS\C-\nAssign Skill to Wheel Slot: \CiHOLD \Cd%jS\C-\nSwitch Current Skill Level: \Cd%jS + %jS/%jS\C-\nQuickuse selected skill: \Cd%jS\C-",
-                       "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "+user1", "+speed", "+forward", "+back", "+attack");
+            HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nLearn/Upgrade Skill: \Cd%jS\C-\nAssign Skill to Wheel Slot: \CiHOLD \Cd%jS\C-\nClear Skill from Wheel Slot: \CiHOLD \Cd%jS + %jS + %jS\C-\nSwitch Current Skill Level: \Cd%jS + %jS/%jS\C-\nQuickuse selected skill: \Cd%jS\C-",
+                       "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "+user1", "+user1", "+speed", "+use", "+speed", "+forward", "+back", "+attack");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case MENUPAGE_SHIELD:

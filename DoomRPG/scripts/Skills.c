@@ -774,6 +774,8 @@ Start:
                         Player.SkillCategory[Player.WheelSelection] = -1;
                         Player.SkillIndex[Player.WheelSelection] = -1;
                         AmbientSound("menu/move", 127);
+                        // We need close the wheel upon clearing or we'll just end up reassigning the skill.
+                        Close = true;
                     }
                 }
             }

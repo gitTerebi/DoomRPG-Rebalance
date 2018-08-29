@@ -1,0 +1,29 @@
+How to make a map compatible with DRPGs arena system (rough, UDMF only).
+
+Instead of placing monster spawns, you must use Map Spots with a starting TID of 1100. For each map spot be sure to increment the TID or you will get duplicate monster spawns.
+
+Map exits. These are automatically handled via DRPGs exit script. Just place exits as normal.
+
+Arena map events.
+- Updates soon.
+
+Lastly you must have a means of activating the arena which requires calling two separate scripts.
+The first script must be repeatable and ensures that all players are ready. I recommend having this as a crossable line.
+The second script must not be repeatable and starts the arena. I recommend having this as a crossable line.
+They must not be called both at once. Both means of activation must be separate. 
+
+Below is ready to use ACS for your map.
+
+#include "zcommon.acs"
+
+// Enable/Disable the Arena
+script 1 (void)
+{
+    ACS_NamedExecute("ToggleArena", 0);
+}
+
+// Passed the Arena line
+script 2 (void)
+{
+    ACS_NamedExecute("PassArenaLine", 0);
+}
