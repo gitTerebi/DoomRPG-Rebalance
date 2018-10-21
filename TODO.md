@@ -47,9 +47,8 @@ Bugs
 ===
 - Modpack save/load is broken
 - Infinite ammo related buffs are broken
-- Furious Fusion stops working every time you sell a weapon?
-- Look into summons always attacking the Force Wall object
-- Whenever allied Arch-viles resurrect enemies they becomes allied too, but their auras act versus you
+- Furious Fusion stops working every time you sell a weapon? // [SW] This item doesn't appear to exist.
+- Look into summons always attacking the Force Wall object // [SW] Couldn't reproduce.
 - Nuclear bomb event HUD not removed on next map if you escape rather than defuse // [SW] Couldn't reproduce.
 - Co-op PIP is still not working properly
 

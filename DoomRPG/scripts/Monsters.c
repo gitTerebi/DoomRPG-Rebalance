@@ -1556,7 +1556,7 @@ Start:
     if (!CheckInventory("DRPGMonsterEPDrainHandler"))
         return;
 
-    if (!Stats->Aura.Type[AURA_BLUE].Active || CheckInventory("DRPGMonsterDisrupted"))
+    if (!Stats->Aura.Type[AURA_BLUE].Active || CheckInventory("DRPGMonsterDisrupted") || GetActorProperty(0, APROP_Friendly))
     {
         Delay(35);
         goto Start;
@@ -1810,7 +1810,7 @@ Start:
     if (!CheckInventory("DRPGMonsterMoneyDrainHandler"))
         return;
 
-    if (!Stats->Aura.Type[AURA_YELLOW].Active || CheckInventory("DRPGMonsterDisrupted"))
+    if (!Stats->Aura.Type[AURA_YELLOW].Active || CheckInventory("DRPGMonsterDisrupted") || GetActorProperty(0, APROP_Friendly))
     {
         Delay(35);
         goto Start;
@@ -1876,7 +1876,7 @@ Start:
     if (!CheckInventory("DRPGMonsterAmmoDrainHandler"))
         return;
 
-    if (!Stats->Aura.Type[AURA_DARKBLUE].Active || CheckInventory("DRPGMonsterDisrupted"))
+    if (!Stats->Aura.Type[AURA_DARKBLUE].Active || CheckInventory("DRPGMonsterDisrupted") || GetActorProperty(0, APROP_Friendly))
     {
         Delay(35);
         goto Start;
