@@ -1443,9 +1443,7 @@ NamedScript KeyBind void ToggleShield()
 
 void RemoveShieldAccessory()
 {
-    //this if statement always passes, causes P_StartScript: Unknown script 0
-    //needs fixing
-    if (Player.Shield.Accessory->Unequip)
+    if (Player.Shield.Accessory->Unequip && Player.Shield.Accessory != NULL)
         Player.Shield.Accessory->Unequip(false);
 
     Player.Shield.AccessoryBattery = 0;

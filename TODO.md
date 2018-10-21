@@ -50,8 +50,7 @@ Bugs
 - Furious Fusion stops working every time you sell a weapon?
 - Look into summons always attacking the Force Wall object
 - Whenever allied Arch-viles resurrect enemies they becomes allied too, but their auras act versus you
-- Unequpping a shield eccessory that isn't equipped tries to run script 0
-- Nuclear bomb event HUD not removed on next map if you escape rather than defuse
+- Nuclear bomb event HUD not removed on next map if you escape rather than defuse // [SW] Couldn't reproduce.
 - Co-op PIP is still not working properly
 
 New Augmentation System
