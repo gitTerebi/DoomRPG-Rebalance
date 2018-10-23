@@ -1,5 +1,4 @@
 OptionMenu "OptionsMenu"
 {
-	SubMenu "Doom RPG Options",			"DoomRPG"
 	SubMenu "LegenDoom Options",        "LegenDoom"
 }

@@ -1456,7 +1456,7 @@ NamedScript void FocusMode()
             RegenDelay = (RegenWindupSpeed * (Player.EPTime / 4)) / StartWindupSpeed;
         }
 
-        if (CheckInput(0, KEY_NOTIDLE, false, PlayerNumber()) || Player.EP >= Player.EPMax)
+        if (CheckInput(0, KEY_ANYNOTIDLE, false, PlayerNumber()) || Player.EP >= Player.EPMax)
             Player.Focusing = false;
 
         Delay(1);

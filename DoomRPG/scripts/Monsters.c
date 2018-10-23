@@ -2370,7 +2370,9 @@ NamedScript void MonsterDeath()
 
     // [KS] Nuke auras so we don't cause bizarre problems
     // [KS] 5/11/2015 - Actually shouldn't shouldn't anymore, uncomment it if it still does
-    //RemoveMonsterAura(Stats);
+    // [SW] 10/22/2018 - This is an option now, yee.
+    if (GetCVar("drpg_aura_removeondeath"))
+        RemoveMonsterAura(Stats);
 }
 
 //[[alloc_Aut(16384)]]

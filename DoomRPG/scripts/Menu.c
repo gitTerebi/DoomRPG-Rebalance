@@ -2400,7 +2400,7 @@ void MenuInput()
     }
 
     // Reset the Delay Timer if no buttons are pressed
-    if (CheckInput(0, KEY_IDLE, false, PlayerNumber()))
+    if (CheckInput(0, KEY_ANYIDLE, false, PlayerNumber()))
         Player.DelayTimer = 0;
 }
 

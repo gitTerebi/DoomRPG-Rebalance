@@ -942,8 +942,8 @@ typedef enum
     KEY_ONLYPRESSED,
     KEY_HELD,
     KEY_ONLYHELD,
-    KEY_IDLE,
-    KEY_NOTIDLE,
+    KEY_ANYIDLE,
+    KEY_ANYNOTIDLE,
     KEY_REPEAT
 } EKeyStates;
 

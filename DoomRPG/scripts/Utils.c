@@ -877,9 +877,7 @@ bool DropPlayerItem(str Item)
 
 bool IsPlayerMoving()
 {
-    return (GetPlayerInput(PlayerNumber(), MODINPUT_FORWARDMOVE) ||
-            GetPlayerInput(PlayerNumber(), MODINPUT_SIDEMOVE) ||
-            GetPlayerInput(PlayerNumber(), MODINPUT_UPMOVE));
+    return CheckInput(BT_FORWARD | BT_BACK | BT_MOVELEFT | BT_MOVERIGHT, KEY_HELD, true, PlayerNumber());
 }
 
 int FindPlayerID(int TID)
@@ -2654,57 +2652,59 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
     int Buttons;
     int OldButtons;
 
-    if (ModInput)
-    {
-        Input = MODINPUT_BUTTONS;
-        InputOld = MODINPUT_OLDBUTTONS;
-    }
-    else
+    if (!ModInput)
     {
         Input = INPUT_BUTTONS;
         InputOld = INPUT_OLDBUTTONS;
+    }
+    else
+    {
+        Input = MODINPUT_BUTTONS;
+        InputOld = MODINPUT_OLDBUTTONS;
     }
 
     Buttons = GetPlayerInput(PlayerNumber, Input);
     OldButtons = GetPlayerInput(PlayerNumber, InputOld);
 
-    if (State == KEY_PRESSED)
+    switch (State)
+    {
+    case KEY_PRESSED:
     {
         if (Buttons & Key && !(OldButtons & Key))
             return true;
     }
-
-    else if (State == KEY_ONLYPRESSED)
+    break;
+    case KEY_ONLYPRESSED:
     {
         if (Buttons == Key && OldButtons != Key)
             return true;
     }
-
-    else if (State == KEY_HELD)
+    break;
+    case KEY_HELD:
     {
         if (Buttons & Key)
             return true;
     }
-
-    else if (State == KEY_ONLYHELD)
+    break;
+    case KEY_ONLYHELD:
     {
         if (Buttons == Key)
             return true;
     }
-
-    else if (State == KEY_IDLE)
+    break;
+    case KEY_ANYIDLE:
     {
         if (Buttons == 0 && OldButtons == 0)
             return true;
     }
-
-    else if (State == KEY_NOTIDLE)
+    break;
+    case KEY_ANYNOTIDLE:
     {
         if (Buttons > 0)
             return true;
     }
-
-    else if (State == KEY_REPEAT)
+    break;
+    case KEY_REPEAT:
     {
         if (Buttons & Key)
         {
@@ -2725,6 +2725,8 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
                     return false;
             }
         }
+    }
+    break;
     }
 
     return false;

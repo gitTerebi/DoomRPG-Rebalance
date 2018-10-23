@@ -151,7 +151,7 @@ NamedScript MapSpecial void ArenaLoop()
                     ArenaKeyTimer = 0;
 
                 // Reset menu block
-                if (CheckInput(0, KEY_IDLE, false, ArenaPlayerNumber))
+                if (CheckInput(0, KEY_ANYIDLE, false, ArenaPlayerNumber))
                     Player.MenuBlock = false;
             }
         }

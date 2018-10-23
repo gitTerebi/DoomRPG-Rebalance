@@ -14,6 +14,5 @@ OptionValue "ShopSpecialCategories"
 
 OptionMenu "OptionsMenu"
 {
-	SubMenu "Doom RPG Options",			"DoomRPG"
     SubMenu "DoomRL Arsenal Options",   "DoomRLA"
 }
