@@ -37,7 +37,7 @@ MonsterInfo const MonsterDataDF[MAX_DEF_MONSTERS_DF] =
     { "Revenant",                           "Revenant",                         50,     0, false, "Bones clatter all around you!" },
     { "Fatso",                              "Mancubus",                         60,     0, false, "You hear deep, guttural noises!" },
     { "Arachnotron",                        "Arachnotron",                      60,     0, false, "Leg servos squeak and whirr nearby!" },
-    { "ArchVile",                           "Arch-Vile",                        70,     0, false, "You hear crackling flames!" },
+    { "Archvile",                           "Arch-Vile",                        70,     0, false, "You hear crackling flames!" },
     { "Cyberdemon",                         "Cyberdemon",                       85,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
     { "SpiderMastermind",                   "Spider Mastermind",                95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
 };
