@@ -877,7 +877,10 @@ bool DropPlayerItem(str Item)
 
 bool IsPlayerMoving()
 {
-    return CheckInput(BT_FORWARD | BT_BACK | BT_MOVELEFT | BT_MOVERIGHT, KEY_HELD, true, PlayerNumber());
+    if (Player.InMenu)
+        return false;
+    else
+        return CheckInput(BT_FORWARD | BT_BACK | BT_MOVELEFT | BT_MOVERIGHT, KEY_HELD, true, PlayerNumber());
 }
 
 int FindPlayerID(int TID)
