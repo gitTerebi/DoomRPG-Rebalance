@@ -1178,6 +1178,7 @@ NamedScript Console bool Powerup(SkillLevelInfo *SkillLevel, void *Data)
     case 5: // Berserk
         ActivatorSound("powerups/berserk", 127);
         GiveInventory("PowerStrength", 1);
+        AddHealth(100, 100);
         break;
     case 6: // Mental Mapping
         ActivatorSound("powerups/map", 127);
