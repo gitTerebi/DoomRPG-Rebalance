@@ -149,6 +149,22 @@ ACTOR BlackBaron2RPG : BlackBaron2 Replaces BlackBaron2
 	}
 }
 
+// White Baron
+ACTOR WhiteBaron2RPG : WhiteBaron2 Replaces WhiteBaron2
+{
+	Tag "Valkyrie of Hell"
+
+	States
+	{
+	Spawn:
+		HQAC A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		HQAC A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 ACTOR DeepTentacleRPG : DeepTentacle Replaces DeepTentacle
 {
 	Tag "Deep Tentacle"

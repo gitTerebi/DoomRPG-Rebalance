@@ -149,6 +149,22 @@ ACTOR BlackRev2RPG : BlackRev2 Replaces BlackRev2
 	}
 }
 
+// Black Revenant EX
+ACTOR BlackRevenantEXRPG : BlackRevenantEX Replaces BlackRevenantEX
+{
+	Tag "The Black Knight Unleashed"
+
+	States
+	{
+	Spawn:
+		DKNT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		DKNT A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 // Fireblu Revenant
 ACTOR FireBLURevenant2RPG : FireBLURevenant2 Replaces FireBLURevenant2
 {

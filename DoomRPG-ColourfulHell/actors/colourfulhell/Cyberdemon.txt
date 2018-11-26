@@ -164,6 +164,38 @@ ACTOR BlackCybie2RPG : BlackCybie2 Replaces BlackCybie2
 	}
 }
 
+// White Cyberdemon
+ACTOR WhiteCybie2RPG : WhiteCybie2 Replaces WhiteCybie2
+{
+	Tag "DOOM.EXE"
+
+	States
+	{
+	Spawn:
+		BSMT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_MEGABOSS | MF_NOAURA)
+		Goto Super::Spawn
+	See:
+		BSMT A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_MEGABOSS | MF_NOAURA)
+		Goto Super::See
+	}
+}
+
+// White Cyberdemon's spawns.
+actor RomeroBaronsCHRPG : RomeroBaronsCH Replaces RomeroBaronsCH
+{
+  Tag "Romero's Baron"
+
+	States
+	{
+	Spawn:
+		BOSS A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
+		Goto Super::Spawn
+	See:
+		BOSS A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
+		Goto Super::See
+	}
+}
+
 // Fireblu Cyberdemon
 ACTOR FireBluCybie2RPG : FireBluCybie2 Replaces FireBluCybie2
 {

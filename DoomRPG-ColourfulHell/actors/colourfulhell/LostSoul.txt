@@ -186,6 +186,26 @@ ACTOR WhiteLSoul2RPG : WhiteLSoul2 Replaces WhiteLSoul2
 	}
 }
 
+// White Lost Soul EX
+ACTOR WhiteLSoulEXRPG : WhiteLSoulEX Replaces WhiteLSoulEX
+{
+	Tag "The Vengeful Soul"
+	
+	-COUNTKILL
+
+	States
+	{
+	Spawn:
+		ETHS A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NODROPS | MF_BOSS)
+		TNT1 A 0
+		Goto Super::Spawn
+	See:
+		ETHS A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NODROPS | MF_BOSS)
+		TNT1 A 0
+		Goto Super::See
+	}
+}
+
 ACTOR HKEggRPG : HKEgg Replaces HKEgg
 {
 	Tag "Egg"

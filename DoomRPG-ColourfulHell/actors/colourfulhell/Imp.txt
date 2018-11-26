@@ -119,6 +119,22 @@ ACTOR BlackImp1RPG : BlackImp1 Replaces BlackImp1
 	}
 }
 
+// Black Imp EX
+ACTOR BlackImpEXRPG : BlackImpEX Replaces BlackImpEX
+{
+	Tag "Smoking Black Imp EX"
+
+	States
+	{
+	Spawn:
+		AGUR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		AGUR A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 // White Imp
 ACTOR WhiteImp2RPG : WhiteImp2 Replaces WhiteImp2
 {
