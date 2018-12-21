@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#include "Arena.h"
 #include "ItemData.h"
 #include "Map.h"
 #include "Mission.h"
 #include "Monsters.h"
 #include "RPG.h"
+#include "Skills.h"
 #include "Stats.h"
 #include "Outpost.h"
 #include "Utils.h"
@@ -79,16 +81,13 @@ NamedScript Type_OPEN void MapInit()
 
             DefaultOutpost = OutpostMap;
 
-            // [KS] Not right now.
-            /*
-            LevelInfo *ArenaMap = &((LevelInfo *)KnownLevels.Data)[KnownLevels.Position++];
+            LevelInfo *ArenaMap = &((LevelInfo *)KnownLevels->Data)[KnownLevels->Position++];
             ArenaMap->LevelNum = 0;
-            ArenaMap->LumpName = "ARENA";
-            ArenaMap->NiceName = "UAC Arena";
+            ArenaMap->LumpName = "DAM01";
+            ArenaMap->NiceName = "Arena! Oblige Edition.";
             ArenaMap->Completed = true;
             ArenaMap->UACArena = true;
             ArenaMap->NeedsRealInfo = false;
-            */
         }
     }
 
@@ -828,7 +827,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
     // Exits
     if (CurrentLevel->UACArena)
     {
-        ChangeLevel("Outpost", 0, CHANGELEVEL_NOINTERMISSION, -1);
+        Transport(NULL, NULL);
         return;
     }
 

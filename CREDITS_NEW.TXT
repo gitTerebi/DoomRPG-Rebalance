@@ -18,4 +18,5 @@ MDK2.
 Doom PSX Soundtrack extended.
 
 Misc.
+Oblige used for the first arena map ever!
 DRPGExitsReplacer based off of: https://forum.zdoom.org/viewtopic.php?f=122&t=55073&p=998677&hilit=exit#p998782

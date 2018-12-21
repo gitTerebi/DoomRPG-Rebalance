@@ -4,6 +4,7 @@
 #include "RPG.h"
 #include "Utils.h"
 #include "Outpost.h"
+#include "Map.h"
 #include "Menu.h"
 #include "Monsters.h"
 
@@ -545,7 +546,14 @@ void ArenaSpawnMobs()
 {
     int MonsterDiffLimit = 2 + ArenaWave;
     int Spawned;
+    int SpawnChanceModifier;
     bool Boss = false;
+
+    // [SW] Not enough monsters spawn in the Oblige Arena however it could get crowded in the UAC arena so lets have separate values for both.
+    if (CurrentLevel->UACArena)
+        SpawnChanceModifier = 1;
+    else
+        SpawnChanceModifier = 5;
 
     // Slots 0 - 2 are for normal monsters. Slot 3 is for boss. Slot 4 is NULL.
     MonsterInfoPtr MonsterList[3];
@@ -593,7 +601,7 @@ void ArenaSpawnMobs()
         }
 
         // Spawn the monster
-        if (!Random(0, 5) > 0 && SpawnSpotFacing(MonsterList[Random(0, 2)]->Actor, i, ArenaMonstersTID))
+        if (!Random(0, SpawnChanceModifier) > 0 && SpawnSpotFacing(MonsterList[Random(0, 2)]->Actor, i, ArenaMonstersTID))
         {
             SpawnSpotForced("TeleportFog", i, 0, 0);
             Spawned++;
@@ -629,6 +637,12 @@ void ArenaSetEnvironment(int ID)
             ID = EnvironmentRandomizer;
     }
 
+    // Avoiding lava for Arena WADs because mucking with the floor texture is too much compatibility wise.
+    // Swapping it for Fog.
+    if (CurrentLevel->UACArena)
+        if (ID == AEVENT_LAVA)
+            ID = AEVENT_FOGGY;
+
     switch (ID)
     {
     case AEVENT_NONE:
@@ -638,9 +652,13 @@ void ArenaSetEnvironment(int ID)
         Sector_SetFade(ArenaSectorTag, 0, 0, 0);
         Sector_SetFade(ArenaSectorTag + 1, 0, 0, 0);
         Sector_SetFade(ArenaSectorTag + 2, 0, 0, 0);
-        ChangeFloor(ArenaSectorTag, "CEIL5_1");
-        ChangeFloor(ArenaSectorTag + 1, "CEIL5_2");
-        ChangeFloor(ArenaSectorTag + 2, "FLAT3");
+        // Only for UAC Arena.
+        if (!CurrentLevel->UACArena)
+        {
+            ChangeFloor(ArenaSectorTag, "CEIL5_1");
+            ChangeFloor(ArenaSectorTag + 1, "CEIL5_2");
+            ChangeFloor(ArenaSectorTag + 2, "FLAT3");
+        }
         Sector_SetDamage(ArenaSectorTag, 0, 0);
         Sector_SetDamage(ArenaSectorTag + 1, 0, 0);
         Sector_SetDamage(ArenaSectorTag + 2, 0, 0);

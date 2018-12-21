@@ -132,6 +132,52 @@ actor OutpostSignArenaFar 11025
     }
 }
 
+actor OutpostSignArenaWS 11026
+{
+		Scale 0.5
+
+    +SpawnCeiling
+    +NoGravity
+    +WALLSPRITE
+    
+    States
+    {
+    Spawn:
+        OMRK I -1 Light("OUTPOSTSIGN")
+        Stop
+    }
+}
+
+actor OutpostSignArenaStart 11027
+{
+    +SpawnCeiling
+    +NoGravity
+    +WALLSPRITE
+    
+    States
+    {
+    Spawn:
+        OMRK J -1 Light("OUTPOSTSIGN")
+        Stop
+    }
+}
+
+actor OutpostSignArenaReady 11028
+{
+		Scale 0.5
+
+    +SpawnCeiling
+    +NoGravity
+    +WALLSPRITE
+    
+    States
+    {
+    Spawn:
+        OMRK K -1 Light("OUTPOSTSIGN")
+        Stop
+    }
+}
+
 // Stuff
 actor OutpostAdminLamp 12100
 {
