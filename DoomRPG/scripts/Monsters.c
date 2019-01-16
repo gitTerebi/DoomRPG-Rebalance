@@ -264,6 +264,7 @@ MonsterInfo const MonsterDataCH[MAX_DEF_MONSTERS_CH] =
     { "YellowBaron",                          "Grand Baron of Hell",              55,     3, false, "Seems you've found Hell's nobility!" },
     { "RedBaron3",                            "Red Baron",                        69,     4, false, "Seems you've found Hell's nobility!" },
     { "BlackBaron2",                          "Baron of the Abyss",               90,     5, true,  "Seems you've found Hell's nobility!" },
+    { "WhiteBaron2",                          "Valkyrie of Hell",                 98,     5, true,  "Seems you've found Hell's nobility!" },
 
     // Lost Soul
     { "CommonLSoul",                          "Lost Soul",                        3,      0, false, "The sound of many flames echo about!" },
@@ -331,14 +332,17 @@ MonsterInfo const MonsterDataCH[MAX_DEF_MONSTERS_CH] =
     { "PurpleCybie",                          "Epic Cyberdemon",                  94,     4, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
     { "YellowCybie",                          "Legendary Cyberdemon",             96,     4, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
     { "RedCybie",                             "Moloch",                           98,     5, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
+    { "BlackCybie2",                          "Cybersmith",                       99,     5, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
+    { "WhiteCybie2",                          "DOOM.EXE",                         100,    5, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
 
     // Mastermind
-    { "CommonMind",                           "Spider Mastermind",                94,     1, true,  "You've stumbled into a hive of the deadliest kind!" },
-    { "GreenMind",                            "Uncommon Spider Mastermind",       95,     2, true,  "You've stumbled into a hive of the deadliest kind!" },
-    { "BlueMind",                             "Rare Spider Mastermind",           96,     3, true,  "You've stumbled into a hive of the deadliest kind!" },
-    { "PurpleMind",                           "Epic Spider Mastermind",           97,     4, true,  "You've stumbled into a hive of the deadliest kind!" },
-    { "YellowMind",                           "Legendary Spider Mastermind",      98,     4, true,  "You've stumbled into a hive of the deadliest kind!" },
-    { "RedMind",                              "Arachnophyte",                     99,     5, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "CommonMind",                           "Spider Mastermind",                93,     1, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "GreenMind",                            "Uncommon Spider Mastermind",       94,     2, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "BlueMind",                             "Rare Spider Mastermind",           95,     3, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "PurpleMind",                           "Epic Spider Mastermind",           96,     4, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "YellowMind",                           "Legendary Spider Mastermind",      97,     4, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "RedMind",                              "Arachnophyte",                     98,     5, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "BlackMind2",                           "Pseudo Old God",                   99,     5, true,  "You've stumbled into a hive of the deadliest kind!" },
 };
 
 MegabossInfo const MegaBossesDF[MAX_MEGABOSSES_DF] =
@@ -472,6 +476,13 @@ NamedScript DECORATE void MonsterInit(int Flags)
             }
         }
         return;
+    }
+
+    // Megabossifyer! For compatible monster mods.
+    // This has been placed after Replacement so it will trigger only for the chosen megaboss actor.
+    if (CompatMonMode != COMPAT_NONE && CurrentLevel->Event == MAPEVENT_MEGABOSS)
+    {
+        Flags = MF_MEGABOSS | MF_NOAURA;
     }
 
     // Store Monster Flags

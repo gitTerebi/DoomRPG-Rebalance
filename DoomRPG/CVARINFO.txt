@@ -1,3 +1,5 @@
+// ANY NEW CVARS ADDED HERE MUST ALSO BE ADDED TO: "ResetToDefaults" and its relatives in "zscript\DRPGZUtils.txt"
+
 // XP System
 server  float   drpg_scalexp = 1.0;
 server  int     drpg_xp_curve = 300;

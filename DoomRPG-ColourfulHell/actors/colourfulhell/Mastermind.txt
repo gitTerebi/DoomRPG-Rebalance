@@ -126,10 +126,10 @@ ACTOR BlackMind2RPG : BlackMind2 Replaces BlackMind2
 	States
 	{
 	Spawn:
-		ARNQ A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_MEGABOSS | MF_NOAURA)
+		ARNQ A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NOAURA)
 		Goto Super::Spawn
 	See:
-		ARNQ A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_MEGABOSS | MF_NOAURA)
+		ARNQ A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NOAURA)
 		Goto Super::See
 	}
 }

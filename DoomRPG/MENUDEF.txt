@@ -422,6 +422,9 @@ OptionMenu "DoomRPGHUD"
 {
     Title "HUD"
     
+    SubMenu "HUD Presets", "DoomRPGHUDPresets"
+    StaticText ""
+    
     Option "HUD Preview", "drpg_hud_preview", "OnOff"
     StaticText ""
     
@@ -499,6 +502,17 @@ OptionMenu "DoomRPGHUD"
     Option "Always Show Aug Battery", "drpg_aug_alwaysshow", "OnOff"
 }
 
+OptionMenu "DoomRPGHUDPresets"
+{
+    Title "HUD Presets"
+
+	StaticText "These will overwrite any changes you have made to the HUD!"
+	StaticText ""
+
+	SafeCommand "Default", "pukename SetHUDPreset 1", "Are you sure?"
+	SafeCommand "Wide", "pukename SetHUDPreset 2", "Are you sure?"
+}
+
 OptionMenu "DoomRPGMisc"
 {
     Title "Misc"
@@ -533,15 +547,15 @@ OptionMenu "DoomRPGCharacter"
     Title "Character"
     
     StaticText "Respec", 1
-    Command "Respec Stats", "pukename Respec 1 0"
-    Command "Respec Skills", "pukename Respec 0 1"
-    Command "Respec All", "pukename Respec 1 1"
+    SafeCommand "Respec Stats", "pukename Respec 1 0", "Are you sure?"
+    SafeCommand "Respec Skills", "pukename Respec 0 1", "Are you sure?"
+    SafeCommand "Respec All", "pukename Respec 1 1", "Are you sure?"
     StaticText ""
 
     StaticText "Save/Load", 1
-    Command "Save Character", "pukename SaveCharacter"
-    Command "Load Character", "pukename LoadCharacter"
-    Command "Clear Character", "pukename ClearCharacter"
+    SafeCommand "Save Character", "pukename SaveCharacter", "Are you sure?"
+    SafeCommand "Load Character", "pukename LoadCharacter", "Are you sure?"
+    SafeCommand "Clear Character", "pukename ClearCharacter", "Are you sure?"
     StaticText ""
 }
 
@@ -655,6 +669,11 @@ OptionMenu "DoomRPG"
     SubMenu "Performance",                  "DoomRPGPerformance"
     SubMenu "Character",                    "DoomRPGCharacter"
     SubMenu "Starting Options",             "DoomRPGStart"
+    
+    StaticText ""
+    StaticText "---------------"
+    StaticText ""
+    SafeCommand "Reset to defaults", "pukename ResetToDefaults", "Are you sure?"
 }
 
 OptionMenu "OptionsMenu"

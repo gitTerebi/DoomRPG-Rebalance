@@ -283,6 +283,8 @@ void DrawBarBase(HUDBarInfo *Info)
             DrawBarSprite(Info, "HPBarB1");
         else if (Contains(Info->Name, "Sloth"))
             DrawBarSprite(Info, "HPBarB7");
+        else
+            DrawBarSprite(Info, "HPBarBM");
     }
     else if (Contains(Info->Actor, "Marine") || Contains(Info->Actor, "PowerSuit"))
         DrawBarSprite(Info, "HPBarM");

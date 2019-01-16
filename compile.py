@@ -48,7 +48,7 @@ ACS_SOURCES  = os.path.join("DoomRPG", "scripts")
 ACS_INCLUDES = os.path.join("DoomRPG", "scripts", "inc")
 
 # Compile options.
-OPTIONS = ['--bc-target=ZDoom']
+OPTIONS = ['--target-engine=ZDoom']
 
 COMPILEROPTIONS = ['-c', '-i', ACS_INCLUDES]
 ASSEMBLEROPTIONS = []

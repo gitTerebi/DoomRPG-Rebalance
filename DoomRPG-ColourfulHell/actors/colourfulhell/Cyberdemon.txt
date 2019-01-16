@@ -156,10 +156,10 @@ ACTOR BlackCybie2RPG : BlackCybie2 Replaces BlackCybie2
 	States
 	{
 	Spawn:
-		BSMT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_MEGABOSS | MF_NOAURA)
+		BSMT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NOAURA)
 		Goto Super::Spawn
 	See:
-		BSMT A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_MEGABOSS | MF_NOAURA)
+		BSMT A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NOAURA)
 		Goto Super::See
 	}
 }
@@ -172,10 +172,10 @@ ACTOR WhiteCybie2RPG : WhiteCybie2 Replaces WhiteCybie2
 	States
 	{
 	Spawn:
-		BSMT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_MEGABOSS | MF_NOAURA)
+		BSMT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NOAURA)
 		Goto Super::Spawn
 	See:
-		BSMT A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_MEGABOSS | MF_NOAURA)
+		BSMT A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NOAURA)
 		Goto Super::See
 	}
 }

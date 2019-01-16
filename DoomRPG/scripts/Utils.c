@@ -2735,6 +2735,16 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
     return false;
 }
 
+NamedScript MenuEntry void SetHUDPreset(int Preset)
+{
+    ScriptCall("DRPGZUtilities", "SetHUDPreset", Preset);
+}
+
+NamedScript MenuEntry void ResetToDefaults()
+{
+    ScriptCall("DRPGZUtilities", "ResetToDefaults");
+}
+
 OptionalArgs(1) void LogMessage(str Message, int Level)
 {
     bool DebugMode = (ActivatorTID() == Player.TID ? GetCVar("drpg_debug") : GetActivatorCVar("drpg_debug"));
