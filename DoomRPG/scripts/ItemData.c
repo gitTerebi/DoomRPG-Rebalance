@@ -1064,10 +1064,13 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
 
     if (Difficulty < 10)
     {
-        DiffPick = Random(0, 100);
-
-        if (DiffPick < 20) Difficulty--; // Unlucky, item will be a rank lower
-        if (DiffPick > 95) Difficulty++; // Lucky, item will be a rank higher
+        // Rarity Chance Modifier thingy
+        if (GetCVar("drpg_loot_rcm"))
+        {
+            DiffPick = Random(0, 100);
+            if (DiffPick < 20) Difficulty--; // Unlucky, item will be a rank lower
+            if (DiffPick > 95) Difficulty++; // Lucky, item will be a rank higher
+        }
 
         // Prevent under/overflow
         if (Difficulty < 0) Difficulty = 0;
