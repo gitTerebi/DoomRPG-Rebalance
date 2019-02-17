@@ -182,15 +182,21 @@ OptionMenu "DoomRPGXPSystem"
 
     Slider "XP Multiplier", "drpg_scalexp", 0.25, 8.0, 0.25
     Slider "XP Curve", "drpg_xp_curve", 0, 500, 5
-	Slider "XP based on monster health", "drpg_xp_health_awareness", 0, 1, 0.1
+//    Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
+    Slider "XP based on monster health", "drpg_xp_health_awareness", 0, 1, 0.1
 }
 
 OptionMenu "DoomRPGMonsters"
 {
     Title "Monster Level/Stat System"
+    
+    Slider "Monster Level Cap", "drpg_monster_level_cap", 1, 10000, 1
+    Slider "Monster Stat Cap", "drpg_monster_stat_cap", 1, 10000, 1
+    StaticText ""
 
     Option "Monster Level System", "drpg_monster_levels", "MonsterLevelType"
-	Slider "Monster Vitality Effect", "drpg_monster_vitality_effect", 1, 100.0, 1
+    Slider "Monster Vitality Effect", "drpg_monster_vitality_effect", 1, 100, 1
+    Slider "Monster Health Boost", "drpg_monster_vitality_boost", 0.0, 100.0, 0.1
     StaticText ""
 
     Slider "Monster Level Weight", "drpg_monster_level_weight", 0.5, 10.0, 0.1
@@ -203,6 +209,73 @@ OptionMenu "DoomRPGMonsters"
     Option "Monster Stat Specialization", "drpg_monster_specialize", "OnOff"
     Option "Are You A Bad Enough Dude?", "drpg_monster_shadows", "YesNo"
     Option "Fast Monsters", "sv_fastmonsters", "OnOff"
+    StaticText ""
+
+    SubMenu "Monster Aura Settings", "DoomRPGMonsterAuraSettings"
+}
+
+OptionMenu "DoomRPGMonsterAuraSettings"
+{
+    StaticText "Red Aura", "Dark Red"
+    Option "Damage retaliation", "drpg_monster_red_retaliation", "OnOff"
+    Option "Faster firing", "drpg_monster_red_missilemore", "OnOff"
+    Option "Even faster firing", "drpg_monster_red_missileevenmore", "OnOff"
+    Option "Fear resistance", "drpg_monster_red_nofear", "OnOff"
+    StaticText ""
+
+    StaticText "Green Aura", "Green"
+    Option "Ignore repulsion", "drpg_monster_green_dontblast", "OnOff"
+    Option "Stop ripping projectiles", "drpg_monster_green_dontrip", "OnOff"
+    Option "Ignore pain", "drpg_monster_green_nopain", "OnOff"
+    Option "Ignore explosive damage", "drpg_monster_green_noradiusdmg", "OnOff"
+    Option "Reflect projectiles", "drpg_monster_green_reflective", "OnOff"
+    StaticText "The following option could be used only"
+    StaticText "with conjuction with the previous one"
+    Option "Only frontal reflection", "drpg_monster_green_shieldreflect", "OnOff"
+    StaticText ""
+
+    StaticText "White Aura", "White"
+    Option "Mass levelups", "drpg_monster_white_masslevel", "OnOff"
+    Option "Always bright", "drpg_monster_white_bright", "OnOff"
+    Option "Omnidirectional sight", "drpg_monster_white_lookallaround", "OnOff"
+    Option "Ignore infighting", "drpg_monster_white_noinfighting", "OnOff"
+    Option "Other monsters ignore attacks", "drpg_monster_white_notarget", "OnOff"
+    Option "Keep attacking one target", "drpg_monster_white_notargetswitch", "OnOff"
+    StaticText ""
+
+    StaticText "Pink Aura", "Brick"
+    Option "Mass resurrection", "drpg_monster_pink_resurrect", "OnOff"
+    Option "Immunity to drain effects", "drpg_monster_pink_dontdrain", "OnOff"
+    StaticText ""
+
+    StaticText "Blue Aura", "Light Blue"
+    Option "Energy drain", "drpg_monster_blue_epdrain", "OnOff"
+    Option "Immunity to timefreeze", "drpg_monster_blue_notimefreeze", "OnOff"
+    Option "Ability to see invisible players", "drpg_monster_blue_seeinvisible", "OnOff"	
+    StaticText ""
+
+    StaticText "Purple Aura", "Purple"
+    Option "Mass healing", "drpg_monster_purple_massheal", "OnOff"
+    StaticText ""
+
+    StaticText "Orange Aura", "Orange"
+    Option "Surprise teleports", "drpg_monster_orange_teleport", "OnOff"
+    Option "Fast movement, reaction and attack", "drpg_monster_orange_alwaysfast", "OnOff"
+    Option "Ability to jump down", "drpg_monster_orange_jumpdown", "OnOff"
+    StaticText "The following option should be enabled"
+	StaticText "if teleports are enabled, unless you want"
+	StaticText "to make your game much more difficult"
+    Option "No telefrag when teleporting", "drpg_monster_orange_notelestomp", "OnOff"
+    Option "Fast target switching", "drpg_monster_orange_quicktoretaliate", "OnOff"
+    StaticText ""
+
+    StaticText "Dark Blue Aura", "Blue"
+    Option "Ammo drain", "drpg_monster_darkblue_ammodrain", "OnOff"
+    StaticText ""
+
+    StaticText "Yellow Aura", "Yellow"
+    Option "Money drain", "drpg_monster_yellow_moneydrain", "OnOff"
+    StaticText ""
 }
 
 OptionMenu "DoomRPGDifficulty"
@@ -221,11 +294,13 @@ OptionMenu "DoomRPGDifficulty"
     Option "Heal HP/EP on Level-up", "drpg_levelup_heal", "OnOff"
     Option "Toxicity Penalties", "drpg_toxicity_penalties", "OnOff"
     Option "Mission Kills Affected By Monsters", "drpg_mission_monsterkillscount", "OnOff"
+    Option "Invulnerability resists status", "drpg_invulnerability_plus", "OnOff"
     StaticText ""
 
     Slider "Starting Map Weight", "drpg_monster_mapweight", 1, 1000, 1
     Slider "Monster Population %", "drpg_monster_population", 10.0, 200.0, 1.0
     Slider "Absolute Monster Limit", "drpg_monster_limit", 0.0, 16200.0, 200.0
+    Option "Map-based monster spawns", "drpg_monster_adaptive_spawns", "OnOff"
     StaticText ""
 
     Slider "Enemy Aura Steal Rate", "drpg_aurasteal_rate", 10, 175, 1
@@ -290,6 +365,8 @@ OptionMenu "DoomRPGStats"
     Slider "Modules Skill Cost Amount Factor", "drpg_module_skillfactor", 0.5, 10.0, 0.1
     StaticText ""
 
+    Slider "Hard Stat Cap", "drpg_hard_stat_cap", 1, 10000, 1
+    Slider "Soft Stat Cap Multiplier", "drpg_soft_stat_cap_mult", 1, 100, 1
     Option "Stat Randomizer", "drpg_auto_spend", "OnOff"
     Option "Stat Preference", "drpg_auto_spend_pref", "StatPreference"
     StaticText ""
@@ -309,9 +386,9 @@ OptionMenu "DoomRPGStats"
     StaticText ""
 
     Option "Inventory Capacity System", "drpg_inv_capacity", "OnOff"
-	StaticText ""
-	
-	Slider "Skill Overdrive % Limit", "drpg_overdrive_limit", 0, 1000, 1
+    StaticText ""
+    
+    Slider "Skill Overdrive % Limit", "drpg_overdrive_limit", 0, 1000, 1
 }
 
 OptionMenu "DoomRPGStatsNatural"
@@ -355,7 +432,7 @@ OptionMenu "DoomRPGHealthBars"
 
     Option "Monster Health Bars", "drpg_healthbars", "OnOff"
     Option "Names on Health Bars", "drpg_healthbars_names", "OnOff"
-	Option "Plain Health Bars", "drpg_healthbars_plain", "OnOff"
+    Option "Plain Health Bars", "drpg_healthbars_plain", "OnOff"
     StaticText ""
 
     Slider "Health Bars Width", "drpg_healthbars_width", 640, 1920, 1

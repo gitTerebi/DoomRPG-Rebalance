@@ -15,7 +15,7 @@ long int XPCurve;
 
 // Stat Caps
 int const SoftStatCap = 100;
-int const HardStatCap = 1000;
+int HardStatCap;
 
 // XP & Rank Tables
 long int XPTable[MAX_LEVEL];
@@ -61,7 +61,8 @@ str const LongRanks[MAX_RANK + 1] =
 NamedScript DECORATE void StatusEffect(int Type, int Time, int Intensity)
 {
     // Can't get Status Effects if Pink Aura is active
-    if (Player.Aura.Type[AURA_PINK].Active || Player.SoulActive[SOUL_PINK]) return;
+    if (Player.Aura.Type[AURA_PINK].Active || Player.SoulActive[SOUL_PINK] || (GetCVar("drpg_invulnerability_plus") && GetActorPowerupTics(0, "PowerInvulnerable") > 0))
+        return;
 
     if (Intensity <= 0)
         Intensity = 1;
@@ -412,7 +413,7 @@ void CheckStats()
     Player.MedkitMax = Player.CapacityTotal * 10;
 
     // Determine current stat cap
-    Player.StatCap = SoftStatCap + Player.Level;
+    Player.StatCap = SoftStatCap + Player.Level * GetCVar("drpg_soft_stat_cap_mult");
 
     // Per-stat leveling
     if (GetCVar("drpg_levelup_natural"))
@@ -734,6 +735,7 @@ void CheckStatCaps()
 // Keep stats capped at the hard value
 void CheckHardStatCaps()
 {
+    HardStatCap = GetCVar("drpg_hard_stat_cap");
     if (Player.Strength > HardStatCap)      Player.Strength = HardStatCap;
     if (Player.Defense > HardStatCap)       Player.Defense = HardStatCap;
     if (Player.Vitality > HardStatCap)      Player.Vitality = HardStatCap;
