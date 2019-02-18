@@ -53,4 +53,17 @@ class DRPGZEHandler : EventHandler
             }
         }
     }
+    
+    override void WorldThingDamaged(WorldEvent e)
+    {
+        if (e.Thing.bIsMonster && e.DamageSource.player)
+        {
+		    int Damage = e.Damage;
+		    if (e.Thing.Health < 0)
+            {
+                Damage += e.Thing.Health;
+            }
+            e.Thing.ACS_ScriptCall("MonsterDamaged", e.DamageSource.PlayerNumber(), Damage);
+        }
+    }
 }

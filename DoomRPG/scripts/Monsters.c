@@ -390,6 +390,10 @@ int NewMonsterID()
         Monsters[CurrentID].Aura.Type[i].Level = 0;
         Monsters[CurrentID].AuraAdd[i] = false;
     }
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        Monsters[CurrentID].DamageTable[i] = 0;
+    }
     Monsters[CurrentID].Threat = 0;
     Monsters[CurrentID].Strength = 0;
     Monsters[CurrentID].Defense = 0;
@@ -2219,8 +2223,13 @@ NamedScript void MonsterDeath()
         {
             if (!PlayerInGame(i)) continue;
 
-            if (Killer == i)
+            Stats->DamageTable[i] = Clamp(0, Stats->DamageTable[i], Stats->HealthMax);
+
+            if (Stats->DamageTable[i] > 0)
             {
+                XPAmount = (XPAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
+                RankAmount = (RankAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
+
                 AddXP(i, XPAmount, RankAmount);
                 if (GetCVar("drpg_levelup_natural"))
                 {
@@ -2233,8 +2242,6 @@ NamedScript void MonsterDeath()
                     Players(i).StrengthXP += (int)(XPAmount * Scale);
                 }
             }
-            else
-                AddXP(i, XPAmount / 3, 0);
         }
     }
 
@@ -2355,7 +2362,28 @@ NamedScript void MonsterDeath()
             CreditsAmount *= 4;
 
         // Log("\CfInitial Amount: %d\n\CfLuck Mult: %d\n\CfMin: %d\n\CfMax: %d\n\CfAmount: %d", CheckInventory("DRPGCredits"), LuckMult, CreditsMin, CreditsMax, CreditsAmount);
-        DropMoney(Killer, 0, CreditsAmount);
+        if (GetCVar("drpg_virtual_credits"))
+        {
+            if (GetCVar("drpg_multi_sharecredits"))
+            {
+                for (int i = 0; i < MAX_PLAYERS; i++)
+                    if (PlayerInGame(i))
+                        GiveActorInventory(Players(i).TID, "DRPGCredits", (CreditsAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100);
+            }
+            else
+                GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsAmount);
+        }
+        else
+        {
+            if (GetCVar("drpg_multi_sharecredits"))
+            {
+                for (int i = 0; i < MAX_PLAYERS; i++)
+                    if (PlayerInGame(i))
+                        DropMoney(i, 0, (CreditsAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100);
+            }
+            else
+                DropMoney(Killer, 0, CreditsAmount);
+        }
     }
 
     // Drop stolen ammo
@@ -2923,3 +2951,8 @@ NamedScript void MonsterOrangeAuraCheck(bool Enable)
 //NamedScript void MonsterDarkBlueAuraCheck(bool Enable)
 //NamedScript void MonsterYellowBlueAuraCheck(bool Enable)
 
+NamedScript Console void MonsterDamaged(int PlayerNum, int Damage)
+{
+    MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+    Stats->DamageTable[PlayerNum] += Damage;
+}

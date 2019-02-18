@@ -425,6 +425,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_multi_restoreammo');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_multi_sharecredits');
+        i.ResetToDefault();
         i = CVar.FindCVar('drpg_shoptype');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_shopspecial_type');
@@ -578,6 +580,8 @@ class DRPGZUtilities
         i = CVar.FindCVar('drpg_auras_drawdistance');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_popoffs_drawdistance');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_virtual_credits');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_char_data_len');
         i.ResetToDefault();

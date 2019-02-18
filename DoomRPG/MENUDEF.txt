@@ -458,6 +458,9 @@ OptionMenu "DoomRPGMultiplayer"
 
     Option "Restore EP on Respawn", "drpg_multi_restoreep", "OnOff"
     Option "Restore Ammo on Respawn", "drpg_multi_restoreammo", "OnOff"
+    StaticText ""
+    
+    Option "Share credit drops", "drpg_multi_sharecredits", "OnOff"
 }
 
 OptionMenu "DoomRPGShop"
@@ -633,7 +636,9 @@ OptionMenu "DoomRPGPerformance"
 
     Slider "Auras Draw Distance", "drpg_auras_drawdistance", 0, 5000, 100
     Slider "Popoffs Draw Distance", "drpg_popoffs_drawdistance", 0, 5000, 100
+    StaticText ""
 
+    Option "Virtual credit drops", "drpg_virtual_credits", "OnOff"
 }
 
 OptionMenu "DoomRPGCharacter"

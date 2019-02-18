@@ -317,6 +317,8 @@ struct MonsterStats_S
 
     int LevelAdd;
     bool AuraAdd[AURA_MAX];
+
+    int DamageTable[MAX_PLAYERS];
 };
 
 struct MonsterInfo_S

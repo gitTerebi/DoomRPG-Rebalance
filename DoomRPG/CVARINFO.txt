@@ -156,6 +156,7 @@ server  int     drpg_multi_dropcredits_percent = 10;
 server  bool    drpg_multi_dropinv = false;
 server  bool    drpg_multi_restoreep = false;
 server  bool    drpg_multi_restoreammo = false;
+server  bool    drpg_multi_sharecredits = false;
 
 // Shop
 server  int     drpg_shoptype = 1;
@@ -245,6 +246,7 @@ user    bool    drpg_toaster = false;
 server  int     drpg_simple_auras = 0;
 server  int     drpg_auras_drawdistance = 1000;
 server  int     drpg_popoffs_drawdistance = 1000;
+server  bool    drpg_virtual_credits = false;
 
 // Stored Character
 user    int     drpg_char_data_len = 0;

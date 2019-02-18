@@ -24,6 +24,7 @@ NamedScript Console  void MonsterDump();
 NamedScript Console  void MonsterDamage(int, int);
 NamedScript DECORATE void MonsterTransport(int, int, int);
 NamedScript DECORATE void MonsterRegenHealer();
+NamedScript Console  void MonsterDamaged(int, int);
 
 OptionalArgs(1) NamedScript void MonsterInitStats(int);
 NamedScript void MonsterStatsHandler();
