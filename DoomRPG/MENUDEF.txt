@@ -184,6 +184,7 @@ OptionMenu "DoomRPGXPSystem"
     Slider "XP Curve", "drpg_xp_curve", 0, 500, 5
 //    Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
     Slider "XP based on monster health", "drpg_xp_health_awareness", 0, 1, 0.1
+	Slider "Summon's damage XP award %", "drpg_xp_summon_percent", 0, 100, 1
 }
 
 OptionMenu "DoomRPGMonsters"

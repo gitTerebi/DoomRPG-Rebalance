@@ -2951,8 +2951,31 @@ NamedScript void MonsterOrangeAuraCheck(bool Enable)
 //NamedScript void MonsterDarkBlueAuraCheck(bool Enable)
 //NamedScript void MonsterYellowBlueAuraCheck(bool Enable)
 
-NamedScript Console void MonsterDamaged(int PlayerNum, int Damage)
+NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
 {
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-    Stats->DamageTable[PlayerNum] += Damage;
+
+    SetActivator(SourceTID);
+
+    // Damaged by a player
+    if (PlayerNumber() > -1)
+    {
+        Stats->DamageTable[PlayerNumber()] += Damage;
+        return;
+    }
+
+    // Damaged by a player's turret
+    for (int i = 0; i < MAX_PLAYERS; i++)
+        if (ActivatorTID() == Players(i).Turret.TID)
+        {
+            Stats->DamageTable[i] += (Damage * GetCVar("drpg_xp_summon_percent")) / 100;
+            return;
+        }
+
+    // Damaged by a player's summons
+    if (ClassifyActor(0) & ACTOR_MONSTER && GetMonsterID(0) && GetActorProperty(0, APROP_MasterTID))
+    {
+        SetActivator(GetActorProperty(0, APROP_MasterTID));
+        Stats->DamageTable[PlayerNumber()] += (Damage * GetCVar("drpg_xp_summon_percent")) / 100;
+    }
 }

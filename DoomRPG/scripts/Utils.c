@@ -2508,7 +2508,7 @@ NamedScript Console void ModStatXP(int Stat, long int Value)
 // Look up a value on the XP Table
 NamedScript Console void LookupXPTable(int index)
 {
-    Log("%d", XPTable[index]);
+    Log("%ld", XPTable[index]);
 }
 
 // Give Credits
