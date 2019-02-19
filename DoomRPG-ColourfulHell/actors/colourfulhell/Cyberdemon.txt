@@ -39,6 +39,22 @@ ACTOR GreenCybieRPG : GreenCybie Replaces GreenCybie
 	}
 }
 
+// Cyan Cyberdemon
+ACTOR CyanCybie2RPG : CyanCybie2 Replaces CyanCybie2
+{
+	Tag "Icy Cyberdemon"
+
+	States
+	{
+	Spawn:
+		CARD A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		SUPS A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 // Blue Cyberdemon
 ACTOR BlueCybieRPG : BlueCybie Replaces BlueCybie
 {
@@ -86,6 +102,38 @@ ACTOR SpecialHKRPG : SpecialHK Replaces SpecialHK
 	}
 }
 
+// Fireblu Cyberdemon
+ACTOR FireBluCybie2RPG : FireBluCybie2 Replaces FireBluCybie2
+{
+	Tag "Enchanted Cyberdemon"
+
+	States
+	{
+	Spawn:
+		CYBR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		CYBR A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Gray Cyberdemon
+ACTOR Graycybie2RPG : Graycybie2 Replaces Graycybie2
+{
+	Tag "Ancient Cyberdemon"
+
+	States
+	{
+	Spawn:
+		SUPR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		SUPR A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 // Yellow Cyberdemon
 ACTOR YellowcybieRPG : Yellowcybie Replaces Yellowcybie
 {
@@ -98,6 +146,22 @@ ACTOR YellowcybieRPG : Yellowcybie Replaces Yellowcybie
 		Goto Super::Spawn
 	See:
 		SUPR A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Abyss Cyberdemon
+ACTOR AbyssCybie2RPG : AbyssCybie2 Replaces AbyssCybie2
+{
+	Tag "Abyssal Cyberdemon"
+
+	States
+	{
+	Spawn:
+		TERM A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TERM A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
 		Goto Super::See
 	}
 }
@@ -192,54 +256,6 @@ actor RomeroBaronsCHRPG : RomeroBaronsCH Replaces RomeroBaronsCH
 		Goto Super::Spawn
 	See:
 		BOSS A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
-		Goto Super::See
-	}
-}
-
-// Fireblu Cyberdemon
-ACTOR FireBluCybie2RPG : FireBluCybie2 Replaces FireBluCybie2
-{
-	Tag "Enchanted Cyberdemon"
-
-	States
-	{
-	Spawn:
-		CYBR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
-		Goto Super::Spawn
-	See:
-		CYBR A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
-		Goto Super::See
-	}
-}
-
-// Gray Cyberdemon
-ACTOR Graycybie2RPG : Graycybie2 Replaces Graycybie2
-{
-	Tag "Ancient Cyberdemon"
-
-	States
-	{
-	Spawn:
-		SUPR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
-		Goto Super::Spawn
-	See:
-		SUPR A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
-		Goto Super::See
-	}
-}
-
-// Abyss Cyberdemon
-ACTOR AbyssCybie2RPG : AbyssCybie2 Replaces AbyssCybie2
-{
-	Tag "Abyssal Cyberdemon"
-
-	States
-	{
-	Spawn:
-		TERM A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
-		Goto Super::Spawn
-	See:
-		TERM A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
 		Goto Super::See
 	}
 }

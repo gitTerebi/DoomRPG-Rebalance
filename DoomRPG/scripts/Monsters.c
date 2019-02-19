@@ -294,6 +294,7 @@ MonsterInfo const MonsterDataCH[MAX_DEF_MONSTERS_CH] =
     { "YellowRevenant",                       "Ghostly Revenant",                 68,     3, false, "Bones clatter all around you!" },
     { "RedRevenant",                          "Bloody Revenant",                  78,     4, false, "Bones clatter all around you!" },
     { "BlackRevenant3",                       "The Black Knight",                 88,     5, true,  "Bones clatter all around you!" },
+    { "WhiteRevenant2",                       "The Lichest Lich",                 94,     5, true,  "Bones clatter all around you!" },
 
     // Mancubus
     { "CommonFatso",                          "Mancubus",                         50,     0, false, "You hear deep, guttural noises!" },

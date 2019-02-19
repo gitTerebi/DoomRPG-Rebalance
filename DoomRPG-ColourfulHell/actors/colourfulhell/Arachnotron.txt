@@ -39,6 +39,22 @@ ACTOR GreenSP1RPG : GreenSP1 Replaces GreenSP1
 	}
 }
 
+// Cyan Arachnotron
+ACTOR CyanSP2RPG : CyanSP2 Replaces CyanSP2
+{
+	Tag "Icy Brainchotron"
+
+	States
+	{
+	Spawn:
+		ACNB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		ACNB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Arachnotron
 ACTOR BlueSP1RPG : BlueSP1 Replaces BlueSP1
 {
@@ -71,10 +87,58 @@ ACTOR PurpleSP1RPG : PurpleSP1 Replaces PurpleSP1
 	}
 }
 
+// Gray Arachnotron
+ACTOR GraySP2RPG : GraySP2 Replaces GraySP2
+{
+	Tag "Ancient Arachnotron"
+
+	States
+	{
+	Spawn:
+		BSPI A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		BSPI A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Abyss Arachnotron
+ACTOR AbyssSP2RPG : AbyssSP2 Replaces AbyssSP2
+{
+	Tag "Abyssal Dweller"
+
+	States
+	{
+	Spawn:
+		ABSP A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		ABSP A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Yellow Arachnotron
 ACTOR YellowSP1RPG : YellowSP1 Replaces YellowSP1
 {
 	Tag "Brainchotron"
+
+	States
+	{
+	Spawn:
+		ACNB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		ACNB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// FireBlu Arachnotron
+ACTOR FireBluSP2RPG : FireBluSP2 Replaces FireBluSP2
+{
+	Tag "Enchanted Brainchotron"
 
 	States
 	{
@@ -176,54 +240,6 @@ ACTOR MiniSP1RPG : MiniSP1 Replaces MiniSP1
 		Goto Super::Spawn
 	See:
 		TRIT A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS | MF_BOSS)
-		Goto Super::See
-	}
-}
-
-// Gray Arachnotron
-ACTOR GraySP2RPG : GraySP2 Replaces GraySP2
-{
-	Tag "Ancient Arachnotron"
-
-	States
-	{
-	Spawn:
-		BSPI A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		BSPI A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// FireBlu Arachnotron
-ACTOR FireBluSP2RPG : FireBluSP2 Replaces FireBluSP2
-{
-	Tag "Enchanted Brainchotron"
-
-	States
-	{
-	Spawn:
-		ACNB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		ACNB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// Abyss Arachnotron
-ACTOR AbyssSP2RPG : AbyssSP2 Replaces AbyssSP2
-{
-	Tag "Abyssal Dweller"
-
-	States
-	{
-	Spawn:
-		ABSP A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		ABSP A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
