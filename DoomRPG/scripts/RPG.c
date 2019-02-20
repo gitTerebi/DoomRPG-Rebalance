@@ -547,6 +547,8 @@ Start:
             {
                 DamageTaken = -Player.Shield.Charge;
                 Player.ActualHealth -= DamageTaken;
+                // Recieving damage interrupts focusing
+                Player.Focusing = false;
                 Player.Shield.Charge = 0;
             }
             else
@@ -561,6 +563,8 @@ Start:
     if (DamageTaken > 0)
     {
         Player.ActualHealth -= DamageTaken;
+        // Recieving damage interrupts focusing
+        Player.Focusing = false;
 
         if (Player.ActualHealth <= 1) // Near-Death stuff
         {
@@ -1369,9 +1373,6 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
         Z = GetActorFloorZ(TID);
         Thing_Remove(TID);
 
-        if (Actor == "DRPGGenericMonsterDropper" && GetCVar("drpg_monster_adaptive_spawns"))
-            Actor = Monsters[Random(1, GetLevelInfo(LEVELINFO_TOTAL_MONSTERS))].Actor;
-
         bool Spawned = Spawn("MapSpotGravity", X, Y, Z, TID, A);
         if (Spawned)
         {
@@ -1380,7 +1381,12 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
             Thing_Remove(TID);
             if (!Remove)
             {
-                if (Spawn(Actor, X, Y, Z, TID, A))
+                if (Actor == "DRPGGenericMonsterDropper" && GetCVar("drpg_monster_adaptive_spawns"))
+                {
+                    if (Spawn(Monsters[Random(1, CurrentLevel->MaxTotalMonsters)].Actor, X, Y, Z, TID, A))
+                        Items++;
+                }
+                else if (Spawn(Actor, X, Y, Z, TID, A))
                     Items++;
             }
         }
@@ -1467,7 +1473,7 @@ NamedScript void FocusMode()
             RegenDelay = (RegenWindupSpeed * (Player.EPTime / 4)) / StartWindupSpeed;
         }
 
-        if (IsPlayerMoving() || Player.EP >= Player.EPMax)
+        if (IsPlayerMoving() || Player.EP >= Player.EPMax || CheckInput(BT_ATTACK, KEY_HELD, true, -1) || CheckInput(BT_ALTATTACK, KEY_HELD, true, -1))
             Player.Focusing = false;
 
         Delay(1);
