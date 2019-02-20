@@ -1377,13 +1377,14 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
         if (Spawned)
         {
             bool Remove = DynamicLootGeneratorCheckRemoval(TID, Z);
+            bool Visible = CheckSight(TID, Players(0).TID, 0);
 
             Thing_Remove(TID);
             if (!Remove)
             {
                 if (Actor == "DRPGGenericMonsterDropper" && GetCVar("drpg_monster_adaptive_spawns"))
                 {
-                    if (Spawn(Monsters[Random(1, CurrentLevel->MaxTotalMonsters)].Actor, X, Y, Z, TID, A))
+                    if (!Visible && Spawn(Monsters[Random(1, CurrentLevel->MaxTotalMonsters)].Actor, X, Y, Z, TID, A))
                         Items++;
                 }
                 else if (Spawn(Actor, X, Y, Z, TID, A))
