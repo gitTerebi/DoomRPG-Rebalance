@@ -1253,14 +1253,16 @@ Start:
         return;
     }
 
-    /* Monster is no longer friendly, remove their summon bonuses and species
+    // Monster is no longer friendly, remove their summon bonuses and species
     // This causes issues with infighting and I don't remember why I did this in the first place
     // Just comment it out and leave it alone for now
-    if (!GetActorProperty(0, APROP_Friendly))
+    // [SW, 2/20/2019] Need this to prevent our summons from being unkillable if they lose APROP_Friendly
+    if (Stats->Friendly && !GetActorProperty(0, APROP_Friendly))
     {
         GiveInventory("DRPGFriendlyRemover", 1);
         SetActorPropertyString(0, APROP_Species, "");
-    } */
+        Stats->Friendly = false;
+    }
 
     // Levelup handling via White Aura radius
     if (CheckInventory("DRPGMonsterLevelup"))
