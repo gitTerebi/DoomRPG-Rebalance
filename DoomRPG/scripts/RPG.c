@@ -547,7 +547,7 @@ Start:
             {
                 DamageTaken = -Player.Shield.Charge;
                 Player.ActualHealth -= DamageTaken;
-                // Recieving damage interrupts focusing
+                // Recieving damage to health interrupts focusing
                 Player.Focusing = false;
                 Player.Shield.Charge = 0;
             }
@@ -563,7 +563,7 @@ Start:
     if (DamageTaken > 0)
     {
         Player.ActualHealth -= DamageTaken;
-        // Recieving damage interrupts focusing
+        // Recieving damage to health interrupts focusing
         Player.Focusing = false;
 
         if (Player.ActualHealth <= 1) // Near-Death stuff
@@ -1377,14 +1377,14 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
         if (Spawned)
         {
             bool Remove = DynamicLootGeneratorCheckRemoval(TID, Z);
-            bool Visible = CheckSight(TID, Players(0).TID, 0);
+            bool Visible = CheckSight(TID, Players(0).TID, CSF_NOFAKEFLOORS);
 
             Thing_Remove(TID);
             if (!Remove)
             {
-                if (Actor == "DRPGGenericMonsterDropper" && GetCVar("drpg_monster_adaptive_spawns"))
+                if (Actor == "DRPGGenericMonsterDropper")
                 {
-                    if (!Visible && Spawn(Monsters[Random(1, CurrentLevel->MaxTotalMonsters)].Actor, X, Y, Z, TID, A))
+                    if (!Visible && Spawn(GetCVar("drpg_monster_adaptive_spawns") ? Monsters[Random(1, CurrentLevel->MaxTotalMonsters)].Actor : Actor, X, Y, Z, TID, A))
                         Items++;
                 }
                 else if (Spawn(Actor, X, Y, Z, TID, A))
@@ -1474,6 +1474,7 @@ NamedScript void FocusMode()
             RegenDelay = (RegenWindupSpeed * (Player.EPTime / 4)) / StartWindupSpeed;
         }
 
+        // Moving and attacking interrupts focusing
         if (IsPlayerMoving() || Player.EP >= Player.EPMax || CheckInput(BT_ATTACK, KEY_HELD, true, -1) || CheckInput(BT_ALTATTACK, KEY_HELD, true, -1))
             Player.Focusing = false;
 

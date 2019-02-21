@@ -184,7 +184,7 @@ OptionMenu "DoomRPGXPSystem"
     Slider "XP Curve", "drpg_xp_curve", 0, 500, 5
 //    Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
     Slider "XP based on monster health", "drpg_xp_health_awareness", 0, 1, 0.1
-	Slider "Summon's damage XP award %", "drpg_xp_summon_percent", 0, 100, 1
+    Slider "Summon's damage XP award %", "drpg_xp_summon_percent", 0, 100, 1
 }
 
 OptionMenu "DoomRPGMonsters"
@@ -252,7 +252,7 @@ OptionMenu "DoomRPGMonsterAuraSettings"
     StaticText "Blue Aura", "Light Blue"
     Option "Energy drain", "drpg_monster_blue_epdrain", "OnOff"
     Option "Immunity to timefreeze", "drpg_monster_blue_notimefreeze", "OnOff"
-    Option "Ability to see invisible players", "drpg_monster_blue_seeinvisible", "OnOff"	
+    Option "Ability to see invisible players", "drpg_monster_blue_seeinvisible", "OnOff"
     StaticText ""
 
     StaticText "Purple Aura", "Purple"
@@ -264,8 +264,8 @@ OptionMenu "DoomRPGMonsterAuraSettings"
     Option "Fast movement, reaction and attack", "drpg_monster_orange_alwaysfast", "OnOff"
     Option "Ability to jump down", "drpg_monster_orange_jumpdown", "OnOff"
     StaticText "The following option should be enabled"
-	StaticText "if teleports are enabled, unless you want"
-	StaticText "to make your game much more difficult"
+    StaticText "if teleports are enabled, unless you want"
+    StaticText "to make your game much more difficult"
     Option "No telefrag when teleporting", "drpg_monster_orange_notelestomp", "OnOff"
     Option "Fast target switching", "drpg_monster_orange_quicktoretaliate", "OnOff"
     StaticText ""
