@@ -56,7 +56,7 @@ class DRPGZEHandler : EventHandler
     
     override void WorldThingDamaged(WorldEvent e)
     {
-        if (e.Thing.bIsMonster)
+        if (e.Thing && e.DamageSource && e.Thing.bIsMonster)
         {
 		    int Damage = e.Damage;
 		    if (e.Thing.Health < 0)
