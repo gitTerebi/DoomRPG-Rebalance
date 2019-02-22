@@ -215,7 +215,16 @@ NamedScript DECORATE int CheckCapacity()
             if (GetActivatorCVar("drpg_character_spec") == 7)
                 Scale *= 2;
         }
-        Player.CapacityXP += (int)(Player.InvItems * Scale / MaxItems * 20);
+
+        if (CompatMode == COMPAT_DRLA)
+        {
+            // Calculate capacity usage per category in DRLA, excluding weapons and modpacks
+            int DRLAItems = CheckInventory("RLArmorInInventory") + CheckInventory("RLSkullLimit") + CheckInventory("RLPhaseDeviceLimit");
+            int DRLAMaxItems = DRLA_ARMOR_MAX + DRLA_SKULL_MAX + DRLA_DEVICE_MAX;
+            Player.CapacityXP += (int)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 20);
+        }
+        else
+            Player.CapacityXP += (int)(Player.InvItems * Scale / MaxItems * 20);
     }
 
     // Don't do checks if you have the system disabled

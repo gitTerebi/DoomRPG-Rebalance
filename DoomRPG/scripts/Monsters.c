@@ -2371,6 +2371,10 @@ NamedScript void MonsterDeath()
                 // RAINBOWS Event
                 if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
                     CreditsTable[i] *= 4;
+
+                // UAC Premium
+                if (GetCVar("drpg_uac_premium"))
+                    GiveActorInventory(Players(i).TID, "DRPGCredits", Stats->SpawnHealth * ThreatMult * Stats->DamageTable[i] * 10 / Stats->HealthMax / 100);
             }
         }
         else
@@ -2387,6 +2391,10 @@ NamedScript void MonsterDeath()
             // RAINBOWS Event
             if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
                 CreditsAmount *= 4;
+
+            // UAC Premium
+            if (GetCVar("drpg_uac_premium"))
+                GiveActorInventory(Players(Killer).TID, "DRPGCredits", Stats->SpawnHealth * ThreatMult / 10);
         }
 
         // Log("\CfInitial Amount: %d\n\CfLuck Mult: %d\n\CfMin: %d\n\CfMax: %d\n\CfAmount: %d", CheckInventory("DRPGCredits"), LuckMult, CreditsMin, CreditsMax, CreditsAmount);

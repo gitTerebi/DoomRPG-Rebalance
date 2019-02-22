@@ -289,6 +289,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_loot_rcm');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_uac_premium');
+        i.ResetToDefault();
         i = CVar.FindCVar('drpg_mapevent_chance');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_mapevent_eventtime');

@@ -325,6 +325,9 @@ OptionMenu "DoomRPGLootGeneration"
 
     StaticText "---------- Crates ----------", "White"
     Slider "Shield part chance", "drpg_loot_crate_spc", 1.0, 100.0, 1.0
+    StaticText ""
+
+    Option "UAC Premium kill bonus", "drpg_uac_premium", "OnOff"
 }
 
 OptionMenu "DoomRPGMapEvents"

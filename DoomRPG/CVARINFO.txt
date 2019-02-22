@@ -75,6 +75,7 @@ server  bool    drpg_loot_system = true;
 server  float   drpg_lootgen_factor = 1.0;
 server  bool    drpg_loot_rcm = true; // Rarity Chance Modifier
 server  float   drpg_loot_crate_spc = 35.0; // Shield Part Chance
+server  bool    drpg_uac_premium = false;
 
 // Map Events
 server  float   drpg_mapevent_chance = 20.0;
