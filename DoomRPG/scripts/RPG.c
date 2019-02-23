@@ -1376,8 +1376,8 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
         bool Spawned = Spawn("MapSpotGravity", X, Y, Z, TID, A);
         if (Spawned)
         {
-            bool Remove = DynamicLootGeneratorCheckRemoval(TID, Z);
-            bool Visible = CheckSight(TID, Players(0).TID, CSF_NOFAKEFLOORS);
+            bool Remove = ScriptCall("DRPGZUtilities", "CheckActorInMap", TID) ? DynamicLootGeneratorCheckRemoval(TID, Z) : true;
+            bool Visible = !Remove ? CheckSight(TID, Players(0).TID, CSF_NOFAKEFLOORS) : false;
 
             Thing_Remove(TID);
             if (!Remove)

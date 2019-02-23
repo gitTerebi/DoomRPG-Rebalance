@@ -4,6 +4,15 @@ class DRPGZUtilities
     {
         return level.Sectors.Size();
     }
+    static bool CheckActorInMap(int TID)
+    {
+        ActorIterator AI = ActorIterator.Create(TID);
+        Actor A = AI.Next();
+        if (A)
+            return level.IsPointInMap(A.Pos);
+        else
+            return false;
+    }
     static void SetHUDPreset(int Preset)
     {
         // Preset options:
