@@ -8,7 +8,7 @@ I recommend reading CHANGELOG.txt and the commits for all the changes.
 * GZDoom v3.2.5 or higher is required to play this mod. 
 Avoid v3.3 as it has an [ACS bug](https://forum.zdoom.org/viewtopic.php?style=12&f=7&t=60049) that causes performance issues.
 
-[Refer to the Wiki.](https://github.com/Kyle873/DoomRPG/wiki)
+[Refer to the Wiki.](https://github.com/Sumwunn/DoomRPG/wiki)
 
 ## Compatible mods
 
