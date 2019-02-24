@@ -323,10 +323,15 @@ NamedScript Type_OPEN void MapInit()
 
         // Give a tip for events instead if they're new to the player
         if (CurrentLevel->Event != MAPEVENT_NONE)
+        {
             // Player has seen this event before
             if (Players(i).SeenEventTip[CurrentLevel->Event]) continue;
 
-        SetActivator(Players(i).TID);
+            SetActivator(Players(i).TID);
+        }
+        else
+            SetActivator(0, AAPTR_PLAYER1 << i);
+
         GiveTip();
         SetActivator(0, AAPTR_NULL);
     }
