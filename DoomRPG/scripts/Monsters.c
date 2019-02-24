@@ -294,6 +294,7 @@ MonsterInfo const MonsterDataCH[MAX_DEF_MONSTERS_CH] =
     { "YellowRevenant",                       "Ghostly Revenant",                 68,     3, false, "Bones clatter all around you!" },
     { "RedRevenant",                          "Bloody Revenant",                  78,     4, false, "Bones clatter all around you!" },
     { "BlackRevenant3",                       "The Black Knight",                 88,     5, true,  "Bones clatter all around you!" },
+    { "WhiteRevenant2",                       "The Lichest Lich",                 94,     5, true,  "Bones clatter all around you!" },
 
     // Mancubus
     { "CommonFatso",                          "Mancubus",                         50,     0, false, "You hear deep, guttural noises!" },
@@ -1223,6 +1224,7 @@ NamedScript void MonsterStatsHandler()
     int OldLuck;
     bool StatsChanged;
     bool MonsterWasDisrupted = false;
+    bool Friendly = GetActorProperty(0, APROP_Friendly); // Sanity check for when APROP_Friendly gets removed from summons
 
 Start:
 
@@ -1256,14 +1258,16 @@ Start:
         return;
     }
 
-    /* Monster is no longer friendly, remove their summon bonuses and species
+    // Monster is no longer friendly, remove their summon bonuses and species
     // This causes issues with infighting and I don't remember why I did this in the first place
     // Just comment it out and leave it alone for now
-    if (!GetActorProperty(0, APROP_Friendly))
+    // [SW, 2/20/2019] Need this to prevent our summons from being unkillable if they lose APROP_Friendly
+    if (Friendly && !GetActorProperty(0, APROP_Friendly))
     {
         GiveInventory("DRPGFriendlyRemover", 1);
         SetActorPropertyString(0, APROP_Species, "");
-    } */
+        Friendly = false;
+    }
 
     // Levelup handling via White Aura radius
     if (CheckInventory("DRPGMonsterLevelup"))

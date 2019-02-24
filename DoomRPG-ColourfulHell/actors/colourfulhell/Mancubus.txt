@@ -39,6 +39,22 @@ ACTOR GreenFatsoRPG : GreenFatso Replaces GreenFatso
 	}
 }
 
+// Cyan Mancubus
+ACTOR CyanFatso2RPG : CyanFatso2 Replaces CyanFatso2
+{
+	Tag "Icy Mancubus"
+
+	States
+	{
+	Spawn:
+		FATT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		FATT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Mancubus
 ACTOR BlueFatsoRPG : BlueFatso Replaces BlueFatso
 {
@@ -67,6 +83,54 @@ ACTOR PurpleFatsoRPG : PurpleFatso Replaces PurpleFatso
 		Goto Super::Spawn
 	See:
 		FATT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Gray Mancubus
+ACTOR GrayFatso2RPG : GrayFatso2 Replaces GrayFatso2
+{
+	Tag "Ancient Mancubus"
+
+	States
+	{
+	Spawn:
+		FATT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		FATT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Fireblu Mancubus
+ACTOR FireBluFatso2RPG : FireBluFatso2 Replaces FireBluFatso2
+{
+	Tag "Enchanted Beast"
+
+	States
+	{
+	Spawn:
+		HBST A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		HBST A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Abyss Mancubus
+ACTOR AbyssFatso2RPG : AbyssFatso2 Replaces AbyssFatso2
+{
+	Tag "Abyssal Mancubus"
+
+	States
+	{
+	Spawn:
+		UNMB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		UNMB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
@@ -147,54 +211,6 @@ ACTOR WhiteFatso2RPG : WhiteFatso2 Replaces WhiteFatso2
 		Goto Super::Spawn
 	See:
 		QUEE A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
-		Goto Super::See
-	}
-}
-
-// Fireblu Mancubus
-ACTOR FireBluFatso2RPG : FireBluFatso2 Replaces FireBluFatso2
-{
-	Tag "Enchanted Beast"
-
-	States
-	{
-	Spawn:
-		HBST A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		HBST A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// Gray Mancubus
-ACTOR GrayFatso2RPG : GrayFatso2 Replaces GrayFatso2
-{
-	Tag "Ancient Mancubus"
-
-	States
-	{
-	Spawn:
-		FATT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		FATT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// Abyss Mancubus
-ACTOR AbyssFatso2RPG : AbyssFatso2 Replaces AbyssFatso2
-{
-	Tag "Abyssal Mancubus"
-
-	States
-	{
-	Spawn:
-		UNMB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		UNMB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }

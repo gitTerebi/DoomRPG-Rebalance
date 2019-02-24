@@ -39,10 +39,42 @@ ACTOR GreenHKRPG : GreenHK Replaces GreenHK
 	}
 }
 
+// Cyan Hell Knight
+ACTOR CyanHK2RPG : CyanHK2 Replaces CyanHK2
+{
+	Tag "Icy Hell Knight"
+
+	States
+	{
+	Spawn:
+		HFRY A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		HFRY A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Hell Knight
 ACTOR BlueHKRPG : BlueHK Replaces BlueHK
 {
 	Tag "Rare Hell Knight"
+
+	States
+	{
+	Spawn:
+		BOS2 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		BOS2 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Gray Hell Knight
+ACTOR GrayHK2RPG : GrayHK2 Replaces GrayHK2
+{
+	Tag "Ancient Knight"
 
 	States
 	{
@@ -83,6 +115,38 @@ ACTOR YellowHKRPG : YellowHK Replaces YellowHK
 		Goto Super::Spawn
 	See:
 		BRUS A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Abyss Hell Knight
+ACTOR AbyssHK2RPG : AbyssHK2 Replaces AbyssHK2
+{
+	Tag "Abyssal Knight"
+
+	States
+	{
+	Spawn:
+		BRUS A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		BRUS A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Fireblu Hell Knight
+ACTOR FireBluHK2RPG : FireBluHK2 Replaces FireBluHK2
+{
+	Tag "Enchanted Knight"
+
+	States
+	{
+	Spawn:
+		BOS2 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		BOS2 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
@@ -132,7 +196,7 @@ ACTOR BlackHK2RPG : BlackHK2 Replaces BlackHK2
 	}
 }
 
-// Black Hell Knight
+// Black Hell Knight EX
 ACTOR BlackHKEXRPG : BlackHKEX Replaces BlackHKEX
 {
 	States
@@ -161,6 +225,7 @@ ACTOR WhiteHK3RPG : WhiteHK3 Replaces WhiteHK3
 		Goto Super::See
 	}
 }
+
 // Specials
 ACTOR WhiteHK2RPG : WhiteHK2 Replaces WhiteHK2
 {
@@ -198,54 +263,6 @@ ACTOR MiniPhantomRPG : MiniPhantom Replaces MiniPhantom
 		Goto Super::Spawn
 	See:
 		SPI1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
-		Goto Super::See
-	}
-}
-
-// Fireblu Hell Knight
-ACTOR FireBluHK2RPG : FireBluHK2 Replaces FireBluHK2
-{
-	Tag "Enchanted Knight"
-
-	States
-	{
-	Spawn:
-		BOS2 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		BOS2 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// Gray Hell Knight
-ACTOR GrayHK2RPG : GrayHK2 Replaces GrayHK2
-{
-	Tag "Ancient Knight"
-
-	States
-	{
-	Spawn:
-		BOS2 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		BOS2 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// Abyss Hell Knight
-ACTOR AbyssHK2RPG : AbyssHK2 Replaces AbyssHK2
-{
-	Tag "Abyssal Knight"
-
-	States
-	{
-	Spawn:
-		BRUS A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		BRUS A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
