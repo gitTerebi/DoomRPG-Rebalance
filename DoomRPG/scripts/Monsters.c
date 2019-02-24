@@ -528,7 +528,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
     MonsterAggressionHandler();
 
     // Death Handler
-    MonsterDeathCheck();
+    // Handled via ZScript
 
     // Environmental Hazard Map Event
     if (CurrentLevel->Event == MAPEVENT_TOXICHAZARD && (Random(1, 24) == 1 || Stats->Flags & MF_BOSS || Stats->Flags & MF_MEGABOSS))
@@ -2091,43 +2091,27 @@ Start:
     goto Start;
 }
 
-NamedScript void MonsterDeathCheck()
+NamedScript DECORATE void MonsterDeathCheck()
 {
-    // Delay Stagger
-    Delay(35 + (GetMonsterID(0) % 4));
-
-    Delay(1);
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-
-Start:
-
-    if (ClassifyActor(0) & ACTOR_WORLD)
-        goto Disappeared;
-
-    if (GetActorProperty(0, APROP_Health) > 0)
-    {
-        Delay(4);
-        goto Start;
-    }
 
     MonsterDeath();
 
-PostDeathWait:
+    while (true)
+    {
+        Delay(35);
 
-    Delay(35);
+        if (ClassifyActor(0) & ACTOR_WORLD)
+        {
+            Stats->Init = false; // Mark as unused
+            Stats->TID = 0;
+            return;
+        }
 
-    if (ClassifyActor(0) & ACTOR_WORLD)
-        goto Disappeared;
+        if (GetActorProperty(0, APROP_Health) > 0)
+            return;
+    }
 
-    if (GetActorProperty(0, APROP_Health) > 0)
-        goto Start;
-
-    goto PostDeathWait;
-
-Disappeared:
-
-    Stats->Init = false; // Mark as unused
-    Stats->TID = 0;
 }
 
 NamedScript void MonsterDeath()
