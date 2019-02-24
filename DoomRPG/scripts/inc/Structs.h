@@ -481,6 +481,7 @@ struct LevelInfo_S
     // Miscellaneous
     int AdditionalMonsters;
     bool SecretMap;
+    bool BadMap;
 
     // Event stuff
     struct DynamicArray_S MonsterPositions;

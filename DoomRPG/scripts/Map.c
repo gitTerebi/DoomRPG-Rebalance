@@ -92,8 +92,6 @@ NamedScript Type_OPEN void MapInit()
     }
 
     CurrentLevel = FindLevelInfo();
-    // Get sector count of current level.
-    LevelSectorCount = ScriptCall("DRPGZUtilities", "GetLevelSectorCount");
 
     if (CurrentLevel == NULL) // New map - We need to create new info for it
     {
@@ -111,6 +109,11 @@ NamedScript Type_OPEN void MapInit()
         CurrentLevel->LevelNum = 0;
         CurrentLevel->NeedsRealInfo = true;
     }
+
+    // Get sector count of current level.
+    LevelSectorCount = ScriptCall("DRPGZUtilities", "GetLevelSectorCount");
+    // Check for a bad map, these have compatibility issues with LootGen & map events and probably something else.
+    CurrentLevel->BadMap = ScriptCall("DRPGZUtilities", "CheckForBadMap");
 
     if (CurrentLevel->NeedsRealInfo)
     {
@@ -422,7 +425,7 @@ NamedScript void SetupMapMissions()
         if (!PlayerInGame(i)) continue;
 
         // Kill
-        if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL)
+        if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL && !CurrentLevel->BadMap)
         {
             int Amount = Players(i).Mission.Amount - Players(i).Mission.Current;
             DynamicLootGenerator(GetMissionMonsterActor(Players(i).Mission.Monster->Actor), Amount);
@@ -659,7 +662,7 @@ int LevelSort(void const *Left, void const *Right)
 
 void AddAdditionalMonsters()
 {
-    if (CurrentLevel->AdditionalMonsters < 1 || CurrentLevel->Event == MAPEVENT_MEGABOSS)
+    if (CurrentLevel->AdditionalMonsters < 1 || CurrentLevel->Event == MAPEVENT_MEGABOSS || CurrentLevel->BadMap)
         return;
 
     if (CurrentLevel->Event == MAPEVENT_ONEMONSTER)
@@ -1165,51 +1168,13 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
     // Harmonized Destruction
     TargetLevel->AuraType = 0;
 
+    // Skip bad map.
+    if (CurrentLevel->BadMap)
+        return;
+
     // [KS] Super-special events for super-special levels (and by "special" I of course mean retarded)
     // [KS] PS: I hate you already.
-    if (!StrICmp(TargetLevel->LumpName, "E1M8"))
-    {
-        // Phobos Anomaly
-        // Tags: 666 (Floor_LowerToLowest)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "E2M8"))
-    {
-        // Tower of Babel
-        // Tags: None, level ends
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "E3M8"))
-    {
-        // Dis
-        // Tags: None, level ends
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "E4M6"))
-    {
-        // Against Thee Wickedly
-        // Tags: 666 (Door_Open)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "E4M8"))
-    {
-        // Unto the Cruel
-        // Tags: 666 (Floor_LowerToLowest)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "MAP07"))
-    {
-        // Dead Simple
-        // Tags: 666 (Floor_LowerToLowest), 667 (Floor_RaiseByTexture)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "LEVEL07"))
-    {
-        // Baron's Banquet
-        // Tags: 666 (Floor_LowerToLowest), 667 (Floor_RaiseByTexture)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "MAP30"))
+    if (!StrICmp(TargetLevel->LumpName, "MAP30"))
     {
         // Icon of Sin
         // Blurb about a demon spitter and the game ending finale here.

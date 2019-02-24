@@ -13,6 +13,54 @@ class DRPGZUtilities
         else
             return false;
     }
+    static bool CheckForBadMap()
+    {
+        if (level.MapName == "E1M8")
+        {
+            // Phobos Anomaly
+            // Tags: 666 (Floor_LowerToLowest)
+            return true;
+        }
+
+        else if (level.MapName == "E2M8")
+        {
+            // Tower of Babel
+            // Tags: None, level ends
+            return true;
+        }
+        else if (level.MapName == "E3M8")
+        {
+            // Dis
+            // Tags: None, level ends
+            return true;
+        }
+        else if (level.MapName == "E4M6")
+        {
+            // Against Thee Wickedly
+            // Tags: 666 (Door_Open)
+            return true;
+        }
+        else if (level.MapName == "E4M8")
+        {
+            // Unto the Cruel
+            // Tags: 666 (Floor_LowerToLowest)
+            return true;
+        }
+        else if (level.MapName == "MAP07")
+        {
+            // Dead Simple
+            // Tags: 666 (Floor_LowerToLowest), 667 (Floor_RaiseByTexture)
+            return true;
+        }
+        else if (level.MapName == "LEVEL07")
+        {
+            // Baron's Banquet
+            // Tags: 666 (Floor_LowerToLowest), 667 (Floor_RaiseByTexture)
+            return true;
+        }
+
+        return false;
+    }
     static void SetHUDPreset(int Preset)
     {
         // Preset options:

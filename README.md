@@ -14,7 +14,7 @@ Avoid v3.3 as it has an [ACS bug](https://forum.zdoom.org/viewtopic.php?style=12
 
 - DoomRL Arsenal - [1.05] [MP-B6.2].
 - LegenDoom v2.4.
-- Colourful Hell v0.95.
+- Colourful Hell v0.96.
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
 
 ## Notes
