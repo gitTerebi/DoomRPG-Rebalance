@@ -2218,7 +2218,6 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(NewID)]);
         Stats->Flags |= MF_NOXP;
         Stats->Flags |= MF_NODROPS;
-        Stats->Friendly = true;
         Stats->NeedReinit = true;
 
         return true;

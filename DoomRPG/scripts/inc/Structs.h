@@ -296,7 +296,6 @@ struct MonsterStats_S
     bool Named;
     bool Reinforcement;
     bool MegaBoss;
-    bool Friendly; // Sanity check for when APROP_Friendly gets removed from summons
 
     // Missions
     int Target;
