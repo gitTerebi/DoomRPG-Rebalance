@@ -1328,10 +1328,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
             return;
 
         MaxItems = -MaxItems;
-        if (CurrentLevel != NULL && CurrentLevel->Event == MAPEVENT_ONEMONSTER)
-            Actor = GetMissionMonsterActor(CurrentLevel->SelectedMonster->Actor);
-        else
-            Actor = "DRPGGenericMonsterDropper";
+        Actor = "DRPGGenericMonsterDropper";
     }
 
     fixed ItemX, ItemY;
@@ -1373,18 +1370,42 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
         Z = GetActorFloorZ(TID);
         Thing_Remove(TID);
 
-        bool Spawned = Spawn("MapSpotGravity", X, Y, Z, TID, A);
+        bool Spawned = Spawn("MapSpotTall", X, Y, Z, TID, A);
         if (Spawned)
         {
             bool Remove = ScriptCall("DRPGZUtilities", "CheckActorInMap", TID) ? DynamicLootGeneratorCheckRemoval(TID, Z) : true;
-            bool Visible = !Remove ? CheckSight(TID, Players(0).TID, CSF_NOFAKEFLOORS) : false;
+            bool Visible = false;
 
+            if (!Remove)
+            {
+                SetActorFlag(TID, "LOOKALLAROUND", true);
+                for (int i = 0; i < MAX_PLAYERS; i++)
+                {
+                    if (CheckSight(TID, Players(i).TID, CSF_NOFAKEFLOORS))
+                    {
+                        Visible = true;
+                        break;
+                    }
+                    else if (CheckSight(Players(i).TID, TID, CSF_NOFAKEFLOORS))
+                    {
+                        Visible = true;
+                        break;
+                    }
+                }
+            }
             Thing_Remove(TID);
             if (!Remove)
             {
                 if (Actor == "DRPGGenericMonsterDropper")
                 {
-                    if (!Visible && Spawn(GetCVar("drpg_monster_adaptive_spawns") ? Monsters[Random(1, CurrentLevel->MaxTotalMonsters)].Actor : Actor, X, Y, Z, TID, A))
+                    str SpawnMonster;
+                    if (CurrentLevel != NULL && CurrentLevel->Event == MAPEVENT_ONEMONSTER)
+                        SpawnMonster = GetMissionMonsterActor(CurrentLevel->SelectedMonster->Actor);
+                    else if (GetCVar("drpg_monster_adaptive_spawns"))
+                        SpawnMonster = Monsters[Random(1, CurrentLevel->MaxTotalMonsters)].Actor;
+                    else
+                        SpawnMonster = Actor;
+                    if (!Visible && Spawn(SpawnMonster, X, Y, Z, TID, A))
                         Items++;
                 }
                 else if (Spawn(Actor, X, Y, Z, TID, A))

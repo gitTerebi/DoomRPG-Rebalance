@@ -665,10 +665,7 @@ void AddAdditionalMonsters()
     if (CurrentLevel->AdditionalMonsters < 1 || CurrentLevel->Event == MAPEVENT_MEGABOSS || CurrentLevel->BadMap)
         return;
 
-    if (CurrentLevel->Event == MAPEVENT_ONEMONSTER)
-        DynamicLootGenerator(GetMissionMonsterActor(CurrentLevel->SelectedMonster->Actor), CurrentLevel->AdditionalMonsters);
-    else
-        DynamicLootGenerator("DRPGGenericMonsterDropper", CurrentLevel->AdditionalMonsters);
+    DynamicLootGenerator("DRPGGenericMonsterDropper", CurrentLevel->AdditionalMonsters);
 }
 
 LevelInfo *FindLevelInfo(str MapName)
