@@ -296,6 +296,7 @@ OptionMenu "DoomRPGDifficulty"
     Option "Toxicity Penalties", "drpg_toxicity_penalties", "OnOff"
     Option "Mission Kills Affected By Monsters", "drpg_mission_monsterkillscount", "OnOff"
     Option "Invulnerability resists status", "drpg_invulnerability_plus", "OnOff"
+    Option "Damage-based combo timer", "drpg_combo_damage", "OnOff"
     StaticText ""
 
     Slider "Starting Map Weight", "drpg_monster_mapweight", 1, 1000, 1

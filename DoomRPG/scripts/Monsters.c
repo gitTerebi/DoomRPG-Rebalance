@@ -2982,9 +2982,15 @@ NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
     SetActivator(SourceTID);
 
     // Damaged by a player
-    if (PlayerNumber() > -1)
+    int PlayerNum = PlayerNumber();
+    if (PlayerNum > -1)
     {
-        Stats->DamageTable[PlayerNumber()] += Damage;
+        Stats->DamageTable[PlayerNum] += Damage;
+        if (GetCVar("drpg_combo_damage"))
+        {
+            if (Players(PlayerNum).Combo > 0)
+                Players(PlayerNum).ComboTimer = COMBO_MAX;
+        }
         return;
     }
 

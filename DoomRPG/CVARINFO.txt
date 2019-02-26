@@ -60,6 +60,7 @@ server  bool    drpg_levelup_heal = false;
 server  bool    drpg_toxicity_penalties = true;
 server  bool    drpg_mission_monsterkillscount = false;
 server  bool    drpg_invulnerability_plus = false;
+server  bool    drpg_combo_damage = false;
 server  int     drpg_monster_mapweight = 1;
 server  int     drpg_monster_population = 100;
 server  int     drpg_monster_limit = 0;
