@@ -1,4 +1,5 @@
 version "3.2.5"
 
 #include "zscript/DRPGZHandler.zs"
+#include "zscript/DRPGZPlayer.zs"
 #include "zscript/DRPGZUtils.zs"

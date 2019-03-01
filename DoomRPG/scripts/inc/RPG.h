@@ -61,10 +61,13 @@ NamedScript Type_DEATH void Dead();
 NamedScript Type_RESPAWN void Respawn();
 NamedScript void SortStartingItems();
 NamedScript void DefaultLoadout();
+NamedScript void ReviveHandler();
 
 void CheckHUD();
 void CheckKeys();
 void CheckCompatibility();
 void AssignTIDs();
+bool CheckAlive();
+bool CheckIncapacitated();
 
 #endif

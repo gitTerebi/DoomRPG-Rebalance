@@ -148,6 +148,20 @@ Start:
         }
     }
 
+    if (GetCVar("drpg_revives") && Player.ActualHealth <= 0)
+    {
+        SetHudSize(0, 0, false);
+        SetFont("BIGFONT");
+        HudMessage("INCAPACITATED");
+        EndHudMessage(HUDMSG_PLAIN, 0, "White", 1.5, 0.75, 0.05);
+
+        if (Player.ReviveKeyTimer > 0)
+        {
+            int Percent = CalcPercent(Player.ReviveKeyTimer, 105);
+            DrawProgressBar("Receiving treatment", Percent);
+        }
+    }
+
     Delay(1);
     goto Start;
 }

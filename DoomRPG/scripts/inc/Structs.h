@@ -714,6 +714,7 @@ struct PlayerData_S
     int StatusTimer[SE_MAX];
     int StatusTimerMax[SE_MAX];
     int Toxicity;
+    int ReviveKeyTimer;
 
     // Locker
     bool LockerMode;

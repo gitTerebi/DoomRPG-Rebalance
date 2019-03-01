@@ -429,6 +429,9 @@ Start:
         SetInventory("RLPhaseDeviceLimit", 0);
     }
 
+    if (GetCVar("drpg_revives"))
+        ReviveHandler();
+
     // Loop
     Delay(1);
 
@@ -602,6 +605,22 @@ Start:
                 HudMessage("Agility Save!");
                 EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 160.0, 140.0, 0.5, 0.5);
                 PrintSpriteFade("AGISAVE", 0, 160.0, 140.0, 0.5, 0.5);
+            }
+
+            // Incapacitation
+            if (GetCVar("drpg_revives"))
+            {
+                SetHudSize(320, 200, false);
+                SetFont("SMALLFONT");
+                HudMessage("%tS was incapacitated", PlayerNumber() + 1);
+                EndHudMessageBold(HUDMSG_FADEOUT, 0, "Brick", 160.0, 140.0, 1.5, 1.0);
+            }
+            else
+            {
+                SetHudSize(320, 200, false);
+                SetFont("SMALLFONT");
+                HudMessage("%tS has died", PlayerNumber() + 1);
+                EndHudMessageBold(HUDMSG_FADEOUT, 0, "Brick", 160.0, 140.0, 1.5, 1.0);
             }
         }
     }
@@ -2329,4 +2348,90 @@ void AssignTIDs()
 
     if (GetCVar("drpg_debug"))
         Log("\CdDEBUG: Player TID: %d", Player.TID);
+}
+
+bool CheckAlive()
+{
+    if (PlayerCount() < 2)
+        return false;
+
+    for (int i = 0; i < PlayerCount(); i++)
+    {
+        if (i != PlayerNumber() && Players(i).ActualHealth > 0)
+            return true;
+    }
+    return false;
+}
+
+bool CheckIncapacitated()
+{
+    for (int i = 0; i < PlayerCount(); i++)
+    {
+        if (Players(i).ActualHealth <= 0)
+            return true;
+    }
+    return false;
+}
+
+NamedScript void ReviveHandler()
+{
+    if (Player.ActualHealth > 0)
+    {
+        for (int i = 0; i < PlayerCount(); i++)
+        {
+            if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Distance(Player.TID, Players(i).TID) < 32)
+            {
+                if ((!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
+                {
+                    SetHudSize(0, 0, false);
+                    SetFont("BIGFONT");
+
+                    if (Player.Medkit > 0)
+                    {
+                        int HealAmount = Players(i).HealthMax - Players(i).ActualHealth;
+                        int Expense = Player.Medkit > HealAmount ? HealAmount : Player.Medkit;
+                        bool Stabilize = Players(i).ActualHealth + Expense < 0;
+                        if (CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()))
+                        {
+                            Players(i).ReviveKeyTimer++;
+                            int Percent = CalcPercent(Players(i).ReviveKeyTimer, 105);
+                            if (!Stabilize)
+                                DrawProgressBar("Reviving", Percent);
+                            else
+                                DrawProgressBar("Stabilizing", Percent);
+
+                            if (Players(i).ReviveKeyTimer > 105)
+                            {
+                                Players(i).ReviveKeyTimer = 0;
+                                Players(i).ActualHealth += Expense;
+                                Player.Medkit -= Expense;
+                                if (!Stabilize)
+                                {
+                                    HudMessage("%tS was revived", i + 1);
+                                    ScriptCall("DRPGZPlayer", "PrepareForRevive", i);
+                                }
+                                else
+                                    HudMessage("%tS was stabilized", i + 1);
+                                EndHudMessageBold(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 0.05);
+                            }
+                        }
+                        else
+                        {
+                            Players(i).ReviveKeyTimer = 0;
+                            if (!Stabilize)
+                                HudMessage("Hold \Cd%jS\C- to revive", "+use");
+                            else
+                                HudMessage("Hold \Cd%jS\C- to stabilize", "+use");
+                            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 0.05);
+                        }
+                    }
+                    else
+                    {
+                        HudMessage("Find some medkit to revive");
+                        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 0.05);
+                    }
+                }
+            }
+        }
+    }
 }

@@ -464,8 +464,11 @@ OptionMenu "DoomRPGMultiplayer"
     Option "Restore EP on Respawn", "drpg_multi_restoreep", "OnOff"
     Option "Restore Ammo on Respawn", "drpg_multi_restoreammo", "OnOff"
     StaticText ""
-    
+
     Option "Share credit drops", "drpg_multi_sharecredits", "OnOff"
+    StaticText ""
+
+	Option "Player revive mechanics", "drpg_revives", "OnOff"
 }
 
 OptionMenu "DoomRPGShop"
