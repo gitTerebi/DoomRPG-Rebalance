@@ -74,11 +74,6 @@ class DRPGZPlayer : DoomPlayer
 			}
 		}
         
-        if (player.cmd.buttons & BT_USE)
-        {
-            RevivePending = true;
-        }
-
         if (RevivePending)
         {
             RevivePending = false;

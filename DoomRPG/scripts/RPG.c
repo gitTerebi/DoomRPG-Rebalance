@@ -1574,7 +1574,7 @@ NamedScript Type_DEATH void Dead()
     }
 
     // Remove TID
-    Thing_ChangeTID(Player.TID, 0);
+    //Thing_ChangeTID(Player.TID, 0);
 }
 
 // Respawn
@@ -1586,7 +1586,8 @@ NamedScript Type_RESPAWN void Respawn()
     AssignTIDs();
 
     // Heal to max health
-    Player.ActualHealth = Player.HealthMax;
+    if (GetCVar("drpg_revives"))
+        Player.ActualHealth = Player.HealthMax;
     SetActorProperty(0, APROP_Health, Player.ActualHealth);
 
     // XP/Rank Penalty
@@ -2403,16 +2404,16 @@ NamedScript void ReviveHandler()
                             if (Players(i).ReviveKeyTimer > 105)
                             {
                                 Players(i).ReviveKeyTimer = 0;
-                                Players(i).ActualHealth += Expense;
-                                Player.Medkit -= Expense;
                                 if (!Stabilize)
                                 {
-                                    HudMessage("%tS was revived", i + 1);
                                     ScriptCall("DRPGZPlayer", "PrepareForRevive", i);
+                                    HudMessage("%tS was revived", i + 1);
                                 }
                                 else
                                     HudMessage("%tS was stabilized", i + 1);
-                                EndHudMessageBold(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 0.05);
+                                EndHudMessageBold(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 1.0);
+                                Players(i).ActualHealth += Expense;
+                                Player.Medkit -= Expense;
                             }
                         }
                         else
