@@ -608,7 +608,7 @@ Start:
             }
 
             // Incapacitation
-            if (GetCVar("drpg_revives"))
+            if (GetCVar("drpg_revives") && PlayerCount() > 1)
             {
                 SetHudSize(320, 200, false);
                 SetFont("SMALLFONT");
@@ -1573,8 +1573,16 @@ NamedScript Type_DEATH void Dead()
         }
     }
 
+    // Remember body location
+    fixed X = GetActorX(Player.TID);
+    fixed Y = GetActorY(Player.TID);
+    fixed Z = GetActorZ(Player.TID);
+    fixed A = GetActorAngle(Player.TID);
+    Player.BodyTID = GetUniqueTID();
+    SpawnForced("MapSpot", X, Y, Z, Player.BodyTID, A);
+
     // Remove TID
-    //Thing_ChangeTID(Player.TID, 0);
+    Thing_ChangeTID(Player.TID, 0);
 }
 
 // Respawn
@@ -1585,9 +1593,16 @@ NamedScript Type_RESPAWN void Respawn()
         Delay(4);
     AssignTIDs();
 
-    // Heal to max health
-    if (GetCVar("drpg_revives"))
+    // Heal to max health if revives are disabled or revive at the body's location
+    if (!GetCVar("drpg_revives") || PlayerCount() == 1)
         Player.ActualHealth = Player.HealthMax;
+    else if (Player.BodyTID != 0)
+    {
+        SetActorPosition(Player.TID, GetActorX(Player.BodyTID), GetActorY(Player.BodyTID), GetActorZ(Player.BodyTID), 0);
+        SetActorAngle(Player.TID, GetActorAngle(Player.BodyTID));
+        Thing_Remove(Player.BodyTID);
+        Player.BodyTID = 0;
+    }
     SetActorProperty(0, APROP_Health, Player.ActualHealth);
 
     // XP/Rank Penalty
@@ -2380,7 +2395,7 @@ NamedScript void ReviveHandler()
     {
         for (int i = 0; i < PlayerCount(); i++)
         {
-            if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Distance(Player.TID, Players(i).TID) < 32)
+            if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Distance(Player.TID, Players(i).BodyTID) < 32)
             {
                 if ((!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
                 {

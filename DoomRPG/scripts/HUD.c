@@ -148,7 +148,7 @@ Start:
         }
     }
 
-    if (GetCVar("drpg_revives") && Player.ActualHealth <= 0)
+    if (GetCVar("drpg_revives") && PlayerCount() > 1 && Player.ActualHealth <= 0)
     {
         SetHudSize(0, 0, false);
         SetFont("BIGFONT");

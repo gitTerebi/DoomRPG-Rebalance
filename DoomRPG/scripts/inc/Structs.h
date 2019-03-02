@@ -529,6 +529,7 @@ struct PlayerData_S
 {
     int TID;
     int PlayerView;
+    int BodyTID;
 
     // Flags
     bool FirstRun;
