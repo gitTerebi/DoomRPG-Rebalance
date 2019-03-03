@@ -148,18 +148,25 @@ Start:
         }
     }
 
-    if (GetCVar("drpg_revives") && PlayerCount() > 1 && Player.ActualHealth <= 0)
+    // Incapacitated message handling
+    if (Timer() > 4 && GetCVar("drpg_revives") && Player.ActualHealth <= 0)
     {
         SetHudSize(0, 0, false);
         SetFont("BIGFONT");
-        HudMessage("INCAPACITATED");
-        EndHudMessage(HUDMSG_PLAIN, 0, "White", 1.5, 0.75, 0.05);
-
-        if (Player.ReviveKeyTimer > 0)
+        if (PlayerCount() > 1)
         {
-            int Percent = CalcPercent(Player.ReviveKeyTimer, 105);
-            DrawProgressBar("Receiving treatment", Percent);
+            HudMessage("Incapacitated\nHealth: %d", Player.ActualHealth);
+            if (Player.ReviveKeyTimer > 0)
+            {
+                int Percent = CalcPercent(Player.ReviveKeyTimer, 105);
+                DrawProgressBar("Receiving treatment", Percent);
+            }
         }
+        else
+        {
+            HudMessage("YOU ARE DEAD");
+        }
+        EndHudMessage(HUDMSG_PLAIN, 0, "Brick", 1.5, 0.75, 0.05);
     }
 
     Delay(1);
@@ -221,7 +228,6 @@ Start:
         Delay(1);
         goto Start;
     }
-
     Credits.Value = CheckInventory("DRPGCredits");
     Modules.Value = CheckInventory("DRPGModule");
     Medkit.Value = Player.Medkit;

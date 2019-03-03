@@ -460,7 +460,7 @@ Start:
     if (Player.ActualHealth <= 0) // [KS] This is to make sure the player actually dies, even if they're shielded.
     {
         SetPlayerProperty(0, 0, PROP_BUDDHA);
-        SetActorProperty(0, APROP_Health, 0);
+        SetActorProperty(0, APROP_Health, Player.ActualHealth);
         goto Start;
     }
 
@@ -591,7 +591,7 @@ Start:
             }
 
             // Survival Bonus
-            if (CanSurvive && Player.ActualHealth <= 1)
+            if (CanSurvive)
             {
                 Player.ActualHealth = 2;
                 Player.LastLegs = true;
@@ -605,22 +605,6 @@ Start:
                 HudMessage("Agility Save!");
                 EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 160.0, 140.0, 0.5, 0.5);
                 PrintSpriteFade("AGISAVE", 0, 160.0, 140.0, 0.5, 0.5);
-            }
-
-            // Incapacitation
-            if (GetCVar("drpg_revives") && PlayerCount() > 1)
-            {
-                SetHudSize(320, 200, false);
-                SetFont("SMALLFONT");
-                HudMessage("%tS was incapacitated", PlayerNumber() + 1);
-                EndHudMessageBold(HUDMSG_FADEOUT, 0, "Brick", 160.0, 140.0, 1.5, 1.0);
-            }
-            else
-            {
-                SetHudSize(320, 200, false);
-                SetFont("SMALLFONT");
-                HudMessage("%tS has died", PlayerNumber() + 1);
-                EndHudMessageBold(HUDMSG_FADEOUT, 0, "Brick", 160.0, 140.0, 1.5, 1.0);
             }
         }
     }
@@ -1573,16 +1557,27 @@ NamedScript Type_DEATH void Dead()
         }
     }
 
-    // Remember body location
-    fixed X = GetActorX(Player.TID);
-    fixed Y = GetActorY(Player.TID);
-    fixed Z = GetActorZ(Player.TID);
-    fixed A = GetActorAngle(Player.TID);
-    Player.BodyTID = GetUniqueTID();
-    SpawnForced("MapSpot", X, Y, Z, Player.BodyTID, A);
+    // Incapacitation announcement
+    if (GetCVar("drpg_revives"))
+    {
+        SetHudSize(320, 200, false);
+        SetFont("SMALLFONT");
+        if (PlayerCount() > 1)
+            HudMessage("%tS was incapacitated", PlayerNumber() + 1);
+        else
+            HudMessage("%tS has died", PlayerNumber() + 1);
+        EndHudMessageBold(HUDMSG_FADEOUT, 0, "Brick", 160.0, 140.0, 1.5, 1.0);
+    }
 
-    // Remove TID
-    Thing_ChangeTID(Player.TID, 0);
+    // Remember body location
+    Player.BodyTID = GetUniqueTID();
+
+    // Assign TID to player's body
+    Thing_ChangeTID(Player.TID, Player.BodyTID);
+
+    Delay(1);
+    // Actualize the actual health
+    Player.ActualHealth = GetActorProperty(0, APROP_Health);
 }
 
 // Respawn
@@ -2395,7 +2390,7 @@ NamedScript void ReviveHandler()
     {
         for (int i = 0; i < PlayerCount(); i++)
         {
-            if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Distance(Player.TID, Players(i).BodyTID) < 32)
+            if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Distance(Player.TID, Players(i).BodyTID) < 48)
             {
                 if ((!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
                 {
@@ -2410,15 +2405,8 @@ NamedScript void ReviveHandler()
                         if (CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()))
                         {
                             Players(i).ReviveKeyTimer++;
-                            int Percent = CalcPercent(Players(i).ReviveKeyTimer, 105);
-                            if (!Stabilize)
-                                DrawProgressBar("Reviving", Percent);
-                            else
-                                DrawProgressBar("Stabilizing", Percent);
-
-                            if (Players(i).ReviveKeyTimer > 105)
+                            if (Players(i).ReviveKeyTimer >= 105)
                             {
-                                Players(i).ReviveKeyTimer = 0;
                                 if (!Stabilize)
                                 {
                                     ScriptCall("DRPGZPlayer", "PrepareForRevive", i);
@@ -2428,7 +2416,17 @@ NamedScript void ReviveHandler()
                                     HudMessage("%tS was stabilized", i + 1);
                                 EndHudMessageBold(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 1.0);
                                 Players(i).ActualHealth += Expense;
+                                SetActorProperty(Players(i).BodyTID, APROP_Health, Players(i).ActualHealth);
                                 Player.Medkit -= Expense;
+                                Players(i).ReviveKeyTimer = 0;
+                            }
+                            else if (Players(i).ReviveKeyTimer > 0)
+                            {
+                                int Percent = CalcPercent(Players(i).ReviveKeyTimer, 105);
+                                if (!Stabilize)
+                                    DrawProgressBar("Reviving", Percent);
+                                else
+                                    DrawProgressBar("Stabilizing", Percent);
                             }
                         }
                         else

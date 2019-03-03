@@ -12,7 +12,10 @@ statusbar fullscreen, fullscreenoffsets
 		drawnumber 5, BIGFONT, red, globalarray(52), drawshadow, Interpolate(4096), 64, -32;
 	}
 	else
-		drawnumber 5, BIGFONT, red, health, drawshadow, Interpolate(4096), 64, -18;
+	{
+		IfHealth 1
+			drawnumber 5, BIGFONT, red, health, drawshadow, Interpolate(4096), 64, -18;
+	}
 	
 	// Armor
 	drawimage armoricon, 18, -48, centerbottom;
