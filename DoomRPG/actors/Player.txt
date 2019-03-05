@@ -1,4 +1,4 @@
-ACTOR DRPGDoomPlayer : DRPGZPlayer
+ACTOR DRPGDoomPlayer : DoomPlayer
 {
     Species "Player"
 

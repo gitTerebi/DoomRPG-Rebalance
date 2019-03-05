@@ -2409,14 +2409,13 @@ NamedScript void ReviveHandler()
                             {
                                 if (!Stabilize)
                                 {
-                                    ScriptCall("DRPGZPlayer", "PrepareForRevive", i);
+                                    ScriptCall("DRPGZUtils", "ForceRespawn", i);
                                     HudMessage("%tS was revived", i + 1);
                                 }
                                 else
                                     HudMessage("%tS was stabilized", i + 1);
                                 EndHudMessageBold(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 1.0);
                                 Players(i).ActualHealth += Expense;
-                                SetActorProperty(Players(i).BodyTID, APROP_Health, Players(i).ActualHealth);
                                 Player.Medkit -= Expense;
                                 Players(i).ReviveKeyTimer = 0;
                             }

@@ -13,6 +13,19 @@ class DRPGZUtilities
         else
             return false;
     }
+    static play void ForceRespawn(int PlayerNum)
+    {
+        let player = Players[PlayerNum].mo.player;
+        if (player)
+        {
+            player.cls = NULL;
+            player.playerstate = PST_REBORN;
+            if (player.mo.special1 > 2)
+            {
+                player.mo.special1 = 0;
+            }
+        }
+    }
     static bool CheckForBadMap()
     {
         if (level.MapName == "E1M8")
