@@ -2409,7 +2409,7 @@ NamedScript void ReviveHandler()
                             {
                                 if (!Stabilize)
                                 {
-                                    ScriptCall("DRPGZUtils", "ForceRespawn", i);
+                                    ScriptCall("DRPGZUtilities", "ForceRespawn", i);
                                     HudMessage("%tS was revived", i + 1);
                                 }
                                 else
