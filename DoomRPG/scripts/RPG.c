@@ -1569,15 +1569,23 @@ NamedScript Type_DEATH void Dead()
         EndHudMessageBold(HUDMSG_FADEOUT, 0, "Brick", 160.0, 140.0, 1.5, 1.0);
     }
 
-    // Remember body location
-    Player.BodyTID = GetUniqueTID();
+    if (GetCVar("drpg_revives"))
+    {
+        // Remember body location
+        Player.BodyTID = GetUniqueTID();
 
-    // Assign TID to player's body
-    Thing_ChangeTID(Player.TID, Player.BodyTID);
+        // Assign TID to player's body
+        Thing_ChangeTID(Player.TID, Player.BodyTID);
+        Delay(1);
 
-    Delay(1);
-    // Actualize the actual health
-    Player.ActualHealth = GetActorProperty(0, APROP_Health);
+        // Actualize the actual health
+        Player.ActualHealth = GetActorProperty(0, APROP_Health);
+    }
+    else
+    {
+        // Remove TID
+        Thing_ChangeTID(Player.TID, 0);
+    }
 }
 
 // Respawn
