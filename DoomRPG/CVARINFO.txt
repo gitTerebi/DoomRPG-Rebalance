@@ -1,4 +1,4 @@
-// ANY NEW CVARS ADDED HERE MUST ALSO BE ADDED TO: "ResetToDefaults" and its relatives in "zscript\DRPGZUtils.txt"
+// ANY NEW CVARS ADDED HERE MUST ALSO BE ADDED TO: "ResetToDefaults" and its relatives in "zscript\DRPGZUtils.zs"
 
 // XP System
 server  float   drpg_scalexp = 1.0;
