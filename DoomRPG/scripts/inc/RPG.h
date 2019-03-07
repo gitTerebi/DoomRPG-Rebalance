@@ -67,7 +67,5 @@ void CheckHUD();
 void CheckKeys();
 void CheckCompatibility();
 void AssignTIDs();
-bool CheckAlive();
-bool CheckIncapacitated();
 
 #endif

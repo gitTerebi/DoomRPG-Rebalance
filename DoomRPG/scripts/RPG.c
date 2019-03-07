@@ -2361,88 +2361,62 @@ void AssignTIDs()
         Log("\CdDEBUG: Player TID: %d", Player.TID);
 }
 
-bool CheckAlive()
-{
-    if (PlayerCount() < 2)
-        return false;
-
-    for (int i = 0; i < PlayerCount(); i++)
-    {
-        if (i != PlayerNumber() && Players(i).ActualHealth > 0)
-            return true;
-    }
-    return false;
-}
-
-bool CheckIncapacitated()
-{
-    for (int i = 0; i < PlayerCount(); i++)
-    {
-        if (Players(i).ActualHealth <= 0)
-            return true;
-    }
-    return false;
-}
-
 NamedScript void ReviveHandler()
 {
-    if (Player.ActualHealth > 0)
+    for (int i = 0; i < PlayerCount(); i++)
     {
-        for (int i = 0; i < PlayerCount(); i++)
+        if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Distance(Player.TID, Players(i).BodyTID) < 48)
         {
-            if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Distance(Player.TID, Players(i).BodyTID) < 48)
+            if ((!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
             {
-                if ((!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
-                {
-                    SetHudSize(0, 0, false);
-                    SetFont("BIGFONT");
+                SetHudSize(0, 0, false);
+                SetFont("BIGFONT");
 
-                    if (Player.Medkit > 0)
+                if (Player.Medkit > 0)
+                {
+                    int HealAmount = Players(i).HealthMax - Players(i).ActualHealth;
+                    int Expense = Player.Medkit > HealAmount ? HealAmount : Player.Medkit;
+                    bool Stabilize = Players(i).ActualHealth + Expense < 0;
+                    if (CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()))
                     {
-                        int HealAmount = Players(i).HealthMax - Players(i).ActualHealth;
-                        int Expense = Player.Medkit > HealAmount ? HealAmount : Player.Medkit;
-                        bool Stabilize = Players(i).ActualHealth + Expense < 0;
-                        if (CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()))
+                        Players(i).ReviveKeyTimer++;
+                        if (Players(i).ReviveKeyTimer >= 105)
                         {
-                            Players(i).ReviveKeyTimer++;
-                            if (Players(i).ReviveKeyTimer >= 105)
-                            {
-                                if (!Stabilize)
-                                {
-                                    ScriptCall("DRPGZUtilities", "ForceRespawn", i);
-                                    HudMessage("%tS was revived", i + 1);
-                                }
-                                else
-                                    HudMessage("%tS was stabilized", i + 1);
-                                EndHudMessageBold(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 1.0);
-                                Players(i).ActualHealth += Expense;
-                                Player.Medkit -= Expense;
-                                Players(i).ReviveKeyTimer = 0;
-                            }
-                            else if (Players(i).ReviveKeyTimer > 0)
-                            {
-                                int Percent = CalcPercent(Players(i).ReviveKeyTimer, 105);
-                                if (!Stabilize)
-                                    DrawProgressBar("Reviving", Percent);
-                                else
-                                    DrawProgressBar("Stabilizing", Percent);
-                            }
-                        }
-                        else
-                        {
-                            Players(i).ReviveKeyTimer = 0;
                             if (!Stabilize)
-                                HudMessage("Hold \Cd%jS\C- to revive", "+use");
+                            {
+                                ScriptCall("DRPGZUtilities", "ForceRespawn", i);
+                                HudMessage("%tS was revived", i + 1);
+                            }
                             else
-                                HudMessage("Hold \Cd%jS\C- to stabilize", "+use");
-                            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 0.05);
+                                HudMessage("%tS was stabilized", i + 1);
+                            EndHudMessageBold(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 1.0);
+                            Players(i).ActualHealth += Expense;
+                            Player.Medkit -= Expense;
+                            Players(i).ReviveKeyTimer = 0;
+                        }
+                        else if (Players(i).ReviveKeyTimer > 0)
+                        {
+                            int Percent = CalcPercent(Players(i).ReviveKeyTimer, 105);
+                            if (!Stabilize)
+                                DrawProgressBar("Reviving", Percent);
+                            else
+                                DrawProgressBar("Stabilizing", Percent);
                         }
                     }
                     else
                     {
-                        HudMessage("Find some medkit to revive");
+                        Players(i).ReviveKeyTimer = 0;
+                        if (!Stabilize)
+                            HudMessage("Hold \Cd%jS\C- to revive", "+use");
+                        else
+                            HudMessage("Hold \Cd%jS\C- to stabilize", "+use");
                         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 0.05);
                     }
+                }
+                else
+                {
+                    HudMessage("Find some medkit to revive");
+                    EndHudMessage(HUDMSG_PLAIN, 0, "Green", 1.5, 0.75, 0.05);
                 }
             }
         }

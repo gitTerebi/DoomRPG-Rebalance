@@ -56,6 +56,9 @@ namespace DoomRPG
 
             // Load Credits
             LoadCredits();
+
+            // Populate branches combo box
+            PopulateBranchesComboBox();
         }
 
         private void ProcessLoadOrder()
@@ -71,11 +74,11 @@ namespace DoomRPG
                 string credits = File.ReadAllText(creditsPath);
 
                 richTextBoxCredits.Text = credits;
-                richTextBoxCredits_TextChanged(null, null);
+                RichTextBoxCredits_TextChanged(null, null);
             }
         }
 
-        private async Task PopulateComboBoxes()
+        private void PopulateComboBoxes()
         {
             // IWAD
             for (int i = 0; i < Enum.GetNames(typeof(IWAD)).Length; i++)
@@ -101,8 +104,10 @@ namespace DoomRPG
                     if (file.EndsWith(".zds"))
                         comboBoxSaveGame.Items.Add(Path.GetFileName(file));
             }
+        }
 
-            // Branches
+        private async Task PopulateBranchesComboBox()
+        {
             List<string> branches = await GetBranches();
             foreach (string branch in branches)
                 comboBoxBranch.Items.Add(branch);
@@ -255,9 +260,9 @@ namespace DoomRPG
 
         private void SaveControls()
         {
-            config.portPath = textBoxPortPath.Text;
-            config.DRPGPath = textBoxDRPGPath.Text;
-            config.modsPath = textBoxModsPath.Text;
+            config.portPath = File.Exists(textBoxPortPath.Text) ? textBoxPortPath.Text : String.Empty;
+            config.DRPGPath = Directory.Exists(textBoxDRPGPath.Text) ? textBoxDRPGPath.Text : String.Empty;
+            config.modsPath = Directory.Exists(textBoxModsPath.Text) ? textBoxModsPath.Text : String.Empty;
             config.iwad = (IWAD)comboBoxIWAD.SelectedIndex;
             config.difficulty = (Difficulty)comboBoxDifficulty.SelectedIndex;
             config.rlClass = (DRLAClass)comboBoxClass.SelectedIndex;
@@ -292,7 +297,7 @@ namespace DoomRPG
         private async Task<string> GetMasterSHA()
         {
             GitHubClient client = new GitHubClient(new ProductHeaderValue("DoomRPG"));
-            Branch master = await client.Repository.GetBranch("Kyle873", "DoomRPG", currentBranch);
+            Branch master = await client.Repository.Branch.Get("Sumwunn", "DoomRPG", currentBranch);
             return master.Commit.Sha;
         }
 
@@ -300,7 +305,7 @@ namespace DoomRPG
         {
             GitHubClient client = new GitHubClient(new ProductHeaderValue("DoomRPG"));
             List<String> branchNames = new List<string>();
-            IReadOnlyList<Branch> branches = await client.Repository.GetAllBranches("Kyle873", "DoomRPG");
+            IReadOnlyList<Branch> branches = await client.Repository.Branch.GetAll("Sumwunn", "DoomRPG");
 
             foreach (Branch branch in branches)
                 branchNames.Add(branch.Name);
@@ -412,15 +417,15 @@ namespace DoomRPG
 
         private void DownloadDRPG()
         {
-            Uri uri = new Uri("https://github.com/Kyle873/DoomRPG/archive/" + currentBranch + ".zip");
+            Uri uri = new Uri("https://github.com/Sumwunn/DoomRPG/archive/" + currentBranch + ".zip");
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string zipName = "\\DoomRPG.zip";
 
             using (WebClient client = new WebClient())
             {
                 client.DownloadFileAsync(uri, path + zipName);
-                client.DownloadProgressChanged += client_DownloadProgressChanged;
-                client.DownloadFileCompleted += client_DownloadFileCompleted;
+                client.DownloadProgressChanged += Client_DownloadProgressChanged;
+                client.DownloadFileCompleted += Client_DownloadFileCompleted;
             }
         }
 
@@ -569,43 +574,60 @@ namespace DoomRPG
             return false;
         }
 
-        private void buttonBrowsePortPath_Click(object sender, EventArgs e)
+        private void ButtonBrowsePortPath_Click(object sender, EventArgs e)
         {
-            FileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Specify (G)ZDoom EXE...";
-            dialog.ShowDialog();
-
-            textBoxPortPath.Text = dialog.FileName;
+            FileDialog dialog = new OpenFileDialog() { Title = "Specify (G)ZDoom EXE..." };
+            if (textBoxPortPath.Text == String.Empty)
+                dialog.InitialDirectory = Directory.GetCurrentDirectory();
+            else
+                dialog.InitialDirectory = Path.GetDirectoryName(textBoxPortPath.Text);
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxPortPath.Text = dialog.FileName;
+                config.portPath = dialog.FileName;
+            }
         }
 
-        private void buttonBrowseDRPGPath_Click(object sender, EventArgs e)
+        private void ButtonBrowseDRPGPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.ShowDialog();
-
-            textBoxDRPGPath.Text = dialog.SelectedPath;
-
-            LoadCredits();
+            if (textBoxDRPGPath.Text == String.Empty)
+                dialog.SelectedPath = Directory.GetCurrentDirectory();
+            else
+                dialog.SelectedPath = textBoxDRPGPath.Text;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxDRPGPath.Text = dialog.SelectedPath;
+                config.DRPGPath = dialog.SelectedPath;
+                // Load Credits and re-populate the patches list
+                LoadCredits();
+                PopulatePatches();
+            }
         }
 
-        private void buttonBrowseModsPath_Click(object sender, EventArgs e)
+        private void ButtonBrowseModsPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.ShowDialog();
+            if (textBoxModsPath.Text == String.Empty)
+                dialog.SelectedPath = Directory.GetCurrentDirectory();
+            else
+                dialog.SelectedPath = textBoxModsPath.Text;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxModsPath.Text = dialog.SelectedPath;
+                config.modsPath = dialog.SelectedPath;
+                // Re-populate the mods list
+                PopulateMods();
+            }
+        }
 
-            textBoxModsPath.Text = dialog.SelectedPath;
-
+        private void TextBoxModsPath_TextChanged(object sender, EventArgs e)
+        {
             // Re-populate the mods list
             PopulateMods();
         }
 
-        private void textBoxModsPath_TextChanged(object sender, EventArgs e)
-        {
-            // Re-populate the mods list
-            PopulateMods();
-        }
-
-        private async void buttonCheckUpdates_Click(object sender, EventArgs e)
+        private async void ButtonCheckUpdates_Click(object sender, EventArgs e)
         {
             // Check the current branch
             if (currentBranch == string.Empty)
@@ -627,7 +649,7 @@ namespace DoomRPG
             await CheckForUpdates();
         }
 
-        private void buttonLaunch_Click(object sender, EventArgs e)
+        private void ButtonLaunch_Click(object sender, EventArgs e)
         {
             try
             {
@@ -656,7 +678,7 @@ namespace DoomRPG
             }
         }
 
-        private void richTextBoxCredits_TextChanged(object sender, EventArgs e)
+        private void RichTextBoxCredits_TextChanged(object sender, EventArgs e)
         {
             richTextBoxCredits.Find("Testers");
             richTextBoxCredits.SelectionFont = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
@@ -672,14 +694,14 @@ namespace DoomRPG
             richTextBoxCredits.SelectionColor = Color.Blue;
         }
 
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             toolStripStatusLabel.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
             toolStripStatusLabel.Text = "Downloading... " + (e.BytesReceived / 1024) + "KB / " + (e.TotalBytesToReceive / 1024) + "KB (" + e.ProgressPercentage + "%)";
             toolStripProgressBar.Value = e.ProgressPercentage;
         }
 
-        private void client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        private void Client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             try
             {
@@ -691,7 +713,7 @@ namespace DoomRPG
             }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             // Check loaded patches
             for (int i = 0; i < patches.Count; i++)
@@ -741,14 +763,14 @@ namespace DoomRPG
             }
         }
 
-        private void timerPulse_Tick(object sender, EventArgs e)
+        private void TimerPulse_Tick(object sender, EventArgs e)
         {
             // Launch button pulse
             int red = 160 + (int)(Math.Sin((double)DateTime.Now.Millisecond / 256) * 64);
             buttonLaunch.ForeColor = Color.FromArgb(255, red, 0, 0);
         }
         
-        private void buttonCopyCommandClipboard_Click(object sender, EventArgs e)
+        private void ButtonCopyCommandClipboard_Click(object sender, EventArgs e)
         {
             PatchInfo.CheckForRequirements(patches);
             PatchInfo.CheckForConflicts(patches);
@@ -757,19 +779,19 @@ namespace DoomRPG
             Clipboard.SetText("\"" + config.portPath + "\"" + BuildCommandLine());
         }
 
-        private void buttonRefresh_Click(object sender, EventArgs e)
+        private void ButtonRefresh_Click(object sender, EventArgs e)
         {
             PopulatePatches();
             PopulateMods();
             LoadControls();
         }
 
-        private void textBoxDRPGPath_TextChanged(object sender, EventArgs e)
+        private void TextBoxDRPGPath_TextChanged(object sender, EventArgs e)
         {
             LoadCredits();
         }
         
-        private void comboBoxBranch_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentBranch = comboBoxBranch.Text;
         }
