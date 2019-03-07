@@ -2578,7 +2578,7 @@ void MenuHelp()
             else if (Player.StatPage == STATPAGE_TEAM)
             {
                 HudMessage("Navigate: \Cd%jS/%jS\C-\nSwitch pages: \Cd%jS + %jS/%jS\C-\nPlayer's view on HUD: \Cd%jS\C-\nTeleport to selected Player (\Cn%d EP\C-): \Cd%jS\C-",
-                           "+forward", "+back", "+speed", "+moveleft", "+moveright", "+attack", "+use", ScaleEPCost(50));
+                           "+forward", "+back", "+speed", "+moveleft", "+moveright", "+attack", ScaleEPCost(50), "+use");
                 EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             }
             break;
