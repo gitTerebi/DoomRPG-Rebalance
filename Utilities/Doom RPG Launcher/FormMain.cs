@@ -18,11 +18,13 @@ namespace DoomRPG
 {
     public partial class FormMain : Form
     {
-        Version version = new Version(0, 9, 5);
+        Version version = Assembly.GetExecutingAssembly().GetName().Version;
         Config config = new Config();
         string currentBranch = string.Empty;
         List<PatchInfo> patches = new List<PatchInfo>();
         Dictionary<int, string> loadOrder = new Dictionary<int, string>();
+        List<DMFlag> DMFlags = new List<DMFlag>();
+        List<DMFlag> DMFlags2 = new List<DMFlag>();
 
         // Extensions of known mod filetypes
         string[] fileTypes =
@@ -35,9 +37,9 @@ namespace DoomRPG
         public FormMain()
         {
             InitializeComponent();
-
+            
             // Title
-            Text = "Doom RPG Launcher v" + version;
+            Text = "Doom RPG SE Launcher v" + version;
 
             // Load config
             config.Load();
@@ -51,6 +53,9 @@ namespace DoomRPG
             // Mods
             PopulateMods();
 
+            // DMFLags
+            PopulateDMFlags();
+
             // Load Controls
             LoadControls();
 
@@ -58,7 +63,58 @@ namespace DoomRPG
             LoadCredits();
 
             // Populate branches combo box
-            PopulateBranchesComboBox();
+            _ = PopulateBranchesComboBox();
+        }
+
+        private void PopulateDMFlags()
+        {
+            string[] lines = Properties.Resources.DMFlags.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+            foreach (string line in lines)
+            {
+                string[] values = line.Split('\t');
+                if (values[0] == "DMFlags")
+                    DMFlags.Add(new DMFlag(int.Parse(values[1]), values[2], bool.Parse(values[3]), values[4]));
+                else
+                    DMFlags2.Add(new DMFlag(int.Parse(values[1]), values[2], bool.Parse(values[3]), values[4]));
+            }
+            // Disable selection of items to prevent confusion
+            listViewDMFlags.SelectedIndexChanged += SkipSelection;
+            // Allow only one type of FallingDamage selected
+            listViewDMFlags.ItemCheck += ListViewDMFlags_ItemCheck;
+            for (int i = 0; i < DMFlags.Count; i++)
+            {
+                listViewDMFlags.Items.Add(DMFlags[i].Name);
+                listViewDMFlags.Items[listViewDMFlags.Items.Count - 1].Checked = ((config.DMFlags & DMFlags[i].Key) == DMFlags[i].Key) ^ DMFlags[i].DefaultState;
+                listViewDMFlags.Items[listViewDMFlags.Items.Count - 1].ToolTipText = DMFlags[i].Description;
+            }
+            listViewDMFlags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+            listViewDMFlags2.SelectedIndexChanged += SkipSelection;
+            for (int i = 0; i < DMFlags2.Count; i++)
+            {
+                listViewDMFlags2.Items.Add(DMFlags2[i].Name);
+                listViewDMFlags2.Items[listViewDMFlags2.Items.Count - 1].Checked = ((config.DMFlags2 & DMFlags2[i].Key) == DMFlags2[i].Key) ^ DMFlags2[i].DefaultState;
+                listViewDMFlags2.Items[listViewDMFlags2.Items.Count - 1].ToolTipText = DMFlags2[i].Description;
+            }
+            listViewDMFlags2.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+
+        private void ListViewDMFlags_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+            {
+                if (e.Index == 4 || e.Index == 5)
+                    listViewDMFlags.Items[3].Checked = false;
+                if (e.Index == 3 || e.Index == 5)
+                    listViewDMFlags.Items[4].Checked = false;
+                if (e.Index == 3 || e.Index == 4 )
+                    listViewDMFlags.Items[5].Checked = false;
+            }
+        }
+
+        private void SkipSelection(object sender, EventArgs e)
+        {
+            ((ListView)sender).SelectedIndices.Clear();
         }
 
         private void ProcessLoadOrder()
@@ -256,6 +312,8 @@ namespace DoomRPG
             checkBoxExtraTics.Checked = config.extraTics;
             numericUpDownDuplicate.Value = config.duplicate;
             textBoxCustomCommands.Text = config.customCommands;
+            checkBoxDMFlags.Checked = config.EnableDMFlags;
+            checkBoxDMFlags2.Checked = config.EnableDMFlags2;
         }
 
         private void SaveControls()
@@ -292,6 +350,8 @@ namespace DoomRPG
             config.extraTics = checkBoxExtraTics.Checked;
             config.duplicate = (int)numericUpDownDuplicate.Value;
             config.customCommands = textBoxCustomCommands.Text;
+            config.EnableDMFlags = checkBoxDMFlags.Checked;
+            config.EnableDMFlags2 = checkBoxDMFlags2.Checked;
         }
 
         private async Task<string> GetMasterSHA()
@@ -557,10 +617,17 @@ namespace DoomRPG
                 if (checkedListBoxPatches.GetItemChecked(i))
                     cmdline += " \"" + patches[i].Path + "\"";
 
+            // DMFlags
+            if (config.EnableDMFlags)
+                cmdline += " +set dmflags " + config.DMFlags.ToString();
+
+            if (config.EnableDMFlags2)
+                cmdline += " +set dmflags2 " + config.DMFlags2.ToString();
+
             // Custom Commands
             if (config.customCommands != string.Empty)
                 cmdline += " " + config.customCommands;
-
+            
             return cmdline;
         }
 
@@ -663,6 +730,7 @@ namespace DoomRPG
 
                 // Save config
                 SaveControls();
+                CalculateDMFlags();
                 config.Save();
 
                 // Error Handling
@@ -676,6 +744,27 @@ namespace DoomRPG
             {
                 Utils.ShowError(ex);
             }
+        }
+
+        private void CalculateDMFlags()
+        {
+            int flags = 0;
+            int flags2 = 0;
+            
+            for (int i = 0; i < listViewDMFlags.Items.Count; i++)
+            {
+                if (listViewDMFlags.Items[i].Checked ^ DMFlags[i].DefaultState)
+                    flags |= DMFlags[i].Key;
+            }
+
+            for (int i = 0; i < listViewDMFlags2.Items.Count; i++)
+            {
+                if (listViewDMFlags2.Items[i].Checked ^ DMFlags2[i].DefaultState)
+                    flags |= DMFlags2[i].Key;
+            }
+
+            config.DMFlags = flags;
+            config.DMFlags2 = flags2;
         }
 
         private void RichTextBoxCredits_TextChanged(object sender, EventArgs e)
@@ -775,6 +864,7 @@ namespace DoomRPG
             PatchInfo.CheckForRequirements(patches);
             PatchInfo.CheckForConflicts(patches);
             SaveControls();
+            CalculateDMFlags();
             config.Save();
             Clipboard.SetText("\"" + config.portPath + "\"" + BuildCommandLine());
         }

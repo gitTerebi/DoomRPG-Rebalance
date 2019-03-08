@@ -8,7 +8,7 @@ namespace DoomRPG
 {
     public class Config
     {
-        private string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + Assembly.GetEntryAssembly().GetName().Name + ".cfg";
+        private readonly string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + Assembly.GetEntryAssembly().GetName().Name + ".cfg";
         
         // Basic
         public string portPath = string.Empty;
@@ -24,6 +24,10 @@ namespace DoomRPG
         public List<String> patches = new List<string>();
         public List<string> mods = new List<string>();
         public string customCommands = string.Empty;
+        public bool EnableDMFlags = false;
+        public int DMFlags = 0;
+        public bool EnableDMFlags2 = false;
+        public int DMFlags2 = 0;        
 
         // Multiplayer
         public bool multiplayer = false;
