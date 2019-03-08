@@ -2578,7 +2578,7 @@ void MenuHelp()
             else if (Player.StatPage == STATPAGE_TEAM)
             {
                 HudMessage("Navigate: \Cd%jS/%jS\C-\nSwitch pages: \Cd%jS + %jS/%jS\C-\nPlayer's view on HUD: \Cd%jS\C-\nTeleport to selected Player (\Cn%d EP\C-): \Cd%jS\C-",
-                           "+forward", "+back", "+speed", "+moveleft", "+moveright", "+attack", "+use", ScaleEPCost(50));
+                           "+forward", "+back", "+speed", "+moveleft", "+moveright", "+attack", ScaleEPCost(50), "+use");
                 EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             }
             break;
@@ -2761,17 +2761,17 @@ void DrawToxicityBar(fixed X, fixed Y, bool HideInfo)
         if (Player.Toxicity >= 25)
         {
             HudMessage("- No Regeneration");
-            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.1, Y + 32.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 32.0, 0.05);
         }
         if (Player.Toxicity >= 50)
         {
             HudMessage("- Energy Loss");
-            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.1, Y + 40.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 40.0, 0.05);
         }
         if (Player.Toxicity >= 75)
         {
             HudMessage("- Reduced Movement Speed");
-            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.1, Y + 48.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 48.0, 0.05);
         }
     }
 }

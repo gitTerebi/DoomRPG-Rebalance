@@ -92,8 +92,6 @@ NamedScript Type_OPEN void MapInit()
     }
 
     CurrentLevel = FindLevelInfo();
-    // Get sector count of current level.
-    LevelSectorCount = ScriptCall("DRPGZUtilities", "GetLevelSectorCount");
 
     if (CurrentLevel == NULL) // New map - We need to create new info for it
     {
@@ -111,6 +109,11 @@ NamedScript Type_OPEN void MapInit()
         CurrentLevel->LevelNum = 0;
         CurrentLevel->NeedsRealInfo = true;
     }
+
+    // Get sector count of current level.
+    LevelSectorCount = ScriptCall("DRPGZUtilities", "GetLevelSectorCount");
+    // Check for a bad map, these have compatibility issues with LootGen & map events and probably something else.
+    CurrentLevel->BadMap = ScriptCall("DRPGZUtilities", "CheckForBadMap");
 
     if (CurrentLevel->NeedsRealInfo)
     {
@@ -320,10 +323,15 @@ NamedScript Type_OPEN void MapInit()
 
         // Give a tip for events instead if they're new to the player
         if (CurrentLevel->Event != MAPEVENT_NONE)
+        {
             // Player has seen this event before
             if (Players(i).SeenEventTip[CurrentLevel->Event]) continue;
 
-        SetActivator(Players(i).TID);
+            SetActivator(Players(i).TID);
+        }
+        else
+            SetActivator(0, AAPTR_PLAYER1 << i);
+
         GiveTip();
         SetActivator(0, AAPTR_NULL);
     }
@@ -422,7 +430,7 @@ NamedScript void SetupMapMissions()
         if (!PlayerInGame(i)) continue;
 
         // Kill
-        if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL)
+        if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL && !CurrentLevel->BadMap)
         {
             int Amount = Players(i).Mission.Amount - Players(i).Mission.Current;
             DynamicLootGenerator(GetMissionMonsterActor(Players(i).Mission.Monster->Actor), Amount);
@@ -659,13 +667,10 @@ int LevelSort(void const *Left, void const *Right)
 
 void AddAdditionalMonsters()
 {
-    if (CurrentLevel->AdditionalMonsters < 1 || CurrentLevel->Event == MAPEVENT_MEGABOSS)
+    if (CurrentLevel->AdditionalMonsters < 1 || CurrentLevel->Event == MAPEVENT_MEGABOSS || CurrentLevel->BadMap)
         return;
 
-    if (CurrentLevel->Event == MAPEVENT_ONEMONSTER)
-        DynamicLootGenerator(GetMissionMonsterActor(CurrentLevel->SelectedMonster->Actor), CurrentLevel->AdditionalMonsters);
-    else
-        DynamicLootGenerator("DRPGGenericMonsterDropper", CurrentLevel->AdditionalMonsters);
+    DynamicLootGenerator("DRPGGenericMonsterDropper", CurrentLevel->AdditionalMonsters);
 }
 
 LevelInfo *FindLevelInfo(str MapName)
@@ -1165,51 +1170,13 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
     // Harmonized Destruction
     TargetLevel->AuraType = 0;
 
+    // Skip bad map.
+    if (CurrentLevel->BadMap)
+        return;
+
     // [KS] Super-special events for super-special levels (and by "special" I of course mean retarded)
     // [KS] PS: I hate you already.
-    if (!StrICmp(TargetLevel->LumpName, "E1M8"))
-    {
-        // Phobos Anomaly
-        // Tags: 666 (Floor_LowerToLowest)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "E2M8"))
-    {
-        // Tower of Babel
-        // Tags: None, level ends
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "E3M8"))
-    {
-        // Dis
-        // Tags: None, level ends
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "E4M6"))
-    {
-        // Against Thee Wickedly
-        // Tags: 666 (Door_Open)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "E4M8"))
-    {
-        // Unto the Cruel
-        // Tags: 666 (Floor_LowerToLowest)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "MAP07"))
-    {
-        // Dead Simple
-        // Tags: 666 (Floor_LowerToLowest), 667 (Floor_RaiseByTexture)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "LEVEL07"))
-    {
-        // Baron's Banquet
-        // Tags: 666 (Floor_LowerToLowest), 667 (Floor_RaiseByTexture)
-        return;
-    }
-    else if (!StrICmp(TargetLevel->LumpName, "MAP30"))
+    if (!StrICmp(TargetLevel->LumpName, "MAP30"))
     {
         // Icon of Sin
         // Blurb about a demon spitter and the game ending finale here.
@@ -1607,7 +1574,12 @@ NamedScript void MegaBossEvent()
         if (Spawned)
         {
             SpawnForced("TeleportFog", ChosenPosition->X, ChosenPosition->Y, ChosenPosition->Z, 0, 0);
-            GiveActorInventory(TID, "DRPGWhiteAuraGiver", 1);
+            // former WhiteAuraGiver
+            SetActorFlag(TID, "LOOKALLAROUND", GetCVar("drpg_monster_lookallaround"));
+            SetActorFlag(TID, "NOTARGETSWITCH", GetCVar("drpg_monster_notargetswitch"));
+            SetActorFlag(TID, "NOTARGET", GetCVar("drpg_monster_notarget"));
+            SetActorFlag(TID, "NOINFIGHTING", GetCVar("drpg_monster_noinfighting"));
+            SetActorFlag(TID, "BRIGHT", GetCVar("drpg_monster_bright"));
             if (GetCVar("drpg_debug"))
                 Log("\CdDEBUG: \Cg%S MegaBoss successfully spawned", CurrentLevel->MegabossActor->Actor);
         }

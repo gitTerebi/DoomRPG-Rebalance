@@ -317,6 +317,8 @@ struct MonsterStats_S
 
     int LevelAdd;
     bool AuraAdd[AURA_MAX];
+
+    int DamageTable[MAX_PLAYERS];
 };
 
 struct MonsterInfo_S
@@ -479,6 +481,7 @@ struct LevelInfo_S
     // Miscellaneous
     int AdditionalMonsters;
     bool SecretMap;
+    bool BadMap;
 
     // Event stuff
     struct DynamicArray_S MonsterPositions;

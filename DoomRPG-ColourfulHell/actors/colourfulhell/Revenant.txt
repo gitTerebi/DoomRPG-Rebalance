@@ -39,6 +39,22 @@ ACTOR GreenRevenantRPG : GreenRevenant Replaces GreenRevenant
 	}
 }
 
+// Cyan Revenant
+ACTOR CyanRevenant2RPG : CyanRevenant2 Replaces CyanRevenant2
+{
+	Tag "Icy Revenant"
+
+	States
+	{
+	Spawn:
+		SREV A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SREV A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Revenant
 ACTOR BlueRevenantRPG : BlueRevenant Replaces BlueRevenant
 {
@@ -114,6 +130,22 @@ ACTOR RedRevenantRPG : RedRevenant Replaces RedRevenant
 		Goto Super::Spawn
 	See:
 		RASK A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Abyss Revenant
+ACTOR AbyssRevenant2RPG : AbyssRevenant2 Replaces AbyssRevenant2
+{
+	Tag "Abyssal Revenant"
+
+	States
+	{
+	Spawn:
+		SKEL A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SKEL A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
@@ -197,18 +229,18 @@ ACTOR GrayRevenant2RPG : GrayRevenant2 Replaces GrayRevenant2
 	}
 }
 
-// Abyss Revenant
-ACTOR AbyssRevenant2RPG : AbyssRevenant2 Replaces AbyssRevenant2
+// White Revenant
+ACTOR WhiteRevenant2RPG : WhiteRevenant2 Replaces WhiteRevenant2
 {
-	Tag "Abyssal Revenant"
+	Tag "The Lichest Lich"
 
 	States
 	{
 	Spawn:
-		SKEL A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::Spawn
 	See:
-		SKEL A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		REVW A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }

@@ -1,20 +1,20 @@
 ## Fork overview
 
 The main goal of this fork is bugfixing/stability & performance improvements. However some usability/gameplay tweaks have been made here and there.
-I recommended reading CHANGELOG.txt and the commits for all the changes.
+I recommend reading CHANGELOG.txt and the commits for all the changes.
 
 ## Installing
 
 * GZDoom v3.2.5 or higher is required to play this mod. 
 Avoid v3.3 as it has an [ACS bug](https://forum.zdoom.org/viewtopic.php?style=12&f=7&t=60049) that causes performance issues.
 
-[Refer to the Wiki.](https://github.com/Kyle873/DoomRPG/wiki)
+[Refer to the Wiki.](https://github.com/Sumwunn/DoomRPG/wiki)
 
 ## Compatible mods
 
 - DoomRL Arsenal - [1.05] [MP-B6.2].
 - LegenDoom v2.4.
-- Colourful Hell v0.95.
+- Colourful Hell v0.96.
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
 
 ## Notes

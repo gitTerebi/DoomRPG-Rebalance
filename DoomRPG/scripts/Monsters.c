@@ -294,6 +294,7 @@ MonsterInfo const MonsterDataCH[MAX_DEF_MONSTERS_CH] =
     { "YellowRevenant",                       "Ghostly Revenant",                 68,     3, false, "Bones clatter all around you!" },
     { "RedRevenant",                          "Bloody Revenant",                  78,     4, false, "Bones clatter all around you!" },
     { "BlackRevenant3",                       "The Black Knight",                 88,     5, true,  "Bones clatter all around you!" },
+    { "WhiteRevenant2",                       "The Lichest Lich",                 94,     5, true,  "Bones clatter all around you!" },
 
     // Mancubus
     { "CommonFatso",                          "Mancubus",                         50,     0, false, "You hear deep, guttural noises!" },
@@ -389,6 +390,10 @@ int NewMonsterID()
         Monsters[CurrentID].Aura.Type[i].Active = false;
         Monsters[CurrentID].Aura.Type[i].Level = 0;
         Monsters[CurrentID].AuraAdd[i] = false;
+    }
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        Monsters[CurrentID].DamageTable[i] = 0;
     }
     Monsters[CurrentID].Threat = 0;
     Monsters[CurrentID].Strength = 0;
@@ -524,7 +529,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
     MonsterAggressionHandler();
 
     // Death Handler
-    MonsterDeathCheck();
+    // Handled via ZScript
 
     // Environmental Hazard Map Event
     if (CurrentLevel->Event == MAPEVENT_TOXICHAZARD && (Random(1, 24) == 1 || Stats->Flags & MF_BOSS || Stats->Flags & MF_MEGABOSS))
@@ -971,7 +976,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         Stats->Aura.Type[AURA_WHITE].Active = true;
         Stats->AuraAdd[AURA_WHITE] = false;
         Stats->LevelAdd += Stats->Level;
-        GiveInventory("DRPGWhiteAuraGiver", 1);
+        MonsterWhiteAuraCheck(true);
         MonsterLevelupHandler();
     }
     if (Stats->AuraAdd[AURA_RED] && !Stats->Aura.Type[AURA_RED].Active) // Red Aura - Strength
@@ -979,7 +984,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         Stats->Aura.Type[AURA_RED].Active = true;
         Stats->AuraAdd[AURA_RED] = false;
         Stats->Strength *= 2;
-        GiveInventory("DRPGRedAuraGiver", 1);
+        MonsterRedAuraCheck(true);
         MonsterDamageRetaliationHandler();
     }
     if (Stats->AuraAdd[AURA_GREEN] && !Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
@@ -987,14 +992,14 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         Stats->Aura.Type[AURA_GREEN].Active = true;
         Stats->AuraAdd[AURA_GREEN] = false;
         Stats->Defense *= 2;
-        GiveInventory("DRPGGreenAuraGiver", 1);
+        MonsterGreenAuraCheck(true);
     }
     if (Stats->AuraAdd[AURA_PINK] && !Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
     {
         Stats->Aura.Type[AURA_PINK].Active = true;
         Stats->AuraAdd[AURA_PINK] = false;
         Stats->Vitality *= 2;
-        GiveInventory("DRPGPinkAuraGiver", 1);
+        MonsterPinkAuraCheck(true);
         MonsterFellowResurrectionHandler();
     }
     if (Stats->AuraAdd[AURA_BLUE] && !Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
@@ -1002,7 +1007,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         Stats->Aura.Type[AURA_BLUE].Active = true;
         Stats->AuraAdd[AURA_BLUE] = false;
         Stats->Energy *= 2;
-        GiveInventory("DRPGBlueAuraGiver", 1);
+        MonsterBlueAuraCheck(true);
         MonsterEPDrainHandler();
     }
     if (Stats->AuraAdd[AURA_PURPLE] && !Stats->Aura.Type[AURA_PURPLE].Active) // Purple Aura - Regeneration
@@ -1016,7 +1021,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         Stats->Aura.Type[AURA_ORANGE].Active = true;
         Stats->AuraAdd[AURA_ORANGE] = false;
         Stats->Agility *= 2;
-        GiveInventory("DRPGOrangeAuraGiver", 1);
+        MonsterOrangeAuraCheck(true);
         MonsterEpicVisitTimeHandler();
     }
     if (Stats->AuraAdd[AURA_DARKBLUE] && !Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
@@ -1040,8 +1045,9 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
     // Apply extra levels from white aura and any other sources
     if (Stats->LevelAdd > 0)
     {
-        if (Stats->Level + Stats->LevelAdd >= 1000)
-            Stats->LevelAdd = 1000 - Stats->Level;
+        int LevelCap = GetCVar("drpg_monster_level_cap");
+        if (Stats->Level + Stats->LevelAdd >= LevelCap)
+            Stats->LevelAdd = LevelCap - Stats->Level;
         MonsterStatPool = GameSkill() * Stats->LevelAdd;
 
         int StrengthAdd = 0;
@@ -1218,6 +1224,7 @@ NamedScript void MonsterStatsHandler()
     int OldLuck;
     bool StatsChanged;
     bool MonsterWasDisrupted = false;
+    bool Friendly = GetActorProperty(0, APROP_Friendly); // Sanity check for when APROP_Friendly gets removed from summons
 
 Start:
 
@@ -1251,14 +1258,16 @@ Start:
         return;
     }
 
-    /* Monster is no longer friendly, remove their summon bonuses and species
+    // Monster is no longer friendly, remove their summon bonuses and species
     // This causes issues with infighting and I don't remember why I did this in the first place
     // Just comment it out and leave it alone for now
-    if (!GetActorProperty(0, APROP_Friendly))
+    // [SW, 2/20/2019] Need this to prevent our summons from being unkillable if they lose APROP_Friendly
+    if (Friendly && !GetActorProperty(0, APROP_Friendly))
     {
         GiveInventory("DRPGFriendlyRemover", 1);
         SetActorPropertyString(0, APROP_Species, "");
-    } */
+        Friendly = false;
+    }
 
     // Levelup handling via White Aura radius
     if (CheckInventory("DRPGMonsterLevelup"))
@@ -1281,7 +1290,10 @@ Start:
     {
         StatsChanged = true;
 
-        SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (0.09 * ((fixed)Stats->Defense / 100.0)));
+        if (Stats->Defense < 1000)
+            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (0.09 * ((fixed)Stats->Defense / 100.0)));
+        else
+            SetActorPropertyFixed(0, APROP_DamageFactor, 100.0 / (fixed)Stats->Defense);
         OldDefense = Stats->Defense;
     }
 
@@ -1367,17 +1379,17 @@ Start:
         if (!MonsterWasDisrupted)
         {
             if (Stats->Aura.Type[AURA_WHITE].Active)
-                GiveInventory("DRPGWhiteAuraRemover", 1);
+                MonsterWhiteAuraCheck(false);
             if (Stats->Aura.Type[AURA_RED].Active)
-                GiveInventory("DRPGRedAuraRemover", 1);
+                MonsterRedAuraCheck(false);
             if (Stats->Aura.Type[AURA_GREEN].Active)
-                GiveInventory("DRPGGreenAuraRemover", 1);
+                MonsterGreenAuraCheck(false);
             if (Stats->Aura.Type[AURA_PINK].Active)
-                GiveInventory("DRPGPinkAuraRemover", 1);
+                MonsterPinkAuraCheck(false);
             if (Stats->Aura.Type[AURA_BLUE].Active)
-                GiveInventory("DRPGBlueAuraRemover", 1);
+                MonsterBlueAuraCheck(false);
             if (Stats->Aura.Type[AURA_ORANGE].Active)
-                GiveInventory("DRPGOrangeAuraRemover", 1);
+                MonsterOrangeAuraCheck(false);
 
             ActivatorSound("skills/disruption", 127);
             MonsterWasDisrupted = true;
@@ -1390,17 +1402,17 @@ Start:
         if (MonsterWasDisrupted)
         {
             if (Stats->Aura.Type[AURA_WHITE].Active)
-                GiveInventory("DRPGWhiteAuraGiver", 1);
+                MonsterWhiteAuraCheck(true);
             if (Stats->Aura.Type[AURA_RED].Active)
-                GiveInventory("DRPGRedAuraGiver", 1);
+                MonsterRedAuraCheck(true);
             if (Stats->Aura.Type[AURA_GREEN].Active)
-                GiveInventory("DRPGGreenAuraGiver", 1);
+                MonsterGreenAuraCheck(true);
             if (Stats->Aura.Type[AURA_PINK].Active)
-                GiveInventory("DRPGPinkAuraGiver", 1);
+                MonsterPinkAuraCheck(true);
             if (Stats->Aura.Type[AURA_BLUE].Active)
-                GiveInventory("DRPGBlueAuraGiver", 1);
+                MonsterBlueAuraCheck(true);
             if (Stats->Aura.Type[AURA_ORANGE].Active)
-                GiveInventory("DRPGOrangeAuraGiver", 1);
+                MonsterOrangeAuraCheck(true);
 
             MonsterWasDisrupted = false;
         }
@@ -1510,7 +1522,7 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
-    if (ClassifyActor(0) & ACTOR_DEAD)
+    if ((ClassifyActor(0) & ACTOR_DEAD) || !GetCVar("drpg_monster_white_masslevel"))
     {
         Delay(35);
         goto Start;
@@ -1558,7 +1570,7 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
-    if (ClassifyActor(0) & ACTOR_DEAD)
+    if ((ClassifyActor(0) & ACTOR_DEAD) || !GetCVar("drpg_monster_blue_epdrain"))
     {
         Delay(35);
         goto Start;
@@ -1624,6 +1636,7 @@ NamedScript void MonsterRegenerationHandler()
     if (CheckInventory("DRPGMonsterRegenerationHandler"))
         return;
 
+    int DelayTime;
     GiveInventory("DRPGMonsterRegenerationHandler", 1);
 
     // Delay Stagger
@@ -1659,17 +1672,19 @@ Start:
     SetActorProperty(0, APROP_Health, GetActorProperty(0, APROP_Health) + RegenAmount);
     Stats->RegenHealth += RegenAmount;
 
-    if (Stats->Aura.Type[AURA_PURPLE].Active && !CheckInventory("DRPGMonsterDisrupted"))
+    if (Stats->Aura.Type[AURA_PURPLE].Active && !CheckInventory("DRPGMonsterDisrupted") && GetCVar("drpg_monster_purple_massheal"))
+    {
         GiveInventory("DRPGMonsterRadiusHealer", 1);
+        DelayTime = 35 * 10;
+    }
+    else
+        DelayTime = 35 * 30;
 
     // Prevent going over 100%
     if (GetActorProperty(0, APROP_Health) > Stats->HealthMax)
         SetActorProperty(0, APROP_Health, Stats->HealthMax);
 
-    if (Stats->Aura.Type[AURA_PURPLE].Active && !CheckInventory("DRPGMonsterDisrupted"))
-        Delay(35 * 10);
-    else
-        Delay(35 * 30);
+    Delay(DelayTime);
     goto Start;
 }
 
@@ -1713,7 +1728,7 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
-    if (ClassifyActor(0) & ACTOR_DEAD)
+    if ((ClassifyActor(0) & ACTOR_DEAD) || !GetCVar("drpg_monster_red_retaliation"))
     {
         Delay(35);
         goto Start;
@@ -1812,7 +1827,7 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
-    if (ClassifyActor(0) & ACTOR_DEAD)
+    if ((ClassifyActor(0) & ACTOR_DEAD) || !GetCVar("drpg_monster_yellow_moneydrain"))
     {
         Delay(35);
         goto Start;
@@ -1878,7 +1893,7 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
-    if (ClassifyActor(0) & ACTOR_DEAD)
+    if ((ClassifyActor(0) & ACTOR_DEAD) || !GetCVar("drpg_monster_darkblue_ammodrain"))
     {
         Delay(35);
         goto Start;
@@ -1970,7 +1985,7 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
-    if (ClassifyActor(0) & ACTOR_DEAD)
+    if ((ClassifyActor(0) & ACTOR_DEAD) || !GetCVar("drpg_monster_pink_resurrect"))
     {
         Delay(35);
         goto Start;
@@ -2009,7 +2024,7 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
-    if (ClassifyActor(0) & ACTOR_DEAD)
+    if ((ClassifyActor(0) & ACTOR_DEAD) || !GetCVar("drpg_monster_orange_teleport"))
     {
         Delay(35);
         goto Start;
@@ -2083,53 +2098,47 @@ Start:
     goto Start;
 }
 
-NamedScript void MonsterDeathCheck()
+NamedScript DECORATE void MonsterDeathCheck()
 {
-    // Delay Stagger
-    Delay(35 + (GetMonsterID(0) % 4));
-
-    Delay(1);
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-
-Start:
-
-    if (ClassifyActor(0) & ACTOR_WORLD)
-        goto Disappeared;
-
-    if (GetActorProperty(0, APROP_Health) > 0)
-    {
-        Delay(4);
-        goto Start;
-    }
 
     MonsterDeath();
 
-PostDeathWait:
+    while (true)
+    {
+        Delay(35);
 
-    Delay(35);
+        if (ClassifyActor(0) & ACTOR_WORLD)
+        {
+            Stats->Init = false; // Mark as unused
+            Stats->TID = 0;
+            return;
+        }
 
-    if (ClassifyActor(0) & ACTOR_WORLD)
-        goto Disappeared;
+        if (GetActorProperty(0, APROP_Health) > 0)
+            return;
+    }
 
-    if (GetActorProperty(0, APROP_Health) > 0)
-        goto Start;
-
-    goto PostDeathWait;
-
-Disappeared:
-
-    Stats->Init = false; // Mark as unused
-    Stats->TID = 0;
 }
 
 NamedScript void MonsterDeath()
 {
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-
+    // Don't forget to remove stupid fixed-point avoidance code after migration (if it happens)
     int Killer = WhoKilledMe();
-    long int XPAmount = Random(GetActorProperty(0, APROP_SpawnHealth) / 2.0, GetActorProperty(0, APROP_SpawnHealth)) * (1 + (Stats->Threat - (Stats->Threat > 0 ? 1 : 0)));;
-    long int RankAmount = GetActorProperty(0, APROP_SpawnHealth) * (1 + (Stats->Threat - (Stats->Threat > 0 ? 1 : 0)));
+    int HealthXP;
+    if (GetCVarFixed("drpg_xp_health_awareness") < 1.0)
+        HealthXP = Stats->SpawnHealth + ((Stats->HealthMax - Stats->SpawnHealth) * (int)(GetCVarFixed("drpg_xp_health_awareness") * 10)) / 10;
+    else
+        HealthXP = (Stats->HealthMax * (int)(GetCVarFixed("drpg_xp_health_awareness") * 10)) / 10;
+
+    int ThreatMult = Stats->Threat;
+    if (ThreatMult < 1)
+        ThreatMult = 1;
+
+    long int XPAmount = Random(HealthXP / 2, HealthXP) * ThreatMult;
+    long int RankAmount = HealthXP * ThreatMult;
 
     // Aura-Based XP/Rank Modifiers
     if (MonsterHasShadowAura(Stats))
@@ -2205,8 +2214,13 @@ NamedScript void MonsterDeath()
         {
             if (!PlayerInGame(i)) continue;
 
-            if (Killer == i)
+            Stats->DamageTable[i] = Clamp(0, Stats->DamageTable[i], Stats->HealthMax);
+
+            if (Stats->DamageTable[i] > 0)
             {
+                XPAmount = (XPAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
+                RankAmount = (RankAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
+
                 AddXP(i, XPAmount, RankAmount);
                 if (GetCVar("drpg_levelup_natural"))
                 {
@@ -2219,8 +2233,6 @@ NamedScript void MonsterDeath()
                     Players(i).StrengthXP += (int)(XPAmount * Scale);
                 }
             }
-            else
-                AddXP(i, XPAmount / 3, 0);
         }
     }
 
@@ -2327,21 +2339,78 @@ NamedScript void MonsterDeath()
     // Drop Credits
     if (!(Stats->Flags & MF_NODROPS) && CheckInventory("DRPGCredits") > 0)
     {
-        int LuckMult = 100 + Players(Killer).LuckTotal;
-        int CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
-        int CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
-        int CreditsAmount = Random(CreditsMin, CreditsMax);
+        int LuckMult;
+        int CreditsMin;
+        int CreditsMax;
+        int CreditsAmount;
+        int CreditsTable[MAX_PLAYERS];
 
-        // REK-T50 accessory
-        if (Players(Killer).Shield.Active && Players(Killer).Shield.Accessory && Players(Killer).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
-            CreditsAmount *= 3;
+        // Fair sharing
+        if (GetCVar("drpg_multi_sharecredits"))
+        {
+            for (int i = 0; i < MAX_PLAYERS; i++)
+            {
+                LuckMult = 100 + Players(i).LuckTotal;
+                CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
+                CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
+                CreditsTable[i] = (Random(CreditsMin, CreditsMax) * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
 
-        // RAINBOWS Event
-        if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
-            CreditsAmount *= 4;
+                // REK-T50 accessory
+                if (Players(i).Shield.Active && Players(i).Shield.Accessory && Players(i).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
+                    CreditsTable[i] *= 3;
+
+                // RAINBOWS Event
+                if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
+                    CreditsTable[i] *= 4;
+
+                // UAC Premium
+                if (GetCVar("drpg_uac_premium"))
+                    GiveActorInventory(Players(i).TID, "DRPGCredits", Stats->SpawnHealth * ThreatMult * Stats->DamageTable[i] * 10 / Stats->HealthMax / 100);
+            }
+        }
+        else
+        {
+            LuckMult = 100 + Players(Killer).LuckTotal;
+            CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
+            CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
+            CreditsAmount = Random(CreditsMin, CreditsMax);
+
+            // REK-T50 accessory
+            if (Players(Killer).Shield.Active && Players(Killer).Shield.Accessory && Players(Killer).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
+                CreditsAmount *= 3;
+
+            // RAINBOWS Event
+            if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
+                CreditsAmount *= 4;
+
+            // UAC Premium
+            if (GetCVar("drpg_uac_premium"))
+                GiveActorInventory(Players(Killer).TID, "DRPGCredits", Stats->SpawnHealth * ThreatMult / 10);
+        }
 
         // Log("\CfInitial Amount: %d\n\CfLuck Mult: %d\n\CfMin: %d\n\CfMax: %d\n\CfAmount: %d", CheckInventory("DRPGCredits"), LuckMult, CreditsMin, CreditsMax, CreditsAmount);
-        DropMoney(Killer, 0, CreditsAmount);
+        if (GetCVar("drpg_virtual_credits"))
+        {
+            if (GetCVar("drpg_multi_sharecredits"))
+            {
+                for (int i = 0; i < MAX_PLAYERS; i++)
+                    if (PlayerInGame(i))
+                        GiveActorInventory(Players(i).TID, "DRPGCredits", CreditsTable[i]);
+            }
+            else
+                GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsAmount);
+        }
+        else
+        {
+            if (GetCVar("drpg_multi_sharecredits"))
+            {
+                for (int i = 0; i < MAX_PLAYERS; i++)
+                    if (PlayerInGame(i))
+                        DropMoney(i, 0, CreditsTable[i]);
+            }
+            else
+                DropMoney(Killer, 0, CreditsAmount);
+        }
     }
 
     // Drop stolen ammo
@@ -2536,7 +2605,7 @@ NamedScript int WhoShotMe()
 void MonsterLevelup(MonsterStatsPtr Stats)
 {
     // If the monster is max level, return
-    if (Stats->Level >= 1000) return;
+    if (Stats->Level >= GetCVar("drpg_monster_level_cap")) return;
 
     // Apply the stats to the monster
     Stats->Level++;
@@ -2587,26 +2656,28 @@ void MonsterLevelup(MonsterStatsPtr Stats)
 
 void CapMonsterStats(MonsterStatsPtr Stats)
 {
+    int MonsterLevelCap = GetCVar("drpg_monster_level_cap");
+    int MonsterStatCap = GetCVar("drpg_monster_stat_cap");
     if (Stats->Level <= 0)
         Stats->Level = 1;
-    if (Stats->Level > 1000)
-        Stats->Level = 1000;
-    if (Stats->Strength > 1000)
-        Stats->Strength = 1000;
-    if (Stats->Defense > 1000)
-        Stats->Defense = 1000;
-    if (Stats->Vitality > 1000)
-        Stats->Vitality = 1000;
-    if (Stats->Energy > 1000)
-        Stats->Energy = 1000;
-    if (Stats->Regeneration > 1000)
-        Stats->Regeneration = 1000;
-    if (Stats->Agility > 1000)
-        Stats->Agility = 1000;
-    if (Stats->Capacity > 1000)
-        Stats->Capacity = 1000;
-    if (Stats->Luck > 1000)
-        Stats->Luck = 1000;
+    if (Stats->Level > MonsterLevelCap)
+        Stats->Level = MonsterLevelCap;
+    if (Stats->Strength > MonsterStatCap)
+        Stats->Strength = MonsterStatCap;
+    if (Stats->Defense > MonsterStatCap)
+        Stats->Defense = MonsterStatCap;
+    if (Stats->Vitality > MonsterStatCap)
+        Stats->Vitality = MonsterStatCap;
+    if (Stats->Energy > MonsterStatCap)
+        Stats->Energy = MonsterStatCap;
+    if (Stats->Regeneration > MonsterStatCap)
+        Stats->Regeneration = MonsterStatCap;
+    if (Stats->Agility > MonsterStatCap)
+        Stats->Agility = MonsterStatCap;
+    if (Stats->Capacity > MonsterStatCap)
+        Stats->Capacity = MonsterStatCap;
+    if (Stats->Luck > MonsterStatCap)
+        Stats->Luck = MonsterStatCap;
 }
 
 int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
@@ -2663,12 +2734,13 @@ int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
 int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)
 {
     long int Health = Stats->SpawnHealth;
-    long int HealthAddition = Stats->SpawnHealth * 9;
+    long int HealthAddition = Stats->SpawnHealth * GetCVar("drpg_monster_vitality_effect");
+    int HealthBoost = (Stats->Vitality * (int)(GetCVarFixed("drpg_monster_vitality_boost") * 100)) / 100;
 
     HealthAddition *= Stats->Vitality;
     HealthAddition /= 1000;
 
-    Health += HealthAddition;
+    Health += HealthAddition + HealthBoost;
 
     return Health;
 }
@@ -2697,12 +2769,12 @@ void RemoveMonsterAura(MonsterStatsPtr Stats)
     };
 
     // Flag Removers
-    GiveInventory("DRPGRedAuraRemover", 1);
-    GiveInventory("DRPGGreenAuraRemover", 1);
-    GiveInventory("DRPGWhiteAuraRemover", 1);
-    GiveInventory("DRPGPinkAuraRemover", 1);
-    GiveInventory("DRPGBlueAuraRemover", 1);
-    GiveInventory("DRPGOrangeAuraRemover", 1);
+    MonsterRedAuraCheck(false);
+    MonsterGreenAuraCheck(false);
+    MonsterWhiteAuraCheck(false);
+    MonsterPinkAuraCheck(false);
+    MonsterBlueAuraCheck(false);
+    MonsterOrangeAuraCheck(false);
 
     // Reset Renderstyle
     SetActorProperty(0, APROP_RenderStyle, Stats->RenderStyle);
@@ -2797,5 +2869,146 @@ NamedScript Console void OutputMonsters()
     {
         //Log("\CdMonster %d:", i);
         //Output Monsters[i];
+    }
+}
+
+NamedScript void MonsterRedAuraCheck(bool Enable)
+{
+    if (Enable)
+    {
+        SetActorFlag(0, "MISSILEMORE", GetCVar("drpg_monster_red_missilemore"));
+        SetActorFlag(0, "MISSILEEVENMORE", GetCVar("drpg_monster_red_missileevenmore"));
+        SetActorFlag(0, "NOFEAR", GetCVar("drpg_monster_red_nofear"));
+    }
+    else
+    {
+        SetActorFlag(0, "MISSILEMORE", false);
+        SetActorFlag(0, "MISSILEEVENMORE", false);
+        SetActorFlag(0, "NOFEAR", false);
+    }
+}
+
+NamedScript void MonsterGreenAuraCheck(bool Enable)
+{
+    if (Enable)
+    {
+        SetActorFlag(0, "REFLECTIVE", GetCVar("drpg_monster_green_reflective"));
+        SetActorFlag(0, "SHIELDREFLECT", GetCVar("drpg_monster_green_shieldreflect"));
+        SetActorFlag(0, "NOPAIN", GetCVar("drpg_monster_green_nopain"));
+        SetActorFlag(0, "NORADIUSDMG", GetCVar("drpg_monster_green_noradiusdmg"));
+        SetActorFlag(0, "DONTBLAST", GetCVar("drpg_monster_green_dontblast"));
+        SetActorFlag(0, "DONTRIP", GetCVar("drpg_monster_green_dontrip"));
+    }
+    else
+    {
+        SetActorFlag(0, "REFLECTIVE", false);
+        SetActorFlag(0, "SHIELDREFLECT", false);
+        SetActorFlag(0, "NOPAIN", false);
+        SetActorFlag(0, "NORADIUSDMG", false);
+        SetActorFlag(0, "DONTBLAST", false);
+        SetActorFlag(0, "DONTRIP", false);
+    }
+}
+
+NamedScript void MonsterWhiteAuraCheck(bool Enable)
+{
+    if (Enable)
+    {
+        SetActorFlag(0, "LOOKALLAROUND", GetCVar("drpg_monster_white_lookallaround"));
+        SetActorFlag(0, "NOTARGETSWITCH", GetCVar("drpg_monster_white_notargetswitch"));
+        SetActorFlag(0, "NOTARGET", GetCVar("drpg_monster_white_notarget"));
+        SetActorFlag(0, "NOINFIGHTING", GetCVar("drpg_monster_white_noinfighting"));
+        SetActorFlag(0, "BRIGHT", GetCVar("drpg_monster_white_bright"));
+    }
+    else
+    {
+        SetActorFlag(0, "LOOKALLAROUND", false);
+        SetActorFlag(0, "NOTARGETSWITCH", false);
+        SetActorFlag(0, "NOTARGET", false);
+        SetActorFlag(0, "NOINFIGHTING", false);
+        SetActorFlag(0, "BRIGHT", false);
+    }
+}
+
+NamedScript void MonsterPinkAuraCheck(bool Enable)
+{
+    if (Enable)
+    {
+        SetActorFlag(0, "DONTDRAIN", GetCVar("drpg_monster_pink_dontdrain"));
+    }
+    else
+    {
+        SetActorFlag(0, "DONTDRAIN", false);
+    }
+}
+
+NamedScript void MonsterBlueAuraCheck(bool Enable)
+{
+    if (Enable)
+    {
+        SetActorFlag(0, "NOTIMEFREEZE", GetCVar("drpg_monster_blue_notimefreeze"));
+        SetActorFlag(0, "SEEINVISIBLE", GetCVar("drpg_monster_blue_seeinvisible"));
+    }
+    else
+    {
+        SetActorFlag(0, "NOTIMEFREEZE", false);
+        SetActorFlag(0, "SEEINVISIBLE", false);
+    }
+}
+
+NamedScript void MonsterOrangeAuraCheck(bool Enable)
+{
+    if (Enable)
+    {
+        SetActorFlag(0, "ALWAYSFAST", GetCVar("drpg_monster_orange_alwaysfast"));
+        SetActorFlag(0, "QUICKTORETALIATE", GetCVar("drpg_monster_orange_quicktoretaliate"));
+        SetActorFlag(0, "JUMPDOWN", GetCVar("drpg_monster_orange_jumpdown"));
+        SetActorFlag(0, "NOTELESTOMP", GetCVar("drpg_monster_orange_notelestomp"));
+    }
+    else
+    {
+        SetActorFlag(0, "ALWAYSFAST", false);
+        SetActorFlag(0, "QUICKTORETALIATE", false);
+        SetActorFlag(0, "JUMPDOWN", false);
+        SetActorFlag(0, "NOTELESTOMP", false);
+    }
+}
+
+//NamedScript void MonsterPurpleAuraCheck(bool Enable)
+//NamedScript void MonsterDarkBlueAuraCheck(bool Enable)
+//NamedScript void MonsterYellowBlueAuraCheck(bool Enable)
+
+NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
+{
+    MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+    SetActivator(SourceTID);
+
+    // Damaged by a player
+    int PlayerNum = PlayerNumber();
+    if (PlayerNum > -1)
+    {
+        Stats->DamageTable[PlayerNum] += Damage;
+        if (GetCVar("drpg_combo_damage"))
+        {
+            if (Players(PlayerNum).Combo > 0)
+                Players(PlayerNum).ComboTimer = COMBO_MAX;
+        }
+        return;
+    }
+
+    // Damaged by a player's turret
+    for (int i = 0; i < MAX_PLAYERS; i++)
+        if (ActivatorTID() == Players(i).Turret.TID)
+        {
+            Stats->DamageTable[i] += (Damage * GetCVar("drpg_xp_summon_percent")) / 100;
+            return;
+        }
+
+    // Damaged by a player's summons
+    if (ClassifyActor(0) & ACTOR_MONSTER && GetMonsterID(0) && GetActorProperty(0, APROP_MasterTID))
+    {
+        SetActivator(GetActorProperty(0, APROP_MasterTID));
+        Stats->DamageTable[PlayerNumber()] += (Damage * GetCVar("drpg_xp_summon_percent")) / 100;
     }
 }

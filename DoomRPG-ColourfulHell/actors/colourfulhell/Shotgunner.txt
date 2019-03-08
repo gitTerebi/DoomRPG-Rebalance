@@ -39,6 +39,22 @@ ACTOR GreenSGRPG : GreenSG Replaces GreenSG
 	}
 }
 
+// Cyan Shotgunner
+ACTOR CyanSG2RPG : CyanSG2 Replaces CyanSG2
+{
+	Tag "Icy Former Sergeant"
+
+	States
+	{
+	Spawn:
+		ZSP1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Shotgunner
 ACTOR BlueSGRPG : BlueSG Replaces BlueSG
 {
@@ -71,6 +87,38 @@ ACTOR PurpleSGRPG : PurpleSG Replaces PurpleSG
 	}
 }
 
+// Gray Shotgunner
+ACTOR GraySG2RPG : GraySG2 Replaces GraySG2
+{
+	Tag "Ancient Sergeant"
+
+	States
+	{
+	Spawn:
+		HMZP A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		HMZP A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Abyss Shotgunner
+ACTOR AbyssSG2RPG : AbyssSG2 Replaces AbyssSG2
+{
+	Tag "Abyssal Sergeant"
+
+	States
+	{
+	Spawn:
+		ASGZ A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		ASGZ A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Yellow Shotgunner
 ACTOR YellowSGRPG : YellowSG Replaces YellowSG
 {
@@ -83,6 +131,22 @@ ACTOR YellowSGRPG : YellowSG Replaces YellowSG
 		Goto Super::Spawn
 	See:
 		ASGZ A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Fireblu Shotgunner
+ACTOR FireBluSG2RPG : FireBluSG2 Replaces FireBluSG2
+{
+	Tag "Enchanted Sergeant"
+
+	States
+	{
+	Spawn:
+		GPOS A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		GPOS A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
@@ -163,54 +227,6 @@ ACTOR WhiteSGEXRPG : WhiteSGEX Replaces WhiteSGEX
 		Goto Super::Spawn
 	See:
 		BENE A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
-		Goto Super::See
-	}
-}
-
-// Fireblu Shotgunner
-ACTOR FireBluSG2RPG : FireBluSG2 Replaces FireBluSG2
-{
-	Tag "Enchanted Sergeant"
-
-	States
-	{
-	Spawn:
-		GPOS A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		GPOS A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// Abyss Shotgunner
-ACTOR AbyssSG2RPG : AbyssSG2 Replaces AbyssSG2
-{
-	Tag "Abyssal Sergeant"
-
-	States
-	{
-	Spawn:
-		ASGZ A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		ASGZ A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::See
-	}
-}
-
-// Gray Shotgunner
-ACTOR GraySG2RPG : GraySG2 Replaces GraySG2
-{
-	Tag "Ancient Sergeant"
-
-	States
-	{
-	Spawn:
-		HMZP A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		Goto Super::Spawn
-	See:
-		HMZP A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }

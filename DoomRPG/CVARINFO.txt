@@ -1,10 +1,15 @@
-// ANY NEW CVARS ADDED HERE MUST ALSO BE ADDED TO: "ResetToDefaults" and its relatives in "zscript\DRPGZUtils.txt"
+// ANY NEW CVARS ADDED HERE MUST ALSO BE ADDED TO: "ResetToDefaults" and its relatives in "zscript\DRPGZUtils.zs"
 
 // XP System
 server  float   drpg_scalexp = 1.0;
 server  int     drpg_xp_curve = 300;
+//server  int     drpg_max_player_level = 100;
+server  float   drpg_xp_health_awareness = 0.0;
+server  int     drpg_xp_summon_percent = 100;
 
 // Monster Difficulty
+server  int     drpg_monster_level_cap = 1000;
+server  int     drpg_monster_stat_cap = 1000;
 server  int     drpg_monster_levels = 3;
 server  float   drpg_monster_level_weight = 1.0;
 server  float   drpg_monster_map_weight = 3.0;
@@ -13,6 +18,37 @@ server  float   drpg_monster_random_max_mult = 1.2;
 server  int     drpg_aura_curve = 0;
 server  bool    drpg_monster_specialize = true;
 server  bool    drpg_monster_shadows = false;
+server  int     drpg_monster_vitality_effect = 9;
+server  float   drpg_monster_vitality_boost = 0;
+server  bool    drpg_monster_red_missileevenmore = true;
+server  bool    drpg_monster_red_missilemore = true;
+server  bool    drpg_monster_red_nofear = true;
+server  bool    drpg_monster_red_retaliation = true;
+server  bool    drpg_monster_green_dontblast = true;
+server  bool    drpg_monster_green_dontrip = true;
+server  bool    drpg_monster_green_nopain = true;
+server  bool    drpg_monster_green_noradiusdmg = true;
+server  bool    drpg_monster_green_reflective = true;
+server  bool    drpg_monster_green_shieldreflect = true;
+server  bool    drpg_monster_white_bright = true;
+server  bool    drpg_monster_white_lookallaround = true;
+server  bool    drpg_monster_white_masslevel = true;
+server  bool    drpg_monster_white_noinfighting = true;
+server  bool    drpg_monster_white_notarget = true;
+server  bool    drpg_monster_white_notargetswitch = true;
+server  bool    drpg_monster_pink_dontdrain = true;
+server  bool    drpg_monster_pink_resurrect = true;
+server  bool    drpg_monster_blue_epdrain = true;
+server  bool    drpg_monster_blue_notimefreeze = true;
+server  bool    drpg_monster_blue_seeinvisible = true;
+server  bool    drpg_monster_purple_massheal = true;
+server  bool    drpg_monster_orange_alwaysfast = true;
+server  bool    drpg_monster_orange_jumpdown = true;
+server  bool    drpg_monster_orange_notelestomp = true;
+server  bool    drpg_monster_orange_quicktoretaliate = true;
+server  bool    drpg_monster_orange_teleport = true;
+server  bool    drpg_monster_darkblue_ammodrain = true;
+server  bool    drpg_monster_yellow_moneydrain = true;
 
 // Game Difficulty
 server  float   drpg_skill_costscale = 1.0;
@@ -23,16 +59,24 @@ server  bool    drpg_shield_armorremove = true;
 server  bool    drpg_levelup_heal = false;
 server  bool    drpg_toxicity_penalties = true;
 server  bool    drpg_mission_monsterkillscount = false;
+server  bool    drpg_invulnerability_plus = false;
+server  bool    drpg_combo_damage = false;
 server  int     drpg_monster_mapweight = 1;
 server  int     drpg_monster_population = 100;
 server  int     drpg_monster_limit = 0;
-server  bool    drpg_loot_system = true;
-server  float   drpg_lootgen_factor = 1.0;
+server  bool    drpg_monster_adaptive_spawns = true;
 server  int     drpg_aurasteal_rate = 70;
 server  float   drpg_aurasteal_amount = 1.0;
 server  bool    drpg_aura_removeondeath = false;
 server  int     drpg_minibosses = 1;
 server  int     drpg_reinforcements = 1;
+
+// Loot Generation
+server  bool    drpg_loot_system = true;
+server  float   drpg_lootgen_factor = 1.0;
+server  bool    drpg_loot_rcm = true; // Rarity Chance Modifier
+server  float   drpg_loot_crate_spc = 35.0; // Shield Part Chance
+server  bool    drpg_uac_premium = false;
 
 // Map Events
 server  float   drpg_mapevent_chance = 20.0;
@@ -62,12 +106,15 @@ server  float   drpg_module_spawnfactor = 1.0;
 server  float   drpg_module_levelfactor = 1.0;
 server  float   drpg_module_statfactor = 1.0;
 server  float   drpg_module_skillfactor = 1.0;
+server  int     drpg_hard_stat_cap = 1000;
+server  int     drpg_soft_stat_cap_mult = 1;
 user    bool    drpg_auto_spend = false;
 user    int     drpg_auto_spend_pref = -1;
 user    bool    drpg_stat_weaponspeed = true;
 user    float   drpg_maxspeed = 2.0;
 user    float   drpg_maxjump = 16.0;
 server  bool    drpg_inv_capacity = true;
+server  int     drpg_overdrive_limit = 1000;
 
 // Natural Stat Leveling
 server  bool    drpg_levelup_natural = true;
@@ -94,6 +141,7 @@ server  int     drpg_damagenumbers_fade = 40;
 server  bool    drpg_modulenumbers = true;
 user    bool    drpg_damagenumbers_hud = true;
 user    bool    drpg_healthbars = true;
+user    bool    drpg_healthbars_plain = false;
 user    bool    drpg_healthbars_names = true;
 user    int     drpg_healthbars_width = 800;
 user    int     drpg_healthbars_height = 600;
@@ -111,6 +159,7 @@ server  int     drpg_multi_dropcredits_percent = 10;
 server  bool    drpg_multi_dropinv = false;
 server  bool    drpg_multi_restoreep = false;
 server  bool    drpg_multi_restoreammo = false;
+server  bool    drpg_multi_sharecredits = false;
 
 // Shop
 server  int     drpg_shoptype = 1;
@@ -187,6 +236,7 @@ server  bool    drpg_debug_gui = false;
 server  int     drpg_debug_drla = 0;
 user    bool    drpg_tips = true;
 server  bool    drpg_regen_movement = true;
+server  int     drpg_move_aug_battery_regen = 0;
 server  int     drpg_autosave = 5;
 server  float   drpg_monster_dropdist = 4.0;
 server  bool    drpg_transport_on_new_map = false;
@@ -199,6 +249,7 @@ user    bool    drpg_toaster = false;
 server  int     drpg_simple_auras = 0;
 server  int     drpg_auras_drawdistance = 1000;
 server  int     drpg_popoffs_drawdistance = 1000;
+server  bool    drpg_virtual_credits = false;
 
 // Stored Character
 user    int     drpg_char_data_len = 0;

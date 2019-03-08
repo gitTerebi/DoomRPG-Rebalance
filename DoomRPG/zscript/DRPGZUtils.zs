@@ -4,6 +4,63 @@ class DRPGZUtilities
     {
         return level.Sectors.Size();
     }
+    static bool CheckActorInMap(int TID)
+    {
+        ActorIterator AI = ActorIterator.Create(TID);
+        Actor A = AI.Next();
+        if (A)
+            return level.IsPointInMap(A.Pos);
+        else
+            return false;
+    }
+    static bool CheckForBadMap()
+    {
+        if (level.MapName == "E1M8")
+        {
+            // Phobos Anomaly
+            // Tags: 666 (Floor_LowerToLowest)
+            return true;
+        }
+
+        else if (level.MapName == "E2M8")
+        {
+            // Tower of Babel
+            // Tags: None, level ends
+            return true;
+        }
+        else if (level.MapName == "E3M8")
+        {
+            // Dis
+            // Tags: None, level ends
+            return true;
+        }
+        else if (level.MapName == "E4M6")
+        {
+            // Against Thee Wickedly
+            // Tags: 666 (Door_Open)
+            return true;
+        }
+        else if (level.MapName == "E4M8")
+        {
+            // Unto the Cruel
+            // Tags: 666 (Floor_LowerToLowest)
+            return true;
+        }
+        else if (level.MapName == "MAP07")
+        {
+            // Dead Simple
+            // Tags: 666 (Floor_LowerToLowest), 667 (Floor_RaiseByTexture)
+            return true;
+        }
+        else if (level.MapName == "LEVEL07")
+        {
+            // Baron's Banquet
+            // Tags: 666 (Floor_LowerToLowest), 667 (Floor_RaiseByTexture)
+            return true;
+        }
+
+        return false;
+    }
     static void SetHUDPreset(int Preset)
     {
         // Preset options:
@@ -159,9 +216,20 @@ class DRPGZUtilities
     {
         CVar i;
 
+        // XP System
         i = CVar.FindCVar('drpg_scalexp');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_xp_curve');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_xp_health_awareness');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_xp_summon_percent');
+        i.ResetToDefault();
+
+        // Monster Difficulty
+        i = CVar.FindCVar('drpg_monster_level_cap');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_stat_cap');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_monster_levels');
         i.ResetToDefault();
@@ -179,6 +247,70 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_monster_shadows');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_vitality_effect');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_vitality_boost');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_red_missileevenmore');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_red_missilemore');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_red_nofear');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_red_retaliation');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_green_dontblast');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_green_dontrip');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_green_nopain');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_green_noradiusdmg');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_green_reflective');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_green_shieldreflect');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_white_bright');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_white_lookallaround');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_white_masslevel');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_white_noinfighting');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_white_notarget');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_white_notargetswitch');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_pink_dontdrain');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_pink_resurrect');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_blue_epdrain');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_blue_notimefreeze');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_blue_seeinvisible');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_purple_massheal');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_orange_alwaysfast');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_orange_jumpdown');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_orange_notelestomp');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_orange_quicktoretaliate');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_orange_teleport');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_darkblue_ammodrain');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_monster_yellow_moneydrain');
+        i.ResetToDefault();
+
+        // Game Difficulty
         i = CVar.FindCVar('drpg_skill_costscale');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_skill_keepauras');
@@ -195,15 +327,17 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_mission_monsterkillscount');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_invulnerability_plus');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_combo_damage');
+        i.ResetToDefault();
         i = CVar.FindCVar('drpg_monster_mapweight');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_monster_population');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_monster_limit');
         i.ResetToDefault();
-        i = CVar.FindCVar('drpg_loot_system');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_lootgen_factor');
+        i = CVar.FindCVar('drpg_monster_adaptive_spawns');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_aurasteal_rate');
         i.ResetToDefault();
@@ -215,6 +349,20 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_reinforcements');
         i.ResetToDefault();
+
+        // Loot Generation
+        i = CVar.FindCVar('drpg_loot_system');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_lootgen_factor');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_loot_rcm');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_loot_crate_spc');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_uac_premium');
+        i.ResetToDefault();
+
+        // Map Events
         i = CVar.FindCVar('drpg_mapevent_chance');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_mapevent_eventtime');
@@ -257,6 +405,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_mapevent_sinstorm');
         i.ResetToDefault();
+
+        // Stat System
         i = CVar.FindCVar('drpg_module_spawnfactor');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_module_levelfactor');
@@ -264,6 +414,10 @@ class DRPGZUtilities
         i = CVar.FindCVar('drpg_module_statfactor');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_module_skillfactor');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_hard_stat_cap');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_soft_stat_cap_mult');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_auto_spend');
         i.ResetToDefault();
@@ -277,6 +431,10 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_inv_capacity');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_overdrive_limit');
+        i.ResetToDefault();
+
+        // Natural Stat Leveling
         i = CVar.FindCVar('drpg_levelup_natural');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_allow_spec');
@@ -299,12 +457,16 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_luck_scalexp');
         i.ResetToDefault();
+
+        // Auto Healing
         i = CVar.FindCVar('drpg_auto_heal');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_auto_heal_percent');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_auto_heal_order');
         i.ResetToDefault();
+
+        // Damage, Module Numbers & Health Bars
         i = CVar.FindCVar('drpg_popoffs');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_damagenumbers');
@@ -317,6 +479,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_healthbars');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_healthbars_plain');
+        i.ResetToDefault();
         i = CVar.FindCVar('drpg_healthbars_names');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_healthbars_width');
@@ -327,8 +491,12 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_healthbars_y');
         i.ResetToDefault();
+
+        // Stims
         i = CVar.FindCVar('drpg_stim_time_multiplier');
         i.ResetToDefault();
+
+        // Multiplayer
         i = CVar.FindCVar('drpg_multi_takexp');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_multi_takexp_percent');
@@ -343,6 +511,10 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_multi_restoreammo');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_multi_sharecredits');
+        i.ResetToDefault();
+
+// Shop
         i = CVar.FindCVar('drpg_shoptype');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_shopspecial_type');
@@ -361,6 +533,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_autosell_lockerfallback');
         i.ResetToDefault();
+
+// Turret
         i = CVar.FindCVar('drpg_turret_aggression');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_turret_movespeed');
@@ -373,6 +547,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_turret_telewaittime');
         i.ResetToDefault();
+
+// Menus
         i = CVar.FindCVar('drpg_menudim');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_menuhelp');
@@ -387,6 +563,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_menu_background_border');
         i.ResetToDefault();
+
+// HUD
         i = CVar.FindCVar('drpg_hud_preview');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_hud_width');
@@ -465,6 +643,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_aug_alwaysshow');
         i.ResetToDefault();
+
+// Misc
         i = CVar.FindCVar('drpg_debug');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_debug_gui');
@@ -474,6 +654,8 @@ class DRPGZUtilities
         i = CVar.FindCVar('drpg_tips');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_regen_movement');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_move_aug_battery_regen');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_autosave');
         i.ResetToDefault();
@@ -487,6 +669,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_give_quickinventory');
         i.ResetToDefault();
+
+// Performance
         i = CVar.FindCVar('drpg_toaster');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_simple_auras');
@@ -495,6 +679,10 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_popoffs_drawdistance');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_virtual_credits');
+        i.ResetToDefault();
+
+// Stored Character
         i = CVar.FindCVar('drpg_char_data_len');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_char_data_0');
@@ -529,20 +717,32 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_char_data_15');
         i.ResetToDefault();
+
+// --------------------------------------------------
+// Starting Options
+//
+
+// Outpost Start
         i = CVar.FindCVar('drpg_startmap');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_addstartmap');
         i.ResetToDefault();
+
+// Funds
         i = CVar.FindCVar('drpg_start_credits');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_modules');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_turretparts');
         i.ResetToDefault();
+
+// Level/Rank
         i = CVar.FindCVar('drpg_start_level');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_rank');
         i.ResetToDefault();
+
+// Stats
         i = CVar.FindCVar('drpg_start_strength');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_defense');
@@ -559,6 +759,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_luck');
         i.ResetToDefault();
+
+// Weapons/Ammo/Armor
         i = CVar.FindCVar('drpg_start_weapon_pistol');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_weapon_shotgun');
@@ -587,6 +789,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_medkit');
         i.ResetToDefault();
+
+// Augs
         i = CVar.FindCVar('drpg_start_aug_amount');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_aug_canisters');
@@ -595,6 +799,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_aug_slots');
         i.ResetToDefault();
+
+// Shield
         i = CVar.FindCVar('drpg_start_shield_type');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_shield_type_acc');
@@ -607,6 +813,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_shield_amount_acc');
         i.ResetToDefault();
+
+// Stims
         i = CVar.FindCVar('drpg_start_stim_injectors');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_stim_vials');
@@ -615,12 +823,16 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_stim_powerups');
         i.ResetToDefault();
+
+// Bonuses
         i = CVar.FindCVar('drpg_start_bonus_goldchips');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_bonus_platchips');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_bonus_shopcard');
         i.ResetToDefault();
+
+// DRLA
         i = CVar.FindCVar('drpg_start_drla_weapon_type');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_drla_weapon_amount');
@@ -633,6 +845,10 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_start_drla_modpacks_amount');
         i.ResetToDefault();
+
+// --------------------------------------------------
+// Skill Wheel
+//
         i = CVar.FindCVar('drpg_skillwheel_category_1');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_skillwheel_index_1');

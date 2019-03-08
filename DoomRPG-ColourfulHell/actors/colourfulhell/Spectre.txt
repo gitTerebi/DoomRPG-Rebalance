@@ -39,6 +39,22 @@ ACTOR GreenSpectreRPG : GreenSpectre Replaces GreenSpectre
 	}
 }
 
+// Cyan Spectre
+ACTOR CyanSpectre2RPG : CyanSpectre2 Replaces CyanSpectre2
+{
+	Tag "Icy Thing"
+
+	States
+	{
+	Spawn:
+		WORM A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	//See:
+	//	WORM A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+	//	Goto Super::See
+	}
+}
+
 // Blue Spectre
 ACTOR BlueSpectreRPG : BlueSpectre Replaces BlueSpectre
 {
@@ -55,6 +71,24 @@ ACTOR BlueSpectreRPG : BlueSpectre Replaces BlueSpectre
 	}
 }
 
+// FireBlu Spectre
+ACTOR FireBluSpectre2RPG : FireBluSpectre2 Replaces FireBluSpectre2
+{
+	Tag "Enchanted Spectre"
+
+	States
+	{
+	Spawn:
+		SARG A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		TNT1 A 0
+		Goto Super::Spawn
+	See:
+		SARG A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		TNT1 A 0
+		Goto Super::See
+	}
+}
+
 // Purple Spectre
 ACTOR PurpleSpectreRPG : PurpleSpectre Replaces PurpleSpectre
 {
@@ -67,6 +101,24 @@ ACTOR PurpleSpectreRPG : PurpleSpectre Replaces PurpleSpectre
 		Goto Super::Spawn
 	See:
 		SARG A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Gray Spectre
+ACTOR GraySpectre2RPG : GraySpectre2 Replaces GraySpectre2
+{
+	Tag "Ancient Spectre"
+
+	States
+	{
+	Spawn:
+		TRIT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		TNT1 A 0
+		Goto Super::Spawn
+	See:
+		TRIT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		TNT1 A 0
 		Goto Super::See
 	}
 }
@@ -146,43 +198,6 @@ ACTOR WakawakaRPG : Wakawaka Replaces Wakawaka
 		Goto Super::Spawn
 	See:
 		EWRM A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
-		Goto Super::See
-	}
-}
-
-// Gray Spectre
-ACTOR GraySpectre2RPG : GraySpectre2 Replaces GraySpectre2
-{
-	Tag "Ancient Spectre"
-
-	States
-	{
-	Spawn:
-		TRIT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		TNT1 A 0
-		Goto Super::Spawn
-	See:
-		TRIT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		TNT1 A 0
-		Goto Super::See
-	}
-}
-
-
-// FireBlu Spectre
-ACTOR FireBluSpectre2RPG : FireBluSpectre2 Replaces FireBluSpectre2
-{
-	Tag "Enchanted Spectre"
-
-	States
-	{
-	Spawn:
-		SARG A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
-		TNT1 A 0
-		Goto Super::Spawn
-	See:
-		SARG A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
-		TNT1 A 0
 		Goto Super::See
 	}
 }

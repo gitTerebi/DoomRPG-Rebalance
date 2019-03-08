@@ -491,3 +491,9 @@ Actor DRPGDumbPistol
         Stop
     }
 }
+
+ACTOR MapSpotTall : MapSpotGravity
+{
+    Height 56
+    Radius 20
+}

@@ -24,6 +24,7 @@ NamedScript Console  void MonsterDump();
 NamedScript Console  void MonsterDamage(int, int);
 NamedScript DECORATE void MonsterTransport(int, int, int);
 NamedScript DECORATE void MonsterRegenHealer();
+NamedScript Console  void MonsterDamaged(int, int);
 
 OptionalArgs(1) NamedScript void MonsterInitStats(int);
 NamedScript void MonsterStatsHandler();
@@ -37,7 +38,7 @@ NamedScript void MonsterMoneyDrainHandler();
 NamedScript void MonsterAmmoDrainHandler();
 NamedScript void MonsterFellowResurrectionHandler();
 NamedScript void MonsterEpicVisitTimeHandler();
-NamedScript void MonsterDeathCheck();
+NamedScript DECORATE void MonsterDeathCheck();
 NamedScript void MonsterDeath();
 NamedScript int WhoKilledMe();
 NamedScript int WhoShotMe();
@@ -51,5 +52,15 @@ void RemoveMonsterAura(MonsterStatsPtr);
 str DetermineBestStatColor(MonsterStatsPtr);
 int BestStat(MonsterStatsPtr);
 int FindMonster(int);
+
+NamedScript void MonsterRedAuraCheck(bool);
+NamedScript void MonsterGreenAuraCheck(bool);
+NamedScript void MonsterWhiteAuraCheck(bool);
+NamedScript void MonsterPinkAuraCheck(bool);
+NamedScript void MonsterBlueAuraCheck(bool);
+//NamedScript void MonsterPurpleAuraCheck(bool);
+NamedScript void MonsterOrangeAuraCheck(bool);
+//NamedScript void MonsterDarkBlueAuraCheck(bool);
+//NamedScript void MonsterYellowBlueAuraCheck(bool);
 
 #endif
