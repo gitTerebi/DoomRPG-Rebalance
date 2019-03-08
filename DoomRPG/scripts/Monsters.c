@@ -1290,7 +1290,10 @@ Start:
     {
         StatsChanged = true;
 
-        SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (0.09 * ((fixed)Stats->Defense / 100.0)));
+        if (Stats->Defense < 1000)
+            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (0.09 * ((fixed)Stats->Defense / 100.0)));
+        else
+            SetActorPropertyFixed(0, APROP_DamageFactor, 100.0 / (fixed)Stats->Defense);
         OldDefense = Stats->Defense;
     }
 
