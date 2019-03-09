@@ -1,3 +1,2 @@
 #include "actors/DoomRL/Monsters.txt"
 #include "actors/DoomRL/MonstersReborn.txt"
-#include "actors/DoomRL/HellSpawners.txt"
