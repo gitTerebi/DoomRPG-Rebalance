@@ -12,7 +12,7 @@ skill baby
 	Aggressiveness = 0.0
 	SpawnFilter = Baby
 	
-	ACSReturn = 1 // (SHOULD BE ZERO!) Set to one until I fix DRPG to handle ZERO.
+	ACSReturn = 0
 	
 	PicName = "M_VEASY"
 	Name = "$SKILL_BABY"

@@ -711,7 +711,7 @@ typedef struct
 
 NamedScript void GiveTip()
 {
-    if ((CurrentLevel->Event == MAPEVENT_SKILL_HELL && GameSkill() != 5) || (CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON && GameSkill() != 6))
+    if ((CurrentLevel->Event == MAPEVENT_SKILL_TECH && GameSkill() != 5) || (CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON && GameSkill() != 6))
         return;
 
     TipInfo Tips[MAX_TIPS] =
@@ -846,7 +846,7 @@ NamedScript void GiveTip()
 
         { "\CgR\CiA\CkI\CdN\ChB\CtO\CaW\CjS",   "SHE BROKE THE REALITY GENERATOR AGAIN! WE'RE DOOMED!", },
 
-        { "\CaHell Event",                      "The difficulty level has increased to \CaHell\C- for this area.", },
+        { "\CuTechnophobia Event",              "The difficulty level has increased to \CuTechnophobia\C- for this area.", },
         { "\CmArmageddon Event",                "The difficulty level has increased to \CmArmageddon\C- for this area.", },
 
         { "\CgSinstorm",                        "You're getting close to the source of the invasion. The demonic legion is pulling all of its' last stops. Expect frequent battles with shadow enemies, and reinforcements to pour in relentlessly. Be careful when traversing outdoors, as the fire rain will harm you as well.", },

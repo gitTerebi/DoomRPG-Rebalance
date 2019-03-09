@@ -475,7 +475,10 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLWidowmakerSMG",                         "Widowmaker SMG \Cd[Unique]\C-",                         30000, -1, 6, "WSMGX0", 24, 20);
         ITEMDATA_DEF("RLChameleonRifle",                        "Chameleon Rifle \Cd[Unique]\C-",                       160000, -1, 8, "CRM1X0", 26, 18);
         ITEMDATA_DEF("RLNanomachicArmamentGenerator",           "Nanomachic Armament Generator \Cd[Unique]\C-",         200000, -1, 8, "NAG0X0", 13, 19);
-        ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     380000, -1, 8, "NKO0X0", 29, 54);
+        ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     500000, -1, 8, "NKO0X0", 29, 54);
+        ITEMDATA_DEF("RLLuciferCannon",                         "Lucifer Cannon \Cf[Unique]\C-",                        300000, -1, 6, "LCFGX0", 30, 26);
+        ITEMDATA_DEF("RLDirectHit",                             "Direct Hit \Cf[Unique]\C-",                            400000, -1, 7, "DHTGX0", 20, 20);
+        ITEMDATA_DEF("RLTriadCannon",                           "Triad Cannon \Cf[Unique]\C-",                         1520000, -1, 8, "TRIDX0", 25, 26);
         // ITEMDATA_DEF("RLSubtleKnife",                           "Subtle Knife \Cd[Unique]\C-",                           30000, -1, "SUBKX0", 38, 37);
         // ITEMDATA_DEF("RLFusionMortar",                          "Fusion Mortar \Cd[Unique]\C-",                          90000, -1, "FMORX0", 38, 37);
         // ITEMDATA_DEF("RLSpectreRevolver",                       "The Spectre \Cd[Unique]\C-",                            31000, -1, "SPERX0", 38, 37);
@@ -491,6 +494,7 @@ NamedScript void BuildItemData()
 
         // Legendary Weapons
         // ITEMDATA_DEF("RLDragonslayer",                          "Dragonslayer \Cf[Legendary]\C-",                      5000000, -1, "DSLYX0", 38, 37);
+        ITEMDATA_DEF("RLLonghorn",                       	    "Longhorn Revolver \Cf[Legendary]\C-",                 2300000, -1, 10, "LONGX0", 19, 20);
         ITEMDATA_DEF("RLJudgeOfTheDead",                        "Judge Of The Dead \Cf[Legendary]\C-",                 2500000, -1, 10, "JOTDX0", 19, 12);
         ITEMDATA_DEF("RLHurricaneCannon",                       "Hurricane Cannon \Cf[Legendary]\C-",                  2200000, -1, 10, "HURRX0", 20, 18);
         ITEMDATA_DEF("RLNeuralStunner",                         "Neural Stunner \Cf[Legendary]\C-",                    2000000, -1, 10, "NEURB0",  7, 13);
