@@ -859,14 +859,15 @@ namespace DoomRPG
             buttonLaunch.ForeColor = Color.FromArgb(255, red, 0, 0);
         }
         
-        private void ButtonCopyCommandClipboard_Click(object sender, EventArgs e)
+        private void ButtonShowCommandLine_Click(object sender, EventArgs e)
         {
+            // Now this method is showing the form containing command-line parameters instead of copying them to clipboard
             PatchInfo.CheckForRequirements(patches);
             PatchInfo.CheckForConflicts(patches);
             SaveControls();
             CalculateDMFlags();
             config.Save();
-            Clipboard.SetText("\"" + config.portPath + "\"" + BuildCommandLine());
+            new FormCommandLine("\"" + config.portPath + "\"" + BuildCommandLine()) { StartPosition = FormStartPosition.CenterParent }.ShowDialog();
         }
 
         private void ButtonRefresh_Click(object sender, EventArgs e)

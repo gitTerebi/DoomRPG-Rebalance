@@ -34,7 +34,7 @@
             this.tabPageBasic = new System.Windows.Forms.TabPage();
             this.comboBoxBranch = new System.Windows.Forms.ComboBox();
             this.labelBranch = new System.Windows.Forms.Label();
-            this.buttonCopyCommandClipboard = new System.Windows.Forms.Button();
+            this.buttonShowCommandLine = new System.Windows.Forms.Button();
             this.textBoxDemo = new System.Windows.Forms.TextBox();
             this.labelRecordDemo = new System.Windows.Forms.Label();
             this.checkBoxLogging = new System.Windows.Forms.CheckBox();
@@ -134,7 +134,7 @@
             // 
             this.tabPageBasic.Controls.Add(this.comboBoxBranch);
             this.tabPageBasic.Controls.Add(this.labelBranch);
-            this.tabPageBasic.Controls.Add(this.buttonCopyCommandClipboard);
+            this.tabPageBasic.Controls.Add(this.buttonShowCommandLine);
             this.tabPageBasic.Controls.Add(this.textBoxDemo);
             this.tabPageBasic.Controls.Add(this.labelRecordDemo);
             this.tabPageBasic.Controls.Add(this.checkBoxLogging);
@@ -189,16 +189,16 @@
             this.labelBranch.TabIndex = 26;
             this.labelBranch.Text = "Branch";
             // 
-            // buttonCopyCommandClipboard
+            // buttonShowCommandLine
             // 
-            this.buttonCopyCommandClipboard.Location = new System.Drawing.Point(588, 492);
-            this.buttonCopyCommandClipboard.Margin = new System.Windows.Forms.Padding(6);
-            this.buttonCopyCommandClipboard.Name = "buttonCopyCommandClipboard";
-            this.buttonCopyCommandClipboard.Size = new System.Drawing.Size(236, 69);
-            this.buttonCopyCommandClipboard.TabIndex = 25;
-            this.buttonCopyCommandClipboard.Text = "Copy Command-Line to Clipboard";
-            this.buttonCopyCommandClipboard.UseVisualStyleBackColor = true;
-            this.buttonCopyCommandClipboard.Click += new System.EventHandler(this.ButtonCopyCommandClipboard_Click);
+            this.buttonShowCommandLine.Location = new System.Drawing.Point(588, 492);
+            this.buttonShowCommandLine.Margin = new System.Windows.Forms.Padding(6);
+            this.buttonShowCommandLine.Name = "buttonShowCommandLine";
+            this.buttonShowCommandLine.Size = new System.Drawing.Size(236, 69);
+            this.buttonShowCommandLine.TabIndex = 25;
+            this.buttonShowCommandLine.Text = "Show Entire Command-Line";
+            this.buttonShowCommandLine.UseVisualStyleBackColor = true;
+            this.buttonShowCommandLine.Click += new System.EventHandler(this.ButtonShowCommandLine_Click);
             // 
             // textBoxDemo
             // 
@@ -995,7 +995,7 @@
         private System.Windows.Forms.CheckBox checkBoxEnableCheats;
         private System.Windows.Forms.TextBox textBoxDemo;
         private System.Windows.Forms.Label labelRecordDemo;
-        private System.Windows.Forms.Button buttonCopyCommandClipboard;
+        private System.Windows.Forms.Button buttonShowCommandLine;
         private System.Windows.Forms.ComboBox comboBoxBranch;
         private System.Windows.Forms.Label labelBranch;
         private System.Windows.Forms.Button buttonRefresh;
