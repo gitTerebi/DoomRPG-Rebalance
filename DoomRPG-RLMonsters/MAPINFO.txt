@@ -1,62 +1,21 @@
 clearskills
 
-// Baby skill
-skill baby
-{
-	EasyBossBrain
-	EasyKey
-	AutoUseHealth
-	
-	AmmoFactor = 2
-	DamageFactor = 0.5
-	Aggressiveness = 0.0
-	SpawnFilter = Baby
-	
-	ACSReturn = 0
-	
-	PicName = "M_VEASY"
-	Name = "$SKILL_BABY"
-	TextColor = "DarkGreen"
-	MustConfirm = "Entire team is babies!"
-	Key = "1"
-	
-	ReplaceActor = "Zombieman", "RLFormerHumanPistol"
-	ReplaceActor = "Shotgunguy", "RLFormerSergeantShotgun"
-	ReplaceActor = "Chaingunguy", "RLFormerCommandoChaingun"
-	ReplaceActor = "DoomImp", "RLImp"
-	ReplaceActor = "Demon", "RLDemon"
-	ReplaceActor = "Spectre", "RLSpectre"
-	ReplaceActor = "LostSoul", "RLLostSoul"
-	ReplaceActor = "Cacodemon", "RLCacodemon"
-	ReplaceActor = "HellKnight", "RLHellKnight"
-	ReplaceActor = "BaronOfHell", "RLBaronOfHell"
-	ReplaceActor = "Arachnotron", "RLArachnotron"
-	ReplaceActor = "PainElemental", "RLPainElemental"
-	ReplaceActor = "Revenant", "RLRevenant"
-	ReplaceActor = "Fatso", "RLMancubus"
-	ReplaceActor = "Archvile", "RLArchvile"
-	ReplaceActor = "Cyberdemon", "RLCyberdemon"
-	ReplaceActor = "SpiderMastermind", "RLSpiderMastermind"
-	ReplaceActor = "BossEye", "RLEasyBossEye"
-	ReplaceActor = "BossBrain", "RLBossBrain"
-}
-
 // Easy skill
 skill easy
 {
-	EasyBossBrain
-	EasyKey
-	AutoUseHealth
+	aggressiveness = 0.0
+	spawnfilter = normal
+
+	easybossbrain
+	easykey
+	autousehealth
 	
-	Aggressiveness = 0.10
-	SpawnFilter = Easy
-	
-	ACSReturn = 1
+	acsreturn = 1
 	
 	PicName = "M_EASY"
 	Name = "$SKILL_EASY"
-	TextColor = "Green"
-	Key = "2"
+	textcolor = "Green"
+	Key = "1"
 	
 	ReplaceActor = "Zombieman", "RLFormerHumanSpawnerEasy"
 	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawnerEasy"
@@ -82,17 +41,17 @@ skill easy
 // Normal skill
 skill normal
 {
-	AutoUseHealth
+	aggressiveness = 0.25
+	spawnfilter = normal
 	
-	Aggressiveness = 0.25
-	SpawnFilter = Normal
+	autousehealth
 
-	ACSReturn = 2
+	acsreturn = 2
 	
 	PicName = "M_MODER"
 	Name = "$SKILL_NORMAL"
-	TextColor = "Yellow"
-	Key = "3"
+	textcolor = "Yellow"
+	Key = "2"
 
 	ReplaceActor = "Zombieman", "RLFormerHumanSpawner"
 	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawner"
@@ -118,17 +77,19 @@ skill normal
 // Hard skill
 skill hard
 {
-	AutoUseHealth
+	defaultskill
 	
-	Aggressiveness = 0.5
-	SpawnFilter = Hard
+	aggressiveness = 0.5
+	spawnfilter = nightmare
+	
+	autousehealth
 
-	ACSReturn = 3
+	acsreturn = 3
 	
 	PicName = "M_STAND"
 	Name = "$SKILL_HARD"
-	TextColor = "Orange"
-	Key = "4"
+	textcolor = "Orange"
+	Key = "3"
 
 	ReplaceActor = "Zombieman", "RLFormerHumanSpawner"
 	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawner"
@@ -154,21 +115,18 @@ skill hard
 // Nightmare skill
 skill nightmare
 {
-	DefaultSkill
-	AutoUseHealth
-    
-    AmmoFactor = 2
-	DropAmmoFactor = 1
-	Aggressiveness = 1.0
-	SpawnFilter = Hard
+	aggressiveness = 1.0
+	spawnfilter = nightmare
+	
+	autousehealth
 
-	ACSReturn = 4
+	acsreturn = 4
 	
 	PicName = "M_NIGHT"
 	Name = "$SKILL_NIGHTMARE"
 	MustConfirm = "Raging, horned devils. Only Nightmare enemies spawn..."
-	TextColor = "Red"
-	Key = "5"
+	textcolor = "Red"
+	Key = "4"
 
 	ReplaceActor = "Zombieman", "RLEliteFormerHumanSpawner"
 	ReplaceActor = "Shotgunguy", "RLEliteFormerSergeantSpawner"
@@ -191,64 +149,59 @@ skill nightmare
 	ReplaceActor = "BossBrain", "RLNightmareBossBrain"
 }
 
-// Technophobia skill
-skill technophobia
+// Hell skill
+skill hell
 {
-	AutoUseHealth
-    
-    AmmoFactor = 2
-	DropAmmoFactor = 1
-	Aggressiveness = 1.0
-	SpawnFilter = Hard
+	aggressiveness = 1.0
+	spawnfilter = nightmare
 
-	ACSReturn = 5
+	disablecheats
+	autousehealth
 	
-	PicName = "M_TECHN"
-	Name = "Technophobia"
-	MustConfirm = "Cold, unfeeling metal. Only Cybernetic enemies spawn... muh cyber-caco experience ;_;."
-	TextColor = "DarkGrey"
-	Key = "6"
+	acsreturn = 5
+	
+	PicName = "M_HELL"
+	Name = "Hell"
+	textcolor = "Brick"
+	Key = "5"
 
-	ReplaceActor = "Zombieman", "RLFormerCyborgBattleRifle"
-	ReplaceActor = "Shotgunguy", "RLFormerCyborgBattleRifle"
-	ReplaceActor = "Chaingunguy", "RLFormerCyborgBattleRifle"
-	ReplaceActor = "DoomImp", "RLCyberneticImp"
-	ReplaceActor = "Demon", "RLCyberneticDemon"
-	ReplaceActor = "Spectre", "RLCyberneticSpectre"
-	ReplaceActor = "LostSoul", "RLCyberneticLostSoul"
-//	ReplaceActor = "Cacodemon", "RLCyberneticCacodemon"
-	ReplaceActor = "Cacodemon", "RLCacodemon"
-	ReplaceActor = "HellKnight", "RLCyberneticHellKnight"
-	ReplaceActor = "BaronOfHell", "RLCyberneticBaronOfHell"
-	ReplaceActor = "Arachnotron", "RLCyberneticArachnotron"
-	ReplaceActor = "PainElemental", "RLCyberneticPainElemental"
-	ReplaceActor = "Revenant", "RLCyberneticRevenant"
-	ReplaceActor = "Fatso", "RLCyberneticMancubus"
-	ReplaceActor = "Archvile", "RLCyberneticArchvile"
-	ReplaceActor = "Cyberdemon", "RLCyberneticCyberdemonSpawner"
-	ReplaceActor = "SpiderMastermind", "RLCyberneticSpiderMastermindSpawner"
-	ReplaceActor = "BossEye", "RLTechnophobiaBossEye"
-	ReplaceActor = "BossBrain", "RLTechnophobiaBossBrain"
+	ReplaceActor = "Zombieman", "DRPGHellFormerHumanSpawner"
+	ReplaceActor = "Shotgunguy", "DRPGHellFormerSergeantSpawner"
+	ReplaceActor = "Chaingunguy", "DRPGHellFormerCommandoSpawner"
+	ReplaceActor = "DoomImp", "DRPGHellImpSpawner"
+	ReplaceActor = "Demon", "DRPGHellDemonSpawner"
+	ReplaceActor = "Spectre", "DRPGHellSpectreSpawner"
+	ReplaceActor = "LostSoul", "DRPGHellLostSoulSpawner"
+	ReplaceActor = "Cacodemon", "DRPGHellCacodemonSpawner"
+	ReplaceActor = "HellKnight", "DRPGHellHellKnightSpawner"
+	ReplaceActor = "BaronOfHell", "DRPGHellBaronOfHellSpawner"
+	ReplaceActor = "Arachnotron", "DRPGHellArachnotronSpawner"
+	ReplaceActor = "PainElemental", "DRPGHellPainElementalSpawner"
+	ReplaceActor = "Revenant", "DRPGHellRevenantSpawner"
+	ReplaceActor = "Fatso", "DRPGHellMancubusSpawner"
+	ReplaceActor = "Archvile", "DRPGHellArchvileSpawner"
+	ReplaceActor = "Cyberdemon", "DRPGHellCyberdemonSpawner"
+	ReplaceActor = "SpiderMastermind", "DRPGHellSpiderMastermindSpawner"
+    ReplaceActor = "BossEye", "RLUVBossEye"
 }
 
 // Armageddon skill
 skill armageddon
 {
-	AutoUseHealth
-    
-    AmmoFactor = 3
-	DropAmmoFactor = 1
-	Aggressiveness = 1.0
-	SpawnFilter = Nightmare
+	aggressiveness = 1.0
+	spawnfilter = nightmare
 
-	ACSReturn = 6
+	disablecheats
+	autousehealth
+	
+	acsreturn = 6
 	
 	PicName = "M_ARMAG"
 	Name = "Armageddon"
 	MustConfirm = "WELCOME TO ARMAGEDDON, FOOL"
-	TextColor = "Brick"
-	Key = "7"
-
+	textcolor = "Black"
+	Key = "6"
+	
 	ReplaceActor = "GreenArmor", "RLArmageddonStandardArmorSpawner"
 	ReplaceActor = "BlueArmor", "RLArmageddonAdvancedArmorSpawner"
 	ReplaceActor = "Zombieman", "RLFormerAssaultTrooper"
@@ -275,21 +228,20 @@ skill armageddon
 // Adaptive skill
 skill adaptive
 {
-	AutoUseHealth
-    
-    AmmoFactor = 1
-	DropAmmoFactor = 1
-	Aggressiveness = 0.5
-	SpawnFilter = Nightmare
+	aggressiveness = 0.8
+	spawnfilter = nightmare
 
-	ACSReturn = 7
+	disablecheats
+	autousehealth
+	
+	acsreturn = 7
 	
 	PicName = "M_ADAPT"
 	Name = "Adaptive"
 	MustConfirm = "A progressive difficulty that ramps up over time, starts at UV, ends up far worse."
-	TextColor = "DarkGrey"
-	Key = "8"
-
+	textcolor = "Sapphire"
+	Key = "7"
+	
 	ReplaceActor = "GreenArmor", "RLAdaptiveStandardArmorSpawner"
 	ReplaceActor = "BlueArmor", "RLAdaptiveAdvancedArmorSpawner"
 	ReplaceActor = "Zombieman", "RLAdaptiveFormerHuman"
@@ -312,3 +264,4 @@ skill adaptive
 	ReplaceActor = "BossEye", "RLUVBossEye"
 	ReplaceActor = "BossBrain", "RLBossBrain"
 }
+

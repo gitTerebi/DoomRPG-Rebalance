@@ -1,0 +1,135 @@
+actor DRPGHellFormerHumanSpawner : RandomSpawner
+{
+    DropItem "RLEliteHumanCombatPistol", 255, 8
+    DropItem "RLEliteHumanUzi", 255, 8
+    DropItem "RLEliteHumanHandcannon", 255, 8
+    DropItem "RLEliteHumanBattleRifle", 255, 8
+    DropItem "RLEliteHumanBattleRifle2", 255, 8
+    DropItem "RLFormerCyborgBattleRifle", 255, 10
+    DropItem "RLFormerAssaultTrooper", 255, 1
+}
+
+actor DRPGHellFormerSergeantSpawner : RandomSpawner
+{
+    DropItem "RLEliteSergeantDoubleShotgun", 255, 8
+    DropItem "RLEliteSergeantAssaultShotgun", 255, 8
+    DropItem "RLEliteSergeantPlasmaShotgun", 255, 8
+    DropItem "RLFormerCyborgBattleRifle", 255, 10
+    DropItem "RLFormerOverwatch", 255, 1
+}
+
+actor DRPGHellFormerCommandoSpawner : RandomSpawner
+{
+    DropItem "RLEliteCommandoMinigun", 255, 8
+//    DropItem "RLEliteCommandoLaserRifle", 255, 4
+    DropItem "RLFormerCyborgBattleRifle", 255, 10
+    DropItem "RLFormerShocktrooper", 255, 1
+//    DropItem "RLEliteCaptainMissileLauncher", 255, 2
+    DropItem "RLEliteCaptainTristarBlaster", 255, 2
+ //   DropItem "RLEliteCaptainNapalmLauncher", 255, 2
+}
+
+actor DRPGHellImpSpawner : RandomSpawner
+{
+    DropItem "RLNightmareImp", 255, 10
+    DropItem "RLCyberneticImp", 255, 10
+    DropItem "RLArmageddonImp", 255, 1
+}
+
+actor DRPGHellDemonSpawner : RandomSpawner
+{
+    DropItem "RLNightmareDemon", 255, 10
+    DropItem "RLCyberneticDemon", 255, 10
+    DropItem "RLArmageddonDemon", 255, 1
+}
+
+actor DRPGHellSpectreSpawner : RandomSpawner
+{
+    DropItem "RLNightmareSpectre", 255, 10
+    DropItem "RLCyberneticSpectre", 255, 10
+//    DropItem "RLArmageddonSpectre", 255, 1
+}
+
+actor DRPGHellLostSoulSpawner : RandomSpawner
+{
+    DropItem "RLNightmareLostSoul", 255, 10
+    DropItem "RLCyberneticLostSoul", 255, 10
+    DropItem "RLTheHungrySpawner", 255, 1
+}
+
+actor DRPGHellCacodemonSpawner : RandomSpawner
+{
+    DropItem "RLNightmareCacodemon", 255, 10
+//    DropItem "RLCyberneticCacodemon", 255, 10
+    DropItem "RLArmageddonCacodemon", 255, 1
+}
+
+actor DRPGHellHellKnightSpawner : RandomSpawner
+{
+    DropItem "RLNightmareHellKnight", 255, 10
+    DropItem "RLCyberneticHellKnight", 255, 10
+//    DropItem "RLArmageddonHellKnight", 255, 1
+}
+
+actor DRPGHellBaronOfHellSpawner : RandomSpawner
+{
+    DropItem "RLNightmareBaronOfHell", 255, 10
+    DropItem "RLCyberneticBaronOfHell", 255, 10
+    DropItem "RLArmageddonBaronOfHell", 255, 1
+}
+
+actor DRPGHellArachnotronSpawner : RandomSpawner
+{
+    DropItem "RLNightmareArachnotron", 255, 10
+    DropItem "RLCyberneticArachnotron", 255, 10
+    DropItem "RLArmageddonArachnotron", 255, 1
+}
+
+actor DRPGHellPainElementalSpawner : RandomSpawner
+{
+    DropItem "RLNightmarePainElemental", 255, 10
+    DropItem "RLCyberneticPainElemental", 255, 10
+    DropItem "RLArmageddonPainElemental", 255, 1
+}
+
+actor DRPGHellRevenantSpawner : RandomSpawner
+{
+    DropItem "RLNightmareRevenant", 255, 10
+    DropItem "RLCyberneticRevenant", 255, 10
+    DropItem "RLArmageddonRevenant", 255, 1
+}
+
+actor DRPGHellMancubusSpawner : RandomSpawner
+{
+    DropItem "RLNightmareMancubus", 255, 10
+    DropItem "RLCyberneticMancubus", 255, 10
+    DropItem "RLArmageddonMancubus", 255, 1
+}
+
+actor DRPGHellArchvileSpawner : RandomSpawner
+{
+    DropItem "RLNightmareArchvile", 255, 10
+    DropItem "RLCyberneticArchvile", 255, 10
+    DropItem "RLRandomCorruptedPlayerSpawner", 255, 1
+    DropItem "RLArmageddonArchvile", 255, 1
+}
+
+actor DRPGHellCyberdemonSpawner : RandomSpawner
+{
+    DropItem "RLNightmareCyberdemon", 255, 20
+    DropItem "RLCyberneticCyberdemon", 255, 20
+//    DropItem "RLArmageddonCyberdemon", 255, 4
+    DropItem "RLBruiserBrother", 255, 5
+    DropItem "RLAgonyElemental", 255, 5
+    DropItem "RLTerminator", 255, 5
+}
+
+actor DRPGHellSpiderMastermindSpawner : RandomSpawner
+{
+    DropItem "RLNightmareSpiderMastermind", 255, 20
+    DropItem "RLCyberneticSpiderMastermind", 255, 20
+//    DropItem "RLArmageddonSpiderMastermind", 255, 20
+    DropItem "RLBruiserBrother", 255, 5
+    DropItem "RLAgonyElemental", 255, 5
+    DropItem "RLTerminator", 255, 5
+}

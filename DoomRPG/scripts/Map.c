@@ -50,10 +50,7 @@ NamedScript Type_OPEN void MapInit()
         if (GetCVar("drpg_monster_mapweight") > 1000)
             SetCVar("drpg_monster_mapweight", 1000);
         int StartMapNum = GetCVar("drpg_monster_mapweight");
-        if (CompatMonMode == COMPAT_DRLA)
-            CurrentSkill = GameSkill();
-        else
-            CurrentSkill = GameSkill() - 1;
+        CurrentSkill = GameSkill() - 1;
         UsedSecretExit = false;
         PreviousLevelSecret = false;
         PreviousLevelNum = StartMapNum - 1;
@@ -821,7 +818,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
         Delay(35 * 5);
     }
 
-    if (CurrentLevel->Event == MAPEVENT_TELEPORTCRACKS || CurrentLevel->Event == MAPEVENT_DOOMSDAY || CurrentLevel->Event == MAPEVENT_DRLA_FEEDINGFRENZY || CurrentLevel->Event == MAPEVENT_SKILL_TECH || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
+    if (CurrentLevel->Event == MAPEVENT_TELEPORTCRACKS || CurrentLevel->Event == MAPEVENT_DOOMSDAY || CurrentLevel->Event == MAPEVENT_DRLA_FEEDINGFRENZY || CurrentLevel->Event == MAPEVENT_SKILL_HELL || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
         CurrentLevel->EventCompleted = true; // These don't actually end until you leave the map normally
 
     CurrentLevel->Completed = true; // We finished the map
@@ -862,12 +859,7 @@ NamedScript void AddMiniboss()
     while (!Monsters[Chosen].Init)
         Chosen = Random(1, MonsterID - 1);
 
-    int LevelMod;
-    if (CompatMonMode == COMPAT_DRLA)
-        LevelMod = (GameSkill()) * AveragePlayerLevel();
-    else
-        LevelMod = (GameSkill() - 1) * AveragePlayerLevel();
-
+    int LevelMod = (GameSkill() - 1) * AveragePlayerLevel();
     LevelMod = (int)(LevelMod * RandomFixed(1.0, 1.33));
     Monsters[Chosen].LevelAdd += LevelMod;
 
@@ -1045,16 +1037,16 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
         return (GetCVar("drpg_mapevent_rainbows") &&
                 !Random(0, 15));
 
-    case MAPEVENT_SKILL_TECH:
-        return (GetCVar("drpg_mapevent_skill_tech") &&
+    case MAPEVENT_SKILL_HELL:
+        return (GetCVar("drpg_mapevent_skill_hell") &&
                 AveragePlayerLevel() >= 15 &&
-                CurrentSkill < 5);
+                CurrentSkill < 4);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_skill_armageddon") &&
                 AveragePlayerLevel() >= 25 &&
-                CurrentSkill < 6);
+                CurrentSkill < 5);
 
     case MAPEVENT_SPECIAL_SINSTORM:
         return false;
@@ -1130,7 +1122,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 
         "RAINBOWS!",
 
-        "Skills - Technophobia",
+        "Skills - Hell",
         "Skills - Armageddon",
 
         "Sinstorm"
@@ -1424,21 +1416,21 @@ NamedScript void SetupMapEvent()
     // Skill Events
     // --------------------------------------------------
 
-    case MAPEVENT_SKILL_TECH:
+    case MAPEVENT_SKILL_HELL:
         if (GameSkill() != 5)
-            ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 5);
-        SetMusic("SkillT");
+            ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 4);
+        SetMusic("Skill5");
         SetHudSize(640, 480, false);
         SetFont("BIGFONT");
-        HudMessage("It smells of burnt electronics and rotting corpses. It is likely you could be joining them soon.");
+        HudMessage("It smells of burnt flesh and rotting corpses. It is likely you could be joining them soon.");
         EndHudMessageBold(HUDMSG_FADEOUT, 0, "Brick", 320.4, 150.0, 1.0, 19.0);
         SetHudSize(0, 0, false);
         break;
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         if (GameSkill() != 6)
-            ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 6);
-        SetMusic("SkillA");
+            ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 5);
+        SetMusic("Skill6");
         SetHudSize(640, 480, false);
         SetFont("BIGFONT");
         HudMessage("A foul misfortune sweeps the land, turning up the darkest creatures. There is no God now.");
@@ -1474,7 +1466,7 @@ NamedScript Type_UNLOADING void ResetMapEvent()
     if (CurrentLevel && CurrentLevel->Event && CurrentLevel->EventCompleted)
     {
         // And reset the skill for these
-        if (CurrentLevel->Event == MAPEVENT_SKILL_TECH || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
+        if (CurrentLevel->Event == MAPEVENT_SKILL_HELL || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
             ChangeSkill(CurrentSkill);
 
         CurrentLevel->Event = MAPEVENT_NONE;

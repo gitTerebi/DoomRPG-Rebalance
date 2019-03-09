@@ -102,13 +102,12 @@ str const SkillLevelsDF[MAX_SKILLLEVELS_DF] =
 // Skill Level DRLA Names
 str const SkillLevelsDRLA[MAX_SKILLLEVELS_DRLA] =
 {
-    "\CqVery Easy",
     "\CdEasy",
-    "\CkModerate", // Normal
+    "\CjModerate", // Normal
     "\CiStandard", // Hard
     "\CgNightmare",
-    "\CuTechnophobia",
-    "\CaArmageddon",
+    "\CaHell",
+    "\CmArmageddon",
     "\CyAdaptive"
 };
 
