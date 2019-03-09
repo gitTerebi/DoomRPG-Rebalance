@@ -643,6 +643,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_aug_alwaysshow');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_drla_hud_staminabar');
+        i.ResetToDefault();
 
 // Misc
         i = CVar.FindCVar('drpg_debug');

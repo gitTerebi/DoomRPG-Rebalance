@@ -1788,7 +1788,7 @@ Start:
     // Stamina Bar
     for (int i = 0; i < 15; i++)
     {
-        if (i * 6.66 > CheckInventory("RLStamina"))
+        if (i * 6.66 > CheckInventory("RLStamina") || !GetCVar("drpg_drla_hud_staminabar"))
             break;
 
         if (i >= 0 && i <= 2)
