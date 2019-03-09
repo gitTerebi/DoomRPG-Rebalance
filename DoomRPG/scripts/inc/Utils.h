@@ -4,10 +4,14 @@
 #include "Defs.h"
 
 extern int const AuraTID;
+extern str const AuraIcons[AURA_MAX + 1];
 extern str const ColorNames[26];
 extern str const ColorCodes[26];
-extern str const SkillLevels[6];
-extern str const AuraIcons[AURA_MAX + 1];
+
+// Skill levels stuff
+extern str const SkillLevelsDF[MAX_SKILLLEVELS_DF];
+extern str const SkillLevelsDRLA[MAX_SKILLLEVELS_DRLA];
+extern int SkillLevelsMax;
 
 NamedScript DECORATE int InOutpost();
 NamedScript DECORATE int GetUniqueTID();

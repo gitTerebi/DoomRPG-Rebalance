@@ -141,7 +141,7 @@ MonsterInfo const MonsterDataDRLA[MAX_DEF_MONSTERS_DRLA] =
     { "RLCyberneticRevenant",               "Heavy Revenant",                   70,     1, false, "Seems they needed bigger rocket launchers!" },
     { "RLCyberneticMancubus",               "Volacubus",                        75,     1, false, "The smell of burning fuel fills this area!" },
     { "RLCyberneticArchvile",               "Tech-Vile",                        80,     1, false, "You hear electrical zaps and pulsing energy waves!" },
-//  { "RLCyberneticCyberdemon",             "Cyberdemon Mk. II",                100,    1, true,  "You hear crashing metal footfalls! You can't stop shaking!" },
+    { "RLCyberneticCyberdemon",             "Cyberdemon Mk. II",                100,    1, true,  "You hear crashing metal footfalls! You can't stop shaking!" },
     { "RLCyberneticSpiderMastermind",       "Spider Overmind",                  100,    1, true,  "You hear endless whispering in your mind!\nYou feel your resistance slipping!" },
 
     // Special Technophobia enemies
@@ -151,18 +151,18 @@ MonsterInfo const MonsterDataDRLA[MAX_DEF_MONSTERS_DRLA] =
     { "RLFormerAssaultTrooper",             "Former Human Assault Trooper",     5,      3, false, "Marching feet and magazines being slapped into\nplace alerts you of the battalion here!" },
     { "RLFormerOverwatch",                  "Former Human Overwatch",           8,      3, false, "You hear the sound of someone activating a hover drone nearby..." },
     { "RLFormerShocktrooper",               "Former Human Shocktrooper",        15,     3, false, "You get the feeling someone is about to get the drop on you..." },
-//  { "RLArmageddonImp",                    "The Watcher",                      12,     3, false, "You feel incredibly uneasy, as though many things are watching you!" },
+    { "RLArmageddonImp",                    "The Watcher",                      12,     3, false, "You feel incredibly uneasy, as though many things are watching you!" },
     { "RLArmageddonDemon",                  "Mech-strosity",                    8,      3, false, "You feel that using a gun here might be a baaaad idea!" },
 //  { "RLArmageddonSpectre",                "Rift Demon",                       16,     3, false, "There don't appear to be any monsters, but that's likely to change!" },
     { "RLArmageddonLostSoul",               "The Hungry",                       6,      3, false, "You hear endless slavering mouths, hoping to consume human flesh!" },
     { "RLArmageddonCacodemon",              "Cacobyss",                         25,     4, false, "Metallic echoing screeches herald your doom!" },
 //  { "RLArmageddonHellKnight",             "Crusader of Ruination",            50,     4, false, "You hear the clanking of metal hooves and the smell of burnt flesh!" },
-//  { "RLArmageddonBaronOfHell",            "Lord of the Abyss",                65,     4, false, "Deep laughter and endless flames welcome you to your death!" },
-//  { "RLArmageddonArachnotron",            "Arachnomaster",                    70,     4, false, "You feel you've intruded somewhere that you should not have!" },
+    { "RLArmageddonBaronOfHell",            "Lord of the Abyss",                65,     4, false, "Deep laughter and endless flames welcome you to your death!" },
+    { "RLArmageddonArachnotron",            "Deathweaver",                      70,     4, false, "You feel you've intruded somewhere that you should not have!" },
     { "RLArmageddonPainElemental",          "Hellstorm Elemental",              80,     4, false, "The air ripples with instability!\nYou feel like you are being slowly torn apart!" },
     { "RLArmageddonRevenant",               "Revenihilator",                    60,     4, false, "Beeping and the sound of bones scraping\nagainst metal alerts you to the danger ahead!" },
     { "RLArmageddonMancubus",               "Magmabus",                         75,     4, false, "Deep growling and blasts of searing heat greet you here!" },
-//  { "RLArmageddonArchvile",               "Dark-Vile",                        85,     5, false, "This entire area seems to be corrupted with great and terrible magic!" },
+    { "RLArmageddonArchvile",               "De-Vile",                          85,     5, false, "This entire area seems to be corrupted with great and terrible magic!" },
 //  { "RLArmageddonCyberdemon",             "Nightmare Cyberdemon Mk. II",      100,    5, true,  "Hell has gone all out to stop you!\nYou are one doomed space marine..." },
 //  { "RLArmageddonSpiderMastermind",       "Nightmare Overmind",               100,    5, true,  "The greatest of foul minds,\nthey taunt you telepathically before their hunt begins!" },
 
@@ -1222,6 +1222,8 @@ NamedScript void MonsterStatsHandler()
     int OldRegeneration;
     int OldEnergy;
     int OldLuck;
+    int StolenCredits;
+    int HealthPercentage;
     bool StatsChanged;
     bool MonsterWasDisrupted = false;
     bool Friendly = GetActorProperty(0, APROP_Friendly); // Sanity check for when APROP_Friendly gets removed from summons
@@ -1302,7 +1304,7 @@ Start:
     {
         StatsChanged = true;
 
-        int StolenCredits = 0;
+        StolenCredits = 0;
         if (CheckInventory("DRPGCredits") > OldCapacity)
             StolenCredits = CheckInventory("DRPGCredits") - OldCapacity;
 
@@ -1324,7 +1326,7 @@ Start:
     {
         StatsChanged = true;
 
-        int HealthPercentage = 100;
+        HealthPercentage = 100;
         if (Stats->HealthMax > 0)
             HealthPercentage = (long long)GetActorProperty(0, APROP_Health) * 100 / Stats->HealthMax;
         Stats->HealthMax = CalculateMonsterMaxHealth(Stats);

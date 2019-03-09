@@ -450,7 +450,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLRCP90",                                 "RC-P90 \Ci[Superior]\C-",                               26000, 12, 5, "RCP9X0", 24, 15);
 
         // Unique Weapons
-        ITEMDATA_DEF("RLJackhammer",                            "Jackhammer \Cd[Unique]\C-",                             32000, -1, 6, "SMAGX0", 27, 14);
+        ITEMDATA_DEF("RLJackhammer",                            "Jackhammer \Cd[Unique]\C-",                             32000, -1, 6, "JHAMX0", 27, 14);
         ITEMDATA_DEF("RLRailgun",                               "Railgun \Cd[Unique]\C-",                                38000, -1, 6, "RAILX0", 23, 13);
         ITEMDATA_DEF("RLMysteriousMagnum",                      "Mysterious Magnum \Cd[Unique]\C-",                      50000, -1, 7, "MMAGX0", 15, 12);
         ITEMDATA_DEF("RLBFG10k",                                "BFG10k \Cd[Unique]\C-",                                 75000, -1, 8, "BFG4X0", 34, 24);
@@ -503,7 +503,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLSpeedloaderPistol",                     "Revolver \Cv[Assembled]\C-",                              800, -1, -1, "REVOX0", 16, 20);
         ITEMDATA_DEF("RLSilencedPistol",                        "Silenced Pistol \Cv[Assembled]\C-",                       500, -1, -1, "SILPX0", 17, 15);
         ITEMDATA_DEF("RLStealthRifle",                          "Stealth Rifle \Cv[Assembled]\C-",                        1800, -1, -1, "STELX0", 25, 14);
-        ITEMDATA_DEF("RLShredderPistol",                        "Shredder Pistol \Cv[Assembled]\C-",                      1200, -1, -1, "SHRPX0", 10, 13);
+        ITEMDATA_DEF("RLShredderPistol",                        "Shredder Pistol \Cv[Assembled]\C-",                      1200, -1, -1, "SRPSX0", 10, 13);
         ITEMDATA_DEF("RLShredderShotgun",                       "Shredder Shotgun \Cv[Assembled]\C-",                     6000, -1, -1, "SHRSX0", 23, 12);
         ITEMDATA_DEF("RLElephantGun",                           "Elephant Gun \Cv[Assembled]\C-",                         1800, -1, -1, "ELEGX0", 21, 13);
         ITEMDATA_DEF("RLGatlingGun",                            "Gatling Gun \Cv[Assembled]\C-",                          2500, -1, -1, "DGTGX0", 38, 19);
@@ -913,7 +913,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLArmorModItem",          "Armor Modpack",        50000, 2, 4, "AMK1A0", 10, 20);
 
         // Demon Artifact
-        ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 4, 6, "DMNAA0", 19, 48);
+        ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 4, 6, "DMNAA0", 19, 65);
         ITEMDATA_CATEGORY_END;
 
         // Boots
