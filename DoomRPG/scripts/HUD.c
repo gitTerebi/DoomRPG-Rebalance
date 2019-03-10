@@ -1793,26 +1793,26 @@ Start:
 
         if (i >= 0 && i <= 2)
         {
-            BarGraphic = "RankEmb5";
+            BarGraphic = "StamBar4";
             Alpha = 0.9 + Sin((Timer() + (i * 4)) / 16.0) * 0.1;
         }
         if (i >= 3 && i <= 5)
         {
-            BarGraphic = "RankEmb4";
+            BarGraphic = "StamBar3";
             Alpha = 0.9 + Sin((Timer() + (i * 4)) / 32.0) * 0.1;
         }
         if (i >= 6 && i <= 9)
         {
-            BarGraphic = "RankEmb3";
+            BarGraphic = "StamBar2";
             Alpha = 0.9 + Sin((Timer() + (i * 4)) / 48.0) * 0.1;
         }
         if (i >= 10 && i <= 14)
         {
-            BarGraphic = "RankEmb2";
+            BarGraphic = "StamBar1";
             Alpha = 0.9 + Sin((Timer() + (i * 4)) / 64.0) * 0.1;
         }
 
-        PrintSpriteAlpha(BarGraphic, 0, X - 160 + (i * 8), Y + 32, 0.05, Alpha);
+        PrintSpriteAlpha(BarGraphic, 0, X - 160 + (i * 8), Y + 20, 0.05, Alpha);
     }
 
     Delay(1);
