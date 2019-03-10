@@ -891,7 +891,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",       100000, 8, 8, "CRYSF0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",   100000, 8, 8, "CRYSG0", 16, 48);
         ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                  2000, 4, 2, "MMAPA0", 14, 23);
-        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",            3000, 4, 3, "BLUPA0", 14, 23);
+        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",            3000, 5, 3, "BLUPA0", 14, 23);
         ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                  6666, 6, 6, "ISKLA0", 10, 18);
         ITEMDATA_DEF("RLBloodSkull",                "Blood Skull",                   4444, 6, 4, "ISKLC0", 10, 18);
         ITEMDATA_DEF("RLFireSkull",                 "Fire Skull",                    5555, 6, 5, "ISKLE0", 10, 18);
@@ -904,20 +904,20 @@ NamedScript void BuildItemData()
         // Mod Packs
         ITEMDATA_CATEGORY(8, "\CtMod Packs", CF_NONE);
         // Normal Modpacks
-        ITEMDATA_DEF("RLPowerModItem",          "Power Modpack",         20000, 0, 2, "PMODA0",  8, 17);
-        ITEMDATA_DEF("RLBulkModItem",           "Bulk Modpack",          20000, 0, 2, "BMODA0",  8, 17);
-        ITEMDATA_DEF("RLAgilityModItem",        "Agility Modpack",       20000, 0, 2, "AMODA0",  8, 17);
-        ITEMDATA_DEF("RLTechnicalModItem",      "Technical Modpack",     20000, 0, 2, "TMODA0",  8, 17);
+        ITEMDATA_DEF("RLPowerModItem",          "Power Modpack",         20000, 5, 2, "PMODA0",  8, 17);
+        ITEMDATA_DEF("RLBulkModItem",           "Bulk Modpack",          20000, 5, 2, "BMODA0",  8, 17);
+        ITEMDATA_DEF("RLAgilityModItem",        "Agility Modpack",       20000, 5, 2, "AMODA0",  8, 17);
+        ITEMDATA_DEF("RLTechnicalModItem",      "Technical Modpack",     20000, 5, 2, "TMODA0",  8, 17);
 
         // Exotic Modpacks
-        ITEMDATA_DEF("RLSniperModItem",         "Sniper Modpack",       50000, 2, 4, "SMODA0",  8, 17);
-        ITEMDATA_DEF("RLFirestormModItem",      "Firestorm Modpack",    50000, 2, 4, "FMODA0",  8, 17);
-        ITEMDATA_DEF("RLNanoModItem",           "Nano Modpack",         50000, 2, 4, "NMODA0",  8, 17);
-        ITEMDATA_DEF("RLOnyxModItem",           "Onyx Modpack",         50000, 2, 4, "OMODA0",  8, 17);
-        ITEMDATA_DEF("RLArmorModItem",          "Armor Modpack",        50000, 2, 4, "AMK1A0", 10, 20);
+        ITEMDATA_DEF("RLSniperModItem",         "Sniper Modpack",       50000, 7, 4, "SMODA0",  8, 17);
+        ITEMDATA_DEF("RLFirestormModItem",      "Firestorm Modpack",    50000, 7, 4, "FMODA0",  8, 17);
+        ITEMDATA_DEF("RLNanoModItem",           "Nano Modpack",         50000, 7, 4, "NMODA0",  8, 17);
+        ITEMDATA_DEF("RLOnyxModItem",           "Onyx Modpack",         50000, 7, 4, "OMODA0",  8, 17);
+        ITEMDATA_DEF("RLArmorModItem",          "Armor Modpack",        50000, 7, 4, "AMK1A0", 10, 20);
 
         // Demon Artifact
-        ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 4, 6, "DMNAA0", 19, 65);
+        ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 10, 6, "DMNAA0", 19, 65);
         ITEMDATA_CATEGORY_END;
 
         // Boots

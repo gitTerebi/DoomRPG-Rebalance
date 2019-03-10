@@ -228,11 +228,11 @@ typedef enum
 // CharSave
 //
 
-#define CHARSAVE_VERSION        17
+#define CHARSAVE_VERSION        18
 #define CHARSAVE_MAXSIZE        224
 #define CHARSAVE_MAXCVARS       16
 #define DRLA_MODPACK_SIZE       9
-#define DRLA_MAX_TOKENS         164
+#define DRLA_MAX_TOKENS         176
 #define DEPOSIT_ID              MAKE_ID('D', 'P', 'S', 'T')
 
 // --------------------------------------------------

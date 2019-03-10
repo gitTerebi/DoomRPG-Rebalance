@@ -225,6 +225,15 @@ str DRLATokens[DRLA_MAX_TOKENS] =
     "RLWidowmakerSMGNanoLearntToken",
     "RLWidowmakerSMGFirestormLearntToken",
     "RLWidowmakerSMGSniperLearntToken",
+    "RLLuciferCannonNanoLearntToken",
+    "RLLuciferCannonFirestormLearntToken",
+    "RLLuciferCannonSniperLearntToken",
+    "RLDirectHitNanoLearntToken",
+    "RLDirectHitFirestormLearntToken",
+    "RLDirectHitSniperLearntToken",
+    "RLTriadCannonNanoLearntToken",
+    "RLTriadCannonFirestormLearntToken",
+    "RLTriadCannonSniperLearntToken",
 
     // Demonic Exotic Mods Effects Learnt Tokens
     "RLDeathsGazeNanoLearntToken",
@@ -244,6 +253,9 @@ str DRLATokens[DRLA_MAX_TOKENS] =
     "RLDreadshotMortarSniperLearntToken",
 
     // Legendary Exotic Mods Effects Learnt Tokens
+    "RLLonghornNanoLearntToken"
+    "RLLonghornFirestormLearntToken"
+    "RLLonghornSniperLearntToken"
     "RLJudgeOfTheDeadNanoLearntToken",
     "RLJudgeOfTheDeadFirestormLearntToken",
     "RLJudgeOfTheDeadSniperLearntToken",
