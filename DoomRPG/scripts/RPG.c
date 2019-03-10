@@ -429,7 +429,7 @@ Start:
         SetInventory("RLPhaseDeviceLimit", 0);
     }
 
-    if (GetCVar("drpg_revives"))
+    if (GetCVar("drpg_multi_revives"))
         ReviveHandler();
 
     // Loop
@@ -1557,9 +1557,9 @@ NamedScript Type_DEATH void Dead()
         }
     }
 
-    // Incapacitation announcement
-    if (GetCVar("drpg_revives"))
+    if (GetCVar("drpg_multi_revives"))
     {
+        // Incapacitation announcement
         SetHudSize(320, 200, false);
         SetFont("SMALLFONT");
         if (PlayerCount() > 1)
@@ -1567,10 +1567,7 @@ NamedScript Type_DEATH void Dead()
         else
             HudMessage("%tS has died", PlayerNumber() + 1);
         EndHudMessageBold(HUDMSG_FADEOUT, 0, "Brick", 160.0, 140.0, 1.5, 1.0);
-    }
 
-    if (GetCVar("drpg_revives"))
-    {
         // Remember body location
         Player.BodyTID = GetUniqueTID();
 
@@ -1597,7 +1594,7 @@ NamedScript Type_RESPAWN void Respawn()
     AssignTIDs();
 
     // Heal to max health if revives are disabled or revive at the body's location
-    if (!GetCVar("drpg_revives") || PlayerCount() == 1)
+    if (!GetCVar("drpg_multi_revives"))
         Player.ActualHealth = Player.HealthMax;
     else if (Player.BodyTID != 0)
     {

@@ -149,7 +149,7 @@ Start:
     }
 
     // Incapacitated message handling
-    if (Timer() > 4 && GetCVar("drpg_revives") && Player.ActualHealth <= 0)
+    if (Timer() > 35 && GetCVar("drpg_multi_revives") && Player.ActualHealth <= 0)
     {
         SetHudSize(0, 0, false);
         SetFont("BIGFONT");

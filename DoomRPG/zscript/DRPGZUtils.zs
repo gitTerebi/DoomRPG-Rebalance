@@ -526,6 +526,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_multi_sharecredits');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_multi_revives');
+        i.ResetToDefault();
 
 // Shop
         i = CVar.FindCVar('drpg_shoptype');

@@ -468,7 +468,7 @@ OptionMenu "DoomRPGMultiplayer"
     Option "Share credit drops", "drpg_multi_sharecredits", "OnOff"
     StaticText ""
 
-	Option "Player revive mechanics", "drpg_revives", "OnOff"
+	Option "Player revive mechanics", "drpg_multi_revives", "OnOff"
 }
 
 OptionMenu "DoomRPGShop"
