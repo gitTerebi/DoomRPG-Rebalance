@@ -5,13 +5,16 @@ I recommend reading CHANGELOG.txt and the commits for all the changes.
 
 ## Installing
 
-* GZDoom v3.7.0 or higher is required to play this mod. Avoid v3.3.0 as it has an ACS bug that causes performance issues.
-DRPG's launcher is the recommended method. Found here: https://github.com/Forevener/DRPGSEL/releases
+GZDoom v3.7.0 or higher is required to play this mod. 
+Avoid v3.3.0 as it has an ACS bug that causes performance issues.
+
+DRPG's launcher is the recommended method. 
+Found here: https://github.com/Forevener/DRPGSEL/releases
 It can download the mod for you and get it launched easy!
 
-Manually:
+### Manually:
 https://github.com/Sumwunn/DoomRPG 
-- The mod itself, click "Clone or download" -> "Download ZIP", extract it, then read the wiki for help.
+The mod itself, click "Clone or download" -> "Download ZIP", extract it, then read the wiki for help.
 https://github.com/Sumwunn/DoomRPG/wiki
 
 ## Compatible mods
