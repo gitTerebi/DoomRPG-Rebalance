@@ -18,7 +18,7 @@ https://github.com/Sumwunn/DoomRPG/wiki
 
 ## Compatible mods
 
-- DoomRL Arsenal - [1.1] [MP-B7.0].
+- DoomRL Arsenal - [1.1.1] [MP-B7.1].
 - LegenDoom v2.5.
 - Colourful Hell v0.96b.
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
