@@ -48,7 +48,7 @@ ICSharpCode for SharpZipLib (http://www.icsharpcode.net/opensource/sharpziplib)
 
 Code:
 worldendDominator
-itsmedoggo (THANK YOU FOR YOUR WORK ON COLOURFUL HELL COMPAT!!!!!!!)
+itsmedoggo (thank you for your work on colourful hell compat (that I nicked :D).)
 Forevener
 
 Graphics:
