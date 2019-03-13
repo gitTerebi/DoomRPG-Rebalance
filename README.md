@@ -6,7 +6,6 @@ I recommend reading CHANGELOG.txt and the commits for all the changes.
 ## Installing
 
 GZDoom v3.7.0 or higher is required to play this mod. 
-Avoid v3.3.0 as it has an ACS bug that causes performance issues.
 
 DRPG's launcher is the recommended method. 
 Found here: https://github.com/Forevener/DRPGSEL/releases
