@@ -726,9 +726,9 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         fixed RandomMaxWeight = GetCVarFixed("drpg_monster_random_max_mult");
         int LevelNum = CurrentLevel->LevelNum;
 
-        // Cap Level Number to 100
-        if (LevelNum > 100)
-            LevelNum = 100;
+        // Let's not cap Level Number to 100 anymore
+        //if (LevelNum > 100)
+        //    LevelNum = 100;
 
         // If the Arena is active, base the Monster Levels Map Number portion on the current wave
         if (CurrentLevel->UACBase && ArenaActive)
