@@ -1039,13 +1039,13 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_SKILL_HELL:
         return (GetCVar("drpg_mapevent_skill_hell") &&
-                AveragePlayerLevel() >= 10 &&
+                AveragePlayerLevel() >= 15 &&
                 CurrentSkill < 4);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_skill_armageddon") &&
-                AveragePlayerLevel() >= 10 &&
+                AveragePlayerLevel() >= 25 &&
                 CurrentSkill < 5);
 
     case MAPEVENT_SPECIAL_SINSTORM:

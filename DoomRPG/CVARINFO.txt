@@ -230,6 +230,7 @@ user    int     drpg_turret_y = 334;
 user    int     drpg_skill_wheelspeed = 32;
 user    bool    drpg_stats_alwaysshow = false;
 user    bool    drpg_aug_alwaysshow = false;
+user	bool	drpg_drla_hud_staminabar = true;
 
 // Misc
 server  bool    drpg_debug = false;

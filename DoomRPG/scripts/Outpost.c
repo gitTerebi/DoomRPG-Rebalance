@@ -742,7 +742,10 @@ NamedScript MapSpecial void SkillComputer()
 
         // Text
         SetFont("BIGFONT");
-        HudMessage("Skill Level: \Cj%d (%S\Cj)", SkillChoice + 1, SkillLevels[SkillChoice]);
+        if (CompatMonMode == COMPAT_DRLA)
+            HudMessage("Skill Level: \Cj%d (%S\Cj)", SkillChoice + 1, SkillLevelsDRLA[SkillChoice]);
+        else
+            HudMessage("Skill Level: \Cj%d (%S\Cj)", SkillChoice + 1, SkillLevelsDF[SkillChoice]);
         EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "Gold", 100.1, 200.0, 0.05, 0.5);
 
         // Input
@@ -751,7 +754,7 @@ NamedScript MapSpecial void SkillComputer()
             ActivatorSound("menu/move", 127);
             SkillChoice--;
         }
-        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && SkillChoice < (CompatMonMode == COMPAT_DRLA ? 5 : 4))
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()) && SkillChoice < SkillLevelsMax - 1)
         {
             ActivatorSound("menu/move", 127);
             SkillChoice++;

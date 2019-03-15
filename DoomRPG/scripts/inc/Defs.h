@@ -228,11 +228,11 @@ typedef enum
 // CharSave
 //
 
-#define CHARSAVE_VERSION        17
+#define CHARSAVE_VERSION        18
 #define CHARSAVE_MAXSIZE        224
 #define CHARSAVE_MAXCVARS       16
 #define DRLA_MODPACK_SIZE       9
-#define DRLA_MAX_TOKENS         164
+#define DRLA_MAX_TOKENS         176
 #define DEPOSIT_ID              MAKE_ID('D', 'P', 'S', 'T')
 
 // --------------------------------------------------
@@ -429,11 +429,13 @@ typedef enum
 //
 #define MAX_MONSTERS            16384
 #define MAX_DEF_MONSTERS_DF     17
-#define MAX_DEF_MONSTERS_DRLA   72
+#define MAX_DEF_MONSTERS_DRLA   77
 #define MAX_DEF_MONSTERS_CH		135
 #define MAX_TEMP_MONSTERS       150
 #define MAX_MEGABOSSES_DF       2
 #define MAX_MEGABOSSES_CH       2
+#define MAX_SKILLLEVELS_DF		6
+#define MAX_SKILLLEVELS_DRLA	7
 
 typedef enum
 {

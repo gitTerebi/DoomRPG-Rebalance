@@ -12,28 +12,30 @@ skill easy
 	
 	acsreturn = 1
 	
-	name = "Easy"
+	PicName = "M_EASY"
+	Name = "$SKILL_EASY"
 	textcolor = "Green"
 	Key = "1"
 	
-    ReplaceActor = "Zombieman", "RLFormerHumanSpawnerEasy"
+	ReplaceActor = "Zombieman", "RLFormerHumanSpawnerEasy"
 	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawnerEasy"
 	ReplaceActor = "Chaingunguy", "RLFormerCommandoSpawnerEasy"
-	ReplaceActor = "DoomImp", "RLImpRPG"
-	ReplaceActor = "Demon", "RLDemonRPG"
-	ReplaceActor = "Spectre", "RLSpectreRPG"
-	ReplaceActor = "LostSoul", "RLLostSoulRPG"
-	ReplaceActor = "Cacodemon", "RLCacodemonRPG"
-	ReplaceActor = "HellKnight", "RLHellKnightRPG"
-	ReplaceActor = "BaronOfHell", "RLBaronOfHellRPG"
-	ReplaceActor = "Arachnotron", "RLArachnotronRPG"
-	ReplaceActor = "PainElemental", "RLPainElementalRPG"
-	ReplaceActor = "Revenant", "RLRevenantRPG"
-	ReplaceActor = "Fatso", "RLMancubusRPG"
-	ReplaceActor = "Archvile", "RLArchvileRPG"
-	ReplaceActor = "Cyberdemon", "RLCyberdemonRPG"
-	ReplaceActor = "SpiderMastermind", "RLSpiderMastermindRPG"
+	ReplaceActor = "DoomImp", "RLImp"
+	ReplaceActor = "Demon", "RLDemon"
+	ReplaceActor = "Spectre", "RLSpectre"
+	ReplaceActor = "LostSoul", "RLLostSoul"
+	ReplaceActor = "Cacodemon", "RLCacodemon"
+	ReplaceActor = "HellKnight", "RLHellKnight"
+	ReplaceActor = "BaronOfHell", "RLBaronOfHell"
+	ReplaceActor = "Arachnotron", "RLArachnotron"
+	ReplaceActor = "PainElemental", "RLPainElemental"
+	ReplaceActor = "Revenant", "RLRevenant"
+	ReplaceActor = "Fatso", "RLMancubus"
+	ReplaceActor = "Archvile", "RLArchvile"
+	ReplaceActor = "Cyberdemon", "RLCyberdemon"
+	ReplaceActor = "SpiderMastermind", "RLSpiderMastermindVariantSpawner"
 	ReplaceActor = "BossEye", "RLBossEye"
+	ReplaceActor = "BossBrain", "RLBossBrain"
 }
 
 // Normal skill
@@ -46,7 +48,8 @@ skill normal
 
 	acsreturn = 2
 	
-	name = "Normal"
+	PicName = "M_MODER"
+	Name = "$SKILL_NORMAL"
 	textcolor = "Yellow"
 	Key = "2"
 
@@ -68,11 +71,14 @@ skill normal
 	ReplaceActor = "Cyberdemon", "RLCyberdemonSpawner"
 	ReplaceActor = "SpiderMastermind", "RLSpiderMastermindSpawner"
 	ReplaceActor = "BossEye", "RLBossEye"
+	ReplaceActor = "BossBrain", "RLBossBrain"
 }
 
 // Hard skill
 skill hard
 {
+	defaultskill
+	
 	aggressiveness = 0.5
 	spawnfilter = nightmare
 	
@@ -80,7 +86,8 @@ skill hard
 
 	acsreturn = 3
 	
-	name = "Hard"
+	PicName = "M_STAND"
+	Name = "$SKILL_HARD"
 	textcolor = "Orange"
 	Key = "3"
 
@@ -101,7 +108,8 @@ skill hard
 	ReplaceActor = "Archvile", "RLArchvileSpawner"
 	ReplaceActor = "Cyberdemon", "RLCyberdemonSpawner"
 	ReplaceActor = "SpiderMastermind", "RLSpiderMastermindSpawner"
-	ReplaceActor = "BossEye", "RLBossEye"
+	ReplaceActor = "BossEye", "RLUVBossEye"
+	ReplaceActor = "BossBrain", "RLBossBrain"
 }
 
 // Nightmare skill
@@ -111,32 +119,34 @@ skill nightmare
 	spawnfilter = nightmare
 	
 	autousehealth
-    defaultskill
 
 	acsreturn = 4
 	
-	name = "Nightmare"
+	PicName = "M_NIGHT"
+	Name = "$SKILL_NIGHTMARE"
+	MustConfirm = "Raging, horned devils. Only Nightmare enemies spawn..."
 	textcolor = "Red"
 	Key = "4"
 
-	ReplaceActor = "Zombieman", "RLFormerHumanSpawner"
-	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawner"
-	ReplaceActor = "Chaingunguy", "RLFormerCommandoSpawner"
-	ReplaceActor = "DoomImp", "RLImpSpawner"
-	ReplaceActor = "Demon", "RLDemonSpawner"
-	ReplaceActor = "Spectre", "RLSpectreSpawner"
-	ReplaceActor = "LostSoul", "RLLostSoulSpawner"
-	ReplaceActor = "Cacodemon", "RLCacodemonSpawner"
-	ReplaceActor = "HellKnight", "RLHellKnightSpawner"
-	ReplaceActor = "BaronOfHell", "RLBaronOfHellSpawner"
-	ReplaceActor = "Arachnotron", "RLArachnotronSpawner"
-	ReplaceActor = "PainElemental", "RLPainElementalSpawner"
-	ReplaceActor = "Revenant", "RLRevenantSpawner"
-	ReplaceActor = "Fatso", "RLMancubusSpawner"
-	ReplaceActor = "Archvile", "RLArchvileSpawner"
-	ReplaceActor = "Cyberdemon", "RLCyberdemonSpawner"
-	ReplaceActor = "SpiderMastermind", "RLSpiderMastermindSpawner"
-	ReplaceActor = "BossEye", "RLBossEye"
+	ReplaceActor = "Zombieman", "RLEliteFormerHumanSpawner"
+	ReplaceActor = "Shotgunguy", "RLEliteFormerSergeantSpawner"
+	ReplaceActor = "Chaingunguy", "RLEliteFormerCommandoSpawner"
+	ReplaceActor = "DoomImp", "RLNightmareImp"
+	ReplaceActor = "Demon", "RLNightmareDemon"
+	ReplaceActor = "Spectre", "RLNightmareSpectre"
+	ReplaceActor = "LostSoul", "RLNightmareLostSoul"
+	ReplaceActor = "Cacodemon", "RLNightmareCacodemon"
+	ReplaceActor = "HellKnight", "RLNightmareHellKnight"
+	ReplaceActor = "BaronOfHell", "RLNightmareBaronOfHell"
+	ReplaceActor = "Arachnotron", "RLNightmareArachnotron"
+	ReplaceActor = "PainElemental", "RLNightmarePainElemental"
+	ReplaceActor = "Revenant", "RLNightmareRevenant"
+	ReplaceActor = "Fatso", "RLNightmareMancubus"
+	ReplaceActor = "Archvile", "RLNightmareArchvile"
+	ReplaceActor = "Cyberdemon", "RLNightmareCyberdemonSpawner"
+	ReplaceActor = "SpiderMastermind", "RLNightmareSpiderMastermindSpawner"
+	ReplaceActor = "BossEye", "RLNightmareBossEye"
+	ReplaceActor = "BossBrain", "RLNightmareBossBrain"
 }
 
 // Hell skill
@@ -150,7 +160,8 @@ skill hell
 	
 	acsreturn = 5
 	
-	name = "Hell"
+	PicName = "M_HELL"
+	Name = "Hell"
 	textcolor = "Brick"
 	Key = "5"
 
@@ -185,31 +196,72 @@ skill armageddon
 	
 	acsreturn = 6
 	
-	name = "Armageddon"
+	PicName = "M_ARMAG"
+	Name = "Armageddon"
+	MustConfirm = "WELCOME TO ARMAGEDDON, FOOL"
 	textcolor = "Black"
 	Key = "6"
-	MustConfirm = "WELCOME TO ARMAGEDDON, FOOL"
 	
-    ReplaceActor = "Zombieman", "RLFormerAssaultTrooper"
+	ReplaceActor = "GreenArmor", "RLArmageddonStandardArmorSpawner"
+	ReplaceActor = "BlueArmor", "RLArmageddonAdvancedArmorSpawner"
+	ReplaceActor = "Zombieman", "RLFormerAssaultTrooper"
 	ReplaceActor = "Shotgunguy", "RLFormerOverwatch"
 	ReplaceActor = "Chaingunguy", "RLFormerShocktrooper"
-	ReplaceActor = "DoomImp", "RLArmageddonImpSpawner"
+	ReplaceActor = "DoomImp", "RLArmageddonImp"
 	ReplaceActor = "Demon", "RLArmageddonDemon"
 	ReplaceActor = "Spectre", "RLArmageddonSpectreSpawner"
 	ReplaceActor = "LostSoul", "RLTheHungrySpawner"
 	ReplaceActor = "Cacodemon", "RLArmageddonCacodemon"
 	ReplaceActor = "HellKnight", "RLArmageddonHellKnightSpawner"
-	ReplaceActor = "BaronOfHell", "RLArmageddonBaronOfHellSpawner"
-	ReplaceActor = "Arachnotron", "RLArmageddonArachnotronSpawner"
+	ReplaceActor = "BaronOfHell", "RLArmageddonBaronOfHell"
+	ReplaceActor = "Arachnotron", "RLArmageddonArachnotron"
 	ReplaceActor = "PainElemental", "RLArmageddonPainElemental"
-	ReplaceActor = "Revenant", "RLArmageddonRevenantSpawner"
+	ReplaceActor = "Revenant", "RLArmageddonRevenant"
 	ReplaceActor = "Fatso", "RLArmageddonMancubus"
 	ReplaceActor = "Archvile", "RLArmageddonArchvileSpawner"
 	ReplaceActor = "Cyberdemon", "RLArmageddonCyberdemonSpawner"
 	ReplaceActor = "SpiderMastermind", "RLArmageddonSpiderMastermindSpawner"
-//	ReplaceActor = "BossEye", "RLArmageddonBossEye"
-	ReplaceActor = "BossEye", "RLUVBossEye"
-    
-    ReplaceActor = "GreenArmor", "RLArmageddonStandardArmorSpawner"
-    ReplaceActor = "BlueArmor", "RLArmageddonAdvancedArmorSpawner"
+	ReplaceActor = "BossEye", "RLArmageddonBossEye"
+	ReplaceActor = "BossBrain", "RLArmageddonBossBrain"
 }
+
+// Adaptive skill
+skill adaptive
+{
+	aggressiveness = 0.8
+	spawnfilter = nightmare
+
+	disablecheats
+	autousehealth
+	
+	acsreturn = 7
+	
+	PicName = "M_ADAPT"
+	Name = "Adaptive"
+	MustConfirm = "A progressive difficulty that ramps up over time, starts at UV, ends up far worse."
+	textcolor = "Sapphire"
+	Key = "7"
+	
+	ReplaceActor = "GreenArmor", "RLAdaptiveStandardArmorSpawner"
+	ReplaceActor = "BlueArmor", "RLAdaptiveAdvancedArmorSpawner"
+	ReplaceActor = "Zombieman", "RLAdaptiveFormerHuman"
+	ReplaceActor = "Shotgunguy", "RLAdaptiveFormerSergeant"
+	ReplaceActor = "Chaingunguy", "RLAdaptiveFormerCommando"
+	ReplaceActor = "DoomImp", "RLAdaptiveImp"
+	ReplaceActor = "Demon", "RLAdaptiveDemon"
+	ReplaceActor = "Spectre", "RLAdaptiveSpectre"
+	ReplaceActor = "LostSoul", "RLAdaptiveLostSoul"
+	ReplaceActor = "Cacodemon", "RLAdaptiveCacodemon"
+	ReplaceActor = "HellKnight", "RLAdaptiveHellKnight"
+	ReplaceActor = "BaronOfHell", "RLAdaptiveBaronOfHell"
+	ReplaceActor = "Arachnotron", "RLAdaptiveArachnotron"
+	ReplaceActor = "PainElemental", "RLAdaptivePainElemental"
+	ReplaceActor = "Revenant", "RLAdaptiveRevenant"
+	ReplaceActor = "Fatso", "RLAdaptiveMancubus"
+	ReplaceActor = "Archvile", "RLAdaptiveArchvile"
+	ReplaceActor = "Cyberdemon", "RLAdaptiveCyberdemon"
+	ReplaceActor = "SpiderMastermind", "RLAdaptiveSpiderMastermind"
+	ReplaceActor = "BossEye", "RLUVBossEye"
+	ReplaceActor = "BossBrain", "RLBossBrain"
+}
+

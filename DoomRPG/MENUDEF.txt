@@ -605,6 +605,7 @@ OptionMenu "DoomRPGHUD"
     Option "Skill Wheel Animation Speed", "drpg_skill_wheelspeed", "WheelSpeed"
     Option "Always Show Stats", "drpg_stats_alwaysshow", "OnOff"
     Option "Always Show Aug Battery", "drpg_aug_alwaysshow", "OnOff"
+    Option "DRLA Stamina bar", "drpg_drla_hud_staminabar", "OnOff"
 }
 
 OptionMenu "DoomRPGHUDPresets"
@@ -660,7 +661,7 @@ OptionMenu "DoomRPGCharacter"
     StaticText ""
 
     StaticText "Save/Load", 1
-    SafeCommand "Save Character", "pukename SaveCharacter", "Are you sure?"
+    SafeCommand "Save Character", "pukename SaveCharacter", "Are you sure? Put your armour and boots into your inventory before continuing!"
     SafeCommand "Load Character", "pukename LoadCharacter", "Are you sure?"
     SafeCommand "Clear Character", "pukename ClearCharacter", "Are you sure?"
     StaticText ""

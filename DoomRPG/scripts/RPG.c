@@ -2269,6 +2269,8 @@ void CheckCompatibility()
     if (GetCVar("drpg_debug"))
         Log("\CdDEBUG: \C-Checking Compatibility...");
 
+    SkillLevelsMax = MAX_SKILLLEVELS_DF;
+
     CompatMode = COMPAT_NONE;
     CompatMonMode = COMPAT_NONE;
 
@@ -2332,6 +2334,7 @@ void CheckCompatibility()
         if (GetCVar("drpg_debug"))
             Log("\CdDEBUG: \CdDoomRL Monsters \C-detected");
 
+        SkillLevelsMax = MAX_SKILLLEVELS_DRLA;
         CompatMonMode = COMPAT_DRLA;
         MonsterData = MonsterDataDRLA;
         MonsterDataAmount = MAX_DEF_MONSTERS_DRLA;

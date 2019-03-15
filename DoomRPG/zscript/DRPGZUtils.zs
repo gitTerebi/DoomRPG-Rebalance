@@ -658,6 +658,8 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_aug_alwaysshow');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_drla_hud_staminabar');
+        i.ResetToDefault();
 
 // Misc
         i = CVar.FindCVar('drpg_debug');
@@ -698,40 +700,40 @@ class DRPGZUtilities
         i.ResetToDefault();
 
 // Stored Character
-        i = CVar.FindCVar('drpg_char_data_len');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_0');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_1');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_2');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_3');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_4');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_5');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_6');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_7');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_8');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_9');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_10');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_11');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_12');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_13');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_14');
-        i.ResetToDefault();
-        i = CVar.FindCVar('drpg_char_data_15');
-        i.ResetToDefault();
+        /*        i = CVar.FindCVar('drpg_char_data_len');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_0');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_1');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_2');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_3');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_4');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_5');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_6');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_7');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_8');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_9');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_10');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_11');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_12');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_13');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_14');
+                i.ResetToDefault();
+                i = CVar.FindCVar('drpg_char_data_15');
+                i.ResetToDefault();*/
 
 // --------------------------------------------------
 // Starting Options

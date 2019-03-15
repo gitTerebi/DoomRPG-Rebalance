@@ -25,6 +25,9 @@ int const AuraTID = 20000;
 static bool CheckInputRepeat;
 static int CheckInputRepeatTimer;
 
+// Skill levels stuff
+int SkillLevelsMax;
+
 str const ColorNames[26] =
 {
     "Brick",
@@ -85,9 +88,8 @@ str const ColorCodes[26] =
     "\Cz"
 };
 
-
 // Skill Level Names
-str const SkillLevels[6] =
+str const SkillLevelsDF[MAX_SKILLLEVELS_DF] =
 {
     "\CdEasy",
     "\CjNormal",
@@ -95,6 +97,18 @@ str const SkillLevels[6] =
     "\CgNightmare",
     "\CaHell",
     "\CmArmageddon"
+};
+
+// Skill Level DRLA Names
+str const SkillLevelsDRLA[MAX_SKILLLEVELS_DRLA] =
+{
+    "\CdEasy",
+    "\CjModerate", // Normal
+    "\CiStandard", // Hard
+    "\CgNightmare",
+    "\CaHell",
+    "\CmArmageddon",
+    "\CyAdaptive"
 };
 
 // TODO: Just number these and use StrParam
@@ -574,7 +588,7 @@ NamedScript DECORATE void RegenBoost()
 // Set Skill Level during the game
 NamedScript KeyBind void SetSkill(int NewSkill)
 {
-    if (NewSkill < 0 || NewSkill > (CompatMonMode == COMPAT_DRLA ? 5 : 4))
+    if (NewSkill < 0 || NewSkill > SkillLevelsMax - 1)
     {
         HudMessage("Invalid Skill Level");
         EndHudMessage(HUDMSG_FADEOUT, 0, "Red", 0.5, 0.5, 2.0, 1.0);
@@ -586,7 +600,10 @@ NamedScript KeyBind void SetSkill(int NewSkill)
     CurrentSkill = NewSkill;
     ActivatorSound("misc/skillchange", 127);
     SetFont("BIGFONT");
-    HudMessage("\CjSkill Level has been changed to\n\n%S", SkillLevels[NewSkill]);
+    if (CompatMonMode == COMPAT_DRLA)
+        HudMessage("\CjSkill Level has been changed to\n\n%S", SkillLevelsDRLA[NewSkill]);
+    else
+        HudMessage("\CjSkill Level has been changed to\n\n%S", SkillLevelsDF[NewSkill]);
     EndHudMessageBold(HUDMSG_FADEOUT, 0, "White", 1.5, 0.5, 2.0, 1.0);
 
     // YOU FOOL!

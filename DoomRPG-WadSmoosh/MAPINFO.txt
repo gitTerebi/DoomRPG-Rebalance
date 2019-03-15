@@ -12,7 +12,6 @@ map E1M8 lookup "HUSTR_E1M8"
 	baronspecial
 	specialaction_lowerfloor
 	music = "$MUSIC_E1M8"
-	translator = "xlat/E1M8.txt"
 }
 
 map E2M8 lookup "HUSTR_E2M8"

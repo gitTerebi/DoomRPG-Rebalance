@@ -977,6 +977,20 @@ ACTOR RLCyberneticArchvileRPG : RLCyberneticArchvile Replaces RLCyberneticArchvi
 	}
 }
 
+// Cybernetic Cyberdemon Mk. II
+ACTOR RLCyberneticCyberdemonRPG : RLCyberneticCyberdemon Replaces RLCyberneticCyberdemon
+{
+	States
+	{
+	Spawn:
+		CCYB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		CCYB A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 // Cybernetic Spider Mastermind
 ACTOR RLCyberneticSpiderMastermindRPG : RLCyberneticSpiderMastermind Replaces RLCyberneticSpiderMastermind
 {
@@ -1047,6 +1061,22 @@ ACTOR RLFormerShocktrooperRPG : RLFormerShocktrooper Replaces RLFormerShocktroop
 		Goto Super::Spawn
 	See:
 		ASHK A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Imp
+ACTOR RLArmageddonImpRPG : RLArmageddonImp Replaces RLArmageddonImp
+{
+	Tag "The Watcher"
+
+	States
+	{
+	Spawn:
+		AIMP A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		AIMP A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
@@ -1132,6 +1162,20 @@ ACTOR RLArmageddonBaronOfHellRPG : RLArmageddonBaronOfHell replaces RLArmageddon
 	}
 }
 
+// Arachnotron
+ACTOR RLArmageddonArachnotronRPG : RLArmageddonArachnotron replaces RLArmageddonArachnotron
+{
+	States
+	{
+	Spawn:
+		AARA A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		AARA A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Skull of the Abyss
 ACTOR RLSkullOfTheAbyssRPG : RLSkullOfTheAbyss replaces RLSkullOfTheAbyss
 {
@@ -1184,6 +1228,20 @@ ACTOR RLArmageddonMancubusRPG : RLArmageddonMancubus Replaces RLArmageddonMancub
 		Goto Super::Spawn
 	See:
 		AMAN A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Archvile
+ACTOR RLArmageddonArchvileRPG : RLArmageddonArchvile Replaces RLArmageddonArchvile
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		AARA A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
