@@ -1,1 +1,2 @@
 Name=Jimmy's Jukebox Instant Randomizer
+Mods=j-jukebox-v9.pk3

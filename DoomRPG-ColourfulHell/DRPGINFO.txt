@@ -1,2 +1,3 @@
 Name=Colourful Hell
 Conflicts=DoomRL Arsenal - Monster Pack
+Mods=ColourfulHell96b.pk3
