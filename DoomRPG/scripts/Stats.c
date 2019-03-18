@@ -64,8 +64,7 @@ NamedScript DECORATE void StatusEffect(int Type, int Time, int Intensity)
     if (Player.Aura.Type[AURA_PINK].Active || Player.SoulActive[SOUL_PINK] || (GetCVar("drpg_invulnerability_plus") && GetActorPowerupTics(0, "PowerInvulnerable") > 0))
         return;
 
-    if (Intensity <= 0)
-        Intensity = 1;
+    Intensity = Clamp(1, Intensity, 5);
 
     if (Player.StatusType[Type])
     {
