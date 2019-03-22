@@ -1372,9 +1372,9 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
 
     // Should the timer be stacked because you used the same Aura?
     if (Stack || Player.Perks[STAT_ENERGY])
-        Player.Aura.Time += AURA_CALCTIME;
+        Player.Aura.Time += (long int)AURA_CALCTIME;
     else
-        Player.Aura.Time = AURA_CALCTIME;
+        Player.Aura.Time = (long int)AURA_CALCTIME;
 
     // Apply Aura
     Player.Aura.Type[Index].Active = true;
