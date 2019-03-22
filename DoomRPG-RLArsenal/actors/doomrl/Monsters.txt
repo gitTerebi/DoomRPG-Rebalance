@@ -89,3 +89,19 @@ actor RLDarkMartyRPG : RLDarkMarty Replaces RLDarkMarty
     }
 }
 
+// --------------------------------------------------
+// SPECIAL BOSSES
+//
+
+actor RLArtifactGuardianRPG : RLArtifactGuardian Replaces RLArtifactGuardian
+{
+    States
+    {
+    Spawn:
+        CYBR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+        Goto Super::Spawn
+    See:
+        CYBR A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+        Goto Super::See
+    }
+}
