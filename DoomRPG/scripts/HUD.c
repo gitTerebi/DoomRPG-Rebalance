@@ -872,7 +872,7 @@ Start:
 
         SetFont("BIGFONT");
         HudMessage("%d", Lives);
-        EndHudMessage(HUDMSG_PLAIN, 0, LivesTextColour, X + 1.0, Y + 24.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, LivesTextColour, X, Y + 24.0, 0.05);
         PrintSpritePulse(LivesSprite, 0, X + 14.0, Y + 88.0, 0.75, 32.0, 0.25);
     }
 

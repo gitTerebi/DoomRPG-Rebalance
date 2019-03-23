@@ -414,6 +414,7 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // Health Bonus Locations
 actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 {
+	DropItem "DRPGHealthBonus"
     DropItem "DRPGLootMedicalSupplies"
     DropItem "DRPGLootChemicals"
     DropItem "DRPGLootHazardousMaterials"
