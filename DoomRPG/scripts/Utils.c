@@ -1240,10 +1240,11 @@ NamedScript KeyBind void PlayerTeleport(int PlayerNum)
         return;
     }
 
+    int Target = Players(PlayerNum).ActualHealth > 0 ? Players(PlayerNum).TID : GetCVar("drpg_multi_revives") ? Players(PlayerNum).BodyTID : Player.TID;
     // Teleport
     GiveInventory("DRPGPlayerTeleportGhost", 1);
-    SetActorPosition(Player.TID, GetActorX(Players(PlayerNum).TID), GetActorY(Players(PlayerNum).TID), GetActorZ(Players(PlayerNum).TID), true);
-    SetActorAngle(Player.TID, GetActorAngle(Players(PlayerNum).TID));
+    SetActorPosition(Player.TID, GetActorX(Target), GetActorY(Target), GetActorZ(Target), true);
+    SetActorAngle(Player.TID, GetActorAngle(Target));
     SetActorProperty(Player.TID, APROP_RenderStyle, STYLE_Translucent);
 
     while (NearPlayers)

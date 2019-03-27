@@ -156,6 +156,7 @@ Start:
         if (PlayerCount() > 1)
         {
             HudMessage("Incapacitated\nHealth: %d", Player.ActualHealth);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", 1.5, 0.25, 0.05);
             if (Player.ReviveKeyTimer > 0)
             {
                 int Percent = CalcPercent(Player.ReviveKeyTimer, 105);
@@ -165,8 +166,8 @@ Start:
         else
         {
             HudMessage("YOU ARE DEAD");
+            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", 1.5, 0.5, 0.05);
         }
-        EndHudMessage(HUDMSG_PLAIN, 0, "Brick", 1.5, 0.75, 0.05);
     }
 
     Delay(1);
@@ -1053,7 +1054,11 @@ Start:
             if (!PlayerInGame(i)) continue;
 
             HealthPercent = (int)(((fixed)Players(i).ActualHealth / (fixed)Players(i).HealthMax) * 100.0);
+            if (HealthPercent > 100)
+                HealthPercent = 100;
             ShieldPercent = (int)(((fixed)Players(i).Shield.Charge / (fixed)Players(i).Shield.Capacity) * 100.0);
+            if (ShieldPercent > 100)
+                ShieldPercent = 100;
             Alpha = 1.0;
 
             // Health Critical
@@ -1065,7 +1070,7 @@ Start:
 
             SetFont("SMALLFONT");
 
-            if (Players(i).Shield.Active)
+            if (Players(i).Shield.Active && Players(i).Shield.Charge > 0)
             {
                 HudMessage("%tS\C- (\Cv%d/%d\C-)", i + 1, Players(i).Shield.Charge, Players(i).Shield.Capacity);
                 EndHudMessage(HUDMSG_PLAIN | HUDMSG_ALPHA, 0, "White", X + 0.1, Y, 0.05, Alpha);

@@ -1028,7 +1028,7 @@ void DrawStatsMenu()
         // Aug Battery
         PrintSprite("AUGBATT", 0, 286.1, 228.1, 0.05);
         SetFont("BIGFONT");
-        HudMessage("%d%%", PlayerPtr->Augs.Battery);
+        HudMessage("%d%%", (int)PlayerPtr->Augs.Battery);
         EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", 306.1, 228.0, 0.05);
 
         // Toxicity
