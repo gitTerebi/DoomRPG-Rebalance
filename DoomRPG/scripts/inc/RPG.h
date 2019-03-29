@@ -49,7 +49,7 @@ NamedScript Type_OPEN void GlobalInit();
 NamedScript Type_ENTER void Init();
 NamedScript void Loop();
 NamedScript void WeaponSpeed();
-NamedScript void PlayerDamage();
+NamedScript DECORATE int PlayerDamage(int, int, bool);
 NamedScript void MoneyChecker();
 NamedScript void StatRandomizer();
 NamedScript void AutosaveHandler();

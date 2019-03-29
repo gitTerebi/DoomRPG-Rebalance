@@ -8,8 +8,6 @@ extern ShieldPart const ShieldParts[3][MAX_PARTS];
 extern ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES];
 
 NamedScript void ShieldTimer();
-NamedScript void ShieldDamage(int);
-NamedScript void ShieldBroken();
 NamedScript void ShieldTimerReset();
 NamedScript bool ActivateShield();
 NamedScript bool DeactivateShield();

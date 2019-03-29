@@ -41,7 +41,6 @@ NamedScript void MonsterEpicVisitTimeHandler();
 NamedScript DECORATE void MonsterDeathCheck();
 NamedScript void MonsterDeath();
 NamedScript int WhoKilledMe();
-NamedScript int WhoShotMe();
 
 void MonsterLevelup(MonsterStatsPtr);
 void CapMonsterStats(MonsterStatsPtr);

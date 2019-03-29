@@ -409,7 +409,7 @@ NamedScript DECORATE void CauseCorrosion()
 
 NamedScript DECORATE int ShieldRemoveArmor()
 {
-    return (int)(GetCVar("drpg_shield_armorremove") && Player.Shield.Active);
+    return Player.Shield.Active;
 }
 
 NamedScript DECORATE int GetAveragePlayerLevel()

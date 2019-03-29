@@ -332,8 +332,6 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_shield_reset');
         i.ResetToDefault();
-        i = CVar.FindCVar('drpg_shield_armorremove');
-        i.ResetToDefault();
         i = CVar.FindCVar('drpg_levelup_heal');
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_toxicity_penalties');

@@ -2594,16 +2594,6 @@ NamedScript int WhoKilledMe()
     return -1;
 }
 
-NamedScript int WhoShotMe()
-{
-    SetActivator(0, AAPTR_TARGET);
-
-    if (GetActorProperty(0, APROP_Health) <= 0)
-        return -1;
-
-    return ActivatorTID();
-}
-
 void MonsterLevelup(MonsterStatsPtr Stats)
 {
     // If the monster is max level, return

@@ -289,7 +289,6 @@ OptionMenu "DoomRPGDifficulty"
     StaticText ""
 
     Option "Shields Drain when Deactivated", "drpg_shield_reset", "OnOff"
-    Option "Shield Removes Armor when Active", "drpg_shield_armorremove", "OnOff"
     StaticText ""
 
     Option "Heal HP/EP on Level-up", "drpg_levelup_heal", "OnOff"

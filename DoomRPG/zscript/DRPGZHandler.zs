@@ -56,6 +56,17 @@ class DRPGZEHandler : EventHandler
 
     override void WorldThingDamaged(WorldEvent e)
     {
+        if (e.Thing.Player)
+        {
+            int DamageSourceTID = 0;
+            if (e.DamageSource)
+                DamageSourceTID = e.DamageSource.TID;
+
+            e.Thing.ACS_ScriptCall("PlayerDamage", DamageSourceTID, e.Damage, false);
+
+            return;
+        }
+
         if (e.Thing && e.DamageSource && e.Thing.bIsMonster)
         {
             int Damage = e.Damage;
