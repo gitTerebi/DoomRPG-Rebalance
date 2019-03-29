@@ -918,20 +918,6 @@ int FindPlayerID(int TID)
     return -1;
 }
 
-// Returns true if any players are within TID's specified distance.
-bool CheckPlayersDistanceTID(int TID, int DistanceTID)
-{
-    for (int i = 0; i < MAX_PLAYERS; i++)
-    {
-        // Player is not in-game
-        if (!PlayerInGame(i)) break;
-
-        if (Distance(Players(i).TID, TID) < DistanceTID) return true;
-    }
-
-    return false;
-}
-
 OptionalArgs(1) bool SetActivatorToTargetExtended(int TID, int NumCycles)
 {
     if (NumCycles == 0) NumCycles = 31;

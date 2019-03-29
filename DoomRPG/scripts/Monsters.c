@@ -1168,10 +1168,7 @@ Start:
         return;
 
     if (GetActorProperty(0, APROP_Health) <= 0)
-    {
-        Delay(35);
-        goto Start;
-    }
+        return;
 
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
@@ -1246,8 +1243,7 @@ Start:
             OldEnergy = 0;
             OldLuck = 0;
         }
-        Delay(35);
-        goto Start;
+        return;
     }
 
     if (ClassifyActor(0) & ACTOR_WORLD)
@@ -1436,14 +1432,8 @@ NamedScript void MonsterAuraDisplayHandler()
 
 Start:
 
-    // Standby loop for when players are outside the specified draw distance.
-    while (!CheckPlayersDistanceTID(0, GetCVar("drpg_auras_drawdistance"))) Delay(35);
-
     if (GetActorProperty(0, APROP_Health) <= 0)
-    {
-        Delay(35);
-        goto Start;
-    }
+        return;
 
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
@@ -1650,10 +1640,7 @@ NamedScript void MonsterRegenerationHandler()
 Start:
 
     if (GetActorProperty(0, APROP_Health) <= 0)
-    {
-        Delay(35);
-        goto Start;
-    }
+        return;
 
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
@@ -2108,8 +2095,6 @@ NamedScript DECORATE void MonsterDeathCheck()
 
     while (true)
     {
-        Delay(35);
-
         if (ClassifyActor(0) & ACTOR_WORLD)
         {
             Stats->Init = false; // Mark as unused
@@ -2118,9 +2103,21 @@ NamedScript DECORATE void MonsterDeathCheck()
         }
 
         if (GetActorProperty(0, APROP_Health) > 0)
-            return;
-    }
+        {
+            // Reboot handlers
+            DamageNumbers();
+            MonsterStatsHandler();
+            MonsterAuraDisplayHandler();
+            if (!(Stats->Flags & MF_NOSTATS))
+                MonsterRegenerationHandler();
 
+            MonsterAggressionHandler();
+
+            return;
+        }
+
+        Delay(35);
+    }
 }
 
 NamedScript void MonsterDeath()

@@ -24,9 +24,6 @@ Start:
 
     while (GetCVar("drpg_damagenumbers"))
     {
-        // Standby loop for when players are outside the specified draw distance.
-        while (!CheckPlayersDistanceTID(0, GetCVar("drpg_popoffs_drawdistance"))) Delay(35);
-
         Health = GetActorProperty(0, APROP_Health);
         if (IsPlayer)
         {
@@ -134,9 +131,6 @@ NamedScript DECORATE void ModulePopoffs()
     {
         // Standby loop.
         while (!GetCVar("drpg_modulenumbers")) Delay(35);
-
-        // Standby loop for when players are outside the specified draw distance.
-        while (!CheckPlayersDistanceTID(0, GetCVar("drpg_popoffs_drawdistance"))) Delay(35);
 
         Popoff(0, GetUserVariable(0, "user_amount"), 0, "DRPGDigitalDigit", false);
         Delay(1);

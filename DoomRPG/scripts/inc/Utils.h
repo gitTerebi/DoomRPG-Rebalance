@@ -65,7 +65,6 @@ bool HaveStatusEffect();
 bool DropPlayerItem(str);
 bool IsPlayerMoving();
 int FindPlayerID(int);
-bool CheckPlayersDistanceTID(int, int);
 OptionalArgs(1) bool SetActivatorToTargetExtended(int, int);
 bool IsTimeFrozen();
 
