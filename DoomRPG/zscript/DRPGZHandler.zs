@@ -78,6 +78,14 @@ class DRPGZEHandler : EventHandler
         }
     }
 
+    override void WorldThingRevived(WorldEvent e)
+    {
+        if (e.Thing.CheckInventory("DRPGMonsterInit", 1))
+        {
+            e.Thing.ACS_ScriptCall("MonsterRevive");
+        }
+    }
+
     override void WorldThingDied(WorldEvent e)
     {
         if (e.Thing.CheckInventory("DRPGMonsterInit", 1))

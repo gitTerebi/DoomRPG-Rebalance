@@ -272,7 +272,7 @@ void CheckLevel()
 
         if (GetCVar("drpg_levelup_heal"))
         {
-            HealThing(SHIELD_HEALTH);
+            HealThing(MAX_HEALTH);
 
             if (Player.EP < 0)
                 Player.EP = 0;

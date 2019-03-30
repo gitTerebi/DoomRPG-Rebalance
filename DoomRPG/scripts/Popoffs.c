@@ -40,11 +40,11 @@ Start:
         if (IsPlayer)
         {
             // Nullify Health if a Shield is active
-            if (PlayerNumber() > -1 && CheckInventory("DRPGShield") || GetActorProperty(0, APROP_Health) >= SHIELD_HEALTH - GetActorProperty(0, APROP_SpawnHealth))
+            if (PlayerNumber() > -1 && CheckInventory("DRPGShield") || GetActorProperty(0, APROP_Health) >= MAX_HEALTH - GetActorProperty(0, APROP_SpawnHealth))
                 Health = 0;
 
             // Shield breaking hits will cause a major health drop, don't show this
-            if (PlayerNumber() > -1 && Health >= (SHIELD_HEALTH / 1000) - GetActorProperty(0, APROP_SpawnHealth))
+            if (PlayerNumber() > -1 && Health >= (MAX_HEALTH / 1000) - GetActorProperty(0, APROP_SpawnHealth))
                 Health = 0;
 
             // Shield checks

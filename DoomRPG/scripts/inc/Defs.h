@@ -602,7 +602,6 @@ typedef enum
 // Shield
 //
 
-#define SHIELD_HEALTH           1000000
 #define MAX_PARTS               22
 #define MAX_BODIES              22
 #define MAX_BATTERIES           13
@@ -688,6 +687,7 @@ typedef enum
 // Stats
 //
 
+#define MAX_HEALTH              1000000
 #define MAX_LEVEL               100
 #define MAX_RANK                24
 #define COMBO_MAX               (35 * 4)

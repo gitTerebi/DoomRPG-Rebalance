@@ -38,6 +38,7 @@ NamedScript void MonsterMoneyDrainHandler();
 NamedScript void MonsterAmmoDrainHandler();
 NamedScript void MonsterFellowResurrectionHandler();
 NamedScript void MonsterEpicVisitTimeHandler();
+NamedScript DECORATE void MonsterRevive();
 NamedScript DECORATE void MonsterDeathCheck();
 NamedScript void MonsterDeath();
 NamedScript int WhoKilledMe();

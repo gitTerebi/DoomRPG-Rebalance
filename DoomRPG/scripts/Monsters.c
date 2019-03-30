@@ -2087,37 +2087,39 @@ Start:
     goto Start;
 }
 
+NamedScript DECORATE void MonsterRevive()
+{
+    MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+    if (ClassifyActor(0) & ACTOR_WORLD)
+    {
+        Stats->Init = false; // Mark as unused
+        Stats->TID = 0;
+        return;
+    }
+
+    // Reboot handlers
+    DamageNumbers();
+    MonsterStatsHandler();
+    MonsterAuraDisplayHandler();
+    if (!(Stats->Flags & MF_NOSTATS))
+        MonsterRegenerationHandler();
+
+    MonsterAggressionHandler();
+}
+
 NamedScript DECORATE void MonsterDeathCheck()
 {
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
-    MonsterDeath();
-
-    while (true)
+    if (ClassifyActor(0) & ACTOR_WORLD)
     {
-        if (ClassifyActor(0) & ACTOR_WORLD)
-        {
-            Stats->Init = false; // Mark as unused
-            Stats->TID = 0;
-            return;
-        }
-
-        if (GetActorProperty(0, APROP_Health) > 0)
-        {
-            // Reboot handlers
-            DamageNumbers();
-            MonsterStatsHandler();
-            MonsterAuraDisplayHandler();
-            if (!(Stats->Flags & MF_NOSTATS))
-                MonsterRegenerationHandler();
-
-            MonsterAggressionHandler();
-
-            return;
-        }
-
-        Delay(35);
+        Stats->Init = false; // Mark as unused
+        Stats->TID = 0;
+        return;
     }
+
+    MonsterDeath();
 }
 
 NamedScript void MonsterDeath()

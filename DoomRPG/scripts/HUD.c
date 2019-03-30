@@ -1312,7 +1312,7 @@ NamedScript void DamageHUD(int Amount, bool Critical)
         break;
     }
 
-    if (Amount > 0 && Amount < SHIELD_HEALTH - Player.HealthMax - Amount)
+    if (Amount > 0 && Amount < MAX_HEALTH - Player.HealthMax - Amount)
     {
         // Fatal Blow
         if (!Player.Shield.Active && Player.ActualHealth - Amount <= 0)
