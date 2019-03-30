@@ -816,11 +816,6 @@ struct PlayerData_S
         int AccessoryBattery;
         int AccessoryTimer;
         struct Position_S AccessoryPosition;
-
-        // Armor
-        str ArmorType;
-        int ArmorAmount;
-        int ArmorMax;
     } Shield;
 
     struct

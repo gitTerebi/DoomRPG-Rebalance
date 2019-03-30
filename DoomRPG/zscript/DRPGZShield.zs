@@ -20,6 +20,7 @@ class DRPGZShieldDamageHandler : Inventory
             dmgType = DT_NORMAL;
 
         owner.ACS_ScriptCall("SetDamageType", dmgType);
-        newdamage = owner.ACS_ScriptCall("PlayerDamage", 0, damage, true);
+
+        newdamage = owner.ACS_ScriptCall("ShieldDamage", damage);
     }
 }

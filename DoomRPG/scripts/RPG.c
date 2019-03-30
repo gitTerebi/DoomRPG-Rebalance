@@ -441,12 +441,11 @@ Start:
 }
 
 // Damage Handler Entry Point
-NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken, bool ShieldMode)
+NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
 {
     bool CanSurvive;
     bool Critical;
     int MonsterID;
-    int ShieldDamageAmount;
     fixed LuckChance;
     fixed EnergyLevel;
 
@@ -492,47 +491,6 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken, bool Shiel
     DamageHUD(DamageTaken, Critical);
 
     Player.DamageType = DT_NONE;
-
-    if (ShieldMode)
-        ShieldTimerReset();
-
-    if (ShieldMode && Player.Shield.Charge > 0)
-    {
-        ShieldDamageAmount = DamageTaken; // For callback
-        if (ShieldDamageAmount > Player.Shield.Charge)
-            ShieldDamageAmount = Player.Shield.Charge;
-
-        Player.Shield.Charge -= DamageTaken;
-        Player.Shield.Full = false;
-
-        FadeRange(0, 100, 255, 0.25, 0, 100, 255, 0, 0.25);
-        PlaySound(0, "shield/hit", 5, 1.0, false, 1.0);
-        if (Player.Shield.Accessory && Player.Shield.Accessory->Damage)
-            Player.Shield.Accessory->Damage(ShieldDamageAmount);
-
-        if (Player.Shield.Charge <= 0)
-        {
-            if (Player.Shield.Charge < 0)
-            {
-                DamageTaken = -Player.Shield.Charge;
-                Player.ActualHealth -= DamageTaken;
-                // Recieving damage to health interrupts focusing
-                Player.Focusing = false;
-                Player.Shield.Charge = 0;
-            }
-            else
-                DamageTaken = 0;
-
-            PlaySound(0, "shield/empty", 5, 1.0, false, 1.0);
-            if (Player.Shield.Accessory && Player.Shield.Accessory->Break)
-                Player.Shield.Accessory->Break();
-        }
-        else
-            DamageTaken = 0;
-    }
-
-    if (ShieldMode)
-        return DamageTaken;
 
     Player.ActualHealth -= DamageTaken;
     // Receiving damage to health interrupts focusing
@@ -580,6 +538,54 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken, bool Shiel
     SetActorProperty(0, APROP_Health, Player.ActualHealth);
 
     return 0;
+}
+
+// Shield Damage Handler Entry Point
+NamedScript DECORATE int ShieldDamage(int DamageTaken)
+{
+    int ShieldDamageAmount;
+
+    ShieldTimerReset();
+
+    if (Player.Shield.Charge > 0)
+    {
+        Player.AutosaveTimerReset = true;
+        AugDamage(DamageTaken);
+        ToxicityDamage();
+        StatusDamage(DamageTaken, RandomFixed(0.0, 100.0), false);
+        DamageHUD(DamageTaken, false);
+
+        ShieldDamageAmount = DamageTaken; // For callback
+        if (ShieldDamageAmount > Player.Shield.Charge)
+            ShieldDamageAmount = Player.Shield.Charge;
+
+        Player.Shield.Charge -= DamageTaken;
+        Player.Shield.Full = false;
+
+        FadeRange(0, 100, 255, 0.25, 0, 100, 255, 0, 0.25);
+        PlaySound(0, "shield/hit", 5, 1.0, false, 1.0);
+        if (Player.Shield.Accessory && Player.Shield.Accessory->Damage)
+            Player.Shield.Accessory->Damage(ShieldDamageAmount);
+
+        if (Player.Shield.Charge <= 0)
+        {
+            if (Player.Shield.Charge < 0)
+            {
+                DamageTaken = -Player.Shield.Charge;
+                Player.Shield.Charge = 0;
+            }
+            else
+                DamageTaken = 0;
+
+            PlaySound(0, "shield/empty", 5, 1.0, false, 1.0);
+            if (Player.Shield.Accessory && Player.Shield.Accessory->Break)
+                Player.Shield.Accessory->Break();
+        }
+        else
+            DamageTaken = 0;
+    }
+
+    return DamageTaken;
 }
 
 NamedScript void MoneyChecker()

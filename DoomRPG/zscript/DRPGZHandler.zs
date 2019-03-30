@@ -62,7 +62,7 @@ class DRPGZEHandler : EventHandler
             if (e.DamageSource)
                 DamageSourceTID = e.DamageSource.TID;
 
-            e.Thing.ACS_ScriptCall("PlayerDamage", DamageSourceTID, e.Damage, false);
+            e.Thing.ACS_ScriptCall("PlayerDamage", DamageSourceTID, e.Damage);
 
             return;
         }
