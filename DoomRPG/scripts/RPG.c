@@ -434,6 +434,9 @@ Start:
     if (GetCVar("drpg_multi_revives"))
         ReviveHandler();
 
+    // Keep health updated
+    SetActorProperty(0, APROP_Health, Player.ActualHealth);
+
     // Loop
     Delay(1);
 
