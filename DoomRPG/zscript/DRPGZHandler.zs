@@ -63,8 +63,6 @@ class DRPGZEHandler : EventHandler
                 DamageSourceTID = e.DamageSource.TID;
 
             e.Thing.ACS_ScriptCall("PlayerDamage", DamageSourceTID, e.Damage);
-
-            return;
         }
 
         if (e.Thing && e.DamageSource && e.Thing.bIsMonster)
@@ -74,6 +72,7 @@ class DRPGZEHandler : EventHandler
             {
                 Damage += e.Thing.Health;
             }
+            e.Thing.ACS_ScriptCall("DamageNumbers", Damage, e.Thing.Health);
             e.Thing.ACS_ScriptCall("MonsterDamaged", e.DamageSource.TID, Damage);
         }
     }

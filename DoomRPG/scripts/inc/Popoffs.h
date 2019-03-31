@@ -3,11 +3,10 @@
 
 #include "Defs.h"
 
-NamedScript void DamageNumbers();
+NamedScript DECORATE void DamageNumbers(int, int);
 NamedScript void InfoPopoffs();
 NamedScript DECORATE void ModulePopoffs();
 
 void Popoff(int, int, int, str, bool);
-int GetDamageNumbersDelay();
 
 #endif

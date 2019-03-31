@@ -502,7 +502,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
     Stats->HealthMax = Stats->SpawnHealth;
 
     // Start Damage Numbers Script
-    DamageNumbers();
+    // Handled via ZScript
 
     // Give it a Health Bar
     if (!(Flags & MF_NOHEALTHBAR))
@@ -2099,7 +2099,6 @@ NamedScript DECORATE void MonsterRevive()
     }
 
     // Reboot handlers
-    DamageNumbers();
     MonsterStatsHandler();
     MonsterAuraDisplayHandler();
     if (!(Stats->Flags & MF_NOSTATS))
