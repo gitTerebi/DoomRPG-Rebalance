@@ -63,6 +63,7 @@ NamedScript Type_RESPAWN void Respawn();
 NamedScript void SortStartingItems();
 NamedScript void DefaultLoadout();
 NamedScript void ReviveHandler();
+NamedScript int AlivePlayers();
 
 void CheckHUD();
 void CheckKeys();

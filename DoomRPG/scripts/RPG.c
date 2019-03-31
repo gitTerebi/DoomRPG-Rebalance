@@ -1525,7 +1525,7 @@ NamedScript Type_DEATH void Dead()
         // Incapacitation announcement
         SetHudSize(320, 200, false);
         SetFont("SMALLFONT");
-        if (PlayerCount() > 1)
+        if (AlivePlayers() >= 1)
             HudMessage("%tS was incapacitated", PlayerNumber() + 1);
         else
             HudMessage("%tS has died", PlayerNumber() + 1);
@@ -2335,7 +2335,7 @@ NamedScript void ReviveHandler()
 {
     for (int i = 0; i < PlayerCount(); i++)
     {
-        if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Distance(Player.TID, Players(i).BodyTID) < 48)
+        if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Players(i).BodyTID > 0 && Distance(Player.TID, Players(i).BodyTID) < 48)
         {
             if ((!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
             {
@@ -2406,4 +2406,13 @@ NamedScript void ReviveHandler()
             }
         }
     }
+}
+
+NamedScript int AlivePlayers()
+{
+    int AlivePlayers = 0;
+    for (int i = 0; i < PlayerCount(); i++)
+        if (Players(i).ActualHealth > 0)
+            AlivePlayers++;
+    return AlivePlayers;
 }

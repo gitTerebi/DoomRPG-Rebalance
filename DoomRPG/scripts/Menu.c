@@ -952,7 +952,7 @@ void DrawStatsMenu()
             }
             else
             {
-                HudMessage("%tS (\Ci%d\C-)", i + 1, Distance(Player.TID, Players(i).TID));
+                HudMessage("%tS (\Ci%d\C-)", i + 1, (int)Distance(Player.TID, Players(i).TID));
                 EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             }
 

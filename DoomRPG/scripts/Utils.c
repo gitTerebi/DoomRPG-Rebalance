@@ -1226,7 +1226,7 @@ NamedScript KeyBind void PlayerTeleport(int PlayerNum)
         return;
     }
 
-    int Target = Players(PlayerNum).ActualHealth > 0 ? Players(PlayerNum).TID : GetCVar("drpg_multi_revives") ? Players(PlayerNum).BodyTID : Player.TID;
+    int Target = Players(PlayerNum).ActualHealth > 0 ? Players(PlayerNum).TID : Players(PlayerNum).BodyTID > 0 ? Players(PlayerNum).BodyTID : Player.TID;
     // Teleport
     GiveInventory("DRPGPlayerTeleportGhost", 1);
     SetActorPosition(Player.TID, GetActorX(Target), GetActorY(Target), GetActorZ(Target), true);
