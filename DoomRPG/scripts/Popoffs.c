@@ -71,8 +71,6 @@ Start:
         // Damage Popoff
         if (Health != 0 || Shield != 0)
         {
-            Log("Health: %i", Health);
-            Log("SpawnHealth: %i", SpawnHealth);
             if (Health >= SpawnHealth) // Critical
                 Color = DNUM_CRITICAL;
             else if (Health < 0 && !Player.Shield.Active) // Healed
