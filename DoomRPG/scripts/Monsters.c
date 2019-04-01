@@ -2578,8 +2578,16 @@ NamedScript int WhoKilledMe()
 
     // Killed by a player's turret
     for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        // Player is not in-game
+        if (!PlayerInGame(i)) continue;
+
+        // Don't have a turret or it isn't out
+        if (!Players(i).Turret.Upgrade[TU_BUILD] || !Players(i).Turret.Active) continue;
+
         if (ActivatorTID() == Players(i).Turret.TID)
             return i;
+    }
 
     // Killed by a player's summons
     if (ClassifyActor(0) & ACTOR_MONSTER && GetMonsterID(0) && GetActorProperty(0, APROP_MasterTID))
