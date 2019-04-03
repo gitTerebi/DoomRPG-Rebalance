@@ -642,6 +642,10 @@ OptionMenu "DoomRPGPerformance"
     Option "Disable Fancy Auras", "drpg_simple_auras", "SimpleAuras"
     StaticText ""
 
+    Slider "Monster Aura Draw Distance*", "drpg_auras_drawdistance", 0, 10000, 100
+    Slider "Popoffs Draw Distance*", "drpg_popoffs_drawdistance", 0, 10000, 100
+    StaticText ""
+
     Option "Virtual credit drops", "drpg_virtual_credits", "OnOff"
 }
 
@@ -754,6 +758,10 @@ OptionMenu "DoomRPGStart"
 OptionMenu "DoomRPG"
 {
     Title "Doom RPG Options"
+
+    StaticText ""
+    StaticText "Changes to options marked * take effect upon next map"
+    StaticText ""
 
     SubMenu "XP System",                    "DoomRPGXPSystem"
     SubMenu "Monster Levels/Stat System",   "DoomRPGMonsters"

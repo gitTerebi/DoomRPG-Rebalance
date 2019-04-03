@@ -690,6 +690,10 @@ class DRPGZUtilities
         i.ResetToDefault();
         i = CVar.FindCVar('drpg_simple_auras');
         i.ResetToDefault();
+        i = CVar.FindCVar('drpg_auras_drawdistance');
+        i.ResetToDefault();
+        i = CVar.FindCVar('drpg_popoffs_drawdistance');
+        i.ResetToDefault();
         i = CVar.FindCVar('drpg_virtual_credits');
         i.ResetToDefault();
 

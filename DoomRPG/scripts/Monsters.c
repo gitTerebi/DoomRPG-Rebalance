@@ -11,6 +11,9 @@
 #include "Utils.h"
 
 static int const MonsterInitDelay = 5;
+static int MonsterLevelCap;
+static int MonsterStatCap;
+
 int RPGMap MonsterID = 1;
 
 MonsterInfoPtr MonsterData;
@@ -500,6 +503,10 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Apply base Spawn Health to HealthMax property
     Stats->SpawnHealth = GetActorProperty(0, APROP_SpawnHealth);
     Stats->HealthMax = Stats->SpawnHealth;
+
+    // Set monster caps
+    MonsterLevelCap = GetCVar("drpg_monster_level_cap");
+    MonsterStatCap = GetCVar("drpg_monster_stat_cap");
 
     // Start Damage Numbers Script
     // Handled via ZScript
@@ -1045,9 +1052,8 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
     // Apply extra levels from white aura and any other sources
     if (Stats->LevelAdd > 0)
     {
-        int LevelCap = GetCVar("drpg_monster_level_cap");
-        if (Stats->Level + Stats->LevelAdd >= LevelCap)
-            Stats->LevelAdd = LevelCap - Stats->Level;
+        if (Stats->Level + Stats->LevelAdd >= MonsterLevelCap)
+            Stats->LevelAdd = MonsterLevelCap - Stats->Level;
         MonsterStatPool = GameSkill() * Stats->LevelAdd;
 
         int StrengthAdd = 0;
@@ -1428,62 +1434,58 @@ NamedScript void MonsterAuraDisplayHandler()
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
-    bool VisibleToPlayers;
+    int DrawDist = GetCVar("drpg_auras_drawdistance");
+    bool CloseToPlayers;
 
-Start:
-
-    if (GetActorProperty(0, APROP_Health) <= 0)
-        return;
-
-    if (ClassifyActor(0) & ACTOR_WORLD)
-        return;
-
-    if (GetCVar("drpg_simple_auras"))
-        VisibleToPlayers = true;
-    else
+    while(true)
     {
-        VisibleToPlayers = false;
+        if (GetActorProperty(0, APROP_Health) <= 0)
+            break;
+
+        if (ClassifyActor(0) & ACTOR_WORLD)
+            break;
 
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
             if (!PlayerInGame(i))
                 continue;
 
-            if (CheckSight(Players(i).TID, 0, CSF_NOBLOCKALL))
+            if (Distance(Players(i).TID, 0) < DrawDist)
+                CloseToPlayers = true;
+            else
             {
-                VisibleToPlayers = true;
+                CloseToPlayers = false;
                 break;
             }
+
+            if (CheckSight(Players(i).TID, 0, CSF_NOBLOCKALL))
+                break;
         }
+
+        if (!CloseToPlayers)
+        {
+            Delay(35);
+            continue;
+        }
+
+        // Spawn Auras
+        if (MonsterHasAura(Stats) || (GetActorProperty(0, APROP_Friendly) && !CurrentLevel->UACBase))
+            SpawnAuras(0, false);
+
+        // Shadow Aura Effects
+        if (MonsterHasShadowAura(Stats))
+            SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
+
+        // Spawn Assassination Target
+        if (Stats->Target > 0)
+            SpawnForced("DRPGAssassinationIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
+
+        // Spawn Disruption Icon
+        if (MonsterHasAura(Stats) && CheckInventory("DRPGMonsterDisrupted"))
+            SpawnForced("DRPGDisruptionIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
+
+        Delay(1);
     }
-
-    if (!VisibleToPlayers && !InTitle)
-    {
-        Delay(4);
-        goto Start;
-    }
-
-    // Spawn Auras
-    if (MonsterHasAura(Stats) || (GetActorProperty(0, APROP_Friendly) && !CurrentLevel->UACBase))
-        SpawnAuras(0, false);
-
-    // Shadow Aura Effects
-    if (MonsterHasShadowAura(Stats))
-        SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-
-    // Spawn Assassination Target
-    if (Stats->Target > 0)
-        SpawnForced("DRPGAssassinationIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
-
-    // Spawn Disruption Icon
-    if (MonsterHasAura(Stats) && CheckInventory("DRPGMonsterDisrupted"))
-        SpawnForced("DRPGDisruptionIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
-
-    if (ClassifyActor(0) & ACTOR_DEAD)
-        return;
-
-    Delay(1);
-    goto Start;
 }
 
 NamedScript void MonsterLevelupHandler()
@@ -1524,7 +1526,7 @@ Start:
         return;
 
     // Loop back to the top if the monster is max level
-    if (Stats->Level >= 1000)
+    if (Stats->Level >= MonsterLevelCap)
         goto Start;
 
     if (!Stats->Aura.Type[AURA_WHITE].Active || CheckInventory("DRPGMonsterDisrupted"))
@@ -2602,8 +2604,12 @@ NamedScript int WhoKilledMe()
 
 void MonsterLevelup(MonsterStatsPtr Stats)
 {
+    // Update monster caps
+    MonsterLevelCap = GetCVar("drpg_monster_level_cap");
+    MonsterStatCap = GetCVar("drpg_monster_stat_cap");
+
     // If the monster is max level, return
-    if (Stats->Level >= GetCVar("drpg_monster_level_cap")) return;
+    if (Stats->Level >= MonsterLevelCap) return;
 
     // Apply the stats to the monster
     Stats->Level++;
@@ -2642,9 +2648,6 @@ void MonsterLevelup(MonsterStatsPtr Stats)
         Pool--;
     }
 
-    // Cap the stats
-    CapMonsterStats(Stats);
-
     // Spawn Level-up Arrow
     SpawnForced("DRPGLevelUpArrow", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height), 0, 0);
 
@@ -2654,8 +2657,6 @@ void MonsterLevelup(MonsterStatsPtr Stats)
 
 void CapMonsterStats(MonsterStatsPtr Stats)
 {
-    int MonsterLevelCap = GetCVar("drpg_monster_level_cap");
-    int MonsterStatCap = GetCVar("drpg_monster_stat_cap");
     if (Stats->Level <= 0)
         Stats->Level = 1;
     if (Stats->Level > MonsterLevelCap)

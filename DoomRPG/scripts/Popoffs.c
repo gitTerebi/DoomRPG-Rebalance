@@ -101,10 +101,37 @@ Start:
 // Spawns digits for Module pickups
 NamedScript DECORATE void ModulePopoffs()
 {
+    int DrawDist = GetCVar("drpg_popoffs_drawdistance");
+    bool CloseToPlayers;
+
     while (!(ClassifyActor(0) == ACTOR_WORLD))
     {
         // Standby loop.
         while (!GetCVar("drpg_modulenumbers")) Delay(35);
+
+        // Distance 'n sight checks
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            if (!PlayerInGame(i))
+                continue;
+
+            if (Distance(Players(i).TID, 0) < DrawDist)
+                CloseToPlayers = true;
+            else
+            {
+                CloseToPlayers = false;
+                break;
+            }
+
+            if (CheckSight(Players(i).TID, 0, CSF_NOBLOCKALL))
+                break;
+        }
+
+        if (!CloseToPlayers)
+        {
+            Delay(35);
+            continue;
+        }
 
         Popoff(0, GetUserVariable(0, "user_amount"), 0, "DRPGDigitalDigit", false);
         Delay(1);
@@ -159,12 +186,4 @@ void Popoff(int TID, int Value, int Color, str DigitType, bool FloatAway)
         else
             SetActorVelocity(DigitTID, RandomFixed(-1.0, 1.0), RandomFixed(-1.0, 1.0), 0.5, 0, 0);
     }
-}
-
-int GetDamageNumbersDelay()
-{
-    int Monsters = GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
-    int TotalMonsters = GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
-
-    return (TotalMonsters - Monsters) / DNUM_MONSTER_DIV;
 }
