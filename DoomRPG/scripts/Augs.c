@@ -325,7 +325,8 @@ void CheckAugs()
 
     // Defense Aug
     if (Player.Augs.Active[AUG_DEFENSE])
-        Player.DamageFactor *= (1.0 - (fixed)Player.Augs.Level[AUG_DEFENSE] * 0.05);
+        Player.DamageFactor -= (fixed)Player.Augs.Level[AUG_DEFENSE] / 20.0;
+    //Player.DamageFactor *= (1.0 - (fixed)Player.Augs.Level[AUG_DEFENSE] * 0.05);
 
     // Vitality Aug
     if (Player.Augs.Active[AUG_VITALITY])
