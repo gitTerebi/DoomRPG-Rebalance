@@ -548,7 +548,7 @@ Start:
 
             FadeRange(0, 255, 255, 0.25, 0, 255, 255, 0, 1.0);
 
-            HealThing(MAX_HEALTH);
+            AddHealth(100, 100);
             Players(i).EP = Players(i).EPMax;
 
             HudMessage("Items Found Bonus!\nFull HP/EP Restore");
@@ -600,7 +600,7 @@ Start:
             Players(i).XP += XPBonus;
             Players(i).Rank += RankBonus;
 
-            HealThing(MAX_HEALTH);
+            AddHealth(100, 100);
             Players(i).EP = Players(i).EPMax;
 
             HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%ld XP Bonus\n\Ck%ld Rank Bonus\n\CnFull HP/EP Restore",
