@@ -272,7 +272,7 @@ void CheckLevel()
 
         if (GetCVar("drpg_levelup_heal"))
         {
-            AddHealth(100, 100);
+            HealThing(MAX_HEALTH);
 
             if (Player.EP < 0)
                 Player.EP = 0;
@@ -611,7 +611,7 @@ void DoRegen()
 
     // HP Regen
     if (Player.HPRate >= Player.HPTime && ClassifyActor(Player.TID) & ACTOR_ALIVE)
-        AddHealthDirect(Player.HPAmount, 100);
+        HealThing(Player.HPAmount);
 
     // EP Regen
     if (Player.EPRate >= Player.EPTime && Player.EP < Player.EPMax)
@@ -627,7 +627,7 @@ void DoRegen()
 
         if (Player.Shield.Active && Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_EPOVERFLOW)
         {
-            AddHealthDirect(Overflow, 100);
+            HealThing(Overflow);
             Player.Shield.Charge += Overflow;
         }
     }

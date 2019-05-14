@@ -305,6 +305,7 @@ NamedScript Type_ENTER void Init()
 
     // Execute Game Loops
     Loop();
+    PlayerHealth();
     MoneyChecker();
     ShieldTimer();
     WeaponSpeed();
@@ -433,13 +434,35 @@ Start:
     if (GetCVar("drpg_multi_revives"))
         ReviveHandler();
 
-    // Keep health updated
-    SetActorProperty(0, APROP_Health, Player.ActualHealth);
-
     // Loop
     Delay(1);
 
     goto Start;
+}
+
+// Health Handler Entry Point
+NamedScript void PlayerHealth()
+{
+    int BeforeHealth;
+    int AfterHealth;
+
+    while (true)
+    {
+        BeforeHealth = GetActorProperty(0, APROP_Health);
+
+        // If the player's dead, terminate
+        if (BeforeHealth <= 0) break;
+
+        Delay(1);
+
+        AfterHealth = GetActorProperty(0, APROP_Health);
+
+        if (AfterHealth > BeforeHealth)
+            Player.ActualHealth += AfterHealth - BeforeHealth;
+
+        // Update health
+        SetActorProperty(0, APROP_Health, Player.ActualHealth);
+    }
 }
 
 // Damage Handler Entry Point
@@ -1610,6 +1633,7 @@ NamedScript Type_RESPAWN void Respawn()
 
     // Run Scripts
     Loop();
+    PlayerHealth();
     MoneyChecker();
     InfoPopoffs();
     HealthBars();
