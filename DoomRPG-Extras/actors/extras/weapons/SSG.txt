@@ -42,7 +42,7 @@ Actor DRPGSuperShotgunExtras : DRPGSuperShotgun replaces SuperShotgun
         Wait
     Fire:
         SH2N A 0 A_JumpIfInventory("PowerInfiniteAmmo", 1, "FireInfinite")
-        SH2N A 0 A_JumpIfInventory("DRPGDarkBlueAuraInfiniteAmmo", 1, "FireInfinite")
+        SH2N A 0 A_JumpIfInventory("DRPGDarkBlueAuraInfiniteAmmo2", 1, "FireInfinite")
         SH2N A 0 A_JumpIfInventory("SSGShot", 1, "Reload1")
         SH2N A 0 A_PlaysoundEx("weapons/ssg/fire", "soundslot5")
         SH2N A 0 A_AlertMonsters
@@ -77,7 +77,7 @@ Actor DRPGSuperShotgunExtras : DRPGSuperShotgun replaces SuperShotgun
         Goto Ready
     AltFire:
         SH2N A 0 A_JumpIfInventory("PowerInfiniteAmmo", 1, "AltFireInfinite")
-        SH2N A 0 A_JumpIfInventory("DRPGDarkBlueAuraInfiniteAmmo", 1, "AltFireInfinite")
+        SH2N A 0 A_JumpIfInventory("DRPGDarkBlueAuraInfiniteAmmo2", 1, "AltFireInfinite")
         SH2N A 0 A_JumpIfInventory("SSGShot", 1, 10)
         SH2N A 0 A_GiveInventory("SSGShot", 1)
         SH2N A 0 A_PlayWeaponSound("weapons/ssg/fire")
