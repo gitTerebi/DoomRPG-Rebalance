@@ -1114,7 +1114,7 @@ int GetAmmoAmount(str Item)
 
 NamedScript DECORATE int GetHealthPercent(int Percent)
 {
-    return (Player.HealthMax * Percent) / 100;
+    return (int)(Player.ActualHealth * Percent / Player.HealthMax);
 }
 
 // Returns true if the player's health is below the specified percentage of max health

@@ -638,7 +638,7 @@ NamedScript DECORATE int AddHealth(int HealthPercent, int MaxPercent)
         if (MaxPercent >= 200 && Player.ActualHealth + HealthAmount >= RealMax)
             Player.OverHeal = false;
 
-    if (Player.ActualHealth >= RealMax)
+    if (HealthAmount > 0 && Player.ActualHealth >= RealMax)
         return 0;
 
     if (Player.ActualHealth + HealthAmount > RealMax)
@@ -670,7 +670,7 @@ NamedScript DECORATE int AddHealthDirect(int HealthAmount, int MaxPercent)
         if (MaxPercent >= 200 && Player.ActualHealth + HealthAmount >= RealMax)
             Player.OverHeal = false;
 
-    if (Player.ActualHealth >= RealMax)
+    if (HealthAmount > 0 && Player.ActualHealth >= RealMax)
         return 0;
 
     if (Player.ActualHealth + HealthAmount > RealMax)
