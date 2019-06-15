@@ -2663,17 +2663,18 @@ void CreateTranslations()
 
 bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
 {
-    int Input;
-    int InputOld;
+    int Input = INPUT_BUTTONS;
+    int InputOld = INPUT_OLDBUTTONS;
     int Buttons;
     int OldButtons;
+    double AxisY;
+    double AxisX;
+    // These two are meant to mimic OldButtons
+    static double OldAxisY;
+    static double OldAxisX;
+    bool UseAxis = false;
 
-    if (!ModInput)
-    {
-        Input = INPUT_BUTTONS;
-        InputOld = INPUT_OLDBUTTONS;
-    }
-    else
+    if (ModInput)
     {
         Input = MODINPUT_BUTTONS;
         InputOld = MODINPUT_OLDBUTTONS;
@@ -2682,23 +2683,68 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
     Buttons = GetPlayerInput(PlayerNumber, Input);
     OldButtons = GetPlayerInput(PlayerNumber, InputOld);
 
+    // Proper navigation support for joystick, binding movement keys no longer necessary
+    if (Key & BT_FORWARD || Key & BT_BACK || Key & BT_MOVELEFT || Key & BT_MOVERIGHT)
+    {
+        AxisY = GetPlayerInput(PlayerNumber, INPUT_FORWARDMOVE);
+        AxisX = GetPlayerInput(PlayerNumber, INPUT_SIDEMOVE);
+
+        // Simplify
+        if (AxisY > 1.0) AxisY = 1.0;
+        if (AxisY < -1.0) AxisY = -1.0;
+        if (AxisX > 1.0) AxisX = 1.0;
+        if (AxisX < -1.0) AxisX = -1.0;
+
+        // Decide if the axises are old and moldy
+        if (AxisY < OldAxisY || AxisY > OldAxisY)
+            OldAxisY = 0;
+        if (AxisX > OldAxisX || AxisX < OldAxisX)
+            OldAxisX = 0;
+
+        if (OldAxisY == 0 && OldAxisX == 0)
+        {
+            if (Key & BT_FORWARD && AxisY == 1.0)
+                UseAxis = true;
+            else if (Key & BT_BACK && AxisY == -1.0)
+                UseAxis = true;
+            else if (Key & BT_MOVELEFT && AxisX == -1.0)
+                UseAxis = true;
+            else if (Key & BT_MOVERIGHT && AxisX == 1.0)
+                UseAxis = true;
+        }
+    }
+
     switch (State)
     {
     case KEY_PRESSED:
     {
-        if (Buttons & Key && !(OldButtons & Key))
+        if (UseAxis)
+        {
+            OldAxisY = AxisY;
+            OldAxisX = AxisX;
+            return true;
+        }
+        else if (Buttons & Key && !(OldButtons & Key))
             return true;
     }
     break;
     case KEY_ONLYPRESSED:
     {
-        if (Buttons == Key && OldButtons != Key)
+        if (UseAxis)
+        {
+            OldAxisY = AxisY;
+            OldAxisX = AxisX;
+            return true;
+        }
+        else if (Buttons == Key && OldButtons != Key)
             return true;
     }
     break;
     case KEY_HELD:
     {
-        if (Buttons & Key)
+        if (UseAxis)
+            return true;
+        else if (Buttons & Key)
             return true;
     }
     break;
@@ -2710,7 +2756,7 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
     break;
     case KEY_ANYIDLE:
     {
-        if (Buttons == 0 && OldButtons == 0)
+        if (!UseAxis && Buttons == 0 && OldButtons == 0)
             return true;
     }
     break;
@@ -2722,7 +2768,7 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
     break;
     case KEY_REPEAT:
     {
-        if (Buttons & Key)
+        if (UseAxis || Buttons & Key)
         {
             int CurrentTime = Timer();
             if (CurrentTime + 5 + 1 < CheckInputRepeatTimer) CheckInputRepeat = false;
