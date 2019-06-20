@@ -234,7 +234,7 @@ skill adaptive
 	disablecheats
 	autousehealth
 	
-	acsreturn = 7
+	acsreturn = 3
 	
 	PicName = "M_ADAPT"
 	Name = "Adaptive"
