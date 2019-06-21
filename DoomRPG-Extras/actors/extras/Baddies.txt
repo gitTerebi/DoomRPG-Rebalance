@@ -592,7 +592,7 @@ ACTOR DRPGRevenantExtras : Revenant replaces Revenant
 
 // Archvile, or grandparent? Depends, is it setting you alight,
 // or throwing out your animes?
-actor DRPGArchVileExtras : Archvile replaces Archvile
+actor DRPGArchvileExtras : Archvile replaces Archvile
 {
     Tag "Archvile"
     States
