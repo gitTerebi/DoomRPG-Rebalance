@@ -20,7 +20,7 @@ https://github.com/Sumwunn/DoomRPG/wiki
 
 - DoomRL Arsenal - [1.1.1] [MP-B7.1].
 - LegenDoom v2.5.
-- Colourful Hell v0.97b.
+- Colourful Hell v0.97ccc.
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
 
 ## Notes

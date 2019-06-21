@@ -3,7 +3,7 @@ clearskills
 // Easy skill
 skill easy
 {
-	aggressiveness = 0.0
+	aggressiveness = 0.25
 	spawnfilter = normal
 
 	easybossbrain
@@ -41,7 +41,7 @@ skill easy
 // Normal skill
 skill normal
 {
-	aggressiveness = 0.25
+	aggressiveness = 0.5
 	spawnfilter = normal
 	
 	autousehealth
@@ -74,40 +74,42 @@ skill normal
 	ReplaceActor = "BossBrain", "RLBossBrain"
 }
 
-// Hard skill
-skill hard
+// Adaptive skill
+skill adaptive
 {
-	defaultskill
-	
-	aggressiveness = 0.5
+	aggressiveness = 0.8
 	spawnfilter = nightmare
-	
-	autousehealth
 
+	disablecheats
+	autousehealth
+	
 	acsreturn = 3
 	
-	PicName = "M_STAND"
-	Name = "$SKILL_HARD"
-	textcolor = "Orange"
+	PicName = "M_ADAPT"
+	Name = "Adaptive"
+	MustConfirm = "A progressive difficulty that ramps up over time, starts at UV, ends up far worse."
+	textcolor = "Sapphire"
 	Key = "3"
-
-	ReplaceActor = "Zombieman", "RLFormerHumanSpawner"
-	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawner"
-	ReplaceActor = "Chaingunguy", "RLFormerCommandoSpawner"
-	ReplaceActor = "DoomImp", "RLImpSpawner"
-	ReplaceActor = "Demon", "RLDemonSpawner"
-	ReplaceActor = "Spectre", "RLSpectreSpawner"
-	ReplaceActor = "LostSoul", "RLLostSoulSpawner"
-	ReplaceActor = "Cacodemon", "RLCacodemonSpawner"
-	ReplaceActor = "HellKnight", "RLHellKnightSpawner"
-	ReplaceActor = "BaronOfHell", "RLBaronOfHellSpawner"
-	ReplaceActor = "Arachnotron", "RLArachnotronSpawner"
-	ReplaceActor = "PainElemental", "RLPainElementalSpawner"
-	ReplaceActor = "Revenant", "RLRevenantSpawner"
-	ReplaceActor = "Fatso", "RLMancubusSpawner"
-	ReplaceActor = "Archvile", "RLArchvileSpawner"
-	ReplaceActor = "Cyberdemon", "RLCyberdemonSpawner"
-	ReplaceActor = "SpiderMastermind", "RLSpiderMastermindSpawner"
+	
+	//ReplaceActor = "GreenArmor", "RLAdaptiveStandardArmorSpawner"
+	//ReplaceActor = "BlueArmor", "RLAdaptiveAdvancedArmorSpawner"
+	ReplaceActor = "Zombieman", "RLAdaptiveFormerHuman"
+	ReplaceActor = "Shotgunguy", "RLAdaptiveFormerSergeant"
+	ReplaceActor = "Chaingunguy", "RLAdaptiveFormerCommando"
+	ReplaceActor = "DoomImp", "RLAdaptiveImp"
+	ReplaceActor = "Demon", "RLAdaptiveDemon"
+	ReplaceActor = "Spectre", "RLAdaptiveSpectre"
+	ReplaceActor = "LostSoul", "RLAdaptiveLostSoul"
+	ReplaceActor = "Cacodemon", "RLAdaptiveCacodemon"
+	ReplaceActor = "HellKnight", "RLAdaptiveHellKnight"
+	ReplaceActor = "BaronOfHell", "RLAdaptiveBaronOfHell"
+	ReplaceActor = "Arachnotron", "RLAdaptiveArachnotron"
+	ReplaceActor = "PainElemental", "RLAdaptivePainElemental"
+	ReplaceActor = "Revenant", "RLAdaptiveRevenant"
+	ReplaceActor = "Fatso", "RLAdaptiveMancubus"
+	ReplaceActor = "Archvile", "RLAdaptiveArchvile"
+	ReplaceActor = "Cyberdemon", "RLAdaptiveCyberdemon"
+	ReplaceActor = "SpiderMastermind", "RLAdaptiveSpiderMastermind"
 	ReplaceActor = "BossEye", "RLUVBossEye"
 	ReplaceActor = "BossBrain", "RLBossBrain"
 }
@@ -115,6 +117,7 @@ skill hard
 // Nightmare skill
 skill nightmare
 {
+	defaultskill
 	aggressiveness = 1.0
 	spawnfilter = nightmare
 	
@@ -224,44 +227,3 @@ skill armageddon
 	ReplaceActor = "BossEye", "RLArmageddonBossEye"
 	ReplaceActor = "BossBrain", "RLArmageddonBossBrain"
 }
-
-// Adaptive skill
-skill adaptive
-{
-	aggressiveness = 0.8
-	spawnfilter = nightmare
-
-	disablecheats
-	autousehealth
-	
-	acsreturn = 3
-	
-	PicName = "M_ADAPT"
-	Name = "Adaptive"
-	MustConfirm = "A progressive difficulty that ramps up over time, starts at UV, ends up far worse."
-	textcolor = "Sapphire"
-	Key = "7"
-	
-	ReplaceActor = "GreenArmor", "RLAdaptiveStandardArmorSpawner"
-	ReplaceActor = "BlueArmor", "RLAdaptiveAdvancedArmorSpawner"
-	ReplaceActor = "Zombieman", "RLAdaptiveFormerHuman"
-	ReplaceActor = "Shotgunguy", "RLAdaptiveFormerSergeant"
-	ReplaceActor = "Chaingunguy", "RLAdaptiveFormerCommando"
-	ReplaceActor = "DoomImp", "RLAdaptiveImp"
-	ReplaceActor = "Demon", "RLAdaptiveDemon"
-	ReplaceActor = "Spectre", "RLAdaptiveSpectre"
-	ReplaceActor = "LostSoul", "RLAdaptiveLostSoul"
-	ReplaceActor = "Cacodemon", "RLAdaptiveCacodemon"
-	ReplaceActor = "HellKnight", "RLAdaptiveHellKnight"
-	ReplaceActor = "BaronOfHell", "RLAdaptiveBaronOfHell"
-	ReplaceActor = "Arachnotron", "RLAdaptiveArachnotron"
-	ReplaceActor = "PainElemental", "RLAdaptivePainElemental"
-	ReplaceActor = "Revenant", "RLAdaptiveRevenant"
-	ReplaceActor = "Fatso", "RLAdaptiveMancubus"
-	ReplaceActor = "Archvile", "RLAdaptiveArchvile"
-	ReplaceActor = "Cyberdemon", "RLAdaptiveCyberdemon"
-	ReplaceActor = "SpiderMastermind", "RLAdaptiveSpiderMastermind"
-	ReplaceActor = "BossEye", "RLUVBossEye"
-	ReplaceActor = "BossBrain", "RLBossBrain"
-}
-

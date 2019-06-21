@@ -435,7 +435,7 @@ typedef enum
 #define MAX_MEGABOSSES_DF       2
 #define MAX_MEGABOSSES_CH       2
 #define MAX_SKILLLEVELS_DF		6
-#define MAX_SKILLLEVELS_DRLA	7
+#define MAX_SKILLLEVELS_DRLA	6
 
 typedef enum
 {
