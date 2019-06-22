@@ -283,7 +283,7 @@ NamedScript Type_OPEN void MapInit()
     if (CurrentLevel->UACBase || CurrentLevel->UACArena)
         return; // [KS] These maps set themselves up, so nothing more to do.
 
-    //Flag to run monster replacements
+    // Flag to run monster replacements
     WaitingForReplacements = true;
 
     // Reduce monster population based on difficulty settings
@@ -347,7 +347,21 @@ NamedScript Type_OPEN void MapInit()
     SetupMapMissions();
 
     DisableEvent = false;
-    WaitingForReplacements = false;
+    // WaitingForReplacements should be left alone here as these events manage it themselves
+    switch(CurrentLevel->Event)
+    {
+    case MAPEVENT_MEGABOSS:
+        break;
+    case MAPEVENT_ONEMONSTER:
+        break;
+    case MAPEVENT_DRLA_FEEDINGFRENZY:
+        break;
+    case MAPEVENT_DRLA_OVERMIND:
+        break;
+    default:
+        WaitingForReplacements = false;
+        break;
+    }
 
     // Hell Skill has some additional challenges
     if (GetCVar("drpg_minibosses") == 1 && GameSkill() >= 5 || GetCVar("drpg_minibosses") == 2)
@@ -363,6 +377,8 @@ NamedScript Type_OPEN void MapInit()
     if (GetCVar("drpg_jjirandomizer_compat"))
         if (CurrentLevel->Event == MAPEVENT_NONE)
             CallACS("jjirandomizer");
+
+    CurrentLevel->Init = true;
 }
 
 NamedScriptSync void ReduceMonsterCount()
@@ -2134,6 +2150,8 @@ NamedScript void OneMonsterEvent()
 
         Monsters[i].ReplaceActor = GetMissionMonsterActor(CurrentLevel->SelectedMonster->Actor);
     }
+
+    WaitingForReplacements = false;
 
     // Level feeling
     SetHudSize(640, 480, false);

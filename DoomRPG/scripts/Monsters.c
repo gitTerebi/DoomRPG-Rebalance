@@ -10,7 +10,6 @@
 #include "Stats.h"
 #include "Utils.h"
 
-static int const MonsterInitDelay = 5;
 static int MonsterLevelCap;
 static int MonsterStatCap;
 
@@ -455,9 +454,20 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Store Actor Name
     Stats->Actor = GetActorClass(0);
 
-    Delay(MonsterInitDelay); // Allow map events to modify our stats/replacements (see Map.ds:18)
-    while (WaitingForReplacements)
+    // Allow map events to modify our stats/replacements
+    Delay(1);
+
+    // Wait for MapInit to finish
+    while (!CurrentLevel->Init)
         Delay(1);
+
+    // When MapInit finishes, we may need to wait for replacements
+    if (CurrentLevel->Event != MAPEVENT_NONE)
+    {
+        Log("WaitingForReplacements: %i", WaitingForReplacements);
+        while (WaitingForReplacements)
+            Delay(1);
+    }
 
     if (!Stats->Init || Stats->TID == 0 || ClassifyActor(Stats->TID) == ACTOR_NONE)
     {
@@ -2553,7 +2563,7 @@ NamedScript DECORATE void MonsterTransport(int Difficulty, int Time, int Radius)
         if (Success)
         {
             // Delay here to make sure the init script has time to run
-            Delay(MonsterInitDelay + 1);
+            Delay(1);
 
             // Pointer
             Stats = &Monsters[GetMonsterID(TID)];
