@@ -463,11 +463,8 @@ NamedScript DECORATE void MonsterInit(int Flags)
 
     // When MapInit finishes, we may need to wait for replacements
     if (CurrentLevel->Event != MAPEVENT_NONE)
-    {
-        Log("WaitingForReplacements: %i", WaitingForReplacements);
         while (WaitingForReplacements)
             Delay(1);
-    }
 
     if (!Stats->Init || Stats->TID == 0 || ClassifyActor(Stats->TID) == ACTOR_NONE)
     {
