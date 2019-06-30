@@ -286,7 +286,7 @@ NamedScript MenuEntry void SaveCharacter()
     //CharSaveInfo Info;
 
     // You need to be in the Outpost to do this
-    if (!CurrentLevel->UACBase && !GetCVar("drpg_debug"))
+    if (!CurrentLevel->UACBase && !DebugLog)
     {
         PrintError("\CgERROR: \CjYou must be in the Outpost to save and deposit your equipment");
         ActivatorSound("menu/error", 127);
@@ -356,7 +356,7 @@ NamedScript MenuEntry void SaveCharacter()
         strncpy(PartialSaveString, EncodedSaveString + (CHARSAVE_MAXSIZE * i), CHARSAVE_MAXSIZE - 1);
 
         Delay(1);
-        //if (GetCVar("drpg_debug"))
+        //if (DebugLog)
         //  Log("Writing Save Data: %s", PartialSaveString);
         if (!SetUserCVarString(PlayerNumber(), StrParam("drpg_char_data_%d", i), StrParam("%s", PartialSaveString)))
             Success = false;
@@ -434,7 +434,7 @@ NamedScript MenuEntry void LoadCharacter()
     DecodeRLE(EncodedSaveString, SaveString);
 
     //SaveString = realloc(SaveString, strlen(SaveString) + 1);
-    //if (GetCVar("drpg_debug"))
+    //if (DebugLog)
     //    Log("Load Data (Raw): %s", SaveString);
     free((void *)EncodedSaveString);
 
@@ -991,12 +991,12 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     // Verify Checksum
     Info->Checksum = HexToInteger(String + StringPos, 8);
     //StringPos += 8;
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: \C-Saved CRC is %d (%X)", Info->Checksum, Info->Checksum);
 
     unsigned int Checksum = (unsigned int)(crc(String, StringPos));
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: \C-CRC for recalled character is %d (%X)", Checksum, Checksum);
     LogMessage(StrParam("Version:%d",Version),LOG_DEBUG);
     Info->Version = Version;
@@ -1202,7 +1202,7 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
     }
 
     Info->Checksum = (unsigned int)(crc(SaveString, pos));
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: \C-CRC for save character is %d (%X)", Info->Checksum, Info->Checksum);
 
     // Checksum

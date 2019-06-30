@@ -36,12 +36,26 @@ pointlight CREDITSORANGE
 	size 9
 }
 
+pointlight CREDITSSILVER
+{
+	color 0.5 0.5 0.5
+	size 9
+}
+
+pointlight CREDITSGOLD
+{
+	color 1.0 0.8 0.0
+	size 9
+}
+
 object DRPGCredits1		{ frame CREDA { light CREDITSGREEN } }
 object DRPGCredits5 	{ frame CREDB { light CREDITSBLUE } }
 object DRPGCredits10 	{ frame CREDC { light CREDITSYELLOW } }
 object DRPGCredits20	{ frame CREDD { light CREDITSRED } }
 object DRPGCredits50	{ frame CREDE { light CREDITSPURPLE } }
 object DRPGCredits100	{ frame CREDF { light CREDITSORANGE } }
+object DRPGCredits250	{ frame CREDG { light CREDITSSILVER } }
+object DRPGCredits500	{ frame CREDH { light CREDITSGOLD } }
 object DRPGCredits1000
 {
 	frame CREDA 	    { light CREDITSGREEN }
@@ -50,6 +64,8 @@ object DRPGCredits1000
 	frame CREDD 	    { light CREDITSRED }
 	frame CREDE 	    { light CREDITSPURPLE }
 	frame CREDF 	    { light CREDITSORANGE }
+	frame CREDH 	    { light CREDITSSILVER }
+	frame CREDG 	    { light CREDITSGOLD }
 }
 
 /* TOKENS

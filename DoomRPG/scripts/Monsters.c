@@ -2178,11 +2178,11 @@ NamedScript void MonsterDeath()
         fixed Radius = GetActorPropertyFixed(Players(Killer).TID, APROP_Radius);
 
         ThingSound(Players(Killer).TID, "menu/buy", 127);
-        Log("\CdLUDICROUS CREDITS!");
+        Log("\CdSHINY CREDITS!");
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 20; i++)
         {
-            int CreditType = Random(1, 6);
+            int CreditType = Random(1, 8);
             str CreditName;
 
             switch (CreditType)
@@ -2204,6 +2204,12 @@ NamedScript void MonsterDeath()
                 break;
             case 6:
                 CreditName = "DRPGCredits100";
+                break;
+            case 7:
+                CreditName = "DRPGCredits250";
+                break;
+            case 8:
+                CreditName = "DRPGCredits500";
                 break;
             }
 
@@ -2299,6 +2305,8 @@ NamedScript void MonsterDeath()
         // Boss Drops
         if (Stats->Flags & MF_BOSS)
         {
+            DropMonsterItem(Killer, 0, "DRPGCredits250", 200);
+            DropMonsterItem(Killer, 0, "DRPGCredits500", 170);
             DropMonsterItem(Killer, 0, "DRPGCredits1000", 256);
             DropMonsterItem(Killer, 0, "DRPGSoulsphereRandomizer", 256);
             DropMonsterItem(Killer, 0, "DRPGLifeDropper", 128);
@@ -2319,6 +2327,8 @@ NamedScript void MonsterDeath()
             int Rolls = 200 - (GameSkill() * 25);
             while (Rolls--)
             {
+                DropMonsterItem(Killer, 0, "DRPGCredits250", 256, 0, 0, 0, 16, 16, Random(8, 16));
+                DropMonsterItem(Killer, 0, "DRPGCredits500", 256, 0, 0, 0, 16, 16, Random(8, 16));
                 DropMonsterItem(Killer, 0, "DRPGCredits1000", 256, 0, 0, 0, 16, 16, Random(8, 16));
                 for (int i = 0; i < PlayerCount(); i++)
                     DropMonsterItem(Killer, 0, "DRPGGenericBossDropper", 256, 0, 0, 0, 16, 16, Random(8, 16));
@@ -2571,7 +2581,7 @@ NamedScript DECORATE void MonsterTransport(int Difficulty, int Time, int Radius)
 
             Spawn("TeleportFog", X + SpawnX, Y + SpawnY, Z, 0, 0);
 
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log("\CdDEBUG: \C-Reinforcements Spawning Index %d (\Ca%S\C-)", MonsterIndex, MonsterList[MonsterIndex]->Name);
         }
     }

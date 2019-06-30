@@ -9,7 +9,9 @@ class DRPGZEHandler : EventHandler
             Line l = level.Lines[i];
             int s = l.special;
             // Exit_Normal
-            if (s == 243)
+            switch (s)
+            {
+            case 243:
             {
                 // 80 = ACS_Execute
                 l.special = 80;
@@ -21,8 +23,9 @@ class DRPGZEHandler : EventHandler
                 // Must be repeatable for DRPG things
                 l.flags |= Line.ML_REPEAT_SPECIAL;
             }
+            break;
             // Exit_Secret
-            else if (s == 244)
+            case 244:
             {
                 // 80 = ACS_Execute
                 l.special = 80;
@@ -34,8 +37,9 @@ class DRPGZEHandler : EventHandler
                 // Must be repeatable for DRPG things
                 l.flags |= Line.ML_REPEAT_SPECIAL;
             }
+            break;
             // Teleport_NewMap
-            else if (s == 74)
+            case 74:
             {
                 // Save args
                 int map = l.args[0];
@@ -50,6 +54,8 @@ class DRPGZEHandler : EventHandler
                 l.args[4] = face;
                 // Must be repeatable for DRPG things
                 l.flags |= Line.ML_REPEAT_SPECIAL;
+            }
+            break;
             }
         }
     }

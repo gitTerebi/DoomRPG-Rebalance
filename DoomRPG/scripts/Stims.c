@@ -90,15 +90,16 @@ NamedScript KeyBind void UseStim(bool Force)
     }
 
     // Set Timer for Stat bonuses
-    int InitialTime;
+    int InitialTime = Random(0, 100); // Just a little bit...
     int InitialTimeMultiplier = GetCVar("drpg_stim_time_multiplier");
     for (int i = StimStatsStart; i < StimStatsEnd + 2; i++)
         if (Player.Stim.Current[i] > 0)
         {
+            // Apply purifier time bonus
             if (i == STIM_PURIFIER)
-                InitialTime += 15 * (Player.Stim.Current[STIM_PURIFIER] * 30 * InitialTimeMultiplier);
+                InitialTime += 10 * (Player.Stim.Current[STIM_PURIFIER] * 5 * InitialTimeMultiplier);
             else
-                InitialTime += 15 * 30 * InitialTimeMultiplier;
+                InitialTime += 10 * InitialTimeMultiplier;
 
             // Immunity penalty
             InitialTime -= InitialTime * Player.StimImmunity / 100;
@@ -112,7 +113,7 @@ NamedScript KeyBind void UseStim(bool Force)
 
     // Apply Multiplier and Potency
     for (int i = StimStatsStart; i < StimStatsEnd; i++)
-        Player.Stim.Current[i] = (Player.Stim.Current[i] * 5) + (Player.Stim.Current[STIM_POTENCY] * 5);
+        Player.Stim.Current[i] = (Player.Stim.Current[i] * 3) + (Player.Stim.Current[STIM_POTENCY] * 3);
 
     // Apply Stat Bonuses
     Player.StrengthBonus += Player.Stim.Current[STIM_STRENGTH];
@@ -128,7 +129,7 @@ NamedScript KeyBind void UseStim(bool Force)
     for (int i = StimPowerupStart; i < StimPowerupEnd; i++)
         if (Player.Stim.Current[i] > 0)
         {
-            int InitialTime = (15 * Player.Stim.Current[i]) * 10 * InitialTimeMultiplier;
+            int InitialTime = (5 * Player.Stim.Current[i]) * 3 * InitialTimeMultiplier;
             InitialTime -= InitialTime * Player.StimImmunity / 100;
 
             Player.Stim.PowerupTimer[i] += InitialTime;

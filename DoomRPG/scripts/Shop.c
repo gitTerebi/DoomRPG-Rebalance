@@ -296,16 +296,24 @@ void ShopLoop()
             EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 433.4, 382.0, 0.05);
         }
 
-        if (Player.ShopCard == 1)
+        switch(Player.ShopCard)
+        {
+        case 1:
             CardSprite = "UCRDA0";
-        else if (Player.ShopCard == 2)
+            break;
+        case 2:
             CardSprite = "UCRDB0";
-        else if (Player.ShopCard == 3)
+            break;
+        case 3:
             CardSprite = "UCRDC0";
-        else if (Player.ShopCard == 4)
+            break;
+        case 4:
             CardSprite = "UCRDD0";
-        else if (Player.ShopCard == 5)
+            break;
+        case 5:
             CardSprite = "UCRDE0";
+            break;
+        }
 
         if (CurrentLevel->UACBase)
             PrintSprite(CardSprite, 0, 458.0, 384.0, 0.05);
@@ -338,7 +346,7 @@ void ShopLoop()
             ActivatorSound("menu/move", 127);
             Player.ShopPage--;
             Player.ShopIndex = 0;
-            if (Player.ShopPage < 0) Player.ShopPage = (GetCVar("drpg_debug") ? ItemCategories : ItemCategories - 1);
+            if (Player.ShopPage < 0) Player.ShopPage = (DebugLog ? ItemCategories : ItemCategories - 1);
         }
         else
         {
@@ -352,7 +360,7 @@ void ShopLoop()
             ActivatorSound("menu/move", 127);
             Player.ShopPage++;
             Player.ShopIndex = 0;
-            if (Player.ShopPage > (GetCVar("drpg_debug") ? ItemCategories : ItemCategories - 1)) Player.ShopPage = 0;
+            if (Player.ShopPage > (DebugLog ? ItemCategories : ItemCategories - 1)) Player.ShopPage = 0;
         }
         else
         {

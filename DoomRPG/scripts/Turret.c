@@ -890,16 +890,24 @@ NamedScript DECORATE void TurretUseAmmo(int Type)
 {
     SetActivator(GetActorProperty(0, APROP_MasterTID)); // Transfer from Turret to Player
 
-    if (Type == TW_BULLET)
+    switch(Type)
+    {
+    case TW_BULLET:
         Player.Turret.BulletAmmo--;
-    else if (Type == TW_PELLET)
+        break;
+    case TW_PELLET:
         Player.Turret.ShellAmmo--;
-    else if (Type == TW_ROCKET)
+        break;
+    case TW_ROCKET:
         Player.Turret.RocketAmmo--;
-    else if (Type == TW_PLASMA)
+        break;
+    case TW_PLASMA:
         Player.Turret.PlasmaAmmo--;
-    else if (Type == TW_RAILGUN)
+        break;
+    case TW_RAILGUN:
         Player.Turret.RailAmmo--;
+        break;
+    }
 }
 
 NamedScript DECORATE int TurretGetProjectileDamage(int Type)
@@ -1317,7 +1325,7 @@ Start:
     }
 
     /* Aim debugging assist
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
       SpawnForced("DRPGTurretTeleportParticle",
                   GetActorX(0) + (64.0 * Cos(GetActorAngle(0)) * Cos(-GetActorPitch(0))),
                   GetActorY(0) + (64.0 * Sin(GetActorAngle(0)) * Cos(-GetActorPitch(0))),

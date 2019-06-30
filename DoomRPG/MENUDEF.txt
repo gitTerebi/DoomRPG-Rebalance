@@ -379,7 +379,7 @@ OptionMenu "DoomRPGStats"
     Option "Auto Healing Percentage", "drpg_auto_heal_percent", "AutoHealing"
     StaticText ""
 
-    Slider "Stim Time Multiplier", "drpg_stim_time_multiplier", 1, 10, 1
+    Slider "Stim Time Multiplier", "drpg_stim_time_multiplier", 1, 50, 1
     StaticText ""
 
     Option "Movement Regeneration Mechanics", "drpg_regen_movement", "OnOff"

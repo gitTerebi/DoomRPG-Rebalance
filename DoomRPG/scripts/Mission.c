@@ -127,7 +127,7 @@ NamedScript void InitMission()
             else
                 LocalAmbientSound("mission/gottarget1", 127);
 
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log("\CdDEBUG: \C-Mission Target Chosen: \Ca%d", Chosen);
         }
 

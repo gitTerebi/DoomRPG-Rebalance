@@ -24,13 +24,13 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Heal",
-            .Cost = 75,
+            .Cost = 50,
             .MaxLevel = 4,
             .Use = Heal,
             .Description =
             {
-                "Recover all of your health",
-                "Recover all of your health\nHeals Status Effects",
+                "Recover 30% of your health",
+                "Recover 70% of your health\nHeals Status Effects",
                 "Recover all of your health\nHeals Status Effects\n\CaAlso Effects Teammates",
                 "Recover to 200% of your maximum health\n\CgSlowly drains back down to 100% maximum health\nHeals Status Effects\n\CaAlso Affects Teammates"
             }
@@ -954,7 +954,7 @@ NamedScript KeyBind void UseSkill(int Key)
             Data = &DataIndex;
 
         // Debugging
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
         {
             Log("\CdDEBUG: \C-EP Cost for %S (\CdLevel %d\C-): \Cn%d", CurrentSkill->Name, SkillLevel->CurrentLevel, EPCost);
             Log("\CdDEBUG: \C-Data Category/Index: \Cd%d\C-, \Cd%d", DataCategory, DataIndex);
@@ -1030,26 +1030,46 @@ NamedScript Console bool Heal(SkillLevelInfo *SkillLevel, void *Data)
 
             SetActivator(Players(i).TID);
 
-            if (SkillLevel->CurrentLevel >= 4)
+            switch(SkillLevel->CurrentLevel)
+            {
+            case 1:
+                AddHealth(30, 100);
+                break;
+            case 2:
+                AddHealth(70, 100);
+                break;
+            case 3:
+                AddHealth(100, 100);
+                break;
+            default:
             {
                 AddHealth(200, 200);
-                Players(i).OverHeal = true;
+                Player.OverHeal = true;
             }
-            else
-                AddHealth(100, 100);
+            }
         }
 
         SetActivator(PlayerTID);
     }
     else
     {
-        if (SkillLevel->CurrentLevel >= 4)
+        switch(SkillLevel->CurrentLevel)
+        {
+        case 1:
+            AddHealth(30, 100);
+            break;
+        case 2:
+            AddHealth(70, 100);
+            break;
+        case 3:
+            AddHealth(100, 100);
+            break;
+        default:
         {
             AddHealth(200, 200);
             Player.OverHeal = true;
         }
-        else
-            AddHealth(100, 100);
+        }
     }
 
     // Remove Status Effects
@@ -2416,6 +2436,10 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
                 CreditCount += 50;
             if (GetActorClass(TID[i]) == "DRPGCredits100")
                 CreditCount += 100;
+            if (GetActorClass(TID[i]) == "DRPGCredits250")
+                CreditCount += 250;
+            if (GetActorClass(TID[i]) == "DRPGCredits500")
+                CreditCount += 500;
             if (GetActorClass(TID[i]) == "DRPGCredits1000")
                 CreditCount += 1000;
 
@@ -2621,7 +2645,7 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
                 SetFont("BIGFONT");
                 HudMessage("An error has occured with the Transport System!");
                 EndHudMessageBold(HUDMSG_FADEOUT, 0, "Red", 0.5, 0.5, 1.0, 2.0);
-                if (GetCVar("drpg_debug")) // Output EVERYTHING for investigation
+                if (DebugLog) // Output EVERYTHING for investigation
                 {
                     //Output Players;
                     //Output Ready;

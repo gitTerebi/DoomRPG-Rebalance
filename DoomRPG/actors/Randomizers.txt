@@ -402,10 +402,10 @@ actor DRPGMarineReinforcementSpawner : RandomSpawner
 // Backpack locations
 actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 {
-    DropItem "DRPGSmallBackpack"    255 40
-    DropItem "DRPGBackpack"         255 40
-    DropItem "DRPGBigBackpack"      255 10
-    DropItem "DRPGCrate"            255 10
+    DropItem "DRPGSmallBackpack"    255 50
+    DropItem "DRPGBackpack"         255 30
+    DropItem "DRPGBigBackpack"      255 15
+    DropItem "DRPGCrate"            255 5
 }
 
 // HEALTH ITEMS
@@ -489,15 +489,15 @@ actor DRPGBlueArmorRandomizer : RandomSpawner Replaces BlueArmor
 // Invulnerability Sphere Locations
 actor DRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces InvulnerabilitySphere
 {
-    DropItem "DRPGInvulnerabilitySphere"    255 50
-    DropItem "DRPGCrate"                    255 50
+    DropItem "DRPGInvulnerabilitySphere"    255 95
+    DropItem "DRPGCrate"                    255 5
 }
 
 // Blur Sphere Locations
 actor DRPGBlurSphereRandomizer : RandomSpawner Replaces BlurSphere
 {
-    DropItem "DRPGBlurSphere"               255 50
-    DropItem "DRPGCrate"                    255 50
+    DropItem "DRPGBlurSphere"               255 95
+    DropItem "DRPGCrate"                    255 5
 }
 
 // SHOP DISPLAYS

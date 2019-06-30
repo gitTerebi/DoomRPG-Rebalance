@@ -177,7 +177,7 @@ NamedScript Type_OPEN void MapInit()
                 CurrentLevel->SecretMap = UsedSecretExit;
             }
 
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log ("\CdDEBUG: \CjLevel number: \Cd%d", CurrentLevel->LevelNum);
 
             CurrentLevel->LumpName = StrParam("%tS", PRINTNAME_LEVEL);
@@ -286,8 +286,8 @@ NamedScript Type_OPEN void MapInit()
     // Flag to run monster replacements
     WaitingForReplacements = true;
 
-    // Reduce monster population based on difficulty settings
-    ReduceMonsterCount();
+    // Modify monster population based on difficulty settings
+    MonsterCountModifier();
 
     // Populate the positions array
     for (int i = 1; i < MonsterID; i++)
@@ -381,7 +381,8 @@ NamedScript Type_OPEN void MapInit()
     CurrentLevel->Init = true;
 }
 
-NamedScriptSync void ReduceMonsterCount()
+// "Just what do you think you're doing, Dave?"
+NamedScriptSync void MonsterCountModifier()
 {
     int TotalMonsters = GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
 
@@ -402,7 +403,7 @@ NamedScriptSync void ReduceMonsterCount()
     if (MonstersToRemove < 0)
     {
         MonstersToRemove = -MonstersToRemove;
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \CcAdding \Cd%d\Cc more monsters!", MonstersToRemove);
         CurrentLevel->AdditionalMonsters = MonstersToRemove;
         return;
@@ -411,16 +412,25 @@ NamedScriptSync void ReduceMonsterCount()
     if (TotalMonsters <= MonstersToRemove)
         MonstersToRemove = TotalMonsters - 1;
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: \CcReducing monster count to \Cd%d\Cc from \Cd%d", TotalMonsters - MonstersToRemove, TotalMonsters);
 
-    int Iterations = 0;
+    int Iterations01 = 0;
+    int Iterations02 = 0;
     while (MonstersToRemove)
     {
         for (int i = Random(1, MonsterID - 1); i < MonsterID; i++)
         {
+            // The delay here is paramount! This loop averages 700000+ iterations with 5000+ monsters, madness!
             if (!Monsters[i].Init || ClassifyActor(Monsters[i].TID) == ACTOR_NONE || !(CheckFlag(Monsters[i].TID, "COUNTKILL")))
+            {
+                Iterations01++;
+
+                if ((Iterations01 % 4096) == 0)
+                    Delay(1);
+
                 continue;
+            }
 
             Thing_Remove(Monsters[i].TID);
             Monsters[i].Init = false;
@@ -431,9 +441,10 @@ NamedScriptSync void ReduceMonsterCount()
             break;
         }
 
-        Iterations++;
+        // This one averages about 5000+ iterations with 5000+ monsters
+        Iterations02++;
 
-        if ((Iterations % 4096) == 0)
+        if ((Iterations02 % 4096) == 0)
             Delay(1);
     }
 }
@@ -635,7 +646,7 @@ Start:
         // All Auras and Harmonized Destruction events are ended by killing everything on the map
         if (Timer() > 4)
         {
-            SetMusic("");
+            SetMusic("AWIND01");
             AmbientSound("misc/secret", 127);
             SetFont("BIGFONT");
             HudMessage("Everything falls silent.");
@@ -837,7 +848,9 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
     if (CurrentLevel->Event == MAPEVENT_TELEPORTCRACKS || CurrentLevel->Event == MAPEVENT_DOOMSDAY || CurrentLevel->Event == MAPEVENT_DRLA_FEEDINGFRENZY || CurrentLevel->Event == MAPEVENT_SKILL_HELL || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
         CurrentLevel->EventCompleted = true; // These don't actually end until you leave the map normally
 
-    CurrentLevel->Completed = true; // We finished the map
+    // We finished the map
+    CurrentLevel->Completed = true;
+    CurrentLevel->Init = false;
 
     UsedSecretExit = Secret;
     PreviousLevel = CurrentLevel;
@@ -1113,7 +1126,7 @@ void MapEventReward()
 
 NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 {
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: \ChDeciding event for \Cd%S", TargetLevel->LumpName);
 
     str const EventNames[MAPEVENT_MAX] =
@@ -1231,24 +1244,27 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
         TargetLevel->Event = PotentialEvents[Random(0, NumPotentialEvents - 1)];
     }
 
-    if (GetCVar("drpg_debug") && TargetLevel->Event != MAPEVENT_NONE)
+    if (DebugLog && TargetLevel->Event != MAPEVENT_NONE)
         Log("\CdDEBUG: Special Event on \Cc%S\Cd: \Cg%S", TargetLevel->NiceName, EventNames[TargetLevel->Event]);
 
     // Initialize some basic info for the chosen event
-
-    if (TargetLevel->Event == MAPEVENT_MEGABOSS)
+    switch(TargetLevel->Event)
+    {
+    case MAPEVENT_MEGABOSS:
     {
         TargetLevel->MegabossActor = &MegaBosses[Random(0, MegaBossesAmount - 1)];
 
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: Chosen Boss: \Cg%S", TargetLevel->MegabossActor->Actor);
     }
-    else if (TargetLevel->Event == MAPEVENT_TOXICHAZARD)
+    break;
+    case MAPEVENT_TOXICHAZARD:
     {
         TargetLevel->HazardLevel = Random(1, 5);
         TargetLevel->RadLeft = 100;
     }
-    else if (TargetLevel->Event == MAPEVENT_ONEMONSTER)
+    break;
+    case MAPEVENT_ONEMONSTER:
     {
         MonsterInfoPtr PotentialMonsters[MAX_TEMP_MONSTERS];
         int NumPotentialMonsters = 0; // BAD STUFF HAPPENS
@@ -1273,7 +1289,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 
             RequiredLevel = (fixed)(TempMonster->Difficulty + ((TempMonster->ThreatLevel) * 20)) / MonsterLevelDivisor;
             RequiredLevel = Clamp(0, RequiredLevel, 80);
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log("\CdDEBUG: \CcPotential monster: \Cg%S \Cc/ Needed level: \Cg%d", TempMonster->Name, RequiredLevel);
 
             if (AverageLevel >= RequiredLevel && TempMonster->ThreatLevel <= 5)
@@ -1282,12 +1298,15 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 
         TargetLevel->SelectedMonster = PotentialMonsters[Random(0, NumPotentialMonsters - 1)];
 
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: Chosen Monster: \Cg%S", TargetLevel->SelectedMonster->Name);
     }
-    else if (TargetLevel->Event == MAPEVENT_HARMONIZEDAURAS)
+    break;
+    case MAPEVENT_HARMONIZEDAURAS:
     {
         TargetLevel->AuraType = Random(0, AURA_MAX);
+    }
+    break;
     }
 }
 
@@ -1303,7 +1322,7 @@ NamedScript Type_OPEN void PassingEvents()
 
         if (PassingEventTimer <= 0)
         {
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log("\CdDEBUG: \CfRe-rolling events for all inactive levels");
 
             for (int i = 0; i < KnownLevels->Position; i++)
@@ -1312,19 +1331,19 @@ NamedScript Type_OPEN void PassingEvents()
 
                 if (!ThisLevel->Completed)
                 {
-                    if (GetCVar("drpg_debug"))
+                    if (DebugLog)
                         Log("\CdDEBUG: \CgIncomplete: %S", ThisLevel->LumpName);
                     continue;
                 }
 
                 if (CurrentLevel && ThisLevel == CurrentLevel)
                 {
-                    if (GetCVar("drpg_debug"))
+                    if (DebugLog)
                         Log("\CdDEBUG: \CfCurrent: %S", ThisLevel->LumpName);
                     continue;
                 }
 
-                if (GetCVar("drpg_debug"))
+                if (DebugLog)
                     Log("\CdDEBUG: \CqInactive: %S", ThisLevel->LumpName);
 
                 DecideMapEvent(ThisLevel);
@@ -1583,7 +1602,7 @@ NamedScript void MegaBossEvent()
         ChosenPosition = &((Position *)CurrentLevel->MonsterPositions.Data)[Index];
         Spawned = Spawn(CurrentLevel->MegabossActor->Actor, ChosenPosition->X, ChosenPosition->Y, ChosenPosition->Z, TID, ChosenPosition->Angle * 256);
 
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: Iterating for Spawn Point... (Class %S, Index %d, Position %.2k/%.2k/%.2k", CurrentLevel->MegabossActor->Actor, Index, ChosenPosition->X, ChosenPosition->Y, ChosenPosition->Z);
 
         // Successful spawn
@@ -1596,7 +1615,7 @@ NamedScript void MegaBossEvent()
             SetActorFlag(TID, "NOTARGET", GetCVar("drpg_monster_notarget"));
             SetActorFlag(TID, "NOINFIGHTING", GetCVar("drpg_monster_noinfighting"));
             SetActorFlag(TID, "BRIGHT", GetCVar("drpg_monster_bright"));
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log("\CdDEBUG: \Cg%S MegaBoss successfully spawned", CurrentLevel->MegabossActor->Actor);
         }
 
@@ -1881,7 +1900,7 @@ NamedScript void ThermonuclearBombEvent()
     }
 
     // Setup Keys
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: \C-Generating %d keys for bomb", MaxKeys);
     while (MaxKeys > 0)
     {
@@ -2165,7 +2184,7 @@ NamedScript void OneMonsterEvent()
     while (ThingCountName(GetMissionMonsterActor(CurrentLevel->SelectedMonster->Actor), 0) > 0)
         Delay(1);
 
-    SetMusic("");
+    SetMusic("AWIND01");
     AmbientSound("misc/secret", 127);
     HudMessage("Everything falls silent.");
     EndHudMessageBold(HUDMSG_FADEOUT, 0, "LightBlue", 0.5, 0.7, 5.0, 5.0);
@@ -2262,7 +2281,7 @@ NamedScript DECORATE void HellUnleashedStart()
 
 NamedScript void HellUnleashedSpawnMonsters()
 {
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: \CaHell Unleashed \C-- Spawning next wave of monsters...");
 
     Delay(1); // Maximize our instructions
@@ -2301,7 +2320,7 @@ NamedScript void HarmonizedDestructionEvent()
     if (AveragePlayerLevel() < 20 && CurrentLevel->AuraType == AURA_MAX)
         CurrentLevel->AuraType = Random(0, AURA_MAX - 1);
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: Aura type %d", CurrentLevel->AuraType);
 
     for (int i = 0; i < MonsterID; i++)
@@ -2469,7 +2488,7 @@ Start:
         else if (CompatMonMode == COMPAT_CH)
             TempMonster = "RedSP1";
         else
-            TempMonster = "Archvile";
+            TempMonster = "BaronOfHell";
 
         if (SpawnSpotFacing(GetMissionMonsterActor(TempMonster), Destination))
             SpawnSpotFacing("TeleportFog", Destination);
@@ -2997,7 +3016,7 @@ NamedScript void WhispersofDarknessEvent()
         ChosenPosition = &((Position *)CurrentLevel->MonsterPositions.Data)[Index];
         Spawned = Spawn("RLCyberneticSpiderMastermindRPG", ChosenPosition->X, ChosenPosition->Y, ChosenPosition->Z, TID, ChosenPosition->Angle * 256);
 
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: Iterating for Spawn Point... (Class %S, Index %d, Position %.2k/%.2k/%.2k", CurrentLevel->MegabossActor->Actor, Index, ChosenPosition->X, ChosenPosition->Y, ChosenPosition->Z);
 
         // Successful spawn
@@ -3014,7 +3033,7 @@ NamedScript void WhispersofDarknessEvent()
             for (int i = 0; i < AURA_MAX; i++)
                 Monsters[MonsterIndex].AuraAdd[i] = true;
 
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log("\CdDEBUG: \CgShadow Overmind successfully spawned");
         }
 

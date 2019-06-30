@@ -21,6 +21,7 @@
 #include "Utils.h"
 
 // Flags
+bool DebugLog;
 bool Transported;
 bool GlobalsInitialized;
 int CompatMode;
@@ -120,6 +121,8 @@ NamedScript Type_OPEN void GlobalInit()
 // Init Script
 NamedScript Type_ENTER void Init()
 {
+    DebugLog = GetCVar("drpg_debug");
+
     // Wait until globals are initialized
     while (!GlobalsInitialized) Delay(1);
 
@@ -998,7 +1001,7 @@ Start:
             MaxValue = AveragePlayerLuck() * 5000;
             break;
         }
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: Shop Special \C-Min/Max Calculated: \Ca%d \C-/ \Cd%d", MinValue, MaxValue);
 
         // Blank out the item until a new one is found
@@ -1064,7 +1067,7 @@ Start:
         ShopSpecialTimer = 35 * 60 * GetCVar("drpg_shopspecial_time");
         ShopSpecialBought = false;
 
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
         {
             if (ShopSpecialItem == GetBlankItem())
                 Log("\CdDEBUG: Shop Special expired! \CaNo new item generated");
@@ -1224,7 +1227,7 @@ NamedScript DECORATE void ItemInit()
     for (int i = 0; i < MAX_ITEMS; i++)
         if (ItemTIDs[i] == -1)
         {
-            //if (GetCVar("drpg_debug"))
+            //if (DebugLog)
             //    Log("\CdDEBUG: \C-Item \Cd%S\C- added (Index \Cd%d\C-)", GetActorClass(0), i);
 
             // Doesn't have a TID, so assign it one
@@ -1308,7 +1311,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
 
     if (MaxItems == 0)
     {
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDebug: \C-Skipped item generation.");
         return;
     }
@@ -1404,7 +1407,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
             }
         }
 
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
         {
             HudMessage("\CfGenerating Loot\n\Cd%d \Cj/ \Cd%d\n\n\CdActor: \C-%S\n\CdIteration: %d\n\CiBoundaries: %.2k-%.2k, %.2k-%.2k\n\nX: %.2k\nY: %.2k\nZ: %.2k", Items, MaxItems, Actor, Iterations, LowerX, UpperX, LowerY, UpperY, X, Y, Z);
             EndHudMessage(HUDMSG_FADEOUT, MAKE_ID('L', 'O', 'O', 'T'), "White", 1.5, 0.8, 1.5, 0.5);
@@ -1416,14 +1419,14 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
 
         /*if (Iterations == 2000) // Trick to restart ourselves if we ran out of iterations
         {
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log("\CdDebug: \C-Dynamic Loot Generation created \Cd%d\C- items of type \Cd%S\C- and is restarting to place more", Items, Actor);
             DynamicLootGenerator(Actor, MaxItems - Items);
             return;
         }*/
     }
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDebug: \C-Dynamic Loot Generation created \Cd%d\C- items of type \Cd%S", Items, Actor);
 }
 
@@ -2253,7 +2256,7 @@ void CheckCompatibility()
     bool Success = false;
     int TID = UniqueTID();
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: \C-Checking Compatibility...");
 
     SkillLevelsMax = MAX_SKILLLEVELS_DF;
@@ -2273,7 +2276,7 @@ void CheckCompatibility()
     Success = SpawnForced("DRPGWadSmooshActive", 0, 0, 0, TID, 0);
     if (Success)
     {
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \CaWadSmoosh\C- detected");
         WadSmoosh = true;
         Thing_Remove(TID);
@@ -2283,7 +2286,7 @@ void CheckCompatibility()
     Success = SpawnForced("DRPGExtrasIsLoaded", 0, 0, 0, TID, 0);
     if (Success)
     {
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \CaExtras\C- detected");
         CompatMode = COMPAT_EXTRAS;
         Thing_Remove(TID);
@@ -2293,7 +2296,7 @@ void CheckCompatibility()
     Success = SpawnForced("LDLegendaryZombie", 0, 0, 0, TID, 0);
     if (Success)
     {
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \CdLegenDoom\C- detected");
 
         CompatMode = COMPAT_LEGENDOOM;
@@ -2306,7 +2309,7 @@ void CheckCompatibility()
     Success = SpawnForced("RLPistolPickup", 0, 0, 0, TID, 0);
     if (Success)
     {
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \CdDoomRL \C-detected");
 
         CompatMode = COMPAT_DRLA;
@@ -2318,7 +2321,7 @@ void CheckCompatibility()
     Success = SpawnForced("RLBaronOfHell", 0, 0, 0, TID, 0);
     if (Success)
     {
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \CdDoomRL Monsters \C-detected");
 
         SkillLevelsMax = MAX_SKILLLEVELS_DRLA;
@@ -2332,7 +2335,7 @@ void CheckCompatibility()
     Success = SpawnForced("RedZombie", 0, 0, 0, TID, 0);
     if (Success)
     {
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \CdColourful Hell \C-detected");
 
         CompatMonMode = COMPAT_CH;
@@ -2343,7 +2346,7 @@ void CheckCompatibility()
         Thing_Remove(TID);
     }
 
-    if (GetCVar("drpg_debug") && CompatMode == COMPAT_NONE && CompatMonMode == COMPAT_NONE && !WadSmoosh)
+    if (DebugLog && CompatMode == COMPAT_NONE && CompatMonMode == COMPAT_NONE && !WadSmoosh)
         Log("\CdDEBUG: \C-No compatible mods found");
 }
 
@@ -2352,7 +2355,7 @@ void AssignTIDs()
     Player.TID = PLAYER_TID + PlayerNumber();
     Thing_ChangeTID(0, Player.TID);
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDEBUG: Player TID: %d", Player.TID);
 }
 

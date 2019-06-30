@@ -7,6 +7,7 @@
 extern const str Version;
 
 // Flags
+extern bool DebugLog;
 extern bool Transported;
 extern bool GlobalsInitialized;
 extern int CompatMode;

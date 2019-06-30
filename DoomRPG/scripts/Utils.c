@@ -22,8 +22,6 @@
 //
 
 int const AuraTID = 20000;
-static bool CheckInputRepeat;
-static int CheckInputRepeatTimer;
 
 // Skill levels stuff
 int SkillLevelsMax;
@@ -51,10 +49,10 @@ str const ColorNames[26] =
     "Dark Brown",
     "Purple",
     "Dark Grey",
-    "Cyan"
-    "Ice"
-    "Fire"
-    "Sapphire"
+    "Cyan",
+    "Ice",
+    "Fire",
+    "Sapphire",
     "Teal"
 };
 
@@ -81,10 +79,10 @@ str const ColorCodes[26] =
     "\Cs",
     "\Ct",
     "\Cu",
-    "\Cv"
-    "\Cw"
-    "\Cx"
-    "\Cy"
+    "\Cv",
+    "\Cw",
+    "\Cx",
+    "\Cy",
     "\Cz"
 };
 
@@ -511,6 +509,14 @@ void DropMoney(int Killer, int TID, int Amount)
     Drops = Total / 1000;
     while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits1000", 256);
     Total %= 1000;
+
+    Drops = Total / 500;
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits500", 256);
+    Total %= 500;
+
+    Drops = Total / 250;
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits250", 256);
+    Total %= 250;
 
     Drops = Total / 100;
     while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits100", 256);
@@ -2666,6 +2672,8 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
     int InputOld = INPUT_OLDBUTTONS;
     int Buttons;
     int OldButtons;
+    static bool CheckInputRepeat;
+    static int CheckInputRepeatTimer;
     double AxisY;
     double AxisX;
     // These two are meant to mimic OldButtons
@@ -2805,7 +2813,7 @@ NamedScript MenuEntry void ResetToDefaults()
 
 OptionalArgs(1) void LogMessage(str Message, int Level)
 {
-    bool DebugMode = (ActivatorTID() == Player.TID ? GetCVar("drpg_debug") : GetActivatorCVar("drpg_debug"));
+    bool DebugMode = (ActivatorTID() == Player.TID ? DebugLog : GetActivatorCVar("drpg_debug"));
 
     if (Level == LOG_DEBUG)
         Message = StrParam("\CdDEBUG: \C-%S", Message);
@@ -2906,7 +2914,7 @@ void ArrayCreate(DynamicArray *Array, str Name, int InitSize, int ItemSize)
     Array->Name = Name;
     Array->Position = 0;
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDynamicArray: Allocating \Cj%S", Array->Name);
 
     if (Recreate)
@@ -2931,7 +2939,7 @@ void ArrayCreate(DynamicArray *Array, str Name, int InitSize, int ItemSize)
         return;
     }
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDynamicArray: \Cj%S\Cd @ %p", Array->Name, Array->Data);
 
     //memset(Array->Data, 0xAAAAAAAA, Array->Size * Array->ItemSize);
@@ -2948,7 +2956,7 @@ void ArrayResize(DynamicArray *Array)
     int OldSize = Array->Size;
 
     Array->Size *= 2;
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdAttempting to resize DynamicArray: \Cj%S\Cd @ %p", Array->Name, Array->Data);
     void *tmp = realloc(Array->Data, Array->ItemSize * Array->Size);
 
@@ -2959,7 +2967,7 @@ void ArrayResize(DynamicArray *Array)
         return;
     }
 
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDynamicArray: Resizing array \Cj%S\Cd @ %p to \Cj%d\Cd elements", Array->Name, Array->Data, Array->Size);
 
     Array->Data = tmp;
@@ -2969,7 +2977,7 @@ void ArrayResize(DynamicArray *Array)
 
 void ArrayDestroy(DynamicArray *Array)
 {
-    if (GetCVar("drpg_debug"))
+    if (DebugLog)
         Log("\CdDynamicArray: Destroying array \Cj%S\Cd @ %p", Array->Name, Array->Data);
 
     free(Array->Data);

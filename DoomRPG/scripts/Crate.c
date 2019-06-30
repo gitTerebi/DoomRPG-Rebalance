@@ -672,12 +672,12 @@ void GenerateCrate(int ID, int Amount)
 
         int SetAmount = Amount;
 
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \C-Checking DRLA sets...");
 
         for (int i = 0; i < MAX_DRLA_SETS; i++)
         {
-            if (GetCVar("drpg_debug"))
+            if (DebugLog)
                 Log("\CdDEBUG: \C-Set \Cd%d\C-: \Cd%S", i + 1, SetItems[i].Name);
 
             // Skip this set if you already have it
@@ -686,13 +686,13 @@ void GenerateCrate(int ID, int Amount)
             bool HaveItem = false;
             for (int j = 0; SetItems[i].Items[j].Name != NULL; j++)
             {
-                if (GetCVar("drpg_debug"))
+                if (DebugLog)
                     Log("\CdDEBUG: \C-Set \Cd%d \C-Item \Cd%d\C-: \Cd%S", i + 1, j + 1, SetItems[i].Items[j].Name);
 
                 if (CheckInventory(SetItems[i].Items[j].Name) || CheckInventory(StrParam("%SToken", SetItems[i].Items[j].Name)))
                 {
                     HaveItem = true;
-                    if (GetCVar("drpg_debug"))
+                    if (DebugLog)
                         Log("\CdDEBUG: \C-Have this item, continue...");
                     break;
                 }
@@ -713,12 +713,12 @@ void GenerateCrate(int ID, int Amount)
                     // Stop checking items if we've filled the crate
                     if (SetAmount >= CRATE_MAX_ITEMS)
                     {
-                        if (GetCVar("drpg_debug"))
+                        if (DebugLog)
                             Log("\CdDEBUG: \C-Crate is full! Stopping set checks");
                         return;
                     }
 
-                    if (GetCVar("drpg_debug"))
+                    if (DebugLog)
                         Log("\CdDEBUG: \C-Set \Cd%d \C-Item \Cd%d\C-: \Cd%S \C-(Chance: \Cf%.2k%% \C-/ Pick: \Cf%.2k%%\C-)", i + 1, j + 1, SetItems[i].Items[j].Name, Chance, Pick);
 
                     if (Pick <= Chance)
@@ -729,7 +729,7 @@ void GenerateCrate(int ID, int Amount)
                         Crates[ID].Active[SetAmount] = true;
                         Crates[ID].Item[SetAmount] = Item;
 
-                        if (GetCVar("drpg_debug"))
+                        if (DebugLog)
                             Log("\CdDEBUG: \CfSet Item Spawned!");
 
                         SetAmount++;

@@ -61,10 +61,12 @@ Sounds
 evecdsp-v2e.wad. Various sounds. I cannot find an author for this.
 System Shock 2.
 Prey (2017).
+Wizardry 8.
 
 Music
 MDK2.
 Doom PSX Soundtrack extended.
+Deus Ex Invisible War.
 
 Misc
 Oblige used for the first arena map ever!

@@ -20,9 +20,9 @@ extern int CurrentSkill;
 extern bool MapPackActive[MAX_WSMAPPACKS];
 
 NamedScript Type_OPEN void MapInit();
+NamedScriptSync void MonsterCountModifier();
 NamedScript void MapLoop();
 NamedScript void CalculateBonusMaps();
-NamedScriptSync void ReduceMonsterCount();
 NamedScript OptionalArgs(1) void DecideMapEvent(LevelInfo *, bool);
 NamedScript void SetupMapEvent();
 NamedScript void SetupMapMissions();

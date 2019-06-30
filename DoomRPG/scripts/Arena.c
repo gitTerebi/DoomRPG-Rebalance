@@ -79,7 +79,9 @@ NamedScript MapSpecial void ArenaLoop()
         ArenaDrawHUD();
 
         // Arena Status Handling
-        if (ArenaState == ARENA_INTERMISSION)
+        switch(ArenaState)
+        {
+        case ARENA_INTERMISSION:
         {
             BonusRandomizer = Random(-10, ABONUS_MAX - 1);
 
@@ -88,7 +90,8 @@ NamedScript MapSpecial void ArenaLoop()
             ArenaSetEnvironment(AEVENT_NONE);
             ArenaState = ARENA_WAITING;
         }
-        else if (ArenaState == ARENA_WAITING)
+        break;
+        case ARENA_WAITING:
         {
             Ready = true;
 
@@ -156,7 +159,8 @@ NamedScript MapSpecial void ArenaLoop()
                     Player.MenuBlock = false;
             }
         }
-        else if (ArenaState == ARENA_READY)
+        break;
+        case ARENA_READY:
         {
             // Clean corpses every couple of waves
             if (ArenaWave > 1 && (ArenaWave % 5) == 0)
@@ -175,7 +179,8 @@ NamedScript MapSpecial void ArenaLoop()
             ArenaSpawnMobs();
             ArenaState = ARENA_ACTIVE;
         }
-        else if (ArenaState == ARENA_ACTIVE)
+        break;
+        case ARENA_ACTIVE:
         {
             ArenaCheckMod();
             ArenaCount = ThingCount(0, ArenaMonstersTID);
@@ -183,6 +188,8 @@ NamedScript MapSpecial void ArenaLoop()
                 ArenaState = ARENA_INTERMISSION;
             if (ArenaTimerActive && ArenaTimer > 0)
                 ArenaTimer--;
+        }
+        break;
         }
 
         Delay(1);

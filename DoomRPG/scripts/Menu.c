@@ -29,13 +29,13 @@ str RPGMap MainMenu[MAX_MENU] =
 
 str RPGMap MainMenuColor[MAX_MENU] =
 {
+    "Orange",
+    "Cyan",
+    "Fire",
+    "Sapphire",
+    "Red",
     "Green",
-    "Green",
-    "Green",
-    "Green",
-    "Green",
-    "Green",
-    "Green"
+    "Teal"
 };
 
 str RPGMap CursorColors[1] =
@@ -139,7 +139,7 @@ NamedScript KeyBind void OpenMenu()
     }
     else
     {
-        if (GetCVar("drpg_debug"))
+        if (DebugLog)
             Log("\CdDEBUG: \CfOpening Menu");
         ActivatorSound("menu/enter", 127);
         Player.InMenu = true;
@@ -339,25 +339,32 @@ void DrawMainMenu()
         SetFont("SMALLFONT");
 
         // Draw Stim selection
-        if (Player.Stim.Size == 1)
+        switch(Player.Stim.Size)
+        {
+        case 1:
         {
             HudMessage("Small Stim: %d/%d", Player.Stim.Amount, Player.Stim.Capacity);
             EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 310.0, 0.05);
         }
-        else if (Player.Stim.Size == 2)
+        break;
+        case 2:
         {
             HudMessage("Medium Stim: %d/%d", Player.Stim.Amount, Player.Stim.Capacity);
             EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 310.0, 0.05);
         }
-        else if (Player.Stim.Size == 3)
+        break;
+        case 3:
         {
             HudMessage("Large Stim: %d/%d", Player.Stim.Amount, Player.Stim.Capacity);
             EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 310.0, 0.05);
         }
-        else if (Player.Stim.Size == 4)
+        break;
+        case 4:
         {
             HudMessage("Extra-Large Stim: %d/%d", Player.Stim.Amount, Player.Stim.Capacity);
             EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 310.0, 0.05);
+        }
+        break;
         }
 
         // Stim Compound Bar
@@ -396,29 +403,38 @@ void DrawStatsMenu()
 
     // Title
     SetFont("BIGFONT");
-    if (Player.StatPage == STATPAGE_STATS)
+    switch(Player.StatPage)
+    {
+    case STATPAGE_STATS:
     {
         HudMessage("Stats");
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 0.1, 10.0, 0.05);
     }
-    if (Player.StatPage == STATPAGE_STATXP)
+    break;
+    case STATPAGE_STATXP:
     {
         HudMessage("Stats XP");
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 0.1, 10.0, 0.05);
     }
-    if (Player.StatPage == STATPAGE_PERKS)
+    break;
+    case STATPAGE_PERKS:
     {
         HudMessage("Perks");
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 0.1, 10.0, 0.05);
     }
-    if (Player.StatPage == STATPAGE_TEAM)
+    break;
+    case STATPAGE_TEAM:
     {
         HudMessage("Team");
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 0.1, 10.0, 0.05);
     }
+    break;
+    }
 
     // Stats Page
-    if (Player.StatPage == STATPAGE_STATS)
+    switch(Player.StatPage)
+    {
+    case STATPAGE_STATS:
     {
         int Cost = (int)((((fixed)*Stats[Player.MenuIndex] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
         if (Cost < 0)
@@ -435,7 +451,9 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "Red", 40.1, 302.1, 0.05);
 
         SetFont("BIGFONT");
-        if (Player.MenuIndex == 0)
+        switch(Player.MenuIndex)
+        {
+        case 0:
         {
             if (Player.StrengthNat > 0)
                 HudMessage("Strength: %d (+%d)", Player.Strength, Player.StrengthNat);
@@ -443,7 +461,8 @@ void DrawStatsMenu()
                 HudMessage("Strength: %d", Player.Strength);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    25.0,   0.05);
         }
-        if (Player.MenuIndex == 1)
+        break;
+        case 1:
         {
             if (Player.DefenseNat > 0)
                 HudMessage("Defense: %d (+%d)", Player.Defense, Player.DefenseNat);
@@ -451,7 +470,8 @@ void DrawStatsMenu()
                 HudMessage("Defense: %d", Player.Defense);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  25.0,   0.05);
         }
-        if (Player.MenuIndex == 2)
+        break;
+        case 2:
         {
             if (Player.VitalityNat > 0)
                 HudMessage("Vitality: %d (+%d)", Player.Vitality, Player.VitalityNat);
@@ -459,7 +479,8 @@ void DrawStatsMenu()
                 HudMessage("Vitality: %d", Player.Vitality);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    75.0,   0.05);
         }
-        if (Player.MenuIndex == 3)
+        break;
+        case 3:
         {
             if (Player.EnergyNat > 0)
                 HudMessage("Energy: %d (+%d)", Player.Energy, Player.EnergyNat);
@@ -467,7 +488,8 @@ void DrawStatsMenu()
                 HudMessage("Energy: %d", Player.Energy);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  75.0,   0.05);
         }
-        if (Player.MenuIndex == 4)
+        break;
+        case 4:
         {
             if (Player.RegenerationNat > 0)
                 HudMessage("Regen: %d (+%d)", Player.Regeneration, Player.RegenerationNat);
@@ -475,7 +497,8 @@ void DrawStatsMenu()
                 HudMessage("Regen: %d", Player.Regeneration);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    125.0,  0.05);
         }
-        if (Player.MenuIndex == 5)
+        break;
+        case 5:
         {
             if (Player.AgilityNat > 0)
                 HudMessage("Agility: %d (+%d)", Player.Agility, Player.AgilityNat);
@@ -483,7 +506,8 @@ void DrawStatsMenu()
                 HudMessage("Agility: %d", Player.Agility);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  125.0,  0.05);
         }
-        if (Player.MenuIndex == 6)
+        break;
+        case 6:
         {
             if (Player.CapacityNat > 0)
                 HudMessage("Capacity: %d (+%d)", Player.Capacity, Player.CapacityNat);
@@ -491,13 +515,16 @@ void DrawStatsMenu()
                 HudMessage("Capacity: %d", Player.Capacity);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    175.0,  0.05);
         }
-        if (Player.MenuIndex == 7)
+        break;
+        case 7:
         {
             if (Player.LuckNat > 0)
                 HudMessage("Luck: %d (+%d)", Player.Luck, Player.LuckNat);
             else
                 HudMessage("Luck: %d", Player.Luck);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  175.0,  0.05);
+        }
+        break;
         }
 
         // Primary Stats
@@ -761,9 +788,9 @@ void DrawStatsMenu()
         PrintSprite("STAT7", 0, 16.1, 210.1, 0.05);
         PrintSprite("STAT8", 0, 216.1, 210.1, 0.05);
     };
-
+    break;
     // Stats XP Page
-    if (Player.StatPage == STATPAGE_STATXP)
+    case STATPAGE_STATXP:
     {
         str const StatNames[STAT_MAX] =
         {
@@ -839,9 +866,9 @@ void DrawStatsMenu()
             PrintSprite("StatBarB", 0, 40.1, 48.0 + (i * 44.0), 0.05);
         }
     }
-
+    break;
     // Perks Page
-    if (Player.StatPage == STATPAGE_PERKS)
+    case STATPAGE_PERKS:
     {
         // Holds the perk information
         str const PerkInfo[STAT_MAX][3] =
@@ -923,9 +950,9 @@ void DrawStatsMenu()
             EndHudMessage(HUDMSG_PLAIN, 0, Color, 40.1, 44.0 + (i * 44.0), 0.05);
         }
     }
-
+    break;
     // Team Page
-    if (Player.StatPage == STATPAGE_TEAM)
+    case STATPAGE_TEAM:
     {
         PlayerData *PlayerPtr = &Players(Player.MenuIndex);
         int PlayerNum = Player.MenuIndex;
@@ -1096,6 +1123,8 @@ void DrawStatsMenu()
                 break;
             }
         }
+    }
+    break;
     }
 }
 
@@ -1624,24 +1653,39 @@ void DrawStimsMenu()
     EndHudMessage(HUDMSG_PLAIN, 0, "Green", 0.1, 10.0, 0.05);
 
     // Stim String
-    if (Player.Stim.Size == 1)
-        StimString = StrParam("Small Stim: %d/%d (\Cq+%d%% Toxicity\C-)", Player.Stim.Amount, Player.Stim.Capacity, Player.Stim.Toxicity);
-    else if (Player.Stim.Size == 2)
-        StimString = StrParam("Medium Stim: %d/%d (\Cq+%d%% Toxicity\C-)", Player.Stim.Amount, Player.Stim.Capacity, Player.Stim.Toxicity);
-    else if (Player.Stim.Size == 3)
-        StimString = StrParam("Large Stim: %d/%d (\Cq+%d%% Toxicity\C-)", Player.Stim.Amount, Player.Stim.Capacity, Player.Stim.Toxicity);
-    else if (Player.Stim.Size == 4)
-        StimString = StrParam("Extra-Large Stim: %d/%d (\Cq+%d%% Toxicity\C-)", Player.Stim.Amount, Player.Stim.Capacity, Player.Stim.Toxicity);
-    else
+    switch(Player.Stim.Size)
     {
-        if (Player.StimSelected == 0)
+    case 1:
+        StimString = StrParam("Small Stim: %d/%d (\Cq+%d%% Toxicity\C-)", Player.Stim.Amount, Player.Stim.Capacity, Player.Stim.Toxicity);
+        break;
+    case 2:
+        StimString = StrParam("Medium Stim: %d/%d (\Cq+%d%% Toxicity\C-)", Player.Stim.Amount, Player.Stim.Capacity, Player.Stim.Toxicity);
+        break;
+    case 3:
+        StimString = StrParam("Large Stim: %d/%d (\Cq+%d%% Toxicity\C-)", Player.Stim.Amount, Player.Stim.Capacity, Player.Stim.Toxicity);
+        break;
+    case 4:
+        StimString = StrParam("Extra-Large Stim: %d/%d (\Cq+%d%% Toxicity\C-)", Player.Stim.Amount, Player.Stim.Capacity, Player.Stim.Toxicity);
+        break;
+    default:
+    {
+        switch(Player.StimSelected)
+        {
+        case 0:
             StimString = StrParam("Small Stim: %d", CheckInventory("DRPGStimSmall"));
-        else if (Player.StimSelected == 1)
+            break;
+        case 1:
             StimString = StrParam("Medium Stim: %d", CheckInventory("DRPGStimMedium"));
-        else if (Player.StimSelected == 2)
+            break;
+        case 2:
             StimString = StrParam("Large Stim: %d", CheckInventory("DRPGStimLarge"));
-        else if (Player.StimSelected == 3)
+            break;
+        case 3:
             StimString = StrParam("Extra-Large Stim: %d", CheckInventory("DRPGStimXL"));
+            break;
+        }
+    }
+    break;
     }
 
     // Set the Color

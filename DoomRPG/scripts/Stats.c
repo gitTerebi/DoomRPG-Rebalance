@@ -484,7 +484,7 @@ void CheckStats()
                     if (GetActivatorCVar("drpg_character_spec") == 5)
                         Scale *= 2;
                 }
-                fixed Factor = 2.0 - AbsFixed(((Player.ActualHealth <= Player.HealthMax ? ((fixed)Player.ActualHealth / (fixed)Player.HealthMax) : 1.0) + (Player.EPMax > 0 ? ((fixed)Player.EP / Player.EPMax) : 0)));
+                fixed Factor = 2.0 - AbsFixed(((Player.ActualHealth <= Player.HealthMax ? ((fixed)Player.ActualHealth / (fixed)Player.HealthMax) : 1.0) + (Player.EP < Player.EPMax && Player.EPMax > 0 ? ((fixed)Player.EP / Player.EPMax) : 0)));
                 Factor += Player.Focusing ? 1 : 0;
                 Player.RegenerationXP += (int)(Factor * (8.25 * Scale));
             }

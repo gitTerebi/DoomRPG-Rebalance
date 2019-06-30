@@ -8,6 +8,10 @@ Sprite CREDC0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDC0, 2, 2 { Al
 Sprite CREDD0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDD0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
 Sprite CREDE0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDE0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
 Sprite CREDF0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDF0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
+// Silver
+Sprite CREDG0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDG0, 2, 2 { Alpha 0.6 Style CopyNewAlpha } }
+// Gold
+Sprite CREDH0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDH0, 2, 2 { Alpha 0.8 Style CopyNewAlpha } }
 
 // Chips
 Graphic CHIPGOLD, 32, 32 { Offset 0, 0 Patch CHPGA0, 0, 0 }

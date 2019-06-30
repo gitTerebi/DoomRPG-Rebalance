@@ -110,6 +110,7 @@ skill nightmare
     acsreturn = 4
     
     name = "Nightmare"
+    MustConfirm = "'Towering, fierce, terrible. Nightmare made material!'"
     textcolor = "Red"
 }
 
@@ -125,5 +126,6 @@ skill hell
     acsreturn = 5
     
     name = "Hell"
+    MustConfirm = "'Steel yourself and remember: there can be no victory without madness!'"
     textcolor = "Brick"
 }
