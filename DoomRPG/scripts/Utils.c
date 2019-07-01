@@ -21,6 +21,7 @@
 // Variables
 //
 
+bool DebugLog;
 int const AuraTID = 20000;
 
 // Skill levels stuff
@@ -3011,6 +3012,10 @@ void ArrayDestroy(DynamicArray *Array)
     }
 }*/
 
+NamedScript DECORATE void SetDebugMode()
+{
+    DebugLog = GetCVar("drpg_debug");
+}
 
 NamedScript void Silly()
 {

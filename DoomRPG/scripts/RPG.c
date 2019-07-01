@@ -21,7 +21,6 @@
 #include "Utils.h"
 
 // Flags
-bool DebugLog;
 bool Transported;
 bool GlobalsInitialized;
 int CompatMode;
@@ -121,8 +120,6 @@ NamedScript Type_OPEN void GlobalInit()
 // Init Script
 NamedScript Type_ENTER void Init()
 {
-    DebugLog = GetCVar("drpg_debug");
-
     // Wait until globals are initialized
     while (!GlobalsInitialized) Delay(1);
 

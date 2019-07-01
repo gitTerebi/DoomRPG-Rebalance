@@ -3,6 +3,8 @@ class DRPGZEHandler : EventHandler
     // Replaces exits with ACS_Execute which calls DRPG's map exit script instead
     override void WorldLoaded(WorldEvent e)
     {
+        CallACS("SetDebugMode");
+
         // Iterate through all lines in the current map to find exits to replace
         for (int i = 0; i < level.Lines.Size(); i++)
         {

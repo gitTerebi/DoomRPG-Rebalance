@@ -3,6 +3,7 @@
 
 #include "Defs.h"
 
+extern bool DebugLog;
 extern int const AuraTID;
 extern str const AuraIcons[AURA_MAX + 1];
 extern str const ColorNames[26];
@@ -186,6 +187,8 @@ void ArrayCreate(DynamicArray *, str, int, int);
 void ArrayResize(DynamicArray *);
 void ArrayDestroy(DynamicArray *);
 //void ArrayDump(DynamicArray *);
+
+NamedScript DECORATE void SetDebugMode();
 
 NamedScript Console void Test();
 
