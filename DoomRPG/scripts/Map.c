@@ -255,6 +255,7 @@ NamedScript Type_OPEN void MapInit()
                 qsort(KnownLevels->Data, KnownLevels->Position, sizeof(LevelInfo), LevelSort);
                 CurrentLevel = FindLevelInfo();
                 CurrentLevel->NeedsRealInfo = false;
+                CurrentLevel->Init = true; // Probably don't need this but just to be safe
 
                 Transported = true;
                 TransporterLevel = CurrentLevel;
@@ -281,7 +282,10 @@ NamedScript Type_OPEN void MapInit()
     InitWadSmoosh();
 
     if (CurrentLevel->UACBase || CurrentLevel->UACArena)
+    {
+        CurrentLevel->Init = true;
         return; // [KS] These maps set themselves up, so nothing more to do.
+    }
 
     // Flag to run monster replacements
     WaitingForReplacements = true;
@@ -379,6 +383,13 @@ NamedScript Type_OPEN void MapInit()
             CallACS("jjirandomizer");
 
     CurrentLevel->Init = true;
+}
+
+// Map Exiting Script
+// An unloading script must be used to set Init to false since there are many ways for a map to unload
+NamedScript Type_UNLOADING void MapExiting()
+{
+    CurrentLevel->Init = false;
 }
 
 // "Just what do you think you're doing, Dave?"
@@ -850,7 +861,6 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
 
     // We finished the map
     CurrentLevel->Completed = true;
-    CurrentLevel->Init = false;
 
     UsedSecretExit = Secret;
     PreviousLevel = CurrentLevel;

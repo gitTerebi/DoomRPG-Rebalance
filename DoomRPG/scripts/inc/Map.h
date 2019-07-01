@@ -20,6 +20,7 @@ extern int CurrentSkill;
 extern bool MapPackActive[MAX_WSMAPPACKS];
 
 NamedScript Type_OPEN void MapInit();
+NamedScript Type_UNLOADING void MapExiting();
 NamedScriptSync void MonsterCountModifier();
 NamedScript void MapLoop();
 NamedScript void CalculateBonusMaps();
