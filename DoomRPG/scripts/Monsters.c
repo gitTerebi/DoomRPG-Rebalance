@@ -651,6 +651,7 @@ NamedScript Console void MonsterDump()
     Log("\Ca===== MONSTER INFORMATION =====");
     Log(" Actor: %S", GetActorClass(0));
     Log(" Replacement Actor: %S", Stats->ReplaceActor);
+    Log(" Species: %S", GetActorPropertyString(0, APROP_Species));
     Log(" Position: %.2k, %.2k, %.2k", Stats->spawnPos.X, Stats->spawnPos.Y, Stats->spawnPos.Z);
     Log(" Tag: %S", GetActorPropertyString(0, APROP_NameTag));
     Log(" Height: %.2k", GetActorPropertyFixed(0, APROP_Height));
@@ -1276,7 +1277,7 @@ Start:
     if (Friendly && !GetActorProperty(0, APROP_Friendly))
     {
         GiveInventory("DRPGFriendlyRemover", 1);
-        SetActorPropertyString(0, APROP_Species, "");
+        SetActorPropertyString(0, APROP_Species, "None");
         Friendly = false;
     }
 
@@ -2098,6 +2099,8 @@ Start:
 
 NamedScript DECORATE void MonsterRevive()
 {
+    Delay(1);
+
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
     if (ClassifyActor(0) & ACTOR_WORLD)
@@ -2106,6 +2109,12 @@ NamedScript DECORATE void MonsterRevive()
         Stats->TID = 0;
         return;
     }
+
+    // Account for monsters revived by friendly Archvile
+    if (GetActorProperty(0, APROP_Friendly))
+        SetActorPropertyString(0, APROP_Species, "Player");
+    else
+        SetActorPropertyString(0, APROP_Species, "None");
 
     // Reboot handlers
     MonsterStatsHandler();
@@ -2118,6 +2127,8 @@ NamedScript DECORATE void MonsterRevive()
 
 NamedScript DECORATE void MonsterDeathCheck()
 {
+    Delay(1);
+
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
     if (ClassifyActor(0) & ACTOR_WORLD)
