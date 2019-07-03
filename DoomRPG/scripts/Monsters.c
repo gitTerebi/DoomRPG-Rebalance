@@ -2581,7 +2581,7 @@ NamedScript DECORATE void MonsterTransport(int Difficulty, int Time, int Radius)
         if (Success)
         {
             // Delay here to make sure the init script has time to run
-            Delay(1);
+            Delay(4);
 
             // Pointer
             Stats = &Monsters[GetMonsterID(TID)];
