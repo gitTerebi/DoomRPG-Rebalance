@@ -95,11 +95,14 @@ actor DRPGMoneyDropper : RandomSpawner 20000
 
 actor DRPGHealthDropper : RandomSpawner 20001
 {
-    DropItem "DRPGStimpack"         255 40
-    DropItem "DRPGMedikit"          255 30
-    DropItem "DRPGLargeMedikit"     255 15
-    DropItem "DRPGXLMedikit"        255 10
-    DropItem "DRPGMedPack"          255 4
+    DropItem "DRPGEPCapsule"        255 10
+    DropItem "DRPGBigEPCapsule"     255 5
+	DropItem "RLArmorBonusPickup"   255 5
+    DropItem "DRPGStimpack"         255 45
+    DropItem "DRPGMedikit"          255 18
+    DropItem "DRPGLargeMedikit"     255 8
+    DropItem "DRPGXLMedikit"        255 5
+    DropItem "DRPGMedPack"          255 3
     DropItem "DRPGSurgeryKit"       255 1
 }
 
@@ -403,9 +406,9 @@ actor DRPGMarineReinforcementSpawner : RandomSpawner
 actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 {
     DropItem "DRPGSmallBackpack"    255 50
-    DropItem "DRPGBackpack"         255 30
-    DropItem "DRPGBigBackpack"      255 15
-    DropItem "DRPGCrate"            255 5
+    DropItem "DRPGBackpack"         255 40
+    DropItem "DRPGBigBackpack"      255 10
+    DropItem "DRPGCrate"            255 0
 }
 
 // HEALTH ITEMS
@@ -414,36 +417,48 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // Health Bonus Locations
 actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 {
-	DropItem "DRPGHealthBonus"
-    DropItem "DRPGLootMedicalSupplies"
-    DropItem "DRPGLootChemicals"
-    DropItem "DRPGLootHazardousMaterials"
-    DropItem "DRPGLootAnomalousMaterials"
-    DropItem "DRPGLootBriefcase"
-    DropItem "DRPGLootComputerData"
-    DropItem "DRPGLootGunParts"
-    DropItem "DRPGLootAmmoCasings"
-    DropItem "DRPGLootFuelCapsule"
-    DropItem "DRPGLootScrapMetals"
-    DropItem "DRPGLootScrapElectronics"
-    DropItem "DRPGLootExperimentalParts"
-    DropItem "DRPGLootDemonArtifact"
+    DropItem "DRPGEPCapsule"                   255 5
+    DropItem "DRPGBigEPCapsule"                255 1
+	DropItem "DRPGTurretPart"                  255 1
+	DropItem "DRPGHealthBonus"                 255 14
+    DropItem "DRPGLootMedicalSupplies"         255 18
+    DropItem "DRPGLootChemicals"               255 18
+    DropItem "DRPGLootHazardousMaterials"      255 18
+    DropItem "DRPGLootAnomalousMaterials"      255 18
+    DropItem "DRPGLootBriefcase"               255 18
+    DropItem "DRPGLootComputerData"            255 18
+    DropItem "DRPGLootGunParts"                255 18
+    DropItem "DRPGLootAmmoCasings"             255 18
+    DropItem "DRPGLootFuelCapsule"             255 18
+    DropItem "DRPGLootScrapMetals"             255 18
+    DropItem "DRPGLootScrapElectronics"        255 18
+    DropItem "DRPGLootExperimentalParts"       255 18
+    DropItem "DRPGLootDemonArtifact"           255 18
 }
 
 // Stimpack Locations
 actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 {
-    DropItem "DRPGStimpack"     192
-    DropItem "DRPGMedikit"      192
-    DropItem "DRPGLargeMedikit" 192
+    DropItem "DRPGEPCapsule"        255 10
+    DropItem "DRPGBigEPCapsule"     255 5
+	DropItem "RLArmorBonusPickup"   255 5
+    DropItem "DRPGStimpack"         255 55
+    DropItem "DRPGMedikit"          255 20
+    DropItem "DRPGLargeMedikit"     255 5
 }
 
 // Medikit Locations
 actor DRPGMedikitRandomizer : RandomSpawner Replaces Medikit
 {
-    DropItem "DRPGXLMedikit"    85
-    DropItem "DRPGMedPack"      85
-    DropItem "DRPGSurgeryKit"   85
+    DropItem "DRPGEPCapsule"        255 10
+    DropItem "DRPGBigEPCapsule"     255 5
+	DropItem "RLArmorBonusPickup"   255 5
+	DropItem "DRPGStimpack"         255 45
+    DropItem "DRPGMedikit"          255 18
+    DropItem "DRPGLargeMedikit"     255 8
+    DropItem "DRPGXLMedikit"        255 5
+    DropItem "DRPGMedPack"          255 3
+    DropItem "DRPGSurgeryKit"       255 1
 }
 
 // Soulsphere Locations
@@ -489,15 +504,15 @@ actor DRPGBlueArmorRandomizer : RandomSpawner Replaces BlueArmor
 // Invulnerability Sphere Locations
 actor DRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces InvulnerabilitySphere
 {
-    DropItem "DRPGInvulnerabilitySphere"    255 95
-    DropItem "DRPGCrate"                    255 5
+    DropItem "DRPGInvulnerabilitySphere"    255 100
+    DropItem "DRPGCrate"                    255 0
 }
 
 // Blur Sphere Locations
 actor DRPGBlurSphereRandomizer : RandomSpawner Replaces BlurSphere
 {
-    DropItem "DRPGBlurSphere"               255 95
-    DropItem "DRPGCrate"                    255 5
+    DropItem "DRPGBlurSphere"               255 100
+    DropItem "DRPGCrate"                    255 0
 }
 
 // SHOP DISPLAYS

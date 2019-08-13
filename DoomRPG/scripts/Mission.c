@@ -232,10 +232,10 @@ MissionInfo CreateMission(int Difficulty)
         else
             RankNext = RankTable[Players(i).RankLevel];
 
-        RewardXP += XPNext * 1000 / (100000 - (Difficulty * 10000));
+        RewardXP += XPNext * 2500 / (100000 - (Difficulty * 10000));
         RewardRank += RankNext * 1000 / (100000 - (Difficulty * 10000));
-        RewardCredits += Random(100 * (Difficulty + 1) * (Players(i).Level + 1), 100 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
-        RewardModules += Random(10 * (Difficulty + 1) * (Players(i).Level + 1), 10 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
+        RewardCredits += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 6 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
+        RewardModules += Random(5 * (Difficulty + 1) * (Players(i).Level + 1), 5 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
 
         NumPlayers++;
     }
@@ -261,7 +261,7 @@ MissionInfo CreateMission(int Difficulty)
     {
         // Generate Item and Amount
         int ItemIndex = Random(0, MAX_LOOT - 1);
-        int Amount = 10 + (Difficulty * 5);
+        int Amount = 20 + (Difficulty * 10);
         ItemInfoPtr ItemPtr = &ItemData[7][ItemIndex];
 
         // Pass data to the Mission struct

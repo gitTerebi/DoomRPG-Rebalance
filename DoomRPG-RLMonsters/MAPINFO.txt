@@ -3,6 +3,9 @@ clearskills
 // Easy skill
 skill easy
 {
+	AmmoFactor = 1
+	DropAmmoFactor = 1
+
 	aggressiveness = 0.25
 	spawnfilter = normal
 
@@ -10,7 +13,7 @@ skill easy
 	easykey
 	autousehealth
 	
-	acsreturn = 1
+	acsreturn = 2
 	
 	PicName = "M_EASY"
 	Name = "$SKILL_EASY"
@@ -41,12 +44,15 @@ skill easy
 // Normal skill
 skill normal
 {
+	AmmoFactor = 1
+	DropAmmoFactor = 1
+
 	aggressiveness = 0.5
 	spawnfilter = normal
 	
 	autousehealth
 
-	acsreturn = 2
+	acsreturn = 3
 	
 	PicName = "M_MODER"
 	Name = "$SKILL_NORMAL"
@@ -74,22 +80,105 @@ skill normal
 	ReplaceActor = "BossBrain", "RLBossBrain"
 }
 
-// Adaptive skill
-skill adaptive
+// Hard skill
+skill hard
 {
+	AmmoFactor = 1
+	DropAmmoFactor = 1
+
+	defaultskill
+	
 	aggressiveness = 0.8
+	spawnfilter = nightmare
+	
+	autousehealth
+
+	acsreturn = 4
+	
+	PicName = "M_STAND"
+	Name = "$SKILL_HARD"
+	textcolor = "Orange"
+	Key = "3"
+
+	ReplaceActor = "Zombieman", "RLFormerHumanSpawner"
+	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawner"
+	ReplaceActor = "Chaingunguy", "RLFormerCommandoSpawner"
+	ReplaceActor = "DoomImp", "RLImpSpawner"
+	ReplaceActor = "Demon", "RLDemonSpawner"
+	ReplaceActor = "Spectre", "RLSpectreSpawner"
+	ReplaceActor = "LostSoul", "RLLostSoulSpawner"
+	ReplaceActor = "Cacodemon", "RLCacodemonSpawner"
+	ReplaceActor = "HellKnight", "RLHellKnightSpawner"
+	ReplaceActor = "BaronOfHell", "RLBaronOfHellSpawner"
+	ReplaceActor = "Arachnotron", "RLArachnotronSpawner"
+	ReplaceActor = "PainElemental", "RLPainElementalSpawner"
+	ReplaceActor = "Revenant", "RLRevenantSpawner"
+	ReplaceActor = "Fatso", "RLMancubusSpawner"
+	ReplaceActor = "Archvile", "RLArchvileSpawner"
+	ReplaceActor = "Cyberdemon", "RLCyberdemonSpawner"
+	ReplaceActor = "SpiderMastermind", "RLSpiderMastermindSpawner"
+	ReplaceActor = "BossEye", "RLUVBossEye"
+	ReplaceActor = "BossBrain", "RLBossBrain"
+}
+
+// Hell skill
+skill hell
+{
+	AmmoFactor = 1
+	DropAmmoFactor = 1
+	
+	aggressiveness = 1.0
 	spawnfilter = nightmare
 
 	disablecheats
 	autousehealth
 	
-	acsreturn = 3
+	acsreturn = 5
+	
+	PicName = "M_HELL"
+	Name = "Hell"
+	textcolor = "Brick"
+	Key = "4"
+
+	ReplaceActor = "Zombieman", "DRPGHellFormerHumanSpawner"
+	ReplaceActor = "Shotgunguy", "DRPGHellFormerSergeantSpawner"
+	ReplaceActor = "Chaingunguy", "DRPGHellFormerCommandoSpawner"
+	ReplaceActor = "DoomImp", "DRPGHellImpSpawner"
+	ReplaceActor = "Demon", "DRPGHellDemonSpawner"
+	ReplaceActor = "Spectre", "DRPGHellSpectreSpawner"
+	ReplaceActor = "LostSoul", "DRPGHellLostSoulSpawner"
+	ReplaceActor = "Cacodemon", "DRPGHellCacodemonSpawner"
+	ReplaceActor = "HellKnight", "DRPGHellHellKnightSpawner"
+	ReplaceActor = "BaronOfHell", "DRPGHellBaronOfHellSpawner"
+	ReplaceActor = "Arachnotron", "DRPGHellArachnotronSpawner"
+	ReplaceActor = "PainElemental", "DRPGHellPainElementalSpawner"
+	ReplaceActor = "Revenant", "DRPGHellRevenantSpawner"
+	ReplaceActor = "Fatso", "DRPGHellMancubusSpawner"
+	ReplaceActor = "Archvile", "DRPGHellArchvileSpawner"
+	ReplaceActor = "Cyberdemon", "DRPGHellCyberdemonSpawner"
+	ReplaceActor = "SpiderMastermind", "DRPGHellSpiderMastermindSpawner"
+    ReplaceActor = "BossEye", "RLUVBossEye"
+}
+
+// Adaptive skill
+skill adaptive
+{
+	AmmoFactor = 1
+	DropAmmoFactor = 1
+
+	aggressiveness = 1.0
+	spawnfilter = nightmare
+
+	disablecheats
+	autousehealth
+	
+	acsreturn = 5
 	
 	PicName = "M_ADAPT"
 	Name = "Adaptive"
 	MustConfirm = "A progressive difficulty that ramps up over time, starts at UV, ends up far worse."
 	textcolor = "Sapphire"
-	Key = "3"
+	Key = "5"
 	
 	//ReplaceActor = "GreenArmor", "RLAdaptiveStandardArmorSpawner"
 	//ReplaceActor = "BlueArmor", "RLAdaptiveAdvancedArmorSpawner"
@@ -114,83 +203,12 @@ skill adaptive
 	ReplaceActor = "BossBrain", "RLBossBrain"
 }
 
-// Nightmare skill
-skill nightmare
-{
-	defaultskill
-	aggressiveness = 1.0
-	spawnfilter = nightmare
-	
-	autousehealth
-
-	acsreturn = 4
-	
-	PicName = "M_NIGHT"
-	Name = "$SKILL_NIGHTMARE"
-	MustConfirm = "Raging, horned devils. Only Nightmare enemies spawn..."
-	textcolor = "Red"
-	Key = "4"
-
-	ReplaceActor = "Zombieman", "RLEliteFormerHumanSpawner"
-	ReplaceActor = "Shotgunguy", "RLEliteFormerSergeantSpawner"
-	ReplaceActor = "Chaingunguy", "RLEliteFormerCommandoSpawner"
-	ReplaceActor = "DoomImp", "RLNightmareImp"
-	ReplaceActor = "Demon", "RLNightmareDemon"
-	ReplaceActor = "Spectre", "RLNightmareSpectre"
-	ReplaceActor = "LostSoul", "RLNightmareLostSoul"
-	ReplaceActor = "Cacodemon", "RLNightmareCacodemon"
-	ReplaceActor = "HellKnight", "RLNightmareHellKnight"
-	ReplaceActor = "BaronOfHell", "RLNightmareBaronOfHell"
-	ReplaceActor = "Arachnotron", "RLNightmareArachnotron"
-	ReplaceActor = "PainElemental", "RLNightmarePainElemental"
-	ReplaceActor = "Revenant", "RLNightmareRevenant"
-	ReplaceActor = "Fatso", "RLNightmareMancubus"
-	ReplaceActor = "Archvile", "RLNightmareArchvile"
-	ReplaceActor = "Cyberdemon", "RLNightmareCyberdemonSpawner"
-	ReplaceActor = "SpiderMastermind", "RLNightmareSpiderMastermindSpawner"
-	ReplaceActor = "BossEye", "RLNightmareBossEye"
-	ReplaceActor = "BossBrain", "RLNightmareBossBrain"
-}
-
-// Hell skill
-skill hell
-{
-	aggressiveness = 1.0
-	spawnfilter = nightmare
-
-	disablecheats
-	autousehealth
-	
-	acsreturn = 5
-	
-	PicName = "M_HELL"
-	Name = "Hell"
-	textcolor = "Brick"
-	Key = "5"
-
-	ReplaceActor = "Zombieman", "DRPGHellFormerHumanSpawner"
-	ReplaceActor = "Shotgunguy", "DRPGHellFormerSergeantSpawner"
-	ReplaceActor = "Chaingunguy", "DRPGHellFormerCommandoSpawner"
-	ReplaceActor = "DoomImp", "DRPGHellImpSpawner"
-	ReplaceActor = "Demon", "DRPGHellDemonSpawner"
-	ReplaceActor = "Spectre", "DRPGHellSpectreSpawner"
-	ReplaceActor = "LostSoul", "DRPGHellLostSoulSpawner"
-	ReplaceActor = "Cacodemon", "DRPGHellCacodemonSpawner"
-	ReplaceActor = "HellKnight", "DRPGHellHellKnightSpawner"
-	ReplaceActor = "BaronOfHell", "DRPGHellBaronOfHellSpawner"
-	ReplaceActor = "Arachnotron", "DRPGHellArachnotronSpawner"
-	ReplaceActor = "PainElemental", "DRPGHellPainElementalSpawner"
-	ReplaceActor = "Revenant", "DRPGHellRevenantSpawner"
-	ReplaceActor = "Fatso", "DRPGHellMancubusSpawner"
-	ReplaceActor = "Archvile", "DRPGHellArchvileSpawner"
-	ReplaceActor = "Cyberdemon", "DRPGHellCyberdemonSpawner"
-	ReplaceActor = "SpiderMastermind", "DRPGHellSpiderMastermindSpawner"
-    ReplaceActor = "BossEye", "RLUVBossEye"
-}
-
 // Armageddon skill
 skill armageddon
 {
+	AmmoFactor = 1
+	DropAmmoFactor = 1
+
 	aggressiveness = 1.0
 	spawnfilter = nightmare
 
@@ -227,3 +245,44 @@ skill armageddon
 	ReplaceActor = "BossEye", "RLArmageddonBossEye"
 	ReplaceActor = "BossBrain", "RLArmageddonBossBrain"
 }
+
+// Nightmare skill
+skill nightmare
+{
+	AmmoFactor = 1
+	DropAmmoFactor = 1
+
+	aggressiveness = 1.0
+	spawnfilter = nightmare
+	
+	autousehealth
+
+	acsreturn = 7
+	
+	PicName = "M_NIGHT"
+	Name = "$SKILL_NIGHTMARE"
+	MustConfirm = "Raging, horned devils. Only Nightmare enemies spawn..."
+	textcolor = "Red"
+	Key = "7"
+
+	ReplaceActor = "Zombieman", "RLEliteFormerHumanSpawner"
+	ReplaceActor = "Shotgunguy", "RLEliteFormerSergeantSpawner"
+	ReplaceActor = "Chaingunguy", "RLEliteFormerCommandoSpawner"
+	ReplaceActor = "DoomImp", "RLNightmareImp"
+	ReplaceActor = "Demon", "RLNightmareDemon"
+	ReplaceActor = "Spectre", "RLNightmareSpectre"
+	ReplaceActor = "LostSoul", "RLNightmareLostSoul"
+	ReplaceActor = "Cacodemon", "RLNightmareCacodemon"
+	ReplaceActor = "HellKnight", "RLNightmareHellKnight"
+	ReplaceActor = "BaronOfHell", "RLNightmareBaronOfHell"
+	ReplaceActor = "Arachnotron", "RLNightmareArachnotron"
+	ReplaceActor = "PainElemental", "RLNightmarePainElemental"
+	ReplaceActor = "Revenant", "RLNightmareRevenant"
+	ReplaceActor = "Fatso", "RLNightmareMancubus"
+	ReplaceActor = "Archvile", "RLNightmareArchvile"
+	ReplaceActor = "Cyberdemon", "RLNightmareCyberdemonSpawner"
+	ReplaceActor = "SpiderMastermind", "RLNightmareSpiderMastermindSpawner"
+	ReplaceActor = "BossEye", "RLNightmareBossEye"
+	ReplaceActor = "BossBrain", "RLNightmareBossBrain"
+}
+

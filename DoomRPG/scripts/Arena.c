@@ -49,12 +49,8 @@ str const ArenaBonus[ABONUS_MAX] =
     "\CfChip Drop",
     "\CeAmmo Drop",
     "\CaHealth Drop",
-    "\CdArmor Drop",
-    "\CgWeapon Drop",
     "\CqPowerup Drop",
     "\CkStim Drop",
-    "\CiCrate Drop",
-    "\CtMod Drop",
     "\CjKey Drop"
 };
 
@@ -274,13 +270,11 @@ NamedScript MapSpecial void ArenaChooseBonus()
             ActivatorSound("menu/move", 127);
             BonusChoice--;
             if (BonusChoice < 1) BonusChoice = ABONUS_MAX - (CanChooseKey ? 1 : 2);
-            if (BonusChoice == ABONUS_MODDROP && CompatMode != COMPAT_DRLA) BonusChoice--;
         }
         if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
             BonusChoice++;
-            if (BonusChoice == ABONUS_MODDROP && CompatMode != COMPAT_DRLA) BonusChoice++;
             if (BonusChoice > ABONUS_MAX - (CanChooseKey ? 1 : 2)) BonusChoice = 1;
         }
         if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
@@ -295,9 +289,6 @@ NamedScript MapSpecial void ArenaChooseBonus()
         // Drawing
         for (int i = 1; i < ABONUS_MAX; i++)
         {
-            // Skip Mod Drop if DRLA extension isn't enabled
-            if (i == ABONUS_MODDROP && CompatMode != COMPAT_DRLA) continue;
-
             // Skip Key Drop if the randomizer hates you
             if (i == ABONUS_KEYDROP && !CanChooseKey) continue;
 
@@ -373,16 +364,6 @@ void ArenaGetBonus(int Bonus)
             SpawnItem = "DRPGHealthDropper";
         DropArenaItem(SpawnItem);
         break;
-    case ABONUS_ARMORDROP: // Armor Drop
-        if (Random(1, 2) == 1)
-            SpawnItem = "DRPGBlueArmorRandomizer";
-        else
-            SpawnItem = "DRPGGreenArmorRandomizer";
-        DropArenaItem(SpawnItem);
-        break;
-    case ABONUS_WEAPONDROP: // Weapon Drop
-        DropArenaItem("DRPGWeaponDropper");
-        break;
     case ABONUS_POWERUPDROP: // Powerup Drop
         DropArenaItem("DRPGPowerupDropper");
         break;
@@ -392,18 +373,6 @@ void ArenaGetBonus(int Bonus)
         else if (Random(1, 8) == 1)
             DropArenaItem("DRPGStimPackagePowerup");
         DropArenaItem("DRPGStimDropper");
-        break;
-    case ABONUS_CRATEDROP: // Crate Drop
-        DropArenaItem("DRPGCrate");
-        break;
-    case ABONUS_MODDROP: // Mod Drop (DRLA Only)
-        if (CompatMode == COMPAT_DRLA)
-            DropArenaItem("RLModPackSpawner");
-        else
-        {
-            ArenaGetBonus(Random(0, ABONUS_MAX - 1));
-            return;
-        }
         break;
     case ABONUS_KEYDROP: // Key Drop
         if (ArenaKey == 0) SpawnItem = "DRPGRedCard";

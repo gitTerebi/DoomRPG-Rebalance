@@ -2381,9 +2381,9 @@ NamedScript void MonsterDeath()
             for (int i = 0; i < MAX_PLAYERS; i++)
             {
                 LuckMult = 100 + Players(i).LuckTotal;
-                CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
-                CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
-                CreditsTable[i] = (Random(CreditsMin, CreditsMax) * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
+                CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 2000;
+                CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 200;
+                CreditsTable[i] = (Random(CreditsMin, CreditsMax) * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 200;
 
                 // REK-T50 accessory
                 if (Players(i).Shield.Active && Players(i).Shield.Accessory && Players(i).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
@@ -2401,8 +2401,8 @@ NamedScript void MonsterDeath()
         else
         {
             LuckMult = 100 + Players(Killer).LuckTotal;
-            CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
-            CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
+            CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 2000;
+            CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 200;
             CreditsAmount = Random(CreditsMin, CreditsMax);
 
             // REK-T50 accessory

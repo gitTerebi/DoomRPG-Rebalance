@@ -309,22 +309,22 @@ NamedScript void BuildItemData()
 
     // Stims/Augmentations/Turret Parts
     ITEMDATA_CATEGORY(6, "\CkStims/Augs/Turret", CF_NONE);
-    ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                         1000, 0, 1, "STIMB0", 16, 29);
-    ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                        2500, 2, 2, "STIMB0", 16, 29);
-    ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                         5000, 4, 4, "STIMB0", 16, 29);
-    ITEMDATA_DEF("DRPGStimXL",              "Extra-Large Stim",                  10000, 8, 6, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                          500, 0, 1, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                        1500, 2, 2, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                         2500, 4, 4, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimXL",              "Extra-Large Stim",                   5000, 8, 6, "STIMB0", 16, 29);
     ITEMDATA_DEF("DRPGStimDetox",           "\CdDetox\C- Hypospray",              2500, 1, 2, "STIMC0",  6, 31);
 
-    ITEMDATA_DEF("DRPGVialStrength",        "\CgStrength\C- Vial",                 500, 4, 0, "STVLA0",  4, 16);
-    ITEMDATA_DEF("DRPGVialDefense",         "\CdDefense\C- Vial",                  500, 4, 0, "STVLB0",  4, 16);
-    ITEMDATA_DEF("DRPGVialVitality",        "\CaVitality\C- Vial",                 500, 4, 0, "STVLC0",  4, 16);
-    ITEMDATA_DEF("DRPGVialEnergy",          "\CnEnergy\C- Vial",                   500, 4, 0, "STVLD0",  4, 16);
-    ITEMDATA_DEF("DRPGVialRegeneration",    "\CtRegeneration\C- Vial",             500, 4, 0, "STVLE0",  4, 16);
-    ITEMDATA_DEF("DRPGVialAgility",         "\CiAgility\C- Vial",                  500, 4, 0, "STVLF0",  4, 16);
-    ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",                 500, 4, 0, "STVLG0",  4, 16);
-    ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",                     500, 4, 0, "STVLH0",  4, 16);
-    ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",                1000, 4, 1, "STVLI0",  4, 16);
-    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",                 1000, 4, 1, "STVLJ0",  4, 16);
+    ITEMDATA_DEF("DRPGVialStrength",        "\CgStrength\C- Vial",                 200, 4, 0, "STVLA0",  4, 16);
+    ITEMDATA_DEF("DRPGVialDefense",         "\CdDefense\C- Vial",                  200, 4, 0, "STVLB0",  4, 16);
+    ITEMDATA_DEF("DRPGVialVitality",        "\CaVitality\C- Vial",                 200, 4, 0, "STVLC0",  4, 16);
+    ITEMDATA_DEF("DRPGVialEnergy",          "\CnEnergy\C- Vial",                   200, 4, 0, "STVLD0",  4, 16);
+    ITEMDATA_DEF("DRPGVialRegeneration",    "\CtRegeneration\C- Vial",             200, 4, 0, "STVLE0",  4, 16);
+    ITEMDATA_DEF("DRPGVialAgility",         "\CiAgility\C- Vial",                  200, 4, 0, "STVLF0",  4, 16);
+    ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",                 200, 4, 0, "STVLG0",  4, 16);
+    ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",                     200, 4, 0, "STVLH0",  4, 16);
+    ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",                 400, 4, 1, "STVLI0",  4, 16);
+    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",                  800, 4, 1, "STVLJ0",  4, 16);
     ITEMDATA_DEF("DRPGVialIndestructible",  "\CqIndestructible\C- Vial",          1000, 4, 1, "STVLK0",  4, 16);
     ITEMDATA_DEF("DRPGVialShadow",          "\CrShadow\C- Vial",                  1000, 4, 1, "STVLL0",  4, 16);
     ITEMDATA_DEF("DRPGVialInfinity",        "\CkInfinity\C- Vial",                1000, 4, 1, "STVLM0",  4, 16);
@@ -337,14 +337,14 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",                  5000, 4, 5, "STPAA0", 30, 16);
     ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",              10000, 4, 7, "STPAB0", 27, 16);
 
-    ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",            100000, 4, 8, "AUGCA0", 12, 24);
-    ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",    100000, 4, 8, "AUGUA0", 12, 24);
-    ITEMDATA_DEF("DRPGAugSlotUpgrade",      "Augmentation Slot Upgrade",        250000, 8, 8, "AUGUB0", 16, 25);
+    ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             50000, 4, 8, "AUGCA0", 12, 24);
+    ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     50000, 4, 8, "AUGUA0", 12, 24);
+    ITEMDATA_DEF("DRPGAugSlotUpgrade",      "Augmentation Slot Upgrade",        125000, 8, 8, "AUGUB0", 16, 25);
     ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                      1000, 4, 1, "BATTA0",  5, 13);
     ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      2500, 8, 2, "BATTB0", 14, 21);
 
-    ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                        1000, 1, 1, "TPRTA0", 29, 21);
-    ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                50000, 4, 4, "TCRTA0", 29, 26);
+    ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                         500, 1, 1, "TPRTA0", 29, 21);
+    ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                25000, 4, 4, "TCRTA0", 29, 26);
     ITEMDATA_CATEGORY_END;
 
     // Generic Loot
@@ -426,9 +426,9 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           1350,  3, 1, "OLOKX0", 10, 13);
         ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              1800,  4, 1, "DEAPX0", 11, 14);
         ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                         2500,  4, 2, "MRKPX0",  9, 12);
-        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                           2500,  4, 2, "NSSGX0", 27,  9);
-        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                         3000,  4, 3, "ASHOX0", 31, 27);
-        ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     1900,  3, 1, "RUZIX0", 20, 26);
+        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                           8000,  4, 2, "NSSGX0", 27,  9);
+        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        10000,  4, 3, "ASHOX0", 31, 27);
+        ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     2000,  3, 1, "RUZIX0", 20, 26);
         ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                15000,  6, 5, "ZGGGX0", 30, 20);
         ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                        5000,  5, 3, "CLAUX0", 45, 24);
         ITEMDATA_DEF("RLNapalmLauncher",                        "Napalm Launcher \Ct[Exotic]\C-",                         8500,  6, 4, "NAPAX0", 22, 20);

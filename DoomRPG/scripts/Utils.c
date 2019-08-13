@@ -103,10 +103,11 @@ str const SkillLevelsDRLA[MAX_SKILLLEVELS_DRLA] =
 {
     "\CdEasy",
     "\CjModerate", // Normal
-    "\CyAdaptive",
-    "\CgNightmare",
+    "\CiStandard", // Hard
     "\CaHell",
-    "\CmArmageddon"
+    "\CyAdaptive",
+    "\CmArmageddon",
+    "\CgNightmare"
 };
 
 // TODO: Just number these and use StrParam

@@ -380,8 +380,8 @@ void CheckStats()
     Player.CapacityTotal = Player.Capacity + Player.CapacityNat + Player.CapacityBonus;
     Player.LuckTotal = Player.Luck + Player.LuckNat + Player.LuckBonus;
 
-    Player.LevelDamage = Player.Level * (10 - GameSkill());
-    Player.BonusDamage = Player.StrengthTotal;
+    Player.LevelDamage = Player.Level * (10 - GameSkill()) / 5;
+    Player.BonusDamage = Player.StrengthTotal * 2;
     Player.DamageMult = 1.0;
     Player.TotalDamage = Player.LevelDamage + Player.BonusDamage;
     if (Player.DefenseTotal > 0)
@@ -389,19 +389,19 @@ void CheckStats()
     else
         Player.DamageFactor = 1.0 + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
     Player.Mass = 100 + (Player.DefenseTotal * 10);
-    Player.HealthMax = Player.VitalityTotal * 10;
+    Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
     Player.StatusEffectResist = (fixed)Player.VitalityTotal / 4.0;
-    Player.EPMax = Player.EnergyTotal * 10;
+    Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
     Player.Speed = 1.0 + 0.25 * ((fixed)Player.AgilityTotal / 100);
     Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.AgilityTotal / 100));
     Player.WeaponSpeed = Player.AgilityTotal;
-    SetAmmoCapacity("Clip", Player.CapacityTotal * 20);
-    SetAmmoCapacity("Shell", Player.CapacityTotal * 5);
-    SetAmmoCapacity("RocketAmmo", Player.CapacityTotal * 5);
-    SetAmmoCapacity("Cell", Player.CapacityTotal * 30);
-    Player.Stim.VialMax = Player.CapacityTotal * 10;
+    SetAmmoCapacity("Clip", 60 + Player.CapacityTotal * 10);
+    SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
+    SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.5);
+    SetAmmoCapacity("Cell", Player.CapacityTotal * 10);
+    Player.Stim.VialMax = Player.CapacityTotal * 2.5;
     Player.SurvivalBonus = (fixed)Player.AgilityTotal / 10.0;
     if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
     {
@@ -409,7 +409,7 @@ void CheckStats()
         SetAmmoCapacity("RLSkullLimit", DRLA_SKULL_MAX);
         SetAmmoCapacity("RLPhaseDeviceLimit", DRLA_DEVICE_MAX);
     }
-    Player.MedkitMax = Player.CapacityTotal * 10;
+    Player.MedkitMax = Player.CapacityTotal * 5;
 
     // Determine current stat cap
     Player.StatCap = SoftStatCap + Player.Level * GetCVar("drpg_soft_stat_cap_mult");
@@ -588,8 +588,8 @@ void CheckStats()
 void CheckRegen()
 {
     // Determine the max timer amounts
-    Player.HPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
-    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
+    Player.HPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 2.05k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
+    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 4.2k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
 
     // Cap Times
     if (Player.HPTime < 35)
@@ -889,21 +889,21 @@ void CheckPerks()
     // If you're dead, return
     if (GetActorProperty(Player.TID, APROP_Health) <= 0) return;
 
-    if (Player.StrengthTotal >= 100)     Player.Perks[STAT_STRENGTH] = true;
+    if (Player.StrengthTotal >= 50)     Player.Perks[STAT_STRENGTH] = true;
     else Player.Perks[STAT_STRENGTH] = false;
-    if (Player.DefenseTotal >= 100)      Player.Perks[STAT_DEFENSE] = true;
+    if (Player.DefenseTotal >= 50)      Player.Perks[STAT_DEFENSE] = true;
     else Player.Perks[STAT_DEFENSE] = false;
-    if (Player.VitalityTotal >= 100)     Player.Perks[STAT_VITALITY] = true;
+    if (Player.VitalityTotal >= 50)     Player.Perks[STAT_VITALITY] = true;
     else Player.Perks[STAT_VITALITY] = false;
-    if (Player.EnergyTotal >= 100)       Player.Perks[STAT_ENERGY] = true;
+    if (Player.EnergyTotal >= 50)       Player.Perks[STAT_ENERGY] = true;
     else Player.Perks[STAT_ENERGY] = false;
-    if (Player.RegenerationTotal >= 100) Player.Perks[STAT_REGENERATION] = true;
+    if (Player.RegenerationTotal >= 50) Player.Perks[STAT_REGENERATION] = true;
     else Player.Perks[STAT_REGENERATION] = false;
-    if (Player.AgilityTotal >= 100)      Player.Perks[STAT_AGILITY] = true;
+    if (Player.AgilityTotal >= 50)      Player.Perks[STAT_AGILITY] = true;
     else Player.Perks[STAT_AGILITY] = false;
     if (Player.CapacityTotal >= 100)     Player.Perks[STAT_CAPACITY] = true;
     else Player.Perks[STAT_CAPACITY] = false;
-    if (Player.LuckTotal >= 100)         Player.Perks[STAT_LUCK] = true;
+    if (Player.LuckTotal >= 50)         Player.Perks[STAT_LUCK] = true;
     else Player.Perks[STAT_LUCK] = false;
 
     fixed StrengthPercent = ((fixed)Player.ActualHealth / (fixed)Player.HealthMax * 100);
@@ -921,7 +921,7 @@ void CheckPerks()
 
     // Strength Perk - Exponentially increase Strength as Health Decreases
     if (Player.Perks[STAT_STRENGTH] && StrengthPercent < 100)
-        Player.DamageMult += ((100 - StrengthPercent) / 12.5);
+        Player.DamageMult += ((100 - StrengthPercent) / 250);
 
     // Defense Perk - Exponentially increase Defense as Health Decreases
     if (Player.Perks[STAT_DEFENSE] && DefensePercent > 0)

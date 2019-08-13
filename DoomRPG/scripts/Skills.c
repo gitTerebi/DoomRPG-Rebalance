@@ -104,7 +104,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Enviro-Shield",
-            .Cost = 100,
+            .Cost = 200,
             .MaxLevel = 1,
             .Use = Powerup,
             .Description =
@@ -144,7 +144,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Supply Drop",
-            .Cost = 200,
+            .Cost = 100,
             .MaxLevel = 3,
             .Use = DropSupply,
             .Description =
@@ -165,12 +165,12 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = UseAura,
             .Description =
             {
+                "+5% Damage",
+                "+10% Damage",
+                "+15% Damage",
+                "+20% Damage",
                 "+25% Damage",
-                "+50% Damage",
-                "+75% Damage",
-                "+100% Damage",
-                "+200% Damage",
-                "+300% Damage"
+                "+30% Damage"
             }
         },
         {
@@ -359,7 +359,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Plasma Beam",
-            .Cost = 65,
+            .Cost = 50,
             .MaxLevel = 3,
             .Use = PlasmaBeam,
             .Description =
@@ -405,7 +405,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Former Human",
-            .Cost = 10,
+            .Cost = 40,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -415,7 +415,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Former Sergeant",
-            .Cost = 50,
+            .Cost = 80,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -435,7 +435,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Imp",
-            .Cost = 75,
+            .Cost = 80,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -445,7 +445,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Demon",
-            .Cost = 75,
+            .Cost = 80,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -485,7 +485,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Lost Soul",
-            .Cost = 25,
+            .Cost = 30,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -610,7 +610,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Recall",
-            .Cost = 25,
+            .Cost = 20,
             .MaxLevel = 1,
             .Use = Recall,
             .Description =
@@ -3053,17 +3053,17 @@ void CheckAuras()
             if (Player.SoulActive[SOUL_RED])
                 Player.DamageMult += 3;
             else if (Player.Aura.Type[AURA_RED].Level == 1)
-                Player.DamageMult += 0.25;
+                Player.DamageMult += 0.051;
             else if (Player.Aura.Type[AURA_RED].Level == 2)
-                Player.DamageMult += 0.5;
+                Player.DamageMult += 0.101;
             else if (Player.Aura.Type[AURA_RED].Level == 3)
-                Player.DamageMult += 0.75;
+                Player.DamageMult += 0.151;
             else if (Player.Aura.Type[AURA_RED].Level == 4)
-                Player.DamageMult += 1;
+                Player.DamageMult += 0.201;
             else if (Player.Aura.Type[AURA_RED].Level == 5)
-                Player.DamageMult += 2;
+                Player.DamageMult += 0.251;
             else if (Player.Aura.Type[AURA_RED].Level == 6)
-                Player.DamageMult += 3;
+                Player.DamageMult += 0.301;
         }
 
         // Green Aura
@@ -3157,13 +3157,13 @@ void CheckAuras()
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 6 || Player.SoulActive[SOUL_DARKBLUE])
                 AmmoRegenMult = 4;
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 1 || Player.SoulActive[SOUL_DARKBLUE])
-                if ((Timer() % (35 / 2)) == 0)
+                if ((Timer() % 25) == 0)
                     GiveInventory("Clip", AmmoRegenMult);
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 2 || Player.SoulActive[SOUL_DARKBLUE])
-                if ((Timer() % 35) == 1)
+                if ((Timer() % (35 * 3)) == 1)
                     GiveInventory("Shell", AmmoRegenMult);
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 3 || Player.SoulActive[SOUL_DARKBLUE])
-                if ((Timer() % (35 * 2)) == 0)
+                if ((Timer() % (35 * 20)) == 0)
                     GiveInventory("RocketAmmo", AmmoRegenMult);
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 4 || Player.SoulActive[SOUL_DARKBLUE])
                 if ((Timer() % (35 / 2)) == 0)

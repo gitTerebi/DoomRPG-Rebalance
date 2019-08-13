@@ -188,12 +188,8 @@ typedef enum
     ABONUS_CHIPDROP,
     ABONUS_AMMODROP,
     ABONUS_HEALTHDROP,
-    ABONUS_ARMORDROP,
-    ABONUS_WEAPONDROP,
     ABONUS_POWERUPDROP,
     ABONUS_STIMDROP,
-    ABONUS_CRATEDROP,
-    ABONUS_MODDROP,
     ABONUS_KEYDROP,
     ABONUS_MAX,
 } EArenaBonusTypes;
@@ -435,7 +431,7 @@ typedef enum
 #define MAX_MEGABOSSES_DF       2
 #define MAX_MEGABOSSES_CH       2
 #define MAX_SKILLLEVELS_DF		6
-#define MAX_SKILLLEVELS_DRLA	6
+#define MAX_SKILLLEVELS_DRLA	7
 
 typedef enum
 {
@@ -739,7 +735,7 @@ typedef enum
 #define LUCK_SHIELDINC          0.0005
 #define LUCK_AUGINC             0.00025
 
-#define AURA_CALCTIME           (((35 * 30) + (Player.EnergyTotal * 5.25)) * (Player.AuraBonus + 1))
+#define AURA_CALCTIME           (((35 * 30) + (Player.EnergyTotal * 53)) * (Player.AuraBonus + 1))
 #define DRLA_WEAPON_MAX         6
 #define DRLA_ARMOR_MAX          2 + (Player.CapacityTotal / 25)
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX

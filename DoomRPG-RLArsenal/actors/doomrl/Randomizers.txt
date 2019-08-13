@@ -77,38 +77,40 @@ actor DRPGRLClipSpawner2 : RandomSpawner replaces DRPGClip
 // Clip Box
 actor DRPGRLClipBoxSpawner2 : RandomSpawner replaces DRPGClipBox
 {
-    DropItem "RLClipBox2" 		255 6
-    DropItem "RLModPackSpawner" 255 1
+    DropItem "RLClipBox2" 		255 100
 }
 
 // Shell Box
 actor DRPGRLShellBoxSpawner2 : RandomSpawner replaces DRPGShellBox
 {
-    DropItem "RLShellBox2" 		255 6
-    DropItem "RLModPackSpawner" 255 1
+    DropItem "RLShellBox2" 		255 92
+	DropItem "DRPGTurretPart"   255 5	
+    DropItem "RLModPackSpawner" 255 3
 }
 
 // Rocket Box
 actor DRPGRLRocketBoxSpawner2 : RandomSpawner replaces DRPGRocketBox
 {
-    DropItem "RLRocketBox2"  	255 6
-    DropItem "RLModPackSpawner" 255 1
+    DropItem "RLRocketBox2"  	255 92
+	DropItem "DRPGTurretPart"   255 5
+    DropItem "RLModPackSpawner" 255 3
 }
 
 // Cell Pack
 actor DRPGRLCellPackSpawner2 : RandomSpawner replaces DRPGCellPack
 {
-    DropItem "RLCellPack2" 		255 6
-    DropItem "RLModPackSpawner" 255 1
+    DropItem "RLCellPack2" 		255 92
+	DropItem "DRPGTurretPart"   255 5
+    DropItem "RLModPackSpawner" 255 3
 }
 
 // Backpack locations
 actor DRPGBackpackRandomizer2 : RandomSpawner Replaces DRPGBackpackRandomizer
 {
-	DropItem "DRPGSmallBackpack" 	255 35
-	DropItem "DRPGBackpack" 		255 35
-	DropItem "DRPGBigBackpack" 		255 5
-    DropItem "DRPGCrate"            255 25
+	DropItem "DRPGSmallBackpack" 	255 50
+	DropItem "DRPGBackpack" 		255 40
+	DropItem "DRPGBigBackpack" 		255 10
+    DropItem "DRPGCrate"            255 0
 }
 
 // ARMOR ITEMS
@@ -117,8 +119,8 @@ actor DRPGBackpackRandomizer2 : RandomSpawner Replaces DRPGBackpackRandomizer
 // Armor Bonus Locations
 actor DRPGArmorBonusReplacer2 : RandomSpawner Replaces DRPGArmorBonusReplacer
 {
-    DropItem "DRPGHealthBonusRandomizer"    255 200
-    DropItem "DRPGDRLAArmorBonusSpawner"    255 55
+    DropItem "DRPGHealthBonusRandomizer"    255 240
+    DropItem "DRPGDRLAArmorBonusSpawner"    255 15
 }
 
 actor DRPGDRLAArmorBonusSpawner
@@ -143,10 +145,10 @@ actor DRPGGreenArmorRandomizer2 : RandomSpawner Replaces DRPGGreenArmorRandomize
 // Blue Armor Locations
 actor DRPGBlueArmorRandomizer2 : RandomSpawner Replaces DRPGBlueArmorRandomizer
 {
-	DropItem "RLBlueArmorSpawner"		255 50
+	DropItem "RLBlueArmorSpawner"		255 70
 	DropItem "RLExoticArmorSpawner"		255 20
-	DropItem "RLAssembledArmorSpawner"	255 10
-	DropItem "RLUniqueArmorSpawner"		255 5
+	DropItem "RLAssembledArmorSpawner"	255 8
+	DropItem "RLUniqueArmorSpawner"		255 2
 }
 
 // POWERUPS
