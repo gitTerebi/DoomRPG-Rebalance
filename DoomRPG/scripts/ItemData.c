@@ -898,7 +898,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLPhaseDevice",               "Phase Device",                  1000, 1, 1, "PHS1I0", -9, -2);
         ITEMDATA_DEF("RLHomingPhaseDevice",         "Homing Phase Device",           2500, 2, 2, "PHS2I0", -9, -2);
         ITEMDATA_DEF("RLRecallPhaseDevice",         "Recall Phase Device",           2500, 2, 2, "PHS3I0", -9, -5);
-        ITEMDATA_DEF("RLExperimentalPhaseDevice",   "Experimental Phase Device",    60000,12, 8, "PHS4I0", -9, -4);
+        ITEMDATA_DEF("RLExperimentalPhaseDevice",   "Experimental Phase Device",    30000,12, 8, "PHS4I0", -9, -4);
         ITEMDATA_CATEGORY_END;
 
         // Mod Packs
