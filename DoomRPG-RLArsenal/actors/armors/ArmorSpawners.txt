@@ -44,7 +44,7 @@ actor RLRareArmorSpawner : RandomSpawner 16718
     DropItem "RLOModCyberwarriorArmorPickup" 255 2
     DropItem "RLOModRepulsionWaveSuitArmorPickup" 255 8
     DropItem "RLOModSurvivalMediArmorPickup" 255 7
-    DropItem "RLUniqueArmorSpawner" 255 7
+    DropItem "RLUniqueArmorSpawner" 255 3
     DropItem "RLStandardBootsSpawner" 255 1
 }
 
@@ -123,8 +123,8 @@ actor RLBlueArmorSpawner : RandomSpawner 16712
     DropItem "RLRedArmorPickup" 255 80
     DropItem "RLExoticArmorSpawner" 255 30
     DropItem "RLAssembledArmorSpawner" 255 20
-    DropItem "RLUniqueArmorSpawner" 255 6
-    DropItem "RLLegendaryArmorSpawner" 255 2
+    DropItem "RLUniqueArmorSpawner" 255 3
+    DropItem "RLLegendaryArmorSpawner" 255 1
 }
 
 actor RLExoticArmorSpawner : RandomSpawner 16713

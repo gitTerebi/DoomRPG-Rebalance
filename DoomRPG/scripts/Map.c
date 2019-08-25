@@ -3308,7 +3308,18 @@ NamedScript void InitWadSmoosh()
         "drpg_ws_master",
         "drpg_ws_nerve",
         "drpg_ws_plut",
-        "drpg_ws_tnt"
+        "drpg_ws_tnt",
+        "drpg_ws_av",
+        "drpg_ws_sc2",
+        "drpg_ws_pl2",
+        "drpg_ws_mm1",
+        "drpg_ws_mm2",
+        "drpg_ws_req",
+        "drpg_ws_jen",
+        "drpg_ws_hr",
+        "drpg_ws_hr2",
+        "drpg_ws_sod",
+        "drpg_ws_van"
     };
 
     str LumpNames[MAX_WSMAPPACKS] =
@@ -3318,7 +3329,18 @@ NamedScript void InitWadSmoosh()
         "ML_MAP01",
         "NV_MAP01",
         "PL_MAP01",
-        "TN_MAP01"
+        "TN_MAP01",
+        "AV01",
+        "SC201",
+        "PL201",
+        "MM101",
+        "MM201",
+        "REQ01",
+        "JEN01",
+        "HR01",
+        "HR201",
+        "SOD01",
+        "VAN01"
     };
     int i;
     bool BlankStart;

@@ -1032,7 +1032,7 @@ typedef struct LegendaryDef_S       LegendaryDef;
 // WadSmoosh Compatibility
 //
 
-#define MAX_WSMAPPACKS  6
+#define MAX_WSMAPPACKS  17
 
 typedef enum
 {
@@ -1041,7 +1041,18 @@ typedef enum
     WS_MASTER,
     WS_NERVE,
     WS_PLUT,
-    WS_TNT
+    WS_TNT,
+    WS_AV,
+    WS_SC2,
+    WS_PL2,
+    WS_MM1,
+    WS_MM2,
+    WS_REQ,
+    WS_JEN,
+    WS_HR,
+    WS_HR2,
+    WS_SOD,
+    WS_VAN
 } EnumWSMapSets;
 
 // --------------------------------------------------

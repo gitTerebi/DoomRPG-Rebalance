@@ -247,13 +247,13 @@ NamedScript void BuildItemData()
             //Rarity
             int rarity = 1;
             if (ShieldPartCost < 999999) rarity = 8;
-            if (ShieldPartCost < 200000) rarity = 7;
-            if (ShieldPartCost < 120000) rarity = 6;
-            if (ShieldPartCost < 90000) rarity = 5;
-            if (ShieldPartCost < 70000) rarity = 4;
-            if (ShieldPartCost < 50000) rarity = 3;
-            if (ShieldPartCost < 35000) rarity = 2;
-            if (ShieldPartCost < 20000) rarity = 1;
+            if (ShieldPartCost < 200000) rarity = 8;
+            if (ShieldPartCost < 120000) rarity = 8;
+            if (ShieldPartCost < 90000) rarity = 7;
+            if (ShieldPartCost < 70000) rarity = 7;
+            if (ShieldPartCost < 50000) rarity = 6;
+            if (ShieldPartCost < 35000) rarity = 5;
+            if (ShieldPartCost < 20000) rarity = 4;
 
             ItemData[5][ItemIndex].Rarity = rarity;
 
@@ -286,13 +286,13 @@ NamedScript void BuildItemData()
         //Rarity
         int rarity = 1;
         if (Accessory->Price < 999999) rarity = 8;
-        if (Accessory->Price < 200000) rarity = 7;
-        if (Accessory->Price < 120000) rarity = 6;
-        if (Accessory->Price < 90000) rarity = 5;
-        if (Accessory->Price < 70000) rarity = 4;
-        if (Accessory->Price < 50000) rarity = 3;
-        if (Accessory->Price < 35000) rarity = 2;
-        if (Accessory->Price < 20000) rarity = 1;
+        if (Accessory->Price < 200000) rarity = 8;
+        if (Accessory->Price < 120000) rarity = 8;
+        if (Accessory->Price < 90000) rarity = 7;
+        if (Accessory->Price < 70000) rarity = 7;
+        if (Accessory->Price < 50000) rarity = 6;
+        if (Accessory->Price < 35000) rarity = 5;
+        if (Accessory->Price < 20000) rarity = 4;
 
         ItemData[5][ItemIndex].Rarity = rarity;
 
@@ -335,7 +335,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",                    1000, 4, 1, "STVLR0",  4, 16);
     ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",                1000, 4, 1, "STVLS0",  4, 16);
     ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",                  5000, 4, 5, "STPAA0", 30, 16);
-    ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",              10000, 4, 7, "STPAB0", 27, 16);
+    ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",              20000, 4, 7, "STPAB0", 27, 16);
 
     ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             50000, 4, 8, "AUGCA0", 12, 24);
     ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     50000, 4, 8, "AUGUA0", 12, 24);
@@ -344,7 +344,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      2500, 8, 2, "BATTB0", 14, 21);
 
     ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                         500, 1, 1, "TPRTA0", 29, 21);
-    ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                25000, 4, 4, "TCRTA0", 29, 26);
+    ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                 2500, 4, 3, "TCRTA0", 29, 26);
     ITEMDATA_CATEGORY_END;
 
     // Generic Loot
@@ -904,17 +904,17 @@ NamedScript void BuildItemData()
         // Mod Packs
         ITEMDATA_CATEGORY(8, "\CtMod Packs", CF_NONE);
         // Normal Modpacks
-        ITEMDATA_DEF("RLPowerModItem",          "Power Modpack",         20000, 5, 2, "PMODA0",  8, 17);
-        ITEMDATA_DEF("RLBulkModItem",           "Bulk Modpack",          20000, 5, 2, "BMODA0",  8, 17);
-        ITEMDATA_DEF("RLAgilityModItem",        "Agility Modpack",       20000, 5, 2, "AMODA0",  8, 17);
-        ITEMDATA_DEF("RLTechnicalModItem",      "Technical Modpack",     20000, 5, 2, "TMODA0",  8, 17);
+        ITEMDATA_DEF("RLPowerModItem",          "Power Modpack",         20000, 5, -1, "PMODA0",  8, 17);
+        ITEMDATA_DEF("RLBulkModItem",           "Bulk Modpack",          20000, 5, -1, "BMODA0",  8, 17);
+        ITEMDATA_DEF("RLAgilityModItem",        "Agility Modpack",       20000, 5, -1, "AMODA0",  8, 17);
+        ITEMDATA_DEF("RLTechnicalModItem",      "Technical Modpack",     20000, 5, -1, "TMODA0",  8, 17);
 
         // Exotic Modpacks
-        ITEMDATA_DEF("RLSniperModItem",         "Sniper Modpack",       50000, 7, 4, "SMODA0",  8, 17);
-        ITEMDATA_DEF("RLFirestormModItem",      "Firestorm Modpack",    50000, 7, 4, "FMODA0",  8, 17);
-        ITEMDATA_DEF("RLNanoModItem",           "Nano Modpack",         50000, 7, 4, "NMODA0",  8, 17);
-        ITEMDATA_DEF("RLOnyxModItem",           "Onyx Modpack",         50000, 7, 4, "OMODA0",  8, 17);
-        ITEMDATA_DEF("RLArmorModItem",          "Armor Modpack",        50000, 7, 4, "AMK1A0", 10, 20);
+        ITEMDATA_DEF("RLSniperModItem",         "Sniper Modpack",       50000, 7, -1, "SMODA0",  8, 17);
+        ITEMDATA_DEF("RLFirestormModItem",      "Firestorm Modpack",    50000, 7, -1, "FMODA0",  8, 17);
+        ITEMDATA_DEF("RLNanoModItem",           "Nano Modpack",         50000, 7, -1, "NMODA0",  8, 17);
+        ITEMDATA_DEF("RLOnyxModItem",           "Onyx Modpack",         50000, 7, -1, "OMODA0",  8, 17);
+        ITEMDATA_DEF("RLArmorModItem",          "Armor Modpack",        50000, 7, -1, "AMK1A0", 10, 20);
 
         // Demon Artifact
         ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 10, 6, "DMNAA0", 19, 65);
@@ -1072,7 +1072,7 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         if (GetCVar("drpg_loot_rcm"))
         {
             DiffPick = Random(0, 100);
-            if (DiffPick < 20) Difficulty--; // Unlucky, item will be a rank lower
+            if (DiffPick < 60) Difficulty--; // Unlucky, item will be a rank lower
             if (DiffPick > 95) Difficulty++; // Lucky, item will be a rank higher
         }
 
@@ -1080,25 +1080,7 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         if (Difficulty < 0) Difficulty = 0;
         if (Difficulty > 9) Difficulty = 9;
 
-        // Higher chance for modpacks if we're playing with DRLA
-        if (CompatMode == COMPAT_DRLA && Difficulty > 1)
-        {
-            if (Difficulty <= 4) Cap = 9;   // Exclude demon artifact
-            if (Difficulty == 2) Cap = 4;   // Basic modpacks only
-            else                 Cap = 10;  // All modpacks
-
-            if (Random(0, 100) < 25)
-            {
-                Index = Random(0, Cap - 1);
-                Reward = &ItemData[8][Index];
-
-                if (DebugLog)
-                    Log("\CdDEBUG: \C-Reward Item %S\C- (%S) picked - Rarity %d Item %d", Reward->Name, Reward->Actor, Difficulty, Index);
-
-                return Reward;
-            }
-        }
-        else if (Random(0, 100) < 20) // Stims/Augs/Turret
+        else if (Random(0, 100) < 80) // Stims/Augs/Turret
         {
             Cap = 0;
 

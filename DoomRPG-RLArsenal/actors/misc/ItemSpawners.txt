@@ -5,26 +5,30 @@
 
 actor RLClipBoxSpawner : RandomSpawner replaces ClipBox
 {
-    DropItem "RLClipBox" 255 6
-    DropItem "RLModPackSpawner" 255 1
+    DropItem "RLClipBox" 255 92
+	DropItem "DRPGTurretPart"   255 5
+    DropItem "RLModPackSpawner" 255 3
 }
 
 actor RLShellBoxSpawner : RandomSpawner replaces ShellBox
 {
-    DropItem "RLShellBox" 255 6
-    DropItem "RLModPackSpawner" 255 1
+    DropItem "RLShellBox" 255 92
+	DropItem "DRPGTurretPart"   255 5	
+    DropItem "RLModPackSpawner" 255 3
 }
 
 actor RLRocketBoxSpawner : RandomSpawner replaces RocketBox
 {
-    DropItem "RLRocketBox" 255 6
-    DropItem "RLModPackSpawner" 255 1
+    DropItem "RLRocketBox" 255 92
+	DropItem "DRPGTurretPart"   255 5	
+    DropItem "RLModPackSpawner" 255 3
 }
 
 actor RLCellPackSpawner : RandomSpawner replaces CellPack
 {
-    DropItem "RLCellPack" 255 6
-    DropItem "RLModPackSpawner" 255 1
+    DropItem "RLCellPack" 255 92
+	DropItem "DRPGTurretPart"   255 5	
+    DropItem "RLModPackSpawner" 255 3
 }
 
 actor RLClipSpawner : RandomSpawner replaces Clip
@@ -696,10 +700,11 @@ actor RLModPackSpawner : RandomSpawner 16700
 {
   Tag "Random Modpack"
     //$category "DRLA Spawners"
-    DropItem "RLBulkModItem" 255 25
-    DropItem "RLPowerModItem" 255 25
-    DropItem "RLAgilityModItem" 255 25
-    DropItem "RLTechnicalModItem" 255 25
+	DropItem "DRPGTurretPartCrate" 255 30
+    DropItem "RLBulkModItem" 255 12
+    DropItem "RLPowerModItem" 255 20
+    DropItem "RLAgilityModItem" 255 26
+    DropItem "RLTechnicalModItem" 255 12
     DropItem "RLNanoModItem" 255 3
     DropItem "RLSniperModItem" 255 3
     DropItem "RLFirestormModItem" 255 3
@@ -711,10 +716,11 @@ actor RLBasicModPackSpawner : RandomSpawner 16701
 {
   Tag "Random Basic Modpack"
     //$category "DRLA Spawners"
-    DropItem "RLBulkModItem" 255 1
-    DropItem "RLPowerModItem" 255 1
-    DropItem "RLAgilityModItem" 255 1
-    DropItem "RLTechnicalModItem" 255 1
+	DropItem "DRPGTurretPartCrate" 255 30
+    DropItem "RLBulkModItem" 255 12
+    DropItem "RLPowerModItem" 255 20
+    DropItem "RLAgilityModItem" 255 26
+    DropItem "RLTechnicalModItem" 255 12
 }
 
 actor RLExoticModPackSpawner : RandomSpawner 16702
