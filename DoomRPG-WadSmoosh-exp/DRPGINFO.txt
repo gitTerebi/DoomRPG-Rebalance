@@ -1,2 +1,2 @@
 Name=WadSmoosh Expassion Pack
-Mods=Map - Doom Complete Exp.pk3
+Mods=doom_complete_exp.pk3
