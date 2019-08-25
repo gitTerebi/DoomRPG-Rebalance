@@ -3,4 +3,5 @@ DoomRL_Monsters	DoomRL Arsenal - Monster Pack
 DoomRL_Arsenal	DoomRL Arsenal
 j-jukebox	Jimmy's Jukebox Instant Randomizer
 LegenDoom	LegenDoom
+doom_complete_exp	WadSmoosh Expansion Pack
 doom_complete	WadSmoosh
