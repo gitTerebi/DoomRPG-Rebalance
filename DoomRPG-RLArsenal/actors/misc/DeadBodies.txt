@@ -303,7 +303,8 @@ actor RLMarineGunSpawner : RandomSpawner
 
 actor RLTechnicianGunSpawner : RandomSpawner
 {
-	DropItem "RLClip2"                  255 40
+	DropItem "RLBlueprintComputer"      255 5
+	DropItem "RLClip2"                  255 35
 	DropItem "RLClipBox2" 		        255 10
 	DropItem "RLShellBox2" 		        255 10
     DropItem "RLCellPack2" 		        255 20
