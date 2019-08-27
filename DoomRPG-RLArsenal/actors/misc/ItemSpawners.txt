@@ -710,6 +710,7 @@ actor RLModPackSpawner : RandomSpawner 16700
     DropItem "RLFirestormModItem" 255 3
     DropItem "RLOnyxModItem" 255 3
     DropItem "RLArmorModItem" 255 6
+	DropItem "RLBlueprintComputer" 255 2
 }
 
 actor RLBasicModPackSpawner : RandomSpawner 16701
