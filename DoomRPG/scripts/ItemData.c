@@ -923,26 +923,26 @@ NamedScript void BuildItemData()
         // Boots
         ITEMDATA_CATEGORY(9, "\CcBoots", CF_NONE);
         // Common Boots
-        ITEMDATA_DEF("RLSteelBootsPickup",                  "Steel Boots",                                             250, 0, 0, "BOOTS0", 13, 26);
-        ITEMDATA_DEF("RLProtectiveBootsPickup",             "Protective Boots",                                        500, 0, 0, "BOOTG0", 13, 26);
-        ITEMDATA_DEF("RLPlasteelBootsPickup",               "Plasteel Boots",                                          750, 0, 0, "BOOTB0", 13, 26);
+        ITEMDATA_DEF("RLSteelBootsPickup",                  "Steel Boots",                                             250, 0, 1, "BOOTS0", 13, 26);
+        ITEMDATA_DEF("RLProtectiveBootsPickup",             "Protective Boots",                                        500, 0, 1, "BOOTG0", 13, 26);
+        ITEMDATA_DEF("RLPlasteelBootsPickup",               "Plasteel Boots",                                          750, 0, 2, "BOOTB0", 13, 26);
 
         // Assembled Boots
         ITEMDATA_DEF("RLCerberusBootsPickup",               "Cerberus Boots \Cv[Assembled]\C-",                      18000, 4, 6, "CERBA0", 13, 24);
         ITEMDATA_DEF("RLTacticalBootsPickup",               "Tactical Boots \Cv[Assembled]\C-",                      14000, 4, 6, "TACBA0", 14, 21);
 
-        ITEMDATA_DEF("RLAntigravSteelBootsPickup",          "Anti-Grav Steel Boots \Cv[Assembled]\C-",                2000, 1, 2, "AGSBA0", 14, 27);
-        ITEMDATA_DEF("RLAntigravProtectiveBootsPickup",     "Anti-Grav Protective Boots \Cv[Assembled]\C-",           3000, 1, 3, "AGGBA0", 14, 27);
-        ITEMDATA_DEF("RLAntigravPlasteelBootsPickup",       "Anti-Grav Plasteel Boots \Cv[Assembled]\C-",             4000, 1, 4, "AGBBA0", 14, 27);
-        ITEMDATA_DEF("RLEnviromentalSteelBootsPickup",      "Environmental Steel Boots \Cv[Assembled]\C-",            1000, 1, 1, "ENVOS0", 14, 18);
-        ITEMDATA_DEF("RLEnviromentalProtectiveBootsPickup", "Environmental Protective Boots \Cv[Assembled]\C-",       2000, 1, 2, "ENVOG0", 14, 18);
-        ITEMDATA_DEF("RLEnviromentalPlasteelBootsPickup",   "Environmental Plasteel Boots \Cv[Assembled]\C-",         3000, 1, 3, "ENVOB0", 14, 18);
-        ITEMDATA_DEF("RLFireproofSteelBootsPickup",         "Fireproof Steel Boots \Cv[Assembled]\C-",                1000, 1, 1, "FIRBS0", 14, 23);
-        ITEMDATA_DEF("RLFireproofProtectiveBootsPickup",    "Fireproof Protective Boots \Cv[Assembled]\C-",           1500, 1, 2, "FIRBG0", 14, 23);
-        ITEMDATA_DEF("RLFireproofPlasteelBootsPickup",      "Fireproof Plasteel Boots \Cv[Assembled]\C-",             2000, 1, 2, "FIRBB0", 14, 23);
-        ITEMDATA_DEF("RLGrapplingSteelBootsPickup",         "Grappling Steel Boots \Cv[Assembled]\C-",                1000, 1, 1, "GRAPS0", 21, 23);
-        ITEMDATA_DEF("RLGrapplingProtectiveBootsPickup",    "Grappling Protective Boots \Cv[Assembled]\C-",           1500, 1, 2, "GRAPG0", 21, 23);
-        ITEMDATA_DEF("RLGrapplingPlasteelBootsPickup",      "Grappling Plasteel Boots \Cv[Assembled]\C-",             2000, 1, 2, "GRAPB0", 21, 23);
+        ITEMDATA_DEF("RLAntigravSteelBootsPickup",          "Anti-Grav Steel Boots \Cv[Assembled]\C-",                2000, 1, 3, "AGSBA0", 14, 27);
+        ITEMDATA_DEF("RLAntigravProtectiveBootsPickup",     "Anti-Grav Protective Boots \Cv[Assembled]\C-",           3000, 1, 4, "AGGBA0", 14, 27);
+        ITEMDATA_DEF("RLAntigravPlasteelBootsPickup",       "Anti-Grav Plasteel Boots \Cv[Assembled]\C-",             4000, 1, 5, "AGBBA0", 14, 27);
+        ITEMDATA_DEF("RLEnviromentalSteelBootsPickup",      "Environmental Steel Boots \Cv[Assembled]\C-",            1000, 1, 2, "ENVOS0", 14, 18);
+        ITEMDATA_DEF("RLEnviromentalProtectiveBootsPickup", "Environmental Protective Boots \Cv[Assembled]\C-",       2000, 1, 3, "ENVOG0", 14, 18);
+        ITEMDATA_DEF("RLEnviromentalPlasteelBootsPickup",   "Environmental Plasteel Boots \Cv[Assembled]\C-",         3000, 1, 4, "ENVOB0", 14, 18);
+        ITEMDATA_DEF("RLFireproofSteelBootsPickup",         "Fireproof Steel Boots \Cv[Assembled]\C-",                1000, 1, 2, "FIRBS0", 14, 23);
+        ITEMDATA_DEF("RLFireproofProtectiveBootsPickup",    "Fireproof Protective Boots \Cv[Assembled]\C-",           1500, 1, 3, "FIRBG0", 14, 23);
+        ITEMDATA_DEF("RLFireproofPlasteelBootsPickup",      "Fireproof Plasteel Boots \Cv[Assembled]\C-",             2000, 1, 4, "FIRBB0", 14, 23);
+        ITEMDATA_DEF("RLGrapplingSteelBootsPickup",         "Grappling Steel Boots \Cv[Assembled]\C-",                1000, 1, 2, "GRAPS0", 21, 23);
+        ITEMDATA_DEF("RLGrapplingProtectiveBootsPickup",    "Grappling Protective Boots \Cv[Assembled]\C-",           1500, 1, 3, "GRAPG0", 21, 23);
+        ITEMDATA_DEF("RLGrapplingPlasteelBootsPickup",      "Grappling Plasteel Boots \Cv[Assembled]\C-",             2000, 1, 4, "GRAPB0", 21, 23);
 
         // Exotic Boots
         ITEMDATA_DEF("RLAcidProofBootsPickup",              "Acid-Proof Boots \Ct[Exotic]\C-",                        5000, 4, 5, "ACPBA0", 14, 23);
