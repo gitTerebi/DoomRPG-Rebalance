@@ -243,13 +243,15 @@ actor RLChaingunSpawner : RandomSpawner 2002
 
 actor RLExoticChaingunSpawner : RandomSpawner
 {
-    DropItem "RLMinigunPickup" 255 45
-    DropItem "RLCombatPistolPickup" 255 80
-    DropItem "RLMarksmanPistolPickup" 255 75
-    DropItem "RLHandcannonPickup" 255 60
-    DropItem "RLUziPickup" 255 52
+	DropItem "RLCombatPistolPickup" 255 80
+    DropItem "RLMarksmanPistolPickup" 255 60
+    DropItem "RLHandcannonPickup" 255 50
+    DropItem "RLUziPickup" 255 40
+    DropItem "RLBattleRiflePickup" 255 25
+	DropItem "RLChaingunPickup" 255 20
     DropItem "RLSuperiorWeaponSpawner" 255 15
     DropItem "RLUniqueWeaponSpawner" 255 10
+	DropItem "RLMinigunPickup" 255 5
 }
 
 actor RLChaingunSpawner2 : RandomSpawner replaces Chaingun
