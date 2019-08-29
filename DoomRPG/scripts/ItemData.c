@@ -426,8 +426,8 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           1350,  3, 1, "OLOKX0", 10, 13);
         ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              1800,  4, 1, "DEAPX0", 11, 14);
         ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                         2500,  4, 2, "MRKPX0",  9, 12);
-        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                           8000,  4, 2, "NSSGX0", 27,  9);
-        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        10000,  4, 3, "ASHOX0", 31, 27);
+        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                           8000,  4, 3, "NSSGX0", 27,  9);
+        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        10000,  4, 4, "ASHOX0", 31, 27);
         ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     2000,  3, 1, "RUZIX0", 20, 26);
         ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                15000,  6, 5, "ZGGGX0", 30, 20);
         ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                        5000,  5, 3, "CLAUX0", 45, 24);
