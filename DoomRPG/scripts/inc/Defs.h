@@ -697,11 +697,11 @@ typedef enum
 
 #define LUCK_HEALTHDROP         10
 #define LUCK_EPDROP             15
-#define LUCK_ARMORDROP          20
-#define LUCK_WEAPONDROP         25
-#define LUCK_POWERUPDROP        50
+#define LUCK_ARMORDROP          25
+#define LUCK_WEAPONDROP         30
+#define LUCK_MODULEDROP         50
 #define LUCK_STIMDROP           75
-#define LUCK_MODULEDROP         100
+#define LUCK_POWERUPDROP        100
 #define LUCK_SHIELDDROP         125
 #define LUCK_AUGDROP            150
 

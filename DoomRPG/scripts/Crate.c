@@ -48,7 +48,7 @@ NamedScript DECORATE void InitCrate()
 {
     int TID = UniqueTID();
     int Amount = 3;
-    int LuckMod = (AveragePlayerLevel() + AveragePlayerLuck()) / 20;
+    int LuckMod = ((AveragePlayerLevel() / 10) + (AveragePlayerLuck() / 15));
     int Rarity = 0;
     int Firewall = 0;
 
@@ -61,7 +61,7 @@ NamedScript DECORATE void InitCrate()
 
     // Calculate Rarity
     for (int i = Rarity; i < MAX_DIFFICULTIES - 1; i++)
-        if (Random(0, (MAX_DIFFICULTIES + (MAX_DIFFICULTIES / 3)) - LuckMod) <= 0)
+        if (Random(0, (MAX_DIFFICULTIES + (MAX_DIFFICULTIES / 3)) - LuckMod) <= 1)
             Rarity++;
     if (Rarity < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         Rarity = 0;

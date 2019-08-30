@@ -903,7 +903,7 @@ void CheckPerks()
     else Player.Perks[STAT_AGILITY] = false;
     if (Player.CapacityTotal >= 100)     Player.Perks[STAT_CAPACITY] = true;
     else Player.Perks[STAT_CAPACITY] = false;
-    if (Player.LuckTotal >= 50)         Player.Perks[STAT_LUCK] = true;
+    if (Player.LuckTotal >= 100)         Player.Perks[STAT_LUCK] = true;
     else Player.Perks[STAT_LUCK] = false;
 
     fixed StrengthPercent = ((fixed)Player.ActualHealth / (fixed)Player.HealthMax * 100);
