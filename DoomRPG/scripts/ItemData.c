@@ -1175,8 +1175,8 @@ NamedScript DECORATE void SpawnLuckItem()
 
 //   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 30.57) ActorToSpawn = "DRPGAmmoDropper";
 //   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 23.35) ActorToSpawn = "DRPGChipDropper";
-    if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 17.12) ActorToSpawn = "DRPGBatteryDropper";
-    if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 12.25) ActorToSpawn = "DRPGChipDropper";
+    if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 17.12) ActorToSpawn = "DRPGChipDropper";
+    if (Luck >= LUCK_MODULEDROP  && RandomFixed(0.0, 100.0) <= 12.25) ActorToSpawn = "DRPGBatteryDropper";
     if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=  6.13) ActorToSpawn = "DRPGCrate";
 
     if (Luck >= LUCK_HEALTHDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXHEALTHCHANCE)  ActorToSpawn = "DRPGHealthDropper";
