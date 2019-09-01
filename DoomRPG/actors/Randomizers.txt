@@ -96,7 +96,7 @@ actor DRPGMoneyDropper : RandomSpawner 20000
 actor DRPGHealthDropper : RandomSpawner 20001
 {
     DropItem "DRPGMoneyDropper"     255 60
-	DropItem "RLArmorBonusPickup"   255 5
+    DropItem "RLArmorBonusPickup"   255 5
     DropItem "DRPGStimpack"         255 60
     DropItem "DRPGMedikit"          255 10
     DropItem "DRPGLargeMedikit"     255 6
@@ -164,7 +164,7 @@ actor DRPGWeaponDropper : RandomSpawner 20005
 actor DRPGAmmoDropper : RandomSpawner 20006
 {
     DropItem "DRPGMoneyDropper"         255 200
-	DropItem "DRPGClip"                 255 80
+    DropItem "DRPGClip"                 255 80
     DropItem "DRPGClipBox"              255 70
     DropItem "DRPGShell"                255 60
     DropItem "DRPGShellBox"             255 50	
@@ -327,7 +327,7 @@ actor DRPGShieldDropper : RandomSpawner 20011
 
 actor DRPGStimDropper : RandomSpawner 20012
 {
-	// Money
+    // Money
     DropItem "DRPGMoneyDropper"         255 50
 	
     // Stims
@@ -437,7 +437,7 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 {
     DropItem "DRPGMoneyDropper"                255 7
-	DropItem "DRPGHealthBonus"                 255 14
+    DropItem "DRPGHealthBonus"                 255 14
     DropItem "DRPGLootMedicalSupplies"         255 18
     DropItem "DRPGLootChemicals"               255 18
     DropItem "DRPGLootHazardousMaterials"      255 18
@@ -457,7 +457,7 @@ actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 {
     DropItem "DRPGMoneyDropper"     255 25
-	DropItem "RLArmorBonusPickup"   255 5
+    DropItem "RLArmorBonusPickup"   255 5
     DropItem "DRPGStimpack"         255 50
     DropItem "DRPGMedikit"          255 15
     DropItem "DRPGLargeMedikit"     255 5
@@ -467,8 +467,8 @@ actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 actor DRPGMedikitRandomizer : RandomSpawner Replaces Medikit
 {
     DropItem "DRPGMoneyDropper"     255 40
-	DropItem "RLArmorBonusPickup"   255 5
-	DropItem "DRPGStimpack"         255 45
+    DropItem "RLArmorBonusPickup"   255 5
+    DropItem "DRPGStimpack"         255 45
     DropItem "DRPGMedikit"          255 18
     DropItem "DRPGLargeMedikit"     255 8
     DropItem "DRPGXLMedikit"        255 5
