@@ -163,7 +163,7 @@ actor DRPGWeaponDropper : RandomSpawner 20005
 
 actor DRPGAmmoDropper : RandomSpawner 20006
 {
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 200
 	DropItem "DRPGClip"                 255 80
     DropItem "DRPGClipBox"              255 70
     DropItem "DRPGShell"                255 60
@@ -176,13 +176,12 @@ actor DRPGAmmoDropper : RandomSpawner 20006
 
 actor DRPGModuleDropper : RandomSpawner 20007
 {
-    DropItem "DRPGMoneyDropper"         255 50
-    DropItem "DRPGModulePickup"         255 50
+    DropItem "DRPGMoneyDropper"         255 25
+    DropItem "DRPGModulePickup"         255 75
 }
 
 actor DRPGAugDropper : RandomSpawner 20009
 {
-    DropItem "DRPGMoneyDropper"         255 100
     DropItem "DRPGAugCanister"          255 25
     DropItem "DRPGAugUpgradeCanister"   255 70
     DropItem "DRPGAugSlotUpgrade"       255 5
@@ -198,7 +197,7 @@ actor DRPGBatteryDropper : RandomSpawner 20010
 actor DRPGShieldDropper : RandomSpawner 20011
 {
 	// Money
-    DropItem "DRPGMoneyDropper"         255 200
+    DropItem "DRPGMoneyDropper"         255 100
 
     // Bodies
     DropItem "DRPGShieldBody1"          255 40 // UAC
@@ -329,7 +328,7 @@ actor DRPGShieldDropper : RandomSpawner 20011
 actor DRPGStimDropper : RandomSpawner 20012
 {
 	// Money
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 50
 	
     // Stims
     DropItem "DRPGStimSmall"            255 70
@@ -382,9 +381,9 @@ actor DRPGVialDropperRare : RandomSpawner 20014
 actor DRPGTurretDropper : RandomSpawner 20015
 {
     DropItem "DRPGMoneyDropper"     255 50
-    DropItem "DRPGTurretPart"       255 46
-    DropItem "DRPGTurretPartCrate"  255 3
-	DropItem "DRPGDestroyedTurret"  255 1
+    DropItem "DRPGTurretPart"       255 93
+    DropItem "DRPGTurretPartCrate"  255 5
+	DropItem "DRPGDestroyedTurret"  255 2
 }
 
 actor DRPGChipDropper : RandomSpawner 20016
@@ -437,8 +436,7 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // Health Bonus Locations
 actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 {
-    DropItem "DRPGMoneyDropper"                255 6
-	DropItem "DRPGTurretPart"                  255 1
+    DropItem "DRPGMoneyDropper"                255 7
 	DropItem "DRPGHealthBonus"                 255 14
     DropItem "DRPGLootMedicalSupplies"         255 18
     DropItem "DRPGLootChemicals"               255 18
