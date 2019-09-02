@@ -395,7 +395,7 @@ void CheckStats()
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
     Player.Speed = 1.0 + 0.25 * ((fixed)Player.AgilityTotal / 100);
-    Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.AgilityTotal / 200));
+    Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.AgilityTotal / 400));
     Player.WeaponSpeed = Player.AgilityTotal / 2;
     SetAmmoCapacity("Clip", 60 + Player.CapacityTotal * 10);
     SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
@@ -889,17 +889,17 @@ void CheckPerks()
     // If you're dead, return
     if (GetActorProperty(Player.TID, APROP_Health) <= 0) return;
 
-    if (Player.StrengthTotal >= 50)     Player.Perks[STAT_STRENGTH] = true;
+    if (Player.StrengthTotal >= 75)     Player.Perks[STAT_STRENGTH] = true;
     else Player.Perks[STAT_STRENGTH] = false;
-    if (Player.DefenseTotal >= 50)      Player.Perks[STAT_DEFENSE] = true;
+    if (Player.DefenseTotal >= 75)      Player.Perks[STAT_DEFENSE] = true;
     else Player.Perks[STAT_DEFENSE] = false;
-    if (Player.VitalityTotal >= 50)     Player.Perks[STAT_VITALITY] = true;
+    if (Player.VitalityTotal >= 75)     Player.Perks[STAT_VITALITY] = true;
     else Player.Perks[STAT_VITALITY] = false;
-    if (Player.EnergyTotal >= 50)       Player.Perks[STAT_ENERGY] = true;
+    if (Player.EnergyTotal >= 75)       Player.Perks[STAT_ENERGY] = true;
     else Player.Perks[STAT_ENERGY] = false;
-    if (Player.RegenerationTotal >= 50) Player.Perks[STAT_REGENERATION] = true;
+    if (Player.RegenerationTotal >= 75) Player.Perks[STAT_REGENERATION] = true;
     else Player.Perks[STAT_REGENERATION] = false;
-    if (Player.AgilityTotal >= 50)      Player.Perks[STAT_AGILITY] = true;
+    if (Player.AgilityTotal >= 75)      Player.Perks[STAT_AGILITY] = true;
     else Player.Perks[STAT_AGILITY] = false;
     if (Player.CapacityTotal >= 100)     Player.Perks[STAT_CAPACITY] = true;
     else Player.Perks[STAT_CAPACITY] = false;
