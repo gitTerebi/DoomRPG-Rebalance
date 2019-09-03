@@ -176,8 +176,7 @@ actor DRPGAmmoDropper : RandomSpawner 20006
 
 actor DRPGModuleDropper : RandomSpawner 20007
 {
-    DropItem "DRPGMoneyDropper"         255 25
-    DropItem "DRPGModulePickup"         255 75
+    DropItem "DRPGModulePickup"
 }
 
 actor DRPGAugDropper : RandomSpawner 20009

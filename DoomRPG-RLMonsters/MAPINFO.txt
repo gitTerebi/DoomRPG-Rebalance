@@ -4,7 +4,7 @@ clearskills
 skill easy
 {
 	AmmoFactor = 1
-	DropAmmoFactor = 1
+	DropAmmoFactor = 0.5
 
 	aggressiveness = 0.25
 	spawnfilter = normal
@@ -45,7 +45,7 @@ skill easy
 skill normal
 {
 	AmmoFactor = 1
-	DropAmmoFactor = 1
+	DropAmmoFactor = 0.5
 
 	aggressiveness = 0.5
 	spawnfilter = normal
@@ -84,7 +84,7 @@ skill normal
 skill hard
 {
 	AmmoFactor = 1
-	DropAmmoFactor = 1
+	DropAmmoFactor = 0.5
 
 	defaultskill
 	
@@ -125,7 +125,7 @@ skill hard
 skill hell
 {
 	AmmoFactor = 1
-	DropAmmoFactor = 1
+	DropAmmoFactor = 0.5
 	
 	aggressiveness = 1.0
 	spawnfilter = nightmare
@@ -164,7 +164,7 @@ skill hell
 skill adaptive
 {
 	AmmoFactor = 1
-	DropAmmoFactor = 1
+	DropAmmoFactor = 0.5
 
 	aggressiveness = 1.0
 	spawnfilter = nightmare
@@ -207,7 +207,7 @@ skill adaptive
 skill armageddon
 {
 	AmmoFactor = 1
-	DropAmmoFactor = 1
+	DropAmmoFactor = 0.5
 
 	aggressiveness = 1.0
 	spawnfilter = nightmare
@@ -250,7 +250,7 @@ skill armageddon
 skill nightmare
 {
 	AmmoFactor = 1
-	DropAmmoFactor = 1
+	DropAmmoFactor = 0.5
 
 	aggressiveness = 1.0
 	spawnfilter = nightmare
