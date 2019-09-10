@@ -69,9 +69,7 @@ actor DRPGMarineReinforcementDRLASpawner : RandomSpawner
 // Clip
 actor DRPGRLClipSpawner2 : RandomSpawner replaces DRPGClip
 {
-    DropItem "RLClip2" 					255 18
-    DropItem "RLPistolPickup" 			255 7
-    DropItem "RLExoticPistolSpawner" 	255 1
+    DropItem "RLClip2" 			255 100
 }
 
 // Clip Box
