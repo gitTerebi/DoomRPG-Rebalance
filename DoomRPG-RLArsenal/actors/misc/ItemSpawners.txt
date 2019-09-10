@@ -102,11 +102,12 @@ actor RLRandomPhaseDeviceSpawner : RandomSpawner 16729
 {
   Tag "Random Phase Device"
     //$category "DRLA Spawners"
-	DropItem "DRPGTurretPart" 255 20
-    DropItem "RLPhaseDevice" 255 150
-    DropItem "RLHomingPhaseDevice" 255 40
-    DropItem "RLRecallPhaseDevice" 255 40
-    DropItem "RLExperimentalPhaseDevice" 255 5
+	DropItem "DRPGMoneyDropper"          255 86
+	DropItem "DRPGTurretPart"            255 20
+    DropItem "RLPhaseDevice"             255 86
+    DropItem "RLHomingPhaseDevice"       255 30
+    DropItem "RLRecallPhaseDevice"       255 30
+    DropItem "RLExperimentalPhaseDevice" 255 3
 }
 
 actor RLAllMapSpawner : RandomSpawner

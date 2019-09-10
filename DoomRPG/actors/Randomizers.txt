@@ -163,15 +163,15 @@ actor DRPGWeaponDropper : RandomSpawner 20005
 
 actor DRPGAmmoDropper : RandomSpawner 20006
 {
-    DropItem "DRPGMoneyDropper"         255 200
+    DropItem "DRPGMoneyDropper"         255 100
     DropItem "DRPGClip"                 255 80
-    DropItem "DRPGClipBox"              255 70
-    DropItem "DRPGShell"                255 60
-    DropItem "DRPGShellBox"             255 50	
-    DropItem "DRPGRocketAmmo"           255 40
-    DropItem "DRPGRocketBox"            255 30	
-    DropItem "DRPGCell"                 255 20
-    DropItem "DRPGCellPack"             255 10
+	DropItem "DRPGShell"                255 60
+	DropItem "DRPGRocketAmmo"           255 20
+	DropItem "DRPGCell"                 255 10
+    DropItem "DRPGClipBox"              255 4
+    DropItem "DRPGShellBox"             255 3	
+    DropItem "DRPGRocketBox"            255 2	
+    DropItem "DRPGCellPack"             255 1
 }
 
 actor DRPGModuleDropper : RandomSpawner 20007
