@@ -563,7 +563,7 @@ Start:
 
             FadeRange(255, 0, 0, 0.25, 255, 0, 0, 0, 1.0);
 
-            XPBonus = XPTable[Players(i).Level] / 100l;
+            XPBonus = XPTable[Players(i).Level] / 80l;
             Player.XP += XPBonus;
 
             HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
@@ -609,7 +609,7 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = RankTable[Players(i).RankLevel] / 20l;
+            RankBonus = RankTable[Players(i).RankLevel] / 40l;
             Players(i).Rank += RankBonus;
 
             HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
@@ -632,8 +632,8 @@ Start:
 
             FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0, 1.0);
 
-            XPBonus = XPTable[Players(i).Level] / 100l;
-            RankBonus = RankTable[Players(i).RankLevel] / 20l;
+            XPBonus = XPTable[Players(i).Level] / 80l;
+            RankBonus = RankTable[Players(i).RankLevel] / 40l;
 
             Players(i).XP += XPBonus;
             Players(i).Rank += RankBonus;
