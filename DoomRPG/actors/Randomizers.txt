@@ -97,7 +97,7 @@ actor DRPGHealthDropper : RandomSpawner 20001
 {
     DropItem "DRPGMoneyDropper"     255 100
     DropItem "RLArmorBonusPickup"   255 5
-    DropItem "DRPGStimpack"         255 60
+    DropItem "DRPGStimpack"         255 70
     DropItem "DRPGMedikit"          255 10
     DropItem "DRPGLargeMedikit"     255 6
     DropItem "DRPGXLMedikit"        255 5

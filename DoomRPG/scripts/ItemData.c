@@ -117,9 +117,9 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGCell",            "Cells",             200, 1, -1, "CELLA0",  8, 12);
     ITEMDATA_DEF("DRPGCellPack",        "Cell Pack",        1000, 1, -1, "CELPA0", 15, 20);
 
-    ITEMDATA_DEF("DRPGSmallBackpack",   "Ammo Satchel",     1000, 1, -1, "ASCHA0", 14, 30);
-    ITEMDATA_DEF("DRPGBackpack",        "Backpack",         2500, 1, -1, "BPAKA0",  8, 25);
-    ITEMDATA_DEF("DRPGBigBackpack",     "Big Backpack",     5000, 1, -1, "GPAKA0", 11, 29);
+    ITEMDATA_DEF("DRPGSmallBackpack",   "Ammo Satchel",      500, 1, -1, "ASCHA0", 14, 30);
+    ITEMDATA_DEF("DRPGBackpack",        "Backpack",         1250, 1, -1, "BPAKA0",  8, 25);
+    ITEMDATA_DEF("DRPGBigBackpack",     "Big Backpack",     2500, 1, -1, "GPAKA0", 11, 29);
     ITEMDATA_CATEGORY_END;
 
     // Health
@@ -254,6 +254,7 @@ NamedScript void BuildItemData()
             if (ShieldPartCost < 50000) rarity = 6;
             if (ShieldPartCost < 35000) rarity = 5;
             if (ShieldPartCost < 20000) rarity = 4;
+            if (ShieldPartCost < 5000) rarity = 3;
 
             ItemData[5][ItemIndex].Rarity = rarity;
 
@@ -293,6 +294,7 @@ NamedScript void BuildItemData()
         if (Accessory->Price < 50000) rarity = 6;
         if (Accessory->Price < 35000) rarity = 5;
         if (Accessory->Price < 20000) rarity = 4;
+        if (Accessory->Price < 5000) rarity = 3;
 
         ItemData[5][ItemIndex].Rarity = rarity;
 
@@ -309,31 +311,31 @@ NamedScript void BuildItemData()
 
     // Stims/Augmentations/Turret Parts
     ITEMDATA_CATEGORY(6, "\CkStims/Augs/Turret", CF_NONE);
-    ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                          500, 0, 1, "STIMB0", 16, 29);
-    ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                        1500, 2, 2, "STIMB0", 16, 29);
-    ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                         2500, 4, 4, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                          500, 0, 2, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                        1500, 2, 3, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                         2500, 4, 5, "STIMB0", 16, 29);
     ITEMDATA_DEF("DRPGStimXL",              "Extra-Large Stim",                   5000, 8, 6, "STIMB0", 16, 29);
     ITEMDATA_DEF("DRPGStimDetox",           "\CdDetox\C- Hypospray",              2500, 1, 2, "STIMC0",  6, 31);
 
-    ITEMDATA_DEF("DRPGVialStrength",        "\CgStrength\C- Vial",                 200, 4, 0, "STVLA0",  4, 16);
-    ITEMDATA_DEF("DRPGVialDefense",         "\CdDefense\C- Vial",                  200, 4, 0, "STVLB0",  4, 16);
-    ITEMDATA_DEF("DRPGVialVitality",        "\CaVitality\C- Vial",                 200, 4, 0, "STVLC0",  4, 16);
-    ITEMDATA_DEF("DRPGVialEnergy",          "\CnEnergy\C- Vial",                   200, 4, 0, "STVLD0",  4, 16);
+    ITEMDATA_DEF("DRPGVialStrength",        "\CgStrength\C- Vial",                 200, 4, 1, "STVLA0",  4, 16);
+    ITEMDATA_DEF("DRPGVialDefense",         "\CdDefense\C- Vial",                  200, 4, 1, "STVLB0",  4, 16);
+    ITEMDATA_DEF("DRPGVialVitality",        "\CaVitality\C- Vial",                 200, 4, 1, "STVLC0",  4, 16);
+    ITEMDATA_DEF("DRPGVialEnergy",          "\CnEnergy\C- Vial",                   200, 4, 1, "STVLD0",  4, 16);
     ITEMDATA_DEF("DRPGVialRegeneration",    "\CtRegeneration\C- Vial",             200, 4, 0, "STVLE0",  4, 16);
     ITEMDATA_DEF("DRPGVialAgility",         "\CiAgility\C- Vial",                  200, 4, 0, "STVLF0",  4, 16);
     ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",                 200, 4, 0, "STVLG0",  4, 16);
     ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",                     200, 4, 0, "STVLH0",  4, 16);
-    ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",                 400, 4, 1, "STVLI0",  4, 16);
-    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",                  800, 4, 1, "STVLJ0",  4, 16);
-    ITEMDATA_DEF("DRPGVialIndestructible",  "\CqIndestructible\C- Vial",          1000, 4, 1, "STVLK0",  4, 16);
-    ITEMDATA_DEF("DRPGVialShadow",          "\CrShadow\C- Vial",                  1000, 4, 1, "STVLL0",  4, 16);
-    ITEMDATA_DEF("DRPGVialInfinity",        "\CkInfinity\C- Vial",                1000, 4, 1, "STVLM0",  4, 16);
-    ITEMDATA_DEF("DRPGVialChrono",          "\CdChrono\C- Vial",                  1000, 4, 1, "STVLN0",  4, 16);
-    ITEMDATA_DEF("DRPGVialAdrenaline",      "\CtAdrenaline\C- Vial",              1000, 4, 1, "STVLO0",  4, 16);
-    ITEMDATA_DEF("DRPGVialGravity",         "\CiGravity\C- Vial",                 1000, 4, 1, "STVLP0",  4, 16);
-    ITEMDATA_DEF("DRPGVialVampire",         "\CaVampire\C- Vial",                 1000, 4, 1, "STVLQ0",  4, 16);
-    ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",                    1000, 4, 1, "STVLR0",  4, 16);
-    ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",                1000, 4, 1, "STVLS0",  4, 16);
+    ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",                 400, 4, 2, "STVLI0",  4, 16);
+    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",                  800, 4, 2, "STVLJ0",  4, 16);
+    ITEMDATA_DEF("DRPGVialIndestructible",  "\CqIndestructible\C- Vial",          1000, 4, 3, "STVLK0",  4, 16);
+    ITEMDATA_DEF("DRPGVialShadow",          "\CrShadow\C- Vial",                  1000, 4, 3, "STVLL0",  4, 16);
+    ITEMDATA_DEF("DRPGVialInfinity",        "\CkInfinity\C- Vial",                1000, 4, 3, "STVLM0",  4, 16);
+    ITEMDATA_DEF("DRPGVialChrono",          "\CdChrono\C- Vial",                  1000, 4, 3, "STVLN0",  4, 16);
+    ITEMDATA_DEF("DRPGVialAdrenaline",      "\CtAdrenaline\C- Vial",              1000, 4, 3, "STVLO0",  4, 16);
+    ITEMDATA_DEF("DRPGVialGravity",         "\CiGravity\C- Vial",                 1000, 4, 3, "STVLP0",  4, 16);
+    ITEMDATA_DEF("DRPGVialVampire",         "\CaVampire\C- Vial",                 1000, 4, 3, "STVLQ0",  4, 16);
+    ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",                    1000, 4, 3, "STVLR0",  4, 16);
+    ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",                1000, 4, 3, "STVLS0",  4, 16);
     ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",                  5000, 4, 5, "STPAA0", 30, 16);
     ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",              20000, 4, 7, "STPAB0", 27, 16);
 
@@ -891,7 +893,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",       100000, 8, 8, "CRYSF0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",   100000, 8, 8, "CRYSG0", 16, 48);
         ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                  2000, 4, 2, "MMAPA0", 14, 23);
-        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",            3000, 5, 3, "BLUPA0", 14, 23);
+        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",            4000, 5, 3, "BLUPA0", 14, 23);
         ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                  6666, 6, 6, "ISKLA0", 10, 18);
         ITEMDATA_DEF("RLBloodSkull",                "Blood Skull",                   4444, 6, 4, "ISKLC0", 10, 18);
         ITEMDATA_DEF("RLFireSkull",                 "Fire Skull",                    5555, 6, 5, "ISKLE0", 10, 18);
@@ -923,32 +925,32 @@ NamedScript void BuildItemData()
         // Boots
         ITEMDATA_CATEGORY(9, "\CcBoots", CF_NONE);
         // Common Boots
-        ITEMDATA_DEF("RLSteelBootsPickup",                  "Steel Boots",                                             250, 0, 1, "BOOTS0", 13, 26);
-        ITEMDATA_DEF("RLProtectiveBootsPickup",             "Protective Boots",                                        500, 0, 1, "BOOTG0", 13, 26);
-        ITEMDATA_DEF("RLPlasteelBootsPickup",               "Plasteel Boots",                                          750, 0, 2, "BOOTB0", 13, 26);
+        ITEMDATA_DEF("RLSteelBootsPickup",                  "Steel Boots",                                             400, 0, 1, "BOOTS0", 13, 26);
+        ITEMDATA_DEF("RLProtectiveBootsPickup",             "Protective Boots",                                        800, 1, 1, "BOOTG0", 13, 26);
+        ITEMDATA_DEF("RLPlasteelBootsPickup",               "Plasteel Boots",                                         1600, 2, 2, "BOOTB0", 13, 26);
 
         // Assembled Boots
         ITEMDATA_DEF("RLCerberusBootsPickup",               "Cerberus Boots \Cv[Assembled]\C-",                      18000, 4, 6, "CERBA0", 13, 24);
         ITEMDATA_DEF("RLTacticalBootsPickup",               "Tactical Boots \Cv[Assembled]\C-",                      14000, 4, 6, "TACBA0", 14, 21);
 
-        ITEMDATA_DEF("RLAntigravSteelBootsPickup",          "Anti-Grav Steel Boots \Cv[Assembled]\C-",                2000, 1, 3, "AGSBA0", 14, 27);
-        ITEMDATA_DEF("RLAntigravProtectiveBootsPickup",     "Anti-Grav Protective Boots \Cv[Assembled]\C-",           3000, 1, 4, "AGGBA0", 14, 27);
-        ITEMDATA_DEF("RLAntigravPlasteelBootsPickup",       "Anti-Grav Plasteel Boots \Cv[Assembled]\C-",             4000, 1, 5, "AGBBA0", 14, 27);
-        ITEMDATA_DEF("RLEnviromentalSteelBootsPickup",      "Environmental Steel Boots \Cv[Assembled]\C-",            1000, 1, 2, "ENVOS0", 14, 18);
-        ITEMDATA_DEF("RLEnviromentalProtectiveBootsPickup", "Environmental Protective Boots \Cv[Assembled]\C-",       2000, 1, 3, "ENVOG0", 14, 18);
-        ITEMDATA_DEF("RLEnviromentalPlasteelBootsPickup",   "Environmental Plasteel Boots \Cv[Assembled]\C-",         3000, 1, 4, "ENVOB0", 14, 18);
-        ITEMDATA_DEF("RLFireproofSteelBootsPickup",         "Fireproof Steel Boots \Cv[Assembled]\C-",                1000, 1, 2, "FIRBS0", 14, 23);
-        ITEMDATA_DEF("RLFireproofProtectiveBootsPickup",    "Fireproof Protective Boots \Cv[Assembled]\C-",           1500, 1, 3, "FIRBG0", 14, 23);
-        ITEMDATA_DEF("RLFireproofPlasteelBootsPickup",      "Fireproof Plasteel Boots \Cv[Assembled]\C-",             2000, 1, 4, "FIRBB0", 14, 23);
-        ITEMDATA_DEF("RLGrapplingSteelBootsPickup",         "Grappling Steel Boots \Cv[Assembled]\C-",                1000, 1, 2, "GRAPS0", 21, 23);
-        ITEMDATA_DEF("RLGrapplingProtectiveBootsPickup",    "Grappling Protective Boots \Cv[Assembled]\C-",           1500, 1, 3, "GRAPG0", 21, 23);
-        ITEMDATA_DEF("RLGrapplingPlasteelBootsPickup",      "Grappling Plasteel Boots \Cv[Assembled]\C-",             2000, 1, 4, "GRAPB0", 21, 23);
+        ITEMDATA_DEF("RLAntigravSteelBootsPickup",          "Anti-Grav Steel Boots \Cv[Assembled]\C-",                2000, 3, 3, "AGSBA0", 14, 27);
+        ITEMDATA_DEF("RLAntigravProtectiveBootsPickup",     "Anti-Grav Protective Boots \Cv[Assembled]\C-",           3000, 4, 4, "AGGBA0", 14, 27);
+        ITEMDATA_DEF("RLAntigravPlasteelBootsPickup",       "Anti-Grav Plasteel Boots \Cv[Assembled]\C-",             4000, 6, 6, "AGBBA0", 14, 27);
+        ITEMDATA_DEF("RLEnviromentalSteelBootsPickup",      "Environmental Steel Boots \Cv[Assembled]\C-",            3500, 3, 3, "ENVOS0", 14, 18);
+        ITEMDATA_DEF("RLEnviromentalProtectiveBootsPickup", "Environmental Protective Boots \Cv[Assembled]\C-",       5000, 4, 4, "ENVOG0", 14, 18);
+        ITEMDATA_DEF("RLEnviromentalPlasteelBootsPickup",   "Environmental Plasteel Boots \Cv[Assembled]\C-",         7000, 6, 6, "ENVOB0", 14, 18);
+        ITEMDATA_DEF("RLFireproofSteelBootsPickup",         "Fireproof Steel Boots \Cv[Assembled]\C-",                3000, 3, 3, "FIRBS0", 14, 23);
+        ITEMDATA_DEF("RLFireproofProtectiveBootsPickup",    "Fireproof Protective Boots \Cv[Assembled]\C-",           4000, 4, 4, "FIRBG0", 14, 23);
+        ITEMDATA_DEF("RLFireproofPlasteelBootsPickup",      "Fireproof Plasteel Boots \Cv[Assembled]\C-",             6000, 6, 6, "FIRBB0", 14, 23);
+        ITEMDATA_DEF("RLGrapplingSteelBootsPickup",         "Grappling Steel Boots \Cv[Assembled]\C-",                2500, 3, 3, "GRAPS0", 21, 23);
+        ITEMDATA_DEF("RLGrapplingProtectiveBootsPickup",    "Grappling Protective Boots \Cv[Assembled]\C-",           3750, 4, 4, "GRAPG0", 21, 23);
+        ITEMDATA_DEF("RLGrapplingPlasteelBootsPickup",      "Grappling Plasteel Boots \Cv[Assembled]\C-",             5000, 6, 6, "GRAPB0", 21, 23);
 
         // Exotic Boots
-        ITEMDATA_DEF("RLAcidProofBootsPickup",              "Acid-Proof Boots \Ct[Exotic]\C-",                        5000, 4, 5, "ACPBA0", 14, 23);
-        ITEMDATA_DEF("RLGothicBootsPickup",                 "Gothic Boots \Ct[Exotic]\C-",                           20000, 4, 7, "GOTBA0", 13, 26);
-        ITEMDATA_DEF("RLPhaseshiftBootsPickup",             "Phaseshift Boots \Ct[Exotic]\C-",                       25000, 4, 7, "PSHBA0", 13, 20);
-        ITEMDATA_DEF("RLShockwaveBootsPickup",              "Shockwave Boots \Ct[Exotic]\C-",                         3500, 4, 3, "SHKBA0", 14, 27);
+        ITEMDATA_DEF("RLAcidProofBootsPickup",              "Acid-Proof Boots \Ct[Exotic]\C-",                        8000, 6, 6, "ACPBA0", 14, 23);
+        ITEMDATA_DEF("RLGothicBootsPickup",                 "Gothic Boots \Ct[Exotic]\C-",                           20000, 6, 7, "GOTBA0", 13, 26);
+        ITEMDATA_DEF("RLPhaseshiftBootsPickup",             "Phaseshift Boots \Ct[Exotic]\C-",                       25000, 6, 7, "PSHBA0", 13, 20);
+        ITEMDATA_DEF("RLShockwaveBootsPickup",              "Shockwave Boots \Ct[Exotic]\C-",                         4000, 6, 5, "SHKBA0", 14, 27);
 
         // Unique Boots
         ITEMDATA_DEF("RLEnviroBootsPickup",                 "Enviro Boots \Cd[Unique]\C-",                            5000, -1, 5, "ENVBA0", 14, 27);
