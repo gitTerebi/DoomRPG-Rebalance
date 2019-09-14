@@ -2422,9 +2422,9 @@ NamedScript void TeleportCracksEvent()
             // Quake
             Radius_Quake2(Players(i).TID, 4, 20, 0, 16, "world/quake");
 
-            // View Fuckery
-            if (!Random(0, 3))
-                TeleporterCrackView(i);
+            // View Fuckery (disabled)
+            //if (!Random(0, 3))
+            //    TeleporterCrackView(i);
         }
 
         AmbientSound("misc/teleport", 127);
