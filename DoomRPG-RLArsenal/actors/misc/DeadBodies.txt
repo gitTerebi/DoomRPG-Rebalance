@@ -282,41 +282,41 @@ ACTOR RLGibbedBody2 : RLDRLADeadBody replaces GibbedMarineExtra
 
 actor RLScoutGunSpawner : RandomSpawner
 {
-	DropItem "RLClip2"                  255 40
-	DropItem "RLClipBox2" 		        255 15
+    DropItem "RLClip2"                  255 40
+    DropItem "RLClipBox2" 		        255 15
     DropItem "RLPistolPickup"           255 25
     DropItem "RLCombatPistolPickup"     255 10
     DropItem "RLMarksmanPistolPickup"   255 4
     DropItem "RLHandcannonPickup"       255 1
-	DropItem "DRPGTurretPart"           255 5	
+    DropItem "DRPGTurretPart"           255 5	
 }
 
 actor RLMarineGunSpawner : RandomSpawner
 {
-	DropItem "RLClip2"                  255 40
-	DropItem "RLClipBox2" 		        255 20
+    DropItem "RLClip2"                  255 40
+    DropItem "RLClipBox2" 		        255 20
     DropItem "RLChaingunPickup"         255 10
     DropItem "RLBattleRiflePickup"      255 20
     DropItem "RLUziPickup"              255 5
-	DropItem "DRPGTurretPart"           255 5
+    DropItem "DRPGTurretPart"           255 5
 }
 
 actor RLTechnicianGunSpawner : RandomSpawner
 {
-	DropItem "RLBlueprintComputer"      255 5
-	DropItem "RLClip2"                  255 35
-	DropItem "RLClipBox2" 		        255 10
-	DropItem "RLShellBox2" 		        255 10
+    DropItem "RLBlueprintComputer"      255 5
+    DropItem "RLClip2"                  255 35
+    DropItem "RLClipBox2" 		        255 10
+    DropItem "RLShellBox2" 		        255 10
     DropItem "RLCellPack2" 		        255 20
-	DropItem "DRPGTurretPart"           255 20
+    DropItem "DRPGTurretPart"           255 20
 }
 
 actor RLRenegadeGunSpawner : RandomSpawner
 {
     DropItem "RLShell"                  255 40
-	DropItem "RLShellBox2" 		        255 30
-	DropItem "RLShotgunPickup"          255 20
-	DropItem "DRPGTurretPart"           255 9
+    DropItem "RLShellBox2" 		        255 30
+    DropItem "RLShotgunPickup"          255 20
+    DropItem "DRPGTurretPart"           255 9
     DropItem "RLAaaghSphere"            255 1
 }
 
@@ -324,7 +324,7 @@ actor RLDemolitionistGunSpawner : RandomSpawner
 {
     DropItem "RLRocketBox"              255 50
     DropItem "RLRocketLauncherPickup"   255 30
-	DropItem "DRPGTurretPart"           255 20
+    DropItem "DRPGTurretPart"           255 20
 }
 
 actor RLCommandoNotGunSpawner : RandomSpawner
