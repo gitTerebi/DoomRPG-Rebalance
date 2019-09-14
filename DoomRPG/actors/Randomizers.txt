@@ -96,7 +96,7 @@ actor DRPGMoneyDropper : RandomSpawner 20000
 actor DRPGHealthDropper : RandomSpawner 20001
 {
     DropItem "DRPGMoneyDropper"     255 100
-    DropItem "RLArmorBonusPickup"   255 5
+    DropItem "DRPGEPCapsule"        255 5
     DropItem "DRPGStimpack"         255 70
     DropItem "DRPGMedikit"          255 10
     DropItem "DRPGLargeMedikit"     255 6
@@ -455,8 +455,7 @@ actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 // Stimpack Locations
 actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 {
-    DropItem "DRPGMoneyDropper"     255 75
-    DropItem "RLArmorBonusPickup"   255 5
+    DropItem "DRPGMoneyDropper"     255 80
     DropItem "DRPGStimpack"         255 50
     DropItem "DRPGMedikit"          255 15
     DropItem "DRPGLargeMedikit"     255 5
@@ -465,8 +464,7 @@ actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 // Medikit Locations
 actor DRPGMedikitRandomizer : RandomSpawner Replaces Medikit
 {
-    DropItem "DRPGMoneyDropper"     255 85
-    DropItem "RLArmorBonusPickup"   255 5
+    DropItem "DRPGMoneyDropper"     255 90
     DropItem "DRPGStimpack"         255 45
     DropItem "DRPGMedikit"          255 18
     DropItem "DRPGLargeMedikit"     255 8
