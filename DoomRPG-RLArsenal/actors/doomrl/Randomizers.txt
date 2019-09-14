@@ -129,6 +129,7 @@ actor DRPGDRLAArmorBonusSpawner
 // Green Armor Locations
 actor DRPGGreenArmorRandomizer2 : RandomSpawner Replaces DRPGGreenArmorRandomizer
 {
+	DropItem "RLArmorBonusPickup"       255 100
 	DropItem "RLStandardArmorSpawner"   255 50
 	DropItem "RLAdvancedArmorSpawner"   255 45
 	DropItem "RLExoticArmorSpawner"     255 5
