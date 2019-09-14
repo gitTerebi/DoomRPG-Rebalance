@@ -169,8 +169,8 @@ actor DRPGShopWeaponRandomizer2 : RandomSpawner Replaces DRPGShopWeaponRandomize
 
 actor DRPGShopArmorRandomizer2 : RandomSpawner Replaces DRPGShopArmorRandomizer
 {
-	DropItem "GreenArmor"
-	DropItem "BlueArmor"
+	DropItem "RLStandardArmorSpawner"
+	DropItem "RLAdvancedArmorSpawner"
 }
 
 actor DRPGShopPowerupRandomizer2 : RandomSpawner Replaces DRPGShopPowerupRandomizer
