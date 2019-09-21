@@ -737,16 +737,16 @@ actor DRPGDestroyedTurret : SwitchableDecoration
         TNT1 A 0 A_JumpIf(user_damage == 3, "Setup3")
         Stop
     Setup1:
-        TNT1 A 0 A_SetUserVar("user_loop", 20)
-        TNT1 A 0 A_SetUserVar("user_angleoff", 360 / 20)
+        TNT1 A 0 A_SetUserVar("user_loop", 7)
+        TNT1 A 0 A_SetUserVar("user_angleoff", 360 / 7)
         Goto Destroyed1
     Setup2:
-        TNT1 A 0 A_SetUserVar("user_loop", 10)
-        TNT1 A 0 A_SetUserVar("user_angleoff", 360 / 10)
-        Goto Destroyed2
-    Setup3:
         TNT1 A 0 A_SetUserVar("user_loop", 5)
         TNT1 A 0 A_SetUserVar("user_angleoff", 360 / 5)
+        Goto Destroyed2
+    Setup3:
+        TNT1 A 0 A_SetUserVar("user_loop", 3)
+        TNT1 A 0 A_SetUserVar("user_angleoff", 360 / 3)
         Goto Destroyed3
     Destroyed1:
         PTRD A Random(35, 105)

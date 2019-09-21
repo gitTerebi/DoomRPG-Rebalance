@@ -1021,7 +1021,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     {
     case MAPEVENT_MEGABOSS:
         return (GetCVar("drpg_mapevent_megaboss") &&
-                AveragePlayerLevel() >= 50);
+                AveragePlayerLevel() >= 40);
 
     case MAPEVENT_TOXICHAZARD:
         return (GetCVar("drpg_mapevent_toxichazard"));
@@ -1070,7 +1070,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     case MAPEVENT_DRLA_OVERMIND:
         return (GetCVar("drpg_mapevent_overmind") &&
                 CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
-                AveragePlayerLevel() >= 40);
+                AveragePlayerLevel() >= 35);
 
     case MAPEVENT_BONUS_RAINBOWS:
         return (GetCVar("drpg_mapevent_rainbows") &&
@@ -1078,8 +1078,8 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_SKILL_HELL:
         return (GetCVar("drpg_mapevent_skill_hell") &&
-                AveragePlayerLevel() >= 15 &&
-                CurrentSkill < 4);
+                AveragePlayerLevel() >= 30 &&
+                CurrentSkill < 6);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
@@ -1462,8 +1462,8 @@ NamedScript void SetupMapEvent()
     // --------------------------------------------------
 
     case MAPEVENT_SKILL_HELL:
-        if (GameSkill() != 5)
-            ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 4);
+        if (GameSkill() != 7)
+            ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 6);
         SetMusic("Skill5");
         SetHudSize(640, 480, false);
         SetFont("BIGFONT");
