@@ -4,7 +4,7 @@ adddefaultmap
 	BorderTexture = "GRNROCK"
 }
 
-map MAP01 lookup "HUSTR_1"
+map MAP01 lookup "Entryway"
 {
 	next = "MAP02"
 	secretnext = "MAP02"
@@ -15,7 +15,7 @@ map MAP01 lookup "HUSTR_1"
 	music = "D_RUNNIN"
 }
 
-map MAP02 lookup "HUSTR_2"
+map MAP02 lookup "Underhalls"
 {
 	next = "MAP03"
 	secretnext = "MAP33"
@@ -26,7 +26,7 @@ map MAP02 lookup "HUSTR_2"
 	music = "D_STALKS"
 }
 
-map MAP33 lookup "HUSTR_33"
+map MAP33 lookup "Betray"
 {
 	next = "MAP03"
 	secretnext = "MAP03"
@@ -37,7 +37,7 @@ map MAP33 lookup "HUSTR_33"
 	par = 120
 }
 
-map MAP03 lookup "HUSTR_3"
+map MAP03 lookup "The Gantlet"
 {
 	next = "MAP04"
 	secretnext = "MAP04"
@@ -48,7 +48,7 @@ map MAP03 lookup "HUSTR_3"
 	music = "D_COUNTD"
 }
 
-map MAP04 lookup "HUSTR_4"
+map MAP04 lookup "The Focus"
 {
 	next = "MAP05"
 	secretnext = "MAP05"
@@ -59,7 +59,7 @@ map MAP04 lookup "HUSTR_4"
 	music = "D_BETWEE"
 }
 
-map MAP05 lookup "HUSTR_5"
+map MAP05 lookup "The Waste Tunnels"
 {
 	next = "MAP06"
 	secretnext = "MAP06"
@@ -70,7 +70,7 @@ map MAP05 lookup "HUSTR_5"
 	music = "D_DOOM"
 }
 
-map MAP06 lookup "HUSTR_6"
+map MAP06 lookup "The Crusher"
 {
 	next = "MAP07"
 	secretnext = "MAP07"
@@ -82,7 +82,7 @@ map MAP06 lookup "HUSTR_6"
 	music = "D_THE_DA"
 }
 
-map MAP07 lookup "HUSTR_7"
+map MAP07 lookup "Dead Simple"
 {
 	next = "MAP08"
 	secretnext = "MAP08"
@@ -94,7 +94,7 @@ map MAP07 lookup "HUSTR_7"
 	music = "D_SHAWN"
 }
 
-map MAP08 lookup "HUSTR_8"
+map MAP08 lookup "Tricks and Traps"
 {
 	next = "MAP09"
 	secretnext = "MAP09"
@@ -105,7 +105,7 @@ map MAP08 lookup "HUSTR_8"
 	music = "D_DDTBLU"
 }
 
-map MAP09 lookup "HUSTR_9"
+map MAP09 lookup "The Pit"
 {
 	next = "MAP10"
 	secretnext = "MAP10"
@@ -116,7 +116,7 @@ map MAP09 lookup "HUSTR_9"
 	music = "D_IN_CIT"
 }
 
-map MAP10 lookup "HUSTR_10"
+map MAP10 lookup "Refueling Base"
 {
 	next = "MAP11"
 	secretnext = "MAP11"
@@ -127,7 +127,7 @@ map MAP10 lookup "HUSTR_10"
 	music = "D_DEAD"
 }
 
-map MAP11 lookup "HUSTR_11"
+map MAP11 lookup "'O' of Destruction!"
 {
 	next = "MAP12"
 	secretnext = "MAP12"
@@ -138,7 +138,7 @@ map MAP11 lookup "HUSTR_11"
 	music = "D_STLKS2"
 }
 
-map MAP12 lookup "HUSTR_12"
+map MAP12 lookup "The Factory"
 {
 	next = "MAP13"
 	secretnext = "MAP13"
@@ -149,7 +149,7 @@ map MAP12 lookup "HUSTR_12"
 	music = "D_THEDA2"
 }
 
-map MAP13 lookup "HUSTR_13"
+map MAP13 lookup "Downtown"
 {
 	next = "MAP14"
 	secretnext = "MAP14"
@@ -160,7 +160,7 @@ map MAP13 lookup "HUSTR_13"
 	music = "D_DOOM2"
 }
 
-map MAP14 lookup "HUSTR_14"
+map MAP14 lookup "The Inmost Dens"
 {
 	next = "MAP15"
 	secretnext = "MAP15"
@@ -171,7 +171,7 @@ map MAP14 lookup "HUSTR_14"
 	music = "D_DDTBL2"
 }
 
-map MAP15 lookup "HUSTR_15"
+map MAP15 lookup "Industrial Zone"
 {
 	next = "MAP16"
 	secretnext = "MAP31"
@@ -182,7 +182,7 @@ map MAP15 lookup "HUSTR_15"
 	music = "D_RUNNI2"
 }
 
-map MAP16 lookup "HUSTR_16"
+map MAP16 lookup "Suburbs"
 {
 	next = "MAP17"
 	secretnext = "MAP17"
@@ -193,7 +193,7 @@ map MAP16 lookup "HUSTR_16"
 	music = "D_DEAD2"
 }
 
-map MAP17 lookup "HUSTR_17"
+map MAP17 lookup "Tenements"
 {
 	next = "MAP18"
 	secretnext = "MAP18"
@@ -204,7 +204,7 @@ map MAP17 lookup "HUSTR_17"
 	music = "D_STLKS3"
 }
 
-map MAP18 lookup "HUSTR_18"
+map MAP18 lookup "The Courtyard"
 {
 	next = "MAP19"
 	secretnext = "MAP19"
@@ -215,7 +215,7 @@ map MAP18 lookup "HUSTR_18"
 	music = "D_ROMERO"
 }
 
-map MAP19 lookup "HUSTR_19"
+map MAP19 lookup "The Citadel"
 {
 	next = "MAP20"
 	secretnext = "MAP20"
@@ -226,7 +226,7 @@ map MAP19 lookup "HUSTR_19"
 	music = "D_SHAWN2"
 }
 
-map MAP20 lookup "HUSTR_20"
+map MAP20 lookup "Gotcha!"
 {
 	next = "MAP21"
 	secretnext = "MAP21"
@@ -237,7 +237,7 @@ map MAP20 lookup "HUSTR_20"
 	music = "D_MESSAG"
 }
 
-map MAP21 lookup "HUSTR_21"
+map MAP21 lookup "Nirvana"
 {
 	next = "MAP22"
 	secretnext = "MAP22"
@@ -248,7 +248,7 @@ map MAP21 lookup "HUSTR_21"
 	music = "D_COUNT2"
 }
 
-map MAP22 lookup "HUSTR_22"
+map MAP22 lookup "The Catacombs"
 {
 	next = "MAP23"
 	secretnext = "MAP23"
@@ -259,7 +259,7 @@ map MAP22 lookup "HUSTR_22"
 	music = "D_DDTBL3"
 }
 
-map MAP23 lookup "HUSTR_23"
+map MAP23 lookup "Barrels o' Fun"
 {
 	next = "MAP24"
 	secretnext = "MAP24"
@@ -270,7 +270,7 @@ map MAP23 lookup "HUSTR_23"
 	music = "D_AMPIE"
 }
 
-map MAP24 lookup "HUSTR_24"
+map MAP24 lookup "The Chasm"
 {
 	next = "MAP25"
 	secretnext = "MAP25"
@@ -281,7 +281,7 @@ map MAP24 lookup "HUSTR_24"
 	music = "D_THEDA3"
 }
 
-map MAP25 lookup "HUSTR_25"
+map MAP25 lookup "Bloodfalls"
 {
 	next = "MAP26"
 	secretnext = "MAP26"
@@ -292,7 +292,7 @@ map MAP25 lookup "HUSTR_25"
 	music = "D_ADRIAN"
 }
 
-map MAP26 lookup "HUSTR_26"
+map MAP26 lookup "The Abandoned Mines"
 {
 	next = "MAP27"
 	secretnext = "MAP27"
@@ -303,7 +303,7 @@ map MAP26 lookup "HUSTR_26"
 	music = "D_MESSG2"
 }
 
-map MAP27 lookup "HUSTR_27"
+map MAP27 lookup "Monster Condo"
 {
 	next = "MAP28"
 	secretnext = "MAP28"
@@ -314,7 +314,7 @@ map MAP27 lookup "HUSTR_27"
 	music = "D_ROMER2"
 }
 
-map MAP28 lookup "HUSTR_28"
+map MAP28 lookup "The Spirit World"
 {
 	next = "MAP29"
 	secretnext = "MAP29"
@@ -325,7 +325,7 @@ map MAP28 lookup "HUSTR_28"
 	music = "D_TENSE"
 }
 
-map MAP29 lookup "HUSTR_29"
+map MAP29 lookup "The Living End"
 {
 	next = "MAP30"
 	secretnext = "MAP30"
@@ -336,7 +336,7 @@ map MAP29 lookup "HUSTR_29"
 	music = "D_SHAWN3"
 }
 
-map MAP30 lookup "HUSTR_30"
+map MAP30 lookup "Icon of Sin"
 {
 	titlepatch = "CWILV29"
 	next = "EndGameC"
