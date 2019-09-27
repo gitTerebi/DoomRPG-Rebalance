@@ -1415,7 +1415,7 @@ NamedScript MapSpecial void MissionBBS()
             ActivatorSound("menu/move", 127);
             if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
-                if (Difficulty < (Player.RankLevel / 1.5) - 1)
+                if (Difficulty < (Player.RankLevel / 2.0) - 1)
                 {
                     if (Difficulty >= MAX_DIFFICULTIES - 1)
                         Difficulty = MAX_DIFFICULTIES - 1;

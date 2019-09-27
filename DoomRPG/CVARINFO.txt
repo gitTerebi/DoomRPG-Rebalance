@@ -11,8 +11,8 @@ server  int     drpg_xp_summon_percent = 100;
 server  int     drpg_monster_level_cap = 1000;
 server  int     drpg_monster_stat_cap = 1000;
 server  int     drpg_monster_levels = 3;
-server  float   drpg_monster_level_weight = 0.5;
-server  float   drpg_monster_map_weight = 0.5;
+server  float   drpg_monster_level_weight = 0.7;
+server  float   drpg_monster_map_weight = 0.3;
 server  float   drpg_monster_random_min_mult = 0.8;
 server  float   drpg_monster_random_max_mult = 1.2;
 server  int     drpg_aura_curve = 0;
@@ -51,7 +51,7 @@ server  bool    drpg_monster_darkblue_ammodrain = false;
 server  bool    drpg_monster_yellow_moneydrain = false;
 
 // Game Difficulty
-server  float   drpg_skill_costscale = 0.5;
+server  float   drpg_skill_costscale = 1.0;
 server  bool    drpg_skill_keepauras = false;
 server  int     drpg_skill_costcooldown = 10;
 server  bool    drpg_shield_reset = true;

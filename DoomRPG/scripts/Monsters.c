@@ -2279,23 +2279,23 @@ NamedScript void MonsterDeath()
 
         // Aura Drops
         if (Stats->Aura.Type[AURA_RED].Active) // Red Aura - Strength
-            DropMonsterItem(Killer, 0, "DRPGVialStrength", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
-            DropMonsterItem(Killer, 0, "DRPGVialDefense", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_WHITE].Active) // White Aura - XP
             DropMonsterItem(Killer, 0, "DRPGStimDropper", 256);
         if (Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
-            DropMonsterItem(Killer, 0, "DRPGVialVitality", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
-            DropMonsterItem(Killer, 0, "DRPGVialEnergy", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_PURPLE].Active) // Purple Aura - Regeneration
-            DropMonsterItem(Killer, 0, "DRPGVialRegeneration", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_ORANGE].Active) // Orange Aura - Agility
-            DropMonsterItem(Killer, 0, "DRPGVialAgility", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
-            DropMonsterItem(Killer, 0, "DRPGVialCapacity", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_YELLOW].Active) // Yellow Aura - Luck
-            DropMonsterItem(Killer, 0, "DRPGVialLuck", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
 
         // Luck-based Drops
         if (Killer > -1 && !(Stats->Flags & MF_MEGABOSS))

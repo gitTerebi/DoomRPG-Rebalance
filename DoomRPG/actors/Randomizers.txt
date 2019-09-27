@@ -339,7 +339,7 @@ actor DRPGStimDropper : RandomSpawner 20012
 actor DRPGVialDropper : RandomSpawner 20013
 {
 	// Money
-    DropItem "DRPGMoneyDropper"         255 50
+    DropItem "DRPGMoneyDropper"         255 100
 
     // Stats
     DropItem "DRPGVialStrength"         255 10

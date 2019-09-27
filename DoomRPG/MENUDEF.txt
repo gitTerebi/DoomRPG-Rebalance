@@ -200,8 +200,8 @@ OptionMenu "DoomRPGMonsters"
     Slider "Monster Health Boost", "drpg_monster_vitality_boost", 0.0, 100.0, 0.1
     StaticText ""
 
-    Slider "Monster Level Weight", "drpg_monster_level_weight", 0.5, 10.0, 0.1
-    Slider "Monster Map Weight", "drpg_monster_map_weight", 0.5, 10.0, 0.1
+    Slider "Monster Level Weight", "drpg_monster_level_weight", 0.1, 10.0, 0.1
+    Slider "Monster Map Weight", "drpg_monster_map_weight", 0.1, 10.0, 0.1
     Slider "Monster Random Min Multiplier", "drpg_monster_random_min_mult", 0.5, 10.0, 0.1
     Slider "Monster Random Max Multiplier", "drpg_monster_random_max_mult", 0.5, 10.0, 0.1
     Slider "Monster Aura Curve", "drpg_aura_curve", -1000, 1000, 10

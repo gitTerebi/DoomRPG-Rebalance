@@ -104,7 +104,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Enviro-Shield",
-            .Cost = 200,
+            .Cost = 100,
             .MaxLevel = 1,
             .Use = Powerup,
             .Description =
@@ -134,7 +134,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Mental Mapping",
-            .Cost = 200,
+            .Cost = 300,
             .MaxLevel = 1,
             .Use = Powerup,
             .Description =
@@ -160,7 +160,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Red Aura",
-            .Cost = 100,
+            .Cost = 75,
             .MaxLevel = 6,
             .Use = UseAura,
             .Description =
@@ -175,7 +175,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Green Aura",
-            .Cost = 100,
+            .Cost = 75,
             .MaxLevel = 5,
             .Use = UseAura,
             .Description =
@@ -189,7 +189,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "White Aura",
-            .Cost = 100,
+            .Cost = 75,
             .MaxLevel = 5,
             .Use = UseAura,
             .Description =
@@ -215,7 +215,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Blue Aura",
-            .Cost = 100,
+            .Cost = 75,
             .MaxLevel = 5,
             .Use = UseAura,
             .Description =
@@ -254,7 +254,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Dark Blue Aura",
-            .Cost = 100,
+            .Cost = 75,
             .MaxLevel = 7,
             .Use = UseAura,
             .Description =
@@ -288,7 +288,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Weaken",
-            .Cost = 200,
+            .Cost = 100,
             .MaxLevel = 5,
             .Use = Weaken,
             .Description =
@@ -325,7 +325,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Aura Steal",
-            .Cost = 500,
+            .Cost = 300,
             .MaxLevel = 1,
             .Use = AuraSteal,
             .Description =
@@ -335,7 +335,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Soul Steal",
-            .Cost = 500,
+            .Cost = 300,
             .MaxLevel = 1,
             .Use = SoulSteal,
             .Description =
@@ -389,7 +389,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Summon Marine",
-            .Cost = 100,
+            .Cost = 75,
             .MaxLevel = 7,
             .Use = Summon,
             .Description =
@@ -405,7 +405,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Former Human",
-            .Cost = 40,
+            .Cost = 100,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -415,7 +415,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Former Sergeant",
-            .Cost = 80,
+            .Cost = 75,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -425,7 +425,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Former Commando",
-            .Cost = 100,
+            .Cost = 150,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -435,7 +435,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Imp",
-            .Cost = 80,
+            .Cost = 60,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -445,7 +445,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Demon",
-            .Cost = 80,
+            .Cost = 60,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -455,7 +455,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Cacodemon",
-            .Cost = 100,
+            .Cost = 125,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -485,7 +485,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Lost Soul",
-            .Cost = 30,
+            .Cost = 25,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -505,7 +505,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Revenant",
-            .Cost = 500,
+            .Cost = 300,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -515,7 +515,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Mancubus",
-            .Cost = 500,
+            .Cost = 325,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -525,7 +525,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Arachnotron",
-            .Cost = 250,
+            .Cost = 200,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -535,7 +535,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Arch-Vile",
-            .Cost = 750,
+            .Cost = 400,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -545,7 +545,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Cyberdemon",
-            .Cost = 1000,
+            .Cost = 500,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -555,7 +555,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Spider Mastermind",
-            .Cost = 1000,
+            .Cost = 500,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -569,7 +569,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Breakdown Armor",
-            .Cost = 250,
+            .Cost = 200,
             .MaxLevel = 1,
             .Use = BreakdownArmor,
             .Description =
@@ -610,7 +610,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Recall",
-            .Cost = 20,
+            .Cost = 10,
             .MaxLevel = 1,
             .Use = Recall,
             .Description =
@@ -620,7 +620,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Magnetize",
-            .Cost = 100,
+            .Cost = 50,
             .MaxLevel = 1,
             .Use = Magnetize,
             .Description =
@@ -1889,6 +1889,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
     bool Success;
     fixed Radius;
     str Name;
+	int LevelNum = CurrentLevel->LevelNum;
 
     str const Summons[] =
     {
@@ -2225,16 +2226,16 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         // Setup Stats
         Delay(4); // We need this initial delay to make sure the ID is valid
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(NewID)];
-        int Modifier = Player.Level * ((fixed)Player.EnergyTotal / 30.0);
-        Stats->LevelAdd += Modifier;
-        Stats->Strength += Random(0, Modifier / GameSkill());
-        Stats->Defense += Random(0, Modifier / GameSkill());
-        Stats->Vitality += Random(0, Modifier / GameSkill());
-        Stats->Energy += Random(0, Modifier / GameSkill());
-        Stats->Regeneration += Random(0, Modifier / GameSkill());
-        Stats->Agility += Random(0, Modifier / GameSkill());
-        Stats->Capacity += Random(0, Modifier / GameSkill());
-        Stats->Luck += Random(0, Modifier / GameSkill());
+        int Modifier = Player.Level / 5.0 + (fixed)Player.EnergyTotal / 2.0;
+        Stats->LevelAdd += (LevelNum * 0.3 + Player.Level * 0.7) - Player.Level;
+        Stats->Strength += Random(0, (Modifier * 1.0));
+        Stats->Defense += Random(0, (Modifier * 1.0));
+        Stats->Vitality += Random(0, (Modifier * 1.0));
+        Stats->Energy += Random(0, (Modifier * 1.0));
+        Stats->Regeneration += Random(0, (Modifier * 1.0));
+        Stats->Agility += Random(0, (Modifier * 1.0));
+        Stats->Capacity += Random(0, (Modifier * 1.0));
+        Stats->Luck += Random(0, (Modifier * 1.0));
         Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(NewID)]);
         Stats->Flags |= MF_NOXP;
         Stats->Flags |= MF_NODROPS;
