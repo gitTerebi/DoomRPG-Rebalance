@@ -352,7 +352,7 @@ actor DRPGVialDropper : RandomSpawner 20013
     DropItem "DRPGVialLuck"             255 15
     
     // Rare Vials
-    DropItem "DRPGVialDropperRare"      255 5
+    DropItem "DRPGVialDropperRare"      255 3
     
     // Stim Packages
     DropItem "DRPGStimPackageStat"      255 1

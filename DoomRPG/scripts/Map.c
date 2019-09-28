@@ -1024,7 +1024,8 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
                 AveragePlayerLevel() >= 40);
 
     case MAPEVENT_TOXICHAZARD:
-        return (GetCVar("drpg_mapevent_toxichazard"));
+        return (GetCVar("drpg_mapevent_toxichazard") &&
+                AveragePlayerLevel() >= 15);
 
     case MAPEVENT_NUCLEARBOMB:
         return (GetCVar("drpg_mapevent_nuclearbomb"));
