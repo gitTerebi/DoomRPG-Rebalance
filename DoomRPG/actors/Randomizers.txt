@@ -339,20 +339,20 @@ actor DRPGStimDropper : RandomSpawner 20012
 actor DRPGVialDropper : RandomSpawner 20013
 {
 	// Money
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 150
 
     // Stats
-    DropItem "DRPGVialStrength"         255 10
-    DropItem "DRPGVialDefense"          255 10
-    DropItem "DRPGVialVitality"         255 10
-    DropItem "DRPGVialEnergy"           255 10
-    DropItem "DRPGVialRegeneration"     255 10
-    DropItem "DRPGVialAgility"          255 10
-    DropItem "DRPGVialCapacity"         255 10
-    DropItem "DRPGVialLuck"             255 10
+    DropItem "DRPGVialStrength"         255 15
+    DropItem "DRPGVialDefense"          255 15
+    DropItem "DRPGVialVitality"         255 15
+    DropItem "DRPGVialEnergy"           255 15
+    DropItem "DRPGVialRegeneration"     255 15
+    DropItem "DRPGVialAgility"          255 15
+    DropItem "DRPGVialCapacity"         255 15
+    DropItem "DRPGVialLuck"             255 15
     
     // Rare Vials
-    DropItem "DRPGVialDropperRare"      255 3
+    DropItem "DRPGVialDropperRare"      255 5
     
     // Stim Packages
     DropItem "DRPGStimPackageStat"      255 1
