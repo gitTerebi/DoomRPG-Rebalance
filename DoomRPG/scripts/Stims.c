@@ -101,7 +101,7 @@ NamedScript KeyBind void UseStim(bool Force)
             else
                 InitialTime = 2100 * InitialTimeMultiplier;
 
-            // Immunity penalty        
+            // Immunity penalty
             InitialTime += InitialTime * Player.StimImmunity / 100;
 
             if (InitialTime >= 42000)
@@ -384,7 +384,7 @@ void CheckStim()
     };
 
     // Toxicity multiplier for Potency and Purifier stims
-    int StimToxicityMultiplier = 1 + (Player.Stim.Current[STIM_POTENCY] / 2) + (Player.Stim.Current[STIM_PURIFIER] / 5);
+    int StimToxicityMultiplier = 1 + (Player.Stim.Current[STIM_POTENCY]) + (Player.Stim.Current[STIM_PURIFIER] / 5);
 
     // Stim maximum capacities
     if (Player.Stim.Size == 1) // Small
