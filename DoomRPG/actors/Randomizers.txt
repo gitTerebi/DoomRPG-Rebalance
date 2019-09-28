@@ -352,7 +352,7 @@ actor DRPGVialDropper : RandomSpawner 20013
     DropItem "DRPGVialLuck"             255 10
     
     // Rare Vials
-    DropItem "DRPGVialDropperRare"      255 5
+    DropItem "DRPGVialDropperRare"      255 3
     
     // Stim Packages
     DropItem "DRPGStimPackageStat"      255 1
@@ -361,20 +361,23 @@ actor DRPGVialDropper : RandomSpawner 20013
 
 actor DRPGVialDropperRare : RandomSpawner 20014
 {
-    // Boosters
-    DropItem "DRPGVialPotency"
-    DropItem "DRPGVialPurifier"
+	// Money
+    DropItem "DRPGMoneyDropper"         255 100    
+	
+	// Boosters
+    DropItem "DRPGVialPotency"          255 10
+    DropItem "DRPGVialPurifier"         255 10
     
     // Powerups
-    DropItem "DRPGVialIndestructible"
-    DropItem "DRPGVialShadow"
-    DropItem "DRPGVialInfinity"
-    DropItem "DRPGVialChrono"
-    DropItem "DRPGVialAdrenaline"
-    DropItem "DRPGVialGravity"
-    DropItem "DRPGVialVampire"
-    DropItem "DRPGVialRage"
-    DropItem "DRPGVialMagnetic"
+    DropItem "DRPGVialIndestructible"   255 10
+    DropItem "DRPGVialShadow"           255 10
+    DropItem "DRPGVialInfinity"         255 10
+    DropItem "DRPGVialChrono"           255 10
+    DropItem "DRPGVialAdrenaline"       255 10
+    DropItem "DRPGVialGravity"          255 10
+    DropItem "DRPGVialVampire"          255 10
+    DropItem "DRPGVialRage"             255 10
+    DropItem "DRPGVialMagnetic"         255 10
 }
 
 actor DRPGTurretDropper : RandomSpawner 20015
