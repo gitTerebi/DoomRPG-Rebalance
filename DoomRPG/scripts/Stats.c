@@ -390,7 +390,7 @@ void CheckStats()
         Player.DamageFactor = 1.0 + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
     Player.Mass = 100 + (Player.DefenseTotal * 10);
     Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
-    Player.StatusEffectResist = (fixed)Player.VitalityTotal / 4.0;
+    Player.StatusEffectResist = (fixed)Player.VitalityTotal / 2.0;
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
@@ -568,8 +568,8 @@ void CheckStats()
     // Status Effect Checking
     if (Player.StatusType[SE_FATIGUE]) // Fatigue
     {
-        Player.Speed = Player.Speed * (1.0 / ((fixed)Player.StatusIntensity[SE_FATIGUE] + 1));
-        Player.JumpHeight = Player.JumpHeight * (1.0 / ((fixed)Player.StatusIntensity[SE_FATIGUE] + 1));
+        Player.Speed = Player.Speed * (1.0 / (((fixed)Player.StatusIntensity[SE_FATIGUE] / 1.7) + 1));
+        Player.JumpHeight = Player.JumpHeight * (1.0 / (((fixed)Player.StatusIntensity[SE_FATIGUE] / 1.7) + 1));
 
         if (Player.StatusIntensity[SE_FATIGUE] > 3)
             SetMugShotState("Rampage");
@@ -1146,16 +1146,17 @@ void StatusDamage(int Amount, fixed Chance, bool Critical)
     int StatChance = 0;
     int Intensity = 0;
     int Time = 0;
+    int LevelNum = CurrentLevel->LevelNum;
 
-    // Criticals boost chance 2.5x
+    // Criticals boost chance 1.75x
     if (Critical)
-        Chance *= 2.5;
+        Chance *= 1.75;
 
     // We lucked out this time and won't get hit with a status effect
     if (RandomFixed(0.0, 100.0) >= Chance) return;
 
     // Calculate the intensity
-    Intensity = (Amount * Player.HealthMax) / 1000;
+    Intensity = ((LevelNum / 6.0) / (1.0 + (Player.VitalityTotal / 10.0) + (Player.Level / 15.0)));
     if (Intensity < 1)
         Intensity = 1;
     if (Intensity > 5)
