@@ -568,8 +568,8 @@ void CheckStats()
     // Status Effect Checking
     if (Player.StatusType[SE_FATIGUE]) // Fatigue
     {
-        Player.Speed = Player.Speed * (1.0 / (((fixed)Player.StatusIntensity[SE_FATIGUE] / 1.7) + 1));
-        Player.JumpHeight = Player.JumpHeight * (1.0 / (((fixed)Player.StatusIntensity[SE_FATIGUE] / 1.7) + 1));
+        Player.Speed = Player.Speed * (1.0 / (((fixed)Player.StatusIntensity[SE_FATIGUE] / 1.5) + 1));
+        Player.JumpHeight = Player.JumpHeight * (1.0 / (((fixed)Player.StatusIntensity[SE_FATIGUE] / 1.5) + 1));
 
         if (Player.StatusIntensity[SE_FATIGUE] > 3)
             SetMugShotState("Rampage");
@@ -1148,9 +1148,9 @@ void StatusDamage(int Amount, fixed Chance, bool Critical)
     int Time = 0;
     int LevelNum = CurrentLevel->LevelNum;
 
-    // Criticals boost chance 1.75x
+    // Criticals boost chance 2.0x
     if (Critical)
-        Chance *= 1.75;
+        Chance *= 2.0;
 
     // We lucked out this time and won't get hit with a status effect
     if (RandomFixed(0.0, 100.0) >= Chance) return;
