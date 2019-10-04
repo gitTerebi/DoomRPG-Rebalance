@@ -493,7 +493,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     MonsterID = FindMonster(Player.DamageTID);
 
     // Calculate monster crit/status chance
-    LuckChance = (fixed)Monsters[MonsterID].Luck / 20.0;
+    LuckChance = (fixed)Monsters[MonsterID].Luck / 25.0;
     EnergyLevel = (fixed)Monsters[MonsterID].Energy / 12.5;
 
     // Calculate a critical hit
