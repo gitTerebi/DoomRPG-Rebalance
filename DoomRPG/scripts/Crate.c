@@ -508,135 +508,135 @@ void GenerateCrate(int ID, int Amount)
             {
                 "Death From Above", "RLDeathFromAboveSetBonusActive", false,
                 {
-                    { "RLAntigravSteelBoots",               40, },
-                    { "RLAntigravProtectiveBoots",          30, },
-                    { "RLAntigravPlasteelBoots",            20, },
-                    { "RLJetpackArmor",                     40, },
+                    { "RLAntigravSteelBoots",               20, },
+                    { "RLAntigravProtectiveBoots",          15, },
+                    { "RLAntigravPlasteelBoots",            10, },
+                    { "RLJetpackArmor",                     20, },
                     { NULL, },
                 },
             },
             {
                 "Demonic", "RLDemonicSetBonusActive", false,
                 {
-                    { "RLDemonicCarapaceArmor",             40, },
-                    { "RLDemonicBoots",                     40, },
+                    { "RLDemonicCarapaceArmor",             20, },
+                    { "RLDemonicBoots",                     10, },
                     { NULL, },
                 },
             },
             {
                 "Tactical", "RLTacticalSetBonusActive", false,
                 {
-                    { "RLTacticalArmor",                    40, },
-                    { "RLTacticalBoots",                    40, },
+                    { "RLTacticalArmor",                    20, },
+                    { "RLTacticalBoots",                    10, },
                     { NULL, },
                 },
             },
             {
                 "Gothic", "RLGothicSetBonusActive", false,
                 {
-                    { "RLGothicArmor",                      40, },
-                    { "RLGothicBoots",                      40, },
+                    { "RLGothicArmor",                      20, },
+                    { "RLGothicBoots",                      10, },
                     { NULL, },
                 },
             },
             {
                 "Phaseshift", "RLPhaseshiftSetBonusActive", false,
                 {
-                    { "RLPhaseshiftArmor",                  40, },
-                    { "RLPhaseshiftBoots",                  40, },
+                    { "RLPhaseshiftArmor",                  20, },
+                    { "RLPhaseshiftBoots",                  10, },
                     { NULL, },
                 },
             },
             {
                 "Roysten", "RLRoystenSetBonusActive", false,
                 {
-                    { "RLRoystensCommandArmor",             25, },
-                    { "RLRoystensCombatBoots",              25, },
+                    { "RLRoystensCommandArmor",             15, },
+                    { "RLRoystensCombatBoots",               5, },
                     { NULL, },
                 },
             },
             {
                 "Architect", "RLArchitectSetBonusActive", false,
                 {
-                    { "RLSoloOperativeSuitArmor",           25, },
-                    { "RLSoloOperativeBoots",               25, },
+                    { "RLSoloOperativeSuitArmor",           15, },
+                    { "RLSoloOperativeBoots",                5, },
                     { NULL, },
                 },
             },
             {
                 "Torgue", "RLTorgueSetBonusActive", false,
                 {
-                    { "RLTorgueBlastplateArmor",            25, },
-                    { "RLTorgueBlastBoots",                 25, },
+                    { "RLTorgueBlastplateArmor",            15, },
+                    { "RLTorgueBlastBoots",                  5, },
                     { NULL, },
                 },
             },
             {
                 "Enclave", "RLEnclaveSetBonusActive", false,
                 {
-                    { "RLNuclearPowerArmor",                25, },
-                    { "RLNuclearPowerBoots",                25, },
+                    { "RLNuclearPowerArmor",                15, },
+                    { "RLNuclearPowerBoots",                 5, },
                     { NULL, },
                 },
             },
             {
                 "Sentry Sentinel", "RLSentrySentinelSetBonusActive", false,
                 {
-                    { "RLTacticalAssemblerSuitArmor",       25, },
-                    { "RLTacticalAssemblerBoots",           25, },
+                    { "RLTacticalAssemblerSuitArmor",       15, },
+                    { "RLTacticalAssemblerBoots",            5, },
                     { NULL, },
                 },
             },
             {
                 "Sensible Strategist", "RLSensibleStrategistSetBonusActive", false,
                 {
-                    { "RLTacticalAssemblerSuitArmor",       25, },
-                    { "RLTacticalAssemblerBoots",           25, },
+                    { "RLTacticalAssemblerSuitArmor",       15, },
+                    { "RLTacticalAssemblerBoots",            5, },
                     { NULL, },
                 },
             },
             {
                 "Lava", "RLLavaSetBonusActive", false,
                 {
-                    { "RLLavaArmor",                        20, },
-                    { "RLLavaBoots",                        20, },
+                    { "RLLavaArmor",                        10, },
+                    { "RLLavaBoots",                         5, },
                     { NULL, },
                 },
             },
             {
                 "Inquisitor", "RLInquisitorsSetBonusActive", false,
                 {
-                    { "RLMaleksArmor",                      20, },
-                    { "RLNyarlaptotepsBoots",               20, },
+                    { "RLMaleksArmor",                      10, },
+                    { "RLNyarlaptotepsBoots",                5, },
                     { NULL, },
                 },
             },
             {
                 "Cerberus", "RLCerberusSetBonusActive", false,
                 {
-                    { "RLTristarBlaster",                   25, },
-                    { "RLCerberusArmor",                    25, },
-                    { "RLCerberusBoots",                    25, },
+                    { "RLTristarBlaster",                   15, },
+                    { "RLCerberusArmor",                    15, },
+                    { "RLCerberusBoots",                     5, },
                     { NULL, },
                 },
             },
             {
                 "Angelic", "RLAngelicAttireSetBonusActive", false,
                 {
-                    { "RLAngelicArmor",                     10, },
-                    { "RLAngelicBoots",                     10, },
+                    { "RLAngelicArmor",                      5, },
+                    { "RLAngelicBoots",                      5, },
                     { NULL, },
                 },
             },
             {
                 "Nuclear", "RLNuclearWeaponSetBonusActive", false,
                 {
-                    { "RLNuclearPlasmaPistol",              25, },
-                    { "RLNuclearPlasmaRifle",               15, },
-                    { "RLNuclearBFG9000",                   10, },
+                    { "RLNuclearPlasmaPistol",              15, },
+                    { "RLNuclearPlasmaRifle",               10, },
+                    { "RLNuclearBFG9000",                    5, },
                     { "RLNuclearOnslaught",                 0.2, },
-                    { "RLNuclearArmor",                     20, },
-                    { "RLNuclearPowerArmor",                3, },
+                    { "RLNuclearArmor",                     10, },
+                    { "RLNuclearPowerArmor",                2, },
                     { "RLHighPowerNuclearPlasmaPistol",     0, },
                     { "RLStormNuclearPlasmaPistol",         0, },
                     { "RLSuperchargedNuclearPlasmaPistol",  0, },
@@ -656,15 +656,15 @@ void GenerateCrate(int ID, int Amount)
             {
                 "Alucard", "RLAntiFreakJackalDemonArtifacts", false,
                 {
-                    { "RLAntiFreakJackal",                  10, },
-                    { "RLHellsingARMSCasull",               10, },
+                    { "RLAntiFreakJackal",                   5, },
+                    { "RLHellsingARMSCasull",                5, },
                     { NULL, },
                 },
             },
             {
                 "Security Officer", "RLMarathonShotgunsDemonArtifacts", true,
                 {
-                    { "RLMarathonShotguns",                 10, },
+                    { "RLMarathonShotguns",                  5, },
                     { NULL, },
                 },
             },
