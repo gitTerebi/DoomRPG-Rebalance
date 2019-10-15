@@ -234,8 +234,8 @@ MissionInfo CreateMission(int Difficulty)
 
         RewardXP += XPNext * 2500 / (100000 - ((Difficulty * 10000) - (Players(i).Level * 1000)));
         RewardRank += RankNext * 1000 / (100000 - ((Difficulty * 10000) - (Players(i).Level * 1000)));
-        RewardCredits += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 6 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
-        RewardModules += Random(5 * (Difficulty + 1) * (Players(i).Level + 1), 5 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
+        RewardCredits += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 12 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
+        RewardModules += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 6 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
 
         NumPlayers++;
     }

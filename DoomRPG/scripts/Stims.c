@@ -132,7 +132,7 @@ NamedScript KeyBind void UseStim(bool Force)
     for (int i = StimPowerupStart; i < StimPowerupEnd; i++)
         if (Player.Stim.Current[i] > 0)
         {
-            int InitialTime = (42 * Player.Stim.Current[i]) * InitialTimeMultiplier;
+            int InitialTime = (21 * Player.Stim.Current[i]) * InitialTimeMultiplier;
             InitialTime -= InitialTime * Player.StimImmunity / 100;
 
             Player.Stim.PowerupTimer[i] += InitialTime;

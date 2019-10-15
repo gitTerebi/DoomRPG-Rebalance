@@ -5,30 +5,33 @@
 
 actor RLClipBoxSpawner : RandomSpawner replaces ClipBox
 {
-    DropItem "RLClipBox" 255 92
-	DropItem "DRPGTurretPart"   255 5
-    DropItem "RLModPackSpawner" 255 3
+    DropItem "RLClipBox"           255 183
+	DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1
 }
 
 actor RLShellBoxSpawner : RandomSpawner replaces ShellBox
 {
-    DropItem "RLShellBox" 255 92
-	DropItem "DRPGTurretPart"   255 5	
-    DropItem "RLModPackSpawner" 255 3
+    DropItem "RLShellBox"          255 183
+	DropItem "DRPGTurretPart"      255 10	
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1
 }
 
 actor RLRocketBoxSpawner : RandomSpawner replaces RocketBox
 {
-    DropItem "RLRocketBox" 255 92
-	DropItem "DRPGTurretPart"   255 5	
-    DropItem "RLModPackSpawner" 255 3
+    DropItem "RLRocketBox"         255 185
+	DropItem "DRPGTurretPart"      255 10	
+    DropItem "RLModPackSpawner"    255 5
 }
 
 actor RLCellPackSpawner : RandomSpawner replaces CellPack
 {
-    DropItem "RLCellPack" 255 92
-	DropItem "DRPGTurretPart"   255 5	
-    DropItem "RLModPackSpawner" 255 3
+    DropItem "RLCellPack"          255 183
+	DropItem "DRPGTurretPart"      255 10	
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1
 }
 
 actor RLClipSpawner : RandomSpawner replaces Clip

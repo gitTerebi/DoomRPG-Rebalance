@@ -245,7 +245,7 @@ void CheckAugs()
         Player.Augs.SlotsUsed = 0;
 
     // Determine max Battery
-    Player.Augs.BatteryMax = 50 + Player.CapacityTotal * 5;
+    Player.Augs.BatteryMax = 100 + (Player.CapacityTotal / 2) * 5;
 
     // Play energy drained sound
     if (Player.Augs.Battery <= 0 && Player.Augs.SlotsUsed > 0)

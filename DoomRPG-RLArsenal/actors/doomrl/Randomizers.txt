@@ -75,25 +75,27 @@ actor DRPGRLClipBoxSpawner2 : RandomSpawner replaces DRPGClipBox
 // Shell Box
 actor DRPGRLShellBoxSpawner2 : RandomSpawner replaces DRPGShellBox
 {
-    DropItem "RLShellBox2" 		255 92
-	DropItem "DRPGTurretPart"   255 5	
-    DropItem "RLModPackSpawner" 255 3
+    DropItem "RLShellBox2" 		   255 183
+	DropItem "DRPGTurretPart"      255 10	
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1
 }
 
 // Rocket Box
 actor DRPGRLRocketBoxSpawner2 : RandomSpawner replaces DRPGRocketBox
 {
-    DropItem "RLRocketBox2"  	255 92
-	DropItem "DRPGTurretPart"   255 5
-    DropItem "RLModPackSpawner" 255 3
+    DropItem "RLRocketBox2"  	   255 185
+	DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 5
 }
 
 // Cell Pack
 actor DRPGRLCellPackSpawner2 : RandomSpawner replaces DRPGCellPack
 {
-    DropItem "RLCellPack2" 		255 92
-	DropItem "DRPGTurretPart"   255 5
-    DropItem "RLModPackSpawner" 255 3
+    DropItem "RLCellPack2" 		   255 183
+	DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1	
 }
 
 // Backpack locations
