@@ -390,7 +390,7 @@ void CheckStats()
         Player.DamageFactor = 1.0 + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
     Player.Mass = 100 + (Player.DefenseTotal * 10);
     Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
-    Player.StatusEffectResist = (fixed)Player.VitalityTotal * 0.8;
+    Player.StatusEffectResist = (fixed)Player.VitalityTotal * 0.75;
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
