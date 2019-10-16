@@ -520,7 +520,7 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = (long int)(RankTable[Players(i).RankLevel]) / 20l;
+            RankBonus = (long int)(RankTable[Players(i).RankLevel]) / 200l;
             Players(i).Rank += RankBonus;
 
             if (Players(i).Mission.Type != MT_SECRETS)
