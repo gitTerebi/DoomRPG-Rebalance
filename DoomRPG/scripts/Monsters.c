@@ -1235,6 +1235,7 @@ NamedScript void MonsterStatsHandler()
     int OldLuck;
     int StolenCredits;
     int HealthPercentage;
+    int LevelNum = CurrentLevel->LevelNum;
     bool StatsChanged;
     bool MonsterWasDisrupted = false;
     bool Friendly = GetActorProperty(0, APROP_Friendly); // Sanity check for when APROP_Friendly gets removed from summons
@@ -1293,7 +1294,7 @@ Start:
     {
         StatsChanged = true;
 
-        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + ((fixed)(Stats->Strength * (fixed)GameSkill()) / 100.0));
+        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + ((fixed)(Stats->Strength * (fixed)GameSkill()) / 300.0) + (LevelNum / 150.0));
         OldStrength = Stats->Strength;
     }
 
@@ -1303,7 +1304,7 @@ Start:
         StatsChanged = true;
 
         if (Stats->Defense < 1000)
-            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (0.09 * ((fixed)Stats->Defense / 100.0)));
+            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (((fixed)Stats->Defense / 600.0)) + (LevelNum / 1200.0));
         else
             SetActorPropertyFixed(0, APROP_DamageFactor, 100.0 / (fixed)Stats->Defense);
         OldDefense = Stats->Defense;
