@@ -1705,18 +1705,9 @@ NamedScript void EnvironmentalHazard()
     EnvironmentalHazardSetColors();
     EnvironmentalHazardDamage();
 
-    int CheckPar = GetLevelInfo(LEVELINFO_PAR_TIME);
-    if (CheckPar == 0)
-        CheckPar = GetCVar("drpg_default_par_seconds"); // Default Par
-
-    CheckPar *= 35;
-
     // Spawn the Neutralizer Fuel Tanks
-    int FuelAmount = 35 * 30 * (6 - GameSkill());
-    if (FuelAmount < 35 * 30)
-        FuelAmount = 35 * 30;
-
-    int RadTime = CheckPar * CurrentLevel->HazardLevel;
+    int FuelAmount = 35 * 30;
+    int RadTime = 4200 * CurrentLevel->HazardLevel;
     int TanksNeeded = RadTime / FuelAmount;
 
     DynamicLootGenerator("DRPGNeutralizerFuel", TanksNeeded + 1 + (12 - GameSkill() * 2));
@@ -1728,7 +1719,7 @@ NamedScript void EnvironmentalHazard()
         Delay(1);
     }
 
-    int RadTimeRequired = CheckPar / 100;
+    int RadTimeRequired = 4200 / 100;
     while (CurrentLevel->Event == MAPEVENT_TOXICHAZARD && !CurrentLevel->EventCompleted)
     {
         if (CurrentLevel->GeneratorFuel)
@@ -1841,9 +1832,7 @@ NamedScript void EnvironmentalHazardDamage()
 
 NamedScript DECORATE void EnvironmentalHazardRefillGenerator()
 {
-    int FuelAmount = 35 * 30 * (6 - GameSkill());
-    if (FuelAmount < 35 * 30)
-        FuelAmount = 35 * 30;
+    int FuelAmount = 35 * 30;
 
     SetActivator(0, AAPTR_TARGET);
 
