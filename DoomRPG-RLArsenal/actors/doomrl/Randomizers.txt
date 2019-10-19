@@ -140,7 +140,7 @@ actor DRPGGreenArmorRandomizer2 : RandomSpawner Replaces DRPGGreenArmorRandomize
 // Blue Armor Locations
 actor DRPGBlueArmorRandomizer2 : RandomSpawner Replaces DRPGBlueArmorRandomizer
 {
-	DropItem "RLArmorBonusPickup"       255 100
+	DropItem "RLArmorBonusPickup"		255 100
 	DropItem "RLBlueArmorSpawner"		255 70
 	DropItem "RLExoticArmorSpawner"		255 20
 	DropItem "RLAssembledArmorSpawner"	255 8
