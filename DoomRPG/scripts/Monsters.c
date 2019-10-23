@@ -3040,3 +3040,12 @@ NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
         Stats->DamageTable[PlayerNumber()] += (Damage * GetCVar("drpg_xp_summon_percent")) / 100;
     }
 }
+
+NamedScript DECORATE int GetMaxMonsterHealth(int monsterTID)
+{
+    MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+    SetActivatorToTarget(Player.TID);
+
+    return CalculateMonsterMaxHealth(Stats);
+}

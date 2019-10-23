@@ -63,4 +63,6 @@ NamedScript void MonsterOrangeAuraCheck(bool);
 //NamedScript void MonsterDarkBlueAuraCheck(bool);
 //NamedScript void MonsterYellowBlueAuraCheck(bool);
 
+NamedScript DECORATE int GetMaxMonsterHealth(int monsterTID);
+
 #endif
