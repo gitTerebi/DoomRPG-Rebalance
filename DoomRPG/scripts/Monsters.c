@@ -3041,20 +3041,16 @@ NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
     }
 }
 
-NamedScript DECORATE int GetMonsterHealthMax(int monsterTID)
+NamedScript DECORATE int GetMonsterHealthMax()
 {
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-
-    SetActivatorToTarget(Player.TID);
 
     return Stats->HealthMax;
 }
 
-NamedScript DECORATE int GetMonsterLevel(int monsterTID)
+NamedScript DECORATE int GetMonsterLevel()
 {
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-
-    SetActivatorToTarget(Player.TID);
 
     return Stats->Level;
 }
