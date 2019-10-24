@@ -3044,13 +3044,11 @@ NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
 NamedScript DECORATE int GetMonsterHealthMax()
 {
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-
     return Stats->HealthMax;
 }
 
 NamedScript DECORATE int GetMonsterLevel()
 {
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-
     return Stats->Level;
 }
