@@ -1,5 +1,127 @@
 
 //==============================================================================
+//		POWERUP SPAWNS
+//==============================================================================
+
+actor RLMegasphereSpotSpawner : RLMultiItemSpawner replaces Megasphere
+{
+    States
+    {
+    SpawnItems:
+	    TNT1 A 0 A_SpawnItemEx ("RLMegasphereTypeSpawner", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx ("RLRandomSkullSpawner", frandom(-24,24),frandom(-24,24),0, 0,0,0, 0, SXF_NOCHECKPOSITION, 128)
+		TNT1 A 0 A_SpawnItemEx ("RLSupplyCrateSpawner", frandom(-5,5),frandom(-5,5),0, 0,0,0, 0, 0, 0)
+	    TNT1 A 0 A_SpawnItemEx ("RLMegasphereSpot", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+	    TNT1 A 0 A_Jump(256, "WaitForCollection")
+		Goto WaitForCollection
+    }
+}
+
+actor RLSoulsphereSpotSpawner : RLMultiItemSpawner replaces Soulsphere
+{
+    States
+    {
+    SpawnItems:
+	    TNT1 A 0 A_SpawnItemEx ("RLSoulsphere", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx ("RLSupplyCrateSpawner", frandom(-5,5),frandom(-5,5),0, 0,0,0, 0, 0, 64)
+	    TNT1 A 0 A_Jump(256, "WaitForCollection")
+		Goto WaitForCollection
+    }
+}
+
+actor RLInvulnerabilitySphereSpotSpawner : RLMultiItemSpawner replaces InvulnerabilitySphere
+{
+    States
+    {
+	Spawn:
+	    TNT1 A 0
+	    TNT1 A 0 A_Jump(256, "SpawnItems")
+		Goto SpawnItems
+    SpawnItems:
+	    TNT1 A 0 A_SpawnItemEx ("RLInvulnerabilitySphere", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx ("RLSupplyCrateSpawner", frandom(-5,5),frandom(-5,5),0, 0,0,0, 0, 0, 64)
+	    TNT1 A 0 A_Jump(256, "WaitForCollection")
+		Goto WaitForCollection
+    }
+}
+
+actor RLRadSuitSpotSpawner : RLMultiItemSpawner replaces RadSuit
+{
+    States
+    {
+	Spawn:
+	    TNT1 A 0
+	    TNT1 A 0 A_Jump(256, "SpawnItems")
+		Goto SpawnItems
+    SpawnItems:
+	    TNT1 A 0 A_SpawnItemEx ("RLRadSuit", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx ("RLSupplyCrateSpawner", frandom(-5,5),frandom(-5,5),0, 0,0,0, 0, 0, 192)
+	    TNT1 A 0 A_Jump(256, "WaitForCollection")
+		Goto WaitForCollection
+    }
+}
+
+actor RLInfraRedSpotSpawner : RLMultiItemSpawner replaces InfraRed
+{
+    States
+    {
+	Spawn:
+	    TNT1 A 0
+	    TNT1 A 0 A_Jump(256, "SpawnItems")
+		Goto SpawnItems
+    SpawnItems:
+	    TNT1 A 0 A_SpawnItemEx ("RLInfraRed", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx ("RLSupplyCrateSpawner", frandom(-24,24),frandom(-24,24),0, 0,0,0, 0, 0, 192)
+	    TNT1 A 0 A_Jump(256, "WaitForCollection")
+		Goto WaitForCollection
+    }
+}
+
+actor RLBlursphereSpotSpawner : RLMultiItemSpawner replaces Blursphere
+{
+    States
+    {
+	Spawn:
+	    TNT1 A 0
+	    TNT1 A 0 A_Jump(256, "SpawnItems")
+		Goto SpawnItems
+    SpawnItems:
+	    TNT1 A 0 A_SpawnItemEx ("RLBlursphere", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx ("RLSupplyCrateSpawner", frandom(-5,5),frandom(-5,5),0, 0,0,0, 0, 0, 192)
+	    TNT1 A 0 A_Jump(256, "WaitForCollection")
+		Goto WaitForCollection
+    }
+}
+
+actor RLAllMapSpotSpawner : RLMultiItemSpawner replaces AllMap
+{
+    States
+    {
+	Spawn:
+	    TNT1 A 0
+	    TNT1 A 0 A_Jump(256, "SpawnItems")
+		Goto SpawnItems
+    SpawnItems:
+	    TNT1 A 0 A_SpawnItemEx ("RLAllMapSpawner", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx ("RLSupplyCrateSpawner", frandom(-5,5),frandom(-5,5),0, 0,0,0, 0, 0, 192)
+	    TNT1 A 0 A_Jump(256, "WaitForCollection")
+		Goto WaitForCollection
+    }
+}
+
+actor RLBerserkSpotSpawner : RLMultiItemSpawner replaces Berserk
+{
+    States
+    {
+    SpawnItems:
+	    TNT1 A 0 A_SpawnItemEx ("RLBerserk", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx ("RLSupplyCrateSpawner", frandom(-5,5),frandom(-5,5),0, 0,0,0, 0, 0, 192)
+	    TNT1 A 0 A_Jump(256, "WaitForCollection")
+		Goto WaitForCollection
+    }
+}
+
+//==============================================================================
 //		RANDOM SPAWNERS
 //==============================================================================
 
@@ -706,17 +828,18 @@ actor RLModPackSpawner : RandomSpawner 16700
 {
   Tag "Random Modpack"
     //$category "DRLA Spawners"
-	DropItem "DRPGTurretPartCrate" 255 30
-    DropItem "RLBulkModItem" 255 12
-    DropItem "RLPowerModItem" 255 18
-    DropItem "RLAgilityModItem" 255 26
-    DropItem "RLTechnicalModItem" 255 14
-    DropItem "RLNanoModItem" 255 3
-    DropItem "RLSniperModItem" 255 3
-    DropItem "RLFirestormModItem" 255 3
-    DropItem "RLOnyxModItem" 255 3
-    DropItem "RLArmorModItem" 255 6
-	DropItem "RLBlueprintComputer" 255 2
+	DropItem "DRPGTurretPartCrate" 255 300
+    DropItem "RLBulkModItem" 255 120
+    DropItem "RLPowerModItem" 255 180
+    DropItem "RLAgilityModItem" 255 260
+    DropItem "RLTechnicalModItem" 255 140
+    DropItem "RLNanoModItem" 255 30
+    DropItem "RLSniperModItem" 255 30
+    DropItem "RLFirestormModItem" 255 30
+    DropItem "RLOnyxModItem" 255 30
+    DropItem "RLArmorModItem" 255 60
+	DropItem "RLBlueprintComputer" 255 20
+    DropItem "RLArtiModItem" 255 1
 }
 
 actor RLBasicModPackSpawner : RandomSpawner 16701
@@ -770,6 +893,7 @@ actor RLUniqueItemSpawner : RandomSpawner 16727
     DropItem "RLLuciferCannonWorldSpawnPickup" 255 1
     DropItem "RLTriadCannonWorldSpawnPickup" 255 1
     DropItem "RLDirectHitWorldSpawnPickup" 255 1
+	
     DropItem "RLCyberneticArmorWorldSpawnPickup" 255 1
     DropItem "RLLavaArmorWorldSpawnPickup" 255 1
     DropItem "RLMaleksArmorWorldSpawnPickup" 255 1
@@ -798,6 +922,7 @@ actor RLUniqueItemSpawner : RandomSpawner 16727
     DropItem "RLFrontlineEngineerSuitArmorWorldSpawnPickup" 255 1
     DropItem "RLTacticalAssemblerSuitArmorWorldSpawnPickup" 255 1
     DropItem "RLNuclearPowerArmorWorldSpawnPickup" 255 1
+	
     DropItem "RLEnviroBootsWorldSpawnPickup" 255 1
     DropItem "RLNyarlaptotepsBootsWorldSpawnPickup" 255 1
     DropItem "RLLavaBootsWorldSpawnPickup" 255 1
@@ -831,6 +956,7 @@ actor RLExoticItemSpawner : RandomSpawner 16734
     DropItem "RLNuclearPlasmaRiflePickup" 255 1
     DropItem "RLNuclearBFG9000Pickup" 255 1
     DropItem "RLCombatTranslocatorPickup" 255 1
+	
     DropItem "RLBallisticShieldArmorPickup" 255 1
     DropItem "RLBallisticVestArmorPickup" 255 1
     DropItem "RLBulletProofVestArmorPickup" 255 1
@@ -846,6 +972,11 @@ actor RLExoticItemSpawner : RandomSpawner 16734
     DropItem "RLCyberwarriorArmorPickup" 255 1
     DropItem "RLRepulsionWaveSuitArmorPickup" 255 1
     DropItem "RLSurvivalMediArmorPickup" 255 1
+	
+    DropItem "RLAcidProofBootsPickup" 255 1
+    DropItem "RLGothicBootsPickup" 255 1
+    DropItem "RLPhaseshiftBootsPickup" 255 1
+    DropItem "RLShockwaveBootsPickup" 255 1
 }
 
 actor RLSuperiorItemSpawner : RandomSpawner 16735

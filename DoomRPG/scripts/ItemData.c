@@ -918,8 +918,11 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLOnyxModItem",           "Onyx Modpack",         40000, 7, -1, "OMODA0",  8, 17);
         ITEMDATA_DEF("RLArmorModItem",          "Armor Modpack",        40000, 7, -1, "AMK1A0", 10, 20);
 
+        // Super rare Modpacks
+        ITEMDATA_DEF("RLArtiModItem",           "Arti Modpack",        80000, 9, -1, "ARTMI0", -7, -5);
+
         // Demon Artifact
-        ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 10, 6, "DMNAA0", 19, 65);
+        ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",       100000, 10, 7, "DMNAA0", 19, 65);
         ITEMDATA_CATEGORY_END;
 
         // Boots
