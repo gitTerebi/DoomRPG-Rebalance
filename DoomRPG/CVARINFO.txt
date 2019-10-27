@@ -78,8 +78,8 @@ server  float   drpg_loot_crate_spc = 35.0; // Shield Part Chance
 server  bool    drpg_uac_premium = false;
 
 // Map Events
-server  float   drpg_mapevent_chance = 20.0;
-server  int     drpg_mapevent_eventtime = 10;
+server  float   drpg_mapevent_chance = 10.0;
+server  int     drpg_mapevent_eventtime = 15;
 server  int     drpg_default_par_seconds = 180;
 server  bool    drpg_mapevent_megaboss = true;
 server  bool    drpg_mapevent_toxichazard = true;
@@ -238,7 +238,7 @@ server  int     drpg_debug_drla = 0;
 user    bool    drpg_tips = false;
 server  bool    drpg_regen_movement = false;
 server  int     drpg_move_aug_battery_regen = 0;
-server  int     drpg_autosave = 5;
+server  int     drpg_autosave = 0;
 server  float   drpg_monster_dropdist = 4.0;
 server  bool    drpg_transport_on_new_map = false;
 server  bool    drpg_shotguns = false;
