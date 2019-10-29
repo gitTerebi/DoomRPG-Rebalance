@@ -457,11 +457,11 @@ actor RLSuperiorWeaponSpawner : RandomSpawner 16726
 {
   Tag "Random Superior Weapon"
     //$category "DRLA Spawners"
-    DropItem "RLMarksmanRiflePickup" 255 10
+    DropItem "RLMarksmanRiflePickup" 255 20
     DropItem "RLVanguardRiflePickup" 255 10
-    DropItem "RLHuntingRevolverPickup" 255 25
-    DropItem "RLThompsonPickup" 255 10
-    DropItem "RLPP7Pickup" 255 39
+    DropItem "RLHuntingRevolverPickup" 255 50
+    DropItem "RLThompsonPickup" 255 34
+    DropItem "RLPP7Pickup" 255 80
     DropItem "RLHuntingShotgunPickup" 255 1
     DropItem "RLRCP90Pickup" 255 5
 }
