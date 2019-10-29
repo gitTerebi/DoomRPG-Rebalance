@@ -131,21 +131,21 @@ actor RLExoticArmorSpawner : RandomSpawner 16713
 {
   Tag "Random Exotic Armor"
     //$category "DRLA Spawners"
-    DropItem "RLBallisticShieldArmorPickup" 255 4
-    DropItem "RLBallisticVestArmorPickup" 255 10
-    DropItem "RLBulletProofVestArmorPickup" 255 9
-    DropItem "RLDuelistArmorPickup" 255 2
-    DropItem "RLEnergyShieldedVestArmorPickup" 255 7
-    DropItem "RLEnergyShieldArmorPickup" 255 4
-    DropItem "RLGothicArmorPickup" 255 2
-    DropItem "RLMedicalArmorPickup" 255 10
-    DropItem "RLPhaseshiftArmorPickup" 255 3
-    DropItem "RLPlasmaShieldArmorPickup" 255 4
+    DropItem "RLBallisticShieldArmorPickup" 255 20
+    DropItem "RLBallisticVestArmorPickup" 255 120
+    DropItem "RLBulletProofVestArmorPickup" 255 80
+    DropItem "RLDuelistArmorPickup" 255 100
+    DropItem "RLEnergyShieldedVestArmorPickup" 255 60
+    DropItem "RLEnergyShieldArmorPickup" 255 20
+    DropItem "RLGothicArmorPickup" 255 10
+    DropItem "RLMedicalArmorPickup" 255 120
+    DropItem "RLPhaseshiftArmorPickup" 255 8
+    DropItem "RLPlasmaShieldArmorPickup" 255 20
     DropItem "RLOnyxArmorPickup" 255 10
-    DropItem "RLOverchargeSystemArmorPickup" 255 6
-    DropItem "RLCyberwarriorArmorPickup" 255 4
-    DropItem "RLRepulsionWaveSuitArmorPickup" 255 8
-    DropItem "RLSurvivalMediArmorPickup" 255 7
+    DropItem "RLOverchargeSystemArmorPickup" 255 100
+    DropItem "RLCyberwarriorArmorPickup" 255 10
+    DropItem "RLRepulsionWaveSuitArmorPickup" 255 80
+    DropItem "RLSurvivalMediArmorPickup" 255 60
 }
 
 actor RLSuperiorArmorSpawner : RandomSpawner 16730
@@ -160,32 +160,32 @@ actor RLAssembledArmorSpawner : RandomSpawner 16714
 {
   Tag "Random Assembled Armor"
     //$category "DRLA Spawners"
-    DropItem "RLBallisticGreenArmorPickup" 255 22
-    DropItem "RLBallisticBlueArmorPickup" 255 20
-    DropItem "RLBallisticRedArmorPickup" 255 18
+    DropItem "RLBallisticGreenArmorPickup" 255 60
+    DropItem "RLBallisticBlueArmorPickup" 255 55
+    DropItem "RLBallisticRedArmorPickup" 255 50
     DropItem "RLCerberusArmorPickup" 255 8
     DropItem "RLCybernanoGreenArmorPickup" 255 3
     DropItem "RLCybernanoBlueArmorPickup" 255 2
     DropItem "RLCybernanoRedArmorPickup" 255 1
-    DropItem "RLFireproofGreenArmorPickup" 255 20
-    DropItem "RLFireproofBlueArmorPickup" 255 19
-    DropItem "RLFireproofRedArmorPickup" 255 18
-    DropItem "RLFireshieldArmorPickup" 255 14
-    DropItem "RLNanofiberGreenArmorPickup" 255 16
-    DropItem "RLNanofiberBlueArmorPickup" 255 15
-    DropItem "RLNanofiberRedArmorPickup" 255 14
-    DropItem "RLNanofiberSkinGreenArmorPickup" 255 8
-    DropItem "RLNanofiberSkinBlueArmorPickup" 255 7
-    DropItem "RLNanofiberSkinRedArmorPickup" 255 6
-    DropItem "RLTowerShieldArmorPickup" 255 16
-    DropItem "RLPowerGreenArmorPickup" 255 18
-    DropItem "RLPowerBlueArmorPickup" 255 16
-    DropItem "RLPowerRedArmorPickup" 255 14
-    DropItem "RLTacticalArmorPickup" 255 11
-    DropItem "RLOnyxArmorSpawner" 255 10
-    DropItem "RLAblativeGreenArmorPickup" 255 12
-    DropItem "RLAblativeBlueArmorPickup" 255 11
-    DropItem "RLAblativeRedArmorPickup" 255 10
+    DropItem "RLFireproofGreenArmorPickup" 255 50
+    DropItem "RLFireproofBlueArmorPickup" 255 45
+    DropItem "RLFireproofRedArmorPickup" 255 40
+    DropItem "RLFireshieldArmorPickup" 255 20
+    DropItem "RLNanofiberGreenArmorPickup" 255 14
+    DropItem "RLNanofiberBlueArmorPickup" 255 12
+    DropItem "RLNanofiberRedArmorPickup" 255 10
+    DropItem "RLNanofiberSkinGreenArmorPickup" 255 6
+    DropItem "RLNanofiberSkinBlueArmorPickup" 255 5
+    DropItem "RLNanofiberSkinRedArmorPickup" 255 4
+    DropItem "RLTowerShieldArmorPickup" 255 40
+    DropItem "RLPowerGreenArmorPickup" 255 14
+    DropItem "RLPowerBlueArmorPickup" 255 12
+    DropItem "RLPowerRedArmorPickup" 255 10
+    DropItem "RLTacticalArmorPickup" 255 12
+    DropItem "RLOnyxArmorSpawner" 255 8
+    DropItem "RLAblativeGreenArmorPickup" 255 40
+    DropItem "RLAblativeBlueArmorPickup" 255 35
+    DropItem "RLAblativeRedArmorPickup" 255 30
 }
 
 actor RLOnyxArmorSpawner : RandomSpawner 16715
@@ -213,32 +213,32 @@ actor RLUniqueArmorSpawner : RandomSpawner 16716
     //$category "DRLA Spawners"
 //    DropItem "RLBerserkerArmorWorldSpawnPickup" 255 6
     DropItem "RLRyanCordellPsychicAmplifierSuitArmorWorldSpawnPickup" 255 10
-    DropItem "RLMedicalPowerArmorWorldSpawnPickup" 255 10
-    DropItem "RLNecroArmorWorldSpawnPickup" 255 10
-    DropItem "RLEnergyDischargeHarnessArmorWorldSpawnPickup" 255 10
-    DropItem "RLBerserkPowersuitArmorWorldSpawnPickup" 255 10
-    DropItem "RLGeosGoldenGauntletArmorWorldSpawnPickup" 255 10
-    DropItem "RLBlazingPhoenixDeviceSuitArmorWorldSpawnPickup" 255 9
-    DropItem "RLSoulshatterArmorWorldSpawnPickup" 255 8
-    DropItem "RLDemonicCarapaceArmorWorldSpawnPickup" 255 8
-    DropItem "RLWildWeaselPeacekeeperArmorWorldSpawnPickup" 255 8
-    DropItem "RLRoystensCommandArmorWorldSpawnPickup" 255 8
-    DropItem "RLCyberneticArmorWorldSpawnPickup" 255 8
-    DropItem "RLFrontlineEngineerSuitArmorWorldSpawnPickup" 255 8
-    DropItem "RLTacticalAssemblerSuitArmorWorldSpawnPickup" 255 8
-    DropItem "RLKateMatterstormHarnessArmorWorldSpawnPickup" 255 7
-    DropItem "RLTerminusEst13BattlesuitArmorWorldSpawnPickup" 255 7
-    DropItem "RLNanoAblativeArmorWorldSpawnPickup" 255 6
-    DropItem "RLJetpackArmorWorldSpawnPickup" 255 6
-    DropItem "RLKyleTeslaboltArmorWorldSpawnPickup" 255 6
-    DropItem "RLSoloOperativeSuitArmorWorldSpawnPickup" 255 5
-    DropItem "RLShieldedArmorWorldSpawnPickup" 255 4
-    DropItem "RLZeroDiamondAssaultforceArmorWorldSpawnPickup" 255 4
-    DropItem "RLPrototypeAssaultShieldArmorWorldSpawnPickup" 255 4
-    DropItem "RLMaleksArmorWorldSpawnPickup" 255 3
-    DropItem "RLNuclearPowerArmorWorldSpawnPickup" 255 3
-    DropItem "RLTorgueBlastplateArmorWorldSpawnPickup" 255 3
-    DropItem "RLLavaArmorWorldSpawnPickup" 255 2
+    DropItem "RLMedicalPowerArmorWorldSpawnPickup" 255 200
+    DropItem "RLNecroArmorWorldSpawnPickup" 255 220
+    DropItem "RLEnergyDischargeHarnessArmorWorldSpawnPickup" 255 120
+    DropItem "RLBerserkPowersuitArmorWorldSpawnPickup" 255 160
+    DropItem "RLGeosGoldenGauntletArmorWorldSpawnPickup" 255 140
+    DropItem "RLBlazingPhoenixDeviceSuitArmorWorldSpawnPickup" 255 180
+    DropItem "RLSoulshatterArmorWorldSpawnPickup" 255 80
+    DropItem "RLDemonicCarapaceArmorWorldSpawnPickup" 255 70
+    DropItem "RLWildWeaselPeacekeeperArmorWorldSpawnPickup" 255 100
+    DropItem "RLRoystensCommandArmorWorldSpawnPickup" 255 90
+    DropItem "RLCyberneticArmorWorldSpawnPickup" 255 60
+    DropItem "RLFrontlineEngineerSuitArmorWorldSpawnPickup" 255 70
+    DropItem "RLTacticalAssemblerSuitArmorWorldSpawnPickup" 255 60
+    DropItem "RLKateMatterstormHarnessArmorWorldSpawnPickup" 255 50
+    DropItem "RLTerminusEst13BattlesuitArmorWorldSpawnPickup" 255 40
+    DropItem "RLNanoAblativeArmorWorldSpawnPickup" 255 10
+    DropItem "RLJetpackArmorWorldSpawnPickup" 255 30
+    DropItem "RLKyleTeslaboltArmorWorldSpawnPickup" 255 25
+    DropItem "RLSoloOperativeSuitArmorWorldSpawnPickup" 255 40
+    DropItem "RLShieldedArmorWorldSpawnPickup" 255 20
+    DropItem "RLZeroDiamondAssaultforceArmorWorldSpawnPickup" 255 50
+    DropItem "RLPrototypeAssaultShieldArmorWorldSpawnPickup" 255 10
+    DropItem "RLMaleksArmorWorldSpawnPickup" 255 15
+    DropItem "RLNuclearPowerArmorWorldSpawnPickup" 255 15
+    DropItem "RLTorgueBlastplateArmorWorldSpawnPickup" 255 15
+    DropItem "RLLavaArmorWorldSpawnPickup" 255 5
     DropItem "RLXaserPowerArmorWorldSpawnPickup" 255 2
 }
 
