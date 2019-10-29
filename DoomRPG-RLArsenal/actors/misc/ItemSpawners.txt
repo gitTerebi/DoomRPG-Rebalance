@@ -311,8 +311,8 @@ actor RLAllPistolSpawner : RandomSpawner 16710
 
 actor RLChainsawSpawner : RandomSpawner replaces Chainsaw
 {
-    DropItem "RLChainsawPickup" 255 98
-    DropItem "RLExoticChainsawSpawner" 255 2
+    DropItem "RLChainsawPickup" 255 99
+    DropItem "RLExoticChainsawSpawner" 255 1
 }
 
 actor RLExoticChainsawSpawner : RandomSpawner
@@ -328,8 +328,8 @@ actor RLShotgunSpawner : RandomSpawner 2001
   Tag "Random Shotgun"
     //$category "DRLA Spawners"
     DropItem "RLShotgunPickup" 255 80
-    DropItem "RLCombatShotgunPickup" 255 17
-    DropItem "RLExoticShotgunSpawner" 255 3
+    DropItem "RLCombatShotgunPickup" 255 18
+    DropItem "RLExoticShotgunSpawner" 255 2
 }
 
 actor RLExoticShotgunSpawner : RandomSpawner
@@ -347,8 +347,8 @@ actor RLShotgunSpawner2 : RandomSpawner replaces Shotgun
 
 actor RLDoubleShotgunSpawner : RandomSpawner replaces SuperShotgun
 {
-    DropItem "RLDoubleShotgunPickup" 255 97
-    DropItem "RLExoticDoubleShotgunSpawner" 255 3
+    DropItem "RLDoubleShotgunPickup" 255 98
+    DropItem "RLExoticDoubleShotgunSpawner" 255 2
 }
 
 actor RLExoticDoubleShotgunSpawner : RandomSpawner
