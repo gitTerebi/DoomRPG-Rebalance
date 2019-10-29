@@ -311,7 +311,7 @@ actor RLAllPistolSpawner : RandomSpawner 16710
 
 actor RLChainsawSpawner : RandomSpawner replaces Chainsaw
 {
-    DropItem "RLChainsawPickup" 255 99
+    DropItem "RLChainsawPickup" 255 1400 // hue
     DropItem "RLExoticChainsawSpawner" 255 1
 }
 
@@ -328,15 +328,15 @@ actor RLShotgunSpawner : RandomSpawner 2001
   Tag "Random Shotgun"
     //$category "DRLA Spawners"
     DropItem "RLShotgunPickup" 255 80
-    DropItem "RLCombatShotgunPickup" 255 18
-    DropItem "RLExoticShotgunSpawner" 255 2
+    DropItem "RLCombatShotgunPickup" 255 19
+    DropItem "RLExoticShotgunSpawner" 255 1
 }
 
 actor RLExoticShotgunSpawner : RandomSpawner
 {
-    DropItem "RLAssaultShotgunPickup" 255 5
-    DropItem "RLPlasmaShotgunPickup" 255 4
-    DropItem "RLUniqueWeaponSpawner" 255 1
+    DropItem "RLAssaultShotgunPickup" 255 57
+    DropItem "RLPlasmaShotgunPickup" 255 40
+    DropItem "RLUniqueWeaponSpawner" 255 3
 }
 
 actor RLShotgunSpawner2 : RandomSpawner replaces Shotgun
@@ -347,8 +347,8 @@ actor RLShotgunSpawner2 : RandomSpawner replaces Shotgun
 
 actor RLDoubleShotgunSpawner : RandomSpawner replaces SuperShotgun
 {
-    DropItem "RLDoubleShotgunPickup" 255 98
-    DropItem "RLExoticDoubleShotgunSpawner" 255 2
+    DropItem "RLDoubleShotgunPickup" 255 7
+    DropItem "RLExoticDoubleShotgunSpawner" 255 1
 }
 
 actor RLExoticDoubleShotgunSpawner : RandomSpawner
@@ -363,8 +363,8 @@ actor RLChaingunSpawner : RandomSpawner 2002
     //$category "DRLA Spawners"
     DropItem "RLChaingunPickup" 255 80
     DropItem "RLBattleRiflePickup" 255 65
-    DropItem "RLSuperiorWeaponSpawner" 255 10
-    DropItem "RLExoticChaingunSpawner" 255 25
+    DropItem "RLSuperiorWeaponSpawner" 255 5
+    DropItem "RLExoticChaingunSpawner" 255 20
 }
 
 actor RLExoticChaingunSpawner : RandomSpawner
@@ -373,11 +373,11 @@ actor RLExoticChaingunSpawner : RandomSpawner
     DropItem "RLMarksmanPistolPickup" 255 60
     DropItem "RLHandcannonPickup" 255 50
     DropItem "RLUziPickup" 255 40
-    DropItem "RLBattleRiflePickup" 255 25
+    DropItem "RLBattleRiflePickup" 255 32
 	DropItem "RLChaingunPickup" 255 20
-    DropItem "RLSuperiorWeaponSpawner" 255 15
-    DropItem "RLUniqueWeaponSpawner" 255 10
-	DropItem "RLMinigunPickup" 255 5
+    DropItem "RLSuperiorWeaponSpawner" 255 10
+    DropItem "RLUniqueWeaponSpawner" 255 3
+	DropItem "RLMinigunPickup" 255 1
 }
 
 actor RLChaingunSpawner2 : RandomSpawner replaces Chaingun
@@ -461,9 +461,9 @@ actor RLSuperiorWeaponSpawner : RandomSpawner 16726
     DropItem "RLVanguardRiflePickup" 255 10
     DropItem "RLHuntingRevolverPickup" 255 25
     DropItem "RLThompsonPickup" 255 10
-    DropItem "RLPP7Pickup" 255 30
-    DropItem "RLHuntingShotgunPickup" 255 5
-    DropItem "RLRCP90Pickup" 255 10
+    DropItem "RLPP7Pickup" 255 39
+    DropItem "RLHuntingShotgunPickup" 255 1
+    DropItem "RLRCP90Pickup" 255 5
 }
 
 actor RLAssembledWeaponSpawner : RandomSpawner 16705
@@ -987,8 +987,8 @@ actor RLSuperiorItemSpawner : RandomSpawner 16735
     DropItem "RLVanguardRiflePickup" 255 10
     DropItem "RLHuntingRevolverPickup" 255 25
     DropItem "RLThompsonPickup" 255 10
-    DropItem "RLPP7Pickup" 255 28
-    DropItem "RLHuntingShotgunPickup" 255 5
+    DropItem "RLPP7Pickup" 255 30
+    DropItem "RLHuntingShotgunPickup" 255 3
     DropItem "RLRCP90Pickup" 255 10
     DropItem "RLNuclearArmorPickup" 255 1
     DropItem "RLRechargeableEnergyShieldArmorPickup" 255 1
