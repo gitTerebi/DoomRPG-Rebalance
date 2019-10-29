@@ -4,7 +4,7 @@ Coming soon...
 
 ## Installing
 
-GZDoom v4.2.3 or higher is required to play this mod. 
+GZDoom v3.7.0 or higher is required to play this mod.
 
 Coming soon...
 
