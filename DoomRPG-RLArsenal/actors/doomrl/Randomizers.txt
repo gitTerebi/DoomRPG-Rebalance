@@ -131,7 +131,7 @@ actor DRPGDRLAArmorBonusSpawner
 // Green Armor Locations
 actor DRPGGreenArmorRandomizer2 : RandomSpawner Replaces DRPGGreenArmorRandomizer
 {
-	DropItem "RLArmorBonusPickup"       255 150
+	DropItem "RLArmorBonusPickup"       255 200
 	DropItem "RLStandardArmorSpawner"   255 50
 	DropItem "RLAdvancedArmorSpawner"   255 45
 	DropItem "RLExoticArmorSpawner"     255 5
@@ -140,11 +140,11 @@ actor DRPGGreenArmorRandomizer2 : RandomSpawner Replaces DRPGGreenArmorRandomize
 // Blue Armor Locations
 actor DRPGBlueArmorRandomizer2 : RandomSpawner Replaces DRPGBlueArmorRandomizer
 {
-	DropItem "RLArmorBonusPickup"		255 100
+	DropItem "RLArmorBonusPickup"		255 200
 	DropItem "RLBlueArmorSpawner"		255 70
 	DropItem "RLExoticArmorSpawner"		255 20
-	DropItem "RLAssembledArmorSpawner"	255 8
-	DropItem "RLUniqueArmorSpawner"		255 2
+	DropItem "RLAssembledArmorSpawner"	255 9
+	DropItem "RLUniqueArmorSpawner"		255 1
 }
 
 // POWERUPS

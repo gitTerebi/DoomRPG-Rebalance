@@ -108,8 +108,8 @@ actor RLGreenArmorSpawner : RandomSpawner 16711
     //$category "DRLA Spawners"
     DropItem "RLGreenArmorPickup" 255 120
     DropItem "RLBlueArmorPickup" 255 80
-    DropItem "RLRedArmorPickup" 255 40
-    DropItem "RLExoticArmorSpawner" 255 25
+    DropItem "RLRedArmorPickup" 255 45
+    DropItem "RLExoticArmorSpawner" 255 20
     DropItem "RLAssembledArmorSpawner" 255 10
     DropItem "RLUniqueArmorSpawner" 255 3
     DropItem "RLLegendaryArmorSpawner" 255 1
