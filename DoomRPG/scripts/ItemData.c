@@ -415,41 +415,41 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLChainsaw",                              "Chainsaw",                                                300,  0, 0, "NSAWX0", 31, 23);
         ITEMDATA_DEF("RLPistol",                                "Pistol",                                                   25,  0, 0, "PISGX0", 11, 13);
         ITEMDATA_DEF("RLShotgun",                               "Shotgun",                                                 100,  0, 0, "PKSGX0", 31, 17);
-        ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          100,  0, 0, "CSHOX0", 25, 17);
-        ITEMDATA_DEF("RLDoubleShotgun",                         "Double Shotgun",                                          350,  1, 0, "DBLSX0", 14,  8);
+        ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          250,  4, 2, "CSHOX0", 25, 17);
+        ITEMDATA_DEF("RLDoubleShotgun",                         "Double Shotgun",                                          500,  6, 4, "DBLSX0", 14,  8);
         ITEMDATA_DEF("RLChaingun",                              "Chaingun",                                                750,  0, 0, "PKCGX0", 25, 18);
-        ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle",                                            750,  1, 0, "UACRX0", 23, 15);
-        ITEMDATA_DEF("RLRocketLauncher",                        "Rocket Launcher",                                        1000,  1, 1, "RLAUX0", 31, 18);
-        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           2500,  1, 2, "PLSRX0", 27, 19);
-        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                5000,  2, 3, "BFGGX0", 31, 38);
+        ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle",                                            750,  1, 1, "UACRX0", 23, 15);
+        ITEMDATA_DEF("RLRocketLauncher",                        "Rocket Launcher",                                        1000,  2, 2, "RLAUX0", 31, 18);
+        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           2500,  4, 3, "PLSRX0", 27, 19);
+        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                5000,  6, 4, "BFGGX0", 31, 38);
 
         // Exotic Weapons
-        ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                  550,  2, 0, "BLASX0", 12, 14);
-        ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           1350,  3, 1, "OLOKX0", 10, 13);
-        ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              1800,  4, 1, "DEAPX0", 11, 14);
-        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                         2500,  4, 2, "MRKPX0",  9, 12);
-        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                           8000,  4, 3, "NSSGX0", 27,  9);
-        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        10000,  4, 4, "ASHOX0", 31, 27);
-        ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     2000,  3, 1, "RUZIX0", 20, 26);
-        ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                15000,  6, 5, "ZGGGX0", 30, 20);
-        ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                       12500,  6, 3, "CLAUX0", 45, 24);
-        ITEMDATA_DEF("RLNapalmLauncher",                        "Napalm Launcher \Ct[Exotic]\C-",                        15000,  8, 4, "NAPAX0", 22, 20);
-        ITEMDATA_DEF("RLLaserRifle",                            "Laser Rifle \Ct[Exotic]\C-",                            17500,  8, 6, "LASRX0", 18, 11);
-        ITEMDATA_DEF("RLPlasmaShotgun",                         "Plasma Shotgun \Ct[Exotic]\C-",                         15000,  6, 4, "PSHOX0", 22, 14);
-        ITEMDATA_DEF("RLTristarBlaster",                        "Tristar Blaster \Ct[Exotic]\C-",                        20000,  8, 6, "TRISX0", 35, 35);
-        ITEMDATA_DEF("RLCombatTranslocator",                    "Combat Translocator \Ct[Exotic]\C-",                    20000,  6, 3, "CTLOX0", 18, 11);
-        ITEMDATA_DEF("RLNuclearPlasmaPistol",                   "Nuclear Plasma Pistol \Ct[Exotic]\C-",                  40000,  8, 6, "NUPPX0", 11, 14);
-        ITEMDATA_DEF("RLNuclearPlasmaRifle",                    "Nuclear Plasma Rifle \Ct[Exotic]\C-",                   60000, 10, 7, "NUKPX0", 23, 14);
-        ITEMDATA_DEF("RLNuclearBFG9000",                        "Nuclear BFG9000 \Ct[Exotic]\C-",                       100000, 12, 8, "NUKBX0", 28, 18);
+        ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                  750,  2, 1, "BLASX0", 12, 14);
+        ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           1500,  3, 2, "OLOKX0", 10, 13);
+        ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              2000,  4, 3, "DEAPX0", 11, 14);
+        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                         3000,  4, 3, "MRKPX0",  9, 12);
+        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          14000,  8, 8, "NSSGX0", 27,  9);
+        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        12000,  6, 4, "ASHOX0", 31, 27);
+        ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     5000,  4, 3, "RUZIX0", 20, 26);
+        ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                15000,  8, 5, "ZGGGX0", 30, 20);
+        ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                       16000,  8, 5, "CLAUX0", 45, 24);
+        ITEMDATA_DEF("RLNapalmLauncher",                        "Napalm Launcher \Ct[Exotic]\C-",                        17500, 10, 6, "NAPAX0", 22, 20);
+        ITEMDATA_DEF("RLLaserRifle",                            "Laser Rifle \Ct[Exotic]\C-",                            22500, 10, 7, "LASRX0", 18, 11);
+        ITEMDATA_DEF("RLPlasmaShotgun",                         "Plasma Shotgun \Ct[Exotic]\C-",                         20000, 10, 4, "PSHOX0", 22, 14);
+        ITEMDATA_DEF("RLTristarBlaster",                        "Tristar Blaster \Ct[Exotic]\C-",                        25000, 10, 7, "TRISX0", 35, 35);
+        ITEMDATA_DEF("RLCombatTranslocator",                    "Combat Translocator \Ct[Exotic]\C-",                    18000,  8, 4, "CTLOX0", 18, 11);
+        ITEMDATA_DEF("RLNuclearPlasmaPistol",                   "Nuclear Plasma Pistol \Ct[Exotic]\C-",                  40000, 10, 8, "NUPPX0", 11, 14);
+        ITEMDATA_DEF("RLNuclearPlasmaRifle",                    "Nuclear Plasma Rifle \Ct[Exotic]\C-",                   60000, 12, 8, "NUKPX0", 23, 14);
+        ITEMDATA_DEF("RLNuclearBFG9000",                        "Nuclear BFG9000 \Ct[Exotic]\C-",                       100000, 14, 8, "NUKBX0", 28, 18);
 
         // Superior Weapons
-        ITEMDATA_DEF("RLMarksmanRifle",                         "Marksman Rifle \Ci[Superior]\C-",                       18000, 12, 5, "MRKRX0", 26, 18);
-        ITEMDATA_DEF("RLVanguardRifle",                         "Vanguard Rifle \Ci[Superior]\C-",                       17500, 12, 5, "VANRX0", 26, 13);
+        ITEMDATA_DEF("RLMarksmanRifle",                         "Marksman Rifle \Ci[Superior]\C-",                       18000, 12, 6, "MRKRX0", 26, 18);
+        ITEMDATA_DEF("RLVanguardRifle",                         "Vanguard Rifle \Ci[Superior]\C-",                       20000, 12, 6, "VANRX0", 26, 13);
         ITEMDATA_DEF("RLHuntingRevolver",                       "Hunting Revolver \Ci[Superior]\C-",                     25000, 12, 5, "HREVX0", 12, 14);
-        ITEMDATA_DEF("RLThompson",                              "Tommy Gun \Ci[Superior]\C-",                            16000, 12, 5, "TGUNX0", 23, 17);
-        ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  15000, 12, 5, "BPP7X0", 8,  10);
-        ITEMDATA_DEF("RLHuntingShotgun",                        "Hunting Shotgun \Ci[Superior]\C-",                      28000, 12, 5, "HUNTX0", 32, 12);
-        ITEMDATA_DEF("RLRCP90",                                 "RC-P90 \Ci[Superior]\C-",                               26000, 12, 5, "RCP9X0", 24, 15);
+        ITEMDATA_DEF("RLThompson",                              "Tommy Gun \Ci[Superior]\C-",                            15000, 12, 5, "TGUNX0", 23, 17);
+        ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  10000, 12, 5, "BPP7X0", 8,  10);
+        ITEMDATA_DEF("RLHuntingShotgun",                        "Hunting Shotgun \Ci[Superior]\C-",                      30000, 12, 8, "HUNTX0", 32, 12);
+        ITEMDATA_DEF("RLRCP90",                                 "RC-P90 \Ci[Superior]\C-",                               28000, 12, 8, "RCP9X0", 24, 15);
 
         // Unique Weapons
         ITEMDATA_DEF("RLJackhammer",                            "Jackhammer \Cd[Unique]\C-",                             32000, -1, 6, "JHAMX0", 27, 14);

@@ -26,5 +26,5 @@ OptionMenu "DRLAMonsterMenu"
 	StaticText "The more WADs you plan to play, the later you will encounter"
 	StaticText "enemies from Armageddon difficulty."
 	StaticText  ""
-	Slider "Estimated counts of WADs", "DRLA_drpg_max_wads", 1, 17, 1, 0
+	Slider "Estimated counts of WADs", "drpg_ws_use_wads", 1, 17, 1, 0
 }
