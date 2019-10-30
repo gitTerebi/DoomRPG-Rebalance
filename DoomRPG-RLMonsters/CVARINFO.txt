@@ -1,0 +1,2 @@
+// DoomRPG
+server int		DRLA_drpg_max_wads = 5;

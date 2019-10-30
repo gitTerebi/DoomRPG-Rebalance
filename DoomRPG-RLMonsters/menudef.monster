@@ -1,0 +1,30 @@
+
+//==============================================================================
+//				MONSTER OPTIONS
+
+OptionMenu "DRLAMonsterMenu"
+{
+	Title "MONSTERPACK OPTIONS"
+	Option "Monster Status Effects", "DRLA_statuseffectvisuals", "StatusEffectType"
+	Option "Fancy gore effects", "DRLA_fancygibs", "OnOff"
+	Option "Monster Quake Toggle", "DRLA_monsterquake", "OnOff"
+	Option "Vanilla zombie drops", "DRLA_vanilladrops", "VanillaDropsType"
+	Option "Stealth Replacements", "DRLA_stealthmonsters", "StealthMonstersType"
+	Option "Endgame Destination", "DRLA_endgametype", "EndgameType"
+	StaticText 	""
+	Option "The Hungry Infestation", "DRLA_thehungryinfestation", "HungryInfestationType"
+	
+	// [marrub] skill options
+	StaticText 	""
+	StaticText  ""
+	StaticText  "Skill Options", 1
+	Option "Change skill while in-game to", "DRLA_skillchange", "SkillType", 1
+	Command "Apply skill change", "DRLA_skillchange_apply 1"
+	Option "CURSE OF RNGesus", "DRLA_rngcurse", "RNGCurseType"
+	StaticText 	""
+	StaticText "The Adaptive difficulty curve will depend on the parameter below."
+	StaticText "The more WADs you plan to play, the later you will encounter"
+	StaticText "enemies from Armageddon difficulty."
+	StaticText  ""
+	Slider "Estimated counts of WADs", "DRLA_drpg_max_wads", 1, 17, 1, 0
+}

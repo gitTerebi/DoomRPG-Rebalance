@@ -108,6 +108,37 @@ ACTOR RLPlayerLOSChecker : FastProjectile
    }
 }
 
+ACTOR RLNullBeamPuff : BulletPuff
+{
+  -ALLOWPARTICLES
+  -RANDOMIZE
+  +PUFFONACTORS
+  +ALWAYSPUFF
+  +PUFFGETSOWNER
+  +THRUGHOST
+  +MTHRUSPECIES
+  +NOTIMEFREEZE
+  +BLOODLESSIMPACT
+  +PAINLESS
+  +NODECAL
+  VSpeed 0
+  Mass 5
+  Damagetype "NullDamage"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	Stop
+  Melee:
+    Goto Spawn
+  }
+}
+
+ACTOR RLNullBeamPuff2 : RLNullBeamPuff
+{
+  +THRUACTORS
+}
+
  // Used to check for the monsterpack in compatibility things.
 ACTOR RLMonsterpackThingo
 {
@@ -340,6 +371,12 @@ ACTOR PowerRLMonsterInfightCooldownToken : Powerup
 ACTOR PowerRLBossFlinchCooldown : Powerup
 {
 	Powerup.Duration -5
+}
+
+// Used to get monsters to not attack non-stop when used with LegenDoom
+ACTOR RLLegendaryAttackCooldown : Powerup
+{
+	Powerup.Duration -1
 }
 
 ACTOR RLBodyThud
