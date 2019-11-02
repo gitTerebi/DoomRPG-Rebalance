@@ -6,7 +6,7 @@ Coming soon...
 
 GZDoom v3.7.0 or higher is required to play this mod.
 
-To run the mod I recommend using [Doom RPG SE Launcher 1.0.3](http://webdesign.ru.net) (no higher).
+To run the mod I recommend using [Doom RPG SE Launcher 1.0.3](https://github.com/Forevener/DRPGSEL/releases/tag/v1.0.3) (no higher).
 
 Use the following load order:
 
