@@ -95,12 +95,11 @@ actor DRPGMoneyDropper : RandomSpawner 20000
 
 actor DRPGHealthDropper : RandomSpawner 20001
 {
-    DropItem "DRPGMoneyDropper"     255 100
-    DropItem "DRPGEPCapsule"        255 5
-    DropItem "DRPGStimpack"         255 70
-    DropItem "DRPGMedikit"          255 10
-    DropItem "DRPGLargeMedikit"     255 6
-    DropItem "DRPGXLMedikit"        255 5
+    DropItem "DRPGMoneyDropper"     255 150
+    DropItem "DRPGStimpack"         255 100
+    DropItem "DRPGMedikit"          255 30
+    DropItem "DRPGLargeMedikit"     255 10
+    DropItem "DRPGXLMedikit"        255 6
     DropItem "DRPGMedPack"          255 3
     DropItem "DRPGSurgeryKit"       255 1
 }
@@ -114,7 +113,7 @@ actor DRPGLifeDropper : RandomSpawner
 
 actor DRPGEPDropper : RandomSpawner 20002
 {
-    DropItem "DRPGMoneyDropper"     255 100
+    DropItem "DRPGMoneyDropper"     255 150
     DropItem "DRPGEPCapsule"        255 90
     DropItem "DRPGBigEPCapsule"     255 10
 }
@@ -458,7 +457,7 @@ actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 // Stimpack Locations
 actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 {
-    DropItem "DRPGMoneyDropper"     255 80
+    DropItem "DRPGMoneyDropper"     255 100
     DropItem "DRPGStimpack"         255 50
     DropItem "DRPGMedikit"          255 15
     DropItem "DRPGLargeMedikit"     255 5
@@ -467,11 +466,11 @@ actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 // Medikit Locations
 actor DRPGMedikitRandomizer : RandomSpawner Replaces Medikit
 {
-    DropItem "DRPGMoneyDropper"     255 90
-    DropItem "DRPGStimpack"         255 45
-    DropItem "DRPGMedikit"          255 18
-    DropItem "DRPGLargeMedikit"     255 8
-    DropItem "DRPGXLMedikit"        255 5
+    DropItem "DRPGMoneyDropper"     255 150
+    DropItem "DRPGStimpack"         255 50
+    DropItem "DRPGMedikit"          255 30
+    DropItem "DRPGLargeMedikit"     255 10
+    DropItem "DRPGXLMedikit"        255 6
     DropItem "DRPGMedPack"          255 3
     DropItem "DRPGSurgeryKit"       255 1
 }

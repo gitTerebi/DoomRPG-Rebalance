@@ -2247,8 +2247,8 @@ NamedScript void MonsterDeath()
 
             if (Stats->DamageTable[i] > 0)
             {
-                XPAmount = (XPAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
-                RankAmount = (RankAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
+                XPAmount = ((XPAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100) * (1 + ((Stats->Level) / 100));
+                RankAmount = ((RankAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100) * (1 + ((Stats->Level) / 100));
 
                 AddXP(i, XPAmount, RankAmount);
                 if (GetCVar("drpg_levelup_natural"))

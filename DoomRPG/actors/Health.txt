@@ -2,11 +2,11 @@
 
     Health Bonus        - +1 HP
     Stimpack            - +10 Medkit
-    Medikit             - +25 Medkit
-    Large Medikit       - +50 Medkit
-    Extra-Large Medikit - +75 Medkit
-    Med-Pack            - +100 Medkit
-    Surgery Kit         - +200 Medkit
+    Medikit             - +15 Medkit
+    Large Medikit       - +25 Medkit
+    Extra-Large Medikit - +50 Medkit
+    Med-Pack            - +75 Medkit
+    Surgery Kit         - +100 Medkit
     
     Medkit Refill       - Full Medkit (Only available in the shop)
     
@@ -82,7 +82,7 @@ ACTOR DRPGMedikit : CustomInventory
         Stop
     Pickup:
         TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 25)
+        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 15)
         Stop
     PickupFail:
         TNT1 A 0
@@ -104,7 +104,7 @@ actor DRPGLargeMedikit : CustomInventory 20030
         Stop
     Pickup:
         TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 50)
+        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 25)
         Stop
     PickupFail:
         TNT1 A 0
@@ -126,7 +126,7 @@ actor DRPGXLMedikit : CustomInventory 20031
         Stop
     Pickup:
         TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 75)
+        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 50)
         Stop
     PickupFail:
         TNT1 A 0
@@ -148,7 +148,7 @@ actor DRPGMedPack : CustomInventory 20032
         Stop
     Pickup:
         TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 100)
+        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 75)
         Stop
     PickupFail:
         TNT1 A 0
@@ -170,7 +170,7 @@ actor DRPGSurgeryKit : CustomInventory 20033
         Goto Spawn+1
     Pickup:
         TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 200)
+        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 100)
         Stop
     PickupFail:
         TNT1 A 0

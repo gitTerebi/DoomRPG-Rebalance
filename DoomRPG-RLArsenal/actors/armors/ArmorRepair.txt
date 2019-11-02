@@ -144,7 +144,7 @@ ACTOR RLArmorBonus100 : ArmorBonus
   Inventory.PickupMessage "Picked up an armor bonus."
   Inventory.Icon "ARM1A0"
   Armor.SavePercent 10
-  Armor.SaveAmount 15
+  Armor.SaveAmount 10
   Armor.MaxSaveAmount 100
   -COUNTITEM
   +INVENTORY.ALWAYSPICKUP

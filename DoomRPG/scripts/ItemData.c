@@ -159,13 +159,13 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGAllMap",                  "Computer Area Map",                1000, 1, 1, "PMAPA0", 13, 23);
     ITEMDATA_DEF("DRPGWings",                   "Wings",                            5000, 2, 2, "WINGA0", 13, 36);
     ITEMDATA_DEF("DRPGMegasphere",              "Megasphere",                       5000, 4, 4, "MEGAA0", 12, 32);
-    ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",           25000, 8, 8, "CRYSA0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalBullet",   "Bullet Immunity Crystal",          25000, 8, 8, "CRYSB0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalFire",     "Fire Immunity Crystal",            25000, 8, 8, "CRYSC0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalPlasma",   "Plasma Immunity Crystal",          25000, 8, 8, "CRYSD0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalLightning","Lightning Immunity Crystal",       25000, 8, 8, "CRYSE0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",           25000, 8, 8, "CRYSF0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",       25000, 8, 8, "CRYSG0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",           50000, 8, 8, "CRYSA0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalBullet",   "Bullet Immunity Crystal",          50000, 8, 8, "CRYSB0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalFire",     "Fire Immunity Crystal",            50000, 8, 8, "CRYSC0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalPlasma",   "Plasma Immunity Crystal",          50000, 8, 8, "CRYSD0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalLightning","Lightning Immunity Crystal",       50000, 8, 8, "CRYSE0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",           50000, 8, 8, "CRYSF0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",       50000, 8, 8, "CRYSG0", 16, 48);
     ITEMDATA_CATEGORY_END;
 
     // Shield Parts - Built Dynamically
