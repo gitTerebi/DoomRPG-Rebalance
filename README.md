@@ -17,7 +17,7 @@ Use the following load order:
 4. [doom_complete](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases);
 5. [Music_Instrumental](https://github.com/WNC12k/DoomRPG-Music/releases);
 6. [Flashlights](https://github.com/WNC12k/DoomRPG-Others/releases);
-6. [Precise Crosshair 1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=64788&start=30) (need GZDoom 4.1.3);
+6. [Precise Crosshair 1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=64788) (need GZDoom 4.1.3);
 6. [Target Spy 1.11](https://forum.zdoom.org/viewtopic.php?t=60784).
 
 ## Compatible mods
