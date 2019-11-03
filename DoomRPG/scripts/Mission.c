@@ -275,7 +275,7 @@ MissionInfo CreateMission(int Difficulty)
 
     // Kill Auras and Kill Reinforcements Missions
     if (Type == MT_KILLAURAS || Type == MT_REINFORCEMENTS)
-        Mission.Amount = 10 + (10 * (Difficulty + 1));
+        Mission.Amount = 10 * (Difficulty + 1);
 
     // Assassination Mission
     if (Type == MT_ASSASSINATION)
@@ -283,11 +283,11 @@ MissionInfo CreateMission(int Difficulty)
 
     // Find Secrets Mission
     if (Type == MT_SECRETS)
-        Mission.Amount = 3 + (3 * (Difficulty + 1));
+        Mission.Amount = 3 * (Difficulty + 1);
 
     // Find Items Mission
     if (Type == MT_ITEMS)
-        Mission.Amount = 30 + (30 * (Difficulty + 1));
+        Mission.Amount = 30 * (Difficulty + 1);
 
     // Combo Mission
     if (Type == MT_COMBO)
@@ -412,7 +412,7 @@ void GetTargetMonster(MissionInfo *Mission)
         MonsterInfoPtr TempMonster = &MonsterData[i];
 
         int TestDifficulty = TempMonster->Difficulty + (10 * TempMonster->ThreatLevel);
-        int TestAmount = (30 + (160 * Mission->Difficulty)) / TestDifficulty;
+        int TestAmount = (30 + (320 * Mission->Difficulty)) / TestDifficulty;
 
         if (Mission->Type != MT_KILL)
         {
@@ -440,7 +440,7 @@ void GetTargetMonster(MissionInfo *Mission)
 
     // Now that we know the monster type, we can calculate an amount
     int EffectiveDifficulty = MonsterPtr->Difficulty + (10 * MonsterPtr->ThreatLevel);
-    int BaseAmount = (30 + (160 * Mission->Difficulty)) / EffectiveDifficulty;
+    int BaseAmount = (30 + (320 * Mission->Difficulty)) / EffectiveDifficulty;
     Amount = Random((fixed)BaseAmount * 0.8, (fixed)BaseAmount * 1.2);
 
     // Insert info into the passed struct

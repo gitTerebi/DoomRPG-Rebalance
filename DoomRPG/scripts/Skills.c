@@ -620,7 +620,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Magnetize",
-            .Cost = 50,
+            .Cost = 25,
             .MaxLevel = 1,
             .Use = Magnetize,
             .Description =
