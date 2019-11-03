@@ -20,9 +20,9 @@ skill easy
 	textcolor = "Green"
 	Key = "1"
 	
-	ReplaceActor = "Zombieman", "RLFormerHumanSpawnerEasy"
-	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawnerEasy"
-	ReplaceActor = "Chaingunguy", "RLFormerCommandoSpawnerEasy"
+	ReplaceActor = "Zombieman", "RLFormerHumanSpawner"
+	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawner"
+	ReplaceActor = "Chaingunguy", "RLFormerCommandoSpawner"
 	ReplaceActor = "DoomImp", "RLImp"
 	ReplaceActor = "Demon", "RLDemon"
 	ReplaceActor = "Spectre", "RLSpectre"
