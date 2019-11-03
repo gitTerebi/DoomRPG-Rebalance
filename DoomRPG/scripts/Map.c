@@ -1025,43 +1025,49 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_TOXICHAZARD:
         return (GetCVar("drpg_mapevent_toxichazard") &&
-                AveragePlayerLevel() >= 15);
+                AveragePlayerLevel() >= 20);
 
     case MAPEVENT_NUCLEARBOMB:
-        return (GetCVar("drpg_mapevent_nuclearbomb"));
+        return (GetCVar("drpg_mapevent_nuclearbomb") &&
+                AveragePlayerLevel() >= 15);
 
     case MAPEVENT_LOWPOWER:
-        return (GetCVar("drpg_mapevent_lowpower"));
+        return (GetCVar("drpg_mapevent_lowpower") &&
+                AveragePlayerLevel() >= 15);
 
     case MAPEVENT_ALLAURAS:
         return (GetCVar("drpg_mapevent_allauras") &&
                 AveragePlayerLevel() >= 20);
 
     case MAPEVENT_ONEMONSTER:
-        return (GetCVar("drpg_mapevent_onemonster"));
+        return (GetCVar("drpg_mapevent_onemonster") &&
+                AveragePlayerLevel() >= 15);
 
     case MAPEVENT_HELLUNLEASHED:
         return (GetCVar("drpg_mapevent_hellunleashed") &&
-                AveragePlayerLevel() >= 20);
+                AveragePlayerLevel() >= 25);
 
     case MAPEVENT_HARMONIZEDAURAS:
         return (GetCVar("drpg_mapevent_harmonizedauras") &&
-                AveragePlayerLevel() >= 10);
+                AveragePlayerLevel() >= 20);
 
     case MAPEVENT_TELEPORTCRACKS:
-        return (GetCVar("drpg_mapevent_teleportcracks"));
+        return (GetCVar("drpg_mapevent_teleportcracks") &&
+                AveragePlayerLevel() >= 15);
 
     case MAPEVENT_DOOMSDAY:
         return (GetCVar("drpg_mapevent_doomsday") &&
-                AveragePlayerLevel() >= 20 &&
+                AveragePlayerLevel() >= 30 &&
                 !Random(0, 3) &&
                 !TargetLevel->Completed);
 
     case MAPEVENT_ACIDRAIN:
-        return (GetCVar("drpg_mapevent_acidrain"));
+        return (GetCVar("drpg_mapevent_acidrain") &&
+                AveragePlayerLevel() >= 10);
 
     case MAPEVENT_DARKZONE:
-        return (GetCVar("drpg_mapevent_darkzone"));
+        return (GetCVar("drpg_mapevent_darkzone") &&
+                AveragePlayerLevel() >= 15);
 
     case MAPEVENT_DRLA_FEEDINGFRENZY:
         return (CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
@@ -1085,7 +1091,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_skill_armageddon") &&
-                AveragePlayerLevel() >= 25 &&
+                AveragePlayerLevel() >= 30 &&
                 CurrentSkill < 5);
 
     case MAPEVENT_SPECIAL_SINSTORM:
