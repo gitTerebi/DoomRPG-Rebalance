@@ -381,7 +381,7 @@ void CheckStats()
     Player.LuckTotal = Player.Luck + Player.LuckNat + Player.LuckBonus;
 
     Player.LevelDamage = Player.Level * (10 - GameSkill()) / 5;
-    Player.BonusDamage = Player.StrengthTotal * 2;
+    Player.BonusDamage = Player.StrengthTotal * 1.5;
     Player.DamageMult = 1.0;
     Player.TotalDamage = Player.LevelDamage + Player.BonusDamage;
     if (Player.DefenseTotal > 0)

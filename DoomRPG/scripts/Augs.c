@@ -91,11 +91,10 @@ AugInfo RPGMap AugData[AUG_MAX] =
     },
     {
         .Name = "Wired Reflexes",
-        .MaxLevel = 4,
+        .MaxLevel = 7,
         .Description =
         {
-            "1.5x Movement Speed",
-            "1.5x Jump Height",
+            "1.25x Movement Speed",
             "1.5x Weapon Speed",
             "+5% Survival Chance",
             "+10% Survival Chance",
@@ -399,20 +398,18 @@ void CheckAugs()
     if (Player.Augs.Active[AUG_AGILITY])
     {
         if (Player.Augs.Level[AUG_AGILITY] >= 1)
-            Player.Speed *= 1.5;
+            Player.Speed *= 1.25;
         if (Player.Augs.Level[AUG_AGILITY] >= 2)
-            Player.JumpHeight *= 1.5;
-        if (Player.Augs.Level[AUG_AGILITY] >= 3)
-            Player.WeaponSpeed = 50;
-        if (Player.Augs.Level[AUG_AGILITY] == 4)
+            Player.WeaponSpeed *= 1.5;
+        if (Player.Augs.Level[AUG_AGILITY] == 3)
             Player.SurvivalBonus += 5;
-        if (Player.Augs.Level[AUG_AGILITY] == 5)
+        if (Player.Augs.Level[AUG_AGILITY] == 4)
             Player.SurvivalBonus += 10;
-        if (Player.Augs.Level[AUG_AGILITY] == 6)
+        if (Player.Augs.Level[AUG_AGILITY] == 5)
             Player.SurvivalBonus += 15;
-        if (Player.Augs.Level[AUG_AGILITY] == 7)
+        if (Player.Augs.Level[AUG_AGILITY] == 6)
             Player.SurvivalBonus += 20;
-        if (Player.Augs.Level[AUG_AGILITY] >= 8)
+        if (Player.Augs.Level[AUG_AGILITY] >= 7)
             Player.SurvivalBonus += 25;
     }
 

@@ -1305,8 +1305,8 @@ Start:
     {
         StatsChanged = true;
 
-        if (Stats->Defense < 1000)
-            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (((fixed)Stats->Defense / 600.0)) + (LevelNum / 1200.0));
+        if (Stats->Defense < 250)
+            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (((fixed)Stats->Defense / 500.0)) + (LevelNum / 1000.0));
         else
             SetActorPropertyFixed(0, APROP_DamageFactor, 100.0 / (fixed)Stats->Defense);
         OldDefense = Stats->Defense;
@@ -2160,8 +2160,9 @@ NamedScript void MonsterDeath()
     if (ThreatMult < 1)
         ThreatMult = 1;
 
-    long int XPAmount = Random(HealthXP / 2, HealthXP) * ThreatMult;
-    long int RankAmount = HealthXP * ThreatMult;
+    int LevelNum = CurrentLevel->LevelNum;
+    long int XPAmount = Random(HealthXP / 2, HealthXP) * ThreatMult * (1 + (Stats->Level / 50) + (LevelNum / 100));
+    long int RankAmount = HealthXP * ThreatMult * (1 + (Stats->Level / 50) + (LevelNum / 100));
 
     // Aura-Based XP/Rank Modifiers
     if (MonsterHasShadowAura(Stats))
@@ -2247,8 +2248,8 @@ NamedScript void MonsterDeath()
 
             if (Stats->DamageTable[i] > 0)
             {
-                XPAmount = ((XPAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100) * (1 + ((Stats->Level) / 50));
-                RankAmount = ((RankAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100) * (1 + ((Stats->Level) / 50));
+                XPAmount = ((XPAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100);
+                RankAmount = ((RankAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100);
 
                 AddXP(i, XPAmount, RankAmount);
                 if (GetCVar("drpg_levelup_natural"))

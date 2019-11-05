@@ -232,8 +232,8 @@ MissionInfo CreateMission(int Difficulty)
         else
             RankNext = RankTable[Players(i).RankLevel];
 
-        RewardXP += XPNext * 2500 / (100000 - ((Difficulty * 10000) - (Players(i).Level * 1000)));
-        RewardRank += RankNext * 1000 / (100000 - ((Difficulty * 10000) - (Players(i).Level * 1000)));
+        RewardXP += XPNext * ((Difficulty + 1) * (800 - (Players(i).Level * 5))) / (100000 + (Players(i).Level * 1000));
+        RewardRank += RankNext * ((Difficulty + 1) * (320 - (Players(i).Level * 2))) / (100000 + (Players(i).Level * 1000));
         RewardCredits += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 12 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
         RewardModules += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 6 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
 
@@ -283,11 +283,11 @@ MissionInfo CreateMission(int Difficulty)
 
     // Find Secrets Mission
     if (Type == MT_SECRETS)
-        Mission.Amount = 3 * (Difficulty + 1);
+        Mission.Amount = 3 + (3 * (Difficulty + 1));
 
     // Find Items Mission
     if (Type == MT_ITEMS)
-        Mission.Amount = 30 * (Difficulty + 1);
+        Mission.Amount = 30 + (30 * (Difficulty + 1));
 
     // Combo Mission
     if (Type == MT_COMBO)
