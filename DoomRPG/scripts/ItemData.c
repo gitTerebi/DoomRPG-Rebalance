@@ -1079,7 +1079,7 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         {
             DiffPick = Random(0, 100);
             if (DiffPick < (70 - (Luck / 2))) Difficulty--; // Unlucky, item will be a rank lower
-            if (DiffPick > (100 - (Luck / 10))) Difficulty++; // Lucky, item will be a rank higher
+            if (DiffPick > 95) Difficulty++; // Lucky, item will be a rank higher
         }
 
         // Prevent under/overflow
