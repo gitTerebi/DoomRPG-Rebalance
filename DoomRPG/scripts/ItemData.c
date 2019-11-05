@@ -337,7 +337,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",                    1000, 4, 3, "STVLR0",  4, 16);
     ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",                1000, 4, 3, "STVLS0",  4, 16);
     ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",                  5000, 4, 5, "STPAA0", 30, 16);
-    ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",              20000, 4, 7, "STPAB0", 27, 16);
+    ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",              20000, 4, 6, "STPAB0", 27, 16);
 
     ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             30000, 4, 8, "AUGCA0", 12, 24);
     ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     30000, 4, 8, "AUGUA0", 12, 24);

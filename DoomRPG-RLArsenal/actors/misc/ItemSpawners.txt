@@ -125,7 +125,8 @@ actor ReplaceRLBerserkSpawner : RandomSpawner 2023  // At the moment, Berserk is
 {
     DropItem "DRPGHealthDropper"   255 100
     DropItem "DRPGAmmoDropper"     255 90
-    DropItem "DRPGModuleDropper"   255 10
+    DropItem "DRPGModuleDropper"   255 9
+    DropItem "RLBlueprintComputer" 255 1
 }
 
 //==============================================================================

@@ -77,8 +77,8 @@ actor DRPGGenericBossDropper : RandomSpawner
     DropItem "DRPGAugDropper"
     DropItem "DRPGBatteryDropper"
     DropItem "DRPGShieldDropper"
-    DropItem "DRPGStimDropper"
-    DropItem "DRPGVialDropper"
+    DropItem "DRPGStimPackageStat"
+    DropItem "DRPGStimPackagePowerup"
     DropItem "DRPGChipDropper"
     DropItem "DRPGTurretDropper"
 }
@@ -351,11 +351,11 @@ actor DRPGVialDropper : RandomSpawner 20013
     DropItem "DRPGVialLuck"             255 20
     
     // Rare Vials
-    DropItem "DRPGVialDropperRare"      255 4
+    DropItem "DRPGVialDropperRare"      255 5
     
     // Stim Packages
-    DropItem "DRPGStimPackageStat"      255 1
-    DropItem "DRPGStimPackagePowerup"   255 1
+//  DropItem "DRPGStimPackageStat"      255 1
+//  DropItem "DRPGStimPackagePowerup"   255 1
 }
 
 actor DRPGVialDropperRare : RandomSpawner 20014
@@ -428,7 +428,7 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
     DropItem "DRPGSmallBackpack"    255 50
     DropItem "DRPGBackpack"         255 40
     DropItem "DRPGBigBackpack"      255 10
-    DropItem "DRPGCrate"            255 0
+//  DropItem "DRPGCrate"            255 0
 }
 
 // HEALTH ITEMS
@@ -519,14 +519,14 @@ actor DRPGBlueArmorRandomizer : RandomSpawner Replaces BlueArmor
 actor DRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces InvulnerabilitySphere
 {
     DropItem "DRPGInvulnerabilitySphere"    255 100
-    DropItem "DRPGCrate"                    255 0
+//  DropItem "DRPGCrate"                    255 0
 }
 
 // Blur Sphere Locations
 actor DRPGBlurSphereRandomizer : RandomSpawner Replaces BlurSphere
 {
     DropItem "DRPGBlurSphere"               255 100
-    DropItem "DRPGCrate"                    255 0
+//  DropItem "DRPGCrate"                    255 0
 }
 
 // SHOP DISPLAYS

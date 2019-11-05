@@ -2287,7 +2287,7 @@ NamedScript void MonsterDeath()
         if (Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
             DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_WHITE].Active) // White Aura - XP
-            DropMonsterItem(Killer, 0, "DRPGStimDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
             DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
         if (Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
@@ -2327,9 +2327,16 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGLifeDropper", 128);
             DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256);
             DropMonsterItem(Killer, 0, "DRPGAugDropper", 128);
-            DropMonsterItem(Killer, 0, "DRPGShieldDropper", 128);
+            DropMonsterItem(Killer, 0, "DRPGShieldDropper", 32);
             DropMonsterItem(Killer, 0, "DRPGUACCard", 128 / (Players(Killer).ShopCard + 1));
+            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 128);
+            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 128);
             DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
+
+            if (CompatMode == COMPAT_DRLA)
+            {
+                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32);
+            }
         }
 
         // Megaboss Drops
