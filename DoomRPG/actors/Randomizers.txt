@@ -134,7 +134,7 @@ actor DRPGPowerupDropper : RandomSpawner 20004
     DropItem "DRPGRegenSphere"
     DropItem "DRPGRadSuit"
     DropItem "DRPGInfrared"
-    DropItem "DRPGBerserk"
+//  DropItem "DRPGBerserk"
 }
 
 actor DRPGImmunityCrystalDropper : RandomSpawner
@@ -591,7 +591,7 @@ actor DRPGShopPowerupRandomizer : RandomSpawner 11005
     DropItem "DRPGRadSuit"                  255 5
     DropItem "DRPGInfrared"                 255 5
     DropItem "DRPGAllMap"                   255 5
-    DropItem "DRPGBerserk"                  255 5
+//  DropItem "DRPGBerserk"                  255 5
 }
 
 actor DRPGShopMiscRandomizer : RandomSpawner 11006

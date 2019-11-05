@@ -124,7 +124,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Berserk",
-            .Cost = 200,
+            .Cost = 300,
             .MaxLevel = 1,
             .Use = Powerup,
             .Description =

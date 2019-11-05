@@ -121,6 +121,13 @@ actor RLBerserkSpotSpawner : RLMultiItemSpawner replaces Berserk
     }
 }
 
+actor ReplaceRLBerserkSpawner : RandomSpawner 2023  // At the moment, Berserk is unbalanced due to the duration of the application until the end of the level. So temporarily replaced  Berserk spawn with different things spawns.
+{
+    DropItem "DRPGHealthDropper"   255 100
+    DropItem "DRPGAmmoDropper"     255 90
+    DropItem "DRPGModuleDropper"   255 10
+}
+
 //==============================================================================
 //		RANDOM SPAWNERS
 //==============================================================================
