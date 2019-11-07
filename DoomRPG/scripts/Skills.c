@@ -160,22 +160,22 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Red Aura",
-            .Cost = 75,
+            .Cost = 100,
             .MaxLevel = 6,
             .Use = UseAura,
             .Description =
             {
-                "+5% Damage",
                 "+10% Damage",
                 "+15% Damage",
                 "+20% Damage",
-                "+25% Damage",
-                "+30% Damage"
+                "+30% Damage",
+                "+40% Damage",
+                "+50% Damage"
             }
         },
         {
             .Name = "Green Aura",
-            .Cost = 75,
+            .Cost = 100,
             .MaxLevel = 5,
             .Use = UseAura,
             .Description =
@@ -189,16 +189,13 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "White Aura",
-            .Cost = 75,
-            .MaxLevel = 5,
+            .Cost = 150,
+            .MaxLevel = 2,
             .Use = UseAura,
             .Description =
             {
                 "Double Combo",
-                "Double Combo\nConstant Combo",
-                "Double Combo\nConstant Combo\n2x XP Per Kill",
-                "Double Combo\nConstant Combo\n2x XP Per Kill\nSlow XP Gain",
-                "Double Combo\nConstant Combo\n2x XP Per Kill\nFast XP Gain"
+                "Double Combo\nCombo timer is based on damages"
             }
         },
         {
@@ -215,7 +212,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Blue Aura",
-            .Cost = 75,
+            .Cost = 100,
             .MaxLevel = 5,
             .Use = UseAura,
             .Description =
@@ -230,14 +227,13 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         {
             .Name = "Purple Aura",
             .Cost = 100,
-            .MaxLevel = 4,
+            .MaxLevel = 3,
             .Use = UseAura,
             .Description =
             {
-                "2x HP/EP Regen Amount",
-                "3x HP/EP Regen Amount",
-                "4x HP/EP Regen Amount",
-                "4x HP/EP Regen Amount\n1/2 HP/EP Regen Timers"
+                "2x HP Regen Amount",
+                "3x HP Regen Amount",
+                "3x HP Regen Amount\n1/2 HP Regen Timer"
             }
         },
         {
@@ -247,14 +243,14 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = UseAura,
             .Description =
             {
-                "Double Movement Speed",
-                "Double Movement Speed\nDouble Jump Height",
-                "Double Movement Speed\nDouble Jump Height\nDouble Firing Speed"
+                "1.50x Weapon Speed",
+                "1.75x Weapon Speed",
+                "2.00x Weapon Speed"
             },
         },
         {
             .Name = "Dark Blue Aura",
-            .Cost = 75,
+            .Cost = 100,
             .MaxLevel = 7,
             .Use = UseAura,
             .Description =
@@ -275,11 +271,11 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = UseAura,
             .Description =
             {
-                "Slow Money Generation\n1.25x Drop Chances",
-                "Medium Money Generation\n1.5x Drop Chances",
-                "Fast Money Generation\n2x Drop Chances",
-                "Very Fast Money Generation\n4x Drop Chances",
-                "Mega Money Generation\n8x Drop Chances"
+                "1.25x Drop Chances",
+                "1.5x Drop Chances",
+                "2x Drop Chances",
+                "4x Drop Chances",
+                "8x Drop Chances"
             }
         }
     },
@@ -1355,7 +1351,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
         // Aura stacking handling with Energy perk
         if (Player.Perks[STAT_ENERGY])
         {
-            int StackMax = 1 + ((Player.EnergyTotal - 100) / 10);
+            int StackMax = 2 + ((Player.EnergyTotal - 50) / 25);
             int Auras = 0;
 
             Log("\CnAura Max Stack: %d", StackMax);
@@ -3052,19 +3048,19 @@ void CheckAuras()
         if (Player.Aura.Type[AURA_RED].Active)
         {
             if (Player.SoulActive[SOUL_RED])
-                Player.DamageMult += 3;
+                Player.DamageMult += 0.501;
             else if (Player.Aura.Type[AURA_RED].Level == 1)
-                Player.DamageMult += 0.051;
-            else if (Player.Aura.Type[AURA_RED].Level == 2)
                 Player.DamageMult += 0.101;
-            else if (Player.Aura.Type[AURA_RED].Level == 3)
+            else if (Player.Aura.Type[AURA_RED].Level == 2)
                 Player.DamageMult += 0.151;
-            else if (Player.Aura.Type[AURA_RED].Level == 4)
+            else if (Player.Aura.Type[AURA_RED].Level == 3)
                 Player.DamageMult += 0.201;
-            else if (Player.Aura.Type[AURA_RED].Level == 5)
-                Player.DamageMult += 0.251;
-            else if (Player.Aura.Type[AURA_RED].Level == 6)
+            else if (Player.Aura.Type[AURA_RED].Level == 4)
                 Player.DamageMult += 0.301;
+            else if (Player.Aura.Type[AURA_RED].Level == 5)
+                Player.DamageMult += 0.401;
+            else if (Player.Aura.Type[AURA_RED].Level == 6)
+                Player.DamageMult += 0.501;
         }
 
         // Green Aura
@@ -3076,21 +3072,7 @@ void CheckAuras()
                 GiveInventory("DRPGGreenAuraIronFeet", 1);
         }
 
-        // White Aura
-        if (Player.Aura.Type[AURA_WHITE].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
-        {
-            if (Player.Aura.Type[AURA_WHITE].Level >= 2 || Player.SoulActive[SOUL_WHITE])
-            {
-                if (Player.Combo == 0) Player.Combo++;
-                Player.ComboTimer = COMBO_MAX - 1;
-            }
-            if (Player.Aura.Type[AURA_WHITE].Level == 3)
-                if ((Timer() % (35 * 4)) == 1)
-                    Player.XPGained += XPTable[Player.Level] / 100 / (Player.Level + 1);
-            if (Player.Aura.Type[AURA_WHITE].Level >= 4 || Player.SoulActive[SOUL_WHITE])
-                if ((Timer() % (35 * 2)) == 1)
-                    Player.XPGained += XPTable[Player.Level] / 100 / (Player.Level + 1);
-        }
+        // White Aura (Look the code in Monsters.c)
 
         // Pink Aura
         if (Player.Aura.Type[AURA_PINK].Active)
@@ -3117,41 +3099,32 @@ void CheckAuras()
         {
             if (Player.Aura.Type[AURA_PURPLE].Level == 1)
             {
-                Player.HPAmount *= 2;
-                Player.EPAmount *= 2;
+                Player.HPAmount *= 2.00;
             }
             if (Player.Aura.Type[AURA_PURPLE].Level == 2)
             {
-                Player.HPAmount *= 3;
-                Player.EPAmount *= 3;
+                Player.HPAmount *= 3.00;
             }
-            if (Player.Aura.Type[AURA_PURPLE].Level == 3)
+            if (Player.Aura.Type[AURA_PURPLE].Level >= 3 || Player.SoulActive[SOUL_PURPLE])
             {
-                Player.HPAmount *= 4;
-                Player.EPAmount *= 4;
-            }
-            if (Player.Aura.Type[AURA_PURPLE].Level >= 4 || Player.SoulActive[SOUL_PURPLE])
-            {
-                Player.HPAmount *= 4;
-                Player.EPAmount *= 4;
-                Player.HPTime /= 2;
-                Player.EPTime /= 2;
+                Player.HPAmount *= 3.00;
+                Player.HPTime /= 2.00;
             }
         }
 
         // Orange Aura
         if (Player.Aura.Type[AURA_ORANGE].Active)
         {
-            if (Player.Aura.Type[AURA_ORANGE].Level >= 1 || Player.SoulActive[SOUL_ORANGE])
-                Player.Speed *= 2;
-            if (Player.Aura.Type[AURA_ORANGE].Level >= 2 || Player.SoulActive[SOUL_ORANGE])
-                Player.JumpHeight *= 2;
+            if (Player.Aura.Type[AURA_ORANGE].Level == 1)
+                Player.WeaponSpeed *= 1.50;
+            if (Player.Aura.Type[AURA_ORANGE].Level == 2)
+                Player.WeaponSpeed *= 1.75;
             if (Player.Aura.Type[AURA_ORANGE].Level >= 3 || Player.SoulActive[SOUL_ORANGE])
-                Player.WeaponSpeed = 100;
+                Player.WeaponSpeed *= 2.00;
         }
 
         // Dark Blue Aura
-        if (Player.Aura.Type[AURA_DARKBLUE].Active)
+        if (Player.Aura.Type[AURA_DARKBLUE].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
         {
             if (Player.Aura.Type[AURA_DARKBLUE].Level == 5)
                 AmmoRegenMult = 2;
@@ -3176,8 +3149,6 @@ void CheckAuras()
         // Yellow Aura
         if (Player.Aura.Type[AURA_YELLOW].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
         {
-            if ((Timer() % (35 * (6 - Player.Aura.Type[AURA_YELLOW].Level))) == 1)
-                GiveInventory("DRPGCredits", (Player.RankLevel + 1));
             if (Player.Aura.Type[AURA_YELLOW].Level == 1)
                 LuckMult = 1.25;
             if (Player.Aura.Type[AURA_YELLOW].Level == 2)

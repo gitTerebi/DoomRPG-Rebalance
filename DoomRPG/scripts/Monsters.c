@@ -659,6 +659,8 @@ NamedScript Console void MonsterDump()
     Log(" Height: %.2k", GetActorPropertyFixed(0, APROP_Height));
     Log(" Radius: %.2k", GetActorPropertyFixed(0, APROP_Radius));
     Log(" Speed: %.2k", GetActorPropertyFixed(0, APROP_Speed));
+    Log(" Damage Multiplier: %.2k", GetActorPropertyFixed(0, APROP_DamageMultiplier));
+    Log(" Damage Factor: %.2k", GetActorPropertyFixed(0, APROP_DamageFactor));
     Log(" TID: %d", ActivatorTID());
     Log(" ID: %d", GetMonsterID(0));
 
@@ -1296,7 +1298,7 @@ Start:
     {
         StatsChanged = true;
 
-        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + ((fixed)(Stats->Strength * (fixed)GameSkill()) / 300.0) + (LevelNum / 150.0));
+        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 300.0) + (LevelNum / 150.0)));
         OldStrength = Stats->Strength;
     }
 
@@ -1305,8 +1307,8 @@ Start:
     {
         StatsChanged = true;
 
-        if (Stats->Defense < 250)
-            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (((fixed)Stats->Defense / 500.0)) + (LevelNum / 1000.0));
+        if (Stats->Defense < 300)
+            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (((fixed)Stats->Defense / 600.0) + (LevelNum / 1200.0)));
         else
             SetActorPropertyFixed(0, APROP_DamageFactor, 100.0 / (fixed)Stats->Defense);
         OldDefense = Stats->Defense;
@@ -3027,7 +3029,7 @@ NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
     if (PlayerNum > -1)
     {
         Stats->DamageTable[PlayerNum] += Damage;
-        if (GetCVar("drpg_combo_damage"))
+        if (GetCVar("drpg_combo_damage") || Player.Aura.Type[AURA_WHITE].Active && Player.Aura.Type[AURA_WHITE].Level >= 2)
         {
             if (Players(PlayerNum).Combo > 0)
                 Players(PlayerNum).ComboTimer = COMBO_MAX;

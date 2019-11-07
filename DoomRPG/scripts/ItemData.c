@@ -787,9 +787,9 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLFireproofGreenArmorPickup",                     "Fireproof Security Armor \Cv[Assembled]\C-",         2000, 2, 1, "FPA1A0", 15, 56);
         ITEMDATA_DEF("RLFireproofBlueArmorPickup",                      "Fireproof Combat Armor \Cv[Assembled]\C-",           2500, 2, 2, "FPA2A0", 15, 56);
         ITEMDATA_DEF("RLFireproofRedArmorPickup",                       "Fireproof Commando Armor \Cv[Assembled]\C-",         3500, 2, 3, "FPA3A0", 15, 56);
-        ITEMDATA_DEF("RLNanofiberGreenArmorPickup",                     "Nanofiber Security Armor \Cv[Assembled]\C-",          500, 1, 1, "NFA1A0", 15, 18);
-        ITEMDATA_DEF("RLNanofiberBlueArmorPickup",                      "Nanofiber Combat Armor \Cv[Assembled]\C-",            750, 1, 2, "NFA2A0", 15, 18);
-        ITEMDATA_DEF("RLNanofiberRedArmorPickup",                       "Nanofiber Commando Armor \Cv[Assembled]\C-",         1500, 1, 3, "NFA3A0", 15, 18);
+        ITEMDATA_DEF("RLNanofiberGreenArmorPickup",                     "Nanofiber Security Armor \Cv[Assembled]\C-",         1000, 5, 1, "NFA1A0", 15, 18);
+        ITEMDATA_DEF("RLNanofiberBlueArmorPickup",                      "Nanofiber Combat Armor \Cv[Assembled]\C-",           1500, 5, 2, "NFA2A0", 15, 18);
+        ITEMDATA_DEF("RLNanofiberRedArmorPickup",                       "Nanofiber Commando Armor \Cv[Assembled]\C-",         3000, 5, 3, "NFA3A0", 15, 18);
         ITEMDATA_DEF("RLNanofiberSkinGreenArmorPickup",                 "Nanofiber Skin Security Armor \Cv[Assembled]\C-",   10000, 6, 4, "NFS1A0", 12, 47);
         ITEMDATA_DEF("RLNanofiberSkinBlueArmorPickup",                  "Nanofiber Skin Combat Armor \Cv[Assembled]\C-",     15000, 6, 5, "NFS2A0", 12, 47);
         ITEMDATA_DEF("RLNanofiberSkinRedArmorPickup",                   "Nanofiber Skin Commando Armor \Cv[Assembled]\C-",   20000, 6, 6, "NFS3A0", 12, 47);
@@ -808,7 +808,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLMedicalArmorPickup",                            "Medical Armor \Ct[Exotic]\C-",                       3500, 6, 2, "MED1A0", 10, 20);
         ITEMDATA_DEF("RLPhaseshiftArmorPickup",                         "Phaseshift Armor \Ct[Exotic]\C-",                   15000, 8, 5, "PSHAA0", 15, 29);
         ITEMDATA_DEF("RLPlasmaShieldArmorPickup",                       "Plasma Shield \Ct[Exotic]\C-",                      10000, 7, 3, "PSHDA0", 10, 21);
-        ITEMDATA_DEF("RLOnyxArmorPickup",                               "Onyx Armor \Ct[Exotic]\C-",                          2200, 4, 2, "ONXAA0", 15, 18);
+        ITEMDATA_DEF("RLOnyxArmorPickup",                               "Onyx Armor \Ct[Exotic]\C-",                          4400, 5, 4, "ONXAA0", 15, 18);
         ITEMDATA_DEF("RLOverchargeSystemArmorPickup",                   "Overcharge System \Ct[Exotic]\C-",                   4000, 6, 2, "OVESA0", 21, 16);
         ITEMDATA_DEF("RLRepulsionWaveSuitArmorPickup",                  "Repulsion Wave Suit \Ct[Exotic]\C-",                 4500, 5, 2, "REPWA0", 11, 23);
         ITEMDATA_DEF("RLSurvivalMediArmorPickup",                       "Survival MediArmor \Ct[Exotic]\C-",                  6000, 6, 3, "SURVA0", 11, 14);

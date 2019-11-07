@@ -586,12 +586,12 @@ void DrawStatsMenu()
         SetFont("SMALLFONT");
         if (Player.StrengthTotal > 0)
         {
-            HudMessage("+%d%% Base Damage", Player.Level * (10 - GameSkill()) / 5);
+            HudMessage("+%d%% Base Damage", Player.LevelDamage);
             EndHudMessage(HUDMSG_PLAIN, 0, "Red",                30.1,   36.0,   0.05);
         }
         else
         {
-            HudMessage("%d%% Base Damage", Player.Level * (10 - GameSkill()) / 5);
+            HudMessage("%d%% Base Damage", Player.LevelDamage);
             EndHudMessage(HUDMSG_PLAIN, 0, "Red",                30.1,   36.0,   0.05);
         }
         if (Player.StrengthTotal > 0)
@@ -897,7 +897,7 @@ void DrawStatsMenu()
             // Energy
             {
                 "2x EP regeneration rate when burned out",
-                "Can stack an extra Aura every +10 Energy invested",
+                "Can stack an extra Aura every 25 Energy invested",
                 NULL
             },
 

@@ -309,17 +309,17 @@ void CheckAugs()
     if (Player.Augs.Active[AUG_STRENGTH])
     {
         if (Player.Augs.Level[AUG_STRENGTH] == 1)
-            Player.DamageMult += 0.11;
+            Player.DamageMult += 0.101;
         if (Player.Augs.Level[AUG_STRENGTH] == 2)
-            Player.DamageMult += 0.16;
+            Player.DamageMult += 0.151;
         if (Player.Augs.Level[AUG_STRENGTH] == 3)
-            Player.DamageMult += 0.21;
+            Player.DamageMult += 0.201;
         if (Player.Augs.Level[AUG_STRENGTH] == 4)
-            Player.DamageMult += 0.31;
+            Player.DamageMult += 0.301;
         if (Player.Augs.Level[AUG_STRENGTH] == 5)
-            Player.DamageMult += 0.41;
+            Player.DamageMult += 0.401;
         if (Player.Augs.Level[AUG_STRENGTH] >= 6)
-            Player.DamageMult += 0.51;
+            Player.DamageMult += 0.501;
     }
 
     // Defense Aug

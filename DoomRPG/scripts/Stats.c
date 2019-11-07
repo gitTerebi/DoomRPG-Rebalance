@@ -380,8 +380,8 @@ void CheckStats()
     Player.CapacityTotal = Player.Capacity + Player.CapacityNat + Player.CapacityBonus;
     Player.LuckTotal = Player.Luck + Player.LuckNat + Player.LuckBonus;
 
-    Player.LevelDamage = Player.Level * (10 - GameSkill()) / 5;
-    Player.BonusDamage = Player.StrengthTotal * 1.5;
+    Player.LevelDamage = Player.Level * (1.0 + (Player.Level * 0.0051));
+    Player.BonusDamage = Player.StrengthTotal * (1.0 + (Player.StrengthTotal * 0.0051));
     Player.DamageMult = 1.0;
     Player.TotalDamage = Player.LevelDamage + Player.BonusDamage;
     if (Player.DefenseTotal > 0)
@@ -589,7 +589,7 @@ void CheckRegen()
 {
     // Determine the max timer amounts
     Player.HPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 2.05k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
-    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 4.2k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
+    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 2.05k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
 
     // Cap Times
     if (Player.HPTime < 35)
@@ -895,7 +895,7 @@ void CheckPerks()
     else Player.Perks[STAT_DEFENSE] = false;
     if (Player.VitalityTotal >= 75)     Player.Perks[STAT_VITALITY] = true;
     else Player.Perks[STAT_VITALITY] = false;
-    if (Player.EnergyTotal >= 75)       Player.Perks[STAT_ENERGY] = true;
+    if (Player.EnergyTotal >= 50)       Player.Perks[STAT_ENERGY] = true;
     else Player.Perks[STAT_ENERGY] = false;
     if (Player.RegenerationTotal >= 75) Player.Perks[STAT_REGENERATION] = true;
     else Player.Perks[STAT_REGENERATION] = false;

@@ -335,8 +335,8 @@ actor RLShotgunSpawner : RandomSpawner 2001
 {
   Tag "Random Shotgun"
     //$category "DRLA Spawners"
-    DropItem "RLShotgunPickup" 255 80
-    DropItem "RLCombatShotgunPickup" 255 19
+    DropItem "RLShotgunPickup" 255 160
+    DropItem "RLCombatShotgunPickup" 255 39
     DropItem "RLExoticShotgunSpawner" 255 1
 }
 
