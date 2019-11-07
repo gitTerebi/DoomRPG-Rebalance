@@ -235,7 +235,7 @@ MissionInfo CreateMission(int Difficulty)
         RewardXP += XPNext * ((Difficulty + 1) * (800 - (Players(i).Level * 5))) / (100000 + (Players(i).Level * 1000));
         RewardRank += RankNext * ((Difficulty + 1) * (320 - (Players(i).Level * 2))) / (100000 + (Players(i).Level * 1000));
         RewardCredits += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 12 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
-        RewardModules += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 6 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
+        RewardModules += Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 4 * (Difficulty + 1) * (Players(i).Level + 1) * 2);
 
         NumPlayers++;
     }
@@ -275,7 +275,7 @@ MissionInfo CreateMission(int Difficulty)
 
     // Kill Auras and Kill Reinforcements Missions
     if (Type == MT_KILLAURAS || Type == MT_REINFORCEMENTS)
-        Mission.Amount = 10 * (Difficulty + 1);
+        Mission.Amount = 10 + (Difficulty * 10);
 
     // Assassination Mission
     if (Type == MT_ASSASSINATION)
@@ -283,15 +283,15 @@ MissionInfo CreateMission(int Difficulty)
 
     // Find Secrets Mission
     if (Type == MT_SECRETS)
-        Mission.Amount = 3 + (3 * (Difficulty + 1));
+        Mission.Amount = 3 + (Difficulty * 3);
 
     // Find Items Mission
     if (Type == MT_ITEMS)
-        Mission.Amount = 30 + (30 * (Difficulty + 1));
+        Mission.Amount = 30 + (Difficulty * 30);
 
     // Combo Mission
     if (Type == MT_COMBO)
-        Mission.Amount = (Difficulty + 2) * 10;
+        Mission.Amount = 20 + (Difficulty * 20);
 
     return Mission;
 }
