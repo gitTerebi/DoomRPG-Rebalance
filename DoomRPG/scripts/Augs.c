@@ -134,14 +134,14 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "+0.5 Recharge Rate",
-            "+1 Recharge Rate",
-            "+1.5 Recharge Rate",
-            "+2 Recharge Rate",
-            "+2.5 Recharge Rate",
-            "+3 Recharge Rate",
-            "+3.5 Recharge Rate",
-            "+4 Recharge Rate"
+            "+10% Recharge Rate",
+            "+20% Recharge Rate",
+            "+30% Recharge Rate",
+            "+40% Recharge Rate",
+            "+50% Recharge Rate",
+            "+60% Recharge Rate",
+            "+70% Recharge Rate",
+            "+80% Recharge Rate"
         },
         .TokenActor = "DRPGAugTokenBattery"
     }
@@ -300,7 +300,7 @@ void CheckAugs()
             if (IsPlayerMoving())
                 Charge = (fixed)(Player.Augs.Level[AUG_BATTERY] * GetCVar("drpg_move_aug_battery_regen") / 200.0);
             else
-                Charge = (fixed)Player.Augs.Level[AUG_BATTERY] / 2.0;
+                Charge = (fixed)Player.Augs.Level[AUG_BATTERY] / 10.0;
             Player.Augs.Battery += Charge;
             DrawBattery();
         }
