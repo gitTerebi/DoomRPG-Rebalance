@@ -481,7 +481,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Lost Soul",
-            .Cost = 25,
+            .Cost = 50,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =

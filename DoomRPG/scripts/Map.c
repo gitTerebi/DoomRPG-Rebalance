@@ -898,9 +898,9 @@ NamedScript void AddMiniboss()
     while (!Monsters[Chosen].Init)
         Chosen = Random(1, MonsterID - 1);
 
-    int LevelMod = (GameSkill() - 1) * AveragePlayerLevel();
-    LevelMod = (int)(LevelMod * RandomFixed(1.0, 1.33));
-    Monsters[Chosen].LevelAdd += LevelMod;
+    int LevelMod = 1 + ((GameSkill() + 1) * 0.125);
+    LevelMod = (int)(LevelMod * RandomFixed(1.00, 1.25));
+    Monsters[Chosen].LevelAdd *= LevelMod;
 
     // Shadow Aura
     for (int i = 0; i < AURA_MAX; i++)

@@ -62,6 +62,7 @@ int AveragePlayerLevel();
 int AveragePlayerRank();
 int AveragePlayerCredits();
 int AveragePlayerLuck();
+int AveragePlayerEnergy();
 bool HaveStatusEffect();
 bool DropPlayerItem(str);
 bool IsPlayerMoving();

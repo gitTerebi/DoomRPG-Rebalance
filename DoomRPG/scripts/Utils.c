@@ -876,6 +876,23 @@ int AveragePlayerLuck()
     return TotalLuck / NumPlayers;
 }
 
+int AveragePlayerEnergy()
+{
+    int NumPlayers;
+    int TotalEnergy;
+
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        // Skip player if they're not ingame
+        if (!PlayerInGame(i)) continue;
+
+        TotalEnergy += Players(i).EnergyTotal;
+        NumPlayers++;
+    }
+
+    return TotalEnergy / NumPlayers;
+}
+
 bool HaveStatusEffect()
 {
     for (int i = 0; i < SE_MAX; i++)

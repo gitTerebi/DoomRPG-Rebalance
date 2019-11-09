@@ -769,7 +769,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // If the monster is friendly, it has the average level of all players in the game
         if (GetActorProperty(0, APROP_Friendly))
-            Stats->Level = AveragePlayerLevel();
+            Stats->Level = ((AveragePlayerLevel() * LevelWeight) + (LevelNum * MapWeight)) * (0.25 + AveragePlayerEnergy() * 0.01);
 
         // Special case for Bosses
         if (Stats->Flags & MF_BOSS)
@@ -2169,11 +2169,11 @@ NamedScript void MonsterDeath()
     // Aura-Based XP/Rank Modifiers
     if (MonsterHasShadowAura(Stats))
     {
-        XPAmount *= 2;
-        RankAmount *= 4;
+        XPAmount *= 1;
+        RankAmount *= 1;
     }
     else if (Stats->Aura.Type[AURA_WHITE].Active)
-        XPAmount *= 2;
+        XPAmount *= 1;
 
     if (Players(Killer).Shield.Accessory)
     {

@@ -1,12 +1,12 @@
 AddOptionMenu "DoomRPG"
 {
     StaticText ""
-	SubMenu "WadSmoosh Expassion Pack",            "WadSmoosh Expassion Pack"
+	SubMenu "WadSmoosh Expassion Pack Options",            "WadSmoosh Expassion Pack"
 }
 
 OptionMenu "WadSmoosh Expassion Pack"
 {
-    Title "WadSmoosh Options"
+    Title "WadSmoosh Expassion Pack Options"
     StaticText "ENTER to change"
     StaticText "Changes require starting a new game!"
     StaticText ""
