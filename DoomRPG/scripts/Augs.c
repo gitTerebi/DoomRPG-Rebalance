@@ -353,13 +353,13 @@ void CheckAugs()
             Player.EPMax *= 1.5;
         if (Player.Augs.Level[AUG_ENERGY] >= 2)
             Player.EPAmount *= 2;
-        if (Player.Augs.Level[AUG_ENERGY] >= 3)
-            Player.AuraBonus = true;
-        else
-            Player.AuraBonus = false;
         if (Player.Augs.Level[AUG_ENERGY] >= 4)
             Player.Aura.Range *= 2;
     }
+    if (Player.Augs.Active[AUG_ENERGY] && Player.Augs.Level[AUG_ENERGY] >= 3)
+        Player.AuraBonus = true;
+    else
+        Player.AuraBonus = false;
 
     // Regeneration Aug
     if (Player.Augs.Active[AUG_REGENERATION])

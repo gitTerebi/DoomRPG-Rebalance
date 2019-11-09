@@ -274,8 +274,8 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
                 "1.25x Drop Chances",
                 "1.5x Drop Chances",
                 "2x Drop Chances",
-                "4x Drop Chances",
-                "8x Drop Chances"
+                "3x Drop Chances",
+                "4x Drop Chances"
             }
         }
     },
@@ -3162,9 +3162,9 @@ void CheckAuras()
             if (Player.Aura.Type[AURA_YELLOW].Level == 3)
                 LuckMult = 2;
             if (Player.Aura.Type[AURA_YELLOW].Level == 4)
-                LuckMult = 4;
+                LuckMult = 3;
             if (Player.Aura.Type[AURA_YELLOW].Level >= 5 || Player.SoulActive[SOUL_YELLOW])
-                LuckMult = 8;
+                LuckMult = 4;
 
             Player.HealthChance *= LuckMult;
             Player.EPChance *= LuckMult;
