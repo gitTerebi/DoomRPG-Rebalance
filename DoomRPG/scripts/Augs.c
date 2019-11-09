@@ -109,8 +109,8 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 3,
         .Description =
         {
+            "1.5x Ammo Limits",
             "2x Ammo Limits",
-            "3x Ammo Limits",
             "2x Stim Vial Capacity"
         },
         .TokenActor = "DRPGAugTokenCapacity"
@@ -416,12 +416,12 @@ void CheckAugs()
     // Capacity Aug
     if (Player.Augs.Active[AUG_CAPACITY])
     {
-        int AmmoMult;
+        fixed AmmoMult;
 
         if (Player.Augs.Level[AUG_CAPACITY] == 1)
-            AmmoMult = 2;
+            AmmoMult = 1.5;
         if (Player.Augs.Level[AUG_CAPACITY] >= 2)
-            AmmoMult = 3;
+            AmmoMult = 2;
         if (Player.Augs.Level[AUG_CAPACITY] >= 3)
             Player.Stim.VialMax *= 2;
 

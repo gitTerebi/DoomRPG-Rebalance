@@ -3055,11 +3055,11 @@ NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
 
 NamedScript DECORATE int GetMonsterHealthMax()
 {
-    // Move script to the targeted monster
-    SetActivatorToTarget(Player.TID);
-
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+    // Move script to the targeted monster
+    SetActivatorToTarget(Player.TID);
 
     // Return value monster maximum health
     return Stats->HealthMax;
@@ -3067,11 +3067,11 @@ NamedScript DECORATE int GetMonsterHealthMax()
 
 NamedScript DECORATE int GetMonsterLevel()
 {
-    // Move script to the targeted monster
-    SetActivatorToTarget(Player.TID);
-
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+    // Move script to the targeted monster
+    SetActivatorToTarget(Player.TID);
 
     // Return value monster level
     return Stats->Level;
