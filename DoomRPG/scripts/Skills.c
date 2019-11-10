@@ -213,15 +213,14 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         {
             .Name = "Blue Aura",
             .Cost = 100,
-            .MaxLevel = 5,
+            .MaxLevel = 4,
             .Use = UseAura,
             .Description =
             {
                 "10% Skill Cost Refund when using a Skill",
+                "15% Skill Cost Refund when using a Skill",
                 "20% Skill Cost Refund when using a Skill",
-                "30% Skill Cost Refund when using a Skill",
-                "40% Skill Cost Refund when using a Skill",
-                "50% Skill Cost Refund when using a Skill"
+                "25% Skill Cost Refund when using a Skill",
             }
         },
         {
@@ -990,10 +989,6 @@ NamedScript KeyBind void UseSkill(int Key)
             // TUFF-MAG3 Shield Accessory
             if (Player.Shield.Active && Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_SKILLTOSHIELD)
                 Player.Shield.Charge += EPCost / 10;
-
-            // Blue Aura Refund
-            if (Player.SkillRefundMult > 0)
-                Player.EP += EPCost * Player.SkillRefundMult;
         }
     }
     else // Not enough EP
@@ -1403,7 +1398,8 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
     Player.Aura.Type[Index].Level = SkillLevel->CurrentLevel;
 
     // Aura Cost Multiplier
-    Player.SkillCostMult += 10;
+    if (!Player.Aura.Type[AURA_BLUE].Active)
+        Player.SkillCostMult += 10;
 
     ActivatorSound("skills/buff", 127);
     return true;
@@ -2947,6 +2943,10 @@ int ScaleEPCost(int Cost)
     if (Player.SkillCostMult > 0)
         ScaleCost += (Player.SkillCostMult * ScaleCost) / 100;
 
+    // Blue Aura and Psi Projector Refund
+    if (Player.SkillRefundMult > 0)
+        ScaleCost *= 1 - Player.SkillRefundMult;
+
     return ScaleCost;
 }
 
@@ -2958,14 +2958,12 @@ void CheckSkills()
     // Level 4 and 5 of the Energy Augmentation increase skill refund rate
     if (Player.Augs.Active[AUG_ENERGY])
     {
-        if (Player.Augs.Level[AUG_ENERGY] == 4)
-            Player.SkillRefundMult += 0.05;
-        else if (Player.Augs.Level[AUG_ENERGY] == 5)
-            Player.SkillRefundMult += 0.1;
+        if (Player.Augs.Level[AUG_ENERGY] == 5)
+            Player.SkillRefundMult += 0.10;
         else if (Player.Augs.Level[AUG_ENERGY] == 6)
             Player.SkillRefundMult += 0.15;
         else if (Player.Augs.Level[AUG_ENERGY] == 7)
-            Player.SkillRefundMult += 0.2;
+            Player.SkillRefundMult += 0.20;
         else if (Player.Augs.Level[AUG_ENERGY] >= 8)
             Player.SkillRefundMult += 0.25;
     }
@@ -3089,14 +3087,12 @@ void CheckAuras()
         if (Player.Aura.Type[AURA_BLUE].Active)
         {
             if (Player.Aura.Type[AURA_BLUE].Level == 1)
-                Player.SkillRefundMult += 0.05;
+                Player.SkillRefundMult += 0.10;
             if (Player.Aura.Type[AURA_BLUE].Level == 2)
-                Player.SkillRefundMult += 0.1;
-            if (Player.Aura.Type[AURA_BLUE].Level == 3)
                 Player.SkillRefundMult += 0.15;
-            if (Player.Aura.Type[AURA_BLUE].Level == 4)
-                Player.SkillRefundMult += 0.2;
-            if (Player.Aura.Type[AURA_BLUE].Level >= 5 || Player.SoulActive[SOUL_BLUE])
+            if (Player.Aura.Type[AURA_BLUE].Level == 3)
+                Player.SkillRefundMult += 0.20;
+            if (Player.Aura.Type[AURA_BLUE].Level >= 4 || Player.SoulActive[SOUL_BLUE])
                 Player.SkillRefundMult += 0.25;
         }
 

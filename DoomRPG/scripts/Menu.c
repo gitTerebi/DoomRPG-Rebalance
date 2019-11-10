@@ -1299,17 +1299,17 @@ void DrawSkillMenu()
     SetFont("BIGFONT");
     if (SkillLevel->Level == 0)
     {
-        HudMessage("Base Cost: %d", SkillCostNext);
+        HudMessage("Skill Cost: %d", SkillCostNext);
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 74.1, 0.05);
     }
     else if (SkillLevel->Level < CurrentSkill->MaxLevel)
     {
-        HudMessage("%d\nNext Level: %d", SkillCost, SkillCostNext);
+        HudMessage("Skill Cost: %d\nNext Level: %d", SkillCost, SkillCostNext);
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 74.1, 0.05);
     }
     else
     {
-        HudMessage("%d", SkillCost);
+        HudMessage("Skill Cost: %d", SkillCost);
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 74.1, 0.05);
     }
 
@@ -1320,13 +1320,13 @@ void DrawSkillMenu()
         SetFont("BIGFONT");
         if (Player.SkillRefundMult > 0)
         {
-            HudMessage("+%d%% Skill Cost\n%d%% Skill Cost Refund", Player.SkillCostMult, RoundInt(Player.SkillRefundMult * 100));
-            EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 256.1, 112.0, 0.05);
+            HudMessage("+%d%% Skill Cost\n%d%% Cost Refund", Player.SkillCostMult, RoundInt(Player.SkillRefundMult * 100));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 256.1, 122.0, 0.05);
         }
         else
         {
             HudMessage("+%d%% Skill Cost", Player.SkillCostMult);
-            EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 256.1, 112.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 256.1, 114.0, 0.05);
         }
     }
 

@@ -390,7 +390,7 @@ void CheckStats()
         Player.DamageFactor = 1.0 + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
     Player.Mass = 100 + (Player.DefenseTotal * 10);
     Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
-    Player.StatusEffectResist = (fixed)Player.VitalityTotal * 0.75;
+    Player.StatusEffectResist = (fixed)Player.VitalityTotal * 0.5;
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
@@ -588,8 +588,8 @@ void CheckStats()
 void CheckRegen()
 {
     // Determine the max timer amounts
-    Player.HPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 2.05k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
-    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 2.05k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
+    Player.HPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
+    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
 
     // Cap Times
     if (Player.HPTime < 35)

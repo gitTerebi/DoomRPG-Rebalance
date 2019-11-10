@@ -43,12 +43,11 @@ AugInfo RPGMap AugData[AUG_MAX] =
     },
     {
         .Name = "Pain Inhibitor",
-        .MaxLevel = 7,
+        .MaxLevel = 6,
         .Description =
         {
             "1.5x Max Health",
             "2x Health Regen",
-            "+5% Status Effect Resist",
             "+10% Status Effect Resist",
             "+15% Status Effect Resist",
             "+20% Status Effect Resist",
@@ -58,14 +57,13 @@ AugInfo RPGMap AugData[AUG_MAX] =
     },
     {
         .Name = "Psi Projector",
-        .MaxLevel = 9,
+        .MaxLevel = 8,
         .Description =
         {
             "1.5x Max EP",
             "2x EP Regen",
             "2x Aura Timer",
             "2x Aura Range",
-            "5% Skill Cost Refund",
             "10% Skill Cost Refund",
             "15% Skill Cost Refund",
             "20% Skill Cost Refund",
@@ -80,8 +78,8 @@ AugInfo RPGMap AugData[AUG_MAX] =
         {
             "2x HP/EP Regen Amounts",
             "1/2 HP/EP Regen Timers",
-            "4x HP/EP Regen Amounts",
-            "1/4 HP/EP Regen Timers",
+            "3x HP/EP Regen Amounts",
+            "1/3 HP/EP Regen Timers",
             "-5 Seconds Toxicity Regen Timer",
             "-10 Seconds Toxicity Regen Timer",
             "-15 Seconds Toxicity Regen Timer",
@@ -335,14 +333,12 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_VITALITY] >= 2)
             Player.HPAmount *= 2;
         if (Player.Augs.Level[AUG_VITALITY] == 3)
-            Player.StatusEffectResist += 5;
-        if (Player.Augs.Level[AUG_VITALITY] == 4)
             Player.StatusEffectResist += 10;
-        if (Player.Augs.Level[AUG_VITALITY] == 5)
+        if (Player.Augs.Level[AUG_VITALITY] == 4)
             Player.StatusEffectResist += 15;
-        if (Player.Augs.Level[AUG_VITALITY] == 6)
+        if (Player.Augs.Level[AUG_VITALITY] == 5)
             Player.StatusEffectResist += 20;
-        if (Player.Augs.Level[AUG_VITALITY] >= 7)
+        if (Player.Augs.Level[AUG_VITALITY] >= 6)
             Player.StatusEffectResist += 25;
     }
 
@@ -376,13 +372,13 @@ void CheckAugs()
         }
         if (Player.Augs.Level[AUG_REGENERATION] >= 3)
         {
-            Player.HPAmount *= 2;
-            Player.EPAmount *= 2;
+            Player.HPAmount *= 1.5;
+            Player.EPAmount *= 1.5;
         }
         if (Player.Augs.Level[AUG_REGENERATION] >= 4)
         {
-            Player.HPTime /= 2;
-            Player.EPTime /= 2;
+            Player.HPTime /= 1.5;
+            Player.EPTime /= 1.5;
         }
         if (Player.Augs.Level[AUG_REGENERATION] == 5)
             Player.ToxicityRegenBonus += 5;
