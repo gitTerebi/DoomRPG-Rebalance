@@ -128,18 +128,18 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .TokenActor = "DRPGAugTokenLuck"
     },
     {
-        .Name = "Battery Recharger",
+        .Name = "AUG Battery",
         .MaxLevel = 8,
         .Description =
         {
-            "+10% Recharge Rate",
-            "+20% Recharge Rate",
-            "+30% Recharge Rate",
-            "+40% Recharge Rate",
-            "+50% Recharge Rate",
-            "+60% Recharge Rate",
-            "+70% Recharge Rate",
-            "+80% Recharge Rate"
+            "Capacity +25%  and Recharge Rate +5%",
+            "Capacity +50%  and Recharge Rate +10%",
+            "Capacity +75%  and Recharge Rate +20%",
+            "Capacity +100% and Recharge Rate +30%",
+            "Capacity +125% and Recharge Rate +40%",
+            "Capacity +150% and Recharge Rate +50%",
+            "Capacity +175% and Recharge Rate +75%",
+            "Capacity +200% and Recharge Rate +100%"
         },
         .TokenActor = "DRPGAugTokenBattery"
     }
@@ -242,7 +242,28 @@ void CheckAugs()
         Player.Augs.SlotsUsed = 0;
 
     // Determine max Battery
-    Player.Augs.BatteryMax = 100 + (Player.CapacityTotal / 2) * 5;
+    Player.Augs.BatteryMax = 100;
+
+    // Battery Aug
+    if (Player.Augs.Active[AUG_BATTERY])
+    {
+        if (Player.Augs.Level[AUG_BATTERY] == 1)
+            Player.Augs.BatteryMax += 25;
+        if (Player.Augs.Level[AUG_BATTERY] == 2)
+            Player.Augs.BatteryMax += 50;
+        if (Player.Augs.Level[AUG_BATTERY] == 3)
+            Player.Augs.BatteryMax += 75;
+        if (Player.Augs.Level[AUG_BATTERY] == 4)
+            Player.Augs.BatteryMax += 100;
+        if (Player.Augs.Level[AUG_BATTERY] == 5)
+            Player.Augs.BatteryMax += 125;
+        if (Player.Augs.Level[AUG_BATTERY] == 6)
+            Player.Augs.BatteryMax += 150;
+        if (Player.Augs.Level[AUG_BATTERY] == 7)
+            Player.Augs.BatteryMax += 175;
+        if (Player.Augs.Level[AUG_BATTERY] >= 8)
+            Player.Augs.BatteryMax += 200;
+    }
 
     // Play energy drained sound
     if (Player.Augs.Battery <= 0 && Player.Augs.SlotsUsed > 0)
@@ -297,8 +318,22 @@ void CheckAugs()
             fixed Charge;
             if (IsPlayerMoving())
                 Charge = (fixed)(Player.Augs.Level[AUG_BATTERY] * GetCVar("drpg_move_aug_battery_regen") / 200.0);
-            else
-                Charge = (fixed)Player.Augs.Level[AUG_BATTERY] / 10.0;
+            else if (Player.Augs.Level[AUG_BATTERY] == 1)
+                Charge = 0.05;
+            else if (Player.Augs.Level[AUG_BATTERY] == 2)
+                Charge = 0.10;
+            else if (Player.Augs.Level[AUG_BATTERY] == 3)
+                Charge = 0.20;
+            else if (Player.Augs.Level[AUG_BATTERY] == 4)
+                Charge = 0.30;
+            else if (Player.Augs.Level[AUG_BATTERY] == 5)
+                Charge = 0.40;
+            else if (Player.Augs.Level[AUG_BATTERY] == 6)
+                Charge = 0.50;
+            else if (Player.Augs.Level[AUG_BATTERY] == 7)
+                Charge = 0.75;
+            else if (Player.Augs.Level[AUG_BATTERY] >= 8)
+                Charge = 1.00;
             Player.Augs.Battery += Charge;
             DrawBattery();
         }
