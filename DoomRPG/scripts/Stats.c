@@ -1221,7 +1221,7 @@ void StatusDamage(int Amount, fixed Chance, bool Critical)
         case 4:
             Type = SE_SILENCE;
             Intensity = 1; // Only has one level of intensity
-            Time = Random(60, 180);
+            Time = Random(30, 90);
             break;
         case 5:
             Type = SE_CURSE;
@@ -1239,7 +1239,7 @@ void StatusDamage(int Amount, fixed Chance, bool Critical)
         case 2:
             Type = SE_SILENCE;
             Intensity = 1; // Only has one level of intensity
-            Time = Random(60, 180);
+            Time = Random(30, 90);
             break;
         case 3:
             Type = SE_EMP;

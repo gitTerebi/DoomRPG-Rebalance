@@ -339,9 +339,9 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",                  5000, 4, 5, "STPAA0", 30, 16);
     ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",              20000, 4, 6, "STPAB0", 27, 16);
 
-    ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             30000, 4, 8, "AUGCA0", 12, 24);
-    ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     30000, 4, 8, "AUGUA0", 12, 24);
-    ITEMDATA_DEF("DRPGAugSlotUpgrade",      "Augmentation Slot Upgrade",         90000, 8, 8, "AUGUB0", 16, 25);
+    ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             20000, 4, 8, "AUGCA0", 12, 24);
+    ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     20000, 4, 8, "AUGUA0", 12, 24);
+    ITEMDATA_DEF("DRPGAugSlotUpgrade",      "Augmentation Slot Upgrade",         60000, 8, 8, "AUGUB0", 16, 25);
     ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                       500, 4, 1, "BATTA0",  5, 13);
     ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      1250, 8, 2, "BATTB0", 14, 21);
 

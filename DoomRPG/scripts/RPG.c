@@ -310,6 +310,7 @@ NamedScript Type_ENTER void Init()
     ShieldTimer();
     WeaponSpeed();
     StatRandomizer();
+    DamageNumbers();
     InfoPopoffs();
     HealthBars();
     AutosaveHandler();
@@ -577,7 +578,7 @@ NamedScript DECORATE int ShieldDamage(int DamageTaken)
         Player.AutosaveTimerReset = true;
         AugDamage(DamageTaken);
         ToxicityDamage();
-        StatusDamage(DamageTaken, RandomFixed(0.0, 50.0), false);
+        StatusDamage(DamageTaken, RandomFixed(0.0, 25.0), false);
         DamageHUD(DamageTaken, false);
 
         ShieldDamageAmount = DamageTaken; // For callback
@@ -1635,6 +1636,7 @@ NamedScript Type_RESPAWN void Respawn()
     Loop();
     PlayerHealth();
     MoneyChecker();
+    DamageNumbers();
     InfoPopoffs();
     HealthBars();
     ShieldTimer();
