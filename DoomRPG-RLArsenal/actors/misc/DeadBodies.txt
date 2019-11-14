@@ -316,8 +316,7 @@ actor RLRenegadeGunSpawner : RandomSpawner
     DropItem "RLShell"                  255 40
     DropItem "RLShellBox2" 		        255 30
     DropItem "RLShotgunPickup"          255 20
-    DropItem "DRPGTurretPart"           255 9
-    DropItem "RLAaaghSphere"            255 1
+    DropItem "DRPGTurretPart"           255 10
 }
 
 actor RLDemolitionistGunSpawner : RandomSpawner
