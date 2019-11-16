@@ -284,8 +284,8 @@ actor RLExoticPistolSpawner : RandomSpawner
     DropItem "RLHandcannonPickup" 255 10
     DropItem "RLBlasterPickup" 255 5
     DropItem "RLUziPickup" 255 10
-    DropItem "RLHuntingRevolverPickup" 255 5
-    DropItem "RLPP7Pickup" 255 5
+    DropItem "RLHuntingRevolverPickup" 255 2
+    DropItem "RLPP7Pickup" 255 8
 }
 
 actor RLAllPistolSpawner : RandomSpawner 16710
