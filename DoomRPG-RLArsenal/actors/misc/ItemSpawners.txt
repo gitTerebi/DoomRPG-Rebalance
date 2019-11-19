@@ -342,9 +342,9 @@ actor RLShotgunSpawner : RandomSpawner 2001
 
 actor RLExoticShotgunSpawner : RandomSpawner
 {
-    DropItem "RLAssaultShotgunPickup" 255 57
+    DropItem "RLAssaultShotgunPickup" 255 59
     DropItem "RLPlasmaShotgunPickup" 255 40
-    DropItem "RLUniqueWeaponSpawner" 255 3
+    DropItem "RLUniqueWeaponSpawner" 255 1
 }
 
 actor RLShotgunSpawner2 : RandomSpawner replaces Shotgun
@@ -370,22 +370,22 @@ actor RLChaingunSpawner : RandomSpawner 2002
   Tag "Random Chaingun"
     //$category "DRLA Spawners"
     DropItem "RLChaingunPickup" 255 80
-    DropItem "RLBattleRiflePickup" 255 65
-    DropItem "RLSuperiorWeaponSpawner" 255 5
+    DropItem "RLBattleRiflePickup" 255 70
+//  DropItem "RLSuperiorWeaponSpawner"
     DropItem "RLExoticChaingunSpawner" 255 20
 }
 
 actor RLExoticChaingunSpawner : RandomSpawner
 {
-	DropItem "RLCombatPistolPickup" 255 80
+    DropItem "RLCombatPistolPickup" 255 80
     DropItem "RLMarksmanPistolPickup" 255 60
     DropItem "RLHandcannonPickup" 255 50
     DropItem "RLUziPickup" 255 40
-    DropItem "RLBattleRiflePickup" 255 32
-	DropItem "RLChaingunPickup" 255 20
-    DropItem "RLSuperiorWeaponSpawner" 255 10
-    DropItem "RLUniqueWeaponSpawner" 255 3
-	DropItem "RLMinigunPickup" 255 1
+    DropItem "RLBattleRiflePickup" 255 40
+    DropItem "RLChaingunPickup" 255 30
+//  DropItem "RLSuperiorWeaponSpawner"
+    DropItem "RLUniqueWeaponSpawner" 255 1
+//  DropItem "RLMinigunPickup"
 }
 
 actor RLChaingunSpawner2 : RandomSpawner replaces Chaingun
@@ -854,7 +854,6 @@ actor RLBasicModPackSpawner : RandomSpawner 16701
 {
   Tag "Random Basic Modpack"
     //$category "DRLA Spawners"
-	DropItem "DRPGTurretPartCrate" 255 30
     DropItem "RLBulkModItem" 255 12
     DropItem "RLPowerModItem" 255 18
     DropItem "RLAgilityModItem" 255 26

@@ -338,7 +338,7 @@ actor DRPGStimDropper : RandomSpawner 20012
 actor DRPGVialDropper : RandomSpawner 20013
 {
 	// Money
-    DropItem "DRPGMoneyDropper"         255 200
+    DropItem "DRPGMoneyDropper"         255 330
 
     // Stats
     DropItem "DRPGVialStrength"         255 20
@@ -361,7 +361,7 @@ actor DRPGVialDropper : RandomSpawner 20013
 actor DRPGVialDropperRare : RandomSpawner 20014
 {
 	// Money
-    DropItem "DRPGMoneyDropper"         255 100    
+    DropItem "DRPGMoneyDropper"         255 220    
 	
 	// Boosters
     DropItem "DRPGVialPotency"          255 10
@@ -437,8 +437,8 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // Health Bonus Locations
 actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 {
-    DropItem "DRPGMoneyDropper"                255 7
-    DropItem "DRPGHealthBonus"                 255 14
+    DropItem "DRPGMoneyDropper"                255 18
+    DropItem "DRPGHealthBonus"                 255 18
     DropItem "DRPGLootMedicalSupplies"         255 18
     DropItem "DRPGLootChemicals"               255 18
     DropItem "DRPGLootHazardousMaterials"      255 18

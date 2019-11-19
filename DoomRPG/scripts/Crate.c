@@ -48,7 +48,9 @@ NamedScript DECORATE void InitCrate()
 {
     int TID = UniqueTID();
     int Amount = 3;
-    int LuckMod = ((AveragePlayerLevel() / 10) + (AveragePlayerLuck() / 15));
+    int LuckMod = ((AveragePlayerLevel() / 10) + (AveragePlayerRank() / 12) + (AveragePlayerLuck() / 15));
+    if (LuckMod > 10.5)
+        LuckMod = 10.5;
     int Rarity = 0;
     int Firewall = 0;
 

@@ -1299,7 +1299,7 @@ Start:
     {
         StatsChanged = true;
 
-        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 500.0) + (LevelNum / 250.0)));
+        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0) + (LevelNum / 200.0)));
         OldStrength = Stats->Strength;
     }
 
@@ -1308,8 +1308,8 @@ Start:
     {
         StatsChanged = true;
 
-        if (Stats->Defense < 250)
-            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (((fixed)Stats->Defense / 500.0) + (LevelNum / 1000.0)));
+        if (Stats->Defense < 275)
+            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (((fixed)Stats->Defense / 400.0) + (LevelNum / 800.0)));
         else
             SetActorPropertyFixed(0, APROP_DamageFactor, 100.0 / (fixed)Stats->Defense);
         OldDefense = Stats->Defense;
@@ -2330,16 +2330,18 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGSoulsphereRandomizer", 256);
             DropMonsterItem(Killer, 0, "DRPGLifeDropper", 128);
             DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256);
-            DropMonsterItem(Killer, 0, "DRPGAugDropper", 128);
-            DropMonsterItem(Killer, 0, "DRPGShieldDropper", 64);
-            DropMonsterItem(Killer, 0, "DRPGUACCard", 128 / (Players(Killer).ShopCard + 1));
+            DropMonsterItem(Killer, 0, "DRPGAugDropper", 96);
+            DropMonsterItem(Killer, 0, "DRPGShieldDropper", 48);
+            DropMonsterItem(Killer, 0, "DRPGUACCard", 96 / (Players(Killer).ShopCard + 1));
             DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 128);
-            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 128);
+            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 64);
             DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
 
             if (CompatMode == COMPAT_DRLA)
             {
-                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32);
+                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 48);
+                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 32);
+                DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 16);
             }
         }
 
