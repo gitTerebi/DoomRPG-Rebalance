@@ -1021,7 +1021,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     {
     case MAPEVENT_MEGABOSS:
         return (GetCVar("drpg_mapevent_megaboss") &&
-                AveragePlayerLevel() >= 40);
+                AveragePlayerLevel() >= 45);
 
     case MAPEVENT_TOXICHAZARD:
         return (GetCVar("drpg_mapevent_toxichazard") &&
@@ -1057,7 +1057,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_DOOMSDAY:
         return (GetCVar("drpg_mapevent_doomsday") &&
-                AveragePlayerLevel() >= 30 &&
+                AveragePlayerLevel() >= 35 &&
                 !Random(0, 3) &&
                 !TargetLevel->Completed);
 
@@ -1077,7 +1077,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     case MAPEVENT_DRLA_OVERMIND:
         return (GetCVar("drpg_mapevent_overmind") &&
                 CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
-                AveragePlayerLevel() >= 35);
+                AveragePlayerLevel() >= 40);
 
     case MAPEVENT_BONUS_RAINBOWS:
         return (GetCVar("drpg_mapevent_rainbows") &&
@@ -1085,13 +1085,13 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_SKILL_HELL:
         return (GetCVar("drpg_mapevent_skill_hell") &&
-                AveragePlayerLevel() >= 30 &&
+                AveragePlayerLevel() >= 35 &&
                 CurrentSkill < 6);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_skill_armageddon") &&
-                AveragePlayerLevel() >= 30 &&
+                AveragePlayerLevel() >= 35 &&
                 CurrentSkill < 5);
 
     case MAPEVENT_SPECIAL_SINSTORM:

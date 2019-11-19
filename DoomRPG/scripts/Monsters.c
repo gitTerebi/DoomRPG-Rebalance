@@ -907,14 +907,22 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         }
 
         // Pity Points
-        if (Stats->Strength < 1)     Stats->Strength = 1;
-        if (Stats->Defense < 1)      Stats->Defense = 1;
-        if (Stats->Vitality < 1)     Stats->Vitality = 1;
-        if (Stats->Energy < 1)       Stats->Energy = 1;
-        if (Stats->Regeneration < 1) Stats->Regeneration = 1;
-        if (Stats->Agility < 1)      Stats->Agility = 1;
-        if (Stats->Capacity < 1)     Stats->Capacity = 1;
-        if (Stats->Luck < 1)         Stats->Luck = 1;
+        if (Stats->Strength < (Stats->Level * 0.80))     Stats->Strength = (Stats->Level * 0.80);
+        if (Stats->Strength < 1)                         Stats->Strength = 1;
+        if (Stats->Defense < (Stats->Level * 0.80))      Stats->Defense = (Stats->Level * 0.80);
+        if (Stats->Defense < 1)                          Stats->Defense = 1;
+        if (Stats->Vitality < (Stats->Level * 0.80))     Stats->Vitality = (Stats->Level * 0.80);
+        if (Stats->Vitality < 1)                         Stats->Vitality = 1;
+        if (Stats->Energy < (Stats->Level * 0.80))       Stats->Energy = (Stats->Level * 0.80);
+        if (Stats->Energy < 1)                           Stats->Energy = 1;
+        if (Stats->Regeneration < (Stats->Level * 0.80)) Stats->Regeneration = (Stats->Level * 0.80);
+        if (Stats->Regeneration < 1)                     Stats->Regeneration = 1;
+        if (Stats->Agility < (Stats->Level * 0.80))      Stats->Agility = (Stats->Level * 0.80);
+        if (Stats->Agility < 1)                          Stats->Agility = 1;
+        if (Stats->Capacity < (Stats->Level * 0.80))     Stats->Capacity = (Stats->Level * 0.80);
+        if (Stats->Capacity < 1)                         Stats->Capacity = 1;
+        if (Stats->Luck < (Stats->Level * 0.80))         Stats->Luck = (Stats->Level * 0.80);
+        if (Stats->Luck < 1)                             Stats->Luck = 1;
 
         // Map Event - RAINBOWS!
         if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
