@@ -895,7 +895,7 @@ void CheckPerks()
     else Player.Perks[STAT_DEFENSE] = false;
     if (Player.VitalityTotal >= 75)     Player.Perks[STAT_VITALITY] = true;
     else Player.Perks[STAT_VITALITY] = false;
-    if (Player.EnergyTotal >= 50)       Player.Perks[STAT_ENERGY] = true;
+    if (Player.EnergyTotal >= 75)       Player.Perks[STAT_ENERGY] = true;
     else Player.Perks[STAT_ENERGY] = false;
     if (Player.RegenerationTotal >= 75) Player.Perks[STAT_REGENERATION] = true;
     else Player.Perks[STAT_REGENERATION] = false;
@@ -958,8 +958,6 @@ void CheckPerks()
     if (Player.Perks[STAT_LUCK])
     {
         GiveInventory("DRPGAllMapRevealer", 1);
-        TakeInventory("PowerScanner", 1);
-        GiveInventory("DRPGAllMapScanner", 1);
     }
 }
 
