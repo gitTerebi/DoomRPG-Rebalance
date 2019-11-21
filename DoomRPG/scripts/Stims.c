@@ -97,9 +97,9 @@ NamedScript KeyBind void UseStim(bool Force)
         {
             // Apply purifier time bonus
             if (i == STIM_PURIFIER)
-                InitialTime += (35 * 12 * (Player.Stim.Current[STIM_PURIFIER] * InitialTimeMultiplier));
+                InitialTime += (35 * 6 * (Player.Stim.Current[STIM_PURIFIER] * InitialTimeMultiplier));
             else
-                InitialTime = 2100 * InitialTimeMultiplier;
+                InitialTime = 1050 * InitialTimeMultiplier;
 
             // Immunity penalty
             InitialTime += InitialTime * Player.StimImmunity / 100;

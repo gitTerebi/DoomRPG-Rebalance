@@ -726,37 +726,37 @@ void DrawStatsMenu()
         }
         if (Player.HealthDrop)
         {
-            HudMessage("\CaHealth\C- Drop Rate: \Cf%.2k%%", Player.HealthChance);
+            HudMessage("\CaHealth\C- Drop Rate: \Cf%.3k%%", Player.HealthChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 300.0, 0.05);
         }
         if (Player.EPDrop)
         {
-            HudMessage("\CnEP\C- Drop Rate: \Cf%.2k%%", Player.EPChance);
+            HudMessage("\CnEP\C- Drop Rate: \Cf%.3k%%", Player.EPChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 308.0, 0.05);
         }
         if (Player.ArmorDrop)
         {
-            HudMessage("\CdAmmo\C- Drop Rate: \Cf%.2k%%", Player.ArmorChance);
+            HudMessage("\CdAmmo\C- Drop Rate: \Cf%.3k%%", Player.ArmorChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 316.0, 0.05);
         }
         if (Player.WeaponDrop)
         {
-            HudMessage("\CgTurrets\C- Drop Rate: \Cf%.2k%%", Player.WeaponChance);
+            HudMessage("\CgTurrets\C- Drop Rate: \Cf%.3k%%", Player.WeaponChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 324.0, 0.05);
         }
         if (Player.ModuleDrop)
         {
-            HudMessage("\CdModule\C- Drop Rate: \Cf%.2k%%", Player.ModuleChance);
+            HudMessage("\CdModule\C- Drop Rate: \Cf%.3k%%", Player.ModuleChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 332.0, 0.05);
         }
         if (Player.StimDrop)
         {
-            HudMessage("\CrStim\C- Drop Rate: \Cf%.2k%%", Player.StimChance);
+            HudMessage("\CrStim\C- Drop Rate: \Cf%.3k%%", Player.StimChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 340.0, 0.05);
         }
         if (Player.PowerupDrop)
         {
-            HudMessage("\CqPowerup\C- Drop Rate: \Cf%.2k%%", Player.PowerupChance);
+            HudMessage("\CqPowerup\C- Drop Rate: \Cf%.3k%%", Player.PowerupChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 348.0, 0.05);
         }
         if (Player.ShieldDrop)
