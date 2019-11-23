@@ -6,16 +6,16 @@ actor RLStandardArmorSpawner : RandomSpawner replaces GreenArmor
 {
   Tag "Random Weak Armor or Boots"
     //$category "DRLA Spawners"
-    DropItem "RLGreenArmorSpawner"    255 9
-    DropItem "RLStandardBootsSpawner" 255 1
+    DropItem "RLGreenArmorSpawner"    255 95
+    DropItem "RLStandardBootsSpawner" 255 5
 }
 
 actor RLAdvancedArmorSpawner : RandomSpawner replaces BlueArmor
 {
   Tag "Random Strong Armor or Boots"
     //$category "DRLA Spawners"
-    DropItem "RLBlueArmorSpawner"     255 9
-    DropItem "RLStandardBootsSpawner" 255 1
+    DropItem "RLBlueArmorSpawner"     255 95
+    DropItem "RLStandardBootsSpawner" 255 5
 }
 
 actor RLRareArmorSpawner : RandomSpawner 16718
