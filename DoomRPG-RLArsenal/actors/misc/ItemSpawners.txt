@@ -844,7 +844,7 @@ actor RLModPackSpawner : RandomSpawner 16700
     DropItem "RLNanoModItem" 255 30
     DropItem "RLSniperModItem" 255 30
     DropItem "RLFirestormModItem" 255 30
-    DropItem "RLOnyxModItem" 255 30
+    DropItem "RLOnyxModItem" 255 10
     DropItem "RLArmorModItem" 255 60
 	DropItem "RLBlueprintComputer" 255 20
     DropItem "RLArtiModItem" 255 1
