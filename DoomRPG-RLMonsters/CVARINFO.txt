@@ -1,2 +1,2 @@
 // DoomRPG
-server int		drpg_ws_use_wads = 5;
+server int		drpg_ws_use_wads = 6;
