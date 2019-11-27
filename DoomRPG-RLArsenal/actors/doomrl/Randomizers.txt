@@ -38,6 +38,18 @@ actor DRPGWeaponDropper2 : RandomSpawner Replaces DRPGWeaponDropper
 	DropItem "RLChainsawPickup"					255 1
 }
 
+actor DRPGHealthDropper2 : RandomSpawner Replaces DRPGHealthDropper
+{
+    DropItem "DRPGMoneyDropper"     255 150
+    DropItem "DRPGStimpack"         255 80
+    DropItem "DRPGMedikit"          255 30
+    DropItem "RLArmorBonusPickup"   255 20
+    DropItem "DRPGLargeMedikit"     255 10
+    DropItem "DRPGXLMedikit"        255 6
+    DropItem "DRPGMedPack"          255 3
+    DropItem "DRPGSurgeryKit"       255 1
+}
+
 // MARINES
 // --------------------------------------------------
 

@@ -198,60 +198,60 @@ actor DRPGShieldDropper : RandomSpawner 20011
     DropItem "DRPGMoneyDropper"         255 255
 
     // Bodies
-    DropItem "DRPGShieldBody1"          255 255 // UAC
-    DropItem "DRPGShieldBody2"          255 200 // XTron
-    DropItem "DRPGShieldBody3"          255 175 // Black Mesa
-    DropItem "DRPGShieldBody4"          255 150 // EDF
-    DropItem "DRPGShieldBody5"          255 100 // Cyberdyne Systems
-    DropItem "DRPGShieldBody6"          255 80 // Misfit Tech
-    DropItem "DRPGShieldBody7"          255 35 // Shadaloo
-    DropItem "DRPGShieldBody8"          255 70 // Arkai
-    DropItem "DRPGShieldBody9"          255 55 // Ironclad Inc.
-    DropItem "DRPGShieldBody10"         255 50 // Yholl
-    DropItem "DRPGShieldBody11"         255 45 // Hyperix
-    DropItem "DRPGShieldBody12"         255 40 // Xaser Inc.
-    DropItem "DRPGShieldBody13"         255 20 // dataDyne
-    DropItem "DRPGShieldBody14"         255 17 // Starbright
-    DropItem "DRPGShieldBody15"         255 14 // Hellsing
-    DropItem "DRPGShieldBody16"         255 11 // S.H.I.E.L.D.
-    DropItem "DRPGShieldBody17"         255 8  // UAC Elite
-    DropItem "DRPGShieldBody18"         255 5  // Stark Industries
-    DropItem "DRPGShieldBody19"         255 4  // Weyland-Yutani
-    DropItem "DRPGShieldBody20"         255 3  // Megalith
+    DropItem "DRPGShieldBody1"          255 40 // UAC
+    DropItem "DRPGShieldBody2"          255 33 // XTron
+    DropItem "DRPGShieldBody3"          255 32 // Black Mesa
+    DropItem "DRPGShieldBody4"          255 28 // EDF
+    DropItem "DRPGShieldBody5"          255 25 // Cyberdyne Systems
+    DropItem "DRPGShieldBody6"          255 24 // Misfit Tech
+    DropItem "DRPGShieldBody7"          255 16 // Shadaloo
+    DropItem "DRPGShieldBody8"          255 22 // Arkai
+    DropItem "DRPGShieldBody9"          255 21 // Ironclad Inc.
+    DropItem "DRPGShieldBody10"         255 21 // Yholl
+    DropItem "DRPGShieldBody11"         255 19 // Hyperix
+    DropItem "DRPGShieldBody12"         255 17 // Xaser Inc.
+    DropItem "DRPGShieldBody13"         255 16 // dataDyne
+    DropItem "DRPGShieldBody14"         255 13 // Starbright
+    DropItem "DRPGShieldBody15"         255 13 // Hellsing
+    DropItem "DRPGShieldBody16"         255 12 // S.H.I.E.L.D.
+    DropItem "DRPGShieldBody17"         255 9  // UAC Elite
+    DropItem "DRPGShieldBody18"         255 9  // Stark Industries
+    DropItem "DRPGShieldBody19"         255 8  // Weyland-Yutani
+    DropItem "DRPGShieldBody20"         255 5  // Megalith
     DropItem "DRPGShieldBody21"         255 2  // Reaper Industries
-    DropItem "DRPGShieldBody22"         255 1  // Eternity Systems
+    DropItem "DRPGShieldBody22"         255 2  // Eternity Systems
     
     // Batteries
-    DropItem "DRPGShieldBattery1"       255 255 // Crappy
-    DropItem "DRPGShieldBattery2"       255 200 // Bullet
-    DropItem "DRPGShieldBattery3"       255 175 // Elegant
-    DropItem "DRPGShieldBattery4"       255 80 // Spiked
-    DropItem "DRPGShieldBattery5"       255 65 // Stubborn
-    DropItem "DRPGShieldBattery6"       255 50 // Mirrored
-    DropItem "DRPGShieldBattery7"       255 30 // Refined
-    DropItem "DRPGShieldBattery8"       255 20  // Clustered
-    DropItem "DRPGShieldBattery9"       255 10  // Winged
-    DropItem "DRPGShieldBattery10"      255 5  // Overcharged
-    DropItem "DRPGShieldBattery11"      255 2  // Superb
+    DropItem "DRPGShieldBattery1"       255 29 // Crappy
+    DropItem "DRPGShieldBattery2"       255 24 // Bullet
+    DropItem "DRPGShieldBattery3"       255 20 // Elegant
+    DropItem "DRPGShieldBattery4"       255 18 // Spiked
+    DropItem "DRPGShieldBattery5"       255 17 // Stubborn
+    DropItem "DRPGShieldBattery6"       255 14 // Mirrored
+    DropItem "DRPGShieldBattery7"       255 13 // Refined
+    DropItem "DRPGShieldBattery8"       255 9  // Clustered
+    DropItem "DRPGShieldBattery9"       255 8  // Winged
+    DropItem "DRPGShieldBattery10"      255 6  // Overcharged
+    DropItem "DRPGShieldBattery11"      255 3  // Superb
     DropItem "DRPGShieldBattery12"      255 2  // Redundant
-    DropItem "DRPGShieldBattery13"      255 1  // Reinforced
+    DropItem "DRPGShieldBattery13"      255 2  // Reinforced
     
     // Capacitors
-    DropItem "DRPGShieldCapacitor1"     255 255 // Standard
-    DropItem "DRPGShieldCapacitor2"     255 200 // Outdated
-    DropItem "DRPGShieldCapacitor3"     255 175 // Cooled
-    DropItem "DRPGShieldCapacitor4"     255 80 // Warm
-    DropItem "DRPGShieldCapacitor5"     255 65 // Inefficient
-    DropItem "DRPGShieldCapacitor6"     255 50 // Energized
-    DropItem "DRPGShieldCapacitor7"     255 30 // Infused
-    DropItem "DRPGShieldCapacitor8"     255 20 // Plasmatic
-    DropItem "DRPGShieldCapacitor9"     255 15 // Burning
-    DropItem "DRPGShieldCapacitor10"    255 10  // Pulsating
-    DropItem "DRPGShieldCapacitor11"    255 7  // Fiery
-    DropItem "DRPGShieldCapacitor12"    255 5  // Eternal
-    DropItem "DRPGShieldCapacitor13"    255 2  // Overloaded
+    DropItem "DRPGShieldCapacitor1"     255 38 // Standard
+    DropItem "DRPGShieldCapacitor2"     255 32 // Outdated
+    DropItem "DRPGShieldCapacitor3"     255 29 // Cooled
+    DropItem "DRPGShieldCapacitor4"     255 26 // Warm
+    DropItem "DRPGShieldCapacitor5"     255 20 // Inefficient
+    DropItem "DRPGShieldCapacitor6"     255 18 // Energized
+    DropItem "DRPGShieldCapacitor7"     255 15 // Infused
+    DropItem "DRPGShieldCapacitor8"     255 13 // Plasmatic
+    DropItem "DRPGShieldCapacitor9"     255 11 // Burning
+    DropItem "DRPGShieldCapacitor10"    255 9  // Pulsating
+    DropItem "DRPGShieldCapacitor11"    255 8  // Fiery
+    DropItem "DRPGShieldCapacitor12"    255 6  // Eternal
+    DropItem "DRPGShieldCapacitor13"    255 3  // Overloaded
     DropItem "DRPGShieldCapacitor14"    255 2  // Dark
-    DropItem "DRPGShieldCapacitor15"    255 1  // Chaotic
+    DropItem "DRPGShieldCapacitor15"    255 2  // Chaotic
     
     // Accessories
     // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
