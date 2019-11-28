@@ -17,30 +17,30 @@ actor RLStandardWeaponSpawner : RandomSpawner
 
 actor DRPGArmorDropper2 : RandomSpawner Replaces DRPGArmorDropper
 {
-	DropItem "DRPGMoneyDropper"			255 70
-	DropItem "RLExoticArmorSpawner"		255 20
-	DropItem "RLAssembledArmorSpawner"	255 8
-	DropItem "RLUniqueArmorSpawner"		255 2
+    DropItem "DRPGMoneyDropper"            255 70
+    DropItem "RLExoticArmorSpawner"        255 20
+    DropItem "RLAssembledArmorSpawner"     255 8
+    DropItem "RLUniqueArmorSpawner"        255 2
 }
 
 actor DRPGWeaponDropper2 : RandomSpawner Replaces DRPGWeaponDropper
 {
-	DropItem "DRPGMoneyDropper"			255 70
-	DropItem "RLExoticWeaponSpawner"	255 20
-	DropItem "RLSuperiorWeaponSpawner"	255 8
-	DropItem "RLUniqueWeaponSpawner"	255 2
+    DropItem "DRPGMoneyDropper"            255 70
+    DropItem "RLExoticWeaponSpawner"       255 20
+    DropItem "RLSuperiorWeaponSpawner"     255 8
+    DropItem "RLUniqueWeaponSpawner"       255 2
 }
 
 actor DRPGHealthDropper2 : RandomSpawner Replaces DRPGHealthDropper
 {
-	DropItem "DRPGMoneyDropper"		255 150
-	DropItem "DRPGStimpack"			255 80
-	DropItem "DRPGMedikit"			255 30
-	DropItem "RLArmorBonusPickup"	255 20
-	DropItem "DRPGLargeMedikit"		255 10
-	DropItem "DRPGXLMedikit"		255 6
-	DropItem "DRPGMedPack"			255 3
-	DropItem "DRPGSurgeryKit"		255 1
+    DropItem "DRPGMoneyDropper"            255 150
+    DropItem "DRPGStimpack"                255 80
+    DropItem "DRPGMedikit"                 255 30
+    DropItem "RLArmorBonusPickup"          255 20
+    DropItem "DRPGLargeMedikit"            255 10
+    DropItem "DRPGXLMedikit"               255 6
+    DropItem "DRPGMedPack"                 255 3
+    DropItem "DRPGSurgeryKit"              255 1
 }
 
 // MARINES
@@ -74,7 +74,7 @@ actor DRPGMarineReinforcementDRLASpawner : RandomSpawner
 // Clip Box
 actor DRPGRLClipBoxSpawner2 : RandomSpawner replaces DRPGClipBox
 {
-    DropItem "RLClipBox2" 		255 100
+    DropItem "RLClipBox2"          255 100
 }
 
 // Shell Box
@@ -89,27 +89,27 @@ actor DRPGRLShellBoxSpawner2 : RandomSpawner replaces DRPGShellBox
 // Rocket Box
 actor DRPGRLRocketBoxSpawner2 : RandomSpawner replaces DRPGRocketBox
 {
-    DropItem "RLRocketBox2"  	   255 185
-	DropItem "DRPGTurretPart"      255 10
+    DropItem "RLRocketBox2"        255 185
+    DropItem "DRPGTurretPart"      255 10
     DropItem "RLModPackSpawner"    255 5
 }
 
 // Cell Pack
 actor DRPGRLCellPackSpawner2 : RandomSpawner replaces DRPGCellPack
 {
-    DropItem "RLCellPack2" 		   255 183
-	DropItem "DRPGTurretPart"      255 10
+    DropItem "RLCellPack2"         255 183
+    DropItem "DRPGTurretPart"      255 10
     DropItem "RLModPackSpawner"    255 6
-    DropItem "RLBlueprintComputer" 255 1	
+    DropItem "RLBlueprintComputer" 255 1
 }
 
 // Backpack locations
 actor DRPGBackpackRandomizer2 : RandomSpawner Replaces DRPGBackpackRandomizer
 {
-	DropItem "DRPGSmallBackpack" 	255 50
-	DropItem "DRPGBackpack" 		255 40
-	DropItem "DRPGBigBackpack" 		255 10
-    DropItem "DRPGCrate"            255 0
+    DropItem "DRPGSmallBackpack"   255 50
+    DropItem "DRPGBackpack"        255 40
+    DropItem "DRPGBigBackpack"     255 10
+    DropItem "DRPGCrate"           255 0
 }
 
 // ARMOR ITEMS
@@ -136,20 +136,20 @@ actor DRPGDRLAArmorBonusSpawner
 // Green Armor Locations
 actor DRPGGreenArmorRandomizer2 : RandomSpawner Replaces DRPGGreenArmorRandomizer
 {
-	DropItem "RLArmorBonusPickup"       255 200
-	DropItem "RLStandardArmorSpawner"   255 50
-	DropItem "RLAdvancedArmorSpawner"   255 45
-	DropItem "RLExoticArmorSpawner"     255 5
+    DropItem "RLArmorBonusPickup"       255 200
+    DropItem "RLStandardArmorSpawner"   255 50
+    DropItem "RLAdvancedArmorSpawner"   255 45
+    DropItem "RLExoticArmorSpawner"     255 5
 }
 
 // Blue Armor Locations
 actor DRPGBlueArmorRandomizer2 : RandomSpawner Replaces DRPGBlueArmorRandomizer
 {
-	DropItem "RLArmorBonusPickup"		255 200
-	DropItem "RLBlueArmorSpawner"		255 70
-	DropItem "RLExoticArmorSpawner"		255 20
-	DropItem "RLAssembledArmorSpawner"	255 9
-	DropItem "RLUniqueArmorSpawner"		255 1
+    DropItem "RLArmorBonusPickup"        255 200
+    DropItem "RLBlueArmorSpawner"        255 70
+    DropItem "RLExoticArmorSpawner"      255 20
+    DropItem "RLAssembledArmorSpawner"   255 9
+    DropItem "RLUniqueArmorSpawner"      255 1
 }
 
 // POWERUPS
@@ -176,20 +176,20 @@ actor DRPGShopWeaponRandomizer2 : RandomSpawner Replaces DRPGShopWeaponRandomize
 
 actor DRPGShopArmorRandomizer2 : RandomSpawner Replaces DRPGShopArmorRandomizer
 {
-	DropItem "RLStandardArmorSpawner"
-	DropItem "RLAdvancedArmorSpawner"
+    DropItem "RLStandardArmorSpawner"
+    DropItem "RLAdvancedArmorSpawner"
 }
 
 actor DRPGShopPowerupRandomizer2 : RandomSpawner Replaces DRPGShopPowerupRandomizer
 {
-	DropItem "InvulnerabilityCharge2"
-	DropItem "InvisibilityCharge2"
-	DropItem "DRPGTimeSphere"
-	DropItem "DRPGRegenSphere"
-	DropItem "RadSuit2"
-	DropItem "Infrared2"
-	DropItem "DRPGAllMap"
-	DropItem "Berserk2"
+    DropItem "InvulnerabilityCharge2"
+    DropItem "InvisibilityCharge2"
+    DropItem "DRPGTimeSphere"
+    DropItem "DRPGRegenSphere"
+    DropItem "RadSuit2"
+    DropItem "Infrared2"
+    DropItem "DRPGAllMap"
+    DropItem "Berserk2"
 
-	DropItem "RLTrackingMap"
+    DropItem "RLTrackingMap"
 }
