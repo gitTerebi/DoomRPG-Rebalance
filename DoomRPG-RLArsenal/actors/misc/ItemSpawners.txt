@@ -136,7 +136,7 @@ actor ReplaceRLBerserkSpawner : RandomSpawner 2023  // At the moment, Berserk is
 actor RLClipBoxSpawner : RandomSpawner replaces ClipBox
 {
     DropItem "RLClipBox"           255 183
-	DropItem "DRPGTurretPart"      255 10
+    DropItem "DRPGTurretPart"      255 10
     DropItem "RLModPackSpawner"    255 6
     DropItem "RLBlueprintComputer" 255 1
 }
@@ -144,7 +144,7 @@ actor RLClipBoxSpawner : RandomSpawner replaces ClipBox
 actor RLShellBoxSpawner : RandomSpawner replaces ShellBox
 {
     DropItem "RLShellBox"          255 183
-	DropItem "DRPGTurretPart"      255 10	
+    DropItem "DRPGTurretPart"      255 10
     DropItem "RLModPackSpawner"    255 6
     DropItem "RLBlueprintComputer" 255 1
 }
@@ -159,7 +159,7 @@ actor RLRocketBoxSpawner : RandomSpawner replaces RocketBox
 actor RLCellPackSpawner : RandomSpawner replaces CellPack
 {
     DropItem "RLCellPack"          255 183
-	DropItem "DRPGTurretPart"      255 10	
+    DropItem "DRPGTurretPart"      255 10
     DropItem "RLModPackSpawner"    255 6
     DropItem "RLBlueprintComputer" 255 1
 }
@@ -235,8 +235,8 @@ actor RLRandomPhaseDeviceSpawner : RandomSpawner 16729
 {
   Tag "Random Phase Device"
     //$category "DRLA Spawners"
-	DropItem "DRPGMoneyDropper"          255 130
-	DropItem "DRPGTurretPart"            255 20
+    DropItem "DRPGMoneyDropper"          255 130
+    DropItem "DRPGTurretPart"            255 20
     DropItem "RLPhaseDevice"             255 90
     DropItem "RLHomingPhaseDevice"       255 30
     DropItem "RLRecallPhaseDevice"       255 27
@@ -627,18 +627,18 @@ actor RLUniqueWeaponSpawner : RandomSpawner 16706
     DropItem "RLMysteriousMagnumWorldSpawnPickup"				255 60
     DropItem "RLRailgunWorldSpawnPickup"						255 80
     DropItem "RLJackhammerWorldSpawnPickup"						255 140
-	DropItem "RLBFG10KWorldSpawnPickup"							255 10
-    DropItem "RLUnknownHeraldWorldSpawnPickup" 					255 30
-    DropItem "RLFragShotgunWorldSpawnPickup" 					255 220
-    DropItem "RLQuadShotgunWorldSpawnPickup" 					255 30
-    DropItem "RLLightweaverWorldSpawnPickup" 					255 5
-    DropItem "RLTrigunWorldSpawnPickup" 						255 70
+    DropItem "RLBFG10KWorldSpawnPickup"							255 10
+    DropItem "RLUnknownHeraldWorldSpawnPickup"					255 30
+    DropItem "RLFragShotgunWorldSpawnPickup"					255 220
+    DropItem "RLQuadShotgunWorldSpawnPickup"					255 30
+    DropItem "RLLightweaverWorldSpawnPickup"					255 5
+    DropItem "RLTrigunWorldSpawnPickup"							255 70
     DropItem "RLGrammatonClericBerettaWorldSpawnPickup"			255 120
     DropItem "RLAntiFreakJackalWorldSpawnPickup"				255 40
     DropItem "RLHellsingARMSCasullWorldSpawnPickup"				255 50
     DropItem "RLTantrumCannonWorldSpawnPickup"					255 90
     DropItem "RLRevenantsLauncherWorldSpawnPickup"				255 160
-    DropItem "RLNullPointerWorldSpawnPickup"				 	255 60
+    DropItem "RLNullPointerWorldSpawnPickup"					255 60
     DropItem "RLParticleBeamCannonWorldSpawnPickup"				255 15
     DropItem "RLPlasmaRedirectionCannonWorldSpawnPickup"		255 100
     DropItem "RLSteelBeastWorldSpawnPickup"						255 180
@@ -650,11 +650,11 @@ actor RLUniqueWeaponSpawner : RandomSpawner 16706
     DropItem "RLChameleonRifleWorldSpawnPickup"					255 9
     DropItem "RLNanomachicArmamentGeneratorWorldSpawnPickup"	255 6
     DropItem "RLNuclearOnslaughtWorldSpawnPickup"				255 2
-    DropItem "RLLuciferCannonWorldSpawnPickup"				 	255 4
-    DropItem "RLTriadCannonWorldSpawnPickup"				 	255 1
+    DropItem "RLLuciferCannonWorldSpawnPickup"					255 4
+    DropItem "RLTriadCannonWorldSpawnPickup"					255 1
     DropItem "RLDirectHitWorldSpawnPickup" 						255 3
-    DropItem "RLDemonicWeaponSpawner" 							255 15
-    DropItem "RLLegendaryWeaponSpawner"						 	255 5
+    DropItem "RLDemonicWeaponSpawner"							255 15
+    DropItem "RLLegendaryWeaponSpawner"							255 5
 }
 
 actor RLDemonicWeaponSpawner : RandomSpawner 16707
@@ -739,7 +739,7 @@ actor RLSuperWeaponSpawner : RandomSpawner 16709
     DropItem "RLMysteriousMagnumWorldSpawnPickup" 255 2
     DropItem "RLRailgunWorldSpawnPickup" 255 2
     DropItem "RLJackhammerWorldSpawnPickup" 255 2
-	DropItem "RLBFG10KWorldSpawnPickup" 255 2
+    DropItem "RLBFG10KWorldSpawnPickup" 255 2
     DropItem "RLUnknownHeraldWorldSpawnPickup" 255 2
     DropItem "RLFragShotgunWorldSpawnPickup" 255 2
     DropItem "RLQuadShotgunWorldSpawnPickup" 255 2
@@ -793,7 +793,7 @@ actor RLSuperweaponModeSpawner : RandomSpawner
     DropItem "RLMysteriousMagnumWorldSpawnPickup" 255 2
     DropItem "RLRailgunWorldSpawnPickup" 255 2
     DropItem "RLJackhammerWorldSpawnPickup" 255 2
-	DropItem "RLBFG10KWorldSpawnPickup" 255 2
+    DropItem "RLBFG10KWorldSpawnPickup" 255 2
     DropItem "RLUnknownHeraldWorldSpawnPickup" 255 2
     DropItem "RLFragShotgunWorldSpawnPickup" 255 2
     DropItem "RLQuadShotgunWorldSpawnPickup" 255 2
@@ -836,7 +836,7 @@ actor RLModPackSpawner : RandomSpawner 16700
 {
   Tag "Random Modpack"
     //$category "DRLA Spawners"
-	DropItem "DRPGTurretPartCrate" 255 300
+    DropItem "DRPGTurretPartCrate" 255 300
     DropItem "RLBulkModItem" 255 120
     DropItem "RLPowerModItem" 255 180
     DropItem "RLAgilityModItem" 255 260
@@ -846,7 +846,7 @@ actor RLModPackSpawner : RandomSpawner 16700
     DropItem "RLFirestormModItem" 255 30
     DropItem "RLOnyxModItem" 255 10
     DropItem "RLArmorModItem" 255 60
-	DropItem "RLBlueprintComputer" 255 20
+    DropItem "RLBlueprintComputer" 255 20
     DropItem "RLArtiModItem" 255 1
 }
 
@@ -877,7 +877,7 @@ actor RLUniqueItemSpawner : RandomSpawner 16727
     DropItem "RLMysteriousMagnumWorldSpawnPickup" 255 1
     DropItem "RLRailgunWorldSpawnPickup" 255 1
     DropItem "RLJackhammerWorldSpawnPickup" 255 1
-	DropItem "RLBFG10KWorldSpawnPickup" 255 1
+    DropItem "RLBFG10KWorldSpawnPickup" 255 1
     DropItem "RLUnknownHeraldWorldSpawnPickup" 255 1
     DropItem "RLFragShotgunWorldSpawnPickup" 255 1
     DropItem "RLQuadShotgunWorldSpawnPickup" 255 1
