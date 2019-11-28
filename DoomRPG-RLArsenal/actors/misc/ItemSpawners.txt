@@ -152,7 +152,7 @@ actor RLShellBoxSpawner : RandomSpawner replaces ShellBox
 actor RLRocketBoxSpawner : RandomSpawner replaces RocketBox
 {
     DropItem "RLRocketBox"         255 185
-	DropItem "DRPGTurretPart"      255 10	
+    DropItem "DRPGTurretPart"      255 10
     DropItem "RLModPackSpawner"    255 5
 }
 
