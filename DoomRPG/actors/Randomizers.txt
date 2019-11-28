@@ -397,7 +397,7 @@ actor DRPGChipDropper : RandomSpawner 20016
 actor DRPGShieldDropperTier1 : RandomSpawner 20016
 {
     // Money
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 300
 
     // Bodies
     DropItem "DRPGShieldBody1"          255 100 // UAC
@@ -430,7 +430,7 @@ actor DRPGShieldDropperTier1 : RandomSpawner 20016
 actor DRPGShieldDropperTier2 : RandomSpawner 20017
 {
     // Money
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 300
 
     // Bodies
     DropItem "DRPGShieldBody5"          255 100 // Cyberdyne Systems
@@ -464,7 +464,7 @@ actor DRPGShieldDropperTier2 : RandomSpawner 20017
 actor DRPGShieldDropperTier3 : RandomSpawner 20018
 {
     // Money
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 300
 
     // Bodies
     DropItem "DRPGShieldBody9"          255 100 // Ironclad Inc.
@@ -503,7 +503,7 @@ actor DRPGShieldDropperTier3 : RandomSpawner 20018
 actor DRPGShieldDropperTier4 : RandomSpawner 20019
 {
     // Money
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 300
 
     // Bodies
     DropItem "DRPGShieldBody13"         255 100 // dataDyne
@@ -543,7 +543,7 @@ actor DRPGShieldDropperTier4 : RandomSpawner 20019
 actor DRPGShieldDropperTier5 : RandomSpawner 20020
 {
     // Money
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 300
 
     // Bodies
     DropItem "DRPGShieldBody17"         255 100  // UAC Elite
@@ -577,7 +577,7 @@ actor DRPGShieldDropperTier5 : RandomSpawner 20020
 actor DRPGShieldDropperTier6 : RandomSpawner 20021
 {
     // Money
-    DropItem "DRPGMoneyDropper"         255 100
+    DropItem "DRPGMoneyDropper"         255 300
 
     // Bodies
     DropItem "DRPGShieldBody20"         255 100  // Megalith
