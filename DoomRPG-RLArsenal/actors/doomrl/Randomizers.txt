@@ -106,10 +106,10 @@ actor DRPGRLCellPackSpawner2 : RandomSpawner replaces DRPGCellPack
 // Backpack locations
 actor DRPGBackpackRandomizer2 : RandomSpawner Replaces DRPGBackpackRandomizer
 {
-	DropItem "DRPGSmallBackpack" 	255 50
-	DropItem "DRPGBackpack" 		255 40
-	DropItem "DRPGBigBackpack" 		255 10
-    DropItem "DRPGCrate"            255 0
+    DropItem "DRPGSmallBackpack"	255 50
+    DropItem "DRPGBackpack"		255 40
+    DropItem "DRPGBigBackpack"		255 10
+    DropItem "DRPGCrate"		255 0
 }
 
 // ARMOR ITEMS
