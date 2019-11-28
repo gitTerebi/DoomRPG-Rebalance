@@ -893,9 +893,9 @@ void CheckPerks()
     else Player.Perks[STAT_STRENGTH] = false;
     if (Player.DefenseTotal >= 75)      Player.Perks[STAT_DEFENSE] = true;
     else Player.Perks[STAT_DEFENSE] = false;
-    if (Player.VitalityTotal >= 75)     Player.Perks[STAT_VITALITY] = true;
+    if (Player.VitalityTotal >= 50)     Player.Perks[STAT_VITALITY] = true;
     else Player.Perks[STAT_VITALITY] = false;
-    if (Player.EnergyTotal >= 75)       Player.Perks[STAT_ENERGY] = true;
+    if (Player.EnergyTotal >= 50)       Player.Perks[STAT_ENERGY] = true;
     else Player.Perks[STAT_ENERGY] = false;
     if (Player.RegenerationTotal >= 75) Player.Perks[STAT_REGENERATION] = true;
     else Player.Perks[STAT_REGENERATION] = false;
@@ -928,7 +928,7 @@ void CheckPerks()
         Player.DamageFactor *= DefensePercent;
 
     // Vitality Perk - Halve Health regeneration time
-    if (Player.Perks[STAT_VITALITY] && Player.ActualHealth < Player.HealthMax / 10 + 1)
+    if (Player.Perks[STAT_VITALITY] && Player.ActualHealth < Player.HealthMax / 5 + 1)
         Player.HPTime /= 2;
 
     // Agility Perk

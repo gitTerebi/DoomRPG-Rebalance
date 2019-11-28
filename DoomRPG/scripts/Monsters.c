@@ -774,11 +774,11 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // Special case for Bosses
         if (Stats->Flags & MF_BOSS)
-            Stats->Level += (GameSkill() * 10);
+            Stats->Level += Random((GameSkill() * 5), (GameSkill() * 10));
 
         // Special case for Megabosses
         if (Stats->Flags & MF_MEGABOSS)
-            Stats->Level += ((1000 / MAX_PLAYERS) * PlayerCount());
+            Stats->Level += ((800 / MAX_PLAYERS) * PlayerCount());
 
         // Special case for Powersuit Mk. II
         if (GetActorClass(0) == "DRPGSuperPowerSuit")
@@ -2352,11 +2352,13 @@ NamedScript void MonsterDeath()
             if (Players(Killer).LuckTotal >= 25)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier2", 32);
+                DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
             }
 
             if (Players(Killer).LuckTotal >= 50)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier3", 16);
+                DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
             }
 
             if (Players(Killer).LuckTotal >= 70)
@@ -2401,7 +2403,7 @@ NamedScript void MonsterDeath()
                     Delay(1);
             }
 
-            DropMonsterItem(Killer, 0, "DRPGDiamondUACCard", 256);
+            DropMonsterItem(Killer, 0, "DRPGDiamondUACCard", 64);
         }
     }
 

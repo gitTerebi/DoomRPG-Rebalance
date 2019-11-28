@@ -890,7 +890,7 @@ void DrawStatsMenu()
             // Vitality
             {
                 "No movement penalties at low health",
-                "2x HP regeneration rate below 10% health",
+                "2x HP regeneration rate below 20% health",
                 NULL
             },
 

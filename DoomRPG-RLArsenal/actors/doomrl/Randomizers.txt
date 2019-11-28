@@ -17,25 +17,18 @@ actor RLStandardWeaponSpawner : RandomSpawner
 
 actor DRPGArmorDropper2 : RandomSpawner Replaces DRPGArmorDropper
 {
-	DropItem "RLArmorBonusPickup"		255	30
-	DropItem "RLStandardBootsSpawner"	255 25
-	DropItem "RLGreenArmorSpawner"		255 25
-	DropItem "RLBlueArmorSpawner"		255 10
-	DropItem "RLExoticArmorSpawner"		255 6
-	DropItem "RLAssembledArmorSpawner"	255 3
-	DropItem "RLUniqueArmorSpawner"		255 1
+	DropItem "DRPGMoneyDropper"			255 70
+	DropItem "RLExoticArmorSpawner"		255 20
+	DropItem "RLAssembledArmorSpawner"	255 8
+	DropItem "RLUniqueArmorSpawner"		255 2
 }
 
 actor DRPGWeaponDropper2 : RandomSpawner Replaces DRPGWeaponDropper
 {
-	DropItem "RLPistolPickup"					255 8
-	DropItem "RLShotgunPickup"					255 7
-	DropItem "RLSuperShotgunPickup"				255 6
-	DropItem "RLChaingunPickup"					255 5
-	DropItem "RLRocketLauncherPickup"			255 4
-	DropItem "RLPlasmaRiflePickup"				255 3
-	DropItem "RLBFG9000Pickup"					255 2
-	DropItem "RLChainsawPickup"					255 1
+	DropItem "DRPGMoneyDropper"			255 70
+	DropItem "RLExoticWeaponSpawner"	255 20
+	DropItem "RLSuperiorWeaponSpawner"	255 8
+	DropItem "RLUniqueWeaponSpawner"	255 2
 }
 
 actor DRPGHealthDropper2 : RandomSpawner Replaces DRPGHealthDropper
