@@ -468,14 +468,14 @@ NamedScript void SetupMapMissions()
         if (!PlayerInGame(i)) continue;
 
         // Kill
-        if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL && !CurrentLevel->BadMap)
+        if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL && !CurrentLevel->BadMap && CurrentLevel->Event != MAPEVENT_MEGABOSS)
         {
             int Amount = Players(i).Mission.Amount - Players(i).Mission.Current;
             DynamicLootGenerator(GetMissionMonsterActor(Players(i).Mission.Monster->Actor), Amount);
         }
 
         // Assassination
-        if (Players(i).Mission.Active && Players(i).Mission.Type == MT_ASSASSINATION)
+        if (Players(i).Mission.Active && Players(i).Mission.Type == MT_ASSASSINATION && CurrentLevel->Event != MAPEVENT_MEGABOSS)
             DynamicLootGenerator(GetMissionMonsterActor(Players(i).Mission.Monster->Actor), 1);
     }
 }
