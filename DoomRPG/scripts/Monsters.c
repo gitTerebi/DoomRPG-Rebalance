@@ -2611,7 +2611,7 @@ NamedScript DECORATE void MonsterTransport(int Difficulty, int Time, int Radius)
         Stats = NULL;
         IsBoss = false;
 
-        while (!Success && SpawnTries < 3)
+        while (!Success && SpawnTries < 3 && CurrentLevel->Event != MAPEVENT_MEGABOSS)
         {
             MonsterIndex = Random(0, MonsterListLength - 1);
 

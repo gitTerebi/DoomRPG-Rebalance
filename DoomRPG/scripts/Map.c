@@ -368,9 +368,9 @@ NamedScript Type_OPEN void MapInit()
     }
 
     // Hell Skill has some additional challenges
-    if (GetCVar("drpg_minibosses") == 1 && GameSkill() >= 5 || GetCVar("drpg_minibosses") == 2)
+    if (GetCVar("drpg_minibosses") == 1 && GameSkill() >= 5 && CurrentLevel->Event != MAPEVENT_MEGABOSS || GetCVar("drpg_minibosses") == 2 && CurrentLevel->Event != MAPEVENT_MEGABOSS)
         AddMiniboss();
-    if (GetCVar("drpg_reinforcements") == 1 && GameSkill() >= 5 || GetCVar("drpg_reinforcements") == 2)
+    if (GetCVar("drpg_reinforcements") == 1 && GameSkill() >= 5 && CurrentLevel->Event != MAPEVENT_MEGABOSS || GetCVar("drpg_reinforcements") == 2 && CurrentLevel->Event != MAPEVENT_MEGABOSS)
         for (int i = 0; i < MAX_PLAYERS; i++)
             if (PlayerInGame(i))
                 HellSkillTransport(i);
