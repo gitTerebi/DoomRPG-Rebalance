@@ -480,30 +480,30 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     500000, -1, 8, "NKO0X0", 29, 54);
         ITEMDATA_DEF("RLLuciferCannon",                         "Lucifer Cannon \Cf[Unique]\C-",                        300000, -1, 6, "LCFGX0", 30, 26);
         ITEMDATA_DEF("RLDirectHit",                             "Direct Hit \Cf[Unique]\C-",                            400000, -1, 7, "DHTGX0", 20, 20);
-        ITEMDATA_DEF("RLTriadCannon",                           "Triad Cannon \Cf[Unique]\C-",                         1520000, -1, 8, "TRIDX0", 25, 26);
+        ITEMDATA_DEF("RLTriadCannon",                           "Triad Cannon \Cf[Unique]\C-",                          600000, -1, 8, "TRIDX0", 25, 26);
         // ITEMDATA_DEF("RLSubtleKnife",                           "Subtle Knife \Cd[Unique]\C-",                           30000, -1, "SUBKX0", 38, 37);
         // ITEMDATA_DEF("RLFusionMortar",                          "Fusion Mortar \Cd[Unique]\C-",                          90000, -1, "FMORX0", 38, 37);
         // ITEMDATA_DEF("RLSpectreRevolver",                       "The Spectre \Cd[Unique]\C-",                            31000, -1, "SPERX0", 38, 37);
 
         // Demonic Weapons
         // ITEMDATA_DEF("RLMonsterFrisbee",                        "Monster Frisbee \Cg[Demonic]\C-",                       78000, -1, "MFRSX0", 37, 21);
-        ITEMDATA_DEF("RLDeathsGaze",                            "Death's Gaze \Cg[Demonic]\C-",                          50000, -1, 9, "DGAZX0", 10, 13);
-        ITEMDATA_DEF("RLHellsReign",                            "Hell's Reign \Cg[Demonic]\C-",                          45000, -1, 9, "HELRX0", 37, 21);
-        ITEMDATA_DEF("RLSoulstormRifle",                        "Soulstorm Rifle \Cg[Demonic]\C-",                       60000, -1, 9, "SOLDX0", 27, 17);
+        ITEMDATA_DEF("RLDeathsGaze",                            "Death's Gaze \Cg[Demonic]\C-",                          80000, -1, 9, "DGAZX0", 10, 13);
+        ITEMDATA_DEF("RLHellsReign",                            "Hell's Reign \Cg[Demonic]\C-",                         100000, -1, 9, "HELRX0", 37, 21);
+        ITEMDATA_DEF("RLSoulstormRifle",                        "Soulstorm Rifle \Cg[Demonic]\C-",                      120000, -1, 9, "SOLDX0", 27, 17);
         // ITEMDATA_DEF("RLMortalyzer",                            "Mortalyzer \Cg[Demonic]\C-",                            58000, -1, "MRTZX0", 37, 21);
         // ITEMDATA_DEF("RLDreadshotMortar",                       "Dreadshot Mortar \Cg[Demonic]\C-",                      60000, -1, "DSMTX0", 37, 21);
-        ITEMDATA_DEF("RLUnmaker",                               "Unmaker \Cg[Demonic]\C-",                             6666666, -1, 9, "UNMAX0", 39, 17);
+        ITEMDATA_DEF("RLUnmaker",                               "Unmaker \Cg[Demonic]\C-",                              500000, -1, 9, "UNMAX0", 39, 17);
 
         // Legendary Weapons
         // ITEMDATA_DEF("RLDragonslayer",                          "Dragonslayer \Cf[Legendary]\C-",                      5000000, -1, "DSLYX0", 38, 37);
-        ITEMDATA_DEF("RLLonghorn",                       	    "Longhorn Revolver \Cf[Legendary]\C-",                 2300000, -1, 10, "LONGX0", 19, 20);
-        ITEMDATA_DEF("RLJudgeOfTheDead",                        "Judge Of The Dead \Cf[Legendary]\C-",                 2500000, -1, 10, "JOTDX0", 19, 12);
-        ITEMDATA_DEF("RLHurricaneCannon",                       "Hurricane Cannon \Cf[Legendary]\C-",                  2200000, -1, 10, "HURRX0", 20, 18);
-        ITEMDATA_DEF("RLNeuralStunner",                         "Neural Stunner \Cf[Legendary]\C-",                    2000000, -1, 10, "NEURB0",  7, 13);
-        ITEMDATA_DEF("RLBaronBlaster",                          "Baron Blaster \Cf[Legendary]\C-",                     1600000, -1, 10, "BABLX0", 11, 14);
-        ITEMDATA_DEF("RLDuke2Rifle",                            "Rigelatin Assault Weapon \Cf[Legendary]\C-",          3000000, -1, 10, "DN2RX0", 28,  9);
-        ITEMDATA_DEF("RLBFGInfinity",                           "BFG Infinity \Cf[Legendary]\C-",                      6000000, -1, 10, "BFGIX0", 25, 20);
-        ITEMDATA_DEF("RLRealityDistortionArray",                "Reality Distortion Array \Cf[Legendary]\C-",         10000000, -1, 10, "RD1NX0", 25, 20);
+        ITEMDATA_DEF("RLLonghorn",                       	    "Longhorn Revolver \Cf[Legendary]\C-",                  700000, -1, 10, "LONGX0", 19, 20);
+        ITEMDATA_DEF("RLJudgeOfTheDead",                        "Judge Of The Dead \Cf[Legendary]\C-",                  750000, -1, 10, "JOTDX0", 19, 12);
+        ITEMDATA_DEF("RLHurricaneCannon",                       "Hurricane Cannon \Cf[Legendary]\C-",                   650000, -1, 10, "HURRX0", 20, 18);
+        ITEMDATA_DEF("RLNeuralStunner",                         "Neural Stunner \Cf[Legendary]\C-",                     600000, -1, 10, "NEURB0",  7, 13);
+        ITEMDATA_DEF("RLBaronBlaster",                          "Baron Blaster \Cf[Legendary]\C-",                      500000, -1, 10, "BABLX0", 11, 14);
+        ITEMDATA_DEF("RLDuke2Rifle",                            "Rigelatin Assault Weapon \Cf[Legendary]\C-",           750000, -1, 10, "DN2RX0", 28,  9);
+        ITEMDATA_DEF("RLBFGInfinity",                           "BFG Infinity \Cf[Legendary]\C-",                      1000000, -1, 10, "BFGIX0", 25, 20);
+        ITEMDATA_DEF("RLRealityDistortionArray",                "Reality Distortion Array \Cf[Legendary]\C-",          1500000, -1, 10, "RD1NX0", 25, 20);
 
         // Basic Assembled Weapons
         ITEMDATA_DEF("RLSpeedloaderPistol",                     "Revolver \Cv[Assembled]\C-",                            25000, -1, -1, "REVOX0", 16, 20);
@@ -807,7 +807,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLGothicArmorPickup",                             "Gothic Armor \Ct[Exotic]\C-",                       12500, 8, 5, "GOTAA0", 16, 32);
         ITEMDATA_DEF("RLMedicalArmorPickup",                            "Medical Armor \Ct[Exotic]\C-",                       3500, 6, 2, "MED1A0", 10, 20);
         ITEMDATA_DEF("RLPhaseshiftArmorPickup",                         "Phaseshift Armor \Ct[Exotic]\C-",                   15000, 8, 5, "PSHAA0", 15, 29);
-        ITEMDATA_DEF("RLPlasmaShieldArmorPickup",                       "Plasma Shield \Ct[Exotic]\C-",                      10000, 7, 3, "PSHDA0", 10, 21);
+        ITEMDATA_DEF("RLPlasmaShieldArmorPickup",                       "Plasma Shield \Ct[Exotic]\C-",                      10000, 8, 5, "PSHDA0", 10, 21);
         ITEMDATA_DEF("RLOnyxArmorPickup",                               "Onyx Armor \Ct[Exotic]\C-",                          4400, 5, 4, "ONXAA0", 15, 18);
         ITEMDATA_DEF("RLOverchargeSystemArmorPickup",                   "Overcharge System \Ct[Exotic]\C-",                   4000, 6, 2, "OVESA0", 21, 16);
         ITEMDATA_DEF("RLRepulsionWaveSuitArmorPickup",                  "Repulsion Wave Suit \Ct[Exotic]\C-",                 4500, 5, 2, "REPWA0", 11, 23);

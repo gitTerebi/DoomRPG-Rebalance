@@ -772,7 +772,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
 
     // Megabosses prevent you from leaving until they are killed
     // Hell Unleashed prevents you from leaving until you have opened the box
-    if ((CurrentLevel->Event == MAPEVENT_MEGABOSS && !CurrentLevel->EventCompleted) || (CurrentLevel->Event == MAPEVENT_DRLA_OVERMIND && !CurrentLevel->EventCompleted) || (CurrentLevel->Event == MAPEVENT_HELLUNLEASHED && !CurrentLevel->HellUnleashedActive))
+    if ((CurrentLevel->Event == MAPEVENT_MEGABOSS && !CurrentLevel->EventCompleted) && !GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) == 0 || (CurrentLevel->Event == MAPEVENT_DRLA_OVERMIND && !CurrentLevel->EventCompleted) && !GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) == 0 || (CurrentLevel->Event == MAPEVENT_HELLUNLEASHED && !CurrentLevel->HellUnleashedActive))
     {
         AmbientSound("mission/gottarget2", 127);
 
@@ -1583,6 +1583,8 @@ NamedScript void MegaBossEvent()
     int Index;
     Position *ChosenPosition;
 
+    Delay (1);
+
     // Ambient Music
     SetMusic(StrParam("MBossA%d", Random(1, 2)));
 
@@ -2168,6 +2170,8 @@ NamedScript DECORATE void PowerGeneratorActivate()
 
 NamedScript void OneMonsterEvent()
 {
+    Delay(1);
+
     for (int i = 0; i < MonsterID; i++)
     {
         if (!Monsters[i].Init)
@@ -2827,6 +2831,8 @@ NamedScript void FeedingFrenzyEvent()
     int Index;
     Position *ChosenPosition;
 
+    Delay(1);
+
     SetMusic("");
 
     for (int i = 0; i < LevelSectorCount; i++)
@@ -2982,6 +2988,8 @@ NamedScript void WhispersofDarknessEvent()
     int MonsterIndex;
     Position *ChosenPosition;
 
+    Delay(1);
+
     // Ambient Music
     SetMusic("Overmind", 0);
 
@@ -3032,7 +3040,7 @@ NamedScript void WhispersofDarknessEvent()
             Delay(1);
             MonsterIndex = GetMonsterID(TID);
 
-            Monsters[MonsterIndex].LevelAdd += ((250 / MAX_PLAYERS) * PlayerCount());
+//          Monsters[MonsterIndex].LevelAdd += ((250 / MAX_PLAYERS) * PlayerCount());
             Monsters[MonsterIndex].NeedReinit = true;
 
             // Shadow Aura

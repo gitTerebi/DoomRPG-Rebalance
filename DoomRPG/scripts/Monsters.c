@@ -774,11 +774,11 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // Special case for Bosses
         if (Stats->Flags & MF_BOSS)
-            Stats->Level += Random((GameSkill() * 5), (GameSkill() * 10));
+            Stats->Level += Random(((160 / MAX_PLAYERS) * PlayerCount()), ((320 / MAX_PLAYERS) * PlayerCount()));
 
         // Special case for Megabosses
         if (Stats->Flags & MF_MEGABOSS)
-            Stats->Level += ((800 / MAX_PLAYERS) * PlayerCount());
+            Stats->Level += Random(((240 / MAX_PLAYERS) * PlayerCount()), ((400 / MAX_PLAYERS) * PlayerCount()));
 
         // Special case for Powersuit Mk. II
         if (GetActorClass(0) == "DRPGSuperPowerSuit")
@@ -1672,12 +1672,16 @@ Start:
     if (!CheckInventory("DRPGMonsterRegenerationHandler"))
         return;
 
-    long long RegenAmount = (long long)Stats->HealthMax * (long long)Stats->Regeneration;
+    long long RegenAmount = ((long long)Stats->HealthMax / 50) * (1 + (long long)Stats->Regeneration / 25);
 
-    if (Stats->RegenHealth >= Stats->HealthMax * 10)
-        RegenAmount /= 10000;
-    else
-        RegenAmount /= 1000;
+    if (Stats->Flags & MF_BOSS)
+        RegenAmount /= 2;
+
+    if (Stats->Flags & MF_MEGABOSS)
+        RegenAmount /= 2;
+
+    if (Stats->RegenHealth >= Stats->HealthMax)
+        RegenAmount /= 2;
 
     if (RegenAmount > INT_MAX)
         RegenAmount = INT_MAX;
@@ -2391,7 +2395,7 @@ NamedScript void MonsterDeath()
             Delay(35 * 2.25); // Just long enough to sync up with the sound nicely
 
             // LOOTSPLOOOOOOOOOOOOOSIIIOOOOOOOOOOOOOONNNNNN
-            int Rolls = 200 - (GameSkill() * 25);
+            int Rolls = (200 / MAX_PLAYERS) * PlayerCount();
             while (Rolls--)
             {
                 DropMonsterItem(Killer, 0, "DRPGCredits250", 256, 0, 0, 0, 16, 16, Random(8, 16));
@@ -2403,7 +2407,16 @@ NamedScript void MonsterDeath()
                     Delay(1);
             }
 
-            DropMonsterItem(Killer, 0, "DRPGDiamondUACCard", 64);
+            DropMonsterItem(Killer, 0, "DRPGArmorDropper", 128);
+            DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 64);
+            DropMonsterItem(Killer, 0, "DRPGDiamondUACCard", 32);
+
+            if (CompatMode == COMPAT_DRLA)
+            {
+                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 128);
+                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 64);
+                DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 32);
+            }
         }
     }
 

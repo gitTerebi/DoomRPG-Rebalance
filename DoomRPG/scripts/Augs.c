@@ -316,9 +316,7 @@ void CheckAugs()
         if ((Timer() % 35) == 0)
         {
             fixed Charge;
-            if (IsPlayerMoving())
-                Charge = (fixed)(Player.Augs.Level[AUG_BATTERY] * GetCVar("drpg_move_aug_battery_regen") / 200.0);
-            else if (Player.Augs.Level[AUG_BATTERY] == 1)
+            if (Player.Augs.Level[AUG_BATTERY] == 1)
                 Charge = 0.05;
             else if (Player.Augs.Level[AUG_BATTERY] == 2)
                 Charge = 0.10;
@@ -334,6 +332,10 @@ void CheckAugs()
                 Charge = 0.75;
             else if (Player.Augs.Level[AUG_BATTERY] >= 8)
                 Charge = 1.00;
+
+            if (GetCVar("drpg_regen_movement") && IsPlayerMoving())
+                Charge += GetCVar("drpg_move_aug_battery_regen") / 100.0;
+
             Player.Augs.Battery += Charge;
             DrawBattery();
         }
