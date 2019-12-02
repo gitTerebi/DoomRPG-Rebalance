@@ -312,7 +312,7 @@ void CheckAugs()
         Player.Augs.Battery = Player.Augs.BatteryMax;
 
     // Battery Recharging
-    if ((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && Player.Augs.Active[AUG_BATTERY] && Player.Augs.Battery < Player.Augs.BatteryMax)
+    if ((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && Player.Augs.Active[AUG_BATTERY] && Player.Augs.Battery > 0 && Player.Augs.Battery < Player.Augs.BatteryMax)
         if ((Timer() % 35) == 0)
         {
             fixed Charge;
