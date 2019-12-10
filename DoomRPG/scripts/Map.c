@@ -1576,14 +1576,14 @@ NamedScript Console void SetMapEvent(int Level, int ID)
 
 NamedScript void MegaBossEvent()
 {
+    Delay(1);
+
     bool Spawned;
     bool Spotted;
     int TID;
     int BossType;
     int Index;
     Position *ChosenPosition;
-
-    Delay (1);
 
     // Ambient Music
     SetMusic(StrParam("MBossA%d", Random(1, 2)));
@@ -1689,12 +1689,12 @@ NamedScript void MegaBossEvent()
 
 NamedScript void EnvironmentalHazard()
 {
+    Delay(1);
+
     // TODO: [03:23:14] <@Yholl/ID> Maybe fill the radiation event with Stalker style singularities that explode into cool stuff when the science machine sciences at them
     bool NeutralizerSpawned = false;
     int NeutralizerTID;
     SetMusic("EvHazard");
-
-    Delay (1);
 
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
@@ -1892,6 +1892,8 @@ NamedScript void EnvironmentalHazardDisarm()
 
 NamedScript void ThermonuclearBombEvent()
 {
+    Delay(1);
+
     int BombTID = UniqueTID();
     int MaxKeys = GameSkill() + 3;
     bool BombSpawned = false;
@@ -2100,6 +2102,8 @@ NamedScript DECORATE void ThermonuclearBombExplode()
 
 NamedScript void LowPowerEvent()
 {
+    Delay(1);
+
     int GeneratorTID = UniqueTID();
     bool GeneratorSpawned = false;
 
@@ -2207,6 +2211,8 @@ NamedScript void OneMonsterEvent()
 
 NamedScript void HellUnleashedEvent()
 {
+    Delay(1);
+
     bool BoxSpawned = false;
 
     // Generate a TID for the box
@@ -2327,6 +2333,8 @@ NamedScript void HellUnleashedSpawnMonsters()
 
 NamedScript void HarmonizedDestructionEvent()
 {
+    Delay(1);
+
     if (AveragePlayerLevel() < 20 && CurrentLevel->AuraType == AURA_MAX)
         CurrentLevel->AuraType = Random(0, AURA_MAX - 1);
 
@@ -2370,6 +2378,8 @@ NamedScript void HarmonizedDestructionEvent()
 
 NamedScript void TeleportCracksEvent()
 {
+    Delay(1);
+
     SetMusic("Cracks");
 
     int X, InPortalTID, OutPortalTID;
@@ -2514,6 +2524,8 @@ Start:
 
 NamedScript void DoomsdayEvent()
 {
+    Delay(1);
+
     ChangeSky("FIRESK00", "-");
 
     for (int i = 0; i < LevelSectorCount; i++)
@@ -2637,6 +2649,8 @@ NamedScript Type_RESPAWN void DoomsdaySupplement()
 
 NamedScript void ViciousDownpourEvent()
 {
+    Delay(1);
+
     SetMusic("AcidRain");
     ChangeSky("ACIDSKY", "-");
     SpawnForced("DRPGRainAmbiance", 0, 0, 0, 0, 0);
@@ -2656,7 +2670,7 @@ NamedScript void AcidRain(int PlayerTID)
 
     while (CurrentLevel->Event == MAPEVENT_ACIDRAIN)
     {
-        Delay(1);
+        Delay(5 / GetCVar("drpg_acidrain_intensity"));
         SpawnSpot("DRPGViciousRainSpawner", 0, 0, 0);
     }
 }
@@ -2665,6 +2679,8 @@ NamedScript void AcidRain(int PlayerTID)
 
 NamedScript void DarkZoneEvent()
 {
+    Delay(1);
+
     int ShadowTime = (GetLevelInfo(LEVELINFO_PAR_TIME) ? GetLevelInfo(LEVELINFO_PAR_TIME) * 2 : GetCVar("drpg_default_par_seconds") * 2) * 35;
     int ShadowTimeMax = (GetLevelInfo(LEVELINFO_PAR_TIME) ? GetLevelInfo(LEVELINFO_PAR_TIME) * 2 : GetCVar("drpg_default_par_seconds") * 2) * 35;
     int Color = 16 + (ShadowTime * 239 / ShadowTimeMax);
@@ -2736,7 +2752,7 @@ NamedScript void DarkZoneFloorMist(int PlayerTID)
 
     while (CurrentLevel->Event == MAPEVENT_DARKZONE)
     {
-        Delay(1);
+        Delay(5 / GetCVar("drpg_darkzone_floormist_intensity"));
         SpawnSpot("DRPGPurpleFloorMistSpawner", 0, 0, 0);
     }
 }
@@ -2747,6 +2763,8 @@ NamedScript void DarkZoneFloorMist(int PlayerTID)
 
 NamedScript void SinstormEvent()
 {
+    Delay(1);
+
     ChangeSky("FIRESK00", "-");
 
     for (int i = 0; i < LevelSectorCount; i++)
@@ -2824,14 +2842,14 @@ NamedScript void SinstormSpawner(int PlayerTID)
 
 NamedScript void FeedingFrenzyEvent()
 {
+    Delay(1);
+
     bool Spawned;
     bool Spotted;
     int TID;
     int BossType;
     int Index;
     Position *ChosenPosition;
-
-    Delay(1);
 
     SetMusic("");
 
@@ -2980,6 +2998,8 @@ Start:
 
 NamedScript void WhispersofDarknessEvent()
 {
+    Delay(1);
+
     bool Spawned;
     bool Spotted;
     int TID;
@@ -2987,8 +3007,6 @@ NamedScript void WhispersofDarknessEvent()
     int Index;
     int MonsterIndex;
     Position *ChosenPosition;
-
-    Delay(1);
 
     // Ambient Music
     SetMusic("Overmind", 0);

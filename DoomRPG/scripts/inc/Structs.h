@@ -566,6 +566,18 @@ struct PlayerData_S
     int CapacityNat;
     int LuckNat;
 
+    // Souls Count
+    int SoulRedCount;
+    int SoulGreenCount;
+    int SoulWhiteCount;
+    int SoulPinkCount;
+    int SoulBlueCount;
+    int SoulPurpleCount;
+    int SoulOrangeCount;
+    int SoulDarkBlueCount;
+    int SoulYellowCount;
+    fixed SoulsCount;
+
     // Total Stat Values
     int StrengthTotal;
     int DefenseTotal;

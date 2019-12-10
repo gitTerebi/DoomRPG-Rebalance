@@ -99,6 +99,8 @@ server  bool    drpg_mapevent_rainbows = true;
 server  bool    drpg_mapevent_skill_hell = true;
 server  bool    drpg_mapevent_skill_armageddon = true;
 server  bool    drpg_mapevent_sinstorm = true;
+server  int     drpg_darkzone_floormist_intensity = 5;
+server  int     drpg_acidrain_intensity = 5;
 
 // Stat System
 server  float   drpg_module_spawnfactor = 0.5;

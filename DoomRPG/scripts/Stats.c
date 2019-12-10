@@ -61,7 +61,7 @@ str const LongRanks[MAX_RANK + 1] =
 NamedScript DECORATE void StatusEffect(int Type, int Time, int Intensity)
 {
     // Can't get Status Effects if Pink Aura is active
-    if (Player.Aura.Type[AURA_PINK].Active || Player.SoulActive[SOUL_PINK] || (GetCVar("drpg_invulnerability_plus") && GetActorPowerupTics(0, "PowerInvulnerable") > 0))
+    if (Player.Aura.Type[AURA_PINK].Active && Player.Aura.Type[AURA_PINK].Level >= 1 || (GetCVar("drpg_invulnerability_plus") && GetActorPowerupTics(0, "PowerInvulnerable") > 0))
         return;
 
     Intensity = Clamp(1, Intensity, 5);
@@ -88,7 +88,7 @@ NamedScript DECORATE void StatusEffect(int Type, int Time, int Intensity)
 NamedScript DECORATE void TryStatusEffect(int Type, int Time, int Intensity)
 {
     // Can't get Status Effects if Pink Aura is active
-    if (Player.Aura.Type[AURA_PINK].Active || Player.SoulActive[SOUL_PINK]) return;
+    if (Player.Aura.Type[AURA_PINK].Active && Player.Aura.Type[AURA_PINK].Level >= 1) return;
 
     // Status Effect Resist check
     if (RandomFixed(0.0, 100.0) <= Player.StatusEffectResist)
@@ -115,7 +115,7 @@ NamedScript void AddXP(int PlayerNum, long int XP, long int Rank)
     Players(PlayerNum).XPGained += XP;
     Players(PlayerNum).RankGained += Rank;
 
-    if (Players(PlayerNum).Aura.Type[AURA_WHITE].Active)
+    if (Players(PlayerNum).Aura.Type[AURA_WHITE].Active && Players(PlayerNum).Aura.Type[AURA_WHITE].Level >= 1)
     {
         if (Players(PlayerNum).Aura.Time > 0)
             Players(PlayerNum).Combo++;
@@ -371,14 +371,14 @@ void CheckStats()
 {
     // VERY IMPORTANT CODE RIGHT HERE
     // If you're reading this and you'd like to modify stat curves, this is where you'd do it
-    Player.StrengthTotal = Player.Strength + Player.StrengthNat + Player.StrengthBonus;
-    Player.DefenseTotal = Player.Defense + Player.DefenseNat + Player.DefenseBonus;
-    Player.VitalityTotal = Player.Vitality + Player.VitalityNat + Player.VitalityBonus;
-    Player.EnergyTotal = Player.Energy + Player.EnergyNat + Player.EnergyBonus;
-    Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat + Player.RegenerationBonus;
-    Player.AgilityTotal = Player.Agility + Player.AgilityNat + Player.AgilityBonus;
-    Player.CapacityTotal = Player.Capacity + Player.CapacityNat + Player.CapacityBonus;
-    Player.LuckTotal = Player.Luck + Player.LuckNat + Player.LuckBonus;
+    Player.StrengthTotal = Player.Strength + Player.StrengthNat + Player.SoulRedCount + Player.StrengthBonus;
+    Player.DefenseTotal = Player.Defense + Player.DefenseNat + Player.SoulGreenCount + Player.DefenseBonus;
+    Player.VitalityTotal = Player.Vitality + Player.VitalityNat + Player.SoulPinkCount + Player.VitalityBonus;
+    Player.EnergyTotal = Player.Energy + Player.EnergyNat + Player.SoulBlueCount + Player.EnergyBonus;
+    Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat + Player.SoulPurpleCount + Player.RegenerationBonus;
+    Player.AgilityTotal = Player.Agility + Player.AgilityNat + Player.SoulOrangeCount + Player.AgilityBonus;
+    Player.CapacityTotal = Player.Capacity + Player.CapacityNat + Player.SoulDarkBlueCount + Player.CapacityBonus;
+    Player.LuckTotal = Player.Luck + Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus;
 
     Player.LevelDamage = Player.Level * (1.0 + (Player.Level * 0.0051));
     Player.BonusDamage = Player.StrengthTotal * (1.0 + (Player.StrengthTotal * 0.0051));
@@ -574,6 +574,32 @@ void CheckStats()
         if (Player.StatusIntensity[SE_FATIGUE] > 3)
             SetMugShotState("Rampage");
     }
+
+    // Souls checking
+    if (Player.Aura.Time <= 0)
+    {
+        TakeInventory("DRPGSoulRedToken", CheckInventory("DRPGSoulRedToken"));
+        TakeInventory("DRPGSoulGreenToken", CheckInventory("DRPGSoulGreenToken"));
+        TakeInventory("DRPGSoulWhiteToken", CheckInventory("DRPGSoulWhiteToken"));
+        TakeInventory("DRPGSoulPinkToken", CheckInventory("DRPGSoulPinkToken"));
+        TakeInventory("DRPGSoulBlueToken", CheckInventory("DRPGSoulBlueToken"));
+        TakeInventory("DRPGSoulPurpleToken", CheckInventory("DRPGSoulPurpleToken"));
+        TakeInventory("DRPGSoulOrangeToken", CheckInventory("DRPGSoulOrangeToken"));
+        TakeInventory("DRPGSoulDarkBlueToken", CheckInventory("DRPGSoulDarkBlueToken"));
+        TakeInventory("DRPGSoulYellowToken", CheckInventory("DRPGSoulYellowToken"));
+    }
+
+    Player.SoulWhiteCount = CheckInventory("DRPGSoulWhiteToken");
+    Player.SoulRedCount = CheckInventory("DRPGSoulRedToken") + Player.SoulWhiteCount;
+    Player.SoulGreenCount = CheckInventory("DRPGSoulGreenToken") + Player.SoulWhiteCount;
+    Player.SoulPinkCount = CheckInventory("DRPGSoulPinkToken") + Player.SoulWhiteCount;
+    Player.SoulBlueCount = CheckInventory("DRPGSoulBlueToken") + Player.SoulWhiteCount;
+    Player.SoulPurpleCount = CheckInventory("DRPGSoulPurpleToken") + Player.SoulWhiteCount;
+    Player.SoulOrangeCount = CheckInventory("DRPGSoulOrangeToken") + Player.SoulWhiteCount;
+    Player.SoulDarkBlueCount = CheckInventory("DRPGSoulDarkBlueToken") + Player.SoulWhiteCount;
+    Player.SoulYellowCount = CheckInventory("DRPGSoulYellowToken") + Player.SoulWhiteCount;
+
+    Player.SoulsCount = (Player.SoulRedCount + Player.SoulGreenCount + Player.SoulPinkCount + Player.SoulBlueCount + Player.SoulPurpleCount + Player.SoulOrangeCount + Player.SoulDarkBlueCount + Player.SoulYellowCount);
 
     // DRLA Checking
     if (CompatMode == COMPAT_DRLA)

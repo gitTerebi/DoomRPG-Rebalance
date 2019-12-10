@@ -160,8 +160,18 @@ NamedScript DECORATE int GetAmmoMax(int Type)
 NamedScript DECORATE void SoulEffect(int Type)
 {
     Player.Aura.Type[Type].Active = true;
-    Player.Aura.Type[Type].Level = Skills[2][Type].MaxLevel;
-    Player.Aura.Time += 30 * 35;
+
+    if (Player.SoulsCount < 60)
+        Player.Aura.Time += (35 * 30) * (1 - (Player.SoulsCount / 100));
+    else
+        Player.Aura.Time += 35 * 12;
+
+    // Cap Aura Timer - 10 min
+    if (Player.Aura.Time > 35 * 600)
+    {
+        Player.Aura.Time = 35 * 600;
+    }
+
     Player.SoulActive[Type] = true;
 }
 

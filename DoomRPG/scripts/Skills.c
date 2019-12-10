@@ -330,7 +330,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Soul Steal",
-            .Cost = 300,
+            .Cost = 50,
             .MaxLevel = 1,
             .Use = SoulSteal,
             .Description =
@@ -1709,7 +1709,7 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
     Thing_ChangeTID(UniqueMonsterTID, RealMonsterTID);
 
     // Heal the user
-    AddHealthDirect(LeechAmount, 100);
+    AddHealthDirect(LeechAmount, (Player.HealthMax / 10));
 
     FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
     ActivatorSound("skills/soulsteal", 127);
@@ -2952,6 +2952,39 @@ int ScaleEPCost(int Cost)
 
 void CheckSkills()
 {
+    // Increase EP cost of skills "Soul Steal" and Auras for every accumulated soul
+    if (Player.SoulsCount > 0)
+    {
+        Skills[3][4].Cost = 50 + (Player.SoulsCount * 5); //Increase EP cost of skill "Soul Steal"
+
+        if (Skills[3][4].Cost > 200) // Increase EP cost of skill "Soul Steal"
+            Skills[3][4].Cost = 200; // Cap cost of skill "Soul Steal" is 200 EP
+
+        Skills[2][0].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Red Aura
+        Skills[2][1].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Green Aura
+        Skills[2][2].Cost = Skills[3][4].Cost * 4; // Increase EP cost of White Aura
+        Skills[2][3].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Pink Aura
+        Skills[2][4].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Blue Aura
+        Skills[2][5].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Purple Aura
+        Skills[2][6].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Orange Aura
+        Skills[2][7].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Dark Blue Aura
+        Skills[2][8].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Yellow Aura
+    }
+    else
+    {
+        Skills[3][4].Cost = 50; // Standart EP cost of skill "Soul Steal"
+
+        Skills[2][0].Cost = 100; // Standart EP cost of Red Aura
+        Skills[2][1].Cost = 100; // Standart EP cost of Green Aura
+        Skills[2][2].Cost = 150; // Standart EP cost of White Aura
+        Skills[2][3].Cost = 100; // Standart EP cost of Pink Aura
+        Skills[2][4].Cost = 100; // Standart EP cost of Blue Aura
+        Skills[2][5].Cost = 100; // Standart EP cost of Purple Aura
+        Skills[2][6].Cost = 100; // Standart EP cost of Orange Aura
+        Skills[2][7].Cost = 100; // Standart EP cost of Dark Blue Aura
+        Skills[2][8].Cost = 100; // Standart EP cost of Yellow Aura
+    }
+
     // Reset the Skill refund multiplier from the Blue Aura and Energy Augmentation
     Player.SkillRefundMult = 0;
 
@@ -3051,28 +3084,51 @@ void CheckAuras()
         // Red Aura
         if (Player.Aura.Type[AURA_RED].Active)
         {
-            if (Player.SoulActive[SOUL_RED])
-                Player.DamageMult += 0.501;
-            else if (Player.Aura.Type[AURA_RED].Level == 1)
+            if (Player.SoulRedCount >= 3 && Player.SoulRedCount < 9 && Player.Aura.Type[AURA_RED].Level < 1)
+                Player.Aura.Type[AURA_RED].Level = 1;
+            if (Player.SoulRedCount >= 9 && Player.SoulRedCount < 15 && Player.Aura.Type[AURA_RED].Level < 2)
+                Player.Aura.Type[AURA_RED].Level = 2;
+            if (Player.SoulRedCount >= 15 && Player.SoulRedCount < 30 && Player.Aura.Type[AURA_RED].Level < 3)
+                Player.Aura.Type[AURA_RED].Level = 3;
+            if (Player.SoulRedCount >= 30 && Player.SoulRedCount < 40 && Player.Aura.Type[AURA_RED].Level < 4)
+                Player.Aura.Type[AURA_RED].Level = 4;
+            if (Player.SoulRedCount >= 40 && Player.SoulRedCount < 50 && Player.Aura.Type[AURA_RED].Level < 5)
+                Player.Aura.Type[AURA_RED].Level = 5;
+            if (Player.SoulRedCount >= 50 && Player.Aura.Type[AURA_RED].Level < 6)
+                Player.Aura.Type[AURA_RED].Level = 6;
+
+            if (Player.Aura.Type[AURA_RED].Level == 1)
                 Player.DamageMult += 0.101;
-            else if (Player.Aura.Type[AURA_RED].Level == 2)
+            if (Player.Aura.Type[AURA_RED].Level == 2)
                 Player.DamageMult += 0.151;
-            else if (Player.Aura.Type[AURA_RED].Level == 3)
+            if (Player.Aura.Type[AURA_RED].Level == 3)
                 Player.DamageMult += 0.201;
-            else if (Player.Aura.Type[AURA_RED].Level == 4)
+            if (Player.Aura.Type[AURA_RED].Level == 4)
                 Player.DamageMult += 0.301;
-            else if (Player.Aura.Type[AURA_RED].Level == 5)
+            if (Player.Aura.Type[AURA_RED].Level == 5)
                 Player.DamageMult += 0.401;
-            else if (Player.Aura.Type[AURA_RED].Level == 6)
+            if (Player.Aura.Type[AURA_RED].Level == 6)
                 Player.DamageMult += 0.501;
+
         }
 
         // Green Aura
         if (Player.Aura.Type[AURA_GREEN].Active)
         {
+            if (Player.SoulGreenCount >= 5 && Player.SoulGreenCount < 10 && Player.Aura.Type[AURA_GREEN].Level < 1)
+                Player.Aura.Type[AURA_GREEN].Level = 1;
+            if (Player.SoulGreenCount >= 10 && Player.SoulGreenCount < 20 && Player.Aura.Type[AURA_GREEN].Level < 2)
+                Player.Aura.Type[AURA_GREEN].Level = 2;
+            if (Player.SoulGreenCount >= 20 && Player.SoulGreenCount < 30 && Player.Aura.Type[AURA_GREEN].Level < 3)
+                Player.Aura.Type[AURA_GREEN].Level = 3;
+            if (Player.SoulGreenCount >= 30 && Player.SoulGreenCount < 50 && Player.Aura.Type[AURA_GREEN].Level < 4)
+                Player.Aura.Type[AURA_GREEN].Level = 4;
+            if (Player.SoulGreenCount >= 50 && Player.Aura.Type[AURA_GREEN].Level < 5)
+                Player.Aura.Type[AURA_GREEN].Level = 5;
+
             if (Player.Aura.Type[AURA_GREEN].Level >= 1)
                 Player.DamageFactor *= (1.0 - (fixed)Player.Aura.Type[AURA_GREEN].Level * 0.05);
-            if (Player.Aura.Type[AURA_GREEN].Level >= 3 || Player.SoulActive[SOUL_GREEN])
+            if (Player.Aura.Type[AURA_GREEN].Level >= 3)
                 GiveInventory("DRPGGreenAuraIronFeet", 1);
         }
 
@@ -3080,25 +3136,50 @@ void CheckAuras()
 
         // Pink Aura
         if (Player.Aura.Type[AURA_PINK].Active)
-            if (Player.Aura.Type[AURA_PINK].Level >= 2 || Player.SoulActive[SOUL_PINK])
+        {
+            if (Player.SoulPinkCount >= 10 && Player.SoulPinkCount < 20 && Player.Aura.Type[AURA_PINK].Level < 1)
+                Player.Aura.Type[AURA_PINK].Level = 1;
+            if (Player.SoulPinkCount >= 20 && Player.SoulPinkCount < 30 && Player.Aura.Type[AURA_PINK].Level < 2)
+                Player.Aura.Type[AURA_PINK].Level = 2;
+            if (Player.SoulPinkCount >= 30 && Player.Aura.Type[AURA_PINK].Level < 3)
+                Player.Aura.Type[AURA_PINK].Level = 3;
+
+            if (Player.Aura.Type[AURA_PINK].Level >= 2)
                 GiveInventory("DRPGPinkAuraDrain", 1);
+        }
 
         // Blue Aura
         if (Player.Aura.Type[AURA_BLUE].Active)
         {
+            if (Player.SoulBlueCount >= 3 && Player.SoulBlueCount < 9 && Player.Aura.Type[AURA_BLUE].Level < 1)
+                Player.Aura.Type[AURA_BLUE].Level = 1;
+            if (Player.SoulBlueCount >= 15 && Player.SoulBlueCount < 30 && Player.Aura.Type[AURA_BLUE].Level < 2)
+                Player.Aura.Type[AURA_BLUE].Level = 2;
+            if (Player.SoulBlueCount >= 30 && Player.SoulBlueCount < 50 && Player.Aura.Type[AURA_BLUE].Level < 3)
+                Player.Aura.Type[AURA_BLUE].Level = 3;
+            if (Player.SoulBlueCount >= 40 && Player.Aura.Type[AURA_BLUE].Level < 4)
+                Player.Aura.Type[AURA_BLUE].Level = 4;
+
             if (Player.Aura.Type[AURA_BLUE].Level == 1)
                 Player.SkillRefundMult += 0.10;
             if (Player.Aura.Type[AURA_BLUE].Level == 2)
                 Player.SkillRefundMult += 0.15;
             if (Player.Aura.Type[AURA_BLUE].Level == 3)
                 Player.SkillRefundMult += 0.20;
-            if (Player.Aura.Type[AURA_BLUE].Level >= 4 || Player.SoulActive[SOUL_BLUE])
+            if (Player.Aura.Type[AURA_BLUE].Level >= 4)
                 Player.SkillRefundMult += 0.25;
         }
 
         // Purple Aura
         if (Player.Aura.Type[AURA_PURPLE].Active)
         {
+            if (Player.SoulPurpleCount >= 10 && Player.SoulPurpleCount < 20 && Player.Aura.Type[AURA_PURPLE].Level < 1)
+                Player.Aura.Type[AURA_PURPLE].Level = 1;
+            if (Player.SoulPurpleCount >= 20 && Player.SoulPurpleCount < 30 && Player.Aura.Type[AURA_PURPLE].Level < 2)
+                Player.Aura.Type[AURA_PURPLE].Level = 2;
+            if (Player.SoulPurpleCount >= 30 && Player.Aura.Type[AURA_PURPLE].Level < 3)
+                Player.Aura.Type[AURA_PURPLE].Level = 3;
+
             if (Player.Aura.Type[AURA_PURPLE].Level == 1)
             {
                 Player.HPAmount *= 2.00;
@@ -3107,7 +3188,7 @@ void CheckAuras()
             {
                 Player.HPAmount *= 3.00;
             }
-            if (Player.Aura.Type[AURA_PURPLE].Level >= 3 || Player.SoulActive[SOUL_PURPLE])
+            if (Player.Aura.Type[AURA_PURPLE].Level >= 3)
             {
                 Player.HPAmount *= 3.00;
                 Player.HPTime /= 2.00;
@@ -3117,50 +3198,83 @@ void CheckAuras()
         // Orange Aura
         if (Player.Aura.Type[AURA_ORANGE].Active)
         {
+            if (Player.SoulOrangeCount >= 10 && Player.SoulOrangeCount < 20 && Player.Aura.Type[AURA_ORANGE].Level < 1)
+                Player.Aura.Type[AURA_ORANGE].Level = 1;
+            if (Player.SoulOrangeCount >= 20 && Player.SoulOrangeCount < 30 && Player.Aura.Type[AURA_ORANGE].Level < 2)
+                Player.Aura.Type[AURA_ORANGE].Level = 2;
+            if (Player.SoulOrangeCount >= 30 && Player.Aura.Type[AURA_ORANGE].Level < 3)
+                Player.Aura.Type[AURA_ORANGE].Level = 3;
+
             if (Player.Aura.Type[AURA_ORANGE].Level == 1)
                 Player.WeaponSpeed *= 1.50;
             if (Player.Aura.Type[AURA_ORANGE].Level == 2)
                 Player.WeaponSpeed *= 1.75;
-            if (Player.Aura.Type[AURA_ORANGE].Level >= 3 || Player.SoulActive[SOUL_ORANGE])
+            if (Player.Aura.Type[AURA_ORANGE].Level >= 3)
                 Player.WeaponSpeed *= 2.00;
         }
 
         // Dark Blue Aura
         if (Player.Aura.Type[AURA_DARKBLUE].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
         {
+            if (Player.SoulDarkBlueCount >= 3 && Player.SoulDarkBlueCount < 9 && Player.Aura.Type[AURA_DARKBLUE].Level < 1)
+                Player.Aura.Type[AURA_DARKBLUE].Level = 1;
+            if (Player.SoulDarkBlueCount >= 9 && Player.SoulDarkBlueCount < 15 && Player.Aura.Type[AURA_DARKBLUE].Level < 2)
+                Player.Aura.Type[AURA_DARKBLUE].Level = 2;
+            if (Player.SoulDarkBlueCount >= 15 && Player.SoulDarkBlueCount < 21 && Player.Aura.Type[AURA_DARKBLUE].Level < 3)
+                Player.Aura.Type[AURA_DARKBLUE].Level = 3;
+            if (Player.SoulDarkBlueCount >= 21 && Player.SoulDarkBlueCount < 30 && Player.Aura.Type[AURA_DARKBLUE].Level < 4)
+                Player.Aura.Type[AURA_DARKBLUE].Level = 4;
+            if (Player.SoulDarkBlueCount >= 30 && Player.SoulDarkBlueCount < 40 && Player.Aura.Type[AURA_DARKBLUE].Level < 5)
+                Player.Aura.Type[AURA_DARKBLUE].Level = 5;
+            if (Player.SoulDarkBlueCount >= 40 && Player.SoulDarkBlueCount < 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 6)
+                Player.Aura.Type[AURA_DARKBLUE].Level = 6;
+            if (Player.SoulDarkBlueCount >= 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 7)
+                Player.Aura.Type[AURA_DARKBLUE].Level = 7;
+
             if (Player.Aura.Type[AURA_DARKBLUE].Level == 5)
                 AmmoRegenMult = 2;
-            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 6 || Player.SoulActive[SOUL_DARKBLUE])
+            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 6)
                 AmmoRegenMult = 4;
-            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 1 || Player.SoulActive[SOUL_DARKBLUE])
+            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 1)
                 if ((Timer() % 25) == 0)
                     GiveInventory("Clip", AmmoRegenMult);
-            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 2 || Player.SoulActive[SOUL_DARKBLUE])
+            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 2)
                 if ((Timer() % (35 * 3)) == 1)
                     GiveInventory("Shell", AmmoRegenMult);
-            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 3 || Player.SoulActive[SOUL_DARKBLUE])
+            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 3)
                 if ((Timer() % (35 * 20)) == 0)
                     GiveInventory("RocketAmmo", AmmoRegenMult);
-            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 4 || Player.SoulActive[SOUL_DARKBLUE])
+            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 4)
                 if ((Timer() % (35 / 2)) == 0)
                     GiveInventory("Cell", AmmoRegenMult);
-            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 7 || Player.SoulActive[SOUL_DARKBLUE])
+            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 7)
                 GiveInventory("DRPGDarkBlueAuraInfiniteAmmo2", 1);
         }
 
         // Yellow Aura
         if (Player.Aura.Type[AURA_YELLOW].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
         {
+            if (Player.SoulYellowCount >= 5 && Player.SoulYellowCount < 10 && Player.Aura.Type[AURA_YELLOW].Level < 1)
+                Player.Aura.Type[AURA_YELLOW].Level = 1;
+            if (Player.SoulYellowCount >= 10 && Player.SoulYellowCount < 20 && Player.Aura.Type[AURA_YELLOW].Level < 2)
+                Player.Aura.Type[AURA_YELLOW].Level = 2;
+            if (Player.SoulYellowCount >= 20 && Player.SoulYellowCount < 30 && Player.Aura.Type[AURA_YELLOW].Level < 3)
+                Player.Aura.Type[AURA_YELLOW].Level = 3;
+            if (Player.SoulYellowCount >= 30 && Player.SoulYellowCount < 50 && Player.Aura.Type[AURA_YELLOW].Level < 4)
+                Player.Aura.Type[AURA_YELLOW].Level = 4;
+            if (Player.SoulYellowCount >= 50 && Player.Aura.Type[AURA_YELLOW].Level < 5)
+                Player.Aura.Type[AURA_YELLOW].Level = 5;
+
             if (Player.Aura.Type[AURA_YELLOW].Level == 1)
                 LuckMult = 1.25;
             if (Player.Aura.Type[AURA_YELLOW].Level == 2)
                 LuckMult = 1.5;
             if (Player.Aura.Type[AURA_YELLOW].Level == 3)
-                LuckMult = 2;
+                LuckMult = 2.0;
             if (Player.Aura.Type[AURA_YELLOW].Level == 4)
-                LuckMult = 3;
-            if (Player.Aura.Type[AURA_YELLOW].Level >= 5 || Player.SoulActive[SOUL_YELLOW])
-                LuckMult = 4;
+                LuckMult = 3.0;
+            if (Player.Aura.Type[AURA_YELLOW].Level >= 5)
+                LuckMult = 4.0;
 
             Player.HealthChance *= LuckMult;
             Player.EPChance *= LuckMult;

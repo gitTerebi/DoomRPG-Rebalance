@@ -1611,7 +1611,7 @@ Start:
         if (Distance(0, Players(i).TID) < Stats->Radius * GameSkill() * 4 + Stats->Radius && CheckSight(0, Players(i).TID, 0) && Players(i).EP > 0)
         {
             // Continue if this player is immune to stealing
-            if ((Players(i).Aura.Type[AURA_PINK].Active && Players(i).Aura.Type[AURA_PINK].Level >= 3) || Players(i).SoulActive[SOUL_PINK]) continue;
+            if (Players(i).Aura.Type[AURA_PINK].Active && Players(i).Aura.Type[AURA_PINK].Level >= 3) continue;
 
             int Previous = Players(i).EP;
 
@@ -1869,7 +1869,7 @@ Start:
         if (Distance(0, Players(i).TID) < Stats->Radius * GameSkill() * 4 + Stats->Radius && CheckSight(0, Players(i).TID, 0))
         {
             // Continue if this player is immune to stealing
-            if ((Players(i).Aura.Type[AURA_PINK].Active && Players(i).Aura.Type[AURA_PINK].Level >= 3) || Players(i).SoulActive[SOUL_PINK]) continue;
+            if (Players(i).Aura.Type[AURA_PINK].Active && Players(i).Aura.Type[AURA_PINK].Level >= 3) continue;
 
             int Previous = CheckActorInventory(Players(i).TID, "DRPGCredits");
             int OrigTID = ActivatorTID();
@@ -1935,7 +1935,7 @@ Start:
         if (Distance(0, Players(i).TID) < Stats->Radius * GameSkill() * 4 + Stats->Radius && CheckSight(0, Players(i).TID, 0))
         {
             // Continue if this player is immune to stealing
-            if ((Players(i).Aura.Type[AURA_PINK].Active && Players(i).Aura.Type[AURA_PINK].Level >= 3) || Players(i).SoulActive[SOUL_PINK]) continue;
+            if (Players(i).Aura.Type[AURA_PINK].Active && Players(i).Aura.Type[AURA_PINK].Level >= 3) continue;
 
             // [KS] We'll give the player 30 seconds of ammo if they were full at stat max.
             int ClipSteal = (int)((fixed)Stats->Capacity / 7.5 * GetCVarFixed("drpg_aurasteal_amount"));
