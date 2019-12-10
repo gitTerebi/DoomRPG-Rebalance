@@ -364,6 +364,13 @@ OptionMenu "DoomRPGMapEvents"
     Option "Hell", "drpg_mapevent_skill_hell", "OnOff"
     Option "Armageddon", "drpg_mapevent_skill_armageddon", "OnOff"
     Option "Sinstorm", "drpg_mapevent_sinstorm", "OnOff"
+	StaticText ""
+
+	StaticText "Advanced option"
+    StaticText ""
+
+    Slider "Intensity acid rain in event Vicious Downpour", "drpg_acidrain_intensity", 1, 5, 1
+    Slider "Intensity floor mist in event The Dark Zone", "drpg_darkzone_floormist_intensity", 1, 5, 1
 }
 
 OptionMenu "DoomRPGStats"
