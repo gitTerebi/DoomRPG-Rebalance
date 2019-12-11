@@ -576,19 +576,6 @@ void CheckStats()
     }
 
     // Souls checking
-    if (Player.Aura.Time <= 0)
-    {
-        TakeInventory("DRPGSoulRedToken", CheckInventory("DRPGSoulRedToken"));
-        TakeInventory("DRPGSoulGreenToken", CheckInventory("DRPGSoulGreenToken"));
-        TakeInventory("DRPGSoulWhiteToken", CheckInventory("DRPGSoulWhiteToken"));
-        TakeInventory("DRPGSoulPinkToken", CheckInventory("DRPGSoulPinkToken"));
-        TakeInventory("DRPGSoulBlueToken", CheckInventory("DRPGSoulBlueToken"));
-        TakeInventory("DRPGSoulPurpleToken", CheckInventory("DRPGSoulPurpleToken"));
-        TakeInventory("DRPGSoulOrangeToken", CheckInventory("DRPGSoulOrangeToken"));
-        TakeInventory("DRPGSoulDarkBlueToken", CheckInventory("DRPGSoulDarkBlueToken"));
-        TakeInventory("DRPGSoulYellowToken", CheckInventory("DRPGSoulYellowToken"));
-    }
-
     Player.SoulWhiteCount = CheckInventory("DRPGSoulWhiteToken");
     Player.SoulRedCount = CheckInventory("DRPGSoulRedToken") + Player.SoulWhiteCount;
     Player.SoulGreenCount = CheckInventory("DRPGSoulGreenToken") + Player.SoulWhiteCount;
@@ -600,6 +587,19 @@ void CheckStats()
     Player.SoulYellowCount = CheckInventory("DRPGSoulYellowToken") + Player.SoulWhiteCount;
 
     Player.SoulsCount = (Player.SoulRedCount + Player.SoulGreenCount + Player.SoulPinkCount + Player.SoulBlueCount + Player.SoulPurpleCount + Player.SoulOrangeCount + Player.SoulDarkBlueCount + Player.SoulYellowCount);
+
+    if (Player.SoulsCount > 0 && Player.Aura.Time <= 0)
+    {
+        TakeInventory("DRPGSoulRedToken", CheckInventory("DRPGSoulRedToken"));
+        TakeInventory("DRPGSoulGreenToken", CheckInventory("DRPGSoulGreenToken"));
+        TakeInventory("DRPGSoulWhiteToken", CheckInventory("DRPGSoulWhiteToken"));
+        TakeInventory("DRPGSoulPinkToken", CheckInventory("DRPGSoulPinkToken"));
+        TakeInventory("DRPGSoulBlueToken", CheckInventory("DRPGSoulBlueToken"));
+        TakeInventory("DRPGSoulPurpleToken", CheckInventory("DRPGSoulPurpleToken"));
+        TakeInventory("DRPGSoulOrangeToken", CheckInventory("DRPGSoulOrangeToken"));
+        TakeInventory("DRPGSoulDarkBlueToken", CheckInventory("DRPGSoulDarkBlueToken"));
+        TakeInventory("DRPGSoulYellowToken", CheckInventory("DRPGSoulYellowToken"));
+    }
 
     // DRLA Checking
     if (CompatMode == COMPAT_DRLA)

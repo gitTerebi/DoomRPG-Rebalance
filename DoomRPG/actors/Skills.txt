@@ -399,78 +399,16 @@ actor DRPGSoulYellow : DRPGSoulBase
     }
 }
 
-//Souls Tokens
-actor DRPGSoulRedToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
-
-actor DRPGSoulGreenToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
-
-actor DRPGSoulWhiteToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
-
-actor DRPGSoulPinkToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
-
-actor DRPGSoulBlueToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
-
-actor DRPGSoulPurpleToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
-
-actor DRPGSoulOrangeToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
-
-actor DRPGSoulDarkBlueToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
-
-actor DRPGSoulYellowToken : Inventory
-{
-    -INVBAR
-    
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
-}
+// Souls Tokens
+actor DRPGSoulRedToken : Inventory       { Inventory.MaxAmount 1000 }
+actor DRPGSoulGreenToken : Inventory     { Inventory.MaxAmount 1000 }
+actor DRPGSoulWhiteToken : Inventory     { Inventory.MaxAmount 1000 }
+actor DRPGSoulPinkToken : Inventory      { Inventory.MaxAmount 1000 }
+actor DRPGSoulBlueToken : Inventory      { Inventory.MaxAmount 1000 }
+actor DRPGSoulPurpleToken : Inventory    { Inventory.MaxAmount 1000 }
+actor DRPGSoulOrangeToken : Inventory    { Inventory.MaxAmount 1000 }
+actor DRPGSoulDarkBlueToken : Inventory  { Inventory.MaxAmount 1000 }
+actor DRPGSoulYellowToken : Inventory    { Inventory.MaxAmount 1000 }
 
 // Mean Things
 actor DRPGEPDrain : CustomInventory
