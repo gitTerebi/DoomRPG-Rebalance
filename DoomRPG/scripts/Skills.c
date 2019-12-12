@@ -2957,9 +2957,6 @@ void CheckSkills()
     {
         Skills[3][4].Cost = 50 + (Player.SoulsCount * 5); //Increase EP cost of skill "Soul Steal"
 
-        if (Skills[3][4].Cost > 200) // Increase EP cost of skill "Soul Steal"
-            Skills[3][4].Cost = 200; // Cap cost of skill "Soul Steal" is 200 EP
-
         Skills[2][0].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Red Aura
         Skills[2][1].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Green Aura
         Skills[2][2].Cost = Skills[3][4].Cost * 4; // Increase EP cost of White Aura
