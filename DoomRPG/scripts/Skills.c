@@ -37,7 +37,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Heal Summons",
-            .Cost = 100,
+            .Cost = 200,
             .MaxLevel = 1,
             .Use = HealSummons,
             .Description =
@@ -384,7 +384,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Summon Marine",
-            .Cost = 75,
+            .Cost = 50,
             .MaxLevel = 7,
             .Use = Summon,
             .Description =
@@ -430,7 +430,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Imp",
-            .Cost = 60,
+            .Cost = 75,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -440,7 +440,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Demon",
-            .Cost = 60,
+            .Cost = 75,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -450,7 +450,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Cacodemon",
-            .Cost = 125,
+            .Cost = 150,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -460,7 +460,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Hell Knight",
-            .Cost = 150,
+            .Cost = 200,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -470,7 +470,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Baron of Hell",
-            .Cost = 200,
+            .Cost = 300,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -520,7 +520,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Arachnotron",
-            .Cost = 200,
+            .Cost = 300,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -2980,6 +2980,52 @@ void CheckSkills()
         Skills[2][6].Cost = 100; // Standart EP cost of Orange Aura
         Skills[2][7].Cost = 100; // Standart EP cost of Dark Blue Aura
         Skills[2][8].Cost = 100; // Standart EP cost of Yellow Aura
+    }
+
+    // Increase the cost of skills associated with "Summoning" depending on the number of summoned allies
+    if (Player.Summons > 0)
+    {
+        Skills[0][1].Cost = 200 + ((Player.Summons - 1) * 100); // Increase EP cost of skill "Heal Summon"
+
+        Skills[4][0].Cost = 50 + (Player.Summons * 25);    // Increase EP cost of Summon Marine
+        Skills[4][1].Cost = 100 + (Player.Summons * 50);   // Increase EP cost of Summon Former Human
+        Skills[4][2].Cost = 75 + (Player.Summons * 25);    // Increase EP cost of Summon Former Sergeant
+        Skills[4][3].Cost = 150 + (Player.Summons * 75);   // Increase EP cost of Summon Former Commando
+        Skills[4][4].Cost = 75 + (Player.Summons * 25);    // Increase EP cost of Summon Imp
+        Skills[4][5].Cost = 75 + (Player.Summons * 25);    // Increase EP cost of Summon Demon
+        Skills[4][6].Cost = 150 + (Player.Summons * 75);   // Increase EP cost of Summon Cacodemon
+        Skills[4][7].Cost = 200 + (Player.Summons * 100);  // Increase EP cost of Summon Hell Knight
+        Skills[4][8].Cost = 300 + (Player.Summons * 150);  // Increase EP cost of Summon Baron of Hell
+        Skills[4][9].Cost = 50 + (Player.Summons * 25);    // Increase EP cost of Summon Lost Soul
+        Skills[4][10].Cost = 250 + (Player.Summons * 125); // Increase EP cost of Summon Pain Elemental
+        Skills[4][11].Cost = 300 + (Player.Summons * 150); // Increase EP cost of Summon Revenant
+        Skills[4][12].Cost = 325 + (Player.Summons * 150); // Increase EP cost of Summon Mancubus
+        Skills[4][13].Cost = 300 + (Player.Summons * 150); // Increase EP cost of Summon Arachnotron
+        Skills[4][14].Cost = 400 + (Player.Summons * 200); // Increase EP cost of Summon Arch-Vile
+        Skills[4][15].Cost = 500 + (Player.Summons * 250); // Increase EP cost of Summon Cyberdemon
+        Skills[4][16].Cost = 500 + (Player.Summons * 250); // Increase EP cost of Summon Spider Mastermind
+    }
+    else
+    {
+        Skills[0][1].Cost = 200; // Standart EP cost of skill "Heal Summon"
+
+        Skills[4][0].Cost = 50;   // Standart EP cost of Summon Marine
+        Skills[4][1].Cost = 100;  // Standart EP cost of Summon Former Human
+        Skills[4][2].Cost = 75;   // Standart EP cost of Summon Former Sergeant
+        Skills[4][3].Cost = 150;  // Standart EP cost of Summon Former Commando
+        Skills[4][4].Cost = 75;   // Standart EP cost of Summon Imp
+        Skills[4][5].Cost = 75;   // Standart EP cost of Summon Demon
+        Skills[4][6].Cost = 150;  // Standart EP cost of Summon Cacodemon
+        Skills[4][7].Cost = 200;  // Standart EP cost of Summon Hell Knight
+        Skills[4][8].Cost = 300;  // Standart EP cost of Summon Baron of Hell
+        Skills[4][9].Cost = 50;   // Standart EP cost of Summon Lost Soul
+        Skills[4][10].Cost = 250; // Standart EP cost of Summon Pain Elemental
+        Skills[4][11].Cost = 300; // Standart EP cost of Summon Revenant
+        Skills[4][12].Cost = 325; // Standart EP cost of Summon Mancubus
+        Skills[4][13].Cost = 300; // Standart EP cost of Summon Arachnotron
+        Skills[4][14].Cost = 400; // Standart EP cost of Summon Arch-Vile
+        Skills[4][15].Cost = 500; // Standart EP cost of Summon Cyberdemon
+        Skills[4][16].Cost = 500; // Standart EP cost of Summon Spider Mastermind
     }
 
     // Reset the Skill refund multiplier from the Blue Aura and Energy Augmentation

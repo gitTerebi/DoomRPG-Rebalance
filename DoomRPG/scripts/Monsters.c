@@ -544,6 +544,9 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Energy Stat Handling
     MonsterAggressionHandler();
 
+    // Enemy Monster Aggression On Friendly Monster Handling
+    MonsterAggressionOnFriendlyHandler();
+
     // Death Handler
     // Handled via ZScript
 
@@ -1220,6 +1223,63 @@ Start:
         if (RandomFixed(0.0, 1.0) < ((Aggression - 1.0) / 4.0))
             GiveInventory("DRPGMonsterAttackMore", 1);
     }
+
+    Delay(8);
+    goto Start;
+}
+
+NamedScript void MonsterAggressionOnFriendlyHandler()
+{
+
+    if (!GetActorProperty(0, APROP_Friendly))
+        return;
+
+    // Delay Stagger
+    Delay(35 + (GetMonsterID(0) % 4));
+
+    // Pointer
+    MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+Start:
+
+    if (!GetActorProperty(0, APROP_Friendly))
+        return;
+
+    if (GetActorProperty(0, APROP_Health) <= 0)
+        return;
+
+    if (ClassifyActor(0) & ACTOR_WORLD)
+        return;
+
+    if (!MonsterHasTarget())
+    {
+        Delay(10);
+        goto Start;
+    }
+
+    if (Random(0, 100) > 10)
+    {
+        Delay(10);
+        goto Start;
+    }
+
+    GiveInventory("DRPGAggressionOnFriendly", 1);
+    Delay(4);
+    TakeInventory("DRPGAggressionOnFriendly", CheckInventory("DRPGAggressionOnFriendly"));
+    Delay(4);
+
+    if (Random(0, 100) > 10)
+    {
+        Delay(10);
+        goto Start;
+    }
+
+    GiveInventory("DRPGClearTarget", 1);
+    Delay(4);
+    TakeInventory("DRPGClearTarget", CheckInventory("DRPGClearTarget"));
+    Delay(4);
+
+    NoiseAlert(0, 0);
 
     Delay(8);
     goto Start;
@@ -2343,9 +2403,9 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGLifeDropper", 128);
             DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256);
             DropMonsterItem(Killer, 0, "DRPGAugDropper", 96);
-            DropMonsterItem(Killer, 0, "DRPGUACCard", 64 / (Players(Killer).ShopCard + 1));
-            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 96);
-            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 48);
+            DropMonsterItem(Killer, 0, "DRPGUACCard", 48 / (Players(Killer).ShopCard + 1));
+            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 64);
+            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 32);
             DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
 
             if (Players(Killer).LuckTotal >= 15)

@@ -68,6 +68,9 @@ NamedScript void PopulateMissions()
 
 NamedScript void InitMission()
 {
+    // Small delay before initializing the script
+    Delay(4);
+
     // If you aren't on a mission or you're in the Outpost, return
     if (!Player.Mission.Active || CurrentLevel->UACBase) return;
 

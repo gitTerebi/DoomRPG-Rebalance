@@ -76,7 +76,7 @@ NamedScript Type_OPEN void GlobalInit()
     if (!GlobalsInitialized)
     {
         // Version Info
-        Log("\CnDoom RPG SE (GDCC) (Compiled on %S) loaded!", __DATE__);
+        Log("\CnDoom RPG SE Rebalance (GDCC) (Compiled on %S) loaded!", __DATE__);
 
         // Compatibility checking
         CheckCompatibility();
@@ -244,7 +244,7 @@ NamedScript Type_ENTER void Init()
         Player.Reviver = -1;
 
         // Fill Augmentation Battery
-        Player.Augs.Battery = Player.CapacityTotal * 10;
+        Player.Augs.Battery = 100;
 
         // Setup the New! shield parts arrays
         for (int i = 0; i < SHIELDPAGE_MAX; i++)
@@ -320,6 +320,9 @@ NamedScript Type_ENTER void Init()
 // Loop Script
 NamedScript void Loop()
 {
+    // Small delay before initializing the script
+    Delay(4);
+
 Start:
 
     // If we're on the title map, terminate

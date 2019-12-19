@@ -369,22 +369,22 @@ Start:
 
     // Combo Info
     SetFont("BIGFONT");
-    if (Combo.DisplayValue > 0 || GetActivatorCVar("drpg_hud_preview"))
+    if (Combo.DisplayValue > 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
         HudMessage("%ld", Combo.DisplayValue);
         EndHudMessage(HUDMSG_PLAIN, 0, "Purple", X + 0.1, Y + 10.0, 0.05);
     }
-    if (XP.DisplayValue != 0 || GetActivatorCVar("drpg_hud_preview"))
+    if (XP.DisplayValue != 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
         HudMessage("%ld", XP.DisplayValue);
         EndHudMessage(HUDMSG_PLAIN, 0, (XP.DisplayValue >= 0 ? "White" : "Gray"), X + 0.1, Y + 22.0, 0.05);
     }
-    if (Rank.DisplayValue != 0 || GetActivatorCVar("drpg_hud_preview"))
+    if (Rank.DisplayValue != 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
         HudMessage("%ld", Rank.DisplayValue);
         EndHudMessage(HUDMSG_PLAIN, 0, (Rank.DisplayValue >= 0 ? "Yellow" : "DarkBrown"), X + 0.1, Y + 34.0, 0.05);
     }
-    if (Bonus.DisplayValue != 0 || GetActivatorCVar("drpg_hud_preview"))
+    if (Bonus.DisplayValue != 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
         HudMessage("%ld", Bonus.DisplayValue);
         EndHudMessage(HUDMSG_PLAIN, 0, (Bonus.DisplayValue >= 0 ? "Green" : "DarkGreen"), X + 0.1, Y + 46.0, 0.05);

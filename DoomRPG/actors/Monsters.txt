@@ -442,6 +442,26 @@ actor DRPGFriendlyRemover : CustomInventory
     }
 }
 
+actor DRPGAggressionOnFriendly : CustomInventory
+{
+    States
+    {
+    Pickup:
+        TNT1 A 0 A_AlertMonsters(frandom(256, 1024), AMF_TARGETEMITTER)
+        Stop
+    }
+}
+
+actor DRPGClearTarget : CustomInventory
+{
+    States
+    {
+    Pickup:
+        TNT1 A 0 A_ClearTarget
+        Stop
+    }
+}
+
 // Red Aura Giver
 actor DRPGRedAuraGiver : CustomInventory
 {

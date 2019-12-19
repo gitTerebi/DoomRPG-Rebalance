@@ -250,6 +250,7 @@ user    bool    drpg_give_quickinventory = false;
 // Performance
 user    bool    drpg_toaster = false;
 server  int     drpg_simple_auras = 1;
+user    bool    drpg_players_aura_icons_disable = false;
 server  int     drpg_auras_drawdistance = 1650;
 server  int     drpg_popoffs_drawdistance = 1650;
 server  bool    drpg_virtual_credits = false;

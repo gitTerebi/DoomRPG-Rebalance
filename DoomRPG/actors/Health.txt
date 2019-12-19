@@ -253,8 +253,8 @@ ACTOR DRPGLife : Inventory
 {
     -INVBAR
     
-    Inventory.DefMaxAmount
-    Inventory.InterHubAmount 1000
+    Inventory.MaxAmount 5
+    Inventory.InterHubAmount 5
     Inventory.PickupMessage "You got a Life!"
     Inventory.PickupSound "health/1up"
 }

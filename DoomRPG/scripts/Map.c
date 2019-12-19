@@ -1037,7 +1037,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_ALLAURAS:
         return (GetCVar("drpg_mapevent_allauras") &&
-                AveragePlayerLevel() >= 20);
+                AveragePlayerLevel() >= 25);
 
     case MAPEVENT_ONEMONSTER:
         return (GetCVar("drpg_mapevent_onemonster") &&
@@ -1045,7 +1045,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_HELLUNLEASHED:
         return (GetCVar("drpg_mapevent_hellunleashed") &&
-                AveragePlayerLevel() >= 25);
+                AveragePlayerLevel() >= 35);
 
     case MAPEVENT_HARMONIZEDAURAS:
         return (GetCVar("drpg_mapevent_harmonizedauras") &&
@@ -1072,7 +1072,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     case MAPEVENT_DRLA_FEEDINGFRENZY:
         return (CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_feedingfrenzy") &&
-                AveragePlayerLevel() >= 20);
+                AveragePlayerLevel() >= 30);
 
     case MAPEVENT_DRLA_OVERMIND:
         return (GetCVar("drpg_mapevent_overmind") &&

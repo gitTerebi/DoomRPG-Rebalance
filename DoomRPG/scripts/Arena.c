@@ -195,7 +195,7 @@ NamedScript MapSpecial void ArenaLoop()
 // Stop the Arena session
 NamedScript MapSpecial void ArenaStop()
 {
-    if (ArenaWave > 1)
+    if (InMultiplayer && ArenaWave > 1)
         ArenaState = ARENA_WAITING;
     else
         ArenaState = ARENA_READY;
@@ -350,7 +350,9 @@ void ArenaGetBonus(int Bonus)
         }
         break;
     case ABONUS_CHIPDROP: // Chip Drop
-        DropArenaItem("DRPGChipDropper");
+        if (Random(1, 16) == 1)
+            DropArenaItem("DRPGChipPlatinum");
+        DropArenaItem("DRPGChipGold");
         break;
     case ABONUS_AMMODROP: // Ammo Drop
         DropArenaItem("DRPGBackpackRandomizer");

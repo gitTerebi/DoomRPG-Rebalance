@@ -1454,7 +1454,11 @@ void SpawnAuras(int TID, bool ForceFancy)
                     if (!Simple)
                         SpawnForced(AuraActors[i], X, Y, Z + Height / 2.0, AuraTID, Angle);
                     else
+                    {
+                        if (GetCVar("drpg_players_aura_icons_disable"))
+                            return;
                         SpawnForced(StrParam("%SIndicator", AuraActors[i]), X, Y, Z + Height + 8.0, 0, Angle);
+                    }
                 }
             }
         }
