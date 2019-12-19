@@ -167,7 +167,7 @@ ACTOR DRPGMarineGuardPistolSummoned
 
 ACTOR DRPGMarineShotgunSummoned
 {
-  Health 150
+  Health 125
   GibHealth -50
   Radius 20
   Height 56
@@ -352,7 +352,7 @@ ACTOR DRPGMarineShotgunSummoned
 
 ACTOR DRPGMarineDoubleShotgunSummoned
 {
-  Health 200
+  Health 150
   GibHealth -50
   Radius 20
   Height 56
@@ -510,7 +510,7 @@ ACTOR DRPGMarineDoubleShotgunSummoned
 
 ACTOR DRPGMarineChaingunSummoned
 {
-  Health 250
+  Health 175
   GibHealth -50
   Radius 20
   Height 56
@@ -681,7 +681,7 @@ ACTOR DRPGMarineChaingunSummoned
 
 ACTOR DRPGMarineRocketLauncherSummoned
 {
-  Health 300
+  Health 175
   GibHealth -50
   Radius 20
   Height 56
@@ -846,7 +846,7 @@ ACTOR DRPGMarineRocketLauncherSummoned
 
 ACTOR DRPGMarinePlasmaRifleSummoned
 {
-  Health 300
+  Health 200
   GibHealth -50
   Radius 20
   Height 56
@@ -1077,7 +1077,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned
 
 ACTOR DRPGMarineBFG9000Summoned
 {
-  Health 300
+  Health 200
   GibHealth -50
   Radius 20
   Height 56
