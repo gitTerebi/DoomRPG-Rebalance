@@ -648,6 +648,11 @@ OptionMenu "DoomRPGMisc"
     StaticText ""
 
     Slider "Monster Drop Distance", "drpg_monster_dropdist", 0.1, 16.0, 0.1
+    StaticText ""
+
+    Option "Monster Friendly Can Teleport To The Player (SP only)*", "drpg_monster_friendly_teleport_enable", "OnOff"
+    Slider "Minimum Distance For Teleport", "drpg_monster_friendly_teleport_distance", 1, 10, 1
+    StaticText ""
 }
 
 OptionMenu "DoomRPGPerformance"

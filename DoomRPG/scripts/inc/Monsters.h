@@ -31,6 +31,7 @@ NamedScript void MonsterStatsHandler();
 NamedScript void MonsterAuraDisplayHandler();
 NamedScript void MonsterAggressionHandler();
 NamedScript void MonsterAggressionOnFriendlyHandler();
+NamedScript void MonsterFriendlyTeleport();
 NamedScript void MonsterLevelupHandler();
 NamedScript void MonsterEPDrainHandler();
 NamedScript void MonsterRegenerationHandler();

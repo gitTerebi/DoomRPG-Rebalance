@@ -448,6 +448,7 @@ actor DRPGAggressionOnFriendly : CustomInventory
     {
     Pickup:
         TNT1 A 0 A_AlertMonsters(frandom(256, 1024), AMF_TARGETEMITTER)
+        TNT1 A 0 A_TakeInventory("DRPGAggressionOnFriendly", 0)
         Stop
     }
 }
@@ -457,7 +458,17 @@ actor DRPGClearTarget : CustomInventory
     States
     {
     Pickup:
+        TNT1 A 0 A_Jump(256, "ForgetCheck")
+    ForgetCheck:
+        TNT1 A 0 A_JumpIfTargetInLOS("ForgetCancel", 0, JLOSF_DEADNOJUMP , 0)
+        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= 512, "ForgetCancel")
+        TNT1 A 0 A_Jump(256, "Forget")
+    Forget: 
         TNT1 A 0 A_ClearTarget
+        TNT1 A 0 A_TakeInventory("DRPGClearTarget", 0)
+        Stop
+    ForgetCancel: 
+        TNT1 A 0 A_TakeInventory("DRPGClearTarget", 0)
         Stop
     }
 }

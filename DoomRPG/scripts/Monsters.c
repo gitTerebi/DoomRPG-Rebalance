@@ -547,6 +547,9 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Enemy Monster Aggression On Friendly Monster Handling
     MonsterAggressionOnFriendlyHandler();
 
+    // Monster Friendly Teleport To The Player Handling
+    MonsterFriendlyTeleport();
+
     // Death Handler
     // Handled via ZScript
 
@@ -1263,25 +1266,89 @@ Start:
         goto Start;
     }
 
-    GiveInventory("DRPGAggressionOnFriendly", 1);
-    Delay(4);
-    TakeInventory("DRPGAggressionOnFriendly", CheckInventory("DRPGAggressionOnFriendly"));
-    Delay(4);
-
-    if (Random(0, 100) > 10)
+    if (!CheckInventory("DRPGAggressionOnFriendly"))
     {
-        Delay(10);
+        GiveInventory("DRPGAggressionOnFriendly", 1);
+    }
+
+    if (!CheckInventory("DRPGClearTarget"))
+    {
+        GiveInventory("DRPGClearTarget", 1);
+    }
+
+    Delay(10);
+    goto Start;
+}
+
+NamedScript void MonsterFriendlyTeleport()
+{
+    if (!GetCVar("drpg_monster_friendly_teleport_enable") || !GetActorProperty(0, APROP_Friendly) || CurrentLevel->UACBase || InMultiplayer && PlayerCount() > 1)
+        return;
+
+    // Delay Stagger
+    Delay(35 + (GetMonsterID(0) % 4));
+
+    // Pointer
+    MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+Start:
+    if (ClassifyActor(0) & ACTOR_WORLD)
+        return;
+
+    if (ClassifyActor(0) & ACTOR_DEAD)
+    {
+        Delay(35);
         goto Start;
     }
 
-    GiveInventory("DRPGClearTarget", 1);
-    Delay(4);
-    TakeInventory("DRPGClearTarget", CheckInventory("DRPGClearTarget"));
-    Delay(4);
+    if (MonsterHasTarget())
+    {
+        Delay(35);
+        goto Start;
+    }
 
-    NoiseAlert(0, 0);
+    fixed TeleportDistance = 512 + (512 * GetCVar("drpg_monster_friendly_teleport_distance"));
 
-    Delay(8);
+    if (Distance(0, Players(0).TID) > TeleportDistance)
+    {
+        int TeleportSpotTID = UniqueTID();
+        int TargetPlayerTID = Players(0).TID;
+
+        bool Success = false;
+        fixed TeleportAngle;
+        fixed TeleportDistance;
+        fixed X, Y, Z, Angle;
+
+        for (int i = 0; i < 10; i++)
+        {
+            fixed TeleportAngle = RandomFixed(0, 1);
+
+            X = GetActorX(TargetPlayerTID) + Random(-256,256);
+            Y = GetActorY(TargetPlayerTID) + Random(-256,256);
+            Z = GetActorZ(TargetPlayerTID);
+            Angle = TeleportAngle + 0.5;
+            Angle %= 1.0;
+
+            Success = Spawn("MapSpot", X, Y, Z, TeleportSpotTID, Angle);
+            if (Success && !SetActorPosition(TeleportSpotTID, GetActorX(TeleportSpotTID), GetActorY(TeleportSpotTID), GetActorFloorZ(TeleportSpotTID), false)) Success = false;
+            if (Success && !CheckSight(TargetPlayerTID, TeleportSpotTID, 0)) Success = false;
+            if (Success)
+                break;
+        }
+
+        if (Success)
+        {
+            // Surprise!!
+            SpawnSpotFacingForced("TeleportFog", 0, 0);
+            SetActorPosition(0, GetActorX(TeleportSpotTID), GetActorY(TeleportSpotTID), GetActorZ(TeleportSpotTID), false);
+            SetActorAngle(0, Angle);
+            SpawnSpotFacingForced("TeleportFog", 0, 0);
+            Thing_Remove(TeleportSpotTID);
+        }
+    }
+
+    Delay(35);
+
     goto Start;
 }
 
@@ -1743,13 +1810,16 @@ Start:
     if (Stats->RegenHealth >= Stats->HealthMax)
         RegenAmount /= 2;
 
+    if (GetActorProperty(0, APROP_Friendly))
+        RegenAmount /= 2;
+
     if (RegenAmount > INT_MAX)
         RegenAmount = INT_MAX;
 
     SetActorProperty(0, APROP_Health, GetActorProperty(0, APROP_Health) + RegenAmount);
     Stats->RegenHealth += RegenAmount;
 
-    if (Stats->Aura.Type[AURA_PURPLE].Active && !CheckInventory("DRPGMonsterDisrupted") && GetCVar("drpg_monster_purple_massheal"))
+    if (Stats->Aura.Type[AURA_PURPLE].Active && !CheckInventory("DRPGMonsterDisrupted") && GetCVar("drpg_monster_purple_massheal") && !GetActorProperty(0, APROP_Friendly))
     {
         GiveInventory("DRPGMonsterRadiusHealer", 1);
         DelayTime = 35 * 10;
@@ -2202,6 +2272,8 @@ NamedScript DECORATE void MonsterRevive()
         MonsterRegenerationHandler();
 
     MonsterAggressionHandler();
+    MonsterAggressionOnFriendlyHandler();
+    MonsterFriendlyTeleport();
 }
 
 NamedScript DECORATE void MonsterDeathCheck()

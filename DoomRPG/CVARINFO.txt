@@ -246,6 +246,8 @@ server  bool    drpg_transport_on_new_map = false;
 server  bool    drpg_shotguns = false;
 user    bool    drpg_augs_autoreactivate = false;
 user    bool    drpg_give_quickinventory = false;
+server  bool    drpg_monster_friendly_teleport_enable = false;
+server  int     drpg_monster_friendly_teleport_distance = 1;
 
 // Performance
 user    bool    drpg_toaster = false;
