@@ -1260,20 +1260,16 @@ Start:
         goto Start;
     }
 
-    if (Random(0, 100) > 10)
-    {
-        Delay(10);
-        goto Start;
-    }
-
-    if (!CheckInventory("DRPGAggressionOnFriendly"))
-    {
-        GiveInventory("DRPGAggressionOnFriendly", 1);
-    }
-
-    if (!CheckInventory("DRPGClearTarget"))
+    if (!CheckInventory("DRPGClearTarget") && Random(0, 100) <= 10)
     {
         GiveInventory("DRPGClearTarget", 1);
+        Delay(10);
+    }
+
+    if (!CheckInventory("DRPGAggressionOnFriendly") && Random(0, 100) <= 10)
+    {
+        GiveInventory("DRPGAggressionOnFriendly", 1);
+        Delay(10);
     }
 
     Delay(10);
