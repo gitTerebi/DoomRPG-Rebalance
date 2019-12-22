@@ -447,7 +447,7 @@ actor DRPGAggressionOnFriendly : CustomInventory
     States
     {
     Pickup:
-        TNT1 A 0 A_AlertMonsters(frandom(256, 1024), AMF_TARGETEMITTER)
+        TNT1 A 0 A_AlertMonsters(frandom(256, 1536), AMF_TARGETEMITTER)
         TNT1 A 0 A_TakeInventory("DRPGAggressionOnFriendly", 0)
         Stop
     }

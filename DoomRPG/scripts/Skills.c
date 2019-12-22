@@ -550,7 +550,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Spider Mastermind",
-            .Cost = 500,
+            .Cost = 600,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -3003,7 +3003,7 @@ void CheckSkills()
         Skills[4][13].Cost = 300 + (Player.Summons * 150); // Increase EP cost of Summon Arachnotron
         Skills[4][14].Cost = 400 + (Player.Summons * 200); // Increase EP cost of Summon Arch-Vile
         Skills[4][15].Cost = 500 + (Player.Summons * 250); // Increase EP cost of Summon Cyberdemon
-        Skills[4][16].Cost = 500 + (Player.Summons * 250); // Increase EP cost of Summon Spider Mastermind
+        Skills[4][16].Cost = 600 + (Player.Summons * 300); // Increase EP cost of Summon Spider Mastermind
     }
     else
     {
@@ -3025,7 +3025,7 @@ void CheckSkills()
         Skills[4][13].Cost = 300; // Standart EP cost of Summon Arachnotron
         Skills[4][14].Cost = 400; // Standart EP cost of Summon Arch-Vile
         Skills[4][15].Cost = 500; // Standart EP cost of Summon Cyberdemon
-        Skills[4][16].Cost = 500; // Standart EP cost of Summon Spider Mastermind
+        Skills[4][16].Cost = 600; // Standart EP cost of Summon Spider Mastermind
     }
 
     // Reset the Skill refund multiplier from the Blue Aura and Energy Augmentation

@@ -1260,13 +1260,13 @@ Start:
         goto Start;
     }
 
-    if (!CheckInventory("DRPGClearTarget") && Random(0, 100) <= 10)
+    if (!CheckInventory("DRPGClearTarget") && Random(0, 100) <= 15)
     {
         GiveInventory("DRPGClearTarget", 1);
         Delay(10);
     }
 
-    if (!CheckInventory("DRPGAggressionOnFriendly") && Random(0, 100) <= 10)
+    if (!CheckInventory("DRPGAggressionOnFriendly") && Random(0, 100) <= 15)
     {
         GiveInventory("DRPGAggressionOnFriendly", 1);
         Delay(10);
@@ -1815,7 +1815,7 @@ Start:
     SetActorProperty(0, APROP_Health, GetActorProperty(0, APROP_Health) + RegenAmount);
     Stats->RegenHealth += RegenAmount;
 
-    if (Stats->Aura.Type[AURA_PURPLE].Active && !CheckInventory("DRPGMonsterDisrupted") && GetCVar("drpg_monster_purple_massheal") && !GetActorProperty(0, APROP_Friendly))
+    if (Stats->Aura.Type[AURA_PURPLE].Active && !CheckInventory("DRPGMonsterDisrupted") && GetCVar("drpg_monster_purple_massheal"))
     {
         GiveInventory("DRPGMonsterRadiusHealer", 1);
         DelayTime = 35 * 10;
@@ -1833,6 +1833,9 @@ Start:
 
 NamedScript DECORATE void MonsterRegenHealer()
 {
+    if (GetActorProperty(0, APROP_Friendly))
+        return;
+
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
