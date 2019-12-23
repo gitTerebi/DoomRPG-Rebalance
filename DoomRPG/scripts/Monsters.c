@@ -544,10 +544,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Energy Stat Handling
     MonsterAggressionHandler();
 
-    // Enemy Monster Aggression On Friendly Monster Handling
-    MonsterAggressionOnFriendlyHandler();
-
-    // Monster Friendly Teleport To The Player Handling
+    // Friendly Monsters Teleport To The Player Handling
     MonsterFriendlyTeleport();
 
     // Death Handler
@@ -1227,49 +1224,42 @@ Start:
             GiveInventory("DRPGMonsterAttackMore", 1);
     }
 
-    Delay(8);
-    goto Start;
-}
-
-NamedScript void MonsterAggressionOnFriendlyHandler()
-{
-
-    if (!GetActorProperty(0, APROP_Friendly))
-        return;
-
-    // Delay Stagger
-    Delay(35 + (GetMonsterID(0) % 4));
-
-    // Pointer
-    MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
-
-Start:
-
-    if (!GetActorProperty(0, APROP_Friendly))
-        return;
-
-    if (GetActorProperty(0, APROP_Health) <= 0)
-        return;
-
-    if (ClassifyActor(0) & ACTOR_WORLD)
-        return;
-
-    if (!MonsterHasTarget())
+    // Clearing enemy target in case a summoned monster is nearby and the player is out of sight
+    if (!GetActorProperty(0, APROP_Friendly) && !CheckInventory("DRPGEnemyClearTarget") && Random(0, 100) <= 15)
     {
-        Delay(10);
-        goto Start;
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            if (!PlayerInGame(i)) continue;
+
+            if (!Players(i).Summons == 0)
+            {
+                for (int j = 0; j < Players(i).Summons; j++)
+                {
+                    if (Distance(0, Players(i).SummonTID[j]) <= Random(256, 1024))
+                    {
+                        GiveInventory("DRPGEnemyClearTarget", 1);
+                        Delay(10);
+                    }
+                }
+            }
+        }
     }
 
-    if (!CheckInventory("DRPGClearTarget") && Random(0, 100) <= 15)
+    if (GetActorProperty(0, APROP_Friendly))
     {
-        GiveInventory("DRPGClearTarget", 1);
-        Delay(10);
-    }
+        // Clearing a friendly monster's target in case the enemy is out of sight
+        if (!CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
+        {
+            GiveInventory("DRPGFriendlyClearTarget", 1);
+            Delay(10);
+        }
 
-    if (!CheckInventory("DRPGAggressionOnFriendly") && Random(0, 100) <= 15)
-    {
-        GiveInventory("DRPGAggressionOnFriendly", 1);
-        Delay(10);
+        // More enemies aggression to summoned monsters
+        if (!CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
+        {
+            GiveInventory("DRPGFriendlyAlertMonsters", 1);
+            Delay(10);
+        }
     }
 
     Delay(10);
@@ -2271,7 +2261,6 @@ NamedScript DECORATE void MonsterRevive()
         MonsterRegenerationHandler();
 
     MonsterAggressionHandler();
-    MonsterAggressionOnFriendlyHandler();
     MonsterFriendlyTeleport();
 }
 
