@@ -488,7 +488,7 @@ actor DRPGEnemyClearTarget : CustomInventory
         TNT1 A 0 A_Jump(256, "Forget")
     ForgetCheckMonster:
         TNT1 A 0 A_JumpIfTargetInLOS("ForgetCancel", 0, JLOSF_DEADNOJUMP , 0)
-        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= frandom(256, 1536), "ForgetCancel")
+        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= frandom(256, 1024), "ForgetCancel")
         TNT1 A 0 A_Jump(256, "Forget")
     Forget: 
         TNT1 A 0 A_ClearTarget
