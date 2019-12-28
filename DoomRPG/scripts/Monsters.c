@@ -1203,6 +1203,76 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
+    // Changing the AI of monsters in case if there are summoned monsters
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (!PlayerInGame(i)) continue;
+
+        if (!Players(i).Summons == 0)
+        {
+            for (int j = 0; j < Players(i).Summons; j++)
+            {
+                if (!GetActorProperty(0, APROP_Friendly))
+                {
+                    // If the enemy has no target and the summoned monster is in his field of vision he immediately becomes aggressive towards summoned monster
+                    if (!MonsterHasTarget() && Distance(0, Players(i).SummonTID[j]) <= 1536 && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
+                    {
+                        Thing_Hate (0, Players(i).SummonTID[j], 3);
+                        Delay(10);
+                    }
+
+                    // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
+                    if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && Random(0, 100) <= 15 || MonsterHasTarget() && CheckSight(0, Players(i).TID, 0) && Random(0, 100) <= 15)
+                    {
+                        if (CheckSight(0, Players(i).SummonTID[j], 0))
+                        {
+                            GiveInventory("DRPGEnemyClearTarget1", 1);
+                            Delay(10);
+                        }
+                        else
+                        {
+                            GiveInventory("DRPGEnemyClearTarget2", 1);
+                            Delay(10);
+                        }
+                    }
+
+                    // Switch to another target if it is closer than the current target
+                    if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && CheckSight(0, Players(i).TID, 0) && Distance(0, AAPTR_TARGET) > Random(256, 512) && Random(0, 100) <= 15)
+                    {
+                        if (Distance(0, Players(i).SummonTID[j]) <= Random(64, 256) && Distance(0, Players(i).SummonTID[j]) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
+                        {
+                            Thing_Hate (0, Players(i).SummonTID[j], 4);
+                            Delay(10);
+                        }
+
+                        if (Distance(0, Players(i).TID) <= Random(64, 256) && Distance(0, Players(i).TID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
+                        {
+                            Thing_Hate (0, Players(i).TID, 4);
+                            Delay(10);
+                        }
+                    }
+                }
+
+                if (GetActorProperty(0, APROP_Friendly))
+                {
+                    // Clearing a friendly monster's target in case the enemy is out of sight
+                    if (!CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
+                    {
+                        GiveInventory("DRPGFriendlyClearTarget", 1);
+                        Delay(10);
+                    }
+
+                    // More enemies aggression to summoned monsters
+                    if (!CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
+                    {
+                        GiveInventory("DRPGFriendlyAlertMonsters", 1);
+                        Delay(10);
+                    }
+                }
+            }
+        }
+    }
+
     if (!MonsterHasTarget())
     {
         Delay(10);
@@ -1222,44 +1292,6 @@ Start:
     {
         if (RandomFixed(0.0, 1.0) < ((Aggression - 1.0) / 4.0))
             GiveInventory("DRPGMonsterAttackMore", 1);
-    }
-
-    // Clearing enemy target in case a summoned monster is nearby and the player is out of sight
-    if (!GetActorProperty(0, APROP_Friendly) && !CheckInventory("DRPGEnemyClearTarget") && Random(0, 100) <= 15)
-    {
-        for (int i = 0; i < MAX_PLAYERS; i++)
-        {
-            if (!PlayerInGame(i)) continue;
-
-            if (!Players(i).Summons == 0)
-            {
-                for (int j = 0; j < Players(i).Summons; j++)
-                {
-                    if (Distance(0, Players(i).SummonTID[j]) <= Random(256, 1024))
-                    {
-                        GiveInventory("DRPGEnemyClearTarget", 1);
-                        Delay(10);
-                    }
-                }
-            }
-        }
-    }
-
-    if (GetActorProperty(0, APROP_Friendly))
-    {
-        // Clearing a friendly monster's target in case the enemy is out of sight
-        if (!CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
-        {
-            GiveInventory("DRPGFriendlyClearTarget", 1);
-            Delay(10);
-        }
-
-        // More enemies aggression to summoned monsters
-        if (!CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
-        {
-            GiveInventory("DRPGFriendlyAlertMonsters", 1);
-            Delay(10);
-        }
     }
 
     Delay(10);

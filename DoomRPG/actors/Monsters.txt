@@ -473,7 +473,7 @@ actor DRPGFriendlyClearTarget : CustomInventory
     }
 }
 
-actor DRPGEnemyClearTarget : CustomInventory
+actor DRPGEnemyClearTarget1 : CustomInventory
 {
     States
     {
@@ -481,22 +481,72 @@ actor DRPGEnemyClearTarget : CustomInventory
         TNT1 A 0 A_Jump(256, "ClassCheck")
     ClassCheck:
         TNT1 A 0 A_JumpIf(CheckClass("PlayerPawn", AAPTR_TARGET, TRUE), "ForgetCheckPlayer")
+        TNT1 A 0 A_CheckFlag("FRIENDLY", "ForgetCheckFriendly", AAPTR_TARGET)
         TNT1 A 0 A_Jump(256, "ForgetCheckMonster")
     ForgetCheckPlayer:
         TNT1 A 0 A_JumpIfTargetInLOS("ForgetCancel", 0, JLOSF_DEADNOJUMP , 0)
-        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= frandom(256, 512), "ForgetCancel")
+        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= frandom(256, 1024), "ForgetCancel")
         TNT1 A 0 A_Jump(256, "Forget")
-    ForgetCheckMonster:     
-    	TNT1 A 0 {If (GetDistance(AAPTR_TARGET) <= frandom(64, 128)) {A_ChangeFlag("NOINFIGHTING", true);} Else {A_ChangeFlag("NOINFIGHTING", false);}}
+    ForgetCheckFriendly:     
         TNT1 A 0 A_JumpIfTargetInLOS("ForgetCancel", 0, JLOSF_DEADNOJUMP , 0)
         TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= frandom(256, 1024), "ForgetCancel")
         TNT1 A 0 A_Jump(256, "Forget")
+    ForgetCheckMonster:     
+    	TNT1 A 0 {If (GetDistance(AAPTR_TARGET) <= frandom(64, 256)) {A_ChangeFlag("NOINFIGHTING", true);}}
+        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= frandom(64, 256), "ForgetCancel")
+        TNT1 A 0 A_Jump(256, "ForgetMonster")
     Forget: 
         TNT1 A 0 A_ClearTarget
-        TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget", 0)
+        TNT1 A 0 A_Look
+        TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget1", 0)
+        Stop
+    ForgetMonster: 
+        TNT1 A 0 A_ClearTarget
+        TNT1 A 0 A_ChangeFlag("NOINFIGHTING", false)
+        TNT1 A 0 A_Look
+        TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget1", 0)
         Stop
     ForgetCancel: 
-        TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget", 0)
+        TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget1", 0)
+        Stop
+    }
+}
+
+actor DRPGEnemyClearTarget2 : CustomInventory
+{
+    States
+    {
+    Pickup:
+        TNT1 A 0 A_Jump(256, "ClassCheck")
+    ClassCheck:
+        TNT1 A 0 A_JumpIf(CheckClass("PlayerPawn", AAPTR_TARGET, TRUE), "ForgetCheckPlayer")
+        TNT1 A 0 A_CheckFlag("FRIENDLY", "ForgetCheckFriendly", AAPTR_TARGET)
+        TNT1 A 0 A_Jump(256, "ForgetCheckMonster")
+    ForgetCheckPlayer:
+        TNT1 A 0 A_JumpIfTargetInLOS("ForgetCancel", 0, JLOSF_DEADNOJUMP , 0)
+        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= 2048, "ForgetCancel")
+        TNT1 A 0 A_Jump(256, "Forget")
+    ForgetCheckFriendly:     
+        TNT1 A 0 A_JumpIfTargetInLOS("ForgetCancel", 0, JLOSF_DEADNOJUMP , 0)
+        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= frandom(256, 1024), "ForgetCancel")
+        TNT1 A 0 A_Jump(256, "Forget")
+    ForgetCheckMonster:     
+    	TNT1 A 0 {If (GetDistance(AAPTR_TARGET) <= frandom(64, 256)) {A_ChangeFlag("NOINFIGHTING", true);}}
+        TNT1 A 0 A_JumpIf(GetDistance(AAPTR_TARGET) <= frandom(64, 256), "ForgetCancel")
+        TNT1 A 0 A_Jump(256, "ForgetMonster")
+    Forget: 
+        TNT1 A 0 A_ClearTarget
+        TNT1 A 0 A_Look
+        TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget2", 0)
+        Stop
+    ForgetMonster: 
+        TNT1 A 0 A_ClearTarget
+        TNT1 A 0 A_ChangeFlag("NOINFIGHTING", false)
+        TNT1 A 0 A_Look
+        TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget2", 0)
+        Stop
+    ForgetCancel: 
+        TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget2", 0)
         Stop
     }
 }
