@@ -1319,7 +1319,7 @@ Start:
         goto Start;
     }
 
-    if (MonsterHasTarget())
+    if (MonsterHasTarget() && GetCVar("drpg_monster_friendly_teleport_if_no_target"))
     {
         Delay(35);
         goto Start;
