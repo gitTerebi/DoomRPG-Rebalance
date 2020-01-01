@@ -1303,6 +1303,10 @@ NamedScript void MonsterFriendlyTeleport()
     if (!GetCVar("drpg_monster_friendly_teleport_enable") || !GetActorProperty(0, APROP_Friendly) || CurrentLevel->UACBase || InMultiplayer && PlayerCount() > 1)
         return;
 
+    // Check class
+    if (GetActorClass(0) == "DRPGForceWall" || GetActorClass(0) == "DRPGPortableTurret")
+        return;
+
     // Delay Stagger
     Delay(35 + (GetMonsterID(0) % 4));
 

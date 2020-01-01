@@ -575,11 +575,13 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         {
             .Name = "Force Wall",
             .Cost = 100,
-            .MaxLevel = 1,
+            .MaxLevel = 3,
             .Use = ForceWall,
             .Description =
             {
-                "Creates a wall of force in front of you which blocks hitscans, projectiles and monsters\nHealth is determined by your Energy"
+                "Creates a wall of force in front of you which blocks hitscans, projectiles and monsters\nHealth is determined by your Energy",
+                "Creates a wall of force in front of you which blocks hitscans, projectiles and monsters\nHealth is determined by your Energy\nDouble increase Health of Force Wall",
+                "Creates a wall of force in front of you which blocks hitscans, projectiles and monsters\nHealth is determined by your Energy\nTriple increase Health of Force Wall",
             }
         },
         {
@@ -2295,10 +2297,24 @@ NamedScript Console bool BreakdownArmor(SkillLevelInfo *SkillLevel, void *Data)
 NamedScript Console bool ForceWall(SkillLevelInfo *SkillLevel, void *Data)
 {
     int TID = UniqueTID();
+    int LevelWall;
     fixed Angle = GetActorAngle(0);
     fixed X = GetActorX(0) + Cos(Angle) * 96.0;
     fixed Y = GetActorY(0) + Sin(Angle) * 96.0;
     fixed Z = GetActorZ(0);
+
+    switch (SkillLevel->CurrentLevel)
+    {
+    case 1:
+        LevelWall = 1;
+        break;
+    case 2:
+        LevelWall = 2;
+        break;
+    case 3:
+        LevelWall = 3;
+        break;
+    }
 
     if (Spawn("DRPGForceWall", X, Y, Z, TID, Angle))
     {
@@ -2308,8 +2324,8 @@ NamedScript Console bool ForceWall(SkillLevelInfo *SkillLevel, void *Data)
 
         // Determine Defense and Health
         Stats->SpawnHealth = GetActorProperty(0, APROP_SpawnHealth);
-        Stats->Defense = Player.EnergyTotal * 5;
-        Stats->Vitality = Player.EnergyTotal * 5;
+        Stats->Defense = Player.EnergyTotal * 1.5;
+        Stats->Vitality = (Player.EnergyTotal * 1.5) * LevelWall;
         Stats->HealthMax = CalculateMonsterMaxHealth(Stats);
         SetActorProperty(TID, APROP_Health, Stats->HealthMax);
 
