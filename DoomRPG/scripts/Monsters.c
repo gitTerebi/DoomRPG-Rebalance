@@ -2497,7 +2497,7 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGCredits1000", 256);
             DropMonsterItem(Killer, 0, "DRPGSoulsphereRandomizer", 256);
             DropMonsterItem(Killer, 0, "DRPGLifeDropper", 128);
-            DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGModulePickup", 256);
             DropMonsterItem(Killer, 0, "DRPGAugDropper", 96);
             DropMonsterItem(Killer, 0, "DRPGUACCard", 48 / (Players(Killer).ShopCard + 1));
             DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 64);

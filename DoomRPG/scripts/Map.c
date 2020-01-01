@@ -1021,7 +1021,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     {
     case MAPEVENT_MEGABOSS:
         return (GetCVar("drpg_mapevent_megaboss") &&
-                AveragePlayerLevel() >= 45);
+                AveragePlayerLevel() >= 50);
 
     case MAPEVENT_TOXICHAZARD:
         return (GetCVar("drpg_mapevent_toxichazard") &&
@@ -1029,7 +1029,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_NUCLEARBOMB:
         return (GetCVar("drpg_mapevent_nuclearbomb") &&
-                AveragePlayerLevel() >= 15);
+                AveragePlayerLevel() >= 10);
 
     case MAPEVENT_LOWPOWER:
         return (GetCVar("drpg_mapevent_lowpower") &&
@@ -1037,23 +1037,23 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_ALLAURAS:
         return (GetCVar("drpg_mapevent_allauras") &&
-                AveragePlayerLevel() >= 25);
+                AveragePlayerLevel() >= 30);
 
     case MAPEVENT_ONEMONSTER:
         return (GetCVar("drpg_mapevent_onemonster") &&
-                AveragePlayerLevel() >= 15);
+                AveragePlayerLevel() >= 20);
 
     case MAPEVENT_HELLUNLEASHED:
         return (GetCVar("drpg_mapevent_hellunleashed") &&
-                AveragePlayerLevel() >= 35);
+                AveragePlayerLevel() >= 45);
 
     case MAPEVENT_HARMONIZEDAURAS:
         return (GetCVar("drpg_mapevent_harmonizedauras") &&
-                AveragePlayerLevel() >= 20);
+                AveragePlayerLevel() >= 25);
 
     case MAPEVENT_TELEPORTCRACKS:
         return (GetCVar("drpg_mapevent_teleportcracks") &&
-                AveragePlayerLevel() >= 15);
+                AveragePlayerLevel() >= 25);
 
     case MAPEVENT_DOOMSDAY:
         return (GetCVar("drpg_mapevent_doomsday") &&
@@ -1072,7 +1072,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     case MAPEVENT_DRLA_FEEDINGFRENZY:
         return (CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_feedingfrenzy") &&
-                AveragePlayerLevel() >= 30);
+                AveragePlayerLevel() >= 35);
 
     case MAPEVENT_DRLA_OVERMIND:
         return (GetCVar("drpg_mapevent_overmind") &&
@@ -2335,7 +2335,7 @@ NamedScript void HarmonizedDestructionEvent()
 {
     Delay(1);
 
-    if (AveragePlayerLevel() < 20 && CurrentLevel->AuraType == AURA_MAX)
+    if (AveragePlayerLevel() < 35 && CurrentLevel->AuraType == AURA_MAX)
         CurrentLevel->AuraType = Random(0, AURA_MAX - 1);
 
     if (DebugLog)
@@ -2880,22 +2880,30 @@ NamedScript void FeedingFrenzyEvent()
         "RLRevenantsLauncherPickup", // Revenant
         "RLPlasmaRedirectionCannonPickup", // Nightmare Cyberdemon
 
+        // Demonic armor set
+        "RLDemonicCarapaceArmorPickup",
+        "RLDemonicBootsPickup",
+
         // Demonic weapons
-        "RLHellsReignPickup",
-        "RLUnmakerPickup",
         // "RLMonsterFrisbee",
         "RLDeathsGaze",
         "RLSoulstormRifle",
         // "RLMortalyzer",
         // "RLDreadshotMortar",
-
-        // Demonic armor set
-        "RLDemonicCarapaceArmorPickup",
-        "RLDemonicBootsPickup"
+        "RLHellsReignPickup",
+        "RLUnmakerPickup"
     };
 
-    str RewardItem = RewardItems[Random(0, 5)];
-    DynamicLootGenerator(RewardItem, 1);
+    if (AveragePlayerLevel() <= 45)
+    {
+        str RewardItem = RewardItems[Random(0, 5)];
+        DynamicLootGenerator(RewardItem, 1);
+    }
+    else
+    {
+        str RewardItem = RewardItems[Random(0, 7)];
+        DynamicLootGenerator(RewardItem, 1);
+    }
 
     // Ambient Music
     SetMusic("FeedThem");
