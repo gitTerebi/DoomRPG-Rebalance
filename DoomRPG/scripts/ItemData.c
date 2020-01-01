@@ -529,7 +529,7 @@ NamedScript void BuildItemData()
 
         // Piercing Blade Assembled Weapons
         // ITEMDATA_DEF("RLPiercingCombatKnife",                   "Piercing Blade \Cv[Assembled]\C-",                       1000, -1, "PKNIX0", 11, 13);
-        ITEMDATA_DEF("RLPiercingChainsaw",                      "Piercing Chainsaw \Cv[Assembled]\C-",                    1500, -1, -1, "PSAWX0", 31, 23);
+        ITEMDATA_DEF("RLPiercingChainsaw",                      "Piercing Chainsaw \Cv[Assembled]\C-",                   20000, -1, -1, "PSAWX0", 31, 23);
         // ITEMDATA_DEF("RLPiercingAxe",                           "Piercing Axe \Cv[Assembled]\C-",                         2500, -1, "PAXEX0", 11, 13);
         // ITEMDATA_DEF("RLPiercingMachete",                       "Piercing Machete \Cv[Assembled]\C-",                     2200, -1, "PMACX0", 11, 13);
         // ITEMDATA_DEF("RLPiercingMace",                          "Piercing Mace \Cv[Assembled]\C-",                        2800, -1, "PMCEX0", 11, 13);
