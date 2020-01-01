@@ -250,7 +250,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         {
             .Name = "Dark Blue Aura",
             .Cost = 100,
-            .MaxLevel = 7,
+            .MaxLevel = 6,
             .Use = UseAura,
             .Description =
             {
@@ -259,8 +259,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
                 "Clip Regen\nShell Regen\nRocket Regen",
                 "Clip Regen\nShell Regen\nRocket Regen\nCell Regen",
                 "Clip Regen\nShell Regen\nRocket Regen\nCell Regen\n2x Regen Speed",
-                "Clip Regen\nShell Regen\nRocket Regen\nCell Regen\n4x Regen Speed",
-                "Clip Regen\nShell Regen\nRocket Regen\nCell Regen\n4x Regen Speed\nInfinite Ammo"
+                "Clip Regen\nShell Regen\nRocket Regen\nCell Regen\n4x Regen Speed"
             }
         },
         {
@@ -2309,10 +2308,10 @@ NamedScript Console bool ForceWall(SkillLevelInfo *SkillLevel, void *Data)
         LevelWall = 1;
         break;
     case 2:
-        LevelWall = 2;
+        LevelWall = 3;
         break;
     case 3:
-        LevelWall = 3;
+        LevelWall = 5;
         break;
     }
 
@@ -2324,8 +2323,8 @@ NamedScript Console bool ForceWall(SkillLevelInfo *SkillLevel, void *Data)
 
         // Determine Defense and Health
         Stats->SpawnHealth = GetActorProperty(0, APROP_SpawnHealth);
-        Stats->Defense = Player.EnergyTotal * 1.5;
-        Stats->Vitality = (Player.EnergyTotal * 1.5) * LevelWall;
+        Stats->Defense = Player.EnergyTotal;
+        Stats->Vitality = Player.EnergyTotal * LevelWall;
         Stats->HealthMax = CalculateMonsterMaxHealth(Stats);
         SetActorProperty(TID, APROP_Health, Stats->HealthMax);
 
@@ -3279,16 +3278,14 @@ void CheckAuras()
                 Player.Aura.Type[AURA_DARKBLUE].Level = 1;
             if (Player.SoulDarkBlueCount >= 9 && Player.SoulDarkBlueCount < 15 && Player.Aura.Type[AURA_DARKBLUE].Level < 2)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 2;
-            if (Player.SoulDarkBlueCount >= 15 && Player.SoulDarkBlueCount < 21 && Player.Aura.Type[AURA_DARKBLUE].Level < 3)
+            if (Player.SoulDarkBlueCount >= 15 && Player.SoulDarkBlueCount < 30 && Player.Aura.Type[AURA_DARKBLUE].Level < 3)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 3;
-            if (Player.SoulDarkBlueCount >= 21 && Player.SoulDarkBlueCount < 30 && Player.Aura.Type[AURA_DARKBLUE].Level < 4)
+            if (Player.SoulDarkBlueCount >= 30 && Player.SoulDarkBlueCount < 40 && Player.Aura.Type[AURA_DARKBLUE].Level < 4)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 4;
-            if (Player.SoulDarkBlueCount >= 30 && Player.SoulDarkBlueCount < 40 && Player.Aura.Type[AURA_DARKBLUE].Level < 5)
+            if (Player.SoulDarkBlueCount >= 40 && Player.SoulDarkBlueCount < 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 5)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 5;
-            if (Player.SoulDarkBlueCount >= 40 && Player.SoulDarkBlueCount < 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 6)
+            if (Player.SoulDarkBlueCount >= 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 6)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 6;
-            if (Player.SoulDarkBlueCount >= 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 7)
-                Player.Aura.Type[AURA_DARKBLUE].Level = 7;
 
             if (Player.Aura.Type[AURA_DARKBLUE].Level == 5)
                 AmmoRegenMult = 2;
@@ -3306,8 +3303,6 @@ void CheckAuras()
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 4)
                 if ((Timer() % (35 / 2)) == 0)
                     GiveInventory("Cell", AmmoRegenMult);
-            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 7)
-                GiveInventory("DRPGDarkBlueAuraInfiniteAmmo2", 1);
         }
 
         // Yellow Aura
