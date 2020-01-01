@@ -2565,7 +2565,7 @@ NamedScript void MonsterDeath()
 
             DropMonsterItem(Killer, 0, "DRPGArmorDropper", 128);
             DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 64);
-            DropMonsterItem(Killer, 0, "DRPGDiamondUACCard", 32);
+            DropMonsterItem(Killer, 0, "DRPGDiamondUACCard", 8);
 
             if (CompatMode == COMPAT_DRLA)
             {
