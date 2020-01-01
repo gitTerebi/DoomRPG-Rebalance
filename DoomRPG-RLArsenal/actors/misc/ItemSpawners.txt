@@ -235,7 +235,7 @@ actor RLRandomPhaseDeviceSpawner : RandomSpawner 16729
 {
   Tag "Random Phase Device"
     //$category "DRLA Spawners"
-    DropItem "DRPGMoneyDropper"          255 130
+    DropItem "DRPGEmpty"                 255 130
     DropItem "DRPGTurretPart"            255 20
     DropItem "RLPhaseDevice"             255 90
     DropItem "RLHomingPhaseDevice"       255 30

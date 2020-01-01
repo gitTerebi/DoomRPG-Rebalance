@@ -497,3 +497,5 @@ ACTOR MapSpotTall : MapSpotGravity
     Height 56
     Radius 20
 }
+
+Actor DRPGEmpty {}
