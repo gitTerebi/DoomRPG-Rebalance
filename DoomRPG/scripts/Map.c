@@ -1021,7 +1021,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     {
     case MAPEVENT_MEGABOSS:
         return (GetCVar("drpg_mapevent_megaboss") &&
-                AveragePlayerLevel() >= 50);
+                AveragePlayerLevel() >= 45);
 
     case MAPEVENT_TOXICHAZARD:
         return (GetCVar("drpg_mapevent_toxichazard") &&
