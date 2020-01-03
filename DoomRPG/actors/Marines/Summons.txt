@@ -11,7 +11,6 @@ ACTOR DRPGMarineGuardPistolSummoned
   +FLOORCLIP
   +AVOIDMELEE
   +FRIENDLY
-  +MISSILEMORE
   -COUNTKILL
   +AMBUSH
   +NEVERRESPAWN
@@ -24,6 +23,7 @@ ACTOR DRPGMarineGuardPistolSummoned
   +ALWAYSFAST
   +QUICKTORETALIATE
   +MISSILEMORE
+  +MISSILEEVENMORE
   Obituary "%o stood in the line of fire for some reason."
   Species "Player"
   Tag "Marine"
@@ -177,7 +177,6 @@ ACTOR DRPGMarineShotgunSummoned
   Monster
   +FLOORCLIP
   +AVOIDMELEE
-  +MISSILEMORE
   -COUNTKILL
   +AMBUSH
   +NEVERRESPAWN
@@ -190,6 +189,7 @@ ACTOR DRPGMarineShotgunSummoned
   +ALWAYSFAST
   +QUICKTORETALIATE
   +MISSILEMORE
+  +MISSILEEVENMORE
   Obituary "%o stood in the line of fire for some reason."
   Species "Player"
   Tag "Marine"
@@ -362,7 +362,6 @@ ACTOR DRPGMarineDoubleShotgunSummoned
   Monster
   +FLOORCLIP
   +AVOIDMELEE
-  +MISSILEMORE
   -COUNTKILL
   +AMBUSH
   +NEVERRESPAWN
@@ -375,6 +374,7 @@ ACTOR DRPGMarineDoubleShotgunSummoned
   +ALWAYSFAST
   +QUICKTORETALIATE
   +MISSILEMORE
+  +MISSILEEVENMORE
   Obituary "%o stood in the line of fire for some reason."
   Species "Player"
   Tag "Marine"
@@ -520,7 +520,6 @@ ACTOR DRPGMarineChaingunSummoned
   Monster
   +FLOORCLIP
   +AVOIDMELEE
-  +MISSILEMORE
   -COUNTKILL
   +AMBUSH
   +NEVERRESPAWN
@@ -533,6 +532,7 @@ ACTOR DRPGMarineChaingunSummoned
   +ALWAYSFAST
   +QUICKTORETALIATE
   +MISSILEMORE
+  +MISSILEEVENMORE
   Obituary "%o stood in the line of fire for some reason."
   Species "Player"
   Tag "Marine"
@@ -691,7 +691,6 @@ ACTOR DRPGMarineRocketLauncherSummoned
   Monster
   +FLOORCLIP
   +AVOIDMELEE
-  +MISSILEMORE
   -COUNTKILL
   +AMBUSH
   +NEVERRESPAWN
@@ -704,6 +703,7 @@ ACTOR DRPGMarineRocketLauncherSummoned
   +ALWAYSFAST
   +QUICKTORETALIATE
   +MISSILEMORE
+  +MISSILEEVENMORE
   Obituary "%o stood in the line of fire for some reason."
   Species "Player"
   Tag "Marine"
@@ -857,7 +857,6 @@ ACTOR DRPGMarinePlasmaRifleSummoned
   Monster
   +FLOORCLIP
   +AVOIDMELEE
-  +MISSILEMORE
   -COUNTKILL
   +AMBUSH
   +NEVERRESPAWN
@@ -870,6 +869,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned
   +ALWAYSFAST
   +QUICKTORETALIATE
   +MISSILEMORE
+  +MISSILEEVENMORE
   Obituary "%o stood in the line of fire for some reason."
   Species "Player"
   Tag "Marine"
@@ -1087,7 +1087,6 @@ ACTOR DRPGMarineBFG9000Summoned
   Monster
   +FLOORCLIP
   +AVOIDMELEE
-  +MISSILEMORE
   -COUNTKILL
   +AMBUSH
   +NEVERRESPAWN
@@ -1100,6 +1099,7 @@ ACTOR DRPGMarineBFG9000Summoned
   +ALWAYSFAST
   +QUICKTORETALIATE
   +MISSILEMORE
+  +MISSILEEVENMORE
   Obituary "%o stood in the line of fire for some reason."
   Species "Player"
   Tag "Marine"

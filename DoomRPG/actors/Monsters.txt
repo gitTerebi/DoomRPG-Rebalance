@@ -497,13 +497,11 @@ actor DRPGEnemyClearTarget1 : CustomInventory
         TNT1 A 0 A_Jump(256, "ForgetMonster")
     Forget: 
         TNT1 A 0 A_ClearTarget
-        TNT1 A 0 A_Look
         TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget1", 0)
         Stop
     ForgetMonster: 
         TNT1 A 0 A_ClearTarget
         TNT1 A 0 A_ChangeFlag("NOINFIGHTING", false)
-        TNT1 A 0 A_Look
         TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget1", 0)
         Stop
     ForgetCancel: 
@@ -536,13 +534,11 @@ actor DRPGEnemyClearTarget2 : CustomInventory
         TNT1 A 0 A_Jump(256, "ForgetMonster")
     Forget: 
         TNT1 A 0 A_ClearTarget
-        TNT1 A 0 A_Look
         TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget2", 0)
         Stop
     ForgetMonster: 
         TNT1 A 0 A_ClearTarget
         TNT1 A 0 A_ChangeFlag("NOINFIGHTING", false)
-        TNT1 A 0 A_Look
         TNT1 A 0 A_TakeInventory("DRPGEnemyClearTarget2", 0)
         Stop
     ForgetCancel: 

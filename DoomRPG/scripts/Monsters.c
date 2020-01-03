@@ -665,6 +665,7 @@ NamedScript Console void MonsterDump()
     Log(" Speed: %.2k", GetActorPropertyFixed(0, APROP_Speed));
     Log(" Damage Multiplier: %.2k", GetActorPropertyFixed(0, APROP_DamageMultiplier));
     Log(" Damage Factor: %.2k", GetActorPropertyFixed(0, APROP_DamageFactor));
+    Log(" Distance: %.2k", Distance(0, Players(PlayerNum).TID));
     Log(" TID: %d", ActivatorTID());
     Log(" ID: %d", GetMonsterID(0));
 
@@ -1249,6 +1250,32 @@ Start:
                         {
                             Thing_Hate (0, Players(i).TID, 4);
                             Delay(10);
+                        }
+                    }
+
+                    // Summons switch to another target if it is closer than the current target
+                    if (CheckSight(Players(i).SummonTID[j], 0, 0) && Distance(0, Players(i).SummonTID[j]) <= 256 && Random(0, 100) <= 15)
+                    {
+                        int EnemyMonsterTID = Stats->TID;
+
+                        SetActivator(Players(i).SummonTID[j]);
+
+                        if (MonsterHasTarget() && CheckSight(0, AAPTR_TARGET, 0) && Distance(0, AAPTR_TARGET) > Random(256, 512))
+                        {
+                            if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= Random(64, 256) && Distance(0, EnemyMonsterTID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
+                            {
+                                Thing_Hate (0, EnemyMonsterTID);
+                                Delay(10);
+                            }
+                        }
+
+                        if (MonsterHasTarget() && !CheckSight(0, AAPTR_TARGET, 0))
+                        {
+                            if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= 256)
+                            {
+                                Thing_Hate (0, EnemyMonsterTID);
+                                Delay(10);
+                            }
                         }
                     }
                 }
