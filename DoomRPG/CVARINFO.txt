@@ -248,6 +248,7 @@ user    bool    drpg_augs_autoreactivate = false;
 user    bool    drpg_give_quickinventory = false;
 server  bool    drpg_monster_friendly_teleport_enable = false;
 server  bool    drpg_monster_friendly_teleport_if_no_target = true;
+server  bool    drpg_monster_friendly_teleport_if_no_sight = true;
 server  int     drpg_monster_friendly_teleport_distance = 1;
 
 // Performance

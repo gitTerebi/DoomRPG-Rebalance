@@ -1366,6 +1366,12 @@ Start:
         goto Start;
     }
 
+    if (CheckSight(0, Players(0).TID, 0) && GetCVar("drpg_monster_friendly_teleport_if_no_sight"))
+    {
+        Delay(35);
+        goto Start;
+    }
+
     fixed TeleportDistance = 512 + (512 * GetCVar("drpg_monster_friendly_teleport_distance"));
 
     if (Distance(0, Players(0).TID) > TeleportDistance)
