@@ -394,7 +394,7 @@ actor DRPGChipDropper : RandomSpawner 20016
     DropItem "DRPGChipPlatinum"     255 2
 }
 
-actor DRPGShieldDropperTier1 : RandomSpawner 20016
+actor DRPGShieldDropperTier1 : RandomSpawner 20150
 {
     // Empty
     DropItem "DRPGEmpty"                255 300
@@ -427,7 +427,7 @@ actor DRPGShieldDropperTier1 : RandomSpawner 20016
     DropItem "DRPGShieldAccessory56"    255 25 // LIL-ZZ8
 }
 
-actor DRPGShieldDropperTier2 : RandomSpawner 20017
+actor DRPGShieldDropperTier2 : RandomSpawner 20151
 {
     // Empty
     DropItem "DRPGEmpty"                255 300
@@ -461,7 +461,7 @@ actor DRPGShieldDropperTier2 : RandomSpawner 20017
     DropItem "DRPGShieldAccessory37"    255 25 // NAKD-N0W
 }
 
-actor DRPGShieldDropperTier3 : RandomSpawner 20018
+actor DRPGShieldDropperTier3 : RandomSpawner 20152
 {
     // Empty
     DropItem "DRPGEmpty"                255 300
@@ -500,7 +500,7 @@ actor DRPGShieldDropperTier3 : RandomSpawner 20018
     DropItem "DRPGShieldAccessory63"    255 25 // TUFF-MAG3
 }
 
-actor DRPGShieldDropperTier4 : RandomSpawner 20019
+actor DRPGShieldDropperTier4 : RandomSpawner 20153
 {
     // Empty
     DropItem "DRPGEmpty"                255 300
@@ -540,7 +540,7 @@ actor DRPGShieldDropperTier4 : RandomSpawner 20019
     DropItem "DRPGShieldAccessory66"    255 25 // S-SP4G3TT
 }
 
-actor DRPGShieldDropperTier5 : RandomSpawner 20020
+actor DRPGShieldDropperTier5 : RandomSpawner 20154
 {
     // Empty
     DropItem "DRPGEmpty"                255 300
@@ -574,7 +574,7 @@ actor DRPGShieldDropperTier5 : RandomSpawner 20020
     DropItem "DRPGShieldAccessory65"    255 25 // HORD-3RR
 }
 
-actor DRPGShieldDropperTier6 : RandomSpawner 20021
+actor DRPGShieldDropperTier6 : RandomSpawner 20155
 {
     // Empty
     DropItem "DRPGEmpty"                255 300

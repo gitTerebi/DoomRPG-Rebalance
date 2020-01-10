@@ -2156,7 +2156,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
 
     if (Index == 0) // Marines
     {
-        if (CompatMonMode == COMPAT_DRLA)
+        if (CompatMode == COMPAT_DRLA)
         {
             switch (SkillLevel->CurrentLevel)
             {
@@ -3104,7 +3104,7 @@ void CheckSkills()
     }
 
     // Summoning Skills - Marines Descriptions
-    if (CompatMonMode == COMPAT_DRLA)
+    if (CompatMode == COMPAT_DRLA)
     {
         if ((Player.Level + Player.EnergyTotal) < 50)
         {
