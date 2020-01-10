@@ -442,6 +442,10 @@ actor DRPGFriendlyRemover : CustomInventory
     }
 }
 
+
+// Used to change the AI of friendly monsters (and enemies in the environment)
+actor DRPGMarineSummonedToken : Inventory {}
+
 actor DRPGFriendlyAlertMonsters : CustomInventory
 {
     States

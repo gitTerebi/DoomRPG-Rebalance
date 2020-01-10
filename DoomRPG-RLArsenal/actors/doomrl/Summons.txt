@@ -1,4 +1,4 @@
-ACTOR DRPGMarineDoubleShotgunDRLASummoned Replaces DRPGMarineDoubleShotgunSummoned
+ACTOR DRPGMarineDoubleShotgunDRLASummoned
 {
   Health 100
   GibHealth -50
@@ -156,7 +156,7 @@ ACTOR DRPGMarineDoubleShotgunDRLASummoned Replaces DRPGMarineDoubleShotgunSummon
   }
 }
 
-ACTOR DRPGMarineBattleRifleDRLASummoned Replaces DRPGMarineChaingunSummoned
+ACTOR DRPGMarineBattleRifleDRLASummoned
 {
   Health 100
   GibHealth -50

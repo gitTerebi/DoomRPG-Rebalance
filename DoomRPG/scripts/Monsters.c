@@ -1283,16 +1283,26 @@ Start:
                 if (GetActorProperty(0, APROP_Friendly))
                 {
                     // Clearing a friendly monster's target in case the enemy is out of sight
-                    if (!CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
+                    if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
                     {
                         GiveInventory("DRPGFriendlyClearTarget", 1);
                         Delay(10);
                     }
 
                     // More enemies aggression to summoned monsters
-                    if (!CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
+                    if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
                     {
                         GiveInventory("DRPGFriendlyAlertMonsters", 1);
+                        Delay(10);
+                    }
+                }
+
+                if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGMarineSummonedToken"))
+                {
+                    // Used to change the AI of friendly marines
+                    if (!MonsterHasTarget() && Distance(0, Players(i).TID) <= 200 && Random(0, 100) <= 25)
+                    {
+                        Thing_Hate(0, Players(i).TID);
                         Delay(10);
                     }
                 }

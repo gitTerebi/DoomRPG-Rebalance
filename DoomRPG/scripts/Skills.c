@@ -383,14 +383,15 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Summon Marine",
-            .Cost = 50,
-            .MaxLevel = 7,
+            .Cost = 60,
+            .MaxLevel = 8,
             .Use = Summon,
             .Description =
             {
                 "Summons a Marine\n\CjPistol",
+                "Summons a Marine\n\CjBattle Rifle",
                 "Summons a Marine\n\CjShotgun",
-                "Summons a Marine\n\CjSuper Shotgun",
+                "Summons a Marine\n\CjDouble Shotgun",
                 "Summons a Marine\n\CjChaingun",
                 "Summons a Marine\n\CjRocket Launcher",
                 "Summons a Marine\n\CjPlasma Rifle",
@@ -419,7 +420,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Former Commando",
-            .Cost = 150,
+            .Cost = 175,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -449,7 +450,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Cacodemon",
-            .Cost = 150,
+            .Cost = 175,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -2155,30 +2156,82 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
 
     if (Index == 0) // Marines
     {
-        switch (SkillLevel->CurrentLevel)
+        if (CompatMonMode == COMPAT_DRLA)
         {
-        case 1:
-            Name = "DRPGMarineGuardPistolSummoned";
-            break;
-        case 2:
-            Name = "DRPGMarineShotgunSummoned";
-            break;
-        case 3:
-            Name = "DRPGMarineDoubleShotgunSummoned";
-            break;
-        case 4:
-            Name = "DRPGMarineChaingunSummoned";;
-            break;
-        case 5:
-            Name = "DRPGMarineRocketLauncherSummoned";
-            break;
-        case 6:
-            Name = "DRPGMarinePlasmaRifleSummoned";
-            break;
-        case 7:
-            Name = "DRPGMarineBFG9000Summoned";
-            break;
-        };
+            switch (SkillLevel->CurrentLevel)
+            {
+            case 1:
+                if ((Player.Level + Player.EnergyTotal) < 50)   Name = "DRPGMarineGuardPistolSummoned";
+                if ((Player.Level + Player.EnergyTotal) >= 50)  Name = "DRPGMarineGuardPistolSummoned2";
+                if ((Player.Level + Player.EnergyTotal) >= 80)  Name = "DRPGMarineGuardPistolSummoned3";
+                break;
+            case 2:
+                if ((Player.Level + Player.EnergyTotal) < 60)   Name = "DRPGMarineBattleRifleSummoned";
+                if ((Player.Level + Player.EnergyTotal) >= 60)  Name = "DRPGMarineBattleRifleSummoned2";
+                if ((Player.Level + Player.EnergyTotal) >= 90)  Name = "DRPGMarineBattleRifleSummoned3";
+                break;
+            case 3:
+                if ((Player.Level + Player.EnergyTotal) < 70)   Name = "DRPGMarineShotgunSummoned";
+                if ((Player.Level + Player.EnergyTotal) >= 70)  Name = "DRPGMarineShotgunSummoned2";
+                if ((Player.Level + Player.EnergyTotal) >= 100)  Name = "DRPGMarineShotgunSummoned3";
+                break;
+            case 4:
+                if ((Player.Level + Player.EnergyTotal) < 80)   Name = "DRPGMarineDoubleShotgunSummoned";
+                if ((Player.Level + Player.EnergyTotal) >= 80)  Name = "DRPGMarineDoubleShotgunSummoned2";
+                if ((Player.Level + Player.EnergyTotal) >= 110)  Name = "DRPGMarineDoubleShotgunSummoned3";
+                break;
+            case 5:
+                if ((Player.Level + Player.EnergyTotal) < 90)   Name = "DRPGMarineChaingunSummoned";
+                if ((Player.Level + Player.EnergyTotal) >= 90)  Name = "DRPGMarineChaingunSummoned2";
+                if ((Player.Level + Player.EnergyTotal) >= 120)  Name = "DRPGMarineChaingunSummoned3";
+                break;
+            case 6:
+                if ((Player.Level + Player.EnergyTotal) < 100)   Name = "DRPGMarineRocketLauncherSummoned";
+                if ((Player.Level + Player.EnergyTotal) >= 100)  Name = "DRPGMarineRocketLauncherSummoned2";
+                if ((Player.Level + Player.EnergyTotal) >= 130)  Name = "DRPGMarineRocketLauncherSummoned3";
+                break;
+            case 7:
+                if ((Player.Level + Player.EnergyTotal) < 110)   Name = "DRPGMarinePlasmaRifleSummoned";
+                if ((Player.Level + Player.EnergyTotal) >= 110)  Name = "DRPGMarinePlasmaRifleSummoned2";
+                if ((Player.Level + Player.EnergyTotal) >= 140)  Name = "DRPGMarinePlasmaRifleSummoned3";
+                break;
+            case 8:
+                if ((Player.Level + Player.EnergyTotal) < 120)   Name = "DRPGMarineBFG9000Summoned";
+                if ((Player.Level + Player.EnergyTotal) >= 120)  Name = "DRPGMarineBFG9000Summoned2";
+                if ((Player.Level + Player.EnergyTotal) >= 150)  Name = "DRPGMarineBFG9000Summoned3";
+                break;
+            };
+        }
+        else
+        {
+            switch (SkillLevel->CurrentLevel)
+            {
+            case 1:
+                Name = "DRPGMarineGuardPistolSummoned";
+                break;
+            case 2:
+                Name = "DRPGMarineBattleRifleSummoned";
+                break;
+            case 3:
+                Name = "DRPGMarineShotgunSummoned";
+                break;
+            case 4:
+                Name = "DRPGMarineDoubleShotgunSummoned";
+                break;
+            case 5:
+                Name = "DRPGMarineChaingunSummoned";;
+                break;
+            case 6:
+                Name = "DRPGMarineRocketLauncherSummoned";
+                break;
+            case 7:
+                Name = "DRPGMarinePlasmaRifleSummoned";
+                break;
+            case 8:
+                Name = "DRPGMarineBFG9000Summoned";
+                break;
+            };
+        }
     }
     else // Monsters
     {
@@ -2792,10 +2845,6 @@ void BuildSkillData()
     // DoomRL Monsters Compatibility
     if (CompatMonMode == COMPAT_DRLA)
     {
-        // DoomRL Marines use slightly different weapons
-        Skills[4][0].Description[2] = "Summons a Marine\n\CjDouble Shotgun";
-        Skills[4][0].Description[3] = "Summons a Marine\n\CjBattle Rifle";
-
         // Summoning Skills - Names
         Skills[4][1].Name = "Summon Former Human";
         Skills[4][2].Name = "Summon Former Sergeant";
@@ -2852,6 +2901,17 @@ void BuildSkillData()
         Skills[4][14].Description[1] = "Summons a Nightmare Arch-Vile";
         Skills[4][15].Description[1] = "Summons a Nightmare Cyberdemon";
         Skills[4][16].Description[1] = "Summons a Spider Overmind";
+
+        // Summoning Skills - Marines Descriptions
+        if (Player.EnergyTotal < 20)
+        {
+            Skills[4][0].Description[0] = "Pistol";
+        }
+        if (Player.EnergyTotal >= 20)
+        {
+            Skills[4][0].Description[0] = "Combat Pistol";
+        }
+
     }
     // Colourful Hell Compatibility
     else if (CompatMonMode == COMPAT_CH)
@@ -3002,13 +3062,13 @@ void CheckSkills()
     {
         Skills[0][1].Cost = 200 + ((Player.Summons - 1) * 100); // Increase EP cost of skill "Heal Summon"
 
-        Skills[4][0].Cost = 50 + (Player.Summons * 25);    // Increase EP cost of Summon Marine
+        Skills[4][0].Cost = 60 + (Player.Summons * 30);    // Increase EP cost of Summon Marine
         Skills[4][1].Cost = 100 + (Player.Summons * 50);   // Increase EP cost of Summon Former Human
-        Skills[4][2].Cost = 75 + (Player.Summons * 25);    // Increase EP cost of Summon Former Sergeant
-        Skills[4][3].Cost = 150 + (Player.Summons * 75);   // Increase EP cost of Summon Former Commando
-        Skills[4][4].Cost = 75 + (Player.Summons * 25);    // Increase EP cost of Summon Imp
-        Skills[4][5].Cost = 75 + (Player.Summons * 25);    // Increase EP cost of Summon Demon
-        Skills[4][6].Cost = 150 + (Player.Summons * 75);   // Increase EP cost of Summon Cacodemon
+        Skills[4][2].Cost = 75 + (Player.Summons * 30);    // Increase EP cost of Summon Former Sergeant
+        Skills[4][3].Cost = 175 + (Player.Summons * 75);   // Increase EP cost of Summon Former Commando
+        Skills[4][4].Cost = 75 + (Player.Summons * 30);    // Increase EP cost of Summon Imp
+        Skills[4][5].Cost = 75 + (Player.Summons * 30);    // Increase EP cost of Summon Demon
+        Skills[4][6].Cost = 175 + (Player.Summons * 75);   // Increase EP cost of Summon Cacodemon
         Skills[4][7].Cost = 200 + (Player.Summons * 100);  // Increase EP cost of Summon Hell Knight
         Skills[4][8].Cost = 300 + (Player.Summons * 150);  // Increase EP cost of Summon Baron of Hell
         Skills[4][9].Cost = 50 + (Player.Summons * 25);    // Increase EP cost of Summon Lost Soul
@@ -3024,13 +3084,13 @@ void CheckSkills()
     {
         Skills[0][1].Cost = 200; // Standart EP cost of skill "Heal Summon"
 
-        Skills[4][0].Cost = 50;   // Standart EP cost of Summon Marine
+        Skills[4][0].Cost = 60;   // Standart EP cost of Summon Marine
         Skills[4][1].Cost = 100;  // Standart EP cost of Summon Former Human
         Skills[4][2].Cost = 75;   // Standart EP cost of Summon Former Sergeant
-        Skills[4][3].Cost = 150;  // Standart EP cost of Summon Former Commando
+        Skills[4][3].Cost = 175;  // Standart EP cost of Summon Former Commando
         Skills[4][4].Cost = 75;   // Standart EP cost of Summon Imp
         Skills[4][5].Cost = 75;   // Standart EP cost of Summon Demon
-        Skills[4][6].Cost = 150;  // Standart EP cost of Summon Cacodemon
+        Skills[4][6].Cost = 175;  // Standart EP cost of Summon Cacodemon
         Skills[4][7].Cost = 200;  // Standart EP cost of Summon Hell Knight
         Skills[4][8].Cost = 300;  // Standart EP cost of Summon Baron of Hell
         Skills[4][9].Cost = 50;   // Standart EP cost of Summon Lost Soul
@@ -3041,6 +3101,104 @@ void CheckSkills()
         Skills[4][14].Cost = 400; // Standart EP cost of Summon Arch-Vile
         Skills[4][15].Cost = 500; // Standart EP cost of Summon Cyberdemon
         Skills[4][16].Cost = 600; // Standart EP cost of Summon Spider Mastermind
+    }
+
+    // Summoning Skills - Marines Descriptions
+    if (CompatMonMode == COMPAT_DRLA)
+    {
+        if ((Player.Level + Player.EnergyTotal) < 50)
+        {
+            Skills[4][0].Description[0] = "Pistol";
+        }
+        if ((Player.Level + Player.EnergyTotal) >= 50)
+        {
+            Skills[4][0].Description[0] = "Combat Pistol";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) < 60)
+        {
+            Skills[4][0].Description[1] = "Battle Rifle";
+        }
+        if ((Player.Level + Player.EnergyTotal) >= 60)
+        {
+            Skills[4][0].Description[1] = "Battle Rifle Mk2";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) < 70)
+        {
+            Skills[4][0].Description[2] = "Shotgun";
+        }
+        if ((Player.Level + Player.EnergyTotal) >= 70)
+        {
+            Skills[4][0].Description[2] = "Combat Shotgun";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) < 80)
+        {
+            Skills[4][0].Description[3] = "Double Shotgun";
+        }
+        if ((Player.Level + Player.EnergyTotal) >= 80)
+        {
+            Skills[4][0].Description[0] = "Dual Combat Pistols";
+            Skills[4][0].Description[3] = "Quad Shotgun";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) < 90)
+        {
+            Skills[4][0].Description[4] = "Chaingun";
+        }
+        if ((Player.Level + Player.EnergyTotal) >= 90)
+        {
+            Skills[4][0].Description[1] = "Battle Rifle Mk3";
+            Skills[4][0].Description[4] = "Minigun";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) < 100)
+        {
+            Skills[4][0].Description[5] = "Rocket Launcher";
+            Skills[4][0].Description[6] = "Plasma Rifle";
+        }
+        if ((Player.Level + Player.EnergyTotal) >= 100)
+        {
+            Skills[4][0].Description[2] = "Combat Shotgun Mk2";
+            Skills[4][0].Description[5] = "Rocket Launcher Mk2";
+            Skills[4][0].Description[6] = "Plasma Rifle Mk2";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) < 110)
+        {
+            Skills[4][0].Description[6] = "Plasma Rifle";
+        }
+        if ((Player.Level + Player.EnergyTotal) >= 110)
+        {
+            Skills[4][0].Description[3] = "Quad Shotgun Mk2";
+            Skills[4][0].Description[6] = "Plasma Rifle Mk2";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) < 120)
+        {
+            Skills[4][0].Description[7] = "BFG 9000";
+        }
+        if ((Player.Level + Player.EnergyTotal) >= 120)
+        {
+            Skills[4][0].Description[4] = "Laser Minigun";
+            Skills[4][0].Description[7] = "VBFG 9000";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) >= 130)
+        {
+            Skills[4][0].Description[5] = "Rocket Launcher Mk3";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) >= 140)
+        {
+            Skills[4][0].Description[6] = "Plasma Rifle Mk3";
+        }
+
+        if ((Player.Level + Player.EnergyTotal) >= 150)
+        {
+            Skills[4][0].Description[7] = "BFG 10000";
+        }
     }
 
     // Reset the Skill refund multiplier from the Blue Aura and Energy Augmentation
