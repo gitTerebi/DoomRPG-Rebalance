@@ -1740,15 +1740,15 @@ NamedScript void EnvironmentalHazard()
 
             CurrentLevel->GeneratorFuel--;
 
-            if (Timer() % RadTimeRequired == 0)
+            if (Timer() % RadTimeRequired <= 0)
             {
                 CurrentLevel->RadLeft--;
 
-                if (CurrentLevel->RadLeft == 0)
+                if (CurrentLevel->RadLeft <= 0)
                 {
                     CurrentLevel->HazardLevel--;
 
-                    if (CurrentLevel->HazardLevel == 0)
+                    if (CurrentLevel->HazardLevel <= 0)
                     {
                         if (GetUserVariable(NeutralizerTID, "user_running"))
                             Thing_Deactivate(NeutralizerTID);
