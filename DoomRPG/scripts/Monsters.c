@@ -1508,10 +1508,13 @@ Start:
     {
         StatsChanged = true;
 
-        if (Stats->Defense < 275)
-            SetActorPropertyFixed(0, APROP_DamageFactor, 1.0 - (((fixed)Stats->Defense / 400.0) + (LevelNum / 800.0)));
-        else
-            SetActorPropertyFixed(0, APROP_DamageFactor, 100.0 / (fixed)Stats->Defense);
+        fixed DamageFactor = 1.0 - (((fixed)Stats->Defense / 400.0) + (LevelNum / 800.0));
+
+        if (DamageFactor < 0.05)
+            DamageFactor = 0.05;
+
+        SetActorPropertyFixed(0, APROP_DamageFactor, DamageFactor);
+
         OldDefense = Stats->Defense;
     }
 
