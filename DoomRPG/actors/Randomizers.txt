@@ -361,7 +361,7 @@ actor DRPGVialDropper : RandomSpawner 20013
 actor DRPGVialDropperRare : RandomSpawner 20014
 {
 	// Empty
-    DropItem "DRPGEmpty"                255 210    
+    DropItem "DRPGEmpty"                255 215    
 	
 	// Boosters
     DropItem "DRPGVialPotency"          255 10
@@ -379,7 +379,7 @@ actor DRPGVialDropperRare : RandomSpawner 20014
     DropItem "DRPGVialMagnetic"         255 10
 
     // Stims
-    DropItem "DRPGStimDropper"          255 10
+    DropItem "DRPGStimDropper"          255 5
 }
 
 actor DRPGTurretDropper : RandomSpawner 20015
