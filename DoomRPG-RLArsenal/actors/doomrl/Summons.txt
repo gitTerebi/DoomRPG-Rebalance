@@ -363,7 +363,7 @@ ACTOR DRPGMarineBattleRifleDRLASummoned
 
 ACTOR DRPGMarineGuardPistolSummoned2
 {
-  Health 125
+  Health 225
   GibHealth -50
   Radius 20
   Height 56
@@ -652,7 +652,7 @@ ACTOR DRPGMarineGuardPistolSummoned2
 
 ACTOR DRPGMarineGuardPistolSummoned3
 {
-  Health 150
+  Health 250
   GibHealth -50
   Radius 20
   Height 56
@@ -941,7 +941,7 @@ ACTOR DRPGMarineGuardPistolSummoned3
 
 ACTOR DRPGMarineBattleRifleSummoned2
 {
-  Health 150
+  Health 250
   GibHealth -50
   Radius 20
   Height 56
@@ -1277,7 +1277,7 @@ ACTOR DRPGMarineBattleRifleSummoned2
 
 ACTOR DRPGMarineBattleRifleSummoned3
 {
-  Health 175
+  Health 275
   GibHealth -50
   Radius 20
   Height 56
@@ -1623,7 +1623,7 @@ ACTOR DRPGMarineBattleRifleSummoned3
 
 ACTOR DRPGMarineShotgunSummoned2
 {
-  Health 175
+  Health 275
   GibHealth -50
   Radius 20
   Height 56
@@ -2015,7 +2015,7 @@ ACTOR DRPGMarineShotgunSummoned2
 
 ACTOR DRPGMarineShotgunSummoned3
 {
-  Health 200
+  Health 300
   GibHealth -50
   Radius 20
   Height 56
@@ -2455,7 +2455,7 @@ ACTOR DRPGMarineShotgunSummoned3
 
 ACTOR DRPGMarineDoubleShotgunSummoned2
 {
-  Health 200
+  Health 300
   GibHealth -50
   Radius 20
   Height 56
@@ -2723,7 +2723,7 @@ ACTOR DRPGMarineDoubleShotgunSummoned2
 
 ACTOR DRPGMarineDoubleShotgunSummoned3
 {
-  Health 225
+  Health 325
   GibHealth -50
   Radius 20
   Height 56
@@ -2991,7 +2991,7 @@ ACTOR DRPGMarineDoubleShotgunSummoned3
 
 ACTOR DRPGMarineChaingunSummoned2
 {
-  Health 225
+  Health 325
   GibHealth -50
   Radius 20
   Height 56
@@ -3297,7 +3297,7 @@ ACTOR DRPGMarineChaingunSummoned2
 
 ACTOR DRPGMarineChaingunSummoned3
 {
-  Health 250
+  Health 350
   GibHealth -50
   Radius 20
   Height 56
@@ -3599,7 +3599,7 @@ ACTOR DRPGMarineChaingunSummoned3
 
 ACTOR DRPGMarineRocketLauncherSummoned2
 {
-  Health 250
+  Health 350
   GibHealth -50
   Radius 20
   Height 56
@@ -3871,7 +3871,7 @@ ACTOR DRPGMarineRocketLauncherSummoned2
 
 ACTOR DRPGMarineRocketLauncherSummoned3
 {
-  Health 275
+  Health 375
   GibHealth -50
   Radius 20
   Height 56
@@ -4143,7 +4143,7 @@ ACTOR DRPGMarineRocketLauncherSummoned3
 
 ACTOR DRPGMarinePlasmaRifleSummoned2
 {
-  Health 275
+  Health 375
   GibHealth -50
   Radius 20
   Height 56
@@ -4471,7 +4471,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned2
 
 ACTOR DRPGMarinePlasmaRifleSummoned3
 {
-  Health 300
+  Health 400
   GibHealth -50
   Radius 20
   Height 56
@@ -4802,7 +4802,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned3
 
 ACTOR DRPGMarineBFG9000Summoned2
 {
-  Health 275
+  Health 375
   GibHealth -50
   Radius 20
   Height 56
@@ -5048,7 +5048,7 @@ ACTOR DRPGMarineBFG9000Summoned2
 
 ACTOR DRPGMarineBFG9000Summoned3
 {
-  Health 300
+  Health 400
   GibHealth -50
   Radius 20
   Height 56
