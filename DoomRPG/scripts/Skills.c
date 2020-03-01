@@ -3082,7 +3082,7 @@ void CheckSkills()
     }
     else
     {
-        Skills[0][1].Cost = 200; // Standart EP cost of skill "Heal Summon"
+        Skills[0][1].Cost = 150; // Standart EP cost of skill "Heal Summon"
 
         Skills[4][0].Cost = 60;   // Standart EP cost of Summon Marine
         Skills[4][1].Cost = 100;  // Standart EP cost of Summon Former Human
