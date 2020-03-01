@@ -144,7 +144,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Supply Drop",
-            .Cost = 100,
+            .Cost = 150,
             .MaxLevel = 3,
             .Use = DropSupply,
             .Description =
@@ -3060,7 +3060,7 @@ void CheckSkills()
     // Increase the cost of skills associated with "Summoning" depending on the number of summoned allies
     if (Player.Summons > 0)
     {
-        Skills[0][1].Cost = 200 + ((Player.Summons - 1) * 100); // Increase EP cost of skill "Heal Summon"
+        Skills[0][1].Cost = 150 + ((Player.Summons - 1) * 75); // Increase EP cost of skill "Heal Summon"
 
         Skills[4][0].Cost = 60 + (Player.Summons * 30);    // Increase EP cost of Summon Marine
         Skills[4][1].Cost = 100 + (Player.Summons * 50);   // Increase EP cost of Summon Former Human
