@@ -37,7 +37,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Heal Summons",
-            .Cost = 200,
+            .Cost = 150,
             .MaxLevel = 1,
             .Use = HealSummons,
             .Description =
