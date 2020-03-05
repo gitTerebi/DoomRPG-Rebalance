@@ -586,7 +586,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Rally",
-            .Cost = 0,
+            .Cost = 5,
             .MaxLevel = 1,
             .Use = Rally,
             .Description =
@@ -3061,6 +3061,7 @@ void CheckSkills()
     if (Player.Summons > 0)
     {
         Skills[0][1].Cost = 150 + ((Player.Summons - 1) * 75); // Increase EP cost of skill "Heal Summon"
+        Skills[5][2].Cost = 5 + ((Player.Summons - 1) * 5); // Increase EP cost of skill "Rally"
 
         Skills[4][0].Cost = 60 + (Player.Summons * 30);    // Increase EP cost of Summon Marine
         Skills[4][1].Cost = 100 + (Player.Summons * 50);   // Increase EP cost of Summon Former Human
@@ -3083,6 +3084,7 @@ void CheckSkills()
     else
     {
         Skills[0][1].Cost = 150; // Standart EP cost of skill "Heal Summon"
+        Skills[5][2].Cost = 5; // Standart EP cost of skill "Rally"
 
         Skills[4][0].Cost = 60;   // Standart EP cost of Summon Marine
         Skills[4][1].Cost = 100;  // Standart EP cost of Summon Former Human

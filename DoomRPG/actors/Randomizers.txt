@@ -114,8 +114,8 @@ actor DRPGLifeDropper : RandomSpawner
 actor DRPGEPDropper : RandomSpawner 20002
 {
     DropItem "DRPGEmpty"            255 50
-    DropItem "DRPGEPCapsule"        255 85
-    DropItem "DRPGBigEPCapsule"     255 15
+    DropItem "DRPGEPCapsule"        255 75
+    DropItem "DRPGBigEPCapsule"     255 25
 }
 
 actor DRPGArmorDropper : RandomSpawner 20003
