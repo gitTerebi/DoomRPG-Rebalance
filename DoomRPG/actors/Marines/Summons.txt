@@ -1358,12 +1358,12 @@ ACTOR DRPGMarineChaingunSummoned
     TNT1 A 0 A_PlaySound("drpgmarines/chaingun", CHAN_WEAPON, 1, 0, 0.7)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineChaingunStateCounter", 1, "MissileAlt")
     TNT1 A 0 A_GiveInventory ("DRPGMarineChaingunStateCounter", 1)
-    NMA6 F 3 Bright A_CustomBulletAttack (16, 2, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA6 F 3 Bright A_CustomBulletAttack (14, 2, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA6 X 1 A_MonsterRefire(30, "Overwatch")
     Goto Missile+5
   MissileAlt:
     TNT1 A 0 A_TakeInventory ("DRPGMarineChaingunStateCounter", 1)
-    NMA6 E 3 Bright A_CustomBulletAttack (16, 2, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA6 E 3 Bright A_CustomBulletAttack (14, 2, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA6 X 1 A_MonsterRefire(30, "Overwatch")
     Goto Missile+5
   Reload:
