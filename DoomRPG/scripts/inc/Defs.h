@@ -1042,6 +1042,7 @@ typedef enum
     WS_NERVE,
     WS_PLUT,
     WS_TNT,
+    WS_VR,
     WS_AA1,
     WS_AAA1,
     WS_AAA2,
@@ -1110,9 +1111,8 @@ typedef enum
     WS_VAN,
     WS_WID,
     WS_WOS,
-    WS_ZOF,
     WS_ZTH,
-    WS_VR
+    WS_ZOF
 } EnumWSMapSets;
 
 // --------------------------------------------------

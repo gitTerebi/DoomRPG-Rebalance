@@ -1,3 +1,4 @@
+server 	bool 	drpg_ws_vr = true;
 server 	bool 	drpg_ws_aa1 = true;
 server 	bool 	drpg_ws_aaa1 = true;
 server 	bool 	drpg_ws_aaa2 = true;
@@ -66,6 +67,5 @@ server 	bool 	drpg_ws_val = true;
 server 	bool 	drpg_ws_van = true;
 server 	bool 	drpg_ws_wid = true;
 server 	bool 	drpg_ws_wos = true;
-server 	bool 	drpg_ws_zof = true;
 server 	bool 	drpg_ws_zth = true;
-server 	bool 	drpg_ws_vr = true;
+server 	bool 	drpg_ws_zof = true;

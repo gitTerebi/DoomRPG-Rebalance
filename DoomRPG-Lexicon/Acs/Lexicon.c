@@ -396,9 +396,6 @@ strict namespace
                 ClearInventory();
             }
             
-            // give player the votegun
-            GiveInventory("Lexicon_VoteGun", 1);
-            SetWeapon("Lexicon_VoteGun");
         }
     }
 
@@ -904,7 +901,6 @@ strict namespace
             {
                 // force musicbox to play first doom2 song
                 SetCVar("lexicon_global_musicid", 1);
-                TakeInventory("Lexicon_VoteGun", 0x7FFFFFFF);
                 ChangeLevel(votenames[GetCVar("lexicon_global_votechosen")][1], 0, CHANGELEVEL_NOINTERMISSION, -1);
             }
         }
