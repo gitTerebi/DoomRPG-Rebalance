@@ -20,19 +20,20 @@ Good luck!
 
 To run the mod I recommend using [Doom RPG SE Launcher 1.0.3](https://github.com/Forevener/DRPGSEL/releases/tag/v1.0.3) (no higher).
 
+After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions -> Reset to defaults).
+
 Use the following load order:
 
 1. [DoomRL Arsenal 1.1.2](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
 2. [DoomRL Monsters Beta 7.2](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
 3. [HD Textures](https://github.com/WNC12k/DoomRPG-Others/releases) (optional);
-4. [Lexicon](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
+4. [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
 5. [doom_complete](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
 6. [Music_Instrumental](https://github.com/WNC12k/DoomRPG-Music/releases) (optional);
 7. [Flashlights](https://github.com/WNC12k/DoomRPG-Others/releases) (recommended);
 8. [Precise Crosshair 1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=64788) (optional, need GZDoom 4.1.3);
-9. [Target Spy 1.11](https://forum.zdoom.org/viewtopic.php?t=60784) (optional).
-
-After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions -> Reset to defaults).
+9. [PyWeaponWheel v0.3](https://forum.zdoom.org/viewtopic.php?f=43&t=61061) (optional).
+10. [Target Spy 1.11](https://forum.zdoom.org/viewtopic.php?t=60784) (optional).
 
 ## Compatible mods
 
