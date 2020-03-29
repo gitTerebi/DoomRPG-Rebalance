@@ -32,8 +32,7 @@ Use the following load order:
 6. [Music_Instrumental](https://github.com/WNC12k/DoomRPG-Music/releases) (optional);
 7. [Flashlights](https://github.com/WNC12k/DoomRPG-Others/releases) (recommended);
 8. [Precise Crosshair 1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=64788) (optional, need GZDoom 4.1.3);
-9. [PyWeaponWheel v0.3](https://forum.zdoom.org/viewtopic.php?f=43&t=61061) (optional).
-10. [Target Spy 1.11](https://forum.zdoom.org/viewtopic.php?t=60784) (optional).
+9. [Target Spy 1.11](https://forum.zdoom.org/viewtopic.php?t=60784) (optional).
 
 ## Compatible mods
 
