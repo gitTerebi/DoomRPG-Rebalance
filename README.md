@@ -24,8 +24,8 @@ After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions 
 
 Use the following load order:
 
-1. [DoomRL Arsenal 1.1.2](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
-2. [DoomRL Monsters Beta 7.2](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
+1. [DoomRL Arsenal 1.1.2](https://github.com/WNC12k/DoomRPG-RLArsenal-1.1.2) (must have);
+2. [DoomRL Monsters Beta 7.2](https://github.com/WNC12k/DoomRPG-RLArsenal-1.1.2) (must have);
 3. [HD Textures](https://github.com/WNC12k/DoomRPG-Others/releases) (optional);
 4. [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
 5. [doom_complete](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
