@@ -919,7 +919,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLArmorModItem",          "Armor Modpack",        50000, 7, 8, "AMK1A0", 10, 20);
 
         // Super rare Modpacks
-        ITEMDATA_DEF("RLArtiModItem",           "Arti Modpack",        100000, 9, 8, "ARTMI0", -7, -5);
+        //ITEMDATA_DEF("RLArtiModItem",           "Arti Modpack",        100000, 9, 8, "ARTMI0", -7, -5);
 
         // Demon Artifact
         ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",     100000, 11, 9, "DMNAA0", 19, 65);
