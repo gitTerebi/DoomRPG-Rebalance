@@ -419,56 +419,56 @@ void CheckStats()
     // Per-stat leveling
     if (GetCVar("drpg_levelup_natural"))
     {
-        if (Player.StrengthXP >= StatTable[Player.StrengthNat] && Player.StrengthXP < (StatTable[Player.StrengthNat] * (2 + GetCVarFixed("drpg_strength_scalexp"))) && Player.StrengthNat < NATURALCAP)
+        if (Player.StrengthXP >= StatTable[Player.StrengthNat] && Player.StrengthNat < NATURALCAP)
         {
             Player.StrengthNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_STRENGTH);
         }
 
-        if (Player.DefenseXP >= StatTable[Player.DefenseNat] && Player.DefenseXP < (StatTable[Player.DefenseNat] * (2 + GetCVarFixed("drpg_defense_scalexp"))) && Player.DefenseNat < NATURALCAP)
+        if (Player.DefenseXP >= StatTable[Player.DefenseNat] && Player.DefenseNat < NATURALCAP)
         {
             Player.DefenseNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_DEFENSE);
         }
 
-        if (Player.VitalityXP >= StatTable[Player.VitalityNat] && Player.VitalityXP < (StatTable[Player.VitalityNat] * (2 + GetCVarFixed("drpg_vitality_scalexp"))) && Player.VitalityNat < NATURALCAP)
+        if (Player.VitalityXP >= StatTable[Player.VitalityNat] && Player.VitalityNat < NATURALCAP)
         {
             Player.VitalityNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_VITALITY);
         }
 
-        if (Player.EnergyXP >= StatTable[Player.EnergyNat] && Player.EnergyXP < (StatTable[Player.EnergyNat] * (2 + GetCVarFixed("drpg_energy_scalexp"))) && Player.EnergyNat < NATURALCAP)
+        if (Player.EnergyXP >= StatTable[Player.EnergyNat] && Player.EnergyNat < NATURALCAP)
         {
             Player.EnergyNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_ENERGY);
         }
 
-        if (Player.RegenerationXP >= StatTable[Player.RegenerationNat] && Player.RegenerationXP < (StatTable[Player.RegenerationNat] * (2 + GetCVarFixed("drpg_regeneration_scalexp"))) && Player.RegenerationNat < NATURALCAP)
+        if (Player.RegenerationXP >= StatTable[Player.RegenerationNat] && Player.RegenerationNat < NATURALCAP)
         {
             Player.RegenerationNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_REGENERATION);
         }
 
-        if (Player.AgilityXP >= StatTable[Player.AgilityNat] && Player.AgilityXP < (StatTable[Player.AgilityNat] * (2 + GetCVarFixed("drpg_agility_scalexp"))) && Player.AgilityNat < NATURALCAP)
+        if (Player.AgilityXP >= StatTable[Player.AgilityNat] && Player.AgilityNat < NATURALCAP)
         {
             Player.AgilityNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_AGILITY);
         }
 
-        if (Player.CapacityXP >= StatTable[Player.CapacityNat] && Player.CapacityXP < (StatTable[Player.CapacityNat] * (2 + GetCVarFixed("drpg_capacity_scalexp"))) && Player.CapacityNat < NATURALCAP)
+        if (Player.CapacityXP >= StatTable[Player.CapacityNat] && Player.CapacityNat < NATURALCAP)
         {
             Player.CapacityNat++;
             ActivatorSound("misc/statup", 127);
             DrawStatUp(STAT_CAPACITY);
         }
 
-        if (Player.LuckXP >= StatTable[Player.LuckNat] && Player.LuckXP < (StatTable[Player.LuckNat] * (2 + GetCVarFixed("drpg_luck_scalexp"))) && Player.LuckNat < NATURALCAP)
+        if (Player.LuckXP >= StatTable[Player.LuckNat] && Player.LuckNat < NATURALCAP)
         {
             Player.LuckNat++;
             ActivatorSound("misc/statup", 127);
