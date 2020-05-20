@@ -1037,7 +1037,7 @@ void CheckStimImmunity()
         Player.StimImmunity = 100;
 
     if (!CurrentLevel->UACBase || ArenaActive || MarinesHostile)
-        if ((Timer() % (35 * GameSkill())) == 0 && Player.StimImmunity > 0)
+        if ((Timer() % (35 * 6)) == 0 && Player.StimImmunity > 0)
             Player.StimImmunity--;
 }
 

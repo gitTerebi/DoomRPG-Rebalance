@@ -326,7 +326,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",                 200, 4, 0, "STVLG0",  4, 16);
     ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",                     200, 4, 0, "STVLH0",  4, 16);
     ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",                 400, 4, 2, "STVLI0",  4, 16);
-    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",                  800, 4, 2, "STVLJ0",  4, 16);
+    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",                  400, 4, 2, "STVLJ0",  4, 16);
     ITEMDATA_DEF("DRPGVialIndestructible",  "\CqIndestructible\C- Vial",          1000, 4, 3, "STVLK0",  4, 16);
     ITEMDATA_DEF("DRPGVialShadow",          "\CrShadow\C- Vial",                  1000, 4, 3, "STVLL0",  4, 16);
     ITEMDATA_DEF("DRPGVialInfinity",        "\CkInfinity\C- Vial",                1000, 4, 3, "STVLM0",  4, 16);
