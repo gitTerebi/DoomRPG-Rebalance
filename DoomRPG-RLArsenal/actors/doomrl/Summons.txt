@@ -368,7 +368,7 @@ ACTOR DRPGMarineGuardPistolSummoned2
   Radius 20
   Height 56
   Speed 8
-  PainChance 192
+  PainChance 160
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -657,7 +657,7 @@ ACTOR DRPGMarineGuardPistolSummoned3
   Radius 20
   Height 56
   Speed 8
-  PainChance 160
+  PainChance 128
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -946,7 +946,7 @@ ACTOR DRPGMarineBattleRifleSummoned2
   Radius 20
   Height 56
   Speed 8
-  PainChance 192
+  PainChance 160
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -1282,7 +1282,7 @@ ACTOR DRPGMarineBattleRifleSummoned3
   Radius 20
   Height 56
   Speed 8
-  PainChance 160
+  PainChance 128
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -1628,7 +1628,7 @@ ACTOR DRPGMarineShotgunSummoned2
   Radius 20
   Height 56
   Speed 8
-  PainChance 192
+  PainChance 160
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -2020,7 +2020,7 @@ ACTOR DRPGMarineShotgunSummoned3
   Radius 20
   Height 56
   Speed 8
-  PainChance 160
+  PainChance 128
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -2460,7 +2460,7 @@ ACTOR DRPGMarineDoubleShotgunSummoned2
   Radius 20
   Height 56
   Speed 8
-  PainChance 192
+  PainChance 160
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -2728,7 +2728,7 @@ ACTOR DRPGMarineDoubleShotgunSummoned3
   Radius 20
   Height 56
   Speed 8
-  PainChance 160
+  PainChance 128
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -2996,7 +2996,7 @@ ACTOR DRPGMarineChaingunSummoned2
   Radius 20
   Height 56
   Speed 6
-  PainChance 192
+  PainChance 160
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -3302,7 +3302,7 @@ ACTOR DRPGMarineChaingunSummoned3
   Radius 20
   Height 56
   Speed 6
-  PainChance 160
+  PainChance 128
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -3604,7 +3604,7 @@ ACTOR DRPGMarineRocketLauncherSummoned2
   Radius 20
   Height 56
   Speed 7
-  PainChance 192
+  PainChance 160
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -3876,7 +3876,7 @@ ACTOR DRPGMarineRocketLauncherSummoned3
   Radius 20
   Height 56
   Speed 7
-  PainChance 160
+  PainChance 128
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -4148,7 +4148,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned2
   Radius 20
   Height 56
   Speed 6
-  PainChance 192
+  PainChance 160
   DamageFactor "Crush", 10
   DamageFactor "Plasma", 0.6
   Monster
@@ -4476,7 +4476,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned3
   Radius 20
   Height 56
   Speed 6
-  PainChance 160
+  PainChance 128
   DamageFactor "Crush", 10
   DamageFactor "Plasma", 0.6
   Monster
@@ -4807,7 +4807,7 @@ ACTOR DRPGMarineBFG9000Summoned2
   Radius 20
   Height 56
   Speed 5
-  PainChance 192
+  PainChance 160
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
@@ -5053,7 +5053,7 @@ ACTOR DRPGMarineBFG9000Summoned3
   Radius 20
   Height 56
   Speed 5
-  PainChance 160
+  PainChance 128
   DamageFactor "Crush", 10
   Monster
   +FLOORCLIP
