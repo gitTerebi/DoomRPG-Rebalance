@@ -609,7 +609,7 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = RankTable[Players(i).RankLevel] / 40l;
+            RankBonus = RankTable[Players(i).RankLevel] / 80l;
             Players(i).Rank += RankBonus;
 
             HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
@@ -633,7 +633,7 @@ Start:
             FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0, 1.0);
 
             XPBonus = XPTable[Players(i).Level] / 80l;
-            RankBonus = RankTable[Players(i).RankLevel] / 40l;
+            RankBonus = RankTable[Players(i).RankLevel] / 80l;
 
             Players(i).XP += XPBonus;
             Players(i).Rank += RankBonus;
@@ -838,7 +838,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
             if (!PlayerInGame(i)) continue;
 
             SetActivator(Players(i).TID);
-            long int RankBonus = RankTable[Players(i).RankLevel] / 20;
+            long int RankBonus = RankTable[Players(i).RankLevel] / 40;
 
             SetFont("SMALLFONT");
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0.0, 1.0);
