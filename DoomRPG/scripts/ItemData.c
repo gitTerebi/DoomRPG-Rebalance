@@ -893,7 +893,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",      100000, 8, 8, "CRYSF0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",  100000, 8, 8, "CRYSG0", 16, 48);
         ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                  2000, 4, 2, "MMAPA0", 14, 23);
-        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",            6000, 6, 3, "BLUPA0", 14, 23);
+        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",           12500, 6, 3, "BLUPA0", 14, 23);
         ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                  5000, 6, 6, "ISKLA0", 10, 18);
         ITEMDATA_DEF("RLBloodSkull",                "Blood Skull",                   3000, 6, 4, "ISKLC0", 10, 18);
         ITEMDATA_DEF("RLFireSkull",                 "Fire Skull",                    4000, 6, 5, "ISKLE0", 10, 18);
