@@ -520,7 +520,7 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = (long int)(RankTable[Players(i).RankLevel]) / 200l;
+            RankBonus = (long int)(RankTable[Players(i).RankLevel]) / (200l + Players(i).RankLevel * 50);
             Players(i).Rank += RankBonus;
 
             if (Players(i).Mission.Type != MT_SECRETS)
@@ -563,7 +563,7 @@ Start:
 
             FadeRange(255, 0, 0, 0.25, 255, 0, 0, 0, 1.0);
 
-            XPBonus = XPTable[Players(i).Level] / 80l;
+            XPBonus = XPTable[Players(i).Level] / (80l + Players(i).Level * 10);
             Player.XP += XPBonus;
 
             HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
@@ -609,7 +609,7 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = RankTable[Players(i).RankLevel] / 80l;
+            RankBonus = RankTable[Players(i).RankLevel] / (80l + Players(i).RankLevel * 20);
             Players(i).Rank += RankBonus;
 
             HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
@@ -632,8 +632,8 @@ Start:
 
             FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0, 1.0);
 
-            XPBonus = XPTable[Players(i).Level] / 80l;
-            RankBonus = RankTable[Players(i).RankLevel] / 80l;
+            XPBonus = XPTable[Players(i).Level] / (80l + Players(i).Level * 10);
+            RankBonus = RankTable[Players(i).RankLevel] / (80l + Players(i).RankLevel * 20);
 
             Players(i).XP += XPBonus;
             Players(i).Rank += RankBonus;
@@ -838,7 +838,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
             if (!PlayerInGame(i)) continue;
 
             SetActivator(Players(i).TID);
-            long int RankBonus = RankTable[Players(i).RankLevel] / 40;
+            long int RankBonus = RankTable[Players(i).RankLevel] / (40 + Players(i).RankLevel);
 
             SetFont("SMALLFONT");
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0.0, 1.0);

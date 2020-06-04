@@ -249,17 +249,15 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Dark Blue Aura",
-            .Cost = 100,
-            .MaxLevel = 6,
+            .Cost = 150,
+            .MaxLevel = 4,
             .Use = UseAura,
             .Description =
             {
                 "Clip Regen",
                 "Clip Regen\nShell Regen",
                 "Clip Regen\nShell Regen\nRocket Regen",
-                "Clip Regen\nShell Regen\nRocket Regen\nCell Regen",
-                "Clip Regen\nShell Regen\nRocket Regen\nCell Regen\n2x Regen Speed",
-                "Clip Regen\nShell Regen\nRocket Regen\nCell Regen\n4x Regen Speed"
+                "Clip Regen\nShell Regen\nRocket Regen\nCell Regen"
             }
         },
         {
@@ -334,7 +332,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = SoulSteal,
             .Description =
             {
-                "Kill a target below 25% health, stealing their health and soul"
+                "Kill a target below 25% (+0.25% for each soul up to 50%) health, stealing their health and soul"
             }
         },
         {
@@ -1671,8 +1669,13 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
         return false;
     }
 
-    // Refund - If the target is not weak enough (Below 25% Health)
-    if (CalcPercent(GetActorProperty(0, APROP_Health), Stats->HealthMax) > 25)
+    // Refund - If the target is not weak enough (Below 25% (+0.25% for each soul up to 50%) Health)
+    int HealthCap = 25 + (Players(PlayerNum).SoulsCount * 0.25);
+
+    if (HealthCap > 50)
+        HealthCap = 50;
+
+    if (CalcPercent(GetActorProperty(0, APROP_Health), Stats->HealthMax) > HealthCap)
     {
         SetActivator(Players(PlayerNum).TID);
         PrintError("Target is not weak enough");
@@ -1687,7 +1690,7 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
     RealMonsterTID = ActivatorTID();
     Thing_ChangeTID(0, UniqueMonsterTID);
 
-    int LeechAmount = GetActorProperty(0, APROP_Health);
+    int LeechAmount = GetActorProperty(0, APROP_Health) * (0.05 + (Players(PlayerNum).SoulsCount / 200));
 
     // Kill it
     SetActivator(Players(PlayerNum).TID);
@@ -1711,7 +1714,7 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
     Thing_ChangeTID(UniqueMonsterTID, RealMonsterTID);
 
     // Heal the user
-    AddHealthDirect(LeechAmount, (Player.HealthMax / 10));
+    AddHealthDirect(LeechAmount, 100);
 
     FadeRange(0, 0, 0, 0.5, 0, 0, 0, 0.0, 0.25);
     ActivatorSound("skills/soulsteal", 127);
@@ -3053,7 +3056,7 @@ void CheckSkills()
         Skills[2][4].Cost = 100; // Standart EP cost of Blue Aura
         Skills[2][5].Cost = 100; // Standart EP cost of Purple Aura
         Skills[2][6].Cost = 100; // Standart EP cost of Orange Aura
-        Skills[2][7].Cost = 100; // Standart EP cost of Dark Blue Aura
+        Skills[2][7].Cost = 150; // Standart EP cost of Dark Blue Aura
         Skills[2][8].Cost = 100; // Standart EP cost of Yellow Aura
     }
 
@@ -3369,13 +3372,13 @@ void CheckAuras()
         // Blue Aura
         if (Player.Aura.Type[AURA_BLUE].Active)
         {
-            if (Player.SoulBlueCount >= 3 && Player.SoulBlueCount < 9 && Player.Aura.Type[AURA_BLUE].Level < 1)
+            if (Player.SoulBlueCount >= 5 && Player.SoulBlueCount < 15 && Player.Aura.Type[AURA_BLUE].Level < 1)
                 Player.Aura.Type[AURA_BLUE].Level = 1;
             if (Player.SoulBlueCount >= 15 && Player.SoulBlueCount < 30 && Player.Aura.Type[AURA_BLUE].Level < 2)
                 Player.Aura.Type[AURA_BLUE].Level = 2;
             if (Player.SoulBlueCount >= 30 && Player.SoulBlueCount < 50 && Player.Aura.Type[AURA_BLUE].Level < 3)
                 Player.Aura.Type[AURA_BLUE].Level = 3;
-            if (Player.SoulBlueCount >= 40 && Player.Aura.Type[AURA_BLUE].Level < 4)
+            if (Player.SoulBlueCount >= 50 && Player.Aura.Type[AURA_BLUE].Level < 4)
                 Player.Aura.Type[AURA_BLUE].Level = 4;
 
             if (Player.Aura.Type[AURA_BLUE].Level == 1)
@@ -3434,23 +3437,15 @@ void CheckAuras()
         // Dark Blue Aura
         if (Player.Aura.Type[AURA_DARKBLUE].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
         {
-            if (Player.SoulDarkBlueCount >= 3 && Player.SoulDarkBlueCount < 9 && Player.Aura.Type[AURA_DARKBLUE].Level < 1)
+            if (Player.SoulDarkBlueCount >= 5 && Player.SoulDarkBlueCount < 15 && Player.Aura.Type[AURA_DARKBLUE].Level < 1)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 1;
-            if (Player.SoulDarkBlueCount >= 9 && Player.SoulDarkBlueCount < 15 && Player.Aura.Type[AURA_DARKBLUE].Level < 2)
+            if (Player.SoulDarkBlueCount >= 15 && Player.SoulDarkBlueCount < 30 && Player.Aura.Type[AURA_DARKBLUE].Level < 2)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 2;
-            if (Player.SoulDarkBlueCount >= 15 && Player.SoulDarkBlueCount < 30 && Player.Aura.Type[AURA_DARKBLUE].Level < 3)
+            if (Player.SoulDarkBlueCount >= 30 && Player.SoulDarkBlueCount < 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 3)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 3;
-            if (Player.SoulDarkBlueCount >= 30 && Player.SoulDarkBlueCount < 40 && Player.Aura.Type[AURA_DARKBLUE].Level < 4)
+            if (Player.SoulDarkBlueCount >= 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 4)
                 Player.Aura.Type[AURA_DARKBLUE].Level = 4;
-            if (Player.SoulDarkBlueCount >= 40 && Player.SoulDarkBlueCount < 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 5)
-                Player.Aura.Type[AURA_DARKBLUE].Level = 5;
-            if (Player.SoulDarkBlueCount >= 50 && Player.Aura.Type[AURA_DARKBLUE].Level < 6)
-                Player.Aura.Type[AURA_DARKBLUE].Level = 6;
 
-            if (Player.Aura.Type[AURA_DARKBLUE].Level == 5)
-                AmmoRegenMult = 2;
-            if (Player.Aura.Type[AURA_DARKBLUE].Level >= 6)
-                AmmoRegenMult = 4;
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 1)
                 if ((Timer() % 25) == 0)
                     GiveInventory("Clip", AmmoRegenMult);
