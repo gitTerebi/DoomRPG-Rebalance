@@ -1399,7 +1399,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
 
     // Aura Cost Multiplier
     if (!Player.Aura.Type[AURA_BLUE].Active)
-        Player.SkillCostMult += 10;
+        Player.SkillCostMult += 5;
 
     ActivatorSound("skills/buff", 127);
     return true;
