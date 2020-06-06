@@ -47,7 +47,7 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .Description =
         {
             "1.5x Max Health",
-            "2x Health Regen",
+            "1.5x Health Regen",
             "+10% Status Effect Resist",
             "+15% Status Effect Resist",
             "+20% Status Effect Resist",
@@ -61,9 +61,9 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .Description =
         {
             "1.5x Max EP",
-            "2x EP Regen",
-            "2x Aura Timer",
-            "2x Aura Range",
+            "1.5x EP Regen",
+            "1.5x Aura Timer",
+            "1.5x Aura Range",
             "10% Skill Cost Refund",
             "15% Skill Cost Refund",
             "20% Skill Cost Refund",
@@ -368,7 +368,7 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_VITALITY] >= 1)
             Player.HealthMax *= 1.5;
         if (Player.Augs.Level[AUG_VITALITY] >= 2)
-            Player.HPAmount *= 2;
+            Player.HPAmount *= 1.5;
         if (Player.Augs.Level[AUG_VITALITY] == 3)
             Player.StatusEffectResist += 10;
         if (Player.Augs.Level[AUG_VITALITY] == 4)
@@ -385,9 +385,9 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_ENERGY] >= 1)
             Player.EPMax *= 1.5;
         if (Player.Augs.Level[AUG_ENERGY] >= 2)
-            Player.EPAmount *= 2;
+            Player.EPAmount *= 1.5;
         if (Player.Augs.Level[AUG_ENERGY] >= 4)
-            Player.Aura.Range *= 2;
+            Player.Aura.Range *= 1.5;
     }
     if (Player.Augs.Active[AUG_ENERGY] && Player.Augs.Level[AUG_ENERGY] >= 3)
         Player.AuraBonus = true;

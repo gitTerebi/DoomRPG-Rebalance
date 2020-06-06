@@ -200,7 +200,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Pink Aura",
-            .Cost = 100,
+            .Cost = 150,
             .MaxLevel = 3,
             .Use = UseAura,
             .Description =
@@ -212,7 +212,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Blue Aura",
-            .Cost = 100,
+            .Cost = 150,
             .MaxLevel = 4,
             .Use = UseAura,
             .Description =
@@ -1399,7 +1399,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
 
     // Aura Cost Multiplier
     if (!Player.Aura.Type[AURA_BLUE].Active)
-        Player.SkillCostMult += 5;
+        Player.SkillCostMult += 10;
 
     ActivatorSound("skills/buff", 127);
     return true;
@@ -3052,8 +3052,8 @@ void CheckSkills()
         Skills[2][0].Cost = 100; // Standart EP cost of Red Aura
         Skills[2][1].Cost = 100; // Standart EP cost of Green Aura
         Skills[2][2].Cost = 150; // Standart EP cost of White Aura
-        Skills[2][3].Cost = 100; // Standart EP cost of Pink Aura
-        Skills[2][4].Cost = 100; // Standart EP cost of Blue Aura
+        Skills[2][3].Cost = 150; // Standart EP cost of Pink Aura
+        Skills[2][4].Cost = 150; // Standart EP cost of Blue Aura
         Skills[2][5].Cost = 100; // Standart EP cost of Purple Aura
         Skills[2][6].Cost = 100; // Standart EP cost of Orange Aura
         Skills[2][7].Cost = 150; // Standart EP cost of Dark Blue Aura

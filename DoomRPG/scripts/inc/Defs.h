@@ -735,7 +735,7 @@ typedef enum
 #define LUCK_SHIELDINC          0.0005
 #define LUCK_AUGINC             0.00025
 
-#define AURA_CALCTIME           (((35 * 30) + (Player.EnergyTotal * 35) + (Player.Level * 35)) * (Player.AuraBonus + 1))
+#define AURA_CALCTIME           (((35 * 30) + (35 * Player.EnergyTotal) + (35 * Player.Level * 2)) * (1 + Player.AuraBonus * 0.5))
 #define DRLA_WEAPON_MAX         6
 #define DRLA_ARMOR_MAX          2 + (Player.CapacityTotal / 25)
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX
