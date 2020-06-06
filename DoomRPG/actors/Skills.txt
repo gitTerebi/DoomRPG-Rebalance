@@ -71,6 +71,7 @@ actor DRPGAura : Inventory
 actor DRPGGreenAuraIronFeet : PowerIronFeet
 {
     Powerup.Duration 5
+    Powerup.Color 0, 0, 0, 0
 }
 
 actor DRPGPinkAuraDrain : PowerDrain

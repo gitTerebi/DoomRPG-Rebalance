@@ -160,7 +160,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Red Aura",
-            .Cost = 100,
+            .Cost = 125,
             .MaxLevel = 6,
             .Use = UseAura,
             .Description =
@@ -175,7 +175,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Green Aura",
-            .Cost = 100,
+            .Cost = 125,
             .MaxLevel = 5,
             .Use = UseAura,
             .Description =
@@ -225,19 +225,19 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Purple Aura",
-            .Cost = 100,
+            .Cost = 150,
             .MaxLevel = 3,
             .Use = UseAura,
             .Description =
             {
+                "1.5x HP Regen Amount",
                 "2x HP Regen Amount",
-                "3x HP Regen Amount",
-                "3x HP Regen Amount\n1/2 HP Regen Timer"
+                "2x HP Regen Amount\n1/2 HP Regen Timer"
             }
         },
         {
             .Name = "Orange Aura",
-            .Cost = 100,
+            .Cost = 150,
             .MaxLevel = 3,
             .Use = UseAura,
             .Description =
@@ -262,12 +262,11 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Yellow Aura",
-            .Cost = 100,
-            .MaxLevel = 5,
+            .Cost = 125,
+            .MaxLevel = 4,
             .Use = UseAura,
             .Description =
             {
-                "1.25x Drop Chances",
                 "1.5x Drop Chances",
                 "2x Drop Chances",
                 "3x Drop Chances",
@@ -3049,15 +3048,15 @@ void CheckSkills()
     {
         Skills[3][4].Cost = 50; // Standart EP cost of skill "Soul Steal"
 
-        Skills[2][0].Cost = 100; // Standart EP cost of Red Aura
-        Skills[2][1].Cost = 100; // Standart EP cost of Green Aura
+        Skills[2][0].Cost = 125; // Standart EP cost of Red Aura
+        Skills[2][1].Cost = 125; // Standart EP cost of Green Aura
         Skills[2][2].Cost = 150; // Standart EP cost of White Aura
         Skills[2][3].Cost = 150; // Standart EP cost of Pink Aura
         Skills[2][4].Cost = 150; // Standart EP cost of Blue Aura
-        Skills[2][5].Cost = 100; // Standart EP cost of Purple Aura
-        Skills[2][6].Cost = 100; // Standart EP cost of Orange Aura
+        Skills[2][5].Cost = 150; // Standart EP cost of Purple Aura
+        Skills[2][6].Cost = 150; // Standart EP cost of Orange Aura
         Skills[2][7].Cost = 150; // Standart EP cost of Dark Blue Aura
-        Skills[2][8].Cost = 100; // Standart EP cost of Yellow Aura
+        Skills[2][8].Cost = 125; // Standart EP cost of Yellow Aura
     }
 
     // Increase the cost of skills associated with "Summoning" depending on the number of summoned allies
@@ -3403,15 +3402,15 @@ void CheckAuras()
 
             if (Player.Aura.Type[AURA_PURPLE].Level == 1)
             {
-                Player.HPAmount *= 2.00;
+                Player.HPAmount *= 1.50;
             }
             if (Player.Aura.Type[AURA_PURPLE].Level == 2)
             {
-                Player.HPAmount *= 3.00;
+                Player.HPAmount *= 2.00;
             }
             if (Player.Aura.Type[AURA_PURPLE].Level >= 3)
             {
-                Player.HPAmount *= 3.00;
+                Player.HPAmount *= 2.00;
                 Player.HPTime /= 2.00;
             }
         }
@@ -3463,26 +3462,22 @@ void CheckAuras()
         // Yellow Aura
         if (Player.Aura.Type[AURA_YELLOW].Active && (!CurrentLevel->UACBase || ArenaActive || MarinesHostile))
         {
-            if (Player.SoulYellowCount >= 5 && Player.SoulYellowCount < 10 && Player.Aura.Type[AURA_YELLOW].Level < 1)
+            if (Player.SoulYellowCount >= 5 && Player.SoulYellowCount < 15 && Player.Aura.Type[AURA_YELLOW].Level < 1)
                 Player.Aura.Type[AURA_YELLOW].Level = 1;
-            if (Player.SoulYellowCount >= 10 && Player.SoulYellowCount < 20 && Player.Aura.Type[AURA_YELLOW].Level < 2)
+            if (Player.SoulYellowCount >= 15 && Player.SoulYellowCount < 30 && Player.Aura.Type[AURA_YELLOW].Level < 2)
                 Player.Aura.Type[AURA_YELLOW].Level = 2;
-            if (Player.SoulYellowCount >= 20 && Player.SoulYellowCount < 30 && Player.Aura.Type[AURA_YELLOW].Level < 3)
+            if (Player.SoulYellowCount >= 30 && Player.SoulYellowCount < 50 && Player.Aura.Type[AURA_YELLOW].Level < 3)
                 Player.Aura.Type[AURA_YELLOW].Level = 3;
-            if (Player.SoulYellowCount >= 30 && Player.SoulYellowCount < 50 && Player.Aura.Type[AURA_YELLOW].Level < 4)
+            if (Player.SoulYellowCount >= 50 && Player.Aura.Type[AURA_YELLOW].Level < 4)
                 Player.Aura.Type[AURA_YELLOW].Level = 4;
-            if (Player.SoulYellowCount >= 50 && Player.Aura.Type[AURA_YELLOW].Level < 5)
-                Player.Aura.Type[AURA_YELLOW].Level = 5;
 
             if (Player.Aura.Type[AURA_YELLOW].Level == 1)
-                LuckMult = 1.25;
-            if (Player.Aura.Type[AURA_YELLOW].Level == 2)
                 LuckMult = 1.5;
-            if (Player.Aura.Type[AURA_YELLOW].Level == 3)
+            if (Player.Aura.Type[AURA_YELLOW].Level == 2)
                 LuckMult = 2.0;
-            if (Player.Aura.Type[AURA_YELLOW].Level == 4)
+            if (Player.Aura.Type[AURA_YELLOW].Level == 3)
                 LuckMult = 3.0;
-            if (Player.Aura.Type[AURA_YELLOW].Level >= 5)
+            if (Player.Aura.Type[AURA_YELLOW].Level >= 4)
                 LuckMult = 4.0;
 
             Player.HealthChance *= LuckMult;

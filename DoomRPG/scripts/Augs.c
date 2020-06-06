@@ -115,12 +115,10 @@ AugInfo RPGMap AugData[AUG_MAX] =
     },
     {
         .Name = "Precognition Unit",
-        .MaxLevel = 6,
+        .MaxLevel = 4,
         .Description =
         {
-            "1.25x Luck Drop Chances",
             "1.5x Luck Drop Chances",
-            "1.75x Luck Drop Chances",
             "2x Luck Drop Chances",
             "3x Luck Drop Chances",
             "4x Luck Drop Chances"
@@ -466,16 +464,12 @@ void CheckAugs()
         fixed LuckMult;
 
         if (Player.Augs.Level[AUG_LUCK] == 1)
-            LuckMult = 1.25;
-        if (Player.Augs.Level[AUG_LUCK] == 2)
             LuckMult = 1.5;
-        if (Player.Augs.Level[AUG_LUCK] == 3)
-            LuckMult = 1.75;
-        if (Player.Augs.Level[AUG_LUCK] == 4)
+        if (Player.Augs.Level[AUG_LUCK] == 2)
             LuckMult = 2;
-        if (Player.Augs.Level[AUG_LUCK] == 5)
+        if (Player.Augs.Level[AUG_LUCK] == 3)
             LuckMult = 3;
-        if (Player.Augs.Level[AUG_LUCK] >= 6)
+        if (Player.Augs.Level[AUG_LUCK] >= 4)
             LuckMult = 4;
 
         Player.HealthChance *= LuckMult;

@@ -604,6 +604,27 @@ actor DRPGShieldDropperTier6 : RandomSpawner 20155
     DropItem "DRPGShieldAccessory53"    255 25 // FLAN-495
 }
 
+actor DRPGHealthMonsterDropper : RandomSpawner 20156
+{
+    DropItem "DRPGStimpack"         255 80
+    DropItem "DRPGMedikit"          255 15
+    DropItem "DRPGLargeMedikit"     255 5
+}
+
+actor DRPGEPMonsterDropper : RandomSpawner 20157
+{
+    DropItem "DRPGEPCapsule"        255 95
+    DropItem "DRPGBigEPCapsule"     255 5
+}
+
+actor DRPGAmmoMonsterDropper : RandomSpawner 20158
+{
+    DropItem "DRPGClip"                 255 150
+	DropItem "DRPGShell"                255 75
+	DropItem "DRPGRocketAmmo"           255 45
+	DropItem "DRPGCell"                 255 30
+}
+
 // MARINES
 // --------------------------------------------------
 
