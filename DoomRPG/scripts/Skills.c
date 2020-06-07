@@ -262,7 +262,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Yellow Aura",
-            .Cost = 125,
+            .Cost = 150,
             .MaxLevel = 4,
             .Use = UseAura,
             .Description =
@@ -407,7 +407,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Former Sergeant",
-            .Cost = 75,
+            .Cost = 80,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -427,7 +427,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Imp",
-            .Cost = 75,
+            .Cost = 80,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -437,7 +437,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Summon Demon",
-            .Cost = 75,
+            .Cost = 80,
             .MaxLevel = 1,
             .Use = Summon,
             .Description =
@@ -3056,7 +3056,7 @@ void CheckSkills()
         Skills[2][5].Cost = 150; // Standart EP cost of Purple Aura
         Skills[2][6].Cost = 150; // Standart EP cost of Orange Aura
         Skills[2][7].Cost = 150; // Standart EP cost of Dark Blue Aura
-        Skills[2][8].Cost = 125; // Standart EP cost of Yellow Aura
+        Skills[2][8].Cost = 150; // Standart EP cost of Yellow Aura
     }
 
     // Increase the cost of skills associated with "Summoning" depending on the number of summoned allies
@@ -3067,10 +3067,10 @@ void CheckSkills()
 
         Skills[4][0].Cost = 60 + (Player.Summons * 30);    // Increase EP cost of Summon Marine
         Skills[4][1].Cost = 100 + (Player.Summons * 50);   // Increase EP cost of Summon Former Human
-        Skills[4][2].Cost = 75 + (Player.Summons * 30);    // Increase EP cost of Summon Former Sergeant
+        Skills[4][2].Cost = 80 + (Player.Summons * 40);    // Increase EP cost of Summon Former Sergeant
         Skills[4][3].Cost = 175 + (Player.Summons * 75);   // Increase EP cost of Summon Former Commando
-        Skills[4][4].Cost = 75 + (Player.Summons * 30);    // Increase EP cost of Summon Imp
-        Skills[4][5].Cost = 75 + (Player.Summons * 30);    // Increase EP cost of Summon Demon
+        Skills[4][4].Cost = 80 + (Player.Summons * 40);    // Increase EP cost of Summon Imp
+        Skills[4][5].Cost = 80 + (Player.Summons * 40);    // Increase EP cost of Summon Demon
         Skills[4][6].Cost = 175 + (Player.Summons * 75);   // Increase EP cost of Summon Cacodemon
         Skills[4][7].Cost = 200 + (Player.Summons * 100);  // Increase EP cost of Summon Hell Knight
         Skills[4][8].Cost = 300 + (Player.Summons * 150);  // Increase EP cost of Summon Baron of Hell
@@ -3090,10 +3090,10 @@ void CheckSkills()
 
         Skills[4][0].Cost = 60;   // Standart EP cost of Summon Marine
         Skills[4][1].Cost = 100;  // Standart EP cost of Summon Former Human
-        Skills[4][2].Cost = 75;   // Standart EP cost of Summon Former Sergeant
+        Skills[4][2].Cost = 80;   // Standart EP cost of Summon Former Sergeant
         Skills[4][3].Cost = 175;  // Standart EP cost of Summon Former Commando
-        Skills[4][4].Cost = 75;   // Standart EP cost of Summon Imp
-        Skills[4][5].Cost = 75;   // Standart EP cost of Summon Demon
+        Skills[4][4].Cost = 80;   // Standart EP cost of Summon Imp
+        Skills[4][5].Cost = 80;   // Standart EP cost of Summon Demon
         Skills[4][6].Cost = 175;  // Standart EP cost of Summon Cacodemon
         Skills[4][7].Cost = 200;  // Standart EP cost of Summon Hell Knight
         Skills[4][8].Cost = 300;  // Standart EP cost of Summon Baron of Hell
@@ -3446,13 +3446,13 @@ void CheckAuras()
                 Player.Aura.Type[AURA_DARKBLUE].Level = 4;
 
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 1)
-                if ((Timer() % 25) == 0)
+                if ((Timer() % (10000 / (400 + (Player.Aura.Type[AURA_DARKBLUE].Level - 1) * 100))) == 0)
                     GiveInventory("Clip", AmmoRegenMult);
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 2)
-                if ((Timer() % (35 * 3)) == 1)
+                if ((Timer() % (10500 / (100 + (Player.Aura.Type[AURA_DARKBLUE].Level - 2) * 40))) == 1)
                     GiveInventory("Shell", AmmoRegenMult);
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 3)
-                if ((Timer() % (35 * 20)) == 0)
+                if ((Timer() % (35 * 15)) == 0)
                     GiveInventory("RocketAmmo", AmmoRegenMult);
             if (Player.Aura.Type[AURA_DARKBLUE].Level >= 4)
                 if ((Timer() % (35 / 2)) == 0)

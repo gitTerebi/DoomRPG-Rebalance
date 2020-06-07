@@ -2525,9 +2525,9 @@ NamedScript void MonsterDeath()
             if (Players(Killer).HealthDrop && RandomFixed(0.0, 100.0) < Players(Killer).HealthChance)    DropMonsterItem(Killer, 0, "DRPGHealthMonsterDropper", 256);
             if (Players(Killer).EPDrop && RandomFixed(0.0, 100.0) < Players(Killer).EPChance)            DropMonsterItem(Killer, 0, "DRPGEPMonsterDropper", 256);
             if (Players(Killer).ArmorDrop && RandomFixed(0.0, 100.0) < Players(Killer).ArmorChance)      DropMonsterItem(Killer, 0, "DRPGAmmoMonsterDropper", 256);
-            if (Players(Killer).WeaponDrop && RandomFixed(0.0, 100.0) < Players(Killer).WeaponChance)    DropMonsterItem(Killer, 0, "DRPGTurretDropper", 256);
+            if (Players(Killer).WeaponDrop && RandomFixed(0.0, 100.0) < Players(Killer).WeaponChance)    DropMonsterItem(Killer, 0, "DRPGTurretMonsterDropper", 256);
             if (Players(Killer).ModuleDrop && RandomFixed(0.0, 100.0) < Players(Killer).ModuleChance)    DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256);
-            if (Players(Killer).StimDrop && RandomFixed(0.0, 100.0) < Players(Killer).StimChance)        DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 256);
+            if (Players(Killer).StimDrop && RandomFixed(0.0, 100.0) < Players(Killer).StimChance)        DropMonsterItem(Killer, 0, "DRPGVialMonsterDropper", 256);
             if (Players(Killer).PowerupDrop && RandomFixed(0.0, 100.0) < Players(Killer).PowerupChance)  DropMonsterItem(Killer, 0, "DRPGPowerupDropper", 256);
             if (Players(Killer).ShieldDrop && RandomFixed(0.0, 100.0) < Players(Killer).ShieldChance)    DropMonsterItem(Killer, 0, "DRPGShieldDropper", 256);
             if (Players(Killer).AugDrop && RandomFixed(0.0, 100.0) < Players(Killer).AugChance)          DropMonsterItem(Killer, 0, "DRPGAugDropper", 256);

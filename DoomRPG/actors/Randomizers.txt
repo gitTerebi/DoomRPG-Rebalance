@@ -625,6 +625,49 @@ actor DRPGAmmoMonsterDropper : RandomSpawner 20158
 	DropItem "DRPGCell"                 255 30
 }
 
+actor DRPGTurretMonsterDropper : RandomSpawner 20159
+{
+    DropItem "DRPGTurretPart"       255 98
+    DropItem "DRPGTurretPartCrate"  255 2
+}
+
+actor DRPGVialMonsterDropper : RandomSpawner 20160
+{
+    // Stats
+    DropItem "DRPGVialStrength"         255 20
+    DropItem "DRPGVialDefense"          255 20
+    DropItem "DRPGVialVitality"         255 20
+    DropItem "DRPGVialEnergy"           255 20
+    DropItem "DRPGVialRegeneration"     255 20
+    DropItem "DRPGVialAgility"          255 20
+    DropItem "DRPGVialCapacity"         255 20
+    DropItem "DRPGVialLuck"             255 20
+    
+    // Rare Vials
+    DropItem "DRPGVialMonsterDropperRare"      255 5
+}
+
+actor DRPGVialMonsterDropperRare : RandomSpawner 20161
+{
+	// Boosters
+    DropItem "DRPGVialPotency"          255 10
+    DropItem "DRPGVialPurifier"         255 10
+    
+    // Powerups
+    DropItem "DRPGVialIndestructible"   255 10
+    DropItem "DRPGVialShadow"           255 10
+    DropItem "DRPGVialInfinity"         255 10
+    DropItem "DRPGVialChrono"           255 10
+    DropItem "DRPGVialAdrenaline"       255 10
+    DropItem "DRPGVialGravity"          255 10
+    DropItem "DRPGVialVampire"          255 10
+    DropItem "DRPGVialRage"             255 10
+    DropItem "DRPGVialMagnetic"         255 10
+
+    // Stims
+    DropItem "DRPGStimDropper"          255 5
+}
+
 // MARINES
 // --------------------------------------------------
 
