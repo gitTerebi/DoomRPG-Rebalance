@@ -233,12 +233,12 @@ ACTOR DRPGMarineGuardPistolSummoned
     Goto Missile
   TacticStrafeBack1:
     NMA2 E 1 A_FaceTarget
-    NMA2 AABBCCDD 1 A_Recoil(-1)
+    NMA2 AABBCCDD 1 A_Recoil(1)
     NMA2 E 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack2:
     NMA2 E 1 A_FaceTarget
-    NMA2 AABBCCDD 1 A_Recoil(-random(1,2))
+    NMA2 AABBCCDD 1 A_Recoil(random(1,2))
     NMA2 E 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack3:
@@ -559,12 +559,12 @@ ACTOR DRPGMarineBattleRifleSummoned
     Goto MissileCheck
   TacticStrafeBack1:
     NMA1 E 1 A_FaceTarget
-    NMA1 AABBCCDD 1 A_Recoil(-1)
+    NMA1 AABBCCDD 1 A_Recoil(1)
     NMA1 E 1 A_FaceTarget
     Goto MissileCheck
   TacticStrafeBack2:
     NMA1 E 1 A_FaceTarget
-    NMA1 AABBCCDD 1 A_Recoil(-random(1,2))
+    NMA1 AABBCCDD 1 A_Recoil(random(1,2))
     NMA1 E 1 A_FaceTarget
     Goto MissileCheck
   TacticStrafeBack3:
@@ -856,12 +856,12 @@ ACTOR DRPGMarineShotgunSummoned
     Goto Missile
   TacticStrafeBack1:
     NMA3 E 1 A_FaceTarget
-    NMA3 AABBCCDD 1 A_Recoil(-1)
+    NMA3 AABBCCDD 1 A_Recoil(1)
     NMA3 E 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack2:
     NMA3 E 1 A_FaceTarget
-    NMA3 AABBCCDD 1 A_Recoil(-random(1,2))
+    NMA3 AABBCCDD 1 A_Recoil(random(1,2))
     NMA3 E 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack3:
@@ -1140,12 +1140,12 @@ ACTOR DRPGMarineDoubleShotgunSummoned
     Goto Missile
   TacticStrafeBack1:
     NMA4 E 1 A_FaceTarget
-    NMA4 AABBCCDD 1 A_Recoil(-1)
+    NMA4 AABBCCDD 1 A_Recoil(1)
     NMA4 E 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack2:
     NMA4 E 1 A_FaceTarget
-    NMA4 AABBCCDD 1 A_Recoil(-random(1,2))
+    NMA4 AABBCCDD 1 A_Recoil(random(1,2))
     NMA4 E 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack3:
@@ -1421,12 +1421,12 @@ ACTOR DRPGMarineChaingunSummoned
     Goto Missile
   TacticStrafeBack1:
     NMA6 X 1 A_FaceTarget
-    NMA6 AABBCCDD 1 A_Recoil(-1)
+    NMA6 AABBCCDD 1 A_Recoil(1)
     NMA6 X 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack2:
     NMA6 X 1 A_FaceTarget
-    NMA6 AABBCCDD 1 A_Recoil(-random(1,2))
+    NMA6 AABBCCDD 1 A_Recoil(random(1,2))
     NMA6 X 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack3:
@@ -1705,12 +1705,12 @@ ACTOR DRPGMarineRocketLauncherSummoned
     Goto Missile+3
   TacticStrafeBack1:
     NMA7 E 1 A_FaceTarget
-    NMA7 AABBCCDD 1 A_Recoil(-1)
+    NMA7 AABBCCDD 1 A_Recoil(1)
     NMA7 E 1 A_FaceTarget
     Goto Missile+3
   TacticStrafeBack2:
     NMA7 E 1 A_FaceTarget
-    NMA7 AABBCCDD 1 A_Recoil(-random(1,2))
+    NMA7 AABBCCDD 1 A_Recoil(random(1,2))
     NMA7 E 1 A_FaceTarget
     Goto Missile+3
   TacticStrafeBack3:
@@ -1980,12 +1980,12 @@ ACTOR DRPGMarinePlasmaRifleSummoned
     Goto Missile
   TacticStrafeBack1:
     NMA8 E 1 A_FaceTarget
-    NMA8 AABBCCDD 1 A_Recoil(-1)
+    NMA8 AABBCCDD 1 A_Recoil(1)
     NMA8 E 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack2:
     NMA8 E 1 A_FaceTarget
-    NMA8 AABBCCDD 1 A_Recoil(-random(1,2))
+    NMA8 AABBCCDD 1 A_Recoil(random(1,2))
     NMA8 E 1 A_FaceTarget
     Goto Missile
   TacticStrafeBack3:
@@ -2279,12 +2279,12 @@ ACTOR DRPGMarineBFG9000Summoned
     Goto Missile+3
   TacticStrafeBack1:
     NMA9 E 1 A_FaceTarget
-    NMA9 AABBCCDD 1 A_Recoil(-1)
+    NMA9 AABBCCDD 1 A_Recoil(1)
     NMA9 E 1 A_FaceTarget
     Goto Missile+3
   TacticStrafeBack2:
     NMA9 E 1 A_FaceTarget
-    NMA9 AABBCCDD 1 A_Recoil(-random(1,2))
+    NMA9 AABBCCDD 1 A_Recoil(random(1,2))
     NMA9 E 1 A_FaceTarget
     Goto Missile+3
   TacticStrafeBack3:
