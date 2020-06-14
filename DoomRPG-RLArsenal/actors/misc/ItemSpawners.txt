@@ -135,10 +135,7 @@ actor ReplaceRLBerserkSpawner : RandomSpawner 2023  // At the moment, Berserk is
 
 actor RLClipBoxSpawner : RandomSpawner replaces ClipBox
 {
-    DropItem "RLClipBox"           255 183
-    DropItem "DRPGTurretPart"      255 10
-    DropItem "RLModPackSpawner"    255 6
-    DropItem "RLBlueprintComputer" 255 1
+    DropItem "RLClipBox"           255 100
 }
 
 actor RLShellBoxSpawner : RandomSpawner replaces ShellBox
