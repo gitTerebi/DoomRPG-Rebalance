@@ -1836,7 +1836,7 @@ ACTOR DRPGMarineShotgunSummoned2
     TNT1 A 0 A_JumpIfHealthLower (30, 2)
     TNT1 A 0 A_JumpIfCloser (600, 1)
     Goto MissileCrouch
-    PL32 EEEEEEEE 1 A_FaceTarget (10)
+    PL32 EEEEEEEEEEEE 1 A_FaceTarget (10)
     TNT1 A 0 A_FaceTarget
     TNT1 A 0 A_MonsterRefire (0, "Overwatch")
     TNT1 A 0 A_GiveInventory ("DRPGMarineCombatShotgunShotCounter", 1)
@@ -1859,7 +1859,7 @@ ACTOR DRPGMarineShotgunSummoned2
     Goto See
   MissileCrouch:
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 5, "RetreatReload")
-    P32C AAAAAAAA 1 A_FaceTarget (10)
+    P32C AAAAAAAAAAAA 1 A_FaceTarget (10)
     TNT1 A 0 A_FaceTarget
     TNT1 A 0 A_MonsterRefire (0, "OverwatchCrouch")
     TNT1 A 0 A_GiveInventory ("DRPGMarineCombatShotgunShotCounter", 1)
@@ -2239,7 +2239,7 @@ ACTOR DRPGMarineShotgunSummoned3
     TNT1 A 0 A_JumpIfHealthLower (30, 2)
     TNT1 A 0 A_JumpIfCloser (600, 1)
     Goto MissileCrouch
-    PASG EEEEEEEE 1 A_FaceTarget (10)
+    PASG EEEEEEEEEEEE 1 A_FaceTarget (10)
     TNT1 A 0 A_FaceTarget
     TNT1 A 0 A_MonsterRefire (0, "Overwatch")
     TNT1 A 0 A_GiveInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
@@ -2262,7 +2262,7 @@ ACTOR DRPGMarineShotgunSummoned3
     Goto See
   MissileCrouch:
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 8, "RetreatReload")
-    PASC AAAAAAAA 1 A_FaceTarget (10)
+    PASC AAAAAAAAAAAA 1 A_FaceTarget (10)
     TNT1 A 0 A_FaceTarget
     TNT1 A 0 A_MonsterRefire (0, "OverwatchCrouch")
     TNT1 A 0 A_GiveInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
@@ -2690,16 +2690,16 @@ ACTOR DRPGMarineDoubleShotgunSummoned2
     TNT1 A 0
     Goto See
   Reload:
-    PQST EE 7
+    PQST EE 4 A_FaceTarget
     TNT1 A 0 A_PlaySound("weapons/heavydoubleshotgunopen", 7)
-    PQST E 21
+    PQST E 21 A_FaceTarget
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_TakeInventory ("DRPGMarineQuadShotgunShotCounter", 2)
     TNT1 A 0 A_PlaySound("weapons/heavydoubleshotgunload", 7)
-    PQST E 18
+    PQST E 18 A_FaceTarget
     TNT1 A 0 A_PlaySound("weapons/heavydoubleshotgunclose", 7)
-    PQST E 5 A_FaceTarget
-    Goto See
+    PQST E 4 A_FaceTarget
+    Goto Missile
   TacticReload:
     PQST E 1 A_FaceTarget (0, 30, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
@@ -2969,16 +2969,16 @@ ACTOR DRPGMarineDoubleShotgunSummoned3
     TNT1 A 0
     Goto See
   Reload:
-    PQST EE 7
+    PQST EE 4 A_FaceTarget
     TNT1 A 0 A_PlaySound("weapons/heavydoubleshotgunopen", 7)
-    PQST E 21
+    PQST E 21 A_FaceTarget
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_TakeInventory ("DRPGMarineQuadShotgunMk2ShotCounter", 4)
     TNT1 A 0 A_PlaySound("weapons/heavydoubleshotgunload", 7)
-    PQST E 18
+    PQST E 18 A_FaceTarget
     TNT1 A 0 A_PlaySound("weapons/heavydoubleshotgunclose", 7)
-    PQST E 5 A_FaceTarget
-    Goto See
+    PQST E 4 A_FaceTarget
+    Goto Missile
   TacticReload:
     PQST E 1 A_FaceTarget (0, 30, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
