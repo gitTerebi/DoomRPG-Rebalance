@@ -258,7 +258,7 @@ ACTOR DRPGMarineGuardPistolSummoned
     TNT1 A 0 ThrustThingZ(0, 4, 0, 1)
     Goto See
   Overwatch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarinePistolShotCounter", 6, "RetreatReload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarinePistolShotCounter", 4, "RetreatReload")
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     NMA2 E 4 A_FaceTarget
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
@@ -476,29 +476,29 @@ ACTOR DRPGMarineBattleRifleSummoned
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 20, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("drpgmarines/battlerifle", CHAN_WEAPON, 1, 0, 0.7)
-    NMA1 F 3 Bright A_CustomBulletAttack (16, 0, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA1 F 3 Bright A_CustomBulletAttack (16, 4, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA1 E 1 A_MonsterRefire(80, "Overwatch")
     Goto MissileCheck
   MissileBurst:
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 20, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("drpgmarines/battlerifle", CHAN_WEAPON, 1, 0, 0.7)
-    NMA1 F 3 Bright A_CustomBulletAttack (16, 0, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA1 F 3 Bright A_CustomBulletAttack (12, 1, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA1 E 1 A_FaceTarget
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 20, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("drpgmarines/battlerifle", CHAN_WEAPON, 1, 0, 0.7)
-    NMA1 F 3 Bright A_CustomBulletAttack (16, 0, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA1 F 3 Bright A_CustomBulletAttack (14, 2, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA1 E 1 A_FaceTarget
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 20, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("drpgmarines/battlerifle", CHAN_WEAPON, 1, 0, 0.7)
-    NMA1 F 3 Bright A_CustomBulletAttack (16, 0, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA1 F 3 Bright A_CustomBulletAttack (15, 3, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA1 E 1 A_FaceTarget
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 20, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("drpgmarines/battlerifle", CHAN_WEAPON, 1, 0, 0.7)
-    NMA1 F 3 Bright A_CustomBulletAttack (16, 0, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA1 F 3 Bright A_CustomBulletAttack (16, 4, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA1 E 1 A_FaceTarget
     NMA1 EEEEEEEEEE 1 A_FaceTarget (10)
     NMA1 E 1 A_MonsterRefire(0, "Overwatch")
@@ -510,7 +510,7 @@ ACTOR DRPGMarineBattleRifleSummoned
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 20, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("drpgmarines/battlerifle", CHAN_WEAPON, 1, 0, 0.7)
-    NMA1 F 3 Bright A_CustomBulletAttack (12, 0, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA1 F 3 Bright A_CustomBulletAttack (12, 1, 1, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA1 E 1 A_MonsterRefire(0, "Overwatch")
     Goto MissileCheck
   Reload:
@@ -595,7 +595,7 @@ ACTOR DRPGMarineBattleRifleSummoned
     TNT1 A 0 ThrustThingZ(0, 4, 0, 1)
     Goto See
   Overwatch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 20, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 12, "Reload")
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     NMA1 E 5 A_FaceTarget (10)
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
@@ -792,7 +792,7 @@ ACTOR DRPGMarineShotgunSummoned
     TNT1 A 0 A_MonsterRefire (0, "Overwatch")
     TNT1 A 0 A_GiveInventory ("DRPGMarineShotgunShotCounter", 1)
     TNT1 A 0 A_PlaySound("drpgmarines/shotgun", CHAN_WEAPON, 1, 0, 0.7)
-    NMA3 F 4 Bright A_CustomBulletAttack (16, 0, 5, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA3 F 4 Bright A_CustomBulletAttack (16, 4, 5, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA3 E 6
     TNT1 A 0 A_JumpIfHealthLower (30, 2)
     TNT1 A 0 A_Jump (64, "RetreatReload")
@@ -816,7 +816,7 @@ ACTOR DRPGMarineShotgunSummoned
     TNT1 A 0 A_MonsterRefire (0, "OverwatchCrouch")
     TNT1 A 0 A_GiveInventory ("DRPGMarineShotgunShotCounter", 1)
     TNT1 A 0 A_PlaySound("drpgmarines/shotgun", CHAN_WEAPON, 1, 0, 0.7)
-    NMA3 Y 4 Bright A_CustomBulletAttack (12, 0, 5, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    NMA3 Y 4 Bright A_CustomBulletAttack (12, 2, 5, random(1,5) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     NMA3 X 6
     NMA3 X 5
     Goto ReloadCrouch
@@ -1491,7 +1491,7 @@ ACTOR DRPGMarineChaingunSummoned
     Goto See
   Overwatch:
     TNT1 A 0 A_PlaySound("drpgmarines/chaingunwinddown", 6)
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineChaingunShotCounterSummoned", 80, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineChaingunShotCounterSummoned", 50, "Reload")
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     NMA6 X 5 A_FaceTarget (10)
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
@@ -2071,7 +2071,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned
     TNT1 A 0 ThrustThingZ(0, 4, 0, 1)
     Goto See
   Overwatch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineChaingunShotCounter", 40, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineChaingunShotCounter", 25, "Reload")
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     NMA8 E 5 A_FaceTarget (10)
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
@@ -2100,7 +2100,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned
     NMA8 E 24 A_FaceTarget
     Goto See
   OverwatchCrouch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineChaingunShotCounter", 40, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineChaingunShotCounter", 25, "Reload")
     TNT1 A 0 A_Chase ("", "MissileCrouch", CHF_DONTMOVE)
     NMA8 E 5 A_FaceTarget (10)
     TNT1 A 0 A_Chase ("", "MissileCrouch", CHF_DONTMOVE)

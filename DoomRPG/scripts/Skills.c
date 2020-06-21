@@ -3151,7 +3151,7 @@ void CheckSkills()
         }
         if ((Player.Level + Player.EnergyTotal) >= 80)
         {
-            Skills[4][0].Description[0] = "Dual Combat Pistols";
+            Skills[4][0].Description[0] = "Uzi";
             Skills[4][0].Description[3] = "Quad Shotgun";
         }
 
