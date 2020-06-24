@@ -774,7 +774,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // If the monster is friendly, it has the average level of all players in the game
         if (GetActorProperty(0, APROP_Friendly))
-            Stats->Level = ((AveragePlayerLevel() * LevelWeight) + (LevelNum * MapWeight)) * (0.4 + AveragePlayerEnergy() * 0.01);
+            Stats->Level = (int)((fixed)AveragePlayerLevel() * LevelWeight + (fixed)LevelNum * MapWeight);
 
         // Special case for Bosses
         if (Stats->Flags & MF_BOSS)

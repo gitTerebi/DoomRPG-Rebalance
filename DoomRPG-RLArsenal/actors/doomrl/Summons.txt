@@ -849,15 +849,47 @@ ACTOR DRPGMarineGuardPistolSummoned3
     TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
     PSMG F 3 Bright A_CustomBulletAttack (8, 1, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     PSMG E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(128, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
+    PSMG F 3 Bright A_CustomBulletAttack (8, 1, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PSMG E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(144, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
     PSMG F 3 Bright A_CustomBulletAttack (10, 2, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     PSMG E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(160, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
+    PSMG F 3 Bright A_CustomBulletAttack (10, 2, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PSMG E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(176, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
     PSMG F 3 Bright A_CustomBulletAttack (12, 4, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PSMG E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(192, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
+    PSMG F 3 Bright A_CustomBulletAttack (12, 4, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PSMG E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(208, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
+    PSMG F 3 Bright A_CustomBulletAttack (14, 4, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PSMG E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(224, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
+    PSMG F 3 Bright A_CustomBulletAttack (14, 4, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     PSMG E 1 A_FaceTarget
     PSMG EEEEEEEEEE 1 A_FaceTarget (10)
     PSMG E 1 A_MonsterRefire(0, "Overwatch")
@@ -866,7 +898,17 @@ ACTOR DRPGMarineGuardPistolSummoned3
     TNT1 A 0 A_Jump (256,1,10,15,20,25)
     PSMG EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_FaceTarget (10)
     TNT1 A 0 A_FaceTarget
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 20, "RetreatReload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
+    PSMG F 3 Bright A_CustomBulletAttack (8, 1, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
+    PSMG F 3 Bright A_CustomBulletAttack (8, 1, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    TNT1 A 0 A_FaceTarget
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleShotCounter", 32, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/uzi", CHAN_WEAPON, 1, 0, 0.7)
     PSMG F 3 Bright A_CustomBulletAttack (8, 1, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
@@ -1181,21 +1223,55 @@ ACTOR DRPGMarineBattleRifleSummoned2
     TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
     PCBN F 3 Bright A_CustomBulletAttack (10, 1, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(112, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
+    PCBN F 3 Bright A_CustomBulletAttack (10, 1, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(128, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
     PCBN F 3 Bright A_CustomBulletAttack (11, 2, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(144, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
+    PCBN F 3 Bright A_CustomBulletAttack (11, 2, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(160, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
     PCBN F 3 Bright A_CustomBulletAttack (12, 3, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(176, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
+    PCBN F 3 Bright A_CustomBulletAttack (12, 3, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(192, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
     PCBN F 3 Bright A_CustomBulletAttack (13, 4, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(208, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
+    PCBN F 3 Bright A_CustomBulletAttack (13, 4, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(224, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
+    PCBN F 3 Bright A_CustomBulletAttack (14, 5, 1, random(2,6) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    PCBN E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(240, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineBattleRifleMk2ShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/highpowerbattlerifle", CHAN_WEAPON, 1, 0, 0.7)
@@ -1528,26 +1604,67 @@ ACTOR DRPGMarineBattleRifleSummoned3
     TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
     MGMR F 3 Bright A_CustomBulletAttack (8, 1, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(80, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
+    MGMR F 3 Bright A_CustomBulletAttack (8, 1, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(96, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
     MGMR F 3 Bright A_CustomBulletAttack (9, 2, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(112, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
+    MGMR F 3 Bright A_CustomBulletAttack (9, 2, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(128, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
     MGMR F 3 Bright A_CustomBulletAttack (10, 3, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(144, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
+    MGMR F 3 Bright A_CustomBulletAttack (10, 3, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(160, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
     MGMR F 3 Bright A_CustomBulletAttack (11, 4, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(176, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
+    MGMR F 3 Bright A_CustomBulletAttack (11, 4, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(192, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
     MGMR F 3 Bright A_CustomBulletAttack (12, 5, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
     MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(208, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
+    MGMR F 3 Bright A_CustomBulletAttack (12, 5, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(224, 6)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
+    MGMR F 3 Bright A_CustomBulletAttack (12, 6, 1, random(3,7) * 3, "DRPGMarineBulletPuffSummoned", 0, CBAF_NORANDOM)
+    MGMR E 1 A_FaceTarget
+    TNT1 A 0 A_Jump(240, 6)
     TNT1 A 0 A_JumpIfInventory ("DRPGMarineVanguardRifleShotCounter", 60, "RetreatReload")
     TNT1 A 0 A_GiveInventory ("DRPGMarineVanguardRifleShotCounter", 1)
     TNT1 A 0 A_PlaySound("weapons/vanguardrifle", CHAN_WEAPON, 1, 0, 0.7)
@@ -1880,7 +1997,7 @@ ACTOR DRPGMarineShotgunSummoned2
     TNT1 A 0
     Goto Missile
   Overwatch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 3, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 4, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     PL32 E 4 A_FaceTarget
@@ -1902,7 +2019,7 @@ ACTOR DRPGMarineShotgunSummoned2
     P32C A 5
     Goto MissileCrouch
   OverwatchCrouch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 3, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 4, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_Chase ("", "MissileCrouch", CHF_DONTMOVE)
     P32C A 4 A_FaceTarget
@@ -2283,7 +2400,7 @@ ACTOR DRPGMarineShotgunSummoned3
     TNT1 A 0
     Goto Missile
   Overwatch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 5, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 6, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     PASG E 4 A_FaceTarget
@@ -2305,7 +2422,7 @@ ACTOR DRPGMarineShotgunSummoned3
     PASC A 5
     Goto MissileCrouch
   OverwatchCrouch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 5, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 6, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_Chase ("", "MissileCrouch", CHF_DONTMOVE)
     PASC A 4 A_FaceTarget
