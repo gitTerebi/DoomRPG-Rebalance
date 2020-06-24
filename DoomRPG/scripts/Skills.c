@@ -3065,7 +3065,7 @@ void CheckSkills()
         Skills[0][1].Cost = 150 + ((Player.Summons - 1) * 75); // Increase EP cost of skill "Heal Summon"
         Skills[5][2].Cost = 5 + ((Player.Summons - 1) * 5); // Increase EP cost of skill "Rally"
 
-        if (Player.SkillLevel[4][0].CurrentLevel == 1)
+        if (Player.SkillLevel[4][0].CurrentLevel <= 1)
         {
             Skills[4][0].Cost = 60 + (Player.Summons * 60);    // Increase EP cost of Summon Marine
         }
