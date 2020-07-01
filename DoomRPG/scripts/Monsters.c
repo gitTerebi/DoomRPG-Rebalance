@@ -1510,8 +1510,8 @@ Start:
 
         fixed DamageFactor = 1.0 - (((fixed)Stats->Defense / 400.0) + (LevelNum / 800.0));
 
-        if (DamageFactor < 0.25)
-            DamageFactor = 0.25;
+        if (DamageFactor < 0.251)
+            DamageFactor = 0.251;
 
         SetActorPropertyFixed(0, APROP_DamageFactor, DamageFactor);
 
