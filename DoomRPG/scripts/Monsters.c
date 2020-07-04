@@ -1499,7 +1499,7 @@ Start:
     {
         StatsChanged = true;
 
-        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0) + (LevelNum / 200.0)));
+        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0) + ((fixed)LevelNum / 200.0)));
         OldStrength = Stats->Strength;
     }
 
@@ -1508,7 +1508,7 @@ Start:
     {
         StatsChanged = true;
 
-        fixed DamageFactor = 1.0 - (((fixed)Stats->Defense / 400.0) + (LevelNum / 800.0));
+        fixed DamageFactor = 1.0 - (((fixed)Stats->Defense / 400.0) + ((fixed)LevelNum / 800.0));
 
         if (DamageFactor < 0.251)
             DamageFactor = 0.251;
@@ -2379,17 +2379,8 @@ NamedScript void MonsterDeath()
         ThreatMult = 1;
 
     int LevelNum = CurrentLevel->LevelNum;
-    long int XPAmount = Random(HealthXP / 2, HealthXP) * ThreatMult * (1 + (Stats->Level / 50) + (LevelNum / 100));
-    long int RankAmount = HealthXP * ThreatMult * (1 + (Stats->Level / 50) + (LevelNum / 100));
-
-    // Aura-Based XP/Rank Modifiers
-    if (MonsterHasShadowAura(Stats))
-    {
-        XPAmount *= 1;
-        RankAmount *= 1;
-    }
-    else if (Stats->Aura.Type[AURA_WHITE].Active)
-        XPAmount *= 1;
+    long int XPAmount = Random(HealthXP / 2, HealthXP) * ThreatMult * (long fixed)(1.0 + (Stats->Level / 50.0) + (LevelNum / 200.0));
+    long int RankAmount = HealthXP * ThreatMult * (long fixed)(1.0 + (Stats->Level / 50.0) + (LevelNum / 200.0));
 
     if (Players(Killer).Shield.Accessory)
     {

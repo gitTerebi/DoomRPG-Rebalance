@@ -2421,8 +2421,8 @@ NamedScript Console void Cheat(int StatBoost)
     }
 
     // Max Level/Rank
-    Player.XP = XPTable[MAX_LEVEL - 1];
-    Player.Rank = RankTable[MAX_RANK - 1];
+    Player.Level = MAX_LEVEL;
+    Player.RankLevel = MAX_RANK;
 
     // Stats
     Player.Strength = StatBoost;

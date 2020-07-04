@@ -1891,7 +1891,6 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
     bool Success;
     fixed Radius;
     str Name;
-    int LevelNum = CurrentLevel->LevelNum;
 
     str const Summons[] =
     {

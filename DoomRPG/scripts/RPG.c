@@ -164,12 +164,10 @@ NamedScript Type_ENTER void Init()
         if (GetCVar("drpg_start_level") > 0)
         {
             Player.Level = GetActivatorCVar("drpg_start_level");
-            Player.XP = XPTable[Player.Level - 1];
         }
         if (GetCVar("drpg_start_rank") > 0)
         {
             Player.RankLevel = GetActivatorCVar("drpg_start_rank");
-            Player.Rank = RankTable[Player.RankLevel - 1];
         }
 
         // Stats

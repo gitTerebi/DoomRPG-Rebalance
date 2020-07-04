@@ -920,7 +920,7 @@ NamedScript MapSpecial void PissOffMarines(bool Steal)
 
     // Demotion
     if (Player.RankLevel > 0 && Steal)
-        Player.Rank = RankTable[Player.RankLevel - 2];
+        Player.Rank -= Player.Rank + RankTable[Player.RankLevel - 1];
 
     // Iterate Marines pre-Delay
     if (Steal)

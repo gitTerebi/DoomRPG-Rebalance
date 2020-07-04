@@ -399,7 +399,7 @@ ACTOR DRPGMarineGuardPistolSummoned2
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PPS2 A 0 A_Look
     Goto FollowPlayer
@@ -1852,7 +1852,7 @@ ACTOR DRPGMarineShotgunSummoned2
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PL32 A 0 A_Look
     Goto FollowPlayer
@@ -2255,7 +2255,7 @@ ACTOR DRPGMarineShotgunSummoned3
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PASG A 0 A_Look
     Goto FollowPlayer
@@ -2706,7 +2706,7 @@ ACTOR DRPGMarineDoubleShotgunSummoned2
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PQST A 0 A_Look
     Goto FollowPlayer
@@ -2985,7 +2985,7 @@ ACTOR DRPGMarineDoubleShotgunSummoned3
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PQST A 0 A_Look
     Goto FollowPlayer
@@ -3264,7 +3264,7 @@ ACTOR DRPGMarineChaingunSummoned2
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PL42 A 0 A_Look
     Goto FollowPlayer
@@ -3581,7 +3581,7 @@ ACTOR DRPGMarineChaingunSummoned3
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PDEV A 0 A_Look
     Goto FollowPlayer
@@ -3895,7 +3895,7 @@ ACTOR DRPGMarineRocketLauncherSummoned2
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PBAZ A 0 A_Look
     Goto FollowPlayer
@@ -4178,7 +4178,7 @@ ACTOR DRPGMarineRocketLauncherSummoned3
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PRDM A 0 A_Look
     Goto FollowPlayer
@@ -4461,7 +4461,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned2
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PRAI E 0 A_Look
     Goto FollowPlayer
@@ -4800,7 +4800,7 @@ ACTOR DRPGMarinePlasmaRifleSummoned3
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PPBM E 0 A_Look
     Goto FollowPlayer
@@ -5141,7 +5141,7 @@ ACTOR DRPGMarineBFG9000Summoned2
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PB10 A 0 A_Look
     Goto FollowPlayer
@@ -5398,7 +5398,7 @@ ACTOR DRPGMarineBFG9000Summoned3
   States
   {
   Spawn:
-    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN | MF_RANKLOSS)
+    TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOPAYKILL | MF_NODROPS | MF_NAMEGEN)
     TNT1 A 0 A_GiveInventory ("DRPGMarineSummonedToken", 1)
     PB10 A 0 A_Look
     Goto FollowPlayer
