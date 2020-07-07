@@ -2331,7 +2331,58 @@ NamedScript DECORATE void MonsterRevive()
 
     // Account for monsters revived by friendly Archvile
     if (GetActorProperty(0, APROP_Friendly))
+    {
+        if (Random(0, 100) <= 80)
+        {
+            switch (Random(1, 8))
+            {
+            case 1:
+                if (Random(0, 100) <= 50) Spawn("DRPGMoneyDropper", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                break;
+            case 2:
+                if (Random(0, 100) <= 45) Spawn("DRPGStimpack", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                break;
+            case 3:
+                if (Random(0, 100) <= 40) Spawn("DRPGClip", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                break;
+            case 4:
+                if (Random(0, 100) <= 30) Spawn("DRPGShell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                break;
+            case 5:
+                if (Random(0, 100) <= 25)
+                {
+                    if (CompatMode == COMPAT_DRLA)
+                    {
+                        Spawn("RLArmorBonusPickup", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                    }
+                    else
+                        Spawn("DRPGArmorBonus", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                }
+                break;
+            case 6:
+                if (Random(0, 100) <= 20) Spawn("DRPGEPCapsule", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                break;
+            case 7:
+                if (Random(0, 100) <= 15) Spawn("DRPGRocketAmmo", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                break;
+            case 8:
+                if (Random(0, 100) <= 10) Spawn("DRPGCell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                break;
+
+            }
+
+            ActivatorSound("vile/firestrt", 127);
+            SpawnForced("SpawnFire", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+            SpawnForced("DRPGBurnedCorpse", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+            Thing_Remove(0);
+
+            return;
+        }
+
         SetActorPropertyString(0, APROP_Species, "Player");
+        GiveInventory("DRPGFriendlyReviveMonster", 1);
+        MonsterFriendlyTeleport();
+    }
     else
         SetActorPropertyString(0, APROP_Species, "None");
 
@@ -2339,11 +2390,12 @@ NamedScript DECORATE void MonsterRevive()
     DamageNumbers();
     MonsterStatsHandler();
     MonsterAuraDisplayHandler();
+    MonsterAggressionHandler();
     if (!(Stats->Flags & MF_NOSTATS))
         MonsterRegenerationHandler();
 
-    MonsterAggressionHandler();
-    MonsterFriendlyTeleport();
+    // Give full health
+    SetActorProperty(0, APROP_Health, Stats->HealthMax);
 }
 
 NamedScript DECORATE void MonsterDeathCheck()
@@ -2745,6 +2797,12 @@ NamedScript void MonsterDeath()
     // [SW] 10/22/2018 - This is an option now, yee.
     if (GetCVar("drpg_aura_removeondeath"))
         RemoveMonsterAura(Stats);
+
+    if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGFriendlyReviveMonster") && GetActorProperty(0, APROP_Health) <= 0)
+    {
+        SpawnForced("TeleportFog", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+        Thing_Remove(0);
+    }
 }
 
 //[[alloc_Aut(16384)]]
