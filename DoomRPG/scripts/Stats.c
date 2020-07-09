@@ -192,7 +192,7 @@ void InitRankTable()
 {
     RankTable[0] = 5000 + (XPCurve * 600);
     for (int i = 1; i < MAX_RANK; i++)
-        RankTable[i] = (((long int)(((long long int)RankTable[i - 1]) + ((i * (long long int)XPCurve * 600ll) * (1 + i)))) + 500) / 1000 * 1000;
+        RankTable[i] = (((long int)((long long int)RankTable[i - 1] + ((i * (long long int)XPCurve * 600ll) * (1 + i)))) + 500) / 1000 * 1000;
 }
 
 void CheckCombo()

@@ -520,8 +520,7 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = (((long int)(RankTable[Players(i).RankLevel]) / 200l) + 250) / 500 * 500;
-            if (RankBonus == 0) RankBonus = 500;
+            RankBonus = (((long int)(RankTable[Players(i).RankLevel]) / 200l) + 250) / 250 * 250;
             Players(i).Rank += RankBonus;
 
             if (Players(i).Mission.Type != MT_SECRETS)
@@ -564,8 +563,7 @@ Start:
 
             FadeRange(255, 0, 0, 0.25, 255, 0, 0, 0, 1.0);
 
-            XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 100 * 100;
-            if (XPBonus == 0) XPBonus = 100;
+            XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
             Player.XP += XPBonus;
 
             HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
@@ -611,8 +609,7 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 500 * 500;
-            if (RankBonus == 0) RankBonus = 500;
+            RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
             Players(i).Rank += RankBonus;
 
             HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
@@ -635,10 +632,8 @@ Start:
 
             FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0, 1.0);
 
-            XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 100 * 100;
-            if (XPBonus == 0) XPBonus = 100;
-            RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 500 * 500;
-            if (RankBonus == 0) RankBonus = 500;
+            XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
+            RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
 
             Players(i).XP += XPBonus;
             Players(i).Rank += RankBonus;
@@ -843,8 +838,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
             if (!PlayerInGame(i)) continue;
 
             SetActivator(Players(i).TID);
-            long int RankBonus = ((RankTable[Players(i).RankLevel] / 40) + 250) / 500 * 500;
-            if (RankBonus == 0) RankBonus = 500;
+            long int RankBonus = ((RankTable[Players(i).RankLevel] / 40) + 250) / 250 * 250;
 
             SetFont("SMALLFONT");
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0.0, 1.0);
