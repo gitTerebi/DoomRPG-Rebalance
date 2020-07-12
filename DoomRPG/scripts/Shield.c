@@ -178,7 +178,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory8",
         "\CfREK-T50",   "SHACH0",   15000,
-        "\Cd+25% Damage Taken\C-\nDoubles the amount of \CfCredits\C- dropped by monsters",
+        "\Cd+50% Damage Taken\C-\nDoubles the amount of \CfCredits\C- dropped by monsters",
         SHIELD_PASS_EPICMEGACASH,
         RektMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },
@@ -507,7 +507,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory55",
         "\CcTRANS-EB2S2",   "SHA2]0",   40000,
-        "If your \CkAugmentation Battery\C- is full, \Cv2x Capacity\C-",
+        "If your \CkAugmentation Battery\C- is full, \Cv+50% Capacity\C-",
         SHIELD_PASS_NONE,
         TheAmazingBatteryShieldMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },
@@ -541,7 +541,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     },
     {
         "DRPGShieldAccessory60",
-        "\CnMUN3-MAG",  "SHA3E0",   33000,
+        "\CnMUN3-MAG",  "SHA3E0",   50000,
         "Doubles the amount of \CfCredits\C- gained from using \CnMagnetize\C-",
         SHIELD_PASS_DOSHMAGNET,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
@@ -907,7 +907,7 @@ NamedScript void BlzutMod()
 
 NamedScript void RektMod()
 {
-    Player.DamageFactor *= 1.25;
+    Player.DamageFactor *= 1.5;
 }
 
 NamedScript void LightAmpMod()
@@ -1169,7 +1169,7 @@ NamedScript void AmmoSpaceUnequip(bool EMP)
 NamedScript void TheAmazingBatteryShieldMod()
 {
     if (Player.Augs.Battery >= 100)
-        Player.Shield.Capacity *= 2;
+        Player.Shield.Capacity *= 1.5;
 }
 
 NamedScript void LilZiggyMod()

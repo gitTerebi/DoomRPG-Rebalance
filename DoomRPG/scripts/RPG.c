@@ -579,7 +579,7 @@ NamedScript DECORATE int ShieldDamage(int DamageTaken)
         Player.AutosaveTimerReset = true;
         AugDamage(DamageTaken);
         ToxicityDamage();
-        StatusDamage(DamageTaken, RandomFixed(0.0, 25.0), false);
+        StatusDamage(DamageTaken, RandomFixed(0.0, 20.0), false);
         DamageHUD(DamageTaken, false);
 
         ShieldDamageAmount = DamageTaken; // For callback
