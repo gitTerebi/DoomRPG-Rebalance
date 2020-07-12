@@ -2521,7 +2521,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
     if (CreditCount > 0)
     {
         if (Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_DOSHMAGNET)
-            CreditCount *= 3;
+            CreditCount *= 2;
 
         GiveInventory("DRPGCredits", CreditCount);
         ActivatorSound("credits/pickup", 127);

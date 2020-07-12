@@ -571,7 +571,7 @@ void CheckStats()
     {
         if (Player.ActualHealth <= Player.HealthMax)
         {
-            int HealthMax = Player.VitalityTotal * 10;
+            int HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
             fixed Ratio = ((fixed)Player.ActualHealth + 0.5) / ((fixed)Player.PrevVitality * 10);
             Player.ActualHealth = Ratio * HealthMax;
         }
@@ -584,7 +584,7 @@ void CheckStats()
     {
         if (Player.EP <= Player.EPMax)
         {
-            int EPMax = Player.EnergyTotal * 10;
+            int EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
             fixed Ratio = ((fixed)Player.EP + 0.5) / ((fixed)Player.PrevEnergy * 10);
             Player.EP = Ratio * EPMax;
         }

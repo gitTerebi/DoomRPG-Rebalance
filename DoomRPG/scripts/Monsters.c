@@ -930,7 +930,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // Map Event - RAINBOWS!
         if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
-            Stats->Capacity *= Random(2, 4);
+            Stats->Capacity *= 2;
 
         // Apply Aura
         if (!GetActorProperty(0, APROP_Friendly) && !(Stats->Flags & MF_NOAURA) && !(Stats->Flags & MF_NOAURAGEN))
@@ -1527,7 +1527,7 @@ Start:
         if (CheckInventory("DRPGCredits") > OldCapacity)
             StolenCredits = CheckInventory("DRPGCredits") - OldCapacity;
 
-        SetInventory("DRPGCredits", Stats->Capacity + StolenCredits);
+        SetInventory("DRPGCredits", (Stats->Capacity + StolenCredits) / 2);
         OldCapacity = Stats->Capacity;
     }
 
@@ -2439,7 +2439,7 @@ NamedScript void MonsterDeath()
         switch (Players(Killer).Shield.Accessory->PassiveEffect)
         {
         case SHIELD_PASS_KILLSCHARGE:
-            AddRemoteShield(Players(Killer).TID, Stats->HealthMax / 10);
+            AddRemoteShield(Players(Killer).TID, Stats->HealthMax / 20);
             break;
         case SHIELD_PASS_BLOODYSHIELDSOREAL:
             Players(Killer).Shield.AccessoryBattery = 35 * 3;
@@ -2694,18 +2694,18 @@ NamedScript void MonsterDeath()
         {
             for (int i = 0; i < MAX_PLAYERS; i++)
             {
-                LuckMult = 100 + (Players(i).LuckTotal / 2);
-                CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 2000;
-                CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 200;
-                CreditsTable[i] = (Random(CreditsMin, CreditsMax) * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 200;
+                LuckMult = 100 + Players(i).LuckTotal;
+                CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
+                CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
+                CreditsTable[i] = (Random(CreditsMin, CreditsMax) * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
 
                 // REK-T50 accessory
                 if (Players(i).Shield.Active && Players(i).Shield.Accessory && Players(i).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
-                    CreditsTable[i] *= 3;
+                    CreditsTable[i] *= 2;
 
                 // RAINBOWS Event
                 if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
-                    CreditsTable[i] *= 4;
+                    CreditsTable[i] *= 2;
 
                 // UAC Premium
                 if (GetCVar("drpg_uac_premium"))
@@ -2715,17 +2715,17 @@ NamedScript void MonsterDeath()
         else
         {
             LuckMult = 100 + Players(Killer).LuckTotal;
-            CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 2000;
-            CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 200;
+            CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
+            CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
             CreditsAmount = Random(CreditsMin, CreditsMax);
 
             // REK-T50 accessory
             if (Players(Killer).Shield.Active && Players(Killer).Shield.Accessory && Players(Killer).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
-                CreditsAmount *= 3;
+                CreditsAmount *= 2;
 
             // RAINBOWS Event
             if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
-                CreditsAmount *= 4;
+                CreditsAmount *= 2;
 
             // UAC Premium
             if (GetCVar("drpg_uac_premium"))

@@ -213,8 +213,8 @@ NamedScript Type_ENTER void Init()
         Player.LuckXP = 0;
 
         // Default Health/EP
-        Player.EP = Player.EnergyTotal * 10;
-        Player.ActualHealth = Player.VitalityTotal * 10;
+        Player.EP = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
+        Player.ActualHealth = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
         Player.PrevHealth = Player.ActualHealth;
         SetActorProperty(0, APROP_Health, Player.ActualHealth);
 
@@ -589,8 +589,11 @@ NamedScript DECORATE int ShieldDamage(int DamageTaken)
         Player.Shield.Charge -= DamageTaken;
         Player.Shield.Full = false;
 
-        FadeRange(0, 100, 255, 0.25, 0, 100, 255, 0, 0.25);
-        PlaySound(0, "shield/hit", 5, 1.0, false, 1.0);
+        if (GetCVar("drpg_shield_effect_hit_enable"))
+        {
+            FadeRange(0, 100, 255, 0.25, 0, 100, 255, 0, 0.25);
+            PlaySound(0, "shield/hit", 5, 1.0, false, 1.0);
+        }
         if (Player.Shield.Accessory && Player.Shield.Accessory->Damage)
             Player.Shield.Accessory->Damage(ShieldDamageAmount);
 
@@ -604,7 +607,9 @@ NamedScript DECORATE int ShieldDamage(int DamageTaken)
             else
                 DamageTaken = 0;
 
-            PlaySound(0, "shield/empty", 5, 1.0, false, 1.0);
+            if (GetCVar("drpg_shield_sound_empty_enable"))
+                PlaySound(0, "shield/empty", 5, 1.0, false, 1.0);
+
             if (Player.Shield.Accessory && Player.Shield.Accessory->Break)
                 Player.Shield.Accessory->Break();
         }

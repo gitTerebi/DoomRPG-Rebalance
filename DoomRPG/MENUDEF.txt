@@ -656,6 +656,12 @@ OptionMenu "DoomRPGMisc"
     Option "Friendly Monsters Can Teleport Only If Don't Sight Player", "drpg_monster_friendly_teleport_if_no_sight", "OnOff"
     Slider "Minimum Distance For Teleport", "drpg_monster_friendly_teleport_distance", 0, 10, 1
     StaticText ""
+
+    Option "Sound Empty Enegry Shield", "drpg_shield_sound_empty_enable", "OnOff"
+    Option "Sound Charging Enegry Shield", "drpg_shield_sound_charge_enable", "OnOff"
+    Option "Sound Full Enegry Shield", "drpg_shield_sound_full_enable", "OnOff"
+    Option "Sound and Effect of Hitting Enegry Shield", "drpg_shield_effect_hit_enable", "OnOff"
+    StaticText ""
 }
 
 OptionMenu "DoomRPGPerformance"

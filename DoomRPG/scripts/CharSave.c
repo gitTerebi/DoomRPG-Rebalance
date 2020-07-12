@@ -524,8 +524,8 @@ NamedScript MenuEntry void LoadCharacter()
     Player.CapacityTotal = Player.Capacity + Player.CapacityNat;
     Player.LuckTotal = Player.Luck + Player.LuckNat;
 
-    Player.EP = Player.EnergyTotal * 10;
-    Player.HealthMax = Player.VitalityTotal * 10;
+    Player.EP = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
+    Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
     Player.ActualHealth = Player.HealthMax;
     SetActorProperty(0, APROP_Health, Player.HealthMax);
 

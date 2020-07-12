@@ -251,6 +251,10 @@ server  bool    drpg_monster_friendly_teleport_enable = false;
 server  bool    drpg_monster_friendly_teleport_if_no_target = true;
 server  bool    drpg_monster_friendly_teleport_if_no_sight = true;
 server  int     drpg_monster_friendly_teleport_distance = 1;
+user    bool    drpg_shield_sound_empty_enable = true;
+user    bool    drpg_shield_sound_charge_enable = true;
+user    bool    drpg_shield_sound_full_enable = true;
+user    bool    drpg_shield_effect_hit_enable = true;
 
 // Performance
 user    bool    drpg_toaster = false;

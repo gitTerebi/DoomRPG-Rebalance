@@ -721,7 +721,7 @@ void DrawStatsMenu()
         SetFont("SMALLFONT");
         if (Player.LuckTotal > 0)
         {
-            HudMessage("\CfCredit\C- Drop Rate: \Cf+%d%%", (Player.LuckTotal / 2));
+            HudMessage("\CfCredit\C- Drop Rate: \Cf+%d%%", Player.LuckTotal);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 292.0, 0.05);
         }
         if (Player.HealthDrop)
