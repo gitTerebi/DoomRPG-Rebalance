@@ -508,21 +508,29 @@ ACTOR DRPGMarineGuardPistolSummoned2
     PPS2 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PPS2 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PPS2 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PPS2 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PPS2 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PPS2 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PPS2 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PPS2 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -552,6 +560,23 @@ ACTOR DRPGMarineGuardPistolSummoned2
     PPS2 E 6
     Goto See+2
   TacticReload:
+    TNT1 A 0 A_Jump(128, 3)
+    PPS2 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    PPS2 E 1 A_FaceTarget
+    PPS2 EE 4
+    TNT1 A 0 A_PlaySound("weapons/hpcombatpistolunload", 7)
+    PPS2 EE 4
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("weapons/hpcombatpistolload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatPistolShotCounter", 12)
+    PPS2 EEEE 4
+    PPS2 E 3
+    TNT1 A 0 A_PlaySound("weapons/hpcombatpistolcock", 7)
+    PPS2 E 6
+    Goto See+2
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_Jump(128, 3)
     PPS2 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
@@ -808,21 +833,29 @@ ACTOR DRPGMarineGuardPistolSummoned3
     PSMG E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PSMG AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PSMG E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PSMG AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PSMG E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PSMG AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PSMG E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PSMG AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -927,6 +960,23 @@ ACTOR DRPGMarineGuardPistolSummoned3
     PSMG EEEEEE 1 A_FaceTarget (10)
     Goto See
   TacticReload:
+    TNT1 A 0 A_Jump(128, 3)
+    PSMG E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    PSMG E 1 A_FaceTarget
+    PSMG EE 4
+    TNT1 A 0 A_PlaySound("weapons/uziunload", 7)
+    PSMG EEEEEEEE 4
+    PSMG E 2
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("weapons/uziload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineUziShotCounter", 32)
+    PSMG EE 5
+    TNT1 A 0 A_PlaySound("weapons/pistolcock", 5)
+    PSMG EEEEEE 1 A_FaceTarget (10)
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_Jump(128, 3)
     PSMG E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
@@ -1182,21 +1232,29 @@ ACTOR DRPGMarineBattleRifleSummoned2
     PCBN E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PCBN AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PCBN E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PCBN AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PCBN E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PCBN AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PCBN E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PCBN AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -1308,6 +1366,23 @@ ACTOR DRPGMarineBattleRifleSummoned2
     PCBN EEEEEE 1 A_FaceTarget (10)
     Goto See
   TacticReload:
+    TNT1 A 0 A_Jump(128, 3)
+    PCBN E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    PCBN E 1 A_FaceTarget
+    PCBN EE 4
+    TNT1 A 0 A_PlaySound("weapons/hpbattlerifleunload", 7)
+    PCBN EEEEEEEE 4
+    PCBN E 2
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("weapons/hpbattlerifleload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineBattleRifleMk2ShotCounter", 30)
+    PCBN EE 5
+    TNT1 A 0 A_PlaySound("weapons/hpbattleriflecock", 5)
+    PCBN EEEEEE 1 A_FaceTarget (10)
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_Jump(128, 3)
     PCBN E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
@@ -1563,21 +1638,29 @@ ACTOR DRPGMarineBattleRifleSummoned3
     MGMR E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     MGMR AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     MGMR E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     MGMR AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     MGMR E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     MGMR AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     MGMR E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     MGMR AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -1706,6 +1789,23 @@ ACTOR DRPGMarineBattleRifleSummoned3
     MGMR EEEEEE 1 A_FaceTarget (10)
     Goto See
   TacticReload:
+    TNT1 A 0 A_Jump(128, 3)
+    MGMR E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    MGMR E 1 A_FaceTarget
+    MGMR EE 4
+    TNT1 A 0 A_PlaySound("weapons/vanguardrifleunload", 7)
+    MGMR EEEEEEEE 4
+    MGMR E 2
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("weapons/vanguardrifleload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineVanguardRifleShotCounter", 60)
+    MGMR EE 5
+    TNT1 A 0 A_PlaySound("weapons/vanguardriflecock", 5)
+    MGMR EEEEEE 1 A_FaceTarget (10)
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_Jump(128, 3)
     MGMR E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
@@ -1961,21 +2061,29 @@ ACTOR DRPGMarineShotgunSummoned2
     PL32 X 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PL32 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PL32 X 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PL32 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PL32 X 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PL32 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PL32 X 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PL32 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -2055,6 +2163,35 @@ ACTOR DRPGMarineShotgunSummoned2
     PL32 EE 4 A_FaceTarget
     Goto See
   TacticReload:
+    TNT1 A 0 A_JumpIfCloser (600, 1)
+    Goto TacticReloadCrouch
+    PL32 EE 4 A_FaceTarget (0, 30, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 0, "See")
+    PL32 EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 0, "See")
+    PL32 EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 0, "See")
+    PL32 EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunShotCounter", 0, "See")
+    PL32 EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/combatshotgunpump", 7)
+    PL32 EE 4 A_FaceTarget
+    PL32 EE 4 A_FaceTarget
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_JumpIfCloser (600, 1)
     Goto TacticReloadCrouch
     PL32 EE 4 A_FaceTarget (0, 30, random(90, 270), 0, 0)
@@ -2364,21 +2501,29 @@ ACTOR DRPGMarineShotgunSummoned3
     PASG X 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PASG AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PASG X 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PASG AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PASG X 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PASG AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PASG X 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PASG AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -2470,6 +2615,47 @@ ACTOR DRPGMarineShotgunSummoned3
     PASG EE 4 A_FaceTarget
     Goto See
   TacticReload:
+    TNT1 A 0 A_JumpIfCloser (600, 1)
+    Goto TacticReloadCrouch
+    PASG EE 4 A_FaceTarget (0, 30, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 0, "See")
+    PASG EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 0, "See")
+    PASG EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 0, "See")
+    PASG EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 0, "See")
+    PASG EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 0, "See")
+    PASG EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 0, "See")
+    PASG EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 0, "See")
+    PASG EEEE 4 A_FaceTarget
+    TNT1 A 0 A_PlaySound("weapons/shellload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineCombatShotgunMk2ShotCounter", 1)
+    TNT1 A 0 A_PlaySound("weapons/heavycombatshotgunpump", 7)
+    PASG EE 4 A_FaceTarget
+    PASG EE 4 A_FaceTarget
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_JumpIfCloser (600, 1)
     Goto TacticReloadCrouch
     PASG EE 4 A_FaceTarget (0, 30, random(90, 270), 0, 0)
@@ -3373,21 +3559,29 @@ ACTOR DRPGMarineChaingunSummoned2
     PL42 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PL42 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PL42 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PL42 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PL42 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PL42 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PL42 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PL42 AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -3435,6 +3629,22 @@ ACTOR DRPGMarineChaingunSummoned2
     PL42 EE 5 A_FaceTarget
     Goto See
   TacticReload:
+    TNT1 A 0 A_Jump(128, 3)
+    PL42 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    PL42 E 1 A_FaceTarget
+    PL42 EEE 5
+    TNT1 A 0 A_PlaySound("rlmonsters/pistolreloadout", 7)
+    PL42 EE 5
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("rlmonsters/chaingunload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineMinigunShotCounter", 200)
+    PL42 EEEEE 5
+    TNT1 A 0 A_PlaySound("rlmonsters/chaingunwinddown", 6)
+    PL42 EE 5 A_FaceTarget
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_Jump(128, 3)
     PL42 E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
@@ -3690,21 +3900,29 @@ ACTOR DRPGMarineChaingunSummoned3
     PDEV E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PDEV AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PDEV E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PDEV AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PDEV E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PDEV AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PDEV E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PDEV AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -3750,6 +3968,20 @@ ACTOR DRPGMarineChaingunSummoned3
     PDEV E 5 A_FaceTarget
     Goto See
   TacticReload:
+    TNT1 A 0 A_Jump(128, 3)
+    PDEV E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    PDEV E 1 A_FaceTarget
+    PDEV EEE 5
+    TNT1 A 0 A_PlaySound("drpgmarines/bfg9000unload", 7)
+    PDEV EEE 5
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("drpgmarines/bfg9000load", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineMinigunShotCounter", 200)
+    PDEV E 5 A_FaceTarget
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_Jump(128, 3)
     PDEV E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
@@ -4572,21 +4804,29 @@ ACTOR DRPGMarinePlasmaRifleSummoned2
     PRAI E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PRAI AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PRAI E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PRAI AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PRAI E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PRAI AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PRAI E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PRAI AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -4612,6 +4852,20 @@ ACTOR DRPGMarinePlasmaRifleSummoned2
     PRAI E 24 A_FaceTarget
     Goto See
   TacticReload:
+    TNT1 A 0 A_Jump(128, 3)
+    PRAI E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    PRAI E 4 A_FaceTarget
+    PRAI E 24
+    TNT1 A 0 A_PlaySound("drpgmarines/plasmarifleunload", 7)
+    PRAI E 9 A_FaceTarget
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("drpgmarines/plasmarifleload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineChaingunShotCounter", 40)
+    PRAI E 24 A_FaceTarget
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_Jump(128, 3)
     PRAI E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
@@ -4911,21 +5165,29 @@ ACTOR DRPGMarinePlasmaRifleSummoned3
     PPBM E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PPBM AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (128, 2)
     TNT1 A 0 A_Jump (96, "Reload")
     PPBM E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PPBM AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (96, 2)
     TNT1 A 0 A_Jump (128, "Reload")
     PPBM E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PPBM AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (64, 2)
     TNT1 A 0 A_Jump (160, "Reload")
     PPBM E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-1)
     PPBM AAAAABBBBBCCCCCDDDDD 1 A_Chase ("", "")
+    TNT1 A 0 A_GiveInventory ("DRPGMarineForceReloadCounter", random(1,2))
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineForceReloadCounter", 5, "ForceReload")
     TNT1 A 0 A_JumpIfCloser (32, 2)
     TNT1 A 0 A_Jump (192, "Reload")
     TNT1 A 0
@@ -4952,6 +5214,20 @@ ACTOR DRPGMarinePlasmaRifleSummoned3
     PPBM E 24 A_FaceTarget
     Goto See
   TacticReload:
+    TNT1 A 0 A_Jump(128, 3)
+    PPBM E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
+    TNT1 A 0 A_Recoil(-random(3,8))
+    PPBM E 4 A_FaceTarget
+    PPBM E 24
+    TNT1 A 0 A_PlaySound("drpgmarines/plasmarifleunload", 7)
+    PPBM E 9 A_FaceTarget
+    TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
+    TNT1 A 0 A_PlaySound("drpgmarines/plasmarifleload", 7)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineChaingunShotCounter", 40)
+    PPBM E 24 A_FaceTarget
+    Goto See
+  ForceReload:
+    TNT1 A 0 A_TakeInventory ("DRPGMarineForceReloadCounter", 5)
     TNT1 A 0 A_Jump(128, 3)
     PPBM E 1 A_FaceTarget (0, 90, random(90, 270), 0, 0)
     TNT1 A 0 A_Recoil(-random(3,8))
