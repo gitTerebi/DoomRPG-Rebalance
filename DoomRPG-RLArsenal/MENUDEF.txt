@@ -33,7 +33,7 @@ OptionMenu "Doom RLA Monsters Options"
     StaticText  ""
     StaticText "Use the slider below to set up the number of WADs that you plan to go through."
     StaticText  ""
-    Slider "Estimated counts of WADs", "drpg_ws_use_wads", 1, 17, 1, 0
+    Slider "Estimated counts of WADs", "drpg_ws_use_wads", 1, 20, 1, 0
     StaticText  ""
     Option "Disable Demonic Bosses", "drpg_drla_demonic_boss_disable", "OnOff"
     Option "Disable Unique Bosses", "drpg_drla_unique_boss_disable", "OnOff"
