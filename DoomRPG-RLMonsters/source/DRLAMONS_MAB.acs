@@ -4,12 +4,12 @@ script "DRLA_StartDangerLevel" (void)
 {
 	int level;
 	if(GetCVar("DRLA_startdangerlevel") >= GetCVar("drpg_monster_mapweight"))
-		level = GetCVar("DRLA_startdangerlevel");
+		level = GetCVar("DRLA_startdangerlevel") - 1;
 	else
-		level = GetCVar("drpg_monster_mapweight");
-	if(level > 2)
-		SetResultValue(level - 2);
-	else
+		level = GetCVar("drpg_monster_mapweight") - 1;
+//	if(level > 1) // the curse has been solved, this is no longer required
+//		SetResultValue(level - 1);
+//	else
 		SetResultValue(level);
 }
 

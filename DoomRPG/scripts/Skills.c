@@ -2740,6 +2740,11 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
     // Transport
     if (!CurrentLevel->UACBase)
     {
+        if (CompatMode == COMPAT_DRLA)
+        {
+            TakeInventory("RLDangerLevel", 2);
+        }
+
         TransporterLevel = FindLevelInfo();
 
         ChangeLevel(DefaultOutpost->LumpName, 0, CHANGELEVEL_NOINTERMISSION, CurrentSkill);
