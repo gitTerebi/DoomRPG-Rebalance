@@ -2,10 +2,14 @@
 
 script "DRLA_StartDangerLevel" (void)
 {
-	int level = GetCVar("DRLA_startdangerlevel");
-//	if(level > 1) // the curse has been solved, this is no longer required
-//		SetResultValue(level - 1);
-//	else
+	int level;
+	if(GetCVar("DRLA_startdangerlevel") >= GetCVar("drpg_monster_mapweight"))
+		level = GetCVar("DRLA_startdangerlevel");
+	else
+		level = GetCVar("drpg_monster_mapweight");
+	if(level > 2)
+		SetResultValue(level - 2);
+	else
 		SetResultValue(level);
 }
 
@@ -63,7 +67,7 @@ script "RLAdaptiveSpawnPicker" (void) // [marrub]
 	// Exponentation is used for the random value to make it curve more fairly.
 	// A reverse exponent is used to make it curve more unfairly later on.
 	int rand = mult * exponent(Random(0.01, 1.0), expn);
-	int rmin = FixedMul(FixedDiv(danger << 16, 50.0), Random(0.0, 1.0));
+	int rmin = FixedMul(FixedDiv(danger << 16, GetCVar("drpg_ws_use_wads") * 32.0), Random(0.0, 1.0));
 	int rmul = Random(exponent(rmin, rmxp), 1.0);
 	// The danger level is then added to that.
 	int dangermod = danger + (rand >> 16);

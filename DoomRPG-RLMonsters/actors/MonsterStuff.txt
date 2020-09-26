@@ -154,7 +154,7 @@ ACTOR RLMonsterpackThingo
  // Used to escalate the game's difficulty in various ways, increments on levels and rare items
 Actor RLDangerLevel : RLPermanentMPInventory
 {
-	inventory.maxamount 50
+	inventory.maxamount 1000
 }
 
 //==============================================================================
