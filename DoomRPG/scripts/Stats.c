@@ -651,8 +651,8 @@ void CheckRegen()
         Player.EPTime = 35;
 
     // Determine the max regen amounts
-    Player.HPAmount = 1 + Player.RegenerationTotal / 25 + Player.VitalityTotal / 25;
-    Player.EPAmount = 1 + Player.RegenerationTotal / 25 + Player.EnergyTotal / 25;
+    Player.HPAmount = 1 + (Player.RegenerationTotal + Player.VitalityTotal) / 25;
+    Player.EPAmount = 1 + (Player.RegenerationTotal + Player.EnergyTotal) / 25;
 }
 
 // Regeneration

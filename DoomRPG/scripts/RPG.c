@@ -436,6 +436,9 @@ Start:
     if (GetCVar("drpg_multi_revives"))
         ReviveHandler();
 
+    if (Player.FocusingCooldown > 0)
+        Player.FocusingCooldown--;
+
     // Loop
     Delay(1);
 
@@ -1437,6 +1440,13 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
 // Activate Focus Mode
 NamedScript KeyBind void ToggleFocusMode()
 {
+    if (Player.FocusingCooldown > 0)
+    {
+        PrintError(StrParam("Focusing device is overloaded\n\nYou must wait %S before reattemtping the focusing", FormatTime(Player.FocusingCooldown)));
+        ActivatorSound("menu/error", 127);
+        return;
+    }
+
     Player.Focusing = !Player.Focusing;
 
     if (Player.Focusing)
@@ -1452,6 +1462,9 @@ NamedScript void FocusMode()
     int StartWindupSpeed = RegenWindupSpeed;
     int RegenDelay = (RegenWindupSpeed * (Player.EPTime / 4)) / StartWindupSpeed;
     int Percent;
+    int FocusingCooldownTime = 35 * (320 - Player.Energy * 2 - Player.Level * 2);
+    if (FocusingCooldownTime <= 35 * 120)
+        FocusingCooldownTime = 35 * 120;
 
     // [KS] Someone did this!
     if (GetActorProperty(0, APROP_Health) <= 0) return;
@@ -1500,6 +1513,7 @@ NamedScript void FocusMode()
         Delay(1);
     }
 
+    Player.FocusingCooldown = FocusingCooldownTime;
     Player.Focusing = false; // So we can't gain Regen XP out of thin air
     PlaySound(0, "misc/epfocusdone", CHAN_BODY, 0.5, false, ATTN_NORM);
     SetPlayerProperty(0, 0, PROP_FROZEN);

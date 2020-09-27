@@ -719,6 +719,7 @@ struct PlayerData_S
     bool EPPadCooldown;
     int EPPadCooldownTimer;
     bool Focusing;
+    int FocusingCooldown;
     bool Overdrive;
 
     // Status Effects
