@@ -1462,9 +1462,7 @@ NamedScript void FocusMode()
     int StartWindupSpeed = RegenWindupSpeed;
     int RegenDelay = (RegenWindupSpeed * (Player.EPTime / 4)) / StartWindupSpeed;
     int Percent;
-    int FocusingCooldownTime = 35 * (320 - Player.Energy * 2 - Player.Level * 2);
-    if (FocusingCooldownTime <= 35 * 120)
-        FocusingCooldownTime = 35 * 120;
+    int FocusingCooldownTime = 35 * 300;
 
     // [KS] Someone did this!
     if (GetActorProperty(0, APROP_Health) <= 0) return;
