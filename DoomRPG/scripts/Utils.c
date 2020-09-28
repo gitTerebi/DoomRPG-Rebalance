@@ -634,6 +634,13 @@ NamedScript KeyBind void SetSkill(int NewSkill)
 // Respec - Respecialize your Player
 NamedScript KeyBind void Respec(bool DoStats, bool DoSkills)
 {
+    if (Player.Level * 500 > CheckInventory("DRPGCredits"))
+    {
+        PrintError(StrParam("Not enough credits\n\nCost respec for %d lvl: %d C",Player.Level, (Player.Level * 500)));
+        ActivatorSound("menu/error", 127);
+        return;
+    }
+
     int Modules;
     int OldCredits;
 
@@ -709,9 +716,9 @@ NamedScript KeyBind void Respec(bool DoStats, bool DoSkills)
     // Give Respecced Modules
     GiveInventory("DRPGModule", Modules);
 
-    // Take 1/2 Credits
+    // Take Credits
     GiveInventory("DRPGCredits", OldCredits);
-    TakeInventory("DRPGCredits", CheckInventory("DRPGCredits") / 2);
+    TakeInventory("DRPGCredits", Player.Level * 500);
 
     // FX
     FadeRange(255, 255, 255, 0.75, 0, 0, 0, 0.0, 2.5);
