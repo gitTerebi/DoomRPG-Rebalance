@@ -572,7 +572,7 @@ void CheckStats()
         if (Player.ActualHealth <= Player.HealthMax)
         {
             int HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
-            fixed Ratio = ((fixed)Player.ActualHealth + 0.5) / ((fixed)Player.PrevVitality * 10);
+            fixed Ratio = ((fixed)Player.ActualHealth + 0.5) / (50 + ((Player.Level + 1) / 2) * 5 + (fixed)Player.PrevVitality * 5);
             Player.ActualHealth = Ratio * HealthMax;
         }
 
@@ -585,7 +585,7 @@ void CheckStats()
         if (Player.EP <= Player.EPMax)
         {
             int EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
-            fixed Ratio = ((fixed)Player.EP + 0.5) / ((fixed)Player.PrevEnergy * 10);
+            fixed Ratio = ((fixed)Player.EP + 0.5) / (50 + ((Player.Level + 1) / 2) * 5 + (fixed)Player.PrevEnergy * 5);
             Player.EP = Ratio * EPMax;
         }
 
@@ -700,8 +700,8 @@ void DoRegen()
         int Angle = GetActorAngle(0) * 256;
         SpawnForced("DRPGRegenSphereEffect", X, Y, Z + 32.0, AuraTID, Angle);
 
-        Player.HPRate += Player.RegenBoostTimer / (GameSkill() * GameSkill());
-        Player.EPRate += Player.RegenBoostTimer / (GameSkill() * GameSkill());
+        Player.HPRate += 1 + Player.RegenerationTotal / (2.0 + Player.RegenerationTotal / 30.0);
+        Player.EPRate += 1 + Player.RegenerationTotal / (2.0 + Player.RegenerationTotal / 30.0);
         Player.RegenBoostTimer--;
 
         // Pass Radius and Height to the Auras for DECORATE usage

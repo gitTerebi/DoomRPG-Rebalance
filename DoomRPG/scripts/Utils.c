@@ -599,7 +599,7 @@ int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed
 // Used by the RegenSphere to temporarily increase regen rates
 NamedScript DECORATE void RegenBoost()
 {
-    Player.RegenBoostTimer += (35 * 5) + ((Player.RegenerationTotal / 13.33) * 35);
+    Player.RegenBoostTimer += (35 * 15) + ((Player.RegenerationTotal / 2) * 35);
 }
 
 // Set Skill Level during the game
