@@ -569,7 +569,7 @@ void CheckStats()
     // Scale Health with Vitality changes
     if (Player.PrevVitality != Player.VitalityTotal)
     {
-        if (Player.ActualHealth <= Player.HealthMax)
+        if (Player.ActualHealth <= Player.HealthMax && Player.VitalityTotal > Player.PrevVitality)
         {
             Player.ActualHealth += Player.VitalityTotal * 5 - Player.PrevVitality * 5;
         }
@@ -580,7 +580,7 @@ void CheckStats()
     // Scale EP with Energy changes
     if (Player.PrevEnergy != Player.EnergyTotal && Player.EP > 0)
     {
-        if (Player.EP <= Player.EPMax)
+        if (Player.EP <= Player.EPMax && Player.EnergyTotal > Player.PrevEnergy)
         {
             Player.EP += Player.EnergyTotal * 5 - Player.PrevEnergy * 5;
         }
