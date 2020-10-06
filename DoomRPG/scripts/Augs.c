@@ -107,9 +107,9 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 3,
         .Description =
         {
+            "1.25x Ammo Limits",
             "1.5x Ammo Limits",
-            "2x Ammo Limits",
-            "2x Stim Vial Capacity"
+            "2x Ammo Limits"
         },
         .TokenActor = "DRPGAugTokenCapacity"
     },
@@ -446,15 +446,15 @@ void CheckAugs()
         fixed AmmoMult;
 
         if (Player.Augs.Level[AUG_CAPACITY] == 1)
+            AmmoMult = 1.25;
+        if (Player.Augs.Level[AUG_CAPACITY] == 2)
             AmmoMult = 1.5;
-        if (Player.Augs.Level[AUG_CAPACITY] >= 2)
-            AmmoMult = 2;
         if (Player.Augs.Level[AUG_CAPACITY] >= 3)
-            Player.Stim.VialMax *= 2;
+            AmmoMult = 2;
 
         SetAmmoCapacity("Clip", (60 + Player.CapacityTotal * 10) * AmmoMult);
         SetAmmoCapacity("Shell", (20 + Player.CapacityTotal * 2) * AmmoMult);
-        SetAmmoCapacity("RocketAmmo", (2 + Player.CapacityTotal * 0.5) * AmmoMult);
+        SetAmmoCapacity("RocketAmmo", (2 + Player.CapacityTotal * 0.6) * AmmoMult);
         SetAmmoCapacity("Cell", (Player.CapacityTotal * 10) * AmmoMult);
     }
 

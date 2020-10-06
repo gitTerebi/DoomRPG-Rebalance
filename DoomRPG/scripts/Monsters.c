@@ -2141,7 +2141,7 @@ Start:
             // [KS] We'll give the player 30 seconds of ammo if they were full at stat max.
             int ClipSteal = (int)((fixed)Stats->Capacity / 7.5 * GetCVarFixed("drpg_aurasteal_amount"));
             int ShellSteal = (int)((fixed)Stats->Capacity / 30 * GetCVarFixed("drpg_aurasteal_amount"));
-            int RocketSteal = (int)((fixed)Stats->Capacity / 60 * GetCVarFixed("drpg_aurasteal_amount"));
+            int RocketSteal = (int)((fixed)Stats->Capacity / 120 * GetCVarFixed("drpg_aurasteal_amount"));
             int CellSteal = (int)((fixed)Stats->Capacity / 20 * GetCVarFixed("drpg_aurasteal_amount"));
 
             if (ClipSteal < 2) ClipSteal = 2;
