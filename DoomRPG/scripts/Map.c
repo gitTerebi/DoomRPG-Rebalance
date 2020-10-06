@@ -1037,7 +1037,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_ALLAURAS:
         return (GetCVar("drpg_mapevent_allauras") &&
-                AveragePlayerLevel() >= 30);
+                AveragePlayerLevel() >= 35);
 
     case MAPEVENT_ONEMONSTER:
         return (GetCVar("drpg_mapevent_onemonster") &&
@@ -1049,7 +1049,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_HARMONIZEDAURAS:
         return (GetCVar("drpg_mapevent_harmonizedauras") &&
-                AveragePlayerLevel() >= 25);
+                AveragePlayerLevel() >= 40);
 
     case MAPEVENT_TELEPORTCRACKS:
         return (GetCVar("drpg_mapevent_teleportcracks") &&
