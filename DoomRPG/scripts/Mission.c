@@ -223,6 +223,10 @@ MissionInfo CreateMission(int Difficulty)
         long int XPNext;
         long int RankNext;
 
+        fixed RewardModulesFactor = 100.0 / (100.0 + (((fixed)Players(i).Strength + (fixed)Players(i).Defense + (fixed)Players(i).Vitality + (fixed)Players(i).Energy + (fixed)Players(i).Regeneration + (fixed)Players(i).Agility + (fixed)Players(i).Capacity + (fixed)Players(i).Luck) / 10.0));
+        if (RewardModulesFactor < 0.0)
+            RewardModulesFactor = 1.0;
+
         if (!PlayerInGame(i)) continue;
 
         // Prevent overflows due to trying to check for a null table index
@@ -238,7 +242,7 @@ MissionInfo CreateMission(int Difficulty)
         RewardXP += ((XPNext * ((Difficulty + 1) * (1200 - (Players(i).Level * 10))) / (10000 + (Players(i).Level * 500))) + 50) / 50 * 50;
         RewardRank += ((RankNext * ((Difficulty + 1) * (300 - (Players(i).RankLevel * 10))) / (10000 + (Players(i).RankLevel * 1000))) + 250) / 250 * 250;
         RewardCredits += ((Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 12 * (Difficulty + 1) * (Players(i).Level + 1) * 2)) + 50) / 50 * 50;
-        RewardModules += ((Random(4 * (Difficulty + 1) * (Players(i).Level + 1), 4 * (Difficulty + 1) * (Players(i).Level + 1) * 2)) + 25) / 25 * 25;
+        RewardModules += ((int)((RandomFixed(4.0 * ((fixed)Difficulty + 1.0) * ((fixed)Players(i).Level + 1.0), 4.0 * ((fixed)Difficulty + 1.0) * ((fixed)Players(i).Level + 1.0) * 2.0)) * (fixed)RewardModulesFactor) + 25) / 25 * 25;
 
         NumPlayers++;
     }
