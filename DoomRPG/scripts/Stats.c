@@ -942,7 +942,7 @@ void CheckPerks()
     else Player.Perks[STAT_STRENGTH] = false;
     if (Player.DefenseTotal >= 75)      Player.Perks[STAT_DEFENSE] = true;
     else Player.Perks[STAT_DEFENSE] = false;
-    if (Player.VitalityTotal >= 50)     Player.Perks[STAT_VITALITY] = true;
+    if (Player.VitalityTotal >= 75)     Player.Perks[STAT_VITALITY] = true;
     else Player.Perks[STAT_VITALITY] = false;
     if (Player.EnergyTotal >= 50)       Player.Perks[STAT_ENERGY] = true;
     else Player.Perks[STAT_ENERGY] = false;

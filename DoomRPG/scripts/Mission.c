@@ -223,7 +223,7 @@ MissionInfo CreateMission(int Difficulty)
         long int XPNext;
         long int RankNext;
 
-        fixed RewardModulesFactor = 100.0 / (100.0 + (((fixed)Players(i).Strength + (fixed)Players(i).Defense + (fixed)Players(i).Vitality + (fixed)Players(i).Energy + (fixed)Players(i).Regeneration + (fixed)Players(i).Agility + (fixed)Players(i).Capacity + (fixed)Players(i).Luck) / 10.0));
+        fixed RewardModulesFactor = 100.0 / (100.0 + (((fixed)Players(i).Strength + (fixed)Players(i).Defense + (fixed)Players(i).Vitality + (fixed)Players(i).Energy + (fixed)Players(i).Regeneration + (fixed)Players(i).Agility + (fixed)Players(i).Capacity + (fixed)Players(i).Luck) / 15.0));
         if (RewardModulesFactor < 0.0)
             RewardModulesFactor = 1.0;
 
