@@ -906,7 +906,7 @@ void DrawStatsMenu()
 
             // Agility
             {
-                "+30% Survival Bonus",
+                "+15% Survival Bonus",
                 "Movement increases Regeneration speed",
                 NULL
             },

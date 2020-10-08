@@ -89,16 +89,14 @@ AugInfo RPGMap AugData[AUG_MAX] =
     },
     {
         .Name = "Wired Reflexes",
-        .MaxLevel = 7,
+        .MaxLevel = 5,
         .Description =
         {
-            "1.25x Movement Speed",
-            "1.5x Weapon Speed",
-            "+5% Survival Chance",
-            "+10% Survival Chance",
-            "+15% Survival Chance",
-            "+20% Survival Chance",
-            "+25% Survival Chance"
+            "+5% Weapon Speed and +2% Survival Chance",
+            "+10% Weapon Speed and +4% Survival Chance",
+            "+15% Weapon Speed and +6% Survival Chance",
+            "+20% Weapon Speed and +8% Survival Chance",
+            "+25% Weapon Speed and +10% Survival Chance"
         },
         .TokenActor = "DRPGAugTokenAgility"
     },
@@ -424,20 +422,31 @@ void CheckAugs()
     // Agility Aug
     if (Player.Augs.Active[AUG_AGILITY])
     {
-        if (Player.Augs.Level[AUG_AGILITY] >= 1)
-            Player.Speed *= 1.25;
-        if (Player.Augs.Level[AUG_AGILITY] >= 2)
-            Player.WeaponSpeed *= 1.5;
+        if (Player.Augs.Level[AUG_AGILITY] == 1)
+        {
+            Player.WeaponSpeed += 5;
+            Player.SurvivalBonus += 2.0;
+        }
+        if (Player.Augs.Level[AUG_AGILITY] == 2)
+        {
+            Player.WeaponSpeed += 10;
+            Player.SurvivalBonus += 4.0;
+        }
         if (Player.Augs.Level[AUG_AGILITY] == 3)
-            Player.SurvivalBonus += 5;
+        {
+            Player.WeaponSpeed += 15;
+            Player.SurvivalBonus += 6.0;
+        }
         if (Player.Augs.Level[AUG_AGILITY] == 4)
-            Player.SurvivalBonus += 10;
-        if (Player.Augs.Level[AUG_AGILITY] == 5)
-            Player.SurvivalBonus += 15;
-        if (Player.Augs.Level[AUG_AGILITY] == 6)
-            Player.SurvivalBonus += 20;
-        if (Player.Augs.Level[AUG_AGILITY] >= 7)
-            Player.SurvivalBonus += 25;
+        {
+            Player.WeaponSpeed += 20;
+            Player.SurvivalBonus += 8.0;
+        }
+        if (Player.Augs.Level[AUG_AGILITY] >= 5)
+        {
+            Player.WeaponSpeed += 25;
+            Player.SurvivalBonus += 10.0;
+        }
     }
 
     // Capacity Aug

@@ -421,7 +421,7 @@ void CheckStats()
     SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
     SetAmmoCapacity("Cell", Player.CapacityTotal * 10);
     Player.Stim.VialMax = Player.CapacityTotal * 2.5;
-    Player.SurvivalBonus = (fixed)Player.AgilityTotal / 10.0;
+    Player.SurvivalBonus = (fixed)Player.AgilityTotal / 5.0;
     if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
     {
         SetAmmoCapacity("RLArmorInInventory", DRLA_ARMOR_MAX);
@@ -628,7 +628,7 @@ void CheckStats()
     if (CompatMode == COMPAT_DRLA)
     {
         if (CheckInventory("RLTacticalBootsToken"))
-            Player.SurvivalBonus += 20.0;
+            Player.SurvivalBonus += 10.0;
         if (PlayerClass(PlayerNumber()) == 1)
             Player.JumpHeight *= 1.25;
     }
@@ -989,8 +989,8 @@ void CheckPerks()
         else
             Player.AgilityTimer = 0;
 
-        // +30% Survival Bonus
-        Player.SurvivalBonus += 30;
+        // +15% Survival Bonus
+        Player.SurvivalBonus += 15;
     }
 
     // Capacity Perk - Regenerate ammo

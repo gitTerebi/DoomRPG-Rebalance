@@ -1189,15 +1189,7 @@ NamedScript void LuckyBastardMod()
 {
     if (Player.Shield.Active)
     {
-        int CombinedStat = Player.AgilityTotal + Player.LuckTotal;
-
-        Player.SurvivalBonus = (fixed)CombinedStat / 10.0;
-
-        if (Player.Augs.Level[AUG_AGILITY] >= 4)
-            Player.SurvivalBonus *= 2;
-
-        if (Player.Perks[STAT_AGILITY])
-            Player.SurvivalBonus += 30;
+        Player.SurvivalBonus += (fixed)Player.LuckTotal / 5.0;
     }
 }
 

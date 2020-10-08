@@ -550,8 +550,10 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
         // Survival Bonus
         if (CanSurvive)
         {
-            Player.ActualHealth = 2;
+            Player.ActualHealth = Player.HealthMax / 5;
             Player.LastLegs = true;
+
+            SetInventory("DRPGInvulnerabilitySurvive", 1);
 
             if (Player.Shield.Accessory && Player.Shield.Accessory->PassiveEffect == SHIELD_PASS_SURVIVECHARGE)
                 Player.Shield.Charge = Player.Shield.Capacity;

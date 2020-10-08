@@ -82,6 +82,18 @@ actor DRPGInvulnerabilityCharge : CustomInventory
     } 
 }
 
+Actor DRPGInvulnerabilitySurvive : PowerupGiver
+{
+    Inventory.MaxAmount 0
+    
+    +INVENTORY.AUTOACTIVATE
+    +INVENTORY.ADDITIVETIME
+    +INVENTORY.PERSISTENTPOWER
+
+    Powerup.Type Invulnerable
+    Powerup.Duration -3
+}
+
 // Invisibility Sphere
 Actor DRPGInvisibilityPower : PowerupGiver
 {

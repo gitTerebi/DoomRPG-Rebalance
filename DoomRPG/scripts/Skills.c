@@ -242,9 +242,9 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Use = UseAura,
             .Description =
             {
-                "1.50x Weapon Speed",
-                "1.75x Weapon Speed",
-                "2.00x Weapon Speed"
+                "+10% Weapon Speed",
+                "+15% Weapon Speed",
+                "+25% Weapon Speed"
             },
         },
         {
@@ -3438,11 +3438,11 @@ void CheckAuras()
                 Player.Aura.Type[AURA_ORANGE].Level = 3;
 
             if (Player.Aura.Type[AURA_ORANGE].Level == 1)
-                Player.WeaponSpeed *= 1.50;
+                Player.WeaponSpeed += 10;
             if (Player.Aura.Type[AURA_ORANGE].Level == 2)
-                Player.WeaponSpeed *= 1.75;
+                Player.WeaponSpeed += 15;
             if (Player.Aura.Type[AURA_ORANGE].Level >= 3)
-                Player.WeaponSpeed *= 2.00;
+                Player.WeaponSpeed += 25;
         }
 
         // Dark Blue Aura
