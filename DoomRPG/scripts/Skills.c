@@ -71,7 +71,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
     {
         {
             .Name = "Invulnerability",
-            .Cost = 250,
+            .Cost = 500,
             .MaxLevel = 2,
             .Use = Powerup,
             .Description =
@@ -82,7 +82,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Invisibility",
-            .Cost = 100,
+            .Cost = 150,
             .MaxLevel = 2,
             .Use = Powerup,
             .Description =
@@ -134,12 +134,12 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Mental Mapping",
-            .Cost = 300,
+            .Cost = 400,
             .MaxLevel = 1,
             .Use = Powerup,
             .Description =
             {
-                "Full Map\nItem/Enemy Tracking"
+                "Full Map"
             }
         },
         {
@@ -1203,7 +1203,6 @@ NamedScript Console bool Powerup(SkillLevelInfo *SkillLevel, void *Data)
     case 6: // Mental Mapping
         ActivatorSound("powerups/map", 127);
         GiveInventory("DRPGAllMapRevealer", 1);
-        GiveInventory("DRPGAllMapScanner", 1);
         break;
     }
 
