@@ -416,10 +416,10 @@ void CheckStats()
     Player.Speed = 1.0 + 0.25 * ((fixed)Player.AgilityTotal / 100);
     Player.JumpHeight = 8.0;
     Player.WeaponSpeed = Player.AgilityTotal / 2;
-    SetAmmoCapacity("Clip", 60 + Player.CapacityTotal * 10);
+    SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
     SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
     SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
-    SetAmmoCapacity("Cell", Player.CapacityTotal * 10);
+    SetAmmoCapacity("Cell", (75 + Player.CapacityTotal * 5) / 10 * 10);
     Player.Stim.VialMax = Player.CapacityTotal * 2.5;
     Player.SurvivalBonus = (fixed)Player.AgilityTotal / 5.0;
     if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
