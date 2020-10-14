@@ -856,7 +856,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
         Delay(35 * 5);
     }
 
-    if (CurrentLevel->Event == MAPEVENT_TELEPORTCRACKS || CurrentLevel->Event == MAPEVENT_DOOMSDAY || CurrentLevel->Event == MAPEVENT_DRLA_FEEDINGFRENZY || CurrentLevel->Event == MAPEVENT_SKILL_HELL || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
+    if (CurrentLevel->Event == MAPEVENT_TELEPORTCRACKS || CurrentLevel->Event == MAPEVENT_DOOMSDAY || CurrentLevel->Event == MAPEVENT_DRLA_FEEDINGFRENZY || CurrentLevel->Event == MAPEVENT_SKILL_TECHNOPHOBIA || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
         CurrentLevel->EventCompleted = true; // These don't actually end until you leave the map normally
 
     // We finished the map
@@ -1083,16 +1083,16 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
         return (GetCVar("drpg_mapevent_rainbows") &&
                 !Random(0, 15));
 
-    case MAPEVENT_SKILL_HELL:
-        return (GetCVar("drpg_mapevent_skill_hell") &&
+    case MAPEVENT_SKILL_TECHNOPHOBIA:
+        return (GetCVar("drpg_mapevent_skill_technophobia") &&
                 AveragePlayerLevel() >= 35 &&
-                CurrentSkill < 6);
+                CurrentSkill != 6);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_skill_armageddon") &&
-                AveragePlayerLevel() >= 35 &&
-                CurrentSkill < 5);
+                AveragePlayerLevel() >= 45 &&
+                CurrentSkill != 7);
 
     case MAPEVENT_SPECIAL_SINSTORM:
         return false;
@@ -1168,7 +1168,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 
         "RAINBOWS!",
 
-        "Skills - Hell",
+        "Skills - Technophobia",
         "Skills - Armageddon",
 
         "Sinstorm"
@@ -1468,7 +1468,7 @@ NamedScript void SetupMapEvent()
     // Skill Events
     // --------------------------------------------------
 
-    case MAPEVENT_SKILL_HELL:
+    case MAPEVENT_SKILL_TECHNOPHOBIA:
         if (GameSkill() != 7)
             ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 6);
         SetMusic("Skill5");
@@ -1480,8 +1480,8 @@ NamedScript void SetupMapEvent()
         break;
 
     case MAPEVENT_SKILL_ARMAGEDDON:
-        if (GameSkill() != 6)
-            ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 5);
+        if (GameSkill() != 8)
+            ChangeLevel(CurrentLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, 7);
         SetMusic("Skill6");
         SetHudSize(640, 480, false);
         SetFont("BIGFONT");
@@ -1518,7 +1518,7 @@ NamedScript Type_UNLOADING void ResetMapEvent()
     if (CurrentLevel && CurrentLevel->Event && CurrentLevel->EventCompleted)
     {
         // And reset the skill for these
-        if (CurrentLevel->Event == MAPEVENT_SKILL_HELL || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
+        if (CurrentLevel->Event == MAPEVENT_SKILL_TECHNOPHOBIA || CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON)
             ChangeSkill(CurrentSkill);
 
         CurrentLevel->Event = MAPEVENT_NONE;

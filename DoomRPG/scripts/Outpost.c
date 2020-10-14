@@ -460,8 +460,8 @@ NamedScript MapSpecial void LevelTransport()
             case MAPEVENT_BONUS_RAINBOWS:
                 AreaText = "\C[Grey]Detected: Internal Software Failure (\C[Red]R\C[Orange]A\C[Yellow]I\C[Green]N\C[Cyan]B\C[Blue]O\C[Purple]W\C[Brick]S\C[Grey])\n    \C[Brick]Kupo?";
                 break;
-            case MAPEVENT_SKILL_HELL:
-                AreaText = "\C[Red]Detected: Internal Mechanism Corruption (Hell!)";
+            case MAPEVENT_SKILL_TECHNOPHOBIA:
+                AreaText = "\C[Red]Detected: Internal Mechanism Corruption (Technophobia!)";
                 break;
             case MAPEVENT_SKILL_ARMAGEDDON:
                 AreaText = "\C[Grey]Detected: Internal Mechanism Corruption (Armageddon!)";

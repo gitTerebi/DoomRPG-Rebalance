@@ -714,7 +714,7 @@ typedef struct
 
 NamedScript void GiveTip()
 {
-    if ((CurrentLevel->Event == MAPEVENT_SKILL_HELL && GameSkill() != 5) || (CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON && GameSkill() != 6))
+    if ((CurrentLevel->Event == MAPEVENT_SKILL_TECHNOPHOBIA && GameSkill() != 6) || (CurrentLevel->Event == MAPEVENT_SKILL_ARMAGEDDON && GameSkill() != 7))
         return;
 
     TipInfo Tips[MAX_TIPS] =
