@@ -107,7 +107,6 @@ skill hard
 	Name = "$SKILL_HARD"
 	Key = "4"
 	acsreturn = 4
-	DefaultSkill
 	ReplaceActor = "Zombieman", "RLFormerHumanSpawner"
 	ReplaceActor = "Shotgunguy", "RLFormerSergeantSpawner"
 	ReplaceActor = "Chaingunguy", "RLFormerCommandoSpawner"
@@ -140,6 +139,7 @@ skill adaptive
 	MustConfirm = "A progressive difficulty that ramps up over time, starts at UV, ends up far worse."
 	Key = "5"
 	acsreturn = 5
+	DefaultSkill
 //	ReplaceActor = "GreenArmor", "RLAdaptiveStandardArmorSpawner"
 //	ReplaceActor = "BlueArmor", "RLAdaptiveAdvancedArmorSpawner"
 	ReplaceActor = "Zombieman", "RLAdaptiveFormerHuman"
