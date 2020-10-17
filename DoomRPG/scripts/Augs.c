@@ -76,10 +76,10 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "1/2 HP Regen Timers",
-            "1/2 EP Regen Timers",
-            "2x HP Regen Amounts",
-            "2x EP Regen Amounts",
+            "+25% HP Regen Speed",
+            "+25% EP Regen Speed",
+            "1.5x HP Regen Amounts",
+            "1.5x EP Regen Amounts",
             "-5 Seconds Toxicity Regen Timer",
             "-10 Seconds Toxicity Regen Timer",
             "-15 Seconds Toxicity Regen Timer",
@@ -290,7 +290,7 @@ void CheckAugs()
         // Decrease Battery
         if (Player.Augs.SlotsUsed > 0 && (Timer() % 35) == 0)
         {
-            Player.Augs.Battery -= (Player.Augs.BatteryDrain / 10);
+            Player.Augs.Battery -= (Player.Augs.BatteryDrain / 20);
             DrawBattery();
         }
 
@@ -395,19 +395,19 @@ void CheckAugs()
     {
         if (Player.Augs.Level[AUG_REGENERATION] >= 1)
         {
-            Player.HPTime /= 2;
+            Player.HPTime *= 0.75;
         }
         if (Player.Augs.Level[AUG_REGENERATION] >= 2)
         {
-            Player.EPTime /= 2;
+            Player.EPTime *= 0.75;
         }
         if (Player.Augs.Level[AUG_REGENERATION] >= 3)
         {
-            Player.HPAmount *= 2;
+            Player.HPAmount *= 1.5;
         }
         if (Player.Augs.Level[AUG_REGENERATION] >= 4)
         {
-            Player.EPAmount *= 2;
+            Player.EPAmount *= 1.5;
         }
         if (Player.Augs.Level[AUG_REGENERATION] == 5)
             Player.ToxicityRegenBonus += 5;
