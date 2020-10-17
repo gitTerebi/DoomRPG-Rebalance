@@ -329,7 +329,7 @@ actor DRPGShieldDropper : RandomSpawner 25011
 actor DRPGStimDropper : RandomSpawner 25012
 {
 	// Empty
-    DropItem "DRPGEmpty"                255 100
+    DropItem "DRPGEmpty"                255 300
 
     // Stims
     DropItem "DRPGStimSmall"            255 70

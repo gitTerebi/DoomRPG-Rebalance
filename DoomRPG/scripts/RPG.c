@@ -1442,6 +1442,13 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
 // Activate Focus Mode
 NamedScript KeyBind void ToggleFocusMode()
 {
+    if (Player.Augs.Battery < (Player.EPMax / 50) * 5)
+    {
+        PrintError(StrParam("There is not enough power for focusing device\n\nYou need %d AUG Battery", (Player.EPMax / 50) * 5));
+        ActivatorSound("menu/error", 127);
+        return;
+    }
+
     if (Player.FocusingCooldown > 0)
     {
         PrintError(StrParam("Focusing device is overloaded\n\nYou must wait %S before reattemtping the focusing", FormatTime(Player.FocusingCooldown)));
@@ -1472,6 +1479,9 @@ NamedScript void FocusMode()
     if (Player.EP >= Player.EPMax) return;
 
     SetPlayerProperty(0, 1, PROP_FROZEN);
+
+    Player.Augs.Battery -= (Player.EPMax / 50) * 5;
+    DrawBattery();
 
     while (Player.Focusing)
     {

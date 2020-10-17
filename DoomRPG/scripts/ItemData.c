@@ -1069,23 +1069,23 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
     ItemInfoPtr Reward;
     int Index;
     int Cap;
-    int DiffPick;
+    fixed DiffPick;
 
     if (Difficulty < 10)
     {
         // Rarity Chance Modifier thingy
         if (GetCVar("drpg_loot_rcm"))
         {
-            DiffPick = Random(0, 100);
-            if (DiffPick < (70 - (AveragePlayerLuck() / 5 + AveragePlayerLevel() / 5))) Difficulty--; // Unlucky, item will be a rank lower
-            if (DiffPick > 95) Difficulty++; // Lucky, item will be a rank higher
+            DiffPick = RandomFixed(0.0, 100.0);
+            if (DiffPick < (70.0 - ((fixed)AveragePlayerLuck() / 5.0 + (fixed)AveragePlayerLevel() / 5.0))) Difficulty--; // Unlucky, item will be a rank lower
+            if (DiffPick > 95.0) Difficulty++; // Lucky, item will be a rank higher
         }
 
         // Prevent under/overflow
         if (Difficulty < 0) Difficulty = 0;
         if (Difficulty > 9) Difficulty = 9;
 
-        else if (Random(0, 100) < (90 - (AveragePlayerLuck() / 5 + AveragePlayerLevel() / 5))) // Stims/Augs/Turret
+        else if (RandomFixed(0.0, 100.0) < (90.0 - ((fixed)AveragePlayerLuck() / 5.0 + (fixed)AveragePlayerLevel() / 5.0))) // Stims/Augs/Turret
         {
             Cap = 0;
 
