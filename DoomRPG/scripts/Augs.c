@@ -290,7 +290,7 @@ void CheckAugs()
         // Decrease Battery
         if (Player.Augs.SlotsUsed > 0 && (Timer() % 35) == 0)
         {
-            Player.Augs.Battery -= (Player.Augs.BatteryDrain / 20);
+            Player.Augs.Battery -= (Player.Augs.BatteryDrain * 0.055);
             DrawBattery();
         }
 

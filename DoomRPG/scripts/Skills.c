@@ -134,7 +134,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Mental Mapping",
-            .Cost = 400,
+            .Cost = 500,
             .MaxLevel = 1,
             .Use = Powerup,
             .Description =

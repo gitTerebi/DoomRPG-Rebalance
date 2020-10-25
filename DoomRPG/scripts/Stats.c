@@ -637,8 +637,8 @@ void CheckStats()
 void CheckRegen()
 {
     // Determine the max timer amounts
-    Player.HPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
-    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.5k) * 2k);
+    Player.HPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.025k) * 2k);
+    Player.EPTime = (int)(350k - ((fixed)Player.RegenerationTotal * 1.575k) - ((fixed)Player.AgilityTimer * 0.025k) * 2k);
 
     // Cap Times
     if (Player.HPTime < 35)
@@ -985,13 +985,21 @@ void CheckPerks()
     {
         // Increment Agility timer to effect regeneration times the longer you are moving
         if (GetActorVelX(Player.TID) != 0 || GetActorVelY(Player.TID) != 0)
-            Player.AgilityTimer++;
+            Player.AgilityTimer += 1;
         else
-            Player.AgilityTimer = 0;
+        {
+            if (Player.AgilityTimer > 0)
+                Player.AgilityTimer -= 25;
+
+            if (Player.AgilityTimer <= 0)
+                Player.AgilityTimer = 0;
+        }
 
         // +15% Survival Bonus
         Player.SurvivalBonus += 15;
     }
+    else
+        Player.AgilityTimer = 0;
 
     // Capacity Perk - Regenerate ammo
     if (Player.Perks[STAT_CAPACITY] && (Timer() % (35 * 30)) == 0)
