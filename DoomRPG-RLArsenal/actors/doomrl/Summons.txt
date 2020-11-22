@@ -5422,7 +5422,7 @@ ACTOR DRPGMarineBFG9000Summoned2
     PB10 A 0 A_Look
     Goto FollowPlayer
   See:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_JumpIfHealthLower (30, "SeeScared")
     TNT1 A 0 A_CheckFlag("FRIENDLY", "Waits", AAPTR_TARGET)
@@ -5524,16 +5524,16 @@ ACTOR DRPGMarineBFG9000Summoned2
     TNT1 A 0 A_Jump (64, "TacticStrafe")
     TNT1 A 0 A_Jump (128, "TacticStrafeLeft1")
     TNT1 A 0 A_Jump (128, "TacticStrafeRight1")
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_PlaySound("weapons/vbfg9000charge", CHAN_WEAPON)
     PB10 EEEEEEEEEEEEEEEEEEEE 1 A_FaceTarget (10)
     PB10 FFFFFFFFFF 1 Bright A_FaceTarget
-    TNT1 A 0 A_GiveInventory ("DRPGMarineBFG9000ShotCounter", 1)
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1)
     PB10 F 7 Bright A_CustomMissile ("RLVBFGBallSummoned", 40, 11, frandom(1,-1), CMF_OFFSETPITCH, frandom(1,-1))
     PB10 E 23
     Goto See
   Overwatch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     PB10 E 4 A_FaceTarget
@@ -5548,7 +5548,7 @@ ACTOR DRPGMarineBFG9000Summoned2
     TNT1 A 0 A_PlaySound("weapons/vbfg9000unload", 7)
     PB10 E 35
     TNT1 A 0 A_PlaySound("weapons/vbfg9000load", 7)
-    TNT1 A 0 A_TakeInventory ("DRPGMarineBFG9000ShotCounter", 2)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1)
     PB10 E 27
     Goto See
   TacticStrafe:
@@ -5679,7 +5679,7 @@ ACTOR DRPGMarineBFG9000Summoned3
     PB10 A 0 A_Look
     Goto FollowPlayer
   See:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_JumpIfHealthLower (30, "SeeScared")
     TNT1 A 0 A_CheckFlag("FRIENDLY", "Waits", AAPTR_TARGET)
@@ -5781,16 +5781,16 @@ ACTOR DRPGMarineBFG9000Summoned3
     TNT1 A 0 A_Jump (64, "TacticStrafe")
     TNT1 A 0 A_Jump (128, "TacticStrafeLeft1")
     TNT1 A 0 A_Jump (128, "TacticStrafeRight1")
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_PlaySound("weapons/vbfg9000charge", CHAN_WEAPON)
     PB10 EEEEEEEEEEEEEEEEEEEE 1 A_FaceTarget (10)
     PB10 FFFFFFFFFF 1 Bright A_FaceTarget
-    TNT1 A 0 A_GiveInventory ("DRPGMarineBFG9000ShotCounter", 1)
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1)
     PB10 F 7 Bright A_CustomMissile ("RLBiggestFuckingGunBallSummoned", 40, 11, frandom(1,-1), CMF_OFFSETPITCH, frandom(1,-1))
     PB10 E 23
     Goto See
   Overwatch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     PB10 E 4 A_FaceTarget
@@ -5805,7 +5805,7 @@ ACTOR DRPGMarineBFG9000Summoned3
     TNT1 A 0 A_PlaySound("weapons/vbfg9000unload", 7)
     PB10 E 35
     TNT1 A 0 A_PlaySound("weapons/vbfg9000load", 7)
-    TNT1 A 0 A_TakeInventory ("DRPGMarineBFG9000ShotCounter", 2)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1)
     PB10 E 27
     Goto See
   TacticStrafe:
@@ -5952,13 +5952,13 @@ ACTOR RLVBFGBallSummoned : BFGBall
 		Death.Normal:
 			TNT1 A 0 A_JumpIf(CallACS("DRLA_FancyProjectiles") == 1, "Death.Fancy")
 			BFE1 AB 8 Bright
-			BFE1 C 8 Bright A_BFGSpray ("BFGExtra", 60, 20, 90, 1024, 32, 0)
+			BFE1 C 8 Bright A_BFGSpray ("BFGExtra", 60, 15, 90, 1024, 32, 0)
 			BFE1 DEF 8 Bright
 			Stop
 		Death.Fancy:
 			BFE1 A 0 A_SpawnItemEx("RLVBFGPuff")
 			BFE1 AB 8 Bright
-			BFE1 C 8 Bright A_BFGSpray ("BFGExtra", 60, 20, 90, 1024, 32, 0)
+			BFE1 C 8 Bright A_BFGSpray ("BFGExtra", 60, 15, 90, 1024, 32, 0)
 			BFE1 DEF 8 Bright
 			Stop
 	}
@@ -6004,7 +6004,7 @@ ACTOR RLBiggestFuckingGunBallSummoned : BFGBall
 			TNT1 A 0 A_SetScale (2)
 			TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("RLBiggestFuckingGunSpark", 16, 0, random (0,360))
 			PULS HI 4 Bright
-			PULS J 4 Bright A_BFGSpray ("RLBFGExtraSummoned", 80, 25, 90, 1024, 32, 0)
+			PULS J 4 Bright A_BFGSpray ("RLBFGExtraSummoned", 80, 20, 90, 1024, 32, 0)
 			PULS KLMNOPQRST 4 Bright
 			Stop
 	}

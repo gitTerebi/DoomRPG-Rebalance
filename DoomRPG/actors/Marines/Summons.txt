@@ -2321,7 +2321,7 @@ ACTOR DRPGMarineBFG9000Summoned
     NMA9 A 0 A_Look
     Goto FollowPlayer
   See:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_JumpIfHealthLower (30, "SeeScared")
     TNT1 A 0 A_CheckFlag("FRIENDLY", "Waits", AAPTR_TARGET)
@@ -2423,16 +2423,16 @@ ACTOR DRPGMarineBFG9000Summoned
     TNT1 A 0 A_Jump (64, "TacticStrafe")
     TNT1 A 0 A_Jump (128, "TacticStrafeLeft1")
     TNT1 A 0 A_Jump (128, "TacticStrafeRight1")
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_PlaySound("weapons/bfgf", CHAN_WEAPON)
     NMA9 EEEEEEEEEEEEEEEEEEEE 1 A_FaceTarget (10)
     NMA9 FFFFFFFFFF 1 Bright A_FaceTarget
-    TNT1 A 0 A_GiveInventory ("DRPGMarineBFG9000ShotCounter", 1)
+    TNT1 A 0 A_GiveInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1)
     NMA9 F 7 Bright A_CustomMissile ("DRPGMarineBFGBallSummoned", 40, 11, frandom(1,-1), CMF_OFFSETPITCH, frandom(1,-1))
     NMA9 E 23
     Goto See
   Overwatch:
-    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounter", 2, "Reload")
+    TNT1 A 0 A_JumpIfInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1, "Reload")
     TNT1 A 0 A_ChangeFlag ("FRIGHTENED", 0)
     TNT1 A 0 A_Chase ("", "Missile", CHF_DONTMOVE)
     NMA9 E 4 A_FaceTarget
@@ -2447,7 +2447,7 @@ ACTOR DRPGMarineBFG9000Summoned
     TNT1 A 0 A_PlaySound("drpgmarines/bfg9000unload", 7)
     NMA9 E 35
     TNT1 A 0 A_PlaySound("drpgmarines/bfg9000load", 7)
-    TNT1 A 0 A_TakeInventory ("DRPGMarineBFG9000ShotCounter", 2)
+    TNT1 A 0 A_TakeInventory ("DRPGMarineBFG9000ShotCounterSummoned", 1)
     NMA9 E 27
     Goto See
   TacticStrafe:
@@ -2569,7 +2569,7 @@ ACTOR DRPGMarineBFGBallSummoned : BFGBall
         TNT1 A 0 A_Quake (2, 40, 0, 1024, "")
         TNT1 A 0 A_Quake (6, 32, 0, 300, "")
         BFE1 AB 8 Bright
-        BFE1 C 8 Bright A_BFGSpray ("BFGExtra", 40, 15, 90, 1024, 32, 0)
+        BFE1 C 8 Bright A_BFGSpray ("BFGExtra", 40, 10, 90, 1024, 32, 0)
         BFE1 DEF 8 Bright
         Stop
     }
@@ -2580,6 +2580,11 @@ ACTOR DRPGMarineBFGBallSummoned : BFGBall
 Actor DRPGMarineChaingunShotCounterSummoned : Inventory
 {
     inventory.maxamount 80
+}
+
+Actor DRPGMarineBFG9000ShotCounterSummoned : Inventory
+{
+    inventory.maxamount 1
 }
 
 Actor DRPGMarineForceReloadCounter : Inventory

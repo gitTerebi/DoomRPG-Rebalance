@@ -46,9 +46,9 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 6,
         .Description =
         {
-            "1.5x HP Regen",
-            "1.5x Max HP",
-            "+10% Status Effect Resist",
+            "+50% HP Regen Amounts",
+            "+25% Max HP Amounts",
+            "+50% Max HP Amounts",
             "+15% Status Effect Resist",
             "+20% Status Effect Resist",
             "+25% Status Effect Resist"
@@ -60,14 +60,14 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "1.5x EP Regen",
-            "1.5x Max EP",
-            "1.5x Aura Timer",
-            "1.5x Aura Range",
-            "10% Skill Cost Refund",
-            "15% Skill Cost Refund",
-            "20% Skill Cost Refund",
-            "25% Skill Cost Refund"
+            "+50% EP Regen Amounts",
+            "+25% Max EP Amounts",
+            "+50% Max EP Amounts",
+            "+50% Aura Timer",
+            "+10% Skill Cost Refund",
+            "+15% Skill Cost Refund",
+            "+20% Skill Cost Refund",
+            "+25% Skill Cost Refund"
         },
         .TokenActor = "DRPGAugTokenEnergy"
     },
@@ -76,10 +76,10 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "1.25x HP Regen Speed",
-            "1.25x EP Regen Speed",
-            "1.5x HP Regen Amounts",
-            "1.5x EP Regen Amounts",
+            "+25% HP Regen Speed",
+            "+25% EP Regen Speed",
+            "+50% HP Regen Amounts",
+            "+50% EP Regen Amounts",
             "-5 Seconds Toxicity Regen Timer",
             "-10 Seconds Toxicity Regen Timer",
             "-15 Seconds Toxicity Regen Timer",
@@ -105,9 +105,9 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 3,
         .Description =
         {
-            "1.25x Ammo Limits",
-            "1.5x Ammo Limits",
-            "2x Ammo Limits"
+            "+25% Ammo Limits",
+            "+50% Ammo Limits",
+            "+100% Ammo Limits"
         },
         .TokenActor = "DRPGAugTokenCapacity"
     },
@@ -116,10 +116,10 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 4,
         .Description =
         {
-            "1.5x Luck Drop Chances",
-            "2x Luck Drop Chances",
-            "3x Luck Drop Chances",
-            "4x Luck Drop Chances"
+            "+50% Luck Drop Chances",
+            "+100% Luck Drop Chances",
+            "+200% Luck Drop Chances",
+            "+300% Luck Drop Chances"
         },
         .TokenActor = "DRPGAugTokenLuck"
     },
@@ -363,10 +363,10 @@ void CheckAugs()
     {
         if (Player.Augs.Level[AUG_VITALITY] >= 1)
             Player.HPAmount *= 1.5;
-        if (Player.Augs.Level[AUG_VITALITY] >= 2)
+        if (Player.Augs.Level[AUG_VITALITY] == 2)
+            Player.HealthMax *= 1.25;
+        if (Player.Augs.Level[AUG_VITALITY] >= 3)
             Player.HealthMax *= 1.5;
-        if (Player.Augs.Level[AUG_VITALITY] == 3)
-            Player.StatusEffectResist += 10;
         if (Player.Augs.Level[AUG_VITALITY] == 4)
             Player.StatusEffectResist += 15;
         if (Player.Augs.Level[AUG_VITALITY] == 5)
@@ -380,12 +380,12 @@ void CheckAugs()
     {
         if (Player.Augs.Level[AUG_ENERGY] >= 1)
             Player.EPAmount *= 1.5;
-        if (Player.Augs.Level[AUG_ENERGY] >= 2)
+        if (Player.Augs.Level[AUG_ENERGY] == 2)
+            Player.EPMax *= 1.25;
+        if (Player.Augs.Level[AUG_ENERGY] >= 3)
             Player.EPMax *= 1.5;
-        if (Player.Augs.Level[AUG_ENERGY] >= 4)
-            Player.Aura.Range *= 1.5;
     }
-    if (Player.Augs.Active[AUG_ENERGY] && Player.Augs.Level[AUG_ENERGY] >= 3)
+    if (Player.Augs.Active[AUG_ENERGY] && Player.Augs.Level[AUG_ENERGY] >= 4)
         Player.AuraBonus = true;
     else
         Player.AuraBonus = false;
