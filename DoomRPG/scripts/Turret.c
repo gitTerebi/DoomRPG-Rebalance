@@ -32,7 +32,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Issuing this command will load the bullet weapon module"
     },
     {
-        "Weapon Module - Bullet - Damage", 10, 3,
+        "Weapon Module - Bullet - Damage", 20, 3,
         "Increases the damage of the turret's bullets",
         "",
         ""
@@ -58,7 +58,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Issuing this command will load the pellet weapon module"
     },
     {
-        "Weapon Module - Pellet - Damage", 10, 3,
+        "Weapon Module - Pellet - Damage", 20, 3,
         "Increases the damage of the turret's pellets",
         "",
         ""

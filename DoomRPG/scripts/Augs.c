@@ -76,8 +76,8 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "+25% HP Regen Speed",
-            "+25% EP Regen Speed",
+            "1.25x HP Regen Speed",
+            "1.25x EP Regen Speed",
             "1.5x HP Regen Amounts",
             "1.5x EP Regen Amounts",
             "-5 Seconds Toxicity Regen Timer",
