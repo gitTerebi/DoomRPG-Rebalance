@@ -394,7 +394,7 @@ Actor RLNightmarePainElementalActive : Inventory
 inventory.maxamount 1
 }
 
-ACTOR RLNightmarePainElementalSummoned : RLPainElementalBase 16529
+ACTOR RLNightmarePainElementalSummoned : RLPainElementalBase 26529
 {
   Health 760
   GibHealth -90

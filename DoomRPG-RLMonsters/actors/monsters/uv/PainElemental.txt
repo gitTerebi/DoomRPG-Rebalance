@@ -229,7 +229,7 @@ ACTOR RLPainElementalAgony : RLPainElemental
   }
 }
 
-ACTOR RLPainElementalSummoned : RLPainElementalBase 16412
+ACTOR RLPainElementalSummoned : RLPainElementalBase 26412
 {
   Health 400
   GibHealth -80
