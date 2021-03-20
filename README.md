@@ -24,19 +24,14 @@ After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions 
 
 Use the following load order:
 
-1. [DoomRL Arsenal 1.1.4](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
+1. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
 2. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
-3. [HD Textures](https://github.com/WNC12k/DoomRPG-Others/releases) (optional);
-4. [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
-5. [doom_complete](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
-6. [Music_Instrumental](https://github.com/WNC12k/DoomRPG-Music/releases) (optional);
-7. [Flashlights](https://github.com/WNC12k/DoomRPG-Others/releases) (recommended);
-8. [Precise Crosshair 1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=64788) (optional, need GZDoom 4.1.3);
-9. [Target Spy 1.11](https://forum.zdoom.org/viewtopic.php?t=60784) (optional).
+3. [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
+4. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
 
 ## Compatible mods
 
-- DoomRL Arsenal - [1.1.4] [MP-B7.3].
+- DoomRL Arsenal - [1.1.5] [MP-B7.3].
 - LegenDoom v2.7.
 - Colourful Hell v0.97ccc.
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
