@@ -12,7 +12,33 @@ And for God's sake, save ammo and credits, you'll need them, and don't forget to
 
 Good luck! 
 
-## Installing
+## Installing (build)
+
+I wanted to share my build with you. Perhaps someone can use it to run a Doom RPG.
+
+Below is the download link:
+[DoomRPG SE Rebalance 1.22 (GZDoom 4.5.0)](https://drive.google.com/file/d/1tgmYkPulsCHaiSkXIqcGtoyMjrsDM6Az/view?usp=sharing)
+
+Installation Instructions:
+
+1. The archive has a folder DoomRPG SE Rebalance. I recommend placing it at the following address: "D:\Games\DoomRPG SE Rebalance".
+1.1 In case you want to place the folder in a place of your choice, you will have to change the corresponding addresses in the DoomRPG Launcher.
+
+2. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRL, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
+
+3. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.5.0\gzdoom-username.ini".
+
+4. Now you need to take the configuration file from the archive in the Extras folder and replace it with the file from step 3. Note that you need to change the "username" in the file name.
+4.1 Please note that the configuration file has also made some changes that affect the functioning of the assembly. Therefore, I recommend using this file as a database. Also note that in the DoomRL Arsenal settings, perks are turned off and the option to learn recipes is enabled. If you are against such settings, disable them manually in the Options menu.
+
+5. Run the game through the DoomRPG Launcher and play.
+
+Please note that for those who like to play on Gamepad, there are 3 optional files:
+1. Gamepad Control Helper (author - Me);
+2. Aim Assist 0.6 (author - RicardoLuis0);
+3. Recenter 0.1.0 (author - m8f).
+
+## Manual Installing
 
 - GZDoom v3.7.0 ([v4.1.3](https://zdoom.org/files/gzdoom/bin/gzdoom-bin-4-1-3-x64.zip) recommended) or higher is required to play this mod.
 - LZDoom v3.83a or higher.
@@ -24,10 +50,10 @@ After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions 
 
 Use the following load order:
 
-1. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
-2. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
-3. [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
-4. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
+1. [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
+2. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
+3. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
+4. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
 
 ## Compatible mods
 
