@@ -29,7 +29,7 @@ Installation Instructions:
 3. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.5.0\gzdoom-username.ini".
 
 4. Now you need to take the configuration file from the archive in the Extras folder and replace it with the file from step 3. Note that you need to change the "username" in the file name.
-4.1 Please note that the configuration file has also made some changes that affect the functioning of the assembly. Therefore, I recommend using this file as a database. Also note that in the DoomRL Arsenal settings, perks are turned off and the option to learn recipes is enabled. If you are against such settings, disable them manually in the Options menu.
+4.1 Please note that the configuration file has also made some changes that affect the functioning of the assembly. Therefore, I recommend using this file as a base. Also note that in the DoomRL Arsenal settings, perks are turned off and the option to learn recipes is enabled. If you are against such settings, disable them manually in the Options menu.
 
 5. Run the game through the DoomRPG Launcher and play.
 
