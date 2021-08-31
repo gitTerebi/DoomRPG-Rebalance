@@ -169,7 +169,7 @@ NamedScript KeyBind void UseMedkit()
 void InitXPTable()
 {
     XPTable[0] = 475l + XPCurve;
-    for (int i = 1; i < MAX_LEVEL; i++)
+    for (int i = 1; i <= MAX_LEVEL; i++)
         XPTable[i] = (((long int)(((long long int)XPTable[i - 1] * (long fixed)(1.0 + i / (i * 8.0))) + ((i * (long long int)XPCurve) * (long fixed)(1.0 + i / (101.0 - i))))) + 50) / 100 * 100;
 }
 
@@ -178,7 +178,7 @@ void InitStatXPTable()
     StatTable = &RealStatTable[101];
 
     StatTable[0] = 475 + XPCurve;
-    for (int i = 1; i < MAX_LEVEL * 2; i++)
+    for (int i = 1; i <= MAX_LEVEL * 2; i++)
         StatTable[i] = (((long int)(((long long int)StatTable[i - 1] * (long fixed)(1.0 + i / (i * 8.0))) + ((i * (long long int)XPCurve) * (long fixed)(1.0 + i / (201.0 - i * 2))))) + 50) / 100 * 100;
 }
 
@@ -191,7 +191,7 @@ void InitNegativeStatXPTable()
 void InitRankTable()
 {
     RankTable[0] = 5000 + (XPCurve * 600);
-    for (int i = 1; i < MAX_RANK; i++)
+    for (int i = 1; i <= MAX_RANK; i++)
         RankTable[i] = (((long int)((long long int)RankTable[i - 1] + ((i * (long long int)XPCurve * 600ll) * (1 + i)))) + 500) / 1000 * 1000;
 }
 

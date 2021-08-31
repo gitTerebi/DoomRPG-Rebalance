@@ -282,7 +282,7 @@ MissionInfo CreateMission(int Difficulty)
 
     // Kill Auras and Kill Reinforcements Missions
     if (Type == MT_KILLAURAS || Type == MT_REINFORCEMENTS)
-        Mission.Amount = 10 + (Difficulty * 10);
+        Mission.Amount = 5.0 + RandomFixed(6.0 + (AveragePlayerLevel() / 6.0), 12.0 + (AveragePlayerLevel() / 6.0)) * (1.0 + Difficulty / 3.4);
 
     // Assassination Mission
     if (Type == MT_ASSASSINATION)
@@ -419,19 +419,33 @@ void GetTargetMonster(MissionInfo *Mission)
         MonsterInfoPtr TempMonster = &MonsterData[i];
 
         int TestDifficulty = TempMonster->Difficulty + (10 * TempMonster->ThreatLevel);
-        int TestAmount = (30 + (320 * Mission->Difficulty)) / TestDifficulty;
+        int TestAmount;
 
-        if (Mission->Type != MT_KILL)
+        if (CompatMode != COMPAT_DRLA)
         {
-            if (TempMonster->Difficulty > ((Mission->Difficulty + 1) * 11) - 11 &&
-                    TempMonster->Difficulty < ((Mission->Difficulty + 1) * 11) + 11)
+            TestAmount = (30 + (320 * Mission->Difficulty)) / TestDifficulty;
+        }
+
+        if (CompatMode == COMPAT_DRLA)
+        {
+            if (TempMonster->Difficulty >= ((Mission->Difficulty + 1) * 40) - 40 &&
+                    TempMonster->Difficulty <= ((Mission->Difficulty + 1) * 40) + 40)
                 PotentialMonsters[NumPotentialMonsters++] = TempMonster;
         }
         else
         {
-            if (!TempMonster->Boss && TestAmount >= 5 &&
-                    TestAmount <= 40)
-                PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+            if (Mission->Type != MT_KILL)
+            {
+                if (TempMonster->Difficulty > ((Mission->Difficulty + 1) * 11) - 11 &&
+                        TempMonster->Difficulty < ((Mission->Difficulty + 1) * 11) + 11)
+                    PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+            }
+            else
+            {
+                if (!TempMonster->Boss && TestAmount >= 5 &&
+                        TestAmount <= 40)
+                    PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+            }
         }
     }
 
@@ -447,7 +461,22 @@ void GetTargetMonster(MissionInfo *Mission)
 
     // Now that we know the monster type, we can calculate an amount
     int EffectiveDifficulty = MonsterPtr->Difficulty + (10 * MonsterPtr->ThreatLevel);
-    int BaseAmount = (30 + (320 * Mission->Difficulty)) / EffectiveDifficulty;
+    int BaseAmount;
+
+    if (CompatMode == COMPAT_DRLA)
+    {
+        if (MonsterPtr->ThreatLevel == 0) BaseAmount = RandomFixed(7.0 + ((fixed)AveragePlayerLevel() / 3.0), 14.0 + ((fixed)AveragePlayerLevel() / 3.0)) * (1.0 + (fixed)Mission->Difficulty / 3.0);
+        if (MonsterPtr->ThreatLevel == 1) BaseAmount = RandomFixed(6.0 + ((fixed)AveragePlayerLevel() / 5.0), 12.0 + ((fixed)AveragePlayerLevel() / 5.0)) * (1.0 + (fixed)Mission->Difficulty / 3.2);
+        if (MonsterPtr->ThreatLevel == 2) BaseAmount = RandomFixed(5.0 + ((fixed)AveragePlayerLevel() / 8.0), 10.0 + ((fixed)AveragePlayerLevel() / 8.0)) * (1.0 + (fixed)Mission->Difficulty / 3.4);
+        if (MonsterPtr->ThreatLevel == 3) BaseAmount = RandomFixed(4.0 + ((fixed)AveragePlayerLevel() / 12.0), 8.0 + ((fixed)AveragePlayerLevel() / 12.0)) * (1.0 + (fixed)Mission->Difficulty / 3.6);
+        if (MonsterPtr->ThreatLevel == 4) BaseAmount = RandomFixed(3.0 + ((fixed)AveragePlayerLevel() / 15.0), 6.0 + ((fixed)AveragePlayerLevel() / 15.0)) * (1.0 + (fixed)Mission->Difficulty / 3.8);
+        if (MonsterPtr->ThreatLevel == 5) BaseAmount = RandomFixed(1.5 + ((fixed)AveragePlayerLevel() / 20.0), 2.0 + ((fixed)AveragePlayerLevel() / 20.0)) * (1.0 + (fixed)Mission->Difficulty / 4.0);
+    }
+    else
+    {
+        BaseAmount = (30 + (320 * Mission->Difficulty)) / EffectiveDifficulty;
+    }
+
     Amount = Random((fixed)BaseAmount * 0.8, (fixed)BaseAmount * 1.2);
 
     // Insert info into the passed struct

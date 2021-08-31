@@ -921,16 +921,26 @@ NamedScript void HellSkillTransport(int player)
     MonsterInfoPtr MonsterList[MAX_TEMP_MONSTERS];
     int MonsterListLength;
     int BossesSpawned = 0;
+    int LevelNum = CurrentLevel->LevelNum;
 
-    Delay(35 * 60); // Grace Period
+    Delay(35 * Random(40,60)); // Grace Period
 
     // Build a list of monsters
     for (int i = 0; i < MonsterDataAmount && MonsterListLength < MAX_TEMP_MONSTERS; i++)
     {
         MonsterInfoPtr TempMonster = &MonsterData[i];
 
-        if (TempMonster->Difficulty <= 2 + AveragePlayerLevel() * 2)
-            MonsterList[MonsterListLength++] = TempMonster;
+        if (CompatMode == COMPAT_DRLA)
+        {
+            if ((fixed)TempMonster->Difficulty >= (((GameSkill() - 5) * 50) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (225.0 - ((GameSkill() - 5) * 50)) + (fixed)AveragePlayerLevel()) &&
+                    (fixed)TempMonster->Difficulty <= (75.0 + ((GameSkill() - 5) * 50) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (225.0 - ((GameSkill() - 5) * 50)) + (fixed)AveragePlayerLevel()))
+                MonsterList[MonsterListLength++] = TempMonster;
+        }
+        else
+        {
+            if (TempMonster->Difficulty <= 2 + AveragePlayerLevel() * 2)
+                MonsterList[MonsterListLength++] = TempMonster;
+        }
     }
 
     //Log("%d monsters", MonsterListLength);
@@ -1009,7 +1019,7 @@ NamedScript void HellSkillTransport(int player)
             Spawn("TeleportFog", X + SpawnX, Y + SpawnY, Z, 0, 0);
         }
 
-        Delay(35 * 30);
+        Delay(35 * Random(20,30));
     }
 }
 

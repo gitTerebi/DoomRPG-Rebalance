@@ -68,113 +68,113 @@ MonsterInfo const MonsterDataLD[MAX_DEF_MONSTERS_DF] =
 MonsterInfo const MonsterDataDRLA[MAX_DEF_MONSTERS_DRLA] =
 {
     // Normal
-    { "RLFormerHumanPistol",                "Former Human",                     1,      0, false, "You hear shuffling footsteps and moans!" },
-    { "RLFormerHumanBattleRifle",           "Former Human",                     1,      0, false, "You hear shuffling footsteps and moans!" },
-    { "RLFormerHumanBattleRifle2",          "Former Human",                     1,      0, false, "You hear shuffling footsteps and moans!" },
-    { "RLFormerHumanBattleRifle3",          "Former Human",                     1,      0, false, "You hear shuffling footsteps and moans!" },
-    { "RLFormerSergeantShotgun",            "Former Sergeant",                  2,      0, false, "You hear the sound of shotguns pumping!" },
-    { "RLFormerSergeantCombatShotgun",      "Former Sergeant",                  2,      0, false, "You hear the sound of shotguns pumping!" },
-    { "RLFormerCommandoChaingun",           "Former Commando",                  5,      0, false, "Quiet mutters and whirring set you on edge!" },
-    { "RLFormerCommandoBattleRifle",        "Former Commando",                  5,      0, false, "Quiet mutters and magazines being loaded set you on edge!" },
-    { "RLFormerCaptainPlasmaRifle",         "Former Captain",                   6,      0, false, "The sound of a plasma rifle priming makes you flinch!" },
-    { "RLImp",                              "Imp",                              4,      0, false, "The walls are scratched and flame-scorched!" },
-    { "RLDemon",                            "Demon",                            3,      0, false, "Hungry growls echo around you!" },
-    { "RLSpectre",                          "Spectre",                          3,      0, false, "It's dark, you are likely to be eaten by a... Spectre?" },
-    { "RLLostSoul",                         "Lost Soul",                        3,      0, false, "The sound of many flames echo about!" },
-    { "RLCacodemon",                        "Cacodemon",                        10,     0, false, "Screeches drown out all other sound!" },
-    { "RLHellKnight",                       "Hell Knight",                      20,     0, false, "A battle cry chants in the distance!" },
-    { "RLBaronOfHell",                      "Baron of Hell",                    30,     0, false, "Seems you've found Hell's nobility!" },
-    { "RLArachnotron",                      "Arachnotron",                      60,     0, false, "Leg servos squeak and whirr nearby!" },
-    { "RLPainElemental",                    "Pain Elemental",                   40,     0, false, "You feel you are being watched!" },
-    { "RLRevenant",                         "Revenant",                         50,     0, false, "Bones clatter all around you!" },
-    { "RLMancubus",                         "Mancubus",                         60,     0, false, "You hear deep, guttural noises!" },
-    { "RLArchvile",                         "Arch-Vile",                        70,     0, false, "You hear crackling flames!" },
-    { "RLCyberdemon",                       "Cyberdemon",                       87,     0, true,  "Suddenly you have a great urge to turn back!\nYou scream in TERROR!" },
-    { "RLSpiderMastermind",                 "Spider Mastermind",                95,     0, true,  "The smell of sulfur and gunpowder hangs in the air, the war machine is close." },
-    { "RLSpiderMastermindMortar",           "Spider Disastermind",              95,     0, true,  "Looks like this is where all the local invasions are planned!" },
+    { "RLFormerHumanPistol",                "Former Human",                     15,      0, false, "You hear shuffling footsteps and moans!" },
+    { "RLFormerHumanBattleRifle",           "Former Human",                     30,      0, false, "You hear shuffling footsteps and moans!" },
+    { "RLFormerHumanBattleRifle2",          "Former Human",                     40,      0, false, "You hear shuffling footsteps and moans!" },
+    { "RLFormerHumanBattleRifle3",          "Former Human",                     55,      0, false, "You hear shuffling footsteps and moans!" },
+    { "RLFormerSergeantShotgun",            "Former Sergeant",                  80,      0, false, "You hear the sound of shotguns pumping!" },
+    { "RLFormerSergeantCombatShotgun",      "Former Sergeant",                  60,      0, false, "You hear the sound of shotguns pumping!" },
+    { "RLFormerCommandoChaingun",           "Former Commando",                  85,      1, false, "Quiet mutters and whirring set you on edge!" },
+    { "RLFormerCommandoBattleRifle",        "Former Commando",                  65,      1, false, "Quiet mutters and magazines being loaded set you on edge!" },
+    { "RLFormerCaptainPlasmaRifle",         "Former Captain",                   90,      1, false, "The sound of a plasma rifle priming makes you flinch!" },
+    { "RLImp",                              "Imp",                              70,      1, false, "The walls are scratched and flame-scorched!" },
+    { "RLDemon",                            "Demon",                            75,      1, false, "Hungry growls echo around you!" },
+    { "RLSpectre",                          "Spectre",                          95,      1, false, "It's dark, you are likely to be eaten by a... Spectre?" },
+    { "RLLostSoul",                         "Lost Soul",                        90,      1, false, "The sound of many flames echo about!" },
+    { "RLCacodemon",                        "Cacodemon",                        100,     2, false, "Screeches drown out all other sound!" },
+    { "RLHellKnight",                       "Hell Knight",                      105,     2, false, "A battle cry chants in the distance!" },
+    { "RLBaronOfHell",                      "Baron of Hell",                    122,     3, false, "Seems you've found Hell's nobility!" },
+    { "RLArachnotron",                      "Arachnotron",                      125,     3, false, "Leg servos squeak and whirr nearby!" },
+    { "RLPainElemental",                    "Pain Elemental",                   127,     3, false, "You feel you are being watched!" },
+    { "RLRevenant",                         "Revenant",                         129,     4, false, "Bones clatter all around you!" },
+    { "RLMancubus",                         "Mancubus",                         131,     4, false, "You hear deep, guttural noises!" },
+    { "RLArchvile",                         "Arch-Vile",                        160,     4, false, "You hear crackling flames!" },
+    { "RLCyberdemon",                       "Cyberdemon",                       290,     5, true,  "Suddenly you have a great urge to turn back!\nYou scream in TERROR!" },
+    { "RLSpiderMastermind",                 "Spider Mastermind",                320,     5, true,  "The smell of sulfur and gunpowder hangs in the air, the war machine is close." },
+    { "RLSpiderMastermindMortar",           "Spider Disastermind",              380,     5, true,  "Looks like this is where all the local invasions are planned!" },
 
     // Special Normal enemies
-    { "RLBruiserBrother",                   "Bruiser Brothers",                 85,     0, true,  "The heat in here has gotten intense!" },
+    { "RLBruiserBrother",                   "Bruiser Brothers",                 340,     5, true,  "The heat in here has gotten intense!" },
 
     // Nightmare
-    { "RLEliteHumanCombatPistol",           "Elite Human",                      2,      1, false, "The sound of heavy gunshots alerts you!" },
-    { "RLEliteHumanHandcannon",             "Elite Human",                      2,      1, false, "Loud gunshots echo throughout the area!" },
-    { "RLEliteHumanBattleRifle",            "Elite Human",                      3,      1, false, "You notice a lot of empty rifle magazines on the ground..." },
-    { "RLEliteHumanBattleRifle2",           "Elite Human",                      3,      1, false, "You notice a lot of empty rifle magazines on the ground..." },
-    { "RLEliteHumanUzi",                    "Elite Human",                      4,      1, false, "Looks like a whole bunch of recon squads ended up here..." },
-    { "RLEliteSergeantDoubleShotgun",       "Elite Sergeant",                   8,      1, false, "Veteran soldiers patrol the halls, seeking you!" },
-    { "RLEliteSergeantAssaultShotgun",      "Elite Sergeant",                   8,      1, false, "Veteran soldiers patrol the halls, seeking you!" },
-    { "RLEliteSergeantPlasmaShotgun",       "Elite Sergeant",                   8,      1, false, "Veteran soldiers patrol the halls, seeking you!" },
-    { "RLEliteCommandoMinigun",             "Elite Commando",                   12,     1, false, "Heavy ammo belts rustle and clank in the dark!" },
-//  { "RLEliteCommandoLaserRifle",          "Elite Commando",                   12,     1, false, "Spent laser rifle cells litter the floor..." },
-    { "RLEliteCaptainTristarBlaster",       "Elite Captain",                    15,     1, false, "You notice some power cells on the floor,\nused only by the most powerful weapons!" },
-//  { "RLEliteCaptainMissileLauncher",      "Elite Captain",                    15,     1, false, "Seems like this area is being used to test some tank buster weapons!" },
-//  { "RLEliteCaptainNapalmLauncher",       "Elite Captain",                    15,     1, false, "Empty napalm drums and scorched walls indicate some serious weaponry!" },
-    { "RLNightmareImp",                     "Nightmare Imp",                    8,      1, false, "You notice dark nebulous enemies are hunting you down!" },
-    { "RLNightmareDemon",                   "Nightmare Demon",                  6,      1, false, "Roars and growls fill the air!" },
-    { "RLNightmareSpectre",                 "Nightmare Spectre",                6,      1, false, "You feel you are being stalked by something unseen!" },
-    { "RLNightmareLostSoul",                "Nightmare Soul",                   6,      1, false, "You feel like you are being haunted!" },
-    { "RLNightmareCacodemon",               "Nightmare Cacodemon",              20,     1, false, "The air is crackling with electricity!" },
-    { "RLNightmareHellKnight",              "Nightmare Knight",                 25,     1, false, "Heavy hoofsteps echo through the chambers!" },
-    { "RLNightmareBaronOfHell",             "Baron of Nightmares",              45,     1, false, "Commanding roars warn you of danger ahead!" },
-    { "RLNightmareArachnotron",             "Nightmare Arachnotron",            65,     1, false, "The charging of heavy plasma guns fills the air with humming!" },
-    { "RLNightmarePainElemental",           "Nightmare Elemental",              60,     1, false, "You feel like Hell's invisible influence\nis leaking into this area faster!" },
-    { "RLNightmareRevenant",                "Nightmare Revenant",               60,     1, false, "Distant screams echo through the air and your mind!" },
-    { "RLNightmareMancubus",                "Nightmare Mancubus",               75,     1, false, "You hear deep growling and the priming of heavy plasma cannons!" },
-    { "RLNightmareArchvile",                "Nightmare Arch-Vile",              85,     1, false, "You suddenly break out in a flash sweat!" },
-    { "RLNightmareCyberdemon",              "Nightmare Cyberdemon",             100,    1, true,  "Surrounded by hoofsteps and deep laughter,\nyou know you will not leave alive!" },
-    { "RLNightmareSpiderMastermind",        "Nightmare Mastermind",             100,    1, true,  "Insane screeching and the pounding of\nmetal legs drowns out all other sound!" },
+    { "RLEliteHumanCombatPistol",           "Elite Human",                      110,      0, false, "The sound of heavy gunshots alerts you!" },
+    { "RLEliteHumanHandcannon",             "Elite Human",                      115,      0, false, "Loud gunshots echo throughout the area!" },
+    { "RLEliteHumanBattleRifle",            "Elite Human",                      120,      0, false, "You notice a lot of empty rifle magazines on the ground..." },
+    { "RLEliteHumanBattleRifle2",           "Elite Human",                      120,      0, false, "You notice a lot of empty rifle magazines on the ground..." },
+    { "RLEliteHumanUzi",                    "Elite Human",                      132,      0, false, "Looks like a whole bunch of recon squads ended up here..." },
+    { "RLEliteSergeantDoubleShotgun",       "Elite Sergeant",                   134,      1, false, "Veteran soldiers patrol the halls, seeking you!" },
+    { "RLEliteSergeantAssaultShotgun",      "Elite Sergeant",                   136,      1, false, "Veteran soldiers patrol the halls, seeking you!" },
+    { "RLEliteSergeantPlasmaShotgun",       "Elite Sergeant",                   138,      1, false, "Veteran soldiers patrol the halls, seeking you!" },
+    { "RLEliteCommandoMinigun",             "Elite Commando",                   164,      1, false, "Heavy ammo belts rustle and clank in the dark!" },
+//  { "RLEliteCommandoLaserRifle",          "Elite Commando",                   168,      1, false, "Spent laser rifle cells litter the floor..." },
+    { "RLEliteCaptainTristarBlaster",       "Elite Captain",                    172,      2, false, "You notice some power cells on the floor,\nused only by the most powerful weapons!" },
+//  { "RLEliteCaptainMissileLauncher",      "Elite Captain",                    176,      2, false, "Seems like this area is being used to test some tank buster weapons!" },
+//  { "RLEliteCaptainNapalmLauncher",       "Elite Captain",                    180,      2, false, "Empty napalm drums and scorched walls indicate some serious weaponry!" },
+    { "RLNightmareImp",                     "Nightmare Imp",                    140,      1, false, "You notice dark nebulous enemies are hunting you down!" },
+    { "RLNightmareDemon",                   "Nightmare Demon",                  142,      1, false, "Roars and growls fill the air!" },
+    { "RLNightmareSpectre",                 "Nightmare Spectre",                144,      1, false, "You feel you are being stalked by something unseen!" },
+    { "RLNightmareLostSoul",                "Nightmare Soul",                   146,      1, false, "You feel like you are being haunted!" },
+    { "RLNightmareCacodemon",               "Nightmare Cacodemon",              148,      2, false, "The air is crackling with electricity!" },
+    { "RLNightmareHellKnight",              "Nightmare Knight",                 150,      2, false, "Heavy hoofsteps echo through the chambers!" },
+    { "RLNightmareBaronOfHell",             "Baron of Nightmares",              184,      3, false, "Commanding roars warn you of danger ahead!" },
+    { "RLNightmareArachnotron",             "Nightmare Arachnotron",            200,      3, false, "The charging of heavy plasma guns fills the air with humming!" },
+    { "RLNightmarePainElemental",           "Nightmare Elemental",              210,      3, false, "You feel like Hell's invisible influence\nis leaking into this area faster!" },
+    { "RLNightmareRevenant",                "Nightmare Revenant",               215,      4, false, "Distant screams echo through the air and your mind!" },
+    { "RLNightmareMancubus",                "Nightmare Mancubus",               188,      4, false, "You hear deep growling and the priming of heavy plasma cannons!" },
+    { "RLNightmareArchvile",                "Nightmare Arch-Vile",              220,      4, false, "You suddenly break out in a flash sweat!" },
+    { "RLNightmareCyberdemon",              "Nightmare Cyberdemon",             330,      5, true,  "Surrounded by hoofsteps and deep laughter,\nyou know you will not leave alive!" },
+    { "RLNightmareSpiderMastermind",        "Nightmare Mastermind",             360,      5, true,  "Insane screeching and the pounding of\nmetal legs drowns out all other sound!" },
 
     // Special Nightmare enemies
-    { "RLAgonyElemental",                   "Agony Elemental",                  100,    1, true, "You feel the presence of great conduits of the damned!" },
-    { "RLAbominant",                  	    "Abominant",                        100,    1, true, "Death waits for the slightest lapse in concentration." },
+    { "RLAgonyElemental",                   "Agony Elemental",                  380,      5, true, "You feel the presence of great conduits of the damned!" },
+    { "RLAbominant",                  	    "Abominant",                        400,      5, true, "Death waits for the slightest lapse in concentration." },
 
     // Cybernetic
-    { "RLFormerCyborgBattleRifle",          "Former Human Cyborg",              4,      1, false, "Sounds like a platoon of the UAC's finest got corrupted!" },
-//  { "RLFormerCyborgSergeantShotgun",      "Former Human Cyborg Sergeant",     8,      1, false, "You hear whirring legs and the cracks of shotgun fire!" },
-//  { "RLFormerCyborgCommandoChaingun",     "Former Human Cyborg Commando",     12,     1, false, "You realise that the UAC still hasn't\nlearned Hell likes to possess soldiers!" },
-    { "RLCyberneticImp",                    "Cyber-Imp",                        3,      1, false, "Arcs of electricity and howling creatures greet you!" },
-    { "RLCyberneticDemon",                  "Mech-Demon",                       3,      1, false, "Stomping metal feet ring in your ears!" },
-    { "RLCyberneticSpectre",                "Mechtre",                          4,      1, false, "You hear the sound of a cloaking device shorting out!" },
-    { "RLCyberneticLostSoul",               "Hellmine",                         2,      1, false, "It's quiet...\ntoo quiet..." },
-//  { "RLCyberneticCacodemon",              "Cyber-Cacodemon",                  15,     1, false, "The hum of antigrav drives vibrates through your body!" },
-    { "RLCyberneticHellKnight",             "Cybruiser",                        30,     1, false, "Clanking footsteps herald Hell's mechanical legions!" },
-    { "RLCyberneticBaronOfHell",            "Techno-Lord",                      45,     1, false, "Uneven footsteps marks the arrival of some of Hell's cyberforces!" },
-    { "RLCyberneticArachnotron",            "Arachnosentinel",                  70,     1, false, "The walls are covered in bullet holes!" },
-    { "RLCyberneticPainElemental",          "Machine Elemental",                60,     1, false, "You hear humming and beeping everywhere!" },
-    { "RLCyberneticRevenant",               "Heavy Revenant",                   70,     1, false, "Seems they needed bigger rocket launchers!" },
-    { "RLCyberneticMancubus",               "Volacubus",                        75,     1, false, "The smell of burning fuel fills this area!" },
-    { "RLCyberneticArchvile",               "Tech-Vile",                        80,     1, false, "You hear electrical zaps and pulsing energy waves!" },
-    { "RLCyberneticCyberdemon",             "Cyberdemon Mk. II",                100,    1, true,  "You hear crashing metal footfalls! You can't stop shaking!" },
-    { "RLCyberneticSpiderMastermind",       "Spider Overmind",                  100,    1, true,  "You hear endless whispering in your mind!\nYou feel your resistance slipping!" },
+    { "RLFormerCyborgBattleRifle",          "Former Human Cyborg",              152,      0, false, "Sounds like a platoon of the UAC's finest got corrupted!" },
+//  { "RLFormerCyborgSergeantShotgun",      "Former Human Cyborg Sergeant",     155,      0, false, "You hear whirring legs and the cracks of shotgun fire!" },
+//  { "RLFormerCyborgCommandoChaingun",     "Former Human Cyborg Commando",     157,      0, false, "You realise that the UAC still hasn't\nlearned Hell likes to possess soldiers!" },
+    { "RLCyberneticImp",                    "Cyber-Imp",                        160,      1, false, "Arcs of electricity and howling creatures greet you!" },
+    { "RLCyberneticDemon",                  "Mech-Demon",                       192,      1, false, "Stomping metal feet ring in your ears!" },
+    { "RLCyberneticSpectre",                "Mechtre",                          194,      1, false, "You hear the sound of a cloaking device shorting out!" },
+    { "RLCyberneticLostSoul",               "Hellmine",                         196,      1, false, "It's quiet...\ntoo quiet..." },
+//  { "RLCyberneticCacodemon",              "Cyber-Cacodemon",                  198,      2, false, "The hum of antigrav drives vibrates through your body!" },
+    { "RLCyberneticHellKnight",             "Cybruiser",                        200,      2, false, "Clanking footsteps herald Hell's mechanical legions!" },
+    { "RLCyberneticBaronOfHell",            "Techno-Lord",                      230,      3, false, "Uneven footsteps marks the arrival of some of Hell's cyberforces!" },
+    { "RLCyberneticArachnotron",            "Arachnosentinel",                  260,      3, false, "The walls are covered in bullet holes!" },
+    { "RLCyberneticPainElemental",          "Machine Elemental",                265,      3, false, "You hear humming and beeping everywhere!" },
+    { "RLCyberneticRevenant",               "Heavy Revenant",                   270,      4, false, "Seems they needed bigger rocket launchers!" },
+    { "RLCyberneticMancubus",               "Volacubus",                        240,      4, false, "The smell of burning fuel fills this area!" },
+    { "RLCyberneticArchvile",               "Tech-Vile",                        273,      4, false, "You hear electrical zaps and pulsing energy waves!" },
+    { "RLCyberneticCyberdemon",             "Cyberdemon Mk. II",                370,      5, true,  "You hear crashing metal footfalls! You can't stop shaking!" },
+    { "RLCyberneticSpiderMastermind",       "Spider Overmind",                  380,      5, true,  "You hear endless whispering in your mind!\nYou feel your resistance slipping!" },
 
     // Special Technophobia enemies
-    { "RLTerminator",                       "Terminator",                       100,    1, true,  "Distorted digital roars mark the beginning of your end!" },
+    { "RLTerminator",                       "Terminator",                       390,      5, true,  "Distorted digital roars mark the beginning of your end!" },
 
     // Armageddon
-    { "RLFormerAssaultTrooper",             "Former Human Assault Trooper",     5,      3, false, "Marching feet and magazines being slapped into\nplace alerts you of the battalion here!" },
-    { "RLFormerOverwatch",                  "Former Human Overwatch",           8,      3, false, "You hear the sound of someone activating a hover drone nearby..." },
-    { "RLFormerShocktrooper",               "Former Human Shocktrooper",        15,     3, false, "You get the feeling someone is about to get the drop on you..." },
-    { "RLArmageddonImp",                    "The Watcher",                      12,     3, false, "You feel incredibly uneasy, as though many things are watching you!" },
-    { "RLArmageddonDemon",                  "Mech-strosity",                    8,      3, false, "You feel that using a gun here might be a baaaad idea!" },
-//  { "RLArmageddonSpectre",                "Rift Demon",                       16,     3, false, "There don't appear to be any monsters, but that's likely to change!" },
-    { "RLArmageddonLostSoul",               "The Hungry",                       6,      3, false, "You hear endless slavering mouths, hoping to consume human flesh!" },
-    { "RLArmageddonCacodemon",              "Cacobyss",                         25,     4, false, "Metallic echoing screeches herald your doom!" },
-//  { "RLArmageddonHellKnight",             "Crusader of Ruination",            50,     4, false, "You hear the clanking of metal hooves and the smell of burnt flesh!" },
-    { "RLArmageddonBaronOfHell",            "Lord of the Abyss",                65,     4, false, "Deep laughter and endless flames welcome you to your death!" },
-    { "RLArmageddonArachnotron",            "Deathweaver",                      70,     4, false, "You feel you've intruded somewhere that you should not have!" },
-    { "RLArmageddonPainElemental",          "Hellstorm Elemental",              80,     4, false, "The air ripples with instability!\nYou feel like you are being slowly torn apart!" },
-    { "RLArmageddonRevenant",               "Revenihilator",                    60,     4, false, "Beeping and the sound of bones scraping\nagainst metal alerts you to the danger ahead!" },
-    { "RLArmageddonMancubus",               "Magmabus",                         75,     4, false, "Deep growling and blasts of searing heat greet you here!" },
-    { "RLArmageddonArchvile",               "De-Vile",                          85,     5, false, "This entire area seems to be corrupted with great and terrible magic!" },
-//  { "RLArmageddonCyberdemon",             "Nightmare Cyberdemon Mk. II",      100,    5, true,  "Hell has gone all out to stop you!\nYou are one doomed space marine..." },
-//  { "RLArmageddonSpiderMastermind",       "Nightmare Overmind",               100,    5, true,  "The greatest of foul minds,\nthey taunt you telepathically before their hunt begins!" },
+    { "RLFormerAssaultTrooper",             "Former Human Assault Trooper",     220,      1, false, "Marching feet and magazines being slapped into\nplace alerts you of the battalion here!" },
+    { "RLFormerOverwatch",                  "Former Human Overwatch",           245,      1, false, "You hear the sound of someone activating a hover drone nearby..." },
+    { "RLFormerShocktrooper",               "Former Human Shocktrooper",        260,      1, false, "You get the feeling someone is about to get the drop on you..." },
+    { "RLArmageddonImp",                    "The Watcher",                      278,      1, false, "You feel incredibly uneasy, as though many things are watching you!" },
+    { "RLArmageddonDemon",                  "Mech-strosity",                    280,      1, false, "You feel that using a gun here might be a baaaad idea!" },
+//  { "RLArmageddonSpectre",                "Rift Demon",                       245,      1, false, "There don't appear to be any monsters, but that's likely to change!" },
+    { "RLArmageddonLostSoul",               "The Hungry",                       235,      1, false, "You hear endless slavering mouths, hoping to consume human flesh!" },
+    { "RLArmageddonCacodemon",              "Cacobyss",                         281,      2, false, "Metallic echoing screeches herald your doom!" },
+//  { "RLArmageddonHellKnight",             "Crusader of Ruination",            304,      2, false, "You hear the clanking of metal hooves and the smell of burnt flesh!" },
+    { "RLArmageddonBaronOfHell",            "Lord of the Abyss",                307,      3, false, "Deep laughter and endless flames welcome you to your death!" },
+    { "RLArmageddonArachnotron",            "Deathweaver",                      310,      3, false, "You feel you've intruded somewhere that you should not have!" },
+    { "RLArmageddonPainElemental",          "Hellstorm Elemental",              313,      3, false, "The air ripples with instability!\nYou feel like you are being slowly torn apart!" },
+    { "RLArmageddonRevenant",               "Revenihilator",                    316,      4, false, "Beeping and the sound of bones scraping\nagainst metal alerts you to the danger ahead!" },
+    { "RLArmageddonMancubus",               "Magmabus",                         318,      4, false, "Deep growling and blasts of searing heat greet you here!" },
+    { "RLArmageddonArchvile",               "De-Vile",                          320,      4, false, "This entire area seems to be corrupted with great and terrible magic!" },
+//  { "RLArmageddonCyberdemon",             "Nightmare Cyberdemon Mk. II",      385,      5, true,  "Hell has gone all out to stop you!\nYou are one doomed space marine..." },
+//  { "RLArmageddonSpiderMastermind",       "Nightmare Overmind",               390,      5, true,  "The greatest of foul minds,\nthey taunt you telepathically before their hunt begins!" },
 
     // Special Armageddon enemies
     // These guys should never be one monsters or anything like that.
     // [KS] Should we add them as Megabosses instead?
-//  { "RLArmageddonCyberdemon2",            "Cyber-Riftlord",                   100,    10, true, "You can feel the presence of dark entities beyond your comprehension!" },
-//  { "RLArmageddonSpiderMastermind2",      "Supreme Overmind",                 100,    10, true, "Seems like you found the grand leaders of the invasion here!" }
+//  { "RLArmageddonCyberdemon2",            "Cyber-Riftlord",                   395,      5, true, "You can feel the presence of dark entities beyond your comprehension!" },
+//  { "RLArmageddonSpiderMastermind2",      "Supreme Overmind",                 400,      5, true, "Seems like you found the grand leaders of the invasion here!" }
 };
 
 // Colourful Hell
@@ -2819,9 +2819,18 @@ NamedScript DECORATE void MonsterTransport(int Difficulty, int Time, int Radius)
     {
         TempMonster = &MonsterData[i];
 
-        if (TempMonster->Difficulty >= ((Difficulty + 1) * 10) - 40 &&
-                TempMonster->Difficulty <= ((Difficulty + 1) * 10) + 10)
-            MonsterList[MonsterListLength++] = TempMonster;
+        if (CompatMode == COMPAT_DRLA)
+        {
+            if (TempMonster->Difficulty >= ((Difficulty + 1) * 40) - 40 &&
+                    TempMonster->Difficulty <= ((Difficulty + 1) * 40) + 40)
+                MonsterList[MonsterListLength++] = TempMonster;
+        }
+        else
+        {
+            if (TempMonster->Difficulty >= ((Difficulty + 1) * 10) - 40 &&
+                    TempMonster->Difficulty <= ((Difficulty + 1) * 10) + 10)
+                MonsterList[MonsterListLength++] = TempMonster;
+        }
     }
 
     if (!MonsterListLength)
