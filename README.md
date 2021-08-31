@@ -17,11 +17,12 @@ Good luck!
 I wanted to share my build with you. Perhaps someone can use it to run a Doom RPG.
 
 Below is the download link:
-[DoomRPG SE Rebalance 1.22 (GZDoom 4.5.0)](https://drive.google.com/file/d/1smbT6XORKt5_tPEGRVVTS4naotD37HGH/view?usp=sharing)
+[DoomRPG SE Rebalance 1.22a (GZDoom 4.5.0)](https://drive.google.com/file/d/1aj4TY2EbyMGng_3i_z4VndyrbR7ghAAO/view?usp=sharing)
 
 Installation Instructions:
 
 1. The archive has a folder DoomRPG SE Rebalance. I recommend placing it at the following address: "D:\Games\DoomRPG SE Rebalance".
+
 1.1 In case you want to place the folder in a place of your choice, you will have to change the corresponding addresses in the DoomRPG Launcher.
 
 2. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRL, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
@@ -29,6 +30,7 @@ Installation Instructions:
 3. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.5.0\gzdoom-username.ini".
 
 4. Now you need to take the configuration file from the archive in the Extras folder and replace it with the file from step 3. Note that you need to change the "username" in the file name.
+
 4.1 Please note that the configuration file has also made some changes that affect the functioning of the assembly. Therefore, I recommend using this file as a base. Also note that in the DoomRL Arsenal settings, perks are turned off and the option to learn recipes is enabled. If you are against such settings, disable them manually in the Options menu.
 
 5. Run the game through the DoomRPG Launcher and play.
