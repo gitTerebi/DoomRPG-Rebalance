@@ -282,7 +282,7 @@ MissionInfo CreateMission(int Difficulty)
 
     // Kill Auras and Kill Reinforcements Missions
     if (Type == MT_KILLAURAS || Type == MT_REINFORCEMENTS)
-        Mission.Amount = 5.0 + RandomFixed(6.0 + (AveragePlayerLevel() / 6.0), 12.0 + (AveragePlayerLevel() / 6.0)) * (1.0 + Difficulty / 3.4);
+        Mission.Amount = 4.0 + RandomFixed(4.0 + ((fixed)AveragePlayerLevel() / 12.0), 10.0 + ((fixed)AveragePlayerLevel() / 8.0)) * (1.0 + (fixed)Difficulty / 3.5);
 
     // Assassination Mission
     if (Type == MT_ASSASSINATION)
@@ -428,9 +428,66 @@ void GetTargetMonster(MissionInfo *Mission)
 
         if (CompatMode == COMPAT_DRLA)
         {
-            if (TempMonster->Difficulty >= ((Mission->Difficulty + 1) * 40) - 40 &&
-                    TempMonster->Difficulty <= ((Mission->Difficulty + 1) * 40) + 40)
-                PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+            if (Mission->Type == MT_KILL)
+            {
+                if (Mission->Difficulty == 0)
+                    if (TempMonster->Difficulty > 0 & TempMonster->Difficulty < 60)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 1)
+                    if (TempMonster->Difficulty > 20 & TempMonster->Difficulty < 80)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 2)
+                    if (TempMonster->Difficulty > 40 & TempMonster->Difficulty < 100)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 3)
+                    if (TempMonster->Difficulty > 100 & TempMonster->Difficulty < 160)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 4)
+                    if (TempMonster->Difficulty > 130 & TempMonster->Difficulty < 190)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 5)
+                    if (TempMonster->Difficulty > 160 & TempMonster->Difficulty < 220)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 6)
+                    if (TempMonster->Difficulty > 220 & TempMonster->Difficulty < 280)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 7)
+                    if (TempMonster->Difficulty > 240 & TempMonster->Difficulty < 300)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 8)
+                    if (TempMonster->Difficulty > 260 & TempMonster->Difficulty < 320)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+            }
+            if (Mission->Type == MT_ASSASSINATION)
+            {
+                if (Mission->Difficulty == 0)
+                    if (TempMonster->Difficulty > 40 & TempMonster->Difficulty < 63)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 1)
+                    if (TempMonster->Difficulty > 80 & TempMonster->Difficulty < 108)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 2)
+                    if (TempMonster->Difficulty > 110 & TempMonster->Difficulty < 130)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 3)
+                    if (TempMonster->Difficulty > 130 & TempMonster->Difficulty < 160)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 4)
+                    if (TempMonster->Difficulty > 151 & TempMonster->Difficulty < 168)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 5)
+                    if (TempMonster->Difficulty > 170 & TempMonster->Difficulty < 217)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 6)
+                    if (TempMonster->Difficulty > 220 & TempMonster->Difficulty < 280)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 7)
+                    if (TempMonster->Difficulty > 240 & TempMonster->Difficulty < 300)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+                if (Mission->Difficulty == 8)
+                    if (TempMonster->Difficulty > 260 & TempMonster->Difficulty < 320)
+                        PotentialMonsters[NumPotentialMonsters++] = TempMonster;
+            }
         }
         else
         {

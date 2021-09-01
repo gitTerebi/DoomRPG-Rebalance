@@ -169,7 +169,7 @@ OptionValue "StartDRLAArmorTypes"
 OptionValue "ExtraMapChallenges"
 {
     0, "Never"
-    1, "Hell and above"
+    1, "Adaptive and above"
     2, "Always"
 }
 

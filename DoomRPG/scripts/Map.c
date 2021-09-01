@@ -932,9 +932,18 @@ NamedScript void HellSkillTransport(int player)
 
         if (CompatMode == COMPAT_DRLA)
         {
-            if ((fixed)TempMonster->Difficulty >= (((GameSkill() - 5) * 50) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (225.0 - ((GameSkill() - 5) * 50)) + (fixed)AveragePlayerLevel()) &&
-                    (fixed)TempMonster->Difficulty <= (75.0 + ((GameSkill() - 5) * 50) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (225.0 - ((GameSkill() - 5) * 50)) + (fixed)AveragePlayerLevel()))
-                MonsterList[MonsterListLength++] = TempMonster;
+            if (GameSkill() < 5)
+            {
+                if ((fixed)TempMonster->Difficulty >= ((((fixed)GameSkill() - 1.0) * 8.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 1.0) * 8.0)) + (fixed)AveragePlayerLevel() - 20.0) &&
+                        (fixed)TempMonster->Difficulty <= ((((fixed)GameSkill() - 1.0) * 8.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 1.0) * 8.0)) + (fixed)AveragePlayerLevel() + 20.0))
+                    MonsterList[MonsterListLength++] = TempMonster;
+            }
+            if (GameSkill() >= 5)
+            {
+                if ((fixed)TempMonster->Difficulty >= ((((fixed)GameSkill() - 5.0) * 50.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 5.0) * 50.0)) + (fixed)AveragePlayerLevel() - 20.0) &&
+                        (fixed)TempMonster->Difficulty <= ((((fixed)GameSkill() - 5.0) * 50.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 5.0) * 50.0)) + (fixed)AveragePlayerLevel() + 20.0))
+                    MonsterList[MonsterListLength++] = TempMonster;
+            }
         }
         else
         {
