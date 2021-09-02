@@ -76,7 +76,7 @@ NamedScript void InitMission()
 
     // Kill Reinforcements Mission
     if (Player.Mission.Type == MT_REINFORCEMENTS)
-        MonsterTransport(CalculateAverageDifficulty(), 10 - Player.Mission.Difficulty, 1024);
+        MonsterTransport(CalculateAverageDifficulty(), 16 - Player.Mission.Difficulty, 1024);
 
     // Assassination Mission
     if (Player.Mission.Type == MT_ASSASSINATION)
@@ -282,7 +282,7 @@ MissionInfo CreateMission(int Difficulty)
 
     // Kill Auras and Kill Reinforcements Missions
     if (Type == MT_KILLAURAS || Type == MT_REINFORCEMENTS)
-        Mission.Amount = 4.0 + RandomFixed(4.0 + ((fixed)AveragePlayerLevel() / 12.0), 10.0 + ((fixed)AveragePlayerLevel() / 8.0)) * (1.0 + (fixed)Difficulty / 3.5);
+        Mission.Amount = 4.0 + ((15.0 * (26.0 - Random(5.0, 10.0)) / 26.0) * (1.0 + (fixed)Difficulty / (4.0 + (Random(5.0, 10.0) + 1.0) / 5.2))) * (1.0 + (fixed)AveragePlayerLevel() / 50.0);
 
     // Assassination Mission
     if (Type == MT_ASSASSINATION)
@@ -458,6 +458,7 @@ void GetTargetMonster(MissionInfo *Mission)
                     if (TempMonster->Difficulty > 260 & TempMonster->Difficulty < 320)
                         PotentialMonsters[NumPotentialMonsters++] = TempMonster;
             }
+
             if (Mission->Type == MT_ASSASSINATION)
             {
                 if (Mission->Difficulty == 0)
@@ -522,12 +523,7 @@ void GetTargetMonster(MissionInfo *Mission)
 
     if (CompatMode == COMPAT_DRLA)
     {
-        if (MonsterPtr->ThreatLevel == 0) BaseAmount = RandomFixed(7.0 + ((fixed)AveragePlayerLevel() / 3.0), 14.0 + ((fixed)AveragePlayerLevel() / 3.0)) * (1.0 + (fixed)Mission->Difficulty / 3.0);
-        if (MonsterPtr->ThreatLevel == 1) BaseAmount = RandomFixed(6.0 + ((fixed)AveragePlayerLevel() / 5.0), 12.0 + ((fixed)AveragePlayerLevel() / 5.0)) * (1.0 + (fixed)Mission->Difficulty / 3.2);
-        if (MonsterPtr->ThreatLevel == 2) BaseAmount = RandomFixed(5.0 + ((fixed)AveragePlayerLevel() / 8.0), 10.0 + ((fixed)AveragePlayerLevel() / 8.0)) * (1.0 + (fixed)Mission->Difficulty / 3.4);
-        if (MonsterPtr->ThreatLevel == 3) BaseAmount = RandomFixed(4.0 + ((fixed)AveragePlayerLevel() / 12.0), 8.0 + ((fixed)AveragePlayerLevel() / 12.0)) * (1.0 + (fixed)Mission->Difficulty / 3.6);
-        if (MonsterPtr->ThreatLevel == 4) BaseAmount = RandomFixed(3.0 + ((fixed)AveragePlayerLevel() / 15.0), 6.0 + ((fixed)AveragePlayerLevel() / 15.0)) * (1.0 + (fixed)Mission->Difficulty / 3.8);
-        if (MonsterPtr->ThreatLevel == 5) BaseAmount = RandomFixed(1.5 + ((fixed)AveragePlayerLevel() / 20.0), 2.0 + ((fixed)AveragePlayerLevel() / 20.0)) * (1.0 + (fixed)Mission->Difficulty / 4.0);
+        BaseAmount = (15.0 * (26.0 - (fixed)MonsterPtr->ThreatLevel) / 26.0) * (1.0 + (fixed)Mission->Difficulty / (4.0 + ((fixed)MonsterPtr->ThreatLevel + 1.0) / 5.2)) * (1.0 + (fixed)AveragePlayerLevel() / 50.0);
     }
     else
     {
@@ -535,6 +531,8 @@ void GetTargetMonster(MissionInfo *Mission)
     }
 
     Amount = Random((fixed)BaseAmount * 0.8, (fixed)BaseAmount * 1.2);
+
+    if (Amount <= 1) Amount = 1;
 
     // Insert info into the passed struct
     Mission->Monster = MonsterPtr;
