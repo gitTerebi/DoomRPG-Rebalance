@@ -2585,7 +2585,7 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGCredits500", 170);
             DropMonsterItem(Killer, 0, "DRPGCredits1000", 256);
             DropMonsterItem(Killer, 0, "DRPGSoulsphereRandomizer", 256);
-            DropMonsterItem(Killer, 0, "DRPGLifeDropper", 128);
+            DropMonsterItem(Killer, 0, "DRPGLifeDropper", 96);
             DropMonsterItem(Killer, 0, "DRPGModulePickup", 256);
             DropMonsterItem(Killer, 0, "DRPGAugDropper", 96);
             DropMonsterItem(Killer, 0, "DRPGUACCard", 48 / (Players(Killer).ShopCard + 1));
@@ -2822,31 +2822,31 @@ NamedScript DECORATE void MonsterTransport(int Difficulty, int Time, int Radius)
         if (CompatMode == COMPAT_DRLA)
         {
             if (Difficulty == 0)
-                if (TempMonster->Difficulty > 0 & TempMonster->Difficulty < 60)
+                if (TempMonster->Difficulty > 0 & TempMonster->Difficulty < 60 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
             if (Difficulty == 1)
-                if (TempMonster->Difficulty > 20 & TempMonster->Difficulty < 80)
+                if (TempMonster->Difficulty > 20 & TempMonster->Difficulty < 80 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
             if (Difficulty == 2)
-                if (TempMonster->Difficulty > 40 & TempMonster->Difficulty < 100)
+                if (TempMonster->Difficulty > 40 & TempMonster->Difficulty < 100 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
             if (Difficulty == 3)
-                if (TempMonster->Difficulty > 100 & TempMonster->Difficulty < 160)
+                if (TempMonster->Difficulty > 100 & TempMonster->Difficulty < 160 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
             if (Difficulty == 4)
-                if (TempMonster->Difficulty > 130 & TempMonster->Difficulty < 190)
+                if (TempMonster->Difficulty > 130 & TempMonster->Difficulty < 190 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
             if (Difficulty == 5)
-                if (TempMonster->Difficulty > 160 & TempMonster->Difficulty < 220)
+                if (TempMonster->Difficulty > 160 & TempMonster->Difficulty < 220 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
             if (Difficulty == 6)
-                if (TempMonster->Difficulty > 220 & TempMonster->Difficulty < 280)
+                if (TempMonster->Difficulty > 220 & TempMonster->Difficulty < 280 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
             if (Difficulty == 7)
-                if (TempMonster->Difficulty > 240 & TempMonster->Difficulty < 300)
+                if (TempMonster->Difficulty > 240 & TempMonster->Difficulty < 300 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
             if (Difficulty == 8)
-                if (TempMonster->Difficulty > 260 & TempMonster->Difficulty < 320)
+                if (TempMonster->Difficulty > 260 & TempMonster->Difficulty < 320 & TempMonster->ThreatLevel < 24)
                     MonsterList[MonsterListLength++] = TempMonster;
         }
         else

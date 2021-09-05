@@ -16,8 +16,10 @@ Good luck!
 
 I wanted to share my build with you. Perhaps someone can use it to run a Doom RPG.
 
-Below is the download link:
-[DoomRPG SE Rebalance 1.22c (GZDoom 4.5.0)](https://drive.google.com/file/d/1hMlqb_hjE0XILxObjOwxRiFQHbg_QOVH/view?usp=sharing)
+Below is the download links:
+1. [DoomRPG SE Rebalance 1.22c (GZDoom 4.5.0)](https://drive.google.com/file/d/1hMlqb_hjE0XILxObjOwxRiFQHbg_QOVH/view?usp=sharing)
+
+2. [Last Patch](https://drive.google.com/drive/folders/1foOmIKfDYAnupmRo5pIxXwRL_bum3FPP?usp=sharing)
 
 Installation Instructions:
 
