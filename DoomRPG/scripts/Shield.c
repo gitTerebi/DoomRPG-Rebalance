@@ -860,7 +860,7 @@ NamedScript void TeleportFullCharge()
 NamedScript void X7Mod()
 {
     if (Player.Shield.Active)
-        if (CheckWeapon("Fist") || CheckWeapon("Knuckle") || CheckWeapon("RLFistRedux"))
+        if (CheckWeapon("Fist") || CheckWeapon("Knuckle") || CheckWeapon("RLFist"))
             Player.TotalDamage *= 1.5;
 }
 
