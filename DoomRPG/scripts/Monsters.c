@@ -2688,6 +2688,7 @@ NamedScript void MonsterDeath()
         int CreditsMax;
         int CreditsAmount;
         int CreditsTable[MAX_PLAYERS];
+        int CreditsUAC;
 
         // Fair sharing
         if (GetCVar("drpg_multi_sharecredits"))
@@ -2709,7 +2710,10 @@ NamedScript void MonsterDeath()
 
                 // UAC Premium
                 if (GetCVar("drpg_uac_premium"))
-                    GiveActorInventory(Players(i).TID, "DRPGCredits", Stats->SpawnHealth * ThreatMult * Stats->DamageTable[i] * 10 / Stats->HealthMax / 100);
+                {
+                    CreditsUAC = (fixed)Stats->SpawnHealth * (fixed)ThreatMult / Random(40.0, 80.0) * (1.0 + (fixed)Players(Killer).RankLevel / 12.0) * ((fixed)Stats->DamageTable[i] * 100.0) / ((fixed)Stats->HealthMax / 100.0);
+                    GiveActorInventory(Players(i).TID, "DRPGCredits", CreditsUAC);
+                }
             }
         }
         else
@@ -2729,7 +2733,10 @@ NamedScript void MonsterDeath()
 
             // UAC Premium
             if (GetCVar("drpg_uac_premium"))
-                GiveActorInventory(Players(Killer).TID, "DRPGCredits", Stats->SpawnHealth * ThreatMult / 10);
+            {
+                CreditsUAC = (fixed)Stats->SpawnHealth * (fixed)ThreatMult / Random(40.0, 80.0) * (1.0 + (fixed)Players(Killer).RankLevel / 12.0);
+                GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsUAC);
+            }
         }
 
         // Log("\CfInitial Amount: %d\n\CfLuck Mult: %d\n\CfMin: %d\n\CfMax: %d\n\CfAmount: %d", CheckInventory("DRPGCredits"), LuckMult, CreditsMin, CreditsMax, CreditsAmount);
