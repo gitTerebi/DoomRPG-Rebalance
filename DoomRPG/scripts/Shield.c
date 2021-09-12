@@ -493,7 +493,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory53",
         "\CgFLAN-495",  "SHA2[0",   120000,
-        "When your \CvShield\C- is \Cgdepleted\C- or \Cdreaches full charge\C-, enemies around you \Cgexplode\C-",
+        "When your \CvShield\C- is \Cgdepleted\C- or \Cdreaches full charge\C-, enemies around you \Cgexplode\C- (cooldown  is 60 sec)",
         SHIELD_PASS_NONE,
         NULL, NULL, NULL, NULL, FlanExplosion, NULL, NULL, NULL, FlanExplosion,
     },
@@ -813,9 +813,15 @@ NamedScript void StaticChargeShieldBreak()
     SetActorPosition(projtid, GetActorX(0), GetActorY(0), GetActorZ(0) + 32.0, false);
 }
 
+NamedScript void SayItOhYeahOhBaby() // OH YEEEEEEEEAH!
+{
+    Delay(8);
+    ActivatorSound("shield/ohyeah", 127);
+}
+
 NamedScript void FlanExplosion() // This gets called on full charge too
 {
-    if (CurrentLevel->UACBase && !ArenaActive) return;
+    if (CurrentLevel->UACBase && !ArenaActive || Player.Shield.AccessoryBattery == 1) return;
 
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
@@ -826,7 +832,13 @@ NamedScript void FlanExplosion() // This gets called on full charge too
             GiveActorInventory(Players(i).Turret.TID, "DRPGShieldRadialExplosionResist", 1);
     }
 
+    FadeRange(255, 128, 0, 0.5, 255, 128, 0, 0.0, 0.5);
     GiveInventory("DRPGShieldRadialExplosionMaker", 1);
+    SayItOhYeahOhBaby();
+
+    Player.Shield.AccessoryBattery = 1;
+    Delay(35 * 60);
+    Player.Shield.AccessoryBattery = 0;
 }
 
 NamedScript void SpaghettiShieldBreak()
@@ -1122,20 +1134,21 @@ NamedScript void HowDidYouEvenMod()
     Player.Shield.ChargeRate = DelayRate;
 }
 
-NamedScript void SayItOhYeahOhBaby() // OH YEEEEEEEEAH!
-{
-    Delay(8);
-    ActivatorSound("shield/ohyeah", 127);
-}
-
 NamedScript void OhYeahMod()
 {
-    if (Timer() == 10 && !CurrentLevel->UACBase)
+    if (Timer() == 105 && !CurrentLevel->UACBase)
     {
-        FadeRange(255, 128, 0, 0.5, 255, 128, 0, 0.0, 0.5);
-        GiveInventory("DRPGShieldRadialExplosion", 1);
         for (int i = 0; i < MAX_PLAYERS; i++)
+        {
             GiveActorInventory(Players(i).TID, "DRPGShieldRadialExplosionResist", 1);
+
+            // Turret needs protection too
+            if (Players(i).Turret.Active)
+                GiveActorInventory(Players(i).Turret.TID, "DRPGShieldRadialExplosionResist", 1);
+        }
+
+        FadeRange(255, 128, 0, 0.5, 255, 128, 0, 0.0, 0.5);
+        GiveInventory("DRPGShieldRadialExplosionMaker", 1);
         SayItOhYeahOhBaby();
     }
 }

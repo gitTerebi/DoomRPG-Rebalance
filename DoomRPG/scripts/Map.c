@@ -563,10 +563,21 @@ Start:
 
             FadeRange(255, 0, 0, 0.25, 255, 0, 0, 0, 1.0);
 
-            XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
-            Player.XP += XPBonus;
+            if (Players(i).Level < MAX_LEVEL)
+            {
+                XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
+                Player.XP += XPBonus;
 
-            HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
+                HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
+            }
+
+            if (Players(i).Level == MAX_LEVEL)
+            {
+                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
+
+                HudMessage("Monsters Killed Bonus!\n%d Credits Bonus", 1000);
+            }
+
             EndHudMessage(HUDMSG_FADEOUT, 0, "Brick", 1.5, 0.4, 3.0, 3.0);
         }
 
@@ -609,10 +620,21 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
-            Players(i).Rank += RankBonus;
+            if (Players(i).RankLevel < MAX_RANK)
+            {
+                RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
+                Players(i).Rank += RankBonus;
 
-            HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
+                HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
+            }
+
+            if (Players(i).RankLevel == MAX_RANK)
+            {
+                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
+
+                HudMessage("Secrets Found Bonus!\n%d Credits Bonus", 1000);
+            }
+
             EndHudMessage(HUDMSG_FADEOUT, 0, "Yellow", 1.5, 0.8, 3.0, 3.0);
         }
 
@@ -632,17 +654,51 @@ Start:
 
             FadeRange(255, 255, 255, 0.25, 255, 255, 255, 0, 1.0);
 
-            XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
-            RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
-
-            Players(i).XP += XPBonus;
-            Players(i).Rank += RankBonus;
-
             HealThing(MAX_HEALTH);
             Players(i).EP = Players(i).EPMax;
 
-            HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%ld XP Bonus\n\Ck%ld Rank Bonus\n\CnFull HP/EP Restore",
-                       XPBonus, RankBonus);
+            if (Players(i).Level < MAX_LEVEL && Players(i).RankLevel < MAX_RANK)
+            {
+                XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
+                RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
+
+                Players(i).XP += XPBonus;
+                Players(i).Rank += RankBonus;
+
+                HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%ld XP Bonus\n\Ck%ld Rank Bonus\n\CnFull HP/EP Restore",
+                           XPBonus, RankBonus);
+            }
+
+            if (Players(i).Level == MAX_LEVEL && Players(i).RankLevel == MAX_RANK)
+            {
+                GiveActorInventory(Players(i).TID, "DRPGCredits", 2000);
+
+                HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%d Credits Bonus\n\Ck%d Credits Bonus\n\CnFull HP/EP Restore",
+                           1000, 1000);
+            }
+
+            if (Players(i).Level == MAX_LEVEL && Players(i).RankLevel < MAX_RANK)
+            {
+                RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
+
+                Players(i).Rank += RankBonus;
+                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
+
+                HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%d Credits Bonus\n\Ck%ld Rank Bonus\n\CnFull HP/EP Restore",
+                           1000, RankBonus);
+            }
+
+            if (Players(i).Level < MAX_LEVEL && Players(i).RankLevel == MAX_RANK)
+            {
+                XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
+
+                Players(i).XP += XPBonus;
+                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
+
+                HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%ld XP Bonus\n\Ck%d Credits Bonus\n\CnFull HP/EP Restore",
+                           XPBonus, 1000);
+            }
+
             EndHudMessage(HUDMSG_FADEOUT, 0, "White", 0.5, 0.2, 5.0, 5.0);
         }
 
@@ -838,14 +894,26 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
             if (!PlayerInGame(i)) continue;
 
             SetActivator(Players(i).TID);
-            long int RankBonus = ((RankTable[Players(i).RankLevel] / 40) + 250) / 250 * 250;
 
             SetFont("SMALLFONT");
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0.0, 1.0);
-            HudMessage("Par Time Beaten!\n%ld Rank Bonus", RankBonus);
-            EndHudMessage(HUDMSG_FADEOUT, 0, "Gold", 1.5, 0.5, 3.0, 2.0);
 
-            Players(i).Rank += RankBonus;
+            if (Players(i).RankLevel < MAX_RANK)
+            {
+                long int RankBonus = ((RankTable[Players(i).RankLevel] / 40) + 250) / 250 * 250;
+                Players(i).Rank += RankBonus;
+
+                HudMessage("Par Time Beaten!\n%ld Rank Bonus", RankBonus);
+            }
+
+            if (Players(i).RankLevel == MAX_RANK)
+            {
+                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
+
+                HudMessage("Par Time Beaten!\n%d Credits Bonus", 1000);
+            }
+
+            EndHudMessage(HUDMSG_FADEOUT, 0, "Gold", 1.5, 0.5, 3.0, 2.0);
         }
 
         AmbientSound("misc/parbonus", 127);
