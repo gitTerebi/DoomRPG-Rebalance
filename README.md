@@ -16,26 +16,24 @@ Good luck!
 
 I wanted to share my build with you. Perhaps someone can use it to run a Doom RPG.
 
-Below is the download links:
-1. [DoomRPG SE Rebalance 1.22c (GZDoom 4.5.0)](https://drive.google.com/file/d/1hMlqb_hjE0XILxObjOwxRiFQHbg_QOVH/view?usp=sharing)
-
-2. [Last Patch](https://drive.google.com/drive/folders/1foOmIKfDYAnupmRo5pIxXwRL_bum3FPP?usp=sharing)
+Below is the download link:
+1. [DoomRPG SE Rebalance Last Build (GZDoom 4.5.0)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
 
 Installation Instructions:
 
 1. The archive has a folder DoomRPG SE Rebalance. I recommend placing it at the following address: "D:\Games\DoomRPG SE Rebalance".
 
-1.1 In case you want to place the folder in a place of your choice, you will have to change the corresponding addresses in the DoomRPG Launcher.
+2 In case you want to place the folder in a place of your choice, you will have to change the corresponding addresses in the DoomRPG Launcher.
 
-2. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRL, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
+3. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRL, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
 
-3. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.5.0\gzdoom-username.ini".
+4. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.5.0\gzdoom-username.ini".
 
-4. Now you need to take the configuration file from the archive in the Extras folder and replace it with the file from step 3. Note that you need to change the "username" in the file name.
+5. Now you need to take the configuration file from the archive in the Extras folder and replace it with the file from step 3. Note that you need to change the "username" in the file name.
 
-4.1 Please note that the configuration file has also made some changes that affect the functioning of the assembly. Therefore, I recommend using this file as a base. Also note that in the DoomRL Arsenal settings, perks are turned off and the option to learn recipes is enabled. If you are against such settings, disable them manually in the Options menu.
+6 Please note that the configuration file has also made some changes that affect the functioning of the assembly. Therefore, I recommend using this file as a base. Also note that in the DoomRL Arsenal settings, perks are turned off and the option to learn recipes is enabled. If you are against such settings, disable them manually in the Options menu.
 
-5. Run the game through the DoomRPG Launcher and play.
+7. Run the game through the DoomRPG Launcher and play.
 
 Please note that for those who like to play on Gamepad, there are 3 optional files:
 1. Gamepad Control Helper (author - Me);
