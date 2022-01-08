@@ -2753,6 +2753,8 @@ bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
 
         return CheckInputZS(Key, i);
     }
+
+    static int CheckInputRepeatTimer; // Delete in the future
 }
 
 // Singleplayer Input is managed by ZScript and updated via this function
