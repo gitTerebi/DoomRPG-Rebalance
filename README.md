@@ -12,12 +12,29 @@ And for God's sake, save ammo and credits, you'll need them, and don't forget to
 
 Good luck! 
 
+## Manual Installing
+
+- GZDoom v4.7.0 ([v4.7.0](https://zdoom.org/files/gzdoom/bin/gzdoom-4-7-0-Windows-64bit.zip) recommended) or higher is required to play this mod.
+- LZDoom v3.83a or higher.
+- Delta Touch (Android) v3.1 or higher (includes the above versions or higher).
+
+To run the mod I recommend using [Doom RPG SE Launcher 1.0.3](https://github.com/Forevener/DRPGSEL/releases/tag/v1.0.3) (no higher).
+
+After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions -> Reset to defaults).
+
+Use the following load order:
+
+1. [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
+2. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
+3. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
+4. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
+
 ## Installing (build)
 
-I wanted to share my build with you. Perhaps someone can use it to run a Doom RPG.
+I wanted to share my build (old build. It is recommended for familiarization.). Perhaps someone can use it to run a Doom RPG.
 
 Below is the download link:
-1. [DoomRPG SE Rebalance Last Build (GZDoom 4.5.0)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
+1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.5.0)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
 
 Installation Instructions:
 
@@ -33,23 +50,6 @@ Please note that for those who like to play on Gamepad, there are 3 optional fil
 1. Gamepad Control Helper (author - Me);
 2. Aim Assist 0.6 (author - RicardoLuis0);
 3. Recenter 0.1.0 (author - m8f).
-
-## Manual Installing
-
-- GZDoom v3.7.0 ([v4.1.3](https://zdoom.org/files/gzdoom/bin/gzdoom-bin-4-1-3-x64.zip) recommended) or higher is required to play this mod.
-- LZDoom v3.83a or higher.
-- Delta Touch (Android) v3.1 or higher (includes the above versions or higher).
-
-To run the mod I recommend using [Doom RPG SE Launcher 1.0.3](https://github.com/Forevener/DRPGSEL/releases/tag/v1.0.3) (no higher).
-
-After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions -> Reset to defaults).
-
-Use the following load order:
-
-1. [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (recommended);
-2. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
-3. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
-4. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
 
 ## Compatible mods
 
