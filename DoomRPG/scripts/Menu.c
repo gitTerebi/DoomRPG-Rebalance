@@ -2174,7 +2174,7 @@ void MenuInput()
             // If the player starts manually toggling augs, don't try to automatically activate any later.
             ClearDisabledAugs();
         }
-        if (CheckInput(BT_SPEED, KEY_REPEAT, false, PlayerNumber()))
+        if (CheckInput(BT_SPEED, KEY_ONLYPRESSED, false, PlayerNumber()))
             LevelUpAug(Player.MenuIndex);
     }
 
@@ -2431,7 +2431,7 @@ void MenuInput()
             else if (Player.TurretPage == TURRETPAGE_UPGRADE)
                 UpgradeTurret(Player.MenuIndex);
         }
-        if (CheckInput(BT_SPEED, KEY_REPEAT, false, PlayerNumber()))
+        if (CheckInput(BT_SPEED, KEY_ONLYPRESSED, false, PlayerNumber()))
             TurretMaintenance();
         if (CheckInput(BT_JUMP, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
