@@ -1386,10 +1386,10 @@ Start:
 
         for (int i = 0; i < 10; i++)
         {
-            fixed TeleportAngle = RandomFixed(0, 1);
+            fixed TeleportAngle = RandomFixed(0.0, 1.0);
 
-            X = GetActorX(TargetPlayerTID) + Random(-256,256);
-            Y = GetActorY(TargetPlayerTID) + Random(-256,256);
+            X = GetActorX(TargetPlayerTID) + Random(-256, 256);
+            Y = GetActorY(TargetPlayerTID) + Random(-256, 256);
             Z = GetActorZ(TargetPlayerTID);
             Angle = TeleportAngle + 0.5;
             Angle %= 1.0;
@@ -1984,7 +1984,7 @@ Start:
                 Thing_ChangeTID(0, NewTID);
                 SetActivator(Players(i).TID);
                 FadeRange(255, 0, 0, 0.5, 255, 0, 0, 0.0, 0.5);
-                TryStatusEffect(SE_CURSE, Random(30,90), Intensity);
+                TryStatusEffect(SE_CURSE, Random(30, 90), Intensity);
                 SetActivator(NewTID);
                 Thing_ChangeTID(0, OrigTID);
             }
@@ -2012,7 +2012,7 @@ Start:
                 Thing_ChangeTID(0, NewTID);
                 SetActivator(Players(i).TID);
                 FadeRange(255, 0, 0, 0.5, 255, 0, 0, 0.0, 0.5);
-                TryStatusEffect(SE_SILENCE, Random(30,90), Intensity);
+                TryStatusEffect(SE_SILENCE, Random(30, 90), Intensity);
                 SetActivator(NewTID);
                 Thing_ChangeTID(0, OrigTID);
             }
@@ -2284,8 +2284,8 @@ Start:
 
         for (int i = 0; i < 10; i++)
         {
-            fixed TeleportAngle = RandomFixed(0, 1);
-            fixed TeleportDistance = RandomFixed(128, 384);
+            fixed TeleportAngle = RandomFixed(0.0, 1.0);
+            fixed TeleportDistance = RandomFixed(128.0, 384.0);
 
             X = GetActorX(TargetPlayerTID) + (Cos(TeleportAngle) * TeleportDistance);
             Y = GetActorY(TargetPlayerTID) + (Sin(TeleportAngle) * TeleportDistance);
@@ -2337,19 +2337,19 @@ NamedScript DECORATE void MonsterRevive()
             switch (Random(1, 8))
             {
             case 1:
-                if (Random(0, 100) <= 50) Spawn("DRPGMoneyDropper", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                if (Random(0, 100) <= 15) Spawn("DRPGMoneyDropper", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
                 break;
             case 2:
-                if (Random(0, 100) <= 45) Spawn("DRPGStimpack", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                if (Random(0, 100) <= 15) Spawn("DRPGStimpack", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
                 break;
             case 3:
-                if (Random(0, 100) <= 40) Spawn("DRPGClip", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                if (Random(0, 100) <= 15) Spawn("DRPGClip", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
                 break;
             case 4:
-                if (Random(0, 100) <= 30) Spawn("DRPGShell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                if (Random(0, 100) <= 15) Spawn("DRPGShell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
                 break;
             case 5:
-                if (Random(0, 100) <= 25)
+                if (Random(0, 100) <= 15)
                 {
                     if (CompatMode == COMPAT_DRLA)
                     {
@@ -2360,13 +2360,13 @@ NamedScript DECORATE void MonsterRevive()
                 }
                 break;
             case 6:
-                if (Random(0, 100) <= 20) Spawn("DRPGEPCapsule", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                if (Random(0, 100) <= 15) Spawn("DRPGEPCapsule", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
                 break;
             case 7:
                 if (Random(0, 100) <= 15) Spawn("DRPGRocketAmmo", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
                 break;
             case 8:
-                if (Random(0, 100) <= 10) Spawn("DRPGCell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                if (Random(0, 100) <= 15) Spawn("DRPGCell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
                 break;
 
             }
@@ -2711,7 +2711,7 @@ NamedScript void MonsterDeath()
                 // UAC Premium
                 if (GetCVar("drpg_uac_premium"))
                 {
-                    CreditsUAC = (fixed)Stats->SpawnHealth * (fixed)ThreatMult / Random(40.0, 80.0) * (1.0 + (fixed)Players(Killer).RankLevel / 12.0) * ((fixed)Stats->DamageTable[i] * 100.0) / ((fixed)Stats->HealthMax / 100.0);
+                    CreditsUAC = (fixed)Stats->SpawnHealth * (fixed)ThreatMult / RandomFixed(40.0, 80.0) * (1.0 + (fixed)Players(Killer).RankLevel / 12.0) * ((fixed)Stats->DamageTable[i] * 100.0) / ((fixed)Stats->HealthMax / 100.0);
                     GiveActorInventory(Players(i).TID, "DRPGCredits", CreditsUAC);
                 }
             }
@@ -2734,7 +2734,7 @@ NamedScript void MonsterDeath()
             // UAC Premium
             if (GetCVar("drpg_uac_premium"))
             {
-                CreditsUAC = (fixed)Stats->SpawnHealth * (fixed)ThreatMult / Random(40.0, 80.0) * (1.0 + (fixed)Players(Killer).RankLevel / 12.0);
+                CreditsUAC = (fixed)Stats->SpawnHealth * (fixed)ThreatMult / RandomFixed(40.0, 80.0) * (1.0 + (fixed)Players(Killer).RankLevel / 12.0);
                 GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsUAC);
             }
         }

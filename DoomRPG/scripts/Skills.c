@@ -2512,7 +2512,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
 
             int HolderTID = UniqueTID();
             SpawnSpot("DRPGCreditsEmpty", TID[i], HolderTID, Random(0, 255));
-            SetActorVelocity(HolderTID, RandomFixed(-8, 8), RandomFixed(-8, 8), RandomFixed(2, 8), false, false);
+            SetActorVelocity(HolderTID, RandomFixed(-8.0, 8.0), RandomFixed(-8.0, 8.0), RandomFixed(2.0, 8.0), false, false);
             Thing_Remove(TID[i]);
         }
 

@@ -2912,7 +2912,7 @@ NamedScript void SinstormSpawner(int PlayerTID)
 
         while (Tries-- > 0)
         {
-            Success = Spawn("DRPGSinstormRift", GetActorX(0) + RandomFixed(-1024, 1024), GetActorY(0) + RandomFixed(-1024, 1024), GetActorFloorZ(0), TID, 0);
+            Success = Spawn("DRPGSinstormRift", GetActorX(0) + RandomFixed(-1024.0, 1024.0), GetActorY(0) + RandomFixed(-1024.0, 1024.0), GetActorFloorZ(0), TID, 0);
 
             if (Success)
                 Success = CheckSight(0, TID, 0);

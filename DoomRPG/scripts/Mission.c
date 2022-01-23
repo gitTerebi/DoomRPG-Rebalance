@@ -287,7 +287,7 @@ MissionInfo CreateMission(int Difficulty)
 
     // Kill Auras and Kill Reinforcements Missions
     if (Type == MT_KILLAURAS || Type == MT_REINFORCEMENTS)
-        Mission.Amount = 4.0 + ((15.0 * (19.0 - Random(4.0 + ((fixed)Difficulty / 2.0), 10.0 + ((fixed)Difficulty / 2.0))) / 19.0) * (1.0 + (fixed)Difficulty / (4.0 + (Random(4.0 + ((fixed)Difficulty / 2.0), 10.0 + ((fixed)Difficulty / 2.0)) + 1.0) / 3.8))) * (1.0 + (fixed)AveragePlayerLevel() / (75.0 - (fixed)Difficulty * 5.0));
+        Mission.Amount = 4.0 + ((15.0 * (19.0 - RandomFixed(4.0 + ((fixed)Difficulty / 2.0), 10.0 + ((fixed)Difficulty / 2.0))) / 19.0) * (1.0 + (fixed)Difficulty / (4.0 + (RandomFixed(4.0 + ((fixed)Difficulty / 2.0), 10.0 + ((fixed)Difficulty / 2.0)) + 1.0) / 3.8))) * (1.0 + (fixed)AveragePlayerLevel() / (75.0 - (fixed)Difficulty * 5.0));
 
     // Assassination Mission
     if (Type == MT_ASSASSINATION)
@@ -535,7 +535,7 @@ void GetTargetMonster(MissionInfo *Mission)
         BaseAmount = (30 + (320 * Mission->Difficulty)) / EffectiveDifficulty;
     }
 
-    Amount = Random((fixed)BaseAmount * 0.8, (fixed)BaseAmount * 1.2);
+    Amount = RandomFixed((fixed)BaseAmount * 0.8, (fixed)BaseAmount * 1.2);
 
     if (Amount <= 1) Amount = 1;
 
