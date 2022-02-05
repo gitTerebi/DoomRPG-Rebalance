@@ -3069,7 +3069,7 @@ void CapMonsterStats(MonsterStatsPtr Stats)
 
 int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
 {
-    int Threat;
+    fixed Threat;
 
     // Stats
     Threat += Stats->Strength;
@@ -3080,19 +3080,19 @@ int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
     Threat += Stats->Agility;
     Threat += Stats->Capacity;
     Threat += Stats->Luck;
-    Threat /= 800;
+    Threat /= 400.0;
 
     // Auras
     for (int i = 0; i < AURA_MAX; i++)
         if (Stats->Aura.Type[i].Active)
-            Threat++;
+            Threat += 0.25;
 
     // Bosses
     if (CheckFlag(0, "BOSS") || Stats->Flags & MF_BOSS)
-        Threat++;
+        Threat += 1.0;
     // Megaboss
     if (Stats->Flags & MF_MEGABOSS)
-        Threat += 2;
+        Threat += 2.0;
 
     // Monsters
     if (CompatMonMode != COMPAT_NONE)
@@ -3105,17 +3105,17 @@ int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
 
             if (StartsWith(Actor, MonsterIterPtr->Actor))
             {
-                Threat += MonsterIterPtr->ThreatLevel;
+                Threat += (fixed)(MonsterIterPtr->ThreatLevel / 5.0);
                 break;
             }
         }
     }
 
     // Cap
-    if (Threat > 10)
-        Threat = 10;
+    if (Threat > 10.0)
+        Threat = 10.0;
 
-    return Threat;
+    return (Threat + 0.5);
 }
 
 int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)
