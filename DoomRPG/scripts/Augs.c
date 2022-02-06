@@ -76,14 +76,14 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "+25% HP Regen Speed",
-            "+25% EP Regen Speed",
-            "+50% HP Regen Amounts",
-            "+50% EP Regen Amounts",
-            "-5 Seconds Toxicity Regen Timer",
-            "-10 Seconds Toxicity Regen Timer",
-            "-15 Seconds Toxicity Regen Timer",
-            "-20 Seconds Toxicity Regen Timer"
+            "+25% HP Regen Speed and +5% Power of Summoning",
+            "+25% EP Regen Speed and +10% Power of Summoning",
+            "+50% HP Regen Amounts and +15% Power of Summoning",
+            "+50% EP Regen Amounts and +20% Power of Summoning",
+            "-5 Seconds Toxicity Timer and +25% Power of Summoning",
+            "-10 Seconds Toxicity Timer and +30% Power of Summoning",
+            "-15 Seconds Toxicity Timer and +40% Power of Summoning",
+            "-20 Seconds Toxicity Timer and +50% Power of Summoning"
         },
         .TokenActor = "DRPGAugTokenRegen"
     },

@@ -2278,16 +2278,29 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         // Setup Stats
         Delay(4); // We need this initial delay to make sure the ID is valid
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(NewID)];
-        int Modifier = Player.Level / 5.0 + (fixed)Player.EnergyTotal / 2.0;
-        Stats->Level *= 1.0 + (fixed)Player.EnergyTotal * 0.001;
-        Stats->Strength += Random(0, (Modifier * 1.0));
-        Stats->Defense += Random(0, (Modifier * 1.0));
-        Stats->Vitality += Random(0, (Modifier * 1.0));
-        Stats->Energy += Random(0, (Modifier * 1.0));
-        Stats->Regeneration += Random(0, (Modifier * 1.0));
-        Stats->Agility += Random(0, (Modifier * 1.0));
-        Stats->Capacity += Random(0, (Modifier * 1.0));
-        Stats->Luck += Random(0, (Modifier * 1.0));
+        fixed Modifier = 0.0;
+
+        if (Player.Augs.Active[AUG_REGENERATION])
+        {
+            if (Player.Augs.Level[AUG_REGENERATION] == 1)
+                Modifier = 0.05;
+            if (Player.Augs.Level[AUG_REGENERATION] == 2)
+                Modifier = 0.10;
+            if (Player.Augs.Level[AUG_REGENERATION] == 3)
+                Modifier = 0.15;
+            if (Player.Augs.Level[AUG_REGENERATION] == 4)
+                Modifier = 0.20;
+            if (Player.Augs.Level[AUG_REGENERATION] == 5)
+                Modifier = 0.25;
+            if (Player.Augs.Level[AUG_REGENERATION] == 6)
+                Modifier = 0.30;
+            if (Player.Augs.Level[AUG_REGENERATION] == 7)
+                Modifier = 0.40;
+            if (Player.Augs.Level[AUG_REGENERATION] >= 8)
+                Modifier = 0.50;
+        }
+
+        Stats->LevelAdd += RandomFixed(0.0, Stats->Level * (1.0 + Modifier) - Stats->Level + 0.5);
         Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(NewID)]);
         Stats->Flags |= MF_NOXP;
         Stats->Flags |= MF_NODROPS;
