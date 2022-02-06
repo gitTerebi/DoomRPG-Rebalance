@@ -218,6 +218,7 @@ typedef enum
     AUG_CAPACITY,
     AUG_LUCK,
     AUG_BATTERY,
+    AUG_SUMMONER,
     AUG_MAX,
 } EAugTypes;
 

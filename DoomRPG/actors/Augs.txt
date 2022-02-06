@@ -128,3 +128,4 @@ actor DRPGAugTokenAgility : Inventory   { Inventory.MaxAmount 4 }
 actor DRPGAugTokenCapacity : Inventory  { Inventory.MaxAmount 3 }
 actor DRPGAugTokenLuck : Inventory      { Inventory.MaxAmount 5 }
 actor DRPGAugTokenBattery : Inventory   { Inventory.MaxAmount 5 }
+actor DRPGAugTokenSummoner : Inventory  { Inventory.MaxAmount 5 }

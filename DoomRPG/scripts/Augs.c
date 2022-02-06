@@ -76,14 +76,14 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "+25% HP Regen Speed and +5% Power of Summoning",
-            "+25% EP Regen Speed and +10% Power of Summoning",
-            "+50% HP Regen Amounts and +15% Power of Summoning",
-            "+50% EP Regen Amounts and +20% Power of Summoning",
-            "-5 Seconds Toxicity Timer and +25% Power of Summoning",
-            "-10 Seconds Toxicity Timer and +30% Power of Summoning",
-            "-15 Seconds Toxicity Timer and +40% Power of Summoning",
-            "-20 Seconds Toxicity Timer and +50% Power of Summoning"
+            "+25% HP Regen Speed",
+            "+25% EP Regen Speed",
+            "+50% HP Regen Amounts",
+            "+50% EP Regen Amounts",
+            "-5 Seconds Toxicity Timer",
+            "-10 Seconds Toxicity Timer",
+            "-15 Seconds Toxicity Timer",
+            "-20 Seconds Toxicity Timer"
         },
         .TokenActor = "DRPGAugTokenRegen"
     },
@@ -138,6 +138,22 @@ AugInfo RPGMap AugData[AUG_MAX] =
             "Capacity +200% and Recharge Rate +100%"
         },
         .TokenActor = "DRPGAugTokenBattery"
+    },
+    {
+        .Name = "Commanding abilities",
+        .MaxLevel = 8,
+        .Description =
+        {
+            "+5% Power of Summoned",
+            "+10% Power of Summoned",
+            "+15% Power of Summoned",
+            "+20% Power of Summoned and +30% Reduces Time Life Regeneration",
+            "+25% Power of Summoned and +10% Reduces Cost for Summoning",
+            "+30% Power of Summoned and +15% Reduces Cost for Summoning",
+            "+40% Power of Summoned and +20% Reduces Cost for Summoning",
+            "+50% Power of Summoned and +25% Reduces Cost for Summoning"
+        },
+        .TokenActor = "DRPGAugTokenSummoner"
     }
 };
 

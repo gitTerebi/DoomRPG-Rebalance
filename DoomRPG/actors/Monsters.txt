@@ -437,6 +437,9 @@ actor DRPGFriendlyBooster : CustomInventory
     }
 }
 
+// Used to enhance the regeneration of friendly monsters (if the corresponding AUG is active)
+actor DRPGSummonedRegenerationBoosterToken : Inventory {}
+
 actor DRPGFriendlyRemover : CustomInventory
 {
     States

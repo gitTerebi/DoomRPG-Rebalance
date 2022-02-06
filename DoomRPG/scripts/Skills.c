@@ -2278,29 +2278,32 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         // Setup Stats
         Delay(4); // We need this initial delay to make sure the ID is valid
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(NewID)];
-        fixed Modifier = 0.0;
+        fixed AugSummonerModifier = 0.0;
 
-        if (Player.Augs.Active[AUG_REGENERATION])
+        if (Player.Augs.Active[AUG_SUMMONER])
         {
-            if (Player.Augs.Level[AUG_REGENERATION] == 1)
-                Modifier = 0.05;
-            if (Player.Augs.Level[AUG_REGENERATION] == 2)
-                Modifier = 0.10;
-            if (Player.Augs.Level[AUG_REGENERATION] == 3)
-                Modifier = 0.15;
-            if (Player.Augs.Level[AUG_REGENERATION] == 4)
-                Modifier = 0.20;
-            if (Player.Augs.Level[AUG_REGENERATION] == 5)
-                Modifier = 0.25;
-            if (Player.Augs.Level[AUG_REGENERATION] == 6)
-                Modifier = 0.30;
-            if (Player.Augs.Level[AUG_REGENERATION] == 7)
-                Modifier = 0.40;
-            if (Player.Augs.Level[AUG_REGENERATION] >= 8)
-                Modifier = 0.50;
+            if (Player.Augs.Level[AUG_SUMMONER] == 1)
+                AugSummonerModifier = 0.05;
+            if (Player.Augs.Level[AUG_SUMMONER] == 2)
+                AugSummonerModifier = 0.10;
+            if (Player.Augs.Level[AUG_SUMMONER] == 3)
+                AugSummonerModifier = 0.15;
+            if (Player.Augs.Level[AUG_SUMMONER] >= 4)
+            {
+                AugSummonerModifier = 0.20;
+                GiveActorInventory(NewID, "DRPGSummonedRegenerationBoosterToken", 1);
+            }
+            if (Player.Augs.Level[AUG_SUMMONER] == 5)
+                AugSummonerModifier = 0.25;
+            if (Player.Augs.Level[AUG_SUMMONER] == 6)
+                AugSummonerModifier = 0.30;
+            if (Player.Augs.Level[AUG_SUMMONER] == 7)
+                AugSummonerModifier = 0.40;
+            if (Player.Augs.Level[AUG_SUMMONER] >= 8)
+                AugSummonerModifier = 0.50;
         }
 
-        Stats->LevelAdd += RandomFixed(0.0, Stats->Level * (1.0 + Modifier) - Stats->Level + 0.5);
+        Stats->LevelAdd += RandomFixed(0.0, Stats->Level * (1.0 + AugSummonerModifier) - Stats->Level + 0.5);
         Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(NewID)]);
         Stats->Flags |= MF_NOXP;
         Stats->Flags |= MF_NODROPS;
@@ -3174,6 +3177,21 @@ int ScaleEPCost(int Cost)
 
 void CheckSkills()
 {
+    fixed AugSummonerModifier = 1.0;
+
+    // Check for AUG Commanding abilities
+    if (Player.Augs.Active[AUG_SUMMONER])
+    {
+        if (Player.Augs.Level[AUG_SUMMONER] == 5)
+            AugSummonerModifier = 0.90;
+        if (Player.Augs.Level[AUG_SUMMONER] == 6)
+            AugSummonerModifier = 0.85;
+        if (Player.Augs.Level[AUG_SUMMONER] == 7)
+            AugSummonerModifier = 0.80;
+        if (Player.Augs.Level[AUG_SUMMONER] == 8)
+            AugSummonerModifier = 0.75;
+    }
+
     // Increase EP cost of skills "Soul Steal" and Auras for every accumulated soul
     if (Player.SoulsCount > 0)
     {
@@ -3212,52 +3230,52 @@ void CheckSkills()
 
         if (Player.SkillLevel[4][0].CurrentLevel <= 1)
         {
-            Skills[4][0].Cost = 60 + (Player.Summons * 60);    // Increase EP cost of Summon Marine
+            Skills[4][0].Cost = (int)((60 + (Player.Summons * 60)) * AugSummonerModifier + 2.5) / 5 * 5;    // Increase EP cost of Summon Marine
         }
         else
         {
-            Skills[4][0].Cost = 60 + (Player.Summons * 30);    // Increase EP cost of Summon Marine
+            Skills[4][0].Cost = (int)((60 + (Player.Summons * 30)) * AugSummonerModifier + 2.5) / 5 * 5;    // Increase EP cost of Summon Marine
         }
 
-        Skills[4][1].Cost = 100 + (Player.Summons * 50);   // Increase EP cost of Summon Former Human
-        Skills[4][2].Cost = 80 + (Player.Summons * 40);    // Increase EP cost of Summon Former Sergeant
-        Skills[4][3].Cost = 175 + (Player.Summons * 75);   // Increase EP cost of Summon Former Commando
-        Skills[4][4].Cost = 80 + (Player.Summons * 40);    // Increase EP cost of Summon Imp
-        Skills[4][5].Cost = 80 + (Player.Summons * 40);    // Increase EP cost of Summon Demon
-        Skills[4][6].Cost = 175 + (Player.Summons * 75);   // Increase EP cost of Summon Cacodemon
-        Skills[4][7].Cost = 200 + (Player.Summons * 100);  // Increase EP cost of Summon Hell Knight
-        Skills[4][8].Cost = 300 + (Player.Summons * 150);  // Increase EP cost of Summon Baron of Hell
-        Skills[4][9].Cost = 50 + (Player.Summons * 25);    // Increase EP cost of Summon Lost Soul
-        Skills[4][10].Cost = 250 + (Player.Summons * 125); // Increase EP cost of Summon Pain Elemental
-        Skills[4][11].Cost = 300 + (Player.Summons * 150); // Increase EP cost of Summon Revenant
-        Skills[4][12].Cost = 325 + (Player.Summons * 150); // Increase EP cost of Summon Mancubus
-        Skills[4][13].Cost = 300 + (Player.Summons * 150); // Increase EP cost of Summon Arachnotron
-        Skills[4][14].Cost = 400 + (Player.Summons * 200); // Increase EP cost of Summon Arch-Vile
-        Skills[4][15].Cost = 500 + (Player.Summons * 250); // Increase EP cost of Summon Cyberdemon
-        Skills[4][16].Cost = 600 + (Player.Summons * 300); // Increase EP cost of Summon Spider Mastermind
+        Skills[4][1].Cost = (int)((100 + (Player.Summons * 50)) * AugSummonerModifier + 2.5) / 5 * 5;   // Increase EP cost of Summon Former Human
+        Skills[4][2].Cost = (int)((80 + (Player.Summons * 40)) * AugSummonerModifier + 2.5) / 5 * 5;    // Increase EP cost of Summon Former Sergeant
+        Skills[4][3].Cost = (int)((175 + (Player.Summons * 75)) * AugSummonerModifier + 2.5) / 5 * 5;   // Increase EP cost of Summon Former Commando
+        Skills[4][4].Cost = (int)((80 + (Player.Summons * 40)) * AugSummonerModifier + 2.5) / 5 * 5;    // Increase EP cost of Summon Imp
+        Skills[4][5].Cost = (int)((80 + (Player.Summons * 40)) * AugSummonerModifier + 2.5) / 5 * 5;    // Increase EP cost of Summon Demon
+        Skills[4][6].Cost = (int)((175 + (Player.Summons * 75)) * AugSummonerModifier + 2.5) / 5 * 5;   // Increase EP cost of Summon Cacodemon
+        Skills[4][7].Cost = (int)((200 + (Player.Summons * 100)) * AugSummonerModifier + 2.5) / 5 * 5;  // Increase EP cost of Summon Hell Knight
+        Skills[4][8].Cost = (int)((300 + (Player.Summons * 150)) * AugSummonerModifier + 2.5) / 5 * 5;  // Increase EP cost of Summon Baron of Hell
+        Skills[4][9].Cost = (int)((50 + (Player.Summons * 25)) * AugSummonerModifier + 2.5) / 5 * 5;    // Increase EP cost of Summon Lost Soul
+        Skills[4][10].Cost = (int)((250 + (Player.Summons * 125)) * AugSummonerModifier + 2.5) / 5 * 5; // Increase EP cost of Summon Pain Elemental
+        Skills[4][11].Cost = (int)((300 + (Player.Summons * 150)) * AugSummonerModifier + 2.5) / 5 * 5; // Increase EP cost of Summon Revenant
+        Skills[4][12].Cost = (int)((325 + (Player.Summons * 150)) * AugSummonerModifier + 2.5) / 5 * 5; // Increase EP cost of Summon Mancubus
+        Skills[4][13].Cost = (int)((300 + (Player.Summons * 150)) * AugSummonerModifier + 2.5) / 5 * 5; // Increase EP cost of Summon Arachnotron
+        Skills[4][14].Cost = (int)((400 + (Player.Summons * 200)) * AugSummonerModifier + 2.5) / 5 * 5; // Increase EP cost of Summon Arch-Vile
+        Skills[4][15].Cost = (int)((500 + (Player.Summons * 250)) * AugSummonerModifier + 2.5) / 5 * 5; // Increase EP cost of Summon Cyberdemon
+        Skills[4][16].Cost = (int)((600 + (Player.Summons * 300)) * AugSummonerModifier + 2.5) / 5 * 5; // Increase EP cost of Summon Spider Mastermind
     }
     else
     {
         Skills[0][1].Cost = 150; // Standart EP cost of skill "Heal Summon"
         Skills[5][2].Cost = 5; // Standart EP cost of skill "Rally"
 
-        Skills[4][0].Cost = 60;   // Standart EP cost of Summon Marine
-        Skills[4][1].Cost = 100;  // Standart EP cost of Summon Former Human
-        Skills[4][2].Cost = 80;   // Standart EP cost of Summon Former Sergeant
-        Skills[4][3].Cost = 175;  // Standart EP cost of Summon Former Commando
-        Skills[4][4].Cost = 80;   // Standart EP cost of Summon Imp
-        Skills[4][5].Cost = 80;   // Standart EP cost of Summon Demon
-        Skills[4][6].Cost = 175;  // Standart EP cost of Summon Cacodemon
-        Skills[4][7].Cost = 200;  // Standart EP cost of Summon Hell Knight
-        Skills[4][8].Cost = 300;  // Standart EP cost of Summon Baron of Hell
-        Skills[4][9].Cost = 50;   // Standart EP cost of Summon Lost Soul
-        Skills[4][10].Cost = 250; // Standart EP cost of Summon Pain Elemental
-        Skills[4][11].Cost = 300; // Standart EP cost of Summon Revenant
-        Skills[4][12].Cost = 325; // Standart EP cost of Summon Mancubus
-        Skills[4][13].Cost = 300; // Standart EP cost of Summon Arachnotron
-        Skills[4][14].Cost = 400; // Standart EP cost of Summon Arch-Vile
-        Skills[4][15].Cost = 500; // Standart EP cost of Summon Cyberdemon
-        Skills[4][16].Cost = 600; // Standart EP cost of Summon Spider Mastermind
+        Skills[4][0].Cost = (int)(60 * AugSummonerModifier + 2.5) / 5 * 5;   // Standart EP cost of Summon Marine
+        Skills[4][1].Cost = (int)(100 * AugSummonerModifier + 2.5) / 5 * 5;  // Standart EP cost of Summon Former Human
+        Skills[4][2].Cost = (int)(80 * AugSummonerModifier + 2.5) / 5 * 5;   // Standart EP cost of Summon Former Sergeant
+        Skills[4][3].Cost = (int)(175 * AugSummonerModifier + 2.5) / 5 * 5;  // Standart EP cost of Summon Former Commando
+        Skills[4][4].Cost = (int)(80 * AugSummonerModifier + 2.5) / 5 * 5;   // Standart EP cost of Summon Imp
+        Skills[4][5].Cost = (int)(80 * AugSummonerModifier + 2.5) / 5 * 5;   // Standart EP cost of Summon Demon
+        Skills[4][6].Cost = (int)(175 * AugSummonerModifier + 2.5) / 5 * 5;  // Standart EP cost of Summon Cacodemon
+        Skills[4][7].Cost = (int)(200 * AugSummonerModifier + 2.5) / 5 * 5;  // Standart EP cost of Summon Hell Knight
+        Skills[4][8].Cost = (int)(300 * AugSummonerModifier + 2.5) / 5 * 5;  // Standart EP cost of Summon Baron of Hell
+        Skills[4][9].Cost = (int)(50 * AugSummonerModifier + 2.5) / 5 * 5;   // Standart EP cost of Summon Lost Soul
+        Skills[4][10].Cost = (int)(250 * AugSummonerModifier + 2.5) / 5 * 5; // Standart EP cost of Summon Pain Elemental
+        Skills[4][11].Cost = (int)(300 * AugSummonerModifier + 2.5) / 5 * 5; // Standart EP cost of Summon Revenant
+        Skills[4][12].Cost = (int)(325 * AugSummonerModifier + 2.5) / 5 * 5; // Standart EP cost of Summon Mancubus
+        Skills[4][13].Cost = (int)(300 * AugSummonerModifier + 2.5) / 5 * 5; // Standart EP cost of Summon Arachnotron
+        Skills[4][14].Cost = (int)(400 * AugSummonerModifier + 2.5) / 5 * 5; // Standart EP cost of Summon Arch-Vile
+        Skills[4][15].Cost = (int)(500 * AugSummonerModifier + 2.5) / 5 * 5; // Standart EP cost of Summon Cyberdemon
+        Skills[4][16].Cost = (int)(600 * AugSummonerModifier + 2.5) / 5 * 5; // Standart EP cost of Summon Spider Mastermind
     }
 
     // Summoning Skills - Marines Descriptions

@@ -1893,7 +1893,14 @@ Start:
         DelayTime = 35 * 10;
     }
     else
-        DelayTime = 35 * 30;
+    {
+        if (CheckInventory("DRPGSummonedRegenerationBoosterToken"))
+        {
+            DelayTime = 35 * 20;
+        }
+        else
+            DelayTime = 35 * 30;
+    }
 
     // Prevent going over 100%
     if (GetActorProperty(0, APROP_Health) > Stats->HealthMax)
