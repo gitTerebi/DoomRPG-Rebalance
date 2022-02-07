@@ -774,7 +774,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // If the monster is friendly, it has the average level of all players in the game
         if (GetActorProperty(0, APROP_Friendly))
-            Stats->Level = (int)(((fixed)AveragePlayerLevel() * LevelWeight + (fixed)LevelNum * MapWeight) * RandomFixed(0.8, 1.0));
+            Stats->Level = (int)(((fixed)AveragePlayerLevel() * LevelWeight + (fixed)LevelNum * MapWeight) * RandomFixed(0.9, 1.1));
 
         // Special case for Bosses
         if (Stats->Flags & MF_BOSS)
@@ -789,6 +789,17 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
             Stats->Level = 1000;
 
         MonsterStatPool = 40 + GameSkill() * Stats->Level;
+
+        // Minimal Points
+        Stats->Strength = Stats->Level / 2;
+        Stats->Defense = Stats->Level / 2;
+        Stats->Vitality = Stats->Level / 2;
+        Stats->Energy = Stats->Level / 2;
+        Stats->Regeneration = Stats->Level / 2;
+        Stats->Agility = Stats->Level / 2;
+        Stats->Capacity = Stats->Level / 2;
+        Stats->Luck = Stats->Level / 2;
+        MonsterStatPool -= (Stats->Level / 2) * 8;
 
         // Calculate the monster's cut and special stats
         if (GetCVar("drpg_monster_specialize"))
@@ -909,24 +920,6 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
                 MonsterStatPool--;
             }
         }
-
-        // Pity Points
-        if (Stats->Strength < (Stats->Level * 0.80))     Stats->Strength = (Stats->Level * 0.80);
-        if (Stats->Strength < 1)                         Stats->Strength = 1;
-        if (Stats->Defense < (Stats->Level * 0.80))      Stats->Defense = (Stats->Level * 0.80);
-        if (Stats->Defense < 1)                          Stats->Defense = 1;
-        if (Stats->Vitality < (Stats->Level * 0.80))     Stats->Vitality = (Stats->Level * 0.80);
-        if (Stats->Vitality < 1)                         Stats->Vitality = 1;
-        if (Stats->Energy < (Stats->Level * 0.80))       Stats->Energy = (Stats->Level * 0.80);
-        if (Stats->Energy < 1)                           Stats->Energy = 1;
-        if (Stats->Regeneration < (Stats->Level * 0.80)) Stats->Regeneration = (Stats->Level * 0.80);
-        if (Stats->Regeneration < 1)                     Stats->Regeneration = 1;
-        if (Stats->Agility < (Stats->Level * 0.80))      Stats->Agility = (Stats->Level * 0.80);
-        if (Stats->Agility < 1)                          Stats->Agility = 1;
-        if (Stats->Capacity < (Stats->Level * 0.80))     Stats->Capacity = (Stats->Level * 0.80);
-        if (Stats->Capacity < 1)                         Stats->Capacity = 1;
-        if (Stats->Luck < (Stats->Level * 0.80))         Stats->Luck = (Stats->Level * 0.80);
-        if (Stats->Luck < 1)                             Stats->Luck = 1;
 
         // Map Event - RAINBOWS!
         if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
@@ -1499,7 +1492,11 @@ Start:
     {
         StatsChanged = true;
 
-        SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0) + ((fixed)LevelNum / 200.0)));
+        if (GetActorProperty(0, APROP_Friendly))
+            SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0)));
+        else
+            SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0) + ((fixed)LevelNum / 200.0)));
+
         OldStrength = Stats->Strength;
     }
 
@@ -1507,8 +1504,12 @@ Start:
     if (Stats->Defense != OldDefense)
     {
         StatsChanged = true;
+        fixed DamageFactor;
 
-        fixed DamageFactor = 1.0 - (((fixed)Stats->Defense / 400.0) + ((fixed)LevelNum / 800.0));
+        if (GetActorProperty(0, APROP_Friendly))
+            DamageFactor = 1.0 - ((fixed)Stats->Defense / 400.0);
+        else
+            DamageFactor = 1.0 - (((fixed)Stats->Defense / 400.0) + ((fixed)LevelNum / 800.0));
 
         if (DamageFactor < 0.251)
             DamageFactor = 0.251;
@@ -1867,7 +1868,7 @@ Start:
     if (!CheckInventory("DRPGMonsterRegenerationHandler"))
         return;
 
-    long long RegenAmount = ((long long)Stats->HealthMax / 50) * (1 + (long long)Stats->Regeneration / 25);
+    long long RegenAmount = ((long long)Stats->HealthMax / 50) * (1 + (long long)Stats->Regeneration / (25 + Stats->Regeneration / 4));
 
     if (Stats->Flags & MF_BOSS)
         RegenAmount /= 2;
@@ -1878,7 +1879,7 @@ Start:
     if (Stats->RegenHealth >= Stats->HealthMax)
         RegenAmount /= 2;
 
-    if (GetActorProperty(0, APROP_Friendly))
+    if (GetActorProperty(0, APROP_Friendly) && !CheckInventory("DRPGSummonedRegenerationBoosterToken"))
         RegenAmount /= 2;
 
     if (RegenAmount > INT_MAX)

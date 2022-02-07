@@ -113,8 +113,8 @@ server  int     drpg_soft_stat_cap_mult = 1;
 user    bool    drpg_auto_spend = false;
 user    int     drpg_auto_spend_pref = -1;
 user    bool    drpg_stat_weaponspeed = true;
-user    float   drpg_maxspeed = 0.8;
-user    float   drpg_maxjump = 16.0;
+user    float   drpg_maxspeed = 1.0;
+user    float   drpg_maxjump = 8.0;
 server  bool    drpg_inv_capacity = true;
 server  int     drpg_overdrive_limit = 1000;
 

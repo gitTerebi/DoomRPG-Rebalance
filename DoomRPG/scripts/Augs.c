@@ -144,14 +144,14 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "+5% Power of Summoned",
-            "+10% Power of Summoned",
-            "+15% Power of Summoned",
-            "+20% Power of Summoned and +30% Reduces Time Life Regeneration",
-            "+25% Power of Summoned and +10% Reduces Cost for Summoning",
-            "+30% Power of Summoned and +15% Reduces Cost for Summoning",
-            "+40% Power of Summoned and +20% Reduces Cost for Summoning",
-            "+50% Power of Summoned and +25% Reduces Cost for Summoning"
+            "Increase Vitality of Summoned (depending on your Energy)",
+            "Increase Defense of Summoned (depending on your Energy)",
+            "Increase Strenght of Summoned (depending on your Energy)",
+            "Increase Life Regeneration of Summoned",
+            "+10% Extra Power of Summoned and +10% Reduces Cost for Summoning",
+            "+15% Extra Power of Summoned and +15% Reduces Cost for Summoning",
+            "+20% Extra Power of Summoned and +20% Reduces Cost for Summoning",
+            "+25% Extra Power of Summoned and +25% Reduces Cost for Summoning"
         },
         .TokenActor = "DRPGAugTokenSummoner"
     }

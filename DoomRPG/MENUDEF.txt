@@ -751,10 +751,10 @@ OptionMenu "DoomRPGStart"
     StaticText ""
 
     StaticText "Augmentations", 1
-    Slider "Active Augs Count", "drpg_start_aug_amount", 0, 9, 1
+    Slider "Active Augs Count", "drpg_start_aug_amount", 0, 10, 1
     Slider "Aug Canisters", "drpg_start_aug_canisters", 0, 100, 1
     Slider "Aug Upgrades", "drpg_start_aug_upgrades", 0, 100, 1
-    Slider "Aug Slots", "drpg_start_aug_slots", 0, 9, 1
+    Slider "Aug Slots", "drpg_start_aug_slots", 0, 10, 1
     StaticText ""
 
     StaticText "Shield", 1
