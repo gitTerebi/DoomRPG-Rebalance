@@ -38,9 +38,14 @@ str RPGMap MainMenuColor[MAX_MENU] =
     "Teal"
 };
 
-str RPGMap CursorColors[1] =
+str RPGMap CursorColors[6] =
 {
-    "Grey"
+    "Black",
+    "Dark Grey",
+    "Grey",
+    "White",
+    "Grey",
+    "Dark Grey"
 };
 
 str RPGMap MenuCursorColor;
@@ -316,11 +321,11 @@ void DrawMainMenu()
     {
         SetFont("SMALLFONT");
         HudMessage("Monsters: %d / %d", CurrentKills, TotalKills);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? MenuCursorColor : "Brick"),       180.1, 120.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? "Green" : "Brick"),       180.1, 120.0, 0.05);
         HudMessage("Items: %d / %d", CurrentItems, TotalItems);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllItems ? MenuCursorColor : "LightBlue"),   180.1, 135.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllItems ? "Green" : "LightBlue"),   180.1, 135.0, 0.05);
         HudMessage("Secrets: %d / %d", CurrentSecretsFound, TotalSecretsFound);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? MenuCursorColor : "Yellow"),    180.1, 150.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? "Green" : "Yellow"),    180.1, 150.0, 0.05);
     }
 
     // Chips
@@ -1720,10 +1725,21 @@ void DrawStimsMenu()
             Color = CompoundColors[i - 1];
 
         // Vial Bar
-        int Amount = (int)(((fixed)Player.Stim.Vials[i - 1] / (fixed)(Player.Stim.VialMax + 1)) * 100.0);
+        int Amount = (int)(((fixed)Player.Stim.Vials[i - 1] / (fixed)Player.Stim.VialMax) * 100.0 + 0.5);
         if (Amount > 100)
             Amount = 100;
-        DrawBar(StrParam("Stim%d", i), X, Y, Amount);
+
+        //Due to the lags that occurred when displaying sprites in GZDoom 4.5.0
+        //I was forced to change the principle of displaying strips reflecting the number of vials collected.
+        //Below is a frozen old code with subsequent replacement with a new one. I left it until better times.
+
+        // DrawBar(StrParam("Stim%d", i), X, Y, Amount);
+        for (int k = 0; k < (int)((fixed)Amount / 3.0 + 0.7); k++)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("/");
+            EndHudMessage(HUDMSG_PLAIN, 0, CompoundColors[i - 1], X + 0.1 + (k * 3.0), Y, 0.05);
+        }
 
         // Vial
         X += 112.0;
