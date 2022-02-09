@@ -168,6 +168,18 @@ NamedScript MapSpecial void RegenArea(int ID)
         if (CheckInventory("Armor") >= GetArmorInfo(ARMORINFO_SAVEAMOUNT))
             return;
 
+        if (CompatMode == COMPAT_DRLA)
+        {
+            if (CheckInventory("RLFireShieldArmorToken") || CheckInventory("RLTowerShieldArmorToken") || CheckInventory("RLBallisticShieldArmorToken") || CheckInventory("RLEnergyShieldArmorToken") || CheckInventory("RLPlasmaShieldArmorToken") || CheckInventory("RLRechargeableEnergyShieldArmorToken"))
+            {
+                SetFont("BIGFONT");
+                HudMessage("This type of armor can't be repairing");
+                EndHudMessage(HUDMSG_FADEOUT, 1, "Red", 0.5, 0.33, 2.0, 0.5);
+                ActivatorSound("menu/error", 127);
+                return;
+            }
+        }
+
         int ArmorPercent = CheckInventory("Armor") * 100 / GetArmorInfo(ARMORINFO_SAVEAMOUNT);
         int ArmorFee = (100 - ArmorPercent) / 5 * 5;
         if (ArmorFee < 5)
