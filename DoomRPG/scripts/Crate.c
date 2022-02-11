@@ -48,9 +48,9 @@ NamedScript DECORATE void InitCrate()
 {
     int TID = UniqueTID();
     int Amount = 3;
-    int LuckMod = ((AveragePlayerLevel() / 10) + (AveragePlayerRank() / 12) + (AveragePlayerLuck() / 15));
-    if (LuckMod > 10.5)
-        LuckMod = 10.5;
+    int LuckMod = (int)((fixed)(AveragePlayerLevel() / (10.0 + (fixed)AveragePlayerLevel() / 20.0)) + (fixed)(AveragePlayerRank() / (6.0 + (fixed)AveragePlayerRank() / 4.0)) + (fixed)(AveragePlayerLuck() / (15.0 + (fixed)AveragePlayerLuck() / 20.0)));
+    if (LuckMod > 13)
+        LuckMod = 13;
     int Rarity = 0;
     int Firewall = 0;
 
@@ -63,7 +63,7 @@ NamedScript DECORATE void InitCrate()
 
     // Calculate Rarity
     for (int i = Rarity; i < MAX_DIFFICULTIES - 1; i++)
-        if (Random(0, (MAX_DIFFICULTIES + (MAX_DIFFICULTIES / 3)) - LuckMod) <= 1)
+        if (Random(0, Random(6, MAX_DIFFICULTIES) + Rarity - LuckMod) <= 0)
             Rarity++;
     if (Rarity < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         Rarity = 0;
@@ -165,7 +165,7 @@ NamedScript DECORATE void UseCrate(int ID)
 
     ActivatorSound("crate/open", 127);
 
-    Delay(1);
+    Delay(2);
 
     while (Player.CrateOpen)
     {
@@ -483,6 +483,8 @@ void GenerateCrate(int ID, int Amount)
     }
 
     // Get items for crate
+    int Rarity = Crates[ID].Rarity;
+
     for (bool SkipShieldPart = true; i < Amount; i++)
     {
         if (RandomFixed(0.0, 99.9) > ShieldPartChance)
@@ -490,7 +492,7 @@ void GenerateCrate(int ID, int Amount)
         else
             SkipShieldPart = false;
 
-        Item = GetRewardItem(Crates[ID].Rarity, SkipShieldPart);
+        Item = GetRewardItem(Rarity, SkipShieldPart);
 
         if (Item == GetBlankItem())
         {
@@ -500,6 +502,9 @@ void GenerateCrate(int ID, int Amount)
 
         Crates[ID].Active[i] = true;
         Crates[ID].Item[i] = Item;
+
+        if (Random(0, MAX_DIFFICULTIES - Rarity) <= 0) Rarity--;
+        if (Rarity < 0) Rarity = 0;
     }
 
     // DRLA Set shenanigans

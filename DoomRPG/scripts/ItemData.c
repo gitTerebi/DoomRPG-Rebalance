@@ -132,7 +132,7 @@ NamedScript void BuildItemData()
 
     // Armor
     ITEMDATA_CATEGORY(3, "\CdArmor", CF_NONE);
-    ITEMDATA_DEF("DRPGArmorBonus",              "Armor Bonus",                  1, 0, -1, "BON2A0",  7, 13);
+    ITEMDATA_DEF("DRPGArmorBonus",              "Armor Bonus",                 1, 0, -1, "BON2A0",  7, 13);
 
     ITEMDATA_DEF("DRPGGreenArmor",              "Green Armor",                100, 0, 0, "ARM1A0", 15, 17);
     ITEMDATA_DEF("DRPGBlueArmor",               "Blue Armor",                 500, 0, 0, "ARM2A0", 15, 17);
@@ -312,45 +312,41 @@ NamedScript void BuildItemData()
     // Stims/Augmentations/Turret Parts
     ITEMDATA_CATEGORY(6, "\CkStims/Augs/Turret", CF_NONE);
     ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                          500, 0, 2, "STIMB0", 16, 29);
-
-    ITEMDATA_DEF("DRPGVialStrength",        "\CgStrength\C- Vial",                 200, 1, 1, "STVLA0",  4, 16);
-    ITEMDATA_DEF("DRPGVialDefense",         "\CdDefense\C- Vial",                  200, 1, 1, "STVLB0",  4, 16);
-    ITEMDATA_DEF("DRPGVialVitality",        "\CaVitality\C- Vial",                 200, 1, 1, "STVLC0",  4, 16);
-    ITEMDATA_DEF("DRPGVialEnergy",          "\CnEnergy\C- Vial",                   200, 1, 1, "STVLD0",  4, 16);
-    ITEMDATA_DEF("DRPGVialRegeneration",    "\CtRegeneration\C- Vial",             200, 2, 0, "STVLE0",  4, 16);
-    ITEMDATA_DEF("DRPGVialAgility",         "\CiAgility\C- Vial",                  200, 2, 0, "STVLF0",  4, 16);
-    ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",                 200, 2, 0, "STVLG0",  4, 16);
-    ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",                     200, 2, 0, "STVLH0",  4, 16);
-
-    ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                        1500, 3, 3, "STIMB0", 16, 29);
-
-    ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",                 400, 3, 2, "STVLI0",  4, 16);
-    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",                  400, 3, 2, "STVLJ0",  4, 16);
-    ITEMDATA_DEF("DRPGVialIndestructible",  "\CqIndestructible\C- Vial",          1000, 3, 3, "STVLK0",  4, 16);
-    ITEMDATA_DEF("DRPGVialShadow",          "\CrShadow\C- Vial",                  1000, 3, 3, "STVLL0",  4, 16);
-    ITEMDATA_DEF("DRPGVialInfinity",        "\CkInfinity\C- Vial",                1000, 3, 3, "STVLM0",  4, 16);
-    ITEMDATA_DEF("DRPGVialChrono",          "\CdChrono\C- Vial",                  1000, 3, 3, "STVLN0",  4, 16);
-    ITEMDATA_DEF("DRPGVialAdrenaline",      "\CtAdrenaline\C- Vial",              1000, 3, 3, "STVLO0",  4, 16);
-    ITEMDATA_DEF("DRPGVialGravity",         "\CiGravity\C- Vial",                 1000, 3, 3, "STVLP0",  4, 16);
-
+    ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                        1500, 2, 3, "STIMB0", 16, 29);
     ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                         2500, 4, 5, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimXL",              "Extra-Large Stim",                   5000, 8, 6, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGStimDetox",           "\CdDetox\C- Hypospray",              2500, 1, 2, "STIMC0",  6, 31);
 
+    ITEMDATA_DEF("DRPGVialStrength",        "\CgStrength\C- Vial",                 200, 4, 1, "STVLA0",  4, 16);
+    ITEMDATA_DEF("DRPGVialDefense",         "\CdDefense\C- Vial",                  200, 4, 1, "STVLB0",  4, 16);
+    ITEMDATA_DEF("DRPGVialVitality",        "\CaVitality\C- Vial",                 200, 4, 1, "STVLC0",  4, 16);
+    ITEMDATA_DEF("DRPGVialEnergy",          "\CnEnergy\C- Vial",                   200, 4, 1, "STVLD0",  4, 16);
+    ITEMDATA_DEF("DRPGVialRegeneration",    "\CtRegeneration\C- Vial",             200, 4, 0, "STVLE0",  4, 16);
+    ITEMDATA_DEF("DRPGVialAgility",         "\CiAgility\C- Vial",                  200, 4, 0, "STVLF0",  4, 16);
+    ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",                 200, 4, 0, "STVLG0",  4, 16);
+    ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",                     200, 4, 0, "STVLH0",  4, 16);
+    ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",                 400, 4, 2, "STVLI0",  4, 16);
+    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",                  400, 4, 2, "STVLJ0",  4, 16);
+    ITEMDATA_DEF("DRPGVialIndestructible",  "\CqIndestructible\C- Vial",          1000, 4, 3, "STVLK0",  4, 16);
+    ITEMDATA_DEF("DRPGVialShadow",          "\CrShadow\C- Vial",                  1000, 4, 3, "STVLL0",  4, 16);
+    ITEMDATA_DEF("DRPGVialInfinity",        "\CkInfinity\C- Vial",                1000, 4, 3, "STVLM0",  4, 16);
+    ITEMDATA_DEF("DRPGVialChrono",          "\CdChrono\C- Vial",                  1000, 4, 3, "STVLN0",  4, 16);
+    ITEMDATA_DEF("DRPGVialAdrenaline",      "\CtAdrenaline\C- Vial",              1000, 4, 3, "STVLO0",  4, 16);
+    ITEMDATA_DEF("DRPGVialGravity",         "\CiGravity\C- Vial",                 1000, 4, 3, "STVLP0",  4, 16);
     ITEMDATA_DEF("DRPGVialVampire",         "\CaVampire\C- Vial",                 1000, 4, 3, "STVLQ0",  4, 16);
     ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",                    1000, 4, 3, "STVLR0",  4, 16);
     ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",                1000, 4, 3, "STVLS0",  4, 16);
-    ITEMDATA_DEF("DRPGStimDetox",           "\CdDetox\C- Hypospray",              2500, 1, 2, "STIMC0",  6, 31);
-    ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",                  5000, 2, 5, "STPAA0", 30, 16);
+    ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",                  5000, 4, 5, "STPAA0", 30, 16);
     ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",              20000, 4, 6, "STPAB0", 27, 16);
-    ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                         500, 1, 1, "TPRTA0", 29, 21);
-    ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                 2500, 4, 3, "TCRTA0", 29, 26);
 
-    ITEMDATA_DEF("DRPGStimXL",              "Extra-Large Stim",                   5000, 8, 6, "STIMB0", 16, 29);
-
-    ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                       500, 4, 1, "BATTA0",  5, 13);
-    ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      1250, 6, 2, "BATTB0", 14, 21);
     ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             30000, 4, 8, "AUGCA0", 12, 24);
     ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     30000, 4, 8, "AUGUA0", 12, 24);
     ITEMDATA_DEF("DRPGAugSlotUpgrade",      "Augmentation Slot Upgrade",         90000, 7, 8, "AUGUB0", 16, 25);
+    ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                       500, 4, 1, "BATTA0",  5, 13);
+    ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      1250, 6, 2, "BATTB0", 14, 21);
+
+    ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                         500, 1, 1, "TPRTA0", 29, 21);
+    ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                 2500, 4, 3, "TCRTA0", 29, 26);
     ITEMDATA_CATEGORY_END;
 
     // Generic Loot
@@ -1006,9 +1002,58 @@ NamedScript void BuildItemData()
     ITEMDATA_CATEGORY(ItemCategories, "Misc", CF_NOBUY | CF_NOSELL | CF_NOSTORE);
     ITEMDATA_DEF("None",                    "\CaUnknown Item\C-",           0, -1, -1, "SprNone", 0, 0);
 
-    ITEMDATA_DEF("DRPGEPCapsule",           "\CnEP Capsule\C-",             0, -1, -1, "EPUPA0", 16, 24);
-    ITEMDATA_DEF("DRPGBigEPCapsule",        "\CnBig EP Capsule\C-",         0, -1, -1, "EPUPA0", 16, 24);
+    // Items for Crates/Rewards - Basic
+    ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                   0, -1, -1, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGVialStrength",        "\CgStrength\C- Vial",          0, -1, -1, "STVLA0",  4, 16);
+    ITEMDATA_DEF("DRPGVialDefense",         "\CdDefense\C- Vial",           0, -1, -1, "STVLB0",  4, 16);
+    ITEMDATA_DEF("DRPGVialVitality",        "\CaVitality\C- Vial",          0, -1, -1, "STVLC0",  4, 16);
+    ITEMDATA_DEF("DRPGVialEnergy",          "\CnEnergy\C- Vial",            0, -1, -1, "STVLD0",  4, 16);
 
+    // Items for Crates/Rewards -  Common
+    ITEMDATA_DEF("DRPGVialRegeneration",    "\CtRegeneration\C- Vial",      0, -1, -1, "STVLE0",  4, 16);
+    ITEMDATA_DEF("DRPGVialAgility",         "\CiAgility\C- Vial",           0, -1, -1, "STVLF0",  4, 16);
+    ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",          0, -1, -1, "STVLG0",  4, 16);
+    ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",              0, -1, -1, "STVLH0",  4, 16);
+    ITEMDATA_DEF("DRPGSmallBackpack",       "Ammo Satchel",                 0, -1, -1, "ASCHA0", 14, 30);
+
+    // Items for Crates/Rewards -  Uncommon
+    ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                  0, -1, -1, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",          0, -1, -1, "STVLI0",  4, 16);
+    ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",           0, -1, -1, "STVLJ0",  4, 16);
+    ITEMDATA_DEF("DRPGVialIndestructible",  "\CqIndestructible\C- Vial",    0, -1, -1, "STVLK0",  4, 16);
+    ITEMDATA_DEF("DRPGVialShadow",          "\CrShadow\C- Vial",            0, -1, -1, "STVLL0",  4, 16);
+    ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                  0, -1, -1, "TPRTA0", 29, 21);
+
+    // Items for Crates/Rewards -  Superior
+    ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                0, -1, -1, "BATTA0",  5, 13);
+    ITEMDATA_DEF("DRPGVialInfinity",        "\CkInfinity\C- Vial",          0, -1, -1, "STVLM0",  4, 16);
+    ITEMDATA_DEF("DRPGVialChrono",          "\CdChrono\C- Vial",            0, -1, -1, "STVLN0",  4, 16);
+    ITEMDATA_DEF("DRPGVialAdrenaline",      "\CtAdrenaline\C- Vial",        0, -1, -1, "STVLO0",  4, 16);
+    ITEMDATA_DEF("DRPGVialGravity",         "\CiGravity\C- Vial",           0, -1, -1, "STVLP0",  4, 16);
+    ITEMDATA_DEF("DRPGBackpack",            "Backpack",                     0, -1, -1, "BPAKA0",  8, 25);
+
+    // Items for Crates/Rewards -  Rare
+    ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                   0, -1, -1, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGVialVampire",         "\CaVampire\C- Vial",           0, -1, -1, "STVLQ0",  4, 16);
+    ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",              0, -1, -1, "STVLR0",  4, 16);
+    ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",          0, -1, -1, "STVLS0",  4, 16);
+    ITEMDATA_DEF("DRPGStimDetox",           "\CdDetox\C- Hypospray",        0, -1, -1, "STIMC0",  6, 31);
+
+    // Items for Crates/Rewards -  Very Rare
+    ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",            0, -1, -1, "STPAA0", 30, 16);
+    ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                0, -1, -1, "BATTB0", 14, 21);
+
+    // Items for Crates/Rewards -  Elite
+    ITEMDATA_DEF("DRPGStimXL",              "Extra-Large Stim",             0, -1, -1, "STIMB0", 16, 29);
+    ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",           0, -1, -1, "TCRTA0", 29, 26);
+
+    // Items for Crates/Rewards -  Legendary
+    ITEMDATA_DEF("DRPGStimPackagePowerup",  "Powerup Stim Package",         0, -1, -1, "STPAB0", 27, 16);
+
+    // Items for Crates/Rewards -  Supreme
+    ITEMDATA_DEF("DRPGBigBackpack",         "Big Backpack",                 0, -1, -1, "GPAKA0", 11, 29);
+
+    // Others Stuff
     ITEMDATA_DEF("DRPGChipGold",            "\CfGold Chip\C-",              0, -1, -1, "CHPGA0", 16, 32);
     ITEMDATA_DEF("DRPGChipPlatinum",        "Platinum Chip",                0, -1, -1, "CHPPA0", 16, 32);
 
@@ -1089,46 +1134,46 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         if (Difficulty < 0) Difficulty = 0;
         if (Difficulty > 9) Difficulty = 9;
 
-        else if (RandomFixed(0.0, 100.0) < (90.0 - ((fixed)AveragePlayerLuck() / 5.0 + (fixed)AveragePlayerLevel() / 5.0))) // Stims/Augs/Turret
+        else if (RandomFixed(0.0, 100.0) < (90.0 - ((fixed)AveragePlayerLuck() / 10.0 + (fixed)AveragePlayerLevel() / 10.0))) // Stims/Augs/Turret
         {
             Cap = 0;
 
             switch (Difficulty)
             {
             case 0:
-                Cap = 5;
+                Cap = 6;
                 break;
             case 1:
-                Cap = 9;
+                Cap = 11;
                 break;
             case 2:
-                Cap = 14;
+                Cap = 17;
                 break;
             case 3:
-                Cap = 18;
-                break;
-            case 4:
                 Cap = 23;
                 break;
+            case 4:
+                Cap = 28;
+                break;
             case 5:
-                Cap = 27;
+                Cap = 30;
                 break;
             case 6:
-                Cap = 29;
+                Cap = 32;
                 break;
             case 7:
-                Cap = 31;
+                Cap = 33;
                 break;
             case 8:
-                Cap = 32;
+                Cap = 34;
                 break;
             case 9:
-                Cap = 32;
+                Cap = 34;
                 break;
             }
 
-            Index = Random(0, Cap - 1);
-            Reward = &ItemData[6][Index];
+            Index = Random(1, Cap - 1);
+            Reward = &ItemData[ItemCategories][Index];
 
             if (DebugLog)
                 Log("\CdDEBUG: \C-Reward Item %S\C- (%S) picked - Rarity %d Item %d", Reward->Name, Reward->Actor, Difficulty, Index);
@@ -1188,7 +1233,7 @@ NamedScript DECORATE void SpawnLuckItem()
 //   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 23.35) ActorToSpawn = "DRPGChipDropper";
     if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 17.12) ActorToSpawn = "DRPGChipDropper";
     if (Luck >= LUCK_MODULEDROP  && RandomFixed(0.0, 100.0) <= 12.25) ActorToSpawn = "DRPGBatteryDropper";
-    if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=  6.13) ActorToSpawn = "DRPGCrate";
+    if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=  5.00) ActorToSpawn = "DRPGCrate";
 
     if (Luck >= LUCK_HEALTHDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXHEALTHCHANCE)  ActorToSpawn = "DRPGHealthDropper";
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= LUCK_MAXEPCHANCE)      ActorToSpawn = "DRPGEPDropper";
