@@ -109,6 +109,10 @@ NamedScript void AddXP(int PlayerNum, long int XP, long int Rank)
     // Don't forget to remove stupid fixed-point avoidance code after migration (if it happens)
     XP = (XP * (int)(GetCVarFixed("drpg_scalexp") * 100)) / 100;
 
+    // Caps for add XP and Rank
+    if (XP > Players(PlayerNum).XPNext / 10) XP = Players(PlayerNum).XPNext / 10;
+    if (Rank > Players(PlayerNum).RankNext / 40) Rank = Players(PlayerNum).RankNext / 40;
+
     Players(PlayerNum).ComboTimer = COMBO_MAX;
     Players(PlayerNum).Combo++;
 
