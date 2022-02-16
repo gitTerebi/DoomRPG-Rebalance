@@ -366,7 +366,7 @@ Start:
     MenuCursorColor = CursorColors[(Timer() / 3) % 6];
 
     // Calculate Shop Discount
-    Player.ShopDiscount = (int)((Player.RankLevel * 2.1) + (CurrentLevel->UACBase ? (Player.ShopCard * 5) : 0));
+    Player.ShopDiscount = (int)((Player.RankLevel * 1.05) + (CurrentLevel->UACBase ? (Player.ShopCard * 5) : 0));
 
     // Main Menu
     if (Player.InMenu)

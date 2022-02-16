@@ -277,7 +277,7 @@ NamedScript MapSpecial void ArenaChooseBonus()
             BonusChoice++;
             if (BonusChoice > ABONUS_MAX - (CanChooseKey ? 1 : 2)) BonusChoice = 1;
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
             ArenaGetBonus(BonusChoice);

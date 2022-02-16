@@ -106,7 +106,7 @@ actor DRPGHealthDropper : RandomSpawner 25001
 
 actor DRPGLifeDropper : RandomSpawner
 {
-    DropItem "DRPG1Up"              255 100
+    DropItem "DRPG1Up"              255 194
     DropItem "DRPG3Up"              255 5
     DropItem "DRPG5Up"              255 1
 }

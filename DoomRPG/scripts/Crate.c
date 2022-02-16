@@ -330,7 +330,7 @@ NamedScript void CrateHack()
         }
 
         // Input
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             bool HitNothing = true;
             XPBonus = ((XPTable[Player.Level] / 100l) + 50) / 50 * 50;

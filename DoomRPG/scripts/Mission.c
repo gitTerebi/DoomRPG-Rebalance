@@ -273,7 +273,7 @@ MissionInfo CreateMission(int Difficulty)
     {
         // Generate Item and Amount
         int ItemIndex = Random(0, MAX_LOOT - 1);
-        int Amount = 15 + (Difficulty * 15);
+        int Amount = 20 + (Difficulty * 20);
         ItemInfoPtr ItemPtr = &ItemData[7][ItemIndex];
 
         // Pass data to the Mission struct

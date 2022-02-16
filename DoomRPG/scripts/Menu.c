@@ -2045,7 +2045,7 @@ void MenuInput()
             Player.MenuIndex++;
             if (Player.MenuIndex > MAX_MENU - 1) Player.MenuIndex = 0;
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             Player.MenuBlock = true;
 
@@ -2136,7 +2136,7 @@ void MenuInput()
                 if (Player.MenuIndex > STAT_MAX - 1) Player.MenuIndex = 0;
             }
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
             if (Player.StatPage == STATPAGE_STATS)
                 IncreaseStat(Player.MenuIndex);
             else if (Player.StatPage == STATPAGE_TEAM && Player.MenuIndex != PlayerNumber())
@@ -2180,7 +2180,7 @@ void MenuInput()
             ActivatorSound("menu/move", 127);
             Player.MenuIndex++;
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             EquipAug(Player.MenuIndex);
 
@@ -2258,7 +2258,7 @@ void MenuInput()
                 Player.MenuIndex++;
             }
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
             IncreaseSkill(Player.SkillPage, Player.MenuIndex);
         if (CheckInput(BT_ATTACK, KEY_ONLYPRESSED, false, PlayerNumber()))
             UseSkill(0);
@@ -2330,7 +2330,7 @@ void MenuInput()
                 if (Player.MenuIndex > PartsMax - 1) Player.MenuIndex = 0;
             }
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             if (Player.MenuIndex < PartsMax)
             {
@@ -2401,7 +2401,7 @@ void MenuInput()
             Player.StimSelected++;
             ActivatorSound("menu/move", 127);
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             if (Player.MenuIndex == 0)
                 SetStim(Player.StimSelected);
@@ -2435,7 +2435,7 @@ void MenuInput()
             Player.MenuIndex++;
             ActivatorSound("menu/move", 127);
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             if (Player.TurretPage == TURRETPAGE_COMMAND)
                 TurretCommand(Player.MenuIndex);

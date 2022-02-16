@@ -392,7 +392,7 @@ void ShopLoop()
             else if (Player.ItemAutoMode[Player.ShopPage][Player.ShopIndex] != AT_SELL)
                 BuyItem(ItemPtr->Actor);
         }
-    //
+
     if (CheckInput(BT_JUMP, KEY_PRESSED, false, PlayerNumber()) && (GetCVar("drpg_shoptype") == 2 || CurrentLevel->UACBase))
     {
         Player.LockerMode = !Player.LockerMode;
@@ -911,8 +911,9 @@ void CheckShopCard()
     if (CheckInventory("DRPGDiamondUACCard"))
         Player.ShopCard = 5;
 
-    if (Player.ShopCard == 5 && !ItemRanksRemoved)
-        RemoveItemRanks();
+//  Disabled this to increase the duration of opening rare items in the store 
+//  if (Player.ShopCard == 5 && !ItemRanksRemoved)
+//      RemoveItemRanks();
 
     for (int i = 0; i < MAX_PLAYERS; i++)
         if (Players(i).ShopCard > GlobalShopCard)

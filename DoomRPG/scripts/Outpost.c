@@ -644,7 +644,7 @@ NamedScript MapSpecial void LevelTransport()
                 LevelChoice += 10;
             }
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             if (CurrentLevel == TeleDest)
             {
@@ -777,7 +777,7 @@ NamedScript MapSpecial void SkillComputer()
             ActivatorSound("menu/move", 127);
             SkillChoice++;
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             SetSkill(SkillChoice);
             SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
@@ -901,7 +901,7 @@ NamedScript MapSpecial void SelectArenaWave()
             WaveChoice += 10;
             if (WaveChoice > ArenaMaxWave) WaveChoice = ArenaMaxWave;
         }
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             if (WaveChoice > 1)
                 ArenaWave = WaveChoice - 1;
@@ -1295,7 +1295,7 @@ NamedScript MapSpecial void ShopSpecial()
             FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
 
         // Input
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             // Buy Item
             if (CheckInventory("DRPGCredits") >= Cost)
@@ -1457,7 +1457,7 @@ NamedScript MapSpecial void MissionBBS()
                     Index = MAX_MISSIONS - 1;
             }
         };
-        if (CheckInput(BT_USE, KEY_ONLYPRESSED, false, PlayerNumber()) && !Player.Mission.Active)
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()) && !Player.Mission.Active)
         {
             ActivatorSound("mission/get", 127);
             Mission->Active = true;

@@ -2596,7 +2596,7 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGLifeDropper", 96);
             DropMonsterItem(Killer, 0, "DRPGModulePickup", 256);
             DropMonsterItem(Killer, 0, "DRPGAugDropper", 96);
-            DropMonsterItem(Killer, 0, "DRPGUACCard", 48 / (Players(Killer).ShopCard + 1));
+            DropMonsterItem(Killer, 0, "DRPGUACCard", (40 / (Players(Killer).ShopCard + 1)));
             DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 64);
             DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 32);
             DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
@@ -2662,7 +2662,7 @@ NamedScript void MonsterDeath()
 
             DropMonsterItem(Killer, 0, "DRPGArmorDropper", 128);
             DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 64);
-            DropMonsterItem(Killer, 0, "DRPGDiamondUACCard", 8);
+            DropMonsterItem(Killer, 0, "DRPGUACCard", 16);
 
             if (CompatMode == COMPAT_DRLA)
             {

@@ -1227,7 +1227,7 @@ NamedScript DECORATE void SpawnLuckItem()
     int Luck = AveragePlayerLuck();
     str ActorToSpawn;
 
-    ActorToSpawn = "DRPGMoneyDropper";
+    ActorToSpawn = "DRPGEmpty";
 
 //   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 30.57) ActorToSpawn = "DRPGAmmoDropper";
 //   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 23.35) ActorToSpawn = "DRPGChipDropper";
