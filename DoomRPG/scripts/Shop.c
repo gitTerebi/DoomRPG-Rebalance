@@ -911,7 +911,7 @@ void CheckShopCard()
     if (CheckInventory("DRPGDiamondUACCard"))
         Player.ShopCard = 5;
 
-//  Disabled this to increase the duration of opening rare items in the store 
+//  Disabled this to increase the duration of opening rare items in the store
 //  if (Player.ShopCard == 5 && !ItemRanksRemoved)
 //      RemoveItemRanks();
 
