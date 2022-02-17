@@ -1,4 +1,3 @@
 // DoomRPG
-server int		drpg_ws_use_wads = 8;
 server bool		drpg_drla_demonic_boss_disable = false;
 server bool		drpg_drla_unique_boss_disable = false;

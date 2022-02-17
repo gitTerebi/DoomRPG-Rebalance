@@ -1,6 +1,7 @@
 #include "RPG.h"
 
 #include <stdlib.h>
+#include "Map.h"
 #include "ItemData.h"
 #include "Shield.h"
 #include "Utils.h"
@@ -425,14 +426,14 @@ NamedScript void BuildItemData()
 
         // Exotic Weapons
         ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                 1500,  2, 1, "BLASX0", 12, 14);
-        ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 2, "OLOKX0", 10, 13);
-        ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 3, "DEAPX0", 11, 14);
-        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                         6000,  4, 3, "MRKPX0",  9, 12);
+        ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 1, "OLOKX0", 10, 13);
+        ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 2, "DEAPX0", 11, 14);
+        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                         6000,  4, 2, "MRKPX0",  9, 12);
         ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          28000, 10, 7, "NSSGX0", 27,  9);
         ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        24000,  8, 5, "ASHOX0", 31, 27);
-        ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                    10000,  6, 4, "RUZIX0", 20, 26);
+        ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                    10000,  6, 3, "RUZIX0", 20, 26);
         ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                30000, 10, 7, "ZGGGX0", 30, 20);
-        ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                       32000, 10, 6, "CLAUX0", 45, 24);
+        ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                       32000, 10, 5, "CLAUX0", 45, 24);
         ITEMDATA_DEF("RLNapalmLauncher",                        "Napalm Launcher \Ct[Exotic]\C-",                        35000, 10, 7, "NAPAX0", 22, 20);
         ITEMDATA_DEF("RLLaserRifle",                            "Laser Rifle \Ct[Exotic]\C-",                            45000, 11, 7, "LASRX0", 18, 11);
         ITEMDATA_DEF("RLPlasmaShotgun",                         "Plasma Shotgun \Ct[Exotic]\C-",                         30000, 10, 4, "PSHOX0", 22, 14);
@@ -447,7 +448,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLVanguardRifle",                         "Vanguard Rifle \Ci[Superior]\C-",                       40000, 10, 6, "VANRX0", 26, 13);
         ITEMDATA_DEF("RLHuntingRevolver",                       "Hunting Revolver \Ci[Superior]\C-",                     35000,  8, 5, "HREVX0", 12, 14);
         ITEMDATA_DEF("RLThompson",                              "Tommy Gun \Ci[Superior]\C-",                            30000,  8, 5, "TGUNX0", 23, 17);
-        ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  20000,  8, 5, "BPP7X0", 8,  10);
+        ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  20000,  8, 4, "BPP7X0", 8,  10);
         ITEMDATA_DEF("RLHuntingShotgun",                        "Hunting Shotgun \Ci[Superior]\C-",                      60000, 12, 8, "HUNTX0", 32, 12);
         ITEMDATA_DEF("RLRCP90",                                 "RC-P90 \Ci[Superior]\C-",                               56000, 11, 8, "RCP9X0", 24, 15);
 
@@ -1229,10 +1230,10 @@ NamedScript DECORATE void SpawnLuckItem()
 
     ActorToSpawn = "DRPGEmpty";
 
-//   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 30.57) ActorToSpawn = "DRPGAmmoDropper";
-//   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 23.35) ActorToSpawn = "DRPGChipDropper";
-    if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 17.12) ActorToSpawn = "DRPGChipDropper";
-    if (Luck >= LUCK_MODULEDROP  && RandomFixed(0.0, 100.0) <= 12.25) ActorToSpawn = "DRPGBatteryDropper";
+//   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 30.00) ActorToSpawn = "DRPGAmmoDropper";
+//   if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= 20.00) ActorToSpawn = "DRPGChipDropper";
+    if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= 15.00) ActorToSpawn = "DRPGChipDropper";
+    if (Luck >= LUCK_MODULEDROP  && RandomFixed(0.0, 100.0) <= 10.00) ActorToSpawn = "DRPGBatteryDropper";
     if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=  5.00) ActorToSpawn = "DRPGCrate";
 
     if (Luck >= LUCK_HEALTHDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXHEALTHCHANCE)  ActorToSpawn = "DRPGHealthDropper";
@@ -1246,6 +1247,118 @@ NamedScript DECORATE void SpawnLuckItem()
     if (Luck >= LUCK_SHIELDDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXSHIELDCHANCE)  ActorToSpawn = "DRPGShieldDropper";
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+
+    Thing_Remove(0);
+}
+
+NamedScript DECORATE void DRPGArmorSpawner()
+{
+    str ActorToSpawn;
+    bool ItemSpawned = false;
+    int ItemCategory = (Random(0, 9) <= 0 ? 9 : 3);
+    int RarityMin = 0;
+    int RarityMax = 0;
+    int Amount = 0;
+    fixed LevelNum = CurrentLevel->LevelNum;
+    fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
+    fixed LevelMod = LevelNum / (LevelMax / (2.0 - (LevelNum / LevelMax)));
+
+    // Calculate Level/Rank/Luck Modifier
+    int Modifier = (int)(((fixed)AveragePlayerLevel() / 15.0 + (fixed)AveragePlayerRank() / 12.0 + (fixed)AveragePlayerLuck() / 15.0) * LevelMod);
+    if (Modifier > 15)
+        Modifier = 15;
+
+    // Calculate Rarity Max
+    for (int i = RarityMax; i < 10; i++)
+        if (Random(0, Random(3, 7) + RarityMax - Modifier) <= 0)
+            RarityMax++;
+    if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
+        RarityMax = 0;
+    if (RarityMax > 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 20))
+        RarityMax = 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 20);
+    if (RarityMax > 10)
+        RarityMax = 10;
+
+    if (Random(0, 100) <= 50)
+    {
+        RarityMin = Random(0, RarityMax);
+
+        for (int i = 0; i <= ItemMax[ItemCategory]; i++)
+        {
+            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax && !ItemSpawned)
+            {
+                if (Random(0, 1 + Amount) <= 0)
+                {
+                    ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+                    ItemSpawned = true;
+                }
+                Amount++;
+            }
+        }
+    }
+
+    if (!ItemSpawned)
+    {
+        SpawnSpotFacingForced(ItemData[3][0].Actor, 0, ActivatorTID());
+        ItemSpawned = true;
+    }
+
+    Thing_Remove(0);
+}
+
+NamedScript DECORATE void DRPGWeaponSpawner()
+{
+    str ActorToSpawn;
+    bool ItemSpawned = false;
+    int ItemCategory = 0;
+    int RarityMin = 0;
+    int RarityMax = 0;
+    int Amount = 0;
+    fixed LevelNum = CurrentLevel->LevelNum;
+    fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
+    fixed LevelMod = LevelNum / (LevelMax / (2.0 - (LevelNum / LevelMax)));
+
+    // Calculate Level/Rank/Luck Modifier
+    int Modifier = (int)(((fixed)AveragePlayerLevel() / 15.0 + (fixed)AveragePlayerRank() / 12.0 + (fixed)AveragePlayerLuck() / 15.0) * LevelMod);
+    if (Modifier > 15)
+        Modifier = 15;
+
+    // Calculate Rarity Max
+    for (int i = RarityMax; i < 10; i++)
+        if (Random(0, Random(3, 7) + RarityMax - Modifier) <= 0)
+            RarityMax++;
+    if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
+        RarityMax = 0;
+    if (RarityMax > 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 20))
+        RarityMax = 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 20);
+    if (RarityMax > 10)
+        RarityMax = 10;
+
+    if (Random(0, 100) <= 50)
+    {
+        RarityMin = Random(0, RarityMax);
+
+        for (int i = 0; i <= ItemMax[ItemCategory]; i++)
+        {
+            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax && !ItemSpawned)
+            {
+                if (Random(0, 1 + Amount) <= 0)
+                {
+                    ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+                    ItemSpawned = true;
+                }
+                Amount++;
+            }
+        }
+    }
+
+    if (!ItemSpawned)
+    {
+        SpawnSpotFacingForced(ItemData[ItemCategory][Random(0, 9)].Actor, 0, ActivatorTID());
+        ItemSpawned = true;
+    }
 
     Thing_Remove(0);
 }

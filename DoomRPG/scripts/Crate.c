@@ -3,6 +3,7 @@
 
 #include "Crate.h"
 #include "ItemData.h"
+#include "Map.h"
 #include "Stats.h"
 #include "Utils.h"
 
@@ -48,9 +49,14 @@ NamedScript DECORATE void InitCrate()
 {
     int TID = UniqueTID();
     int Amount = 3;
-    int LuckMod = (int)((fixed)(AveragePlayerLevel() / (10.0 + (fixed)AveragePlayerLevel() / 20.0)) + (fixed)(AveragePlayerRank() / (6.0 + (fixed)AveragePlayerRank() / 4.0)) + (fixed)(AveragePlayerLuck() / (15.0 + (fixed)AveragePlayerLuck() / 20.0)));
-    if (LuckMod > 13)
-        LuckMod = 13;
+    fixed LevelNum = CurrentLevel->LevelNum;
+    fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
+    fixed LevelMod = LevelNum / (LevelMax / (2.0 - (LevelNum / LevelMax)));
+
+    // Calculate Level/Rank/Luck Modifier
+    int Modifier = (int)(((fixed)AveragePlayerLevel() / 15.0 + (fixed)AveragePlayerRank() / 12.0 + (fixed)AveragePlayerLuck() / 15.0) * LevelMod);
+    if (Modifier > 15)
+        Modifier = 15;
     int Rarity = 0;
     int Firewall = 0;
 
@@ -63,10 +69,12 @@ NamedScript DECORATE void InitCrate()
 
     // Calculate Rarity
     for (int i = Rarity; i < MAX_DIFFICULTIES - 1; i++)
-        if (Random(0, Random(6, MAX_DIFFICULTIES) + Rarity - LuckMod) <= 0)
+        if (Random(0, Random(3, MAX_DIFFICULTIES) + Rarity - Modifier) <= 0)
             Rarity++;
     if (Rarity < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         Rarity = 0;
+    if (Rarity > 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 25))
+        Rarity = 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 25);
     if (Rarity > MAX_DIFFICULTIES - 1)
         Rarity = MAX_DIFFICULTIES - 1;
 

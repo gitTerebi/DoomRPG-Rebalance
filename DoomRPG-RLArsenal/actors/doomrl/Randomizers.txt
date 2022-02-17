@@ -17,18 +17,12 @@ actor RLStandardWeaponSpawner : RandomSpawner
 
 actor DRPGArmorDropper2 : RandomSpawner Replaces DRPGArmorDropper
 {
-    DropItem "DRPGEmpty"                   255 70
-    DropItem "RLExoticArmorSpawner"        255 20
-    DropItem "RLAssembledArmorSpawner"     255 8
-    DropItem "RLUniqueArmorSpawner"        255 2
+    DropItem "DRPGArmorSpawner"
 }
 
 actor DRPGWeaponDropper2 : RandomSpawner Replaces DRPGWeaponDropper
 {
-    DropItem "DRPGEmpty"                   255 70
-    DropItem "RLExoticWeaponSpawner"       255 20
-    DropItem "RLSuperiorWeaponSpawner"     255 8
-    DropItem "RLUniqueWeaponSpawner"       255 2
+    DropItem "DRPGWeaponSpawner"
 }
 
 actor DRPGHealthDropper2 : RandomSpawner Replaces DRPGHealthDropper
@@ -109,7 +103,7 @@ actor DRPGBackpackRandomizer2 : RandomSpawner Replaces DRPGBackpackRandomizer
     DropItem "DRPGSmallBackpack"   255 50
     DropItem "DRPGBackpack"        255 40
     DropItem "DRPGBigBackpack"     255 10
-    DropItem "DRPGCrate"           255 0
+//  DropItem "DRPGCrate"           255 0
 }
 
 // ARMOR ITEMS
@@ -136,20 +130,13 @@ actor DRPGDRLAArmorBonusSpawner
 // Green Armor Locations
 actor DRPGGreenArmorRandomizer2 : RandomSpawner Replaces DRPGGreenArmorRandomizer
 {
-    DropItem "RLArmorBonusPickup"       255 200
-    DropItem "RLStandardArmorSpawner"   255 50
-    DropItem "RLAdvancedArmorSpawner"   255 45
-    DropItem "RLExoticArmorSpawner"     255 5
+    DropItem "DRPGArmorSpawner"
 }
 
 // Blue Armor Locations
 actor DRPGBlueArmorRandomizer2 : RandomSpawner Replaces DRPGBlueArmorRandomizer
 {
-    DropItem "RLArmorBonusPickup"        255 200
-    DropItem "RLBlueArmorSpawner"        255 70
-    DropItem "RLExoticArmorSpawner"      255 20
-    DropItem "RLAssembledArmorSpawner"   255 9
-    DropItem "RLUniqueArmorSpawner"      255 1
+    DropItem "DRPGArmorSpawner"
 }
 
 // POWERUPS
@@ -192,4 +179,55 @@ actor DRPGShopPowerupRandomizer2 : RandomSpawner Replaces DRPGShopPowerupRandomi
     DropItem "Berserk2"
 
     DropItem "RLTrackingMap"
+}
+
+//DOOMRPG REBALANCE RANDOM SPAWNERS
+actor RLChainsawSpawner3 : RandomSpawner 2005
+{
+    DropItem "RLChainsawPickup"       255 90
+    DropItem "DRPGWeaponSpawner"      255 10
+}
+
+actor RLPistolSpawner3 : RandomSpawner 5010
+{
+    DropItem "RLPistolPickup"         255 90
+    DropItem "DRPGWeaponSpawner"      255 10
+}
+
+actor RLShotgunSpawner3 : RandomSpawner Replaces RLShotgunSpawner
+{
+    DropItem "RLShotgunPickup"        255 70
+    DropItem "RLCombatShotgunPickup"  255 20
+    DropItem "DRPGWeaponSpawner"      255 10
+}
+
+actor RLSuperShotgunSpawner3 : RandomSpawner 82
+{
+    DropItem "RLDoubleShotgunPickup"  255 90
+    DropItem "DRPGWeaponSpawner"      255 10
+}
+
+actor RLChaingunSpawner3 : RandomSpawner Replaces RLChaingunSpawner
+{
+    DropItem "RLBattleRiflePickup"    255 55
+    DropItem "RLChaingunPickup"       255 35
+    DropItem "DRPGWeaponSpawner"      255 10
+}
+
+actor RLRocketLauncherSpawner3 : RandomSpawner 2003
+{
+    DropItem "RLRocketLauncherPickup" 255 90
+    DropItem "DRPGWeaponSpawner"      255 10
+}
+
+actor RLPlasmaRifleSpawner3 : RandomSpawner 2004
+{
+    DropItem "RLPlasmaRiflePickup"    255 90
+    DropItem "DRPGWeaponSpawner"      255 10
+}
+
+actor RLBFG9000Spawner3 : RandomSpawner 2006
+{
+    DropItem "RLBFG9000Pickup"        255 90
+    DropItem "DRPGWeaponSpawner"      255 10
 }

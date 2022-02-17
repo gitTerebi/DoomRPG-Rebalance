@@ -255,6 +255,7 @@ user    bool    drpg_shield_sound_empty_enable = true;
 user    bool    drpg_shield_sound_charge_enable = true;
 user    bool    drpg_shield_sound_full_enable = true;
 user    bool    drpg_shield_effect_hit_enable = true;
+server  int     drpg_ws_use_wads = 8;
 
 // Performance
 user    bool    drpg_toaster = false;

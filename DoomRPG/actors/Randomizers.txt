@@ -913,3 +913,24 @@ actor DRPGItemDropper
         Stop
     }
 }
+
+//DOOMRPG REBALANCE ACS RANDOMIZERS
+actor DRPGArmorSpawner : MapSpot
+{
+    States
+    {
+    Spawn:
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGArmorSpawner")
+        Stop
+    }
+}
+
+actor DRPGWeaponSpawner : MapSpot
+{
+    States
+    {
+    Spawn:
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner")
+        Stop
+    }
+}

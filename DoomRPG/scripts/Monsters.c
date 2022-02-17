@@ -2599,6 +2599,8 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGUACCard", (40 / (Players(Killer).ShopCard + 1)));
             DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 64);
             DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 32);
+            DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
             DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
 
             if (Players(Killer).LuckTotal >= 15)
@@ -2609,13 +2611,11 @@ NamedScript void MonsterDeath()
             if (Players(Killer).LuckTotal >= 25)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier2", 32);
-                DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
             }
 
             if (Players(Killer).LuckTotal >= 50)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier3", 16);
-                DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
             }
 
             if (Players(Killer).LuckTotal >= 70)
