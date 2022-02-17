@@ -73,8 +73,8 @@ NamedScript DECORATE void InitCrate()
             Rarity++;
     if (Rarity < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         Rarity = 0;
-    if (Rarity > 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 25))
-        Rarity = 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 25);
+    if (Rarity > 1 + (int)(8.0 * LevelMod))
+        Rarity = 1 + (int)(8.0 * LevelMod);
     if (Rarity > MAX_DIFFICULTIES - 1)
         Rarity = MAX_DIFFICULTIES - 1;
 

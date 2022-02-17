@@ -1274,8 +1274,8 @@ NamedScript DECORATE void DRPGArmorSpawner()
             RarityMax++;
     if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         RarityMax = 0;
-    if (RarityMax > 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 20))
-        RarityMax = 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 20);
+    if (RarityMax > 1 + (int)(10.0 * LevelMod))
+        RarityMax = 1 + (int)(10.0 * LevelMod);
     if (RarityMax > 10)
         RarityMax = 10;
 
@@ -1330,8 +1330,8 @@ NamedScript DECORATE void DRPGWeaponSpawner()
             RarityMax++;
     if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         RarityMax = 0;
-    if (RarityMax > 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 20))
-        RarityMax = 1 + ((AveragePlayerLevel() + AveragePlayerLuck()) / 20);
+    if (RarityMax > 1 + (int)(10.0 * LevelMod))
+        RarityMax = 1 + (int)(10.0 * LevelMod);
     if (RarityMax > 10)
         RarityMax = 10;
 
