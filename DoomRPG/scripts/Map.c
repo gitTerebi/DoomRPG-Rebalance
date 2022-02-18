@@ -2901,10 +2901,14 @@ NamedScript void SinstormSpawner(int PlayerTID)
     bool Success;
     int Tries;
     int TID;
+    int Waves = 3 * AveragePlayerLevel() / 10;
 
     while (true)
     {
-        Delay(35 * 45);
+        if (Waves <= 0)
+            break;
+
+        Delay(35 * 60);
 
         Success = false;
         Tries = 10;
@@ -2915,7 +2919,10 @@ NamedScript void SinstormSpawner(int PlayerTID)
             Success = Spawn("DRPGSinstormRift", GetActorX(0) + RandomFixed(-1024.0, 1024.0), GetActorY(0) + RandomFixed(-1024.0, 1024.0), GetActorFloorZ(0), TID, 0);
 
             if (Success)
+            {
                 Success = CheckSight(0, TID, 0);
+                Waves--;
+            }
 
             if (!Success)
                 Thing_Remove(TID);

@@ -3,7 +3,6 @@
 
 #include "Crate.h"
 #include "ItemData.h"
-#include "Map.h"
 #include "Stats.h"
 #include "Utils.h"
 
@@ -49,12 +48,9 @@ NamedScript DECORATE void InitCrate()
 {
     int TID = UniqueTID();
     int Amount = 3;
-    fixed LevelNum = CurrentLevel->LevelNum;
-    fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
-    fixed LevelMod = LevelNum / (LevelMax / (2.0 - (LevelNum / LevelMax)));
 
-    // Calculate Level/Rank/Luck Modifier
-    int Modifier = (int)(((fixed)AveragePlayerLevel() / 15.0 + (fixed)AveragePlayerRank() / 12.0 + (fixed)AveragePlayerLuck() / 15.0) * LevelMod);
+    // Calculate Level/Luck Modifier
+    int Modifier = (int)(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelMod());
     if (Modifier > 15)
         Modifier = 15;
     int Rarity = 0;
@@ -73,8 +69,8 @@ NamedScript DECORATE void InitCrate()
             Rarity++;
     if (Rarity < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         Rarity = 0;
-    if (Rarity > 1 + (int)(8.0 * LevelMod))
-        Rarity = 1 + (int)(8.0 * LevelMod);
+    if (Rarity > 1 + (int)(((fixed)MAX_DIFFICULTIES - 1.0) * MapLevelMod()))
+        Rarity = 1 + (int)(((fixed)MAX_DIFFICULTIES - 1.0) * MapLevelMod());
     if (Rarity > MAX_DIFFICULTIES - 1)
         Rarity = MAX_DIFFICULTIES - 1;
 

@@ -184,50 +184,50 @@ actor DRPGShopPowerupRandomizer2 : RandomSpawner Replaces DRPGShopPowerupRandomi
 //DOOMRPG REBALANCE RANDOM SPAWNERS
 actor RLChainsawSpawner3 : RandomSpawner 2005
 {
-    DropItem "RLChainsawPickup"       255 90
-    DropItem "DRPGWeaponSpawner"      255 10
+    DropItem "RLChainsawPickup"       255 85
+    DropItem "DRPGWeaponSpawner"      255 15
 }
 
 actor RLPistolSpawner3 : RandomSpawner 5010
 {
-    DropItem "RLPistolPickup"         255 90
-    DropItem "DRPGWeaponSpawner"      255 10
+    DropItem "RLPistolPickup"         255 85
+    DropItem "DRPGWeaponSpawner"      255 15
 }
 
 actor RLShotgunSpawner3 : RandomSpawner Replaces RLShotgunSpawner
 {
-    DropItem "RLShotgunPickup"        255 70
-    DropItem "RLCombatShotgunPickup"  255 20
-    DropItem "DRPGWeaponSpawner"      255 10
+    DropItem "RLShotgunPickup"        255 55
+    DropItem "RLCombatShotgunPickup"  255 30
+    DropItem "DRPGWeaponSpawner"      255 15
 }
 
 actor RLSuperShotgunSpawner3 : RandomSpawner 82
 {
-    DropItem "RLDoubleShotgunPickup"  255 90
-    DropItem "DRPGWeaponSpawner"      255 10
+    DropItem "RLDoubleShotgunPickup"  255 85
+    DropItem "DRPGWeaponSpawner"      255 15
 }
 
 actor RLChaingunSpawner3 : RandomSpawner Replaces RLChaingunSpawner
 {
     DropItem "RLBattleRiflePickup"    255 55
-    DropItem "RLChaingunPickup"       255 35
-    DropItem "DRPGWeaponSpawner"      255 10
+    DropItem "RLChaingunPickup"       255 30
+    DropItem "DRPGWeaponSpawner"      255 15
 }
 
 actor RLRocketLauncherSpawner3 : RandomSpawner 2003
 {
-    DropItem "RLRocketLauncherPickup" 255 90
-    DropItem "DRPGWeaponSpawner"      255 10
+    DropItem "RLRocketLauncherPickup" 255 85
+    DropItem "DRPGWeaponSpawner"      255 15
 }
 
 actor RLPlasmaRifleSpawner3 : RandomSpawner 2004
 {
-    DropItem "RLPlasmaRiflePickup"    255 90
-    DropItem "DRPGWeaponSpawner"      255 10
+    DropItem "RLPlasmaRiflePickup"    255 85
+    DropItem "DRPGWeaponSpawner"      255 15
 }
 
 actor RLBFG9000Spawner3 : RandomSpawner 2006
 {
-    DropItem "RLBFG9000Pickup"        255 90
-    DropItem "DRPGWeaponSpawner"      255 10
+    DropItem "RLBFG9000Pickup"        255 85
+    DropItem "DRPGWeaponSpawner"      255 15
 }

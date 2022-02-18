@@ -1047,6 +1047,25 @@ bool IsTimeFrozen()
     return false;
 }
 
+// Calculate current map level modifier
+fixed MapLevelMod()
+{
+    fixed LevelNum = CurrentLevel->LevelNum;
+    fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
+    fixed MapLevelMod = LevelNum / (LevelMax / (2.0 - (LevelNum / LevelMax)));
+
+    if (MapLevelMod > 0.5)
+        MapLevelMod = LevelNum / LevelMax + (0.3 - (0.3 * LevelNum / LevelMax));
+
+    if (CurrentLevel->UACBase)
+        MapLevelMod = AveragePlayerLevel() / 100.0;
+
+    if (MapLevelMod > 1.0)
+        MapLevelMod = 1.0;
+
+    return MapLevelMod;
+}
+
 // --------------------------------------------------
 // Inventory
 //

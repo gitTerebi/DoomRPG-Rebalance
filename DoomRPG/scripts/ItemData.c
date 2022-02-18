@@ -1,7 +1,6 @@
 #include "RPG.h"
 
 #include <stdlib.h>
-#include "Map.h"
 #include "ItemData.h"
 #include "Shield.h"
 #include "Utils.h"
@@ -1127,7 +1126,7 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         if (GetCVar("drpg_loot_rcm"))
         {
             DiffPick = RandomFixed(0.0, 100.0);
-            if (DiffPick < (70.0 - ((fixed)AveragePlayerLuck() / 5.0 + (fixed)AveragePlayerLevel() / 5.0))) Difficulty--; // Unlucky, item will be a rank lower
+            if (DiffPick < (70.0 - 35.0 * MapLevelMod())) Difficulty--; // Unlucky, item will be a rank lower
             if (DiffPick > 95.0) Difficulty++; // Lucky, item will be a rank higher
         }
 
@@ -1135,7 +1134,7 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         if (Difficulty < 0) Difficulty = 0;
         if (Difficulty > 9) Difficulty = 9;
 
-        else if (RandomFixed(0.0, 100.0) < (90.0 - ((fixed)AveragePlayerLuck() / 10.0 + (fixed)AveragePlayerLevel() / 10.0))) // Stims/Augs/Turret
+        else if (RandomFixed(0.0, 100.0) < (90.0 - 20.0 * MapLevelMod())) // Stims/Augs/Turret
         {
             Cap = 0;
 
@@ -1259,12 +1258,9 @@ NamedScript DECORATE void DRPGArmorSpawner()
     int RarityMin = 0;
     int RarityMax = 0;
     int Amount = 0;
-    fixed LevelNum = CurrentLevel->LevelNum;
-    fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
-    fixed LevelMod = LevelNum / (LevelMax / (2.0 - (LevelNum / LevelMax)));
 
-    // Calculate Level/Rank/Luck Modifier
-    int Modifier = (int)(((fixed)AveragePlayerLevel() / 15.0 + (fixed)AveragePlayerRank() / 12.0 + (fixed)AveragePlayerLuck() / 15.0) * LevelMod);
+    // Calculate Level/Luck Modifier
+    int Modifier = (int)(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelMod());
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1274,14 +1270,14 @@ NamedScript DECORATE void DRPGArmorSpawner()
             RarityMax++;
     if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         RarityMax = 0;
-    if (RarityMax > 1 + (int)(10.0 * LevelMod))
-        RarityMax = 1 + (int)(10.0 * LevelMod);
+    if (RarityMax > 1 + (int)(10.0 * MapLevelMod()))
+        RarityMax = 1 + (int)(10.0 * MapLevelMod());
     if (RarityMax > 10)
         RarityMax = 10;
 
     if (Random(0, 100) <= 50)
     {
-        RarityMin = Random(0, RarityMax);
+        RarityMin = Random(0, RarityMax / 2);
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {
@@ -1315,12 +1311,9 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     int RarityMin = 0;
     int RarityMax = 0;
     int Amount = 0;
-    fixed LevelNum = CurrentLevel->LevelNum;
-    fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
-    fixed LevelMod = LevelNum / (LevelMax / (2.0 - (LevelNum / LevelMax)));
 
-    // Calculate Level/Rank/Luck Modifier
-    int Modifier = (int)(((fixed)AveragePlayerLevel() / 15.0 + (fixed)AveragePlayerRank() / 12.0 + (fixed)AveragePlayerLuck() / 15.0) * LevelMod);
+    // Calculate Level/Luck Modifier
+    int Modifier = (int)(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelMod());
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1330,14 +1323,14 @@ NamedScript DECORATE void DRPGWeaponSpawner()
             RarityMax++;
     if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         RarityMax = 0;
-    if (RarityMax > 1 + (int)(10.0 * LevelMod))
-        RarityMax = 1 + (int)(10.0 * LevelMod);
+    if (RarityMax > 1 + (int)(10.0 * MapLevelMod()))
+        RarityMax = 1 + (int)(10.0 * MapLevelMod());
     if (RarityMax > 10)
         RarityMax = 10;
 
     if (Random(0, 100) <= 50)
     {
-        RarityMin = Random(0, RarityMax);
+        RarityMin = Random(0, RarityMax / 2);
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {

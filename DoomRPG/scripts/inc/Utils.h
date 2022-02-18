@@ -69,6 +69,7 @@ bool IsPlayerMoving();
 int FindPlayerID(int);
 OptionalArgs(1) bool SetActivatorToTargetExtended(int, int);
 bool IsTimeFrozen();
+fixed MapLevelMod();
 
 // Inventory
 int CheckInventoryTID(int, str);
