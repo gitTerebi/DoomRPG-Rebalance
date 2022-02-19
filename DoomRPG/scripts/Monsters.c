@@ -2823,22 +2823,26 @@ NamedScript void MonsterDeath()
     {
         Delay(35 * (GetCVar("drpg_corpses_cleanup_timer")));
 
-        bool Sight;
+        bool Sight = true;
 
-        while (true)
+        while (Sight)
         {
-            if (CheckSight(0, Players(Killer).TID, 0))
-                Sight = true;
+            for (int i = 0; i < MAX_PLAYERS; i++)
+            {
+                if (!PlayerInGame(i)) continue;
 
-            if (Sight)
-            {
-                Sight = false;
-                Delay(35 * 10);
-            }
-            else
-            {
-                Thing_Remove(0);
-                break;
+                if (CheckSight(0, Players(i).TID, 0))
+                    Sight = true;
+                else
+                    Sight = false;
+
+                if (Sight)
+                    Delay(35 * 10);
+                else
+                {
+                    Thing_Remove(0);
+                    break;
+                }
             }
         }
     }
