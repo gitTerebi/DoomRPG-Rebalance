@@ -2821,11 +2821,26 @@ NamedScript void MonsterDeath()
 
     if (GetCVar("drpg_corpses_cleanup") > 0 && Random(1, 2) <= GetCVar("drpg_corpses_cleanup"))
     {
-        Delay(35 * (GetCVar("drpg_corpses_cleanup_timer") + Random(-6, 6)));
-        ActivatorSound("vile/firestrt", 80);
-        SpawnForced("DRPGFireCorpse", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-        SpawnForced("DRPGBurnedCorpse", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-        Thing_Remove(0);
+        Delay(35 * (GetCVar("drpg_corpses_cleanup_timer")));
+
+        bool Sight;
+
+        while (true)
+        {
+            if (CheckSight(0, Players(Killer).TID, 0))
+                Sight = true;
+
+            if (Sight)
+            {
+                Sight = false;
+                Delay(35 * 10);
+            }
+            else
+            {
+                Thing_Remove(0);
+                break;
+            }
+        }
     }
 }
 
