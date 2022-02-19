@@ -1311,7 +1311,7 @@ Start:
 
     Capacity = Stats->Capacity;
 
-    fixed Aggression = 0.25 + (Capacity * 0.00475);
+    fixed Aggression = 0.25 + (Capacity * 0.01);
 
     if (Aggression < 1.0)
     {
@@ -2816,6 +2816,15 @@ NamedScript void MonsterDeath()
     if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGFriendlyReviveMonster") && GetActorProperty(0, APROP_Health) <= 0)
     {
         SpawnForced("TeleportFog", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+        Thing_Remove(0);
+    }
+
+    if (GetCVar("drpg_corpses_cleanup") > 0 && Random(1, 2) <= GetCVar("drpg_corpses_cleanup"))
+    {
+        Delay(35 * (GetCVar("drpg_corpses_cleanup_timer") + Random(-6, 6)));
+        ActivatorSound("vile/firestrt", 80);
+        SpawnForced("DRPGFireCorpse", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+        SpawnForced("DRPGBurnedCorpse", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
         Thing_Remove(0);
     }
 }

@@ -89,6 +89,13 @@ OptionValue "SimpleAuras"
     3, "Both"
 }
 
+OptionValue "CorpsesCleanup"
+{
+    0, "Off"
+    1, "Half"
+    2, "Full"
+}
+
 OptionValue "StartArmorType"
 {
     -1, "None"
@@ -682,6 +689,8 @@ OptionMenu "DoomRPGPerformance"
     Option "Toaster Mode", "drpg_toaster", "OnOff"
     Option "Disable Fancy Auras", "drpg_simple_auras", "SimpleAuras"
     Option "Disable Players Aura Icons", "drpg_players_aura_icons_disable", "OnOff"
+    Option "Corpses Cleanup", "drpg_corpses_cleanup", "CorpsesCleanup"
+    Slider "Corpses Cleanup Timer (sec)", "drpg_corpses_cleanup_timer", 15, 120, 15
     StaticText ""
 
     Slider "Monster Aura Draw Distance*", "drpg_auras_drawdistance", 0, 10000, 100
