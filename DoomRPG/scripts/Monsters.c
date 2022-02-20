@@ -2832,17 +2832,19 @@ NamedScript void MonsterDeath()
                 if (!PlayerInGame(i)) continue;
 
                 if (CheckSight(0, Players(i).TID, 0))
-                    Sight = true;
-                else
-                    Sight = false;
-
-                if (Sight)
-                    Delay(35 * 10);
-                else
                 {
-                    Thing_Remove(0);
+                    Delay(35 * 10);
+                    Sight = true;
                     break;
                 }
+                else
+                    Sight = false;
+            }
+
+            if (!Sight)
+            {
+                Thing_Remove(0);
+                break;
             }
         }
     }
