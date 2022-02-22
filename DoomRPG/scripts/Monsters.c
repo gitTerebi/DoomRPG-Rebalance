@@ -2434,7 +2434,7 @@ NamedScript void MonsterDeath()
     else
         HealthXP = ((long int)Stats->HealthMax * (long int)(GetCVarFixed("drpg_xp_health_awareness") * 10l)) / 10l;
 
-    fixed ThreatMult = (fixed)Stats->Threat * (fixed)(1.0 + ((fixed)Stats->Level / ((fixed)GetCVar("drpg_ws_use_wads") * 6.0)) + 8.0 * PowFixed(MapLevelMod(), GetCVar("drpg_ws_use_wads")));
+    fixed ThreatMult = (fixed)Stats->Threat + ((fixed)Stats->Level / ((fixed)GetCVar("drpg_ws_use_wads") * 6.0)) + 8.0 * PowFixed(MapLevelMod(), GetCVar("drpg_ws_use_wads"));
     if (ThreatMult < 1.0)
         ThreatMult = 1.0;
 
@@ -3142,7 +3142,7 @@ int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
 
             if (StartsWith(Actor, MonsterIterPtr->Actor))
             {
-                Threat += (fixed)(MonsterIterPtr->ThreatLevel / 10.0);
+                Threat += (fixed)((0.25 - 0.01 * MonsterIterPtr->ThreatLevel) + MonsterIterPtr->ThreatLevel / 10.0);
                 break;
             }
         }

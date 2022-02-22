@@ -1060,7 +1060,7 @@ fixed MapLevelMod()
     if (CurrentLevel->UACBase)
         MapLevelMod = AveragePlayerLevel() / 100.0;
 
-    if (MapLevelMod > 1.0)
+    if (MapLevelMod > 1.0 || LevelNum / LevelMax > 1.0)
         MapLevelMod = 1.0;
 
     return MapLevelMod;
