@@ -2266,6 +2266,13 @@ int Pow(int x, int n)
     return y;
 }
 
+fixed PowFixed(fixed x, int n)
+{
+    fixed y = 1.0;
+    while (n-- > 0) y *= x;
+    return y;
+}
+
 // Return the absolute value of a negative integer
 int Abs(int x)
 {

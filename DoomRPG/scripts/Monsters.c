@@ -955,7 +955,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
             // 2nd roll: Number of auras to have
             int AuraRand = Random(Stats->Energy / 10, 200);
-            int AuraNumber = (AuraRand * AuraRand) / 4000;
+            int AuraNumber = ((AuraRand * AuraRand) / 4000) * MapLevelMod();
             if (AuraNumber < 1) AuraNumber = 1;
             if (AuraNumber > AURA_MAX) AuraNumber = AURA_MAX;
             if (!HasAura) AuraNumber = 0;
@@ -2428,19 +2428,18 @@ NamedScript void MonsterDeath()
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
     // Don't forget to remove stupid fixed-point avoidance code after migration (if it happens)
     int Killer = WhoKilledMe();
-    int HealthXP;
+    long int HealthXP;
     if (GetCVarFixed("drpg_xp_health_awareness") < 1.0)
-        HealthXP = Stats->SpawnHealth + ((Stats->HealthMax - Stats->SpawnHealth) * (int)(GetCVarFixed("drpg_xp_health_awareness") * 10)) / 10;
+        HealthXP = (long int)Stats->SpawnHealth + (((long int)Stats->HealthMax - (long int)Stats->SpawnHealth) * (long int)(GetCVarFixed("drpg_xp_health_awareness") * 10l)) / 10l;
     else
-        HealthXP = (Stats->HealthMax * (int)(GetCVarFixed("drpg_xp_health_awareness") * 10)) / 10;
+        HealthXP = ((long int)Stats->HealthMax * (long int)(GetCVarFixed("drpg_xp_health_awareness") * 10l)) / 10l;
 
-    int ThreatMult = Stats->Threat;
-    if (ThreatMult < 1)
-        ThreatMult = 1;
+    fixed ThreatMult = (fixed)Stats->Threat * (fixed)(1.0 + ((fixed)Stats->Level / ((fixed)GetCVar("drpg_ws_use_wads") * 6.0)) + 8.0 * PowFixed(MapLevelMod(), GetCVar("drpg_ws_use_wads")));
+    if (ThreatMult < 1.0)
+        ThreatMult = 1.0;
 
-    int LevelNum = CurrentLevel->LevelNum;
-    long int XPAmount = Random(HealthXP / 2, HealthXP) * ThreatMult * (long fixed)(1.0 + (Stats->Level / 50.0) + (LevelNum / 200.0));
-    long int RankAmount = HealthXP * ThreatMult * (long fixed)(1.0 + (Stats->Level / 50.0) + (LevelNum / 200.0));
+    long int XPAmount = Random(HealthXP / 2l, HealthXP) * (long fixed)ThreatMult;
+    long int RankAmount = HealthXP * (long fixed)ThreatMult;
 
     if (Players(Killer).Shield.Accessory)
     {
@@ -3118,7 +3117,7 @@ int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
     Threat += Stats->Agility;
     Threat += Stats->Capacity;
     Threat += Stats->Luck;
-    Threat /= 400.0;
+    Threat /= 200.0;
 
     // Auras
     for (int i = 0; i < AURA_MAX; i++)
@@ -3143,7 +3142,7 @@ int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
 
             if (StartsWith(Actor, MonsterIterPtr->Actor))
             {
-                Threat += (fixed)(MonsterIterPtr->ThreatLevel / 5.0);
+                Threat += (fixed)(MonsterIterPtr->ThreatLevel / 10.0);
                 break;
             }
         }
@@ -3153,7 +3152,7 @@ int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
     if (Threat > 10.0)
         Threat = 10.0;
 
-    return (Threat + 0.5);
+    return (RoundInt(Threat));
 }
 
 int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)
