@@ -622,6 +622,43 @@ int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed
     return ItemTID;
 }
 
+// Use for while if you want to make a delay when the monster sees the players
+bool MonsterSeePlayers(int MonsterTID, int Dist)
+{
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (!PlayerInGame(i)) continue;
+
+        if (!CheckSight(MonsterTID, Players(i).TID, 0) || Distance(MonsterTID, Players(i).TID) > Dist)
+            return false;
+    }
+
+    return true;
+}
+
+// Use for while if you want to make a delay when the monster doesn't see the players
+bool MonsterNotSeePlayers(int MonsterTID, int Dist)
+{
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (!PlayerInGame(i)) continue;
+
+        if (CheckSight(MonsterTID, Players(i).TID, 0) || Distance(MonsterTID, Players(i).TID) <= Dist)
+            return false;
+
+        if (!Players(i).Summons == 0)
+        {
+            for (int j = 0; j < Players(i).Summons; j++)
+            {
+                if (CheckSight(MonsterTID, Players(i).SummonTID[j], 0) || Distance(MonsterTID, Players(i).SummonTID[j]) <= Dist)
+                    return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 // --------------------------------------------------
 // Players
 //

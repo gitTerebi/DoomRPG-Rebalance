@@ -390,7 +390,8 @@ void DrawMainMenu()
         SetFont("SMALLFONT");
         HudMessage("Toxicity: %d%%", Player.Toxicity);
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 335.0, 0.05);
-        DrawToxicityBar(180.1, 335.0, false);
+        if (!GetCVar("drpg_toaster"))
+            DrawToxicityBar(180.1, 335.0, false);
     }
 }
 
@@ -1068,7 +1069,8 @@ void DrawStatsMenu()
             SetFont("BIGFONT");
             HudMessage("Toxicity: %d%%", Player.Toxicity);
             EndHudMessage(HUDMSG_PLAIN, 0, "Green", 276.1, 250.0, 0.05);
-            DrawToxicityBar(276.1, 250.0, true);
+            if (!GetCVar("drpg_toaster"))
+                DrawToxicityBar(276.1, 250.0, true);
         }
 
         // Shield
@@ -1754,7 +1756,8 @@ void DrawStimsMenu()
     }
 
     // Toxicity
-    DrawToxicityBar(40.1, 240.0, false);
+    if (!GetCVar("drpg_toaster"))
+        DrawToxicityBar(40.1, 240.0, false);
     SetFont("BIGFONT");
     HudMessage("Toxicity: %d%%", Player.Toxicity);
     EndHudMessage(HUDMSG_PLAIN, 0, "Green", 40.1, 240.0, 0.05);

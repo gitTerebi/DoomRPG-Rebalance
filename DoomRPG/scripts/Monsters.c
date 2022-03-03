@@ -519,29 +519,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
 
     // Delay if Toaster Mode on
     if (GetCVar("drpg_toaster"))
-    {
-        bool Sight;
-        int PlayersValue = MAX_PLAYERS;
-
-        while (!Sight)
-        {
-            for (int i = 0; i < PlayersValue; i++)
-            {
-                if (!PlayerInGame(i))
-                {
-                    PlayersValue--;
-                    continue;
-                }
-
-                if (Distance(0, Players(i).TID) <= 2048)
-                {
-                    Sight = true;
-                    break;
-                }
-            }
-            Delay(35);
-        }
-    }
+        while (MonsterNotSeePlayers(0, 2048)) Delay(35);
 
     // Start Damage Numbers Script
     DamageNumbers();
@@ -1228,6 +1206,10 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
+    // Delay if Toaster Mode on
+    if (GetCVar("drpg_toaster"))
+        while (MonsterNotSeePlayers(0, 0)) Delay(10);
+
     // Changing the AI of monsters in case if there are summoned monsters
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
@@ -1504,6 +1486,10 @@ Start:
         TakeInventory("DRPGMonsterStatsHandler", 1);
         return;
     }
+
+    // Delay if Toaster Mode on
+    if (GetCVar("drpg_toaster"))
+        while (MonsterNotSeePlayers(0, 2048)) Delay(35);
 
     // Monster is no longer friendly, remove their summon bonuses and species
     // This causes issues with infighting and I don't remember why I did this in the first place
@@ -2859,35 +2845,9 @@ NamedScript void MonsterDeath()
     {
         Delay(35 * (GetCVar("drpg_corpses_cleanup_timer")));
 
-        bool Sight = true;
-        int PlayersValue = MAX_PLAYERS;
+        while (MonsterSeePlayers(0, 2048)) Delay(35 * 10);
 
-        while (Sight)
-        {
-            for (int i = 0; i < PlayersValue; i++)
-            {
-                if (!PlayerInGame(i))
-                {
-                    PlayersValue--;
-                    continue;
-                }
-
-                if (CheckSight(0, Players(i).TID, 0))
-                {
-                    Delay(35 * 10);
-                    Sight = true;
-                    break;
-                }
-                else
-                    Sight = false;
-            }
-
-            if (!Sight)
-            {
-                Thing_Remove(0);
-                break;
-            }
-        }
+        Thing_Remove(0);
     }
 }
 

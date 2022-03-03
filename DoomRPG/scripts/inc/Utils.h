@@ -42,6 +42,8 @@ NamedScript DECORATE void HealMonster(int, int);
 NamedScript DECORATE void TeleportMonster();
 void DropMoney(int, int, int);
 OptionalArgs(6) int DropMonsterItem(int, int, str, int, fixed, fixed, fixed, fixed, fixed, fixed);
+bool MonsterSeePlayers(int, int);
+bool MonsterNotSeePlayers(int, int);
 
 // Players
 NamedScript DECORATE void RegenBoost();
