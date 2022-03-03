@@ -686,7 +686,7 @@ OptionMenu "DoomRPGPerformance"
 {
     Title "Performance"
 
-    Option "Toaster Mode", "drpg_toaster", "OnOff"
+    Option "Toaster Mode*", "drpg_toaster", "OnOff"
     Option "Disable Fancy Auras", "drpg_simple_auras", "SimpleAuras"
     Option "Disable Players Aura Icons", "drpg_players_aura_icons_disable", "OnOff"
     Option "Corpses Cleanup", "drpg_corpses_cleanup", "CorpsesCleanup"

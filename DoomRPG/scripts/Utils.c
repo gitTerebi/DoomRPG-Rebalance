@@ -2079,7 +2079,7 @@ void DrawMissionInfo(MissionInfo *Mission, fixed X, fixed Y, bool Active)
 
 OptionalArgs(1) void DrawBar(str Fill, int X, int Y, int Amount, bool Pulse)
 {
-    if (GetActivatorCVar("drpg_toaster"))
+    if (GetCVar("drpg_toaster"))
         Pulse = false;
 
     for (int i = 0; i < Amount; i++)

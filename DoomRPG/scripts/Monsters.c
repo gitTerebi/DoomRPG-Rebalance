@@ -517,6 +517,32 @@ NamedScript DECORATE void MonsterInit(int Flags)
     MonsterLevelCap = GetCVar("drpg_monster_level_cap");
     MonsterStatCap = GetCVar("drpg_monster_stat_cap");
 
+    // Delay if Toaster Mode on
+    if (GetCVar("drpg_toaster"))
+    {
+        bool Sight;
+        int PlayersValue = MAX_PLAYERS;
+
+        while (!Sight)
+        {
+            for (int i = 0; i < PlayersValue; i++)
+            {
+                if (!PlayerInGame(i))
+                {
+                    PlayersValue--;
+                    continue;
+                }
+
+                if (Distance(0, Players(i).TID) <= 2048)
+                {
+                    Sight = true;
+                    break;
+                }
+            }
+            Delay(35);
+        }
+    }
+
     // Start Damage Numbers Script
     DamageNumbers();
 
@@ -1184,6 +1210,11 @@ NamedScript void MonsterAggressionHandler()
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
+    // Calculate delay value
+    int DelayValue = 10;
+    if (GetCVar("drpg_toaster"))
+        DelayValue = 35;
+
     int Capacity = Stats->Capacity;
 
 Start:
@@ -1212,7 +1243,7 @@ Start:
                     if (!MonsterHasTarget() && Distance(0, Players(i).SummonTID[j]) <= 1536 && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
                     {
                         Thing_Hate (0, Players(i).SummonTID[j], 3);
-                        Delay(10);
+                        Delay(DelayValue);
                     }
 
                     // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
@@ -1221,12 +1252,12 @@ Start:
                         if (CheckSight(0, Players(i).SummonTID[j], 0))
                         {
                             GiveInventory("DRPGEnemyClearTarget1", 1);
-                            Delay(10);
+                            Delay(DelayValue);
                         }
                         else
                         {
                             GiveInventory("DRPGEnemyClearTarget2", 1);
-                            Delay(10);
+                            Delay(DelayValue);
                         }
                     }
 
@@ -1236,13 +1267,13 @@ Start:
                         if (Distance(0, Players(i).SummonTID[j]) <= Random(64, 256) && Distance(0, Players(i).SummonTID[j]) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
                         {
                             Thing_Hate (0, Players(i).SummonTID[j], 4);
-                            Delay(10);
+                            Delay(DelayValue);
                         }
 
                         if (Distance(0, Players(i).TID) <= Random(64, 256) && Distance(0, Players(i).TID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
                         {
                             Thing_Hate (0, Players(i).TID, 4);
-                            Delay(10);
+                            Delay(DelayValue);
                         }
                     }
 
@@ -1258,7 +1289,7 @@ Start:
                             if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= Random(64, 256) && Distance(0, EnemyMonsterTID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
                             {
                                 Thing_Hate (0, EnemyMonsterTID);
-                                Delay(10);
+                                Delay(DelayValue);
                             }
                         }
 
@@ -1267,7 +1298,7 @@ Start:
                             if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= 256)
                             {
                                 Thing_Hate (0, EnemyMonsterTID);
-                                Delay(10);
+                                Delay(DelayValue);
                             }
                         }
                     }
@@ -1279,14 +1310,14 @@ Start:
                     if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
                     {
                         GiveInventory("DRPGFriendlyClearTarget", 1);
-                        Delay(10);
+                        Delay(DelayValue);
                     }
 
                     // More enemies aggression to summoned monsters
                     if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
                     {
                         GiveInventory("DRPGFriendlyAlertMonsters", 1);
-                        Delay(10);
+                        Delay(DelayValue);
                     }
                 }
 
@@ -1296,7 +1327,7 @@ Start:
                     if (!MonsterHasTarget() && Distance(0, Players(i).TID) <= 200 && Random(0, 100) <= 25)
                     {
                         Thing_Hate(0, Players(i).TID);
-                        Delay(10);
+                        Delay(DelayValue);
                     }
                 }
             }
@@ -1305,7 +1336,7 @@ Start:
 
     if (!MonsterHasTarget())
     {
-        Delay(10);
+        Delay(DelayValue);
         goto Start;
     }
 
@@ -1324,7 +1355,7 @@ Start:
             GiveInventory("DRPGMonsterAttackMore", 1);
     }
 
-    Delay(10);
+    Delay(DelayValue);
     goto Start;
 }
 
@@ -1422,6 +1453,11 @@ NamedScript void MonsterStatsHandler()
 
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+    // Calculate delay value
+    int DelayValue = 4;
+    if (GetCVar("drpg_toaster"))
+        DelayValue = 15;
 
     int OldStrength;
     int OldDefense;
@@ -1640,7 +1676,7 @@ Start:
         }
     }
 
-    Delay(4);
+    Delay(DelayValue);
     goto Start;
 }
 
@@ -2818,17 +2854,23 @@ NamedScript void MonsterDeath()
         Thing_Remove(0);
     }
 
+    // Corpses cleanup
     if (GetCVar("drpg_corpses_cleanup") > 0 && Random(1, 2) <= GetCVar("drpg_corpses_cleanup"))
     {
         Delay(35 * (GetCVar("drpg_corpses_cleanup_timer")));
 
         bool Sight = true;
+        int PlayersValue = MAX_PLAYERS;
 
         while (Sight)
         {
-            for (int i = 0; i < MAX_PLAYERS; i++)
+            for (int i = 0; i < PlayersValue; i++)
             {
-                if (!PlayerInGame(i)) continue;
+                if (!PlayerInGame(i))
+                {
+                    PlayersValue--;
+                    continue;
+                }
 
                 if (CheckSight(0, Players(i).TID, 0))
                 {

@@ -295,7 +295,7 @@ NamedScript void CrateHack()
         SetFont("SMALLFONT");
         HudMessage("HACKING IN PROGRESS...");
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 160.0, 100.0, 0.05);
-        if (!GetActivatorCVar("drpg_toaster"))
+        if (!GetCVar("drpg_toaster"))
             for (int i = 0; i < 16; i++)
             {
                 HudMessage("%d", Random(0, 1));

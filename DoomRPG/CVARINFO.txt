@@ -258,7 +258,7 @@ user    bool    drpg_shield_effect_hit_enable = true;
 server  int     drpg_ws_use_wads = 8;
 
 // Performance
-user    bool    drpg_toaster = false;
+server  bool    drpg_toaster = false;
 server  int     drpg_simple_auras = 1;
 user    bool    drpg_players_aura_icons_disable = false;
 server  int     drpg_corpses_cleanup = 0;
