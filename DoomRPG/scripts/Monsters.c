@@ -1208,7 +1208,7 @@ Start:
 
     // Delay if Toaster Mode on
     if (GetCVar("drpg_toaster"))
-        while (MonsterNotSeePlayers(0, 0)) Delay(10);
+        while (MonsterNotSeePlayers(0, 0)) Delay(35);
 
     // Changing the AI of monsters in case if there are summoned monsters
     for (int i = 0; i < MAX_PLAYERS; i++)
@@ -1487,10 +1487,6 @@ Start:
         return;
     }
 
-    // Delay if Toaster Mode on
-    if (GetCVar("drpg_toaster"))
-        while (MonsterNotSeePlayers(0, 2048)) Delay(35);
-
     // Monster is no longer friendly, remove their summon bonuses and species
     // This causes issues with infighting and I don't remember why I did this in the first place
     // Just comment it out and leave it alone for now
@@ -1661,6 +1657,10 @@ Start:
             MonsterWasDisrupted = false;
         }
     }
+
+    // Delay if Toaster Mode on
+    if (GetCVar("drpg_toaster"))
+        while (MonsterNotSeePlayers(0, 0)) Delay(35);
 
     Delay(DelayValue);
     goto Start;
@@ -1890,7 +1890,7 @@ Start:
     if (!CheckInventory("DRPGMonsterRegenerationHandler"))
         return;
 
-    long long RegenAmount = ((long long)Stats->HealthMax / 50) * (1 + (long long)Stats->Regeneration / (25 + Stats->Regeneration / 4));
+    int RegenAmount = (Stats->HealthMax / 50) * (1 + Stats->Regeneration / (25 + Stats->Regeneration / 4));
 
     if (Stats->Flags & MF_BOSS)
         RegenAmount /= 2;
