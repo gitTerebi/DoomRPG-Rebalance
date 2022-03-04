@@ -390,8 +390,7 @@ void DrawMainMenu()
         SetFont("SMALLFONT");
         HudMessage("Toxicity: %d%%", Player.Toxicity);
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 180.1, 335.0, 0.05);
-        if (!GetCVar("drpg_toaster"))
-            DrawToxicityBar(180.1, 335.0, false);
+        DrawToxicityBar(180.1, 335.0, false);
     }
 }
 
@@ -1069,8 +1068,7 @@ void DrawStatsMenu()
             SetFont("BIGFONT");
             HudMessage("Toxicity: %d%%", Player.Toxicity);
             EndHudMessage(HUDMSG_PLAIN, 0, "Green", 276.1, 250.0, 0.05);
-            if (!GetCVar("drpg_toaster"))
-                DrawToxicityBar(276.1, 250.0, true);
+            DrawToxicityBar(276.1, 250.0, true);
         }
 
         // Shield
@@ -1756,8 +1754,7 @@ void DrawStimsMenu()
     }
 
     // Toxicity
-    if (!GetCVar("drpg_toaster"))
-        DrawToxicityBar(40.1, 240.0, false);
+    DrawToxicityBar(40.1, 240.0, false);
     SetFont("BIGFONT");
     HudMessage("Toxicity: %d%%", Player.Toxicity);
     EndHudMessage(HUDMSG_PLAIN, 0, "Green", 40.1, 240.0, 0.05);
@@ -2762,6 +2759,31 @@ void DrawPlayerSprite(int PlayerNum, fixed X, fixed Y)
 
 void DrawToxicityBar(fixed X, fixed Y, bool HideInfo)
 {
+    // Toxicity Penalties
+    if (GetActivatorCVar("drpg_menuhelp") && !HideInfo)
+    {
+        SetFont("SMALLFONT");
+        if (Player.Toxicity >= 25)
+        {
+            HudMessage("- No Regeneration");
+            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 32.0, 0.05);
+        }
+        if (Player.Toxicity >= 50)
+        {
+            HudMessage("- Energy Loss");
+            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 40.0, 0.05);
+        }
+        if (Player.Toxicity >= 75)
+        {
+            HudMessage("- Reduced Movement Speed");
+            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 48.0, 0.05);
+        }
+    }
+
+    // If Toaster Mode on finish it
+    if (GetCVar("drpg_toaster"))
+        return;
+
     // Pixel Color
     str Color;
     if (Player.Toxicity >= 0 && Player.Toxicity <= 24)
@@ -2803,28 +2825,6 @@ void DrawToxicityBar(fixed X, fixed Y, bool HideInfo)
         PrintSpriteFade(Color, TOXMETER_ID + (Player.ToxicTimer % 100), X + (Player.ToxicTimer % 100), Y + 16.0, 0.05, 1.0);
     else
         PrintSpriteFade(Color, TOXMETER_ID + (Player.ToxicTimer % 100), X + (Player.ToxicTimer % 100), Y + 16.0 + Player.ToxicOffset, 0.05, 1.0);
-
-
-    // Toxicity Penalties
-    if (GetActivatorCVar("drpg_menuhelp") && !HideInfo)
-    {
-        SetFont("SMALLFONT");
-        if (Player.Toxicity >= 25)
-        {
-            HudMessage("- No Regeneration");
-            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 32.0, 0.05);
-        }
-        if (Player.Toxicity >= 50)
-        {
-            HudMessage("- Energy Loss");
-            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 40.0, 0.05);
-        }
-        if (Player.Toxicity >= 75)
-        {
-            HudMessage("- Reduced Movement Speed");
-            EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 0.0, Y + 48.0, 0.05);
-        }
-    }
 }
 
 void ClearToxicityMeter()
