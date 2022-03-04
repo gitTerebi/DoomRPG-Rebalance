@@ -519,7 +519,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
 
     // Delay if Toaster Mode on
     if (GetCVar("drpg_toaster"))
-        while (MonsterNotSeePlayers(0, 2048)) Delay(35);
+        while (MonsterNotSeePlayers(0, 2048)) Delay(70);
 
     // Start Damage Numbers Script
     DamageNumbers();
@@ -1188,10 +1188,10 @@ NamedScript void MonsterAggressionHandler()
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
-    // Calculate delay value
-    int DelayValue = 10;
+    // Calculate delay time
+    int DelayTime = 10;
     if (GetCVar("drpg_toaster"))
-        DelayValue = 35;
+        DelayTime = 35;
 
     int Capacity = Stats->Capacity;
 
@@ -1225,7 +1225,7 @@ Start:
                     if (!MonsterHasTarget() && Distance(0, Players(i).SummonTID[j]) <= 1536 && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
                     {
                         Thing_Hate (0, Players(i).SummonTID[j], 3);
-                        Delay(DelayValue);
+                        Delay(DelayTime);
                     }
 
                     // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
@@ -1234,12 +1234,12 @@ Start:
                         if (CheckSight(0, Players(i).SummonTID[j], 0))
                         {
                             GiveInventory("DRPGEnemyClearTarget1", 1);
-                            Delay(DelayValue);
+                            Delay(DelayTime);
                         }
                         else
                         {
                             GiveInventory("DRPGEnemyClearTarget2", 1);
-                            Delay(DelayValue);
+                            Delay(DelayTime);
                         }
                     }
 
@@ -1249,13 +1249,13 @@ Start:
                         if (Distance(0, Players(i).SummonTID[j]) <= Random(64, 256) && Distance(0, Players(i).SummonTID[j]) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
                         {
                             Thing_Hate (0, Players(i).SummonTID[j], 4);
-                            Delay(DelayValue);
+                            Delay(DelayTime);
                         }
 
                         if (Distance(0, Players(i).TID) <= Random(64, 256) && Distance(0, Players(i).TID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
                         {
                             Thing_Hate (0, Players(i).TID, 4);
-                            Delay(DelayValue);
+                            Delay(DelayTime);
                         }
                     }
 
@@ -1271,7 +1271,7 @@ Start:
                             if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= Random(64, 256) && Distance(0, EnemyMonsterTID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
                             {
                                 Thing_Hate (0, EnemyMonsterTID);
-                                Delay(DelayValue);
+                                Delay(DelayTime);
                             }
                         }
 
@@ -1280,7 +1280,7 @@ Start:
                             if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= 256)
                             {
                                 Thing_Hate (0, EnemyMonsterTID);
-                                Delay(DelayValue);
+                                Delay(DelayTime);
                             }
                         }
                     }
@@ -1292,14 +1292,14 @@ Start:
                     if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
                     {
                         GiveInventory("DRPGFriendlyClearTarget", 1);
-                        Delay(DelayValue);
+                        Delay(DelayTime);
                     }
 
                     // More enemies aggression to summoned monsters
                     if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
                     {
                         GiveInventory("DRPGFriendlyAlertMonsters", 1);
-                        Delay(DelayValue);
+                        Delay(DelayTime);
                     }
                 }
 
@@ -1309,7 +1309,7 @@ Start:
                     if (!MonsterHasTarget() && Distance(0, Players(i).TID) <= 200 && Random(0, 100) <= 25)
                     {
                         Thing_Hate(0, Players(i).TID);
-                        Delay(DelayValue);
+                        Delay(DelayTime);
                     }
                 }
             }
@@ -1318,7 +1318,7 @@ Start:
 
     if (!MonsterHasTarget())
     {
-        Delay(DelayValue);
+        Delay(DelayTime);
         goto Start;
     }
 
@@ -1337,7 +1337,7 @@ Start:
             GiveInventory("DRPGMonsterAttackMore", 1);
     }
 
-    Delay(DelayValue);
+    Delay(DelayTime);
     goto Start;
 }
 
@@ -1436,10 +1436,10 @@ NamedScript void MonsterStatsHandler()
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
-    // Calculate delay value
-    int DelayValue = 4;
+    // Calculate delay time
+    int DelayTime = 4;
     if (GetCVar("drpg_toaster"))
-        DelayValue = 15;
+        DelayTime = 15;
 
     int OldStrength;
     int OldDefense;
@@ -1662,7 +1662,7 @@ Start:
     if (GetCVar("drpg_toaster"))
         while (MonsterNotSeePlayers(0, 0)) Delay(35);
 
-    Delay(DelayValue);
+    Delay(DelayTime);
     goto Start;
 }
 

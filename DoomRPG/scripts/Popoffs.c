@@ -8,6 +8,10 @@
 // Handles Damage Numbers
 NamedScript void DamageNumbers()
 {
+    // Terminate if Toaster Mode on and Damage Numbers off
+    if (GetCVar("drpg_toaster") && !GetCVar("drpg_damagenumbers"))
+        return;
+
     int Health;
     bool IsPlayer;
     bool ShieldActive;
