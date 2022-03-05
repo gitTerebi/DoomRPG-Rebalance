@@ -3160,7 +3160,7 @@ NamedScript void WhispersofDarknessEvent()
             Delay(1);
             MonsterIndex = GetMonsterID(TID);
 
-//          Monsters[MonsterIndex].LevelAdd += ((250 / MAX_PLAYERS) * PlayerCount());
+//          Monsters[MonsterIndex].LevelAdd += ((250 / 8) * PlayerCount());
             Monsters[MonsterIndex].NeedReinit = true;
 
             // Shadow Aura

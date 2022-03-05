@@ -782,11 +782,11 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // Special case for Bosses
         if (Stats->Flags & MF_BOSS)
-            Stats->Level += Random(((160 / MAX_PLAYERS) * PlayerCount()), ((320 / MAX_PLAYERS) * PlayerCount()));
+            Stats->Level += Random(((160 / 8) * PlayerCount()), ((320 / 8) * PlayerCount()));
 
         // Special case for Megabosses
         if (Stats->Flags & MF_MEGABOSS)
-            Stats->Level += Random(((240 / MAX_PLAYERS) * PlayerCount()), ((400 / MAX_PLAYERS) * PlayerCount()));
+            Stats->Level += Random(((240 / 8) * PlayerCount()), ((400 / 8) * PlayerCount()));
 
         // Special case for Powersuit Mk. II
         if (GetActorClass(0) == "DRPGSuperPowerSuit")
@@ -2669,7 +2669,7 @@ NamedScript void MonsterDeath()
             Delay(35 * 2.25); // Just long enough to sync up with the sound nicely
 
             // LOOTSPLOOOOOOOOOOOOOSIIIOOOOOOOOOOOOOONNNNNN
-            int Rolls = (200 / MAX_PLAYERS) * PlayerCount();
+            int Rolls = (200 / 8) * PlayerCount();
             while (Rolls--)
             {
                 DropMonsterItem(Killer, 0, "DRPGCredits250", 256, 0, 0, 0, 16, 16, Random(8, 16));
