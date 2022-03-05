@@ -21,14 +21,14 @@ actor DRPGSkillInvisibility1 : PowerupGiver
     +INVENTORY.AUTOACTIVATE
     +INVENTORY.ADDITIVETIME
     
-    Powerup.Type "Shadow"
+    Powerup.Type Invisibility
     Powerup.Strength 100
     Powerup.Duration -30
 }
 
 actor DRPGSkillInvisibility2 : DRPGSkillInvisibility1
 {
-    Powerup.Type "Ghost"
+    Powerup.Duration -60
 }
 
 actor DRPGSkillIronFeet : PowerupGiver

@@ -88,7 +88,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Description =
             {
                 "Makes you invisible to enemies\n\Cd(30 sec)",
-                "Makes you invisible to enemies\nSome projectiles pass through you\n\Cd(30 sec)"
+                "Makes you invisible to enemies\n\Cd(60 sec)"
             }
         },
         {
@@ -99,7 +99,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
             .Description =
             {
                 "Stutter Time",
-                "Freeze Time",
+                "Freeze Time"
             }
         },
         {
