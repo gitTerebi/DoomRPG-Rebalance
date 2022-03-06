@@ -1215,7 +1215,7 @@ void StatusDamage(int Amount, fixed Chance, bool Critical)
     if (RandomFixed(0.0, 100.0) >= Chance) return;
 
     // Calculate the intensity
-    Intensity = ((LevelNum / 8.0) / (1.0 + (Player.VitalityTotal / 10.0) + (Player.Level / 10.0)));
+    Intensity = Random(1, RoundInt(5 * MapLevelMod()));
     if (Intensity < 1)
         Intensity = 1;
     if (Intensity > 5)

@@ -782,11 +782,11 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // Special case for Bosses
         if (Stats->Flags & MF_BOSS)
-            Stats->Level += Random(((160 / 8) * PlayerCount()), ((320 / 8) * PlayerCount()));
+            Stats->Level += (int)(Random(((160 / 8) * PlayerCount()), ((320 / 8) * PlayerCount())) * MapLevelMod());
 
         // Special case for Megabosses
         if (Stats->Flags & MF_MEGABOSS)
-            Stats->Level += Random(((240 / 8) * PlayerCount()), ((400 / 8) * PlayerCount()));
+            Stats->Level += (int)(Random(((240 / 8) * PlayerCount()), ((400 / 8) * PlayerCount())) * MapLevelMod());
 
         // Special case for Powersuit Mk. II
         if (GetActorClass(0) == "DRPGSuperPowerSuit")
@@ -2618,8 +2618,8 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGModulePickup", 256);
             DropMonsterItem(Killer, 0, "DRPGAugDropper", 96);
             DropMonsterItem(Killer, 0, "DRPGUACCard", (40 / (Players(Killer).ShopCard + 1)));
-            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 64);
-            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 32);
+            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 48);
+            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 24);
             DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
             DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
             DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
@@ -3154,7 +3154,7 @@ int CalculateMonsterThreatLevel(MonsterStatsPtr Stats)
     if (Threat > 10.0)
         Threat = 10.0;
 
-    return (RoundInt(Threat));
+    return RoundInt(Threat);
 }
 
 int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)

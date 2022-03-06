@@ -515,7 +515,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     if (MonsterID > 0)
         StatusDamage(DamageTaken, LuckChance, Critical);
     else
-        StatusDamage(DamageTaken, RandomFixed(0.0, 100.0), Critical);
+        StatusDamage(DamageTaken, RandomFixed(0.0, 100.0 * MapLevelMod()), Critical);
 
     ResetRegen();
     DamageHUD(DamageTaken, Critical);
@@ -584,7 +584,7 @@ NamedScript DECORATE int ShieldDamage(int DamageTaken)
         Player.AutosaveTimerReset = true;
         AugDamage(DamageTaken);
         ToxicityDamage();
-        StatusDamage(DamageTaken, RandomFixed(0.0, 20.0), false);
+        StatusDamage(DamageTaken, RandomFixed(0.0, 10.0 * MapLevelMod()), false);
         DamageHUD(DamageTaken, false);
 
         ShieldDamageAmount = DamageTaken; // For callback

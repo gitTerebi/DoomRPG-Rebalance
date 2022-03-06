@@ -1736,13 +1736,16 @@ void DrawStimsMenu()
         // DrawBar(StrParam("Stim%d", i), X, Y, Amount);
         for (int k = 0; k < (int)((fixed)Amount / 3.0 + 0.7); k++)
         {
+            if (GetCVar("drpg_toaster"))
+                continue;
             SetFont("SMALLFONT");
             HudMessage("/");
             EndHudMessage(HUDMSG_PLAIN, 0, CompoundColors[i - 1], X + 0.1 + (k * 3.0), Y, 0.05);
         }
 
         // Vial
-        X += 112.0;
+        if (!GetCVar("drpg_toaster"))
+            X += 112.0;
         SetFont("SMALLFONT");
         HudMessage("%S: %d/%d", CompoundNames[i - 1], Player.Stim.Vials[i - 1], Player.Stim.VialMax);
         EndHudMessage(HUDMSG_PLAIN, 0, Color, X, Y, 0.05);

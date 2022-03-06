@@ -605,11 +605,11 @@ NamedScript void HealthConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 8)
+    while (Player.Shield.AccessoryBattery >= 12)
     {
         // FadeRange(255, 0, 255, 0.25, 255, 0, 255, 0, 0.25);
         AddHealthDirect(1, 100);
-        Player.Shield.AccessoryBattery -= 8;
+        Player.Shield.AccessoryBattery -= 12;
     }
 }
 
@@ -617,11 +617,11 @@ NamedScript void EPConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 8)
+    while (Player.Shield.AccessoryBattery >= 12)
     {
         // FadeRange(0, 255, 255, 0.25, 0, 255, 255, 0, 0.25);
         AddEP(1, true);
-        Player.Shield.AccessoryBattery -= 8;
+        Player.Shield.AccessoryBattery -= 12;
     }
 }
 
@@ -629,11 +629,11 @@ NamedScript void BatteryConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 32)
+    while (Player.Shield.AccessoryBattery >= 48)
     {
         // FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 0.25);
         AddBattery(1);
-        Player.Shield.AccessoryBattery -= 32;
+        Player.Shield.AccessoryBattery -= 48;
     }
 }
 
@@ -641,12 +641,12 @@ NamedScript void AmmoConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 32)
+    while (Player.Shield.AccessoryBattery >= 48)
     {
         // FadeRange(0, 0, 255, 0.25, 0, 0, 255, 0, 0.25);
         GiveInventory("Clip", 4);
         GiveInventory("Shell", 1);
-        Player.Shield.AccessoryBattery -= 32;
+        Player.Shield.AccessoryBattery -= 48;
     }
 }
 
