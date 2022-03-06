@@ -247,7 +247,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     },
     {
         "DRPGShieldAccessory18",
-        "\ChSHVR-Z7",   "SHACR0",   40000,
+        "\ChSHVR-Z7",   "SHACR0",   50000,
         "\CfConverter\C-: When full, produces \CcClips\C- and \CiShells\C-",
         SHIELD_PASS_NONE,
         NULL, NULL, NULL, NULL, NULL, NULL, AmmoConversion, NULL, NULL,
@@ -605,11 +605,11 @@ NamedScript void HealthConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 12)
+    while (Player.Shield.AccessoryBattery >= 16)
     {
         // FadeRange(255, 0, 255, 0.25, 255, 0, 255, 0, 0.25);
         AddHealthDirect(1, 100);
-        Player.Shield.AccessoryBattery -= 12;
+        Player.Shield.AccessoryBattery -= 16;
     }
 }
 
@@ -617,11 +617,11 @@ NamedScript void EPConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 12)
+    while (Player.Shield.AccessoryBattery >= 16)
     {
         // FadeRange(0, 255, 255, 0.25, 0, 255, 255, 0, 0.25);
         AddEP(1, true);
-        Player.Shield.AccessoryBattery -= 12;
+        Player.Shield.AccessoryBattery -= 16;
     }
 }
 
@@ -629,11 +629,11 @@ NamedScript void BatteryConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 48)
+    while (Player.Shield.AccessoryBattery >= 64)
     {
         // FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 0.25);
         AddBattery(1);
-        Player.Shield.AccessoryBattery -= 48;
+        Player.Shield.AccessoryBattery -= 64;
     }
 }
 
@@ -641,12 +641,12 @@ NamedScript void AmmoConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 48)
+    while (Player.Shield.AccessoryBattery >= 64)
     {
         // FadeRange(0, 0, 255, 0.25, 0, 0, 255, 0, 0.25);
         GiveInventory("Clip", 4);
         GiveInventory("Shell", 1);
-        Player.Shield.AccessoryBattery -= 48;
+        Player.Shield.AccessoryBattery -= 64;
     }
 }
 

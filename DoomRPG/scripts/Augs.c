@@ -140,7 +140,7 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .TokenActor = "DRPGAugTokenBattery"
     },
     {
-        .Name = "Commanding abilities",
+        .Name = "Telepathic synchronizer",
         .MaxLevel = 8,
         .Description =
         {
