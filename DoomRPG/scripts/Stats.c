@@ -425,7 +425,7 @@ void CheckStats()
     SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
     SetAmmoCapacity("Cell", (75 + Player.CapacityTotal * 5) / 10 * 10);
     Player.Stim.VialMax = Player.CapacityTotal * 2.5;
-    Player.SurvivalBonus = (fixed)Player.AgilityTotal / 5.0;
+    Player.SurvivalBonus = Player.AgilityTotal / 5;
     if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
     {
         SetAmmoCapacity("RLArmorInInventory", DRLA_ARMOR_MAX);
@@ -632,7 +632,7 @@ void CheckStats()
     if (CompatMode == COMPAT_DRLA)
     {
         if (CheckInventory("RLTacticalBootsToken"))
-            Player.SurvivalBonus += 10.0;
+            Player.SurvivalBonus += 10;
         if (PlayerClass(PlayerNumber()) == 1)
             Player.JumpHeight *= 1.25;
     }
@@ -846,10 +846,10 @@ void CheckStatBounds()
         Player.WeaponSpeed = 100k;
 
     // Cap Survival Bonus
-    if (Player.SurvivalBonus < 0k)
-        Player.SurvivalBonus = 0k;
-    if (Player.SurvivalBonus > 75k && (!Player.Shield.Accessory || Player.Shield.Accessory->PassiveEffect != SHIELD_PASS_ROULETTE))
-        Player.SurvivalBonus = 75k;
+    if (Player.SurvivalBonus < 0)
+        Player.SurvivalBonus = 0;
+    if (Player.SurvivalBonus > 50 && (!Player.Shield.Accessory || Player.Shield.Accessory->PassiveEffect != SHIELD_PASS_ROULETTE))
+        Player.SurvivalBonus = 50;
 
     // Cap chances at 100%
     if (Player.HealthChance > 100k)  Player.HealthChance = 100k;
@@ -1205,7 +1205,6 @@ void StatusDamage(int Amount, fixed Chance, bool Critical)
     int StatChance = 0;
     int Intensity = 0;
     int Time = 0;
-    int LevelNum = CurrentLevel->LevelNum;
 
     // Criticals boost chance 2.0x
     if (Critical)
@@ -1215,7 +1214,7 @@ void StatusDamage(int Amount, fixed Chance, bool Critical)
     if (RandomFixed(0.0, 100.0) >= Chance) return;
 
     // Calculate the intensity
-    Intensity = Random(1, RoundInt(5 * MapLevelMod()));
+    Intensity = Random(1, RoundInt(5 * MapLevelModifier));
     if (Intensity < 1)
         Intensity = 1;
     if (Intensity > 5)

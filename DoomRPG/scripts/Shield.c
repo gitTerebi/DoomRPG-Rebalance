@@ -1106,7 +1106,7 @@ NamedScript void RussianRouletteMod()
     if (Player.Shield.Active)
     {
         Player.DamageFactor = 11.0; // Let's crank this up to eleven
-        Player.SurvivalBonus = (5.0 / 6.0) * 100.0;
+        Player.SurvivalBonus = 83;
     }
 }
 
@@ -1202,7 +1202,7 @@ NamedScript void LuckyBastardMod()
 {
     if (Player.Shield.Active)
     {
-        Player.SurvivalBonus += (fixed)Player.LuckTotal / 5.0;
+        Player.SurvivalBonus += Player.LuckTotal / 5;
     }
 }
 

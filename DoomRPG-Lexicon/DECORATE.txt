@@ -1,1 +1,16 @@
 actor DRPGWadSmooshActive {}
+
+// Valiant
+// Arachnoorb
+ACTOR ValiantArachnorbRPG : ValiantArachnorb 25081//replaces MBFHelperDog 888
+{
+	States
+	{
+	Spawn:
+		AAAN A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		AAAN A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}

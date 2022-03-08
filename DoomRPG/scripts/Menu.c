@@ -661,7 +661,7 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",             230.1,  144.0,  0.05);
         HudMessage("+%d%% Weapon Speed", Player.WeaponSpeed);
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",             230.1,  152.0,  0.05);
-        HudMessage("%.2k%% Survival Bonus", Player.SurvivalBonus);
+        HudMessage("%d%% Survival Bonus", Player.SurvivalBonus);
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",             230.1,  160.0,  0.05);
         HudMessage("Bullets: %d/%d", Bullets, MaxBullets);
         EndHudMessage(HUDMSG_PLAIN, 0, "Brick",              30.1,   186.0,  0.05);

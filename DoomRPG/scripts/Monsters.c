@@ -782,11 +782,11 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
         // Special case for Bosses
         if (Stats->Flags & MF_BOSS)
-            Stats->Level += (int)(Random(((160 / 8) * PlayerCount()), ((320 / 8) * PlayerCount())) * MapLevelMod());
+            Stats->Level += (int)(Random(((160 / 8) * PlayerCount()), ((320 / 8) * PlayerCount())) * MapLevelModifier);
 
         // Special case for Megabosses
         if (Stats->Flags & MF_MEGABOSS)
-            Stats->Level += (int)(Random(((240 / 8) * PlayerCount()), ((400 / 8) * PlayerCount())) * MapLevelMod());
+            Stats->Level += (int)(Random(((240 / 8) * PlayerCount()), ((400 / 8) * PlayerCount())) * MapLevelModifier);
 
         // Special case for Powersuit Mk. II
         if (GetActorClass(0) == "DRPGSuperPowerSuit")
@@ -959,7 +959,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
             // 2nd roll: Number of auras to have
             int AuraRand = Random(Stats->Energy / 10, 200);
-            int AuraNumber = ((AuraRand * AuraRand) / 4000) * MapLevelMod();
+            int AuraNumber = ((AuraRand * AuraRand) / 4000) * MapLevelModifier;
             if (AuraNumber < 1) AuraNumber = 1;
             if (AuraNumber > AURA_MAX) AuraNumber = AURA_MAX;
             if (!HasAura) AuraNumber = 0;
@@ -2451,12 +2451,13 @@ NamedScript void MonsterDeath()
     // Don't forget to remove stupid fixed-point avoidance code after migration (if it happens)
     int Killer = WhoKilledMe();
     long int HealthXP;
+
     if (GetCVarFixed("drpg_xp_health_awareness") < 1.0)
         HealthXP = (long int)Stats->SpawnHealth + (((long int)Stats->HealthMax - (long int)Stats->SpawnHealth) * (long int)(GetCVarFixed("drpg_xp_health_awareness") * 10l)) / 10l;
     else
         HealthXP = ((long int)Stats->HealthMax * (long int)(GetCVarFixed("drpg_xp_health_awareness") * 10l)) / 10l;
 
-    fixed ThreatMult = (fixed)Stats->Threat + ((fixed)Stats->Level / ((fixed)GetCVar("drpg_ws_use_wads") * 6.0)) + 8.0 * PowFixed(MapLevelMod(), GetCVar("drpg_ws_use_wads") / 2);
+    fixed ThreatMult = (fixed)Stats->Threat + ((fixed)Stats->Level / ((fixed)GetCVar("drpg_ws_use_wads") * 6.0)) + 8.0 * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
     if (ThreatMult < 1.0)
         ThreatMult = 1.0;
 
@@ -2624,32 +2625,32 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
             DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
 
-            if (Players(Killer).LuckTotal >= 15)
+            if (MapLevelModifier >= 0.15)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier1", 48);
             }
 
-            if (Players(Killer).LuckTotal >= 25)
+            if (MapLevelModifier >= 0.30)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier2", 32);
             }
 
-            if (Players(Killer).LuckTotal >= 50)
+            if (MapLevelModifier >= 0.50)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier3", 16);
             }
 
-            if (Players(Killer).LuckTotal >= 70)
+            if (MapLevelModifier >= 0.60)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier4", 16);
             }
 
-            if (Players(Killer).LuckTotal >= 80)
+            if (MapLevelModifier >= 0.70)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier5", 8);
             }
 
-            if (Players(Killer).LuckTotal >= 90)
+            if (MapLevelModifier >= 0.85)
             {
                 DropMonsterItem(Killer, 0, "DRPGShieldDropperTier6", 8);
             }

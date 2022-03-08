@@ -3,6 +3,7 @@
 
 #include "Crate.h"
 #include "ItemData.h"
+#include "Map.h"
 #include "Stats.h"
 #include "Utils.h"
 
@@ -46,11 +47,14 @@ NamedScript Type_OPEN void CrateLoop()
 
 NamedScript DECORATE void InitCrate()
 {
+    // Delay while the map is being initialized
+    while (!CurrentLevel->Init) Delay(1);
+
     int TID = UniqueTID();
     int Amount = 3;
 
     // Calculate Level/Luck Modifier
-    int Modifier = (int)(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelMod());
+    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
     if (Modifier > 15)
         Modifier = 15;
     int Rarity = 0;
@@ -69,8 +73,8 @@ NamedScript DECORATE void InitCrate()
             Rarity++;
     if (Rarity < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         Rarity = 0;
-    if (Rarity > 1 + (int)(((fixed)MAX_DIFFICULTIES - 1.0) * MapLevelMod()))
-        Rarity = 1 + (int)(((fixed)MAX_DIFFICULTIES - 1.0) * MapLevelMod());
+    if (Rarity > 1 + RoundInt(((fixed)MAX_DIFFICULTIES - 1.0) * MapLevelModifier))
+        Rarity = 1 + RoundInt(((fixed)MAX_DIFFICULTIES - 1.0) * MapLevelModifier);
     if (Rarity > MAX_DIFFICULTIES - 1)
         Rarity = MAX_DIFFICULTIES - 1;
 

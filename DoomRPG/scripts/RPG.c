@@ -479,10 +479,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     fixed LuckChance;
     fixed EnergyLevel;
 
-    CanSurvive = Player.SurvivalBonus > 0 && RandomFixed(0.0, 100.0) <= Player.SurvivalBonus && !Player.LastLegs;
-
-    if (Player.ActualHealth > 2)
-        Player.LastLegs = false;
+    CanSurvive = Random(0, 100) <= Player.SurvivalBonus;
 
     if (CanSurvive || CheckInventory("DRPGLife"))
         SetPlayerProperty(0, 1, PROP_BUDDHA);
@@ -515,7 +512,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     if (MonsterID > 0)
         StatusDamage(DamageTaken, LuckChance, Critical);
     else
-        StatusDamage(DamageTaken, RandomFixed(0.0, 100.0 * MapLevelMod()), Critical);
+        StatusDamage(DamageTaken, RandomFixed(0.0, 100.0 * MapLevelModifier), Critical);
 
     ResetRegen();
     DamageHUD(DamageTaken, Critical);
@@ -526,7 +523,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     // Receiving damage to health interrupts focusing
     Player.Focusing = false;
 
-    if (Player.ActualHealth <= 1) // Near-Death stuff
+    if (Player.ActualHealth <= 1 && MonsterID > 0) // Near-Death stuff
     {
         // Extra Life check
         if (CheckInventory("DRPGLife"))
@@ -551,7 +548,6 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
         if (CanSurvive)
         {
             Player.ActualHealth = Player.HealthMax / 5;
-            Player.LastLegs = true;
 
             SetInventory("DRPGInvulnerabilitySurvive", 1);
 
@@ -584,7 +580,7 @@ NamedScript DECORATE int ShieldDamage(int DamageTaken)
         Player.AutosaveTimerReset = true;
         AugDamage(DamageTaken);
         ToxicityDamage();
-        StatusDamage(DamageTaken, RandomFixed(0.0, 10.0 * MapLevelMod()), false);
+        StatusDamage(DamageTaken, RandomFixed(0.0, 10.0 * MapLevelModifier), false);
         DamageHUD(DamageTaken, false);
 
         ShieldDamageAmount = DamageTaken; // For callback
@@ -1297,12 +1293,14 @@ NamedScript bool DynamicLootGeneratorCheckRemoval(int TID, fixed Z)
 
 NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
 {
+    // Delay while the map is being initialized
+    while (!CurrentLevel->Init) Delay(1);
+
     LogMessage(StrParam("Running DynamicLootGenerator to create %d items of %S", MaxItems, Actor), LOG_DEBUG);
     fixed LowerX = GetActorX(0);
     fixed UpperX = GetActorX(0);
     fixed LowerY = GetActorY(0);
     fixed UpperY = GetActorY(0);
-
     int Items = 0;
     int Iterations = 0;
     int NumItems = 0;
@@ -1314,7 +1312,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
     // Determine the max amount of items to create if it's not specifically specified
     if (MaxItems == 0)
     {
-        MaxItems = Random(24, 56) * MapLevelMod();
+        MaxItems = Random(24, 56) * MapLevelModifier;
         MaxItems *= GetCVarFixed("drpg_lootgen_factor");
     }
 

@@ -441,27 +441,27 @@ void CheckAugs()
         if (Player.Augs.Level[AUG_AGILITY] == 1)
         {
             Player.WeaponSpeed += 5;
-            Player.SurvivalBonus += 2.0;
+            Player.SurvivalBonus += 2;
         }
         if (Player.Augs.Level[AUG_AGILITY] == 2)
         {
             Player.WeaponSpeed += 10;
-            Player.SurvivalBonus += 4.0;
+            Player.SurvivalBonus += 4;
         }
         if (Player.Augs.Level[AUG_AGILITY] == 3)
         {
             Player.WeaponSpeed += 15;
-            Player.SurvivalBonus += 6.0;
+            Player.SurvivalBonus += 6;
         }
         if (Player.Augs.Level[AUG_AGILITY] == 4)
         {
             Player.WeaponSpeed += 20;
-            Player.SurvivalBonus += 8.0;
+            Player.SurvivalBonus += 8;
         }
         if (Player.Augs.Level[AUG_AGILITY] >= 5)
         {
             Player.WeaponSpeed += 25;
-            Player.SurvivalBonus += 10.0;
+            Player.SurvivalBonus += 10;
         }
     }
 

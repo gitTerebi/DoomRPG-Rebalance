@@ -140,6 +140,9 @@
 #define PLAYER_TID              31337
 #define PI                      3.14159265359
 
+//Calculate Map Level Modifier
+#define MapLevelModifier        MapLevelMod()
+
 // Struct Aliases
 #define Players(N)              _PlayerData[(N)]
 #define Player                  _PlayerData[PlayerNumber()]

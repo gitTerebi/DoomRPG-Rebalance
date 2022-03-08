@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include "ItemData.h"
+#include "Map.h"
 #include "Shield.h"
 #include "Utils.h"
 
@@ -1126,7 +1127,7 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         if (GetCVar("drpg_loot_rcm"))
         {
             DiffPick = RandomFixed(0.0, 100.0);
-            if (DiffPick < (70.0 - 35.0 * MapLevelMod())) Difficulty--; // Unlucky, item will be a rank lower
+            if (DiffPick < (70.0 - 35.0 * MapLevelModifier)) Difficulty--; // Unlucky, item will be a rank lower
             if (DiffPick > 95.0) Difficulty++; // Lucky, item will be a rank higher
         }
 
@@ -1134,7 +1135,7 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         if (Difficulty < 0) Difficulty = 0;
         if (Difficulty > 9) Difficulty = 9;
 
-        else if (RandomFixed(0.0, 100.0) < (90.0 - 20.0 * MapLevelMod())) // Stims/Augs/Turret
+        else if (RandomFixed(0.0, 100.0) < (90.0 - 20.0 * MapLevelModifier)) // Stims/Augs/Turret
         {
             Cap = 0;
 
@@ -1250,70 +1251,20 @@ NamedScript DECORATE void SpawnLuckItem()
     Thing_Remove(0);
 }
 
-NamedScript DECORATE void DRPGArmorSpawner()
-{
-    str ActorToSpawn;
-    bool ItemSpawned = false;
-    int ItemCategory = (Random(0, 9) <= 0 ? 9 : 3);
-    int RarityMin = 0;
-    int RarityMax = 0;
-    int Amount = 0;
-
-    // Calculate Level/Luck Modifier
-    int Modifier = (int)(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelMod());
-    if (Modifier > 15)
-        Modifier = 15;
-
-    // Calculate Rarity Max
-    for (int i = RarityMax; i < 10; i++)
-        if (Random(0, Random(3, 7) + RarityMax - Modifier) <= 0)
-            RarityMax++;
-    if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
-        RarityMax = 0;
-    if (RarityMax > 1 + (int)(10.0 * MapLevelMod()))
-        RarityMax = 1 + (int)(10.0 * MapLevelMod());
-    if (RarityMax > 10)
-        RarityMax = 10;
-
-    if (Random(0, 100) <= 50)
-    {
-        RarityMin = Random(0, RarityMax / 2);
-
-        for (int i = 0; i <= ItemMax[ItemCategory]; i++)
-        {
-            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax && !ItemSpawned)
-            {
-                if (Random(0, 1 + Amount) <= 0)
-                {
-                    ActorToSpawn = ItemData[ItemCategory][i].Actor;
-                    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
-                    ItemSpawned = true;
-                }
-                Amount++;
-            }
-        }
-    }
-
-    if (!ItemSpawned)
-    {
-        SpawnSpotFacingForced(ItemData[3][0].Actor, 0, ActivatorTID());
-        ItemSpawned = true;
-    }
-
-    Thing_Remove(0);
-}
-
 NamedScript DECORATE void DRPGWeaponSpawner()
 {
+    // Delay while the map is being initialized
+    while (!CurrentLevel->Init) Delay(1);
+
     str ActorToSpawn;
-    bool ItemSpawned = false;
+    bool ItemSpawned;
     int ItemCategory = 0;
     int RarityMin = 0;
     int RarityMax = 0;
     int Amount = 0;
 
-    // Calculate Level/Luck Modifier
-    int Modifier = (int)(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelMod());
+    // Calculate Modifier
+    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1323,14 +1274,14 @@ NamedScript DECORATE void DRPGWeaponSpawner()
             RarityMax++;
     if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
         RarityMax = 0;
-    if (RarityMax > 1 + (int)(10.0 * MapLevelMod()))
-        RarityMax = 1 + (int)(10.0 * MapLevelMod());
+    if (RarityMax > 1 + RoundInt(10.0 * MapLevelModifier))
+        RarityMax = 1 + RoundInt(10.0 * MapLevelModifier);
     if (RarityMax > 10)
         RarityMax = 10;
 
     if (Random(0, 100) <= 50)
     {
-        RarityMin = Random(0, RarityMax / 2);
+        RarityMin = Random(0, RarityMax / 4 - RoundInt(3.0 * MapLevelModifier));
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {
@@ -1350,6 +1301,62 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     if (!ItemSpawned)
     {
         SpawnSpotFacingForced(ItemData[ItemCategory][Random(0, 9)].Actor, 0, ActivatorTID());
+        ItemSpawned = true;
+    }
+
+    Thing_Remove(0);
+}
+
+NamedScript DECORATE void DRPGArmorSpawner()
+{
+    // Delay while the map is being initialized
+    while (!CurrentLevel->Init) Delay(1);
+
+    str ActorToSpawn;
+    bool ItemSpawned;
+    int ItemCategory = (Random(0, 9) <= 0 ? 9 : 3);
+    int RarityMin = 0;
+    int RarityMax = 0;
+    int Amount = 0;
+
+    // Calculate Modifier
+    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    if (Modifier > 15)
+        Modifier = 15;
+
+    // Calculate Rarity Max
+    for (int i = RarityMax; i < 10; i++)
+        if (Random(0, Random(3, 7) + RarityMax - Modifier) <= 0)
+            RarityMax++;
+    if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
+        RarityMax = 0;
+    if (RarityMax > 1 + RoundInt(10.0 * MapLevelModifier))
+        RarityMax = 1 + RoundInt(10.0 * MapLevelModifier);
+    if (RarityMax > 10)
+        RarityMax = 10;
+
+    if (Random(0, 100) <= 50)
+    {
+        RarityMin = Random(0, RarityMax / 4 - RoundInt(3.0 * MapLevelModifier));
+
+        for (int i = 0; i <= ItemMax[ItemCategory]; i++)
+        {
+            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax && !ItemSpawned)
+            {
+                if (Random(0, 1 + Amount) <= 0)
+                {
+                    ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+                    ItemSpawned = true;
+                }
+                Amount++;
+            }
+        }
+    }
+
+    if (!ItemSpawned)
+    {
+        SpawnSpotFacingForced(ItemData[3][0].Actor, 0, ActivatorTID());
         ItemSpawned = true;
     }
 

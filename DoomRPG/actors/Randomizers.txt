@@ -422,8 +422,6 @@ actor DRPGShieldDropperTier1 : RandomSpawner 20150
     DropItem "DRPGShieldCapacitor3"     255 25 // Cooled
     
     // Accessories
-    // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
-
     DropItem "DRPGShieldAccessory7"     255 25 // CNV-RT99
     DropItem "DRPGShieldAccessory10"    255 25 // CU-256
     DropItem "DRPGShieldAccessory11"    255 25 // TX-BGONN
@@ -455,7 +453,6 @@ actor DRPGShieldDropperTier2 : RandomSpawner 20151
     DropItem "DRPGShieldCapacitor6"     255 25 // Energized
     
     // Accessories
-    // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
     DropItem "DRPGShieldAccessory1"     255 25 // X-7
     DropItem "DRPGShieldAccessory4"     255 25 // HRY-VP80
     DropItem "DRPGShieldAccessory5"     255 25 // DEF-2
@@ -489,7 +486,6 @@ actor DRPGShieldDropperTier3 : RandomSpawner 20152
     DropItem "DRPGShieldCapacitor9"     255 25 // Burning
     
     // Accessories
-    // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
     DropItem "DRPGShieldAccessory2"     255 25 // SGENX-5b
     DropItem "DRPGShieldAccessory3"     255 25 // AMP-3000
     DropItem "DRPGShieldAccessory9"     255 25 // UW-0t
@@ -526,7 +522,6 @@ actor DRPGShieldDropperTier4 : RandomSpawner 20153
     DropItem "DRPGShieldCapacitor12"    255 30  // Eternal
     
     // Accessories
-    // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
     DropItem "DRPGShieldAccessory13"    255 25 // NOV-A2
     DropItem "DRPGShieldAccessory18"    255 25 // SHVR-Z7
     DropItem "DRPGShieldAccessory21"    255 25 // SP-00k
@@ -565,7 +560,6 @@ actor DRPGShieldDropperTier5 : RandomSpawner 20154
     DropItem "DRPGShieldCapacitor14"    255 50  // Dark
     
     // Accessories
-    // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
     DropItem "DRPGShieldAccessory16"    255 25 // PH-D88
     DropItem "DRPGShieldAccessory23"    255 25 // E1N-T31
     DropItem "DRPGShieldAccessory26"    255 25 // PWAA-9001
@@ -597,7 +591,6 @@ actor DRPGShieldDropperTier6 : RandomSpawner 20155
     DropItem "DRPGShieldCapacitor15"    255 100  // Chaotic
     
     // Accessories
-    // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
     DropItem "DRPGShieldAccessory17"    255 25 // BATT-B
     DropItem "DRPGShieldAccessory28"    255 25 // SCL-AR53
     DropItem "DRPGShieldAccessory29"    255 25 // RF-CT

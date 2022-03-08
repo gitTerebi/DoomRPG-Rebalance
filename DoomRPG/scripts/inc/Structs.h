@@ -538,7 +538,6 @@ struct PlayerData_S
     bool InShop;
     bool InMinigame;
     bool CrateOpen;
-    bool LastLegs;      // You're about to die, do something about it!
 
     // Primary Stats
     int Strength;       // Increases Damage
@@ -625,7 +624,7 @@ struct PlayerData_S
     fixed Speed;                // Movement Speed
     fixed JumpHeight;           // Jump Height
     int WeaponSpeed;            // Weapon Speed Increase bsed on Agility
-    fixed SurvivalBonus;        // Chance that you will survive a fatal hit
+    int SurvivalBonus;          // Chance that you will survive a fatal hit
     int InvItems;               // How many inventory items you are currently carrying
     int MedkitMax;              // THe total amount of healing your Medkit can hold
     int StatCap;                // Current Stat Cap
