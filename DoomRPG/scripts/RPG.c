@@ -523,7 +523,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     // Receiving damage to health interrupts focusing
     Player.Focusing = false;
 
-    if (Player.ActualHealth <= 1 && MonsterID > 0) // Near-Death stuff
+    if (Player.ActualHealth <= 1) // Near-Death stuff
     {
         // Extra Life check
         if (CheckInventory("DRPGLife"))
@@ -545,7 +545,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
         }
 
         // Survival Bonus
-        if (CanSurvive)
+        if (CanSurvive && MonsterID > 0)
         {
             Player.ActualHealth = Player.HealthMax / 5;
 
