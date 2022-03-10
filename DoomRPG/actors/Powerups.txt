@@ -145,10 +145,8 @@ Actor DRPGInvisibilityChargePower : PowerupGiver
     +INVENTORY.PERSISTENTPOWER
 
     Powerup.Type Invisibility
-    Powerup.Mode Translucent
-    Powerup.Duration -60
     Powerup.Strength 100
-    +GHOST
+    Powerup.Duration -60
 }
 
 actor DRPGInvisibilityCharge : CustomInventory
@@ -488,7 +486,7 @@ ACTOR DRPGMegasphere : CustomInventory Replaces MegaSphere
 // Immunity Crystals
 actor DRPGImmunityCrystalMelee : CustomInventory
 {
-    Health 100
+    Health 1000
     Height 32
     Radius 16
     Mass 0x7FFFFFFF
@@ -541,7 +539,7 @@ actor DRPGImmunityCrystalMelee : CustomInventory
 
 actor DRPGImmunityCrystalBullet : CustomInventory
 {
-    Health 100
+    Health 1000
     Height 32
     Radius 16
     Mass 0x7FFFFFFF
@@ -594,7 +592,7 @@ actor DRPGImmunityCrystalBullet : CustomInventory
 
 actor DRPGImmunityCrystalFire : CustomInventory
 {
-    Health 100
+    Health 1000
     Height 32
     Radius 16
     Mass 0x7FFFFFFF
@@ -647,7 +645,7 @@ actor DRPGImmunityCrystalFire : CustomInventory
 
 actor DRPGImmunityCrystalPlasma : CustomInventory
 {
-    Health 100
+    Health 1000
     Height 32
     Radius 16
     Mass 0x7FFFFFFF
@@ -700,7 +698,7 @@ actor DRPGImmunityCrystalPlasma : CustomInventory
 
 actor DRPGImmunityCrystalLightning : CustomInventory
 {
-    Health 100
+    Health 1000
     Height 32
     Radius 16
     Mass 0x7FFFFFFF
@@ -753,7 +751,7 @@ actor DRPGImmunityCrystalLightning : CustomInventory
 
 actor DRPGImmunityCrystalToxic : CustomInventory
 {
-    Health 100
+    Health 1000
     Height 32
     Radius 16
     Mass 0x7FFFFFFF
@@ -806,7 +804,7 @@ actor DRPGImmunityCrystalToxic : CustomInventory
 
 actor DRPGImmunityCrystalRadiation : CustomInventory
 {
-    Health 100
+    Health 1000
     Height 32
     Radius 16
     Mass 0x7FFFFFFF

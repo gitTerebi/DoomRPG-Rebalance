@@ -145,7 +145,7 @@ ACTOR RLInvisibilityChargeNormal : PowerupGiver
 	+INVENTORY.AUTOACTIVATE
 	+INVENTORY.ADDITIVETIME
 	
-	Powerup.Type Shadow
+	Powerup.Type Invisibility
 	Powerup.Strength 100
 	Powerup.Duration -60
 }
