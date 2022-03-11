@@ -304,6 +304,7 @@ NamedScript Type_ENTER void Init()
     // Execute Game Loops
     Loop();
     PlayerHealth();
+    PlayerSurvive();
     MoneyChecker();
     ShieldTimer();
     WeaponSpeed();
@@ -470,21 +471,26 @@ NamedScript void PlayerHealth()
     }
 }
 
+NamedScript void PlayerSurvive()
+{
+    while (true)
+    {
+        Player.CanSurvive = (Random(0, 100) <= Player.SurvivalBonus);
+        if (Player.CanSurvive || CheckInventory("DRPGLife"))
+            SetPlayerProperty(0, 1, PROP_BUDDHA);
+        else
+            SetPlayerProperty(0, 0, PROP_BUDDHA);
+        Delay(35);
+    }
+}
+
 // Damage Handler Entry Point
 NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
 {
-    bool CanSurvive;
     bool Critical;
     int MonsterID;
     fixed LuckChance;
     fixed EnergyLevel;
-
-    CanSurvive = Random(0, 100) <= Player.SurvivalBonus;
-
-    if (CanSurvive || CheckInventory("DRPGLife"))
-        SetPlayerProperty(0, 1, PROP_BUDDHA);
-    else
-        SetPlayerProperty(0, 0, PROP_BUDDHA);
 
     // Assign attacker's ID
     Player.DamageTID = Inflictor;
@@ -545,7 +551,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
         }
 
         // Survival Bonus
-        if (CanSurvive && MonsterID > 0)
+        if (Player.CanSurvive && MonsterID > 0)
         {
             Player.ActualHealth = Player.HealthMax / 5;
 
@@ -1662,6 +1668,7 @@ NamedScript Type_RESPAWN void Respawn()
     // Run Scripts
     Loop();
     PlayerHealth();
+    PlayerSurvive();
     MoneyChecker();
     DamageNumbers();
     InfoPopoffs();

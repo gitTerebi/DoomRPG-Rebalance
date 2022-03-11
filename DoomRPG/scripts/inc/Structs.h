@@ -538,6 +538,7 @@ struct PlayerData_S
     bool InShop;
     bool InMinigame;
     bool CrateOpen;
+    bool CanSurvive;    // You're about to die, do something about it!
 
     // Primary Stats
     int Strength;       // Increases Damage

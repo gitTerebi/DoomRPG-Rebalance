@@ -50,6 +50,7 @@ NamedScript Type_ENTER void Init();
 NamedScript void Loop();
 NamedScript void WeaponSpeed();
 NamedScript void PlayerHealth();
+NamedScript void PlayerSurvive();
 NamedScript DECORATE int PlayerDamage(int, int);
 NamedScript DECORATE int ShieldDamage(int);
 NamedScript void MoneyChecker();
