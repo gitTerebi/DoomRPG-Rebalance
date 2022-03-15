@@ -90,20 +90,18 @@ NamedScript KeyBind void UseStim(bool Force)
     }
 
     // Set Timer for Stat bonuses
-    int InitialTime;
-    int InitialTimeMultiplier = GetCVar("drpg_stim_time_multiplier");
     fixed StimImmunity = Player.StimImmunity;
     for (int i = StimStatsStart; i < StimStatsEnd + 2; i++)
         if (Player.Stim.Current[i] > 0)
         {
             // Set Timer
-            InitialTime = (1050 + (35 * 6 * Player.Stim.Current[STIM_PURIFIER])) * InitialTimeMultiplier * (1 - (StimImmunity / 100));
+            int InitialTime = (35 * 600 + (35 * 120 * Player.Stim.Current[STIM_PURIFIER]));
+
+            // Immunity penalty
+            InitialTime -= InitialTime * Player.StimImmunity / 100;
 
             Player.Stim.Active = true;
             Player.Stim.Timer = InitialTime;
-
-            if (Player.Stim.Timer >= 42000)
-                Player.Stim.Timer = 42000;
 
             if (Player.Stim.Timer >= Player.Stim.TimerMax)
                 Player.Stim.TimerMax = Player.Stim.Timer;
@@ -112,7 +110,7 @@ NamedScript KeyBind void UseStim(bool Force)
     // Apply Multiplier and Potency
     fixed StimCurrentPotency = Player.Stim.Current[STIM_POTENCY];
     for (int i = StimStatsStart; i < StimStatsEnd; i++)
-        Player.Stim.Current[i] = Player.Stim.Current[i] * (1 + (StimCurrentPotency / 10)) * (1 - (StimImmunity / 100));
+        Player.Stim.Current[i] = Player.Stim.Current[i] * (1 + (StimCurrentPotency / 10));
 
     // Apply Stat Bonuses
     Player.StrengthBonus += Player.Stim.Current[STIM_STRENGTH];
@@ -128,7 +126,10 @@ NamedScript KeyBind void UseStim(bool Force)
     for (int i = StimPowerupStart; i < StimPowerupEnd; i++)
         if (Player.Stim.Current[i] > 0)
         {
-            int InitialTime = (21 * Player.Stim.Current[i]) * InitialTimeMultiplier * (1 - (StimImmunity / 100));
+            int InitialTime = (35 * 6 * Player.Stim.Current[i]);
+
+            // Immunity penalty
+            InitialTime -= InitialTime * Player.StimImmunity / 100;
 
             Player.Stim.PowerupTimer[i] += InitialTime;
 
@@ -381,7 +382,7 @@ void CheckStim()
     // Toxicity multiplier for Potency and Purifier stims
     fixed StimCurrentPotency = Player.Stim.Current[STIM_POTENCY];
     fixed StimCurrentPurifier = Player.Stim.Current[STIM_PURIFIER];
-    fixed StimToxicityMultiplier = 1 + (StimCurrentPotency / 10) + (StimCurrentPurifier / 10);
+    fixed StimToxicityMultiplier = 1 + (StimCurrentPotency / 20) + (StimCurrentPurifier / 20);
 
     // Stim maximum capacities
     if (Player.Stim.Size == 1) // Small
@@ -402,7 +403,7 @@ void CheckStim()
             Player.Stim.Toxicity += StimToxicityMultiplier;
 
     // Toxicity from total amount of compounds
-    Player.Stim.Toxicity += (Player.Stim.Amount * 0.75) * StimToxicityMultiplier;
+    Player.Stim.Toxicity += (Player.Stim.Amount * 0.5) * StimToxicityMultiplier;
 
     // Calculate the current Stim amount
     Player.Stim.Amount = 0;

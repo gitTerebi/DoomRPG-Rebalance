@@ -290,6 +290,25 @@ void CheckLevel()
         FadeRange(255, 255, 255, 0.5, 255, 255, 255, 0, 2.0);
         PrintMessage(StrParam("You have reached level %d", Player.Level), LEVELUP_ID, -32);
 
+        // Get a bonus for every 10 levels
+        for (int i = 1; i < 10; i++)
+        {
+            if (Player.Level == i * 10)
+            {
+                if (i > 1)
+                {
+                    GiveInventory("DRPGAugCanister", 1);
+                    GiveInventory("DRPGAugUpgradeCanister", i);
+                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C- and \Cd%d Aug Upgrade Canister\C-", i), LEVELUP_ID + 1, 0);
+                }
+                else
+                {
+                    GiveInventory("DRPGAugCanister", 1);
+                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C-", i), LEVELUP_ID + 1, 0);
+                }
+            }
+        }
+
         ActivatorSound("misc/levelup", 96);
         SpawnForced("DRPGLevelUpArrow", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(Player.TID, APROP_Height), 0, 0);
     }
