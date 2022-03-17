@@ -900,7 +900,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
 
             if (Players(i).RankLevel < MAX_RANK)
             {
-                long int RankBonus = ((RankTable[Players(i).RankLevel] / 40) + 250) / 250 * 250;
+                long int RankBonus = ((RankTable[Players(i).RankLevel] / 40l) + 250) / 250 * 250;
                 Players(i).Rank += RankBonus;
 
                 HudMessage("Par Time Beaten!\n%ld Rank Bonus", RankBonus);
@@ -1108,63 +1108,63 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     {
     case MAPEVENT_MEGABOSS:
         return (GetCVar("drpg_mapevent_megaboss") &&
-                AveragePlayerLevel() >= 45);
+                MapLevelModifier >= 0.85);
 
     case MAPEVENT_TOXICHAZARD:
         return (GetCVar("drpg_mapevent_toxichazard") &&
-                AveragePlayerLevel() >= 20);
+                MapLevelModifier >= 0.40);
 
     case MAPEVENT_NUCLEARBOMB:
         return (GetCVar("drpg_mapevent_nuclearbomb") &&
-                AveragePlayerLevel() >= 10);
+                MapLevelModifier >= 0.20);
 
     case MAPEVENT_LOWPOWER:
         return (GetCVar("drpg_mapevent_lowpower") &&
-                AveragePlayerLevel() >= 15);
+                MapLevelModifier >= 0.30);
 
     case MAPEVENT_ALLAURAS:
         return (GetCVar("drpg_mapevent_allauras") &&
-                AveragePlayerLevel() >= 35);
+                MapLevelModifier >= 0.70);
 
     case MAPEVENT_ONEMONSTER:
         return (GetCVar("drpg_mapevent_onemonster") &&
-                AveragePlayerLevel() >= 20);
+                MapLevelModifier >= 0.40);
 
     case MAPEVENT_HELLUNLEASHED:
         return (GetCVar("drpg_mapevent_hellunleashed") &&
-                AveragePlayerLevel() >= 45);
+                MapLevelModifier >= 0.85);
 
     case MAPEVENT_HARMONIZEDAURAS:
         return (GetCVar("drpg_mapevent_harmonizedauras") &&
-                AveragePlayerLevel() >= 40);
+                MapLevelModifier >= 0.80);
 
     case MAPEVENT_TELEPORTCRACKS:
         return (GetCVar("drpg_mapevent_teleportcracks") &&
-                AveragePlayerLevel() >= 25);
+                MapLevelModifier >= 0.60);
 
     case MAPEVENT_DOOMSDAY:
         return (GetCVar("drpg_mapevent_doomsday") &&
-                AveragePlayerLevel() >= 35 &&
+                MapLevelModifier >= 0.70 &&
                 !Random(0, 3) &&
                 !TargetLevel->Completed);
 
     case MAPEVENT_ACIDRAIN:
         return (GetCVar("drpg_mapevent_acidrain") &&
-                AveragePlayerLevel() >= 10);
+                MapLevelModifier >= 0.20);
 
     case MAPEVENT_DARKZONE:
         return (GetCVar("drpg_mapevent_darkzone") &&
-                AveragePlayerLevel() >= 15);
+                MapLevelModifier >= 0.30);
 
     case MAPEVENT_DRLA_FEEDINGFRENZY:
         return (CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_feedingfrenzy") &&
-                AveragePlayerLevel() >= 35);
+                MapLevelModifier >= 0.70);
 
     case MAPEVENT_DRLA_OVERMIND:
         return (GetCVar("drpg_mapevent_overmind") &&
                 CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
-                AveragePlayerLevel() >= 40);
+                MapLevelModifier >= 0.85);
 
     case MAPEVENT_BONUS_RAINBOWS:
         return (GetCVar("drpg_mapevent_rainbows") &&
@@ -1172,13 +1172,13 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_SKILL_TECHNOPHOBIA:
         return (GetCVar("drpg_mapevent_skill_technophobia") &&
-                AveragePlayerLevel() >= 35 &&
+                MapLevelModifier >= 0.65 &&
                 CurrentSkill != 6);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_skill_armageddon") &&
-                AveragePlayerLevel() >= 45 &&
+                MapLevelModifier >= 0.80 &&
                 CurrentSkill != 7);
 
     case MAPEVENT_SPECIAL_SINSTORM:
@@ -1223,7 +1223,24 @@ void MapEventReward()
             }
 
             ActivatorSound("mission/complete", 127);
-            PrintMessage(Message);
+            PrintMessage(Message, 1, -32);
+
+            if (Player.Level < MAX_LEVEL)
+            {
+                long int XPBonus = ((XPTable[Player.Level] / 20l) + 50) / 50 * 50;
+                Player.XP += XPBonus;
+
+                PrintMessage(StrParam("\CfBonus:\C- %ld XP and Crate", XPBonus), 2, 0);
+            }
+
+            if (Player.Level == MAX_LEVEL)
+            {
+                GiveActorInventory(Player.TID, "DRPGCredits", 1000);
+
+                PrintMessage(StrParam("\CfBonus:\C- %d Credits and Crate", 1000), 2, 0);
+            }
+
+            Spawn("DRPGCrate", GetActorX(0), GetActorY(0), GetActorZ(0), 0, GetActorAngle(0));
         }
     }
 }

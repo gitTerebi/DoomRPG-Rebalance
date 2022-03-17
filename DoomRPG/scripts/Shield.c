@@ -641,12 +641,12 @@ NamedScript void AmmoConversion(int Charge)
 {
     Player.Shield.AccessoryBattery += Charge;
 
-    while (Player.Shield.AccessoryBattery >= 64)
+    while (Player.Shield.AccessoryBattery >= 48)
     {
         // FadeRange(0, 0, 255, 0.25, 0, 0, 255, 0, 0.25);
         GiveInventory("Clip", 4);
         GiveInventory("Shell", 1);
-        Player.Shield.AccessoryBattery -= 64;
+        Player.Shield.AccessoryBattery -= 48;
     }
 }
 
