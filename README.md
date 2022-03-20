@@ -6,11 +6,9 @@ This fork intends to solve this problem. Now the content is served to the player
 
 In addition, some of the content (RPG's Skills, Stims, AUG, Auras, etc.) are now the things that need to be applied to survive. Especially good Stims when meeting with boss - remember this.
 
-Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more complex monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> DoomRLA Monster Pack Options and see for yourself (default is 6).
+Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more complex monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> DoomRLA Monster Pack Options and see for yourself (default is 8).
 
-And for God's sake, save ammo and credits, you'll need them, and don't forget to take missions in the Outpost. 
-
-Good luck! 
+Enjoy! 
 
 ## Manual Installing
 
@@ -31,25 +29,24 @@ Use the following load order:
 
 ## Installing (build)
 
-I wanted to share my build (old build. It is recommended for familiarization.). Perhaps someone can use it to run a Doom RPG.
+I wanted to share my build. Perhaps someone can use it to run a Doom RPG.
 
 Below is the download link:
-1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.5.0)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
+1. [DoomRPG SE Rebalance 1.27a (for GZDoom 4.7.1)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
 
 Installation Instructions:
 
 1. The archive has a folder DoomRPG SE Rebalance. I recommend placing it at the following address: "D:\Games\DoomRPG SE Rebalance".
 2. In case you want to place the folder in a place of your choice, you will have to change the corresponding addresses in the DoomRPG Launcher.
 3. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRL, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
-4. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.5.0\gzdoom-username.ini".
+4. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.7.1\gzdoom-username.ini".
 5. Now you need to take the configuration file from the archive in the Extras folder and replace it with the file from step "3". Note that you need to change the "username" in the file name.
 6. Please note that the configuration file has also made some changes that affect the functioning of the assembly. Therefore, I recommend using this file as a base. Also note that in the DoomRL Arsenal settings, perks are turned off and the option to learn recipes is enabled. If you are against such settings, disable them manually in the Options menu.
 7. Run the game through the DoomRPG Launcher and play.
 
-Please note that for those who like to play on Gamepad, there are 3 optional files:
+Please note that for those who like to play on Gamepad, there are 2 optional files:
 1. Gamepad Control Helper (author - Me);
-2. Aim Assist 0.6 (author - RicardoLuis0);
-3. Recenter 0.1.0 (author - m8f).
+2. Aim Assist 0.75 (author - RicardoLuis0).
 
 ## Compatible mods
 
