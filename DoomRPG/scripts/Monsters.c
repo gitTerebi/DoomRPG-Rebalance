@@ -1546,7 +1546,21 @@ Start:
         if (CheckInventory("DRPGCredits") > OldCapacity)
             StolenCredits = CheckInventory("DRPGCredits") - OldCapacity;
 
-        SetInventory("DRPGCredits", (Stats->Capacity + StolenCredits) / 2);
+        // Calculation of credits depending of WADs that you plan to go through
+        if (GetCVar("drpg_ws_use_wads") < 8)
+        {
+            fixed Modifier = 8.0 / GetCVar("drpg_ws_use_wads") * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
+
+            if (Modifier < 1.0)
+                Modifier = 1.0;
+
+            SetInventory("DRPGCredits", (int)((Stats->Capacity + StolenCredits) / 2 * Modifier));
+        }
+        else
+        {
+            SetInventory("DRPGCredits", (Stats->Capacity + StolenCredits) / 2);
+        }
+
         OldCapacity = Stats->Capacity;
     }
 

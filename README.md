@@ -6,7 +6,7 @@ This fork intends to solve this problem. Now the content is served to the player
 
 In addition, some of the content (RPG's Skills, Stims, AUG, Auras, etc.) are now the things that need to be applied to survive. Especially good Stims when meeting with boss - remember this.
 
-Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more complex monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> DoomRLA Monster Pack Options and see for yourself (default is 8).
+Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more complex monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> DoomRLA Monster Pack Options and see for yourself (default is 6).
 
 Enjoy! 
 
@@ -32,7 +32,7 @@ Use the following load order:
 I wanted to share my build. Perhaps someone can use it to run a Doom RPG.
 
 Below is the download link:
-1. [DoomRPG SE Rebalance 1.27a (for GZDoom 4.7.1)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
+1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.7.1)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
 
 Installation Instructions:
 

@@ -291,20 +291,33 @@ void CheckLevel()
         PrintMessage(StrParam("You have reached level %d", Player.Level), LEVELUP_ID, -32);
 
         // Get a bonus for every 10 levels
-        for (int i = 1; i < 10; i++)
+        for (int i = 1; i <= 20; i++)
         {
-            if (Player.Level == i * 10)
+            if (Player.Level == i * 5)
             {
-                if (i > 1)
+                if (Player.Level == 10)
                 {
                     GiveInventory("DRPGAugCanister", 1);
-                    GiveInventory("DRPGAugUpgradeCanister", i);
-                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C- and \Cd%d Aug Upgrade Canister\C-", i), LEVELUP_ID + 1, 0);
+                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C-"), LEVELUP_ID + 1, 0);
                 }
-                else
+                else if (Player.Level == 30 || Player.Level == 60)
                 {
                     GiveInventory("DRPGAugCanister", 1);
-                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C-", i), LEVELUP_ID + 1, 0);
+                    GiveInventory("DRPGAugSlotUpgrade", 1);
+                    GiveInventory("DRPGAugUpgradeCanister", i / 2);
+                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C-, \Cd%d Aug Upgrade Canister\C- and \Cy1 Aug Slot\C-", i / 2), LEVELUP_ID + 1, 0);
+                }
+                else if (Player.Level == i / 2 * 10)
+                {
+                    GiveInventory("DRPGAugCanister", 1);
+                    GiveInventory("DRPGAugUpgradeCanister", i / 2);
+                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C- and \Cd%d Aug Upgrade Canister\C-", i / 2), LEVELUP_ID + 1, 0);
+                }
+                else if (Player.Level == i * 5)
+                {
+                    int Credits = Random(i * 100 + 500, i * 200 + 1000) / 250 * 250;;
+                    GiveActorInventory(Player.TID, "DRPGCredits", i * Credits);
+                    PrintMessage(StrParam("\CfBonus:\C- \Cf%d Credits\C-", i * Credits), LEVELUP_ID + 1, 0);
                 }
             }
         }
