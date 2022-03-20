@@ -478,6 +478,16 @@ NamedScript MenuEntry void LoadCharacter()
         Player.RankLevel = Info.RankLevel;
     }
 
+    // XP / Rank
+    if (Info.XP > 0)
+    {
+        Player.XP = Info.XP;
+    }
+    if (Info.Rank > 0)
+    {
+        Player.Rank = Info.Rank;
+    }
+
     // Misc
     SetInventory("DRPGCredits", Info.Credits);
     SetInventory("DRPGModule", Info.Modules);
@@ -733,6 +743,10 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
     Info->Level = Player.Level;
     Info->RankLevel = Player.RankLevel;
 
+    // XP / Rank
+    Info->XP = Player.XP;
+    Info->Rank = Player.Rank;
+
     // Stats
     Info->Stats[0] = Player.Strength;
     Info->Stats[1] = Player.Defense;
@@ -860,6 +874,12 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     StringPos += 2;
     Info->RankLevel = HexToInteger(String + StringPos, 2);
     StringPos += 2;
+
+    // XP / Rank
+    Info->XP = HexToInteger(String + StringPos, 8);
+    StringPos += 8;
+    Info->Rank = HexToInteger(String + StringPos, 8);
+    StringPos += 8;
 
     // Stats
     for (int i = 0; i < STAT_MAX; i++)
@@ -1021,6 +1041,28 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
     SaveString[pos + 1] = ToHexChar(Info->Level);
     SaveString[pos + 0] = ToHexChar(Info->Level >> 4);
     pos += 4;
+
+    // XP
+    SaveString[pos + 7] = ToHexChar(Info->XP);
+    SaveString[pos + 6] = ToHexChar(Info->XP >> 4);
+    SaveString[pos + 5] = ToHexChar(Info->XP >> 8);
+    SaveString[pos + 4] = ToHexChar(Info->XP >> 12);
+    SaveString[pos + 3] = ToHexChar(Info->XP >> 16);
+    SaveString[pos + 2] = ToHexChar(Info->XP >> 20);
+    SaveString[pos + 1] = ToHexChar(Info->XP >> 24);
+    SaveString[pos + 0] = ToHexChar(Info->XP >> 28);
+    pos += 8;
+
+    // Rank
+    SaveString[pos + 7] = ToHexChar(Info->Rank);
+    SaveString[pos + 6] = ToHexChar(Info->Rank >> 4);
+    SaveString[pos + 5] = ToHexChar(Info->Rank >> 8);
+    SaveString[pos + 4] = ToHexChar(Info->Rank >> 12);
+    SaveString[pos + 3] = ToHexChar(Info->Rank >> 16);
+    SaveString[pos + 2] = ToHexChar(Info->Rank >> 20);
+    SaveString[pos + 1] = ToHexChar(Info->Rank >> 24);
+    SaveString[pos + 0] = ToHexChar(Info->Rank >> 28);
+    pos += 8;
 
     // Stats
     for (int i = 0; i < STAT_MAX; i++)

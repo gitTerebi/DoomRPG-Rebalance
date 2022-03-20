@@ -73,6 +73,10 @@ struct CharSaveInfo_S
     int Level;
     int RankLevel;
 
+    // XP / Rank
+    int XP;
+    int Rank;
+
     // Stats
     int Stats[STAT_MAX];
     int StatsNat[STAT_MAX];
