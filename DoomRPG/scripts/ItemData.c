@@ -1285,12 +1285,11 @@ NamedScript DECORATE void DRPGWeaponSpawner()
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {
-            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax && !ItemSpawned)
+            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
             {
                 if (Random(0, 1 + Amount) <= 0)
                 {
                     ActorToSpawn = ItemData[ItemCategory][i].Actor;
-                    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
                     ItemSpawned = true;
                 }
                 Amount++;
@@ -1299,10 +1298,9 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     }
 
     if (!ItemSpawned)
-    {
-        SpawnSpotFacingForced(ItemData[ItemCategory][Random(0, 9)].Actor, 0, ActivatorTID());
-        ItemSpawned = true;
-    }
+        ActorToSpawn = ItemData[ItemCategory][Random(0, 9)].Actor;
+
+    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
     Thing_Remove(0);
 }
@@ -1341,12 +1339,11 @@ NamedScript DECORATE void DRPGArmorSpawner()
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {
-            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax && !ItemSpawned)
+            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
             {
                 if (Random(0, 1 + Amount) <= 0)
                 {
                     ActorToSpawn = ItemData[ItemCategory][i].Actor;
-                    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
                     ItemSpawned = true;
                 }
                 Amount++;
@@ -1355,10 +1352,9 @@ NamedScript DECORATE void DRPGArmorSpawner()
     }
 
     if (!ItemSpawned)
-    {
-        SpawnSpotFacingForced(ItemData[3][0].Actor, 0, ActivatorTID());
-        ItemSpawned = true;
-    }
+        ActorToSpawn = ItemData[3][0].Actor;
+
+    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
     Thing_Remove(0);
 }
