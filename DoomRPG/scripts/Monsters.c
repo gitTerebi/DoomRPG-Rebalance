@@ -747,12 +747,23 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
     if (!(StatFlags & SF_RECREATE))
     {
+        // Calculate Map Level Modifier
+        fixed Modifier = 1.0;
+
+        if (GetCVar("drpg_ws_use_wads") < 8)
+        {
+            Modifier = 8.0 / GetCVar("drpg_ws_use_wads") * MapLevelModifier;
+
+            if (Modifier < 1.0)
+                Modifier = 1.0;
+        }
+
         int LevelType = GetCVar("drpg_monster_levels");
         fixed LevelWeight = GetCVarFixed("drpg_monster_level_weight");
         fixed MapWeight = GetCVarFixed("drpg_monster_map_weight");
         fixed RandomMinWeight = GetCVarFixed("drpg_monster_random_min_mult");
         fixed RandomMaxWeight = GetCVarFixed("drpg_monster_random_max_mult");
-        int LevelNum = CurrentLevel->LevelNum;
+        int LevelNum = CurrentLevel->LevelNum * Modifier;
 
         // Let's not cap Level Number to 100 anymore
         //if (LevelNum > 100)
@@ -1513,7 +1524,7 @@ Start:
         if (GetActorProperty(0, APROP_Friendly))
             SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0)));
         else
-            SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0) + ((fixed)LevelNum / 200.0)));
+            SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0) + ((fixed)LevelNum / (GetCVar("drpg_ws_use_wads") * 25.0))));
 
         OldStrength = Stats->Strength;
     }
@@ -1527,7 +1538,7 @@ Start:
         if (GetActorProperty(0, APROP_Friendly))
             DamageFactor = 1.0 - ((fixed)Stats->Defense / 400.0);
         else
-            DamageFactor = 1.0 - (((fixed)Stats->Defense / 400.0) + ((fixed)LevelNum / 800.0));
+            DamageFactor = 1.0 - (((fixed)Stats->Defense / 400.0) + ((fixed)LevelNum / (GetCVar("drpg_ws_use_wads") * 100.0)));
 
         if (DamageFactor < 0.251)
             DamageFactor = 0.251;

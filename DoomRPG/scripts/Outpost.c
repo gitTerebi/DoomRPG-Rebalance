@@ -492,12 +492,26 @@ NamedScript MapSpecial void LevelTransport()
 
             if (1)
             {
+                // Calculate Map Level Modifier
+                fixed LevelNum = TeleDest->LevelNum;
+                fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
+                fixed MapLevelMod = LevelNum / (LevelMax / (2.0 - (LevelNum / LevelMax)));
+                fixed Modifier = 1.0;
+                if (MapLevelMod > 0.5)
+                    MapLevelMod = LevelNum / LevelMax + (0.3 - (0.3 * LevelNum / LevelMax));
+                if (MapLevelMod > 1.0 || LevelNum / LevelMax > 1.0)
+                    MapLevelMod = 1.0;
+                if (GetCVar("drpg_ws_use_wads") < 8)
+                    Modifier = 8.0 / GetCVar("drpg_ws_use_wads") * MapLevelMod;
+                if (Modifier < 1.0)
+                    Modifier = 1.0;
+
                 int MonsterLevelType = GetCVar("drpg_monster_levels");
                 fixed MonsterLevelWeight = GetCVarFixed("drpg_monster_level_weight");
                 fixed MonsterMapWeight = GetCVarFixed("drpg_monster_map_weight");
                 fixed MonsterRandomMinWeight = GetCVarFixed("drpg_monster_random_min_mult");
                 fixed MonsterRandomMaxWeight = GetCVarFixed("drpg_monster_random_max_mult");
-                int MonsterLevelNum = TeleDest->LevelNum;
+                int MonsterLevelNum = TeleDest->LevelNum * Modifier;
 
                 // Calculate Monster Level
                 if (MonsterLevelType == 1 || MonsterLevelType == 3) // Player Level
