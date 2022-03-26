@@ -177,7 +177,7 @@ ACTOR RLEnemyWeaponDrop
 		
 	FullArsenalExperience:
 // Checks to see if DRPG is being run.
-		TNT1 A 0 A_JumpIf(CallACS("DRPGCheck"), "DonutstealDrop")
+		TNT1 A 0 A_JumpIf(CallACS("DRPGCheck"), "WeaponDropType")
 // Checks the DRLA gameplay modes for whether or not it should spawn.
 		TNT1 A 0 A_JumpIf(CallACS("DRLA_specialstarts") == 1, "Nope")
 		TNT1 A 0 A_JumpIf(CallACS("DRLA_specialstarts") == 2, "Nope")
@@ -193,6 +193,25 @@ ACTOR RLEnemyWeaponDrop
 		TNT1 A 0 A_Jump(256, "WeaponDropNoArsenal")
 		Goto WeaponDropNoArsenal
 		
+	WeaponDropType:
+		TNT1 A 0 A_JumpIf(GetCVar("DRLA_weapondroptype") == 0, "AdaptiveDrop")
+		TNT1 A 0 A_JumpIf(GetCVar("DRLA_weapondroptype") == 1, "WeaponDrop")
+		TNT1 A 0 A_JumpIf(GetCVar("DRLA_weapondroptype") == 2, "DonutstealDrop")
+		TNT1 A 0 A_JumpIf(GetCVar("DRLA_weapondroptype") == 3, "Nope")
+		Stop
+
+    AdaptiveDrop:
+		TNT1 A 0 A_Jump(48, "WeaponDrop")
+		TNT1 A 0 A_Jump(6, "WeaponSpawner")
+		TNT1 A 0 A_Jump(256, "DonutstealDrop")
+		Goto DonutstealDrop
+    WeaponSpawner:
+        TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner")
+        Stop
+    ArmorSpawner:
+        TNT1 A 0 ACS_NamedExecuteWithResult("DRPGArmorSpawner")
+        Stop
+
 	WeaponDrop:
 		TNT1 A 0 A_DropItem("RLChaingunPickup")
 		Stop
