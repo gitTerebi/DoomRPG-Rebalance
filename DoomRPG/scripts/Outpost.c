@@ -501,8 +501,8 @@ NamedScript MapSpecial void LevelTransport()
                     MapLevelMod = LevelNum / LevelMax + (0.3 - (0.3 * LevelNum / LevelMax));
                 if (MapLevelMod > 1.0 || LevelNum / LevelMax > 1.0)
                     MapLevelMod = 1.0;
-                if (GetCVar("drpg_ws_use_wads") < 8)
-                    Modifier = 8.0 / GetCVar("drpg_ws_use_wads") * MapLevelMod;
+                if (GetCVar("drpg_ws_use_wads") < 4)
+                    Modifier = 4.0 / GetCVar("drpg_ws_use_wads") * MapLevelMod;
                 if (Modifier < 1.0)
                     Modifier = 1.0;
 

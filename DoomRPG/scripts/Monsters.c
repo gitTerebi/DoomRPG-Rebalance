@@ -750,9 +750,9 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         // Calculate Map Level Modifier
         fixed Modifier = 1.0;
 
-        if (GetCVar("drpg_ws_use_wads") < 8)
+        if (GetCVar("drpg_ws_use_wads") < 4)
         {
-            Modifier = 8.0 / GetCVar("drpg_ws_use_wads") * MapLevelModifier;
+            Modifier = 4.0 / GetCVar("drpg_ws_use_wads") * MapLevelModifier;
 
             if (Modifier < 1.0)
                 Modifier = 1.0;
