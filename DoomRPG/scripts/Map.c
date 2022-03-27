@@ -991,7 +991,7 @@ NamedScript void HellSkillTransport(int player)
     int BossesSpawned = 0;
     int LevelNum = CurrentLevel->LevelNum;
 
-    Delay(35 * Random(40,60)); // Grace Period
+    Delay(35 * Random(60,300)); // Grace Period
 
     // Build a list of monsters
     for (int i = 0; i < MonsterDataAmount && MonsterListLength < MAX_TEMP_MONSTERS; i++)
