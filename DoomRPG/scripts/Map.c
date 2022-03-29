@@ -998,7 +998,7 @@ NamedScript void HellSkillTransport(int player)
     {
         MonsterInfoPtr TempMonster = &MonsterData[i];
 
-        if (CompatMode == COMPAT_DRLA)
+        if (CompatMonMode == COMPAT_DRLA)
         {
             if (GameSkill() < 5)
             {

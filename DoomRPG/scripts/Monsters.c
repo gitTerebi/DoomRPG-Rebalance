@@ -2891,7 +2891,7 @@ NamedScript DECORATE void MonsterTransport(int Difficulty, int Time, int Radius)
     {
         TempMonster = &MonsterData[i];
 
-        if (CompatMode == COMPAT_DRLA)
+        if (CompatMonMode == COMPAT_DRLA)
         {
             if (Difficulty == 0)
                 if (TempMonster->Difficulty > 0 & TempMonster->Difficulty < 60 & TempMonster->ThreatLevel < 24)
