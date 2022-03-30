@@ -625,7 +625,7 @@ void CheckStats()
     }
 
     // Run function
-    if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) || GetCVar("cl_run"))
+    if (GetCVar("cl_run") || CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
         Player.Speed = 1.0 + 0.25 * ((fixed)Player.AgilityTotal / 100);
 
     // Status Effect Checking

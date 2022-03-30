@@ -236,6 +236,7 @@ server  bool    drpg_debug = false;
 server  bool    drpg_debug_gui = false;
 server  int     drpg_debug_drla = 0;
 user    bool    drpg_tips = false;
+user    bool    drpg_deltatouch = false;
 server  bool    drpg_regen_movement = false;
 server  int     drpg_move_aug_battery_regen = 0;
 server  int     drpg_autosave = 10;

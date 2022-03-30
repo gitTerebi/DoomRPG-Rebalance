@@ -1493,8 +1493,16 @@ NamedScript bool TurretWantsToSwitchToPlayerTarget()
 
 void BuildTurretData()
 {
-    TurretUpgradeData[TU_BUILD].CommandInfo = StrParam("Issuing this command will enable or disable the turret\n\Ck(\Cd%jS\C- + \Cd%jS\Ck for quick use)", "+speed", "+user2");
-    TurretUpgradeData[TU_COMMAND_DRAW_FIRE].CommandInfo = StrParam("When issued, use \Cd%jS\C- + \Cd%jS\Ck to force a target switch", "+speed", "+attack");
+    if (GetCVar("use_joystick") || GetUserCVar(PlayerNumber(), "drpg_deltatouch"))
+    {
+        TurretUpgradeData[TU_BUILD].CommandInfo = StrParam("Issuing this command will enable or disable the turret\n\Ck(\Cd%jS\C- + \Cd%jS\Ck for quick use)", "Run", "Turret Wheel");
+        TurretUpgradeData[TU_COMMAND_DRAW_FIRE].CommandInfo = StrParam("When issued, use \Cd%jS\C- + \Cd%jS\Ck to force a target switch", "Run", "Attack");
+    }
+    else
+    {
+        TurretUpgradeData[TU_BUILD].CommandInfo = StrParam("Issuing this command will enable or disable the turret\n\Ck(\Cd%jS\C- + \Cd%jS\Ck for quick use)", "+speed", "+user2");
+        TurretUpgradeData[TU_COMMAND_DRAW_FIRE].CommandInfo = StrParam("When issued, use \Cd%jS\C- + \Cd%jS\Ck to force a target switch", "+speed", "+attack");
+    }
 }
 
 bool TurretTeleport(int DestTID)

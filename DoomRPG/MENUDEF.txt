@@ -650,6 +650,9 @@ OptionMenu "DoomRPGMisc"
     Option "Transport On New Map", "drpg_transport_on_new_map", "OnOff"
     StaticText ""
 
+    Option "Delta Touch Compatibility", "drpg_deltatouch", "OnOff"
+    StaticText ""
+
     Slider "Autosave Interval (Minutes)", "drpg_autosave", 0, 60, 1
     Option "Auto Reactivate Augs Disabled By EMP", "drpg_augs_autoreactivate", "OnOff"
     Option "Place quick-use items on the Inventory Bar", "drpg_give_quickinventory", "OnOff"

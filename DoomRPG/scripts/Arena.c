@@ -98,7 +98,10 @@ NamedScript MapSpecial void ArenaLoop()
             {
                 if (!Player.InMenu && !Player.InShop && !Player.OutpostMenu)
                 {
-                    HudMessage("Hold \Cd%jS\C- to start the next wave\nHold \Cd%jS\C- to end the Arena", "+use", "+speed");
+                    if (GetCVar("use_joystick") || GetUserCVar(PlayerNumber(), "drpg_deltatouch"))
+                        HudMessage("Hold \Cd%S\C- to start the next wave\nHold \Cd%S\C- to end the Arena", "Use", "Run");
+                    else
+                        HudMessage("Hold \Cd%jS\C- to start the next wave\nHold \Cd%jS\C- to end the Arena", "+use", "+speed");
                     EndHudMessage(HUDMSG_PLAIN, 0, "White", 1.5, 0.75, 0.05);
                 }
 

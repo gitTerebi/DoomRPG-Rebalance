@@ -2805,7 +2805,7 @@ void CreateTranslations()
 
 bool CheckInput(int Key, int State, bool ModInput, int PlayerNumber)
 {
-    if (InMultiplayer)
+    if (InMultiplayer || GetUserCVar(PlayerNumber, "drpg_deltatouch"))
         return CheckInputACS(Key, State, ModInput, PlayerNumber);
     else
     {
@@ -2951,6 +2951,15 @@ bool CheckInputACS(int Key, int State, bool ModInput, int PlayerNumber)
     int InputOld;
     int Buttons;
     int OldButtons;
+    static bool CheckInputRepeat;
+    static int CheckInputRepeatTimer;
+    double AxisY;
+    double AxisX;
+    // These two are meant to mimic OldButtons
+    static double OldAxisY;
+    static double OldAxisX;
+    bool UseAxis = false;
+    bool UseDeltaTouch = GetUserCVar(PlayerNumber, "drpg_deltatouch");
 
     if (!ModInput)
     {
@@ -2966,23 +2975,68 @@ bool CheckInputACS(int Key, int State, bool ModInput, int PlayerNumber)
     Buttons = GetPlayerInput(PlayerNumber, Input);
     OldButtons = GetPlayerInput(PlayerNumber, InputOld);
 
+    // Proper navigation support for joystick, binding movement keys no longer necessary
+    if (UseDeltaTouch && Key & BT_FORWARD || UseDeltaTouch && Key & BT_BACK || UseDeltaTouch && Key & BT_MOVELEFT || UseDeltaTouch && Key & BT_MOVERIGHT)
+    {
+        AxisY = GetPlayerInput(PlayerNumber, INPUT_FORWARDMOVE);
+        AxisX = GetPlayerInput(PlayerNumber, INPUT_SIDEMOVE);
+
+        // Simplify
+        if (AxisY > 1.0) AxisY = 1.0;
+        if (AxisY < -1.0) AxisY = -1.0;
+        if (AxisX > 1.0) AxisX = 1.0;
+        if (AxisX < -1.0) AxisX = -1.0;
+
+        // Decide if the axises are old and moldy
+        if (AxisY < OldAxisY || AxisY > OldAxisY)
+            OldAxisY = 0;
+        if (AxisX > OldAxisX || AxisX < OldAxisX)
+            OldAxisX = 0;
+
+        if (OldAxisY == 0 && OldAxisX == 0)
+        {
+            if (Key & BT_FORWARD && AxisY == 1.0)
+                UseAxis = true;
+            else if (Key & BT_BACK && AxisY == -1.0)
+                UseAxis = true;
+            else if (Key & BT_MOVELEFT && AxisX == -1.0)
+                UseAxis = true;
+            else if (Key & BT_MOVERIGHT && AxisX == 1.0)
+                UseAxis = true;
+        }
+    }
+
     switch (State)
     {
     case KEY_PRESSED:
     {
-        if (Buttons & Key && !(OldButtons & Key))
+        if (UseAxis)
+        {
+            OldAxisY = AxisY;
+            OldAxisX = AxisX;
+            return true;
+        }
+        else if (Buttons & Key && !(OldButtons & Key))
             return true;
     }
     break;
     case KEY_ONLYPRESSED:
     {
-        if (Buttons & Key && !(OldButtons & Key))
+        if (UseAxis)
+        {
+            OldAxisY = AxisY;
+            OldAxisX = AxisX;
+            return true;
+        }
+        else if (Buttons & Key && !(OldButtons & Key))
             return true;
     }
     break;
     case KEY_HELD:
     {
-        if (Buttons & Key)
+        if (UseAxis)
+            return true;
+        else if (Buttons & Key)
             return true;
     }
     break;
@@ -2994,7 +3048,7 @@ bool CheckInputACS(int Key, int State, bool ModInput, int PlayerNumber)
     break;
     case KEY_ANYIDLE:
     {
-        if (Buttons & Key && !(OldButtons & Key))
+        if (!UseAxis && Buttons & Key && !(OldButtons & Key))
             return true;
     }
     break;
@@ -3007,7 +3061,26 @@ bool CheckInputACS(int Key, int State, bool ModInput, int PlayerNumber)
     // Originally not compatible with multiplayer, so it is now KEY_PRESSED
     case KEY_REPEAT:
     {
-        if (Buttons & Key && !(OldButtons & Key))
+        if (UseAxis)
+        {
+            int CurrentTime = Timer();
+            if (CurrentTime + 5 + 1 < CheckInputRepeatTimer) CheckInputRepeat = false;
+            if (!CheckInputRepeat)
+            {
+                CheckInputRepeatTimer = CurrentTime;
+                CheckInputRepeatTimer += 5;
+                CheckInputRepeat = true;
+                return true;
+            }
+            else
+            {
+                if (CurrentTime >= CheckInputRepeatTimer)
+                    CheckInputRepeat = false;
+                else
+                    return false;
+            }
+        }
+        else if (Buttons & Key && !(OldButtons & Key))
             return true;
     }
     break;
