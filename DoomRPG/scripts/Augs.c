@@ -259,21 +259,21 @@ void CheckAugs()
     // Battery Aug
     if (Player.Augs.Active[AUG_BATTERY])
     {
-        if (Player.Augs.Level[AUG_BATTERY] == 1)
+        if (Player.Augs.CurrentLevel[AUG_BATTERY] == 1)
             Player.Augs.BatteryMax += 25;
-        if (Player.Augs.Level[AUG_BATTERY] == 2)
+        if (Player.Augs.CurrentLevel[AUG_BATTERY] == 2)
             Player.Augs.BatteryMax += 50;
-        if (Player.Augs.Level[AUG_BATTERY] == 3)
+        if (Player.Augs.CurrentLevel[AUG_BATTERY] == 3)
             Player.Augs.BatteryMax += 75;
-        if (Player.Augs.Level[AUG_BATTERY] == 4)
+        if (Player.Augs.CurrentLevel[AUG_BATTERY] == 4)
             Player.Augs.BatteryMax += 100;
-        if (Player.Augs.Level[AUG_BATTERY] == 5)
+        if (Player.Augs.CurrentLevel[AUG_BATTERY] == 5)
             Player.Augs.BatteryMax += 125;
-        if (Player.Augs.Level[AUG_BATTERY] == 6)
+        if (Player.Augs.CurrentLevel[AUG_BATTERY] == 6)
             Player.Augs.BatteryMax += 150;
-        if (Player.Augs.Level[AUG_BATTERY] == 7)
+        if (Player.Augs.CurrentLevel[AUG_BATTERY] == 7)
             Player.Augs.BatteryMax += 175;
-        if (Player.Augs.Level[AUG_BATTERY] >= 8)
+        if (Player.Augs.CurrentLevel[AUG_BATTERY] >= 8)
             Player.Augs.BatteryMax += 200;
     }
 
@@ -301,7 +301,7 @@ void CheckAugs()
         // Calculate Battery Drain
         for (int i = 0; i < AUG_MAX; i++)
             if (Player.Augs.Active[i] && i != AUG_BATTERY)
-                Player.Augs.BatteryDrain += Player.Augs.Level[i];
+                Player.Augs.BatteryDrain += Player.Augs.CurrentLevel[i];
 
         // Decrease Battery
         if (Player.Augs.SlotsUsed > 0 && (Timer() % 35) == 0)
@@ -328,21 +328,21 @@ void CheckAugs()
         if ((Timer() % 35) == 0)
         {
             fixed Charge;
-            if (Player.Augs.Level[AUG_BATTERY] == 1)
+            if (Player.Augs.CurrentLevel[AUG_BATTERY] == 1)
                 Charge = 0.05;
-            else if (Player.Augs.Level[AUG_BATTERY] == 2)
+            else if (Player.Augs.CurrentLevel[AUG_BATTERY] == 2)
                 Charge = 0.10;
-            else if (Player.Augs.Level[AUG_BATTERY] == 3)
+            else if (Player.Augs.CurrentLevel[AUG_BATTERY] == 3)
                 Charge = 0.20;
-            else if (Player.Augs.Level[AUG_BATTERY] == 4)
+            else if (Player.Augs.CurrentLevel[AUG_BATTERY] == 4)
                 Charge = 0.30;
-            else if (Player.Augs.Level[AUG_BATTERY] == 5)
+            else if (Player.Augs.CurrentLevel[AUG_BATTERY] == 5)
                 Charge = 0.40;
-            else if (Player.Augs.Level[AUG_BATTERY] == 6)
+            else if (Player.Augs.CurrentLevel[AUG_BATTERY] == 6)
                 Charge = 0.50;
-            else if (Player.Augs.Level[AUG_BATTERY] == 7)
+            else if (Player.Augs.CurrentLevel[AUG_BATTERY] == 7)
                 Charge = 0.75;
-            else if (Player.Augs.Level[AUG_BATTERY] >= 8)
+            else if (Player.Augs.CurrentLevel[AUG_BATTERY] >= 8)
                 Charge = 1.00;
 
             if (GetCVar("drpg_regen_movement") && IsPlayerMoving())
@@ -355,53 +355,53 @@ void CheckAugs()
     // Strength Aug
     if (Player.Augs.Active[AUG_STRENGTH])
     {
-        if (Player.Augs.Level[AUG_STRENGTH] == 1)
+        if (Player.Augs.CurrentLevel[AUG_STRENGTH] == 1)
             Player.DamageMult += 0.101;
-        if (Player.Augs.Level[AUG_STRENGTH] == 2)
+        if (Player.Augs.CurrentLevel[AUG_STRENGTH] == 2)
             Player.DamageMult += 0.151;
-        if (Player.Augs.Level[AUG_STRENGTH] == 3)
+        if (Player.Augs.CurrentLevel[AUG_STRENGTH] == 3)
             Player.DamageMult += 0.201;
-        if (Player.Augs.Level[AUG_STRENGTH] == 4)
+        if (Player.Augs.CurrentLevel[AUG_STRENGTH] == 4)
             Player.DamageMult += 0.301;
-        if (Player.Augs.Level[AUG_STRENGTH] == 5)
+        if (Player.Augs.CurrentLevel[AUG_STRENGTH] == 5)
             Player.DamageMult += 0.401;
-        if (Player.Augs.Level[AUG_STRENGTH] >= 6)
+        if (Player.Augs.CurrentLevel[AUG_STRENGTH] >= 6)
             Player.DamageMult += 0.501;
     }
 
     // Defense Aug
     if (Player.Augs.Active[AUG_DEFENSE])
-        Player.DamageFactor -= (fixed)Player.Augs.Level[AUG_DEFENSE] / 20.0;
-    //Player.DamageFactor *= (1.0 - (fixed)Player.Augs.Level[AUG_DEFENSE] * 0.05);
+        Player.DamageFactor -= (fixed)Player.Augs.CurrentLevel[AUG_DEFENSE] / 20.0;
+    //Player.DamageFactor *= (1.0 - (fixed)Player.Augs.CurrentLevel[AUG_DEFENSE] * 0.05);
 
     // Vitality Aug
     if (Player.Augs.Active[AUG_VITALITY])
     {
-        if (Player.Augs.Level[AUG_VITALITY] >= 1)
+        if (Player.Augs.CurrentLevel[AUG_VITALITY] >= 1)
             Player.HPAmount *= 1.5;
-        if (Player.Augs.Level[AUG_VITALITY] == 2)
+        if (Player.Augs.CurrentLevel[AUG_VITALITY] == 2)
             Player.HealthMax *= 1.25;
-        if (Player.Augs.Level[AUG_VITALITY] >= 3)
+        if (Player.Augs.CurrentLevel[AUG_VITALITY] >= 3)
             Player.HealthMax *= 1.5;
-        if (Player.Augs.Level[AUG_VITALITY] == 4)
+        if (Player.Augs.CurrentLevel[AUG_VITALITY] == 4)
             Player.StatusEffectResist += 15;
-        if (Player.Augs.Level[AUG_VITALITY] == 5)
+        if (Player.Augs.CurrentLevel[AUG_VITALITY] == 5)
             Player.StatusEffectResist += 20;
-        if (Player.Augs.Level[AUG_VITALITY] >= 6)
+        if (Player.Augs.CurrentLevel[AUG_VITALITY] >= 6)
             Player.StatusEffectResist += 25;
     }
 
     // Energy Aug
     if (Player.Augs.Active[AUG_ENERGY])
     {
-        if (Player.Augs.Level[AUG_ENERGY] >= 1)
+        if (Player.Augs.CurrentLevel[AUG_ENERGY] >= 1)
             Player.EPAmount *= 1.5;
-        if (Player.Augs.Level[AUG_ENERGY] == 2)
+        if (Player.Augs.CurrentLevel[AUG_ENERGY] == 2)
             Player.EPMax *= 1.25;
-        if (Player.Augs.Level[AUG_ENERGY] >= 3)
+        if (Player.Augs.CurrentLevel[AUG_ENERGY] >= 3)
             Player.EPMax *= 1.5;
     }
-    if (Player.Augs.Active[AUG_ENERGY] && Player.Augs.Level[AUG_ENERGY] >= 4)
+    if (Player.Augs.Active[AUG_ENERGY] && Player.Augs.CurrentLevel[AUG_ENERGY] >= 4)
         Player.AuraBonus = true;
     else
         Player.AuraBonus = false;
@@ -409,56 +409,56 @@ void CheckAugs()
     // Regeneration Aug
     if (Player.Augs.Active[AUG_REGENERATION])
     {
-        if (Player.Augs.Level[AUG_REGENERATION] >= 1)
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 1)
         {
             Player.HPTime *= 0.75;
         }
-        if (Player.Augs.Level[AUG_REGENERATION] >= 2)
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 2)
         {
             Player.EPTime *= 0.75;
         }
-        if (Player.Augs.Level[AUG_REGENERATION] >= 3)
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 3)
         {
             Player.HPAmount *= 1.5;
         }
-        if (Player.Augs.Level[AUG_REGENERATION] >= 4)
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 4)
         {
             Player.EPAmount *= 1.5;
         }
-        if (Player.Augs.Level[AUG_REGENERATION] == 5)
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] == 5)
             Player.ToxicityRegenBonus += 5;
-        if (Player.Augs.Level[AUG_REGENERATION] == 6)
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] == 6)
             Player.ToxicityRegenBonus += 10;
-        if (Player.Augs.Level[AUG_REGENERATION] == 7)
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] == 7)
             Player.ToxicityRegenBonus += 15;
-        if (Player.Augs.Level[AUG_REGENERATION] >= 8)
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 8)
             Player.ToxicityRegenBonus += 20;
     }
 
     // Agility Aug
     if (Player.Augs.Active[AUG_AGILITY])
     {
-        if (Player.Augs.Level[AUG_AGILITY] == 1)
+        if (Player.Augs.CurrentLevel[AUG_AGILITY] == 1)
         {
             Player.WeaponSpeed += 5;
             Player.SurvivalBonus += 2;
         }
-        if (Player.Augs.Level[AUG_AGILITY] == 2)
+        if (Player.Augs.CurrentLevel[AUG_AGILITY] == 2)
         {
             Player.WeaponSpeed += 10;
             Player.SurvivalBonus += 4;
         }
-        if (Player.Augs.Level[AUG_AGILITY] == 3)
+        if (Player.Augs.CurrentLevel[AUG_AGILITY] == 3)
         {
             Player.WeaponSpeed += 15;
             Player.SurvivalBonus += 6;
         }
-        if (Player.Augs.Level[AUG_AGILITY] == 4)
+        if (Player.Augs.CurrentLevel[AUG_AGILITY] == 4)
         {
             Player.WeaponSpeed += 20;
             Player.SurvivalBonus += 8;
         }
-        if (Player.Augs.Level[AUG_AGILITY] >= 5)
+        if (Player.Augs.CurrentLevel[AUG_AGILITY] >= 5)
         {
             Player.WeaponSpeed += 25;
             Player.SurvivalBonus += 10;
@@ -470,11 +470,11 @@ void CheckAugs()
     {
         fixed AmmoMult;
 
-        if (Player.Augs.Level[AUG_CAPACITY] == 1)
+        if (Player.Augs.CurrentLevel[AUG_CAPACITY] == 1)
             AmmoMult = 1.25;
-        if (Player.Augs.Level[AUG_CAPACITY] == 2)
+        if (Player.Augs.CurrentLevel[AUG_CAPACITY] == 2)
             AmmoMult = 1.5;
-        if (Player.Augs.Level[AUG_CAPACITY] >= 3)
+        if (Player.Augs.CurrentLevel[AUG_CAPACITY] >= 3)
             AmmoMult = 2;
 
         SetAmmoCapacity("Clip", (60 + Player.CapacityTotal * 10) * AmmoMult);
@@ -488,13 +488,13 @@ void CheckAugs()
     {
         fixed LuckMult;
 
-        if (Player.Augs.Level[AUG_LUCK] == 1)
+        if (Player.Augs.CurrentLevel[AUG_LUCK] == 1)
             LuckMult = 1.5;
-        if (Player.Augs.Level[AUG_LUCK] == 2)
+        if (Player.Augs.CurrentLevel[AUG_LUCK] == 2)
             LuckMult = 2;
-        if (Player.Augs.Level[AUG_LUCK] == 3)
+        if (Player.Augs.CurrentLevel[AUG_LUCK] == 3)
             LuckMult = 3;
-        if (Player.Augs.Level[AUG_LUCK] >= 4)
+        if (Player.Augs.CurrentLevel[AUG_LUCK] >= 4)
             LuckMult = 4;
 
         Player.HealthChance *= LuckMult;
@@ -519,7 +519,7 @@ void AugDamage(int Amount)
 void EquipAug(int Aug)
 {
     // If you don't have this aug yet, return
-    if (Player.Augs.Level[Aug] == 0)
+    if (Player.Augs.Level[Aug] == 0 || Player.Augs.CurrentLevel[Aug] == 0)
     {
         PrintError("This aug has not been activated yet");
         ActivatorSound("menu/error", 127);
@@ -597,5 +597,6 @@ void LevelUpAug(int AugIndex)
         }
 
         Player.Augs.Level[AugIndex]++;
+        Player.Augs.CurrentLevel[AugIndex] = Player.Augs.Level[AugIndex];
     }
 }

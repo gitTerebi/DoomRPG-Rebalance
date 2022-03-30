@@ -561,7 +561,10 @@ NamedScript MenuEntry void LoadCharacter()
 
     // Augmentations
     for (int i = 0; i < AUG_MAX; i++)
+    {
         Player.Augs.Level[i] = Info.Augs[i];
+        Player.Augs.CurrentLevel[i] = Player.Augs.Level[i];
+    }
 
     // Stims
     for (int i = 0; i < STIM_MAX; i++)

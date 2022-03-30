@@ -1893,6 +1893,10 @@ NamedScript void Loadout_GiveAugs()
         if (Player.Augs.Level[Type] > 0) continue;
 
         Player.Augs.Level[Type]++;
+
+        if (Player.Augs.Level[Type] > 0)
+            Player.Augs.CurrentLevel[Type] = Player.Augs.Level[Type];
+
         ActiveAugs++;
     }
 

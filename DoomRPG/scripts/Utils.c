@@ -2691,6 +2691,7 @@ NamedScript Console void GiveAugs(int Canisters, int Upgrades, int Slots)
     {
         AugInfoPtr AugPtr = &AugData[i];
         Player.Augs.Level[i] = AugPtr->MaxLevel;
+        Player.Augs.CurrentLevel[i] = Player.Augs.Level[i];
     }
 }
 

@@ -806,6 +806,7 @@ struct PlayerData_S
         int Slots;
         int SlotsUsed;
         bool Active[AUG_MAX];
+        int CurrentLevel[AUG_MAX];
         int Level[AUG_MAX];
     } Augs;
 

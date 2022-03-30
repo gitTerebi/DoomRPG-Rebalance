@@ -2283,28 +2283,28 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         {
             fixed AugSummonerModifier;
 
-            if (Player.Augs.Level[AUG_SUMMONER] == 5)
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 5)
                 AugSummonerModifier = 0.10;
-            if (Player.Augs.Level[AUG_SUMMONER] == 6)
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 6)
                 AugSummonerModifier = 0.15;
-            if (Player.Augs.Level[AUG_SUMMONER] == 7)
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 7)
                 AugSummonerModifier = 0.20;
-            if (Player.Augs.Level[AUG_SUMMONER] >= 8)
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 8)
                 AugSummonerModifier = 0.25;
 
             Stats->LevelAdd += RandomFixed(0.0, (fixed)Stats->Level * (1.0 + AugSummonerModifier) - (fixed)Stats->Level + 0.5);
 
-            if (Player.Augs.Level[AUG_SUMMONER] >= 5) Delay (1 * 35);
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 5) Delay (1 * 35);
 
             fixed BaseStatePoint = (40.0 + (fixed)GameSkill() * (fixed)Stats->Level) / 8.0;
 
-            if (Player.Augs.Level[AUG_SUMMONER] >= 1)
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 1)
                 Stats->Vitality += 10 + (int)(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0 + 0.5);
-            if (Player.Augs.Level[AUG_SUMMONER] >= 2)
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 2)
                 Stats->Defense += 10 + (int)(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0 + 0.5);
-            if (Player.Augs.Level[AUG_SUMMONER] >= 3)
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 3)
                 Stats->Strength += 10 + (int)(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0 + 0.5);
-            if (Player.Augs.Level[AUG_SUMMONER] >= 4)
+            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 4)
             {
                 GiveActorInventory(NewID, "DRPGSummonedRegenerationBoosterToken", 1);
             }
@@ -3192,13 +3192,13 @@ void CheckSkills()
     // Check for AUG Commanding abilities
     if (Player.Augs.Active[AUG_SUMMONER])
     {
-        if (Player.Augs.Level[AUG_SUMMONER] == 5)
+        if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 5)
             AugSummonerModifier = 0.90;
-        if (Player.Augs.Level[AUG_SUMMONER] == 6)
+        if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 6)
             AugSummonerModifier = 0.85;
-        if (Player.Augs.Level[AUG_SUMMONER] == 7)
+        if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 7)
             AugSummonerModifier = 0.80;
-        if (Player.Augs.Level[AUG_SUMMONER] >= 8)
+        if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 8)
             AugSummonerModifier = 0.75;
     }
 
@@ -3392,13 +3392,13 @@ void CheckSkills()
     // Level 4 and 5 of the Energy Augmentation increase skill refund rate
     if (Player.Augs.Active[AUG_ENERGY])
     {
-        if (Player.Augs.Level[AUG_ENERGY] == 5)
+        if (Player.Augs.CurrentLevel[AUG_ENERGY] == 5)
             Player.SkillRefundMult += 0.10;
-        else if (Player.Augs.Level[AUG_ENERGY] == 6)
+        else if (Player.Augs.CurrentLevel[AUG_ENERGY] == 6)
             Player.SkillRefundMult += 0.15;
-        else if (Player.Augs.Level[AUG_ENERGY] == 7)
+        else if (Player.Augs.CurrentLevel[AUG_ENERGY] == 7)
             Player.SkillRefundMult += 0.20;
-        else if (Player.Augs.Level[AUG_ENERGY] >= 8)
+        else if (Player.Augs.CurrentLevel[AUG_ENERGY] >= 8)
             Player.SkillRefundMult += 0.25;
     }
 

@@ -1044,7 +1044,7 @@ void DrawStatsMenu()
             }
 
             // Draw the level and max level
-            HudMessage("%d/%d", PlayerPtr->Augs.Level[i], AugPtr->MaxLevel);
+            HudMessage("%d/%d", PlayerPtr->Augs.CurrentLevel[i], AugPtr->MaxLevel);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 303.2 + ((i % 3) * 34.0), 140.0 + ((i / 3) * 34.0), 0.05);
 
             // Icon
@@ -1199,7 +1199,7 @@ void DrawAugsMenu()
             }
 
             // Draw the level and max level
-            HudMessage("%d/%d", Player.Augs.Level[Index], AugPtr->MaxLevel);
+            HudMessage("%d/%d", Player.Augs.CurrentLevel[Index], AugPtr->MaxLevel);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 32.2 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
 
             // Icon
@@ -1233,7 +1233,7 @@ void DrawAugsMenu()
                 {
                     AugInfoPtr AugIterPtr = &AugData[Player.MenuIndex];
 
-                    if (Player.Augs.Level[Index] <= k)
+                    if (Player.Augs.CurrentLevel[Index] <= k)
                     {
                         HudMessage("\Cu%S", AugIterPtr->Description[k]);
                         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 0.1, 136.1 + (k * 8.0), 0.05);
@@ -2161,17 +2161,39 @@ void MenuInput()
     // Augmentations menu
     if (Player.Menu == MENUPAGE_AUGS && !Player.MenuBlock)
     {
-        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex > 0)
+        if (CheckInput(BT_FORWARD, KEY_REPEAT, false, PlayerNumber()))
         {
-            ActivatorSound("menu/move", 127);
-            Player.MenuIndex -= 5;
-            if (Player.MenuIndex < 0) Player.MenuIndex = 0;
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+            {
+                if (Player.Augs.CurrentLevel[Player.MenuIndex] > 1)
+                {
+                    Player.Augs.CurrentLevel[Player.MenuIndex]--;
+                    ActivatorSound("menu/move", 127);
+                }
+            }
+            else if (Player.MenuIndex > 0)
+            {
+                ActivatorSound("menu/move", 127);
+                Player.MenuIndex -= 5;
+                if (Player.MenuIndex < 0) Player.MenuIndex = 0;
+            }
         }
-        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex < AUG_MAX - 1)
+        if (CheckInput(BT_BACK, KEY_REPEAT, false, PlayerNumber()))
         {
-            ActivatorSound("menu/move", 127);
-            Player.MenuIndex += 5;
-            if (Player.MenuIndex > AUG_MAX - 1) Player.MenuIndex = AUG_MAX - 1;
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+            {
+                if (Player.Augs.CurrentLevel[Player.MenuIndex] < Player.Augs.Level[Player.MenuIndex])
+                {
+                    Player.Augs.CurrentLevel[Player.MenuIndex]++;
+                    ActivatorSound("menu/move", 127);
+                }
+            }
+            else if (Player.MenuIndex < AUG_MAX - 1)
+            {
+                ActivatorSound("menu/move", 127);
+                Player.MenuIndex += 5;
+                if (Player.MenuIndex > AUG_MAX - 1) Player.MenuIndex = AUG_MAX - 1;
+            }
         }
         if (CheckInput(BT_MOVELEFT, KEY_REPEAT, false, PlayerNumber()) && Player.MenuIndex > 0)
         {
@@ -2185,13 +2207,16 @@ void MenuInput()
         }
         if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
-            EquipAug(Player.MenuIndex);
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+                LevelUpAug(Player.MenuIndex);
+            else
+            {
+                EquipAug(Player.MenuIndex);
 
-            // If the player starts manually toggling augs, don't try to automatically activate any later.
-            ClearDisabledAugs();
+                // If the player starts manually toggling augs, don't try to automatically activate any later.
+                ClearDisabledAugs();
+            }
         }
-        if (CheckInput(BT_SPEED, KEY_ONLYPRESSED, false, PlayerNumber()))
-            LevelUpAug(Player.MenuIndex);
     }
 
     // Skills Menu
@@ -2656,11 +2681,11 @@ void MenuHelp()
             break;
         case MENUPAGE_AUGS:
             if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
-                HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nToggle On/Off: \Cd%S\C-\nUpgrade: \Cd%S\C-",
-                           "Up", "Down", "Left", "Right", "Use", "Run");
+                HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch Current Level: \Cd%S + %S/%S\C-\nToggle On/Off: \Cd%S\C-\nUpgrade: \Cd%S + %S\C-",
+                           "Up", "Down", "Left", "Right", "Run", "Up", "Down", "Use", "Run", "Use");
             else
-                HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nToggle On/Off: \Cd%jS\C-\nUpgrade: \Cd%jS\C-",
-                           "+forward", "+back", "+moveleft", "+moveright", "+use", "+speed");
+                HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Current Level: \Cd%jS + %jS/%jS\C-\nToggle On/Off: \Cd%jS\C-\nSwitch Current Level: \Cd%jS + %jS/%jS\C-\nUpgrade: \Cd%jS + jS\C-",
+                           "+forward", "+back", "+moveleft", "+moveright", "+speed", "+forward", "+back", "+use", "+speed", "+use");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case MENUPAGE_SKILLS:
