@@ -2684,7 +2684,7 @@ void MenuHelp()
                 HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch Current Level: \Cd%S + %S/%S\C-\nToggle On/Off: \Cd%S\C-\nUpgrade: \Cd%S + %S\C-",
                            "Up", "Down", "Left", "Right", "Run", "Up", "Down", "Use", "Run", "Use");
             else
-                HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Current Level: \Cd%jS + %jS/%jS\C-\nToggle On/Off: \Cd%jS\C-\nSwitch Current Level: \Cd%jS + %jS/%jS\C-\nUpgrade: \Cd%jS + jS\C-",
+                HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Current Level: \Cd%jS + %jS/%jS\C-\nToggle On/Off: \Cd%jS\C-\nUpgrade: \Cd%jS + %jS\C-",
                            "+forward", "+back", "+moveleft", "+moveright", "+speed", "+forward", "+back", "+use", "+speed", "+use");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
