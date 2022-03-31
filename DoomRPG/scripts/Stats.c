@@ -449,7 +449,6 @@ void CheckStats()
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
-    Player.Speed = 0.5;
     Player.JumpHeight = 8.0;
     Player.WeaponSpeed = Player.AgilityTotal / 2;
     SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
@@ -626,7 +625,14 @@ void CheckStats()
 
     // Run function
     if (GetCVar("cl_run") || CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
-        Player.Speed = 1.0 + 0.25 * ((fixed)Player.AgilityTotal / 100);
+    {
+        if (GetCVar("cl_run") && CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+            Player.Speed = 0.5;
+        else
+            Player.Speed = 1.0 + 0.25 * ((fixed)Player.AgilityTotal / 100);
+    }
+    else
+        Player.Speed = 0.5;
 
     // Status Effect Checking
     if (Player.StatusType[SE_FATIGUE]) // Fatigue

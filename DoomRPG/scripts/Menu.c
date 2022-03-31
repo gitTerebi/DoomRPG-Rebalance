@@ -1233,10 +1233,15 @@ void DrawAugsMenu()
                 {
                     AugInfoPtr AugIterPtr = &AugData[Player.MenuIndex];
 
-                    if (Player.Augs.CurrentLevel[Index] <= k)
+                    if (Player.Augs.Level[Index] <= k)
                     {
                         HudMessage("\Cu%S", AugIterPtr->Description[k]);
-                        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 0.1, 136.1 + (k * 8.0), 0.05);
+                        EndHudMessage(HUDMSG_PLAIN, 0, "White", 0.1, 136.1 + (k * 8.0), 0.05);
+                    }
+                    else if (Player.Augs.CurrentLevel[Index]  <= k)
+                    {
+                        HudMessage("\Ck%S", AugIterPtr->Description[k]);
+                        EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", 0.1, 136.1 + (k * 8.0), 0.05);
                     }
                     else
                     {

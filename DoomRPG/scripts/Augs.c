@@ -597,6 +597,6 @@ void LevelUpAug(int AugIndex)
         }
 
         Player.Augs.Level[AugIndex]++;
-        Player.Augs.CurrentLevel[AugIndex] = Player.Augs.Level[AugIndex];
+        Player.Augs.CurrentLevel[AugIndex]++;
     }
 }
