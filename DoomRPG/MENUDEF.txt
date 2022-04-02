@@ -661,9 +661,7 @@ OptionMenu "DoomRPGMisc"
     Slider "Monster Drop Distance", "drpg_monster_dropdist", 0.1, 16.0, 0.1
     StaticText ""
 
-    Option "Friendly Monsters Can Teleport To The Player (SP only)*", "drpg_monster_friendly_teleport_enable", "OnOff"
-    Option "Friendly Monsters Can Teleport Only If Don't Have Target", "drpg_monster_friendly_teleport_if_no_target", "OnOff"
-    Option "Friendly Monsters Can Teleport Only If Don't Sight Player", "drpg_monster_friendly_teleport_if_no_sight", "OnOff"
+    Option "Friendly Monsters Can Teleport To The Player", "drpg_monster_friendly_teleport_enable", "OnOff"
     Slider "Minimum Distance For Teleport", "drpg_monster_friendly_teleport_distance", 0, 10, 1
     StaticText ""
 

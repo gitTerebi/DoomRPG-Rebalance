@@ -2299,15 +2299,17 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
             fixed BaseStatePoint = (40.0 + (fixed)GameSkill() * (fixed)Stats->Level) / 8.0;
 
             if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 1)
-                Stats->Vitality += 10 + (int)(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0 + 0.5);
+                Stats->Vitality += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
             if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 2)
-                Stats->Defense += 10 + (int)(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0 + 0.5);
+                Stats->Defense += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
             if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 3)
-                Stats->Strength += 10 + (int)(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0 + 0.5);
+                Stats->Strength += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
             if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 4)
             {
                 GiveActorInventory(NewID, "DRPGSummonedRegenerationBoosterToken", 1);
             }
+
+            SetActorInventory(NewID, "DRPGAugTokenSummoner", 1);
         }
 
         Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(NewID)]);

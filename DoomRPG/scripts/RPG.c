@@ -532,7 +532,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     if (Player.ActualHealth <= 1) // Near-Death stuff
     {
         // Extra Life check
-        if (CheckInventory("DRPGLife"))
+        if (!Player.CanSurvive && CheckInventory("DRPGLife"))
         {
             Player.ActualHealth = Player.HealthMax;
             ActivatorSound("health/resurrect", 127);
@@ -551,7 +551,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
         }
 
         // Survival Bonus
-        if (Player.CanSurvive && MonsterID > 0)
+        if (Player.CanSurvive)
         {
             Player.ActualHealth = Player.HealthMax / 5;
 

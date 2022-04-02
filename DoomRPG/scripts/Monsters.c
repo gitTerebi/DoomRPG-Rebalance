@@ -1224,104 +1224,101 @@ Start:
     // Changing the AI of monsters in case if there are summoned monsters
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
-        if (!PlayerInGame(i)) continue;
+        if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
 
-        if (!Players(i).Summons == 0)
+        for (int j = 0; j < Players(i).Summons; j++)
         {
-            for (int j = 0; j < Players(i).Summons; j++)
+            if (!GetActorProperty(0, APROP_Friendly))
             {
-                if (!GetActorProperty(0, APROP_Friendly))
+                // If the enemy has no target and the summoned monster is in his field of vision he immediately becomes aggressive towards summoned monster
+                if (!MonsterHasTarget() && Distance(0, Players(i).SummonTID[j]) <= 1536 && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
                 {
-                    // If the enemy has no target and the summoned monster is in his field of vision he immediately becomes aggressive towards summoned monster
-                    if (!MonsterHasTarget() && Distance(0, Players(i).SummonTID[j]) <= 1536 && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
-                    {
-                        Thing_Hate (0, Players(i).SummonTID[j], 3);
-                        Delay(DelayTime);
-                    }
-
-                    // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
-                    if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && Random(0, 100) <= 15 || MonsterHasTarget() && CheckSight(0, Players(i).TID, 0) && Random(0, 100) <= 15)
-                    {
-                        if (CheckSight(0, Players(i).SummonTID[j], 0))
-                        {
-                            GiveInventory("DRPGEnemyClearTarget1", 1);
-                            Delay(DelayTime);
-                        }
-                        else
-                        {
-                            GiveInventory("DRPGEnemyClearTarget2", 1);
-                            Delay(DelayTime);
-                        }
-                    }
-
-                    // Switch to another target if it is closer than the current target
-                    if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && CheckSight(0, Players(i).TID, 0) && Distance(0, AAPTR_TARGET) > Random(256, 512) && Random(0, 100) <= 15)
-                    {
-                        if (Distance(0, Players(i).SummonTID[j]) <= Random(64, 256) && Distance(0, Players(i).SummonTID[j]) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
-                        {
-                            Thing_Hate (0, Players(i).SummonTID[j], 4);
-                            Delay(DelayTime);
-                        }
-
-                        if (Distance(0, Players(i).TID) <= Random(64, 256) && Distance(0, Players(i).TID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
-                        {
-                            Thing_Hate (0, Players(i).TID, 4);
-                            Delay(DelayTime);
-                        }
-                    }
-
-                    // Summons switch to another target if it is closer than the current target
-                    if (CheckSight(Players(i).SummonTID[j], 0, 0) && Distance(0, Players(i).SummonTID[j]) <= 256 && Random(0, 100) <= 15)
-                    {
-                        int EnemyMonsterTID = Stats->TID;
-
-                        SetActivator(Players(i).SummonTID[j]);
-
-                        if (MonsterHasTarget() && CheckSight(0, AAPTR_TARGET, 0) && Distance(0, AAPTR_TARGET) > Random(256, 512))
-                        {
-                            if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= Random(64, 256) && Distance(0, EnemyMonsterTID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
-                            {
-                                Thing_Hate (0, EnemyMonsterTID);
-                                Delay(DelayTime);
-                            }
-                        }
-
-                        if (MonsterHasTarget() && !CheckSight(0, AAPTR_TARGET, 0))
-                        {
-                            if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= 256)
-                            {
-                                Thing_Hate (0, EnemyMonsterTID);
-                                Delay(DelayTime);
-                            }
-                        }
-                    }
+                    Thing_Hate (0, Players(i).SummonTID[j], 3);
+                    Delay(DelayTime);
                 }
 
-                if (GetActorProperty(0, APROP_Friendly))
+                // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
+                if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && Random(0, 100) <= 15 || MonsterHasTarget() && CheckSight(0, Players(i).TID, 0) && Random(0, 100) <= 15)
                 {
-                    // Clearing a friendly monster's target in case the enemy is out of sight
-                    if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
+                    if (CheckSight(0, Players(i).SummonTID[j], 0))
                     {
-                        GiveInventory("DRPGFriendlyClearTarget", 1);
+                        GiveInventory("DRPGEnemyClearTarget1", 1);
                         Delay(DelayTime);
                     }
-
-                    // More enemies aggression to summoned monsters
-                    if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
+                    else
                     {
-                        GiveInventory("DRPGFriendlyAlertMonsters", 1);
+                        GiveInventory("DRPGEnemyClearTarget2", 1);
                         Delay(DelayTime);
                     }
                 }
 
-                if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGMarineSummonedToken"))
+                // Switch to another target if it is closer than the current target
+                if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && CheckSight(0, Players(i).TID, 0) && Distance(0, AAPTR_TARGET) > Random(256, 512) && Random(0, 100) <= 15)
                 {
-                    // Used to change the AI of friendly marines
-                    if (!MonsterHasTarget() && Distance(0, Players(i).TID) <= 200 && Random(0, 100) <= 25)
+                    if (Distance(0, Players(i).SummonTID[j]) <= Random(64, 256) && Distance(0, Players(i).SummonTID[j]) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
                     {
-                        Thing_Hate(0, Players(i).TID);
+                        Thing_Hate (0, Players(i).SummonTID[j], 4);
                         Delay(DelayTime);
                     }
+
+                    if (Distance(0, Players(i).TID) <= Random(64, 256) && Distance(0, Players(i).TID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
+                    {
+                        Thing_Hate (0, Players(i).TID, 4);
+                        Delay(DelayTime);
+                    }
+                }
+
+                // Summons switch to another target if it is closer than the current target
+                if (CheckSight(Players(i).SummonTID[j], 0, 0) && Distance(0, Players(i).SummonTID[j]) <= 256 && Random(0, 100) <= 15)
+                {
+                    int EnemyMonsterTID = Stats->TID;
+
+                    SetActivator(Players(i).SummonTID[j]);
+
+                    if (MonsterHasTarget() && CheckSight(0, AAPTR_TARGET, 0) && Distance(0, AAPTR_TARGET) > Random(256, 512))
+                    {
+                        if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= Random(64, 256) && Distance(0, EnemyMonsterTID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
+                        {
+                            Thing_Hate (0, EnemyMonsterTID);
+                            Delay(DelayTime);
+                        }
+                    }
+
+                    if (MonsterHasTarget() && !CheckSight(0, AAPTR_TARGET, 0))
+                    {
+                        if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= 256)
+                        {
+                            Thing_Hate (0, EnemyMonsterTID);
+                            Delay(DelayTime);
+                        }
+                    }
+                }
+            }
+
+            if (GetActorProperty(0, APROP_Friendly))
+            {
+                // Clearing a friendly monster's target in case the enemy is out of sight
+                if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
+                {
+                    GiveInventory("DRPGFriendlyClearTarget", 1);
+                    Delay(DelayTime);
+                }
+
+                // More enemies aggression to summoned monsters
+                if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
+                {
+                    GiveInventory("DRPGFriendlyAlertMonsters", 1);
+                    Delay(DelayTime);
+                }
+            }
+
+            if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGMarineSummonedToken"))
+            {
+                // Used to change the AI of friendly marines
+                if (!MonsterHasTarget() && Distance(0, Players(i).TID) <= 200 && Random(0, 100) <= 25)
+                {
+                    Thing_Hate(0, Players(i).TID);
+                    Delay(DelayTime);
                 }
             }
         }
@@ -1354,7 +1351,7 @@ Start:
 
 NamedScript void MonsterFriendlyTeleport()
 {
-    if (!GetCVar("drpg_monster_friendly_teleport_enable") || !GetActorProperty(0, APROP_Friendly) || CurrentLevel->UACBase || InMultiplayer && PlayerCount() > 1)
+    if (!GetActorProperty(0, APROP_Friendly) || CurrentLevel->UACBase)
         return;
 
     // Check class
@@ -1367,34 +1364,41 @@ NamedScript void MonsterFriendlyTeleport()
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
+    int PlayerTID;
+    int PlayerNumber;
+    int MonsterTID = Stats->TID;
+    int TeleportDistance;
+
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
+
+        for (int j = 0; j < Players(i).Summons; j++)
+        {
+            if (Players(i).SummonTID[j] == MonsterTID)
+            {
+                PlayerTID = Players(i).TID;
+                PlayerNumber = i;
+                break;
+            }
+        }
+    }
+
 Start:
-    if (ClassifyActor(0) & ACTOR_WORLD)
-        return;
 
-    if (ClassifyActor(0) & ACTOR_DEAD)
-    {
-        Delay(35);
-        goto Start;
-    }
+    Delay(35);
 
-    if (MonsterHasTarget() && GetCVar("drpg_monster_friendly_teleport_if_no_target"))
-    {
-        Delay(35);
-        goto Start;
-    }
+    if (!GetUserCVar(PlayerNumber, "drpg_monster_friendly_teleport_enable")) goto Start;
 
-    if (CheckSight(0, Players(0).TID, 0) && GetCVar("drpg_monster_friendly_teleport_if_no_sight"))
-    {
-        Delay(35);
-        goto Start;
-    }
+    if (ClassifyActor(0) & ACTOR_WORLD || ClassifyActor(0) & ACTOR_DEAD) return;
 
-    fixed TeleportDistance = 512 + (512 * GetCVar("drpg_monster_friendly_teleport_distance"));
+    while (MonsterHasTarget() || MonsterSeePlayers(0, 0)) Delay(35);
 
-    if (Distance(0, Players(0).TID) > TeleportDistance)
+    TeleportDistance = 512 + (512 * GetUserCVar(PlayerNumber, "drpg_monster_friendly_teleport_distance"));
+
+    if (Distance(0, PlayerTID) > TeleportDistance)
     {
         int TeleportSpotTID = UniqueTID();
-        int TargetPlayerTID = Players(0).TID;
 
         bool Success = false;
         fixed TeleportAngle;
@@ -1405,15 +1409,15 @@ Start:
         {
             fixed TeleportAngle = RandomFixed(0.0, 1.0);
 
-            X = GetActorX(TargetPlayerTID) + Random(-256, 256);
-            Y = GetActorY(TargetPlayerTID) + Random(-256, 256);
-            Z = GetActorZ(TargetPlayerTID);
+            X = GetActorX(PlayerTID) + Random(-256, 256);
+            Y = GetActorY(PlayerTID) + Random(-256, 256);
+            Z = GetActorZ(PlayerTID);
             Angle = TeleportAngle + 0.5;
             Angle %= 1.0;
 
             Success = Spawn("MapSpot", X, Y, Z, TeleportSpotTID, Angle);
             if (Success && !SetActorPosition(TeleportSpotTID, GetActorX(TeleportSpotTID), GetActorY(TeleportSpotTID), GetActorFloorZ(TeleportSpotTID), false)) Success = false;
-            if (Success && !CheckSight(TargetPlayerTID, TeleportSpotTID, 0)) Success = false;
+            if (Success && !CheckSight(PlayerTID, TeleportSpotTID, 0)) Success = false;
             if (Success)
                 break;
         }
@@ -1428,8 +1432,6 @@ Start:
             Thing_Remove(TeleportSpotTID);
         }
     }
-
-    Delay(35);
 
     goto Start;
 }
@@ -1680,6 +1682,35 @@ Start:
                 MonsterOrangeAuraCheck(true);
 
             MonsterWasDisrupted = false;
+        }
+    }
+
+    if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGAugTokenSummoner"))
+    {
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
+
+            for (int j = 0; j < Players(i).Summons; j++)
+            {
+                if (Players(i).SummonTID[j] == Stats->TID)
+                {
+                    if (!Players(i).Augs.Active[AUG_SUMMONER])
+                    {
+                        int Health = GetActorProperty(0, APROP_Health);
+
+                        MonsterInitStats();
+
+                        if (Health > Stats->HealthMax)
+                            SetActorProperty(0, APROP_Health, Stats->HealthMax);
+                        else
+                            SetActorProperty(0, APROP_Health, Health);
+
+                        SetInventory("DRPGSummonedRegenerationBoosterToken", 0);
+                        SetInventory("DRPGAugTokenSummoner", 0);
+                    }
+                }
+            }
         }
     }
 
