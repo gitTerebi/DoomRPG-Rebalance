@@ -1495,8 +1495,8 @@ void BuildTurretData()
 {
     if (GetCVar("use_joystick") || GetUserCVar(PlayerNumber(), "drpg_deltatouch"))
     {
-        TurretUpgradeData[TU_BUILD].CommandInfo = StrParam("Issuing this command will enable or disable the turret\n\Ck(\Cd%jS\C- + \Cd%jS\Ck for quick use)", "Run", "Turret Wheel");
-        TurretUpgradeData[TU_COMMAND_DRAW_FIRE].CommandInfo = StrParam("When issued, use \Cd%jS\C- + \Cd%jS\Ck to force a target switch", "Run", "Attack");
+        TurretUpgradeData[TU_BUILD].CommandInfo = StrParam("Issuing this command will enable or disable the turret\n\Ck(\Cd%S\C- + \Cd%S\Ck for quick use)", "Run", "Turret Wheel");
+        TurretUpgradeData[TU_COMMAND_DRAW_FIRE].CommandInfo = StrParam("When issued, use \Cd%S\C- + \Cd%S\Ck to force a target switch", "Run", "Attack");
     }
     else
     {
