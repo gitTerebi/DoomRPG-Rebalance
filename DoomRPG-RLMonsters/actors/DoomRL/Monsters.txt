@@ -1503,6 +1503,18 @@ ACTOR DRPGRLGibbedStuff
 // MONSTER'S ADAPTIVE WEAPONS DROP
 //
 
+ACTOR RLEliteSergeantDoubleShotgunDropRPG : RLEliteSergeantDoubleShotgunDrop replaces RLEliteSergeantDoubleShotgunDrop
+{
+	States
+	{
+	WeaponDrop: // Drops for DRLA Arsenal + Monsterpack
+		TNT1 A 0 A_DropItem("RLDoubleShotgunPickup")
+		TNT1 A 0 A_Jump(127, "DonutstealDrop")
+		TNT1 A 0 A_DropItem("RLShellBox")
+		Stop
+	}
+}
+
 ACTOR RLEliteHumanCombatPistolDropRPG : RLEliteHumanCombatPistolDrop replaces RLEliteHumanCombatPistolDrop
 {
 	States
