@@ -6,9 +6,27 @@ This fork intends to solve this problem. Now the content is served to the player
 
 In addition, some of the content (RPG's Skills, Stims, AUG, Auras, etc.) are now the things that need to be applied to survive. Especially good Stims when meeting with boss - remember this.
 
-Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more complex monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> DoomRLA Monster Pack Options and see for yourself (default is 6).
+Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more complex monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> DoomRLA Monster Pack Options and see for yourself.
 
 Enjoy! 
+
+## Installing (build)
+
+Below is the download link:
+1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.7.1)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
+
+Installation Instructions:
+
+1. The archive has a folder DoomRPG SE Rebalance. I recommend placing it at the following address: "D:\Games\DoomRPG SE Rebalance".
+2. If you want to place the folder in the location of your choice, you will have to change the corresponding folder paths in the DoomRPG Launcher.
+3. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRLA, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
+4. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.7.1\gzdoom-username.ini".
+5. Now you need to take the configuration file from the archive in the Extras folder and replace it with the file from step "3". Note that you need to change the "username" in the file name.
+6. Run the game through the DoomRPG Launcher and play.
+
+Please note that for those who like to play on Gamepad, there are 2 optional files:
+1. Gamepad Control Helper (author - Me);
+2. Aim Assist 0.75 (author - RicardoLuis0).
 
 ## Manual Installing
 
@@ -26,27 +44,6 @@ Use the following load order:
 2. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) (recommended);
 3. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
 4. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) (must have);
-
-## Installing (build)
-
-I wanted to share my build. Perhaps someone can use it to run a Doom RPG.
-
-Below is the download link:
-1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.7.1)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
-
-Installation Instructions:
-
-1. The archive has a folder DoomRPG SE Rebalance. I recommend placing it at the following address: "D:\Games\DoomRPG SE Rebalance".
-2. In case you want to place the folder in a place of your choice, you will have to change the corresponding addresses in the DoomRPG Launcher.
-3. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRL, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
-4. Launch the game via the DoomRPG Launcher and exit. The game will create a configuration file at "D:\Games\DoomRPG SE Rebalance\ports\(G)ZDooM 4.7.1\gzdoom-username.ini".
-5. Now you need to take the configuration file from the archive in the Extras folder and replace it with the file from step "3". Note that you need to change the "username" in the file name.
-6. Please note that the configuration file has also made some changes that affect the functioning of the assembly. Therefore, I recommend using this file as a base. Also note that in the DoomRL Arsenal settings, perks are turned off and the option to learn recipes is enabled. If you are against such settings, disable them manually in the Options menu.
-7. Run the game through the DoomRPG Launcher and play.
-
-Please note that for those who like to play on Gamepad, there are 2 optional files:
-1. Gamepad Control Helper (author - Me);
-2. Aim Assist 0.75 (author - RicardoLuis0).
 
 ## Compatible mods
 
