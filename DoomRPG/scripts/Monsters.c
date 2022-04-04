@@ -791,14 +791,6 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         if (GetActorProperty(0, APROP_Friendly))
             Stats->Level = (int)(((fixed)AveragePlayerLevel() * LevelWeight + (fixed)LevelNum * MapWeight) * RandomFixed(0.9, 1.1));
 
-        // Special case for Bosses
-        if (Stats->Flags & MF_BOSS)
-            Stats->Level += (int)(Random(((160 / 8) * PlayerCount()), ((320 / 8) * PlayerCount())) * MapLevelModifier);
-
-        // Special case for Megabosses
-        if (Stats->Flags & MF_MEGABOSS)
-            Stats->Level += (int)(Random(((240 / 8) * PlayerCount()), ((400 / 8) * PlayerCount())) * MapLevelModifier);
-
         // Special case for Powersuit Mk. II
         if (GetActorClass(0) == "DRPGSuperPowerSuit")
             Stats->Level = 1000;
@@ -1523,7 +1515,7 @@ Start:
     {
         StatsChanged = true;
 
-        if (GetActorProperty(0, APROP_Friendly))
+        if (GetActorProperty(0, APROP_Friendly) || Stats->Flags & MF_BOSS || Stats->Flags & MF_MEGABOSS)
             SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0)));
         else
             SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + (((fixed)(Stats->Strength * (fixed)GameSkill()) / 400.0) + ((fixed)LevelNum / (GetCVar("drpg_ws_use_wads") * 25.0))));
