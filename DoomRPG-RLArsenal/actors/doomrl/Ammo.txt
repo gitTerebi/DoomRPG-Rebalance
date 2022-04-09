@@ -31,6 +31,19 @@ actor RLClipBox2 : RLClipBox Replaces RLClipBox
     }
 }
 
+actor RLShell2 : RLShell Replaces DRPGShell
+{
+    Inventory.PickupSound "items/shell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		SHEL A -1
+        Stop
+    }
+}
+
 actor RLShellBox2 : RLShellBox Replaces RLShellBox
 {
 	Inventory.PickupSound "items/shell"
