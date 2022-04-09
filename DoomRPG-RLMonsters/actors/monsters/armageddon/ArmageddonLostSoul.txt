@@ -45,7 +45,7 @@ ACTOR RLArmageddonLostSoul : RLLostSoulBase 16559
   
   DamageFactor "Maser", 2.0 // Final Doomer Damagetype
   
-  Damage 1
+  Damage 2
   DamageType "Melee"
   PainType "Melee"
   DeathType "Melee"
