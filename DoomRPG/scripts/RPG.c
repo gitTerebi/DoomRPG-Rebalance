@@ -893,6 +893,9 @@ NamedScript void WeaponSpeed()
 
 Start:
 
+    while (CheckInventory("RLWeaponDrop"))
+        Delay(35);
+
     if (Player.Stim.PowerupTimer[STIM_RAGE] > 0 || Player.WeaponSpeed >= 100 || Player.WeaponSpeed <= 0)
         Time = 4;
     else
