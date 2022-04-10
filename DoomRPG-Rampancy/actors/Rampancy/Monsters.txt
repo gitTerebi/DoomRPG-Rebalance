@@ -1,0 +1,327 @@
+// --------------------------------------------------
+// STANDARD ENEMIES
+//
+
+ACTOR Robot_SentryBot2 : Robot_SentryBot Replaces Robot_SentryBot
+{
+    Tag "Sentry Bot"
+
+	States
+	{
+	Spawn:
+		STRY A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		STRY A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_DefenderBot2 : Robot_DefenderBot Replaces Robot_DefenderBot
+{
+    Tag "Defender Bot"
+
+	States
+	{
+	Spawn:
+		DFNB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		DFNB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_SecurityBotSmall2 : Robot_SecurityBotSmall Replaces Robot_SecurityBotSmall
+{
+    Tag "Security Bot Small"
+
+	States
+	{
+	Spawn:
+		SECB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SECB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_SoldierBot2 : Robot_SoldierBot Replaces Robot_SoldierBot
+{
+    Tag "Soldier Bot"
+
+	States
+	{
+	Spawn:
+		SDBT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SDBT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_SpiderBotSmall2 : Robot_SpiderBotSmall Replaces Robot_SpiderBotSmall
+{
+    Tag "Spider Bot Small"
+
+	States
+	{
+	Spawn:
+		SPD2 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SPD2 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_StealthDroid2 : Robot_StealthDroid Replaces Robot_StealthDroid
+{
+    Tag "Stealth Droid"
+
+	States
+	{
+	Spawn:
+		PROT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		PROT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_ScoutDrone2 : Robot_ScoutDrone Replaces Robot_ScoutDrone
+{
+    Tag "Scout Drone"
+
+	States
+	{
+	Spawn:
+		SCDR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SCDR A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_AssaultDrone2 : Robot_AssaultDrone Replaces Robot_AssaultDrone
+{
+    Tag "Assault Drone"
+
+	States
+	{
+	Spawn:
+		ASTD A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		ASTD A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_SecurityBot2 : Robot_SecurityBot Replaces Robot_SecurityBot
+{
+    Tag "Security Bot"
+
+	States
+	{
+	Spawn:
+		SCBT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SCBT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_DreadnoughtBot2 : Robot_DreadnoughtBot Replaces Robot_DreadnoughtBot
+{
+    Tag "Dreadnought Bot"
+
+	States
+	{
+	Spawn:
+		DRDB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		DRDB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_SpiderBot2 : Robot_SpiderBot Replaces Robot_SpiderBot
+{
+    Tag "Spider Bot"
+
+	States
+	{
+	Spawn:
+		SPDB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SPDB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_FabricationNode2 : Robot_FabricationNode Replaces Robot_FabricationNode
+{
+    Tag "Fabrication Node"
+
+	States
+	{
+	Spawn:
+		FABN A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		FABN A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_RollerDroid2 : Robot_RollerDroid Replaces Robot_RollerDroid
+{
+    Tag "Roller Droid"
+
+	States
+	{
+	Spawn:
+		RLRD A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		RLRD A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_MaintenanceBot2 : Robot_MaintenanceBot Replaces Robot_MaintenanceBot
+{
+    Tag "Maintenance Bot"
+
+	States
+	{
+	Spawn:
+		MNTB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		MNTB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_RepairBot2 : Robot_RepairBot Replaces Robot_RepairBot
+{
+    Tag "Repair Bot"
+
+	States
+	{
+	Spawn:
+		REPB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		REPB A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_MilitaryBot2 : Robot_MilitaryBot Replaces Robot_MilitaryBot
+{
+    Tag "Military Bot"
+
+	States
+	{
+	Spawn:
+		MILB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		MILB A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+ACTOR Robot_LoaderBot2 : Robot_LoaderBot Replaces Robot_LoaderBot
+{
+    Tag "Loader Bot"
+
+	States
+	{
+	Spawn:
+		LDRB A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		LDRB A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// GunTurret
+ACTOR Robot_GunTurretRPG : Robot_GunTurret Replaces Robot_GunTurret
+{
+    Tag "Gun Turret"
+
+	States
+	{
+	Spawn:
+		GTR1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		GTR1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// BossEye
+ACTOR Robot_BossEye2 : Robot_BossEye Replaces Robot_BossEye
+{
+    Tag "Boss Eye"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// BossBrain
+ACTOR Robot_BossBrain2 : Robot_BossBrain Replaces Robot_BossBrain
+{
+    Tag "Boss Brain"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// REPLACES DRPG ENEMIES
+//
+ACTOR Robot_SentryBotRPG : Robot_SentryBot2 Replaces DRPGZombieMan {}
+ACTOR Robot_DefenderBotRPG : Robot_DefenderBot2 Replaces DRPGShotgunGuy {}
+ACTOR Robot_SecurityBotSmallRPG : Robot_SecurityBotSmall2 Replaces DRPGChaingunGuy {}
+ACTOR Robot_SoldierBotRPG : Robot_SoldierBot2 Replaces DRPGDoomImp {}
+ACTOR Robot_SpiderBotSmallRPG : Robot_SpiderBotSmall2 Replaces DRPGDemon {}
+ACTOR Robot_StealthDroidRPG : Robot_StealthDroid2 Replaces DRPGSpectre {}
+ACTOR Robot_ScoutDroneRPG : Robot_ScoutDrone2 Replaces DRPGLostSoul {}
+ACTOR Robot_AssaultDroneRPG : Robot_AssaultDrone2 Replaces DRPGCacodemon {}
+ACTOR Robot_SecurityBotRPG : Robot_SecurityBot2 Replaces DRPGHellKnight {}
+ACTOR Robot_DreadnoughtBotRPG : Robot_DreadnoughtBot2 Replaces DRPGBaronOfHell {}
+ACTOR Robot_SpiderBotRPG : Robot_SpiderBot2 Replaces DRPGArachnotron {}
+ACTOR Robot_FabricationNodeRPG : Robot_FabricationNode2 Replaces DRPGPainElemental {}
+ACTOR Robot_RollerDroidRPG : Robot_RollerDroid2 Replaces DRPGRevenant {}
+ACTOR Robot_MaintenanceBotRPG : Robot_MaintenanceBot2 Replaces DRPGFatso {}
+ACTOR Robot_RepairBotRPG : Robot_RepairBot2 Replaces DRPGArchvile {}
+ACTOR Robot_MilitaryBotRPG : Robot_MilitaryBot2 Replaces DRPGCyberdemon {}
+ACTOR Robot_LoaderBotRPG : Robot_LoaderBot2 Replaces Robot_LoaderBot {}

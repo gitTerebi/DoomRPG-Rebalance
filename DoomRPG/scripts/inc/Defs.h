@@ -568,6 +568,7 @@ typedef enum
     COMPAT_NONE,
     COMPAT_EXTRAS,
     COMPAT_LEGENDOOM,
+    COMPAT_RAMPANCY,
     COMPAT_DRLA,
     COMPAT_CH
 } ECompatibilityMode;

@@ -25,23 +25,23 @@ NoInit MonsterStats RPGMap Monsters[MAX_MONSTERS];
 
 MonsterInfo const MonsterDataDF[MAX_DEF_MONSTERS_DF] =
 {
-    { "ZombieMan",                          "Former Human",                     1,      0, false, "You hear shuffling footsteps and moans!" },
-    { "ShotgunGuy",                         "Former Sergeant",                  2,      0, false, "You hear the sound of shotguns pumping!" },
-    { "ChaingunGuy",                        "Former Commando",                  5,      0, false, "Quiet mutters and whirring set you on edge!" },
-    { "DoomImp",                            "Imp",                              4,      0, false, "The walls are scratched and flame-scorched!" },
-    { "Demon",                              "Demon",                            3,      0, false, "Hungry growls echo around you!" },
-    { "Spectre",                            "Spectre",                          3,      0, false, "It's dark, you are likely to be eaten by a... Spectre?" },
-    { "LostSoul",                           "Lost Soul",                        3,      0, false, "The sound of many flames echo about!" },
-    { "Cacodemon",                          "Cacodemon",                        10,     0, false, "Screeches drown out all other sound!" },
-    { "HellKnight",                         "Hell Knight",                      20,     0, false, "A battle cry chants in the distance!" },
-    { "BaronOfHell",                        "Baron of Hell",                    30,     0, false, "Seems you've found Hell's nobility!" },
-    { "PainElemental",                      "Pain Elemental",                   40,     0, false, "You feel you are being watched!" },
-    { "Revenant",                           "Revenant",                         50,     0, false, "Bones clatter all around you!" },
-    { "Fatso",                              "Mancubus",                         60,     0, false, "You hear deep, guttural noises!" },
-    { "Arachnotron",                        "Arachnotron",                      60,     0, false, "Leg servos squeak and whirr nearby!" },
-    { "Archvile",                           "Arch-Vile",                        70,     0, false, "You hear crackling flames!" },
-    { "Cyberdemon",                         "Cyberdemon",                       85,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
-    { "SpiderMastermind",                   "Spider Mastermind",                95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
+    { "ZombieMan",                          "Former Human",                      1,      0, false, "You hear shuffling footsteps and moans!" },
+    { "ShotgunGuy",                         "Former Sergeant",                   2,      0, false, "You hear the sound of shotguns pumping!" },
+    { "ChaingunGuy",                        "Former Commando",                   5,      0, false, "Quiet mutters and whirring set you on edge!" },
+    { "DoomImp",                            "Imp",                               4,      0, false, "The walls are scratched and flame-scorched!" },
+    { "Demon",                              "Demon",                             3,      0, false, "Hungry growls echo around you!" },
+    { "Spectre",                            "Spectre",                           3,      0, false, "It's dark, you are likely to be eaten by a... Spectre?" },
+    { "LostSoul",                           "Lost Soul",                         3,      0, false, "The sound of many flames echo about!" },
+    { "Cacodemon",                          "Cacodemon",                         10,     0, false, "Screeches drown out all other sound!" },
+    { "HellKnight",                         "Hell Knight",                       20,     0, false, "A battle cry chants in the distance!" },
+    { "BaronOfHell",                        "Baron of Hell",                     30,     0, false, "Seems you've found Hell's nobility!" },
+    { "PainElemental",                      "Pain Elemental",                    40,     0, false, "You feel you are being watched!" },
+    { "Revenant",                           "Revenant",                          50,     0, false, "Bones clatter all around you!" },
+    { "Fatso",                              "Mancubus",                          60,     0, false, "You hear deep, guttural noises!" },
+    { "Arachnotron",                        "Arachnotron",                       60,     0, false, "Leg servos squeak and whirr nearby!" },
+    { "Archvile",                           "Arch-Vile",                         70,     0, false, "You hear crackling flames!" },
+    { "Cyberdemon",                         "Cyberdemon",                        85,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
+    { "SpiderMastermind",                   "Spider Mastermind",                 95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
 };
 
 MonsterInfo const MonsterDataLD[MAX_DEF_MONSTERS_DF] =
@@ -63,6 +63,27 @@ MonsterInfo const MonsterDataLD[MAX_DEF_MONSTERS_DF] =
     { "LDArchvile",                           "Arch-Vile",                       70,     0, false, "You hear crackling flames!" },
     { "LDCyberdemon",                         "Cyberdemon",                      85,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
     { "LDSpiderMastermind",                   "Spider Mastermind",               95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
+};
+
+MonsterInfo const MonsterDataRAMPANCY[MAX_DEF_MONSTERS_DF] =
+{
+    { "Robot_SentryBot",                      "Sentry Bot",                      1,      0, false, "You hear shuffling footsteps and moans!" },
+    { "Robot_DefenderBot",                    "Defender Bot",                    2,      0, false, "You hear the sound of shotguns pumping!" },
+    { "Robot_SecurityBotSmall",               "Security Bot Small",              5,      0, false, "Quiet mutters and whirring set you on edge!" },
+    { "Robot_SoldierBot",                     "Soldier Bot",                     4,      0, false, "The walls are scratched and flame-scorched!" },
+    { "Robot_SpiderBotSmall",                 "Spider Bot Small",                3,      0, false, "Hungry growls echo around you!" },
+    { "Robot_StealthDroid",                   "Stealth Droid",                   3,      0, false, "It's dark, you are likely to be eaten by a... Spectre?" },
+    { "Robot_ScoutDrone",                     "Scout Drone",                     3,      0, false, "The sound of many flames echo about!" },
+    { "Robot_AssaultDrone",                   "Assault Drone",                   10,     0, false, "Screeches drown out all other sound!" },
+    { "Robot_SecurityBot",                    "Security Bot",                    20,     0, false, "A battle cry chants in the distance!" },
+    { "Robot_DreadnoughtBot",                 "Dreadnought Bot",                 30,     0, false, "Seems you've found Hell's nobility!" },
+    { "Robot_FabricationNode",                "Fabrication Node",                40,     0, false, "You feel you are being watched!" },
+    { "Robot_RollerDroid",                    "Roller Droid",                    50,     0, false, "Bones clatter all around you!" },
+    { "Robot_MaintenanceBot",                 "Maintenance Bot",                 60,     0, false, "You hear deep, guttural noises!" },
+    { "Robot_SpiderBot",                      "Spider Bot",                      60,     0, false, "Leg servos squeak and whirr nearby!" },
+    { "Robot_RepairBot",                      "Repair Bot",                      70,     0, false, "You hear crackling flames!" },
+    { "Robot_MilitaryBot",                    "Military Bot",                    85,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
+    { "Robot_LoaderBot",                      "Loader Bot",                      95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
 };
 
 MonsterInfo const MonsterDataDRLA[MAX_DEF_MONSTERS_DRLA] =

@@ -3157,6 +3157,16 @@ void BuildSkillData()
         Skills[4][16].Description[1] = "Summons a Uncommon Spider Mastermind";
         Skills[4][16].Description[2] = "Summons a Rare Spider Mastermind";
     }
+    // Rampancy Compatibility
+    else if (CompatMonMode == COMPAT_RAMPANCY)
+    {
+        for (int i = 1; i < 17; i++)
+        {
+            Skills[4][i].MaxLevel = 0;
+            Skills[4][i].Name = "Not supported";
+            Skills[4][i].Description[0] = "Not supported";
+        }
+    }
 
     // Icons
     for (int i = 0; i < MAX_CATEGORIES; i++)

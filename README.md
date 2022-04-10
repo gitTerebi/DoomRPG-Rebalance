@@ -47,7 +47,8 @@ Use the following load order:
 
 ## Compatible mods
 
-- DoomRL Arsenal - [1.1.5] [MP-B7.3].
-- LegenDoom v2.7.
-- Colourful Hell v0.97ccc.
+- [DoomRL Arsenal - v1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044);
+– [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193);
+- LegenDoom v2.7;
+- Colourful Hell v0.97ccc;
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.

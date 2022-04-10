@@ -2173,7 +2173,7 @@ NamedScript void Loadout_GiveDRLAEquipment()
 NamedScript void DefaultLoadout()
 {
     // Weapons
-    if (CompatMode != COMPAT_DRLA && CompatMode != COMPAT_LEGENDOOM)
+    if (CompatMode != COMPAT_DRLA && CompatMode != COMPAT_LEGENDOOM && CompatMode != COMPAT_RAMPANCY)
     {
         for (int i = 0; i < 8; i++)
         {
@@ -2343,6 +2343,19 @@ void CheckCompatibility()
         CompatMode = COMPAT_LEGENDOOM;
         CompatMonMode = COMPAT_LEGENDOOM;
         MonsterData = MonsterDataLD;
+        Thing_Remove(TID);
+    }
+
+    // Rampancy
+    Success = SpawnForced("Robot_SentryBot", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (DebugLog)
+            Log("\CdDEBUG: \CdLegenDoom\C- detected");
+
+        CompatMode = COMPAT_RAMPANCY;
+        CompatMonMode = COMPAT_RAMPANCY;
+        MonsterData = MonsterDataRAMPANCY;
         Thing_Remove(TID);
     }
 
