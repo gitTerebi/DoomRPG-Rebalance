@@ -4,7 +4,6 @@ clearskills
 // Easy skill
 skill easy
 {
-{
     damagefactor = 1.0
     monsterhealth = 1.0
     aggressiveness = 0.0
