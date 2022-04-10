@@ -450,7 +450,6 @@ void CheckStats()
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
     Player.JumpHeight = 8.0;
-    Player.WeaponSpeed = Player.AgilityTotal / 2;
     SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
     SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
     SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
@@ -622,6 +621,12 @@ void CheckStats()
 
         Player.PrevEnergy = Player.EnergyTotal;
     }
+
+    // Weapon speed (with check the weapon drop script from DRLA)
+    if (CheckInventory("RLWeaponDrop") > 0)
+        Player.WeaponSpeed = 0;
+    else
+        Player.WeaponSpeed = Player.AgilityTotal / 2;
 
     // Run function
     if (GetCVar("cl_run") || CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
