@@ -144,7 +144,7 @@ ACTOR Robot_ItemDrop
 		
 	ItemDropDRLA:
 		TNT1 A 0 A_JumpIf(CallACS("Robot_itemdroptype") == 2, "ItemDropDRLAAmmoOnly")
-		TNT1 A 0 A_Jump(202, ItemDropDRLAAmmoOnly)
+		TNT1 A 0 A_Jump(202, "ItemDropDRLAAmmoOnly")
 		TNT1 A 0 A_Jump(6, "WeaponSpawner")
 		TNT1 A 0 A_JumpIf(CallACS("Robot_itemdroptype") == 1, "ItemDropDRLAStandard")
 		TNT1 A 0 A_Jump(256, "NoDrop")
