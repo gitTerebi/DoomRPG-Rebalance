@@ -3059,17 +3059,6 @@ void BuildSkillData()
         Skills[4][14].Description[1] = "Summons a Nightmare Arch-Vile";
         Skills[4][15].Description[1] = "Summons a Nightmare Cyberdemon";
         Skills[4][16].Description[1] = "Summons a Spider Overmind";
-
-        // Summoning Skills - Marines Descriptions
-        if (Player.EnergyTotal < 20)
-        {
-            Skills[4][0].Description[0] = "Pistol";
-        }
-        if (Player.EnergyTotal >= 20)
-        {
-            Skills[4][0].Description[0] = "Combat Pistol";
-        }
-
     }
     // Colourful Hell Compatibility
     else if (CompatMonMode == COMPAT_CH)

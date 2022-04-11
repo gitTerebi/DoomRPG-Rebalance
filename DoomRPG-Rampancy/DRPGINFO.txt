@@ -1,4 +1,4 @@
 Name=Rampancy
-Conflicts=Colourful Hell
 Conflicts=DoomRL Arsenal - Monster Pack
+Conflicts=Colourful Hell
 Mods=Rampancy_1.3.pk3

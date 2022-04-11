@@ -1,3 +1,4 @@
 Name=DoomRL Arsenal - Monster Pack
 Conflicts=Colourful Hell
+Conflicts=Rampancy
 Mods=DoomRL_Monsters_Beta_7.3.pk3

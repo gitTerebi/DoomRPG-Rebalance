@@ -1,3 +1,4 @@
 Name=Colourful Hell
 Conflicts=DoomRL Arsenal - Monster Pack
+Conflicts=Rampancy
 Mods=ColourfulHell97ccc.pk3

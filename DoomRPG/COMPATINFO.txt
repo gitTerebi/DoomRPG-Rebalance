@@ -1,7 +1,8 @@
 ColourfulHell	Colourful Hell
 DoomRL_Monsters	DoomRL Arsenal - Monster Pack
 DoomRL_Arsenal	DoomRL Arsenal
-j-jukebox	Jimmy's Jukebox Instant Randomizer
-LegenDoom	LegenDoom
-doom_complete_exp	WadSmoosh Expansion Pack
+j-jukebox		Jimmy's Jukebox Instant Randomizer
+LegenDoom		LegenDoom
+Rampancy		Rampancy
+Lexicon			Lexicon
 doom_complete	WadSmoosh
