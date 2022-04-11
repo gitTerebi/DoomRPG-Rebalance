@@ -2173,7 +2173,7 @@ NamedScript void Loadout_GiveDRLAEquipment()
 NamedScript void DefaultLoadout()
 {
     // Weapons
-    if (CompatMode != COMPAT_DRLA && CompatMode != COMPAT_LEGENDOOM && CompatMode != COMPAT_RAMPANCY)
+    if (CompatMode != COMPAT_DRLA && CompatMode != COMPAT_LEGENDOOM)
     {
         for (int i = 0; i < 8; i++)
         {
@@ -2353,7 +2353,6 @@ void CheckCompatibility()
         if (DebugLog)
             Log("\CdDEBUG: \CdLegenDoom\C- detected");
 
-        CompatMode = COMPAT_RAMPANCY;
         CompatMonMode = COMPAT_RAMPANCY;
         MonsterData = MonsterDataRAMPANCY;
         Thing_Remove(TID);
