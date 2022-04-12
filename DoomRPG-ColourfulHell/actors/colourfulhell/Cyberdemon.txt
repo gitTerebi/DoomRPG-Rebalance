@@ -134,6 +134,22 @@ ACTOR Graycybie2RPG : Graycybie2 Replaces Graycybie2
 	}
 }
 
+// Brown Cyberdemon
+ACTOR Browncybie2RPG : Browncybie2 Replaces Browncybie2
+{
+	Tag "Monstrous Cyberdemon"
+
+	States
+	{
+	Spawn:
+		SUPR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		8CYB A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 // Yellow Cyberdemon
 ACTOR YellowcybieRPG : Yellowcybie Replaces Yellowcybie
 {

@@ -55,6 +55,22 @@ ACTOR BlueBaronRPG : BlueBaron Replaces BlueBaron
 	}
 }
 
+// Brown Baron
+ACTOR BrownBaron2RPG : BrownBaron2 Replaces BrownBaron2
+{
+	Tag "Monstrous Baron of Hell"
+
+	States
+	{
+	Spawn:
+		STYR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		STYR A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Cyan Baron
 ACTOR CyanBaron2RPG : CyanBaron2 Replaces CyanBaron2
 {

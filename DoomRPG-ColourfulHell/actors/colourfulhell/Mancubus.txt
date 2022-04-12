@@ -103,6 +103,22 @@ ACTOR GrayFatso2RPG : GrayFatso2 Replaces GrayFatso2
 	}
 }
 
+// Brown Mancubus
+ACTOR BrownFatso2RPG : BrownFatso2 Replaces BrownFatso2
+{
+	Tag "Monstrous Mancubus"
+
+	States
+	{
+	Spawn:
+		FFAT A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		FFAT A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Fireblu Mancubus
 ACTOR FireBluFatso2RPG : FireBluFatso2 Replaces FireBluFatso2
 {

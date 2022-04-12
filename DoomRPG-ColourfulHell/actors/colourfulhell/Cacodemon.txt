@@ -55,6 +55,22 @@ ACTOR CyanCaco2RPG : CyanCaco2 Replaces CyanCaco2
 	}
 }
 
+// Brown Cacodemon
+ACTOR BrownCaco2RPG : BrownCaco2 Replaces BrownCaco2
+{
+	Tag "Monstrous Cacodemon"
+
+	States
+	{
+	Spawn:
+		GREL A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		GREL A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Cacodemon
 ACTOR BlueCacoRPG : BlueCaco Replaces BlueCaco
 {

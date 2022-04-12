@@ -1,0 +1,5 @@
+Name=LegenDoom Colourful Hell Patch
+Conflicts=DoomRL Arsenal
+Conflicts=Extras
+Mods=LegenDoom_2.8.3.pk3
+Mods=ColourfulHell98c.pk3

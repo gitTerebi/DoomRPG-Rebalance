@@ -55,6 +55,22 @@ ACTOR CyanVileRPG : CyanVile Replaces CyanVile
 	}
 }
 
+// Brown Archvile
+ACTOR BrownVileRPG : BrownVile Replaces BrownVile
+{
+	Tag "Monstrous Archvile"
+
+	States
+	{
+	Spawn:
+		WICK A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		WICK A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Archvile
 ACTOR BlueArchRPG : BlueArch Replaces BlueArch
 {

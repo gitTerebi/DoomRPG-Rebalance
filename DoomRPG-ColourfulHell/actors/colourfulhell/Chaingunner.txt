@@ -103,6 +103,22 @@ ACTOR GrayCguy2RPG : GrayCguy2 Replaces GrayCguy2
 	}
 }
 
+// Brown Chaingunner
+ACTOR BrownCGuy2RPG : BrownCGuy2 Replaces BrownCGuy2
+{
+	Tag "Monstrous Former Commando"
+
+	States
+	{
+	Spawn:
+		CZV1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		CZV1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Abyss Chaingunner
 ACTOR AbyssCGuy2RPG : AbyssCGuy2 Replaces AbyssCGuy2
 {

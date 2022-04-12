@@ -135,6 +135,22 @@ ACTOR YellowSGRPG : YellowSG Replaces YellowSG
 	}
 }
 
+// Brown Shotgunner
+ACTOR BrownSG2RPG : BrownSG2 Replaces BrownSG2
+{
+	Tag "Monstrous Former Sergeant"
+
+	States
+	{
+	Spawn:
+		QSZM A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		QSZM A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Fireblu Shotgunner
 ACTOR FireBluSG2RPG : FireBluSG2 Replaces FireBluSG2
 {

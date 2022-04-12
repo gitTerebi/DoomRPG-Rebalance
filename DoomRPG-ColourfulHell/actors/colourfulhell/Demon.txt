@@ -55,6 +55,22 @@ ACTOR CyanDemon2RPG : CyanDemon2 Replaces CyanDemon2
 	}
 }
 
+// Brown Demon
+ACTOR BrownDemon2RPG : BrownDemon2 Replaces BrownDemon2
+{
+	Tag "Monstrous Worm"
+
+	States
+	{
+	Spawn:
+		IFN2 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		IFIN A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Demon
 ACTOR BlueDemonRPG : BlueDemon Replaces BlueDemon
 {

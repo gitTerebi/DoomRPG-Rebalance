@@ -39,6 +39,22 @@ ACTOR GreenSP1RPG : GreenSP1 Replaces GreenSP1
 	}
 }
 
+// Brown Arachnotron
+ACTOR BrownSP2RPG : BrownSP2 Replaces BrownSP2
+{
+	Tag "Monstrous Arachnotron"
+
+	States
+	{
+	Spawn:
+		BSPI A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		BSPI A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Cyan Arachnotron
 ACTOR CyanSP2RPG : CyanSP2 Replaces CyanSP2
 {

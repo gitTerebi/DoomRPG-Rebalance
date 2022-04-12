@@ -55,8 +55,24 @@ ACTOR BlueImpRPG : BlueImp Replaces BlueImp
 	}
 }
 
+// Brown Imp
+ACTOR BrownImp2RPG : BrownImp2 Replaces BrownImp2
+{
+	Tag "Monstrous Imp"
+
+	States
+	{
+	Spawn:
+		WARI A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		WARI A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Cyan Imp
-ACTOR CyanImp2RPG : BlueImp Replaces CyanImp2
+ACTOR CyanImp2RPG : CyanImp2 Replaces CyanImp2
 {
 	Tag "Icy Imp"
 

@@ -23,6 +23,22 @@ ACTOR CommonZombieRPG : CommonZombie Replaces CommonZombie
 	}
 }
 
+// Brown Zombie
+ACTOR BrownZombie2RPG : BrownZombie2 Replaces BrownZombie2
+{
+	Tag "Monstrous Former Human"
+
+	States
+	{
+	Spawn:
+		SGAR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		SGAR A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Green Zombie
 ACTOR GreenZombieRPG : GreenZombie Replaces GreenZombie
 {

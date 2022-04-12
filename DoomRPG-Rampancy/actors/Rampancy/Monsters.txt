@@ -324,4 +324,4 @@ ACTOR Robot_RollerDroidRPG : Robot_RollerDroid2 Replaces DRPGRevenant {}
 ACTOR Robot_MaintenanceBotRPG : Robot_MaintenanceBot2 Replaces DRPGFatso {}
 ACTOR Robot_RepairBotRPG : Robot_RepairBot2 Replaces DRPGArchvile {}
 ACTOR Robot_MilitaryBotRPG : Robot_MilitaryBot2 Replaces DRPGCyberdemon {}
-ACTOR Robot_LoaderBotRPG : Robot_LoaderBot2 Replaces Robot_LoaderBot {}
+ACTOR Robot_LoaderBotRPG : Robot_LoaderBot2 Replaces DRPGSpiderMastermind {}

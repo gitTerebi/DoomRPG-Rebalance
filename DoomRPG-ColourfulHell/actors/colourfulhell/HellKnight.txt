@@ -55,6 +55,22 @@ ACTOR CyanHK2RPG : CyanHK2 Replaces CyanHK2
 	}
 }
 
+// Brown Hell Knight
+ACTOR BrownHK2RPG : BrownHK2 Replaces BrownHK2
+{
+	Tag "Monstrous Hell Knight"
+
+	States
+	{
+	Spawn:
+		HWAR A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		HWAR A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
 // Blue Hell Knight
 ACTOR BlueHKRPG : BlueHK Replaces BlueHK
 {

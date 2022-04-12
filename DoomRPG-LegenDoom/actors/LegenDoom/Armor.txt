@@ -1,0 +1,26 @@
+// Armor Bonus
+actor LDArmorBonusPickupRPG : LDArmorBonusPickup Replaces DRPGArmorBonus {}
+
+// Green Armor Locations
+actor LDGreenArmorPickupRPG : DRPGGreenArmor Replaces DRPGGreenArmor
+{
+    States
+    {
+    Use:
+        TNT1 A 0 A_JumpIf(CallACS("ShieldRemoveArmor") == 1, "UseFail")
+        TNT1 A 0 A_GiveInventory("LDGreenArmorPickup", 1)
+        Stop
+    }
+}
+
+// Blue Armor Locations
+actor LDBlueArmorPickupRPG : DRPGBlueArmor Replaces DRPGBlueArmor
+{
+    States
+    {
+    Use:
+        TNT1 A 0 A_JumpIf(CallACS("ShieldRemoveArmor") == 1, "UseFail")
+        TNT1 A 0 A_GiveInventory("LDBlueArmorPickup", 1)
+        Stop
+    }
+}

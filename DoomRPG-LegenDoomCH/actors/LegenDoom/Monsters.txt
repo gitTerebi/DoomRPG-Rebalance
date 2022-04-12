@@ -1,0 +1,17 @@
+actor LDCHZombiemanRPG : Colourset2RPG Replaces LDZombiemanRPG {}
+actor LDCHShotgunguyRPG : Colourset4RPG Replaces LDShotgunguyRPG {}
+actor LDCHChaingunguyRPG : Colourset12RPG Replaces LDChaingunguyRPG {}
+actor LDCHDoomImpRPG : Colourset3RPG Replaces LDDoomImpRPG {}
+actor LDCHDemonRPG : Colourset5RPG Replaces LDDemonRPG {}
+actor LDCHSpectreRPG : Colourset6RPG Replaces LDSpectreRPG {}
+actor LDCHCacodemonRPG : Colourset7RPG Replaces LDCacodemonRPG {}
+actor LDCHHellKnightRPG : Colourset8RPG Replaces LDHellKnightRPG {}
+actor LDCHBaronOfHellRPG : Colourset13RPG Replaces LDBaronOfHellRPG {}
+actor LDCHLostSoulRPG : Colourset14RPG Replaces LDLostSoulRPG {}
+actor LDCHPainElementalRPG : Colourset15RPG Replaces LDPainElementalRPG {}
+actor LDCHRevenantRPG : Colourset1RPG Replaces LDRevenantRPG {}
+actor LDCHMancubusRPG : Colourset10RPG Replaces LDMancubusRPG {}
+actor LDCHArachnotronRPG : Colourset9RPG Replaces LDArachnotronRPG {}
+actor LDCHArchvileRPG : Colourset11RPG Replaces LDArchvileRPG {}
+actor LDCHCyberdemonRPG : Colourset16RPG Replaces LDCyberdemonRPG {}
+actor LDCHSpiderMastermindRPG : Colourset17RPG Replaces LDSpiderMastermindRPG {}

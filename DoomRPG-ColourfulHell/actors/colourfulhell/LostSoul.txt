@@ -75,6 +75,40 @@ ACTOR GreenLSoulRPG : GreenLSoul Replaces GreenLSoul
 	}
 }
 
+// Brown Lost Soul
+ACTOR BrownLSoul2RPG : BrownLSoul2 Replaces BrownLSoul2
+{
+	Tag "Monstrous Lost Soul"
+	
+	States
+	{
+	Spawn:
+    	// ----- Lost Souls that are not map-based should not have their kills and XP taken into account due to possible spawn spam (Pain Elementals for example). ----- //
+    	// Check if monster is map-based.
+    	BOSF A 0 NoDelay A_JumpIf(GetLevelSpawnTime() == 0, 4)
+    	// Not map-based.
+    	BOSF A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
+    	BOSF A 0 A_ChangeFlag("COUNTKILL", false)
+    	BOSF A 0 A_Jump(256, 2)
+    	// Map-based.
+    	BOSF A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOAURA | MF_NODROPS)
+        TNT1 A 0
+		Goto Super::Spawn
+	See:
+    	// ----- Lost Souls that are not map-based should not have their kills and XP taken into account due to possible spawn spam (Pain Elementals for example). ----- //
+    	// Check if monster is map-based.
+    	BOSF A 0 A_JumpIf(GetLevelSpawnTime() == 0, 4)
+    	// Not map-based.
+    	BOSF A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS)
+    	BOSF A 0 A_ChangeFlag("COUNTKILL", false)
+    	BOSF A 0 A_Jump(256, 2)
+    	// Map-based.
+    	BOSF A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOAURA | MF_NODROPS)
+        TNT1 A 0
+		Goto Super::See
+	}
+}
+
 // Cyan Lost Soul
 ACTOR CyanLSoul2RPG : CyanLSoul2 Replaces CyanLSoul2
 {
