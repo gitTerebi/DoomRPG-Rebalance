@@ -22,10 +22,6 @@ Installation Instructions:
 3. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRLA, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
 4. Run the game through the DoomRPG Launcher and play.
 
-Please note that for those who like to play on Gamepad, there are 2 optional files:
-1. Gamepad Control Helper (author - Me);
-2. Aim Assist 0.75 (author - RicardoLuis0).
-
 ## Manual Installing
 
 - [GZDoom v4.7.1](https://github.com/coelckers/gzdoom/releases/download/g4.7.1/gzdoom-4-7-1-Windows-64bit.zip) is required to play this mod.

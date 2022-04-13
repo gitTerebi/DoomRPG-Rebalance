@@ -2495,6 +2495,33 @@ NamedScript Console bool Recall(SkillLevelInfo *SkillLevel, void *Data)
         return false;
     }
 
+    // Checks if use Gamepad Control Helper
+    if (CheckInventory("DRPG_use_gch_token") == 1)
+    {
+        TakeInventory("DRPG_use_gch_token", 1);
+
+        // Check if the Skill has been learned yet
+        if (Player.SkillLevel[5][4].CurrentLevel == 0)
+        {
+            SetFont("BIGFONT");
+            PrintError("You don't know this skill yet");
+            ActivatorSound("skills/fail", 127);
+            return false;
+        }
+
+        // Not enough EP
+        if (Player.EP < Skills[5][4].Cost)
+        {
+            SetFont("BIGFONT");
+            PrintError("Not enough EP to use this skill!");
+            ActivatorSound("skills/fail", 127);
+            return false;
+        }
+        else
+            Player.EP -= Skills[5][4].Cost;
+    }
+
+
     SetInventory("ArtiTeleport", 1);
     UseInventory("ArtiTeleport");
     return true;

@@ -1,3 +1,7 @@
+// --------------------------------------------------
+// GENERAL
+//
+
 /*OptionValue "DropStyle"
 {
     1, "DOOM"
@@ -840,4 +844,34 @@ OptionMenu "DoomRPG"
 OptionMenu "OptionsMenu"
 {
     SubMenu "Doom RPG Options",         "DoomRPG"
+}
+
+// --------------------------------------------------
+// GAMEPAD CONTROL HELPER (GCH) SECTION
+//
+
+
+OptionMenu Gamepad_Control_Helper
+{
+	Title "Gamepad Control Helper"
+	StaticText " "
+
+	StaticText "General Commands"
+	Command "Main Menu", menu_main
+	Command "Save Menu", menu_save
+	Command "Load Menu", menu_load
+	StaticText " "
+
+	StaticText "DoomRPG Commands"
+	Command "Quick Heal", drpg_quickheal_gch
+	Command "Focus Mode", drpg_focusmode_gch
+	Command "Toggle Shield", drpg_shield_gch
+	Command "Use Stim", drpg_usestim_gch
+	Command "Dispose Stim", drpg_throwawaystim_gch
+	StaticText " "
+
+	StaticText "DoomRPG Skills"
+	Command "Recall", drpg_recall_gch
+	Command "Transport", drpg_transport_gch
+	StaticText " "
 }

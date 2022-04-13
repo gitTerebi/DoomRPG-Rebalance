@@ -2392,7 +2392,7 @@ void CheckCompatibility()
     if (Success)
     {
         if (DebugLog)
-            Log("\CdDEBUG: \CdLegenDoom\C- detected");
+            Log("\CdDEBUG: \CdRampancy\C- detected");
 
         CompatMonMode = COMPAT_RAMPANCY;
         MonsterData = MonsterDataRAMPANCY;
@@ -2404,7 +2404,7 @@ void CheckCompatibility()
     if (Success)
     {
         if (DebugLog)
-            Log("\CdDEBUG: \CdLegenDoom\C- detected");
+            Log("\CdDEBUG: \CdDeHacked Attack\C- detected");
 
         CompatMonMode = COMPAT_DEHACKED;
         MonsterData = MonsterDataDEHACKED;

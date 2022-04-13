@@ -498,4 +498,6 @@ ACTOR MapSpotTall : MapSpotGravity
     Radius 20
 }
 
+Actor DRPG_use_gch_token : Inventory  { Inventory.MaxAmount 1 }
+
 Actor DRPGEmpty {}
