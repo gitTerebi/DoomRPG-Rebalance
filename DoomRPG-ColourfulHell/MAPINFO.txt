@@ -4,6 +4,10 @@ clearskills
 // Easy skill
 skill easy
 {
+    ammofactor = 1.0
+    dropammofactor = 1.0
+    damagefactor = 0.5
+    monsterhealth = 1.0
     aggressiveness = 0.0
     spawnfilter = normal
 
@@ -38,6 +42,10 @@ skill easy
 // Normal skill
 skill normal
 {
+    ammofactor = 1.0
+    dropammofactor = 1.0
+    damagefactor = 1.0
+    monsterhealth = 1.0
     aggressiveness = 0.25
     spawnfilter = hard
     
@@ -70,6 +78,10 @@ skill normal
 // Hard skill
 skill hard
 {
+    ammofactor = 0.5
+    dropammofactor = 0.5
+    damagefactor = 1.0
+    monsterhealth = 1.0
     aggressiveness = 0.5
     spawnfilter = nightmare
     
@@ -102,6 +114,10 @@ skill hard
 // Nightmare skill
 skill nightmare
 {
+    ammofactor = 0.5
+    dropammofactor = 0.5
+    damagefactor = 1.0
+    monsterhealth = 1.0
     aggressiveness = 1.0
     spawnfilter = nightmare
     
@@ -135,6 +151,10 @@ skill nightmare
 // Hell skill
 skill hell
 {
+    ammofactor = 0.5
+    dropammofactor = 0.5
+    damagefactor = 1.0
+    monsterhealth = 1.0
     aggressiveness = 1.0
     spawnfilter = nightmare
     

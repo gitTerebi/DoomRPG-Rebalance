@@ -86,6 +86,27 @@ MonsterInfo const MonsterDataRAMPANCY[MAX_DEF_MONSTERS_DF] =
     { "Robot_LoaderBot",                      "Loader Bot",                      95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
 };
 
+MonsterInfo const MonsterDataDEHACKED[MAX_DEF_MONSTERS_DF] =
+{
+    { "DEHZombieman",                         "Former Human",                    1,      0, false, "You hear shuffling footsteps and moans!" },
+    { "DEHShotgunguy",                        "Former Sergeant",                 2,      0, false, "You hear the sound of shotguns pumping!" },
+    { "DEHChaingunguy",                       "Former Commando",                 5,      0, false, "Quiet mutters and whirring set you on edge!" },
+    { "DEHDoomImp",                           "Imp",                             4,      0, false, "The walls are scratched and flame-scorched!" },
+    { "DEHDemon",                             "Demon",                           3,      0, false, "Hungry growls echo around you!" },
+    { "DEHSpectre",                           "Spectre",                         3,      0, false, "It's dark, you are likely to be eaten by a... Spectre?" },
+    { "DEHLostSoul",                          "Lost Soul",                       3,      0, false, "The sound of many flames echo about!" },
+    { "DEHCacodemon",                         "Cacodemon",                       10,     0, false, "Screeches drown out all other sound!" },
+    { "DEHHellKnight",                        "Hell Knight",                     20,     0, false, "A battle cry chants in the distance!" },
+    { "DEHBaronOfHell",                       "Baron of Hell",                   30,     0, false, "Seems you've found Hell's nobility!" },
+    { "DEHArachnotron",                       "Arachnotron",                     40,     0, false, "You feel you are being watched!" },
+    { "DEHPainElemental",                     "Pain Elemental",                  50,     0, false, "Bones clatter all around you!" },
+    { "DEHRevenant",                          "Revenant",                        60,     0, false, "You hear deep, guttural noises!" },
+    { "DEHFatso",                             "Mancubus",                        60,     0, false, "Leg servos squeak and whirr nearby!" },
+    { "DEHArchvile",                          "Arch-Vile",                       70,     0, false, "You hear crackling flames!" },
+    { "DEHCyberdemon",                        "Cyberdemon",                      85,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
+    { "DEHSpiderMastermind",                  "Spider Mastermind",               95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
+};
+
 MonsterInfo const MonsterDataDRLA[MAX_DEF_MONSTERS_DRLA] =
 {
     // Normal

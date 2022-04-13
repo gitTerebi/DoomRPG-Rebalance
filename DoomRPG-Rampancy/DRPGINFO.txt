@@ -1,4 +1,5 @@
 Name=Rampancy
 Conflicts=DoomRL Arsenal - Monster Pack
 Conflicts=Colourful Hell
+Conflicts=Dehacked Attack
 Mods=Rampancy_1.3.pk3

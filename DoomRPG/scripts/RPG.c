@@ -2346,18 +2346,6 @@ void CheckCompatibility()
         Thing_Remove(TID);
     }
 
-    // Rampancy
-    Success = SpawnForced("Robot_SentryBot", 0, 0, 0, TID, 0);
-    if (Success)
-    {
-        if (DebugLog)
-            Log("\CdDEBUG: \CdLegenDoom\C- detected");
-
-        CompatMonMode = COMPAT_RAMPANCY;
-        MonsterData = MonsterDataRAMPANCY;
-        Thing_Remove(TID);
-    }
-
     // DoomRL Arsenal
     Success = SpawnForced("RLPistolPickup", 0, 0, 0, TID, 0);
     if (Success)
@@ -2396,6 +2384,30 @@ void CheckCompatibility()
         MonsterDataAmount = MAX_DEF_MONSTERS_CH;
         MegaBosses = MegaBossesCH;
         MegaBossesAmount = MAX_MEGABOSSES_CH;
+        Thing_Remove(TID);
+    }
+
+    // Rampancy
+    Success = SpawnForced("Robot_SentryBot", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (DebugLog)
+            Log("\CdDEBUG: \CdLegenDoom\C- detected");
+
+        CompatMonMode = COMPAT_RAMPANCY;
+        MonsterData = MonsterDataRAMPANCY;
+        Thing_Remove(TID);
+    }
+
+    // Dehacked Attack
+    Success = SpawnForced("DEHZombieman", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (DebugLog)
+            Log("\CdDEBUG: \CdLegenDoom\C- detected");
+
+        CompatMonMode = COMPAT_DEHACKED;
+        MonsterData = MonsterDataDEHACKED;
         Thing_Remove(TID);
     }
 

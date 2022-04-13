@@ -6,7 +6,7 @@ This fork intends to solve this problem. Now the content is served to the player
 
 In addition, some of the content (RPG's Skills, Stims, AUG, Auras, etc.) are now the things that need to be applied to survive.
 
-Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more complex monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> DoomRLA Monster Pack Options and see for yourself.
+Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more difficulty monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> Misc and see for yourself.
 
 Enjoy! 
 
@@ -38,9 +38,9 @@ After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions 
 
 Use the following load order:
 
-1. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) / [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) (or another mapset);
-2. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) / [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
-3. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) / [Colourful Hell v0.98c](https://forum.zdoom.org/viewtopic.php?t=47980) / [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193).
+1. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) and/or [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) or another mapset;
+2. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
+3. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [Colourful Hell v0.98c](https://forum.zdoom.org/viewtopic.php?t=47980) or [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193) or [Dehacked Attack v3.1](https://forum.zdoom.org/viewtopic.php?f=43&t=72362).
 
 ## Compatible mods
 
@@ -49,4 +49,5 @@ Use the following load order:
 - [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193);
 - [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
 - [Colourful Hell v0.98c](https://forum.zdoom.org/viewtopic.php?t=47980);
+- [Dehacked Attack v3.1](https://forum.zdoom.org/viewtopic.php?f=43&t=72362);
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
