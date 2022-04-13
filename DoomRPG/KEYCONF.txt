@@ -111,3 +111,9 @@ alias drpg_throwawaystim_gch "closemenu; drpg_throwawaystim"
 // DoomRPG Quick Use Skill
 alias drpg_recall_gch "closemenu; give DRPG_use_gch_token; pukename Recall"
 alias drpg_transport_gch "closemenu; pukename Transport"
+
+// Music Box Commands
+alias nextsong_gch "closemenu; nextsong"
+alias origsong_gch "closemenu; origsong"
+alias autonexton_gch "closemenu; autonexton"
+alias autonextoff_gch "closemenu; autonextoff"

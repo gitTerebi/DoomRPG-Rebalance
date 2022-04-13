@@ -874,4 +874,11 @@ OptionMenu Gamepad_Control_Helper
 	Command "Recall", drpg_recall_gch
 	Command "Transport", drpg_transport_gch
 	StaticText " "
+
+	StaticText "Music Box Commands"
+	Command "Next Song", nextsong_gch
+	Command "Original Song", origsong_gch
+	Command "Auto Next On", autonexton_gch
+	Command "Auto Next Off", autonextoff_gch
+	StaticText " "
 }
