@@ -2076,6 +2076,21 @@ ACTOR ArchangelusRPG : Archangelus Replaces Archangelus
 	}
 }
 
+ACTOR ArchangelusARPG : ArchangelusA Replaces ArchangelusA
+{
+    Tag "Archangelus"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
 ACTOR LeviathanFinalRPG : LeviathanFinal Replaces LeviathanFinal
 {
     Tag "Leviathan"
