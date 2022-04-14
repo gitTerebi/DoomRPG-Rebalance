@@ -1107,13 +1107,12 @@ ACTOR PoisonSoulRPG : PoisonSoul Replaces PoisonSoul
 	}
 }
 
-ACTOR SpiritElementalRPG : SpiritElemental Replaces SpiritElemental
+ACTOR SpiritElementalRPG : PainElemental Replaces SpiritElemental
 {
     Tag "Spirit Elemental"
 
     Obituary "%o was killed by a Spirit Elemental."
     BloodColor "DarkGreen"
-    Tag "Spirit Elemental"
     DamageFactor "Antiair", 3.0
     States
     {
