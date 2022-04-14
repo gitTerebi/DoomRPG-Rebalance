@@ -1171,7 +1171,8 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
                 !Random(0, 15));
 
     case MAPEVENT_SKILL_TECHNOPHOBIA:
-        return (GetCVar("drpg_mapevent_skill_technophobia") &&
+        return  (CompatMonMode == COMPAT_DRLA &&
+                GetCVar("drpg_mapevent_skill_technophobia") &&
                 MapLevelModifier >= 0.65 &&
                 CurrentSkill != 6);
 
