@@ -295,7 +295,7 @@ NamedScript void BuildItemData()
         if (Accessory->Price < 50000) rarity = 6;
         if (Accessory->Price < 35000) rarity = 5;
         if (Accessory->Price < 20000) rarity = 4;
-        if (Accessory->Price < 5000) rarity = 3;
+        if (Accessory->Price < 10000) rarity = 3;
 
         ItemData[5][ItemIndex].Rarity = rarity;
 

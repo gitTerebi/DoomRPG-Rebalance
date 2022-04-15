@@ -896,6 +896,93 @@ void DrawItemGrid()
                 EndHudMessage(HUDMSG_PLAIN, 0, ((!Player.LockerMode && (CanAfford || !CanBuy)) || Player.LockerMode ? "White" : "Red"), 24.1, 344.1, 0.05);
             }
 
+            // Set Description For Shield Parts
+            if (Player.ShopPage == 5 && Player.ShopIndex > 0)
+            {
+                int ReduceIndex;
+                int ShieldPartType;
+                str Description = "";
+                ShieldPartPtr CurrentPart;
+                ShieldAccsPtr CurrentAccessory;
+
+                // Get Current Part Shield
+                if (Index <= MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS)
+                {
+                    // Capacitors
+                    if (Index > MAX_BODIES + MAX_BATTERIES)
+                    {
+                        ShieldPartType = SHIELDPAGE_CAPACITOR;
+                        ReduceIndex = MAX_BODIES + MAX_BATTERIES;
+                    }
+                    // Batteries
+                    else if (Index > MAX_BODIES)
+                    {
+                        ShieldPartType = SHIELDPAGE_BATTERY;
+                        ReduceIndex = MAX_BODIES;
+                    }
+                    // Bodies
+                    else
+                        ShieldPartType = SHIELDPAGE_BODY;
+
+                    CurrentPart = &ShieldParts[ShieldPartType][Index - ReduceIndex - 1];
+                }
+                // Get Current Part Shield For Accessories
+                else
+                {
+                    ReduceIndex = MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS;
+                    CurrentAccessory = &ShieldAccessories[Index - ReduceIndex - 1];
+                }
+
+                // Get Description For Bodies, Batteries and Capacitors
+                if (Player.ShopIndex == Index && Index <= MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS)
+                {
+                    // Name
+                    Description = StrParam("\CgPart characteristics:\C-");
+
+                    str Prepend;
+
+                    // Capacity
+                    if (CurrentPart->Capacity < 0)
+                        Prepend = "\Cc";
+                    else
+                        Prepend = "\Cj+";
+                    if (CurrentPart->Capacity != 0)
+                        Description = StrParam("%S\n%S%d Capacity", Description, Prepend, CurrentPart->Capacity);
+
+                    // Charge Rate
+                    if (CurrentPart->ChargeRate < 0)
+                        Prepend = "\Cc";
+                    else
+                        Prepend = "\Cj+";
+                    if (CurrentPart->ChargeRate != 0)
+                        Description = StrParam("%S\n%S%d Charge Rate/Sec", Description, Prepend, CurrentPart->ChargeRate);
+
+                    // Delay Rate
+                    if (CurrentPart->DelayRate > 0)
+                        Prepend = "\Cc+";
+                    else
+                        Prepend = "\Cj";
+                    if (CurrentPart->DelayRate != 0)
+                        Description = StrParam("%S\n%S%.2k Delay", Description, Prepend, CurrentPart->DelayRate);
+
+                }
+                // Get Description For Accessories
+                else if (Player.ShopIndex == Index)
+                {
+                    // Name
+                    Description = StrParam("\CgAccessory effect:\C-");
+
+                    // Extra Description
+                    if (CurrentAccessory->Description != "")
+                        Description = StrParam("%S\n%S", Description, CurrentAccessory->Description);
+                }
+
+                // View Description
+                SetFont("SMALLFONT");
+                HudMessage("%S", Description);
+                EndHudMessage(HUDMSG_PLAIN, 0, "White", 24.1, 363.1, 0.05);
+            }
+
             // Increment X
             BaseX += 48.0;
         }

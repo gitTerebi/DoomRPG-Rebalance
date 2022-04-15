@@ -2734,25 +2734,53 @@ void MenuHelp()
     // Shop Menu Help
     if (!Player.InMenu && Player.InShop)
     {
-        if (Player.LockerMode)
+        // For Shield Parts Category
+        if (Player.ShopPage == 5 && Player.ShopIndex > 0)
         {
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
-                HudMessage("Switch to the Shop: \Cd%S\C-\nNavigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nDeposit Item: \Cd%S\C-\nWithdraw Item: \Cd%S + %S\C-\nToggle Auto-Storing of item: \Cd%S\C-\nToggle Auto-Keeping of 1 item: \Cd%S + %S\C-\nDrop selected item: \Cd%S\C-\nWithdraw all items on the page: \Cd%S\C-\nExit: \Cd%S\C-",
-                           "Jump", "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Run", "Attack", "Drop Item", "Alt Attack", "Menu");
+            if (Player.LockerMode)
+            {
+                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                    HudMessage("Switch to the Shop: \Cd%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nDeposit Item: \Cd%S\C-\nWithdraw Item: \Cd%S + %S\C-\nToggle Auto-Storing of item: \Cd%S\C-\nWithdraw all items on the page: \Cd%S\C-\nExit: \Cd%S\C-",
+                               "Jump", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Alt Attack", "Menu");
+                else
+                    HudMessage("Switch to the Shop: \Cd%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nDeposit Item: \Cd%jS\C-\nWithdraw Item: \Cd%jS + %jS\C-\nToggle Auto-Storing of item: \Cd%jS\C-\nWithdraw all items on the page: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                               "+jump", "+speed", "+moveleft", "+moveright", "+use", "+speed", "+use", "+attack", "+altattack", "drpg_menu");
+                EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y + 30.0, 0.05);
+            }
             else
-                HudMessage("Switch to the Shop: \Cd%jS\C-\nNavigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nDeposit Item: \Cd%jS\C-\nWithdraw Item: \Cd%jS + %jS\C-\nToggle Auto-Storing of item: \Cd%jS\C-\nToggle Auto-Keeping of 1 item: \Cd%jS + %jS\C-\nDrop selected item: \Cd%jS\C-\nWithdraw all items on the page: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                           "+jump", "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "+speed", "+use", "+attack", "+speed", "+attack", "+zoom", "+altattack", "drpg_menu");
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            {
+                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                    HudMessage("Switch to the Locker: \Cd%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nBuy Item: \Cd%S\C-\nSell Item: \Cd%S + %S\C-\nToggle Auto-Selling of item: \Cd%S\C-\nDrop selected item: \Cd%S\C-\nExit: \Cd%S\C-",
+                               "Jump", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Drop Item", "Menu");
+                else
+                    HudMessage("Switch to the Locker: \Cd%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nBuy Item: \Cd%jS\C-\nSell Item: \Cd%jS + %jS\C-\nToggle Auto-Selling of item: \Cd%jS\C-\nDrop selected item: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                               "+jump", "+speed", "+moveleft", "+moveright", "+use", "+speed", "+use", "+attack", "+zoom", "drpg_menu");
+                EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y + 30.0, 0.05);
+            }
         }
+        // For Everything Else
         else
         {
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
-                HudMessage("Switch to the Locker: \Cd%S\C-\nNavigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nBuy Item: \Cd%S\C-\nSell Item: \Cd%S + %S\C-\nToggle Auto-Selling of item: \Cd%S\C-\nToggle Auto-Keeping of 1 item: \Cd%S + %S\C-\nDrop selected item: \Cd%S\C-\nExit: \Cd%S\C-",
-                           "Jump", "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Run", "Attack", "Drop Item", "Menu");
+            if (Player.LockerMode)
+            {
+                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                    HudMessage("Switch to the Shop: \Cd%S\C-\nNavigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nDeposit Item: \Cd%S\C-\nWithdraw Item: \Cd%S + %S\C-\nToggle Auto-Storing of item: \Cd%S\C-\nToggle Auto-Keeping of 1 item: \Cd%S + %S\C-\nDrop selected item: \Cd%S\C-\nWithdraw all items on the page: \Cd%S\C-\nExit: \Cd%S\C-",
+                               "Jump", "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Run", "Attack", "Drop Item", "Alt Attack", "Menu");
+                else
+                    HudMessage("Switch to the Shop: \Cd%jS\C-\nNavigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nDeposit Item: \Cd%jS\C-\nWithdraw Item: \Cd%jS + %jS\C-\nToggle Auto-Storing of item: \Cd%jS\C-\nToggle Auto-Keeping of 1 item: \Cd%jS + %jS\C-\nDrop selected item: \Cd%jS\C-\nWithdraw all items on the page: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                               "+jump", "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "+speed", "+use", "+attack", "+speed", "+attack", "+zoom", "+altattack", "drpg_menu");
+                EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            }
             else
-                HudMessage("Switch to the Locker: \Cd%jS\C-\nNavigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nBuy Item: \Cd%jS\C-\nSell Item: \Cd%jS + %jS\C-\nToggle Auto-Selling of item: \Cd%jS\C-\nToggle Auto-Keeping of 1 item: \Cd%jS + %jS\C-\nDrop selected item: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                           "+jump", "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "+speed", "+use", "+attack", "+speed", "+attack", "+zoom", "drpg_menu");
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            {
+                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                    HudMessage("Switch to the Locker: \Cd%S\C-\nNavigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nBuy Item: \Cd%S\C-\nSell Item: \Cd%S + %S\C-\nToggle Auto-Selling of item: \Cd%S\C-\nToggle Auto-Keeping of 1 item: \Cd%S + %S\C-\nDrop selected item: \Cd%S\C-\nExit: \Cd%S\C-",
+                               "Jump", "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Run", "Attack", "Drop Item", "Menu");
+                else
+                    HudMessage("Switch to the Locker: \Cd%jS\C-\nNavigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch Pages: \Cd%jS + %jS/%jS\C-\nBuy Item: \Cd%jS\C-\nSell Item: \Cd%jS + %jS\C-\nToggle Auto-Selling of item: \Cd%jS\C-\nToggle Auto-Keeping of 1 item: \Cd%jS + %jS\C-\nDrop selected item: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                               "+jump", "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "+speed", "+use", "+attack", "+speed", "+attack", "+zoom", "drpg_menu");
+                EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            }
         }
     }
 
