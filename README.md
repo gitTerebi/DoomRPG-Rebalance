@@ -19,8 +19,9 @@ Installation Instructions:
 
 1. The archive has a folder DoomRPG SE Rebalance. I recommend placing it at the following address: "D:\Games\DoomRPG SE Rebalance".
 2. If you want to place the folder in the location of your choice, you will have to change the corresponding folder paths in the DoomRPG Launcher.
-3. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRLA, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
-4. Run the game through the DoomRPG Launcher and play.
+3. Put your doom2.wad in "...\DoomRPG SE Rebalance\wads".
+4. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRLA, Lexicon, etc.). Bring it in line with the screenshots in DoomRPG Launcher.
+5. Run the game through the DoomRPG Launcher and play.
 
 ## Manual Installing
 
