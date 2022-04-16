@@ -1172,9 +1172,9 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_SKILL_TECHNOPHOBIA:
         return  (CompatMonMode == COMPAT_DRLA &&
-                GetCVar("drpg_mapevent_skill_technophobia") &&
-                MapLevelModifier >= 0.65 &&
-                CurrentSkill != 6);
+                 GetCVar("drpg_mapevent_skill_technophobia") &&
+                 MapLevelModifier >= 0.65 &&
+                 CurrentSkill != 6);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&

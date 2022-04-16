@@ -3259,6 +3259,17 @@ int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)
 
     Health += HealthAddition + HealthBoost;
 
+    // LegenDoom: Add Health For Legendary Monsters
+    if (CompatMode == COMPAT_LEGENDOOM && CheckInventory("LDLegendaryMonsterToken"))
+    {
+        if (CheckFlag(0, "BOSS"))
+            Health *= GetCVar("LD_legendaryhealthboss") / 100;
+        else
+            Health *= GetCVar("LD_legendaryhealth") / 100;
+
+        GiveInventory("DRPGLegenDoomMonsterInit", 1);
+    }
+
     return Health;
 }
 
