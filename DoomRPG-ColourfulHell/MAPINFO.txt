@@ -77,8 +77,8 @@ skill normal
 skill hard
 {
     dropammofactor = 0.5
-    damagefactor = 1.0
-    monsterhealth = 1.0
+    damagefactor = 0.75
+    monsterhealth = 1.25
     aggressiveness = 0.5
     spawnfilter = nightmare
     
@@ -113,7 +113,7 @@ skill nightmare
 {
     dropammofactor = 0.5
     damagefactor = 1.0
-    monsterhealth = 1.0
+    monsterhealth = 1.25
     aggressiveness = 1.0
     spawnfilter = nightmare
     
@@ -148,8 +148,8 @@ skill nightmare
 skill hell
 {
     dropammofactor = 0.5
-    damagefactor = 1.0
-    monsterhealth = 1.0
+    damagefactor = 1.25
+    monsterhealth = 1.25
     aggressiveness = 1.0
     spawnfilter = nightmare
     
