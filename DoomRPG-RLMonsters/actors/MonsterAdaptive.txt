@@ -1,0 +1,418 @@
+
+//==============================================================================
+//		ADAPTIVE SPAWNERS
+//==============================================================================
+// Used to deploy your death in increasing doses overtime
+
+// Idea adapted from Kinsie's MetaDoom. Admittedly I'd have done this the same way anyway, but yeah.
+// Is of much cool, I'm glad he got it working nicely.
+
+ACTOR RLAdaptiveSpawner
+{
+	Health 0x7FFFFFFF
+	Radius 0
+	Height 0
+
+	Monster
+	+NOBLOCKMAP
+	+NOCLIP
+	+NOTRIGGER
+	+NOTONAUTOMAP
+	-SHOOTABLE
+	-SOLID
+	-COUNTKILL
+
+	const int SpawnFlags = SXF_TRANSFERPOINTERS | SXF_TRANSFERAMBUSHFLAG |
+		SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION | SXF_ISTRACER;
+
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 5 ACS_NamedExecuteAlways("RLAdaptiveSpawnPicker")
+		Stop
+	BossWait:
+		TNT1 A 1 A_JumpIfHealthLower(1, "BossDead", AAPTR_TRACER)
+		Loop
+	BossDead:
+		TNT1 A 1 A_BossDeath
+		Stop
+	SpawnUV:
+	SpawnNightmare:
+	SpawnCybernetic:
+	SpawnArmageddon:
+		TNT1 A 5 A_Log("OH NO NOT unknown adaptive spawner")
+		Stop
+	}
+}
+
+//------------------------------------------------------------------------------
+//		EXTRA SPAWNERS
+
+actor RLFormerCommandoAdaptiveSpawner : RandomSpawner
+{
+    DropItem "RLFormerCommandoChaingun", 255, 20
+    DropItem "RLFormerCommandoBattleRifle", 255, 9
+    DropItem "RLFormerCaptainSpawner", 255, 3
+}
+
+actor RLEliteCommandoAdaptiveSpawner : RandomSpawner
+{
+    DropItem "RLEliteCommandoMinigun", 255, 29
+    DropItem "RLEliteCaptainTristarBlaster", 255, 3
+}
+//------------------------------------------------------------------------------
+//		ADAPTIVE SPAWNERS
+
+ACTOR RLAdaptiveFormerHuman : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLFormerHumanVariantSpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLEliteFormerHumanSpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLFormerCyborgBattleRifle", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLFormerAssaultTrooper", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveFormerSergeant : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLFormerSergeantVariantSpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLEliteFormerSergeantSpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLEliteFormerSergeantSpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLFormerOverwatch", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveFormerCommando : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLFormerCommandoAdaptiveSpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLEliteCommandoAdaptiveSpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLEliteCommandoAdaptiveSpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLFormerShocktrooper", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveImp : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLImp", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareImp", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticImp", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonImp", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveDemon : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLDemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareDemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticDemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonDemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveSpectre : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLSpectre", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareSpectre", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticSpectre", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareSpectre", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveLostSoul : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLLostSoul", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareLostSoul", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticLostSoul", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLTheHungrySpawner", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveCacodemon : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLCacodemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareCacodemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareCacodemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonCacodemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveHellKnight : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLHellKnight", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareHellKnight", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticHellKnight", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticHellKnight", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveBaronOfHell : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLBaronOfHell", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareBaronOfHell", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticBaronOfHell", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonBaronOfHell", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	}
+}
+
+ACTOR RLAdaptiveArachnotron : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLArachnotron", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareArachnotron", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticArachnotron", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonArachnotron", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	}
+}
+
+ACTOR RLAdaptivePainElemental : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLPainElemental", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmarePainElemental", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticPainElemental", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonPainElemental", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveRevenant : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLRevenant", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareRevenant", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticRevenant", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonRevenant", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveMancubus : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLMancubus", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareMancubus", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticMancubus", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonMancubus", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	}
+}
+
+ACTOR RLAdaptiveArchvile : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 5 A_SpawnItemEx("RLArchvile", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnNightmare:
+		TNT1 A 5 A_SpawnItemEx("RLNightmareArchvile", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnCybernetic:
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticArchvile", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	SpawnArmageddon:
+		TNT1 A 5 A_SpawnItemEx("RLArmageddonArchvile", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Stop
+	}
+}
+
+ACTOR RLAdaptiveCyberdemon : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 0 A_Jump (64, 2)
+		TNT1 A 5 A_SpawnItemEx("RLCyberdemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+		TNT1 A 5 A_SpawnItemEx("RLBruiserBrother", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnNightmare:
+		TNT1 A 0 A_Jump (64, 2)
+		TNT1 A 5 A_SpawnItemEx("RLNightmareCyberdemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+		TNT1 A 5 A_SpawnItemEx("RLAgonyElemental", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnCybernetic:
+		TNT1 A 0 A_Jump (64, 2)
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticCyberdemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+		TNT1 A 5 A_SpawnItemEx("RLTerminator", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnArmageddon:
+		TNT1 A 0 A_Jump (256, 2) // temporary until bosses are done
+		TNT1 A 5 A_SpawnItemEx("RLNightmareCyberdemon", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+		TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") != 5, 2)
+		TNT1 A 0 A_JumpIf(CallACS("GetAveragePlayerLevel") < 50, "SpawnNightmare")
+		TNT1 A 5 A_SpawnItemEx("RLAbominant", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	}
+}
+
+ACTOR RLAdaptiveSpiderMastermind : RLAdaptiveSpawner
+{
+	States
+	{
+	SpawnUV:
+		TNT1 A 0 A_Jump (64, 2)
+		TNT1 A 5 A_SpawnItemEx("RLSpiderMastermind", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+		TNT1 A 5 A_SpawnItemEx("RLBruiserBrother", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnNightmare:
+		TNT1 A 0 A_Jump (64, 2)
+		TNT1 A 5 A_SpawnItemEx("RLNightmareSpiderMastermind", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+		TNT1 A 5 A_SpawnItemEx("RLAgonyElemental", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnCybernetic:
+		TNT1 A 0 A_Jump (64, 2)
+		TNT1 A 5 A_SpawnItemEx("RLCyberneticSpiderMastermind", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+		TNT1 A 5 A_SpawnItemEx("RLTerminator", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	SpawnArmageddon:
+		TNT1 A 0 A_Jump (256, 2) // temporary until bosses are done
+		TNT1 A 5 A_SpawnItemEx("RLNightmareSpiderMastermind", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+		TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") != 5, 2)
+		TNT1 A 0 A_JumpIf(CallACS("GetAveragePlayerLevel") < 50, "SpawnNightmare")
+		TNT1 A 5 A_SpawnItemEx("RLAbominant", 0,0,0,0,0,0,0, SpawnFlags, 0, tid)
+		Goto BossWait
+	}
+}
+
+
