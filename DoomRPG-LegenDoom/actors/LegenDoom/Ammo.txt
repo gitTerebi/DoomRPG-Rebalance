@@ -9,6 +9,7 @@ actor LDClipPickupRPG : LDClipPickup Replaces DRPGClip
     States
     {
     PickupNormal:
+        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
         TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "PickupHard")
         goto Super::PickupNormal
     PickupHard:
@@ -19,6 +20,7 @@ actor LDClipPickupRPG : LDClipPickup Replaces DRPGClip
         goto ScroungerEffect
 
     HoarderEffectAmmo:
+        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
         TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "HoarderEffectAmmoHard")
         goto Super::HoarderEffectAmmo
     HoarderEffectAmmoHard:
@@ -32,6 +34,7 @@ actor LDShellPickupRPG : LDShellPickup replaces DRPGShell
     States
     {
     PickupNormal:
+        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
         TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "PickupHard")
         goto Super::PickupNormal
     PickupHard:
@@ -42,6 +45,7 @@ actor LDShellPickupRPG : LDShellPickup replaces DRPGShell
         goto ScroungerEffect
 
     HoarderEffectAmmo:
+        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
         TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "HoarderEffectAmmoHard")
         goto Super::HoarderEffectAmmo
     HoarderEffectAmmoHard:
@@ -55,6 +59,7 @@ actor LDCellPickupRPG : LDCellPickup replaces DRPGCell
     States
     {
     PickupNormal:
+        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
         TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "PickupHard")
         goto Super::PickupNormal
     PickupHard:
@@ -65,6 +70,7 @@ actor LDCellPickupRPG : LDCellPickup replaces DRPGCell
         goto ScroungerEffect
 
     HoarderEffectAmmo:
+        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
         TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "HoarderEffectAmmoHard")
         goto Super::HoarderEffectAmmo
     HoarderEffectAmmoHard:

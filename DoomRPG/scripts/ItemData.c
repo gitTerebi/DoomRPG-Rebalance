@@ -992,6 +992,23 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("LDBFG9000PickupLegendary",        "BFG9000",         100000, 5, 5, "BFUGA0", 31, 38);
         ITEMDATA_CATEGORY_END;
 
+        // Armor
+        ITEMDATA_CATEGORY(3, "\CdArmor", CF_NONE);
+        ITEMDATA_DEF("DRPGArmorBonus",              "Armor Bonus",                 1, 0, -1, "BON2A0",  7, 13);
+
+        ITEMDATA_DEF("LDGreenArmorPickupRPG",       "Green Armor",                100, 0, 0, "ARM1A0", 15, 17);
+        ITEMDATA_DEF("LDBlueArmorPickupRPG",        "Blue Armor",                 500, 0, 0, "ARM2A0", 15, 17);
+        ITEMDATA_DEF("DRPGYellowArmor2",            "Yellow Armor",              1000, 1, 1, "ARM3A0", 15, 17);
+        ITEMDATA_DEF("DRPGRedArmor",                "Red Armor",                 5000, 2, 2, "ARM4A0", 15, 17);
+        ITEMDATA_DEF("DRPGWhiteArmor",              "White Armor",              10000, 4, 4, "ARM5A0", 15, 17);
+
+        ITEMDATA_DEF("DRPGReinforcedGreenArmor2",   "Reinforced Green Armor",     200, 0, 1, "ARX1A0", 15, 17);
+        ITEMDATA_DEF("DRPGReinforcedBlueArmor2",    "Reinforced Blue Armor",     1000, 0, 1, "ARX2A0", 15, 17);
+        ITEMDATA_DEF("DRPGReinforcedYellowArmor2",  "Reinforced Yellow Armor",   2000, 1, 2, "ARX3A0", 15, 17);
+        ITEMDATA_DEF("DRPGReinforcedRedArmor",      "Reinforced Red Armor",     10000, 2, 3, "ARX4A0", 15, 17);
+        ITEMDATA_DEF("DRPGReinforcedWhiteArmor",    "Reinforced White Armor",   20000, 4, 5, "ARX5A0", 15, 17);
+        ITEMDATA_CATEGORY_END;
+
         // Powerups
         ItemData[4][0].Actor = "LDInvulnerabilitySpherePickupRPG";
         ItemData[4][1].Actor = "LDBlurSpherePickupRPG";
