@@ -106,9 +106,9 @@ actor DRPGHealthDropper : RandomSpawner 25001
 
 actor DRPGLifeDropper : RandomSpawner
 {
-    DropItem "DRPG1Up"              255 194
-    DropItem "DRPG3Up"              255 5
-    DropItem "DRPG5Up"              255 1
+    DropItem "DRPG1Up"              255 100
+//  DropItem "DRPG3Up"              255 5
+//  DropItem "DRPG5Up"              255 1
 }
 
 actor DRPGEPDropper : RandomSpawner 25002
@@ -698,7 +698,7 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
     DropItem "DRPGSmallBackpack"    255 50
     DropItem "DRPGBackpack"         255 40
     DropItem "DRPGBigBackpack"      255 10
-//  DropItem "DRPGCrate"            255 0
+//  DropItem "DRPGCrate"            255 1
 }
 
 // HEALTH ITEMS
@@ -789,14 +789,14 @@ actor DRPGBlueArmorRandomizer : RandomSpawner Replaces BlueArmor
 actor DRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces InvulnerabilitySphere
 {
     DropItem "DRPGInvulnerabilitySphere"    255 100
-//  DropItem "DRPGCrate"                    255 0
+//  DropItem "DRPGCrate"                    255 1
 }
 
 // Blur Sphere Locations
 actor DRPGBlurSphereRandomizer : RandomSpawner Replaces BlurSphere
 {
     DropItem "DRPGBlurSphere"               255 100
-//  DropItem "DRPGCrate"                    255 0
+//  DropItem "DRPGCrate"                    255 1
 }
 
 // SHOP DISPLAYS
