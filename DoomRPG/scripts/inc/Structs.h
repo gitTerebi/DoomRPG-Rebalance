@@ -700,7 +700,7 @@ struct PlayerData_S
     int ShopIndex;
     int ShopPage;
 
-    // WadSmoosh
+    // Map Packs (WadSmoosh, Lexicon and etc.)
     int SelectedMapPack;
 
     // Skill Info

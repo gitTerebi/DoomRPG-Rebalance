@@ -573,8 +573,8 @@ NamedScript MapSpecial void LevelTransport()
                 LevelChoice = KnownLevels->Position - 1;
         }
 
-        // Wadsmoosh change MapPack support
-        if (WadSmoosh)
+        // Map packs support
+        if (MapPacks)
         {
             if ((CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber())) && (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber())))
             {
@@ -592,7 +592,7 @@ NamedScript MapSpecial void LevelTransport()
                 if (MapPack != -1)
                 {
                     Player.SelectedMapPack = MapPack;
-                    KnownLevels = &WSMapPacks[MapPack]; //ah, probably means no mp support this way
+                    KnownLevels = &ExtraMapPacks[MapPack]; //ah, probably means no mp support this way
                     //will have to move the KnownLevels pointer into the Player Struct
                     //or use a new pointer for outpost text rendering and swap the knownlevels
                     //pointer before changing the map
@@ -621,12 +621,12 @@ NamedScript MapSpecial void LevelTransport()
                         break;
                     }
                 }
-                while (MapPack < MAX_WSMAPPACKS);
+                while (MapPack < MAX_MAPPACKS);
 
-                if (MapPack != MAX_WSMAPPACKS)
+                if (MapPack != MAX_MAPPACKS)
                 {
                     Player.SelectedMapPack = MapPack;
-                    KnownLevels = &WSMapPacks[MapPack]; //ah, probably means no mp support this way
+                    KnownLevels = &ExtraMapPacks[MapPack]; //ah, probably means no mp support this way
                     //will have to move the KnownLevels pointer into the Player Struct
                     //or use a new pointer for outpost text rendering and swap the knownlevels
                     //pointer before changing the map

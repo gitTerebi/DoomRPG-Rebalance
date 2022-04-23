@@ -2790,7 +2790,7 @@ void MenuHelp()
         switch (Player.OutpostMenu)
         {
         case OMENU_LEVELTRANSPORT:
-            if (WadSmoosh)
+            if (MapPacks)
             {
                 if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
                     HudMessage("Select Level: \Cd%S/%S/%S/%S\C-\nSelect IWAD: \Cd%S+%S/%S+%S\C-\nTeleport to Level: \Cd%S\C-\nExit: \Cd%S\C-",

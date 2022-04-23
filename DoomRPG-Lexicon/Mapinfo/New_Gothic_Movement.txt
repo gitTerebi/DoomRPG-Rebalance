@@ -107,7 +107,7 @@ map NG115 "New Gothic 1 MAP15"
 	
 map NG116 "New Gothic 1 MAP16"
 	{
-	next = "NG121"
+	next = "OUTPOST"
 	sky1 = "NG1RSKY2"
 	music = "d_ng116"
 	}

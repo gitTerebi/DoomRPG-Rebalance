@@ -15,8 +15,8 @@
 #include "Utils.h"
 
 // Level Info
-DynamicArray WSMapPacks[MAX_WSMAPPACKS];
-DynamicArray *KnownLevels = &WSMapPacks[0];
+DynamicArray ExtraMapPacks[MAX_MAPPACKS];
+DynamicArray *KnownLevels = &ExtraMapPacks[0];
 LevelInfo *CurrentLevel;
 LevelInfo *PreviousLevel;
 LevelInfo *TransporterLevel;
@@ -28,16 +28,16 @@ bool WaitingForReplacements;
 int AllBonusMaps; // For the OCD Shield
 int CurrentSkill; // Keeps track of skill changes based on events
 
-// WadSmoosh
-bool MapPackActive[MAX_WSMAPPACKS];
+// MapPacks
+bool MapPackActive[MAX_MAPPACKS];
 
 // Local
 static int PassingEventTimer;
 static bool DisableEvent;
 static int LevelSectorCount;
 
-//WadSmoosh Local
-static bool WadSmooshInitialized;
+//MapPacks Local
+static bool MapPacksInitialized;
 
 // Map Init Script
 NamedScript Type_OPEN void MapInit()
@@ -278,8 +278,8 @@ NamedScript Type_OPEN void MapInit()
     if (CurrentLevel->UACBase)
         DefaultOutpost = CurrentLevel;
 
-    // WadSmoosh
-    InitWadSmoosh();
+    // Initialization map packs (WadSmoosh, Lexicon and etc.)
+    InitMapPacks();
 
     if (CurrentLevel->UACBase || CurrentLevel->UACArena)
     {
@@ -796,8 +796,8 @@ NamedScript MapSpecial void AddUnknownMap(str Name, str DisplayName, int LevelNu
     while (KnownLevels->Data == NULL)
         Delay(1);
 
-    if (WadSmoosh)
-        return; // this messes up WadSmoosh too much, running every time we go to the outpost
+    if (MapPacks)
+        return; // this messes up map packs too much, running every time we go to the outpost
 
     if (FindLevelInfo(Name) != NULL)
         return; // This map was already unlocked, so ignore it
@@ -1327,7 +1327,61 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 
     // [KS] Super-special events for super-special levels (and by "special" I of course mean retarded)
     // [KS] PS: I hate you already.
-    if (!StrICmp(TargetLevel->LumpName, "MAP30"))
+    if (MapPacks)
+    {
+        str MapsIconOfSin[35] =
+        {
+            "MAP30",
+            "AV30",
+            "CC130",
+            "CC230",
+            "CC330",
+            "CC430",
+            "CHX30",
+            "DC30",
+            "EP230",
+            "EST30",
+            "GD30",
+            "HLB30",
+            "HR30",
+            "HR230",
+            "INT30",
+            "KS30",
+            "KSS30",
+            "MOC30",
+            "NG116",
+            "NG216",
+            "NV130",
+            "PIZ30",
+            "RDX30",
+            "SDE30",
+            "SL20",
+            "SOD30",
+            "TAT30",
+            "TT130",
+            "TT330",
+            "TU30",
+            "UHR30",
+            "WID30",
+            "WOS30",
+            "ZTH30",
+            "ZOF30"
+        };
+
+        for (int i = 0; i < 35; i++)
+        {
+            str MapNumber = MapsIconOfSin[i];
+            if (!StrICmp(TargetLevel->LumpName, MapNumber))
+            {
+                // Icon of Sin
+                // Blurb about a demon spitter and the game ending finale here.
+                if (GetCVar("drpg_mapevent_sinstorm"))
+                    TargetLevel->Event = MAPEVENT_SPECIAL_SINSTORM;
+                return;
+            }
+        }
+    }
+    else if (!StrICmp(TargetLevel->LumpName, "MAP30"))
     {
         // Icon of Sin
         // Blurb about a demon spitter and the game ending finale here.
@@ -3440,10 +3494,10 @@ Start:
     goto Start;
 }
 
-// WadSmoosh --------------------------------------------------
-NamedScript void InitWadSmoosh()
+// Initialization map packs --------------------------------------------------
+NamedScript void InitMapPacks()
 {
-    str CvarNames[MAX_WSMAPPACKS] =
+    str CvarNames[MAX_MAPPACKS] =
     {
         "drpg_ws_doom1",
         "drpg_ws_doom2",
@@ -3451,80 +3505,80 @@ NamedScript void InitWadSmoosh()
         "drpg_ws_nerve",
         "drpg_ws_plut",
         "drpg_ws_tnt",
-        "drpg_ws_vr",
-        "drpg_ws_aa1",
-        "drpg_ws_aaa1",
-        "drpg_ws_aaa2",
-        "drpg_ws_av",
-        "drpg_ws_bx1",
-        "drpg_ws_cc1",
-        "drpg_ws_cc2",
-        "drpg_ws_cc3",
-        "drpg_ws_cc4",
-        "drpg_ws_chx",
-        "drpg_ws_coc",
-        "drpg_ws_cs",
-        "drpg_ws_cs2",
-        "drpg_ws_cw",
-        "drpg_ws_dc",
-        "drpg_ws_dib",
-        "drpg_ws_dke",
-        "drpg_ws_du1",
-        "drpg_ws_dv",
-        "drpg_ws_dv2",
-        "drpg_ws_ep1",
-        "drpg_ws_ep2",
-        "drpg_ws_est",
-        "drpg_ws_eye",
-        "drpg_ws_fsw",
-        "drpg_ws_gd",
-        "drpg_ws_hc",
-        "drpg_ws_hlb",
-        "drpg_ws_hp1",
-        "drpg_ws_hp3",
-        "drpg_ws_hph",
-        "drpg_ws_hr",
-        "drpg_ws_hr2",
-        "drpg_ws_int",
-        "drpg_ws_ks",
-        "drpg_ws_kss",
-        "drpg_ws_may",
-        "drpg_ws_moc",
-        "drpg_ws_mom",
-        "drpg_ws_ng1",
-        "drpg_ws_ng2",
-        "drpg_ws_nv1",
-        "drpg_ws_piz",
-        "drpg_ws_rdx",
-        "drpg_ws_sc2",
-        "drpg_ws_sd6",
-        "drpg_ws_sd7",
-        "drpg_ws_sde",
-        "drpg_ws_sf2",
-        "drpg_ws_sf3",
-        "drpg_ws_sl",
-        "drpg_ws_slu",
-        "drpg_ws_snd",
-        "drpg_ws_sod",
-        "drpg_ws_sw1",
-        "drpg_ws_tat",
-        "drpg_ws_tsp",
-        "drpg_ws_tsp2",
-        "drpg_ws_tt1",
-        "drpg_ws_tt2",
-        "drpg_ws_tt3",
-        "drpg_ws_tu",
-        "drpg_ws_uac",
-        "drpg_ws_uhr",
-        "drpg_ws_val",
-        "drpg_ws_van",
-        "drpg_ws_wid",
-        "drpg_ws_wos",
-        "drpg_ws_zth",
-        "drpg_ws_zof"
+        "drpg_lex_vr",
+        "drpg_lex_aa1",
+        "drpg_lex_aaa1",
+        "drpg_lex_aaa2",
+        "drpg_lex_av",
+        "drpg_lex_bx1",
+        "drpg_lex_cc1",
+        "drpg_lex_cc2",
+        "drpg_lex_cc3",
+        "drpg_lex_cc4",
+        "drpg_lex_chx",
+        "drpg_lex_coc",
+        "drpg_lex_cs",
+        "drpg_lex_cs2",
+        "drpg_lex_cw",
+        "drpg_lex_dc",
+        "drpg_lex_dib",
+        "drpg_lex_dke",
+        "drpg_lex_du1",
+        "drpg_lex_dv",
+        "drpg_lex_dv2",
+        "drpg_lex_ep1",
+        "drpg_lex_ep2",
+        "drpg_lex_est",
+        "drpg_lex_eye",
+        "drpg_lex_fsw",
+        "drpg_lex_gd",
+        "drpg_lex_hc",
+        "drpg_lex_hlb",
+        "drpg_lex_hp1",
+        "drpg_lex_hp3",
+        "drpg_lex_hph",
+        "drpg_lex_hr",
+        "drpg_lex_hr2",
+        "drpg_lex_int",
+        "drpg_lex_ks",
+        "drpg_lex_kss",
+        "drpg_lex_may",
+        "drpg_lex_moc",
+        "drpg_lex_mom",
+        "drpg_lex_ng1",
+        "drpg_lex_ng2",
+        "drpg_lex_nv1",
+        "drpg_lex_piz",
+        "drpg_lex_rdx",
+        "drpg_lex_sc2",
+        "drpg_lex_sd6",
+        "drpg_lex_sd7",
+        "drpg_lex_sde",
+        "drpg_lex_sf2",
+        "drpg_lex_sf3",
+        "drpg_lex_sl",
+        "drpg_lex_slu",
+        "drpg_lex_snd",
+        "drpg_lex_sod",
+        "drpg_lex_sw1",
+        "drpg_lex_tat",
+        "drpg_lex_tsp",
+        "drpg_lex_tsp2",
+        "drpg_lex_tt1",
+        "drpg_lex_tt2",
+        "drpg_lex_tt3",
+        "drpg_lex_tu",
+        "drpg_lex_uac",
+        "drpg_lex_uhr",
+        "drpg_lex_val",
+        "drpg_lex_van",
+        "drpg_lex_wid",
+        "drpg_lex_wos",
+        "drpg_lex_zth",
+        "drpg_lex_zof"
     };
 
-    str LumpNames[MAX_WSMAPPACKS] =
+    str LumpNames[MAX_MAPPACKS] =
     {
         "E1M1",
         "MAP01",
@@ -3602,7 +3656,7 @@ NamedScript void InitWadSmoosh()
         "WID01",
         "WOS01",
         "ZTH01",
-        "ZOF01",
+        "ZOF01"
     };
     int i;
     bool BlankStart;
@@ -3612,10 +3666,10 @@ NamedScript void InitWadSmoosh()
     if (CurrentLevel->LumpName == "TITLEMAP") //don't need to run on title screen
         return;
 
-    if (!WadSmoosh || WadSmooshInitialized) return; //let's be safe
-    LogMessage("\CdStarting Wad Smoosh Initialization", LOG_DEBUG);
+    if (!MapPacks || MapPacksInitialized) return; //let's be safe
+    LogMessage("\CdStarting Map Packs Initialization", LOG_DEBUG);
 
-    for (i = 0; i < MAX_WSMAPPACKS; i++)
+    for (i = 0; i < MAX_MAPPACKS; i++)
     {
         MapPackActive[i] = GetCVar(CvarNames[i]); //find which iwads user says they have
     };
@@ -3624,7 +3678,7 @@ NamedScript void InitWadSmoosh()
 
     if (!StartedOnMap) //we started in the outpost and map arrays are empty - lets add one
     {
-        for (i = 0; i < MAX_WSMAPPACKS; i++)
+        for (i = 0; i < MAX_MAPPACKS; i++)
         {
             if (MapPackActive[i])
             {
@@ -3642,13 +3696,13 @@ NamedScript void InitWadSmoosh()
                 break;
             }
         }
-        if (i == MAX_WSMAPPACKS)
+        if (i == MAX_MAPPACKS)
         {
-            LogMessage(StrParam("\CdERROR: \C-WadSmoosh loaded with no IWADS enabled!"), LOG_ERROR);
+            LogMessage(StrParam("\CdERROR: \C-Map packs loaded with no IWADS enabled!"), LOG_ERROR);
             return;
         }
     }
-    str Lump = ((LevelInfo *)WSMapPacks[WS_DOOM1].Data)[1].LumpName;
+    str Lump = ((LevelInfo *)ExtraMapPacks[WS_DOOM1].Data)[1].LumpName;
 
 
     if (Lump != "E1M1") //we didn't start with doom 1 or started on outpost with add unknown map not set to doom 1
@@ -3657,36 +3711,36 @@ NamedScript void InitWadSmoosh()
 
         DynamicArray Temp;
 
-        for (i = 1; i < MAX_WSMAPPACKS; i++)
+        for (i = 1; i < MAX_MAPPACKS; i++)
         {
             if (Lump == LumpNames[i])    //get which iwad was loaded
                 break;
         }
 
         LogMessage("Swapping Array positions", LOG_DEBUG);
-        Temp = WSMapPacks[i];   //store current data of correct location
-        LogMessage(StrParam("Swapping %p with %p",&WSMapPacks[i], &WSMapPacks[WS_DOOM1]), LOG_DEBUG);
-        WSMapPacks[i] = WSMapPacks[WS_DOOM1]; //move map data to correct position
-        WSMapPacks[WS_DOOM1] = Temp; //place replaced data in the outdated doom 1 slot
+        Temp = ExtraMapPacks[i];   //store current data of correct location
+        LogMessage(StrParam("Swapping %p with %p",&ExtraMapPacks[i], &ExtraMapPacks[WS_DOOM1]), LOG_DEBUG);
+        ExtraMapPacks[i] = ExtraMapPacks[WS_DOOM1]; //move map data to correct position
+        ExtraMapPacks[WS_DOOM1] = Temp; //place replaced data in the outdated doom 1 slot
 
-        KnownLevels = &WSMapPacks[i];   //update pointer to the new location
+        KnownLevels = &ExtraMapPacks[i];   //update pointer to the new location
     }
 
     //we need to do this again to update i, just in case
     //it's possible to get here if data is already initialised and this would
     //mess up the current map pack pointer if we didn't recheck
     Lump = ((LevelInfo *)KnownLevels->Data)[1].LumpName;
-    for (i = 0; i < MAX_WSMAPPACKS; i++)
+    for (i = 0; i < MAX_MAPPACKS; i++)
     {
         if (Lump == LumpNames[i])    //get which iwad was loaded
             break;
     }
 
-    for (int j = 0; j < MAX_WSMAPPACKS; j++) //loop through all map packs
+    for (int j = 0; j < MAX_MAPPACKS; j++) //loop through all map packs
     {
         if (j != i && MapPackActive[j]) //the "current" pack already has data so ignore it, also make sure the iwad is marked active
         {
-            KnownLevels = &WSMapPacks[j]; //move pointer for this operation
+            KnownLevels = &ExtraMapPacks[j]; //move pointer for this operation
             if (KnownLevels->Data == NULL)
                 ArrayCreate(KnownLevels, "Levels", 32, sizeof(LevelInfo)); //allocate memory
 
@@ -3715,9 +3769,9 @@ NamedScript void InitWadSmoosh()
         }
     }
 
-    KnownLevels = &WSMapPacks[i]; //move pointer back to current mappack
+    KnownLevels = &ExtraMapPacks[i]; //move pointer back to current mappack
     CurrentLevel = FindLevelInfo(); //the CurrentLevel pointer is invalidated and needs to be reset
     Player.SelectedMapPack = i;
 
-    WadSmooshInitialized = true;
+    MapPacksInitialized = true;
 }

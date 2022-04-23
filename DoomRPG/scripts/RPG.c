@@ -25,7 +25,7 @@ bool Transported;
 bool GlobalsInitialized;
 int CompatMode;
 int CompatMonMode;
-bool WadSmoosh;
+bool MapPacks;
 
 // Arrays
 str PlayerWeapon[MAX_PLAYERS];
@@ -2311,7 +2311,7 @@ void CheckCompatibility()
     MegaBosses = MegaBossesDF;
     MegaBossesAmount = MAX_MEGABOSSES_DF;
 
-    WadSmoosh = false;
+    MapPacks = false;
 
     // WadSmoosh
     Success = SpawnForced("DRPGWadSmooshActive", 0, 0, 0, TID, 0);
@@ -2319,7 +2319,17 @@ void CheckCompatibility()
     {
         if (DebugLog)
             Log("\CdDEBUG: \CaWadSmoosh\C- detected");
-        WadSmoosh = true;
+        MapPacks = true;
+        Thing_Remove(TID);
+    }
+
+    // Lexicon
+    Success = SpawnForced("DRPGLexiconActive", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (DebugLog)
+            Log("\CdDEBUG: \CaLexicon\C- detected");
+        MapPacks = true;
         Thing_Remove(TID);
     }
 
@@ -2411,7 +2421,7 @@ void CheckCompatibility()
         Thing_Remove(TID);
     }
 
-    if (DebugLog && CompatMode == COMPAT_NONE && CompatMonMode == COMPAT_NONE && !WadSmoosh)
+    if (DebugLog && CompatMode == COMPAT_NONE && CompatMonMode == COMPAT_NONE && !MapPacks)
         Log("\CdDEBUG: \C-No compatible mods found");
 }
 
