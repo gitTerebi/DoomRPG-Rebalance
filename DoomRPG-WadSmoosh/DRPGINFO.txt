@@ -1,2 +1,2 @@
 Name=WadSmoosh
-Mods=Maps - Doom Complete.pk3
+Mods=doom_complete.pk3
