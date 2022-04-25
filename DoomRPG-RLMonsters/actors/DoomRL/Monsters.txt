@@ -1424,6 +1424,19 @@ ACTOR RLNightmareArtifactGuardianRPG : RLNightmareArtifactGuardian Replaces RLNi
 	}
 }
 
+ACTOR RLAbominantArtifactGuardianRPG : RLAbominantArtifactGuardian Replaces RLAbominantArtifactGuardian
+{
+	States
+	{
+	Spawn:
+		ABOM A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NODROPS | MF_NOWEAKEN)
+		Goto Super::Spawn
+	See:
+		ABOM A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NODROPS | MF_NOWEAKEN)
+		Goto Super::See
+	}
+}
+
 // --------------------------------------------------------
 // Copies for the One-Monster map event
 
