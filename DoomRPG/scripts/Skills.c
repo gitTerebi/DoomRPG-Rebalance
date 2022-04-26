@@ -2810,13 +2810,13 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
                 // Skip input checks if you've already voted
                 if (Voted[i]) continue;
 
-                if (CheckInput(BT_USE, KEY_ONLYHELD, false, PlayerNumber()))
+                if (CheckInput(BT_USE, KEY_ONLYHELD, false, i))
                 {
                     ActivatorSound("menu/move", 127);
                     PlayersApprove++;
                     Voted[i] = true;
                 }
-                if (CheckInput(BT_SPEED, KEY_ONLYHELD, false, PlayerNumber()))
+                if (CheckInput(BT_SPEED, KEY_ONLYHELD, false, i))
                 {
                     ActivatorSound("menu/move", 127);
                     PlayersDeny++;
@@ -2835,8 +2835,12 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
 
             // Drawing
             SetFont("BIGFONT");
-            HudMessage("\Cd%tS\C- has requested Transport\n\C-Players: %d (\Cd%d\C-/\Cg%d\C-)\n\n\Cd%jS\C- to Approve\n\Cd%jS\C- to Deny",
-                       PlayerNumber() + 1, Players, PlayersApprove, PlayersDeny, "+use", "+speed");
+            if (GetCVar("use_joystick") || GetUserCVar(PlayerNumber(), "drpg_deltatouch"))
+                HudMessage("\Cd%tS\C- has requested Transport\n\C-Players: %d (\Cd%d\C-/\Cg%d\C-)\n\n\Cd%S\C- to Approve\n\Cd%S\C- to Deny",
+                           PlayerNumber() + 1, Players, PlayersApprove, PlayersDeny, "Use", "Run");
+            else
+                HudMessage("\Cd%tS\C- has requested Transport\n\C-Players: %d (\Cd%d\C-/\Cg%d\C-)\n\n\Cd%jS\C- to Approve\n\Cd%jS\C- to Deny",
+                           PlayerNumber() + 1, Players, PlayersApprove, PlayersDeny, "+use", "+speed");
             EndHudMessageBold(HUDMSG_FADEOUT, MENU_ID, "White", 0.5, 0.75, 1.0, 4.0);
 
             Delay(1);
