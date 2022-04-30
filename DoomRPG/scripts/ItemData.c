@@ -1152,7 +1152,7 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
         if (Difficulty < 0) Difficulty = 0;
         if (Difficulty > 9) Difficulty = 9;
 
-        else if (RandomFixed(0.0, 100.0) < (90.0 - 20.0 * MapLevelModifier)) // Stims/Augs/Turret
+        else if (RandomFixed(0, 100) < (90 - RoundInt(20.0 * MapLevelModifier))) // Stims/Augs/Turret
         {
             Cap = 0;
 

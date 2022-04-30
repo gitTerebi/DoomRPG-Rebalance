@@ -2012,7 +2012,7 @@ NamedScript DECORATE void EnvironmentalHazardRefillGenerator()
         return;
     }
 
-    if (CurrentLevel->GeneratorFuel > 0)
+    if (CurrentLevel->GeneratorFuel > (FuelAmount * 3) + 1)
     {
         DropInventory(0, "DRPGNeutralizerFuel");
         ActivatorSound("radiation/tankup", 127);
@@ -2021,7 +2021,7 @@ NamedScript DECORATE void EnvironmentalHazardRefillGenerator()
     }
 
     TakeInventory("DRPGNeutralizerFuel", 1);
-    CurrentLevel->GeneratorFuel = FuelAmount;
+    CurrentLevel->GeneratorFuel += FuelAmount;
 
     AmbientSound("radiation/refuel", 127);
     SetFont("BIGFONT");

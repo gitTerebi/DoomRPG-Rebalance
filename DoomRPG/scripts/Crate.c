@@ -511,6 +511,16 @@ void GenerateCrate(int ID, int Amount)
         Crates[ID].Active[i] = true;
         Crates[ID].Item[i] = Item;
 
+        // Reget the item in case of repetition
+        for (int j = 0; j < i; j++)
+        {
+            if (Crates[ID].Item[i] == Crates[ID].Item[j])
+            {
+                Crates[ID].Item[i] = &ItemData[ItemCategories][Random(1, 22)];
+                break;
+            }
+        }
+
         if (Random(0, MAX_DIFFICULTIES - Rarity) <= 0) Rarity--;
         if (Rarity < 0) Rarity = 0;
     }
@@ -649,22 +659,22 @@ void GenerateCrate(int ID, int Amount)
                     { "RLNuclearPlasmaPistol",              15, },
                     { "RLNuclearPlasmaRifle",               10, },
                     { "RLNuclearBFG9000",                    5, },
-                    { "RLNuclearOnslaught",                 0.2, },
+                    { "RLNuclearOnslaught",                0.2, },
                     { "RLNuclearArmor",                     10, },
-                    { "RLNuclearPowerArmor",                2, },
-                    { "RLHighPowerNuclearPlasmaPistol",     0, },
-                    { "RLStormNuclearPlasmaPistol",         0, },
-                    { "RLSuperchargedNuclearPlasmaPistol",  0, },
-                    { "RLNuclearPlasmaShotgun",             0, },
-                    { "RLNuclearPlasmaRifleMkII",           0, },
-                    { "RLAssaultRifleNuclearPlasmaRifle",   0, },
-                    { "RLBurstCannonNuclearPlasmaRifle",    0, },
-                    { "RLHighPowerNuclearPlasmaRifle",      0, },
-                    { "RLHighPowerNuclearBFG9000",          0, },
-                    { "RLNuclearVBFG9000",                  0, },
-                    { "RLNuclearBiggestFuckingGun",         0, },
-                    { "RLNuclearPlasmaRevolver",            0, },
-                    { "RLNuclearOnslaught",                 0, },
+                    { "RLNuclearPowerArmor",                 2, },
+                    { "RLHighPowerNuclearPlasmaPistol",      0, },
+                    { "RLStormNuclearPlasmaPistol",          0, },
+                    { "RLSuperchargedNuclearPlasmaPistol",   0, },
+                    { "RLNuclearPlasmaShotgun",              0, },
+                    { "RLNuclearPlasmaRifleMkII",            0, },
+                    { "RLAssaultRifleNuclearPlasmaRifle",    0, },
+                    { "RLBurstCannonNuclearPlasmaRifle",     0, },
+                    { "RLHighPowerNuclearPlasmaRifle",       0, },
+                    { "RLHighPowerNuclearBFG9000",           0, },
+                    { "RLNuclearVBFG9000",                   0, },
+                    { "RLNuclearBiggestFuckingGun",          0, },
+                    { "RLNuclearPlasmaRevolver",             0, },
+                    { "RLNuclearOnslaught",                  0, },
                     { NULL, },
                 },
             },
