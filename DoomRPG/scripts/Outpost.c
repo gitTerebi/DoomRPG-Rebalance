@@ -521,6 +521,9 @@ NamedScript MapSpecial void LevelTransport()
 
                 MonsterMinLevel = MonsterAvgLevel * MonsterRandomMinWeight;
                 MonsterMaxLevel = MonsterAvgLevel * MonsterRandomMaxWeight;
+
+                if (MonsterMinLevel <= 0) MonsterMinLevel = 1;
+                if (MonsterMaxLevel <= 0) MonsterMaxLevel = 1;
             }
 
             SetFont("BIGFONT");
