@@ -41,7 +41,7 @@ actor DRPGHealthBonus : CustomInventory
         BON1 ABCDCB 6 Bright
         Goto Spawn+1
     Pickup:
-        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealthDirect", 1, 200)
+        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealthDirect", 5, 200)
         Stop
     }
 }
