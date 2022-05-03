@@ -412,7 +412,7 @@ actor DRPGLowPowerJunkSpawner : RandomSpawner
     DropItem "DRPGDeadMarine"               256 30
     DropItem "DRPGLowPowerBrokenLamp"       256 20
     DropItem "DRPGDestroyedTurret"          256 20
-    DropItem "DRPGCrate"                    256 10
+    DropItem "DRPGCrate"                    256 5
     DropItem "DRPGExperimentTank"           256 5
     DropItem "DRPGModulePickup"             256 2
 }

@@ -565,7 +565,7 @@ Start:
 
             if (Players(i).Level < MAX_LEVEL)
             {
-                XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
+                XPBonus = ((XPTable[Players(i).Level] / 20l) + 50) / 50 * 50;
                 Player.XP += XPBonus;
 
                 HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
@@ -622,7 +622,7 @@ Start:
 
             if (Players(i).RankLevel < MAX_RANK)
             {
-                RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
+                RankBonus = ((RankTable[Players(i).RankLevel] / 40l) + 250) / 250 * 250;
                 Players(i).Rank += RankBonus;
 
                 HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
@@ -659,8 +659,8 @@ Start:
 
             if (Players(i).Level < MAX_LEVEL && Players(i).RankLevel < MAX_RANK)
             {
-                XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
-                RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
+                XPBonus = ((XPTable[Players(i).Level] / 20l) + 50) / 50 * 50;
+                RankBonus = ((RankTable[Players(i).RankLevel] / 40l) + 250) / 250 * 250;
 
                 Players(i).XP += XPBonus;
                 Players(i).Rank += RankBonus;
@@ -679,7 +679,7 @@ Start:
 
             if (Players(i).Level == MAX_LEVEL && Players(i).RankLevel < MAX_RANK)
             {
-                RankBonus = ((RankTable[Players(i).RankLevel] / 80l) + 250) / 250 * 250;
+                RankBonus = ((RankTable[Players(i).RankLevel] / 40l) + 250) / 250 * 250;
 
                 Players(i).Rank += RankBonus;
                 GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
@@ -690,7 +690,7 @@ Start:
 
             if (Players(i).Level < MAX_LEVEL && Players(i).RankLevel == MAX_RANK)
             {
-                XPBonus = ((XPTable[Players(i).Level] / 40l) + 50) / 50 * 50;
+                XPBonus = ((XPTable[Players(i).Level] / 20l) + 50) / 50 * 50;
 
                 Players(i).XP += XPBonus;
                 GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
@@ -900,7 +900,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
 
             if (Players(i).RankLevel < MAX_RANK)
             {
-                long int RankBonus = ((RankTable[Players(i).RankLevel] / 40l) + 250) / 250 * 250;
+                long int RankBonus = ((RankTable[Players(i).RankLevel] / 20l) + 250) / 250 * 250;
                 Players(i).Rank += RankBonus;
 
                 HudMessage("Par Time Beaten!\n%ld Rank Bonus", RankBonus);

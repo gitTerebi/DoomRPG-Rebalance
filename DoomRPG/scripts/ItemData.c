@@ -428,10 +428,10 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                 1500,  2, 1, "BLASX0", 12, 14);
         ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 1, "OLOKX0", 10, 13);
         ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 2, "DEAPX0", 11, 14);
-        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                         6000,  4, 2, "MRKPX0",  9, 12);
+        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                        10000,  5, 3, "MRKPX0",  9, 12);
         ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          28000, 10, 7, "NSSGX0", 27,  9);
         ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        24000,  8, 5, "ASHOX0", 31, 27);
-        ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                    10000,  6, 3, "RUZIX0", 20, 26);
+        ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     6000,  4, 2, "RUZIX0", 20, 26);
         ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                30000, 10, 7, "ZGGGX0", 30, 20);
         ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                       32000, 10, 5, "CLAUX0", 45, 24);
         ITEMDATA_DEF("RLNapalmLauncher",                        "Napalm Launcher \Ct[Exotic]\C-",                        35000, 10, 7, "NAPAX0", 22, 20);
