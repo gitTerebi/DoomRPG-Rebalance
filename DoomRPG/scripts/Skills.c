@@ -57,7 +57,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Repair Armor",
-            .Cost = 200,
+            .Cost = 150,
             .MaxLevel = 1,
             .Use = Repair,
             .Description =
@@ -114,7 +114,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Night Vision",
-            .Cost = 200,
+            .Cost = 150,
             .MaxLevel = 1,
             .Use = Powerup,
             .Description =
@@ -1156,6 +1156,16 @@ NamedScript Console bool Repair(SkillLevelInfo *SkillLevel, void *Data)
         PrintError("You aren't wearing any armor");
         ActivatorSound("menu/error", 127);
         return false;
+    }
+
+    if (CompatMode == COMPAT_DRLA)
+    {
+        if (CheckInventory("RLFireShieldArmorToken") || CheckInventory("RLTowerShieldArmorToken") || CheckInventory("RLBallisticShieldArmorToken") || CheckInventory("RLEnergyShieldArmorToken") || CheckInventory("RLPlasmaShieldArmorToken") || CheckInventory("RLRechargeableEnergyShieldArmorToken"))
+        {
+            PrintError("This type of armor can't be repairing");
+            ActivatorSound("menu/error", 127);
+            return false;
+        }
     }
 
     FadeRange(0, 255, 0, 0.5, 0, 255, 0, 0, 1.0);

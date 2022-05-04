@@ -1228,7 +1228,7 @@ void MapEventReward()
 
             if (Player.Level < MAX_LEVEL)
             {
-                long int XPBonus = ((XPTable[Player.Level] / 20l) + 50) / 50 * 50;
+                long int XPBonus = ((XPTable[Player.Level] / 10l) + 50) / 50 * 50;
                 Player.XP += XPBonus;
 
                 PrintMessage(StrParam("\CfBonus:\C- %ld XP and Crate", XPBonus), 2, 0);
@@ -1236,9 +1236,9 @@ void MapEventReward()
 
             if (Player.Level == MAX_LEVEL)
             {
-                GiveActorInventory(Player.TID, "DRPGCredits", 1000);
+                GiveActorInventory(Player.TID, "DRPGCredits", 5000);
 
-                PrintMessage(StrParam("\CfBonus:\C- %d Credits and Crate", 1000), 2, 0);
+                PrintMessage(StrParam("\CfBonus:\C- %d Credits and Crate", 5000), 2, 0);
             }
 
             Spawn("DRPGCrate", GetActorX(0), GetActorY(0), GetActorZ(0), 0, GetActorAngle(0));
