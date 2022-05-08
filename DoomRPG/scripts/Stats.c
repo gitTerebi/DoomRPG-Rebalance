@@ -566,7 +566,7 @@ void CheckStats()
         }
 
         // Add Defense XP for decreases in Health
-        if (Player.PrevHealth != Player.ActualHealth)
+        if (Player.PrevHealth != Player.ActualHealth && !CurrentLevel->UACBase || Player.PrevHealth != Player.ActualHealth && CurrentLevel->UACBase && ArenaActive)
         {
             if (Player.ActualHealth < Player.PrevHealth)
             {
@@ -584,7 +584,7 @@ void CheckStats()
         }
 
         // Add Luck XP for increases in Credits
-        if (Player.PrevCredits != CheckInventory("DRPGCredits") && !CurrentLevel->UACBase || Player.PrevCredits != CheckInventory("DRPGCredits") && CurrentLevel->UACBase && ArenaActive)
+        if (Player.PrevCredits != CheckInventory("DRPGCredits") && !CurrentLevel->UACBase || Player.PrevCredits != CheckInventory("DRPGCredits") && CurrentLevel->UACBase && ArenaActive || Player.PrevCredits != CheckInventory("DRPGCredits") && Player.InShop)
         {
             if (CheckInventory("DRPGCredits") > Player.PrevCredits)
             {

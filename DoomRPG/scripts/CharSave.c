@@ -490,6 +490,7 @@ NamedScript MenuEntry void LoadCharacter()
 
     // Misc
     SetInventory("DRPGCredits", Info.Credits);
+    Player.PrevCredits = Info.Credits;
     SetInventory("DRPGModule", Info.Modules);
     Player.Medkit = Info.Medkit;
     SetInventory("DRPGChipGold", Info.GoldChips);
@@ -551,6 +552,7 @@ NamedScript MenuEntry void LoadCharacter()
     Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
     Player.ActualHealth = Player.HealthMax;
     SetActorProperty(0, APROP_Health, Player.HealthMax);
+    Player.PrevHealth = Player.ActualHealth;
 
     // Skills
     for (int i = 0; i < MAX_CATEGORIES; i++)
