@@ -2641,7 +2641,7 @@ NamedScript void MonsterDeath()
                         if (GetActivatorCVar("drpg_character_spec") == 1)
                             Scale *= 2;
                     }
-                    Players(i).StrengthXP += (int)(XPAmount * Scale);
+                    Players(i).StrengthXP += (int)(((HealthXP * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100) * Scale);
                 }
             }
         }

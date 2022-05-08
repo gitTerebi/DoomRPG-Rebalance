@@ -546,6 +546,10 @@ OptionMenu "DoomRPGMenus"
 
     Option "Menu background border", "drpg_menu_background_border", "OnOff"
     StaticText ""
+
+    Option "Delta Touch Compatibility", "drpg_deltatouch", "OnOff"
+    StaticText ""
+
     StaticText "Emulates the effect of holding down key(s) while navigating menus. May cause input lag. Only works in singleplayer.", "Orange"
     Option "Input Repetition", "drpg_menu_repetition", "OnOff"
 }
@@ -652,9 +656,6 @@ OptionMenu "DoomRPGMisc"
 
     Option "Gameplay Tips", "drpg_tips", "OnOff"
     Option "Transport On New Map", "drpg_transport_on_new_map", "OnOff"
-    StaticText ""
-
-    Option "Delta Touch Compatibility", "drpg_deltatouch", "OnOff"
     StaticText ""
 
     Slider "Autosave Interval (Minutes)", "drpg_autosave", 0, 60, 1

@@ -91,3 +91,23 @@ actor RLTacticalAssemblerRestorer2TechnicianRPG : RLTacticalAssemblerRestorer2Te
         Goto Super::Spawn
     }
 }
+
+actor RLArmorBonusPickupRPG : RLArmorBonusPickup replaces RLArmorBonusPickup
+{
+	States
+	{
+	100ArmorRepair:
+		TNT1 A 0 A_JumpIfInventory("BasicArmor",100,"NotPickup")
+		TNT1 A 0 A_GiveInventory("RLArmorBonus100RPG",1)
+		TNT1 A 0 A_JumpIfInventory("BasicArmor",100,2)
+		TNT1 A 0 A_Print("Your armor looks better.", 5)
+		Stop
+		TNT1 A 0 A_Print("Your armor looks good as new!", 5)
+		Stop
+	}
+}
+
+ACTOR RLArmorBonus100RPG : RLArmorBonus100 replaces RLArmorBonus100
+{
+  Armor.SaveAmount 15
+}

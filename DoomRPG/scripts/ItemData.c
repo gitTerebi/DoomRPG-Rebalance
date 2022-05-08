@@ -1296,7 +1296,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    if (Random(0, 100) <= 25 + RoundInt(75.0 * MapLevelModifier))
+    if (Random(0, 100) <= 25 + RoundInt((fixed)AveragePlayerLuck() / 4.0 + 50.0 * MapLevelModifier))
     {
         RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
 
@@ -1350,7 +1350,7 @@ NamedScript DECORATE void DRPGArmorSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    if (Random(0, 100) <= 25 + RoundInt(75.0 * MapLevelModifier))
+    if (Random(0, 100) <= 25 + RoundInt((fixed)AveragePlayerLuck() / 4.0 + 50.0 * MapLevelModifier))
     {
         RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
 

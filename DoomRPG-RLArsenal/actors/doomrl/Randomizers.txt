@@ -12,18 +12,8 @@ actor RLStandardWeaponSpawner : RandomSpawner
     DropItem "RLBFG9000Pickup"
 }
 
-// SPECIAL
+// HEALTH ITEMS
 // --------------------------------------------------
-
-actor DRPGArmorDropper2 : RandomSpawner Replaces DRPGArmorDropper
-{
-    DropItem "DRPGArmorSpawner"
-}
-
-actor DRPGWeaponDropper2 : RandomSpawner Replaces DRPGWeaponDropper
-{
-    DropItem "DRPGWeaponSpawner"
-}
 
 actor DRPGHealthDropper2 : RandomSpawner Replaces DRPGHealthDropper
 {
@@ -35,75 +25,6 @@ actor DRPGHealthDropper2 : RandomSpawner Replaces DRPGHealthDropper
     DropItem "DRPGXLMedikit"               255 6
     DropItem "DRPGMedPack"                 255 3
     DropItem "DRPGSurgeryKit"              255 1
-}
-
-// MARINES
-// --------------------------------------------------
-
-actor DRPGMarineOutpostDRLASpawner : RandomSpawner Replaces DRPGMarineOutpostSpawner
-{
-    DropItem "DRPGMarineGuardPistol"            255 12
-    DropItem "DRPGMarineGuardShotgun"           255 15
-    DropItem "DRPGMarineGuardDoubleShotgunDRLA" 255 5
-    DropItem "DRPGMarineGuardChaingun"          255 7
-    DropItem "DRPGMarineGuardBattleRifle"       255 20
-    DropItem "DRPGMarineFemGuardBattleRifle"    255 20
-}
-
-actor DRPGMarineReinforcementDRLASpawner : RandomSpawner
-{
-    DropItem "DRPGMarineShotgun"                255 15
-    DropItem "DRPGMarineDoubleShotgunDRLA"      255 5
-    DropItem "DRPGMarineChaingun"               255 10
-    DropItem "DRPGMarineBattleRifle"            255 20
-    DropItem "DRPGMarineFemBattleRifle"         255 20
-    DropItem "DRPGMarineRocketLauncher"         255 6
-    DropItem "DRPGMarinePlasmaRifle"            255 8
-    DropItem "DRPGMarineBFG9000"                255 2
-}
-
-// AMMO
-// --------------------------------------------------
-
-// Clip Box
-actor DRPGRLClipBoxSpawner2 : RandomSpawner replaces DRPGClipBox
-{
-    DropItem "RLClipBox2"          255 100
-}
-
-// Shell Box
-actor DRPGRLShellBoxSpawner2 : RandomSpawner replaces DRPGShellBox
-{
-    DropItem "RLShellBox2"         255 183
-    DropItem "DRPGTurretPart"      255 10
-    DropItem "RLModPackSpawner"    255 6
-    DropItem "RLBlueprintComputer" 255 1
-}
-
-// Rocket Box
-actor DRPGRLRocketBoxSpawner2 : RandomSpawner replaces DRPGRocketBox
-{
-    DropItem "RLRocketBox2"        255 185
-    DropItem "DRPGTurretPart"      255 10
-    DropItem "RLModPackSpawner"    255 5
-}
-
-// Cell Pack
-actor DRPGRLCellPackSpawner2 : RandomSpawner replaces DRPGCellPack
-{
-    DropItem "RLCellPack2"         255 183
-    DropItem "DRPGTurretPart"      255 10
-    DropItem "RLModPackSpawner"    255 6
-    DropItem "RLBlueprintComputer" 255 1
-}
-
-// Backpack locations
-actor DRPGBackpackRandomizer2 : RandomSpawner Replaces DRPGBackpackRandomizer
-{
-    DropItem "DRPGSmallBackpack"   255 50
-    DropItem "DRPGBackpack"        255 40
-    DropItem "DRPGBigBackpack"     255 10
-//  DropItem "DRPGCrate"           255 0
 }
 
 // ARMOR ITEMS
@@ -139,6 +60,141 @@ actor DRPGBlueArmorRandomizer2 : RandomSpawner Replaces DRPGBlueArmorRandomizer
     DropItem "DRPGArmorSpawner"
 }
 
+// Armor Dropper
+actor DRPGArmorDropper2 : RandomSpawner Replaces DRPGArmorDropper
+{
+    DropItem "DRPGArmorSpawner"
+}
+
+// AMMO
+// --------------------------------------------------
+
+// Clip Box
+actor DRPGRLClipBoxSpawner2 : RandomSpawner replaces DRPGClipBox
+{
+    DropItem "RLClipBox2"          255 100
+}
+
+actor RLClipBoxSpawnerRPG : RandomSpawner replaces RLClipBoxSpawner
+{
+    DropItem "RLClipBox2"          255 100
+}
+
+// Shell Box
+actor DRPGRLShellBoxSpawner2 : RandomSpawner replaces DRPGShellBox
+{
+    DropItem "RLShellBox2"         255 183
+    DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1
+}
+
+actor RLShellBoxSpawnerRPG : RandomSpawner replaces RLShellBoxSpawner
+{
+    DropItem "RLShellBox2"         255 183
+    DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1
+}
+
+// Rocket Box
+actor DRPGRLRocketBoxSpawner2 : RandomSpawner replaces DRPGRocketBox
+{
+    DropItem "RLRocketBox2"        255 185
+    DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 5
+}
+
+actor RLRocketBoxSpawnerRPG : RandomSpawner replaces RLRocketBoxSpawner
+{
+    DropItem "RLRocketBox2"        255 185
+    DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 5
+}
+
+// Cell Pack
+actor DRPGRLCellPackSpawner2 : RandomSpawner replaces DRPGCellPack
+{
+    DropItem "RLCellPack2"         255 183
+    DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1
+}
+
+actor RLCellPackSpawnerRPG : RandomSpawner replaces RLCellPackSpawner
+{
+    DropItem "RLCellPack2"         255 183
+    DropItem "DRPGTurretPart"      255 10
+    DropItem "RLModPackSpawner"    255 6
+    DropItem "RLBlueprintComputer" 255 1
+}
+
+// Backpack locations
+actor DRPGBackpackRandomizer2 : RandomSpawner Replaces DRPGBackpackRandomizer
+{
+    DropItem "DRPGSmallBackpack"   255 50
+    DropItem "DRPGBackpack"        255 40
+    DropItem "DRPGBigBackpack"     255 10
+//  DropItem "DRPGCrate"           255 0
+}
+
+// WEAPONS SPAWNERS
+// --------------------------------------------------
+actor RLChainsawSpawnerRPG : RandomSpawner 2005
+{
+    DropItem "RLChainsawPickup"       255 80
+    DropItem "DRPGWeaponSpawner"      255 20
+}
+
+actor RLPistolSpawnerRPG : RandomSpawner 5010
+{
+    DropItem "RLPistolPickup"         255 80
+    DropItem "DRPGWeaponSpawner"      255 20
+}
+
+actor RLShotgunSpawnerRPG : RandomSpawner Replaces RLShotgunSpawner
+{
+    DropItem "RLShotgunPickup"        255 50
+    DropItem "RLCombatShotgunPickup"  255 30
+    DropItem "DRPGWeaponSpawner"      255 20
+}
+
+actor RLSuperShotgunSpawnerRPG : RandomSpawner 82
+{
+    DropItem "RLDoubleShotgunPickup"  255 80
+    DropItem "DRPGWeaponSpawner"      255 20
+}
+
+actor RLChaingunSpawnerRPG : RandomSpawner Replaces RLChaingunSpawner
+{
+    DropItem "RLBattleRiflePickup"    255 50
+    DropItem "RLChaingunPickup"       255 30
+    DropItem "DRPGWeaponSpawner"      255 20
+}
+
+actor RLRocketLauncherSpawnerRPG : RandomSpawner 2003
+{
+    DropItem "RLRocketLauncherPickup" 255 80
+    DropItem "DRPGWeaponSpawner"      255 20
+}
+
+actor RLPlasmaRifleSpawnerRPG : RandomSpawner 2004
+{
+    DropItem "RLPlasmaRiflePickup"    255 80
+    DropItem "DRPGWeaponSpawner"      255 20
+}
+
+actor RLBFG9000SpawnerRPG : RandomSpawner 2006
+{
+    DropItem "RLBFG9000Pickup"        255 80
+    DropItem "DRPGWeaponSpawner"      255 20
+}
+
+actor DRPGWeaponDropper2 : RandomSpawner Replaces DRPGWeaponDropper
+{
+    DropItem "DRPGWeaponSpawner"
+}
+
 // POWERUPS
 // --------------------------------------------------
 
@@ -148,6 +204,31 @@ actor RLTrackingMap2 : RLTrackingMap { -COUNTITEM }
 actor RLAllMapSpawner2 : RandomSpawner replaces DRPGAllMap
 {
     DropItem "RLAllmap2"
+}
+
+// MARINES
+// --------------------------------------------------
+
+actor DRPGMarineOutpostDRLASpawner : RandomSpawner Replaces DRPGMarineOutpostSpawner
+{
+    DropItem "DRPGMarineGuardPistol"            255 12
+    DropItem "DRPGMarineGuardShotgun"           255 15
+    DropItem "DRPGMarineGuardDoubleShotgunDRLA" 255 5
+    DropItem "DRPGMarineGuardChaingun"          255 7
+    DropItem "DRPGMarineGuardBattleRifle"       255 20
+    DropItem "DRPGMarineFemGuardBattleRifle"    255 20
+}
+
+actor DRPGMarineReinforcementDRLASpawner : RandomSpawner
+{
+    DropItem "DRPGMarineShotgun"                255 15
+    DropItem "DRPGMarineDoubleShotgunDRLA"      255 5
+    DropItem "DRPGMarineChaingun"               255 10
+    DropItem "DRPGMarineBattleRifle"            255 20
+    DropItem "DRPGMarineFemBattleRifle"         255 20
+    DropItem "DRPGMarineRocketLauncher"         255 6
+    DropItem "DRPGMarinePlasmaRifle"            255 8
+    DropItem "DRPGMarineBFG9000"                255 2
 }
 
 // SHOP DISPLAYS
@@ -181,53 +262,60 @@ actor DRPGShopPowerupRandomizer2 : RandomSpawner Replaces DRPGShopPowerupRandomi
     DropItem "RLTrackingMap"
 }
 
-//DOOMRPG REBALANCE RANDOM SPAWNERS
-actor RLChainsawSpawner3 : RandomSpawner 2005
+// MODPACKS SPAWNERS
+// --------------------------------------------------
+actor RLModPackSpawnerRPG : RandomSpawner replaces RLModPackSpawner
 {
-    DropItem "RLChainsawPickup"       255 80
-    DropItem "DRPGWeaponSpawner"      255 20
+  Tag "Random Modpack"
+    //$category "DRLA Spawners"
+    DropItem "DRPGTurretPartCrate" 255 300
+    DropItem "RLBulkModItem"       255 120
+    DropItem "RLPowerModItem"      255 180
+    DropItem "RLAgilityModItem"    255 260
+    DropItem "RLTechnicalModItem"  255 140
+    DropItem "RLNanoModItem"       255 10
+    DropItem "RLSniperModItem"     255 30
+    DropItem "RLFirestormModItem"  255 30
+    DropItem "RLOnyxModItem"       255 10
+    DropItem "RLArmorModItem"      255 60
+    DropItem "RLBlueprintComputer" 255 20
 }
 
-actor RLPistolSpawner3 : RandomSpawner 5010
+actor RLBasicModPackSpawnerRPG : RandomSpawner replaces RLBasicModPackSpawner
 {
-    DropItem "RLPistolPickup"         255 80
-    DropItem "DRPGWeaponSpawner"      255 20
+  Tag "Random Basic Modpack"
+    //$category "DRLA Spawners"
+    DropItem "RLBulkModItem"      255 12
+    DropItem "RLPowerModItem"     255 18
+    DropItem "RLAgilityModItem"   255 26
+    DropItem "RLTechnicalModItem" 255 14
 }
 
-actor RLShotgunSpawner3 : RandomSpawner Replaces RLShotgunSpawner
+// MISC
+// --------------------------------------------------
+actor RLRandomPhaseDeviceSpawnerRPG : RandomSpawner replaces RLRandomPhaseDeviceSpawner
 {
-    DropItem "RLShotgunPickup"        255 50
-    DropItem "RLCombatShotgunPickup"  255 30
-    DropItem "DRPGWeaponSpawner"      255 20
+  Tag "Random Phase Device"
+    //$category "DRLA Spawners"
+    DropItem "DRPGEmpty"                 255 130
+    DropItem "DRPGTurretPart"            255 20
+    DropItem "RLPhaseDevice"             255 90
+    DropItem "RLHomingPhaseDevice"       255 30
+    DropItem "RLRecallPhaseDevice"       255 27
+    DropItem "RLExperimentalPhaseDevice" 255 3
 }
 
-actor RLSuperShotgunSpawner3 : RandomSpawner 82
+actor RLBerserkSpawnerRPG : RandomSpawner 2023
 {
-    DropItem "RLDoubleShotgunPickup"  255 80
-    DropItem "DRPGWeaponSpawner"      255 20
-}
-
-actor RLChaingunSpawner3 : RandomSpawner Replaces RLChaingunSpawner
-{
-    DropItem "RLBattleRiflePickup"    255 50
-    DropItem "RLChaingunPickup"       255 30
-    DropItem "DRPGWeaponSpawner"      255 20
-}
-
-actor RLRocketLauncherSpawner3 : RandomSpawner 2003
-{
-    DropItem "RLRocketLauncherPickup" 255 80
-    DropItem "DRPGWeaponSpawner"      255 20
-}
-
-actor RLPlasmaRifleSpawner3 : RandomSpawner 2004
-{
-    DropItem "RLPlasmaRiflePickup"    255 80
-    DropItem "DRPGWeaponSpawner"      255 20
-}
-
-actor RLBFG9000Spawner3 : RandomSpawner 2006
-{
-    DropItem "RLBFG9000Pickup"        255 80
-    DropItem "DRPGWeaponSpawner"      255 20
+    DropItem "DRPGMedikit"          255 100
+    DropItem "DRPGLargeMedikit"     255 30
+    DropItem "DRPGXLMedikit"        255 10
+    DropItem "DRPGMedPack"          255 6
+    DropItem "DRPGSurgeryKit"       255 3
+    DropItem "DRPGClipBox"          255 80
+    DropItem "DRPGShellBox"         255 60	
+    DropItem "DRPGRocketBox"        255 20	
+    DropItem "DRPGCellPack"         255 10
+    DropItem "DRPGModulePickup"     255 1
+    DropItem "RLBlueprintComputer"  255 1
 }

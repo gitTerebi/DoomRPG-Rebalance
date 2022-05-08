@@ -122,14 +122,14 @@ server  int     drpg_overdrive_limit = 1000;
 server  bool    drpg_levelup_natural = false;
 server  bool    drpg_allow_spec = false;
 user    int     drpg_character_spec = 0;
-server  float   drpg_strength_scalexp = 0.25;
-server  float   drpg_defense_scalexp = 0.25;
-server  float   drpg_vitality_scalexp = 0.25;
-server  float   drpg_energy_scalexp = 0.25;
-server  float   drpg_regeneration_scalexp = 0.25;
-server  float   drpg_agility_scalexp = 0.25;
-server  float   drpg_capacity_scalexp = 0.25;
-server  float   drpg_luck_scalexp = 0.25;
+server  float   drpg_strength_scalexp = 1.00;
+server  float   drpg_defense_scalexp = 1.00;
+server  float   drpg_vitality_scalexp = 1.00;
+server  float   drpg_energy_scalexp = 1.00;
+server  float   drpg_regeneration_scalexp = 1.00;
+server  float   drpg_agility_scalexp = 1.00;
+server  float   drpg_capacity_scalexp = 1.00;
+server  float   drpg_luck_scalexp = 1.00;
 
 // Auto Healing
 user    bool    drpg_auto_heal = false;

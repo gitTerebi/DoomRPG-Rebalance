@@ -525,14 +525,27 @@ NamedScript MenuEntry void LoadCharacter()
     Player.LuckNat         = Info.StatsNat[7];
 
     // Total values
-    Player.StrengthTotal = Player.Strength + Player.StrengthNat;
-    Player.DefenseTotal = Player.Defense + Player.DefenseNat;
-    Player.VitalityTotal = Player.Vitality + Player.VitalityNat;
-    Player.EnergyTotal = Player.Energy + Player.EnergyNat;
-    Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat;
-    Player.AgilityTotal = Player.Agility + Player.AgilityNat;
-    Player.CapacityTotal = Player.Capacity + Player.CapacityNat;
-    Player.LuckTotal = Player.Luck + Player.LuckNat;
+    Player.StrengthTotal = Player.Strength;
+    Player.DefenseTotal = Player.Defense;
+    Player.VitalityTotal = Player.Vitality;
+    Player.EnergyTotal = Player.Energy;
+    Player.RegenerationTotal = Player.Regeneration;
+    Player.AgilityTotal = Player.Agility;
+    Player.CapacityTotal = Player.Capacity;
+    Player.LuckTotal = Player.Luck;
+
+    // Natural stats values
+    if (GetCVar("drpg_levelup_natural"))
+    {
+        Player.StrengthTotal += Player.StrengthNat;
+        Player.DefenseTotal += Player.DefenseNat;
+        Player.VitalityTotal += Player.VitalityNat;
+        Player.EnergyTotal += Player.EnergyNat;
+        Player.RegenerationTotal += Player.RegenerationNat;
+        Player.AgilityTotal += Player.AgilityNat;
+        Player.CapacityTotal += Player.CapacityNat;
+        Player.LuckTotal += Player.LuckNat;
+    }
 
     Player.EP = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;

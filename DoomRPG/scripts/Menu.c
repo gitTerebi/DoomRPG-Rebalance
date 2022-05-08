@@ -462,8 +462,8 @@ void DrawStatsMenu()
         {
         case 0:
         {
-            if ((Player.StrengthNat + Player.SoulRedCount) > 0)
-                HudMessage("Strength: %d (+%d)", Player.Strength, (Player.StrengthNat + Player.SoulRedCount));
+            if (Player.StrengthTotal > Player.Strength)
+                HudMessage("Strength: %d (+%d)", Player.Strength, (Player.StrengthNat + Player.SoulRedCount + Player.StrengthBonus));
             else
                 HudMessage("Strength: %d", Player.Strength);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    25.0,   0.05);
@@ -471,8 +471,8 @@ void DrawStatsMenu()
         break;
         case 1:
         {
-            if ((Player.DefenseNat + Player.SoulGreenCount) > 0)
-                HudMessage("Defense: %d (+%d)", Player.Defense, (Player.DefenseNat + Player.SoulGreenCount));
+            if (Player.DefenseTotal > Player.Defense)
+                HudMessage("Defense: %d (+%d)", Player.Defense, (Player.DefenseNat + Player.SoulGreenCount + Player.DefenseBonus));
             else
                 HudMessage("Defense: %d", Player.Defense);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  25.0,   0.05);
@@ -480,8 +480,8 @@ void DrawStatsMenu()
         break;
         case 2:
         {
-            if ((Player.VitalityNat + Player.SoulPinkCount) > 0)
-                HudMessage("Vitality: %d (+%d)", Player.Vitality, (Player.VitalityNat + Player.SoulPinkCount));
+            if (Player.VitalityTotal > Player.Vitality)
+                HudMessage("Vitality: %d (+%d)", Player.Vitality, (Player.VitalityNat + Player.SoulPinkCount + Player.VitalityBonus));
             else
                 HudMessage("Vitality: %d", Player.Vitality);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    75.0,   0.05);
@@ -489,8 +489,8 @@ void DrawStatsMenu()
         break;
         case 3:
         {
-            if ((Player.EnergyNat + Player.SoulBlueCount) > 0)
-                HudMessage("Energy: %d (+%d)", Player.Energy, (Player.EnergyNat + Player.SoulBlueCount));
+            if (Player.EnergyTotal > Player.Energy)
+                HudMessage("Energy: %d (+%d)", Player.Energy, (Player.EnergyNat + Player.SoulBlueCount + Player.EnergyBonus));
             else
                 HudMessage("Energy: %d", Player.Energy);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  75.0,   0.05);
@@ -498,8 +498,8 @@ void DrawStatsMenu()
         break;
         case 4:
         {
-            if ((Player.RegenerationNat + Player.SoulPurpleCount) > 0)
-                HudMessage("Regen: %d (+%d)", Player.Regeneration, (Player.RegenerationNat + Player.SoulPurpleCount));
+            if (Player.RegenerationTotal > Player.Regeneration)
+                HudMessage("Regen: %d (+%d)", Player.Regeneration, (Player.RegenerationNat + Player.SoulPurpleCount + Player.RegenerationBonus));
             else
                 HudMessage("Regen: %d", Player.Regeneration);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    125.0,  0.05);
@@ -507,8 +507,8 @@ void DrawStatsMenu()
         break;
         case 5:
         {
-            if ((Player.AgilityNat + Player.SoulOrangeCount) > 0)
-                HudMessage("Agility: %d (+%d)", Player.Agility, (Player.AgilityNat + Player.SoulOrangeCount));
+            if (Player.AgilityTotal > Player.Agility)
+                HudMessage("Agility: %d (+%d)", Player.Agility, (Player.AgilityNat + Player.SoulOrangeCount + Player.AgilityBonus));
             else
                 HudMessage("Agility: %d", Player.Agility);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  125.0,  0.05);
@@ -516,8 +516,8 @@ void DrawStatsMenu()
         break;
         case 6:
         {
-            if ((Player.CapacityNat + Player.SoulDarkBlueCount) > 0)
-                HudMessage("Capacity: %d (+%d)", Player.Capacity, (Player.CapacityNat + Player.SoulDarkBlueCount));
+            if (Player.CapacityTotal > Player.Capacity)
+                HudMessage("Capacity: %d (+%d)", Player.Capacity, (Player.CapacityNat + Player.SoulDarkBlueCount + Player.CapacityBonus));
             else
                 HudMessage("Capacity: %d", Player.Capacity);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   0.1,    175.0,  0.05);
@@ -525,8 +525,8 @@ void DrawStatsMenu()
         break;
         case 7:
         {
-            if ((Player.LuckNat + Player.SoulYellowCount) > 0)
-                HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount));
+            if (Player.LuckTotal > Player.Luck)
+                HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
             else
                 HudMessage("Luck: %d", Player.Luck);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  175.0,  0.05);
@@ -536,43 +536,43 @@ void DrawStatsMenu()
 
         // Primary Stats
         SetFont("BIGFONT");
-        if ((Player.StrengthNat + Player.SoulRedCount) > 0)
-            HudMessage("Strength: %d (+%d)", Player.Strength, (Player.StrengthNat + Player.SoulRedCount));
+        if (Player.StrengthTotal > Player.Strength)
+            HudMessage("Strength: %d (+%d)", Player.Strength, (Player.StrengthNat + Player.SoulRedCount + Player.StrengthBonus));
         else
             HudMessage("Strength: %d", Player.Strength);
         EndHudMessage(HUDMSG_PLAIN, 0, "Red",        0.1,    25.0,   0.05);
-        if ((Player.DefenseNat + Player.SoulGreenCount) > 0)
-            HudMessage("Defense: %d (+%d)", Player.Defense, (Player.DefenseNat + Player.SoulGreenCount));
+        if (Player.DefenseTotal > Player.Defense)
+            HudMessage("Defense: %d (+%d)", Player.Defense, (Player.DefenseNat + Player.SoulGreenCount + Player.DefenseBonus));
         else
             HudMessage("Defense: %d", Player.Defense);
         EndHudMessage(HUDMSG_PLAIN, 0, "Green",      200.1,  25.0,   0.05);
-        if ((Player.VitalityNat + Player.SoulPinkCount) > 0)
-            HudMessage("Vitality: %d (+%d)", Player.Vitality, (Player.VitalityNat + Player.SoulPinkCount));
+        if (Player.VitalityTotal > Player.Vitality)
+            HudMessage("Vitality: %d (+%d)", Player.Vitality, (Player.VitalityNat + Player.SoulPinkCount + Player.VitalityBonus));
         else
             HudMessage("Vitality: %d", Player.Vitality);
         EndHudMessage(HUDMSG_PLAIN, 0, "Brick",      0.1,    75.0,   0.05);
-        if ((Player.EnergyNat + Player.SoulBlueCount) > 0)
-            HudMessage("Energy: %d (+%d)", Player.Energy, (Player.EnergyNat + Player.SoulBlueCount));
+        if (Player.EnergyTotal > Player.Energy)
+            HudMessage("Energy: %d (+%d)", Player.Energy, (Player.EnergyNat + Player.SoulBlueCount + Player.EnergyBonus));
         else
             HudMessage("Energy: %d", Player.Energy);
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",  200.1,  75.0,   0.05);
-        if ((Player.RegenerationNat + Player.SoulPurpleCount) > 0)
-            HudMessage("Regen: %d (+%d)", Player.Regeneration, (Player.RegenerationNat + Player.SoulPurpleCount));
+        if (Player.RegenerationTotal > Player.Regeneration)
+            HudMessage("Regen: %d (+%d)", Player.Regeneration, (Player.RegenerationNat + Player.SoulPurpleCount + Player.RegenerationBonus));
         else
             HudMessage("Regen: %d", Player.Regeneration);
         EndHudMessage(HUDMSG_PLAIN, 0, "Purple",     0.1,    125.0,  0.05);
-        if ((Player.AgilityNat + Player.SoulOrangeCount) > 0)
-            HudMessage("Agility: %d (+%d)", Player.Agility, (Player.AgilityNat + Player.SoulOrangeCount));
+        if (Player.AgilityTotal > Player.Agility)
+            HudMessage("Agility: %d (+%d)", Player.Agility, (Player.AgilityNat + Player.SoulOrangeCount + Player.AgilityBonus));
         else
             HudMessage("Agility: %d", Player.Agility);
         EndHudMessage(HUDMSG_PLAIN, 0, "Orange",     200.1,  125.0,  0.05);
-        if ((Player.CapacityNat + Player.SoulDarkBlueCount) > 0)
-            HudMessage("Capacity: %d (+%d)", Player.Capacity, (Player.CapacityNat + Player.SoulDarkBlueCount));
+        if (Player.CapacityTotal > Player.Capacity)
+            HudMessage("Capacity: %d (+%d)", Player.Capacity, (Player.CapacityNat + Player.SoulDarkBlueCount + Player.CapacityBonus));
         else
             HudMessage("Capacity: %d", Player.Capacity);
         EndHudMessage(HUDMSG_PLAIN, 0, "Blue",       0.1,    175.0,  0.05);
-        if ((Player.LuckNat + Player.SoulYellowCount) > 0)
-            HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount));
+        if (Player.LuckTotal > Player.Luck)
+            HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
         else
             HudMessage("Luck: %d", Player.Luck);
         EndHudMessage(HUDMSG_PLAIN, 0, "Gold",       200.1,  175.0,  0.05);

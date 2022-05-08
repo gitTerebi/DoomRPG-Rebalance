@@ -345,7 +345,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     },
     {
         "DRPGShieldAccessory32",
-        "\CdADPT-V15",   "SHA2F0",   48000,
+        "\CiRUS-ROU1",   "SHA2F0",   48000,
         "\Cd+1000% Damage Taken\n\Ci5 In 6 Survival Bonus\C-",
         SHIELD_PASS_ROULETTE, // To bypass the 75% survival cap
         RussianRouletteMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
@@ -436,7 +436,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     },
     {
         "DRPGShieldAccessory45",
-        "\CiRUS-ROU1",  "SHA2S0",   70000,
+        "\CdADPT-V15",  "SHA2S0",   70000,
         "Scales your \CdCharge Rate\C- up and \CaDelay\C- down based on how long you've been in a level",
         SHIELD_PASS_NONE,
         MinuteMaidMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,

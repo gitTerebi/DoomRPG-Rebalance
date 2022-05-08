@@ -426,14 +426,27 @@ void CheckStats()
 {
     // VERY IMPORTANT CODE RIGHT HERE
     // If you're reading this and you'd like to modify stat curves, this is where you'd do it
-    Player.StrengthTotal = Player.Strength + Player.StrengthNat + Player.SoulRedCount + Player.StrengthBonus;
-    Player.DefenseTotal = Player.Defense + Player.DefenseNat + Player.SoulGreenCount + Player.DefenseBonus;
-    Player.VitalityTotal = Player.Vitality + Player.VitalityNat + Player.SoulPinkCount + Player.VitalityBonus;
-    Player.EnergyTotal = Player.Energy + Player.EnergyNat + Player.SoulBlueCount + Player.EnergyBonus;
-    Player.RegenerationTotal = Player.Regeneration + Player.RegenerationNat + Player.SoulPurpleCount + Player.RegenerationBonus;
-    Player.AgilityTotal = Player.Agility + Player.AgilityNat + Player.SoulOrangeCount + Player.AgilityBonus;
-    Player.CapacityTotal = Player.Capacity + Player.CapacityNat + Player.SoulDarkBlueCount + Player.CapacityBonus;
-    Player.LuckTotal = Player.Luck + Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus;
+    Player.StrengthTotal = Player.Strength + Player.SoulRedCount + Player.StrengthBonus;
+    Player.DefenseTotal = Player.Defense + Player.SoulGreenCount + Player.DefenseBonus;
+    Player.VitalityTotal = Player.Vitality + Player.SoulPinkCount + Player.VitalityBonus;
+    Player.EnergyTotal = Player.Energy + Player.SoulBlueCount + Player.EnergyBonus;
+    Player.RegenerationTotal = Player.Regeneration + Player.SoulPurpleCount + Player.RegenerationBonus;
+    Player.AgilityTotal = Player.Agility + Player.SoulOrangeCount + Player.AgilityBonus;
+    Player.CapacityTotal = Player.Capacity + Player.SoulDarkBlueCount + Player.CapacityBonus;
+    Player.LuckTotal = Player.Luck + Player.SoulYellowCount + Player.LuckBonus;
+
+    // Natural stats check
+    if (GetCVar("drpg_levelup_natural"))
+    {
+        Player.StrengthTotal += Player.StrengthNat;
+        Player.DefenseTotal += Player.DefenseNat;
+        Player.VitalityTotal += Player.VitalityNat;
+        Player.EnergyTotal += Player.EnergyNat;
+        Player.RegenerationTotal += Player.RegenerationNat;
+        Player.AgilityTotal += Player.AgilityNat;
+        Player.CapacityTotal += Player.CapacityNat;
+        Player.LuckTotal += Player.LuckNat;
+    }
 
     Player.LevelDamage = Player.Level;
     Player.BonusDamage = Player.StrengthTotal;
@@ -571,7 +584,7 @@ void CheckStats()
         }
 
         // Add Luck XP for increases in Credits
-        if (Player.PrevCredits != CheckInventory("DRPGCredits"))
+        if (Player.PrevCredits != CheckInventory("DRPGCredits") && !CurrentLevel->UACBase || Player.PrevCredits != CheckInventory("DRPGCredits") && CurrentLevel->UACBase && ArenaActive)
         {
             if (CheckInventory("DRPGCredits") > Player.PrevCredits)
             {
@@ -984,21 +997,21 @@ void CheckPerks()
     // If you're dead, return
     if (GetActorProperty(Player.TID, APROP_Health) <= 0) return;
 
-    if (Player.StrengthTotal >= 75)     Player.Perks[STAT_STRENGTH] = true;
+    if (Player.StrengthTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75))     Player.Perks[STAT_STRENGTH] = true;
     else Player.Perks[STAT_STRENGTH] = false;
-    if (Player.DefenseTotal >= 75)      Player.Perks[STAT_DEFENSE] = true;
+    if (Player.DefenseTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75))      Player.Perks[STAT_DEFENSE] = true;
     else Player.Perks[STAT_DEFENSE] = false;
-    if (Player.VitalityTotal >= 75)     Player.Perks[STAT_VITALITY] = true;
+    if (Player.VitalityTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75))     Player.Perks[STAT_VITALITY] = true;
     else Player.Perks[STAT_VITALITY] = false;
-    if (Player.EnergyTotal >= 50)       Player.Perks[STAT_ENERGY] = true;
+    if (Player.EnergyTotal >= (GetCVar("drpg_levelup_natural") ? 100 : 50))       Player.Perks[STAT_ENERGY] = true;
     else Player.Perks[STAT_ENERGY] = false;
-    if (Player.RegenerationTotal >= 75) Player.Perks[STAT_REGENERATION] = true;
+    if (Player.RegenerationTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75)) Player.Perks[STAT_REGENERATION] = true;
     else Player.Perks[STAT_REGENERATION] = false;
-    if (Player.AgilityTotal >= 75)      Player.Perks[STAT_AGILITY] = true;
+    if (Player.AgilityTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75))      Player.Perks[STAT_AGILITY] = true;
     else Player.Perks[STAT_AGILITY] = false;
-    if (Player.CapacityTotal >= 100)     Player.Perks[STAT_CAPACITY] = true;
+    if (Player.CapacityTotal >= (GetCVar("drpg_levelup_natural") ? 200 : 100))    Player.Perks[STAT_CAPACITY] = true;
     else Player.Perks[STAT_CAPACITY] = false;
-    if (Player.LuckTotal >= 100)         Player.Perks[STAT_LUCK] = true;
+    if (Player.LuckTotal >= (GetCVar("drpg_levelup_natural") ? 200 : 100))        Player.Perks[STAT_LUCK] = true;
     else Player.Perks[STAT_LUCK] = false;
 
     fixed StrengthPercent = ((fixed)Player.ActualHealth / (fixed)Player.HealthMax * 100);
