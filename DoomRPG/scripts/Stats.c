@@ -566,7 +566,7 @@ void CheckStats()
         }
 
         // Add Defense XP for decreases in Health
-        if (Player.PrevHealth != Player.ActualHealth && !CurrentLevel->UACBase || Player.PrevHealth != Player.ActualHealth && CurrentLevel->UACBase && ArenaActive)
+        if (Player.PrevHealth != Player.ActualHealth && !CurrentLevel->UACBase || Player.PrevHealth != Player.ActualHealth && CurrentLevel->UACBase && ArenaActive || Player.PrevHealth != Player.ActualHealth && CurrentLevel->UACBase && MarinesHostile)
         {
             if (Player.ActualHealth < Player.PrevHealth)
             {
