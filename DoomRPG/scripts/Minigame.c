@@ -52,8 +52,12 @@ NamedScript void ItemRoulette(bool Rare)
         if (GetActivatorCVar("drpg_menuhelp"))
         {
             SetFont("SMALLFONT");
-            HudMessage("Navigate/Change: \Cd%jS/%jS/%jS/%jS\C-\nReady/Play: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                       "+forward", "+back", "+moveleft", "+moveright", "+use", "drpg_menu");
+            if (GetCVar("use_joystick") || GetUserCVar(PlayerNumber(), "drpg_deltatouch"))
+                HudMessage("Navigate/Change: \Cd%S/%S/%S/%S\C-\nReady/Play: \Cd%S\C-\nExit: \Cd%S\C-",
+                           "Up", "Down", "Left", "Right", "Use", "Menu");
+            else
+                HudMessage("Navigate/Change: \Cd%jS/%jS/%jS/%jS\C-\nReady/Play: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                           "+forward", "+back", "+moveleft", "+moveright", "+use", "drpg_menu");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 90.1, 460.0, 0.05);
         }
 
