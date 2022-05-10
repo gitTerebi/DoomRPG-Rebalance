@@ -909,13 +909,13 @@ void CheckStatBounds()
     // Cap chances at 100%
     if (Player.HealthChance > 100k)  Player.HealthChance = 100k;
     if (Player.EPChance > 100k)      Player.EPChance = 100k;
-    if (Player.PowerupChance > 100k) Player.PowerupChance = 100k;
+    if (Player.AmmoChance > 100k)    Player.AmmoChance = 100k;
+    if (Player.TurretChance > 100k)  Player.TurretChance = 100k;
+    if (Player.ModuleChance > 100k)  Player.ModuleChance = 100k;
     if (Player.ArmorChance > 100k)   Player.ArmorChance = 100k;
     if (Player.WeaponChance > 100k)  Player.WeaponChance = 100k;
-    if (Player.ModuleChance > 100k)  Player.ModuleChance = 100k;
     if (Player.AugChance > 100k)     Player.AugChance = 100k;
     if (Player.ShieldChance > 100k)  Player.ShieldChance = 100k;
-    if (Player.StimChance > 100k)    Player.StimChance = 100k;
 
     // Speed capping CVAR
     if (Player.Speed > GetActivatorCVarFixed("drpg_maxspeed"))
@@ -931,21 +931,21 @@ void CheckLuck()
 {
     Player.HealthDrop =     (Player.LuckTotal >= LUCK_HEALTHDROP ? true : false);
     Player.EPDrop =         (Player.LuckTotal >= LUCK_EPDROP ? true : false);
+    Player.AmmoDrop =       (Player.LuckTotal >= LUCK_AMMODROP ? true : false);
+    Player.TurretDrop =     (Player.LuckTotal >= LUCK_TURRETDROP ? true : false);
+    Player.ModuleDrop =     (Player.LuckTotal >= LUCK_MODULEDROP ? true : false);
     Player.ArmorDrop =      (Player.LuckTotal >= LUCK_ARMORDROP ? true : false);
     Player.WeaponDrop =     (Player.LuckTotal >= LUCK_WEAPONDROP ? true : false);
-    Player.PowerupDrop =    (Player.LuckTotal >= LUCK_POWERUPDROP ? true : false);
-    Player.StimDrop =       (Player.LuckTotal >= LUCK_STIMDROP ? true : false);
-    Player.ModuleDrop =     (Player.LuckTotal >= LUCK_MODULEDROP ? true : false);
     Player.AugDrop =        (Player.LuckTotal >= LUCK_AUGDROP ? true : false);
     Player.ShieldDrop =     (Player.LuckTotal >= LUCK_SHIELDDROP ? true : false);
 
     Player.HealthChance =   Curve(Player.LuckTotal, LUCK_HEALTHDROP, 1000, LUCK_HEALTHCHANCE, LUCK_MAXHEALTHCHANCE);
     Player.EPChance =       Curve(Player.LuckTotal, LUCK_EPDROP, 1000, LUCK_EPCHANCE, LUCK_MAXEPCHANCE);
+    Player.AmmoChance =     Curve(Player.LuckTotal, LUCK_AMMODROP, 1000, LUCK_AMMOCHANCE, LUCK_MAXAMMOCHANCE);
+    Player.TurretChance =   Curve(Player.LuckTotal, LUCK_TURRETDROP, 1000, LUCK_TURRETCHANCE, LUCK_MAXTURRETCHANCE);
+    Player.ModuleChance =   Curve(Player.LuckTotal, LUCK_MODULEDROP, 1000, LUCK_MODULECHANCE, LUCK_MAXMODULECHANCE);
     Player.ArmorChance =    Curve(Player.LuckTotal, LUCK_ARMORDROP, 1000, LUCK_ARMORCHANCE, LUCK_MAXARMORCHANCE);
     Player.WeaponChance =   Curve(Player.LuckTotal, LUCK_WEAPONDROP, 1000, LUCK_WEAPONCHANCE, LUCK_MAXWEAPONCHANCE);
-    Player.PowerupChance =  Curve(Player.LuckTotal, LUCK_POWERUPDROP, 1000, LUCK_POWERUPCHANCE, LUCK_MAXPOWERUPCHANCE);
-    Player.StimChance =     Curve(Player.LuckTotal, LUCK_STIMDROP, 1000, LUCK_STIMCHANCE, LUCK_MAXSTIMCHANCE);
-    Player.ModuleChance =   Curve(Player.LuckTotal, LUCK_MODULEDROP, 1000, LUCK_MODULECHANCE, LUCK_MAXMODULECHANCE);
     Player.ShieldChance =   Curve(Player.LuckTotal, LUCK_SHIELDDROP, 1000, LUCK_SHIELDCHANCE, LUCK_MAXSHIELDCHANCE);
     Player.AugChance =      Curve(Player.LuckTotal, LUCK_AUGDROP, 1000, LUCK_AUGCHANCE, LUCK_MAXAUGCHANCE);
 
@@ -954,11 +954,11 @@ void CheckLuck()
     {
         Player.HealthChance += CurrentLevel->RareAdd;
         Player.EPChance += CurrentLevel->RareAdd;
+        Player.AmmoChance += CurrentLevel->RareAdd;
+        Player.TurretChance += CurrentLevel->RareAdd;
+        Player.ModuleChance += CurrentLevel->RareAdd;
         Player.ArmorChance += CurrentLevel->RareAdd;
         Player.WeaponChance += CurrentLevel->RareAdd;
-        Player.PowerupChance += CurrentLevel->RareAdd;
-        Player.StimChance += CurrentLevel->RareAdd;
-        Player.ModuleChance += CurrentLevel->RareAdd;
         Player.AugChance += CurrentLevel->RareAdd;
         Player.ShieldChance += CurrentLevel->RareAdd;
     }

@@ -28,7 +28,6 @@ actor DRPGBasicHealth : Health
 // Health Bonus
 actor DRPGHealthBonus : CustomInventory
 {
-    +COUNTITEM
     +INVENTORY.ALWAYSPICKUP
     
     Inventory.PickupMessage "$GOTHTHBONUS"
@@ -347,8 +346,22 @@ actor DRPGEPCapsule : CustomInventory 25037
     }
 }
 
+// Little EP Capsule
+actor DRPGLittleEPCapsule : DRPGEPCapsule 25038
+{
+    Scale 0.40
+    
+    States
+    {
+    Pickup:
+        TNT1 A 0 A_JumpIf(CallACS("GetEP") >= CallACS("GetEPMax"), "SpawnLoop")
+        TNT1 A 0 ACS_NamedExecuteAlways("AddEP", 0, CallACS("GetEPMax") / 15)
+        Stop
+    }
+}
+
 // Big EP Capsule
-actor DRPGBigEPCapsule : DRPGEPCapsule 25038
+actor DRPGBigEPCapsule : DRPGEPCapsule 25039
 {
     Scale 0.75
     

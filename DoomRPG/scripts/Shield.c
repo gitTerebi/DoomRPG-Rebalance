@@ -992,13 +992,13 @@ NamedScript void GhettoLuckMod()
 
     Player.HealthChance += Luck * LUCK_HEALTHCHANCE;
     Player.EPChance += Luck * LUCK_EPCHANCE;
-    Player.ArmorChance += Luck * LUCK_ARMORCHANCE;
-    Player.PowerupChance += Luck * LUCK_POWERUPCHANCE;
-    Player.WeaponChance += Luck * LUCK_WEAPONCHANCE;
+    Player.AmmoChance += Luck * LUCK_AMMOCHANCE;
+    Player.TurretChance += Luck * LUCK_TURRETCHANCE;
     Player.ModuleChance += Luck * LUCK_MODULECHANCE;
-    Player.AugChance += Luck * LUCK_AUGCHANCE;
+    Player.ArmorChance += Luck * LUCK_ARMORCHANCE;
+    Player.WeaponChance += Luck * LUCK_WEAPONCHANCE;
     Player.ShieldChance += Luck * LUCK_SHIELDCHANCE;
-    Player.StimChance += Luck * LUCK_STIMCHANCE;
+    Player.AugChance += Luck * LUCK_AUGCHANCE;
 }
 
 NamedScript void SuperSqueezyScalarMod()

@@ -499,13 +499,13 @@ void CheckAugs()
 
         Player.HealthChance *= LuckMult;
         Player.EPChance *= LuckMult;
+        Player.AmmoChance *= LuckMult;
+        Player.TurretChance *= LuckMult;
+        Player.ModuleChance *= LuckMult;
         Player.ArmorChance *= LuckMult;
         Player.WeaponChance *= LuckMult;
-        Player.PowerupChance *= LuckMult;
-        Player.ModuleChance *= LuckMult;
-        Player.AugChance *= LuckMult;
         Player.ShieldChance *= LuckMult;
-        Player.StimChance *= LuckMult;
+        Player.AugChance *= LuckMult;
     }
 }
 

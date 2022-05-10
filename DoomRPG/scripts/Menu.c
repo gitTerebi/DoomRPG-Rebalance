@@ -700,27 +700,27 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, (Player.HealthDrop ? "Gold" : "Gray"), 246.0, 204.0, 0.05);
         HudMessage("%d", LUCK_EPDROP);
         EndHudMessage(HUDMSG_PLAIN, 0, (Player.EPDrop ? "Gold" : "Gray"), 284.0, 204.0, 0.05);
-        HudMessage("%d", LUCK_ARMORDROP);
-        EndHudMessage(HUDMSG_PLAIN, 0, (Player.ArmorDrop ? "Gold" : "Gray"), 322.0, 204.0, 0.05);
-        HudMessage("%d", LUCK_WEAPONDROP);
-        EndHudMessage(HUDMSG_PLAIN, 0, (Player.WeaponDrop ? "Gold" : "Gray"), 246.0, 240.0, 0.05);
+        HudMessage("%d", LUCK_AMMODROP);
+        EndHudMessage(HUDMSG_PLAIN, 0, (Player.AmmoDrop ? "Gold" : "Gray"), 322.0, 204.0, 0.05);
+        HudMessage("%d", LUCK_TURRETDROP);
+        EndHudMessage(HUDMSG_PLAIN, 0, (Player.TurretDrop ? "Gold" : "Gray"), 246.0, 240.0, 0.05);
         HudMessage("%d", LUCK_MODULEDROP);
         EndHudMessage(HUDMSG_PLAIN, 0, (Player.ModuleDrop ? "Gold" : "Gray"), 284.0, 240.0, 0.05);
-        HudMessage("%d", LUCK_STIMDROP);
-        EndHudMessage(HUDMSG_PLAIN, 0, (Player.StimDrop ? "Gold" : "Gray"), 322.0, 240.0, 0.05);
-        HudMessage("%d", LUCK_POWERUPDROP);
-        EndHudMessage(HUDMSG_PLAIN, 0, (Player.PowerupDrop ? "Gold" : "Gray"), 246.0, 275.0, 0.05);
+        HudMessage("%d", LUCK_ARMORDROP);
+        EndHudMessage(HUDMSG_PLAIN, 0, (Player.ArmorDrop ? "Gold" : "Gray"), 322.0, 240.0, 0.05);
+        HudMessage("%d", LUCK_WEAPONDROP);
+        EndHudMessage(HUDMSG_PLAIN, 0, (Player.WeaponDrop ? "Gold" : "Gray"), 246.0, 275.0, 0.05);
         HudMessage("%d", LUCK_SHIELDDROP);
         EndHudMessage(HUDMSG_PLAIN, 0, (Player.ShieldDrop ? "Gold" : "Gray"), 284.0, 276.0, 0.05);
         HudMessage("%d", LUCK_AUGDROP);
         EndHudMessage(HUDMSG_PLAIN, 0, (Player.AugDrop ? "Gold" : "Gray"), 322.0, 276.0, 0.05);
         PrintSprite("MEDIA0", 0, 260.0, 212.0, 0.05);
-        PrintSprite("EPUPA0", 0, 300.0, 218.0, 0.05);
-        PrintSprite("AMMOA0", 0, 336.0, 210.0, 0.05);
-        PrintSprite("PTURA2A8", 0, 258.0, 238.0, 0.05);
+        PrintSprite("EPUPA0", 0, 301.0, 218.0, 0.05);
+        PrintSprite("AMMOA0", 0, 334.0, 210.0, 0.05);
+        PrintSprite("PTURA2A8", 0, 258.0, 234.0, 0.05);
         PrintSprite("UMODA0", 0, 294.0, 245.0, 0.05);
-        PrintSprite("STVLJ0", 0, 326.0, 238.0, 0.05);
-        PrintSprite("PINVA0", 0, 257.0, 282.0, 0.05);
+        PrintSprite("ARM1A0", 0, 336.0, 238.0, 0.05);
+        PrintSprite("PISTA0", 0, 257.0, 272.0, 0.05);
         PrintSprite("SHPAA0", 0, 302.0, 293.0, 0.05);
         PrintSprite("AUGCA0", 0, 334.0, 282.0, 0.05);
         SetFont("SMALLFONT");
@@ -739,14 +739,14 @@ void DrawStatsMenu()
             HudMessage("\CnEP\C- Drop Rate: \Cf%.3k%%", Player.EPChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 308.0, 0.05);
         }
-        if (Player.ArmorDrop)
+        if (Player.AmmoDrop)
         {
-            HudMessage("\CdAmmo\C- Drop Rate: \Cf%.3k%%", Player.ArmorChance);
+            HudMessage("\CdAmmo\C- Drop Rate: \Cf%.3k%%", Player.AmmoChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 316.0, 0.05);
         }
-        if (Player.WeaponDrop)
+        if (Player.TurretDrop)
         {
-            HudMessage("\CgTurrets\C- Drop Rate: \Cf%.3k%%", Player.WeaponChance);
+            HudMessage("\CgTurret\C- Drop Rate: \Cf%.3k%%", Player.TurretChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 324.0, 0.05);
         }
         if (Player.ModuleDrop)
@@ -754,14 +754,14 @@ void DrawStatsMenu()
             HudMessage("\CdModule\C- Drop Rate: \Cf%.3k%%", Player.ModuleChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 332.0, 0.05);
         }
-        if (Player.StimDrop)
+        if (Player.ArmorDrop)
         {
-            HudMessage("\CrStim\C- Drop Rate: \Cf%.3k%%", Player.StimChance);
+            HudMessage("\CrArmor\C- Drop Rate: \Cf%.3k%%", Player.ArmorChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 340.0, 0.05);
         }
-        if (Player.PowerupDrop)
+        if (Player.WeaponDrop)
         {
-            HudMessage("\CqPowerup\C- Drop Rate: \Cf%.3k%%", Player.PowerupChance);
+            HudMessage("\CqWeapon\C- Drop Rate: \Cf%.3k%%", Player.WeaponChance);
             EndHudMessage(HUDMSG_PLAIN, 0, "White", 230.1, 348.0, 0.05);
         }
         if (Player.ShieldDrop)

@@ -702,43 +702,43 @@ typedef enum
 #define MODULE_STAT_MULT        25
 #define MODULE_SKILL_MULT       250
 
-#define LUCK_HEALTHDROP         10
-#define LUCK_EPDROP             15
-#define LUCK_ARMORDROP          25
-#define LUCK_WEAPONDROP         30
-#define LUCK_MODULEDROP         50
-#define LUCK_STIMDROP           75
-#define LUCK_POWERUPDROP        100
-#define LUCK_SHIELDDROP         125
-#define LUCK_AUGDROP            150
+#define LUCK_HEALTHDROP         (GetCVar("drpg_levelup_natural") ? 15 : 10)
+#define LUCK_EPDROP             (GetCVar("drpg_levelup_natural") ? 25 : 15)
+#define LUCK_AMMODROP           (GetCVar("drpg_levelup_natural") ? 40 : 25)
+#define LUCK_TURRETDROP         (GetCVar("drpg_levelup_natural") ? 50 : 30)
+#define LUCK_MODULEDROP         (GetCVar("drpg_levelup_natural") ? 75 : 50)
+#define LUCK_ARMORDROP          (GetCVar("drpg_levelup_natural") ? 100 : 75)
+#define LUCK_WEAPONDROP         (GetCVar("drpg_levelup_natural") ? 125 : 100)
+#define LUCK_SHIELDDROP         (GetCVar("drpg_levelup_natural") ? 150 : 125)
+#define LUCK_AUGDROP            (GetCVar("drpg_levelup_natural") ? 200 : 150)
 
 #define LUCK_HEALTHCHANCE       0.025
 #define LUCK_EPCHANCE           0.025
-#define LUCK_ARMORCHANCE        0.025
-#define LUCK_WEAPONCHANCE       0.0125
-#define LUCK_POWERUPCHANCE      0.0125
-#define LUCK_STIMCHANCE         0.0125
-#define LUCK_MODULECHANCE       0.01
+#define LUCK_AMMOCHANCE         0.025
+#define LUCK_TURRETCHANCE       0.0125
+#define LUCK_MODULECHANCE       0.0125
+#define LUCK_ARMORCHANCE        0.01
+#define LUCK_WEAPONCHANCE       0.01
 #define LUCK_SHIELDCHANCE       0.005
 #define LUCK_AUGCHANCE          0.0025
 
 #define LUCK_MAXHEALTHCHANCE    16.163076
 #define LUCK_MAXEPCHANCE        14.641911
-#define LUCK_MAXARMORCHANCE     13.064138
-#define LUCK_MAXWEAPONCHANCE    5.712424
-#define LUCK_MAXPOWERUPCHANCE   5.3415475
-#define LUCK_MAXSTIMCHANCE      4.9230437
-#define LUCK_MAXMODULECHANCE    3.5358825
-#define LUCK_MAXSHIELDCHANCE    0.73634326
-#define LUCK_MAXAUGCHANCE       1.0753031
+#define LUCK_MAXAMMOCHANCE      13.064138
+#define LUCK_MAXTURRETCHANCE    5.712424
+#define LUCK_MAXMODULECHANCE    5.3415475
+#define LUCK_MAXARMORCHANCE     4.9230437
+#define LUCK_MAXWEAPONCHANCE    3.5358825
+#define LUCK_MAXSHIELDCHANCE    1.0753031
+#define LUCK_MAXAUGCHANCE       0.73634326
 
 #define LUCK_HEALTHINC          0.0025
 #define LUCK_EPINC              0.0025
-#define LUCK_ARMORINC           0.0025
-#define LUCK_WEAPONINC          0.00125
-#define LUCK_POWERUPINC         0.00125
-#define LUCK_STIMINC            0.00125
-#define LUCK_MODULEINC          0.001
+#define LUCK_AMMOINC            0.0025
+#define LUCK_TURRETINC          0.00125
+#define LUCK_MODULEINC          0.00125
+#define LUCK_ARMORINC           0.001
+#define LUCK_WEAPONINC          0.001
 #define LUCK_SHIELDINC          0.0005
 #define LUCK_AUGINC             0.00025
 

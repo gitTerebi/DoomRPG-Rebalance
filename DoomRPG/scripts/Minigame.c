@@ -77,7 +77,7 @@ NamedScript void ItemRoulette(bool Rare)
 
             // Place Items in Wheel
             for (int i = 0; i < Amount; i++)
-                WheelItems[i] = GetRewardItem(Rarity);
+                WheelItems[i] = GetItemRoulette(Rarity);
 
             // Place Duds
             Duds = 0;
@@ -102,20 +102,22 @@ NamedScript void ItemRoulette(bool Rare)
         }
 
         // Wheel Handling
-        for (int i = 0; i < Amount; i++)
+        if (Started)
         {
-            fixed Angle = -0.25 + ((1.0 / Amount) * i) + Offset;
-            fixed X = 320.0 + (Radius * Cos(Angle)) + WheelItems[i]->Sprite.XOff;
-            fixed Y = 240.0 + (Radius * Sin(Angle)) + WheelItems[i]->Sprite.YOff;
+            for (int i = 0; i < Amount; i++)
+            {
+                fixed Angle = -0.25 + ((1.0 / Amount) * i) + Offset;
+                fixed X = 320.0 + (Radius * Cos(Angle)) + WheelItems[i]->Sprite.XOff;
+                fixed Y = 240.0 + (Radius * Sin(Angle)) + WheelItems[i]->Sprite.YOff;
 
-            // Draw Icon
-            PrintSprite(WheelItems[i]->Sprite.Name, 0, (int)X, (int)Y, 0.05);
-            if (StrLen(WheelItems[i]->Sprite.Name) < 0)
-                PrintSprite("SprNone", 0, (int)X, (int)Y, 0.05);
+                PrintSprite(WheelItems[i]->Sprite.Name, 0, (int)X, (int)Y, 0.05);
+                if (StrLen(WheelItems[i]->Sprite.Name) < 0)
+                    PrintSprite("SprNone", 0, (int)X, (int)Y, 0.05);
 
-            // Determine the current item near the cursor
-            if (Distance2D(320, 240 + Radius, X - WheelItems[i]->Sprite.XOff, Y - WheelItems[i]->Sprite.YOff) < 32)
-                Selection = i;
+                // Determine the current item near the cursor
+                if (Distance2D(320, 240 + Radius, X - WheelItems[i]->Sprite.XOff, Y - WheelItems[i]->Sprite.YOff) < 32)
+                    Selection = i;
+            }
         }
 
         // Draw Chips
@@ -136,9 +138,12 @@ NamedScript void ItemRoulette(bool Rare)
         };
 
         // Draw Name
-        SetFont("BIGFONT");
-        HudMessage("%S", (WheelItems[Selection] == GetBlankItem() ? "\CaNothing" : WheelItems[Selection]->Name));
-        EndHudMessage(HUDMSG_PLAIN, 0, "White", 320, 240 + Radius + 32, 0.05);
+        if (Started)
+        {
+            SetFont("BIGFONT");
+            HudMessage("%S", (WheelItems[Selection] == GetBlankItem() ? "\CaNothing" : WheelItems[Selection]->Name));
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", 320, 240 + Radius + 32, 0.05);
+        }
 
         // Draw Box
         if (Started)
@@ -303,4 +308,46 @@ NamedScript void ItemRoulette(bool Rare)
 
     SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
     Player.InMinigame = false;
+}
+
+ItemInfoPtr GetItemRoulette(int Rarity)
+{
+    // I was going to have SkipCategory but then I remembered that if unused, SkipCategory will equal 0 and we have a category starting at zero so rip idea.
+    ItemInfoPtr Item;
+    int Index;
+    int Cap;
+    fixed DiffPick;
+
+    if (Rarity < 10)
+    {
+        // Rarity Chance Modifier thingy
+        if (GetCVar("drpg_loot_rcm"))
+        {
+            DiffPick = RandomFixed(0.0, 100.0);
+            if (DiffPick < (70.0 - 35.0 * MapLevelModifier)) Rarity--; // Unlucky, item will be a rank lower
+            if (DiffPick > 95.0) Rarity++; // Lucky, item will be a rank higher
+        }
+
+        // Prevent under/overflow
+        if (Rarity < 0) Rarity = 0;
+        if (Rarity > 9) Rarity = 9;
+
+        else if (Random(0, 100) < 50) // Stims/Augs/Turret
+        {
+            Item = &ItemData[ItemCategories][Random(1, 33)];
+
+            if (DebugLog)
+                Log("\CdDEBUG: \C-Roulette Item %S\C- (%S) picked - Rarity %d Item %d", Item->Name, Item->Actor, Rarity, Index);
+
+            return Item;
+        }
+    }
+
+    Index = Random(0, RewardsCount[Rarity] - 1);
+    Item = RewardList[Rarity][Index];
+
+    if (DebugLog)
+        Log("\CdDEBUG: \C-Roulette Item %S\C- (%S) picked - Rarity %d Item %d", Item->Name, Item->Actor, Rarity, Index);
+
+    return Item;
 }

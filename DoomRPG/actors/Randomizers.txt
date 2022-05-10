@@ -47,7 +47,6 @@ actor DRPGGenericMonsterDropper : RandomSpawner
 
 actor DRPGGenericDropper : RandomSpawner
 {
-    DropItem "DRPGEmpty"                        255 10
     DropItem "DRPGHealthDropper"                255 10
     DropItem "DRPGEPDropper"                    255 10
     DropItem "DRPGArmorDropper"                 255 10
@@ -95,7 +94,7 @@ actor DRPGMoneyDropper : RandomSpawner 25000
 
 actor DRPGHealthDropper : RandomSpawner 25001
 {
-    DropItem "DRPGEmpty"            255 150
+    DropItem "DRPGHealthBonus"      255 150
     DropItem "DRPGStimpack"         255 100
     DropItem "DRPGMedikit"          255 30
     DropItem "DRPGLargeMedikit"     255 10
@@ -113,9 +112,9 @@ actor DRPGLifeDropper : RandomSpawner
 
 actor DRPGEPDropper : RandomSpawner 25002
 {
-    DropItem "DRPGEmpty"            255 50
-    DropItem "DRPGEPCapsule"        255 75
-    DropItem "DRPGBigEPCapsule"     255 25
+    DropItem "DRPGLittleEPCapsule"  255 50
+    DropItem "DRPGEPCapsule"        255 40
+    DropItem "DRPGBigEPCapsule"     255 10
 }
 
 actor DRPGArmorDropper : RandomSpawner 25003
@@ -126,8 +125,6 @@ actor DRPGArmorDropper : RandomSpawner 25003
 
 actor DRPGPowerupDropper : RandomSpawner 25004
 {
-    DropItem "DRPGEmpty"                 255 160
-
     DropItem "DRPGInvulnerabilitySphere" 255 10
     DropItem "DRPGInvulnerabilityCharge" 255 10
     DropItem "DRPGBlurSphere"            255 10
@@ -164,11 +161,10 @@ actor DRPGWeaponDropper : RandomSpawner 25005
 
 actor DRPGAmmoDropper : RandomSpawner 25006
 {
-    DropItem "DRPGEmpty"                255 180
     DropItem "DRPGClip"                 255 80
 	DropItem "DRPGShell"                255 60
-	DropItem "DRPGRocketAmmo"           255 20
-	DropItem "DRPGCell"                 255 10
+    DropItem "DRPGRocketAmmo"           255 20
+    DropItem "DRPGCell"                 255 10
     DropItem "DRPGClipBox"              255 4
     DropItem "DRPGShellBox"             255 3	
     DropItem "DRPGRocketBox"            255 2	
@@ -177,8 +173,7 @@ actor DRPGAmmoDropper : RandomSpawner 25006
 
 actor DRPGModuleDropper : RandomSpawner 25007
 {
-    DropItem "DRPGEmpty"                255 100
-    DropItem "DRPGModulePickup"         255 50
+    DropItem "DRPGModulePickup"
 }
 
 actor DRPGAugDropper : RandomSpawner 25009
@@ -190,16 +185,12 @@ actor DRPGAugDropper : RandomSpawner 25009
 
 actor DRPGBatteryDropper : RandomSpawner 25010
 {
-    DropItem "DRPGEmpty"                255 20
     DropItem "DRPGBatterySmall"         255 9
     DropItem "DRPGBatteryLarge"         255 1
 }
 
 actor DRPGShieldDropper : RandomSpawner 25011
 {
-	// Empty
-    DropItem "DRPGEmpty"                255 255
-
     // Bodies
     DropItem "DRPGShieldBody1"          255 40 // UAC
     DropItem "DRPGShieldBody2"          255 33 // XTron
@@ -328,9 +319,6 @@ actor DRPGShieldDropper : RandomSpawner 25011
 
 actor DRPGStimDropper : RandomSpawner 25012
 {
-	// Empty
-    DropItem "DRPGEmpty"                255 300
-
     // Stims
     DropItem "DRPGStimSmall"            255 70
     DropItem "DRPGStimMedium"           255 20
@@ -340,9 +328,6 @@ actor DRPGStimDropper : RandomSpawner 25012
 
 actor DRPGVialDropper : RandomSpawner 25013
 {
-	// Empty
-    DropItem "DRPGEmpty"                255 330
-
     // Stats
     DropItem "DRPGVialStrength"         255 20
     DropItem "DRPGVialDefense"          255 20
@@ -363,9 +348,6 @@ actor DRPGVialDropper : RandomSpawner 25013
 
 actor DRPGVialDropperRare : RandomSpawner 25014
 {
-	// Empty
-    DropItem "DRPGEmpty"                255 215    
-	
 	// Boosters
     DropItem "DRPGVialPotency"          255 10
     DropItem "DRPGVialPurifier"         255 10
@@ -387,7 +369,6 @@ actor DRPGVialDropperRare : RandomSpawner 25014
 
 actor DRPGTurretDropper : RandomSpawner 25015
 {
-    DropItem "DRPGEmpty"            255 50
     DropItem "DRPGTurretPart"       255 93
     DropItem "DRPGTurretPartCrate"  255 5
 	DropItem "DRPGDestroyedTurret"  255 2
@@ -395,16 +376,12 @@ actor DRPGTurretDropper : RandomSpawner 25015
 
 actor DRPGChipDropper : RandomSpawner 25016
 {
-    DropItem "DRPGEmpty"            255 64
-    DropItem "DRPGChipGold"         255 30
-    DropItem "DRPGChipPlatinum"     255 2
+    DropItem "DRPGChipGold"         255 32
+    DropItem "DRPGChipPlatinum"     255 1
 }
 
 actor DRPGShieldDropperTier1 : RandomSpawner 20150
 {
-    // Empty
-    DropItem "DRPGEmpty"                255 300
-
     // Bodies
     DropItem "DRPGShieldBody1"          255 100 // UAC
     DropItem "DRPGShieldBody2"          255 75 // XTron
@@ -433,9 +410,6 @@ actor DRPGShieldDropperTier1 : RandomSpawner 20150
 
 actor DRPGShieldDropperTier2 : RandomSpawner 20151
 {
-    // Empty
-    DropItem "DRPGEmpty"                255 300
-
     // Bodies
     DropItem "DRPGShieldBody5"          255 100 // Cyberdyne Systems
     DropItem "DRPGShieldBody6"          255 50 // Misfit Tech
@@ -466,9 +440,6 @@ actor DRPGShieldDropperTier2 : RandomSpawner 20151
 
 actor DRPGShieldDropperTier3 : RandomSpawner 20152
 {
-    // Empty
-    DropItem "DRPGEmpty"                255 300
-
     // Bodies
     DropItem "DRPGShieldBody9"          255 100 // Ironclad Inc.
     DropItem "DRPGShieldBody10"         255 75 // Yholl
@@ -504,9 +475,6 @@ actor DRPGShieldDropperTier3 : RandomSpawner 20152
 
 actor DRPGShieldDropperTier4 : RandomSpawner 20153
 {
-    // Empty
-    DropItem "DRPGEmpty"                255 300
-
     // Bodies
     DropItem "DRPGShieldBody13"         255 100 // dataDyne
     DropItem "DRPGShieldBody14"         255 75 // Starbright
@@ -543,9 +511,6 @@ actor DRPGShieldDropperTier4 : RandomSpawner 20153
 
 actor DRPGShieldDropperTier5 : RandomSpawner 20154
 {
-    // Empty
-    DropItem "DRPGEmpty"                255 300
-
     // Bodies
     DropItem "DRPGShieldBody17"         255 100  // UAC Elite
     DropItem "DRPGShieldBody18"         255 50  // Stark Industries
@@ -576,9 +541,6 @@ actor DRPGShieldDropperTier5 : RandomSpawner 20154
 
 actor DRPGShieldDropperTier6 : RandomSpawner 20155
 {
-    // Empty
-    DropItem "DRPGEmpty"                255 300
-
     // Bodies
     DropItem "DRPGShieldBody20"         255 100  // Megalith
     DropItem "DRPGShieldBody21"         255 50  // Reaper Industries
@@ -609,8 +571,9 @@ actor DRPGHealthMonsterDropper : RandomSpawner 20156
 
 actor DRPGEPMonsterDropper : RandomSpawner 20157
 {
-    DropItem "DRPGEPCapsule"        255 95
-    DropItem "DRPGBigEPCapsule"     255 5
+    DropItem "DRPGLittleEPCapsule"  255 50
+    DropItem "DRPGEPCapsule"        255 40
+    DropItem "DRPGBigEPCapsule"     255 10
 }
 
 actor DRPGAmmoMonsterDropper : RandomSpawner 20158
@@ -625,43 +588,6 @@ actor DRPGTurretMonsterDropper : RandomSpawner 20159
 {
     DropItem "DRPGTurretPart"       255 98
     DropItem "DRPGTurretPartCrate"  255 2
-}
-
-actor DRPGVialMonsterDropper : RandomSpawner 20160
-{
-    // Stats
-    DropItem "DRPGVialStrength"         255 20
-    DropItem "DRPGVialDefense"          255 20
-    DropItem "DRPGVialVitality"         255 20
-    DropItem "DRPGVialEnergy"           255 20
-    DropItem "DRPGVialRegeneration"     255 20
-    DropItem "DRPGVialAgility"          255 20
-    DropItem "DRPGVialCapacity"         255 20
-    DropItem "DRPGVialLuck"             255 20
-    
-    // Rare Vials
-    DropItem "DRPGVialMonsterDropperRare"      255 5
-}
-
-actor DRPGVialMonsterDropperRare : RandomSpawner 20161
-{
-	// Boosters
-    DropItem "DRPGVialPotency"          255 10
-    DropItem "DRPGVialPurifier"         255 10
-    
-    // Powerups
-    DropItem "DRPGVialIndestructible"   255 10
-    DropItem "DRPGVialShadow"           255 10
-    DropItem "DRPGVialInfinity"         255 10
-    DropItem "DRPGVialChrono"           255 10
-    DropItem "DRPGVialAdrenaline"       255 10
-    DropItem "DRPGVialGravity"          255 10
-    DropItem "DRPGVialVampire"          255 10
-    DropItem "DRPGVialRage"             255 10
-    DropItem "DRPGVialMagnetic"         255 10
-
-    // Stims
-    DropItem "DRPGStimDropper"          255 5
 }
 
 // MARINES
@@ -707,8 +633,6 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // Health Bonus Locations
 actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 {
-    DropItem "DRPGEmpty"                       255 18
-    DropItem "DRPGHealthBonus"                 255 18
     DropItem "DRPGLootMedicalSupplies"         255 18
     DropItem "DRPGLootChemicals"               255 18
     DropItem "DRPGLootHazardousMaterials"      255 18
@@ -727,7 +651,7 @@ actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
 // Stimpack Locations
 actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 {
-    DropItem "DRPGEmpty"            255 100
+    DropItem "DRPGHealthBonus"      255 100
     DropItem "DRPGStimpack"         255 50
     DropItem "DRPGMedikit"          255 15
     DropItem "DRPGLargeMedikit"     255 5
@@ -736,7 +660,7 @@ actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 // Medikit Locations
 actor DRPGMedikitRandomizer : RandomSpawner Replaces Medikit
 {
-    DropItem "DRPGEmpty"            255 150
+    DropItem "DRPGHealthBonus"      255 150
     DropItem "DRPGStimpack"         255 50
     DropItem "DRPGMedikit"          255 30
     DropItem "DRPGLargeMedikit"     255 10

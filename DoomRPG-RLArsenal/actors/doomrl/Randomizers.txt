@@ -17,7 +17,7 @@ actor RLStandardWeaponSpawner : RandomSpawner
 
 actor DRPGHealthDropper2 : RandomSpawner Replaces DRPGHealthDropper
 {
-    DropItem "DRPGEmpty"                   255 150
+    DropItem "DRPGHealthBonus"             255 150
     DropItem "DRPGStimpack"                255 80
     DropItem "DRPGMedikit"                 255 30
     DropItem "RLArmorBonusPickup"          255 20

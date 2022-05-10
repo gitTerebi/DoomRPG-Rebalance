@@ -668,22 +668,22 @@ struct PlayerData_S
     // Can Drop / Drop Chance Percentages
     bool HealthDrop;
     bool EPDrop;
-    bool ArmorDrop;
-    bool PowerupDrop;
-    bool WeaponDrop;
+    bool AmmoDrop;
+    bool TurretDrop;
     bool ModuleDrop;
-    bool AugDrop;
+    bool ArmorDrop;
+    bool WeaponDrop;
     bool ShieldDrop;
-    bool StimDrop;
+    bool AugDrop;
     fixed HealthChance;
     fixed EPChance;
-    fixed ArmorChance;
-    fixed PowerupChance;
-    fixed WeaponChance;
+    fixed AmmoChance;
+    fixed TurretChance;
     fixed ModuleChance;
-    fixed AugChance;
+    fixed ArmorChance;
+    fixed WeaponChance;
     fixed ShieldChance;
-    fixed StimChance;
+    fixed AugChance;
 
     // Menu Data
     bool MenuBlock;

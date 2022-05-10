@@ -2660,38 +2660,38 @@ NamedScript void MonsterDeath()
         // Auras have a chance of rare vial drops
         for (int i = 0; i < AURA_MAX; i++)
             if (Stats->Aura.Type[i].Active)
-                DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 51);
+                DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 8);
 
         // Aura Drops
         if (Stats->Aura.Type[AURA_RED].Active) // Red Aura - Strength
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_WHITE].Active) // White Aura - XP
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_PURPLE].Active) // Purple Aura - Regeneration
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_ORANGE].Active) // Orange Aura - Agility
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_YELLOW].Active) // Yellow Aura - Luck
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 256);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
 
         // Luck-based Drops
         if (Killer > -1 && !(Stats->Flags & MF_MEGABOSS))
         {
             if (Players(Killer).HealthDrop && RandomFixed(0.0, 100.0) < Players(Killer).HealthChance)    DropMonsterItem(Killer, 0, "DRPGHealthMonsterDropper", 256);
             if (Players(Killer).EPDrop && RandomFixed(0.0, 100.0) < Players(Killer).EPChance)            DropMonsterItem(Killer, 0, "DRPGEPMonsterDropper", 256);
-            if (Players(Killer).ArmorDrop && RandomFixed(0.0, 100.0) < Players(Killer).ArmorChance)      DropMonsterItem(Killer, 0, "DRPGAmmoMonsterDropper", 256);
-            if (Players(Killer).WeaponDrop && RandomFixed(0.0, 100.0) < Players(Killer).WeaponChance)    DropMonsterItem(Killer, 0, "DRPGTurretMonsterDropper", 256);
+            if (Players(Killer).AmmoDrop && RandomFixed(0.0, 100.0) < Players(Killer).AmmoChance)        DropMonsterItem(Killer, 0, "DRPGAmmoMonsterDropper", 256);
+            if (Players(Killer).TurretDrop && RandomFixed(0.0, 100.0) < Players(Killer).TurretChance)    DropMonsterItem(Killer, 0, "DRPGTurretMonsterDropper", 256);
             if (Players(Killer).ModuleDrop && RandomFixed(0.0, 100.0) < Players(Killer).ModuleChance)    DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256);
-            if (Players(Killer).StimDrop && RandomFixed(0.0, 100.0) < Players(Killer).StimChance)        DropMonsterItem(Killer, 0, "DRPGVialMonsterDropper", 256);
-            if (Players(Killer).PowerupDrop && RandomFixed(0.0, 100.0) < Players(Killer).PowerupChance)  DropMonsterItem(Killer, 0, "DRPGPowerupDropper", 256);
+            if (Players(Killer).ArmorDrop && RandomFixed(0.0, 100.0) < Players(Killer).ArmorChance)      DropMonsterItem(Killer, 0, "DRPGArmorDropper", 256);
+            if (Players(Killer).WeaponDrop && RandomFixed(0.0, 100.0) < Players(Killer).WeaponChance)    DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 256);
             if (Players(Killer).ShieldDrop && RandomFixed(0.0, 100.0) < Players(Killer).ShieldChance)    DropMonsterItem(Killer, 0, "DRPGShieldDropper", 256);
             if (Players(Killer).AugDrop && RandomFixed(0.0, 100.0) < Players(Killer).AugChance)          DropMonsterItem(Killer, 0, "DRPGAugDropper", 256);
         }
