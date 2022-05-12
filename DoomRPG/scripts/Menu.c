@@ -2616,7 +2616,6 @@ void MenuHelp()
 {
     fixed X = 0.1;
     fixed Y = 380.1;
-    int PlayerNum = PlayerNumber();
 
     // Return if the help CVAR is off
     if (!GetActivatorCVar("drpg_menuhelp")) return;
@@ -2633,7 +2632,7 @@ void MenuHelp()
             // Mission Help
             if (Player.Mission.Active)
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Navigate: \Cd%S/%S\C-\nSelect: \Cd%S\C-\nMission Info: \CiHOLD \Cd%S\C-",
                                "Up", "Down", "Use", "Run");
                 else
@@ -2643,7 +2642,7 @@ void MenuHelp()
             }
             else
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Navigate: \Cd%S/%S\C-\nSelect: \Cd%S\C-\nNo mission currently active.",
                                "Up", "Down", "Use");
                 else
@@ -2655,7 +2654,7 @@ void MenuHelp()
         case MENUPAGE_STATS:
             if (Player.StatPage == STATPAGE_STATS)
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch pages: \Cd%S + %S/%S\C-\nIncrease Stat: \Cd%S\C-",
                                "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use");
                 else
@@ -2665,7 +2664,7 @@ void MenuHelp()
             }
             else if (Player.StatPage == STATPAGE_STATXP || Player.StatPage == STATPAGE_PERKS)
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Switch pages: \Cd%S + %S/%S\C-",
                                "Run", "Left", "Right");
                 else
@@ -2675,7 +2674,7 @@ void MenuHelp()
             }
             else if (Player.StatPage == STATPAGE_TEAM)
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Navigate: \Cd%S/%S\C-\nSwitch pages: \Cd%S + %S/%S\C-\nPlayer's view on HUD: \Cd%S\C-\nTeleport to selected Player (\Cn%d EP\C-): \Cd%S\C-",
                                "Up", "Down", "Run", "Left", "Right", "Attack", ScaleEPCost(50), "Use");
                 else
@@ -2685,7 +2684,7 @@ void MenuHelp()
             }
             break;
         case MENUPAGE_AUGS:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch Current Level: \Cd%S + %S/%S\C-\nToggle On/Off: \Cd%S\C-\nUpgrade: \Cd%S + %S\C-",
                            "Up", "Down", "Left", "Right", "Run", "Up", "Down", "Use", "Run", "Use");
             else
@@ -2694,7 +2693,7 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case MENUPAGE_SKILLS:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nLearn/Upgrade Skill: \Cd%S\C-\nAssign Skill to Wheel Slot: \CiHOLD \Cd%S\C-\nClear Skill from Wheel Slot: \CiHOLD \Cd%S + %S + %S\C-\nSwitch Current Skill Level: \Cd%S + %S/%S\C-\nQuickuse selected skill: \Cd%S\C-",
                            "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Skill Wheel", "Skill Wheel", "Run", "Use", "Run", "Up", "Down", "Attack");
             else
@@ -2703,7 +2702,7 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case MENUPAGE_SHIELD:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nEquip Part: \Cd%S\C-\nUnequip Part: \Cd%S + %S\C-",
                            "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Run", "Use");
             else
@@ -2712,7 +2711,7 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y + 45.0, 0.05); // This help is pushed down so shield component description doesn't overlap it.
             break;
         case MENUPAGE_STIMS:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S\C-\nSelect Stim Size: \Cd%S/%S\C-\nChoose Stim/Add Compound to Stim: \Cd%S\C-\nUse Stim: \Cd%S\C-\nDispose Stim: \Cd%S\C-",
                            "Up", "Down", "Left", "Right", "Use", "Use Stim Command", "Throwaway Stim Command");
             else
@@ -2721,7 +2720,7 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case MENUPAGE_TURRET:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S\C-\n%S: \Cd%S\C-\n%S: \Cd%S\C-\n",
                            "Up", "Down", "Left", "Right", "Jump", Player.Turret.Maintenance? "Reclaim Turret" : "Maintenance Turret", "Run", (Player.TurretPage == TURRETPAGE_COMMAND)? "Issue Command" : "Upgrade Turret", "Use");
             else
@@ -2739,7 +2738,7 @@ void MenuHelp()
         {
             if (Player.LockerMode)
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Switch to the Shop: \Cd%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nDeposit Item: \Cd%S\C-\nWithdraw Item: \Cd%S + %S\C-\nToggle Auto-Storing of item: \Cd%S\C-\nWithdraw all items on the page: \Cd%S\C-\nExit: \Cd%S\C-",
                                "Jump", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Alt Attack", "Menu");
                 else
@@ -2749,7 +2748,7 @@ void MenuHelp()
             }
             else
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Switch to the Locker: \Cd%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nBuy Item: \Cd%S\C-\nSell Item: \Cd%S + %S\C-\nToggle Auto-Selling of item: \Cd%S\C-\nDrop selected item: \Cd%S\C-\nExit: \Cd%S\C-",
                                "Jump", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Drop Item", "Menu");
                 else
@@ -2763,7 +2762,7 @@ void MenuHelp()
         {
             if (Player.LockerMode)
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Switch to the Shop: \Cd%S\C-\nNavigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nDeposit Item: \Cd%S\C-\nWithdraw Item: \Cd%S + %S\C-\nToggle Auto-Storing of item: \Cd%S\C-\nToggle Auto-Keeping of 1 item: \Cd%S + %S\C-\nDrop selected item: \Cd%S\C-\nWithdraw all items on the page: \Cd%S\C-\nExit: \Cd%S\C-",
                                "Jump", "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Run", "Attack", "Drop Item", "Alt Attack", "Menu");
                 else
@@ -2773,7 +2772,7 @@ void MenuHelp()
             }
             else
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Switch to the Locker: \Cd%S\C-\nNavigate: \Cd%S/%S/%S/%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nBuy Item: \Cd%S\C-\nSell Item: \Cd%S + %S\C-\nToggle Auto-Selling of item: \Cd%S\C-\nToggle Auto-Keeping of 1 item: \Cd%S + %S\C-\nDrop selected item: \Cd%S\C-\nExit: \Cd%S\C-",
                                "Jump", "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Run", "Use", "Attack", "Run", "Attack", "Drop Item", "Menu");
                 else
@@ -2792,7 +2791,7 @@ void MenuHelp()
         case OMENU_LEVELTRANSPORT:
             if (MapPacks)
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Select Level: \Cd%S/%S/%S/%S\C-\nSelect IWAD: \Cd%S+%S/%S+%S\C-\nTeleport to Level: \Cd%S\C-\nExit: \Cd%S\C-",
                                "Up", "Down", "Left", "Right", "Run", "Left", "Run", "Right", "Use", "Menu");
                 else
@@ -2801,7 +2800,7 @@ void MenuHelp()
             }
             else
             {
-                if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                     HudMessage("Select Level: \Cd%S/%S/%S/%S\C-\nTeleport to Level: \Cd%S\C-\nExit: \Cd%S\C-",
                                "Up", "Down", "Left", "Right", "Use", "Menu");
                 else
@@ -2811,7 +2810,7 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case OMENU_SKILLCOMPUTER:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S\C-\nChange Skill: \Cd%S\C-\nExit: \Cd%S\C-",
                            "Up", "Down", "Use", "Menu");
             else
@@ -2822,7 +2821,7 @@ void MenuHelp()
         case OMENU_MODULECONVERTER:
             break;
         case OMENU_WAVESELECTOR:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Choose Wave: \Cd%S/%S/%S/%S\C-\nChange Wave: \Cd%S\C-\nExit: \Cd%S\C-",
                            "Up", "Down", "Left", "Right", "Use", "Menu");
             else
@@ -2831,7 +2830,7 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case OMENU_SHOPSPECIAL:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Buy: \Cd%S\C-\nExit: \Cd%S\C-",
                            "Use", "Menu");
             else
@@ -2840,7 +2839,7 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case OMENU_BONUSSELECTOR:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S\C-\nSelect: \Cd%S\C-",
                            "Up", "Down", "Use");
             else
@@ -2849,7 +2848,7 @@ void MenuHelp()
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case OMENU_BBS:
-            if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nAccept Mission: \Cd%S\C-\nAbort Mission: \Cd%S\C-\nSwitch Pages: \Cd%S + %S/%S\C-\nExit: \Cd%S\C-",
                            "Up", "Down", "Left", "Right", "Use", "Attack", "Run", "Left", "Right", "Menu");
             else
@@ -2863,7 +2862,7 @@ void MenuHelp()
     // Crate Help
     if (Player.CrateOpen && Crates[Player.CrateID].Hacking == -1)
     {
-        if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+        if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
             HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nTake Item: \Cd%S\C-\nTake All: \Cd%S + %S\C-\nExit: \Cd%S\C-",
                        "Up", "Down", "Left", "Right", "Use", "Run", "Use", "Menu");
         else
@@ -2874,7 +2873,7 @@ void MenuHelp()
     // Crate Hacking Help
     else if (Player.CrateHacking)
     {
-        if (GetCVar("use_joystick") || GetUserCVar(PlayerNum, "drpg_deltatouch"))
+        if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
             HudMessage("Select: \Cd%S\C-\nExit: \Cd%S\C-",
                        "Use", "Menu");
         else
