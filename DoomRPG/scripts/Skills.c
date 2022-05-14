@@ -3570,7 +3570,8 @@ void CheckAuras()
                 Player.Aura.Type[AURA_GREEN].Level = 5;
 
             if (Player.Aura.Type[AURA_GREEN].Level >= 1)
-                Player.DamageFactor *= (1.0 - (fixed)Player.Aura.Type[AURA_GREEN].Level * 0.05);
+                Player.DamageFactor -= (fixed)Player.Aura.Type[AURA_GREEN].Level / 20.0;
+            //Player.DamageFactor *= (1.0 - (fixed)Player.Aura.Type[AURA_GREEN].Level * 0.05);
             if (Player.Aura.Type[AURA_GREEN].Level >= 3)
                 GiveInventory("DRPGGreenAuraIronFeet", 1);
         }
