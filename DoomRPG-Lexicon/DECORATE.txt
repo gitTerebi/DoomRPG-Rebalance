@@ -2,8 +2,10 @@ actor DRPGLexiconActive {}
 
 // Valiant
 // Arachnoorb
-ACTOR ValiantArachnorbRPG : ValiantArachnorb 25081//replaces MBFHelperDog 888
+ACTOR ValiantArachnorbRPG : ValiantArachnorb replaces ValiantArachnorb
 {
+    Tag "Arachnorb"
+
 	States
 	{
 	Spawn:
