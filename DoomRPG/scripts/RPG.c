@@ -1396,7 +1396,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
 
         bool Spawned = Spawn("MapSpotTall", X, Y, Z, TID, A);
 
-        if (CheckSight(TID, StartTID, 0) || Distance(TID, StartTID) <= 1024)
+        if (Iterations < 512 && CheckSight(TID, StartTID, 0) || Iterations < 512 && Distance(TID, StartTID) <= 1024)
             continue;
 
         if (Spawned)
