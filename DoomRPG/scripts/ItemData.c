@@ -247,15 +247,16 @@ NamedScript void BuildItemData()
 
             //Rarity
             int rarity = 1;
-            if (ShieldPartCost < 999999) rarity = 8;
-            if (ShieldPartCost < 200000) rarity = 8;
-            if (ShieldPartCost < 120000) rarity = 8;
-            if (ShieldPartCost < 90000) rarity = 7;
-            if (ShieldPartCost < 70000) rarity = 7;
-            if (ShieldPartCost < 50000) rarity = 6;
-            if (ShieldPartCost < 35000) rarity = 5;
-            if (ShieldPartCost < 20000) rarity = 4;
-            if (ShieldPartCost < 5000) rarity = 3;
+            if (ShieldPartCost <= 999999) rarity = 10;
+            if (ShieldPartCost <= 200000) rarity = 9;
+            if (ShieldPartCost <= 120000) rarity = 8;
+            if (ShieldPartCost <= 90000) rarity = 7;
+            if (ShieldPartCost <= 50000) rarity = 6;
+            if (ShieldPartCost <= 40000) rarity = 5;
+            if (ShieldPartCost <= 30000) rarity = 4;
+            if (ShieldPartCost <= 20000) rarity = 3;
+            if (ShieldPartCost <= 5000) rarity = 2;
+            if (ShieldPartCost <= 2500) rarity = 1;
 
             ItemData[5][ItemIndex].Rarity = rarity;
 
@@ -287,15 +288,16 @@ NamedScript void BuildItemData()
 
         //Rarity
         int rarity = 1;
-        if (Accessory->Price < 999999) rarity = 8;
-        if (Accessory->Price < 200000) rarity = 8;
-        if (Accessory->Price < 120000) rarity = 8;
-        if (Accessory->Price < 90000) rarity = 7;
-        if (Accessory->Price < 70000) rarity = 7;
-        if (Accessory->Price < 50000) rarity = 6;
-        if (Accessory->Price < 35000) rarity = 5;
-        if (Accessory->Price < 20000) rarity = 4;
-        if (Accessory->Price < 10000) rarity = 3;
+        if (Accessory->Price <= 999999) rarity = 10;
+        if (Accessory->Price <= 200000) rarity = 9;
+        if (Accessory->Price <= 120000) rarity = 8;
+        if (Accessory->Price <= 90000) rarity = 7;
+        if (Accessory->Price <= 50000) rarity = 6;
+        if (Accessory->Price <= 40000) rarity = 5;
+        if (Accessory->Price <= 30000) rarity = 4;
+        if (Accessory->Price <= 20000) rarity = 3;
+        if (Accessory->Price <= 15000) rarity = 2;
+        if (Accessory->Price <= 8000) rarity = 1;
 
         ItemData[5][ItemIndex].Rarity = rarity;
 
@@ -1274,9 +1276,9 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     str ActorToSpawn;
     bool ItemSpawned;
     int ItemCategory = 0;
-    int RarityMin = 0;
-    int RarityMax = 0;
-    int Amount = 0;
+    int RarityMin;
+    int RarityMax;
+    int Amount;
 
     // Calculate Modifier
     int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
@@ -1328,9 +1330,9 @@ NamedScript DECORATE void DRPGArmorSpawner()
     str ActorToSpawn;
     bool ItemSpawned;
     int ItemCategory = (Random(0, 9) <= 0 ? 9 : 3);
-    int RarityMin = 0;
-    int RarityMax = 0;
-    int Amount = 0;
+    int RarityMin;
+    int RarityMax;
+    int Amount;
 
     // Calculate Modifier
     int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
@@ -1368,6 +1370,91 @@ NamedScript DECORATE void DRPGArmorSpawner()
 
     if (!ItemSpawned)
         ActorToSpawn = ItemData[3][0].Actor;
+
+    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+
+    Thing_Remove(0);
+}
+
+NamedScript DECORATE void DRPGShieldSpawner()
+{
+    // Delay while the map is being initialized
+    while (!CurrentLevel->Init) Delay(1);
+
+    str ActorToSpawn;
+    bool ItemSpawned;
+    int ItemCategory = 5;
+    int RarityMin;
+    int RarityMax;
+    int Amount;
+    int ShieldPartsMin;
+    int ShieldPartsMax;
+
+    // Get Shield Parts Type (Bodies / Batteries / Capacitors / Accessories)
+    switch (Random(0,3))
+    {
+    case 0:
+        ShieldPartsMin = 0;
+        ShieldPartsMax = MAX_BODIES;
+        break;
+    case 1:
+        ShieldPartsMin = MAX_BODIES;
+        ShieldPartsMax = MAX_BODIES + MAX_BATTERIES;
+        break;
+    case 2:
+        ShieldPartsMin = MAX_BODIES + MAX_BATTERIES;
+        ShieldPartsMax = MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS;
+        break;
+    case 3:
+        ShieldPartsMin = MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS;
+        ShieldPartsMax = MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES;
+        break;
+    }
+
+    // Calculate Modifier
+    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    if (Modifier > 15)
+        Modifier = 15;
+
+    // Calculate Rarity Max
+    for (int i = RarityMax; i < 10; i++)
+        if (Random(0, Random(3, 7) + RarityMax - Modifier) <= 0)
+            RarityMax++;
+    if (RarityMax < 0) // Make sure the Rarity still isn't -1, or else bad things will happen
+        RarityMax = 0;
+    if (RarityMax > 1 + RoundInt(10.0 * MapLevelModifier))
+        RarityMax = 1 + RoundInt(10.0 * MapLevelModifier);
+    if (RarityMax > 10)
+        RarityMax = 10;
+
+    RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
+
+    for (int i = ShieldPartsMin; i <= ShieldPartsMax; i++)
+    {
+        if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
+        {
+            if (Random(0, 1 + Amount) <= 0)
+            {
+                ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                ItemSpawned = true;
+            }
+            Amount++;
+        }
+    }
+
+    if (!ItemSpawned)
+        switch (Random(0,2))
+        {
+        case 0:
+            ActorToSpawn = ItemData[ItemCategory][1].Actor;
+            break;
+        case 1:
+            ActorToSpawn = ItemData[ItemCategory][MAX_BODIES + 1].Actor;
+            break;
+        case 2:
+            ActorToSpawn = ItemData[ItemCategory][MAX_BODIES + MAX_BATTERIES + 1].Actor;
+            break;
+        }
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 

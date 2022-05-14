@@ -623,7 +623,7 @@ int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed
 }
 
 // Use for while if you want to make a delay when the monster sees the players
-bool MonsterSeePlayers(int MonsterTID, int Dist)
+bool ActorSeePlayers(int MonsterTID, int Dist)
 {
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
@@ -637,7 +637,7 @@ bool MonsterSeePlayers(int MonsterTID, int Dist)
 }
 
 // Use for while if you want to make a delay when the monster doesn't see the players
-bool MonsterNotSeePlayers(int MonsterTID, int Dist)
+bool ActorNotSeePlayers(int MonsterTID, int Dist)
 {
     for (int i = 0; i < MAX_PLAYERS; i++)
     {

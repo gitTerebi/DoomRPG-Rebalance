@@ -561,7 +561,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
 
     // Delay if Toaster Mode on
     if (GetCVar("drpg_toaster"))
-        while (MonsterNotSeePlayers(0, 2048)) Delay(70);
+        while (ActorNotSeePlayers(0, 2048)) Delay(70);
 
     // Start Damage Numbers Script
     DamageNumbers();
@@ -1253,7 +1253,7 @@ Start:
 
     // Delay if Toaster Mode on
     if (GetCVar("drpg_toaster"))
-        while (MonsterNotSeePlayers(0, 0)) Delay(35);
+        while (ActorNotSeePlayers(0, 0)) Delay(35);
 
     // Changing the AI of monsters in case if there are summoned monsters
     for (int i = 0; i < MAX_PLAYERS; i++)
@@ -1426,7 +1426,7 @@ Start:
 
     if (ClassifyActor(0) & ACTOR_WORLD || ClassifyActor(0) & ACTOR_DEAD) return;
 
-    while (MonsterHasTarget() || MonsterSeePlayers(0, 0)) Delay(35);
+    while (MonsterHasTarget() || ActorSeePlayers(0, 0)) Delay(35);
 
     TeleportDistance = 512 + (512 * GetUserCVar(PlayerNumber, "drpg_monster_friendly_teleport_distance"));
 
@@ -1750,7 +1750,7 @@ Start:
 
     // Delay if Toaster Mode on
     if (GetCVar("drpg_toaster"))
-        while (MonsterNotSeePlayers(0, 0)) Delay(35);
+        while (ActorNotSeePlayers(0, 0)) Delay(35);
 
     Delay(DelayTime);
     goto Start;
@@ -2711,39 +2711,10 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGUACCard", (40 / (Players(Killer).ShopCard + 1)));
             DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 48);
             DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 24);
+            DropMonsterItem(Killer, 0, "DRPGShieldSpawner", 48);
             DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
             DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
             DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
-
-            if (MapLevelModifier >= 0.15)
-            {
-                DropMonsterItem(Killer, 0, "DRPGShieldDropperTier1", 48);
-            }
-
-            if (MapLevelModifier >= 0.30)
-            {
-                DropMonsterItem(Killer, 0, "DRPGShieldDropperTier2", 32);
-            }
-
-            if (MapLevelModifier >= 0.50)
-            {
-                DropMonsterItem(Killer, 0, "DRPGShieldDropperTier3", 16);
-            }
-
-            if (MapLevelModifier >= 0.60)
-            {
-                DropMonsterItem(Killer, 0, "DRPGShieldDropperTier4", 16);
-            }
-
-            if (MapLevelModifier >= 0.70)
-            {
-                DropMonsterItem(Killer, 0, "DRPGShieldDropperTier5", 8);
-            }
-
-            if (MapLevelModifier >= 0.85)
-            {
-                DropMonsterItem(Killer, 0, "DRPGShieldDropperTier6", 8);
-            }
 
             if (CompatMode == COMPAT_DRLA)
             {
@@ -2936,7 +2907,7 @@ NamedScript void MonsterDeath()
     {
         Delay(35 * (GetCVar("drpg_corpses_cleanup_timer")));
 
-        while (MonsterSeePlayers(0, 2048)) Delay(35 * 10);
+        while (ActorSeePlayers(0, 2048)) Delay(35 * 10);
 
         Thing_Remove(0);
     }

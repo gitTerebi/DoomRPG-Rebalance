@@ -154,7 +154,7 @@ class DRPGZUtilities
         // All CVars except Character data
         static const string drpgHUDCVars[] =
         {
-            "drpg_hud_height", "drpg_hud_width", "drpg_stats_y", "drpg_stats_x", "drpg_skill_y", "drpg_skill_x", "drpg_stateffect_y", "drpg_stateffect_x", "drpg_credits_y", "drpg_credits_x", "drpg_combo_y", "drpg_combo_x", "drpg_stim_y", "drpg_stim_x", "drpg_aug_y", "drpg_aug_x", "drpg_mission_x", "drpg_mission_y", "drpg_auratimer_x", "drpg_auratimer_y", "drpg_powerup_y", "drpg_powerup_x", "drpg_event_y", "drpg_event_x", "drpg_drla_y", "drpg_drla_x", "drpg_ld_y", "drpg_ld_x", "drpg_coopview_y", "drpg_coopview_x", "drpg_multiplayer_y", "drpg_multiplayer_x", "drpg_turret_y", "drpg_turret_x"
+            "drpg_hud_height", "drpg_hud_width", "drpg_stats_y", "drpg_stats_x", "drpg_skill_y", "drpg_skill_x", "drpg_stateffect_y", "drpg_stateffect_x", "drpg_credits_y", "drpg_credits_x", "drpg_combo_y", "drpg_combo_x", "drpg_stim_y", "drpg_stim_x", "drpg_aug_y", "drpg_aug_x", "drpg_mission_x", "drpg_mission_y", "drpg_mission_complete_x", "drpg_mission_complete_y", "drpg_auratimer_x", "drpg_auratimer_y", "drpg_powerup_y", "drpg_powerup_x", "drpg_event_y", "drpg_event_x", "drpg_drla_y", "drpg_drla_x", "drpg_ld_y", "drpg_ld_x", "drpg_coopview_y", "drpg_coopview_x", "drpg_multiplayer_y", "drpg_multiplayer_x", "drpg_turret_y", "drpg_turret_x"
         };
         // Wide preset values
         static const int drpgHUD_Wide[] =

@@ -1364,6 +1364,20 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
     if (NumItems < 1) // [KS] If we can't find any possible positions to spawn anything, fuck it.
         return;
 
+    // Set starting Map Spot
+    int StartTID = UniqueTID();
+    fixed StartX, StartY, StartZ;
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (!PlayerInGame(i)) continue;
+
+        StartX = GetActorX(Players(i).TID);
+        StartY = GetActorY(Players(i).TID);
+        StartZ = GetActorZ(Players(i).TID);
+        break;
+    }
+    SpawnForced("MapSpot", StartX, StartY, StartZ, StartTID, 0);
+
     int TID, A;
     fixed X, Y, Z;
 
@@ -1381,6 +1395,10 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
         Thing_Remove(TID);
 
         bool Spawned = Spawn("MapSpotTall", X, Y, Z, TID, A);
+
+        if (CheckSight(TID, StartTID, 0) || Distance(TID, StartTID) <= 1024)
+            continue;
+
         if (Spawned)
         {
             bool Remove = ScriptCall("DRPGZUtilities", "CheckActorInMap", TID) ? DynamicLootGeneratorCheckRemoval(TID, Z) : true;
