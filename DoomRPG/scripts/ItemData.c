@@ -250,11 +250,11 @@ NamedScript void BuildItemData()
             if (ShieldPartCost <= 999999) rarity = 10;
             if (ShieldPartCost <= 200000) rarity = 9;
             if (ShieldPartCost <= 120000) rarity = 8;
-            if (ShieldPartCost <= 90000) rarity = 7;
+            if (ShieldPartCost <= 75000) rarity = 7;
             if (ShieldPartCost <= 50000) rarity = 6;
-            if (ShieldPartCost <= 40000) rarity = 5;
-            if (ShieldPartCost <= 30000) rarity = 4;
-            if (ShieldPartCost <= 20000) rarity = 3;
+            if (ShieldPartCost <= 35000) rarity = 5;
+            if (ShieldPartCost <= 20000) rarity = 4;
+            if (ShieldPartCost <= 15000) rarity = 3;
             if (ShieldPartCost <= 5000) rarity = 2;
             if (ShieldPartCost <= 2500) rarity = 1;
 
