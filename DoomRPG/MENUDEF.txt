@@ -600,10 +600,6 @@ OptionMenu "DoomRPGHUD"
     Slider "Mission Progress Y Position", "drpg_mission_y", -240, 1080, 1
     StaticText ""
 
-    Slider "Mission Complete X Position", "drpg_mission_complete_x", -320, 1920, 1
-    Slider "Mission Complete Y Position", "drpg_mission_complete_y", -240, 1080, 1
-    StaticText ""
-
     Slider "Aura Timer X Position", "drpg_auratimer_x", -320, 1920, 1
     Slider "Aura Timer Y Position", "drpg_auratimer_y", -240, 1080, 1
     StaticText ""
@@ -637,6 +633,20 @@ OptionMenu "DoomRPGHUD"
     Slider "Turret Info Y Position", "drpg_turret_y", -240, 1080, 1
     StaticText ""
 
+    StaticText "Notifications"
+    Option "Notifications Preview", "drpg_notifications_preview", "OnOff"
+    Option "Detailed Notifications", "drpg_notifications_detailed", "OnOff"
+    StaticText ""
+
+    Slider "Level Up X Position", "drpg_level_up_x", -320, 1920, 1
+    Slider "Level Up Y Position", "drpg_level_up_y", -240, 1080, 1
+    Slider "Rank Up X Position", "drpg_rank_up_x", -320, 1920, 1
+    Slider "Rank Up Y Position", "drpg_rank_up_y", -240, 1080, 1
+    Slider "Mission Complete X Position", "drpg_mission_complete_x", -320, 1920, 1
+    Slider "Mission Complete Y Position", "drpg_mission_complete_y", -240, 1080, 1
+    StaticText ""
+
+    StaticText "Misc"
     Option "Skill Wheel Animation Speed", "drpg_skill_wheelspeed", "WheelSpeed"
     Option "Always Show Stats", "drpg_stats_alwaysshow", "OnOff"
     Option "Always Show Aug Battery", "drpg_aug_alwaysshow", "OnOff"

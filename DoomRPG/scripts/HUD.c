@@ -605,16 +605,31 @@ Start:
 
     Delay(1);
 
-    if (Player.Mission.Active && Player.Mission.Current != OldAmount || GetActivatorCVar("drpg_hud_preview"))
+    if (Player.Mission.Active && Player.Mission.Current != OldAmount || GetActivatorCVar("drpg_hud_preview") || GetActivatorCVar("drpg_notifications_preview"))
     {
         SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
         SetFont("BIGFONT");
 
-        if (GetActivatorCVar("drpg_hud_preview")) // Preview
+        if (GetActivatorCVar("drpg_hud_preview") || GetActivatorCVar("drpg_notifications_preview")) // Preview
         {
-            HudMessage("0 / 0");
-            EndHudMessage(HUDMSG_FADEOUT, MISSION_ID, "Green", X + 0.1, Y, 2.0, 1.0);
-            PrintSpriteFade("PISTA0", MISSION_ID + 1, X + 11.0 - 40.0 + 0.4, Y + 15.0 + 0.4, 2.0, 1.0);
+            // Mission's HUD
+            if (GetActivatorCVar("drpg_hud_preview") && !GetActivatorCVar("drpg_notifications_preview"))
+            {
+                HudMessage("0 / 0");
+                EndHudMessage(HUDMSG_FADEOUT, MISSION_ID, "Green", X + 0.1, Y, 2.0, 1.0);
+                PrintSpriteFade("PISTA0", MISSION_ID + 1, X + 11.0 - 40.0 + 0.4, Y + 15.0 + 0.4, 2.0, 1.0);
+            }
+
+            // Mission's Notifications
+            if (GetActivatorCVar("drpg_notifications_preview"))
+            {
+                if (GetActivatorCVar("drpg_notifications_detailed"))
+                    HudMessage("Mission Complete!\n\n\Cj+%d XP\n\Ck+%d Rank\n\Cf+%d Credits\n\Cd+%d Modules\n\n\CiItem: \Cj%S",
+                               0, 0, 0, 0, "Reward");
+                else
+                    HudMessage("Mission Complete!");
+                EndHudMessage(HUDMSG_FADEOUT, MISSION_ID + 2, "Green", GetActivatorCVar("drpg_mission_complete_x") + 0.4, GetActivatorCVar("drpg_mission_complete_y"), 3.0, 2.0);
+            }
         }
         else
         {

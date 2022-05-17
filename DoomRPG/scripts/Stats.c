@@ -256,6 +256,9 @@ void CheckCombo()
 // Keeps current level and XP updated
 void CheckLevel()
 {
+    fixed X = GetActivatorCVar("drpg_level_up_x");
+    fixed Y = GetActivatorCVar("drpg_level_up_y");
+
     if (Player.Level < MAX_LEVEL)
         Player.XPNext = XPTable[Player.Level];
 
@@ -265,65 +268,97 @@ void CheckLevel()
         Player.XPNext = XPTable[MAX_LEVEL - 1];
     }
 
-    // Now check for a level up
-    if (Player.XP >= XPTable[Player.Level] && Player.Level < MAX_LEVEL)
+    // Set HUD size and font for notifications
+    SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
+    SetFont("BIGFONT");
+
+    // Preview notifications
+    if (GetActivatorCVar("drpg_notifications_preview"))
     {
-        int Modules = (int)((((fixed)Player.Level + 1) * 100.0) * GetCVarFixed("drpg_module_levelfactor"));
-
-        // Take XP
-        Player.XP -= XPTable[Player.Level];
-
-        // Level Up
-        Player.Level++;
-        GiveInventory("DRPGModule", Modules);
-
-        if (GetCVar("drpg_levelup_heal"))
+        if (GetActivatorCVar("drpg_notifications_detailed"))
+            HudMessage("You have reached level %d", 0);
+        else
+            HudMessage("You get Level Up!");
+        EndHudMessage(HUDMSG_FADEOUT, LEVELUP_ID, "White", X + 0.4, Y, 3.0, 2.0);
+        if (GetActivatorCVar("drpg_notifications_detailed"))
         {
-            HealThing(MAX_HEALTH);
-
-            if (Player.EP < 0)
-                Player.EP = 0;
-            else
-                Player.EP = Player.EPMax;
+            HudMessage("\CfBonus:\C- \Cf%d Credits\C-", 0);
+            EndHudMessage(HUDMSG_FADEOUT, LEVELUP_ID + 1, "White", X + 0.4, Y + 32, 3.0, 2.0);
         }
-
-        FadeRange(255, 255, 255, 0.5, 255, 255, 255, 0, 2.0);
-        PrintMessage(StrParam("You have reached level %d", Player.Level), LEVELUP_ID, -32);
-
-        // Get a bonus for every 10 levels
-        for (int i = 1; i <= 20; i++)
+    }
+    else
+    {
+        // Now check for a level up
+        if (Player.XP >= XPTable[Player.Level] && Player.Level < MAX_LEVEL)
         {
-            if (Player.Level == i * 5)
+            int Modules = (int)((((fixed)Player.Level + 1) * 100.0) * GetCVarFixed("drpg_module_levelfactor"));
+
+            // Take XP
+            Player.XP -= XPTable[Player.Level];
+
+            // Level Up
+            Player.Level++;
+            GiveInventory("DRPGModule", Modules);
+
+            if (GetCVar("drpg_levelup_heal"))
             {
-                if (Player.Level == 10)
+                HealThing(MAX_HEALTH);
+
+                if (Player.EP < 0)
+                    Player.EP = 0;
+                else
+                    Player.EP = Player.EPMax;
+            }
+
+            FadeRange(255, 255, 255, 0.5, 255, 255, 255, 0, 2.0);
+
+            if (GetActivatorCVar("drpg_notifications_detailed"))
+                HudMessage("You have reached level %d", Player.Level);
+            else
+                HudMessage("You get Level Up!");
+            EndHudMessage(HUDMSG_FADEOUT, LEVELUP_ID, "White", X + 0.4, Y, 3.0, 2.0);
+
+            // Get a bonus for every 10 levels
+            for (int i = 1; i <= 20; i++)
+            {
+                if (Player.Level == i * 5)
                 {
-                    GiveInventory("DRPGAugCanister", 1);
-                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C-"), LEVELUP_ID + 1, 0);
-                }
-                else if (Player.Level == 30 || Player.Level == 60)
-                {
-                    GiveInventory("DRPGAugCanister", 1);
-                    GiveInventory("DRPGAugSlotUpgrade", 1);
-                    GiveInventory("DRPGAugUpgradeCanister", i / 2);
-                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C-, \Cd%d Aug Upgrade Canister\C- and \Cy1 Aug Slot\C-", i / 2), LEVELUP_ID + 1, 0);
-                }
-                else if (Player.Level == i / 2 * 10)
-                {
-                    GiveInventory("DRPGAugCanister", 1);
-                    GiveInventory("DRPGAugUpgradeCanister", i / 2);
-                    PrintMessage(StrParam("\CfBonus:\C- \Cn1 Aug Canister\C- and \Cd%d Aug Upgrade Canister\C-", i / 2), LEVELUP_ID + 1, 0);
-                }
-                else if (Player.Level == i * 5)
-                {
-                    int Credits = Random(i * 100 + 500, i * 200 + 1000) / 250 * 250;;
-                    GiveActorInventory(Player.TID, "DRPGCredits", i * Credits);
-                    PrintMessage(StrParam("\CfBonus:\C- \Cf%d Credits\C-", i * Credits), LEVELUP_ID + 1, 0);
+                    if (Player.Level == 10)
+                    {
+                        GiveInventory("DRPGAugCanister", 1);
+                        if (GetActivatorCVar("drpg_notifications_detailed"))
+                            HudMessage("\CfBonus:\C- \Cn1 Aug Canister\C-");
+                    }
+                    else if (Player.Level == 30 || Player.Level == 60)
+                    {
+                        GiveInventory("DRPGAugCanister", 1);
+                        GiveInventory("DRPGAugSlotUpgrade", 1);
+                        GiveInventory("DRPGAugUpgradeCanister", i / 2);
+                        if (GetActivatorCVar("drpg_notifications_detailed"))
+                            HudMessage("\CfBonus:\C- \Cn1 Aug Canister\C-, \Cd%d Aug Upgrade Canister\C- and \Cy1 Aug Slot\C-", i / 2);
+                    }
+                    else if (Player.Level == i / 2 * 10)
+                    {
+                        GiveInventory("DRPGAugCanister", 1);
+                        GiveInventory("DRPGAugUpgradeCanister", i / 2);
+                        if (GetActivatorCVar("drpg_notifications_detailed"))
+                            HudMessage("\CfBonus:\C- \Cn1 Aug Canister\C- and \Cd%d Aug Upgrade Canister\C-", i / 2);
+                    }
+                    else if (Player.Level == i * 5)
+                    {
+                        int Credits = Random(i * 100 + 500, i * 200 + 1000) / 250 * 250;;
+                        GiveActorInventory(Player.TID, "DRPGCredits", i * Credits);
+                        if (GetActivatorCVar("drpg_notifications_detailed"))
+                            HudMessage("\CfBonus:\C- \Cf%d Credits\C-", i * Credits);
+                    }
+
+                    EndHudMessage(HUDMSG_FADEOUT, LEVELUP_ID + 1, "White", X + 0.4, Y + 32, 3.0, 2.0);
                 }
             }
-        }
 
-        ActivatorSound("misc/levelup", 96);
-        SpawnForced("DRPGLevelUpArrow", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(Player.TID, APROP_Height), 0, 0);
+            ActivatorSound("misc/levelup", 96);
+            SpawnForced("DRPGLevelUpArrow", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(Player.TID, APROP_Height), 0, 0);
+        }
     }
 }
 
@@ -331,6 +366,9 @@ void CheckLevel()
 void CheckRank()
 {
     bool RankPromotion;
+
+    fixed X = GetActivatorCVar("drpg_rank_up_x");
+    fixed Y = GetActivatorCVar("drpg_rank_up_y");
 
     Player.RankString = Ranks[Player.RankLevel];
 
@@ -343,52 +381,84 @@ void CheckRank()
         Player.RankNext = RankTable[MAX_RANK - 1];
     }
 
-    // Rank Demotion
-    if (!RankPromotion && Player.RankLevel > 0 && Player.Rank < 0)
+    // Set HUD size and font for notifications
+    SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
+    SetFont("BIGFONT");
+
+    // Preview notifications
+    if (GetActivatorCVar("drpg_notifications_preview"))
     {
-        // Take Rank Level
-        Player.RankLevel--;
-
-        // Take negative Rank
-        Player.Rank = RankTable[Player.RankLevel] + Player.Rank;
-
-        FadeRange(255, 0, 64, 0.25, 255, 0, 64, 0, 2.0);
-
-        PrintMessage(StrParam("\CaYou have been demoted to rank %d: %S", Player.RankLevel, LongRanks[Player.RankLevel]), RANKUP_ID, 32);
+        if (GetActivatorCVar("drpg_notifications_detailed"))
+            HudMessage("\CkYou have been promoted to rank %d: %S", 0, LongRanks[0]);
+        else
+            HudMessage("\CkYou get Rank Up!");
+        EndHudMessage(HUDMSG_FADEOUT, RANKUP_ID, "Yellow", X + 0.4, Y, 3.0, 2.0);
+        if (GetActivatorCVar("drpg_notifications_detailed"))
+        {
+            HudMessage("\CcYou have unlocked \Cf%d\Cc new items in the shop", 0);
+            EndHudMessage(HUDMSG_FADEOUT, RANKUP_ID + 1, "Yellow", X + 0.4, Y + 64, 3.0, 2.0);
+        }
     }
-
-    // Necessary check the status Rank level
-    if (RankPromotion && Player.Rank > 0) RankPromotion = false;
-
-    // Rank Promotion
-    if (Player.Rank >= RankTable[Player.RankLevel] && Player.RankLevel < MAX_RANK)
+    else
     {
-        int NewItems;
+        // Rank Demotion
+        if (!RankPromotion && Player.RankLevel > 0 && Player.Rank < 0)
+        {
+            // Take Rank Level
+            Player.RankLevel--;
 
-        // Take Rank
-        Player.Rank -= RankTable[Player.RankLevel];
+            // Take negative Rank
+            Player.Rank = RankTable[Player.RankLevel] + Player.Rank;
 
-        // Rank Up
-        Player.RankLevel++;
+            FadeRange(255, 0, 64, 0.25, 255, 0, 64, 0, 2.0);
 
-        ActivatorSound("misc/rankup", 96);
-        FadeRange(255, 255, 0, 0.5, 255, 255, 0, 0, 2.0);
+            if (GetActivatorCVar("drpg_notifications_detailed"))
+                HudMessage("\CaYou have been demoted to rank %d: %S", Player.RankLevel, LongRanks[Player.RankLevel]);
+            else
+                HudMessage("\CaYou get Rank Down!");
+            EndHudMessage(HUDMSG_FADEOUT, RANKUP_ID, "Yellow", X + 0.4, Y, 3.0, 2.0);
+        }
 
-        // Determine how many new items you've unlocked in the shop
-        for (int i = 0; i < ItemCategories; i++)
-            for (int j = 0; j < ItemMax[i]; j++)
-                if (ItemData[i][j].Rank == Player.RankLevel)
-                    NewItems++;
+        // Necessary check the status Rank level
+        if (RankPromotion && Player.Rank > 0) RankPromotion = false;
 
-        PrintMessage(StrParam("\CkYou have been promoted to rank %d: %S", Player.RankLevel, LongRanks[Player.RankLevel]), RANKUP_ID, 32);
+        // Rank Promotion
+        if (Player.Rank >= RankTable[Player.RankLevel] && Player.RankLevel < MAX_RANK)
+        {
+            int NewItems;
 
-        SpawnForced("DRPGRankUpArrow", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(Player.TID, APROP_Height), 0, 0);
+            // Take Rank
+            Player.Rank -= RankTable[Player.RankLevel];
 
-        // Tells you if you've unlocked new items in the Shop
-        if (NewItems > 0)
-            PrintMessage(StrParam("\CcYou have unlocked \Cf%d\Cc new items in the shop", NewItems), RANKUP_ID + 1, 96);
+            // Rank Up
+            Player.RankLevel++;
 
-        RankPromotion = true;
+            ActivatorSound("misc/rankup", 96);
+            FadeRange(255, 255, 0, 0.5, 255, 255, 0, 0, 2.0);
+
+            // Determine how many new items you've unlocked in the shop
+            for (int i = 0; i < ItemCategories; i++)
+                for (int j = 0; j < ItemMax[i]; j++)
+                    if (ItemData[i][j].Rank == Player.RankLevel)
+                        NewItems++;
+
+            if (GetActivatorCVar("drpg_notifications_detailed"))
+                HudMessage("\CkYou have been promoted to rank %d: %S", Player.RankLevel, LongRanks[Player.RankLevel]);
+            else
+                HudMessage("\CkYou get Rank Up!");
+            EndHudMessage(HUDMSG_FADEOUT, RANKUP_ID, "Yellow", X + 0.4, Y, 3.0, 2.0);
+
+            SpawnForced("DRPGRankUpArrow", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(Player.TID, APROP_Height), 0, 0);
+
+            // Tells you if you've unlocked new items in the Shop
+            if (NewItems > 0 && GetActivatorCVar("drpg_notifications_detailed"))
+            {
+                HudMessage("\CcYou have unlocked \Cf%d\Cc new items in the shop", NewItems);
+                EndHudMessage(HUDMSG_FADEOUT, RANKUP_ID + 1, "Yellow", X + 0.4, Y + 64, 3.0, 2.0);
+            }
+
+            RankPromotion = true;
+        }
     }
 }
 

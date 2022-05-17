@@ -372,9 +372,12 @@ void CheckMission()
         // Message
         ActivatorSound("mission/complete", 127);
         SetFont("BIGFONT");
-        SetHudSize(640, 480, false);
-        HudMessage("Mission Complete!\n\n\Cj+%ld XP\n\Ck+%ld Rank\n\Cf+%d Credits\n\Cd+%d Modules\n\n\CiItem: \Cj%S",
-                   Player.Mission.RewardXP, Player.Mission.RewardRank, Player.Mission.RewardCredits, Player.Mission.RewardModules, Player.Mission.RewardItem->Name);
+        SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
+        if (GetActivatorCVar("drpg_notifications_detailed"))
+            HudMessage("Mission Complete!\n\n\Cj+%ld XP\n\Ck+%ld Rank\n\Cf+%d Credits\n\Cd+%d Modules\n\n\CiItem: \Cj%S",
+                       Player.Mission.RewardXP, Player.Mission.RewardRank, Player.Mission.RewardCredits, Player.Mission.RewardModules, Player.Mission.RewardItem->Name);
+        else
+            HudMessage("Mission Complete!");
         EndHudMessage(HUDMSG_FADEOUT, MISSION_ID, "Green", GetActivatorCVar("drpg_mission_complete_x") + 0.4, GetActivatorCVar("drpg_mission_complete_y"), 3.0, 2.0);
 
         // Reward - XP/Rank
