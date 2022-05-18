@@ -612,14 +612,6 @@ Start:
 
         if (GetActivatorCVar("drpg_hud_preview") || GetActivatorCVar("drpg_notifications_preview")) // Preview
         {
-            // Mission's HUD
-            if (GetActivatorCVar("drpg_hud_preview") && !GetActivatorCVar("drpg_notifications_preview"))
-            {
-                HudMessage("0 / 0");
-                EndHudMessage(HUDMSG_FADEOUT, MISSION_ID, "Green", X + 0.1, Y, 2.0, 1.0);
-                PrintSpriteFade("PISTA0", MISSION_ID + 1, X + 11.0 - 40.0 + 0.4, Y + 15.0 + 0.4, 2.0, 1.0);
-            }
-
             // Mission's Notifications
             if (GetActivatorCVar("drpg_notifications_preview"))
             {
@@ -629,6 +621,14 @@ Start:
                 else
                     HudMessage("Mission Complete!");
                 EndHudMessage(HUDMSG_FADEOUT, MISSION_ID + 2, "Green", GetActivatorCVar("drpg_mission_complete_x") + 0.4, GetActivatorCVar("drpg_mission_complete_y"), 3.0, 2.0);
+            }
+
+            // Mission's HUD
+            if (GetActivatorCVar("drpg_hud_preview"))
+            {
+                HudMessage("0 / 0");
+                EndHudMessage(HUDMSG_FADEOUT, MISSION_ID, "Green", X + 0.1, Y, 2.0, 1.0);
+                PrintSpriteFade("PISTA0", MISSION_ID + 1, X + 11.0 - 40.0 + 0.4, Y + 15.0 + 0.4, 2.0, 1.0);
             }
         }
         else
