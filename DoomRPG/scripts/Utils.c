@@ -1089,6 +1089,28 @@ fixed MapLevelMod()
     return MapLevelMod;
 }
 
+// Calculate natural stat leveling modifier
+fixed StatsNatMod()
+{
+    int NumPlayers;
+    int Stats;
+    int StatsNat;
+    fixed Modifier;
+
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        // Skip player if they're not ingame
+        if (!PlayerInGame(i)) continue;
+
+        Stats = Players(i).Strength + Players(i).Defense + Players(i).Vitality + Players(i).Energy + Players(i).Regeneration + Players(i).Agility + Players(i).Capacity + Players(i).Luck;
+        StatsNat = Players(i).StrengthNat + Players(i).DefenseNat + Players(i).VitalityNat + Players(i).EnergyNat + Players(i).RegenerationNat + Players(i).AgilityNat + Players(i).CapacityNat + Players(i).LuckNat;
+        Modifier += (fixed)StatsNat / (fixed)(Stats + StatsNat);
+        NumPlayers++;
+    }
+
+    return (1.0 + (Modifier / (fixed)NumPlayers));
+}
+
 // --------------------------------------------------
 // Inventory
 //

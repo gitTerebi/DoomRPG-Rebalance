@@ -140,8 +140,11 @@
 #define PLAYER_TID              31337
 #define PI                      3.14159265359
 
-//Calculate Map Level Modifier
+// Calculate Map Level Modifier
 #define MapLevelModifier        MapLevelMod()
+
+// Calculate Natural Stat Leveling Modifier
+#define StatsNatModifier        (GetCVar("drpg_levelup_natural") ? StatsNatMod() : 1.0)
 
 // Struct Aliases
 #define Players(N)              _PlayerData[(N)]

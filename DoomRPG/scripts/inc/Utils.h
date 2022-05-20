@@ -71,6 +71,7 @@ int FindPlayerID(int);
 OptionalArgs(1) bool SetActivatorToTargetExtended(int, int);
 bool IsTimeFrozen();
 fixed MapLevelMod();
+fixed StatsNatMod();
 
 // Inventory
 int CheckInventoryTID(int, str);

@@ -837,7 +837,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         if (GetActorClass(0) == "DRPGSuperPowerSuit")
             Stats->Level = 1000;
 
-        MonsterStatPool = 40 + GameSkill() * Stats->Level;
+        MonsterStatPool = (40 + GameSkill() * Stats->Level) * StatsNatModifier;
 
         // Minimal Points
         Stats->Strength = Stats->Level / 2;
