@@ -1093,7 +1093,7 @@ fixed MapLevelMod()
 fixed StatsNatMod()
 {
     int NumPlayers;
-    int Stats;
+    int PlayerLevel;
     int StatsNat;
     fixed Modifier;
 
@@ -1102,9 +1102,10 @@ fixed StatsNatMod()
         // Skip player if they're not ingame
         if (!PlayerInGame(i)) continue;
 
-        Stats = Players(i).Strength + Players(i).Defense + Players(i).Vitality + Players(i).Energy + Players(i).Regeneration + Players(i).Agility + Players(i).Capacity + Players(i).Luck;
+        PlayerLevel = Players(i).Level;
+        if (PlayerLevel <= 0) PlayerLevel = 1;
         StatsNat = Players(i).StrengthNat + Players(i).DefenseNat + Players(i).VitalityNat + Players(i).EnergyNat + Players(i).RegenerationNat + Players(i).AgilityNat + Players(i).CapacityNat + Players(i).LuckNat;
-        Modifier += (fixed)StatsNat / (fixed)(Stats + StatsNat);
+        Modifier += ((fixed)StatsNat / ((fixed)PlayerLevel * 8.0) > 1.0 ? 1.0 : (fixed)StatsNat / ((fixed)PlayerLevel * 8.0));
         NumPlayers++;
     }
 
