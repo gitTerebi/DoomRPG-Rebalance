@@ -2802,7 +2802,7 @@ NamedScript void MonsterDeath()
                 // UAC Premium
                 if (GetCVar("drpg_uac_premium"))
                 {
-                    CreditsUAC = (fixed)Stats->SpawnHealth * (fixed)ThreatMult / RandomFixed(40.0, 80.0) * (1.0 + (fixed)Players(Killer).RankLevel / 12.0) * ((fixed)Stats->DamageTable[i] * 100.0) / ((fixed)Stats->HealthMax / 100.0);
+                    CreditsUAC = (fixed)Stats->Threat + CreditsTable[i] / 100.0 * (4.0 + (fixed)Players(i).RankLevel * 4.0);
                     GiveActorInventory(Players(i).TID, "DRPGCredits", CreditsUAC);
                 }
             }
@@ -2825,7 +2825,7 @@ NamedScript void MonsterDeath()
             // UAC Premium
             if (GetCVar("drpg_uac_premium"))
             {
-                CreditsUAC = (fixed)Stats->SpawnHealth * (fixed)ThreatMult / RandomFixed(40.0, 80.0) * (1.0 + (fixed)Players(Killer).RankLevel / 12.0);
+                CreditsUAC = (fixed)Stats->Threat + CreditsAmount / 100.0 * (4.0 + (fixed)Players(Killer).RankLevel * 4.0);
                 GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsUAC);
             }
         }

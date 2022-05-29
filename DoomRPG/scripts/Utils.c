@@ -245,10 +245,10 @@ NamedScript DECORATE int CheckAugBatteryMax()
 // Get the max inventory size
 NamedScript DECORATE int CheckInventoryMax()
 {
-    int MaxItems = Player.CapacityTotal * 2;
+    int MaxItems = 5 + Player.CapacityTotal / 2;
 
-    if (MaxItems > 200)
-        MaxItems = 200;
+    if (MaxItems > 100)
+        MaxItems = 100;
 
     return MaxItems;
 }
