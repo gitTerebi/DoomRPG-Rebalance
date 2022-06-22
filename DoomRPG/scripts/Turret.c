@@ -4,6 +4,7 @@
 
 #include "Crate.h"
 #include "ItemData.h"
+#include "Map.h"
 #include "Menu.h"
 #include "RPG.h"
 #include "Stims.h"
@@ -477,15 +478,15 @@ Start:
         // Autoloader
         if (Player.Turret.Upgrade[TU_AMMO_AUTOLOADER] && Player.Turret.Autoload)
         {
-            if (Player.Turret.Upgrade[TU_WEAPON_BULLET] && Player.Turret.BulletAmmo <= 0)
+            if (Player.Turret.Upgrade[TU_WEAPON_BULLET] && Player.Turret.BulletAmmo <= Player.Turret.BulletAmmoMax - 50)
                 TurretLoadAmmo(TU_WEAPON_BULLET);
-            if (Player.Turret.Upgrade[TU_WEAPON_PELLET] && Player.Turret.ShellAmmo <= 0)
+            if (Player.Turret.Upgrade[TU_WEAPON_PELLET] && Player.Turret.ShellAmmo <= Player.Turret.ShellAmmoMax - 20)
                 TurretLoadAmmo(TU_WEAPON_PELLET);
-            if (Player.Turret.Upgrade[TU_WEAPON_ROCKET] && Player.Turret.RocketAmmo <= 0)
+            if (Player.Turret.Upgrade[TU_WEAPON_ROCKET] && Player.Turret.RocketAmmo <= Player.Turret.RocketAmmoMax - 5)
                 TurretLoadAmmo(TU_WEAPON_ROCKET);
-            if (Player.Turret.Upgrade[TU_WEAPON_PLASMA] && Player.Turret.PlasmaAmmo <= 0)
+            if (Player.Turret.Upgrade[TU_WEAPON_PLASMA] && Player.Turret.PlasmaAmmo <= Player.Turret.PlasmaAmmoMax - 100)
                 TurretLoadAmmo(TU_WEAPON_PLASMA);
-            if (Player.Turret.Upgrade[TU_WEAPON_RAILGUN] && Player.Turret.RailAmmo <= 0)
+            if (Player.Turret.Upgrade[TU_WEAPON_RAILGUN] && Player.Turret.RailAmmo <= Player.Turret.RailAmmoMax - 1)
                 TurretLoadAmmo(TU_WEAPON_RAILGUN);
         }
 
@@ -650,10 +651,11 @@ Start:
     if (Player.Turret.Maintenance)
     {
         // Charging
-        if ((Timer() % (35 - (Player.Turret.Upgrade[TU_HARDWARE_BATTERY] * 3))) == 0)
+        if ((Timer() % (CurrentLevel->UACBase ? 5 : 35 - (Player.Turret.Upgrade[TU_HARDWARE_BATTERY] * 3))) == 0)
             if (Player.Turret.ChargeTimer > 0)
             {
                 Player.Turret.Battery++;
+                MaintCost += 2;
 
                 // Done
                 if (Player.Turret.Battery >= Player.Turret.BatteryMax)
@@ -661,7 +663,7 @@ Start:
             }
 
         // Repairing
-        if ((Timer() % (35 - (Player.Turret.Upgrade[TU_HARDWARE_PART] * 3))) == 0)
+        if ((Timer() % (CurrentLevel->UACBase ? 5 : 35 - (Player.Turret.Upgrade[TU_HARDWARE_PART] * 3))) == 0)
         {
             if (Player.Turret.RepairTimer > 0)
             {
@@ -681,7 +683,10 @@ Start:
                 }
 
                 if (Player.Turret.PaidForRepair)
+                {
                     Player.Turret.Health++;
+                    MaintCost += 5;
+                }
 
                 // Done
                 if (Player.Turret.Health >= Player.Turret.HealthMax)
@@ -693,26 +698,26 @@ Start:
         }
 
         // Refitting
-        if ((Timer() % (35 - (Player.Turret.Upgrade[TU_HARDWARE_SPECS] * 3))) == 0)
+        if ((Timer() % (CurrentLevel->UACBase ? 5 : 35 - (Player.Turret.Upgrade[TU_HARDWARE_SPECS] * 3))) == 0)
             if (Player.Turret.RefitTimer > 0)
             {
                 Player.Turret.RefitTimer--;
+                MaintCost += 20;
 
                 // Done
                 if (Player.Turret.RefitTimer <= 0)
                     ActivatorSound("turret/refitdone", 127);
             }
 
-        // Calculate maintenance cost for this tic
-        if (Player.Turret.ChargeTimer > 0)
-            MaintCost++;
-        if (Player.Turret.PaidForRepair && Player.Turret.RepairTimer > 0)
-            MaintCost++;
-        if (Player.Turret.RefitTimer > 0)
-            MaintCost++;
+        // Calculate maintenance cost
+        if (MaintCost > 2 && Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] > 0)
+        {
+            MaintCost = RoundInt((fixed)MaintCost * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 11.0)));
+            if (MaintCost < 2) MaintCost = 2;
+        }
 
         // Steady credit loss while maintenance is happening
-        if ((Player.Turret.ChargeTimer > 0 || (Player.Turret.PaidForRepair && Player.Turret.RepairTimer > 0) || Player.Turret.RefitTimer > 0) && (Timer() % (5 + (Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] * 3))) == 0)
+        if (Player.Turret.ChargeTimer > 0 || (Player.Turret.PaidForRepair && Player.Turret.RepairTimer > 0) || Player.Turret.RefitTimer > 0)
             TakeInventory("DRPGCredits", MaintCost);
     }
 
