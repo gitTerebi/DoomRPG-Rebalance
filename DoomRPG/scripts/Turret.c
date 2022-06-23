@@ -608,6 +608,7 @@ Start:
 NamedScript Type_ENTER void TurretLoopMaintenance()
 {
     int MaintCost = 0;
+    int MaintCostCalc = 0;
 
 Start:
 
@@ -655,7 +656,9 @@ Start:
             if (Player.Turret.ChargeTimer > 0)
             {
                 Player.Turret.Battery++;
-                MaintCost += 2;
+                MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 2.0 : 4.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
+                if (MaintCostCalc < 1) MaintCostCalc = 1;
+                MaintCost += MaintCostCalc;
 
                 // Done
                 if (Player.Turret.Battery >= Player.Turret.BatteryMax)
@@ -685,7 +688,9 @@ Start:
                 if (Player.Turret.PaidForRepair)
                 {
                     Player.Turret.Health++;
-                    MaintCost += 5;
+                    MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 3.5 : 7.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
+                    if (MaintCostCalc < 1) MaintCostCalc = 1;
+                    MaintCost += MaintCostCalc;
                 }
 
                 // Done
@@ -702,19 +707,14 @@ Start:
             if (Player.Turret.RefitTimer > 0)
             {
                 Player.Turret.RefitTimer--;
-                MaintCost += 20;
+                MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 10.0 : 20.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
+                if (MaintCostCalc < 1) MaintCostCalc = 1;
+                MaintCost += MaintCostCalc;
 
                 // Done
                 if (Player.Turret.RefitTimer <= 0)
                     ActivatorSound("turret/refitdone", 127);
             }
-
-        // Calculate maintenance cost
-        if (MaintCost > 2 && Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] > 0)
-        {
-            MaintCost = RoundInt((fixed)MaintCost * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 11.0)));
-            if (MaintCost < 2) MaintCost = 2;
-        }
 
         // Steady credit loss while maintenance is happening
         if (Player.Turret.ChargeTimer > 0 || (Player.Turret.PaidForRepair && Player.Turret.RepairTimer > 0) || Player.Turret.RefitTimer > 0)
@@ -1219,7 +1219,8 @@ Start:
         EnemyPitch = VectorAngle(Distance(0, TargetTID), GetActorZ(TargetTID) - GetActorZ(0));
 
         TurretTurn(EnemyAngle, EnemyPitch);
-        GiveInventory("DRPGTurretTargetingLaser", 1);
+        if (!GetCVar("drpg_toaster"))
+            GiveInventory("DRPGTurretTargetingLaser", 1);
 
         if (Distance(0, TargetTID) <= GetActorPropertyFixed(TargetTID, APROP_Radius) + TurretEnemyDistance)
         {

@@ -1003,16 +1003,16 @@ Start:
             MaxValue = AveragePlayerLevel() * (100 * MAX_LEVEL);
             break;
         case SHOPSPECIAL_RANK:
-            MinValue = AveragePlayerRank() * (25 * MAX_RANK);
-            MaxValue = AveragePlayerRank() * (2500 * MAX_RANK);
+            MinValue = AveragePlayerRank() * (18 * MAX_RANK);
+            MaxValue = AveragePlayerRank() * (1800 * MAX_RANK);
             break;
         case SHOPSPECIAL_CREDITS:
             MinValue = AveragePlayerCredits() / 10;
             MaxValue = AveragePlayerCredits() * 10;
             break;
         case SHOPSPECIAL_LUCK:
-            MinValue = AveragePlayerLuck() * 500;
-            MaxValue = AveragePlayerLuck() * 5000;
+            MinValue = AveragePlayerLuck() * (GetCVar("drpg_levelup_natural") ? 50 : 100);
+            MaxValue = AveragePlayerLuck() * (GetCVar("drpg_levelup_natural") ? 5000 : 10000);
             break;
         }
         if (DebugLog)
@@ -1049,6 +1049,14 @@ Start:
 
             // Skip Loot category entirely
             if (Category == 7)
+            {
+                ValidItem = false;
+                Tries++;
+                continue;
+            }
+
+            // Skip over high rarity items
+            if (ItemData[Category][Index].Rarity > 4 + RoundInt(8.0 * MapLevelModifier))
             {
                 ValidItem = false;
                 Tries++;
