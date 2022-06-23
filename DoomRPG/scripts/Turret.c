@@ -182,7 +182,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
     // Ammo
     {
         "Ammo Module - Autoloader", 1, 5,
-        "Autoloads ammo from your own ammo pool (only for activated Weapon Module)",
+        "Autoloads ammo from your own ammo pool",
         "",
         "issuing this command will toggle autoloading on and off"
     },
@@ -478,15 +478,15 @@ Start:
         // Autoloader
         if (Player.Turret.Upgrade[TU_AMMO_AUTOLOADER] && Player.Turret.Autoload)
         {
-            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_BULLET && Player.Turret.Upgrade[TU_WEAPON_BULLET] && Player.Turret.BulletAmmo <= Player.Turret.BulletAmmoMax - 50)
+            if (Player.Turret.Upgrade[TU_WEAPON_BULLET] && Player.Turret.BulletAmmo <= Player.Turret.BulletAmmoMax - 50)
                 TurretLoadAmmo(TU_WEAPON_BULLET);
-            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_PELLET && Player.Turret.Upgrade[TU_WEAPON_PELLET] && Player.Turret.ShellAmmo <= Player.Turret.ShellAmmoMax - 20)
+            if (Player.Turret.Upgrade[TU_WEAPON_PELLET] && Player.Turret.ShellAmmo <= Player.Turret.ShellAmmoMax - 20)
                 TurretLoadAmmo(TU_WEAPON_PELLET);
-            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_ROCKET && Player.Turret.Upgrade[TU_WEAPON_ROCKET] && Player.Turret.RocketAmmo <= Player.Turret.RocketAmmoMax - 5)
+            if (Player.Turret.Upgrade[TU_WEAPON_ROCKET] && Player.Turret.RocketAmmo <= Player.Turret.RocketAmmoMax - 5)
                 TurretLoadAmmo(TU_WEAPON_ROCKET);
-            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_PLASMA && Player.Turret.Upgrade[TU_WEAPON_PLASMA] && Player.Turret.PlasmaAmmo <= Player.Turret.PlasmaAmmoMax - 100)
+            if (Player.Turret.Upgrade[TU_WEAPON_PLASMA] && Player.Turret.PlasmaAmmo <= Player.Turret.PlasmaAmmoMax - 100)
                 TurretLoadAmmo(TU_WEAPON_PLASMA);
-            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_RAILGUN && Player.Turret.Upgrade[TU_WEAPON_RAILGUN] && Player.Turret.RailAmmo <= Player.Turret.RailAmmoMax - 1)
+            if (Player.Turret.Upgrade[TU_WEAPON_RAILGUN] && Player.Turret.RailAmmo <= Player.Turret.RailAmmoMax - 1)
                 TurretLoadAmmo(TU_WEAPON_RAILGUN);
         }
 
