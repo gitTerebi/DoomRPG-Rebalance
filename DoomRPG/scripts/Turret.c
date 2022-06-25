@@ -2,8 +2,11 @@
 
 #include <stdlib.h>
 
+#include "Arena.h"
+#include "Augs.h"
 #include "Crate.h"
 #include "ItemData.h"
+#include "Outpost.h"
 #include "Map.h"
 #include "Menu.h"
 #include "RPG.h"
@@ -178,7 +181,6 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "",
         ""
     },
-
     // Ammo
     {
         "Ammo Module - Autoloader", 1, 5,
@@ -284,9 +286,15 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
     //
 
     {
+        "Battery - AUG Battery Adapter", 1, 5,
+        "Use turret from your AUG battery",
+        "",
+        "issuing this command will toggle autoloading on and off"
+    },
+    {
         "Battery - Capacity", 10, 5,
         "Increases the capacity of the turret's battery",
-        "Upgrades increase maximum battery capacity",
+        "Upgrades increase maximum battery capacity (also reduces consumption from AUG battery)",
         ""
     },
 
@@ -580,8 +588,11 @@ Start:
             Player.Turret.HitTimer--;
 
         // Drain Battery
-        if (Player.Turret.Battery > 0 && (Timer() % 35) == 0)
-            Player.Turret.Battery--;
+        if (((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && !CheckInventory("PowerTimeFreezer")) && Player.Turret.Battery > 0 && (Timer() % 35) == 0)
+        {
+            if (!Player.Turret.AugBattery)
+                Player.Turret.Battery--;
+        }
 
         // Prevent battery overflow
         if (Player.Turret.Battery > Player.Turret.BatteryMax)
@@ -656,9 +667,15 @@ Start:
             if (Player.Turret.ChargeTimer > 0)
             {
                 Player.Turret.Battery++;
-                MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 2.0 : 4.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
-                if (MaintCostCalc < 1) MaintCostCalc = 1;
-                MaintCost += MaintCostCalc;
+
+                if (Player.Turret.Upgrade[TU_BATTERY_AUGBATTERY] && Player.Turret.AugBattery)
+                    Player.Augs.BatteryDrain += 3;
+                else
+                {
+                    MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 2.0 : 4.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
+                    if (MaintCostCalc < 1) MaintCostCalc = 1;
+                    MaintCost += MaintCostCalc;
+                }
 
                 // Done
                 if (Player.Turret.Battery >= Player.Turret.BatteryMax)
@@ -688,7 +705,7 @@ Start:
                 if (Player.Turret.PaidForRepair)
                 {
                     Player.Turret.Health++;
-                    MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 3.5 : 7.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
+                    MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 4.0 : 8.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
                     if (MaintCostCalc < 1) MaintCostCalc = 1;
                     MaintCost += MaintCostCalc;
                 }
@@ -748,6 +765,7 @@ NamedScript Type_ENTER void TurretCommandWheel()
         TU_WEAPON_RAILGUN,
         TU_WEAPON_RAILGUN_CAPACITY,
         TU_AMMO_AUTOLOADER,
+        TU_BATTERY_AUGBATTERY,
         TU_COMMAND_RECALL,
         TU_COMMAND_DRAW_FIRE,
         TU_COMMAND_HOLD_POSITION
@@ -1804,6 +1822,12 @@ void TurretCommand(int Index)
     {
         ActivatorSound("menu/move", 127);
         Player.Turret.Autoload = !Player.Turret.Autoload;
+    }
+
+    if (Index == TU_BATTERY_AUGBATTERY)
+    {
+        ActivatorSound("menu/move", 127);
+        Player.Turret.AugBattery = !Player.Turret.AugBattery;
     }
 
     if (Index == TU_COMMAND_RECALL && Player.Turret.Active)

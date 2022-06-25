@@ -900,6 +900,7 @@ struct PlayerData_S
         // Battery
         int Battery;
         int BatteryMax;
+        bool AugBattery;
 
         // Timers
         int HitTimer;

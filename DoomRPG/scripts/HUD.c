@@ -1250,12 +1250,21 @@ Start:
 
             // Timers
             SetFont("BIGFONT");
-            HudMessage("%S", FormatTime(Player.Turret.ChargeTimer * 35));
-            EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 24.1, Y - 16.0, 0.05);
-            HudMessage("%S", FormatTime(Player.Turret.RepairTimer * 35));
-            EndHudMessage(HUDMSG_PLAIN, 0, (Player.Turret.PaidForRepair ? "Brick" : "Red"), X + 24.1, Y, 0.05);
-            HudMessage("%S", FormatTime(Player.Turret.RefitTimer * 35));
-            EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", X + 24.1, Y + 16.0, 0.05);
+            if (Player.Turret.RepairTimer > 0)
+            {
+                HudMessage("%S", FormatTime(Player.Turret.RepairTimer * 35));
+                EndHudMessage(HUDMSG_PLAIN, 0, (Player.Turret.PaidForRepair ? "Brick" : "Red"), X + 24.1, Y - 16.0, 0.05);
+            }
+            if (Player.Turret.ChargeTimer > 0)
+            {
+                HudMessage("%S", FormatTime(Player.Turret.ChargeTimer * 35));
+                EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 24.1, Y, 0.05);
+            }
+            if (Player.Turret.RefitTimer > 0)
+            {
+                HudMessage("%S", FormatTime(Player.Turret.RefitTimer * 35));
+                EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", X + 24.1, Y + 16.0, 0.05);
+            }
         }
         else if (!Player.Turret.Maintenance || GetActivatorCVar("drpg_hud_preview"))
         {
@@ -1268,8 +1277,11 @@ Start:
             SetFont("BIGFONT");
             HudMessage("%ld", Health.DisplayValue);
             EndHudMessage(HUDMSG_PLAIN, 0, "Red", X + 24.1, Y - 16.0, 0.05);
-            HudMessage("%S", FormatTime(Player.Turret.Battery * 35));
-            EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 24.1, Y, 0.05);
+            if (!Player.Turret.AugBattery)
+            {
+                HudMessage("%S", FormatTime(Player.Turret.Battery * 35));
+                EndHudMessage(HUDMSG_PLAIN, 0, "Yellow", X + 24.1, Y, 0.05);
+            }
             if (Player.Turret.Weapon != TW_NONE)
             {
                 HudMessage("%d", Ammo[Player.Turret.Weapon]);

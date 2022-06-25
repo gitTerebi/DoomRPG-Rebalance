@@ -1930,6 +1930,12 @@ void DrawTurretInfo(fixed X, fixed Y, int Index)
         else
             Info = "\CaOFF";
         break;
+    case TU_BATTERY_AUGBATTERY:
+        if (Player.Turret.AugBattery)
+            Info = "\CdON";
+        else
+            Info = "\CaOFF";
+        break;
     case TU_AMMO_NANOGEN:
         Y -= 4.0;
         Info = StrParam("\Cj%d\n\CjSec", 15 - Player.Turret.Upgrade[TU_AMMO_NANOGEN]);

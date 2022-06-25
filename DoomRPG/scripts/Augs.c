@@ -303,8 +303,36 @@ void CheckAugs()
             if (Player.Augs.Active[i] && i != AUG_BATTERY)
                 Player.Augs.BatteryDrain += Player.Augs.CurrentLevel[i];
 
+        // Calculate Battery Drain for Tutrret
+        if (Player.Turret.Active && Player.Turret.AugBattery)
+        {
+            // Battery Drain for Turret Active
+            Player.Augs.BatteryDrain++;
+
+            // Battery Drain for Tutrret's Weapon Module Active and Upgrades
+            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_BULLET) Player.Augs.BatteryDrain += 1.0 + (Player.Turret.Upgrade[TU_WEAPON_BULLET_DAMAGE] + TU_WEAPON_BULLET_ROF) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_BATTERY_CAPACITY] / 10.0)) * 0.5;
+            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_PELLET) Player.Augs.BatteryDrain += 1.0 + (Player.Turret.Upgrade[TU_WEAPON_PELLET_DAMAGE] + TU_WEAPON_PELLET_ROF + TU_WEAPON_PELLET_SPREAD + TU_WEAPON_PELLET_AMOUNT) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_BATTERY_CAPACITY] / 10.0)) * 0.5;
+            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_ROCKET) Player.Augs.BatteryDrain += 1.0 + (Player.Turret.Upgrade[TU_WEAPON_ROCKET_DAMAGE] + TU_WEAPON_ROCKET_ROF + TU_WEAPON_ROCKET_SEEKING) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_BATTERY_CAPACITY] / 10.0)) * 0.5;
+            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_PLASMA) Player.Augs.BatteryDrain += 1.0 + (Player.Turret.Upgrade[TU_WEAPON_PLASMA_DAMAGE] + TU_WEAPON_PLASMA_ROF) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_BATTERY_CAPACITY] / 10.0)) * 0.5;
+            if (GetUserVariable(Player.Turret.TID, "user_weapon") == TW_RAILGUN) Player.Augs.BatteryDrain += 1.0 + (Player.Turret.Upgrade[TU_WEAPON_RAILGUN_DAMAGE] + TU_WEAPON_RAILGUN_ROF + TU_WEAPON_RAILGUN_RIPPING) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_BATTERY_CAPACITY] / 10.0)) * 0.5;
+
+            // Battery Drain for Tutrret's Ammo Module Active
+            if (Player.Turret.Upgrade[TU_AMMO_NANOGEN] > 0)
+            {
+                // Battery Drain for Tutrret's Ammo Nano-Generators Module Active
+                Player.Augs.BatteryDrain += 1.0 + Player.Turret.Upgrade[TU_AMMO_NANOGEN] * (1.0 - ((fixed)Player.Turret.Upgrade[TU_BATTERY_CAPACITY] / 10.0)) * 0.5;
+
+                // Battery Drain for Tutrret's Ammo Nano-Generators Module Upgrades
+                if (Player.Turret.Upgrade[TU_AMMO_NANOGEN_BULLET] && Player.Turret.BulletAmmo < Player.Turret.BulletAmmoMax) Player.Augs.BatteryDrain++;
+                if (Player.Turret.Upgrade[TU_AMMO_NANOGEN_SHELL] && Player.Turret.ShellAmmo < Player.Turret.ShellAmmoMax) Player.Augs.BatteryDrain++;
+                if (Player.Turret.Upgrade[TU_AMMO_NANOGEN_ROCKET] && Player.Turret.RocketAmmo < Player.Turret.RocketAmmoMax) Player.Augs.BatteryDrain++;
+                if (Player.Turret.Upgrade[TU_AMMO_NANOGEN_CELL] && Player.Turret.PlasmaAmmo < Player.Turret.PlasmaAmmoMax) Player.Augs.BatteryDrain++;
+                if (Player.Turret.Upgrade[TU_AMMO_NANOGEN_CELL] && Player.Turret.RailAmmo < Player.Turret.RailAmmoMax) Player.Augs.BatteryDrain++;
+            }
+        }
+
         // Decrease Battery
-        if (Player.Augs.SlotsUsed > 0 && (Timer() % 35) == 0)
+        if ((Player.Augs.SlotsUsed > 0 || (Player.Turret.Active && Player.Turret.AugBattery)) && (Timer() % 35) == 0)
         {
             Player.Augs.Battery -= (Player.Augs.BatteryDrain * 0.055);
             DrawBattery();

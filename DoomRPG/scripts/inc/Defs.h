@@ -814,8 +814,8 @@ typedef enum
 // Turret
 //
 
-#define MAX_UPGRADES            55
-#define MAX_COMMANDS            15
+#define MAX_UPGRADES            56
+#define MAX_COMMANDS            16
 #define TURRET_BATTERY_CHARGE   60 * 3
 
 typedef enum
@@ -867,6 +867,7 @@ typedef enum
     TU_ARMOR_MODULE_PHASE,
 
     // Battery
+    TU_BATTERY_AUGBATTERY,
     TU_BATTERY_CAPACITY,
     TU_BATTERY_GENERATOR_KINETIC,
     TU_BATTERY_GENERATOR_ILLUMINATION,
