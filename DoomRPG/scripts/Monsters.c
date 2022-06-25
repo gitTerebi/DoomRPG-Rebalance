@@ -2786,7 +2786,7 @@ NamedScript void MonsterDeath()
         {
             for (int i = 0; i < MAX_PLAYERS; i++)
             {
-                LuckMult = 100 + Players(i).LuckTotal;
+                LuckMult = 100 + (GetCVar("drpg_levelup_natural") ? Players(i).LuckTotal / 2 : Players(i).LuckTotal);
                 CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
                 CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
                 CreditsTable[i] = (Random(CreditsMin, CreditsMax) * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
@@ -2809,7 +2809,7 @@ NamedScript void MonsterDeath()
         }
         else
         {
-            LuckMult = 100 + Players(Killer).LuckTotal;
+            LuckMult = 100 + (GetCVar("drpg_levelup_natural") ? Players(Killer).LuckTotal / 2 : Players(Killer).LuckTotal);
             CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
             CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
             CreditsAmount = Random(CreditsMin, CreditsMax);
