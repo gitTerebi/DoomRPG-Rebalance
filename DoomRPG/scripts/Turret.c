@@ -589,7 +589,11 @@ Start:
 
         // Check AUG Battery
         if (Player.Turret.AugBattery && Player.Augs.Battery <= 0)
+        {
+            PrintError("Your aug battery is depleted");
+            ActivatorSound("menu/error", 127);
             Player.Turret.AugBattery = false;
+        }
 
         // Drain Battery
         if (((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && !CheckInventory("PowerTimeFreezer")) && Player.Turret.Battery > 0 && (Timer() % 35) == 0)
@@ -1822,10 +1826,19 @@ void TurretCommand(int Index)
         Player.Turret.Autoload = !Player.Turret.Autoload;
     }
 
-    if (Index == TU_BATTERY_AUGBATTERY && Player.Augs.Battery > 0)
+    if (Index == TU_BATTERY_AUGBATTERY)
     {
-        ActivatorSound("menu/move", 127);
-        Player.Turret.AugBattery = !Player.Turret.AugBattery;
+        if (Player.Augs.Battery <= 0)
+        {
+            PrintError("Your aug battery is depleted");
+            ActivatorSound("menu/error", 127);
+            Player.Turret.AugBattery = false;
+        }
+        else
+        {
+            ActivatorSound("menu/move", 127);
+            Player.Turret.AugBattery = !Player.Turret.AugBattery;
+        }
     }
 
     if (Index == TU_COMMAND_RECALL && Player.Turret.Active)
