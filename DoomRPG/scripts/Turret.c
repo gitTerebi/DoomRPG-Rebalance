@@ -289,7 +289,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Battery - AUG Battery Adapter", 1, 5,
         "Use turret from your AUG battery",
         "",
-        "issuing this command will toggle autoloading on and off"
+        "issuing this command will toggle AUG Battery Adapter on and off"
     },
     {
         "Battery - Capacity", 10, 5,
@@ -477,7 +477,7 @@ Start:
         SetActorPropertyString(Player.Turret.TID, APROP_NameTag, StrParam("%tS\C-'s Turret", PlayerNumber() + 1));
 
         // Battery is drained
-        if (Player.Turret.Battery <= 0)
+        if ((Player.Turret.Battery <= 0 && !Player.Turret.AugBattery) || (Player.Turret.Battery <= 0 && Player.Turret.AugBattery && Player.Augs.Battery <= 0))
         {
             TurretDespawn();
             break;
@@ -587,6 +587,10 @@ Start:
         if (Player.Turret.HitTimer > 0)
             Player.Turret.HitTimer--;
 
+        // Check AUG Battery
+        if (Player.Turret.AugBattery && Player.Augs.Battery <= 0)
+            Player.Turret.AugBattery = false;
+
         // Drain Battery
         if (((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && !CheckInventory("PowerTimeFreezer")) && Player.Turret.Battery > 0 && (Timer() % 35) == 0)
         {
@@ -667,15 +671,9 @@ Start:
             if (Player.Turret.ChargeTimer > 0)
             {
                 Player.Turret.Battery++;
-
-                if (Player.Turret.Upgrade[TU_BATTERY_AUGBATTERY] && Player.Turret.AugBattery)
-                    Player.Augs.BatteryDrain += 3;
-                else
-                {
-                    MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 2.0 : 4.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
-                    if (MaintCostCalc < 1) MaintCostCalc = 1;
-                    MaintCost += MaintCostCalc;
-                }
+                MaintCostCalc = RoundInt((CurrentLevel->UACBase ? 2.0 : 4.0) * (1.0 - ((fixed)Player.Turret.Upgrade[TU_HARDWARE_FABRICATION] / 10.0)));
+                if (MaintCostCalc < 1) MaintCostCalc = 1;
+                MaintCost += MaintCostCalc;
 
                 // Done
                 if (Player.Turret.Battery >= Player.Turret.BatteryMax)
@@ -1824,7 +1822,7 @@ void TurretCommand(int Index)
         Player.Turret.Autoload = !Player.Turret.Autoload;
     }
 
-    if (Index == TU_BATTERY_AUGBATTERY)
+    if (Index == TU_BATTERY_AUGBATTERY && Player.Augs.Battery > 0)
     {
         ActivatorSound("menu/move", 127);
         Player.Turret.AugBattery = !Player.Turret.AugBattery;
@@ -1917,7 +1915,7 @@ void TurretSpawn()
 {
     if (GetActorProperty(0, APROP_Health) <= 0) return;
 
-    if (Player.Turret.Battery <= 0)
+    if ((Player.Turret.Battery <= 0 && !Player.Turret.AugBattery) || (Player.Turret.Battery <= 0 && Player.Turret.AugBattery && Player.Augs.Battery <= 0))
     {
         ActivatorSound("menu/error", 127);
         PrintError("Your turret's battery is depleted");

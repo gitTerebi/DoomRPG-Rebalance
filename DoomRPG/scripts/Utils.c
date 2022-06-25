@@ -1939,8 +1939,11 @@ void DrawBattery()
     SetHudSize(Width, Height, false);
     PrintSpriteFade("AUGBATT", BATTERY_ID, X + 0.4, Y + 0.4, HoldTime, FadeTime);
     SetFont("BIGFONT");
-    HudMessage("%d%%", (int)Player.Augs.Battery);
-    EndHudMessage(HUDMSG_FADEOUT, BATTERY_ID + 1, "Yellow", X + 24.0, Y - 10.0, HoldTime, FadeTime);
+    if (Player.Augs.Battery > 0)
+    {
+        HudMessage("%d%%", (int)Player.Augs.Battery);
+        EndHudMessage(HUDMSG_FADEOUT, BATTERY_ID + 1, "Yellow", X + 24.0, Y - 10.0, HoldTime, FadeTime);
+    }
 }
 
 void DrawShieldInfo(int ID, fixed X, fixed Y, int DrawID)
