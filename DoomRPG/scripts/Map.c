@@ -3899,6 +3899,8 @@ NamedScript void InitMapPacks()
             NewMap->Completed = false;
             NewMap->NeedsRealInfo = true;
             LogMessage(StrParam("Added Lump %S to Array %p", ((LevelInfo *)KnownLevels->Data)[1].LumpName, KnownLevels), LOG_DEBUG);
+
+            if(j > 80) Delay(1);
         }
     }
 

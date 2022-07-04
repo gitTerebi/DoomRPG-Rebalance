@@ -40,8 +40,6 @@ map MM101 "The Teleporter"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
 	par = 120
-	nocrouch
-	nojump
 	}
 
 map MM102 "The Bridge"
@@ -53,8 +51,6 @@ map MM102 "The Bridge"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
 	par = 300
-	nocrouch
-	nojump
 	}
 
 map MM103 "Interlock"
@@ -65,8 +61,6 @@ map MM103 "Interlock"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM104 "The Stand"
@@ -77,8 +71,6 @@ map MM104 "The Stand"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM105 "Hell's Kitchen"
@@ -99,8 +91,6 @@ map MM106 "The Powerstation"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM107 "Not That Simple"
@@ -113,8 +103,6 @@ map MM107 "Not That Simple"
 	intermusic = "MUS_M1IN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map MM108 "And The Dead Shall Rise"
@@ -125,8 +113,6 @@ map MM108 "And The Dead Shall Rise"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM109 "High-Tech Grave"
@@ -137,8 +123,6 @@ map MM109 "High-Tech Grave"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 	
 map MM110 "The Mansion"
@@ -149,8 +133,6 @@ map MM110 "The Mansion"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM111 "Halls of Insanity"
@@ -161,8 +143,6 @@ map MM111 "Halls of Insanity"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM112 "Kinetics"
@@ -173,8 +153,6 @@ map MM112 "Kinetics"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM113 "The Inmost Dens II"
@@ -185,8 +163,6 @@ map MM113 "The Inmost Dens II"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM114 "Aquaduct"
@@ -197,8 +173,6 @@ map MM114 "Aquaduct"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 	
 map MM115 "Karmacoma"
@@ -210,8 +184,6 @@ map MM115 "Karmacoma"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 	
 map MM116 "Stoned"
@@ -222,8 +194,6 @@ map MM116 "Stoned"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM117 "House of Thorn"
@@ -234,8 +204,6 @@ map MM117 "House of Thorn"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 	
 map MM118 "A Dead Man's Town"
@@ -246,8 +214,6 @@ map MM118 "A Dead Man's Town"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM119 "Maltraiter"
@@ -258,8 +224,6 @@ map MM119 "Maltraiter"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 	
 map MM120 "Mountain Depot"
@@ -270,8 +234,6 @@ map MM120 "Mountain Depot"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM121 "Twilight Lab"
@@ -282,8 +244,6 @@ map MM121 "Twilight Lab"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM122 "The Escape"
@@ -294,8 +254,6 @@ map MM122 "The Escape"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 	
 map MM123 "Showdown"
@@ -306,8 +264,6 @@ map MM123 "Showdown"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM124 "Diehard"
@@ -318,8 +274,6 @@ map MM124 "Diehard"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM125 "Cesspool"
@@ -330,8 +284,6 @@ map MM125 "Cesspool"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 	
 map MM126 "Between Scattered Corpses"
@@ -342,8 +294,6 @@ map MM126 "Between Scattered Corpses"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM127 "Fort Hades"
@@ -354,8 +304,6 @@ map MM127 "Fort Hades"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM128 "City Of The Unavenged"
@@ -366,8 +314,6 @@ map MM128 "City Of The Unavenged"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM129 "Island Of Death"
@@ -379,8 +325,6 @@ map MM129 "Island Of Death"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map MM130 "Viper"
@@ -391,8 +335,6 @@ map MM130 "Viper"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 map MM131 "Technology Base"
@@ -404,8 +346,6 @@ map MM131 "Technology Base"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 	
 map MM132 "The Hidden Slime Factory"
@@ -416,8 +356,6 @@ map MM132 "The Hidden Slime Factory"
 	enterpic = "MM1INT"
 	exitpic = "MM1INT"
 	intermusic = "MUS_M1IN"
-	nocrouch
-	nojump
 	}
 
 // Memento Mori II
@@ -430,8 +368,6 @@ map MM201 "Outpost"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM202 "The Feeding Pit"
@@ -442,8 +378,6 @@ map MM202 "The Feeding Pit"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM203 "... And Hell Beneath"
@@ -454,8 +388,6 @@ map MM203 "... And Hell Beneath"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM204 "Ratamahatta"
@@ -467,8 +399,6 @@ map MM204 "Ratamahatta"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map MM205 "Rites of Passage"
@@ -479,8 +409,6 @@ map MM205 "Rites of Passage"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM206 "Trapped"
@@ -491,8 +419,6 @@ map MM206 "Trapped"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM207 "Frustration"
@@ -505,8 +431,6 @@ map MM207 "Frustration"
 	intermusic = "MUS_M2IN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map MM208 "Stigmata"
@@ -517,8 +441,6 @@ map MM208 "Stigmata"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM209 "Sabbath Sewer"
@@ -529,8 +451,6 @@ map MM209 "Sabbath Sewer"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 	
 map MM210 "Clear for Death"
@@ -541,8 +461,6 @@ map MM210 "Clear for Death"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM211 "Sewer Shutdown"
@@ -553,8 +471,6 @@ map MM211 "Sewer Shutdown"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM212 "The Waterway"
@@ -565,8 +481,6 @@ map MM212 "The Waterway"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM213 "Devil's Paradise"
@@ -577,8 +491,6 @@ map MM213 "Devil's Paradise"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM214 "A Question of Time"
@@ -589,8 +501,6 @@ map MM214 "A Question of Time"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 	
 map MM215 "The Devil's Coterie"
@@ -602,8 +512,6 @@ map MM215 "The Devil's Coterie"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 	
 map MM216 "The Nephilim"
@@ -614,8 +522,6 @@ map MM216 "The Nephilim"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM217 "No One"
@@ -626,8 +532,6 @@ map MM217 "No One"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 	
 map MM218 "Regulate"
@@ -638,8 +542,6 @@ map MM218 "Regulate"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM219 "The Shaft"
@@ -650,8 +552,6 @@ map MM219 "The Shaft"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 	
 map MM220 "The Experiment"
@@ -662,8 +562,6 @@ map MM220 "The Experiment"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM221 "Sanctuary"
@@ -674,8 +572,6 @@ map MM221 "Sanctuary"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM222 "R.R.F. Refinary"
@@ -686,8 +582,6 @@ map MM222 "R.R.F. Refinary"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 	
 map MM223 "No Way Out"
@@ -698,8 +592,6 @@ map MM223 "No Way Out"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM224 "Io Lab"
@@ -710,8 +602,6 @@ map MM224 "Io Lab"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM225 "Forgotten Town"
@@ -723,8 +613,6 @@ map MM225 "Forgotten Town"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map MM226 "Base Exposure"
@@ -735,8 +623,6 @@ map MM226 "Base Exposure"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM227 "The Silos"
@@ -747,8 +633,6 @@ map MM227 "The Silos"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM228 "Corporate Hell"
@@ -759,8 +643,6 @@ map MM228 "Corporate Hell"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM229 "Kings of Metal"
@@ -771,8 +653,6 @@ map MM229 "Kings of Metal"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 	
 map MM230 "It"
@@ -783,8 +663,6 @@ map MM230 "It"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MM231 "DejaVu"
@@ -796,8 +674,6 @@ map MM231 "DejaVu"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 	
 map MM232 "Dances with Demons"
@@ -808,8 +684,6 @@ map MM232 "Dances with Demons"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MMS01 "Secret Operation 1"
@@ -820,8 +694,6 @@ map MMS01 "Secret Operation 1"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 map MMS02 "Secret Operation 2"
@@ -832,8 +704,6 @@ map MMS02 "Secret Operation 2"
 	enterpic = "MM2INT"
 	exitpic = "MM2INT"
 	intermusic = "MUS_M2IN"
-	nocrouch
-	nojump
 	}
 
 // REQUIEM
@@ -846,8 +716,6 @@ map REQ01 "The Gateway"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ02 "Sacrificium"
@@ -858,8 +726,6 @@ map REQ02 "Sacrificium"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ03 "Poison Processing"
@@ -870,8 +736,6 @@ map REQ03 "Poison Processing"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ04 "Fireworks"
@@ -882,8 +746,6 @@ map REQ04 "Fireworks"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ05 "The Canyon"
@@ -894,8 +756,6 @@ map REQ05 "The Canyon"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ06 "nataS ot etubirT"
@@ -906,8 +766,6 @@ map REQ06 "nataS ot etubirT"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ07 "Hell's Gift"
@@ -920,8 +778,6 @@ map REQ07 "Hell's Gift"
 	intermusic = "MUS_RQIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map REQ08 "The Reactor"
@@ -932,8 +788,6 @@ map REQ08 "The Reactor"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ09 "Deep Down Below"
@@ -944,8 +798,6 @@ map REQ09 "Deep Down Below"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 	
 map REQ10 "The Black Gate"
@@ -956,8 +808,6 @@ map REQ10 "The Black Gate"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ11 "Rats in the Walls"
@@ -968,8 +818,6 @@ map REQ11 "Rats in the Walls"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ12 "Militant Reprisal"
@@ -980,8 +828,6 @@ map REQ12 "Militant Reprisal"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ13 "Town of the Dead"
@@ -992,8 +838,6 @@ map REQ13 "Town of the Dead"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ14 "The portal"
@@ -1004,8 +848,6 @@ map REQ14 "The portal"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 	
 map REQ15 "Last Resort"
@@ -1017,8 +859,6 @@ map REQ15 "Last Resort"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 	
 map REQ16 "Escape From Chaos"
@@ -1029,8 +869,6 @@ map REQ16 "Escape From Chaos"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ17 "Dens of Iniquity"
@@ -1041,8 +879,6 @@ map REQ17 "Dens of Iniquity"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 	
 map REQ18 "Base of Thorn"
@@ -1053,8 +889,6 @@ map REQ18 "Base of Thorn"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ19 "Skinny Puppy"
@@ -1065,8 +899,6 @@ map REQ19 "Skinny Puppy"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 	
 map REQ20 "The Forsaken Hall"
@@ -1077,8 +909,6 @@ map REQ20 "The Forsaken Hall"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ21 "Den of the Skull"
@@ -1089,8 +919,6 @@ map REQ21 "Den of the Skull"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ22 "Arachnophobia"
@@ -1101,8 +929,6 @@ map REQ22 "Arachnophobia"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 	
 map REQ23 "Hatred"
@@ -1113,8 +939,6 @@ map REQ23 "Hatred"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ24 "Procrustes Chambers"
@@ -1125,8 +949,6 @@ map REQ24 "Procrustes Chambers"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ25 "Chaos Zone"
@@ -1137,8 +959,6 @@ map REQ25 "Chaos Zone"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 	
 map REQ26 "Excoriation"
@@ -1149,8 +969,6 @@ map REQ26 "Excoriation"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ27 "Cursed Kingdom"
@@ -1161,8 +979,6 @@ map REQ27 "Cursed Kingdom"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ28 "Fetals' Remains"
@@ -1173,8 +989,6 @@ map REQ28 "Fetals' Remains"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ29 "Downer"
@@ -1185,8 +999,6 @@ map REQ29 "Downer"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ30 "Nevermore"
@@ -1197,8 +1009,6 @@ map REQ30 "Nevermore"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ31 "Doorway to Quake"
@@ -1210,8 +1020,6 @@ map REQ31 "Doorway to Quake"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 map REQ32 "Bitter Herb"
@@ -1222,8 +1030,6 @@ map REQ32 "Bitter Herb"
 	enterpic = "REQINT"
 	exitpic = "REQINT"
 	intermusic = "MUS_RQIN"
-	nocrouch
-	nojump
 	}
 
 // INSERTION
@@ -1236,8 +1042,6 @@ map INS01 "Sabbatical"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 
 map INS02 "Abandoned Station"
@@ -1248,8 +1052,6 @@ map INS02 "Abandoned Station"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 
 map INS03 "Cakewalk"
@@ -1260,8 +1062,6 @@ map INS03 "Cakewalk"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 
 map INS04 "Inner Sanctum"
@@ -1272,8 +1072,6 @@ map INS04 "Inner Sanctum"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 
 map INS05 "Barracks of Hell"
@@ -1284,8 +1082,6 @@ map INS05 "Barracks of Hell"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 
 map INS06 "The Enemy Within"
@@ -1296,8 +1092,6 @@ map INS06 "The Enemy Within"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 
 map INS07 "Military Inferno"
@@ -1310,8 +1104,6 @@ map INS07 "Military Inferno"
 	intermusic = "MUS_ININ"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map INS08 "Toxic Waste Site"
@@ -1322,8 +1114,6 @@ map INS08 "Toxic Waste Site"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 
 map INS09 "Running Scared"
@@ -1334,8 +1124,6 @@ map INS09 "Running Scared"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 	
 map INS10 "Hanford Disaster"
@@ -1346,8 +1134,6 @@ map INS10 "Hanford Disaster"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 
 map INS11 "Focal Point"
@@ -1358,8 +1144,6 @@ map INS11 "Focal Point"
 	enterpic = "INSINT"
 	exitpic = "INSINT"
 	intermusic = "MUS_ININ"
-	nocrouch
-	nojump
 	}
 	
 // OBITUARY
@@ -1372,8 +1156,6 @@ map OBT01 "Entrance"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT02 "The Cataract"
@@ -1384,8 +1166,6 @@ map OBT02 "The Cataract"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT03 "Chambers of Confusion"
@@ -1396,8 +1176,6 @@ map OBT03 "Chambers of Confusion"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT04 "The Church"
@@ -1408,8 +1186,6 @@ map OBT04 "The Church"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT05 "The Hidden Below"
@@ -1420,8 +1196,6 @@ map OBT05 "The Hidden Below"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT06 "Reactor"
@@ -1432,8 +1206,6 @@ map OBT06 "Reactor"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT07 "Slaughter Until Death"
@@ -1446,8 +1218,6 @@ map OBT07 "Slaughter Until Death"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map OBT08 "Observation Station"
@@ -1458,8 +1228,6 @@ map OBT08 "Observation Station"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT09 "Nuclear Research Base"
@@ -1470,8 +1238,6 @@ map OBT09 "Nuclear Research Base"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map OBT10 "The Stand"
@@ -1482,8 +1248,6 @@ map OBT10 "The Stand"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT11 "Incubator of Chaos"
@@ -1494,8 +1258,6 @@ map OBT11 "Incubator of Chaos"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT12 "Biochemical Factory"
@@ -1506,8 +1268,6 @@ map OBT12 "Biochemical Factory"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT13 "Pandemonium II"
@@ -1518,8 +1278,6 @@ map OBT13 "Pandemonium II"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map OBT14 "Halls of the Requiem"
@@ -1530,8 +1288,6 @@ map OBT14 "Halls of the Requiem"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map OBT15 "Castle of Damnation"
@@ -1543,8 +1299,6 @@ map OBT15 "Castle of Damnation"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map OBT16 "Conclusion"
@@ -1555,8 +1309,6 @@ map OBT16 "Conclusion"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map OBT31 "Divine Inferno"
@@ -1567,8 +1319,6 @@ map OBT31 "Divine Inferno"
 	enterpic = "OBTINT"
 	exitpic = "OBTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // STRAIN
@@ -1581,8 +1331,6 @@ map STR01 "Barracks"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR02 "Outskirts"
@@ -1594,8 +1342,6 @@ map STR02 "Outskirts"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map STR03 "Downtown"
@@ -1606,8 +1352,6 @@ map STR03 "Downtown"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR04 "Industrial Zone"
@@ -1618,8 +1362,6 @@ map STR04 "Industrial Zone"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR05 "Depot"
@@ -1630,8 +1372,6 @@ map STR05 "Depot"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR06 "Launch Control"
@@ -1642,8 +1382,6 @@ map STR06 "Launch Control"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR07 "En Route"
@@ -1656,8 +1394,6 @@ map STR07 "En Route"
 	intermusic = "MUS_STIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map STR08 "Hangar"
@@ -1668,8 +1404,6 @@ map STR08 "Hangar"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR09 "Cargo Bay"
@@ -1680,8 +1414,6 @@ map STR09 "Cargo Bay"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 	
 map STR10 "Entryway"
@@ -1692,8 +1424,6 @@ map STR10 "Entryway"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR11 "Command Control"
@@ -1704,8 +1434,6 @@ map STR11 "Command Control"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR12 "Power Station"
@@ -1716,8 +1444,6 @@ map STR12 "Power Station"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR13 "Ruins"
@@ -1728,8 +1454,6 @@ map STR13 "Ruins"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR14 "Engineering"
@@ -1740,8 +1464,6 @@ map STR14 "Engineering"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 	
 map STR15 "Subsidiary Power"
@@ -1753,8 +1475,6 @@ map STR15 "Subsidiary Power"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 	
 map STR16 "Living Quarters"
@@ -1765,8 +1485,6 @@ map STR16 "Living Quarters"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR17 "Promenade"
@@ -1777,8 +1495,6 @@ map STR17 "Promenade"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 	
 map STR18 "Relay Station"
@@ -1789,8 +1505,6 @@ map STR18 "Relay Station"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR19 "Waste Processing"
@@ -1801,8 +1515,6 @@ map STR19 "Waste Processing"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 	
 map STR20 "Reactor"
@@ -1813,8 +1525,6 @@ map STR20 "Reactor"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR21 "Maintenance"
@@ -1825,8 +1535,6 @@ map STR21 "Maintenance"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR22 "Specimen Storage"
@@ -1837,8 +1545,6 @@ map STR22 "Specimen Storage"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 	
 map STR23 "Dispensary Alpha"
@@ -1849,8 +1555,6 @@ map STR23 "Dispensary Alpha"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR24 "Sub-Laboratory"
@@ -1861,8 +1565,6 @@ map STR24 "Sub-Laboratory"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR25 "Main Laboratory"
@@ -1873,8 +1575,6 @@ map STR25 "Main Laboratory"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 	
 map STR26 "Main Laboratory II"
@@ -1885,8 +1585,6 @@ map STR26 "Main Laboratory II"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR27 "Dispensary Beta"
@@ -1897,8 +1595,6 @@ map STR27 "Dispensary Beta"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR28 "Unknown"
@@ -1909,8 +1605,6 @@ map STR28 "Unknown"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR29 "Self-Destruct"
@@ -1921,8 +1615,6 @@ map STR29 "Self-Destruct"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 	
 map STR30 "Boss"
@@ -1933,8 +1625,6 @@ map STR30 "Boss"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 map STR31 "Secret"
@@ -1947,8 +1637,6 @@ map STR31 "Secret"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map STR32 "Super Secret"
@@ -1959,8 +1647,6 @@ map STR32 "Super Secret"
 	enterpic = "STRNINT"
 	exitpic = "STRNINT"
 	intermusic = "MUS_STIN"
-	nocrouch
-	nojump
 	}
 
 // BIOWAR
@@ -1973,8 +1659,6 @@ map BIO01 "The End"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO02 "Terror Core"
@@ -1985,8 +1669,6 @@ map BIO02 "Terror Core"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO03 "Onslaught"
@@ -1997,8 +1679,6 @@ map BIO03 "Onslaught"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO04 "The Arrival"
@@ -2009,8 +1689,6 @@ map BIO04 "The Arrival"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO05 "Skybase"
@@ -2021,8 +1699,6 @@ map BIO05 "Skybase"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO06 "Last Call"
@@ -2033,8 +1709,6 @@ map BIO06 "Last Call"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO07 "Apparatus"
@@ -2047,8 +1721,6 @@ map BIO07 "Apparatus"
 	intermusic = "MUS_BWIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map BIO08 "Biolabs"
@@ -2059,8 +1731,6 @@ map BIO08 "Biolabs"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO09 "Security"
@@ -2071,8 +1741,6 @@ map BIO09 "Security"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 	
 map BIO10 "Dark Woods"
@@ -2083,8 +1751,6 @@ map BIO10 "Dark Woods"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO11 "Frozen Terror"
@@ -2095,8 +1761,6 @@ map BIO11 "Frozen Terror"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO12 "Military Center"
@@ -2107,8 +1771,6 @@ map BIO12 "Military Center"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO13 "UAC Prison"
@@ -2119,8 +1781,6 @@ map BIO13 "UAC Prison"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 map BIO14 "Absolution"
@@ -2131,8 +1791,6 @@ map BIO14 "Absolution"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 	
 map BIO15 "Heat"
@@ -2144,8 +1802,6 @@ map BIO15 "Heat"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 	
 map BIO16 "The Killing Fields"
@@ -2156,8 +1812,6 @@ map BIO16 "The Killing Fields"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 	
 map BIO17 "Sacrilege"
@@ -2168,8 +1822,6 @@ map BIO17 "Sacrilege"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 	
 map BIO18 "Die Heuschrecke"
@@ -2180,8 +1832,6 @@ map BIO18 "Die Heuschrecke"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 	
 map BIO31 "Juggelo Funhouse"
@@ -2192,8 +1842,6 @@ map BIO31 "Juggelo Funhouse"
 	enterpic = "BIOWINT"
 	exitpic = "BIOWINT"
 	intermusic = "MUS_BWIN"
-	nocrouch
-	nojump
 	}
 
 // THE DARKENING
@@ -2206,8 +1854,6 @@ map DRK01 "Scary"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 map DRK02 "Bloody Hell"
@@ -2218,8 +1864,6 @@ map DRK02 "Bloody Hell"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 map DRK03 "Entropia"
@@ -2230,8 +1874,6 @@ map DRK03 "Entropia"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 map DRK04 "Relentless"
@@ -2242,8 +1884,6 @@ map DRK04 "Relentless"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 map DRK05 "Hand of Doom"
@@ -2254,8 +1894,6 @@ map DRK05 "Hand of Doom"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 map DRK06 "The Mines of Death"
@@ -2266,8 +1904,6 @@ map DRK06 "The Mines of Death"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 map DRK07 "Dead Simple II"
@@ -2280,8 +1916,6 @@ map DRK07 "Dead Simple II"
 	intermusic = "MUS_DRIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map DRK08 "Discordia"
@@ -2292,8 +1926,6 @@ map DRK08 "Discordia"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 map DRK09 "Military Complex"
@@ -2304,8 +1936,6 @@ map DRK09 "Military Complex"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 	
 map DRK10 "Under Earth"
@@ -2316,8 +1946,6 @@ map DRK10 "Under Earth"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 map DRK11 "Stone Tyrant"
@@ -2328,8 +1956,6 @@ map DRK11 "Stone Tyrant"
 	enterpic = "DRK1INT"
 	exitpic = "DRK1INT"
 	intermusic = "MUS_DRIN"
-	nocrouch
-	nojump
 	}
 
 // THE TROOPER'S PLAYGROUND
@@ -2342,8 +1968,6 @@ map TTP01 "Welcome"
 	enterpic = "TTPINT"
 	exitpic = "TTPINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map TTP02 "Intrusion"
@@ -2354,8 +1978,6 @@ map TTP02 "Intrusion"
 	enterpic = "TTPINT"
 	exitpic = "TTPINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map TTP03 "Simply Dead..."
@@ -2366,8 +1988,6 @@ map TTP03 "Simply Dead..."
 	enterpic = "TTPINT"
 	exitpic = "TTPINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map TTP04 "Going Down"
@@ -2378,8 +1998,6 @@ map TTP04 "Going Down"
 	enterpic = "TTPINT"
 	exitpic = "TTPINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map TTP05 "Underground Temple"
@@ -2390,8 +2008,6 @@ map TTP05 "Underground Temple"
 	enterpic = "TTPINT"
 	exitpic = "TTPINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map TTP06 "Deep Down Below"
@@ -2402,8 +2018,6 @@ map TTP06 "Deep Down Below"
 	enterpic = "TTPINT"
 	exitpic = "TTPINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map TTP07 "Three 'O Matic"
@@ -2416,8 +2030,6 @@ map TTP07 "Three 'O Matic"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map TTP08 "Star Control"
@@ -2428,8 +2040,6 @@ map TTP08 "Star Control"
 	enterpic = "TTPINT"
 	exitpic = "TTPINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map TTP09 "Deliverence?"
@@ -2440,8 +2050,6 @@ map TTP09 "Deliverence?"
 	enterpic = "TTPINT"
 	exitpic = "TTPINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // PERDITION'S GATE
@@ -2454,8 +2062,6 @@ map PGR01 "Main Gate"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR02 "Interlock"
@@ -2466,8 +2072,6 @@ map PGR02 "Interlock"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR03 "Recreation Yard"
@@ -2478,8 +2082,6 @@ map PGR03 "Recreation Yard"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR04 "Storage Area"
@@ -2490,8 +2092,6 @@ map PGR04 "Storage Area"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR05 "Sub-Basement Entry"
@@ -2502,8 +2102,6 @@ map PGR05 "Sub-Basement Entry"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR06 "Waste Areas"
@@ -2514,8 +2112,6 @@ map PGR06 "Waste Areas"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR07 "Flow Control Facility"
@@ -2528,8 +2124,6 @@ map PGR07 "Flow Control Facility"
 	intermusic = "MUS_PGIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map PGR08 "Drainage Tunnels"
@@ -2540,8 +2134,6 @@ map PGR08 "Drainage Tunnels"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR09 "Hangar"
@@ -2552,8 +2144,6 @@ map PGR09 "Hangar"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR10 "High Security Area"
@@ -2564,8 +2154,6 @@ map PGR10 "High Security Area"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR11 "Secret Teleporter Lab"
@@ -2576,8 +2164,6 @@ map PGR11 "Secret Teleporter Lab"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR12 "Entryway to the Worlds of the Ancients"
@@ -2588,8 +2174,6 @@ map PGR12 "Entryway to the Worlds of the Ancients"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR13 "Distant Worlds"
@@ -2600,8 +2184,6 @@ map PGR13 "Distant Worlds"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR14 "Transfer Locking Area"
@@ -2612,8 +2194,6 @@ map PGR14 "Transfer Locking Area"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR15 "Teleporter Central"
@@ -2625,8 +2205,6 @@ map PGR15 "Teleporter Central"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR16 "The Alien Shrine"
@@ -2637,8 +2215,6 @@ map PGR16 "The Alien Shrine"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR17 "Interdimensional Control"
@@ -2649,8 +2225,6 @@ map PGR17 "Interdimensional Control"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR18 "The Throne of the Vile"
@@ -2661,8 +2235,6 @@ map PGR18 "The Throne of the Vile"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR19 "Closer to Hell"
@@ -2673,8 +2245,6 @@ map PGR19 "Closer to Hell"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR20 "The Last Stand"
@@ -2685,8 +2255,6 @@ map PGR20 "The Last Stand"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR21 "Hell's Gate"
@@ -2697,8 +2265,6 @@ map PGR21 "Hell's Gate"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR22 "The Deepest Reaches"
@@ -2709,8 +2275,6 @@ map PGR22 "The Deepest Reaches"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR23 "Hell's Gymnasium"
@@ -2721,8 +2285,6 @@ map PGR23 "Hell's Gymnasium"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR24 "The BloodStone Gardens of Hell"
@@ -2733,8 +2295,6 @@ map PGR24 "The BloodStone Gardens of Hell"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR25 "Hell's Park"
@@ -2745,8 +2305,6 @@ map PGR25 "Hell's Park"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR26 "The Blood Tunnels"
@@ -2757,8 +2315,6 @@ map PGR26 "The Blood Tunnels"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR27 "Hell's Masterpiece"
@@ -2769,8 +2325,6 @@ map PGR27 "Hell's Masterpiece"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR28 "High-Tech Hades"
@@ -2781,8 +2335,6 @@ map PGR28 "High-Tech Hades"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 
@@ -2794,8 +2346,6 @@ map PGR29 "The Bomb Facility"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR30 "The Escape"
@@ -2806,8 +2356,6 @@ map PGR30 "The Escape"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 map PGR31 "The Planet of Living Rock"
@@ -2819,8 +2367,6 @@ map PGR31 "The Planet of Living Rock"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 	
 map PGR32 "The Sea of Radioactive Waste"
@@ -2831,8 +2377,6 @@ map PGR32 "The Sea of Radioactive Waste"
 	enterpic = "PGINT"
 	exitpic = "PGINT"
 	intermusic = "MUS_PGIN"
-	nocrouch
-	nojump
 	}
 
 // POST
@@ -2845,8 +2389,6 @@ map PST01 "OOOPS"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map PST02 "Hit"
@@ -2857,8 +2399,6 @@ map PST02 "Hit"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map PST03 "I Go Humble"
@@ -2869,8 +2409,6 @@ map PST03 "I Go Humble"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map PST04 "Play Dead"
@@ -2881,8 +2419,6 @@ map PST04 "Play Dead"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map PST05 "Traitor"
@@ -2893,8 +2429,6 @@ map PST05 "Traitor"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map PST06 "Planet"
@@ -2905,8 +2439,6 @@ map PST06 "Planet"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map PST07 "Car Parts"
@@ -2919,8 +2451,6 @@ map PST07 "Car Parts"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map PST08 "Bottles"
@@ -2931,8 +2461,6 @@ map PST08 "Bottles"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map PST09 "Cutlery"
@@ -2943,8 +2471,6 @@ map PST09 "Cutlery"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map PST10 "Shoot Him"
@@ -2955,8 +2481,6 @@ map PST10 "Shoot Him"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map PST11 "Delicious Demon"
@@ -2967,8 +2491,6 @@ map PST11 "Delicious Demon"
 	enterpic = "POSTINT"
 	exitpic = "POSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // REVOLUTION!
@@ -2981,8 +2503,6 @@ map TVR01 "Carnivorous Cargo"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR02 "Depression"
@@ -2993,8 +2513,6 @@ map TVR02 "Depression"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR03 "Infestation"
@@ -3005,8 +2523,6 @@ map TVR03 "Infestation"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR04 "Phobopolis"
@@ -3017,8 +2533,6 @@ map TVR04 "Phobopolis"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR05 "R 'N' R"
@@ -3029,8 +2543,6 @@ map TVR05 "R 'N' R"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR06 "Wasted!"
@@ -3041,8 +2553,6 @@ map TVR06 "Wasted!"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR07 "The Valley of Death"
@@ -3055,8 +2565,6 @@ map TVR07 "The Valley of Death"
 	intermusic = "MUS_TVIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map TVR08 "Rockit"
@@ -3067,8 +2575,6 @@ map TVR08 "Rockit"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR09 "Wrath of Man"
@@ -3079,8 +2585,6 @@ map TVR09 "Wrath of Man"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR10 "Lab of the Lost"
@@ -3091,8 +2595,6 @@ map TVR10 "Lab of the Lost"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR11 "The Transporter"
@@ -3103,8 +2605,6 @@ map TVR11 "The Transporter"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR12 "Utopia"
@@ -3115,8 +2615,6 @@ map TVR12 "Utopia"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR13 "Amok"
@@ -3127,8 +2625,6 @@ map TVR13 "Amok"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR14 "Dead End"
@@ -3139,8 +2635,6 @@ map TVR14 "Dead End"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR15 "Battleground"
@@ -3152,8 +2646,6 @@ map TVR15 "Battleground"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR16 "Utopia Factory"
@@ -3164,8 +2656,6 @@ map TVR16 "Utopia Factory"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR17 "The Miners"
@@ -3176,8 +2666,6 @@ map TVR17 "The Miners"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR18 "XS"
@@ -3188,8 +2676,6 @@ map TVR18 "XS"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR19 "Xenocracy"
@@ -3200,8 +2686,6 @@ map TVR19 "Xenocracy"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR20 "X Mark the Spot"
@@ -3212,8 +2696,6 @@ map TVR20 "X Mark the Spot"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR21 "Hausterium"
@@ -3224,8 +2706,6 @@ map TVR21 "Hausterium"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR22 "Beyond the Oracle"
@@ -3236,8 +2716,6 @@ map TVR22 "Beyond the Oracle"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR23 "Pyramid of Pain"
@@ -3248,8 +2726,6 @@ map TVR23 "Pyramid of Pain"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR24 "The Sect"
@@ -3260,8 +2736,6 @@ map TVR24 "The Sect"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR25 "The Prefect"
@@ -3272,8 +2746,6 @@ map TVR25 "The Prefect"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR26 "Phragmobasidium"
@@ -3284,8 +2756,6 @@ map TVR26 "Phragmobasidium"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR27 "Necrosis"
@@ -3296,8 +2766,6 @@ map TVR27 "Necrosis"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR28 "Exodus"
@@ -3308,8 +2776,6 @@ map TVR28 "Exodus"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR29 "Hall of Maim"
@@ -3320,8 +2786,6 @@ map TVR29 "Hall of Maim"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR30 "The Forgotten God"
@@ -3332,8 +2796,6 @@ map TVR30 "The Forgotten God"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR31 "Raw"
@@ -3345,8 +2807,6 @@ map TVR31 "Raw"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 	
 map TVR32 "'Zombie Or Not To Be'"
@@ -3357,8 +2817,6 @@ map TVR32 "'Zombie Or Not To Be'"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 map TVR33 "Revoltlover"
@@ -3369,8 +2827,6 @@ map TVR33 "Revoltlover"
 	enterpic = "TVRINT"
 	exitpic = "TVRINT"
 	intermusic = "MUS_TVIN"
-	nocrouch
-	nojump
 	}
 
 // SCIENTIST 2
@@ -3383,8 +2839,6 @@ map SCI01 "The Scientist"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI02 "Kapital"
@@ -3395,8 +2849,6 @@ map SCI02 "Kapital"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI03 "Prosperity"
@@ -3407,8 +2859,6 @@ map SCI03 "Prosperity"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI04 "Refinery"
@@ -3419,8 +2869,6 @@ map SCI04 "Refinery"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI05 "Reservoir"
@@ -3431,8 +2879,6 @@ map SCI05 "Reservoir"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI06 "Construction Yard"
@@ -3443,8 +2889,6 @@ map SCI06 "Construction Yard"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI07 "Siberia"
@@ -3457,8 +2901,6 @@ map SCI07 "Siberia"
 	intermusic = "MUS_S2IN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map SCI08 "Frostbite"
@@ -3469,8 +2911,6 @@ map SCI08 "Frostbite"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI09 "Bio Lab"
@@ -3481,8 +2921,6 @@ map SCI09 "Bio Lab"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 	
 map SCI10 "Dark and Cold"
@@ -3493,8 +2931,6 @@ map SCI10 "Dark and Cold"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI11 "Pure as Snow"
@@ -3505,8 +2941,6 @@ map SCI11 "Pure as Snow"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI12 "Crown of Thorns"
@@ -3517,8 +2951,6 @@ map SCI12 "Crown of Thorns"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI13 "Cursed Ground"
@@ -3529,8 +2961,6 @@ map SCI13 "Cursed Ground"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI14 "Dogma"
@@ -3541,8 +2971,6 @@ map SCI14 "Dogma"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 	
 map SCI15 "Son of Man"
@@ -3553,8 +2981,6 @@ map SCI15 "Son of Man"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 	
 map SCI16 "Zarathustra"
@@ -3565,8 +2991,6 @@ map SCI16 "Zarathustra"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI17 "Second Horseman"
@@ -3577,8 +3001,6 @@ map SCI17 "Second Horseman"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 	
 map SCI18 "Zilzal"
@@ -3589,8 +3011,6 @@ map SCI18 "Zilzal"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 map SCI19 "Crown of Creation"
@@ -3601,8 +3021,6 @@ map SCI19 "Crown of Creation"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 	
 map SCI20 "Mount of Congregation"
@@ -3613,8 +3031,6 @@ map SCI20 "Mount of Congregation"
 	enterpic = "SCI2INT"
 	exitpic = "SCI2INT"
 	intermusic = "MUS_S2IN"
-	nocrouch
-	nojump
 	}
 
 // ICARUS ALIEN VANGUARD
@@ -3627,8 +3043,6 @@ map ICA01 "Shuttlecraft"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA02 "Shuttle Bay"
@@ -3639,8 +3053,6 @@ map ICA02 "Shuttle Bay"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA03 "Quarry"
@@ -3651,8 +3063,6 @@ map ICA03 "Quarry"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA04 "Engineering"
@@ -3663,8 +3073,6 @@ map ICA04 "Engineering"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA05 "Flipside"
@@ -3675,8 +3083,6 @@ map ICA05 "Flipside"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA06 "P.E.T. Rescue"
@@ -3687,8 +3093,6 @@ map ICA06 "P.E.T. Rescue"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA07 "Sickbay"
@@ -3701,8 +3105,6 @@ map ICA07 "Sickbay"
 	intermusic = "MUS_ICIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map ICA08 "Donnybrook"
@@ -3713,8 +3115,6 @@ map ICA08 "Donnybrook"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA09 "The Moat"
@@ -3725,8 +3125,6 @@ map ICA09 "The Moat"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA10 "Bridge"
@@ -3737,8 +3135,6 @@ map ICA10 "Bridge"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA11 "Feeding Frenzy"
@@ -3749,8 +3145,6 @@ map ICA11 "Feeding Frenzy"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA12 "Hydroponics"
@@ -3761,8 +3155,6 @@ map ICA12 "Hydroponics"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA13 "Asylum"
@@ -3773,8 +3165,6 @@ map ICA13 "Asylum"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA14 "Fortress of Evil"
@@ -3785,8 +3175,6 @@ map ICA14 "Fortress of Evil"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA15 "Waste Disposal"
@@ -3798,8 +3186,6 @@ map ICA15 "Waste Disposal"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA16 "Bootcamp"
@@ -3810,8 +3196,6 @@ map ICA16 "Bootcamp"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA17 "Bloodbath"
@@ -3822,8 +3206,6 @@ map ICA17 "Bloodbath"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA18 "Cargo Bay"
@@ -3834,8 +3216,6 @@ map ICA18 "Cargo Bay"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA19 "Blessed are the Quick"
@@ -3846,8 +3226,6 @@ map ICA19 "Blessed are the Quick"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA20 "WarTemple"
@@ -3858,8 +3236,6 @@ map ICA20 "WarTemple"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA21 "Engine Core"
@@ -3870,8 +3246,6 @@ map ICA21 "Engine Core"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA22 "Nightfall"
@@ -3882,8 +3256,6 @@ map ICA22 "Nightfall"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA23 "Painful Discharge"
@@ -3894,8 +3266,6 @@ map ICA23 "Painful Discharge"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA24 "The Haunting"
@@ -3906,8 +3276,6 @@ map ICA24 "The Haunting"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA25 "Another Fine Mess"
@@ -3918,8 +3286,6 @@ map ICA25 "Another Fine Mess"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA26 "Weapons Bay"
@@ -3930,8 +3296,6 @@ map ICA26 "Weapons Bay"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA27 "Starhenge"
@@ -3942,8 +3306,6 @@ map ICA27 "Starhenge"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA28 "Excavations"
@@ -3954,8 +3316,6 @@ map ICA28 "Excavations"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA29 "Brutality"
@@ -3966,8 +3326,6 @@ map ICA29 "Brutality"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA30 "Nucleus"
@@ -3978,8 +3336,6 @@ map ICA30 "Nucleus"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 map ICA31 "Great Balls of Fire"
@@ -3991,8 +3347,6 @@ map ICA31 "Great Balls of Fire"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 	
 map ICA32 "Prestidigitation"
@@ -4003,8 +3357,6 @@ map ICA32 "Prestidigitation"
 	enterpic = "ICARINT"
 	exitpic = "ICARINT"
 	intermusic = "MUS_ICIN"
-	nocrouch
-	nojump
 	}
 
 // HELL TO PAY
@@ -4017,8 +3369,6 @@ map HTP01 "The Holding Cells"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP02 "The Slave Quarters"
@@ -4029,8 +3379,6 @@ map HTP02 "The Slave Quarters"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP03 "The Mines"
@@ -4041,8 +3389,6 @@ map HTP03 "The Mines"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP04 "Nukage Processing"
@@ -4053,8 +3399,6 @@ map HTP04 "Nukage Processing"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP05 "Trustee Country"
@@ -4065,8 +3409,6 @@ map HTP05 "Trustee Country"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP06 "Command and Control"
@@ -4077,8 +3419,6 @@ map HTP06 "Command and Control"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP07 "The Industrial Park"
@@ -4091,8 +3431,6 @@ map HTP07 "The Industrial Park"
 	intermusic = "MUS_HPIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map HTP08 "The Warehouse"
@@ -4103,8 +3441,6 @@ map HTP08 "The Warehouse"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP09 "The Military Complex"
@@ -4115,8 +3451,6 @@ map HTP09 "The Military Complex"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 	
 map HTP10 "The Liquid Metal Labs"
@@ -4127,8 +3461,6 @@ map HTP10 "The Liquid Metal Labs"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP11 "The Space Port"
@@ -4139,8 +3471,6 @@ map HTP11 "The Space Port"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP12 "The Cargo Hold"
@@ -4151,8 +3481,6 @@ map HTP12 "The Cargo Hold"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP13 "The Engine Room"
@@ -4163,8 +3491,6 @@ map HTP13 "The Engine Room"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP14 "The Habitat Deck"
@@ -4175,8 +3501,6 @@ map HTP14 "The Habitat Deck"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 	
 map HTP15 "Captain Bellows"
@@ -4188,8 +3512,6 @@ map HTP15 "Captain Bellows"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 	
 map HTP16 "Io Base"
@@ -4200,8 +3522,6 @@ map HTP16 "Io Base"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP17 "Hot as Hell"
@@ -4212,8 +3532,6 @@ map HTP17 "Hot as Hell"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 	
 map HTP18 "Big Crane"
@@ -4224,8 +3542,6 @@ map HTP18 "Big Crane"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP19 "Demon Chow"
@@ -4236,8 +3552,6 @@ map HTP19 "Demon Chow"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 	
 map HTP20 "Master Computer"
@@ -4248,8 +3562,6 @@ map HTP20 "Master Computer"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP21 "Planet Hell"
@@ -4260,8 +3572,6 @@ map HTP21 "Planet Hell"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP22 "Vile Temple"
@@ -4272,8 +3582,6 @@ map HTP22 "Vile Temple"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP23 "Hell's Cavern"
@@ -4284,8 +3592,6 @@ map HTP23 "Hell's Cavern"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP24 "Hell's Park"
@@ -4296,8 +3602,6 @@ map HTP24 "Hell's Park"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP25 "Hell's Gauntlet"
@@ -4308,8 +3612,6 @@ map HTP25 "Hell's Gauntlet"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP26 "Circle of Hell"
@@ -4320,8 +3622,6 @@ map HTP26 "Circle of Hell"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP27 "Hell Squared"
@@ -4332,8 +3632,6 @@ map HTP27 "Hell Squared"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP28 "Neophyte Reception"
@@ -4344,8 +3642,6 @@ map HTP28 "Neophyte Reception"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP29 "Initiation"
@@ -4356,8 +3652,6 @@ map HTP29 "Initiation"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP30 "Sky High"
@@ -4368,8 +3662,6 @@ map HTP30 "Sky High"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP31 "Secret Facility"
@@ -4381,8 +3673,6 @@ map HTP31 "Secret Facility"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 map HTP32 "Self-Destruct"
@@ -4393,8 +3683,6 @@ map HTP32 "Self-Destruct"
 	enterpic = "HTPINT"
 	exitpic = "HTPINT"
 	intermusic = "MUS_HPIN"
-	nocrouch
-	nojump
 	}
 
 // THE ABYSS
@@ -4407,8 +3695,6 @@ map ABY01 "Pink Horde"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY02 "The Catacombs"
@@ -4419,8 +3705,6 @@ map ABY02 "The Catacombs"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY03 "Avernus"
@@ -4431,8 +3715,6 @@ map ABY03 "Avernus"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY04 "The Nunnery"
@@ -4443,8 +3725,6 @@ map ABY04 "The Nunnery"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY05 "Imp Madness"
@@ -4455,8 +3735,6 @@ map ABY05 "Imp Madness"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY06 "Not Level"
@@ -4467,8 +3745,6 @@ map ABY06 "Not Level"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY07 "The Cube"
@@ -4481,8 +3757,6 @@ map ABY07 "The Cube"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map ABY08 "The Theatre"
@@ -4493,8 +3767,6 @@ map ABY08 "The Theatre"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY09 "Bloodstream"
@@ -4505,8 +3777,6 @@ map ABY09 "Bloodstream"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map ABY10 "Hangar"
@@ -4517,8 +3787,6 @@ map ABY10 "Hangar"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY11 "Stone Henge"
@@ -4529,8 +3797,6 @@ map ABY11 "Stone Henge"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY12 "The Square"
@@ -4541,8 +3807,6 @@ map ABY12 "The Square"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY13 "The Library"
@@ -4553,8 +3817,6 @@ map ABY13 "The Library"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY14 "Arabesque"
@@ -4565,8 +3827,6 @@ map ABY14 "Arabesque"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map ABY15 "Satan's Cross"
@@ -4578,8 +3838,6 @@ map ABY15 "Satan's Cross"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map ABY16 "The Grand Tower"
@@ -4590,8 +3848,6 @@ map ABY16 "The Grand Tower"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY17 "Light and Darkness"
@@ -4602,8 +3858,6 @@ map ABY17 "Light and Darkness"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map ABY18 "Short 'n Sweet"
@@ -4614,8 +3868,6 @@ map ABY18 "Short 'n Sweet"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY19 "The Pits of Doom"
@@ -4626,8 +3878,6 @@ map ABY19 "The Pits of Doom"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map ABY20 "The Cray"
@@ -4638,8 +3888,6 @@ map ABY20 "The Cray"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY21 "Heretic Factor"
@@ -4650,8 +3898,6 @@ map ABY21 "Heretic Factor"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY22 "Basilica"
@@ -4662,8 +3908,6 @@ map ABY22 "Basilica"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ABY31 "The Temple"
@@ -4675,8 +3919,6 @@ map ABY31 "The Temple"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map ABY32 "Spider Bowl"
@@ -4687,8 +3929,6 @@ map ABY32 "Spider Bowl"
 	enterpic = "ABYSINT"
 	exitpic = "ABYSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // THE TALOSIAN INCIDENT
@@ -4701,8 +3941,6 @@ map TAL01 "The Transport"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL02 "Desolation"
@@ -4713,8 +3951,6 @@ map TAL02 "Desolation"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL03 "The Cliff Top Fort"
@@ -4725,8 +3961,6 @@ map TAL03 "The Cliff Top Fort"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL04 "The Chapel"
@@ -4737,8 +3971,6 @@ map TAL04 "The Chapel"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL05 "The Fort - I"
@@ -4749,8 +3981,6 @@ map TAL05 "The Fort - I"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL06 "The Fort - II"
@@ -4761,8 +3991,6 @@ map TAL06 "The Fort - II"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL07 "The Church"
@@ -4775,8 +4003,6 @@ map TAL07 "The Church"
 	intermusic = "MUS_TIIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map TAL08 "Focus"
@@ -4787,8 +4013,6 @@ map TAL08 "Focus"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL09 "The Palace"
@@ -4799,8 +4023,6 @@ map TAL09 "The Palace"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL10 "Hardware"
@@ -4811,8 +4033,6 @@ map TAL10 "Hardware"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL11 "Software"
@@ -4823,8 +4043,6 @@ map TAL11 "Software"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL12 "Vulcan"
@@ -4835,8 +4053,6 @@ map TAL12 "Vulcan"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL13 "Get the hell out"
@@ -4847,8 +4063,6 @@ map TAL13 "Get the hell out"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL14 "Beneath"
@@ -4859,8 +4073,6 @@ map TAL14 "Beneath"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL15 "Solvent"
@@ -4872,8 +4084,6 @@ map TAL15 "Solvent"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL16 "The Canyons"
@@ -4884,8 +4094,6 @@ map TAL16 "The Canyons"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL17 "The Great Outdoors"
@@ -4896,8 +4104,6 @@ map TAL17 "The Great Outdoors"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL18 "Hi Honey, I'm Home"
@@ -4908,8 +4114,6 @@ map TAL18 "Hi Honey, I'm Home"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL31 "Inferno Revisited"
@@ -4921,8 +4125,6 @@ map TAL31 "Inferno Revisited"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 map TAL32 "Portals"
@@ -4933,8 +4135,6 @@ map TAL32 "Portals"
 	enterpic = "TALOINT"
 	exitpic = "TALOINT"
 	intermusic = "MUS_TIIN"
-	nocrouch
-	nojump
 	}
 
 // ALL HELL IS BREAKING LOOSE!
@@ -4947,8 +4147,6 @@ map ALH01 "Home Sick"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_ALHI"
-	nocrouch
-	nojump
 	}
 
 map ALH02 "Shaft"
@@ -4959,8 +4157,6 @@ map ALH02 "Shaft"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_ALHI"
-	nocrouch
-	nojump
 	}
 
 map ALH03 "Bridge to Damnation"
@@ -4971,8 +4167,6 @@ map ALH03 "Bridge to Damnation"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_ALHI"
-	nocrouch
-	nojump
 	}
 
 map ALH04 "Cave of Death"
@@ -4983,8 +4177,6 @@ map ALH04 "Cave of Death"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_ALHI"
-	nocrouch
-	nojump
 	}
 
 map ALH05 "Fiendish City"
@@ -4995,8 +4187,6 @@ map ALH05 "Fiendish City"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_ALHI"
-	nocrouch
-	nojump
 	}
 
 // ENIGMA
@@ -5009,8 +4199,6 @@ map ENI01 "Mt Doom"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENI02 "Rings"
@@ -5021,8 +4209,6 @@ map ENI02 "Rings"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENI03 "Twisted"
@@ -5033,8 +4219,6 @@ map ENI03 "Twisted"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENI04 "Gulch"
@@ -5045,8 +4229,6 @@ map ENI04 "Gulch"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENI05 "The Wheel"
@@ -5057,8 +4239,6 @@ map ENI05 "The Wheel"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENI06 "Triplet"
@@ -5069,8 +4249,6 @@ map ENI06 "Triplet"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENI07 "Wack"
@@ -5083,8 +4261,6 @@ map ENI07 "Wack"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map ENI08 "The Tower"
@@ -5095,8 +4271,6 @@ map ENI08 "The Tower"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENI09 "The Citadel"
@@ -5107,8 +4281,6 @@ map ENI09 "The Citadel"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // REALM OF CHAOS
@@ -5121,8 +4293,6 @@ map RLM01 "Dropoff"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM02 "Outpost 27"
@@ -5133,8 +4303,6 @@ map RLM02 "Outpost 27"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM03 "Mars Base Alpha"
@@ -5145,8 +4313,6 @@ map RLM03 "Mars Base Alpha"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM04 "Sewers"
@@ -5157,8 +4323,6 @@ map RLM04 "Sewers"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM05 "Mission Control"
@@ -5169,8 +4333,6 @@ map RLM05 "Mission Control"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM06 "Splatterhouse"
@@ -5181,8 +4343,6 @@ map RLM06 "Splatterhouse"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM07 "Deathstay"
@@ -5195,8 +4355,6 @@ map RLM07 "Deathstay"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map RLM08 "Research Lab"
@@ -5207,8 +4365,6 @@ map RLM08 "Research Lab"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM09 "Machine Gun Etiquette"
@@ -5219,8 +4375,6 @@ map RLM09 "Machine Gun Etiquette"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map RLM10 "Hollow Oblivion"
@@ -5231,8 +4385,6 @@ map RLM10 "Hollow Oblivion"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM11 "Mars Starport"
@@ -5243,8 +4395,6 @@ map RLM11 "Mars Starport"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM12 "Home Sweet Home"
@@ -5255,8 +4405,6 @@ map RLM12 "Home Sweet Home"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM13 "Bloodlands"
@@ -5267,8 +4415,6 @@ map RLM13 "Bloodlands"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM14 "Die Hard"
@@ -5279,8 +4425,6 @@ map RLM14 "Die Hard"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map RLM15 "Infestation"
@@ -5292,8 +4436,6 @@ map RLM15 "Infestation"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map RLM16 "The Wolf's Hour"
@@ -5304,8 +4446,6 @@ map RLM16 "The Wolf's Hour"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM17 "No Escape"
@@ -5316,8 +4456,6 @@ map RLM17 "No Escape"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map RLM18 "Dead Radio"
@@ -5328,8 +4466,6 @@ map RLM18 "Dead Radio"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM19 "Port Fury"
@@ -5340,8 +4476,6 @@ map RLM19 "Port Fury"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map RLM20 "Teleporter Central"
@@ -5352,8 +4486,6 @@ map RLM20 "Teleporter Central"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM21 "Prison"
@@ -5364,8 +4496,6 @@ map RLM21 "Prison"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM22 "Nova Akropola"
@@ -5376,8 +4506,6 @@ map RLM22 "Nova Akropola"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM23 "Ancalagon"
@@ -5388,8 +4516,6 @@ map RLM23 "Ancalagon"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM24 "Burnt Guts"
@@ -5400,8 +4526,6 @@ map RLM24 "Burnt Guts"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM25 "Castle of the Hellknights"
@@ -5412,8 +4536,6 @@ map RLM25 "Castle of the Hellknights"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM26 "Above and Below"
@@ -5424,8 +4546,6 @@ map RLM26 "Above and Below"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM27 "Venom"
@@ -5436,8 +4556,6 @@ map RLM27 "Venom"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM28 "Fortress of Death"
@@ -5448,8 +4566,6 @@ map RLM28 "Fortress of Death"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM29 "The Fountain"
@@ -5460,8 +4576,6 @@ map RLM29 "The Fountain"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM30 "Apocalypse"
@@ -5472,8 +4586,6 @@ map RLM30 "Apocalypse"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM31 "The Mansion"
@@ -5485,8 +4597,6 @@ map RLM31 "The Mansion"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map RLM32 "Nowhere to Hide"
@@ -5497,8 +4607,6 @@ map RLM32 "Nowhere to Hide"
 	enterpic = "RLMCINT"
 	exitpic = "RLMCINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // DYSTOPIA 3
@@ -5511,8 +4619,6 @@ map DYS01 "Map01"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYS02 "Map02"
@@ -5523,8 +4629,6 @@ map DYS02 "Map02"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYS03 "Map03"
@@ -5535,8 +4639,6 @@ map DYS03 "Map03"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYS04 "Map04"
@@ -5547,8 +4649,6 @@ map DYS04 "Map04"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYS05 "Map05"
@@ -5559,8 +4659,6 @@ map DYS05 "Map05"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYS06 "Map06"
@@ -5571,8 +4669,6 @@ map DYS06 "Map06"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYS07 "Map07"
@@ -5585,8 +4681,6 @@ map DYS07 "Map07"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map DYS08 "Map08"
@@ -5597,8 +4691,6 @@ map DYS08 "Map08"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYS09 "Map09"
@@ -5609,8 +4701,6 @@ map DYS09 "Map09"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map DYS10 "Map10"
@@ -5621,8 +4711,6 @@ map DYS10 "Map10"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYS11 "Map11"
@@ -5633,8 +4721,6 @@ map DYS11 "Map11"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map DYSXTRA "Add-on Level"
@@ -5645,8 +4731,6 @@ map DYSXTRA "Add-on Level"
 	enterpic = "DYSTINT"
 	exitpic = "DYSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // ETERNAL DOOM
@@ -5659,8 +4743,6 @@ map ETE01 "Genesis"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE02 "Tower of Hell"
@@ -5671,8 +4753,6 @@ map ETE02 "Tower of Hell"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE03 "Inter-Base"
@@ -5684,8 +4764,6 @@ map ETE03 "Inter-Base"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
 	//compat_stairs = 1
-	nocrouch
-	nojump
 	}
 
 map ETE04 "Nucleus"
@@ -5696,8 +4774,6 @@ map ETE04 "Nucleus"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE05 "Time Gate"
@@ -5708,8 +4784,6 @@ map ETE05 "Time Gate"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE06 "Pathos"
@@ -5720,8 +4794,6 @@ map ETE06 "Pathos"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE07 "The Abbey"
@@ -5734,8 +4806,6 @@ map ETE07 "The Abbey"
 	intermusic = "MUS_EDIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map ETE08 "Woodhead"
@@ -5746,8 +4816,6 @@ map ETE08 "Woodhead"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE09 "Forlorn Fortress"
@@ -5758,8 +4826,6 @@ map ETE09 "Forlorn Fortress"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 	
 map ETE10 "Crimson Tide"
@@ -5770,8 +4836,6 @@ map ETE10 "Crimson Tide"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE11 "Dawn of the Dead"
@@ -5782,8 +4846,6 @@ map ETE11 "Dawn of the Dead"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE12 "Darkdome"
@@ -5794,8 +4856,6 @@ map ETE12 "Darkdome"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE13 "Drop 'Em!"
@@ -5806,8 +4866,6 @@ map ETE13 "Drop 'Em!"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE14 "Pistol Only"
@@ -5818,8 +4876,6 @@ map ETE14 "Pistol Only"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 	
 map ETE15 "Celebration of Evil"
@@ -5831,8 +4887,6 @@ map ETE15 "Celebration of Evil"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 	
 map ETE16 "Guardstation"
@@ -5843,8 +4897,6 @@ map ETE16 "Guardstation"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE17 "The Crypt"
@@ -5855,8 +4907,6 @@ map ETE17 "The Crypt"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 	
 map ETE18 "Stands"
@@ -5867,8 +4917,6 @@ map ETE18 "Stands"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE19 "Warheros"
@@ -5879,8 +4927,6 @@ map ETE19 "Warheros"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 	
 map ETE20 "Silures"
@@ -5891,8 +4937,6 @@ map ETE20 "Silures"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE21 "Fire and Stone"
@@ -5903,8 +4947,6 @@ map ETE21 "Fire and Stone"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE22 "The Seeker"
@@ -5915,8 +4957,6 @@ map ETE22 "The Seeker"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 	
 map ETE23 "Time Gate II"
@@ -5927,8 +4967,6 @@ map ETE23 "Time Gate II"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE24 "Rainbow Bridge"
@@ -5939,8 +4977,6 @@ map ETE24 "Rainbow Bridge"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE25 "Beginner's End"
@@ -5953,8 +4989,6 @@ map ETE25 "Beginner's End"
 	intermusic = "MUS_EDIN"
 	compat_stairs = 1
 	compat_maskedmidtex = 1
-	nocrouch
-	nojump
 	}
 	
 map ETE26 "No Parking"
@@ -5965,8 +4999,6 @@ map ETE26 "No Parking"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE27 "Paldorian"
@@ -5977,8 +5009,6 @@ map ETE27 "Paldorian"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE28 "Timeslip"
@@ -5991,8 +5021,6 @@ map ETE28 "Timeslip"
 	intermusic = "MUS_EDIN"
 	compat_trace = 1
 	compat_useblocking = 1
-	nocrouch
-	nojump
 	}
 
 map ETE29 "Dominion"
@@ -6003,8 +5031,6 @@ map ETE29 "Dominion"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 	
 map ETE30 "Excalibur"
@@ -6015,8 +5041,6 @@ map ETE30 "Excalibur"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE31 "Monster Mansion"
@@ -6028,8 +5052,6 @@ map ETE31 "Monster Mansion"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 	
 map ETE32 "Halls of Disarray"
@@ -6040,8 +5062,6 @@ map ETE32 "Halls of Disarray"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE33 "CyberSweeper"
@@ -6052,8 +5072,6 @@ map ETE33 "CyberSweeper"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 map ETE34 "Credits"
@@ -6064,8 +5082,6 @@ map ETE34 "Credits"
 	enterpic = "ETERNINT"
 	exitpic = "ETERNINT"
 	intermusic = "MUS_EDIN"
-	nocrouch
-	nojump
 	}
 
 // REBIRTH
@@ -6078,8 +5094,6 @@ map REB01 "Operator"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB02 "Outer Base"
@@ -6090,8 +5104,6 @@ map REB02 "Outer Base"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB03 "Paranoya"
@@ -6102,8 +5114,6 @@ map REB03 "Paranoya"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB04 "Sewage"
@@ -6114,8 +5124,6 @@ map REB04 "Sewage"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB05 "The Complex"
@@ -6126,8 +5134,6 @@ map REB05 "The Complex"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB06 "Colossus"
@@ -6138,8 +5144,6 @@ map REB06 "Colossus"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB07 "Cremation"
@@ -6152,8 +5156,6 @@ map REB07 "Cremation"
 	intermusic = "MUS_RBIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map REB08 "Pump Station"
@@ -6164,8 +5166,6 @@ map REB08 "Pump Station"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB09 "The Depot"
@@ -6176,8 +5176,6 @@ map REB09 "The Depot"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 	
 map REB10 "The Machine"
@@ -6188,8 +5186,6 @@ map REB10 "The Machine"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB11 "Teleporter Center"
@@ -6200,8 +5196,6 @@ map REB11 "Teleporter Center"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB12 "Home!?"
@@ -6212,8 +5206,6 @@ map REB12 "Home!?"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB13 "Condemned Streets"
@@ -6224,8 +5216,6 @@ map REB13 "Condemned Streets"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB14 "The Undertown"
@@ -6236,8 +5226,6 @@ map REB14 "The Undertown"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 	
 map REB15 "Ugly Halls"
@@ -6249,8 +5237,6 @@ map REB15 "Ugly Halls"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 	
 map REB16 "The Musty Ones"
@@ -6261,8 +5247,6 @@ map REB16 "The Musty Ones"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB17 "Xenophob"
@@ -6273,8 +5257,6 @@ map REB17 "Xenophob"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 	
 map REB18 "Death Pit"
@@ -6285,8 +5267,6 @@ map REB18 "Death Pit"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB19 "House of Pain"
@@ -6297,8 +5277,6 @@ map REB19 "House of Pain"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 	
 map REB20 "The Gateway"
@@ -6309,8 +5287,6 @@ map REB20 "The Gateway"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB21 "River of Flames"
@@ -6321,8 +5297,6 @@ map REB21 "River of Flames"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB22 "Withered Fields"
@@ -6333,8 +5307,6 @@ map REB22 "Withered Fields"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB23 "Dark Arena"
@@ -6345,8 +5317,6 @@ map REB23 "Dark Arena"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB24 "Hall of Despair"
@@ -6357,8 +5327,6 @@ map REB24 "Hall of Despair"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB25 "The Tower"
@@ -6369,8 +5337,6 @@ map REB25 "The Tower"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB26 "Burning Canals"
@@ -6381,8 +5347,6 @@ map REB26 "Burning Canals"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB27 "Wired Hive"
@@ -6393,8 +5357,6 @@ map REB27 "Wired Hive"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB28 "Netherworld"
@@ -6405,8 +5367,6 @@ map REB28 "Netherworld"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB29 "The Abyss"
@@ -6417,8 +5377,6 @@ map REB29 "The Abyss"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB30 "Hells Innards"
@@ -6429,8 +5387,6 @@ map REB30 "Hells Innards"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB31 "Snowed-in Mansion"
@@ -6442,8 +5398,6 @@ map REB31 "Snowed-in Mansion"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 map REB32 "Zoo"
@@ -6454,8 +5408,6 @@ map REB32 "Zoo"
 	enterpic = "RBRINT"
 	exitpic = "RBRINT"
 	intermusic = "MUS_RBIN"
-	nocrouch
-	nojump
 	}
 
 // SCYTHE
@@ -6468,8 +5420,6 @@ map SCY01 "Get Going"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY02 "Punchline"
@@ -6480,8 +5430,6 @@ map SCY02 "Punchline"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY03 "Up and Around"
@@ -6492,8 +5440,6 @@ map SCY03 "Up and Around"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY04 "Lost Warehouse"
@@ -6504,8 +5450,6 @@ map SCY04 "Lost Warehouse"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY05 "Slimy Tunnels"
@@ -6516,8 +5460,6 @@ map SCY05 "Slimy Tunnels"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY06 "Pressure Point"
@@ -6528,8 +5470,6 @@ map SCY06 "Pressure Point"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY07 "Deadly"
@@ -6542,8 +5482,6 @@ map SCY07 "Deadly"
 	intermusic = "MUS_SYIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map SCY08 "Garden Base"
@@ -6554,8 +5492,6 @@ map SCY08 "Garden Base"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY09 "Computer Storage"
@@ -6566,8 +5502,6 @@ map SCY09 "Computer Storage"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 	
 map SCY10 "The Lords"
@@ -6578,8 +5512,6 @@ map SCY10 "The Lords"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY11 "Sneak Peak"
@@ -6590,8 +5522,6 @@ map SCY11 "Sneak Peak"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY12 "Walk in the Park"
@@ -6602,8 +5532,6 @@ map SCY12 "Walk in the Park"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY13 "Subverted Base"
@@ -6614,8 +5542,6 @@ map SCY13 "Subverted Base"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY14 "Power Outage"
@@ -6626,8 +5552,6 @@ map SCY14 "Power Outage"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 	
 map SCY15 "Blood Bath"
@@ -6639,8 +5563,6 @@ map SCY15 "Blood Bath"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 	
 map SCY16 "Burial Grounds"
@@ -6651,8 +5573,6 @@ map SCY16 "Burial Grounds"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY17 "Book Lords"
@@ -6663,8 +5583,6 @@ map SCY17 "Book Lords"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 	
 map SCY18 "M/S Futura"
@@ -6675,8 +5593,6 @@ map SCY18 "M/S Futura"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY19 "3000 AD"
@@ -6687,8 +5603,6 @@ map SCY19 "3000 AD"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 	
 map SCY20 "The Starport"
@@ -6699,8 +5613,6 @@ map SCY20 "The Starport"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY21 "Solitude"
@@ -6711,8 +5623,6 @@ map SCY21 "Solitude"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY22 "Despair"
@@ -6723,8 +5633,6 @@ map SCY22 "Despair"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 	
 map SCY23 "Anger"
@@ -6735,8 +5643,6 @@ map SCY23 "Anger"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY24 "Hatred"
@@ -6747,8 +5653,6 @@ map SCY24 "Hatred"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY25 "Envy"
@@ -6759,8 +5663,6 @@ map SCY25 "Envy"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 	
 map SCY26 "Fear"
@@ -6771,8 +5673,6 @@ map SCY26 "Fear"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY27 "Terror"
@@ -6783,8 +5683,6 @@ map SCY27 "Terror"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY28 "Run From It"
@@ -6795,8 +5693,6 @@ map SCY28 "Run From It"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY29 "Hell on Earth"
@@ -6807,8 +5703,6 @@ map SCY29 "Hell on Earth"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 	
 map SCY30 "Fire and Ice"
@@ -6819,8 +5713,6 @@ map SCY30 "Fire and Ice"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY31 "I Dunno Torn"
@@ -6832,8 +5724,6 @@ map SCY31 "I Dunno Torn"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 map SCY32 "Enoz Soahc"
@@ -6844,8 +5734,6 @@ map SCY32 "Enoz Soahc"
 	enterpic = "SCYINT"
 	exitpic = "SCYINT"
 	intermusic = "MUS_SYIN"
-	nocrouch
-	nojump
 	}
 
 // CAVERNS OF DARKNESS
@@ -6861,8 +5749,6 @@ map COD01 "Surface"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 
 map COD02 "Six Feet Under"
@@ -6877,8 +5763,6 @@ map COD02 "Six Feet Under"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 
 map COD03 "Hell & High Water"
@@ -6905,8 +5789,6 @@ map COD04 "Hydrosfear"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 
 map COD05 "Command Control"
@@ -6921,10 +5803,6 @@ map COD05 "Command Control"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
-	nocrouch
-	nojump
 	}
 
 map COD06 "Perditions Abyss"
@@ -6938,8 +5816,6 @@ map COD06 "Perditions Abyss"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 
 map COD07 "Lava Processing"
@@ -6954,8 +5830,6 @@ map COD07 "Lava Processing"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 	
 map COD08 "The Pit"
@@ -6969,8 +5843,6 @@ map COD08 "The Pit"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 
 map COD09 "Hellmine"
@@ -6984,8 +5856,6 @@ map COD09 "Hellmine"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 	
 map COD10 "Caverns of Darkness"
@@ -6999,8 +5869,6 @@ map COD10 "Caverns of Darkness"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 
 map COD11 "Symbol of Grace"
@@ -7015,8 +5883,6 @@ map COD11 "Symbol of Grace"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 
 map COD12 "The Stand"
@@ -7031,8 +5897,6 @@ map COD12 "The Stand"
 	Translator = "codxlat.txt"
 	additive_scrollers
 	evenlighting
-	nocrouch
-	nojump
 	}
 
 // THE DARKENING 2
@@ -7045,8 +5909,6 @@ map DK201 "Outpost Mortem"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK202 "Biotech Terror"
@@ -7057,8 +5919,6 @@ map DK202 "Biotech Terror"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK203 "Binary Compound"
@@ -7069,8 +5929,6 @@ map DK203 "Binary Compound"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK204 "Vindication"
@@ -7081,8 +5939,6 @@ map DK204 "Vindication"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK205 "Melt-Down"
@@ -7093,8 +5949,6 @@ map DK205 "Melt-Down"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK206 "At the Heart of Decay"
@@ -7105,8 +5959,6 @@ map DK206 "At the Heart of Decay"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK207 "Waste Processing"
@@ -7119,8 +5971,6 @@ map DK207 "Waste Processing"
 	intermusic = "MUS_DKIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map DK208 "Lucifer's Laboratory"
@@ -7131,8 +5981,6 @@ map DK208 "Lucifer's Laboratory"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK209 "Hard Core"
@@ -7143,8 +5991,6 @@ map DK209 "Hard Core"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 	
 map DK210 "Plasmorgasm"
@@ -7155,8 +6001,6 @@ map DK210 "Plasmorgasm"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK211 "Powerplant"
@@ -7167,8 +6011,6 @@ map DK211 "Powerplant"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 map DK212 "Toxicity"
@@ -7179,8 +6021,6 @@ map DK212 "Toxicity"
 	enterpic = "DRK2INT"
 	exitpic = "DRK2INT"
 	intermusic = "MUS_DKIN"
-	nocrouch
-	nojump
 	}
 
 // EQUINOX
@@ -7193,8 +6033,6 @@ map EQU01 "Map01"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU02 "Map02"
@@ -7205,8 +6043,6 @@ map EQU02 "Map02"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU03 "Map03"
@@ -7217,8 +6053,6 @@ map EQU03 "Map03"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU04 "Map04"
@@ -7229,8 +6063,6 @@ map EQU04 "Map04"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU05 "Map05"
@@ -7241,8 +6073,6 @@ map EQU05 "Map05"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU06 "Map06"
@@ -7253,8 +6083,6 @@ map EQU06 "Map06"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU07 "Map07"
@@ -7267,8 +6095,6 @@ map EQU07 "Map07"
 	intermusic = "MUS_EQIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map EQU08 "Map08"
@@ -7279,8 +6105,6 @@ map EQU08 "Map08"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU09 "Map09"
@@ -7291,8 +6115,6 @@ map EQU09 "Map09"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 	
 map EQU10 "Map10"
@@ -7303,8 +6125,6 @@ map EQU10 "Map10"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU11 "Map11"
@@ -7315,8 +6135,6 @@ map EQU11 "Map11"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU12 "Map12"
@@ -7327,8 +6145,6 @@ map EQU12 "Map12"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 map EQU13 "Map13"
@@ -7339,8 +6155,6 @@ map EQU13 "Map13"
 	enterpic = "EQNXINT"
 	exitpic = "EQNXINT"
 	intermusic = "MUS_EQIN"
-	nocrouch
-	nojump
 	}
 
 // MARSDOOM
@@ -7353,8 +6167,6 @@ map MRS01 "The Starport"
 	enterpic = "MARSINT"
 	exitpic = "MARSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MRS02 "The Sewers"
@@ -7365,8 +6177,6 @@ map MRS02 "The Sewers"
 	enterpic = "MARSINT"
 	exitpic = "MARSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MRS03 "The Container Base"
@@ -7377,8 +6187,6 @@ map MRS03 "The Container Base"
 	enterpic = "MARSINT"
 	exitpic = "MARSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MRS04 "The Arena"
@@ -7389,8 +6197,6 @@ map MRS04 "The Arena"
 	enterpic = "MARSINT"
 	exitpic = "MARSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MRS05 "The Missile Base"
@@ -7401,8 +6207,6 @@ map MRS05 "The Missile Base"
 	enterpic = "MARSINT"
 	exitpic = "MARSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MRS06 "Help Me!"
@@ -7413,8 +6217,6 @@ map MRS06 "Help Me!"
 	enterpic = "MARSINT"
 	exitpic = "MARSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MRS07 "The Shooting Range"
@@ -7427,8 +6229,6 @@ map MRS07 "The Shooting Range"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map MRS08 "Space Marines!"
@@ -7440,8 +6240,6 @@ map MRS08 "Space Marines!"
 	enterpic = "MARSINT"
 	exitpic = "MARSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MRS09 "Wrong Game?!"
@@ -7452,8 +6250,6 @@ map MRS09 "Wrong Game?!"
 	enterpic = "MARSINT"
 	exitpic = "MARSINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // BLOODRUST
@@ -7466,8 +6262,6 @@ map BLR01 "Map01"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BLR02 "Map02"
@@ -7478,8 +6272,6 @@ map BLR02 "Map02"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BLR03 "Map03"
@@ -7490,8 +6282,6 @@ map BLR03 "Map03"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BLR04 "Map04"
@@ -7502,8 +6292,6 @@ map BLR04 "Map04"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BLR05 "Map05"
@@ -7514,8 +6302,6 @@ map BLR05 "Map05"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BLR06 "Map06"
@@ -7526,8 +6312,6 @@ map BLR06 "Map06"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BLR07 "Map07"
@@ -7540,8 +6324,6 @@ map BLR07 "Map07"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map BLR08 "Map08"
@@ -7552,8 +6334,6 @@ map BLR08 "Map08"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BLR09 "Map09"
@@ -7564,8 +6344,6 @@ map BLR09 "Map09"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map BLR10 "Map10"
@@ -7576,8 +6354,6 @@ map BLR10 "Map10"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BLR11 "Map11"
@@ -7588,8 +6364,6 @@ map BLR11 "Map11"
 	enterpic = "BRUSTINT"
 	exitpic = "BRUSTINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // OSIRIS
@@ -7602,8 +6376,6 @@ map OSI01 "Stargate Systems"
 	enterpic = "OSIRINT"
 	exitpic = "OSIRINT"
 	intermusic = "MUS_OSII"
-	nocrouch
-	nojump
 	}
 
 map OSI02 "The Crypts Defiled"
@@ -7614,8 +6386,6 @@ map OSI02 "The Crypts Defiled"
 	enterpic = "OSIRINT"
 	exitpic = "OSIRINT"
 	intermusic = "MUS_OSII"
-	nocrouch
-	nojump
 	}
 
 map OSI03 "Cloud of Flame"
@@ -7626,8 +6396,6 @@ map OSI03 "Cloud of Flame"
 	enterpic = "OSIRINT"
 	exitpic = "OSIRINT"
 	intermusic = "MUS_OSII"
-	nocrouch
-	nojump
 	}
 
 map OSI04 "R U Experienced?"
@@ -7638,8 +6406,6 @@ map OSI04 "R U Experienced?"
 	enterpic = "OSIRINT"
 	exitpic = "OSIRINT"
 	intermusic = "MUS_OSII"
-	nocrouch
-	nojump
 	}
 
 map OSI05 "Osiris Outpost"
@@ -7650,8 +6416,6 @@ map OSI05 "Osiris Outpost"
 	enterpic = "OSIRINT"
 	exitpic = "OSIRINT"
 	intermusic = "MUS_OSII"
-	nocrouch
-	nojump
 	}
 
 map OSI06 "Prince of the Dead"
@@ -7662,8 +6426,6 @@ map OSI06 "Prince of the Dead"
 	enterpic = "OSIRINT"
 	exitpic = "OSIRINT"
 	intermusic = "MUS_OSII"
-	nocrouch
-	nojump
 	}
 
 map OSI07 "Temple of Amon-Ra"
@@ -7676,8 +6438,6 @@ map OSI07 "Temple of Amon-Ra"
 	intermusic = "MUS_OSII"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map OSI08 "The Last Pharaoh"
@@ -7688,8 +6448,6 @@ map OSI08 "The Last Pharaoh"
 	enterpic = "OSIRINT"
 	exitpic = "OSIRINT"
 	intermusic = "MUS_OSII"
-	nocrouch
-	nojump
 	}
 
 // BROTHERHOOD OF RUIN
@@ -7702,8 +6460,6 @@ map RUI01 "Map01"
 	enterpic = "RUININT"
 	exitpic = "RUININT"
 	intermusic = "MUS_RUII"
-	nocrouch
-	nojump
 	}
 
 map RUI02 "Map02"
@@ -7714,8 +6470,6 @@ map RUI02 "Map02"
 	enterpic = "RUININT"
 	exitpic = "RUININT"
 	intermusic = "MUS_RUII"
-	nocrouch
-	nojump
 	}
 
 map RUI03 "Map03"
@@ -7726,8 +6480,6 @@ map RUI03 "Map03"
 	enterpic = "RUININT"
 	exitpic = "RUININT"
 	intermusic = "MUS_RUII"
-	nocrouch
-	nojump
 	}
 
 map RUI04 "Map04"
@@ -7738,8 +6490,6 @@ map RUI04 "Map04"
 	enterpic = "RUININT"
 	exitpic = "RUININT"
 	intermusic = "MUS_RUII"
-	nocrouch
-	nojump
 	}
 
 map RUI05 "Map05"
@@ -7750,8 +6500,6 @@ map RUI05 "Map05"
 	enterpic = "RUININT"
 	exitpic = "RUININT"
 	intermusic = "MUS_RUII"
-	nocrouch
-	nojump
 	}
 
 map RUI06 "Map06"
@@ -7762,8 +6510,6 @@ map RUI06 "Map06"
 	enterpic = "RUININT"
 	exitpic = "RUININT"
 	intermusic = "MUS_RUII"
-	nocrouch
-	nojump
 	}
 
 map RUI07 "Map07"
@@ -7776,8 +6522,6 @@ map RUI07 "Map07"
 	intermusic = "MUS_RUII"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 // ENJAY ZDOOM
@@ -7790,7 +6534,6 @@ map NJZ01 "Slipgate Complex"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ02 "Platform 1"
@@ -7801,7 +6544,6 @@ map NJZ02 "Platform 1"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ03 "The Lake"
@@ -7812,7 +6554,6 @@ map NJZ03 "The Lake"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ04 "Power Room"
@@ -7823,7 +6564,6 @@ map NJZ04 "Power Room"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ05 "Pyramids of Power"
@@ -7834,7 +6574,6 @@ map NJZ05 "Pyramids of Power"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ06 "Docking Point"
@@ -7845,7 +6584,6 @@ map NJZ06 "Docking Point"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ07 "AIEEEEE!"
@@ -7856,7 +6594,6 @@ map NJZ07 "AIEEEEE!"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	map07special
 	}
 
@@ -7868,7 +6605,6 @@ map NJZ08 "Container Depot"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ09 "Teleport Lab"
@@ -7879,7 +6615,6 @@ map NJZ09 "Teleport Lab"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ10 "Rad Pits"
@@ -7890,7 +6625,6 @@ map NJZ10 "Rad Pits"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ11 "The Switch"
@@ -7903,7 +6637,6 @@ map NJZ11 "The Switch"
 	intermusic = "MUS_M1I2"
 	baronspecial
 	specialaction_lowerfloor
-	nocrouch
 	}
 
 map NJZ12 "City Terminal"
@@ -7914,7 +6647,6 @@ map NJZ12 "City Terminal"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ13 "The Long Run"
@@ -7925,7 +6657,6 @@ map NJZ13 "The Long Run"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ14 "Psychic Research"
@@ -7936,7 +6667,6 @@ map NJZ14 "Psychic Research"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ15 "A Crushing Time"
@@ -7948,7 +6678,6 @@ map NJZ15 "A Crushing Time"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ16 "The Old Town"
@@ -7959,7 +6688,6 @@ map NJZ16 "The Old Town"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ17 "Research Dept."
@@ -7970,7 +6698,6 @@ map NJZ17 "Research Dept."
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ18 "Old Sewage Works"
@@ -7981,7 +6708,6 @@ map NJZ18 "Old Sewage Works"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ19 "Under the City"
@@ -7992,7 +6718,6 @@ map NJZ19 "Under the City"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ20 "City Control"
@@ -8003,7 +6728,6 @@ map NJZ20 "City Control"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ21 "Bridge to Despair"
@@ -8014,7 +6738,6 @@ map NJZ21 "Bridge to Despair"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ22 "Hell's Onion"
@@ -8025,7 +6748,6 @@ map NJZ22 "Hell's Onion"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ23 "Ring of Pain"
@@ -8036,7 +6758,6 @@ map NJZ23 "Ring of Pain"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ24 "Death Fortress"
@@ -8047,7 +6768,6 @@ map NJZ24 "Death Fortress"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ25 "Blood Island"
@@ -8058,7 +6778,6 @@ map NJZ25 "Blood Island"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ26 "Exercise Yard"
@@ -8069,7 +6788,6 @@ map NJZ26 "Exercise Yard"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ27 "Get Down"
@@ -8082,7 +6800,6 @@ map NJZ27 "Get Down"
 	intermusic = "MUS_M1I2"
 	cyberdemonspecial
 	specialaction_lowerfloor
-	nocrouch
 	}
 
 map NJZ28 "Detention Complex"
@@ -8093,7 +6810,6 @@ map NJZ28 "Detention Complex"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ29 "Spinal Trap"
@@ -8104,7 +6820,6 @@ map NJZ29 "Spinal Trap"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map NJZ30 "The Icon's Brother"
@@ -8118,7 +6833,6 @@ map NJZ30 "The Icon's Brother"
 	spidermastermindspecial
 	cyberdemonspecial
 	specialaction_lowerfloor
-	nocrouch
 	}
 
 map NJZ31 "The Secret Base"
@@ -8131,7 +6845,6 @@ map NJZ31 "The Secret Base"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
 	forcenoskystretch
-	nocrouch
 	}
 
 map NJZ32 "Deja Vu"
@@ -8142,7 +6855,6 @@ map NJZ32 "Deja Vu"
 	enterpic = "NJAYINT"
 	exitpic = "NJAYINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 // DAEDALUS
@@ -8160,7 +6872,6 @@ forcenoskystretch
 cluster = 1
 levelnum = 1
 nointermission
-nocrouch
 }
 
 // Jeromy Visser D2KJV02
@@ -8173,7 +6884,6 @@ cluster = 1
 levelnum = 2
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Jani Saksa D2KJS03
@@ -8186,7 +6896,6 @@ cluster = 1
 levelnum = 3
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Don Howard D2KGH04
@@ -8199,7 +6908,6 @@ cluster = 1
 levelnum = 4
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Paul Schmitz D2KPS05
@@ -8212,7 +6920,6 @@ cluster = 1
 levelnum = 5
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Rick Clark D2KRC06
@@ -8225,7 +6932,6 @@ cluster = 1
 levelnum = 6
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Ty Halderman D2KTY07
@@ -8240,7 +6946,6 @@ levelnum = 7
 enterpic = "DAEDINT"
 exitpic = "DAEDINT"
 intermusic = "MM_01"
-nocrouch
 // do not use nointermission here--end of hub
 }
 
@@ -8253,7 +6958,6 @@ cluster = 1
 levelnum = 14
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 //--------------- HUB TWO ---------------
@@ -8268,7 +6972,6 @@ cluster = 2
 levelnum = 8
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Ty Halderman D2KTY09
@@ -8281,7 +6984,6 @@ cluster = 2
 levelnum = 9
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Don Howard D2KGH10
@@ -8294,7 +6996,6 @@ cluster = 2
 levelnum = 10
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Dale Harris D2KDH11
@@ -8307,7 +7008,6 @@ cluster = 2
 levelnum = 11
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Rick Clark D2KRC12
@@ -8320,7 +7020,6 @@ cluster = 2
 levelnum = 12
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Andrew Griffiths - dae16 (LEVELS\D2KAG16)
@@ -8336,7 +7035,6 @@ forcenoskystretch
 enterpic = "DAEDINT"
 exitpic = "DAEDINT"
 intermusic = "MM_01"
-nocrouch
 }
 //nointermission 20jul2002 gg
 // do not use nointermission here--end of hub
@@ -8352,7 +7050,6 @@ cluster = 2
 levelnum = 18
 forcenoskystretch
 nointermission
-nocrouch
 }
 // do not use nointermission here--end of hub 20jul2002 gg
 
@@ -8366,7 +7063,6 @@ cluster = 2
 levelnum = 19
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Paul Schmitz D2KTTUBE - hub two
@@ -8378,7 +7074,6 @@ cluster = 2
 levelnum = 15
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 //--------------- HUB THREE ---------------
@@ -8391,7 +7086,6 @@ cluster = 3
 levelnum = 13
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Jani Saksa - dae21 (LEVELS\D2KJS21)
@@ -8404,7 +7098,6 @@ cluster = 3
 levelnum = 21
 forcenoskystretch
 nointermission 
-nocrouch
 }
 
 // Gary Gosson - dae22 (LEVELS\D2KGG22)
@@ -8417,7 +7110,6 @@ cluster = 3
 levelnum = 22
 forcenoskystretch
 nointermission 
-nocrouch
 }
 
 // Rick Clark - dae23 (LEVELS\D2KRC23)
@@ -8430,7 +7122,6 @@ cluster = 3
 levelnum = 23
 forcenoskystretch
 nointermission 
-nocrouch
 }
 
 //  Don Howard - dae24 (LEVELS\D2KGH24)
@@ -8443,7 +7134,6 @@ cluster = 3
 levelnum = 24
 forcenoskystretch
 nointermission 
-nocrouch
 }
 
 // David Nordlund - dae25 (LEVELS\D2KDN25) 
@@ -8456,7 +7146,6 @@ cluster = 3
 levelnum = 25
 forcenoskystretch
 nointermission 
-nocrouch
 }
 
 // Mattias Johannson - dae26 (LEVELS\D2KMJ26) 
@@ -8471,7 +7160,6 @@ forcenoskystretch
 enterpic = "DAEDINT"
 exitpic = "DAEDINT"
 intermusic = "MM_01"
-nocrouch
 }
 // do not use nointermission here--end of hub
 
@@ -8486,7 +7174,6 @@ cluster = 4
 levelnum = 20
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Ty Halderman - dae27 (LEVELS\D2KUBAHN) - hub Four transition
@@ -8498,7 +7185,6 @@ cluster = 4
 levelnum = 27
 forcenoskystretch
 nointermission
-nocrouch
 }
 
 // Ty Halderman - dae28 (LEVELS\D2KTY28)
@@ -8511,7 +7197,6 @@ cluster = 4
 levelnum = 28
 forcenoskystretch
 nointermission 
-nocrouch
 }
 
 // Ty Halderman - dae29 (LEVELS\D2KTY29)
@@ -8524,7 +7209,6 @@ cluster = 4
 levelnum = 29
 forcenoskystretch
 nointermission 
-nocrouch
 }
 
 // Mattias Johansson - dae30 (LEVELS\D2KMJ30)
@@ -8537,7 +7221,6 @@ cluster = 4
 levelnum = 30
 forcenoskystretch
 nointermission 
-nocrouch
 }
 
 // Gary Gosson - dae31 (LEVELS\D2KGG31)
@@ -8552,7 +7235,6 @@ levelnum = 31
 enterpic = "DAEDINT"
 exitpic = "DAEDINT"
 intermusic = "MM_01"
-nocrouch
 }
 
 // Ty Halderman - dae32 (LEVELS\D2KTY32)
@@ -8569,7 +7251,6 @@ levelnum = 32
 enterpic = "DAEDINT"
 exitpic = "DAEDINT"
 intermusic = "MM_01"
-nocrouch
 }
 
 // ------------ cluster = Definitions -----------
@@ -8634,8 +7315,6 @@ map CLE01 "Advent"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE02 "Holding Pens"
@@ -8646,8 +7325,6 @@ map CLE02 "Holding Pens"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE03 "No Quarter"
@@ -8658,8 +7335,6 @@ map CLE03 "No Quarter"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE04 "Torment"
@@ -8670,8 +7345,6 @@ map CLE04 "Torment"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE05 "The Cleansing"
@@ -8682,8 +7355,6 @@ map CLE05 "The Cleansing"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE06 "Enclave"
@@ -8694,8 +7365,6 @@ map CLE06 "Enclave"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE07 "Bastion"
@@ -8708,8 +7377,6 @@ map CLE07 "Bastion"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map CLE08 "Hazard Base"
@@ -8720,8 +7387,6 @@ map CLE08 "Hazard Base"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE09 "Cauldron"
@@ -8732,8 +7397,6 @@ map CLE09 "Cauldron"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CLE10 "Veil of Blood"
@@ -8744,8 +7407,6 @@ map CLE10 "Veil of Blood"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE11 "Annihilation"
@@ -8756,8 +7417,6 @@ map CLE11 "Annihilation"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE12 "Trapped"
@@ -8768,8 +7427,6 @@ map CLE12 "Trapped"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE13 "Ground-Zero"
@@ -8780,8 +7437,6 @@ map CLE13 "Ground-Zero"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE14 "The Five"
@@ -8792,8 +7447,6 @@ map CLE14 "The Five"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CLE15 "Stairway to Hell"
@@ -8805,8 +7458,6 @@ map CLE15 "Stairway to Hell"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CLE16 "Bulletproof"
@@ -8817,8 +7468,6 @@ map CLE16 "Bulletproof"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE17 "Sole Survivor"
@@ -8829,8 +7478,6 @@ map CLE17 "Sole Survivor"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CLE18 "Scent of Death"
@@ -8841,8 +7488,6 @@ map CLE18 "Scent of Death"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE19 "Rise & Fall"
@@ -8853,8 +7498,6 @@ map CLE19 "Rise & Fall"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CLE20 "Hip Deep"
@@ -8865,8 +7508,6 @@ map CLE20 "Hip Deep"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE21 "Full Metal Island"
@@ -8877,8 +7518,6 @@ map CLE21 "Full Metal Island"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE22 "Rosewood"
@@ -8889,8 +7528,6 @@ map CLE22 "Rosewood"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE23 "Castle of the Ancients"
@@ -8901,8 +7538,6 @@ map CLE23 "Castle of the Ancients"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE24 "The Ungathered"
@@ -8913,8 +7548,6 @@ map CLE24 "The Ungathered"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE25 "Well of Fire"
@@ -8925,8 +7558,6 @@ map CLE25 "Well of Fire"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE26 "Release Me"
@@ -8937,8 +7568,6 @@ map CLE26 "Release Me"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE27 "Entr'Acte"
@@ -8949,8 +7578,6 @@ map CLE27 "Entr'Acte"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE28 "Axis"
@@ -8961,8 +7588,6 @@ map CLE28 "Axis"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE29 "The Hive"
@@ -8973,8 +7598,6 @@ map CLE29 "The Hive"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE30 "Temple of Lost Souls"
@@ -8985,8 +7608,6 @@ map CLE30 "Temple of Lost Souls"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE31 "Command + Control"
@@ -8998,8 +7619,6 @@ map CLE31 "Command + Control"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CLE32 "Tomb of the Forsaken"
@@ -9010,8 +7629,6 @@ map CLE32 "Tomb of the Forsaken"
 	enterpic = "CLEIMINT"
 	exitpic = "CLEIMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // ASDOOM 2
@@ -9024,8 +7641,6 @@ map ASD01 "A Walk in the Park"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ASD02 "The Hall of the Mountain Kings"
@@ -9036,8 +7651,6 @@ map ASD02 "The Hall of the Mountain Kings"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ASD03 "Moody"
@@ -9048,8 +7661,6 @@ map ASD03 "Moody"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ASD04 "Going Down?"
@@ -9060,8 +7671,6 @@ map ASD04 "Going Down?"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ASD05 "Hell of a Knight"
@@ -9072,8 +7681,6 @@ map ASD05 "Hell of a Knight"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ASD06 "The Heat is On"
@@ -9084,8 +7691,6 @@ map ASD06 "The Heat is On"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ASD07 "A False Sense of Security"
@@ -9098,8 +7703,6 @@ map ASD07 "A False Sense of Security"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map ASD08 "Finale"
@@ -9110,8 +7713,6 @@ map ASD08 "Finale"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // PLEIADES
@@ -9124,7 +7725,6 @@ map PLE01 "Solitude"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE02 "Pleiades"
@@ -9135,7 +7735,6 @@ map PLE02 "Pleiades"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE03 "MIR"
@@ -9146,7 +7745,6 @@ map PLE03 "MIR"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE04 "Star City"
@@ -9157,7 +7755,6 @@ map PLE04 "Star City"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE06 "Hiatus"
@@ -9168,7 +7765,6 @@ map PLE06 "Hiatus"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE07 "Phobos Spaceport"
@@ -9179,7 +7775,6 @@ map PLE07 "Phobos Spaceport"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE08 "Nuclear Plant"
@@ -9190,7 +7785,6 @@ map PLE08 "Nuclear Plant"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE09 "Refinery"
@@ -9201,7 +7795,6 @@ map PLE09 "Refinery"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE10 "Command and Control"
@@ -9212,7 +7805,6 @@ map PLE10 "Command and Control"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE11 "Iapetus"
@@ -9223,7 +7815,6 @@ map PLE11 "Iapetus"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 map PLE05 "Galaxia"
@@ -9234,7 +7825,6 @@ map PLE05 "Galaxia"
 	enterpic = "PLEIINT"
 	exitpic = "PLEIINT"
 	intermusic = "MUS_PLEI"
-	nocrouch
 	}
 
 // DARK COVENANT
@@ -9247,8 +7837,6 @@ map DCV01 "Suburb"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV02 "Green Water"
@@ -9259,8 +7847,6 @@ map DCV02 "Green Water"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV03 "Necropolis"
@@ -9271,8 +7857,6 @@ map DCV03 "Necropolis"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV04 "Forgotten Outpost"
@@ -9283,8 +7867,6 @@ map DCV04 "Forgotten Outpost"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV05 "Earth Core"
@@ -9295,8 +7877,6 @@ map DCV05 "Earth Core"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV06 "Cavern of Doom"
@@ -9307,8 +7887,6 @@ map DCV06 "Cavern of Doom"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV07 "The Flooded Base"
@@ -9321,8 +7899,6 @@ map DCV07 "The Flooded Base"
 	intermusic = "MUS_DCIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map DCV08 "Gateway"
@@ -9333,8 +7909,6 @@ map DCV08 "Gateway"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV09 "The Evil Eye"
@@ -9345,8 +7919,6 @@ map DCV09 "The Evil Eye"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 	
 map DCV10 "Research Facility"
@@ -9357,8 +7929,6 @@ map DCV10 "Research Facility"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV11 "Launch Control"
@@ -9369,8 +7939,6 @@ map DCV11 "Launch Control"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 map DCV12 "Last Ship Out"
@@ -9381,8 +7949,6 @@ map DCV12 "Last Ship Out"
 	enterpic = "DCVNTINT"
 	exitpic = "DCVNTINT"
 	intermusic = "MUS_DCIN"
-	nocrouch
-	nojump
 	}
 
 // SLAYER
@@ -9395,8 +7961,6 @@ map SLA01 "Human Processing"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 map SLA02 "Get the Gun!!!"
@@ -9407,8 +7971,6 @@ map SLA02 "Get the Gun!!!"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 map SLA03 "Gethsemane"
@@ -9419,8 +7981,6 @@ map SLA03 "Gethsemane"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 map SLA04 "Old Town"
@@ -9431,8 +7991,6 @@ map SLA04 "Old Town"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 map SLA05 "Arena"
@@ -9443,8 +8001,6 @@ map SLA05 "Arena"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 map SLA06 "Psycho-Mania"
@@ -9455,8 +8011,6 @@ map SLA06 "Psycho-Mania"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 map SLA07 "Into the Light"
@@ -9469,8 +8023,6 @@ map SLA07 "Into the Light"
 	intermusic = "MUS_SLIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map SLA08 "10 Secrets"
@@ -9481,8 +8033,6 @@ map SLA08 "10 Secrets"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 map SLA09 "Techbase Terror"
@@ -9493,8 +8043,6 @@ map SLA09 "Techbase Terror"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 	
 map SLA10 "Staircase to Heaven"
@@ -9505,8 +8053,6 @@ map SLA10 "Staircase to Heaven"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 map SLA11 "Bonus Map"
@@ -9517,8 +8063,6 @@ map SLA11 "Bonus Map"
 	enterpic = "SLAYINT"
 	exitpic = "SLAYINT"
 	intermusic = "MUS_SLIN"
-	nocrouch
-	nojump
 	}
 
 // HELL FACTORY
@@ -9530,7 +8074,6 @@ sky1 = "HFACSKY1"
 cluster = 71
 levelnum = 71
 nointermission
-nocrouch
 }
 
 map HFA02 "The Sewers"
@@ -9540,7 +8083,6 @@ sky1 = "HFACSKY1"
 cluster = 71
 levelnum = 72
 nointermission
-nocrouch
 }
 
 map HFA03 "Destroyed Base"
@@ -9550,7 +8092,6 @@ sky1 = "HFACSKY2"
 cluster = 71
 levelnum = 73
 nointermission
-nocrouch
 }
 
 map HFA04 "The Nukage Area"
@@ -9560,7 +8101,6 @@ sky1 = "HFACSKY2"
 cluster = 71
 levelnum = 74
 nointermission
-nocrouch
 }
 
 Clusterdef 71
@@ -9578,8 +8118,6 @@ map CDR01 "Warm Up: 1 on 1"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR02 "The S-2 Factor"
@@ -9590,8 +8128,6 @@ map CDR02 "The S-2 Factor"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR03 "The Bridge Between"
@@ -9602,8 +8138,6 @@ map CDR03 "The Bridge Between"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR04 "Come On In"
@@ -9614,8 +8148,6 @@ map CDR04 "Come On In"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR05 "Cybers and Holes"
@@ -9626,8 +8158,6 @@ map CDR05 "Cybers and Holes"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR06 "John's Lament"
@@ -9638,8 +8168,6 @@ map CDR06 "John's Lament"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR07 "Unusual Friendship"
@@ -9652,8 +8180,6 @@ map CDR07 "Unusual Friendship"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map CDR08 "Happy End?"
@@ -9664,8 +8190,6 @@ map CDR08 "Happy End?"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR09 "Double Duplex"
@@ -9676,8 +8200,6 @@ map CDR09 "Double Duplex"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CDR10 "Escape From the Hidden Trinity"
@@ -9688,8 +8210,6 @@ map CDR10 "Escape From the Hidden Trinity"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR11 "Sequential Movements"
@@ -9700,8 +8220,6 @@ map CDR11 "Sequential Movements"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR12 "Lord of the Ring"
@@ -9712,8 +8230,6 @@ map CDR12 "Lord of the Ring"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR13 "After the Ring"
@@ -9724,8 +8240,6 @@ map CDR13 "After the Ring"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR14 "Satyrs, Gargoyles, Lions and Suffering"
@@ -9736,8 +8250,6 @@ map CDR14 "Satyrs, Gargoyles, Lions and Suffering"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CDR15 "Four Leaf Clover"
@@ -9749,8 +8261,6 @@ map CDR15 "Four Leaf Clover"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CDR16 "Urbanity"
@@ -9761,8 +8271,6 @@ map CDR16 "Urbanity"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR17 "Tic-tac-toe"
@@ -9773,8 +8281,6 @@ map CDR17 "Tic-tac-toe"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CDR18 "The Blocked Way to Arch-Itecture"
@@ -9785,8 +8291,6 @@ map CDR18 "The Blocked Way to Arch-Itecture"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR19 "Arch-Itecture"
@@ -9797,8 +8301,6 @@ map CDR19 "Arch-Itecture"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map CDR20 "Anti-Clockwise"
@@ -9809,8 +8311,6 @@ map CDR20 "Anti-Clockwise"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR21 "Bleeding Woods"
@@ -9821,8 +8321,6 @@ map CDR21 "Bleeding Woods"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR22 "Hot Dog"
@@ -9833,8 +8331,6 @@ map CDR22 "Hot Dog"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR23 "Hard Descent, Harder Climbings"
@@ -9845,8 +8341,6 @@ map CDR23 "Hard Descent, Harder Climbings"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR24 "Sorry, 66% Maximum"
@@ -9857,8 +8351,6 @@ map CDR24 "Sorry, 66% Maximum"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR25 "Pure Blood"
@@ -9869,8 +8361,6 @@ map CDR25 "Pure Blood"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR26 "The Tough Twins"
@@ -9881,8 +8371,6 @@ map CDR26 "The Tough Twins"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR27 "You See Me, You Don't"
@@ -9893,8 +8381,6 @@ map CDR27 "You See Me, You Don't"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR28 "The Floatin' Conspiracy"
@@ -9905,8 +8391,6 @@ map CDR28 "The Floatin' Conspiracy"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR29 "The Way to God's Manna"
@@ -9917,8 +8401,6 @@ map CDR29 "The Way to God's Manna"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR30 "Resurrection"
@@ -9929,8 +8411,6 @@ map CDR30 "Resurrection"
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR31 "With a Little Help..."
@@ -9942,8 +8422,6 @@ map CDR31 "With a Little Help..."
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map CDR32 "From My Friend."
@@ -9954,8 +8432,6 @@ map CDR32 "From My Friend."
 	enterpic = "CDRMINT"
 	exitpic = "CDRMINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // THE FINAL GATHERING
@@ -9968,8 +8444,6 @@ map GAT01 "Water Treatment Plant"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map GAT02 "Sewers"
@@ -9980,8 +8454,6 @@ map GAT02 "Sewers"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map GAT03 "Caverns"
@@ -9992,8 +8464,6 @@ map GAT03 "Caverns"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map GAT04 "Enemy Stronghold"
@@ -10004,8 +8474,6 @@ map GAT04 "Enemy Stronghold"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map GAT05 "Dark Side of the Mind"
@@ -10016,8 +8484,6 @@ map GAT05 "Dark Side of the Mind"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map GAT06 "Shrine of the Warriors"
@@ -10028,8 +8494,6 @@ map GAT06 "Shrine of the Warriors"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // EARTH
@@ -10042,7 +8506,6 @@ map ERT01 "The Ruins"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map ERT02 "The Tomb"
@@ -10053,7 +8516,6 @@ map ERT02 "The Tomb"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map ERT03 "Mines of Moria"
@@ -10064,7 +8526,6 @@ map ERT03 "Mines of Moria"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map ERT04 "The Chasm"
@@ -10075,7 +8536,6 @@ map ERT04 "The Chasm"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map ERT05 "Strategic Defense Command"
@@ -10086,7 +8546,6 @@ map ERT05 "Strategic Defense Command"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map ERT06 "Observation Station"
@@ -10097,7 +8556,6 @@ map ERT06 "Observation Station"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map ERT07 "The Emerald Tower"
@@ -10109,7 +8567,6 @@ map ERT07 "The Emerald Tower"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
 	map07special
-	nocrouch
 	}
 	
 map ERT08 "The Ammo Pit"
@@ -10120,7 +8577,6 @@ map ERT08 "The Ammo Pit"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map ERT09 "Islands"
@@ -10131,7 +8587,6 @@ map ERT09 "Islands"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 	
 map ERT10 "The Hill"
@@ -10142,7 +8597,6 @@ map ERT10 "The Hill"
 	enterpic = "EARTHINT"
 	exitpic = "EARTHINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 // EVILUTION (Private Version Only, sorry folks)
@@ -10482,8 +8936,6 @@ map END01 "Arctic"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map END02 "Old School"
@@ -10494,8 +8946,6 @@ map END02 "Old School"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map END03 "Morsel"
@@ -10506,8 +8956,6 @@ map END03 "Morsel"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map END04 "Garrison"
@@ -10518,8 +8966,6 @@ map END04 "Garrison"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map END05 "Zylstra"
@@ -10530,8 +8976,6 @@ map END05 "Zylstra"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map END06 "Chaostile"
@@ -10542,8 +8986,6 @@ map END06 "Chaostile"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map END07 "Water Treatment Facility"
@@ -10556,8 +8998,6 @@ map END07 "Water Treatment Facility"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 
 map END08 "The Beauty of Evil"
@@ -10568,8 +9008,6 @@ map END08 "The Beauty of Evil"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // DOOM RESURRECTION
@@ -10581,7 +9019,6 @@ map RES01 "Ammunition Bunker"
 	enterpic = "DRESINT"
 	exitpic = "DRESINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map RES02 "War Factory"
@@ -10591,7 +9028,6 @@ map RES02 "War Factory"
 	enterpic = "DRESINT"
 	exitpic = "DRESINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map RES03 "Sewer Side"
@@ -10601,7 +9037,6 @@ map RES03 "Sewer Side"
 	enterpic = "DRESINT"
 	exitpic = "DRESINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map RES04 "Core-Gen Labs"
@@ -10611,7 +9046,6 @@ map RES04 "Core-Gen Labs"
 	enterpic = "DRESINT"
 	exitpic = "DRESINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 map RES05 "Headquarters"
@@ -10621,7 +9055,6 @@ map RES05 "Headquarters"
 	enterpic = "DRESINT"
 	exitpic = "DRESINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
 	}
 
 // ENSLAVEMENT
@@ -10634,8 +9067,6 @@ map ENS01 "Underground"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENS02 "The Chase"
@@ -10646,8 +9077,6 @@ map ENS02 "The Chase"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENS03 "Kill the Innocent"
@@ -10658,8 +9087,6 @@ map ENS03 "Kill the Innocent"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENS04 "Web of Fire"
@@ -10670,8 +9097,6 @@ map ENS04 "Web of Fire"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENS05 "The Grand Palace"
@@ -10693,8 +9118,6 @@ map ENS06 "The Dark Temple"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENS07 "Chamber of Sacrifice"
@@ -10707,8 +9130,6 @@ map ENS07 "Chamber of Sacrifice"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map ENS08 "Black Dungeon"
@@ -10719,8 +9140,6 @@ map ENS08 "Black Dungeon"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENS09 "Enslavement"
@@ -10731,8 +9150,6 @@ map ENS09 "Enslavement"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map ENS10 "Gateway of Death"
@@ -10743,8 +9160,6 @@ map ENS10 "Gateway of Death"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ENS11 "Slave Palace"
@@ -10755,8 +9170,6 @@ map ENS11 "Slave Palace"
 	enterpic = "ENSLINT"
 	exitpic = "ENSLINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // BIOTECH
@@ -10769,8 +9182,6 @@ map BTK01 "BioTech Entrance"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTK02 "Switches and Bridges"
@@ -10781,8 +9192,6 @@ map BTK02 "Switches and Bridges"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTK03 "The Biolabs"
@@ -10793,8 +9202,6 @@ map BTK03 "The Biolabs"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTK04 "The Descent"
@@ -10805,8 +9212,6 @@ map BTK04 "The Descent"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTK05 "The Pits"
@@ -10817,8 +9222,6 @@ map BTK05 "The Pits"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTK06 "The River of Mutagen"
@@ -10829,8 +9232,6 @@ map BTK06 "The River of Mutagen"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTK07 "The Tunnels"
@@ -10843,8 +9244,6 @@ map BTK07 "The Tunnels"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map BTK08 "The Unknown"
@@ -10855,8 +9254,6 @@ map BTK08 "The Unknown"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // CITY OF DOOM
@@ -10869,8 +9266,6 @@ map CIT01 "The River Front"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 map CIT02 "The City Streets"
@@ -10881,8 +9276,6 @@ map CIT02 "The City Streets"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 map CIT03 "Down in the Sewers"
@@ -10893,8 +9286,6 @@ map CIT03 "Down in the Sewers"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 map CIT04 "A Stroll in the Park"
@@ -10905,8 +9296,6 @@ map CIT04 "A Stroll in the Park"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 map CIT05 "The Subway"
@@ -10917,8 +9306,6 @@ map CIT05 "The Subway"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 map CIT06 "Down on Main Street"
@@ -10929,8 +9316,6 @@ map CIT06 "Down on Main Street"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 map CIT07 "Passenger Street"
@@ -10943,8 +9328,6 @@ map CIT07 "Passenger Street"
 	intermusic = "MUS_CITI"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map CIT08 "The Shuttle Base"
@@ -10955,8 +9338,6 @@ map CIT08 "The Shuttle Base"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 map CIT09 "The Freight Terminal"
@@ -10967,8 +9348,6 @@ map CIT09 "The Freight Terminal"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 	
 map CIT10 "Command Center"
@@ -10979,8 +9358,6 @@ map CIT10 "Command Center"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 map CIT11 "Mission Control"
@@ -10991,8 +9368,6 @@ map CIT11 "Mission Control"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_CITI"
-	nocrouch
-	nojump
 	}
 
 
@@ -11007,7 +9382,6 @@ map SLP01 "Strike Base"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 map SLP02 "Power Complex"
@@ -11019,7 +9393,6 @@ map SLP02 "Power Complex"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 map SLP03 "Logistics"
@@ -11031,7 +9404,6 @@ map SLP03 "Logistics"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 map SLP04 "Facility 6B"
@@ -11043,7 +9415,6 @@ map SLP04 "Facility 6B"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 map SLP05 "Slipgate"
@@ -11055,7 +9426,6 @@ map SLP05 "Slipgate"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 map SLP06 "A Dark Reality"
@@ -11067,7 +9437,6 @@ map SLP06 "A Dark Reality"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 map SLP07 "Atermis"
@@ -11080,7 +9449,6 @@ map SLP07 "Atermis"
 	forcenoskystretch
 	evenlighting
 	map07special
-	nocrouch
 	}
 	
 map SLP08 "Dark Cathedral"
@@ -11092,7 +9460,6 @@ map SLP08 "Dark Cathedral"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 map SLP09 "Stir of Echoes"
@@ -11104,7 +9471,6 @@ map SLP09 "Stir of Echoes"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 	
 map SLP10 "Blood Chalice"
@@ -11116,7 +9482,6 @@ map SLP10 "Blood Chalice"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 map SLP11 "The Necro Elders"
@@ -11128,7 +9493,6 @@ map SLP11 "The Necro Elders"
 	intermusic = "MUS_SLIP"
 	forcenoskystretch
 	evenlighting
-	nocrouch
 	}
 
 // DISSOLUTION OF ETERNITY
@@ -11141,7 +9505,6 @@ map DIS01 "Dark Azure"
 	exitpic = "DISTINT"
 	intermusic = "MUS_DIST"
 	evenlighting
-	nocrouch
 	}
 
 map DIS02 "Temple of Ages"
@@ -11152,7 +9515,6 @@ map DIS02 "Temple of Ages"
 	exitpic = "DISTINT"
 	intermusic = "MUS_DIST"
 	evenlighting
-	nocrouch
 	}
 
 map DIS03 "Dream Eden"
@@ -11163,7 +9525,6 @@ map DIS03 "Dream Eden"
 	exitpic = "DISTINT"
 	intermusic = "MUS_DIST"
 	evenlighting
-	nocrouch
 	}
 
 map DIS04 "Fallen Hope"
@@ -11174,7 +9535,6 @@ map DIS04 "Fallen Hope"
 	exitpic = "DISTINT"
 	intermusic = "MUS_DIST"
 	evenlighting
-	nocrouch
 	}
 
 map DIS05 "Gloom Keep"
@@ -11185,7 +9545,6 @@ map DIS05 "Gloom Keep"
 	exitpic = "DISTINT"
 	intermusic = "MUS_DIST"
 	evenlighting
-	nocrouch
 	}
 
 map DIS06 "Castle Rapture"
@@ -11196,7 +9555,6 @@ map DIS06 "Castle Rapture"
 	exitpic = "DISTINT"
 	intermusic = "MUS_DIST"
 	evenlighting
-	nocrouch
 	}
 
 map DIS07 "And there was none"
@@ -11208,7 +9566,6 @@ map DIS07 "And there was none"
 	intermusic = "MUS_DIST"
 	evenlighting
 	map07special
-	nocrouch
 	}
 
 // SUSPENDED IN DUSK
@@ -11222,8 +9579,6 @@ map SID01 "Map01"
 	exitpic = "SIDINT"
 	intermusic = "MUS_M1I2"
 	compat_sectorsounds = 1
-	nocrouch
-	nojump
 	}
 
 map SID02 "Map02"
@@ -11234,8 +9589,6 @@ map SID02 "Map02"
 	enterpic = "SIDINT"
 	exitpic = "SIDINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map SID03 "Map03"
@@ -11246,8 +9599,6 @@ map SID03 "Map03"
 	enterpic = "SIDINT"
 	exitpic = "SIDINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map SID04 "Map04"
@@ -11258,8 +9609,6 @@ map SID04 "Map04"
 	enterpic = "SIDINT"
 	exitpic = "SIDINT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // MANCUBUS
@@ -11272,8 +9621,6 @@ map MAN01 "Map01"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MAN02 "Map02"
@@ -11284,8 +9631,6 @@ map MAN02 "Map02"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MAN03 "Map03"
@@ -11296,8 +9641,6 @@ map MAN03 "Map03"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map MAN04 "Map04"
@@ -11308,8 +9651,6 @@ map MAN04 "Map04"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // LAST DAY ON EARTH
@@ -11322,8 +9663,6 @@ map LEP01 "Underground Base"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 map LEP02 "Experimental Lab"
@@ -11334,8 +9673,6 @@ map LEP02 "Experimental Lab"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 map LEP03 "Water Plant"
@@ -11346,8 +9683,6 @@ map LEP03 "Water Plant"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 map LEP04 "Shotgun Factory"
@@ -11358,8 +9693,6 @@ map LEP04 "Shotgun Factory"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 map LEP05 "The Jail"
@@ -11370,8 +9703,6 @@ map LEP05 "The Jail"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 map LEP06 "UAC Centre"
@@ -11382,8 +9713,6 @@ map LEP06 "UAC Centre"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 map LEP07 "Inmost Mines"
@@ -11396,8 +9725,6 @@ map LEP07 "Inmost Mines"
 	intermusic = "MUS_LEPI"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map LEP08 "Military Station"
@@ -11408,8 +9735,6 @@ map LEP08 "Military Station"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 map LEP09 "Medical Facility"
@@ -11420,8 +9745,6 @@ map LEP09 "Medical Facility"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 	
 map LEP10 "UAC Tower"
@@ -11432,8 +9755,6 @@ map LEP10 "UAC Tower"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 map LEP11 "The Door"
@@ -11444,8 +9765,6 @@ map LEP11 "The Door"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_LEPI"
-	nocrouch
-	nojump
 	}
 
 // VILE FLESH
@@ -11458,8 +9777,6 @@ map VFL01 "Administration"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL02 "Nuke Storage"
@@ -11470,8 +9787,6 @@ map VFL02 "Nuke Storage"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL03 "Processing"
@@ -11482,8 +9797,6 @@ map VFL03 "Processing"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL04 "Mainframe"
@@ -11494,8 +9807,6 @@ map VFL04 "Mainframe"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL05 "Outpost"
@@ -11506,8 +9817,6 @@ map VFL05 "Outpost"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL06 "Secure Area"
@@ -11518,8 +9827,6 @@ map VFL06 "Secure Area"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL07 "Labs"
@@ -11532,8 +9839,6 @@ map VFL07 "Labs"
 	intermusic = "MUS_VFIN"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map VFL08 "Gateway"
@@ -11544,8 +9849,6 @@ map VFL08 "Gateway"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL09 "Weapons Bay"
@@ -11556,8 +9859,6 @@ map VFL09 "Weapons Bay"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 	
 map VFL10 "Beacon"
@@ -11568,8 +9869,6 @@ map VFL10 "Beacon"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL11 "War Rooms"
@@ -11580,8 +9879,6 @@ map VFL11 "War Rooms"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL12 "Cliff Face"
@@ -11592,8 +9889,6 @@ map VFL12 "Cliff Face"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL13 "Subterrainia"
@@ -11604,8 +9899,6 @@ map VFL13 "Subterrainia"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL14 "The Pits"
@@ -11616,8 +9909,6 @@ map VFL14 "The Pits"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 	
 map VFL15 "Village"
@@ -11629,8 +9920,6 @@ map VFL15 "Village"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 	
 map VFL16 "Cathedral"
@@ -11641,8 +9930,6 @@ map VFL16 "Cathedral"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL17 "Guard Towers"
@@ -11653,8 +9940,6 @@ map VFL17 "Guard Towers"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 	
 map VFL18 "Boneyard"
@@ -11665,8 +9950,6 @@ map VFL18 "Boneyard"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL19 "The Pillars"
@@ -11677,8 +9960,6 @@ map VFL19 "The Pillars"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 	
 map VFL20 "Demon Seed"
@@ -11689,8 +9970,6 @@ map VFL20 "Demon Seed"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL21 "Flesh Mill"
@@ -11701,8 +9980,6 @@ map VFL21 "Flesh Mill"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL22 "Ungod"
@@ -11713,8 +9990,6 @@ map VFL22 "Ungod"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL23 "Return Ticket"
@@ -11725,8 +10000,6 @@ map VFL23 "Return Ticket"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL24 "City Center"
@@ -11737,8 +10010,6 @@ map VFL24 "City Center"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL25 "UAC Headquarters"
@@ -11749,8 +10020,6 @@ map VFL25 "UAC Headquarters"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL26 "Service Tunnels"
@@ -11761,8 +10030,6 @@ map VFL26 "Service Tunnels"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL27 "Dimension Shift"
@@ -11773,8 +10040,6 @@ map VFL27 "Dimension Shift"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL28 "Tower Block"
@@ -11785,8 +10050,6 @@ map VFL28 "Tower Block"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL29 "Earth Siege"
@@ -11797,8 +10060,6 @@ map VFL29 "Earth Siege"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL30 "Hell Revealed"
@@ -11809,8 +10070,6 @@ map VFL30 "Hell Revealed"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL31 "Rough Draft"
@@ -11822,8 +10081,6 @@ map VFL31 "Rough Draft"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 map VFL32 "Spider Web"
@@ -11834,8 +10091,6 @@ map VFL32 "Spider Web"
 	enterpic = "VILEFINT"
 	exitpic = "VILEFINT"
 	intermusic = "MUS_VFIN"
-	nocrouch
-	nojump
 	}
 
 // THE VILECORE
@@ -11848,8 +10103,6 @@ map VCO01 "Evilzone"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO02 "Halls of Doom"
@@ -11860,8 +10113,6 @@ map VCO02 "Halls of Doom"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO03 "Revenant Court"
@@ -11872,8 +10123,6 @@ map VCO03 "Revenant Court"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO04 "Barriers"
@@ -11884,8 +10133,6 @@ map VCO04 "Barriers"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO05 "Hell Knight's Temple"
@@ -11896,8 +10143,6 @@ map VCO05 "Hell Knight's Temple"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO06 "Powersurger"
@@ -11908,8 +10153,6 @@ map VCO06 "Powersurger"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO07 "Demonic Outpost"
@@ -11922,8 +10165,6 @@ map VCO07 "Demonic Outpost"
 	intermusic = "MUS_M1I2"
 	map07special
 	compat_shorttex = 1
-	nocrouch
-	nojump
 	}
 	
 map VCO08 "Temple of Fiends"
@@ -11934,8 +10175,6 @@ map VCO08 "Temple of Fiends"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO09 "Vile Complex"
@@ -11946,8 +10185,6 @@ map VCO09 "Vile Complex"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map VCO10 "Nukage Plant"
@@ -11958,8 +10195,6 @@ map VCO10 "Nukage Plant"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO11 "Doomcatraz!"
@@ -11970,8 +10205,6 @@ map VCO11 "Doomcatraz!"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO12 "The Chaos Site"
@@ -11982,8 +10215,6 @@ map VCO12 "The Chaos Site"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO13 "The Morbid Area"
@@ -11994,8 +10225,6 @@ map VCO13 "The Morbid Area"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO14 "The Baron's Causeway"
@@ -12006,8 +10235,6 @@ map VCO14 "The Baron's Causeway"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map VCO15 "Ashwall Plaza"
@@ -12019,8 +10246,6 @@ map VCO15 "Ashwall Plaza"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map VCO16 "The Dreadhold"
@@ -12031,8 +10256,6 @@ map VCO16 "The Dreadhold"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO17 "Aztecore"
@@ -12043,8 +10266,6 @@ map VCO17 "Aztecore"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map VCO18 "Doomed Castle"
@@ -12055,8 +10276,6 @@ map VCO18 "Doomed Castle"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO19 "The Bridge at Kazadoom!"
@@ -12067,8 +10286,6 @@ map VCO19 "The Bridge at Kazadoom!"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 	
 map VCO20 "Forsaken Mines"
@@ -12079,8 +10296,6 @@ map VCO20 "Forsaken Mines"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO21 "The Rife Hive"
@@ -12091,8 +10306,6 @@ map VCO21 "The Rife Hive"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO22 "Doomhenge"
@@ -12103,8 +10316,6 @@ map VCO22 "Doomhenge"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO23 "Hellish Junction"
@@ -12115,8 +10326,6 @@ map VCO23 "Hellish Junction"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO24 "Chemical Facility"
@@ -12127,8 +10336,6 @@ map VCO24 "Chemical Facility"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO25 "Blood Fountain"
@@ -12139,8 +10346,6 @@ map VCO25 "Blood Fountain"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO26 "Hellpitt Temple"
@@ -12151,8 +10356,6 @@ map VCO26 "Hellpitt Temple"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO27 "Infested Tomb"
@@ -12163,8 +10366,6 @@ map VCO27 "Infested Tomb"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO28 "Energy Well"
@@ -12175,8 +10376,6 @@ map VCO28 "Energy Well"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO29 "Paths of Chaos"
@@ -12187,8 +10386,6 @@ map VCO29 "Paths of Chaos"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO30 "Battle Hex!"
@@ -12199,8 +10396,6 @@ map VCO30 "Battle Hex!"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO31 "Bloodstone"
@@ -12212,8 +10407,6 @@ map VCO31 "Bloodstone"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map VCO32 "The Vilecore!!"
@@ -12224,8 +10417,6 @@ map VCO32 "The Vilecore!!"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // TWILIGHT ZONE II
@@ -12238,8 +10429,6 @@ map TW201 "Sputnik Port"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW202 "Triton"
@@ -12250,8 +10439,6 @@ map TW202 "Triton"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW203 "Nemesis"
@@ -12262,8 +10449,6 @@ map TW203 "Nemesis"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW204 "Momento"
@@ -12274,8 +10459,6 @@ map TW204 "Momento"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW205 "TNT Barons"
@@ -12286,8 +10469,6 @@ map TW205 "TNT Barons"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW206 "Burnett Mining Complex"
@@ -12298,8 +10479,6 @@ map TW206 "Burnett Mining Complex"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW207 "Suffocate"
@@ -12311,8 +10490,6 @@ map TW207 "Suffocate"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
 	map07special
-	nocrouch
-	nojump
 	}
 	
 map TW208 "Porpoise"
@@ -12323,8 +10500,6 @@ map TW208 "Porpoise"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW209 "Gymea Mentos"
@@ -12335,8 +10510,6 @@ map TW209 "Gymea Mentos"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 	
 map TW210 "Facility"
@@ -12347,8 +10520,6 @@ map TW210 "Facility"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW211 "Termite Mound"
@@ -12359,8 +10530,6 @@ map TW211 "Termite Mound"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW212 "Death Ship"
@@ -12371,8 +10540,6 @@ map TW212 "Death Ship"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW213 "D'Sparil's Domain"
@@ -12383,8 +10550,6 @@ map TW213 "D'Sparil's Domain"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW214 "Hazard Base"
@@ -12395,8 +10560,6 @@ map TW214 "Hazard Base"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 	
 map TW215 "Stardate Institute"
@@ -12408,8 +10571,6 @@ map TW215 "Stardate Institute"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 	
 map TW216 "SubSpace"
@@ -12420,8 +10581,6 @@ map TW216 "SubSpace"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW217 "Spacelab"
@@ -12432,8 +10591,6 @@ map TW217 "Spacelab"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 	
 map TW218 "The Gypsy"
@@ -12444,8 +10601,6 @@ map TW218 "The Gypsy"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW219 "Disaster Area"
@@ -12456,8 +10611,6 @@ map TW219 "Disaster Area"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 	
 map TW220 "Corcous"
@@ -12468,8 +10621,6 @@ map TW220 "Corcous"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW221 "Processing Labs"
@@ -12480,8 +10631,6 @@ map TW221 "Processing Labs"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW222 "Despair"
@@ -12492,8 +10641,6 @@ map TW222 "Despair"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW223 "Who Stole the Health?"
@@ -12504,8 +10651,6 @@ map TW223 "Who Stole the Health?"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW224 "The Abyss"
@@ -12516,8 +10661,6 @@ map TW224 "The Abyss"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW225 "Amy's Keep"
@@ -12528,8 +10671,6 @@ map TW225 "Amy's Keep"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW226 "Den of Insanity"
@@ -12540,8 +10681,6 @@ map TW226 "Den of Insanity"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW227 "Place of Reckoning"
@@ -12552,8 +10691,6 @@ map TW227 "Place of Reckoning"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW228 "Unholy"
@@ -12564,8 +10701,6 @@ map TW228 "Unholy"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW229 "Caverns of Darkness"
@@ -12576,8 +10711,6 @@ map TW229 "Caverns of Darkness"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW230 "Jon's Arena"
@@ -12588,8 +10721,6 @@ map TW230 "Jon's Arena"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW231 "Morass"
@@ -12601,8 +10732,6 @@ map TW231 "Morass"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 map TW232 "Meorhanal 4 Yul"
@@ -12613,8 +10742,6 @@ map TW232 "Meorhanal 4 Yul"
 	enterpic = "TW2INT"
 	exitpic = "TW2INT"
 	intermusic = "MUS_TWIN"
-	nocrouch
-	nojump
 	}
 
 // NEODOOM (Vaccinated Edition)
@@ -12627,7 +10754,6 @@ map NEO01 "Landing Base"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO02 "Poison Refinery"
@@ -12638,7 +10764,6 @@ map NEO02 "Poison Refinery"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO03 "Command Central"
@@ -12649,7 +10774,6 @@ map NEO03 "Command Central"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO04 "Creature Prison"
@@ -12660,7 +10784,6 @@ map NEO04 "Creature Prison"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO05 "Computer Station"
@@ -12671,7 +10794,6 @@ map NEO05 "Computer Station"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO06 "Toxin Supplier"
@@ -12682,7 +10804,6 @@ map NEO06 "Toxin Supplier"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO07 "Slime Machine"
@@ -12693,7 +10814,6 @@ map NEO07 "Slime Machine"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	map07special
 	}
 	
@@ -12705,7 +10825,6 @@ map NEO08 "Damaged Dam"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO09 "Hidden Industry"
@@ -12716,7 +10835,6 @@ map NEO09 "Hidden Industry"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO10 "Sewerage"
@@ -12727,7 +10845,6 @@ map NEO10 "Sewerage"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO11 "The Mansion"
@@ -12738,7 +10855,6 @@ map NEO11 "The Mansion"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO12 "South Zone"
@@ -12749,7 +10865,6 @@ map NEO12 "South Zone"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO13 "Residential Ward"
@@ -12760,7 +10875,6 @@ map NEO13 "Residential Ward"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO14 "Center District"
@@ -12771,7 +10885,6 @@ map NEO14 "Center District"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO15 "Commercial Downtown"
@@ -12783,7 +10896,6 @@ map NEO15 "Commercial Downtown"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO16 "Doom Shopping"
@@ -12794,7 +10906,6 @@ map NEO16 "Doom Shopping"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO17 "Municipal Park"
@@ -12805,7 +10916,6 @@ map NEO17 "Municipal Park"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO18 "Forgotten Fortress"
@@ -12816,7 +10926,6 @@ map NEO18 "Forgotten Fortress"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO19 "Temple of the Waterfall"
@@ -12827,7 +10936,6 @@ map NEO19 "Temple of the Waterfall"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO20 "Inner Temple"
@@ -12838,7 +10946,6 @@ map NEO20 "Inner Temple"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO21 "Frozen Lands"
@@ -12849,7 +10956,6 @@ map NEO21 "Frozen Lands"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO22 "Demonic Island"
@@ -12860,7 +10966,6 @@ map NEO22 "Demonic Island"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO23 "Profane Cathedral"
@@ -12871,7 +10976,6 @@ map NEO23 "Profane Cathedral"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 
@@ -12883,7 +10987,6 @@ map NEO24 "Tower of Suffering"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO25 "Eternity Cemetery"
@@ -12894,7 +10997,6 @@ map NEO25 "Eternity Cemetery"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO26 "Underground Castle"
@@ -12905,7 +11007,6 @@ map NEO26 "Underground Castle"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO27 "Demonic Throat Canyon"
@@ -12916,7 +11017,6 @@ map NEO27 "Demonic Throat Canyon"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO28 "Gateway to the Evil"
@@ -12927,7 +11027,6 @@ map NEO28 "Gateway to the Evil"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 map NEO29 "At the Heart of it all"
@@ -12938,7 +11037,6 @@ map NEO29 "At the Heart of it all"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO30 "The Return"
@@ -12960,7 +11058,6 @@ map NEO31 "Vacation House"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 	
 map NEO32 "A Brick on the Wall"
@@ -12971,7 +11068,6 @@ map NEO32 "A Brick on the Wall"
 	enterpic = "NEOINT"
 	exitpic = "NEOINT"
 	intermusic = "MUS_NDIN"
-	nocrouch
 	}
 
 // TITAN
@@ -12992,8 +11088,6 @@ map ANN01 "Presence of Death"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ANN02 "Occupied Territory"
@@ -13004,8 +11098,6 @@ map ANN02 "Occupied Territory"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map ANN03 "Close Encounters"
@@ -13016,8 +11108,6 @@ map ANN03 "Close Encounters"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // 99 WAYS TO DIE
@@ -13030,8 +11120,6 @@ map 99W01 "MAP01"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map 99W02 "MAP02"
@@ -13042,8 +11130,6 @@ map 99W02 "MAP02"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map 99W03 "MAP03"
@@ -13054,8 +11140,6 @@ map 99W03 "MAP03"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 // Back to Hell
@@ -13068,8 +11152,6 @@ map BTH01 "Map01"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTH02 "Map02"
@@ -13080,8 +11162,6 @@ map BTH02 "Map02"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTH03 "Map03"
@@ -13092,8 +11172,6 @@ map BTH03 "Map03"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTH04 "Map04"
@@ -13104,8 +11182,6 @@ map BTH04 "Map04"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTH05 "Map05"
@@ -13116,8 +11192,6 @@ map BTH05 "Map05"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTH06 "Map06"
@@ -13128,8 +11202,6 @@ map BTH06 "Map06"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTH07 "Map07"
@@ -13140,8 +11212,6 @@ map BTH07 "Map07"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTH08 "Map08"
@@ -13152,8 +11222,6 @@ map BTH08 "Map08"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 map BTH09 "Map09"
@@ -13164,8 +11232,6 @@ map BTH09 "Map09"
 	enterpic = "DOOM2INT"
 	exitpic = "DOOM2INT"
 	intermusic = "MUS_M1I2"
-	nocrouch
-	nojump
 	}
 
 

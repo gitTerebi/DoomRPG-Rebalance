@@ -1,3 +1,2 @@
 Name=Compendium
-Conflicts=Lexicon
 Mods=Compendium-v1a.pk3
