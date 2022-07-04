@@ -448,24 +448,6 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // HEALTH ITEMS
 // --------------------------------------------------
 
-// Health Bonus Locations
-actor DRPGHealthBonusRandomizer : RandomSpawner Replaces HealthBonus
-{
-    DropItem "DRPGLootMedicalSupplies"         255 18
-    DropItem "DRPGLootChemicals"               255 18
-    DropItem "DRPGLootHazardousMaterials"      255 18
-    DropItem "DRPGLootAnomalousMaterials"      255 18
-    DropItem "DRPGLootBriefcase"               255 18
-    DropItem "DRPGLootComputerData"            255 18
-    DropItem "DRPGLootGunParts"                255 18
-    DropItem "DRPGLootAmmoCasings"             255 18
-    DropItem "DRPGLootFuelCapsule"             255 18
-    DropItem "DRPGLootScrapMetals"             255 18
-    DropItem "DRPGLootScrapElectronics"        255 18
-    DropItem "DRPGLootExperimentalParts"       255 18
-    DropItem "DRPGLootDemonArtifact"           255 18
-}
-
 // Stimpack Locations
 actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 {
@@ -498,9 +480,6 @@ actor DRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
 
 // ARMOR ITEMS
 // --------------------------------------------------
-
-// Armor Bonus
-actor DRPGArmorBonusReplacer : DRPGHealthBonusRandomizer Replaces ArmorBonus {}
 
 // Green Armor Locations
 actor DRPGGreenArmorRandomizer : RandomSpawner Replaces GreenArmor
@@ -650,6 +629,30 @@ actor DRPGItemDropper
 }
 
 //DOOMRPG REBALANCE ACS RANDOMIZERS
+
+// Health Bonus Locations
+actor DRPGHealthBonusSpawner : MapSpot Replaces HealthBonus
+{
+    States
+    {
+    Spawn:
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGGenericLootSpawner")
+        Stop
+    }
+}
+
+// Armor Bonus Locations
+actor DRPGArmorBonusSpawner : MapSpot Replaces ArmorBonus
+{
+    States
+    {
+    Spawn:
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGGenericLootSpawner")
+        Stop
+    }
+}
+
+// Armor Randomizer
 actor DRPGArmorSpawner : MapSpot
 {
     States
@@ -660,6 +663,7 @@ actor DRPGArmorSpawner : MapSpot
     }
 }
 
+// Weapon Randomizer
 actor DRPGWeaponSpawner : MapSpot
 {
     States
@@ -670,6 +674,7 @@ actor DRPGWeaponSpawner : MapSpot
     }
 }
 
+// Shield Randomizer
 actor DRPGShieldSpawner : MapSpot
 {
     States

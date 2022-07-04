@@ -4,6 +4,7 @@ DoomRL_Arsenal	DoomRL Arsenal
 j-jukebox	Jimmy's Jukebox Instant Randomizer
 LegenDoom	LegenDoom
 Rampancy	Rampancy
-Lexicon	Lexicon
 doom_complete	WadSmoosh
+Compendium	Compendium
+Lexicon	Lexicon
 DehackedAttack	Dehacked Attack

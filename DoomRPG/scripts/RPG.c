@@ -1372,20 +1372,6 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
     if (NumItems < 1) // [KS] If we can't find any possible positions to spawn anything, fuck it.
         return;
 
-    // Set starting Map Spot
-    int StartTID = UniqueTID();
-    fixed StartX, StartY, StartZ;
-    for (int i = 0; i < MAX_PLAYERS; i++)
-    {
-        if (!PlayerInGame(i)) continue;
-
-        StartX = GetActorX(Players(i).TID);
-        StartY = GetActorY(Players(i).TID);
-        StartZ = GetActorZ(Players(i).TID);
-        break;
-    }
-    SpawnForced("MapSpot", StartX, StartY, StartZ, StartTID, 0);
-
     int TID, A;
     fixed X, Y, Z;
 
@@ -1404,7 +1390,9 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
 
         bool Spawned = Spawn("MapSpotTall", X, Y, Z, TID, A);
 
-        if (Iterations < 512 && CheckSight(TID, StartTID, 0) || Iterations < 512 && Distance(TID, StartTID) <= 1024)
+        Iterations++;
+
+        if (Iterations < 512 && (CheckSight(TID, MAP_START_TID, 0) || Distance(TID, MAP_START_TID) <= 1024 - Iterations))
             continue;
 
         if (Spawned)
@@ -1454,8 +1442,6 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
             HudMessage("\CfGenerating Loot\n\Cd%d \Cj/ \Cd%d\n\n\CdActor: \C-%S\n\CdIteration: %d\n\CiBoundaries: %.2k-%.2k, %.2k-%.2k\n\nX: %.2k\nY: %.2k\nZ: %.2k", Items, MaxItems, Actor, Iterations, LowerX, UpperX, LowerY, UpperY, X, Y, Z);
             EndHudMessage(HUDMSG_FADEOUT, MAKE_ID('L', 'O', 'O', 'T'), "White", 1.5, 0.8, 1.5, 0.5);
         }
-
-        Iterations++;
 
         if (Iterations % 50 == 0) Delay(1);
 
@@ -2355,6 +2341,16 @@ void CheckCompatibility()
     {
         if (DebugLog)
             Log("\CdDEBUG: \CaLexicon\C- detected");
+        MapPacks = true;
+        Thing_Remove(TID);
+    }
+
+    // Compendium
+    Success = SpawnForced("DRPGCompendiumActive", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (DebugLog)
+            Log("\CdDEBUG: \CaCompendium\C- detected");
         MapPacks = true;
         Thing_Remove(TID);
     }

@@ -1,2 +1,3 @@
 Name=Lexicon
+Conflicts=Compendium
 Mods=Lexicon-beta-build-137.pk3

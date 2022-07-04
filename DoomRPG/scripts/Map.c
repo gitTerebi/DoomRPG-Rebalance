@@ -42,6 +42,19 @@ static bool MapPacksInitialized;
 // Map Init Script
 NamedScript Type_OPEN void MapInit()
 {
+    // Set starting Map Spot
+    fixed StartX, StartY, StartZ;
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (!PlayerInGame(i)) continue;
+
+        StartX = GetActorX(Players(i).TID);
+        StartY = GetActorY(Players(i).TID);
+        StartZ = GetActorZ(Players(i).TID);
+        break;
+    }
+    SpawnForced("MapSpot", StartX, StartY, StartZ, MAP_START_TID, 0);
+
     // Running the game for the first time
     if (KnownLevels->Data == NULL)
     {
@@ -3575,18 +3588,78 @@ NamedScript void InitMapPacks()
         "drpg_lex_wid",
         "drpg_lex_wos",
         "drpg_lex_zth",
-        "drpg_lex_zof"
+        "drpg_lex_zof",
+        "drpg_comp_hubmap",
+        "drpg_comp_mm101",
+        "drpg_comp_mm201",
+        "drpg_comp_req01",
+        "drpg_comp_ins01",
+        "drpg_comp_obt01",
+        "drpg_comp_str01",
+        "drpg_comp_bio01",
+        "drpg_comp_drk01",
+        "drpg_comp_ttp01",
+        "drpg_comp_pgr01",
+        "drpg_comp_pst01",
+        "drpg_comp_tvr01",
+        "drpg_comp_sci01",
+        "drpg_comp_ica01",
+        "drpg_comp_htp01",
+        "drpg_comp_aby01",
+        "drpg_comp_tal01",
+        "drpg_comp_alh01",
+        "drpg_comp_eni01",
+        "drpg_comp_rlm01",
+        "drpg_comp_dys01",
+        "drpg_comp_ete01",
+        "drpg_comp_reb01",
+        "drpg_comp_scy01",
+        "drpg_comp_cod01",
+        "drpg_comp_dk201",
+        "drpg_comp_equ01",
+        "drpg_comp_mrs01",
+        "drpg_comp_blr01",
+        "drpg_comp_osi01",
+        "drpg_comp_rui01",
+        "drpg_comp_njs01",
+        "drpg_comp_dae01",
+        "drpg_comp_cle01",
+        "drpg_comp_asd01",
+        "drpg_comp_ple01",
+        "drpg_comp_dcv01",
+        "drpg_comp_sla01",
+        "drpg_comp_hfa01",
+        "drpg_comp_cdr01",
+        "drpg_comp_gat01",
+        "drpg_comp_ert01",
+        "drpg_comp_end01",
+        "drpg_comp_res01",
+        "drpg_comp_ens01",
+        "drpg_comp_btk01",
+        "drpg_comp_cit01",
+        "drpg_comp_slp01",
+        "drpg_comp_dis01",
+        "drpg_comp_sid01",
+        "drpg_comp_man01",
+        "drpg_comp_lep01",
+        "drpg_comp_vfl01",
+        "drpg_comp_vco01",
+        "drpg_comp_tw201",
+        "drpg_comp_neo01",
+        "drpg_comp_ann01",
+        "drpg_comp_99w01",
+        "drpg_comp_bth01"
     };
 
     str LumpNames[MAX_MAPPACKS] =
     {
-        "E1M1",
+        "E1M1",      // WadSmoosh
         "MAP01",
         "ML_MAP01",
         "NV_MAP01",
         "PL_MAP01",
         "TN_MAP01",
-        "VR",
+        "VR",        // Lexicon
         "AA101",
         "AAA01",
         "AAA02",
@@ -3656,7 +3729,67 @@ NamedScript void InitMapPacks()
         "WID01",
         "WOS01",
         "ZTH01",
-        "ZOF01"
+        "ZOF01",
+        "HUBMAP",    // Compemdium
+        "MM101",
+        "MM201",
+        "REQ01",
+        "INS01",
+        "OBT01",
+        "STR01",
+        "BIO01",
+        "DRK01",
+        "TTP01",
+        "PGR01",
+        "PST01",
+        "TVR01",
+        "SCI01",
+        "ICA01",
+        "HTP01",
+        "ABY01",
+        "TAL01",
+        "ALH01",
+        "ENI01",
+        "RLM01",
+        "DYS01",
+        "ETE01",
+        "REB01",
+        "SCY01",
+        "COD01",
+        "DK201",
+        "EQU01",
+        "MRS01",
+        "BLR01",
+        "OSI01",
+        "RUI01",
+        "NJZ01",
+        "DAE01",
+        "CLE01",
+        "ASD01",
+        "PLE01",
+        "DCV01",
+        "SLA01",
+        "HFA01",
+        "CDR01",
+        "GAT01",
+        "ERT01",
+        "END01",
+        "RES01",
+        "ENS01",
+        "BTK01",
+        "CIT01",
+        "SLP01",
+        "DIS01",
+        "SID01",
+        "MAN01",
+        "LEP01",
+        "VFL01",
+        "VCO01",
+        "TW201",
+        "NEO01",
+        "ANN01",
+        "99W01",
+        "BTH01"
     };
     int i;
     bool BlankStart;

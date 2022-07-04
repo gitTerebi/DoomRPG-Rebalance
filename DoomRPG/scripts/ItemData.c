@@ -1268,6 +1268,23 @@ NamedScript DECORATE void SpawnLuckItem()
     Thing_Remove(0);
 }
 
+NamedScript DECORATE void DRPGGenericLootSpawner()
+{
+    // Delay while the map is being initialized
+    while (!CurrentLevel->Init) Delay(1);
+
+    str ActorToSpawn;
+
+    if (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512)
+        ActorToSpawn = "DRPGHealthBonus";
+    else
+        ActorToSpawn = ItemData[7][Random(0, 12)].Actor;
+
+    SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+
+    Thing_Remove(0);
+}
+
 NamedScript DECORATE void DRPGWeaponSpawner()
 {
     // Delay while the map is being initialized
@@ -1306,7 +1323,10 @@ NamedScript DECORATE void DRPGWeaponSpawner()
             {
                 if (Random(0, 1 + Amount) <= 0)
                 {
-                    ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                    if (CheckSight(ActivatorTID(), MAP_START_TID, 0)|| Distance(ActivatorTID(), MAP_START_TID) <= 512)
+                        ActorToSpawn = ItemData[ItemCategory][Random(0, ((CompatMode == COMPAT_DRLA) ? 9 : 7))].Actor;
+                    else
+                        ActorToSpawn = ItemData[ItemCategory][i].Actor;
                     ItemSpawned = true;
                 }
                 Amount++;
@@ -1315,7 +1335,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     }
 
     if (!ItemSpawned)
-        ActorToSpawn = ItemData[ItemCategory][Random(0, 9)].Actor;
+        ActorToSpawn = ItemData[ItemCategory][Random(0, ((CompatMode == COMPAT_DRLA) ? 9 : 7))].Actor;
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
@@ -1360,7 +1380,10 @@ NamedScript DECORATE void DRPGArmorSpawner()
             {
                 if (Random(0, 1 + Amount) <= 0)
                 {
-                    ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                    if (CheckSight(ActivatorTID(), MAP_START_TID, 0)|| Distance(ActivatorTID(), MAP_START_TID) <= 512)
+                        ActorToSpawn = ItemData[3][Random(1, ((CompatMode == COMPAT_DRLA) ? 3 : 5))].Actor;
+                    else
+                        ActorToSpawn = ItemData[ItemCategory][i].Actor;
                     ItemSpawned = true;
                 }
                 Amount++;

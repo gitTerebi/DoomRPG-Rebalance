@@ -313,6 +313,8 @@ typedef enum
 #define MAP_EXIT_SCRIPTNUM          30000
 #define MAP_EXIT_TELEPORT_SCRIPTNUM 30001
 
+#define MAP_START_TID           (MAKE_ID('S', 'T', 'R', 'T'))
+
 typedef enum
 {
     MAPEVENT_NONE,
@@ -1133,8 +1135,74 @@ typedef enum
     LEX_ZOF
 } EnumLEXMapSets;
 
+// Compendium Map Packs
+#define MAX_COMPMAPPACKS 60
+typedef enum
+{
+    COMP_HUBMAP,
+    COMP_MM101,
+    COMP_MM201,
+    COMP_REQ01,
+    COMP_INS01,
+    COMP_OBT01,
+    COMP_STR01,
+    COMP_BIO01,
+    COMP_DRK01,
+    COMP_TTP01,
+    COMP_PGR01,
+    COMP_PST01,
+    COMP_TVR01,
+    COMP_SCI01,
+    COMP_ICA01,
+    COMP_HTP01,
+    COMP_ABY01,
+    COMP_TAL01,
+    COMP_ALH01,
+    COMP_ENI01,
+    COMP_RLM01,
+    COMP_DYS01,
+    COMP_ETE01,
+    COMP_REB01,
+    COMP_SCY01,
+    COMP_COD01,
+    COMP_DK201,
+    COMP_EQU01,
+    COMP_MRS01,
+    COMP_BLR01,
+    COMP_OSI01,
+    COMP_RUI01,
+    COMP_NJZ01,
+    COMP_DAE01,
+    COMP_CLE01,
+    COMP_ASD01,
+    COMP_PLE01,
+    COMP_DCV01,
+    COMP_SLA01,
+    COMP_HFA01,
+    COMP_CDR01,
+    COMP_GAT01,
+    COMP_ERT01,
+    COMP_END01,
+    COMP_RES01,
+    COMP_ENS01,
+    COMP_BTK01,
+    COMP_CIT01,
+    COMP_SLP01,
+    COMP_DIS01,
+    COMP_SID01,
+    COMP_MAN01,
+    COMP_LEP01,
+    COMP_VFL01,
+    COMP_VCO01,
+    COMP_TW201,
+    COMP_NEO01,
+    COMP_ANN01,
+    COMP_99W01,
+    COMP_BTH01
+} EnumCOMPMapSets;
+
 // Max Map Packs
-#define MAX_MAPPACKS  (MAX_WSMAPPACKS + MAX_LEXMAPPACKS)
+#define MAX_MAPPACKS  (MAX_WSMAPPACKS + MAX_LEXMAPPACKS + MAX_COMPMAPPACKS)
 
 // --------------------------------------------------
 // Pointer Types
