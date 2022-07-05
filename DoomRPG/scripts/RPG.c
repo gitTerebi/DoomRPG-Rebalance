@@ -1329,7 +1329,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
     // Determine the max amount of items to create if it's not specifically specified
     if (MaxItems == 0)
     {
-        MaxItems = Random(24, 56) * MapLevelModifier;
+        MaxItems = RoundInt(RandomFixed(24.0, 56.0) * ((fixed)AveragePlayerLuck() / 100.0));
         MaxItems *= GetCVarFixed("drpg_lootgen_factor");
     }
 
