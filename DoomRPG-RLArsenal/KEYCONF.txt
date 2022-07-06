@@ -9,5 +9,5 @@ alias rl_armorspecial_gch "closemenu; rl_armorspecial"
 alias rl_specialitemdropper_gch "closemenu; rl_specialitemdropper"
 
 // Open/Close PDA
-alias drla_pda_open_gch "drla_pda; bind RStickUp +lookup; bind RStickDown +lookdown; bind LTrigger +altattack; freelook true; centerview; rebind drla_pda_close_gch"
-alias drla_pda_close_gch "drla_pda; bind RStickUp weapnext; bind RStickDown weapprev; unbind LTrigger; freelook false; centerview; rebind drla_pda_open_gch"
+alias drla_pda_open_gch "drla_pda; rebind drla_pda_close_gch"
+alias drla_pda_close_gch "drla_pda; rebind drla_pda_open_gch"
