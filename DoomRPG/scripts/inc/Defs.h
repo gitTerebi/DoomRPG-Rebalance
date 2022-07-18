@@ -752,6 +752,7 @@ typedef enum
 #define DRLA_ARMOR_MAX          2 + (Player.CapacityTotal / 25)
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX
 #define DRLA_DEVICE_MAX         4 + (Player.CapacityTotal / 50)
+#define DRLA_MODPACKS_MAX       (PlayerClass(PlayerNumber()) == 2 ? 8 : 4)
 
 #define NATURALCAP              100
 

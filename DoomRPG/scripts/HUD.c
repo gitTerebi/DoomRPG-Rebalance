@@ -1553,7 +1553,7 @@ Start:
         if (ModPacks > 0 || GetCVar("drpg_hud_preview"))
         {
             SetFont("BIGFONT");
-            if ((!IsTechnician && ModPacks >= 4) || (IsTechnician && ModPacks >= 8))
+            if (ModPacks >= DRLA_MODPACKS_MAX)
             {
                 HudMessage("%d", ModPacks);
                 EndHudMessage(HUDMSG_ALPHA, 0, "Gold", XOff, Y + 12.0, 0.05, 0.75 + (Sin((fixed)Timer() / 32.0) * 0.25));

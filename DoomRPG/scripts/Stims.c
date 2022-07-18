@@ -405,6 +405,19 @@ void CheckStim()
     // Toxicity from total amount of compounds
     Player.Stim.Toxicity += (Player.Stim.Amount * 0.5) * StimToxicityMultiplier;
 
+    // Toxicity depending from Regeneration Aug
+    if (Player.Augs.Active[AUG_REGENERATION])
+    {
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] == 5)
+            Player.Stim.Toxicity *= 0.90;
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] == 6)
+            Player.Stim.Toxicity *= 0.85;
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] == 7)
+            Player.Stim.Toxicity *= 0.80;
+        if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 8)
+            Player.Stim.Toxicity *= 0.70;
+    }
+
     // Calculate the current Stim amount
     Player.Stim.Amount = 0;
     for (int i = 0; i < STIM_MAX; i++)

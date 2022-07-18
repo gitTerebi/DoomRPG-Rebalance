@@ -258,6 +258,7 @@ NamedScript DECORATE int CheckCapacity()
 {
     int Items = 0;
     int MaxItems = CheckInventoryMax();
+    bool IsTechnician = (PlayerClass(PlayerNumber()) == 2);
 
     // Add Capacity XP for total carried items
     if (GetCVar("drpg_levelup_natural") && Timer() % 7 == 0)
@@ -272,12 +273,12 @@ NamedScript DECORATE int CheckCapacity()
         if (CompatMode == COMPAT_DRLA)
         {
             // Calculate capacity usage per category in DRLA, excluding weapons and modpacks
-            int DRLAItems = CheckInventory("RLArmorInInventory") + CheckInventory("RLSkullLimit") + CheckInventory("RLPhaseDeviceLimit");
-            int DRLAMaxItems = DRLA_ARMOR_MAX + DRLA_SKULL_MAX + DRLA_DEVICE_MAX;
-            Player.CapacityXP += (int)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 20);
+            int DRLAItems = CheckInventory("RLArmorInInventory") + CheckInventory("RLSkullLimit") + CheckInventory("RLPhaseDeviceLimit") + (IsTechnician ? CheckInventory("RLScavengerModLimit") : CheckInventory("RLModLimit"));
+            int DRLAMaxItems = DRLA_ARMOR_MAX + DRLA_SKULL_MAX + DRLA_DEVICE_MAX + DRLA_MODPACKS_MAX;
+            Player.CapacityXP += (int)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 20.0);
         }
         else
-            Player.CapacityXP += (int)(Player.InvItems * Scale / MaxItems * 20);
+            Player.CapacityXP += (int)(Player.InvItems * Scale / MaxItems * 20.0);
     }
 
     // Don't do checks if you have the system disabled

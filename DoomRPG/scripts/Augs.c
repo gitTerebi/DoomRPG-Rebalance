@@ -80,10 +80,10 @@ AugInfo RPGMap AugData[AUG_MAX] =
             "+25% EP Regen Speed",
             "+50% HP Regen Amounts",
             "+50% EP Regen Amounts",
-            "-5 Seconds Toxicity Timer",
-            "-10 Seconds Toxicity Timer",
-            "-15 Seconds Toxicity Timer",
-            "-20 Seconds Toxicity Timer"
+            "-5 Seconds Toxicity Timer and -10% Reduce Toxicity from Stims",
+            "-10 Seconds Toxicity Timer and -15% Reduce Toxicity from Stims",
+            "-15 Seconds Toxicity Timer and -20% Reduce Toxicity from Stims",
+            "-20 Seconds Toxicity Timer and -30% Reduce Toxicity from Stims"
         },
         .TokenActor = "DRPGAugTokenRegen"
     },
