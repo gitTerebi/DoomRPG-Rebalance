@@ -343,14 +343,14 @@ void CheckMission()
     }
 
     // Generic Checking
-    if (Player.Mission.Type == MT_KILL || Player.Mission.Type == MT_KILLAURAS ||
+    if ((Player.Mission.Type == MT_KILL || Player.Mission.Type == MT_KILLAURAS ||
             Player.Mission.Type == MT_REINFORCEMENTS || Player.Mission.Type == MT_SECRETS ||
-            Player.Mission.Type == MT_ITEMS)
+            Player.Mission.Type == MT_ITEMS) && !CurrentLevel->UACBase)
         if (Player.Mission.Current >= Player.Mission.Amount)
             Complete = true;
 
     // Assassination Mission
-    if (Player.Mission.Type == MT_ASSASSINATION)
+    if (Player.Mission.Type == MT_ASSASSINATION && !CurrentLevel->UACBase)
         if (Player.Mission.Current >= 1)
             Complete = true;
 

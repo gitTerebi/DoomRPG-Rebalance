@@ -345,8 +345,8 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             30000, 4, 8, "AUGCA0", 12, 24);
     ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     30000, 4, 8, "AUGUA0", 12, 24);
     ITEMDATA_DEF("DRPGAugSlotUpgrade",      "Augmentation Slot Upgrade",         90000, 7, 8, "AUGUB0", 16, 25);
-    ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                       500, 4, 1, "BATTA0",  5, 13);
-    ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      1250, 6, 2, "BATTB0", 14, 21);
+    ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                       500, 1, 1, "BATTA0",  5, 13);
+    ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      1250, 4, 3, "BATTB0", 14, 21);
 
     ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                         500, 1, 1, "TPRTA0", 29, 21);
     ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                 2500, 4, 3, "TCRTA0", 29, 26);
@@ -1035,6 +1035,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",          0, -1, -1, "STVLG0",  4, 16);
     ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",              0, -1, -1, "STVLH0",  4, 16);
     ITEMDATA_DEF("DRPGSmallBackpack",       "Ammo Satchel",                 0, -1, -1, "ASCHA0", 14, 30);
+    ITEMDATA_DEF("DRPGChipGold",            "\CfGold Chip\C-",              0, -1, -1, "CHPGB0",  0,  0);
 
     // Items for Crates/Rewards -  Uncommon
     ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                  0, -1, -1, "STIMB0", 16, 29);
@@ -1058,6 +1059,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",              0, -1, -1, "STVLR0",  4, 16);
     ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",          0, -1, -1, "STVLS0",  4, 16);
     ITEMDATA_DEF("DRPGStimDetox",           "\CdDetox\C- Hypospray",        0, -1, -1, "STIMC0",  6, 31);
+    ITEMDATA_DEF("DRPGChipPlatinum",        "Platinum Chip",                0, -1, -1, "CHPPB0",  0,  0);
 
     // Items for Crates/Rewards -  Very Rare
     ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",            0, -1, -1, "STPAA0", 30, 16);
@@ -1074,9 +1076,6 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGBigBackpack",         "Big Backpack",                 0, -1, -1, "GPAKA0", 11, 29);
 
     // Others Stuff
-    ITEMDATA_DEF("DRPGChipGold",            "\CfGold Chip\C-",              0, -1, -1, "CHPGA0", 16, 32);
-    ITEMDATA_DEF("DRPGChipPlatinum",        "Platinum Chip",                0, -1, -1, "CHPPA0", 16, 32);
-
     ITEMDATA_DEF("DRPGUACCard",             "UAC Card",                     0, -1, -1, "UCRDA0", 26, 26);
     ITEMDATA_DEF("DRPGDiamondUACCard",      "Diamond UAC Card",             0, -1, -1, "UCRDE0", 26, 26);
 
@@ -1164,31 +1163,31 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
                 Cap = 6;
                 break;
             case 1:
-                Cap = 11;
+                Cap = 12;
                 break;
             case 2:
-                Cap = 17;
+                Cap = 18;
                 break;
             case 3:
-                Cap = 23;
+                Cap = 24;
                 break;
             case 4:
-                Cap = 28;
-                break;
-            case 5:
                 Cap = 30;
                 break;
-            case 6:
+            case 5:
                 Cap = 32;
                 break;
+            case 6:
+                Cap = 34;
+                break;
             case 7:
-                Cap = 33;
+                Cap = 35;
                 break;
             case 8:
-                Cap = 34;
+                Cap = 36;
                 break;
             case 9:
-                Cap = 34;
+                Cap = 36;
                 break;
             }
 
@@ -1249,9 +1248,9 @@ NamedScript DECORATE void SpawnLuckItem()
 
     ActorToSpawn = "DRPGEmpty";
 
-    if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=  5.00) ActorToSpawn = "DRPGCrate";
-    if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <=  5.00) ActorToSpawn = "DRPGBatteryDropper";
-    if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <=  5.00) ActorToSpawn = "DRPGChipDropper";
+    if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <=  15.00) ActorToSpawn = "DRPGChipDropper";
+    if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <=  10.00) ActorToSpawn = "DRPGBatteryDropper";
+    if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=   5.00) ActorToSpawn = "DRPGCrate";
 
     if (Luck >= LUCK_HEALTHDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXHEALTHCHANCE)      ActorToSpawn = "DRPGHealthDropper";
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= LUCK_MAXEPCHANCE)          ActorToSpawn = "DRPGEPDropper";
