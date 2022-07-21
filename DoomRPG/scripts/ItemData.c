@@ -1035,7 +1035,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",          0, -1, -1, "STVLG0",  4, 16);
     ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",              0, -1, -1, "STVLH0",  4, 16);
     ITEMDATA_DEF("DRPGSmallBackpack",       "Ammo Satchel",                 0, -1, -1, "ASCHA0", 14, 30);
-    ITEMDATA_DEF("DRPGChipGold",            "\CfGold Chip\C-",              0, -1, -1, "CHPGB0",  0,  0);
+    ITEMDATA_DEF("DRPGChipGoldPack",        "\CfGold Chips (3 pcs.)\C-",    0, -1, -1, "CHPGB0",  0,  0);
 
     // Items for Crates/Rewards -  Uncommon
     ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                  0, -1, -1, "STIMB0", 16, 29);
@@ -1059,7 +1059,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",              0, -1, -1, "STVLR0",  4, 16);
     ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",          0, -1, -1, "STVLS0",  4, 16);
     ITEMDATA_DEF("DRPGStimDetox",           "\CdDetox\C- Hypospray",        0, -1, -1, "STIMC0",  6, 31);
-    ITEMDATA_DEF("DRPGChipPlatinum",        "Platinum Chip",                0, -1, -1, "CHPPB0",  0,  0);
+    ITEMDATA_DEF("DRPGChipPlatinumPack",    "Platinum Chips (3 pcs.)",      0, -1, -1, "CHPPB0",  0,  0);
 
     // Items for Crates/Rewards -  Very Rare
     ITEMDATA_DEF("DRPGStimPackageStat",     "Stat Stim Package",            0, -1, -1, "STPAA0", 30, 16);
