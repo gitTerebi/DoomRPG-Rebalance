@@ -185,7 +185,7 @@ actor DRPGAugDropper : RandomSpawner 25009
 
 actor DRPGBatteryDropper : RandomSpawner 25010
 {
-    DropItem "DRPGBatterySmall"         255 9
+    DropItem "DRPGBatterySmall"         255 19
     DropItem "DRPGBatteryLarge"         255 1
 }
 
