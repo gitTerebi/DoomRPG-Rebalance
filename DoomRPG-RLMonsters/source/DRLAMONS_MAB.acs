@@ -63,22 +63,29 @@ script "RLAdaptiveSpawnPicker" (void) // [marrub]
 	int rmxp = GetCVar("DRLA_adaptive_random_multiplier_exponent");
 	int maxwads = GetCVar("drpg_ws_use_wads") * 32;
 
+	// OH GOD
+	if (danger >= 18 + maxwads)
+	{
+		SetActorState(0, "SpawnArmageddon");
+		terminate;
+	}
+
 	// Calculate the difficulty level to use.
 	// Exponentation is used for the random value to make it curve more fairly.
 	// A reverse exponent is used to make it curve more unfairly later on.
 	int rand = mult * exponent(Random(0.01, 1.0), expn);
-	int rmin = FixedMul(FixedDiv(danger << 16, GetCVar("drpg_ws_use_wads") * 32.0), Random(0.0, 1.0));
+	int rmin = FixedMul(FixedDiv(danger << 16, (18.0 + GetCVar("drpg_ws_use_wads") * 32.0)), Random(0.0, 1.0));
 	int rmul = Random(exponent(rmin, rmxp), 1.0);
 	// The danger level is then added to that.
 	int dangermod = danger + (rand >> 16);
 	dangermod = FixedMul(dangermod << 16, rmul) >> 16;
 	// Clamp to max wads.
-	if (dangermod > maxwads)
-		dangermod = maxwads;
+	if (dangermod > 18 + maxwads)
+		dangermod = 18 + maxwads;
 
 	// Get settings for spawn determiners.
-	int uvspawn = GetCVar("DRLA_adaptive_uv_spawn_level")        * maxwads >> 16;
-	int nmspawn = GetCVar("DRLA_adaptive_nightmare_spawn_level") * maxwads >> 16;
+	int uvspawn = GetCVar("DRLA_adaptive_uv_spawn_level")        * (18 + maxwads) >> 16;
+	int nmspawn = GetCVar("DRLA_adaptive_nightmare_spawn_level") * (18 + maxwads) >> 16;
 
 	if (dangermod < uvspawn)
 	{
