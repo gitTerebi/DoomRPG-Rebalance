@@ -2680,7 +2680,10 @@ NamedScript void MonsterDeath()
         if (Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
             DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
         if (Stats->Aura.Type[AURA_YELLOW].Active) // Yellow Aura - Luck
+        {
             DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGChipDropper", 32);
+        }
 
         // Luck-based Drops
         if (Killer > -1 && !(Stats->Flags & MF_MEGABOSS))
