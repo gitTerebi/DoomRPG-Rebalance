@@ -60,6 +60,18 @@ class DRPGZEHandler : EventHandler
             break;
             }
         }
+
+        // Iterate through all sectors in the current map to find secrets and add crate to the center
+        for (int i = 0; i < level.Sectors.Size(); ++i)
+        {
+            Sector CurrSec = level.Sectors[i];
+            vector3 SpawnPos = (CurrSec.centerspot.x, CurrSec.centerspot.y, CurrSec.floorplane.ZAtPoint(CurrSec.centerspot));
+            if (CurrSec.IsSecret() && random(1, 100) <= 66)
+            {
+                Actor.Spawn("DRPGCrate", SpawnPos);
+            }
+
+        }
     }
 
     override void WorldThingDamaged(WorldEvent e)
