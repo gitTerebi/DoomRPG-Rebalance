@@ -36,6 +36,7 @@ int RPGMap HallTeleportSpotID = 1601;
 int RPGMap CameraTID = 1700;
 int RPGMap RiftSpotTID = 1800;
 int RPGMap CreditsBlockerID = 1900;
+int RPGMap DisassemblingDeviceID = 29;
 
 // Timers
 int RPGMap ForcefieldTimer = 0;
@@ -1589,6 +1590,675 @@ NamedScript MapSpecial void PowerOutage()
             Sector_SetColor(i, 255, 0, 0, 0);
             Light_Fade(i, 160, 60);
         }
+    }
+}
+
+NamedScript MapSpecial void OperatingCapsule()
+{
+    // if you're already in a menu, terminate
+    if (Player.InMenu || Player.InShop || Player.OutpostMenu == OMENU_OPERATINGCAPSULE) return;
+
+    // If Marines are hostile or the power is out, terminate
+    if (MarinesHostile || PowerOut) return;
+
+    // If don't use an DoomRL Arsenal, terminate
+    if (CompatMode != COMPAT_DRLA)
+    {
+        PrintError("The Operating Capsule is not working right now");
+        ActivatorSound("menu/error", 127);
+        return;
+    }
+
+    ActivatorSound("menu/move", 127);
+    Player.OutpostMenu = OMENU_OPERATINGCAPSULE;
+
+    fixed X = 0.1;
+    fixed Y = 0.1;
+
+    int OperationChoice;
+    int Price;
+
+    str ArmorNames[12] =
+    {
+        "Cybernano \CdSecurity\C- Armor",
+        "Cybernano \CnCombat\C- Armor",
+        "Cybernano \CaCommando\C- Armor",
+        "Nanofiber Skin \CdSecurity\C- Armor",
+        "Nanofiber Skin \CnCombat\C- Armor",
+        "Nanofiber Skin \CaCommando\C- Armor",
+        "\CqCybernetic\C- Armor",
+        "\CaCyberwarrior\C- Armor",
+        "\CaCyberwarrior\C- Armor \Cc[Onyx]\C-",
+        "\CgBerserk\C- Powersuit",
+        "\CuR11-n Psychic Amplifier Suit\C-",
+        "\CrSoulshatter\C- Armor"
+    };
+
+    str ArmorActors[12] =
+    {
+        "RLCybernanoGreenArmor",
+        "RLCybernanoBlueArmor",
+        "RLCybernanoRedArmor",
+        "RLNanofiberSkinGreenArmor",
+        "RLNanofiberSkinBlueArmor",
+        "RLNanofiberSkinRedArmor",
+        "RLCyberneticArmor",
+        "RLCyberwarriorArmor",
+        "RLOModCyberwarriorArmor",
+        "RLBerserkPowersuitArmor",
+        "RLRyanCordellPsychicAmplifierSuitArmor",
+        "RLSoulshatterArmor"
+    };
+
+    str ArmorPickups[12] =
+    {
+        "RLCybernanoGreenArmorPickup",
+        "RLCybernanoBlueArmorPickup",
+        "RLCybernanoRedArmorPickup",
+        "RLNanofiberSkinGreenArmorPickup",
+        "RLNanofiberSkinBlueArmorPickup",
+        "RLNanofiberSkinRedArmorPickup",
+        "RLCyberneticArmorPickup",
+        "RLCyberwarriorArmorPickup",
+        "RLOModCyberwarriorArmorPickup",
+        "RLBerserkPowersuitArmorPickup",
+        "RLRyanCordellPsychicAmplifierSuitArmorPickup",
+        "RLSoulshatterArmorPickup"
+    };
+
+    str ArmorTokens[12] =
+    {
+        "RLCybernanoGreenArmorToken",
+        "RLCybernanoBlueArmorToken",
+        "RLCybernanoRedArmorToken",
+        "RLNanofiberSkinGreenArmorToken",
+        "RLNanofiberSkinBlueArmorToken",
+        "RLNanofiberSkinRedArmorToken",
+        "RLCyberneticArmorToken",
+        "RLCyberwarriorArmorToken",
+        "RLOModCyberwarriorArmorToken",
+        "RLBerserkPowersuitArmorToken",
+        "RLRyanCordellPsychicAmplifierSuitArmorToken",
+        "RLSoulshatterArmorToken"
+    };
+
+    str ArmorRenegadeTokens[12] =
+    {
+        "RLCybernanoGreenArmorRenegade",
+        "RLCybernanoBlueArmorRenegade",
+        "RLCybernanoRedArmorRenegade",
+        "RLNanofiberSkinGreenArmorRenegade",
+        "RLNanofiberSkinBlueArmorRenegade",
+        "RLNanofiberSkinRedArmorRenegade",
+        "RLCyberneticArmorRenegade",
+        "RLCyberwarriorArmorRenegade",
+        "RLOModCyberwarriorArmorRenegade",
+        "RLBerserkPowersuitArmorRenegade",
+        "RLRyanCordellPsychicAmplifierSuitArmorRenegade",
+        "RLSoulshatterArmorRenegade"
+    };
+
+    str ArmorBonusTokens[12] =
+    {
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "RLCyberneticArmorBonus",
+        "RLCyberwarriorArmorBonus",
+        "null",
+        "RLBerserkPowersuitArmorBonus",
+        "RLRyanCordellPsychicAmplifierSuitArmorBonus",
+        "RLSoulshatterArmorBonus"
+    };
+
+    str CyberneticArmorTokens[26] =
+    {
+        "RLCyberneticArmorBulk",
+        "RLCyberneticArmorPower",
+        "RLCyberneticArmorAgility",
+        "RLCyberneticArmorTechnical",
+        "RLCyberneticArmorSniper",
+        "RLCyberneticArmorFirestorm",
+        "RLCyberneticArmorNano",
+        "RLCyberneticArmorOnyx",
+        "RLCyberneticArmorBulkToken",
+        "RLCyberneticArmorPowerToken",
+        "RLCyberneticArmorAgilityToken",
+        "RLCyberneticArmorTechnicalToken",
+        "RLCyberneticArmorSniperToken",
+        "RLCyberneticArmorFirestormToken",
+        "RLCyberneticArmorNanoToken",
+        "RLCyberneticArmorOnyxToken",
+        "RLCyberneticArmorRenegadeBulk",
+        "RLCyberneticArmorRenegadePower",
+        "RLCyberneticArmorRenegadeAgility",
+        "RLCyberneticArmorRenegadeTechnical",
+        "RLCyberneticArmorRenegadeSniper",
+        "RLCyberneticArmorRenegadeFirestorm",
+        "RLCyberneticArmorRenegadeNano",
+        "RLCyberneticArmorRenegadeOnyx",
+        "RLCyberneticArmorModdedToken",
+        "RLCyberneticArmorModdingConfirm"
+    };
+
+    str ArmorIcons[12] =
+    {
+        "CYN1A0",
+        "CYN2A0",
+        "CYN3A0",
+        "NFS1A0",
+        "NFS2A0",
+        "NFS3A0",
+        "CYNAA0",
+        "CYWAA0",
+        "ONYAF0",
+        "BEPSB0",
+        "RCPAA0",
+        "SOLSA0"
+    };
+
+    // So the player's initial interaction is not processed as a menu action
+    Delay(1);
+
+    while (Player.OutpostMenu == OMENU_OPERATINGCAPSULE)
+    {
+        SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+        // Draw the background
+        if (GetCVar("drpg_menudim"))
+            FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
+
+        // Set the HUD Size
+        SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+            DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470);
+
+        // Text
+        SetFont("BIGFONT");
+        HudMessage("\CdOperating capsule\C-");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X + 120.0, Y + 16.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("Select operation to remove armor:");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "White", X + 24.0, Y + 56.0, 0.05, 0.05);
+
+        PrintSprite(ArmorIcons[OperationChoice], 0, X + 240.0,  Y + 180.0, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("%S", ArmorNames[OperationChoice]);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "White", X + 72.0, Y + 208.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        if (OperationChoice <= 6)
+            HudMessage("\CfPrice:\C- %d \CfC\C- and 1 \CdExtra Life\C-", Price);
+        else
+            HudMessage("\CfPrice:\C- %d \CfC\C-", Price);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 72.0, Y + 240.0, 0.05, 0.05);
+
+        // Price Calculate
+        if (OperationChoice > 6)
+            Price = 50;
+        if (OperationChoice <= 2)
+            Price = 12500;
+        if (OperationChoice > 2 && OperationChoice <= 5)
+            Price = 25000;
+        if (OperationChoice == 6)
+            Price = 50000;
+
+        // Input
+        if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            OperationChoice--;
+            if (OperationChoice < 0) OperationChoice = 11;
+        }
+        if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            OperationChoice++;
+            if (OperationChoice > 11) OperationChoice = 0;
+        }
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+        {
+            if ((((OperationChoice <= 6) && CheckInventory("DRPGLife")) || (OperationChoice > 6)) && (CheckInventory("DRPGCredits") >= Price && CheckInventory(ArmorTokens[OperationChoice]) && CheckInventory("RLArmorInInventory") < DRLA_ARMOR_MAX))
+            {
+                Player.OutpostMenu = 0;
+
+                // Take Credits and Extra Life
+                if (OperationChoice <= 6)
+                    TakeInventory("DRPGLife",1);
+
+                TakeInventory(("DRPGCredits"), Price);
+
+                // The effect of sleep immersion
+                FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 2.0);
+                Delay(35 * 5);
+                FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 3.0);
+
+                // Take Universe Armor Tokens
+                TakeInventory("RLUnequippingArmor", 1);
+                GiveInventory("RLArmorRemover", 1);
+                if (OperationChoice == 7)
+                    TakeInventory("RL100ArmorWorn",1);
+                else
+                    TakeInventory("RLIndestructibleArmorWorn",1);
+
+                TakeInventory("BasicArmor",99999);
+
+                // Take Individual Armor Tokens
+                TakeInventory(ArmorActors[OperationChoice],1);
+                TakeInventory(ArmorTokens[OperationChoice], 1);
+                TakeInventory(ArmorRenegadeTokens[OperationChoice], 1);
+                if (OperationChoice >= 6 && OperationChoice != 8)
+                    TakeInventory(ArmorBonusTokens[OperationChoice], 1);
+
+                // Take Cybernetic Armor Addition Tokens
+                if (OperationChoice == 6)
+                    for (int i = 0; i < 26; i++)
+                        TakeInventory(CyberneticArmorTokens[i],1);
+
+                // Give Removed Armor
+                GiveInventory(ArmorPickups[OperationChoice],1);
+
+                SetFont("BIGFONT");
+                HudMessage("Armor removal completed");
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "Green", X + 80.0, Y + 240.0, 3.0, 2.0);
+                ActivatorSound("mission/complete", 127);
+
+                SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+                return;
+            }
+            else
+            {
+                if (!CheckInventory(ArmorTokens[OperationChoice]))
+                    HudMessage("Armor is not equipped");
+                else if (CheckInventory("RLArmorInInventory") >= DRLA_ARMOR_MAX)
+                    HudMessage("Inventory armor is full");
+                else if (CheckInventory("DRPGCredits") < Price)
+                    HudMessage("Not enough credits");
+                else if ((OperationChoice <= 6) && !CheckInventory("DRPGLife"))
+                    HudMessage("You don't have Extra Life");
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "Red", X + 108.0, Y + 304.0, 3.0, 2.0);
+                ActivatorSound("menu/error", 127);
+            }
+        }
+        Delay(1);
+    }
+}
+
+NamedScript MapSpecial void DisassemblingDevice()
+{
+    // if you're already in a menu, terminate
+    if (Player.InMenu || Player.InShop || Player.OutpostMenu == OMENU_DISASSEMBLINGDEVICE) return;
+
+    // If Marines are hostile or the power is out, terminate
+    if (MarinesHostile || PowerOut) return;
+
+    // If don't use an DoomRL Arsenal, terminate
+    if (CompatMode != COMPAT_DRLA)
+    {
+        PrintError("The Disassembling Device is not working right now");
+        ActivatorSound("menu/error", 127);
+        return;
+    }
+
+    ActivatorSound("menu/move", 127);
+    Player.OutpostMenu = OMENU_DISASSEMBLINGDEVICE;
+
+    fixed X = 0.1;
+    fixed Y = 0.1;
+
+    // Categories Data
+    int CurrentCategory;
+    int CategoriesData[4] = {0, 3, 5, 9};
+    str CategoriesNames[3] =
+    {
+        "\CaWeapons",
+        "\CdArmors/Boots",
+        "\CnShield Parts"
+    };
+
+    str ExtentExtraction[5] =
+    {
+        "\CdVery Low",
+        "    \CdLow",
+        "  \CqMedium",
+        "    \CaHigh",
+        "\CgVery High"
+    };
+
+    // Weapons Data
+    int WeaponData;
+    int WeaponIndexes[DRLA_WEAPON_MAX];
+    str WeaponActors[DRLA_WEAPON_MAX];
+    str WeaponNames[DRLA_WEAPON_MAX];
+    str WeaponIcons[DRLA_WEAPON_MAX];
+    int WeaponCost[DRLA_WEAPON_MAX];
+
+    // Armors/Boots Data
+    int ArmorData;
+    int ArmorIndexes[DRLA_WEAPON_MAX];
+    str ArmorActors[DRLA_WEAPON_MAX];
+    str ArmorNames[DRLA_WEAPON_MAX];
+    str ArmorIcons[DRLA_WEAPON_MAX];
+    int ArmorCost[DRLA_WEAPON_MAX];
+
+    // Shield Parts Data
+    int ShieldData;
+    str ShieldActors[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
+    str ShieldNames[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
+    str ShieldIcons[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
+    int ShieldCost[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
+
+    // Current Item
+    int CurrentItem;
+    int CurrentData;
+    int CurrentIndex;
+    str CurrentActor;
+    str CurrentName;
+    str CurrentIcon;
+    int CurrentCost;
+    int CurrentExtraction;
+
+    // Chances of getting parts
+    int MaxParts;
+    int ChanceChips;
+    int ChanceBattery;
+    int ChanceTurret;
+    int ChanceModule;
+    int ChanceAug;
+    int ChanceBluePrint;
+    int ChanceModPacks;
+
+    // Database creation
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < ItemMax[CategoriesData[i]]; j++)
+            if (CheckInventory(ItemData[CategoriesData[i]][j].Actor))
+            {
+                // Weapons
+                if (i == 0)
+                {
+                    ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
+                    WeaponIndexes[WeaponData] = j;
+                    WeaponActors[WeaponData] = Item->Actor;
+                    WeaponNames[WeaponData] = Item->Name;
+                    WeaponIcons[WeaponData] = Item->Sprite.Name;
+                    WeaponCost[WeaponData] = Item->Price;
+                    WeaponData++;
+                    if (WeaponData >= DRLA_WEAPON_MAX - 1) continue;
+                }
+
+                // Armors/Boots
+                if (i == 1 || i == 3)
+                {
+                    ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
+                    ArmorIndexes[ArmorData] = j;
+                    ArmorActors[ArmorData] = Item->Actor;
+                    ArmorNames[ArmorData] = Item->Name;
+                    ArmorIcons[ArmorData] = Item->Sprite.Name;
+                    ArmorCost[ArmorData] = Item->Price;
+                    ArmorData++;
+                    if (ArmorData >= DRLA_WEAPON_MAX - 1) continue;
+                }
+
+                // Shield Parts
+                if (i == 2)
+                {
+                    ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
+                    ShieldActors[ShieldData] = Item->Actor;
+                    ShieldNames[ShieldData] = Item->Name;
+                    ShieldIcons[ShieldData] = Item->Sprite.Name;
+                    ShieldCost[ShieldData] = Item->Price;
+                    ShieldData++;
+                    if (ShieldData >= MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES - 1) continue;
+                }
+            }
+
+    // So the player's initial interaction is not processed as a menu action
+    Delay(1);
+
+    while (Player.OutpostMenu == OMENU_DISASSEMBLINGDEVICE)
+    {
+        SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+        // Draw the background
+        if (GetCVar("drpg_menudim"))
+            FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
+
+        // Set the HUD Size
+        SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+            DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470);
+
+        // Info for Current Item
+        // For Weapons
+        if (CurrentCategory == 0 && WeaponData > 0)
+        {
+            CurrentData = WeaponData;
+            CurrentIndex = WeaponIndexes[CurrentItem];
+            CurrentActor = WeaponActors[CurrentItem];
+            CurrentName = WeaponNames[CurrentItem];
+            CurrentIcon = WeaponIcons[CurrentItem];
+            CurrentCost = WeaponCost[CurrentItem] / 20;
+        }
+        // For Armors/Boots
+        if (CurrentCategory == 1 && ArmorData > 0)
+        {
+            CurrentData = ArmorData;
+            CurrentIndex = ArmorIndexes[CurrentItem];
+            CurrentActor = ArmorActors[CurrentItem];
+            CurrentName = ArmorNames[CurrentItem];
+            CurrentIcon = ArmorIcons[CurrentItem];
+            CurrentCost = ArmorCost[CurrentItem] / 20;
+        }
+        // For Shield Parts
+        if (CurrentCategory == 2 && ShieldData > 0)
+        {
+            CurrentData = ShieldData;
+            CurrentActor = ShieldActors[CurrentItem];
+            CurrentName = ShieldNames[CurrentItem];
+            CurrentIcon = ShieldIcons[CurrentItem];
+            CurrentCost = ShieldCost[CurrentItem] / 20;
+        }
+
+        // Calculate Max Parts
+        MaxParts = 1 + CurrentCost / (200 / (CurrentCategory == 1 ? 2.0 : 1));
+        if (MaxParts > 50) MaxParts = 50;
+
+        // Calculate Extent Extraction
+        if (MaxParts <= 5) CurrentExtraction = 0;
+        if (MaxParts >  5) CurrentExtraction = 1;
+        if (MaxParts > 10) CurrentExtraction = 2;
+        if (MaxParts > 20) CurrentExtraction = 3;
+        if (MaxParts > 35) CurrentExtraction = 4;
+
+        // Calculate Chances
+        // For Chips
+        ChanceChips = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 25.0 : 50.0));
+        if (ChanceChips > 10) ChanceChips = 10;
+        // For Battery
+        ChanceBattery = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 32.5 : 75.0));
+        if (ChanceBattery > 10) ChanceBattery = 10;
+        // For Turret
+        ChanceTurret = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 75.0 : 150.0));
+        if (ChanceTurret > 10) ChanceTurret = 10;
+        // For Modules
+        ChanceModule = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 175.0 : 350.0));
+        if (ChanceModule > 10) ChanceModule = 10;
+        // For Augs
+        ChanceAug = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 250.0 : 500.0));
+        if (ChanceAug > 10) ChanceAug = 10;
+        // For Blueprint Computer
+        ChanceBluePrint = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 100.0 : 200.0));
+        if (ChanceBluePrint > 10) ChanceBluePrint = 10;
+        // For ModPacks
+        ChanceModPacks = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 125.0 : 250.0));
+        if (ChanceModPacks > 10) ChanceModPacks = 10;
+
+        // Text
+        SetFont("BIGFONT");
+        HudMessage("\CdDisassembling Device\C-");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X + 108.0, Y + 16.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("Select item for disassembling:");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "White", X + 64.0, Y + 56.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("Category: %S", CategoriesNames[CurrentCategory]);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "White", X + 124.0, Y + 112.0, 0.05, 0.05);
+
+        if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
+        {
+            PrintSprite(CurrentIcon, 0, X + 240.0,  Y + 188.0, 0.05);
+
+            SetFont("BIGFONT");
+            HudMessage("Item: %S", CurrentName);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 32.0, Y + 230.0, 0.05, 0.05);
+
+            SetFont("SMALLFONT");
+            HudMessage("Possible Extraction:\n\CdOther\C-\n\CaBattery\C-\n\CfChips\C-\n\CgTurret Parts\C-\n\CqModule\C-\n\CkAug\C-\n\CnRecipes\C-\n\CrModPacks\C-", ExtentExtraction[CurrentExtraction]);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 32.0, Y + 272.0, 0.05, 0.05);
+
+            SetFont("SMALLFONT");
+            HudMessage("Extent of Extraction:");
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 280.0, Y + 272.0, 0.05, 0.05);
+
+            SetFont("BIGFONT");
+            HudMessage("%S", ExtentExtraction[CurrentExtraction]);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 304.0, Y + 304.0, 0.05, 0.05);
+        }
+        else
+        {
+            SetFont("BIGFONT");
+            HudMessage("No have items in this category");
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 56.0, Y + 208.0, 0.05, 0.05);
+        }
+
+        // Input
+        if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentCategory++;
+            CurrentItem = 0;
+            if (CurrentCategory > 2) CurrentCategory = 0;
+        }
+        if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentCategory--;
+            CurrentItem = 0;
+            if (CurrentCategory < 0) CurrentCategory = 2;
+        }
+        if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentItem--;
+            if (CurrentItem < 0) CurrentItem = CurrentData - 1;
+        }
+        if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentItem++;
+            if (CurrentItem > CurrentData - 1) CurrentItem = 0;
+        }
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+        {
+            if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
+            {
+                Player.OutpostMenu = 0;
+                str ActorToSpawn;
+                int Attempts = MaxParts;
+
+                // Take Current Item
+                TakeInventory(CurrentActor,1);
+
+                // Take tokens from DoomRL Arsenal
+                if (CompatMode == COMPAT_DRLA);
+                {
+                    if (CurrentCategory == 0) RemoveDRLAItem(0, CurrentIndex);
+                    if (CurrentCategory == 1) RemoveDRLAItem(3, CurrentIndex);
+                }
+
+                // The effect of sleep immersion
+                FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
+                Delay(35 * 1);
+
+                // Get Part
+                while (Attempts > 0 && CurrentCost > 0)
+                {
+                    ActorToSpawn = ItemData[7][Random(9, 11)].Actor;
+
+                    if (Random(1, 100) <=  ChanceChips)
+                    {
+                        ActorToSpawn = "DRPGChipDropper";
+                        CurrentCost -= 100;
+                    }
+                    if (Random(1, 100) <=  ChanceBattery)
+                    {
+                        ActorToSpawn = "DRPGBatteryDropper";
+                        CurrentCost -= 250;
+                    }
+                    if (Random(1, 100) <=  ChanceTurret)
+                    {
+                        ActorToSpawn = "DRPGTurretPart";
+                        CurrentCost -= 250;
+                    }
+                    if (Random(1, 100) <=  ChanceModule)
+                    {
+                        ActorToSpawn = "DRPGModuleDropper";
+                        CurrentCost -= 5000;
+                    }
+                    if (Random(1, 100) <=  ChanceAug)
+                    {
+                        ActorToSpawn = "DRPGAugDropper";
+                        CurrentCost -= 10000;
+                    }
+                    if (Random(1, 100) <=  ChanceBluePrint)
+                    {
+                        ActorToSpawn = "RLBlueprintComputer";
+                        CurrentCost -= 5000;
+                    }
+                    if (Random(1, 100) <=  ChanceModPacks)
+                    {
+                        ActorToSpawn = ItemData[8][Random(0, 3)].Actor;
+                        CurrentCost -= 5000;
+                    }
+                    if (Random(1, 100) <=  ChanceModPacks / 4)
+                    {
+                        ActorToSpawn = ItemData[8][Random(4, 8)].Actor;
+                        CurrentCost -= 10000;
+                    }
+
+                    // Spawn Part in Disassembling Device
+                    SpawnSpotForced(ActorToSpawn, DisassemblingDeviceID, UniqueTID(), 0);
+
+                    Attempts--;
+                }
+
+                FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 2.0);
+
+                SetFont("BIGFONT");
+                HudMessage("Item disassembly is complete");
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "Green", X + 80.0, Y + 240.0, 3.0, 2.0);
+                ActivatorSound("mission/complete", 127);
+
+                SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+                return;
+            }
+            else
+                ActivatorSound("menu/error", 127);
+        }
+        Delay(1);
     }
 }
 

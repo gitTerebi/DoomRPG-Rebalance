@@ -65,8 +65,8 @@ class DRPGZEHandler : EventHandler
         for (int i = 0; i < level.Sectors.Size(); ++i)
         {
             Sector CurrSec = level.Sectors[i];
-            vector3 SpawnPos = (CurrSec.centerspot.x, CurrSec.centerspot.y, CurrSec.floorplane.ZAtPoint(CurrSec.centerspot));
-            if (CurrSec.IsSecret() && random(1, 100) <= 66)
+            vector3 SpawnPos = (CurrSec.centerspot.x + random(-16, 16), CurrSec.centerspot.y + random(-16, 16), CurrSec.floorplane.ZAtPoint(CurrSec.centerspot));
+            if (CurrSec.IsSecret() && random(1, 100) <= 20)
             {
                 Actor.Spawn("DRPGCrate", SpawnPos);
             }

@@ -52,6 +52,8 @@ NamedScript MapSpecial void MissionBBS();
 NamedScript MapSpecial void MinigameHandler();
 NamedScript MapSpecial void OutpostSecret();
 NamedScript MapSpecial void PowerOutage();
+NamedScript MapSpecial void OperatingCapsule();
+NamedScript MapSpecial void DisassemblingDevice();
 NamedScript void AlarmLoop();
 NamedScript void PlaceBoss();
 NamedScript void SpawnBoss();

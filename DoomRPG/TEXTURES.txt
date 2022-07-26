@@ -1,3 +1,32 @@
+//Outpost 2 textures
+
+texture OPANAA1, 128, 128 {Patch OPANAA1, 0, 0}
+texture OPANAA2, 128, 128 {Patch OPANAA2, 0, 0}
+texture OPANAA3, 128, 128 {Patch OPANAA3, 0, 0}
+texture OPANAA4, 128, 128 {Patch OPANAA4, 0, 0}
+texture OPANA1, 128, 47 {Patch OPANA1, 0, 0}
+texture OPANA2, 128, 47 {Patch OPANA2, 0, 0}
+texture OPANA3, 128, 47 {Patch OPANA3, 0, 0}
+texture OPANA4, 128, 47 {Patch OPANA4, 0, 0}
+texture 64MONI1, 128, 128 {Patch 64MONI1, 0, 0}
+texture 64MONI2, 128, 128 {Patch 64MONI2, 0, 0}
+texture 64MONI3, 128, 128 {Patch 64MONI3, 0, 0}
+texture 64MONI4, 128, 128 {Patch 64MONI4, 0, 0}
+
+texture CGCANI00, 128, 128 {Patch CGCANI00, 0, 0}
+texture CGCANI01, 128, 128 {Patch CGCANI01, 0, 0}
+texture CGCANI02, 128, 128 {Patch CGCANI02, 0, 0}
+texture CGCANI03, 128, 128 {Patch CGCANI03, 0, 0}
+texture CGCANI04, 128, 128 {Patch CGCANI04, 0, 0}
+texture CGCANI05, 128, 128 {Patch CGCANI05, 0, 0}
+texture CGCANI06, 128, 128 {Patch CGCANI06, 0, 0}
+texture CGCANI07, 128, 128 {Patch CGCANI07, 0, 0}
+
+texture ECOMP1, 256, 128 {Patch ECOMP1, 0, 0}
+texture ECOMP2, 256, 128 {Patch ECOMP2, 0, 0}
+texture ECOMP3, 256, 128 {Patch ECOMP3, 0, 0}
+texture ECOMP4, 256, 128 {Patch ECOMP4, 0, 0}
+
 // Agility Save
 Graphic AGISAVE, 429, 220 { XScale 4.0 YScale 4.0 Patch AgiSav_, 0, 0 }
 
