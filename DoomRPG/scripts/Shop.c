@@ -543,7 +543,7 @@ int GetSellPrice(str Item, int Amount)
             }
         }
 
-    // 1/10th normal buying price
+    // 1/20th normal buying price
     SellCost /= 20;
 
     // Multiply by amount

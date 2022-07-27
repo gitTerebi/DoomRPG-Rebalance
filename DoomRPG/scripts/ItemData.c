@@ -98,8 +98,8 @@ NamedScript void BuildItemData()
     // Weapons
     ITEMDATA_CATEGORY(0, "\CgWeapons", CF_NONE);
     ITEMDATA_DEF("DRPGChainsaw",        "Chainsaw",          300, 0, 0, "CSAWA0", 31, 23);
-    ITEMDATA_DEF("DRPGPistol",          "Pistol",             25, 0, 0, "PISTA0", 11, 15);
-    ITEMDATA_DEF("DRPGShotgun",         "Shotgun",           100, 0, 0, "SHOTA0", 31, 17);
+    ITEMDATA_DEF("DRPGPistol",          "Pistol",            125, 0, 0, "PISTA0", 11, 15);
+    ITEMDATA_DEF("DRPGShotgun",         "Shotgun",           250, 0, 0, "SHOTA0", 31, 17);
     ITEMDATA_DEF("DRPGSuperShotgun",    "Super Shotgun",     500, 1, 1, "SGN2A0", 27, 15);
     ITEMDATA_DEF("DRPGChaingun",        "Chaingun",          750, 0, 0, "MGUNA0", 25, 18);
     ITEMDATA_DEF("DRPGRocketLauncher",  "Rocket Launcher",  1000, 1, 1, "LAUNA0", 31, 18);
@@ -135,13 +135,13 @@ NamedScript void BuildItemData()
     ITEMDATA_CATEGORY(3, "\CdArmor", CF_NONE);
     ITEMDATA_DEF("DRPGArmorBonus",              "Armor Bonus",                 1, 0, -1, "BON2A0",  7, 13);
 
-    ITEMDATA_DEF("DRPGGreenArmor",              "Green Armor",                100, 0, 0, "ARM1A0", 15, 17);
+    ITEMDATA_DEF("DRPGGreenArmor",              "Green Armor",                150, 0, 0, "ARM1A0", 15, 17);
     ITEMDATA_DEF("DRPGBlueArmor",               "Blue Armor",                 500, 0, 0, "ARM2A0", 15, 17);
     ITEMDATA_DEF("DRPGYellowArmor",             "Yellow Armor",              1000, 1, 1, "ARM3A0", 15, 17);
     ITEMDATA_DEF("DRPGRedArmor",                "Red Armor",                 5000, 2, 2, "ARM4A0", 15, 17);
     ITEMDATA_DEF("DRPGWhiteArmor",              "White Armor",              10000, 4, 4, "ARM5A0", 15, 17);
 
-    ITEMDATA_DEF("DRPGReinforcedGreenArmor",    "Reinforced Green Armor",     200, 0, 1, "ARX1A0", 15, 17);
+    ITEMDATA_DEF("DRPGReinforcedGreenArmor",    "Reinforced Green Armor",     250, 0, 1, "ARX1A0", 15, 17);
     ITEMDATA_DEF("DRPGReinforcedBlueArmor",     "Reinforced Blue Armor",     1000, 0, 1, "ARX2A0", 15, 17);
     ITEMDATA_DEF("DRPGReinforcedYellowArmor",   "Reinforced Yellow Armor",   2000, 1, 2, "ARX3A0", 15, 17);
     ITEMDATA_DEF("DRPGReinforcedRedArmor",      "Reinforced Red Armor",     10000, 2, 3, "ARX4A0", 15, 17);
@@ -361,7 +361,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGLootBriefcase",           "Briefcase Data",       500, 0, -1, "LT05A0", 14, 18);
     ITEMDATA_DEF("DRPGLootComputerData",        "Computer Data",        500, 0, -1, "LT06A0",  6, 23);
     ITEMDATA_DEF("DRPGLootGunParts",            "Gun Parts",            250, 0, -1, "LT07A0", 10, 24);
-    ITEMDATA_DEF("DRPGLootAmmoCasings",         "Ammo Casings",          50, 0, -1, "LT08A0", 12,  8);
+    ITEMDATA_DEF("DRPGLootAmmoCasings",         "Ammo Casings",         100, 0, -1, "LT08A0", 12,  8);
     ITEMDATA_DEF("DRPGLootFuelCapsule",         "Fuel Capsule",         100, 0, -1, "LT09A0",  7, 19);
     ITEMDATA_DEF("DRPGLootScrapMetals",         "Scrap Metals",         100, 0, -1, "LT10A0", 12, 15);
     ITEMDATA_DEF("DRPGLootScrapElectronics",    "Scrap Electronics",    100, 0, -1, "LT11A0",  8, 22);
@@ -416,9 +416,9 @@ NamedScript void BuildItemData()
         // Common Weapons
         // ITEMDATA_DEF("RLCombatKnife",                           "CombatKnife",                                               20,  0, "CKNIX0", 31, 23);
         ITEMDATA_DEF("RLChainsaw",                              "Chainsaw",                                                300,  0, -1, "NSAWX0", 31, 23);
-        ITEMDATA_DEF("RLPistol",                                "Pistol",                                                   25,  0, -1, "PISGX0", 11, 13);
-        ITEMDATA_DEF("RLShotgun",                               "Shotgun",                                                 100,  0, -1, "PKSGX0", 31, 17);
-        ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          250,  3, -1, "CSHOX0", 25, 17);
+        ITEMDATA_DEF("RLPistol",                                "Pistol",                                                  125,  0, -1, "PISGX0", 11, 13);
+        ITEMDATA_DEF("RLShotgun",                               "Shotgun",                                                 250,  0, -1, "PKSGX0", 31, 17);
+        ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          350,  3, -1, "CSHOX0", 25, 17);
         ITEMDATA_DEF("RLDoubleShotgun",                         "Double Shotgun",                                          500,  5, -1, "DBLSX0", 14,  8);
         ITEMDATA_DEF("RLChaingun",                              "Chaingun",                                                750,  0, -1, "PKCGX0", 25, 18);
         ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle",                                            750,  1, -1, "UACRX0", 23, 15);
@@ -896,7 +896,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",      100000, 8, 8, "CRYSF0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",  100000, 8, 8, "CRYSG0", 16, 48);
         ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                  2000, 4, 2, "MMAPA0", 14, 23);
-        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",           12500, 5, 3, "BLUPA0", 14, 23);
+        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",           12500, 5, 2, "BLUPA0", 14, 23);
         ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                  5000, 6, 6, "ISKLA0", 10, 18);
         ITEMDATA_DEF("RLBloodSkull",                "Blood Skull",                   3000, 6, 4, "ISKLC0", 10, 18);
         ITEMDATA_DEF("RLFireSkull",                 "Fire Skull",                    4000, 6, 5, "ISKLE0", 10, 18);
@@ -1250,7 +1250,7 @@ NamedScript DECORATE void SpawnLuckItem()
 
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <=  15.00) ActorToSpawn = "DRPGChipDropper";
     if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <=  10.00) ActorToSpawn = "DRPGBatteryDropper";
-    if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=   5.00) ActorToSpawn = "DRPGCrate";
+    // if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=   5.00) ActorToSpawn = "DRPGCrate";
 
     if (Luck >= LUCK_HEALTHDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXHEALTHCHANCE)      ActorToSpawn = "DRPGHealthDropper";
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= LUCK_MAXEPCHANCE)          ActorToSpawn = "DRPGEPDropper";

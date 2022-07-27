@@ -9,6 +9,15 @@ warp texture FFLDA0
 // Doomsday
 texture FIRESK00
     range FIRESK99 tics 2
+	
+//---------------------------------------------------
+// Outpost 2 textures
+
+texture 64MONI1 range 64MONI4 tics 4
+texture	OPANA1 range OPANA4	tics 6
+texture OPANAA1 range OPANAA4 tics 6
+texture CGCANI00 range CGCANI07 tics 4
+texture ECOMP1 range ECOMP4 tics 5
 
 // --------------------------------------------------
 // MENU
