@@ -615,11 +615,12 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         {
             .Name = "Magnetize",
             .Cost = 25,
-            .MaxLevel = 1,
+            .MaxLevel = 2,
             .Use = Magnetize,
             .Description =
             {
-                "Picks up all dropped credits from monsters you've killed\nand attracts items around in the area of your sight"
+                "Picks up all dropped credits from monsters you've killed\nand attracts items around in the area of your sight",
+                "Picks up all dropped credits from monsters you've killed\nand attracts items around in the area of your sight\nPlaces items directly on you"
             }
         },
         {
@@ -1406,8 +1407,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
     Player.Aura.Type[Index].Level = SkillLevel->CurrentLevel;
 
     // Aura Cost Multiplier
-    if (!Player.Aura.Type[AURA_BLUE].Active)
-        Player.SkillCostMult += 10;
+    Player.SkillCostMult += 10;
 
     ActivatorSound("skills/buff", 127);
     return true;
@@ -2735,7 +2735,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
     }
 
     // Overdrive - Pull the items on top of you
-    if (Player.Overdrive)
+    if (Player.SkillLevel[5][5].CurrentLevel == 2)
     {
         for (int i = 0; i < TIDPos; i++)
         {
