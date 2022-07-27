@@ -98,7 +98,7 @@ NamedScript void BuildItemData()
     // Weapons
     ITEMDATA_CATEGORY(0, "\CgWeapons", CF_NONE);
     ITEMDATA_DEF("DRPGChainsaw",        "Chainsaw",          300, 0, 0, "CSAWA0", 31, 23);
-    ITEMDATA_DEF("DRPGPistol",          "Pistol",             25, 0, 0, "PISTA0", 11, 15);
+    ITEMDATA_DEF("DRPGPistol",          "Pistol",             50, 0, 0, "PISTA0", 11, 15);
     ITEMDATA_DEF("DRPGShotgun",         "Shotgun",           100, 0, 0, "SHOTA0", 31, 17);
     ITEMDATA_DEF("DRPGSuperShotgun",    "Super Shotgun",     500, 1, 1, "SGN2A0", 27, 15);
     ITEMDATA_DEF("DRPGChaingun",        "Chaingun",          750, 0, 0, "MGUNA0", 25, 18);
@@ -361,7 +361,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGLootBriefcase",           "Briefcase Data",       500, 0, -1, "LT05A0", 14, 18);
     ITEMDATA_DEF("DRPGLootComputerData",        "Computer Data",        500, 0, -1, "LT06A0",  6, 23);
     ITEMDATA_DEF("DRPGLootGunParts",            "Gun Parts",            250, 0, -1, "LT07A0", 10, 24);
-    ITEMDATA_DEF("DRPGLootAmmoCasings",         "Ammo Casings",          50, 0, -1, "LT08A0", 12,  8);
+    ITEMDATA_DEF("DRPGLootAmmoCasings",         "Ammo Casings",         100, 0, -1, "LT08A0", 12,  8);
     ITEMDATA_DEF("DRPGLootFuelCapsule",         "Fuel Capsule",         100, 0, -1, "LT09A0",  7, 19);
     ITEMDATA_DEF("DRPGLootScrapMetals",         "Scrap Metals",         100, 0, -1, "LT10A0", 12, 15);
     ITEMDATA_DEF("DRPGLootScrapElectronics",    "Scrap Electronics",    100, 0, -1, "LT11A0",  8, 22);
@@ -416,7 +416,7 @@ NamedScript void BuildItemData()
         // Common Weapons
         // ITEMDATA_DEF("RLCombatKnife",                           "CombatKnife",                                               20,  0, "CKNIX0", 31, 23);
         ITEMDATA_DEF("RLChainsaw",                              "Chainsaw",                                                300,  0, -1, "NSAWX0", 31, 23);
-        ITEMDATA_DEF("RLPistol",                                "Pistol",                                                   25,  0, -1, "PISGX0", 11, 13);
+        ITEMDATA_DEF("RLPistol",                                "Pistol",                                                   50,  0, -1, "PISGX0", 11, 13);
         ITEMDATA_DEF("RLShotgun",                               "Shotgun",                                                 100,  0, -1, "PKSGX0", 31, 17);
         ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          250,  3, -1, "CSHOX0", 25, 17);
         ITEMDATA_DEF("RLDoubleShotgun",                         "Double Shotgun",                                          500,  5, -1, "DBLSX0", 14,  8);

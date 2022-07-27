@@ -1826,66 +1826,69 @@ NamedScript MapSpecial void OperatingCapsule()
         }
         if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
-            if ((((OperationChoice <= 6) && CheckInventory("DRPGLife")) || (OperationChoice > 6)) && (CheckInventory("DRPGCredits") >= Price && CheckInventory(ArmorTokens[OperationChoice]) && CheckInventory("RLArmorInInventory") < DRLA_ARMOR_MAX))
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
-                Player.OutpostMenu = 0;
+                if ((((OperationChoice <= 6) && CheckInventory("DRPGLife")) || (OperationChoice > 6)) && (CheckInventory("DRPGCredits") >= Price && CheckInventory(ArmorTokens[OperationChoice]) && CheckInventory("RLArmorInInventory") < DRLA_ARMOR_MAX))
+                {
+                    Player.OutpostMenu = 0;
 
-                // Take Credits and Extra Life
-                if (OperationChoice <= 6)
-                    TakeInventory("DRPGLife",1);
+                    // Take Credits and Extra Life
+                    if (OperationChoice <= 6)
+                        TakeInventory("DRPGLife",1);
 
-                TakeInventory(("DRPGCredits"), Price);
+                    TakeInventory(("DRPGCredits"), Price);
 
-                // The effect of sleep immersion
-                FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 2.0);
-                Delay(35 * 5);
-                FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 3.0);
+                    // The effect of sleep immersion
+                    FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 2.0);
+                    Delay(35 * 5);
 
-                // Take Universe Armor Tokens
-                TakeInventory("RLUnequippingArmor", 1);
-                GiveInventory("RLArmorRemover", 1);
-                if (OperationChoice == 7)
-                    TakeInventory("RL100ArmorWorn",1);
+                    // Take Universe Armor Tokens
+                    TakeInventory("RLUnequippingArmor", 1);
+                    GiveInventory("RLArmorRemover", 1);
+                    if (OperationChoice == 7)
+                        TakeInventory("RL100ArmorWorn",1);
+                    else
+                        TakeInventory("RLIndestructibleArmorWorn",1);
+
+                    TakeInventory("BasicArmor",99999);
+
+                    // Take Individual Armor Tokens
+                    TakeInventory(ArmorActors[OperationChoice],1);
+                    TakeInventory(ArmorTokens[OperationChoice], 1);
+                    TakeInventory(ArmorRenegadeTokens[OperationChoice], 1);
+                    if (OperationChoice >= 6 && OperationChoice != 8)
+                        TakeInventory(ArmorBonusTokens[OperationChoice], 1);
+
+                    // Take Cybernetic Armor Addition Tokens
+                    if (OperationChoice == 6)
+                        for (int i = 0; i < 26; i++)
+                            TakeInventory(CyberneticArmorTokens[i],1);
+
+                    // Give Removed Armor
+                    GiveInventory(ArmorPickups[OperationChoice],1);
+
+                    SetFont("BIGFONT");
+                    HudMessage("Armor removal completed");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "Green", X + 80.0, Y + 240.0, 3.0, 2.0);
+                    ActivatorSound("mission/complete", 127);
+                    FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 3.0);
+
+                    SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+                    return;
+                }
                 else
-                    TakeInventory("RLIndestructibleArmorWorn",1);
-
-                TakeInventory("BasicArmor",99999);
-
-                // Take Individual Armor Tokens
-                TakeInventory(ArmorActors[OperationChoice],1);
-                TakeInventory(ArmorTokens[OperationChoice], 1);
-                TakeInventory(ArmorRenegadeTokens[OperationChoice], 1);
-                if (OperationChoice >= 6 && OperationChoice != 8)
-                    TakeInventory(ArmorBonusTokens[OperationChoice], 1);
-
-                // Take Cybernetic Armor Addition Tokens
-                if (OperationChoice == 6)
-                    for (int i = 0; i < 26; i++)
-                        TakeInventory(CyberneticArmorTokens[i],1);
-
-                // Give Removed Armor
-                GiveInventory(ArmorPickups[OperationChoice],1);
-
-                SetFont("BIGFONT");
-                HudMessage("Armor removal completed");
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "Green", X + 80.0, Y + 240.0, 3.0, 2.0);
-                ActivatorSound("mission/complete", 127);
-
-                SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
-                return;
-            }
-            else
-            {
-                if (!CheckInventory(ArmorTokens[OperationChoice]))
-                    HudMessage("Armor is not equipped");
-                else if (CheckInventory("RLArmorInInventory") >= DRLA_ARMOR_MAX)
-                    HudMessage("Inventory armor is full");
-                else if (CheckInventory("DRPGCredits") < Price)
-                    HudMessage("Not enough credits");
-                else if ((OperationChoice <= 6) && !CheckInventory("DRPGLife"))
-                    HudMessage("You don't have Extra Life");
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "Red", X + 108.0, Y + 304.0, 3.0, 2.0);
-                ActivatorSound("menu/error", 127);
+                {
+                    if (!CheckInventory(ArmorTokens[OperationChoice]))
+                        HudMessage("Armor is not equipped");
+                    else if (CheckInventory("RLArmorInInventory") >= DRLA_ARMOR_MAX)
+                        HudMessage("Inventory armor is full");
+                    else if (CheckInventory("DRPGCredits") < Price)
+                        HudMessage("Not enough credits");
+                    else if ((OperationChoice <= 6) && !CheckInventory("DRPGLife"))
+                        HudMessage("You don't have Extra Life");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "Red", X + 108.0, Y + 304.0, 3.0, 2.0);
+                    ActivatorSound("menu/error", 127);
+                }
             }
         }
         Delay(1);
@@ -1924,13 +1927,24 @@ NamedScript MapSpecial void DisassemblingDevice()
         "\CnShield Parts"
     };
 
-    str ExtentExtraction[5] =
+    str ExtentExtraction[6] =
     {
         "\CdVery Low",
         "    \CdLow",
         "  \CqMedium",
         "    \CaHigh",
-        "\CgVery High"
+        "\CgVery High",
+        "\CfVery High+"
+    };
+
+    str PossibleExtraction[6] =
+    {
+        "\CdDetails\C-\n\CfChips\C-\n\CnRecipes\C-",
+        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CnRecipes\C-",
+        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-",
+        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-",
+        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-\n\CkAug\C-",
+        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-\n\CkAug\C-"
     };
 
     // Weapons Data
@@ -1967,14 +1981,13 @@ NamedScript MapSpecial void DisassemblingDevice()
     int CurrentExtraction;
 
     // Chances of getting parts
-    int MaxParts;
-    int ChanceChips;
-    int ChanceBattery;
-    int ChanceTurret;
-    int ChanceModule;
-    int ChanceAug;
-    int ChanceBluePrint;
-    int ChanceModPacks;
+    fixed ChanceChips;
+    fixed ChanceBattery;
+    fixed ChanceTurret;
+    fixed ChanceModule;
+    fixed ChanceAug;
+    fixed ChanceBluePrint;
+    fixed ChanceModPacks;
 
     // Database creation
     for (int i = 0; i < 4; i++)
@@ -2070,39 +2083,95 @@ NamedScript MapSpecial void DisassemblingDevice()
             CurrentCost = ShieldCost[CurrentItem] / 20;
         }
 
-        // Calculate Max Parts
-        MaxParts = 1 + CurrentCost / (200 / (CurrentCategory == 1 ? 2.0 : 1));
-        if (MaxParts > 50) MaxParts = 50;
-
         // Calculate Extent Extraction
-        if (MaxParts <= 5) CurrentExtraction = 0;
-        if (MaxParts >  5) CurrentExtraction = 1;
-        if (MaxParts > 10) CurrentExtraction = 2;
-        if (MaxParts > 20) CurrentExtraction = 3;
-        if (MaxParts > 35) CurrentExtraction = 4;
+        // For Weapons and Shield Parts
+        if (CurrentCategory == 0 || CurrentCategory == 2)
+        {
+            if (CurrentCost <=  250) CurrentExtraction = 0;
+            if (CurrentCost >   250) CurrentExtraction = 1;
+            if (CurrentCost >  1500) CurrentExtraction = 2;
+            if (CurrentCost >  3000) CurrentExtraction = 3;
+            if (CurrentCost >  6000) CurrentExtraction = 4;
+            if (CurrentCost > 10000) CurrentExtraction = 5;
+        }
+        // For Armor/Boots
+        if (CurrentCategory == 1)
+        {
+            if (CurrentCost <=  125) CurrentExtraction = 0;
+            if (CurrentCost >   125) CurrentExtraction = 1;
+            if (CurrentCost >   300) CurrentExtraction = 2;
+            if (CurrentCost >   900) CurrentExtraction = 3;
+            if (CurrentCost >  1500) CurrentExtraction = 4;
+            if (CurrentCost >  2500) CurrentExtraction = 5;
+        }
 
         // Calculate Chances
-        // For Chips
-        ChanceChips = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 25.0 : 50.0));
-        if (ChanceChips > 10) ChanceChips = 10;
-        // For Battery
-        ChanceBattery = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 32.5 : 75.0));
-        if (ChanceBattery > 10) ChanceBattery = 10;
-        // For Turret
-        ChanceTurret = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 75.0 : 150.0));
-        if (ChanceTurret > 10) ChanceTurret = 10;
-        // For Modules
-        ChanceModule = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 175.0 : 350.0));
-        if (ChanceModule > 10) ChanceModule = 10;
-        // For Augs
-        ChanceAug = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 250.0 : 500.0));
-        if (ChanceAug > 10) ChanceAug = 10;
-        // For Blueprint Computer
-        ChanceBluePrint = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 100.0 : 200.0));
-        if (ChanceBluePrint > 10) ChanceBluePrint = 10;
-        // For ModPacks
-        ChanceModPacks = RoundInt((fixed)CurrentCost / (CurrentCategory == 1 ? 125.0 : 250.0));
-        if (ChanceModPacks > 10) ChanceModPacks = 10;
+        // For Very Low Extent Extraction
+        if (CurrentExtraction == 0)
+        {
+            ChanceChips = 5.0;
+            ChanceBattery = 0.0;
+            ChanceTurret = 0.0;
+            ChanceBluePrint = 2.5;
+            ChanceModPacks = 0.0;
+            ChanceModule = 0.0;
+            ChanceAug = 0.0;
+        }
+        // For Low Extent Extraction
+        if (CurrentExtraction == 1)
+        {
+            ChanceChips = 7.5;
+            ChanceBattery = 5.0;
+            ChanceTurret = 0.0;
+            ChanceBluePrint = 3.5;
+            ChanceModPacks = 0.0;
+            ChanceModule = 0.0;
+            ChanceAug = 0.0;
+        }
+        // For Medium Extent Extraction
+        if (CurrentExtraction == 2)
+        {
+            ChanceChips = 10.0;
+            ChanceBattery = 7.5;
+            ChanceTurret = 5.0;
+            ChanceBluePrint = 5.0;
+            ChanceModPacks = 5.0;
+            ChanceModule = 0.0;
+            ChanceAug = 0.0;
+        }
+        // For High Extent Extraction
+        if (CurrentExtraction == 3)
+        {
+            ChanceChips = 12.5;
+            ChanceBattery = 10.0;
+            ChanceTurret = 7.5;
+            ChanceBluePrint = 7.5;
+            ChanceModPacks = 7.5;
+            ChanceModule = 5.0;
+            ChanceAug = 0.0;
+        }
+        // For Very High Extent Extraction
+        if (CurrentExtraction == 4)
+        {
+            ChanceChips = 15.0;
+            ChanceBattery = 12.5;
+            ChanceTurret = 10.0;
+            ChanceBluePrint = 10.0;
+            ChanceModPacks = 10.0;
+            ChanceModule = 7.5;
+            ChanceAug = 5.0;
+        }
+        // For Very High+ Extent Extraction
+        if (CurrentExtraction == 5)
+        {
+            ChanceChips = 17.5;
+            ChanceBattery = 15.0;
+            ChanceTurret = 12.5;
+            ChanceBluePrint = 12.5;
+            ChanceModPacks = 12.5;
+            ChanceModule = 10.0;
+            ChanceAug = 7.5;
+        }
 
         // Text
         SetFont("BIGFONT");
@@ -2126,7 +2195,7 @@ NamedScript MapSpecial void DisassemblingDevice()
             EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 32.0, Y + 230.0, 0.05, 0.05);
 
             SetFont("SMALLFONT");
-            HudMessage("Possible Extraction:\n\CdOther\C-\n\CaBattery\C-\n\CfChips\C-\n\CgTurret Parts\C-\n\CqModule\C-\n\CkAug\C-\n\CnRecipes\C-\n\CrModPacks\C-", ExtentExtraction[CurrentExtraction]);
+            HudMessage("Possible Extraction:\n%S", PossibleExtraction[CurrentExtraction]);
             EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 32.0, Y + 272.0, 0.05, 0.05);
 
             SetFont("SMALLFONT");
@@ -2173,90 +2242,104 @@ NamedScript MapSpecial void DisassemblingDevice()
         }
         if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
-            if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
             {
-                Player.OutpostMenu = 0;
-                str ActorToSpawn;
-                int Attempts = MaxParts;
-
-                // Take Current Item
-                TakeInventory(CurrentActor,1);
-
-                // Take tokens from DoomRL Arsenal
-                if (CompatMode == COMPAT_DRLA);
+                if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
                 {
-                    if (CurrentCategory == 0) RemoveDRLAItem(0, CurrentIndex);
-                    if (CurrentCategory == 1) RemoveDRLAItem(3, CurrentIndex);
+                    Player.OutpostMenu = 0;
+                    str ActorToSpawn;
+                    bool PartReceived;
+                    int Attempts = Random(1, 3 + CurrentExtraction) + Random(1, 3 + CurrentExtraction) * CurrentExtraction;
+
+                    // Take Current Item
+                    TakeInventory(CurrentActor,1);
+
+                    // Take tokens from DoomRL Arsenal
+                    if (CompatMode == COMPAT_DRLA);
+                    {
+                        if (CurrentCategory == 0) RemoveDRLAItem(0, CurrentIndex);
+                        if (CurrentCategory == 1) RemoveDRLAItem(3, CurrentIndex);
+                    }
+
+                    // The effect of sleep immersion
+                    FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
+                    Delay(35 * 1);
+
+                    // Get Part
+                    while (Attempts > 0 && CurrentCost > 0)
+                    {
+                        if (CurrentCategory == 0)
+                            ActorToSpawn = ItemData[7][Random(6, 8)].Actor;
+                        if (CurrentCategory == 1)
+                            ActorToSpawn = ItemData[7][Random(9, 11)].Actor;
+                        if (CurrentCategory == 2)
+                            ActorToSpawn = ItemData[7][Random(0, 5)].Actor;
+
+                        if (RandomFixed(0.0, 100.0) <  ChanceChips && !PartReceived)
+                        {
+                            if (CurrentExtraction < 3)
+                                ActorToSpawn = "DRPGChipDropper";
+                            else
+                                ActorToSpawn = (Random(0, 32) <= 0 ? "DRPGChipPlatinumPack" : "DRPGChipGoldPack");
+                            PartReceived = true;
+                            CurrentCost -= 125;
+                        }
+                        if (RandomFixed(0.0, 100.0) <  ChanceBattery && !PartReceived)
+                        {
+                            ActorToSpawn = (Random(0, 1) <= 0 ? "DRPGLootDemonArtifact" : "DRPGBatteryDropper");
+                            PartReceived = true;
+                            CurrentCost -= 250;
+                        }
+                        if (RandomFixed(0.0, 100.0) <  ChanceTurret && !PartReceived)
+                        {
+                            ActorToSpawn = (Random(0, 20) <= 0 ? "DRPGTurretPartCrate" : "DRPGTurretPart");
+                            PartReceived = true;
+                            CurrentCost -= 250;
+                        }
+                        if (RandomFixed(0.0, 100.0) <  ChanceBluePrint && !PartReceived)
+                        {
+                            ActorToSpawn = "RLBlueprintComputer";
+                            PartReceived = true;
+                            CurrentCost -= 2500;
+                        }
+                        if (RandomFixed(0.0, 100.0) <  ChanceModPacks && !PartReceived)
+                        {
+                            ActorToSpawn = (Random(0, 4) <= 0 ? ItemData[8][Random(4, 8)].Actor : ItemData[8][Random(0, 3)].Actor);
+                            PartReceived = true;
+                            CurrentCost -= 2500;
+                        }
+                        if (RandomFixed(0.0, 100.0) <  ChanceModule && !PartReceived)
+                        {
+                            ActorToSpawn = (Random(0, 1) <= 0 ? "DRPGModuleDropper" : ItemData[4][0].Actor);
+                            PartReceived = true;
+                            CurrentCost -= 2500;
+                        }
+                        if (RandomFixed(0.0, 100.0) <  ChanceAug && !PartReceived)
+                        {
+                            ActorToSpawn = "DRPGAugDropper";
+                            PartReceived = true;
+                            CurrentCost -= 10000;
+                        }
+
+                        // Spawn Part in Disassembling Device
+                        SpawnSpotForced(ActorToSpawn, DisassemblingDeviceID, UniqueTID(), 0);
+
+                        PartReceived = false;
+                        Attempts--;
+                    }
+
+                    SetFont("BIGFONT");
+                    HudMessage("Item disassembly is complete");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "Green", X + 64.0, Y + 240.0, 3.0, 2.0);
+                    ActivatorSound("mission/complete", 127);
+                    FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 2.0);
+
+                    SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+                    return;
                 }
-
-                // The effect of sleep immersion
-                FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
-                Delay(35 * 1);
-
-                // Get Part
-                while (Attempts > 0 && CurrentCost > 0)
-                {
-                    ActorToSpawn = ItemData[7][Random(9, 11)].Actor;
-
-                    if (Random(1, 100) <=  ChanceChips)
-                    {
-                        ActorToSpawn = "DRPGChipDropper";
-                        CurrentCost -= 100;
-                    }
-                    if (Random(1, 100) <=  ChanceBattery)
-                    {
-                        ActorToSpawn = "DRPGBatteryDropper";
-                        CurrentCost -= 250;
-                    }
-                    if (Random(1, 100) <=  ChanceTurret)
-                    {
-                        ActorToSpawn = "DRPGTurretPart";
-                        CurrentCost -= 250;
-                    }
-                    if (Random(1, 100) <=  ChanceModule)
-                    {
-                        ActorToSpawn = "DRPGModuleDropper";
-                        CurrentCost -= 5000;
-                    }
-                    if (Random(1, 100) <=  ChanceAug)
-                    {
-                        ActorToSpawn = "DRPGAugDropper";
-                        CurrentCost -= 10000;
-                    }
-                    if (Random(1, 100) <=  ChanceBluePrint)
-                    {
-                        ActorToSpawn = "RLBlueprintComputer";
-                        CurrentCost -= 5000;
-                    }
-                    if (Random(1, 100) <=  ChanceModPacks)
-                    {
-                        ActorToSpawn = ItemData[8][Random(0, 3)].Actor;
-                        CurrentCost -= 5000;
-                    }
-                    if (Random(1, 100) <=  ChanceModPacks / 4)
-                    {
-                        ActorToSpawn = ItemData[8][Random(4, 8)].Actor;
-                        CurrentCost -= 10000;
-                    }
-
-                    // Spawn Part in Disassembling Device
-                    SpawnSpotForced(ActorToSpawn, DisassemblingDeviceID, UniqueTID(), 0);
-
-                    Attempts--;
-                }
-
-                FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 2.0);
-
-                SetFont("BIGFONT");
-                HudMessage("Item disassembly is complete");
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "Green", X + 80.0, Y + 240.0, 3.0, 2.0);
-                ActivatorSound("mission/complete", 127);
-
-                SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
-                return;
+                else
+                    ActivatorSound("menu/error", 127);
             }
-            else
-                ActivatorSound("menu/error", 127);
         }
         Delay(1);
     }
