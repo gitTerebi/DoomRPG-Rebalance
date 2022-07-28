@@ -423,11 +423,11 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLChaingun",                              "Chaingun",                                                750,  0, -1, "PKCGX0", 25, 18);
         ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle",                                            750,  1, -1, "UACRX0", 23, 15);
         ITEMDATA_DEF("RLRocketLauncher",                        "Rocket Launcher",                                        1000,  2, -1, "RLAUX0", 31, 18);
-        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           2500,  4, -1, "PLSRX0", 27, 19);
-        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                5000,  5, -1, "BFGGX0", 31, 38);
+        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           1500,  4, -1, "PLSRX0", 27, 19);
+        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                1750,  5, -1, "BFGGX0", 31, 38);
 
         // Exotic Weapons
-        ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                 1500,  2, 1, "BLASX0", 12, 14);
+        ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                 2000,  2, 1, "BLASX0", 12, 14);
         ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 1, "OLOKX0", 10, 13);
         ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 2, "DEAPX0", 11, 14);
         ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                        10000,  5, 3, "MRKPX0",  9, 12);
@@ -787,10 +787,10 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLCyberNanoGreenArmorPickup",                     "Cybernano Security Armor \Cv[Assembled]\C-",        15000, 8, 5, "CYN1A0", 16, 30);
         ITEMDATA_DEF("RLCyberNanoBlueArmorPickup",                      "Cybernano Combat Armor \Cv[Assembled]\C-",          20000, 8, 6, "CYN2A0", 16, 30);
         ITEMDATA_DEF("RLCyberNanoRedArmorPickup",                       "Cybernano Commando Armor \Cv[Assembled]\C-",        30000, 8, 7, "CYN3A0", 16, 30);
-        ITEMDATA_DEF("RLFireproofGreenArmorPickup",                     "Fireproof Security Armor \Cv[Assembled]\C-",         2000, 3, 1, "FPA1A0", 15, 56);
-        ITEMDATA_DEF("RLFireproofBlueArmorPickup",                      "Fireproof Combat Armor \Cv[Assembled]\C-",           2500, 3, 2, "FPA2A0", 15, 56);
-        ITEMDATA_DEF("RLFireproofRedArmorPickup",                       "Fireproof Commando Armor \Cv[Assembled]\C-",         3500, 3, 3, "FPA3A0", 15, 56);
-        ITEMDATA_DEF("RLNanofiberGreenArmorPickup",                     "Nanofiber Security Armor \Cv[Assembled]\C-",         1000, 5, 1, "NFA1A0", 15, 18);
+        ITEMDATA_DEF("RLFireproofGreenArmorPickup",                     "Fireproof Security Armor \Cv[Assembled]\C-",         1500, 3, 1, "FPA1A0", 15, 56);
+        ITEMDATA_DEF("RLFireproofBlueArmorPickup",                      "Fireproof Combat Armor \Cv[Assembled]\C-",           2000, 3, 2, "FPA2A0", 15, 56);
+        ITEMDATA_DEF("RLFireproofRedArmorPickup",                       "Fireproof Commando Armor \Cv[Assembled]\C-",         3000, 3, 3, "FPA3A0", 15, 56);
+        ITEMDATA_DEF("RLNanofiberGreenArmorPickup",                     "Nanofiber Security Armor \Cv[Assembled]\C-",         1250, 5, 1, "NFA1A0", 15, 18);
         ITEMDATA_DEF("RLNanofiberBlueArmorPickup",                      "Nanofiber Combat Armor \Cv[Assembled]\C-",           1500, 5, 2, "NFA2A0", 15, 18);
         ITEMDATA_DEF("RLNanofiberRedArmorPickup",                       "Nanofiber Commando Armor \Cv[Assembled]\C-",         3000, 5, 3, "NFA3A0", 15, 18);
         ITEMDATA_DEF("RLNanofiberSkinGreenArmorPickup",                 "Nanofiber Skin Security Armor \Cv[Assembled]\C-",   10000, 7, 4, "NFS1A0", 12, 47);
