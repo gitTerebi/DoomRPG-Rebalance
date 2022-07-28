@@ -2558,6 +2558,13 @@ void IncreaseSkill(int Category, int Index)
             SkillLevel->CurrentLevel++;
             TakeInventory("DRPGModule", Cost);
             ActivatorSound("menu/move", 127);
+
+            // Add free level for skill "Magnetize"
+            if (CurrentSkill->Name == "Magnetize")
+            {
+                SkillLevel->Level++;
+                SkillLevel->CurrentLevel++;
+            }
         }
     }
     else

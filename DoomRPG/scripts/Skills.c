@@ -1379,6 +1379,8 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
                     if (Player.Aura.Type[i].Active)
                     {
                         Player.Aura.Type[i].Active = false;
+                        if (i == 4)
+                            Player.SkillCostMult += 10;
                         Auras--;
                         break;
                     }
@@ -1401,7 +1403,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
         }
 
         // Aura Cost Multiplier - only adding new stackable auras increases cost
-        if (ActiveAuras < StackMax)
+        if (ActiveAuras < StackMax && Index != 4)
             Player.SkillCostMult += 10;
     }
 
@@ -1413,9 +1415,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
 
     // Cap Aura Timer - 10 min
     if (Player.Aura.Time > 35 * 600)
-    {
         Player.Aura.Time = 35 * 600;
-    }
 
     // Apply Aura
     Player.Aura.Type[Index].Active = true;
@@ -2746,7 +2746,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
         Delay(35 * 2);
     }
 
-    // Overdrive - Pull the items on top of you
+    // Pull the items on top of you if Magnetize Skill Level is 2
     if (Player.SkillLevel[5][5].CurrentLevel == 2)
     {
         for (int i = 0; i < TIDPos; i++)
@@ -3243,7 +3243,7 @@ void CheckSkills()
 {
     fixed AugSummonerModifier = 1.0;
 
-    // Check for AUG Commanding abilities
+    // Check for AUG "Telepathic synchronizer" abilities
     if (Player.Augs.Active[AUG_SUMMONER])
     {
         if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 5)
@@ -3341,6 +3341,12 @@ void CheckSkills()
         Skills[4][15].Cost = 500 * AugSummonerModifier; // Standart EP cost of Summon Cyberdemon
         Skills[4][16].Cost = 600 * AugSummonerModifier; // Standart EP cost of Summon Spider Mastermind
     }
+
+    // Hold EP cost of skill "Magnetize"
+    if (Player.SkillLevel[5][5].CurrentLevel > 1)
+        Skills[5][5].Cost = 12;
+    else
+        Skills[5][5].Cost = 25;
 
     // Summoning Skills - Marines Descriptions
     if (CompatMode == COMPAT_DRLA)
