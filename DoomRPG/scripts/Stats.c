@@ -303,11 +303,7 @@ void CheckLevel()
             if (GetCVar("drpg_levelup_heal"))
             {
                 HealThing(MAX_HEALTH);
-
-                if (Player.EP < 0)
-                    Player.EP = 0;
-                else
-                    Player.EP = Player.EPMax;
+                Player.EP = Player.EPMax;
             }
 
             FadeRange(255, 255, 255, 0.5, 255, 255, 255, 0, 2.0);
@@ -1141,7 +1137,7 @@ void CheckPerks()
 
     // Luck Perk - Always have Automap/Scanner
     // TODO: Ability to see secrets
-    if (Player.Perks[STAT_LUCK])
+    if (Player.Perks[STAT_LUCK] && !GetCVar("drpg_disable_luck_perk"))
     {
         GiveInventory("DRPGAllMapRevealer", 1);
     }

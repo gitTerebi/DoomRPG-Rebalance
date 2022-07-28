@@ -615,11 +615,12 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         {
             .Name = "Magnetize",
             .Cost = 25,
-            .MaxLevel = 1,
+            .MaxLevel = 2,
             .Use = Magnetize,
             .Description =
             {
-                "Picks up all dropped credits from monsters you've killed\nand attracts items around in the area of your sight"
+                "Picks up all dropped credits from monsters you've killed\nand attracts items around in the area of your sight",
+                "Picks up all dropped credits from monsters you've killed\nand attracts items around in the area of your sight\nPlaces items directly on you"
             }
         },
         {
@@ -1343,6 +1344,9 @@ NamedScript Console bool DropSupply(SkillLevelInfo *SkillLevel, void *Data)
 NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
 {
     int Index = *(int *)Data;
+    int StackMax = 2 + ((Player.EnergyTotal - 50) / 25);
+    int Auras = 0;
+    int ActiveAuras = 0;
     bool Stack = false;
 
     // Is the Aura you used the same as the one you already have active?
@@ -1354,15 +1358,15 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
         // Aura stacking handling with Energy perk
         if (Player.Perks[STAT_ENERGY])
         {
-            int StackMax = 2 + ((Player.EnergyTotal - 50) / 25);
-            int Auras = 0;
-
             Log("\CnAura Max Stack: %d", StackMax);
 
             // Count the current Auras
             for (int i = 0; i < AURA_MAX; i++)
                 if (Player.Aura.Type[i].Active)
                     Auras++;
+
+            // Copying auras count for multiplier calculation
+            ActiveAuras = Auras;
 
             // Make sure the proper Aura stack is maintained
             while (Auras >= StackMax)
@@ -1385,8 +1389,20 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
             }
         }
         else // Remove all other Auras first if you don't have the Energy
+        {
+            StackMax = 1;
             for (int i = 0; i < AURA_MAX; i++)
+            {
+                if (Player.Aura.Type[i].Active)
+                    ActiveAuras++;
+
                 Player.Aura.Type[i].Active = false;
+            }
+        }
+
+        // Aura Cost Multiplier - only adding new stackable auras increases cost
+        if (ActiveAuras < StackMax)
+            Player.SkillCostMult += 10;
     }
 
     // Should the timer be stacked because you used the same Aura?
@@ -1404,10 +1420,6 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
     // Apply Aura
     Player.Aura.Type[Index].Active = true;
     Player.Aura.Type[Index].Level = SkillLevel->CurrentLevel;
-
-    // Aura Cost Multiplier
-    if (!Player.Aura.Type[AURA_BLUE].Active)
-        Player.SkillCostMult += 10;
 
     ActivatorSound("skills/buff", 127);
     return true;
@@ -2735,7 +2747,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
     }
 
     // Overdrive - Pull the items on top of you
-    if (Player.Overdrive)
+    if (Player.SkillLevel[5][5].CurrentLevel == 2)
     {
         for (int i = 0; i < TIDPos; i++)
         {

@@ -117,6 +117,7 @@ user    float   drpg_maxspeed = 1.0;
 user    float   drpg_maxjump = 8.0;
 server  bool    drpg_inv_capacity = true;
 server  int     drpg_overdrive_limit = 1000;
+server  bool    drpg_disable_luck_perk = false;
 
 // Natural Stat Leveling
 server  bool    drpg_levelup_natural = false;
