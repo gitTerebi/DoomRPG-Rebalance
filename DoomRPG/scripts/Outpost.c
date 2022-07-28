@@ -2087,8 +2087,8 @@ NamedScript MapSpecial void DisassemblingDevice()
         // For Weapons and Shield Parts
         if (CurrentCategory == 0 || CurrentCategory == 2)
         {
-            if (CurrentCost <=  250) CurrentExtraction = 0;
-            if (CurrentCost >   250) CurrentExtraction = 1;
+            if (CurrentCost <   100) CurrentExtraction = 0;
+            if (CurrentCost >=  100) CurrentExtraction = 1;
             if (CurrentCost >  1500) CurrentExtraction = 2;
             if (CurrentCost >  3000) CurrentExtraction = 3;
             if (CurrentCost >  6000) CurrentExtraction = 4;
@@ -2097,9 +2097,9 @@ NamedScript MapSpecial void DisassemblingDevice()
         // For Armor/Boots
         if (CurrentCategory == 1)
         {
-            if (CurrentCost <=  125) CurrentExtraction = 0;
-            if (CurrentCost >   125) CurrentExtraction = 1;
-            if (CurrentCost >   300) CurrentExtraction = 2;
+            if (CurrentCost <=   50) CurrentExtraction = 0;
+            if (CurrentCost >    50) CurrentExtraction = 1;
+            if (CurrentCost >   225) CurrentExtraction = 2;
             if (CurrentCost >   900) CurrentExtraction = 3;
             if (CurrentCost >  1500) CurrentExtraction = 4;
             if (CurrentCost >  2500) CurrentExtraction = 5;
@@ -2330,7 +2330,7 @@ NamedScript MapSpecial void DisassemblingDevice()
 
                     SetFont("BIGFONT");
                     HudMessage("Item disassembly is complete");
-                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "Green", X + 64.0, Y + 240.0, 3.0, 2.0);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "Green", X + 64.0, Y + 240.0, 3.0, 2.0);
                     ActivatorSound("mission/complete", 127);
                     FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 2.0);
 
