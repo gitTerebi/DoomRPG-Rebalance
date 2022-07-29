@@ -1978,6 +1978,8 @@ NamedScript MapSpecial void DisassemblingDevice()
     str CurrentName;
     str CurrentIcon;
     int CurrentCost;
+    int CostMin;
+    int CostMax;
     int CurrentExtraction;
 
     // Chances of getting parts
@@ -2087,32 +2089,92 @@ NamedScript MapSpecial void DisassemblingDevice()
         // For Weapons and Shield Parts
         if (CurrentCategory == 0 || CurrentCategory == 2)
         {
-            if (CurrentCost <   100) CurrentExtraction = 0;
-            if (CurrentCost >=  100) CurrentExtraction = 1;
-            if (CurrentCost >  1500) CurrentExtraction = 2;
-            if (CurrentCost >  3000) CurrentExtraction = 3;
-            if (CurrentCost >  6000) CurrentExtraction = 4;
-            if (CurrentCost > 10000) CurrentExtraction = 5;
+            if (CurrentCost < 100)
+            {
+                CostMin = 0;
+                CostMax = 100;
+                CurrentExtraction = 0;
+            }
+            if (CurrentCost >= 100)
+            {
+                CostMin = 100;
+                CostMax = 1500;
+                CurrentExtraction = 1;
+            }
+            if (CurrentCost > 1500)
+            {
+                CostMin = 1500;
+                CostMax = 3000;
+                CurrentExtraction = 2;
+            }
+            if (CurrentCost > 3000)
+            {
+                CostMin = 3000;
+                CostMax = 6000;
+                CurrentExtraction = 3;
+            }
+            if (CurrentCost > 6000)
+            {
+                CostMin = 6000;
+                CostMax = 10000;
+                CurrentExtraction = 4;
+            }
+            if (CurrentCost > 10000)
+            {
+                CostMin = 10000;
+                CostMax = 20000;
+                CurrentExtraction = 5;
+            }
         }
         // For Armor/Boots
         if (CurrentCategory == 1)
         {
-            if (CurrentCost <=   50) CurrentExtraction = 0;
-            if (CurrentCost >    50) CurrentExtraction = 1;
-            if (CurrentCost >   225) CurrentExtraction = 2;
-            if (CurrentCost >   900) CurrentExtraction = 3;
-            if (CurrentCost >  1500) CurrentExtraction = 4;
-            if (CurrentCost >  2500) CurrentExtraction = 5;
+            if (CurrentCost <= 50)
+            {
+                CostMin = 0;
+                CostMax = 50;
+                CurrentExtraction = 0;
+            }
+            if (CurrentCost > 50)
+            {
+                CostMin = 50;
+                CostMax = 225;
+                CurrentExtraction = 1;
+            }
+            if (CurrentCost > 225)
+            {
+                CostMin = 225;
+                CostMax = 900;
+                CurrentExtraction = 2;
+            }
+            if (CurrentCost > 900)
+            {
+                CostMin = 900;
+                CostMax = 1500;
+                CurrentExtraction = 3;
+            }
+            if (CurrentCost > 1500)
+            {
+                CostMin = 1500;
+                CostMax = 2500;
+                CurrentExtraction = 4;
+            }
+            if (CurrentCost > 2500)
+            {
+                CostMin = 2500;
+                CostMax = 5000;
+                CurrentExtraction = 5;
+            }
         }
 
         // Calculate Chances
         // For Very Low Extent Extraction
         if (CurrentExtraction == 0)
         {
-            ChanceChips = 5.0;
+            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
             ChanceBattery = 0.0;
             ChanceTurret = 0.0;
-            ChanceBluePrint = 2.5;
+            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 0.1, 2.5);
             ChanceModPacks = 0.0;
             ChanceModule = 0.0;
             ChanceAug = 0.0;
@@ -2120,10 +2182,10 @@ NamedScript MapSpecial void DisassemblingDevice()
         // For Low Extent Extraction
         if (CurrentExtraction == 1)
         {
-            ChanceChips = 7.5;
-            ChanceBattery = 5.0;
+            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
             ChanceTurret = 0.0;
-            ChanceBluePrint = 3.5;
+            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 2.5, 3.5);
             ChanceModPacks = 0.0;
             ChanceModule = 0.0;
             ChanceAug = 0.0;
@@ -2131,46 +2193,46 @@ NamedScript MapSpecial void DisassemblingDevice()
         // For Medium Extent Extraction
         if (CurrentExtraction == 2)
         {
-            ChanceChips = 10.0;
-            ChanceBattery = 7.5;
-            ChanceTurret = 5.0;
-            ChanceBluePrint = 5.0;
-            ChanceModPacks = 5.0;
+            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+            ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
+            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 3.5, 5.0);
+            ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
             ChanceModule = 0.0;
             ChanceAug = 0.0;
         }
         // For High Extent Extraction
         if (CurrentExtraction == 3)
         {
-            ChanceChips = 12.5;
-            ChanceBattery = 10.0;
-            ChanceTurret = 7.5;
-            ChanceBluePrint = 7.5;
-            ChanceModPacks = 7.5;
-            ChanceModule = 5.0;
+            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+            ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+            ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+            ChanceModule = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
             ChanceAug = 0.0;
         }
         // For Very High Extent Extraction
         if (CurrentExtraction == 4)
         {
-            ChanceChips = 15.0;
-            ChanceBattery = 12.5;
-            ChanceTurret = 10.0;
-            ChanceBluePrint = 10.0;
-            ChanceModPacks = 10.0;
-            ChanceModule = 7.5;
-            ChanceAug = 5.0;
+            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 12.5, 15.0);
+            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+            ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+            ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+            ChanceModule = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+            ChanceAug = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
         }
         // For Very High+ Extent Extraction
         if (CurrentExtraction == 5)
         {
-            ChanceChips = 17.5;
-            ChanceBattery = 15.0;
-            ChanceTurret = 12.5;
-            ChanceBluePrint = 12.5;
-            ChanceModPacks = 12.5;
-            ChanceModule = 10.0;
-            ChanceAug = 7.5;
+            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 15.0, 17.5);
+            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 12.5, 15.0);
+            ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+            ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+            ChanceModule = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+            ChanceAug = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
         }
 
         // Text
