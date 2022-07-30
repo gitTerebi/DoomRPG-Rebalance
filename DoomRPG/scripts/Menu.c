@@ -2880,11 +2880,29 @@ void MenuHelp()
             break;
         case OMENU_DISASSEMBLINGDEVICE:
             if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
+                HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nConfirm: \Cd%S\C-\nExit: \Cd%S\C-",
+                           "Up", "Down", "Left", "Right", "Use", "Menu");
+            else
+                HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nConfirm: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                           "+forward", "+back", "+moveleft", "+moveright", "+use", "drpg_menu");
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            break;
+        case OMENU_DISASSEMBLING:
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Select Category: \Cd%S/%S\C-\nSelect Item: \Cd%S/%S\C-\nConfirm: \Cd%S + \Cd%S\C-\nExit: \Cd%S\C-",
                            "Up", "Down", "Left", "Right", "Run", "Use", "Menu");
             else
                 HudMessage("Select Category: \Cd%jS/%jS\C-\nSelect Item: \Cd%jS/%jS\C-\nConfirm: \Cd%jS + \Cd%jS\C-\nExit: \Cd%jS\C-",
                            "+forward", "+back", "+moveleft", "+moveright", "+speed", "+use", "drpg_menu");
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            break;
+        case OMENU_ASSEMBLING:
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
+                HudMessage("Select Category: \Cd%S/%S\C-\nSelect Rare: \Cd%S + \Cd%S/%S\C-\nSelect Item: \Cd%S/%S\C-\nConfirm: \Cd%S + \Cd%S\C-\nExit: \Cd%S\C-",
+                           "Up", "Down", "Run", "Up", "Down", "Left", "Right", "Run", "Use", "Menu");
+            else
+                HudMessage("Select Category: \Cd%jS/%jS\C-\nSelect Rare: \Cd%jS + \Cd%jS/%jS\C-\nSelect Item: \Cd%jS/%jS\C-\nConfirm: \Cd%jS + \Cd%jS\C-\nExit: \Cd%jS\C-",
+                           "+forward", "+back", "+speed", "+forward", "+back", "+moveleft", "+moveright", "+speed", "+use", "drpg_menu");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         }

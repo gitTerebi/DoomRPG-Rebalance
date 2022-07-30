@@ -480,10 +480,10 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLWidowmakerSMG",                         "Widowmaker SMG \Cd[Unique]\C-",                         60000, -1, 6, "WSMGX0", 24, 20);
         ITEMDATA_DEF("RLChameleonRifle",                        "Chameleon Rifle \Cd[Unique]\C-",                       160000, -1, 8, "CRM1X0", 26, 18);
         ITEMDATA_DEF("RLNanomachicArmamentGenerator",           "Nanomachic Armament Generator \Cd[Unique]\C-",         200000, -1, 8, "NAG0X0", 13, 19);
-        ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     500000, -1, 9, "NKO0X0", 29, 54);
-        ITEMDATA_DEF("RLLuciferCannon",                         "Lucifer Cannon \Cf[Unique]\C-",                        300000, -1, 8, "LCFGX0", 30, 26);
-        ITEMDATA_DEF("RLDirectHit",                             "Direct Hit \Cf[Unique]\C-",                            400000, -1, 8, "DHTGX0", 20, 20);
-        ITEMDATA_DEF("RLTriadCannon",                           "Triad Cannon \Cf[Unique]\C-",                          600000, -1, 9, "TRIDX0", 25, 26);
+        ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     450000, -1, 9, "NKO0X0", 29, 54);
+        ITEMDATA_DEF("RLLuciferCannon",                         "Lucifer Cannon \Cd[Unique]\C-",                        300000, -1, 8, "LCFGX0", 30, 26);
+        ITEMDATA_DEF("RLDirectHit",                             "Direct Hit \Cd[Unique]\C-",                            400000, -1, 8, "DHTGX0", 20, 20);
+        ITEMDATA_DEF("RLTriadCannon",                           "Triad Cannon \Cd[Unique]\C-",                          480000, -1, 9, "TRIDX0", 25, 26);
         // ITEMDATA_DEF("RLSubtleKnife",                           "Subtle Knife \Cd[Unique]\C-",                           30000, -1, "SUBKX0", 38, 37);
         // ITEMDATA_DEF("RLFusionMortar",                          "Fusion Mortar \Cd[Unique]\C-",                          90000, -1, "FMORX0", 38, 37);
         // ITEMDATA_DEF("RLSpectreRevolver",                       "The Spectre \Cd[Unique]\C-",                            31000, -1, "SPERX0", 38, 37);
