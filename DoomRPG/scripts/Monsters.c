@@ -762,6 +762,197 @@ NamedScript Console void MonsterDamage(int Amount, int Type)
     DamageThing(Amount, Type);
 }
 
+NamedScript void CalculateMonsterStats(MonsterStatsPtr Stats)
+{
+    int StatEffect[8];
+    int MonsterStatPool;
+
+    // Calculate Map Level Modifier
+    fixed Modifier = 1.0;
+
+    if (GetCVar("drpg_ws_use_wads") < 4)
+    {
+        Modifier = 4.0 / GetCVar("drpg_ws_use_wads") * MapLevelModifier;
+
+        if (Modifier < 1.0)
+            Modifier = 1.0;
+    }
+
+    int LevelType = GetCVar("drpg_monster_levels");
+    fixed LevelWeight = GetCVarFixed("drpg_monster_level_weight");
+    fixed MapWeight = GetCVarFixed("drpg_monster_map_weight");
+    fixed RandomMinWeight = GetCVarFixed("drpg_monster_random_min_mult");
+    fixed RandomMaxWeight = GetCVarFixed("drpg_monster_random_max_mult");
+    int LevelNum = CurrentLevel->LevelNum * Modifier;
+
+    // Let's not cap Level Number to 100 anymore
+    //if (LevelNum > 100)
+    //    LevelNum = 100;
+
+    // If the Arena is active, base the Monster Levels Map Number portion on the current wave
+    if (CurrentLevel->UACBase && ArenaActive)
+        LevelNum = ArenaWave / 3;
+
+    // Calculate Monster Level
+    if (LevelType == 1 || LevelType == 3) // Player Level
+        Stats->Level += (int)((fixed)AveragePlayerLevel() * LevelWeight);
+    if (LevelType == 2 || LevelType == 3) // Map Number
+        Stats->Level += (int)((fixed)LevelNum * MapWeight);
+    if (AveragePlayerLuck() < 0)
+        Stats->Level += -AveragePlayerLuck();
+
+    // Randomization Weight
+    if (RandomMinWeight > RandomMaxWeight)
+        Log("\CgERROR: \C-Monster Random Min Multiplier cannot be above Monster Random Max Multiplier!");
+    else
+        Stats->Level = (int)(Stats->Level * RandomFixed(RandomMinWeight, RandomMaxWeight));
+
+    // If the monster is friendly, it has the average level of all players in the game
+    if (GetActorProperty(0, APROP_Friendly))
+        Stats->Level = (int)(((fixed)AveragePlayerLevel() * LevelWeight + (fixed)LevelNum * MapWeight) * RandomFixed(0.9, 1.1));
+
+    // Special case for Powersuit Mk. II
+    if (GetActorClass(0) == "DRPGSuperPowerSuit")
+        Stats->Level = 1000;
+
+    MonsterStatPool = (40 + GameSkill() * Stats->Level) * StatsNatModifier;
+
+    // Minimal Points
+    Stats->Strength = Stats->Level / 2;
+    Stats->Defense = Stats->Level / 2;
+    Stats->Vitality = Stats->Level / 2;
+    Stats->Energy = Stats->Level / 2;
+    Stats->Regeneration = Stats->Level / 2;
+    Stats->Agility = Stats->Level / 2;
+    Stats->Capacity = Stats->Level / 2;
+    Stats->Luck = Stats->Level / 2;
+    MonsterStatPool -= (Stats->Level / 2) * 8;
+
+    // Calculate the monster's cut and special stats
+    if (GetCVar("drpg_monster_specialize"))
+    {
+        // [KS] Here's a fun and fast little way of doing it:
+
+        // 2 specialized stats
+        StatEffect[0] = 2;
+        StatEffect[1] = 2;
+
+        // 2 normal stats
+        StatEffect[2] = 0;
+        StatEffect[3] = 0;
+
+        // 4 cut stats
+        StatEffect[4] = 1;
+        StatEffect[5] = 1;
+        StatEffect[6] = 1;
+        StatEffect[7] = 1;
+
+        // Shuffle 'em up!
+        for (int i = 0; i < STAT_MAX; i++)
+        {
+            int SwapWith = Random(0, STAT_MAX - 1);
+            int Temp = StatEffect[i];
+
+            StatEffect[i] = StatEffect[SwapWith];
+            StatEffect[SwapWith] = Temp;
+        }
+
+        // Next, create a weighted list of stats.
+        // Specialized stats are preferred over normal stats, and cut stats are avoided.
+        int StatSelector[14];
+        int j = 0;
+
+        for (int i = 0; i < STAT_MAX; i++)
+        {
+            if (StatEffect[i] == 2)
+            {
+                StatSelector[j++] = i;
+                StatSelector[j++] = i;
+                StatSelector[j++] = i;
+            }
+            else if (StatEffect[i] == 0)
+            {
+                StatSelector[j++] = i;
+                StatSelector[j++] = i;
+            }
+            else
+                StatSelector[j++] = i;
+        }
+
+        // Finally, distribute the points with our weighted list.
+        while (MonsterStatPool > 0)
+        {
+            switch (StatSelector[Random (0, 13)])
+            {
+            case 0:
+                Stats->Strength++;
+                break;
+            case 1:
+                Stats->Defense++;
+                break;
+            case 2:
+                Stats->Vitality++;
+                break;
+            case 3:
+                Stats->Energy++;
+                break;
+            case 4:
+                Stats->Regeneration++;
+                break;
+            case 5:
+                Stats->Agility++;
+                break;
+            case 6:
+                Stats->Capacity++;
+                break;
+            case 7:
+                Stats->Luck++;
+                break;
+            }
+            MonsterStatPool--;
+        }
+    }
+    else
+    {
+        // Distribute entirely at random
+        while (MonsterStatPool > 0)
+        {
+            switch (Random (0, STAT_MAX - 1))
+            {
+            case 0:
+                Stats->Strength++;
+                break;
+            case 1:
+                Stats->Defense++;
+                break;
+            case 2:
+                Stats->Vitality++;
+                break;
+            case 3:
+                Stats->Energy++;
+                break;
+            case 4:
+                Stats->Regeneration++;
+                break;
+            case 5:
+                Stats->Agility++;
+                break;
+            case 6:
+                Stats->Capacity++;
+                break;
+            case 7:
+                Stats->Luck++;
+                break;
+            }
+            MonsterStatPool--;
+        }
+    }
+
+    // Map Event - RAINBOWS!
+    if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
+        Stats->Capacity *= 2;
+}
+
 // Apply stats to monsters
 OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 {
@@ -789,190 +980,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
 
     if (!(StatFlags & SF_RECREATE))
     {
-        // Calculate Map Level Modifier
-        fixed Modifier = 1.0;
-
-        if (GetCVar("drpg_ws_use_wads") < 4)
-        {
-            Modifier = 4.0 / GetCVar("drpg_ws_use_wads") * MapLevelModifier;
-
-            if (Modifier < 1.0)
-                Modifier = 1.0;
-        }
-
-        int LevelType = GetCVar("drpg_monster_levels");
-        fixed LevelWeight = GetCVarFixed("drpg_monster_level_weight");
-        fixed MapWeight = GetCVarFixed("drpg_monster_map_weight");
-        fixed RandomMinWeight = GetCVarFixed("drpg_monster_random_min_mult");
-        fixed RandomMaxWeight = GetCVarFixed("drpg_monster_random_max_mult");
-        int LevelNum = CurrentLevel->LevelNum * Modifier;
-
-        // Let's not cap Level Number to 100 anymore
-        //if (LevelNum > 100)
-        //    LevelNum = 100;
-
-        // If the Arena is active, base the Monster Levels Map Number portion on the current wave
-        if (CurrentLevel->UACBase && ArenaActive)
-            LevelNum = ArenaWave / 3;
-
-        // Calculate Monster Level
-        if (LevelType == 1 || LevelType == 3) // Player Level
-            Stats->Level += (int)((fixed)AveragePlayerLevel() * LevelWeight);
-        if (LevelType == 2 || LevelType == 3) // Map Number
-            Stats->Level += (int)((fixed)LevelNum * MapWeight);
-        if (AveragePlayerLuck() < 0)
-            Stats->Level += -AveragePlayerLuck();
-
-        // Randomization Weight
-        if (RandomMinWeight > RandomMaxWeight)
-            Log("\CgERROR: \C-Monster Random Min Multiplier cannot be above Monster Random Max Multiplier!");
-        else
-            Stats->Level = (int)(Stats->Level * RandomFixed(RandomMinWeight, RandomMaxWeight));
-
-        // If the monster is friendly, it has the average level of all players in the game
-        if (GetActorProperty(0, APROP_Friendly))
-            Stats->Level = (int)(((fixed)AveragePlayerLevel() * LevelWeight + (fixed)LevelNum * MapWeight) * RandomFixed(0.9, 1.1));
-
-        // Special case for Powersuit Mk. II
-        if (GetActorClass(0) == "DRPGSuperPowerSuit")
-            Stats->Level = 1000;
-
-        MonsterStatPool = (40 + GameSkill() * Stats->Level) * StatsNatModifier;
-
-        // Minimal Points
-        Stats->Strength = Stats->Level / 2;
-        Stats->Defense = Stats->Level / 2;
-        Stats->Vitality = Stats->Level / 2;
-        Stats->Energy = Stats->Level / 2;
-        Stats->Regeneration = Stats->Level / 2;
-        Stats->Agility = Stats->Level / 2;
-        Stats->Capacity = Stats->Level / 2;
-        Stats->Luck = Stats->Level / 2;
-        MonsterStatPool -= (Stats->Level / 2) * 8;
-
-        // Calculate the monster's cut and special stats
-        if (GetCVar("drpg_monster_specialize"))
-        {
-            // [KS] Here's a fun and fast little way of doing it:
-
-            // 2 specialized stats
-            StatEffect[0] = 2;
-            StatEffect[1] = 2;
-
-            // 2 normal stats
-            StatEffect[2] = 0;
-            StatEffect[3] = 0;
-
-            // 4 cut stats
-            StatEffect[4] = 1;
-            StatEffect[5] = 1;
-            StatEffect[6] = 1;
-            StatEffect[7] = 1;
-
-            // Shuffle 'em up!
-            for (int i = 0; i < STAT_MAX; i++)
-            {
-                int SwapWith = Random(0, STAT_MAX - 1);
-                int Temp = StatEffect[i];
-
-                StatEffect[i] = StatEffect[SwapWith];
-                StatEffect[SwapWith] = Temp;
-            }
-
-            // Next, create a weighted list of stats.
-            // Specialized stats are preferred over normal stats, and cut stats are avoided.
-            int StatSelector[14];
-            int j = 0;
-
-            for (int i = 0; i < STAT_MAX; i++)
-            {
-                if (StatEffect[i] == 2)
-                {
-                    StatSelector[j++] = i;
-                    StatSelector[j++] = i;
-                    StatSelector[j++] = i;
-                }
-                else if (StatEffect[i] == 0)
-                {
-                    StatSelector[j++] = i;
-                    StatSelector[j++] = i;
-                }
-                else
-                    StatSelector[j++] = i;
-            }
-
-            // Finally, distribute the points with our weighted list.
-            while (MonsterStatPool > 0)
-            {
-                switch (StatSelector[Random (0, 13)])
-                {
-                case 0:
-                    Stats->Strength++;
-                    break;
-                case 1:
-                    Stats->Defense++;
-                    break;
-                case 2:
-                    Stats->Vitality++;
-                    break;
-                case 3:
-                    Stats->Energy++;
-                    break;
-                case 4:
-                    Stats->Regeneration++;
-                    break;
-                case 5:
-                    Stats->Agility++;
-                    break;
-                case 6:
-                    Stats->Capacity++;
-                    break;
-                case 7:
-                    Stats->Luck++;
-                    break;
-                }
-                MonsterStatPool--;
-            }
-        }
-        else
-        {
-            // Distribute entirely at random
-            while (MonsterStatPool > 0)
-            {
-                switch (Random (0, STAT_MAX - 1))
-                {
-                case 0:
-                    Stats->Strength++;
-                    break;
-                case 1:
-                    Stats->Defense++;
-                    break;
-                case 2:
-                    Stats->Vitality++;
-                    break;
-                case 3:
-                    Stats->Energy++;
-                    break;
-                case 4:
-                    Stats->Regeneration++;
-                    break;
-                case 5:
-                    Stats->Agility++;
-                    break;
-                case 6:
-                    Stats->Capacity++;
-                    break;
-                case 7:
-                    Stats->Luck++;
-                    break;
-                }
-                MonsterStatPool--;
-            }
-        }
-
-        // Map Event - RAINBOWS!
-        if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
-            Stats->Capacity *= 2;
+        CalculateMonsterStats(Stats);
 
         // Apply Aura
         if (!GetActorProperty(0, APROP_Friendly) && !(Stats->Flags & MF_NOAURA) && !(Stats->Flags & MF_NOAURAGEN))
@@ -1594,19 +1602,7 @@ Start:
             StolenCredits = CheckInventory("DRPGCredits") - OldCapacity;
 
         // Calculation of credits depending of WADs that you plan to go through
-        if (GetCVar("drpg_ws_use_wads") < 8)
-        {
-            fixed Modifier = 8.0 / GetCVar("drpg_ws_use_wads") * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
-
-            if (Modifier < 1.0)
-                Modifier = 1.0;
-
-            SetInventory("DRPGCredits", (int)((Stats->Capacity + StolenCredits) / 2 * Modifier));
-        }
-        else
-        {
-            SetInventory("DRPGCredits", (Stats->Capacity + StolenCredits) / 2);
-        }
+        CalculateMonsterCredits(Stats, StolenCredits);
 
         OldCapacity = Stats->Capacity;
     }
@@ -2518,6 +2514,68 @@ NamedScript DECORATE void MonsterRevive()
     SetActorProperty(0, APROP_Health, Stats->HealthMax);
 }
 
+NamedScript DECORATE void PropDeathCheck(int PropType)
+{
+    if (CurrentLevel && !CurrentLevel->UACBase && !CurrentLevel->UACArena)
+    {
+        Delay(1);
+
+        int Killer = WhoKilledMe();
+        MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+        // Set prop's stats for DRPGCredits value calculation
+        CalculateMonsterStats(Stats);
+        // Calculate and set prop's DRPGCredits value
+        CalculateMonsterCredits(Stats);
+
+        if(PropType)
+        {
+            switch(PropType)
+            {
+            case 1: // tech
+                DropMonsterItem(Killer, 0, "DRPGLootScrapMetals",      37); // ~30%
+                DropMonsterItem(Killer, 0, "DRPGTurretPart",           25); // ~20%
+                DropMonsterItem(Killer, 0, "DRPGBatterySmall",         10); // ~4%
+                break;
+
+            case 2: // gore
+                DropMonsterItem(Killer, 0, "DRPGAmmoMonsterDropper",   37); // ~30%
+                DropMonsterItem(Killer, 0, "DRPGMedikitRandomizer",    37); // ~30%
+                DropMonsterItem(Killer, 0, "DRPGWeaponDropper",        25); // ~20% - vanilla weapons only
+                DropMonsterItem(Killer, 0, "DRPGGreenArmorRandomizer", 25); // ~20% - vanilla armors only
+                break;
+
+            case 3: // barrels
+                DropMonsterItem(Killer, 0, "DRPGLootChemicals",        12); // ~10%
+                break;
+            }
+        }
+
+        DropCredits(Killer, Stats);
+    }
+}
+
+OptionalArgs(1) NamedScript void CalculateMonsterCredits(MonsterStatsPtr Stats, int StolenCredits)
+{
+    int Amount = Stats->Capacity;
+    if(StolenCredits)
+        Amount = Stats->Capacity + StolenCredits;
+
+    if (GetCVar("drpg_ws_use_wads") < 8)
+    {
+        fixed Modifier = 8.0 / GetCVar("drpg_ws_use_wads") * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
+
+        if (Modifier < 1.0)
+            Modifier = 1.0;
+
+        SetInventory("DRPGCredits", (int)(Amount / 2 * Modifier));
+    }
+    else
+    {
+        SetInventory("DRPGCredits", (int)(Amount / 2));
+    }
+}
+
 NamedScript DECORATE void MonsterDeathCheck()
 {
     Delay(1);
@@ -2532,6 +2590,89 @@ NamedScript DECORATE void MonsterDeathCheck()
     }
 
     MonsterDeath();
+}
+
+NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
+{
+    int LuckMult;
+    int CreditsMin;
+    int CreditsMax;
+    int CreditsAmount;
+    int CreditsTable[MAX_PLAYERS];
+    int CreditsUAC;
+
+    // Fair sharing
+    if (GetCVar("drpg_multi_sharecredits"))
+    {
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            LuckMult = 100 + (GetCVar("drpg_levelup_natural") ? Players(i).LuckTotal / 2 : Players(i).LuckTotal);
+            CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
+            CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
+            CreditsTable[i] = (Random(CreditsMin, CreditsMax) * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
+
+            // REK-T50 accessory
+            if (Players(i).Shield.Active && Players(i).Shield.Accessory && Players(i).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
+                CreditsTable[i] *= 2;
+
+            // RAINBOWS Event
+            if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
+                CreditsTable[i] *= 2;
+
+            // UAC Premium
+            if (GetCVar("drpg_uac_premium"))
+            {
+                CreditsUAC = (fixed)Stats->Threat + CreditsTable[i] / 100.0 * (4.0 + (fixed)Players(i).RankLevel * 4.0);
+                GiveActorInventory(Players(i).TID, "DRPGCredits", CreditsUAC);
+            }
+        }
+    }
+    else
+    {
+        LuckMult = 100 + (GetCVar("drpg_levelup_natural") ? Players(Killer).LuckTotal / 2 : Players(Killer).LuckTotal);
+        CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
+        CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
+        CreditsAmount = Random(CreditsMin, CreditsMax);
+
+        // REK-T50 accessory
+        if (Players(Killer).Shield.Active && Players(Killer).Shield.Accessory && Players(Killer).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
+            CreditsAmount *= 2;
+
+        // RAINBOWS Event
+        if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
+            CreditsAmount *= 2;
+
+        // UAC Premium
+        if (GetCVar("drpg_uac_premium"))
+        {
+            CreditsUAC = (fixed)Stats->Threat + CreditsAmount / 100.0 * (4.0 + (fixed)Players(Killer).RankLevel * 4.0);
+            GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsUAC);
+        }
+    }
+
+    //Log("\CfInitial Amount: %d\n\CfLuck Mult: %d\n\CfMin: %d\n\CfMax: %d\n\CfAmount: %d", CheckInventory("DRPGCredits"), LuckMult, CreditsMin, CreditsMax, CreditsAmount);
+    if (GetCVar("drpg_virtual_credits"))
+    {
+        if (GetCVar("drpg_multi_sharecredits"))
+        {
+            for (int i = 0; i < MAX_PLAYERS; i++)
+                if (PlayerInGame(i))
+                    GiveActorInventory(Players(i).TID, "DRPGCredits", CreditsTable[i]);
+        }
+        else
+            GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsAmount);
+    }
+    else
+    {
+        if (GetCVar("drpg_multi_sharecredits"))
+        {
+            for (int i = 0; i < MAX_PLAYERS; i++)
+                if (PlayerInGame(i))
+                    DropMoney(i, 0, CreditsTable[i]);
+        }
+        else
+            DropMoney(Killer, 0, CreditsAmount);
+    }
 }
 
 NamedScript void MonsterDeath()
@@ -2777,85 +2918,7 @@ NamedScript void MonsterDeath()
     // Drop Credits
     if (!(Stats->Flags & MF_NODROPS) && CheckInventory("DRPGCredits") > 0)
     {
-        int LuckMult;
-        int CreditsMin;
-        int CreditsMax;
-        int CreditsAmount;
-        int CreditsTable[MAX_PLAYERS];
-        int CreditsUAC;
-
-        // Fair sharing
-        if (GetCVar("drpg_multi_sharecredits"))
-        {
-            for (int i = 0; i < MAX_PLAYERS; i++)
-            {
-                LuckMult = 100 + (GetCVar("drpg_levelup_natural") ? Players(i).LuckTotal / 2 : Players(i).LuckTotal);
-                CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
-                CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
-                CreditsTable[i] = (Random(CreditsMin, CreditsMax) * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100;
-
-                // REK-T50 accessory
-                if (Players(i).Shield.Active && Players(i).Shield.Accessory && Players(i).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
-                    CreditsTable[i] *= 2;
-
-                // RAINBOWS Event
-                if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
-                    CreditsTable[i] *= 2;
-
-                // UAC Premium
-                if (GetCVar("drpg_uac_premium"))
-                {
-                    CreditsUAC = (fixed)Stats->Threat + CreditsTable[i] / 100.0 * (4.0 + (fixed)Players(i).RankLevel * 4.0);
-                    GiveActorInventory(Players(i).TID, "DRPGCredits", CreditsUAC);
-                }
-            }
-        }
-        else
-        {
-            LuckMult = 100 + (GetCVar("drpg_levelup_natural") ? Players(Killer).LuckTotal / 2 : Players(Killer).LuckTotal);
-            CreditsMin = (CheckInventory("DRPGCredits") * LuckMult) / 1000;
-            CreditsMax = (CheckInventory("DRPGCredits") * LuckMult) / 100;
-            CreditsAmount = Random(CreditsMin, CreditsMax);
-
-            // REK-T50 accessory
-            if (Players(Killer).Shield.Active && Players(Killer).Shield.Accessory && Players(Killer).Shield.Accessory->PassiveEffect == SHIELD_PASS_EPICMEGACASH)
-                CreditsAmount *= 2;
-
-            // RAINBOWS Event
-            if (CurrentLevel->Event == MAPEVENT_BONUS_RAINBOWS)
-                CreditsAmount *= 2;
-
-            // UAC Premium
-            if (GetCVar("drpg_uac_premium"))
-            {
-                CreditsUAC = (fixed)Stats->Threat + CreditsAmount / 100.0 * (4.0 + (fixed)Players(Killer).RankLevel * 4.0);
-                GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsUAC);
-            }
-        }
-
-        // Log("\CfInitial Amount: %d\n\CfLuck Mult: %d\n\CfMin: %d\n\CfMax: %d\n\CfAmount: %d", CheckInventory("DRPGCredits"), LuckMult, CreditsMin, CreditsMax, CreditsAmount);
-        if (GetCVar("drpg_virtual_credits"))
-        {
-            if (GetCVar("drpg_multi_sharecredits"))
-            {
-                for (int i = 0; i < MAX_PLAYERS; i++)
-                    if (PlayerInGame(i))
-                        GiveActorInventory(Players(i).TID, "DRPGCredits", CreditsTable[i]);
-            }
-            else
-                GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsAmount);
-        }
-        else
-        {
-            if (GetCVar("drpg_multi_sharecredits"))
-            {
-                for (int i = 0; i < MAX_PLAYERS; i++)
-                    if (PlayerInGame(i))
-                        DropMoney(i, 0, CreditsTable[i]);
-            }
-            else
-                DropMoney(Killer, 0, CreditsAmount);
-        }
+        DropCredits(Killer, Stats);
     }
 
     // Drop stolen ammo
