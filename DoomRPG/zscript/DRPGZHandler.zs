@@ -183,6 +183,11 @@ class DRPGZEHandler : EventHandler
                 };
 
                 // Kinsie Metaprops - Hell except MetaHeadOnAStick
+                /* 
+                 * turned off because couldn't think of item pool for this
+                 * todo: add something funny and/or cool if Player destroys MetaBigTree or MetaTorchTree with a Chainsaw 
+                 * (drop new item Wood Log? new associated quest? one-time perk/achievement award?)
+                 */
                 /*static const string PropEtc[] =
                 {
                     "MetaBigTree",
@@ -191,7 +196,7 @@ class DRPGZEHandler : EventHandler
                     "MetaEvilEye"
                 };*/
 
-                int propType; // default type - credits only
+                int propType;
 
                 for (int i = 0; i < PropTech.size(); i++) {
                     if(propType) 
@@ -218,14 +223,20 @@ class DRPGZEHandler : EventHandler
                     }
                 }
                 
-                /*for (int i = 0; i < PropEtc.size(); i++)
-                    if(propType) 
-                        break;
-                    if (e.Thing.GetClassName() == PropEtc[i])
-                        propType = 3;*/
+                /*
+                if(!propType) {
+                    for (int i = 0; i < PropEtc.size(); i++) {
+                        if(propType) 
+                            break;
+                        if (e.Thing.GetClassName() == PropEtc[i])
+                            propType = 4;
+                    }
+                }
+                */
 
-                e.Thing.ACS_ScriptCall("PropDeathCheck", propType); 
-                    
+                // drop credits only if couldn't find Actor class in arrays
+
+                e.Thing.ACS_ScriptCall("PropDeathCheck", propType);   
             }   
             else
                 e.Thing.ACS_ScriptCall("MonsterDeathCheck");
