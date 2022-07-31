@@ -2060,6 +2060,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                 int CurrentExtraction;
 
                 // Chances of getting parts
+                fixed ChanceDetails;
                 fixed ChanceChips;
                 fixed ChanceBattery;
                 fixed ChanceTurret;
@@ -2255,6 +2256,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         ChanceModPacks = 0.0;
                         ChanceModule = 0.0;
                         ChanceAug = 0.0;
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
                     }
                     // For Low Extent Extraction
                     if (CurrentExtraction == 1)
@@ -2266,6 +2268,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         ChanceModPacks = 0.0;
                         ChanceModule = 0.0;
                         ChanceAug = 0.0;
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
                     }
                     // For Medium Extent Extraction
                     if (CurrentExtraction == 2)
@@ -2277,6 +2280,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
                         ChanceModule = 0.0;
                         ChanceAug = 0.0;
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
                     }
                     // For High Extent Extraction
                     if (CurrentExtraction == 3)
@@ -2288,6 +2292,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
                         ChanceModule = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
                         ChanceAug = 0.0;
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
                     }
                     // For Very High Extent Extraction
                     if (CurrentExtraction == 4)
@@ -2299,6 +2304,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
                         ChanceModule = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
                         ChanceAug = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
                     }
                     // For Very High+ Extent Extraction
                     if (CurrentExtraction == 5)
@@ -2310,6 +2316,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
                         ChanceModule = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
                         ChanceAug = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
                     }
 
                     // Text
@@ -2407,13 +2414,17 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 // Get Part
                                 while (Attempts > 0 && CurrentCost > 0)
                                 {
+                                    // For Details
                                     if (CurrentCategory == 0)
                                         ActorToSpawn = ItemData[7][Random(6, 8)].Actor;
                                     if (CurrentCategory == 1)
                                         ActorToSpawn = ItemData[7][Random(9, 11)].Actor;
                                     if (CurrentCategory == 2)
                                         ActorToSpawn = ItemData[7][Random(0, 5)].Actor;
+                                    if (RandomFixed(0.0, 100.0) <  ChanceDetails)
+                                        PartReceived = true;
 
+                                    // For Other Chances
                                     if (RandomFixed(0.0, 100.0) <  ChanceChips && !PartReceived)
                                     {
                                         if (CurrentExtraction < 3)
