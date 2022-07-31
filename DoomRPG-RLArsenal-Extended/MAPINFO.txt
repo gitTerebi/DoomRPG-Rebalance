@@ -1,0 +1,14 @@
+gameinfo
+{
+	playerclasses = "DoomRLMarineRPG", 
+					"DoomRLScoutRPG", 
+					"DoomRLTechnicianRPG", 
+					"DoomRLRenegadeRPG", 
+					"DoomRLDemolitionistRPG",
+					"DoomRLCommandoRPG",
+					"DoomRLMechanoidRPG",
+					"DoomRLNomadRPG",
+					"DoomRLNanoManiacRPG",
+					"DoomRLPhaseSistersRPG",
+					"DoomRLSargeRPG"
+}
