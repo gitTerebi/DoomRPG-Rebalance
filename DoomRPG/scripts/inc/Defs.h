@@ -499,6 +499,8 @@ typedef enum
     OMENU_STIMINJECTOR,
     OMENU_OPERATINGCAPSULE,
     OMENU_DISASSEMBLINGDEVICE,
+    OMENU_DISASSEMBLING,
+    OMENU_ASSEMBLING,
     OMENU_MAX
 } EOutpostMenu;
 
@@ -751,7 +753,7 @@ typedef enum
 
 #define AURA_CALCTIME           (((35 * 30) + (35 * Player.EnergyTotal) + (35 * Player.Level * 2)) * (1 + Player.AuraBonus * 0.5))
 #define DRLA_WEAPON_MAX         6
-#define DRLA_ARMOR_MAX          2 + (Player.CapacityTotal / 25)
+#define DRLA_ARMOR_MAX          2 + ((GetCVar("drpg_levelup_natural")) ? (Player.CapacityTotal / 50) : (Player.CapacityTotal / 25))
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX
 #define DRLA_DEVICE_MAX         4 + (Player.CapacityTotal / 50)
 #define DRLA_MODPACKS_MAX       (PlayerClass(PlayerNumber()) == 2 ? 8 : 4)

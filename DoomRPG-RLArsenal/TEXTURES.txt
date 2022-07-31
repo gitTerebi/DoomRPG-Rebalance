@@ -53,3 +53,19 @@ Graphic ARM3BOX, 33, 17
 	Offset -6, -22
 	Patch ARM3A0, 0, 0
 }
+
+Graphic "EXCRE", 62, 33
+{
+	XScale 2.200
+	YScale 2.200
+	Offset -1, -18
+	Graphic "CREXM0", 0, 0
+}
+
+Graphic "UNCRE", 62, 33
+{
+	XScale 2.200
+	YScale 2.200
+	Offset -1, -18
+	Graphic "CRUNN0", 0, 0
+}

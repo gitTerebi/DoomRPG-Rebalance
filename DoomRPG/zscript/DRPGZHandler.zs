@@ -62,15 +62,21 @@ class DRPGZEHandler : EventHandler
         }
 
         // Iterate through all sectors in the current map to find secrets and add crate to the center
-        for (int i = 0; i < level.Sectors.Size(); ++i)
+        for (int i = 0; i < Level.Sectors.Size(); ++i)
         {
             Sector CurrSec = level.Sectors[i];
-            vector3 SpawnPos = (CurrSec.centerspot.x + random(-16, 16), CurrSec.centerspot.y + random(-16, 16), CurrSec.floorplane.ZAtPoint(CurrSec.centerspot));
-            if (CurrSec.IsSecret() && random(1, 100) <= 20)
+            secplane Floor = CurrSec.floorplane;
+            secplane Ceiling = CurrSec.ceilingplane;
+            int ceilingZ = int(Ceiling.ZAtPoint((CurrSec.CenterSpot.x, CurrSec.CenterSpot.y)));
+            int floorZ = int(Floor.ZAtPoint((CurrSec.CenterSpot.x, CurrSec.CenterSpot.y)));
+            int centerHeight = ceilingZ - floorZ;
+            vector3 SpawnPos = (CurrSec.CenterSpot.x + random(-16, 16), CurrSec.CenterSpot.y + random(-16, 16), Floor.ZAtPoint(CurrSec.CenterSpot));
+
+            // Spawn Crate in a secret with a 20% chance, only if secret's sector is not a door (looking at you, Doom 1)
+            if (CurrSec.IsSecret() && centerHeight > 0 && random(1, 100) <= 20)
             {
                 Actor.Spawn("DRPGCrate", SpawnPos);
             }
-
         }
     }
 
@@ -133,7 +139,107 @@ class DRPGZEHandler : EventHandler
 
     override void WorldThingDied(WorldEvent e)
     {
-        if (e.Thing && e.Thing.bIsMonster)
-            e.Thing.ACS_ScriptCall("MonsterDeathCheck");
+        if (e.Thing) 
+        {
+            if(!e.Thing.bIsMonster) 
+            {
+                // Kinsie Metaprops - Tech
+                static const string PropTech[] =
+                {
+                    "MetaTechLamp",
+                    "MetaTechLamp2",
+                    "MetaColumn",
+                    "MetaTechPillar"
+                };
+
+                // Kinsie Metaprops - Gore plus MetaHeadOnAStick
+                static const string PropGore[] =
+                {
+                    "MetaBloodyTwitch",
+                    "MetaDeadStick",
+                    "MetaLiveStick",
+                    "MetaMeat2",
+                    "MetaMeat3",
+                    "MetaMeat4",
+                    "MetaMeat5",
+                    "MetaHangBNoBrain",
+                    "MetaHangNoGuts",
+                    "MetaHangTLookingDown",
+                    "MetaHangTLookingUp",
+                    "MetaHangTNoBrain",
+                    "MetaHangTSkull",
+                    "MetaHeadOnAStick"
+                };
+
+                // DRLA - Barrels
+                static const string PropBarrels[] =
+                {
+                    "RLVanillaExplosiveBarrel",
+                    "RLExplosiveBarrel",
+                    "RLAcidBarrel",
+                    "RLNapalmBarrel",
+                    "RLTechBarrel",
+                    "RLNuclearBarrel"
+                };
+
+                // Kinsie Metaprops - Hell except MetaHeadOnAStick
+                /* 
+                 * turned off because couldn't think of item pool for this
+                 * todo: add something funny and/or cool if Player destroys MetaBigTree or MetaTorchTree with a Chainsaw 
+                 * (drop new item Wood Log? new associated quest? one-time perk/achievement award?)
+                 */
+                /*static const string PropEtc[] =
+                {
+                    "MetaBigTree",
+                    "MetaTorchTree",
+                    "MetaCandelabra",
+                    "MetaEvilEye"
+                };*/
+
+                int propType;
+
+                for (int i = 0; i < PropTech.size(); i++) {
+                    if(propType) 
+                        break;
+                    if (e.Thing.GetClassName() == PropTech[i])
+                        propType = 1;
+                }
+                    
+                if(!propType) {
+                    for (int i = 0; i < PropGore.size(); i++) {
+                        if(propType) 
+                            break;
+                        if (e.Thing.GetClassName() == PropGore[i])
+                            propType = 2;
+                    }
+                }
+
+                if(!propType) {
+                    for (int i = 0; i < PropBarrels.size(); i++) {
+                        if(propType) 
+                            break;
+                        if (e.Thing.GetClassName() == PropBarrels[i])
+                            propType = 3;
+                    }
+                }
+                
+                /*
+                if(!propType) {
+                    for (int i = 0; i < PropEtc.size(); i++) {
+                        if(propType) 
+                            break;
+                        if (e.Thing.GetClassName() == PropEtc[i])
+                            propType = 4;
+                    }
+                }
+                */
+
+                // drop credits only if couldn't find Actor class in arrays
+
+                e.Thing.ACS_ScriptCall("PropDeathCheck", propType);   
+            }   
+            else
+                e.Thing.ACS_ScriptCall("MonsterDeathCheck");
+        }
     }
 }
