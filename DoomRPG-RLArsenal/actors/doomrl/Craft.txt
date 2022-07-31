@@ -1,0 +1,49 @@
+// Generic Craft item base
+Actor DRPGCraftParts : Inventory
+{
+    Inventory.Amount 1
+    Inventory.MaxAmount 1
+    Inventory.InterHubAmount 1000
+    Inventory.Icon CREXM0
+    Inventory.PickupMessage "Got a Generic Craft item."
+    Inventory.PickupSound "items/loot"
+    
+    -COUNTITEM
+	+INVBAR
+}
+
+// Exotic Craft Parts
+Actor DRPGCraftPartsExotic : DRPGCraftParts
+{
+    Scale 0.75
+    
+    Inventory.PickupMessage "Got Craft Parts (Exotic)."
+    Inventory.Icon "EXCRE"
+	
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        CREX AABBCCDDEEFFGGHHIIJJKKLL 1
+		CREX M 40
+        Goto Spawn+1
+    }
+}
+
+// Unique Craft Parts
+Actor DRPGCraftPartsUnique : DRPGCraftParts
+{
+    Scale 0.75
+    
+    Inventory.PickupMessage "Got Craft Parts (Unique)."
+    Inventory.Icon "UNCRE"
+	
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        CRUN AABBCCDDEEFFGGHHIIJJKKLL 1
+		CRUN N 40
+        Goto Spawn+1
+    }
+}

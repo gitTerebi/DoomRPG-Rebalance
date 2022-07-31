@@ -2511,10 +2511,10 @@ NamedScript MapSpecial void DisassemblingDevice()
                 int CurrentItem;
                 int CurrentItemMin;
                 int CurrentItemMax;
+                int CurrentCostMin;
+                int CurrentCostMax;
                 int CurrentCost;
                 int CurrentRank;
-                int CostMin;
-                int CostMax;
 
                 // Current Required Items
                 int CurrentTypeDetails1;
@@ -2523,6 +2523,10 @@ NamedScript MapSpecial void DisassemblingDevice()
                 int CurrentAmountDetails2;
                 int CurrentTypeDetails3;
                 int CurrentAmountDetails3;
+                int CurrentTypeDetails4;
+                int CurrentAmountDetails4;
+                int CurrentTypeDetails5;
+                int CurrentAmountDetails5;
 
                 // So the player's initial interaction is not processed as a menu action
                 Delay(1);
@@ -2577,60 +2581,168 @@ NamedScript MapSpecial void DisassemblingDevice()
                     if (CurrentItem < CurrentItemMin) CurrentItem = CurrentItemMin;
                     if (CurrentItem > CurrentItemMax) CurrentItem = CurrentItemMax;
 
-
                     // Calculate Required Items
                     ItemInfoPtr Item = &ItemData[CategoriesData[CurrentCategory]][CurrentItem];
-                    // Current Cost Item
-                    CurrentCost = Item->Price / 4;
+                    // Cost Item
+                    // Min/Max Cost
+                    CurrentCostMin = ItemData[CategoriesData[CurrentCategory]][CurrentItemMin].Price / 20;
+                    CurrentCostMax = ItemData[CategoriesData[CurrentCategory]][CurrentItemMax].Price / 20;
+                    for (int i = CurrentItemMin; i <= CurrentItemMax; i++)
+                    {
+                        if ((ItemData[CategoriesData[CurrentCategory]][i].Price / 20) < CurrentCostMin)
+                            CurrentCostMin = ItemData[CategoriesData[CurrentCategory]][i].Price / 20;
+                        if ((ItemData[CategoriesData[CurrentCategory]][i].Price / 20) > CurrentCostMax)
+                            CurrentCostMax = ItemData[CategoriesData[CurrentCategory]][i].Price / 20;
+                    }
+                    // Current Cost
+                    CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 3) / 500 * 500;
                     // Rank
                     if (CurrentRare == 0)
-                        CurrentRank = Item->Rank;
+                        CurrentRank = 2 + (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 0, 8));
                     else
-                        CurrentRank = 6 + RoundInt(8.0 / (fixed)(CurrentItemMax - CurrentItemMin) * (fixed)(CurrentItem - CurrentItemMin));
+                        CurrentRank = 7 + (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 0, 8));
                     // Type/Amount Required Details
-                    // Need to reset the Amount before continuing
-                    CurrentAmountDetails1 = 0;
-                    CurrentAmountDetails2 = 0;
-                    CurrentAmountDetails3 = 0;
                     // For Weapons
                     if (CurrentCategory == 0)
                     {
-                        if (CurrentRare >= 0)
+                        // Set Current Type Details
+                        CurrentTypeDetails1 =  6;
+                        CurrentTypeDetails2 =  7;
+                        CurrentTypeDetails3 =  8;
+                        // For Exotic Rare
+                        if (CurrentRare == 0)
                         {
-                            CurrentTypeDetails1 =  6;
-                            CurrentAmountDetails1 = (10 + Item->Price / 500) / 5 * 5;
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 100)) / 5 * 5;
+                            if (CurrentRank >= 5)
+                            {
+                                CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 60)) / 5 * 5;
+                                CurrentTypeDetails4 =  10;
+                                CurrentAmountDetails4 = 1;
+                            }
+                            if (CurrentRank >= 7 )
+                            {
+                                CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 30)) / 5 * 5;
+                            }
+                            // For Nuclear Weapons
+                            if (CurrentItem >= 24)
+                            {
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
                         }
-                        if (CurrentRare > 0 || CurrentRank >= 6)
+                        // For Unique Rare
+                        if (CurrentRare == 1)
                         {
-                            CurrentTypeDetails2 =  7;
-                            CurrentAmountDetails2 = (10 + Item->Price / 1000) / 5 * 5;
-                        }
-                        if (CurrentRare >= 1 || CurrentRank >= 8 )
-                        {
-                            CurrentTypeDetails3 =  8;
-                            CurrentAmountDetails3 = (10 + Item->Price / 1500) / 5 * 5;
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 120)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 80)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 40)) / 5 * 5;
+                            CurrentTypeDetails4 =  11;
+                            CurrentAmountDetails4 = 1;
+                            // For BFG10k
+                            if (CurrentItem == 37)
+                            {
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Lightweaver
+                            if (CurrentItem == 41)
+                            {
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Quantum Tantrum Cannon
+                            if (CurrentItem == 46)
+                            {
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Particle Beam Cannon
+                            if (CurrentItem == 49)
+                            {
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nuclear Onslaught
+                            if (CurrentItem == 59)
+                            {
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
                         }
                     }
-                    // For Armor/Boots
-                    if (CurrentCategory == 1 || CurrentCategory == 2)
+                    // For Armor
+                    if (CurrentCategory == 1)
                     {
-                        if (CurrentRare >= 0)
+                        CurrentTypeDetails1 =  9;
+                        CurrentTypeDetails2 =  10;
+                        CurrentTypeDetails3 =  11;
+                        // For Exotic Rare
+                        if (CurrentRare == 0)
                         {
-                            CurrentTypeDetails1 =  9;
-                            CurrentAmountDetails1 = (10 + Item->Price / 250) / 5 * 5;
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 60)) / 5 * 5;
+                            if (CurrentRank >= 5)
+                            {
+                                CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
+                            }
+                            if (CurrentRank >= 7)
+                            {
+                                CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 20)) / 5 * 5;
+                            }
                         }
-                        if (CurrentRare > 0 || CurrentRank >= 6)
+                        // For Unique Rare
+                        if (CurrentRare == 1)
                         {
-                            CurrentTypeDetails2 =  10;
-                            CurrentAmountDetails2 = (10 + Item->Price / 500) / 5 * 5;
-                        }
-                        if (CurrentRare >= 1 || CurrentRank >= 8 )
-                        {
-                            CurrentTypeDetails3 =  11;
-                            CurrentAmountDetails3 = (10 + Item->Price / 750) / 5 * 5;
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 80)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 40)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
+                            CurrentTypeDetails4 =  11;
+                            CurrentAmountDetails4 = 1;
+                            // For Nuclear Armor
+                            if (CurrentItem == 73)
+                            {
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
                         }
                     }
 
+                    // For Boots
+                    if (CurrentCategory == 2)
+                    {
+                        CurrentTypeDetails1 =  9;
+                        CurrentTypeDetails2 =  10;
+                        CurrentTypeDetails3 =  11;
+                        // For Exotic Rare
+                        if (CurrentRare == 0)
+                        {
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 50)) / 5 * 5;
+                            if (CurrentRank >= 5)
+                            {
+                                CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
+                                CurrentTypeDetails4 =  10;
+                                CurrentAmountDetails4 = 1;
+                            }
+                            if (CurrentRank >= 7)
+                            {
+                                CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 20)) / 5 * 5;
+                            }
+                        }
+                        // For Unique Rare
+                        if (CurrentRare == 1)
+                        {
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 80)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 60)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 40)) / 5 * 5;
+                            CurrentTypeDetails4 =  11;
+                            CurrentAmountDetails4 = 1;
+                            // For Nuclear Boots
+                            if (CurrentItem == 25)
+                            {
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                        }
+                    }
                     // Draw the background
                     if (GetCVar("drpg_menudim"))
                         FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
@@ -2668,7 +2780,7 @@ NamedScript MapSpecial void DisassemblingDevice()
 
                     SetFont("SMALLFONT");
                     HudMessage("Required \Cddetails\C-:");
-                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 32.0, Y + 300.0, 0.05, 0.05);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 32.0, Y + 276.0, 0.05, 0.05);
 
                     // Required Details
                     // For Details #1
@@ -2676,30 +2788,48 @@ NamedScript MapSpecial void DisassemblingDevice()
                     {
                         SetFont("SMALLFONT");
                         HudMessage("%S: %d", ItemData[7][CurrentTypeDetails1].Name, CurrentAmountDetails1);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 32.0, Y + 308.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 32.0, Y + 284.0, 0.05, 0.05);
                     }
                     // For Details #2
                     if (CurrentAmountDetails2 > 0)
                     {
                         SetFont("SMALLFONT");
                         HudMessage("%S: %d", ItemData[7][CurrentTypeDetails2].Name, CurrentAmountDetails2);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 32.0, Y + 316.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 32.0, Y + 292.0, 0.05, 0.05);
                     }
                     // For Details #3
                     if (CurrentAmountDetails3 > 0)
                     {
                         SetFont("SMALLFONT");
                         HudMessage("%S: %d", ItemData[7][CurrentTypeDetails3].Name, CurrentAmountDetails3);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + 324.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + 300.0, 0.05, 0.05);
+                    }
+                    // For Details #4
+                    if (CurrentAmountDetails4 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("Required \Caadditional details\C-:\n%S: %d", ItemData[8][CurrentTypeDetails4].Name, CurrentAmountDetails4);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 32.0, Y + 316.0, 0.05, 0.05);
+
+                        PrintSprite(ItemData[8][CurrentTypeDetails4].Sprite.Name, 0, X + 32.0,  Y + 338.0, 0.05);
+                    }
+                    // For Details #5
+                    if (CurrentAmountDetails5 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("%S: %d", ItemData[4][CurrentTypeDetails5].Name, CurrentAmountDetails4);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + 332.0, 0.05, 0.05);
+
+                        PrintSprite(ItemData[4][CurrentTypeDetails5].Sprite.Name, 0, X + 80.0,  Y + 390.0, 0.05);
                     }
 
                     SetFont("SMALLFONT");
                     HudMessage("Required \Cfcredits\C-:\n%d \CfC\C-", CurrentCost);
-                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 280.0, Y + 300.0, 0.05, 0.05);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 280.0, Y + 276.0, 0.05, 0.05);
 
                     SetFont("SMALLFONT");
                     HudMessage("Required \CkRank\C-:\n%d \Ck(%S)\C-", CurrentRank, LongRanks[CurrentRank]);
-                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 280.0, Y + 322.0, 0.05, 0.05);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 280.0, Y + 298.0, 0.05, 0.05);
 
                     // Input
                     if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
@@ -2709,12 +2839,22 @@ NamedScript MapSpecial void DisassemblingDevice()
                         {
                             CurrentRare++;
                             CurrentItem = 0;
+                            CurrentAmountDetails1 = 0;
+                            CurrentAmountDetails2 = 0;
+                            CurrentAmountDetails3 = 0;
+                            CurrentAmountDetails4 = 0;
+                            CurrentAmountDetails5 = 0;
                             if (CurrentRare > 1) CurrentRare = 0;
                         }
                         else
                         {
                             CurrentCategory++;
                             CurrentItem = 0;
+                            CurrentAmountDetails1 = 0;
+                            CurrentAmountDetails2 = 0;
+                            CurrentAmountDetails3 = 0;
+                            CurrentAmountDetails4 = 0;
+                            CurrentAmountDetails5 = 0;
                             if (CurrentCategory > 2) CurrentCategory = 0;
                         }
 
@@ -2726,12 +2866,22 @@ NamedScript MapSpecial void DisassemblingDevice()
                         {
                             CurrentRare--;
                             CurrentItem = 0;
+                            CurrentAmountDetails1 = 0;
+                            CurrentAmountDetails2 = 0;
+                            CurrentAmountDetails3 = 0;
+                            CurrentAmountDetails4 = 0;
+                            CurrentAmountDetails5 = 0;
                             if (CurrentRare < 0) CurrentRare = 1;
                         }
                         else
                         {
                             CurrentCategory--;
                             CurrentItem = 0;
+                            CurrentAmountDetails1 = 0;
+                            CurrentAmountDetails2 = 0;
+                            CurrentAmountDetails3 = 0;
+                            CurrentAmountDetails4 = 0;
+                            CurrentAmountDetails5 = 0;
                             if (CurrentCategory < 0) CurrentCategory = 2;
                         }
                     }
@@ -2739,20 +2889,30 @@ NamedScript MapSpecial void DisassemblingDevice()
                     {
                         ActivatorSound("menu/move", 127);
                         CurrentItem--;
+                        CurrentAmountDetails1 = 0;
+                        CurrentAmountDetails2 = 0;
+                        CurrentAmountDetails3 = 0;
+                        CurrentAmountDetails4 = 0;
+                        CurrentAmountDetails5 = 0;
                         if (CurrentItem < CurrentItemMin) CurrentItem = CurrentItemMax;
                     }
                     if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
                     {
                         ActivatorSound("menu/move", 127);
                         CurrentItem++;
+                        CurrentAmountDetails1 = 0;
+                        CurrentAmountDetails2 = 0;
+                        CurrentAmountDetails3 = 0;
+                        CurrentAmountDetails4 = 0;
+                        CurrentAmountDetails5 = 0;
                         if (CurrentItem > CurrentItemMax) CurrentItem = CurrentItemMin;
                     }
                     if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
                     {
                         if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
                         {
-                            if (Player.RankLevel >= CurrentRank && CheckInventory("DRPGCredits") >= CurrentCost && CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) >= CurrentAmountDetails1
-                                    &&  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) >= CurrentAmountDetails2 && CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) >= CurrentAmountDetails3)
+                            if (Player.RankLevel >= CurrentRank && CheckInventory("DRPGCredits") >= CurrentCost && CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) >= CurrentAmountDetails1 &&  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) >= CurrentAmountDetails2
+                                    && CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) >= CurrentAmountDetails3 && CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) >= CurrentAmountDetails4 && CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) >= CurrentAmountDetails5)
                             {
                                 Player.OutpostMenu = 0;
 
@@ -2761,6 +2921,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 TakeInventory(ItemData[7][CurrentTypeDetails1].Actor, CurrentAmountDetails1);
                                 TakeInventory(ItemData[7][CurrentTypeDetails2].Actor, CurrentAmountDetails2);
                                 TakeInventory(ItemData[7][CurrentTypeDetails3].Actor, CurrentAmountDetails3);
+                                TakeInventory(ItemData[8][CurrentTypeDetails4].Actor, CurrentAmountDetails4);
+                                TakeInventory(ItemData[4][CurrentTypeDetails5].Actor, CurrentAmountDetails5);
 
                                 // The effect of sleep immersion
                                 FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
@@ -2788,6 +2950,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 else if (CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) < CurrentAmountDetails1 ||  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) < CurrentAmountDetails2
                                          || CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) < CurrentAmountDetails3)
                                     PrintError("Not enough details to assembly this item");
+                                else if (CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) < CurrentAmountDetails4 || CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) < CurrentAmountDetails5)
+                                    PrintError("Not enough additional details to assembly this item");
                                 ActivatorSound("menu/error", 127);
                             }
                         }

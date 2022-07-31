@@ -2858,10 +2858,12 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGShieldSpawner", 48);
             DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
             DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
-            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 8);
+            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 48);
 
             if (CompatMode == COMPAT_DRLA)
             {
+                DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 96);
+                DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 64);
                 DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32);
                 DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 16);
                 DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 8);
