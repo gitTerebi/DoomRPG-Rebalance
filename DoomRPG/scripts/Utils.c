@@ -342,6 +342,10 @@ NamedScript DECORATE int CheckCapacity()
             "Infrared2",
             "Berserk2",
 
+            // Craft Parts
+            "DRPGCraftPartsExotic",
+            "DRPGCraftPartsUnique",
+
             // End of List
             NULL
         };

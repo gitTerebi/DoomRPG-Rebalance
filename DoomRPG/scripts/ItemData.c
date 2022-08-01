@@ -345,8 +345,8 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             30000, 4, 8, "AUGCA0", 12, 24);
     ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     30000, 4, 8, "AUGUA0", 12, 24);
     ITEMDATA_DEF("DRPGAugSlotUpgrade",      "Augmentation Slot Upgrade",         90000, 7, 8, "AUGUB0", 16, 25);
-    ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                       500, 1, 1, "BATTA0",  5, 13);
-    ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      1250, 4, 3, "BATTB0", 14, 21);
+    ITEMDATA_DEF("DRPGBatterySmall",        "Small \CkBattery\C-",                 500, 1, 1, "BATTA0",  5, 13);
+    ITEMDATA_DEF("DRPGBatteryLarge",        "Large \CkBattery\C-",                1250, 4, 3, "BATTB0", 14, 21);
 
     ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                         500, 1, 1, "TPRTA0", 29, 21);
     ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                 2500, 4, 3, "TCRTA0", 29, 26);
@@ -889,10 +889,10 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGWings",                   "Wings",                               5000,  2,  5, "WINGA0", 13, 36);
         ITEMDATA_DEF("Megasphere2",                 "Megasphere",                          5000,  4,  7, "MEGAA0", 12, 32);
         ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",             50000, -1,  8, "CRYSA0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalBullet",   "Bullet Immunity Crystal",            50000, -1,  8, "CRYSB0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalBullet",   "\CcBullet\C- Immunity Crystal",      50000, -1,  8, "CRYSB0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalFire",     "\CaFire\C- Immunity Crystal",        50000, -1,  8, "CRYSC0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalPlasma",   "\CnPlasma\C- Immunity Crystal",      50000, -1,  8, "CRYSD0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalLightning","\CnLightning\C- Immunity Crystal",   50000, -1,  8, "CRYSE0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalLightning","\CfLightning\C- Immunity Crystal",   50000, -1,  8, "CRYSE0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "\CdToxic\C- Immunity Crystal",       50000, -1,  8, "CRYSF0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalRadiation","\CqRadiation\C- Immunity Crystal",   50000, -1,  8, "CRYSG0", 16, 48);
         ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                        2000,  4,  2, "MMAPA0", 14, 23);
