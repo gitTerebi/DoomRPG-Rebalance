@@ -1,0 +1,449 @@
+class RLNomadStartingLoadout : CustomInventory
+{
+	states
+	{
+		Pickup:
+		TNT1 A 0 A_GiveInventory("RLNomadPassives");
+		stop;
+	}
+}
+
+class RLNomadPassives : Inventory
+{
+	Default
+	{
+		inventory.maxamount 1;
+		+INVENTORY.UNDROPPABLE;
+		+INVENTORY.UNTOSSABLE;
+		+INVENTORY.UNCLEARABLE;
+	}
+}
+
+Class RLNomadReroll
+{
+	String item;
+	Int quality;
+}
+
+Class RLNomadEvents : EventHandler
+{
+	int danger;
+	int tics;
+
+	override void WorldTick ()
+	{
+		tics++;
+		
+		// if not working, probably due to array size
+		if(tics == 5 && danger > 0)
+		{
+			//Console.Printf("" .. danger);
+			NomadPassive();
+		}
+	}
+
+	override void WorldLoaded (WorldEvent e)
+	{
+		danger = 0;
+		
+		for(int i = 0; i<Players.Size(); i++)
+		{
+			if(Players[i].mo && Players[i].mo.GetClassName() == "DoomRLNomadRPG")
+			{
+				Players[i].mo.ACS_NamedExecuteAlways("DRLA_ClearBackpack");
+				//let ammo = players[i].mo.FindInventory("Shell");
+				name invName = 'RLDangerLevel';
+				
+				if(Players[i].mo.CountInv(invName)>0)
+				{
+					danger = Max(danger, Players[i].mo.CountInv(invName));
+				}
+				else
+				{
+					invName = 'RLUniqueBossLevel';
+					danger = Max(danger, Players[i].mo.CountInv(invName));
+				}
+
+				Players[i].mo.PickWeapon(1, false);
+			}
+		}
+	}
+	
+	Array<RLNomadReroll> ReplaceRoll;
+	
+	void NomadPassive()
+	{
+		Array<Actor> MapInv;
+		
+		ThinkerIterator InvIterator = ThinkerIterator.Create("Actor");
+		Actor inv;
+			
+		while(inv = Actor(InvIterator.Next()))
+		{
+			Inventory io = Inventory(inv);
+			
+			if(io && io.owner)
+			{
+				continue;
+			}
+			
+			MapInv.Push(inv);
+		}
+		
+		int rerolls = danger/2;
+		
+		for(int i = 0; i<rerolls; i++)
+		{
+			for(int i = 0; i<MapInv.Size(); i++)
+			{
+				bool dontremove = false;
+				
+				ReplaceRoll.Clear();
+				
+				if(!MapInv[i])
+				{
+					continue;
+				}
+				
+				if(IsBackPack(MapInv[i]))
+				{
+					AddActorChance("RLBackpack", 800, 0);
+				}
+				
+				if(IsBigAmmo(MapInv[i]))
+				{
+					AddActorChance("", 16, 0);
+					AddActorChance("RLModPackSpawner", 1, 0);
+					dontremove = true;
+				}
+				
+				if(IsChainsaw(MapInv[i]))
+				{
+					AddActorChance("", 1400, 0);
+					AddActorChance("RLExoticChainsawSpawner", 1, 0);
+				}
+				
+				if(IsShotgun(MapInv[i]))
+				{
+					AddActorChance("RLShotgunPickup", 140, 0);
+					AddActorChance("RLCombatShotgunPickup", 40, 1);
+					AddActorChance("RLAssaultShotgunPickup", 10, 2);
+					AddActorChance("RLPlasmaShotgunPickup", 10, 2);
+					AddActorChance("RLUniqueWeaponSpawner", 1, 3);
+				}
+				
+				if(IsDoubleShotgun(MapInv[i]))
+				{
+					AddActorChance("RLDoubleShotgunPickup", 70, 0);
+					AddActorChance("RLSuperShotgunPickup", 10, 1);
+					AddActorChance("RLUniqueWeaponSpawner", 1, 3);
+				}
+				
+				if(IsChaingun(MapInv[i]))
+				{
+					AddActorChance("RLChaingunPickup", 800, 0);
+					AddActorChance("RLBattleRiflePickup", 650, 1);
+					AddActorChance("RLMinigunPickup", 45, 2);
+					AddActorChance("RLCombatPistolPickup", 80, 2);
+					AddActorChance("RLMarksmanPistolPickup", 75, 2);
+					AddActorChance("RLHandcannonPickup", 60, 2);
+					AddActorChance("RLUziPickup", 52, 2);
+					AddActorChance("RLSuperiorWeaponSpawner", 15, 3);
+					AddActorChance("RLUniqueWeaponSpawner", 10, 4);
+				}
+				
+				if(IsRocketLauncher(MapInv[i]))
+				{
+					AddActorChance("RLRocketLauncherPickup", 120, 0);
+					AddActorChance("RLNapalmLauncherPickup", 80, 1);
+					AddActorChance("RLMissileLauncherPickup", 100, 1);
+					AddActorChance("RLSuperiorWeaponSpawner", 20, 2);
+					AddActorChance("RLUniqueWeaponSpawner", 10, 3);
+				}
+				
+				if(IsPlasmaRifle(MapInv[i]))
+				{
+					AddActorChance("RLPlasmaRiflePickup", 70, 0);
+					AddActorChance("RLNuclearPlasmaPistolPickup", 20, 1);
+					AddActorChance("RLNuclearPlasmaRiflePickup", 20, 1);
+					AddActorChance("RLBlasterPickup", 50, 2);
+					AddActorChance("RLLaserRiflePickup", 40, 2);
+					AddActorChance("RLTristarBlasterPickup", 30, 2);
+					AddActorChance("RLCombatTranslocatorPickup", 30, 2);
+					AddActorChance("RLSuperiorWeaponSpawner", 4, 3);
+					AddActorChance("RLUniqueWeaponSpawner", 1, 4);
+				}
+				
+				if(IsBFG9000(MapInv[i]))
+				{
+					AddActorChance("RLBFG9000Pickup", 40, 0);
+					AddActorChance("RLNuclearBFG9000Pickup", 30, 1);
+					AddActorChance("RLUniqueWeaponSpawner", 1, 2);
+					AddActorChance("RLDemonicWeaponSpawner", 1, 2);
+				}
+				
+				if(IsBoots(MapInv[i]))
+				{
+					AddActorChance("RLSteelBootsPickup", 80, 0);
+					AddActorChance("RLProtectiveBootsPickup", 60, 0);
+					AddActorChance("RLPlasteelBootsPickup", 60, 0);
+					AddActorChance("RLGothicBootsPickup", 20, 1);
+					AddActorChance("RLPhaseshiftBootsPickup", 40, 1);
+					AddActorChance("RLAcidProofBootsPickup", 40, 1);
+					AddActorChance("RLExoticBootsSpawner", 20, 2);
+					AddActorChance("RLAssembledBootsSpawner", 20, 3);
+					AddActorChance("RLUniqueBootsSpawner", 1, 4);
+				}
+				
+				if(IsArmor(MapInv[i]))
+				{
+					AddActorChance("RLGreenArmorPickup", 80, 0);
+					AddActorChance("RLBlueArmorPickup", 80, 1);
+					AddActorChance("RLRedArmorPickup", 80, 2);
+					AddActorChance("RLExoticArmorSpawner", 60, 3);
+					AddActorChance("RLAssembledArmorSpawner", 20, 3);
+					AddActorChance("RLUniqueArmorSpawner", 10, 4);
+					AddActorChance("RLLegendaryArmorSpawner", 1, 4);
+				}
+				
+				if(ReplaceRoll.Size()>0)
+				{
+					RLNomadReroll ritem = ReplaceRoll[random(0, ReplaceRoll.Size()-1)];
+					
+					if(ritem.item == MapInv[i].GetClassName() || ritem.item == "")
+					{
+						continue;
+					}
+					
+					bool done = false;
+					
+					for(int r = 0; r < ReplaceRoll.Size(); r++)
+					{
+						if(MapInv[i].GetClassName() == ReplaceRoll[r].item && ritem.quality < ReplaceRoll[r].quality)
+						{
+							//Console.Printf(ritem.item .. " quality is less than " .. MapInv[i].GetClassName());
+							done = true;
+						}
+					}
+					
+					if(done)
+					{
+						continue;
+					}
+					
+					Actor newinv = Actor.Spawn(ritem.item, MapInv[i].pos);
+					if(!dontremove)
+					{
+					MapInv[i].Destroy();
+					MapInv[i] = newinv;
+					}
+				}
+			}
+		}
+	}
+	
+	void AddActorChance(string invname, int chance, int quality)
+	{
+		for(int i = 0; i<chance; i++)
+		{
+			RLNomadReroll rr = new ("RLNomadReroll");
+			rr.item = invname;
+			rr.quality = quality;
+			ReplaceRoll.Push(rr);
+		}
+	}
+	
+	bool IsBigAmmo(Actor a)
+	{
+		String invn = a.GetClassName();
+		//Console.Printf(invn);
+		if(invn == "RLClipBox"){return true;}
+		if(invn == "RLShellBox"){return true;}
+		if(invn == "RLRocketBox"){return true;}
+		if(invn == "RLCellPack"){return true;}
+		
+		return false;
+	}
+	
+	bool IsBackPack(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLBackpack"){return true;}
+		return false;
+	}
+	
+	bool IsChainsaw(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLChainsawPickup"){return true;}
+		return false;
+	}
+	
+	bool IsShotgun(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLShotgunPickup"){return true;}
+		if(invn == "RLCombatShotgunPickup"){return true;}
+		if(invn == "RLAssaultShotgunPickup"){return true;}
+		if(invn == "RLPlasmaShotgunPickup"){return true;}
+		return false;
+	}
+	
+	bool IsDoubleShotgun(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLDoubleShotgunPickup"){return true;}
+		if(invn == "RLSuperShotgunPickup"){return true;}
+		return false;
+	}
+	
+	bool IsChaingun(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLChaingunPickup"){return true;}
+		if(invn == "RLBattleRiflePickup"){return true;}
+		if(invn == "RLCombatPistolPickup"){return true;}
+		if(invn == "RLMarksmanPistolPickup"){return true;}
+		if(invn == "RLHandcannonPickup"){return true;}
+		if(invn == "RLUziPickup"){return true;}
+		return false;
+	}
+
+	bool IsRocketLauncher(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLRocketLauncherPickup"){return true;}
+		if(invn == "RLNapalmLauncherPickup"){return true;}
+		return false;
+	}
+	
+	bool IsPlasmaRifle(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLPlasmaRiflePickup"){return true;}
+		if(invn == "RLNuclearPlasmaPistolPickup"){return true;}
+		if(invn == "RLNuclearPlasmaRiflePickup"){return true;}
+		if(invn == "RLBlasterPickup"){return true;}
+		if(invn == "RLLaserRiflePickup"){return true;}
+		if(invn == "RLTristarBlasterPickup"){return true;}
+		if(invn == "RLCombatTranslocatorPickup"){return true;}
+		return false;
+	}
+	
+	bool IsBFG9000(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLBFG9000Pickup"){return true;}
+		if(invn == "RLNuclearBFG9000Pickup"){return true;}
+		return false;
+	}
+	
+	bool IsArmor(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLGreenArmorPickup"){return true;}
+		if(invn == "RLBlueArmorPickup"){return true;}
+		if(invn == "RLRedArmorPickup"){return true;}		
+		return false;
+	}
+	
+	bool IsBoots(Actor a)
+	{
+		String invn = a.GetClassName();
+		if(invn == "RLSteelBootsPickup"){return true;}
+		if(invn == "RLProtectiveBootsPickup"){return true;}
+		if(invn == "RLPlasteelBootsPickup"){return true;}	
+		return false;
+	}	
+	
+	override void WorldUnloaded (WorldEvent e) 
+	{
+		//mapsbeat++;
+		
+		ThinkerIterator InvIterator = ThinkerIterator.Create("Inventory");
+		
+		Inventory inv;
+		
+		while(inv = Inventory(InvIterator.Next()))
+		{
+			if(!inv.owner)
+			{
+				continue;
+			}
+			
+			if(inv.owner.GetClassName() == "DoomRLNomadRPG")
+			{
+				if(inv.GetClassName() == "RLDangerLevel"){continue;}
+				if(inv.GetClassName() == "RLUniqueBossLevel"){continue;}
+				if(inv.GetClassName() == "RLDemonArtifactItem"){continue;}
+				
+				if(inv.GetClassName() == "DRPGModule"){continue;}
+				if(inv.GetClassName() == "DRPGCredits"){continue;}
+				if(inv.GetClassName() == "DRPGTurretPart"){continue;}
+
+				if(inv.GetClassName() == "DRPGAugCanister"){continue;}
+				if(inv.GetClassName() == "DRPGAugUpgradeCanister"){continue;}
+
+				if(inv.GetClassName() == "DRPGChipGold"){continue;}
+				if(inv.GetClassName() == "DRPGChipPlatinum"){continue;}
+
+				if(inv is "DRPGStimSmall"){continue;} 								// all stims
+				if(inv.GetClassName() == "DRPGVialStrength"){continue;}
+				if(inv.GetClassName() == "DRPGVialDefense"){continue;}
+				if(inv.GetClassName() == "DRPGVialVitality"){continue;}
+				if(inv.GetClassName() == "DRPGVialEnergy"){continue;}
+				if(inv.GetClassName() == "DRPGVialRegeneration"){continue;}
+				if(inv.GetClassName() == "DRPGVialAgility"){continue;}
+				if(inv.GetClassName() == "DRPGVialCapacity"){continue;}
+				if(inv.GetClassName() == "DRPGVialLuck"){continue;}
+				if(inv.GetClassName() == "DRPGVialPurifier"){continue;}
+				if(inv.GetClassName() == "DRPGVialPotency"){continue;}
+				if(inv.GetClassName() == "DRPGVialIndestructible"){continue;}
+				if(inv.GetClassName() == "DRPGVialShadow"){continue;}
+				if(inv.GetClassName() == "DRPGVialInfinity"){continue;}
+				if(inv.GetClassName() == "DRPGVialChrono"){continue;}
+				if(inv.GetClassName() == "DRPGVialAdrenaline"){continue;}
+				if(inv.GetClassName() == "DRPGVialGravity"){continue;}
+				if(inv.GetClassName() == "DRPGVialVampire"){continue;}
+				if(inv.GetClassName() == "DRPGVialRage"){continue;}
+				if(inv.GetClassName() == "DRPGVialMagnetic"){continue;}
+
+				if(inv.GetClassName() == "DRPGLife"){continue;}						// additional lives / 1up
+				
+				if(inv is "DRPGLoot"){continue;} 									// all quest loot
+				if(inv is "DRPGShieldPart"){continue;} 								// all shield parts
+				if(inv is "DRPGCraftParts"){continue;} 								// crafting parts
+				
+				inv.owner.TakeInventory(inv.GetClassName(), inv.maxamount);
+			}
+		}
+		
+		for(int i = 0; i<Players.Size(); i++)
+		{
+			if(!Players[i].mo || Players[i].mo.GetClassName()!="DoomRLNomadRPG")
+			{
+			continue;
+			}
+
+			Actor a = Players[i].mo;
+			
+			DropItem di = a.default.GetDropItems();
+			
+			while (di != null)
+			{
+				Class<Actor> w;			
+				a.GiveInventory(di.Name, di.amount);
+				
+				w = di.Name;
+				if(w is "Weapon")
+				{
+					a.A_SelectWeapon(di.Name);
+				}
+				di = di.Next;
+			}
+			
+			a.health = a.default.health;
+			Players[i].health = a.default.health;
+		}
+	}	
+}
