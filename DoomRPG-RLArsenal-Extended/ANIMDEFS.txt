@@ -1,0 +1,38 @@
+// --------------------------------------------------
+// PLAYERS
+// 
+
+// Mechanoid
+texture 1337A1
+	pic 1337A1 tics 6
+	pic 1337B1 tics 6
+	pic 1337C1 tics 6
+	pic 1337D1 tics 6
+
+// Nomad
+texture ZHRTA1
+	pic ZHRTA1 tics 6
+	pic ZHRTB1 tics 6
+	pic ZHRTC1 tics 6
+	pic ZHRTD1 tics 6
+
+// NanoManiac
+texture DKCPA1
+	pic DKCPA1 tics 6
+	pic DKCPB1 tics 6
+	pic DKCPC1 tics 6
+	pic DKCPD1 tics 6
+
+// PhaseSisters
+texture REVYA1
+	pic REVYA1 tics 6
+	pic REVYB1 tics 6
+	pic REVYC1 tics 6
+	pic REVYD1 tics 6
+
+// Sarge
+texture SUT1A1
+	pic SUT1A1 tics 6
+	pic SUT1B1 tics 6
+	pic SUT1C1 tics 6
+	pic SUT1D1 tics 6
