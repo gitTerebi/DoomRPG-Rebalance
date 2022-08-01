@@ -3150,7 +3150,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Quad Shotgun
                             if (CurrentItem == 40)
                             {
-                                CurrentIndexBasis = 14;
+                                CurrentIndexBasis = 91;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
@@ -3322,14 +3322,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                         if (CurrentRare == 0)
                         {
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 60)) / 5 * 5;
-                            if (CurrentRank >= 5)
-                            {
-                                CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
-                            }
-                            if (CurrentRank >= 7)
-                            {
-                                CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 15)) / 5 * 5;
-                            }
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 15)) / 5 * 5;
                         }
                         // For Unique Rare
                         if (CurrentRare == 1)
@@ -3508,18 +3502,18 @@ NamedScript MapSpecial void DisassemblingDevice()
 
                     SetFont("SMALLFONT");
                     HudMessage("Required \Cfcredits\C-:\n%d \CfC\C-", CurrentCost);
-                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 280.0, Y + 268.0, 0.05, 0.05);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 272.0, Y + 268.0, 0.05, 0.05);
 
                     SetFont("SMALLFONT");
                     HudMessage("Required \CkRank\C-:\n%d \Ck(%S)\C-", CurrentRank, LongRanks[CurrentRank]);
-                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 280.0, Y + 290.0, 0.05, 0.05);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 272.0, Y + 290.0, 0.05, 0.05);
 
                     // Required basic Item
                     if (CurrentIndexBasis >= 0)
                     {
                         SetFont("SMALLFONT");
-                        HudMessage("Required \Cabasic item\C-:\n%S", ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Name);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 15, "White", X + 280.0, Y + 314.0, 0.05, 0.05);
+                        HudMessage("Required \Cabasic item\C-:\n%S\n%S", StrLeft(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Name, 26), StrMid(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Name, 26, 26));
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 15, "White", X + 272.0, Y + 314.0, 0.05, 0.05);
 
                         PrintSprite(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Sprite.Name, 0, X + 336.0,  Y + 372.0, 0.05);
                     }
