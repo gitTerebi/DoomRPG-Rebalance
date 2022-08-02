@@ -117,9 +117,17 @@ class DRPGZEHandler : EventHandler
             {
                 // CORRUPTED PLAYERS
                 "RLCorruptedMarine1",
+                "RLCorruptedScout1",
                 "RLCorruptedTechnician1",
                 "RLCorruptedRenegade1",
-                "RLCorruptedDemolitionist1"
+                "RLCorruptedDemolitionist1",
+
+                // DRLAX (Roguelike Arsenal Extended) classes
+                "RLCorruptedMechanoid1",
+                "RLCorruptedPhaseSisters1",
+                "RLCorruptedNomad1",
+                "RLCorruptedSarge1",
+                "RLCorruptedNanoManiac1"
             };
             static const string RLMBosses[] =
             {
