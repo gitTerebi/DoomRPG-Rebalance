@@ -2507,9 +2507,18 @@ NamedScript MapSpecial void DisassemblingDevice()
                                         {
                                             if (Random(0,5) <= 0 && !PartReceived)
                                             {
-                                                ActorToSpawn = ItemData[7][8].Actor;
-                                                AmountFuelCapsule++;
-                                                PartReceived = true;
+                                                if (Random(0,1) <= 0)
+                                                {
+                                                    ActorToSpawn = ItemData[7][8].Actor;
+                                                    AmountFuelCapsule++;
+                                                    PartReceived = true;
+                                                }
+                                                else
+                                                {
+                                                    ActorToSpawn = ItemData[7][11].Actor;
+                                                    AmountExperimentalParts++;
+                                                    PartReceived = true;
+                                                }
                                             }
                                             else if (Random(0,2) <= 0 && !PartReceived)
                                             {
@@ -2528,9 +2537,18 @@ NamedScript MapSpecial void DisassemblingDevice()
                                         {
                                             if (Random(0,5) <= 0 && !PartReceived)
                                             {
-                                                ActorToSpawn = ItemData[7][11].Actor;
-                                                AmountExperimentalParts++;
-                                                PartReceived = true;
+                                                if (Random(0,1) <= 0)
+                                                {
+                                                    ActorToSpawn = ItemData[7][8].Actor;
+                                                    AmountFuelCapsule++;
+                                                    PartReceived = true;
+                                                }
+                                                else
+                                                {
+                                                    ActorToSpawn = ItemData[7][11].Actor;
+                                                    AmountExperimentalParts++;
+                                                    PartReceived = true;
+                                                }
                                             }
                                             else if (Random(0,2) <= 0 && !PartReceived)
                                             {
@@ -2858,6 +2876,9 @@ NamedScript MapSpecial void DisassemblingDevice()
                 ActivatorSound("menu/move", 127);
                 Player.OutpostMenu = OMENU_ASSEMBLING;
 
+                // Additional coordinates
+                fixed X1, Y1, Y2;
+
                 // Categories Data
                 int CurrentCategory;
                 int CategoriesData[3] = {0, 3, 9};
@@ -2885,8 +2906,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                 int CurrentCost;
                 int CurrentRank;
 
-                // Current Required Basis
-                int CurrentIndexBasis;
+                // Current Required Basiс Item
+                int CurrentIndexBasic;
 
                 // Current Required Items
                 int CurrentTypeDetails1;
@@ -2908,6 +2929,11 @@ NamedScript MapSpecial void DisassemblingDevice()
                 while (Player.OutpostMenu == OMENU_ASSEMBLING)
                 {
                     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+                    // Reset additional coordinates
+                    X1 = 0.0;
+                    Y1 = 0.0;
+                    Y2 = 0.0;
 
                     // Get Min/Max Item Index
                     // For Weapon
@@ -2968,134 +2994,160 @@ NamedScript MapSpecial void DisassemblingDevice()
                         if ((ItemData[CategoriesData[CurrentCategory]][i].Price / 20) > CurrentCostMax)
                             CurrentCostMax = ItemData[CategoriesData[CurrentCategory]][i].Price / 20;
                     }
-                    // Current Cost
+                    // Calculate Global Current Cost
                     CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 3) / 250 * 250;
                     // Rank
                     if (CurrentRare == 0)
-                        CurrentRank = 2 + (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 0, 8));
+                        CurrentRank = ItemData[CategoriesData[CurrentCategory]][CurrentItem].Rank - 2;
                     else
                         CurrentRank = 6 + (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 0, 8));
                     // Type/Amount Required Details
                     // For Weapons
                     if (CurrentCategory == 0)
                     {
-                        // Set Current Type Details
+                        // Set Default Current Type Details
                         CurrentTypeDetails1 =  6;
                         CurrentTypeDetails2 =  7;
-                        CurrentTypeDetails3 =  8;
+                        CurrentTypeDetails3 =  9;
+
+                        // Set Global Required
                         // For Exotic Rare
                         if (CurrentRare == 0)
                         {
+                            // Calculate Amount Details
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 100)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 50)) / 5 * 5;
+
+                            // Set Default Current Craft Part
                             if (CurrentRank >= 5)
                             {
-                                CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 50)) / 5 * 5;
                                 CurrentTypeDetails4 =  10;
                                 CurrentAmountDetails4 = 1;
                             }
-                            if (CurrentRank >= 7 )
+                            if (CurrentRank >= 6 )
                             {
-                                CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 25)) / 5 * 5;
+                                CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 30)) / 5 * 5;
                             }
+
+                            // Set Individual Required
                             // For Blaster
                             if (CurrentItem == 10)
                             {
-                                CurrentIndexBasis = 1;
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails6 =  29;
                                 CurrentAmountDetails6 = 2;
                             }
                             // For Combat Pistol
                             if (CurrentItem == 11)
                             {
-                                CurrentIndexBasis = 1;
+                                CurrentIndexBasic = 1;
                             }
                             // For Handcannon
                             if (CurrentItem == 12)
                             {
-                                CurrentIndexBasis = 11;
+                                CurrentIndexBasic = 11;
                             }
                             // For Marksman Pistol
                             if (CurrentItem == 13)
                             {
-                                CurrentIndexBasis = 12;
+                                CurrentIndexBasic = 12;
                             }
                             // For Super Shotgun
                             if (CurrentItem == 14)
                             {
-                                CurrentIndexBasis = 4;
+                                CurrentIndexBasic = 4;
                             }
                             // For Assault Shotgun
                             if (CurrentItem == 15)
                             {
-                                CurrentIndexBasis = 3;
+                                CurrentIndexBasic = 3;
                             }
                             // For Uzi
                             if (CurrentItem == 16)
                             {
-                                CurrentIndexBasis = 11;
+                                CurrentIndexBasic = 11;
                             }
                             // For Minigun
                             if (CurrentItem == 17)
                             {
-                                CurrentIndexBasis = 5;
+                                CurrentIndexBasic = 5;
+                                CurrentAmountDetails1 = 60;
+                                CurrentAmountDetails2 = 40;
+                                CurrentAmountDetails3 = 20;
                             }
                             // For Missile Launcher
                             if (CurrentItem == 18)
                             {
-                                CurrentIndexBasis = 7;
+                                CurrentIndexBasic = 7;
+                                CurrentTypeDetails2 =  8;
+                                CurrentAmountDetails2 = 20;
                             }
                             // For Napalm Launcher
                             if (CurrentItem == 19)
                             {
-                                CurrentIndexBasis = 7;
+                                CurrentIndexBasic = 7;
                                 CurrentTypeDetails2 =  8;
+                                CurrentAmountDetails2 = 30;
                             }
                             // For Laser Rifle
                             if (CurrentItem == 20)
                             {
-                                CurrentIndexBasis = 10;
+                                CurrentIndexBasic = 10;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 1;
+                                CurrentAmountDetails6 = 2;
                             }
                             // For Plasma Shotgun
                             if (CurrentItem == 21)
                             {
-                                CurrentIndexBasis = 8;
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails6 =  29;
                                 CurrentAmountDetails6 = 10;
                             }
                             // For Tristar Blaster
                             if (CurrentItem == 22)
                             {
-                                CurrentIndexBasis = 9;
+                                CurrentIndexBasic = 9;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 1;
+                                CurrentAmountDetails6 = 2;
                             }
                             // For Combat Translocator
                             if (CurrentItem == 23)
                             {
-                                CurrentIndexBasis = 8;
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 1;
                             }
                             // For Nuclear Plasma Pistol
                             if (CurrentItem == 24)
                             {
-                                CurrentIndexBasis = 1;
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  16;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Nuclear Plasma Rifle
                             if (CurrentItem == 25)
                             {
-                                CurrentIndexBasis = 8;
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  16;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Nuclear BFG9000
                             if (CurrentItem == 26)
                             {
-                                CurrentIndexBasis = 9;
+                                CurrentIndexBasic = 9;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  16;
                                 CurrentAmountDetails5 = 1;
                             }
@@ -3103,32 +3155,41 @@ NamedScript MapSpecial void DisassemblingDevice()
                         // For Unique Rare
                         if (CurrentRare == 1)
                         {
-                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 120)) / 5 * 5;
-                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 60)) / 5 * 5;
-                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
+                            // Set Default Current Type Details
                             CurrentTypeDetails4 =  11;
                             CurrentAmountDetails4 = 1;
+
+                            // Calculate Amount Details
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 120)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 60)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 40)) / 5 * 5;
+
+                            // Set Individual Required
                             // For Jackhammer
                             if (CurrentItem == 34)
                             {
-                                CurrentIndexBasis = 15;
+                                CurrentIndexBasic = 15;
                             }
                             // For Railgun
                             if (CurrentItem == 35)
                             {
-                                CurrentIndexBasis = 8;
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 1;
                             }
                             // For Mysterious Magnum
                             if (CurrentItem == 36)
                             {
-                                CurrentIndexBasis = 12;
+                                CurrentIndexBasic = 75;
                             }
                             // For BFG10k
                             if (CurrentItem == 37)
                             {
-                                CurrentIndexBasis = 9;
+                                CurrentIndexBasic = 9;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  16;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  30;
@@ -3137,27 +3198,32 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Unknown Herald
                             if (CurrentItem == 38)
                             {
-                                CurrentIndexBasis = 13;
+                                CurrentIndexBasic = 104;
+                                CurrentTypeDetails2 =  8;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Frag Shotgun
                             if (CurrentItem == 39)
                             {
-                                CurrentIndexBasis = 2;
+                                CurrentIndexBasic = 2;
                                 CurrentAmountDetails1 *= 2;
+                                CurrentAmountDetails2 *= 2;
+                                CurrentAmountDetails3 *= 2;
                             }
                             // For Quad Shotgun
                             if (CurrentItem == 40)
                             {
-                                CurrentIndexBasis = 91;
+                                CurrentIndexBasic = 91;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Lightweaver
                             if (CurrentItem == 41)
                             {
-                                CurrentIndexBasis = 10;
+                                CurrentIndexBasic = 101;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  14;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  29;
@@ -3166,31 +3232,33 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Trigun
                             if (CurrentItem == 42)
                             {
-                                CurrentIndexBasis = 12;
+                                CurrentIndexBasic = 75;
                             }
                             // For Grammaton Cleric Beretta
                             if (CurrentItem == 43)
                             {
-                                CurrentIndexBasis = 13;
+                                CurrentIndexBasic = 102;
                             }
                             // For Anti-Freak Jackal
                             if (CurrentItem == 44)
                             {
-                                CurrentIndexBasis = 13;
+                                CurrentIndexBasic = 104;
                                 CurrentTypeDetails5 =  14;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Hellsing ARMS Casull
                             if (CurrentItem == 45)
                             {
-                                CurrentIndexBasis = 13;
+                                CurrentIndexBasic = 104;
                                 CurrentTypeDetails5 =  14;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Quantum Tantrum Cannon
                             if (CurrentItem == 46)
                             {
-                                CurrentIndexBasis = 10;
+                                CurrentIndexBasic = 101;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  12;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  29;
@@ -3201,18 +3269,25 @@ NamedScript MapSpecial void DisassemblingDevice()
                             {
                                 CurrentTypeDetails1 =  12;
                                 CurrentAmountDetails1 = 50;
+                                CurrentTypeDetails2 =  8;
                             }
                             // For Charch's Null Pointer
                             if (CurrentItem == 48)
                             {
-                                CurrentIndexBasis = 35;
+                                CurrentIndexBasic = 35;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  14;
                                 CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 1;
                             }
                             // For Particle Beam Cannon
                             if (CurrentItem == 49)
                             {
-                                CurrentIndexBasis = 35;
+                                CurrentIndexBasic = 35;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  13;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  30;
@@ -3221,14 +3296,16 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Steel Beast
                             if (CurrentItem == 50)
                             {
-                                CurrentIndexBasis = 3;
+                                CurrentIndexBasic = 89;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Plasma Redirection Cannon
                             if (CurrentItem == 51)
                             {
-                                CurrentIndexBasis = 22;
+                                CurrentIndexBasic = 22;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  13;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  30;
@@ -3237,8 +3314,10 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Suss Gun
                             if (CurrentItem == 52)
                             {
-                                CurrentIndexBasis = 22;
+                                CurrentIndexBasic = 22;
                                 CurrentTypeDetails5 =  12;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 4;
@@ -3246,33 +3325,34 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For MIRV Launcher
                             if (CurrentItem == 53)
                             {
-                                CurrentIndexBasis = 18;
+                                CurrentIndexBasic = 18;
+                                CurrentTypeDetails2 =  8;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For MA-75B Assault Rifle
                             if (CurrentItem == 54)
                             {
-                                CurrentIndexBasis = 6;
+                                CurrentIndexBasic = 98;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For WSTE-M5 Shotgun
                             if (CurrentItem == 55)
                             {
-                                CurrentIndexBasis = 4;
+                                CurrentIndexBasic = 4;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Widowmaker SMG
                             if (CurrentItem == 56)
                             {
-                                CurrentIndexBasis = 6;
+                                CurrentIndexBasic = 6;
                             }
                             // For Chameleon Rifle
                             if (CurrentItem == 57)
                             {
-                                CurrentIndexBasis = 6;
+                                CurrentIndexBasic = 98;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
@@ -3285,28 +3365,34 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Nuclear Onslaught
                             if (CurrentItem == 59)
                             {
-                                CurrentIndexBasis = 25;
+                                CurrentIndexBasic = 25;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  16;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Lucifer Cannon
                             if (CurrentItem == 60)
                             {
-                                CurrentIndexBasis = 35;
+                                CurrentIndexBasic = 35;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  14;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Direct Hit
                             if (CurrentItem == 61)
                             {
-                                CurrentIndexBasis = 18;
+                                CurrentIndexBasic = 18;
+                                CurrentTypeDetails2 =  8;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Triad Cannon
                             if (CurrentItem == 62)
                             {
-                                CurrentIndexBasis = 53;
+                                CurrentIndexBasic = 53;
+                                CurrentTypeDetails2 =  8;
                                 CurrentTypeDetails5 =  12;
                                 CurrentAmountDetails5 = 1;
                             }
@@ -3315,28 +3401,350 @@ NamedScript MapSpecial void DisassemblingDevice()
                     // For Armor
                     if (CurrentCategory == 1)
                     {
+                        // Set Default Current Type Details
                         CurrentTypeDetails1 =  9;
                         CurrentTypeDetails2 =  10;
                         CurrentTypeDetails3 =  11;
+
+                        // Set Global Required
                         // For Exotic Rare
                         if (CurrentRare == 0)
                         {
-                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 60)) / 5 * 5;
-                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
-                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 15)) / 5 * 5;
+                            // Calculate Current Cost
+                            CurrentCost = (CurrentCost / 2) / 250 * 250;
+
+                            // Calculate Amount Details
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 50)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 25)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 10)) / 5 * 5;
+
+                            // Set Individual Required
+                            // For Ballistic Shield
+                            if (CurrentItem == 29)
+                            {
+                                CurrentIndexBasic = 11;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Ballistic Vest
+                            if (CurrentItem == 30)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                            }
+                            // For Bulletproof Vest
+                            if (CurrentItem == 31)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                            }
+                            // For Duelist Armor
+                            if (CurrentItem == 32)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                            }
+                            // For Energy-Shielded Vest
+                            if (CurrentItem == 33)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Energy Shield
+                            if (CurrentItem == 34)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Gothic Armor
+                            if (CurrentItem == 35)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Medical Armor
+                            if (CurrentItem == 36)
+                            {
+                                CurrentTypeDetails2 = 0;
+                            }
+                            // For Phaseshift Armor
+                            if (CurrentItem == 37)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Plasma Shield
+                            if (CurrentItem == 38)
+                            {
+                                CurrentIndexBasic = 12;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Onyx Armor
+                            if (CurrentItem == 39)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Overcharge System
+                            if (CurrentItem == 40)
+                            {
+                                CurrentAmountDetails1 *= 2;
+                                CurrentAmountDetails2 *= 2;
+                                CurrentAmountDetails3 *= 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Repulsion Wave Suit
+                            if (CurrentItem == 41)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Survival MediArmor
+                            if (CurrentItem == 42)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails2 = 0;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Cyberwarrior Armor
+                            if (CurrentItem == 43)
+                            {
+                                CurrentIndexBasic = 3;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
                         }
                         // For Unique Rare
                         if (CurrentRare == 1)
                         {
+                            // Set Default Current Craft Part
+                            CurrentTypeDetails4 =  11;
+                            CurrentAmountDetails4 = 1;
+
+                            // Calculate Amount Details
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 80)) / 5 * 5;
                             CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 40)) / 5 * 5;
                             CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 20)) / 5 * 5;
-                            CurrentTypeDetails4 =  11;
-                            CurrentAmountDetails4 = 1;
+
+                            // Set Individual Required
+                            // For Berserk Powersuit
+                            if (CurrentItem == 59)
+                            {
+                                CurrentIndexBasic = 43;
+                                CurrentTypeDetails5 =  10;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Phoenix-B Device Suit
+                            if (CurrentItem == 60)
+                            {
+                                CurrentIndexBasic = 27;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Cybernetic Armor
+                            if (CurrentItem == 61)
+                            {
+                                CurrentIndexBasic = 14;
+                                CurrentAmountDetails2 *= 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Energy Discharge Harness
+                            if (CurrentItem == 62)
+                            {
+                                CurrentIndexBasic = 41;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Frontline Engineer Suit
+                            if (CurrentItem == 63)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentIndexBasic = 12;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Geo's Golden Gauntlet
+                            if (CurrentItem == 64)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentTypeDetails2 = 3;
+                                CurrentTypeDetails5 =  10;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Jetpack
+                            if (CurrentItem == 65)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For K-8 Matterstorm Harness
+                            if (CurrentItem == 66)
+                            {
+                                CurrentIndexBasic = 27;
+                                CurrentTypeDetails2 =  3;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For K1-L3 Teslabolt Armor
+                            if (CurrentItem == 67)
+                            {
+                                CurrentIndexBasic = 27;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Lava Armor
+                            if (CurrentItem == 68)
+                            {
+                                CurrentIndexBasic = 28;
+                                CurrentTypeDetails2 = 3;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Malek's Armor
+                            if (CurrentItem == 69)
+                            {
+                                CurrentIndexBasic = 28;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Medical Power Armor
+                            if (CurrentItem == 70)
+                            {
+                                CurrentIndexBasic = 36;
+                                CurrentTypeDetails2 = 0;
+                                CurrentAmountDetails2 *= 2;
+                            }
+                            // For Nano Ablative Armor
+                            if (CurrentItem == 71)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentIndexBasic = 20;
+                                CurrentTypeDetails2 = 3;
+                            }
+                            // For Necro Armor
+                            if (CurrentItem == 72)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentIndexBasic = 11;
+                                CurrentTypeDetails2 = 12;
+                            }
                             // For Nuclear Armor
                             if (CurrentItem == 73)
                             {
+                                CurrentIndexBasic = 28;
                                 CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Prototype Assault Shield
+                            if (CurrentItem == 74)
+                            {
+                                CurrentIndexBasic = 34;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For R11-n Psychic Amplifier Suit
+                            if (CurrentItem == 75)
+                            {
+                                CurrentIndexBasic = 26;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Roysten's Command Armor
+                            if (CurrentItem == 76)
+                            {
+                                CurrentIndexBasic = 32;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Shielded Armor
+                            if (CurrentItem == 77)
+                            {
+                                CurrentIndexBasic = 29;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Solo Operative Suit
+                            if (CurrentItem == 78)
+                            {
+                                CurrentIndexBasic = 26;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // Tactical Assembler Suit
+                            if (CurrentItem == 79)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentIndexBasic = 13;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // Terminus Battlesuit
+                            if (CurrentItem == 80)
+                            {
+                                CurrentIndexBasic = 26;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Torgue Blastplate Armor
+                            if (CurrentItem == 81)
+                            {
+                                CurrentIndexBasic = 28;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For WW-41 Peacekeeper Armor
+                            if (CurrentItem == 82)
+                            {
+                                CurrentIndexBasic = 32;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Xaser Inc. Powerarmor
+                            if (CurrentItem == 83)
+                            {
+                                CurrentIndexBasic = 27;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For 0D-1a Assaultforce Armor
+                            if (CurrentItem == 84)
+                            {
+                                CurrentIndexBasic = 26;
+                                CurrentTypeDetails2 =  6;
+                                CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
                         }
@@ -3345,61 +3753,138 @@ NamedScript MapSpecial void DisassemblingDevice()
                     // For Boots
                     if (CurrentCategory == 2)
                     {
+                        // Set Default Current Type Details
                         CurrentTypeDetails1 =  9;
                         CurrentTypeDetails2 =  10;
                         CurrentTypeDetails3 =  11;
+
+                        // Set Global Required
                         // For Exotic Rare
                         if (CurrentRare == 0)
                         {
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 60)) / 5 * 5;
                             if (CurrentRank >= 5)
                             {
-                                CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
+                                // Set Default Current Craft Part
                                 CurrentTypeDetails4 =  10;
                                 CurrentAmountDetails4 = 1;
+
+                                // Calculate Amount Details
+                                CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
                             }
                             if (CurrentRank >= 7)
                             {
+                                // Calculate Amount Details
                                 CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 15)) / 5 * 5;
                             }
+
+                            // Set Individual Required
                             // For Acid-Proof Boots
                             if (CurrentItem == 17)
                             {
-                                CurrentIndexBasis = 8;
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
                             }
                             // For Gothic Boots
                             if (CurrentItem == 18)
                             {
-                                CurrentIndexBasis = 2;
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
                             }
                             // For Phaseshift Boots
                             if (CurrentItem == 19)
                             {
-                                CurrentIndexBasis = 1;
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
                             }
                             // For Shockwave Boots
                             if (CurrentItem == 20)
                             {
-                                CurrentIndexBasis = 0;
+                                CurrentIndexBasic = 0;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
                             }
                         }
                         // For Unique Rare
                         if (CurrentRare == 1)
                         {
+                            CurrentTypeDetails4 =  11;
+                            CurrentAmountDetails4 = 1;
+
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 80)) / 5 * 5;
                             CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 40)) / 5 * 5;
                             CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 20)) / 5 * 5;
-                            CurrentTypeDetails4 =  11;
-                            CurrentAmountDetails4 = 1;
-                            // For Acid-Proof Boots
+
+                            // Set Individual Required
+                            // For Enviro Boots
                             if (CurrentItem == 21)
                             {
-                                CurrentIndexBasis = 8;
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Frontline Engineer Boots
+                            if (CurrentItem == 22)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Lava Boots
+                            if (CurrentItem == 23)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Leonidas' Boots
+                            if (CurrentItem == 24)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  10;
+                                CurrentAmountDetails5 = 1;
                             }
                             // For Nuclear Boots
                             if (CurrentItem == 25)
                             {
+                                CurrentIndexBasic = 2;
                                 CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nyarlaptotep's Boots
+                            if (CurrentItem == 26)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Roysten's Combat Boots
+                            if (CurrentItem == 27)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Solo Operative Boots
+                            if (CurrentItem == 28)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Tactical Assembler Boots
+                            if (CurrentItem == 29)
+                            {
+                                CurrentIndexBasic = 4;
+                            }
+                            // For Torgue Blastboots
+                            if (CurrentItem == 30)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  12;
                                 CurrentAmountDetails5 = 1;
                             }
                         }
@@ -3463,7 +3948,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                     {
                         SetFont("SMALLFONT");
                         HudMessage("%S: %d", ItemData[7][CurrentTypeDetails3].Name, CurrentAmountDetails3);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + 292.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + (CurrentAmountDetails2 > 0 ? 292.0 : 284.0), 0.05, 0.05);
                     }
                     // For Additional Details
                     if (CurrentAmountDetails4 > 0 || CurrentAmountDetails5 > 0 || CurrentAmountDetails6 > 0)
@@ -3471,51 +3956,69 @@ NamedScript MapSpecial void DisassemblingDevice()
                         SetFont("SMALLFONT");
                         HudMessage("Required \Cqadditional details\C-:");
                         EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 32.0, Y + 308.0, 0.05, 0.05);
+
+                        // Set additional coordinates
+                        if (CurrentAmountDetails5 > 0 && CurrentAmountDetails4 + CurrentAmountDetails6 > 0)
+                            Y2 += 8.0;
+                        if (CurrentAmountDetails6 > 0 && CurrentAmountDetails4 + CurrentAmountDetails5 > 0)
+                            Y2 += 8.0;
                     }
-                    // For Details #4
+                    // For Details #4 (Additional)
                     if (CurrentAmountDetails4 > 0)
                     {
                         SetFont("SMALLFONT");
                         HudMessage("%S: %d", ItemData[8][CurrentTypeDetails4].Name, CurrentAmountDetails4);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + 316.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
 
-                        PrintSprite(ItemData[8][CurrentTypeDetails4].Sprite.Name, 0, X + 32.0,  Y + (CurrentAmountDetails5 + CurrentAmountDetails6 >= 2 ? 338.0 : (CurrentAmountDetails5 + CurrentAmountDetails6 == 1 ? 330.0 : 322.0)), 0.05);
+                        PrintSprite(ItemData[8][CurrentTypeDetails4].Sprite.Name, 0, X + X1 + 32.0,  Y + Y2 + 322.0, 0.05);
+
+                        X1 += 32.0;
+                        Y1 += 8.0;
                     }
-                    // For Details #5
+                    // For Details #5 (Additional)
                     if (CurrentAmountDetails5 > 0)
                     {
                         SetFont("SMALLFONT");
                         HudMessage("%S: %d", ItemData[4][CurrentTypeDetails5].Name, CurrentAmountDetails5);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + (CurrentAmountDetails4 >= 1 ? 324.0 : 316.0), 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
 
-                        PrintSprite(ItemData[4][CurrentTypeDetails5].Sprite.Name, 0, X + (CurrentAmountDetails4 >= 1 ? 80.0 : 40.0),  Y + (CurrentAmountDetails4 + CurrentAmountDetails6 >= 2 ? 390.0 : (CurrentAmountDetails4 + CurrentAmountDetails6 == 1 ? 382.0 : 376.0)), 0.05);
+                        PrintSprite(ItemData[4][CurrentTypeDetails5].Sprite.Name, 0, X + X1 + 48.0,  Y + Y2 + 376.0, 0.05);
+
+                        X1 += 32.0;
+                        Y1 += 8.0;
                     }
-                    // For Details #6
+                    // For Details #6 (Additional)
                     if (CurrentAmountDetails6 > 0)
                     {
                         SetFont("SMALLFONT");
                         HudMessage("%S: %d", ItemData[6][CurrentTypeDetails6].Name, CurrentAmountDetails6);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + (CurrentAmountDetails4 + CurrentAmountDetails5 >= 2 ? 332.0 : (CurrentAmountDetails4 + CurrentAmountDetails5 == 1 ? 324.0 : 316.0)), 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
 
-                        PrintSprite(ItemData[6][CurrentTypeDetails6].Sprite.Name, 0, X + (CurrentAmountDetails4 + CurrentAmountDetails5 >= 2 ? 112.0 : (CurrentAmountDetails4 + CurrentAmountDetails5 == 1 ? 80.0 : 48.0)),  Y + (CurrentAmountDetails4 + CurrentAmountDetails5 >= 2 ? 364.0 : (CurrentAmountDetails4 + CurrentAmountDetails5 == 1 ? 356.0 : 348.0)), 0.05);
+                        PrintSprite(ItemData[6][CurrentTypeDetails6].Sprite.Name, 0, X + X1 + 48.0,  Y + Y2 + 348.0, 0.05);
+
+                        X1 += 32.0;
+                        Y1 += 8.0;
                     }
 
                     SetFont("SMALLFONT");
                     HudMessage("Required \Cfcredits\C-:\n%d \CfC\C-", CurrentCost);
                     EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 272.0, Y + 268.0, 0.05, 0.05);
 
-                    SetFont("SMALLFONT");
-                    HudMessage("Required \CkRank\C-:\n%d \Ck(%S)\C-", CurrentRank, LongRanks[CurrentRank]);
-                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 272.0, Y + 290.0, 0.05, 0.05);
-
-                    // Required basic Item
-                    if (CurrentIndexBasis >= 0)
+                    if (CurrentRank > 0)
                     {
                         SetFont("SMALLFONT");
-                        HudMessage("Required \Cabasic item\C-:\n%S\n%S", StrLeft(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Name, 26), StrMid(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Name, 26, 26));
+                        HudMessage("Required \CkRank\C-:\n%d \Ck(%S)\C-", CurrentRank, LongRanks[CurrentRank]);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 272.0, Y + 290.0, 0.05, 0.05);
+                    }
+
+                    // Required basic Item
+                    if (CurrentIndexBasic >= 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("Required \Cabasic item\C-:\n%S", StrLeft(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Name, 26));
                         EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 15, "White", X + 272.0, Y + 314.0, 0.05, 0.05);
 
-                        PrintSprite(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Sprite.Name, 0, X + 336.0,  Y + 372.0, 0.05);
+                        PrintSprite(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Sprite.Name, 0, X + 336.0,  Y + 372.0, 0.05);
                     }
 
                     // Input
@@ -3526,7 +4029,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         {
                             CurrentRare++;
                             CurrentItem = 0;
-                            CurrentIndexBasis = -1;
+                            CurrentIndexBasic = -1;
                             CurrentAmountDetails1 = 0;
                             CurrentAmountDetails2 = 0;
                             CurrentAmountDetails3 = 0;
@@ -3539,7 +4042,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         {
                             CurrentCategory++;
                             CurrentItem = 0;
-                            CurrentIndexBasis = -1;
+                            CurrentIndexBasic = -1;
                             CurrentAmountDetails1 = 0;
                             CurrentAmountDetails2 = 0;
                             CurrentAmountDetails3 = 0;
@@ -3557,7 +4060,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         {
                             CurrentRare--;
                             CurrentItem = 0;
-                            CurrentIndexBasis = -1;
+                            CurrentIndexBasic = -1;
                             CurrentAmountDetails1 = 0;
                             CurrentAmountDetails2 = 0;
                             CurrentAmountDetails3 = 0;
@@ -3570,7 +4073,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         {
                             CurrentCategory--;
                             CurrentItem = 0;
-                            CurrentIndexBasis = -1;
+                            CurrentIndexBasic = -1;
                             CurrentAmountDetails1 = 0;
                             CurrentAmountDetails2 = 0;
                             CurrentAmountDetails3 = 0;
@@ -3584,7 +4087,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                     {
                         ActivatorSound("menu/move", 127);
                         CurrentItem--;
-                        CurrentIndexBasis = -1;
+                        CurrentIndexBasic = -1;
                         CurrentAmountDetails1 = 0;
                         CurrentAmountDetails2 = 0;
                         CurrentAmountDetails3 = 0;
@@ -3597,7 +4100,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                     {
                         ActivatorSound("menu/move", 127);
                         CurrentItem++;
-                        CurrentIndexBasis = -1;
+                        CurrentIndexBasic = -1;
                         CurrentAmountDetails1 = 0;
                         CurrentAmountDetails2 = 0;
                         CurrentAmountDetails3 = 0;
@@ -3610,20 +4113,20 @@ NamedScript MapSpecial void DisassemblingDevice()
                     {
                         if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
                         {
-                            if ((CurrentIndexBasis >= 0 && CheckInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Actor) || CurrentIndexBasis < 0) && Player.RankLevel >= CurrentRank && CheckInventory("DRPGCredits") >= CurrentCost && CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) >= CurrentAmountDetails1 &&  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) >= CurrentAmountDetails2
+                            if ((CurrentIndexBasic >= 0 && CheckInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor) || CurrentIndexBasic < 0) && Player.RankLevel >= CurrentRank && CheckInventory("DRPGCredits") >= CurrentCost && CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) >= CurrentAmountDetails1 &&  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) >= CurrentAmountDetails2
                                     && CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) >= CurrentAmountDetails3 && CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) >= CurrentAmountDetails4 && CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) >= CurrentAmountDetails5 && CheckInventory(ItemData[6][CurrentTypeDetails6].Actor) >= CurrentAmountDetails6)
                             {
                                 Player.OutpostMenu = 0;
 
                                 // Take Basic Item
-                                if (CurrentIndexBasis >= 0)
+                                if (CurrentIndexBasic >= 0)
                                 {
                                     // Take Current Basic Item
-                                    TakeInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Actor, 1);
+                                    TakeInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor, 1);
 
                                     // Take tokens from DoomRL Arsenal
                                     if (CompatMode == COMPAT_DRLA)
-                                        RemoveDRLAItem(CategoriesData[CurrentCategory], CurrentIndexBasis);
+                                        RemoveDRLAItem(CategoriesData[CurrentCategory], CurrentIndexBasic);
                                 }
 
                                 // Take Details
@@ -3656,7 +4159,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 SetFont("BIGFONT");
                                 if (Player.RankLevel < CurrentRank)
                                     PrintError("You need higher Rank to assembly this item");
-                                else if (CurrentIndexBasis >= 0 && !CheckInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasis].Actor))
+                                else if (CurrentIndexBasic >= 0 && !CheckInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor))
                                     PrintError("You need basic item");
                                 else if (CheckInventory("DRPGCredits") < CurrentCost)
                                     PrintError("Not enough credits to assembly this item");
