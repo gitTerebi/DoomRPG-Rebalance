@@ -345,8 +345,8 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGAugCanister",         "Augmentation Canister",             30000, 4, 8, "AUGCA0", 12, 24);
     ITEMDATA_DEF("DRPGAugUpgradeCanister",  "Augmentation Upgrade Canister",     30000, 4, 8, "AUGUA0", 12, 24);
     ITEMDATA_DEF("DRPGAugSlotUpgrade",      "Augmentation Slot Upgrade",         90000, 7, 8, "AUGUB0", 16, 25);
-    ITEMDATA_DEF("DRPGBatterySmall",        "Small Battery",                       500, 1, 1, "BATTA0",  5, 13);
-    ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                      1250, 4, 3, "BATTB0", 14, 21);
+    ITEMDATA_DEF("DRPGBatterySmall",        "Small \CkBattery\C-",                 500, 1, 1, "BATTA0",  5, 13);
+    ITEMDATA_DEF("DRPGBatteryLarge",        "Large \CkBattery\C-",                1250, 4, 3, "BATTB0", 14, 21);
 
     ITEMDATA_DEF("DRPGTurretPart",          "Turret Part",                         500, 1, 1, "TPRTA0", 29, 21);
     ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",                 2500, 4, 3, "TCRTA0", 29, 26);
@@ -462,12 +462,12 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLUnknownHerald",                         "Unknown Herald \Cd[Unique]\C-",                         78000, -1, 7, "UNKHX0",  8, 10);
         ITEMDATA_DEF("RLFragShotgun",                           "Frag Shotgun \Cd[Unique]\C-",                           30000, -1, 5, "FRSHX0", 28, 11);
         ITEMDATA_DEF("RLQuadShotgun",                           "Quad Shotgun \Cd[Unique]\C-",                           80000, -1, 7, "SHT4X0", 26, 16);
-        ITEMDATA_DEF("RLLightweaver",                           "Lightweaver \Cd[Unique]\C-",                           220000, -1, 8, "KARAX0", 16, 10);
+        ITEMDATA_DEF("RLLightweaver",                           "Lightweaver \Cd[Unique]\C-",                           175000, -1, 8, "KARAX0", 16, 10);
         ITEMDATA_DEF("RLTrigun",                                "Trigun \Cd[Unique]\C-",                                 44000, -1, 6, "TRIGX0", 15, 12);
         ITEMDATA_DEF("RLGrammatonClericBeretta",                "Grammaton Cleric Beretta \Cd[Unique]\C-",               40000, -1, 6, "GCBPX0", 12, 13);
         ITEMDATA_DEF("RLAntiFreakJackal",                       "Anti-Freak Jackal \Cd[Unique]\C-",                      76000, -1, 7, "AFJKX0", 15, 14);
         ITEMDATA_DEF("RLHellsingARMSCasull",                    "Hellsing ARMS Casull \Cd[Unique]\C-",                   76000, -1, 7, "HSACX0", 15, 14);
-        ITEMDATA_DEF("RLTantrumCannon",                         "Quantum Tantrum Cannon \Cd[Unique]\C-",                 42000, -1, 6, "QTCWX0", 14, 13);
+        ITEMDATA_DEF("RLTantrumCannon",                         "Quantum Tantrum Cannon \Cd[Unique]\C-",                 68000, -1, 7, "QTCWX0", 14, 13);
         ITEMDATA_DEF("RLRevenantsLauncher",                     "Revenant's Launcher \Cd[Unique]\C-",                    46000, -1, 6, "REVLX0", 22, 13);
         ITEMDATA_DEF("RLNullPointer",                           "Charch's Null Pointer \Cd[Unique]\C-",                  72000, -1, 7, "NULPX0", 23, 14);
         ITEMDATA_DEF("RLParticleBeamCannon",                    "Particle Beam Cannon \Cd[Unique]\C-",                   84000, -1, 8, "PBCNX0", 26, 16);
@@ -478,12 +478,12 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLMarathonAssaultRifle",                  "MA-75B Assault Rifle \Cd[Unique]\C-",                   76000, -1, 7, "MA75Y0",  0,  0);
         ITEMDATA_DEF("RLMarathonShotguns",                      "WSTE-M5 Shotgun \Cd[Unique]\C-",                        82000, -1, 8, "WSTEY0",  6,  6);
         ITEMDATA_DEF("RLWidowmakerSMG",                         "Widowmaker SMG \Cd[Unique]\C-",                         60000, -1, 6, "WSMGX0", 24, 20);
-        ITEMDATA_DEF("RLChameleonRifle",                        "Chameleon Rifle \Cd[Unique]\C-",                       160000, -1, 8, "CRM1X0", 26, 18);
-        ITEMDATA_DEF("RLNanomachicArmamentGenerator",           "Nanomachic Armament Generator \Cd[Unique]\C-",         200000, -1, 8, "NAG0X0", 13, 19);
-        ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     500000, -1, 9, "NKO0X0", 29, 54);
-        ITEMDATA_DEF("RLLuciferCannon",                         "Lucifer Cannon \Cf[Unique]\C-",                        300000, -1, 8, "LCFGX0", 30, 26);
-        ITEMDATA_DEF("RLDirectHit",                             "Direct Hit \Cf[Unique]\C-",                            400000, -1, 8, "DHTGX0", 20, 20);
-        ITEMDATA_DEF("RLTriadCannon",                           "Triad Cannon \Cf[Unique]\C-",                          600000, -1, 9, "TRIDX0", 25, 26);
+        ITEMDATA_DEF("RLChameleonRifle",                        "Chameleon Rifle \Cd[Unique]\C-",                       125000, -1, 8, "CRM1X0", 26, 18);
+        ITEMDATA_DEF("RLNanomachicArmamentGenerator",           "Nanomachic Armament Generator \Cd[Unique]\C-",         150000, -1, 8, "NAG0X0", 13, 19);
+        ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     300000, -1, 9, "NKO0X0", 29, 54);
+        ITEMDATA_DEF("RLLuciferCannon",                         "Lucifer Cannon \Cd[Unique]\C-",                        225000, -1, 8, "LCFGX0", 30, 26);
+        ITEMDATA_DEF("RLDirectHit",                             "Direct Hit \Cd[Unique]\C-",                            275000, -1, 8, "DHTGX0", 20, 20);
+        ITEMDATA_DEF("RLTriadCannon",                           "Triad Cannon \Cd[Unique]\C-",                          350000, -1, 9, "TRIDX0", 25, 26);
         // ITEMDATA_DEF("RLSubtleKnife",                           "Subtle Knife \Cd[Unique]\C-",                           30000, -1, "SUBKX0", 38, 37);
         // ITEMDATA_DEF("RLFusionMortar",                          "Fusion Mortar \Cd[Unique]\C-",                          90000, -1, "FMORX0", 38, 37);
         // ITEMDATA_DEF("RLSpectreRevolver",                       "The Spectre \Cd[Unique]\C-",                            31000, -1, "SPERX0", 38, 37);
@@ -840,18 +840,18 @@ NamedScript void BuildItemData()
         // ITEMDATA_DEF("RLBerserkerArmorPickup",                          "Berserker Armor \Cd[Unique]\C-",                    30000, -1, "BERZA0", 15, 31);
         ITEMDATA_DEF("RLBerserkPowersuitArmorPickup",                   "Berserk Powersuit \Cd[Unique]\C-",                  35000, -1, 6, "BEPSB0", 16, 30);
         ITEMDATA_DEF("RLBlazingPhoenixDeviceSuitArmorPickup",           "Phoenix-B Device Suit \Cd[Unique]\C-",              39000, -1, 6, "BPHDA0", 16, 21);
-        ITEMDATA_DEF("RLCyberneticArmorPickup",                         "Cybernetic Armor \Cd[Unique]\C-",                   30000, -1, 5, "CYNAA0", 15, 31);
-        ITEMDATA_DEF("RLEnergyDischargeHarnessArmorPickup",             "Energy Discharge Harness \Cd[Unique]\C-",           27500, -1, 5, "EDHXA0", 11, 22);
-        ITEMDATA_DEF("RLFrontlineEngineerSuitArmorPickup",              "Frontline Engineer Suit \Cd[Unique]\C-",            36000, -1, 6, "BLUAA0",  9, 39);
-        ITEMDATA_DEF("RLGeosGoldenGauntletArmorPickup",                 "Geo's Golden Gauntlet \Cd[Unique]\C-",              30000, -1, 5, "GGGXA0",  8, 26);
+        ITEMDATA_DEF("RLCyberneticArmorPickup",                         "Cybernetic Armor \Cd[Unique]\C-",                   36000, -1, 6, "CYNAA0", 15, 31);
+        ITEMDATA_DEF("RLEnergyDischargeHarnessArmorPickup",             "Energy Discharge Harness \Cd[Unique]\C-",           30000, -1, 5, "EDHXA0", 11, 22);
+        ITEMDATA_DEF("RLFrontlineEngineerSuitArmorPickup",              "Frontline Engineer Suit \Cd[Unique]\C-",            27500, -1, 5, "BLUAA0",  9, 39);
+        ITEMDATA_DEF("RLGeosGoldenGauntletArmorPickup",                 "Geo's Golden Gauntlet \Cd[Unique]\C-",              25000, -1, 4, "GGGXA0",  8, 26);
         ITEMDATA_DEF("RLJetpackArmorPickup",                            "Jetpack \Cd[Unique]\C-",                            42000, -1, 7, "JETPA0", 14, 36);
         ITEMDATA_DEF("RLKateMatterstormHarnessArmorPickup",             "K-8 Matterstorm Harness \Cd[Unique]\C-",            41000, -1, 7, "K8MHA0", 16, 18);
         ITEMDATA_DEF("RLKyleTeslaboltArmorPickup",                      "K1-L3 Teslabolt Armor \Cd[Unique]\C-",              56000, -1, 8, "KTESA0", 17, 30);
         ITEMDATA_DEF("RLLavaArmorPickup",                               "Lava Armor \Cd[Unique]\C-",                         65000, -1, 8, "LAVUA0", 15, 18);
         ITEMDATA_DEF("RLMaleksArmorPickup",                             "Malek's Armor \Cd[Unique]\C-",                      50000, -1, 8, "MALKA0", 15, 31);
-        ITEMDATA_DEF("RLMedicalPowerArmorPickup",                       "Medical Power Armor \Cd[Unique]\C-",                17500, -1, 4, "MED2A0", 10, 24);
+        ITEMDATA_DEF("RLMedicalPowerArmorPickup",                       "Medical Power Armor \Cd[Unique]\C-",                22500, -1, 4, "MED2A0", 10, 24);
         ITEMDATA_DEF("RLNanoAblativeArmorPickup",                       "Nano Ablative Armor \Cd[Unique]\C-",                38000, -1, 6, "NABLA0", 16, 19);
-        ITEMDATA_DEF("RLNecroArmorPickup",                              "Necro Armor \Cd[Unique]\C-",                        15500, -1, 4, "NECRA0", 16, 28);
+        ITEMDATA_DEF("RLNecroArmorPickup",                              "Necro Armor \Cd[Unique]\C-",                        20000, -1, 4, "NECRA0", 16, 28);
         ITEMDATA_DEF("RLNuclearPowerArmorPickup",                       "Nuclear Powerarmor \Cd[Unique]\C-",                 65000, -1, 8, "ENUKA0", 16, 27);
         ITEMDATA_DEF("RLPrototypeAssaultShieldArmorPickup",             "Prototype Assault Shield \Cd[Unique]\C-",           45000, -1, 8, "PASSA0", 12, 18);
         ITEMDATA_DEF("RLRyanCordellPsychicAmplifierSuitArmorPickup",    "R11-n Psychic Amplifier Suit \Cd[Unique]\C-",       33000, -1, 5, "RCPAA0", 14, 23);
@@ -878,32 +878,32 @@ NamedScript void BuildItemData()
 
         // Powerups
         ITEMDATA_CATEGORY(4, "\CqPowerups", CF_NONE);
-        ITEMDATA_DEF("InvulnerabilityCharge2",      "Invulnerability Charge",        5000, 2, 7, "CRG2A0",  6, 22);
-        ITEMDATA_DEF("InvisibilityCharge2",         "Invisibility Charge",           2500, 1, 2, "CRG1A0",  6, 22);
-        ITEMDATA_DEF("DRPGTimeSphere",              "Time Sphere",                   1000, 4, 1, "TIMEA0", 16, 45);
-        ITEMDATA_DEF("DRPGRegenSphere",             "Regeneration Sphere",           1000, 2, 1, "REGNA0", 12, 38);
-        ITEMDATA_DEF("RadSuit2",                    "Radiation Suit",                 250, 0, 0, "SUITA0", 11, 51);
-        ITEMDATA_DEF("Infrared2",                   "IR Goggles",                     500, 0, 0, "PVISA0", 11,  9);
-        ITEMDATA_DEF("Berserk2",                    "Berserk Pack",                  5000, 6, -1, "PSTRA0", 12, 15);
-        ITEMDATA_DEF("DRPGAllMap",                  "Computer Area Map",             1000, 1, 1, "PMAPA0", 13, 23);
-        ITEMDATA_DEF("DRPGWings",                   "Wings",                         5000, 2, 5, "WINGA0", 13, 36);
-        ITEMDATA_DEF("Megasphere2",                 "Megasphere",                    5000, 4, 7, "MEGAA0", 12, 32);
-        ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",      100000, 8, 8, "CRYSA0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalBullet",   "Bullet Immunity Crystal",     100000, 8, 8, "CRYSB0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalFire",     "Fire Immunity Crystal",       100000, 8, 8, "CRYSC0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalPlasma",   "Plasma Immunity Crystal",     100000, 8, 8, "CRYSD0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalLightning","Lightning Immunity Crystal",  100000, 8, 8, "CRYSE0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",      100000, 8, 8, "CRYSF0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",  100000, 8, 8, "CRYSG0", 16, 48);
-        ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                  2000, 4, 2, "MMAPA0", 14, 23);
-        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",           12500, 5, 2, "BLUPA0", 14, 23);
-        ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                  5000, 6, 6, "ISKLA0", 10, 18);
-        ITEMDATA_DEF("RLBloodSkull",                "Blood Skull",                   3000, 6, 4, "ISKLC0", 10, 18);
-        ITEMDATA_DEF("RLFireSkull",                 "Fire Skull",                    4000, 6, 5, "ISKLE0", 10, 18);
-        ITEMDATA_DEF("RLPhaseDevice",               "Phase Device",                  1000, 1, 1, "PHS1I0", -9, -2);
-        ITEMDATA_DEF("RLHomingPhaseDevice",         "Homing Phase Device",           2500, 2, 2, "PHS2I0", -9, -2);
-        ITEMDATA_DEF("RLRecallPhaseDevice",         "Recall Phase Device",           2500, 2, 2, "PHS3I0", -9, -5);
-        ITEMDATA_DEF("RLExperimentalPhaseDevice",   "Experimental Phase Device",    30000,12, 8, "PHS4I0", -9, -4);
+        ITEMDATA_DEF("InvulnerabilityCharge2",      "Invulnerability Charge",              5000,  2,  7, "CRG2A0",  6, 22);
+        ITEMDATA_DEF("InvisibilityCharge2",         "Invisibility Charge",                 2500,  1,  2, "CRG1A0",  6, 22);
+        ITEMDATA_DEF("DRPGTimeSphere",              "Time Sphere",                         1000,  4,  1, "TIMEA0", 16, 45);
+        ITEMDATA_DEF("DRPGRegenSphere",             "Regeneration Sphere",                 1000,  2,  1, "REGNA0", 12, 38);
+        ITEMDATA_DEF("RadSuit2",                    "Radiation Suit",                       250,  0,  0, "SUITA0", 11, 51);
+        ITEMDATA_DEF("Infrared2",                   "IR Goggles",                           500,  0,  0, "PVISA0", 11,  9);
+        ITEMDATA_DEF("Berserk2",                    "Berserk Pack",                        5000,  6, -1, "PSTRA0", 12, 15);
+        ITEMDATA_DEF("DRPGAllMap",                  "Computer Area Map",                   1000,  1,  1, "PMAPA0", 13, 23);
+        ITEMDATA_DEF("DRPGWings",                   "Wings",                               5000,  2,  5, "WINGA0", 13, 36);
+        ITEMDATA_DEF("Megasphere2",                 "Megasphere",                          5000,  4,  7, "MEGAA0", 12, 32);
+        ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",             50000, -1,  8, "CRYSA0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalBullet",   "\CcBullet\C- Immunity Crystal",      50000, -1,  8, "CRYSB0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalFire",     "\CaFire\C- Immunity Crystal",        50000, -1,  8, "CRYSC0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalPlasma",   "\CnPlasma\C- Immunity Crystal",      50000, -1,  8, "CRYSD0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalLightning","\CfLightning\C- Immunity Crystal",   50000, -1,  8, "CRYSE0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "\CdToxic\C- Immunity Crystal",       50000, -1,  8, "CRYSF0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalRadiation","\CqRadiation\C- Immunity Crystal",   50000, -1,  8, "CRYSG0", 16, 48);
+        ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                        2000,  4,  2, "MMAPA0", 14, 23);
+        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",                 12500,  5,  2, "BLUPA0", 14, 23);
+        ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                        5000,  6,  6, "ISKLA0", 10, 18);
+        ITEMDATA_DEF("RLBloodSkull",                "Blood Skull",                         3000,  6,  4, "ISKLC0", 10, 18);
+        ITEMDATA_DEF("RLFireSkull",                 "Fire Skull",                          4000,  6,  5, "ISKLE0", 10, 18);
+        ITEMDATA_DEF("RLPhaseDevice",               "Phase Device",                        1000,  1,  1, "PHS1I0", -9, -2);
+        ITEMDATA_DEF("RLHomingPhaseDevice",         "Homing Phase Device",                 2500,  2,  2, "PHS2I0", -9, -2);
+        ITEMDATA_DEF("RLRecallPhaseDevice",         "Recall Phase Device",                 2500,  2,  2, "PHS3I0", -9, -5);
+        ITEMDATA_DEF("RLExperimentalPhaseDevice",   "Experimental Phase Device",          30000, 12,  8, "PHS4I0", -9, -4);
         ITEMDATA_CATEGORY_END;
 
         // Mod Packs
@@ -926,6 +926,10 @@ NamedScript void BuildItemData()
 
         // Demon Artifact
         ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",     100000, 11, 9, "DMNAA0", 19, 65);
+
+        // Crates with Parts for craft
+        ITEMDATA_DEF("DRPGCraftPartsExotic", "Craft Parts \Ct[Exotic]\C-", 50000, -1, -1, "EXCRE", 0, -8);
+        ITEMDATA_DEF("DRPGCraftPartsUnique", "Craft Parts \Cd[Unique]\C-", 50000, -1, -1, "UNCRE", 0, -8);
         ITEMDATA_CATEGORY_END;
 
         // Boots

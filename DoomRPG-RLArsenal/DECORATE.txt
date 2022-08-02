@@ -1,5 +1,6 @@
 #include "actors/DoomRL/Ammo.txt"
 #include "actors/DoomRL/Armor.txt"
+#include "actors/DoomRL/Craft.txt"
 #include "actors/DoomRL/DamageMods.txt"
 #include "actors/DoomRL/DeadBodies.txt"
 #include "actors/DoomRL/Dummies.txt"

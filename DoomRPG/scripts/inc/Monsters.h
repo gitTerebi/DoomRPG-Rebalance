@@ -43,8 +43,13 @@ NamedScript void MonsterFellowResurrectionHandler();
 NamedScript void MonsterEpicVisitTimeHandler();
 NamedScript DECORATE void MonsterRevive();
 NamedScript DECORATE void MonsterDeathCheck();
+OptionalArgs(1) NamedScript DECORATE void PropDeathCheck(int);
 NamedScript void MonsterDeath();
 NamedScript int WhoKilledMe();
+
+OptionalArgs(1) NamedScript void CalculateMonsterCredits(MonsterStatsPtr, int);
+NamedScript void CalculateMonsterStats(MonsterStatsPtr);
+NamedScript void DropCredits(int, MonsterStatsPtr);
 
 void MonsterLevelup(MonsterStatsPtr);
 void CapMonsterStats(MonsterStatsPtr);

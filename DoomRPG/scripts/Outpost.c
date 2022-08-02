@@ -1609,6 +1609,10 @@ NamedScript MapSpecial void OperatingCapsule()
         return;
     }
 
+    // Close the door and change the color of the room
+    Door_Close(19, 32, 13);
+    Sector_SetColor(20, 200, 50, 50, 0);
+
     ActivatorSound("menu/move", 127);
     Player.OutpostMenu = OMENU_OPERATINGCAPSULE;
 
@@ -1779,6 +1783,16 @@ NamedScript MapSpecial void OperatingCapsule()
         if (GetActivatorCVar("drpg_menu_background_border"))
             DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470);
 
+        // Price Calculate
+        if (OperationChoice <= 2)
+            Price = 12500;
+        if (OperationChoice > 2 && OperationChoice <= 5)
+            Price = 25000;
+        if (OperationChoice == 6)
+            Price = 50000;
+        if (OperationChoice > 6)
+            Price = 50;
+
         // Text
         SetFont("BIGFONT");
         HudMessage("\CdOperating capsule\C-");
@@ -1800,16 +1814,6 @@ NamedScript MapSpecial void OperatingCapsule()
         else
             HudMessage("\CfPrice:\C- %d \CfC\C-", Price);
         EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 72.0, Y + 240.0, 0.05, 0.05);
-
-        // Price Calculate
-        if (OperationChoice > 6)
-            Price = 50;
-        if (OperationChoice <= 2)
-            Price = 12500;
-        if (OperationChoice > 2 && OperationChoice <= 5)
-            Price = 25000;
-        if (OperationChoice == 6)
-            Price = 50000;
 
         // Input
         if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
@@ -1918,122 +1922,12 @@ NamedScript MapSpecial void DisassemblingDevice()
     fixed Y = 0.1;
 
     // Categories Data
-    int CurrentCategory;
-    int CategoriesData[4] = {0, 3, 5, 9};
-    str CategoriesNames[3] =
+    int CurrentAction;
+    str ActionNames[2] =
     {
-        "\CaWeapons",
-        "\CdArmors/Boots",
-        "\CnShield Parts"
+        "\CaDisassembling",
+        "  \CdAssembling"
     };
-
-    str ExtentExtraction[6] =
-    {
-        "\CdVery Low",
-        "    \CdLow",
-        "  \CqMedium",
-        "    \CaHigh",
-        "\CgVery High",
-        "\CfVery High+"
-    };
-
-    str PossibleExtraction[6] =
-    {
-        "\CdDetails\C-\n\CfChips\C-\n\CnRecipes\C-",
-        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CnRecipes\C-",
-        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-",
-        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-",
-        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-\n\CkAug\C-",
-        "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-\n\CkAug\C-"
-    };
-
-    // Weapons Data
-    int WeaponData;
-    int WeaponIndexes[DRLA_WEAPON_MAX];
-    str WeaponActors[DRLA_WEAPON_MAX];
-    str WeaponNames[DRLA_WEAPON_MAX];
-    str WeaponIcons[DRLA_WEAPON_MAX];
-    int WeaponCost[DRLA_WEAPON_MAX];
-
-    // Armors/Boots Data
-    int ArmorData;
-    int ArmorIndexes[DRLA_WEAPON_MAX];
-    str ArmorActors[DRLA_WEAPON_MAX];
-    str ArmorNames[DRLA_WEAPON_MAX];
-    str ArmorIcons[DRLA_WEAPON_MAX];
-    int ArmorCost[DRLA_WEAPON_MAX];
-
-    // Shield Parts Data
-    int ShieldData;
-    str ShieldActors[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
-    str ShieldNames[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
-    str ShieldIcons[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
-    int ShieldCost[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
-
-    // Current Item
-    int CurrentItem;
-    int CurrentData;
-    int CurrentIndex;
-    str CurrentActor;
-    str CurrentName;
-    str CurrentIcon;
-    int CurrentCost;
-    int CostMin;
-    int CostMax;
-    int CurrentExtraction;
-
-    // Chances of getting parts
-    fixed ChanceChips;
-    fixed ChanceBattery;
-    fixed ChanceTurret;
-    fixed ChanceModule;
-    fixed ChanceAug;
-    fixed ChanceBluePrint;
-    fixed ChanceModPacks;
-
-    // Database creation
-    for (int i = 0; i < 4; i++)
-        for (int j = 0; j < ItemMax[CategoriesData[i]]; j++)
-            if (CheckInventory(ItemData[CategoriesData[i]][j].Actor))
-            {
-                // Weapons
-                if (i == 0)
-                {
-                    ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
-                    WeaponIndexes[WeaponData] = j;
-                    WeaponActors[WeaponData] = Item->Actor;
-                    WeaponNames[WeaponData] = Item->Name;
-                    WeaponIcons[WeaponData] = Item->Sprite.Name;
-                    WeaponCost[WeaponData] = Item->Price;
-                    WeaponData++;
-                    if (WeaponData >= DRLA_WEAPON_MAX - 1) continue;
-                }
-
-                // Armors/Boots
-                if (i == 1 || i == 3)
-                {
-                    ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
-                    ArmorIndexes[ArmorData] = j;
-                    ArmorActors[ArmorData] = Item->Actor;
-                    ArmorNames[ArmorData] = Item->Name;
-                    ArmorIcons[ArmorData] = Item->Sprite.Name;
-                    ArmorCost[ArmorData] = Item->Price;
-                    ArmorData++;
-                    if (ArmorData >= DRLA_WEAPON_MAX - 1) continue;
-                }
-
-                // Shield Parts
-                if (i == 2)
-                {
-                    ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
-                    ShieldActors[ShieldData] = Item->Actor;
-                    ShieldNames[ShieldData] = Item->Name;
-                    ShieldIcons[ShieldData] = Item->Sprite.Name;
-                    ShieldCost[ShieldData] = Item->Price;
-                    ShieldData++;
-                    if (ShieldData >= MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES - 1) continue;
-                }
-            }
 
     // So the player's initial interaction is not processed as a menu action
     Delay(1);
@@ -2054,355 +1948,2236 @@ NamedScript MapSpecial void DisassemblingDevice()
         if (GetActivatorCVar("drpg_menu_background_border"))
             DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470);
 
-        // Info for Current Item
-        // For Weapons
-        if (CurrentCategory == 0 && WeaponData > 0)
-        {
-            CurrentData = WeaponData;
-            CurrentIndex = WeaponIndexes[CurrentItem];
-            CurrentActor = WeaponActors[CurrentItem];
-            CurrentName = WeaponNames[CurrentItem];
-            CurrentIcon = WeaponIcons[CurrentItem];
-            CurrentCost = WeaponCost[CurrentItem] / 20;
-        }
-        // For Armors/Boots
-        if (CurrentCategory == 1 && ArmorData > 0)
-        {
-            CurrentData = ArmorData;
-            CurrentIndex = ArmorIndexes[CurrentItem];
-            CurrentActor = ArmorActors[CurrentItem];
-            CurrentName = ArmorNames[CurrentItem];
-            CurrentIcon = ArmorIcons[CurrentItem];
-            CurrentCost = ArmorCost[CurrentItem] / 20;
-        }
-        // For Shield Parts
-        if (CurrentCategory == 2 && ShieldData > 0)
-        {
-            CurrentData = ShieldData;
-            CurrentActor = ShieldActors[CurrentItem];
-            CurrentName = ShieldNames[CurrentItem];
-            CurrentIcon = ShieldIcons[CurrentItem];
-            CurrentCost = ShieldCost[CurrentItem] / 20;
-        }
-
-        // Calculate Extent Extraction
-        // For Weapons and Shield Parts
-        if (CurrentCategory == 0 || CurrentCategory == 2)
-        {
-            if (CurrentCost < 100)
-            {
-                CostMin = 0;
-                CostMax = 100;
-                CurrentExtraction = 0;
-            }
-            if (CurrentCost >= 100)
-            {
-                CostMin = 100;
-                CostMax = 1500;
-                CurrentExtraction = 1;
-            }
-            if (CurrentCost > 1500)
-            {
-                CostMin = 1500;
-                CostMax = 3000;
-                CurrentExtraction = 2;
-            }
-            if (CurrentCost > 3000)
-            {
-                CostMin = 3000;
-                CostMax = 6000;
-                CurrentExtraction = 3;
-            }
-            if (CurrentCost > 6000)
-            {
-                CostMin = 6000;
-                CostMax = 10000;
-                CurrentExtraction = 4;
-            }
-            if (CurrentCost > 10000)
-            {
-                CostMin = 10000;
-                CostMax = 20000;
-                CurrentExtraction = 5;
-            }
-        }
-        // For Armor/Boots
-        if (CurrentCategory == 1)
-        {
-            if (CurrentCost <= 50)
-            {
-                CostMin = 0;
-                CostMax = 50;
-                CurrentExtraction = 0;
-            }
-            if (CurrentCost > 50)
-            {
-                CostMin = 50;
-                CostMax = 225;
-                CurrentExtraction = 1;
-            }
-            if (CurrentCost > 225)
-            {
-                CostMin = 225;
-                CostMax = 900;
-                CurrentExtraction = 2;
-            }
-            if (CurrentCost > 900)
-            {
-                CostMin = 900;
-                CostMax = 1500;
-                CurrentExtraction = 3;
-            }
-            if (CurrentCost > 1500)
-            {
-                CostMin = 1500;
-                CostMax = 2500;
-                CurrentExtraction = 4;
-            }
-            if (CurrentCost > 2500)
-            {
-                CostMin = 2500;
-                CostMax = 5000;
-                CurrentExtraction = 5;
-            }
-        }
-
-        // Calculate Chances
-        // For Very Low Extent Extraction
-        if (CurrentExtraction == 0)
-        {
-            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
-            ChanceBattery = 0.0;
-            ChanceTurret = 0.0;
-            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 0.1, 2.5);
-            ChanceModPacks = 0.0;
-            ChanceModule = 0.0;
-            ChanceAug = 0.0;
-        }
-        // For Low Extent Extraction
-        if (CurrentExtraction == 1)
-        {
-            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
-            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
-            ChanceTurret = 0.0;
-            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 2.5, 3.5);
-            ChanceModPacks = 0.0;
-            ChanceModule = 0.0;
-            ChanceAug = 0.0;
-        }
-        // For Medium Extent Extraction
-        if (CurrentExtraction == 2)
-        {
-            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
-            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
-            ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
-            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 3.5, 5.0);
-            ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
-            ChanceModule = 0.0;
-            ChanceAug = 0.0;
-        }
-        // For High Extent Extraction
-        if (CurrentExtraction == 3)
-        {
-            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
-            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
-            ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
-            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
-            ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
-            ChanceModule = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
-            ChanceAug = 0.0;
-        }
-        // For Very High Extent Extraction
-        if (CurrentExtraction == 4)
-        {
-            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 12.5, 15.0);
-            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
-            ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
-            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
-            ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
-            ChanceModule = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
-            ChanceAug = Curve(CurrentCost, CostMin, CostMax, 0.1, 5.0);
-        }
-        // For Very High+ Extent Extraction
-        if (CurrentExtraction == 5)
-        {
-            ChanceChips = Curve(CurrentCost, CostMin, CostMax, 15.0, 17.5);
-            ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 12.5, 15.0);
-            ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
-            ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
-            ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
-            ChanceModule = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
-            ChanceAug = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
-        }
-
         // Text
         SetFont("BIGFONT");
         HudMessage("\CdDisassembling Device\C-");
         EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X + 108.0, Y + 16.0, 0.05, 0.05);
 
         SetFont("BIGFONT");
-        HudMessage("Select item for disassembling:");
-        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "White", X + 64.0, Y + 56.0, 0.05, 0.05);
+        HudMessage("Select action:");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "White", X + 156.0, Y + 112.0, 0.05, 0.05);
 
         SetFont("BIGFONT");
-        HudMessage("Category: %S", CategoriesNames[CurrentCategory]);
-        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "White", X + 124.0, Y + 112.0, 0.05, 0.05);
-
-        if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
-        {
-            PrintSprite(CurrentIcon, 0, X + 240.0,  Y + 188.0, 0.05);
-
-            SetFont("BIGFONT");
-            HudMessage("Item: %S", CurrentName);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 32.0, Y + 230.0, 0.05, 0.05);
-
-            SetFont("SMALLFONT");
-            HudMessage("Possible Extraction:\n%S", PossibleExtraction[CurrentExtraction]);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 32.0, Y + 272.0, 0.05, 0.05);
-
-            SetFont("SMALLFONT");
-            HudMessage("Extent of Extraction:");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 280.0, Y + 272.0, 0.05, 0.05);
-
-            SetFont("BIGFONT");
-            HudMessage("%S", ExtentExtraction[CurrentExtraction]);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 304.0, Y + 304.0, 0.05, 0.05);
-        }
-        else
-        {
-            SetFont("BIGFONT");
-            HudMessage("No have items in this category");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 56.0, Y + 208.0, 0.05, 0.05);
-        }
+        HudMessage("%S", ActionNames[CurrentAction]);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "White", X + 154.0, Y + 188.0, 0.05, 0.05);
 
         // Input
         if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
-            CurrentCategory++;
-            CurrentItem = 0;
-            if (CurrentCategory > 2) CurrentCategory = 0;
+            CurrentAction++;
+            if (CurrentAction > 1) CurrentAction = 0;
         }
         if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
-            CurrentCategory--;
-            CurrentItem = 0;
-            if (CurrentCategory < 0) CurrentCategory = 2;
+            CurrentAction--;
+            if (CurrentAction < 0) CurrentAction = 1;
         }
         if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
-            CurrentItem--;
-            if (CurrentItem < 0) CurrentItem = CurrentData - 1;
+            CurrentAction--;
+            if (CurrentAction < 0) CurrentAction = 1;
         }
         if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
         {
             ActivatorSound("menu/move", 127);
-            CurrentItem++;
-            if (CurrentItem > CurrentData - 1) CurrentItem = 0;
+            CurrentAction++;
+            if (CurrentAction > 1) CurrentAction = 0;
         }
         if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
-            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+            // Disassembling
+            if (CurrentAction == 0)
             {
-                if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
+                ActivatorSound("menu/move", 127);
+                Player.OutpostMenu = OMENU_DISASSEMBLING;
+
+                // Categories Data
+                int CurrentCategory;
+                int CategoriesData[4] = {0, 3, 5, 9};
+                str CategoriesNames[3] =
                 {
-                    Player.OutpostMenu = 0;
-                    str ActorToSpawn;
-                    bool PartReceived;
-                    int Attempts = Random(1, 3 + CurrentExtraction) + Random(1, 3 + CurrentExtraction) * CurrentExtraction;
+                    "\CaWeapons",
+                    "\CdArmors/Boots",
+                    "\CnShield Parts"
+                };
 
-                    // Take Current Item
-                    TakeInventory(CurrentActor,1);
+                str ExtentExtraction[6] =
+                {
+                    "\CdVery Low",
+                    "    \CdLow",
+                    "  \CqMedium",
+                    "    \CaHigh",
+                    "\CgVery High",
+                    "\CfVery High+"
+                };
 
-                    // Take tokens from DoomRL Arsenal
-                    if (CompatMode == COMPAT_DRLA);
+                str PossibleExtraction[6] =
+                {
+                    "\CdDetails\C-\n\CfChips\C-\n\CnRecipes\C-",
+                    "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CnRecipes\C-",
+                    "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-",
+                    "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-",
+                    "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-\n\CkAug\C-",
+                    "\CdDetails\C-\n\CfChips\C-\n\CaBattery\C-\n\CgTurret Parts\C-\n\CnRecipes\C-\n\CrModPacks\C-\n\CqModule\C-\n\CkAug\C-"
+                };
+
+                // Weapons Data
+                int WeaponData;
+                int WeaponIndexes[10];
+                str WeaponActors[10];
+                str WeaponNames[10];
+                str WeaponIcons[10];
+                int WeaponCost[10];
+
+                // Armors/Boots Data
+                int ArmorData;
+                int ArmorIndexes[10];
+                str ArmorActors[10];
+                str ArmorNames[10];
+                str ArmorIcons[10];
+                int ArmorCost[10];
+
+                // Shield Parts Data
+                int ShieldData;
+                str ShieldActors[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
+                str ShieldNames[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
+                str ShieldIcons[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
+                int ShieldCost[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
+
+                // Current Item
+                int CurrentItem;
+                int CurrentData;
+                int CurrentIndex;
+                str CurrentActor;
+                str CurrentName;
+                str CurrentIcon;
+                int CurrentCost;
+                int CostMin;
+                int CostMax;
+                int CurrentExtraction;
+
+                // Chances of getting parts
+                int MaxAmount;
+                fixed ChanceDetails;
+                fixed ChanceChips;
+                fixed ChanceBattery;
+                fixed ChanceTurret;
+                fixed ChanceModule;
+                fixed ChanceAug;
+                fixed ChanceBluePrint;
+                fixed ChanceModPacks;
+
+                // Extraction Accounting
+                int AmountGunParts;
+                int AmountAmmoCasings;
+                int AmountFuelCapsule;
+                int AmountScrapMetals;
+                int AmountScrapElectronics;
+                int AmountExperimentalParts;
+                int AmountDemonArtifacts;
+                int AmountDifferentDetails;
+                int AmountChipGold;
+                int AmountChipPlatinum;
+                int AmountBattery;
+                int AmountTurret;
+                int AmountModule;
+                int AmountAug;
+                int AmountBluePrint;
+                int AmountModPacks;
+
+                // Database creation
+                for (int i = 0; i < 4; i++)
+                    for (int j = 0; j < ItemMax[CategoriesData[i]]; j++)
+                        if (CheckInventory(ItemData[CategoriesData[i]][j].Actor))
+                        {
+                            // Weapons
+                            if (i == 0)
+                            {
+                                ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
+                                WeaponIndexes[WeaponData] = j;
+                                WeaponActors[WeaponData] = Item->Actor;
+                                WeaponNames[WeaponData] = Item->Name;
+                                WeaponIcons[WeaponData] = Item->Sprite.Name;
+                                WeaponCost[WeaponData] = Item->Price;
+                                WeaponData++;
+                                if (WeaponData >= 10 - 1) continue;
+                            }
+
+                            // Armors/Boots
+                            if (i == 1 || i == 3)
+                            {
+                                ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
+                                ArmorIndexes[ArmorData] = j;
+                                ArmorActors[ArmorData] = Item->Actor;
+                                ArmorNames[ArmorData] = Item->Name;
+                                ArmorIcons[ArmorData] = Item->Sprite.Name;
+                                ArmorCost[ArmorData] = Item->Price;
+                                ArmorData++;
+                                if (ArmorData >= 10 - 1) continue;
+                            }
+
+                            // Shield Parts
+                            if (i == 2)
+                            {
+                                ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
+                                ShieldActors[ShieldData] = Item->Actor;
+                                ShieldNames[ShieldData] = Item->Name;
+                                ShieldIcons[ShieldData] = Item->Sprite.Name;
+                                ShieldCost[ShieldData] = Item->Price;
+                                ShieldData++;
+                                if (ShieldData >= MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES - 1) continue;
+                            }
+                        }
+
+                // So the player's initial interaction is not processed as a menu action
+                Delay(1);
+
+                while (Player.OutpostMenu == OMENU_DISASSEMBLING)
+                {
+                    SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+                    // Draw the background
+                    if (GetCVar("drpg_menudim"))
+                        FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
+
+                    // Set the HUD Size
+                    SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+
+                    // Draw Border
+                    // These are pushed back a bit so the border doesn't overlap anything
+                    if (GetActivatorCVar("drpg_menu_background_border"))
+                        DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470);
+
+                    // Info for Current Item
+                    // For Weapons
+                    if (CurrentCategory == 0 && WeaponData > 0)
                     {
-                        if (CurrentCategory == 0) RemoveDRLAItem(0, CurrentIndex);
-                        if (CurrentCategory == 1) RemoveDRLAItem(3, CurrentIndex);
+                        CurrentData = WeaponData;
+                        CurrentIndex = WeaponIndexes[CurrentItem];
+                        CurrentActor = WeaponActors[CurrentItem];
+                        CurrentName = WeaponNames[CurrentItem];
+                        CurrentIcon = WeaponIcons[CurrentItem];
+                        CurrentCost = WeaponCost[CurrentItem] / 20;
+                    }
+                    // For Armors/Boots
+                    if (CurrentCategory == 1 && ArmorData > 0)
+                    {
+                        CurrentData = ArmorData;
+                        CurrentIndex = ArmorIndexes[CurrentItem];
+                        CurrentActor = ArmorActors[CurrentItem];
+                        CurrentName = ArmorNames[CurrentItem];
+                        CurrentIcon = ArmorIcons[CurrentItem];
+                        CurrentCost = ArmorCost[CurrentItem] / 20;
+                    }
+                    // For Shield Parts
+                    if (CurrentCategory == 2 && ShieldData > 0)
+                    {
+                        CurrentData = ShieldData;
+                        CurrentActor = ShieldActors[CurrentItem];
+                        CurrentName = ShieldNames[CurrentItem];
+                        CurrentIcon = ShieldIcons[CurrentItem];
+                        CurrentCost = ShieldCost[CurrentItem] / 20;
                     }
 
-                    // The effect of sleep immersion
-                    FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
-                    Delay(35 * 1);
-
-                    // Get Part
-                    while (Attempts > 0 && CurrentCost > 0)
+                    // Calculate Extent Extraction
+                    // For Weapons and Shield Parts
+                    if (CurrentCategory == 0 || CurrentCategory == 2)
                     {
-                        if (CurrentCategory == 0)
-                            ActorToSpawn = ItemData[7][Random(6, 8)].Actor;
-                        if (CurrentCategory == 1)
-                            ActorToSpawn = ItemData[7][Random(9, 11)].Actor;
-                        if (CurrentCategory == 2)
-                            ActorToSpawn = ItemData[7][Random(0, 5)].Actor;
-
-                        if (RandomFixed(0.0, 100.0) <  ChanceChips && !PartReceived)
+                        if (CurrentCost < 100)
                         {
-                            if (CurrentExtraction < 3)
-                                ActorToSpawn = "DRPGChipDropper";
-                            else
-                                ActorToSpawn = (Random(0, 32) <= 0 ? "DRPGChipPlatinumPack" : "DRPGChipGoldPack");
-                            PartReceived = true;
-                            CurrentCost -= 125;
+                            CostMin = 0;
+                            CostMax = 100;
+                            CurrentExtraction = 0;
                         }
-                        if (RandomFixed(0.0, 100.0) <  ChanceBattery && !PartReceived)
+                        if (CurrentCost >= 100)
                         {
-                            ActorToSpawn = (Random(0, 1) <= 0 ? "DRPGLootDemonArtifact" : "DRPGBatteryDropper");
-                            PartReceived = true;
-                            CurrentCost -= 250;
+                            CostMin = 100;
+                            CostMax = 1500;
+                            CurrentExtraction = 1;
                         }
-                        if (RandomFixed(0.0, 100.0) <  ChanceTurret && !PartReceived)
+                        if (CurrentCost > 1500)
                         {
-                            ActorToSpawn = (Random(0, 20) <= 0 ? "DRPGTurretPartCrate" : "DRPGTurretPart");
-                            PartReceived = true;
-                            CurrentCost -= 250;
+                            CostMin = 1500;
+                            CostMax = 3000;
+                            CurrentExtraction = 2;
                         }
-                        if (RandomFixed(0.0, 100.0) <  ChanceBluePrint && !PartReceived)
+                        if (CurrentCost > 3000)
                         {
-                            ActorToSpawn = "RLBlueprintComputer";
-                            PartReceived = true;
-                            CurrentCost -= 2500;
+                            CostMin = 3000;
+                            CostMax = 6000;
+                            CurrentExtraction = 3;
                         }
-                        if (RandomFixed(0.0, 100.0) <  ChanceModPacks && !PartReceived)
+                        if (CurrentCost > 6000)
                         {
-                            ActorToSpawn = (Random(0, 4) <= 0 ? ItemData[8][Random(4, 8)].Actor : ItemData[8][Random(0, 3)].Actor);
-                            PartReceived = true;
-                            CurrentCost -= 2500;
+                            CostMin = 6000;
+                            CostMax = 10000;
+                            CurrentExtraction = 4;
                         }
-                        if (RandomFixed(0.0, 100.0) <  ChanceModule && !PartReceived)
+                        if (CurrentCost > 10000)
                         {
-                            ActorToSpawn = (Random(0, 1) <= 0 ? "DRPGModuleDropper" : ItemData[4][0].Actor);
-                            PartReceived = true;
-                            CurrentCost -= 2500;
+                            CostMin = 10000;
+                            CostMax = 20000;
+                            CurrentExtraction = 5;
                         }
-                        if (RandomFixed(0.0, 100.0) <  ChanceAug && !PartReceived)
-                        {
-                            ActorToSpawn = "DRPGAugDropper";
-                            PartReceived = true;
-                            CurrentCost -= 10000;
-                        }
-
-                        // Spawn Part in Disassembling Device
-                        SpawnSpotForced(ActorToSpawn, DisassemblingDeviceID, UniqueTID(), 0);
-
-                        PartReceived = false;
-                        Attempts--;
                     }
+                    // For Armor/Boots
+                    if (CurrentCategory == 1)
+                    {
+                        if (CurrentCost <= 50)
+                        {
+                            CostMin = 0;
+                            CostMax = 50;
+                            CurrentExtraction = 0;
+                        }
+                        if (CurrentCost > 50)
+                        {
+                            CostMin = 50;
+                            CostMax = 225;
+                            CurrentExtraction = 1;
+                        }
+                        if (CurrentCost > 225)
+                        {
+                            CostMin = 225;
+                            CostMax = 900;
+                            CurrentExtraction = 2;
+                        }
+                        if (CurrentCost > 900)
+                        {
+                            CostMin = 900;
+                            CostMax = 1500;
+                            CurrentExtraction = 3;
+                        }
+                        if (CurrentCost > 1500)
+                        {
+                            CostMin = 1500;
+                            CostMax = 2500;
+                            CurrentExtraction = 4;
+                        }
+                        if (CurrentCost > 2500)
+                        {
+                            CostMin = 2500;
+                            CostMax = 5000;
+                            CurrentExtraction = 5;
+                        }
+                    }
+
+                    // Calculate Chances
+                    // For Very Low Extent Extraction
+                    if (CurrentExtraction == 0)
+                    {
+                        MaxAmount = Curve(CurrentCost, CostMin, CostMax, 1, 3);
+                        ChanceChips = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
+                        ChanceBattery = 0.0;
+                        ChanceTurret = 0.0;
+                        ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 0.5, 2.5);
+                        ChanceModPacks = 0.0;
+                        ChanceModule = 0.0;
+                        ChanceAug = 0.0;
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
+                    }
+                    // For Low Extent Extraction
+                    if (CurrentExtraction == 1)
+                    {
+                        MaxAmount = Curve(CurrentCost, CostMin, CostMax, 4, 12);
+                        ChanceChips = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+                        ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
+                        ChanceTurret = 0.0;
+                        ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 2.5, 3.5);
+                        ChanceModPacks = 0.0;
+                        ChanceModule = 0.0;
+                        ChanceAug = 0.0;
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
+                    }
+                    // For Medium Extent Extraction
+                    if (CurrentExtraction == 2)
+                    {
+                        MaxAmount = Curve(CurrentCost, CostMin, CostMax, 13, 18);
+                        ChanceChips = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+                        ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+                        ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
+                        ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 3.5, 5.0);
+                        ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
+                        ChanceModule = 0.0;
+                        ChanceAug = 0.0;
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
+                    }
+                    // For High Extent Extraction
+                    if (CurrentExtraction == 3)
+                    {
+                        MaxAmount = Curve(CurrentCost, CostMin, CostMax, 19, 24);
+                        ChanceChips = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+                        ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+                        ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+                        ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+                        ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+                        ChanceModule = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
+                        ChanceAug = 0.0;
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
+                    }
+                    // For Very High Extent Extraction
+                    if (CurrentExtraction == 4)
+                    {
+                        MaxAmount = Curve(CurrentCost, CostMin, CostMax, 25, 35);
+                        ChanceChips = Curve(CurrentCost, CostMin, CostMax, 12.5, 15.0);
+                        ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+                        ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+                        ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+                        ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+                        ChanceModule = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+                        ChanceAug = Curve(CurrentCost, CostMin, CostMax, 0.5, 5.0);
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
+                    }
+                    // For Very High+ Extent Extraction
+                    if (CurrentExtraction == 5)
+                    {
+                        MaxAmount = Curve(CurrentCost, CostMin, CostMax, 36, 50);
+                        ChanceChips = Curve(CurrentCost, CostMin, CostMax, 15.0, 17.5);
+                        ChanceBattery = Curve(CurrentCost, CostMin, CostMax, 12.5, 15.0);
+                        ChanceTurret = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+                        ChanceBluePrint = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+                        ChanceModPacks = Curve(CurrentCost, CostMin, CostMax, 10.0, 12.5);
+                        ChanceModule = Curve(CurrentCost, CostMin, CostMax, 7.5, 10.0);
+                        ChanceAug = Curve(CurrentCost, CostMin, CostMax, 5.0, 7.5);
+                        ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
+                    }
+
+                    // Text
+                    SetFont("BIGFONT");
+                    HudMessage("\CdDisassembling Device\C-");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X + 108.0, Y + 16.0, 0.05, 0.05);
 
                     SetFont("BIGFONT");
-                    HudMessage("Item disassembly is complete");
-                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "Green", X + 64.0, Y + 240.0, 3.0, 2.0);
-                    ActivatorSound("mission/complete", 127);
-                    FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 2.0);
+                    HudMessage("Select item for disassembling:");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "White", X + 64.0, Y + 56.0, 0.05, 0.05);
 
-                    SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
-                    return;
+                    SetFont("BIGFONT");
+                    HudMessage("Category: %S", CategoriesNames[CurrentCategory]);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "White", X + 124.0, Y + 112.0, 0.05, 0.05);
+
+                    if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
+                    {
+                        PrintSprite(CurrentIcon, 0, X + 240.0,  Y + 188.0, 0.05);
+
+                        SetFont("BIGFONT");
+                        HudMessage("Item: %S", CurrentName);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 32.0, Y + 230.0, 0.05, 0.05);
+
+                        SetFont("SMALLFONT");
+                        HudMessage("Extent of Extraction:");
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 280.0, Y + 272.0, 0.05, 0.05);
+
+                        SetFont("BIGFONT");
+                        HudMessage("%S", ExtentExtraction[CurrentExtraction]);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 304.0, Y + 304.0, 0.05, 0.05);
+
+
+                        SetFont("SMALLFONT");
+                        HudMessage("Possible Extraction:\n\nMaximum amount: \Cd%d pcs.\C-", MaxAmount);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 32.0, Y + 272.0, 0.05, 0.05);
+
+                        // Possible Extraction
+                        // For Details
+                        if (ChanceDetails > 0)
+                        {
+                            SetFont("SMALLFONT");
+                            HudMessage("\CdDetails\C- rate: \Cf%.2k%%\C-", ChanceDetails);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 32.0, Y + 280.0 + 24.0, 0.05, 0.05);
+                        }
+                        // For Chips
+                        if (ChanceChips > 0)
+                        {
+                            SetFont("SMALLFONT");
+                            HudMessage("\CfChips\C- rate: \Cf%.2k%%\C-", ChanceChips);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + 280.0 + 32.0, 0.05, 0.05);
+                        }
+                        // For Recipes
+                        if (ChanceBluePrint > 0)
+                        {
+                            SetFont("SMALLFONT");
+                            HudMessage("\CnRecipes\C- rate: \Cf%.2k%%\C-", ChanceBluePrint);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 32.0, Y + 280.0 + 40.0, 0.05, 0.05);
+                        }
+                        // For Battery
+                        if (ChanceBattery > 0)
+                        {
+                            SetFont("SMALLFONT");
+                            HudMessage("\CaBattery\C- rate: \Cf%.2k%%\C-", ChanceBattery);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + 280.0 + 48.0, 0.05, 0.05);
+                        }
+                        // For Turret Parts
+                        if (ChanceTurret > 0)
+                        {
+                            SetFont("SMALLFONT");
+                            HudMessage("\CgTurret Parts\C- rate: \Cf%.2k%%\C-", ChanceTurret);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + 280.0 + 56.0, 0.05, 0.05);
+                        }
+                        // For ModPacks
+                        if (ChanceModPacks > 0)
+                        {
+                            SetFont("SMALLFONT");
+                            HudMessage("\CrModPacks\C- rate: \Cf%.2k%%\C-", ChanceModPacks);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + 280.0 + 64.0, 0.05, 0.05);
+                        }
+                        // For Module
+                        if (ChanceModule > 0)
+                        {
+                            SetFont("SMALLFONT");
+                            HudMessage("\CqModule\C- rate: \Cf%.2k%%\C-", ChanceModule);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 32.0, Y + 280.0 + 72.0, 0.05, 0.05);
+                        }
+                        // For Augmentation
+                        if (ChanceAug > 0)
+                        {
+                            SetFont("SMALLFONT");
+                            HudMessage("\CkAugmentation\C- rate: \Cf%.2k%%\C-", ChanceAug);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 32.0, Y + 280.0 + 80.0, 0.05, 0.05);
+                        }
+                    }
+                    else
+                    {
+                        SetFont("BIGFONT");
+                        HudMessage("No have items in this category");
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "Red", X + 56.0, Y + 208.0, 0.05, 0.05);
+                    }
+
+                    // Input
+                    if (CheckInput(BT_FORWARD, KEY_ONLYPRESSED, false, PlayerNumber()))
+                    {
+                        ActivatorSound("menu/move", 127);
+                        CurrentCategory++;
+                        CurrentItem = 0;
+                        if (CurrentCategory > 2) CurrentCategory = 0;
+                    }
+                    if (CheckInput(BT_BACK, KEY_ONLYPRESSED, false, PlayerNumber()))
+                    {
+                        ActivatorSound("menu/move", 127);
+                        CurrentCategory--;
+                        CurrentItem = 0;
+                        if (CurrentCategory < 0) CurrentCategory = 2;
+                    }
+                    if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
+                    {
+                        ActivatorSound("menu/move", 127);
+                        CurrentItem--;
+                        if (CurrentItem < 0) CurrentItem = CurrentData - 1;
+                    }
+                    if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
+                    {
+                        ActivatorSound("menu/move", 127);
+                        CurrentItem++;
+                        if (CurrentItem > CurrentData - 1) CurrentItem = 0;
+                    }
+                    if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+                    {
+                        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+                        {
+                            if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
+                            {
+                                Player.OutpostMenu = 0;
+                                str ActorToSpawn;
+                                bool PartReceived;
+                                int Attempts = MaxAmount;
+                                int AddMenuID = 3;
+                                fixed Y1;
+
+                                // Take Current Item
+                                TakeInventory(CurrentActor,1);
+
+                                // Take tokens from DoomRL Arsenal
+                                if (CompatMode == COMPAT_DRLA);
+                                {
+                                    if (CurrentCategory == 0) RemoveDRLAItem(0, CurrentIndex);
+                                    if (CurrentCategory == 1) RemoveDRLAItem(3, CurrentIndex);
+                                }
+
+                                // The effect of sleep immersion
+                                FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
+                                Delay(35 * 1);
+
+                                // Get Part
+                                while (Attempts > 0 && CurrentCost > 0)
+                                {
+                                    // For Details
+                                    if (RandomFixed(0.0, 100.0) <  ChanceDetails)
+                                    {
+                                        if (CurrentCategory == 0)
+                                        {
+                                            if (Random(0,5) <= 0 && !PartReceived)
+                                            {
+                                                if (Random(0,1) <= 0)
+                                                {
+                                                    ActorToSpawn = ItemData[7][8].Actor;
+                                                    AmountFuelCapsule++;
+                                                    PartReceived = true;
+                                                }
+                                                else
+                                                {
+                                                    ActorToSpawn = ItemData[7][11].Actor;
+                                                    AmountExperimentalParts++;
+                                                    PartReceived = true;
+                                                }
+                                            }
+                                            else if (Random(0,2) <= 0 && !PartReceived)
+                                            {
+                                                ActorToSpawn = ItemData[7][7].Actor;
+                                                AmountAmmoCasings++;
+                                                PartReceived = true;
+                                            }
+                                            else if (!PartReceived)
+                                            {
+                                                ActorToSpawn = ItemData[7][6].Actor;
+                                                AmountGunParts++;
+                                                PartReceived = true;
+                                            }
+                                        }
+                                        if (CurrentCategory == 1)
+                                        {
+                                            if (Random(0,5) <= 0 && !PartReceived)
+                                            {
+                                                if (Random(0,1) <= 0)
+                                                {
+                                                    ActorToSpawn = ItemData[7][8].Actor;
+                                                    AmountFuelCapsule++;
+                                                    PartReceived = true;
+                                                }
+                                                else
+                                                {
+                                                    ActorToSpawn = ItemData[7][11].Actor;
+                                                    AmountExperimentalParts++;
+                                                    PartReceived = true;
+                                                }
+                                            }
+                                            else if (Random(0,2) <= 0 && !PartReceived)
+                                            {
+                                                ActorToSpawn = ItemData[7][10].Actor;
+                                                AmountScrapElectronics++;
+                                                PartReceived = true;
+                                            }
+                                            else if (!PartReceived)
+                                            {
+                                                ActorToSpawn = ItemData[7][9].Actor;
+                                                AmountScrapMetals++;
+                                                PartReceived = true;
+                                            }
+                                        }
+                                        if (CurrentCategory == 2)
+                                        {
+                                            ActorToSpawn = ItemData[7][Random(0, 5)].Actor;
+                                            AmountDifferentDetails++;
+                                            PartReceived = true;
+                                        }
+                                    }
+                                    // For Other Chances
+                                    else
+                                    {
+                                        if (RandomFixed(0.0, 100.0) <  ChanceChips && !PartReceived)
+                                        {
+                                            if (CurrentExtraction < 3)
+                                            {
+                                                if (Random(0, 32) <= 0 && !PartReceived)
+                                                {
+                                                    ActorToSpawn = "DRPGChipPlatinum";
+                                                    AmountChipPlatinum++;
+                                                    PartReceived = true;
+                                                    CurrentCost -= 250;
+                                                }
+                                                else if (!PartReceived)
+                                                {
+                                                    ActorToSpawn = "DRPGChipGold";
+                                                    AmountChipGold++;
+                                                    PartReceived = true;
+                                                    CurrentCost -= 125;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (Random(0, 32) <= 0 && !PartReceived)
+                                                {
+                                                    ActorToSpawn = "DRPGChipPlatinumPack";
+                                                    AmountChipPlatinum += 3;
+                                                    PartReceived = true;
+                                                    CurrentCost -= 750;
+                                                }
+                                                else if (!PartReceived)
+                                                {
+                                                    ActorToSpawn = "DRPGChipGoldPack";
+                                                    AmountChipGold += 3;
+                                                    PartReceived = true;
+                                                    CurrentCost -= 375;
+                                                }
+                                            }
+                                        }
+                                        if (RandomFixed(0.0, 100.0) <  ChanceBattery && !PartReceived)
+                                        {
+                                            if (Random(0,1) <= 0 && !PartReceived)
+                                            {
+                                                ActorToSpawn = "DRPGLootDemonArtifact";
+                                                AmountDemonArtifacts++;
+                                                PartReceived = true;
+                                                CurrentCost -= 100;
+                                            }
+                                            else if (!PartReceived)
+                                            {
+                                                ActorToSpawn = "DRPGBatteryDropper";
+                                                AmountBattery++;
+                                                PartReceived = true;
+                                                CurrentCost -= 200;
+                                            }
+                                        }
+                                        if (RandomFixed(0.0, 100.0) <  ChanceTurret && !PartReceived)
+                                        {
+                                            if (Random(0, 20) <= 0 && !PartReceived)
+                                            {
+                                                ActorToSpawn = "DRPGTurretPartCrate";
+                                                AmountTurret += 5;
+                                                PartReceived = true;
+                                                CurrentCost -= 625;
+                                            }
+                                            else if (!PartReceived)
+                                            {
+                                                ActorToSpawn = "DRPGTurretPart";
+                                                AmountTurret++;
+                                                PartReceived = true;
+                                                CurrentCost -= 125;
+                                            }
+                                        }
+                                        if (RandomFixed(0.0, 100.0) <  ChanceBluePrint && !PartReceived)
+                                        {
+                                            ActorToSpawn = "RLBlueprintComputer";
+                                            AmountBluePrint++;
+                                            PartReceived = true;
+                                            CurrentCost -= 2000;
+                                        }
+                                        if (RandomFixed(0.0, 100.0) <  ChanceModPacks && !PartReceived)
+                                        {
+                                            ActorToSpawn = (Random(0, 4) <= 0 ? ItemData[8][Random(4, 8)].Actor : ItemData[8][Random(0, 3)].Actor);
+                                            AmountModPacks++;
+                                            PartReceived = true;
+                                            CurrentCost -= 2500;
+                                        }
+                                        if (RandomFixed(0.0, 100.0) <  ChanceModule && !PartReceived)
+                                        {
+                                            ActorToSpawn = "DRPGModuleDropper";
+                                            AmountModule++;
+                                            PartReceived = true;
+                                            CurrentCost -= 2500;
+                                        }
+                                        if (RandomFixed(0.0, 100.0) <  ChanceAug && !PartReceived)
+                                        {
+                                            ActorToSpawn = "DRPGAugDropper";
+                                            AmountAug++;
+                                            PartReceived = true;
+                                            CurrentCost -= 5000;
+                                        }
+                                    }
+                                    // For cases where no chance was successful
+                                    if (!PartReceived)
+                                    {
+                                        if (CurrentCategory == 0)
+                                        {
+                                            ActorToSpawn = ItemData[7][6].Actor;
+                                            AmountGunParts++;
+                                            PartReceived = true;
+                                        }
+                                        if (CurrentCategory == 1)
+                                        {
+                                            ActorToSpawn = ItemData[7][9].Actor;
+                                            AmountScrapMetals++;
+                                            PartReceived = true;
+                                        }
+                                        if (CurrentCategory == 2)
+                                        {
+                                            ActorToSpawn = ItemData[7][Random(0, 5)].Actor;
+                                            AmountDifferentDetails++;
+                                            PartReceived = true;
+                                        }
+                                    }
+
+                                    // Spawn Part in Disassembling Device
+                                    SpawnSpotForced(ActorToSpawn, DisassemblingDeviceID, UniqueTID(), 0);
+
+                                    PartReceived = false;
+                                    Attempts--;
+                                }
+
+                                SetFont("BIGFONT");
+                                HudMessage("Item disassembly is complete");
+                                EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "Green", X + 64.0, Y + 240.0, 3.0, 3.0);
+
+                                // Extraction Accounting
+                                SetFont("SMALLFONT");
+                                HudMessage("Managed to extract:");
+                                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + 264.0, 3.0, 3.0);
+
+                                // For Different Details (from Shield Parts)
+                                if (AmountDifferentDetails > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("Different Details: \Cd%d pcs.\C-", AmountDifferentDetails);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Gun Parts
+                                if (AmountGunParts > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("Gun Parts: \Cd%d pcs.\C-", AmountGunParts);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Ammo Casings
+                                if (AmountAmmoCasings > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("Ammo Casings: \Cd%d pcs.\C-", AmountAmmoCasings);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Fuel Capsule
+                                if (AmountFuelCapsule > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("Fuel Capsule: \Cd%d pcs.\C-", AmountFuelCapsule);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Scrap Metals
+                                if (AmountScrapMetals > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("Scrap Metals: \Cd%d pcs.\C-", AmountScrapMetals);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Scrap Electronics
+                                if (AmountScrapElectronics > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("Scrap Electronics: \Cd%d pcs.\C-", AmountScrapElectronics);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Experimental Parts
+                                if (AmountExperimentalParts > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("Experimental Parts: \Cd%d pcs.\C-", AmountExperimentalParts);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Demon Artifacts
+                                if (AmountDemonArtifacts > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CaDemon Artifacts\C-: \Cd%d pcs.\C-", AmountDemonArtifacts);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Chip Gold
+                                if (AmountChipGold > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CfChip Gold\C-: \Cd%d pcs.\C-", AmountChipGold);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Chip Platinum
+                                if (AmountChipPlatinum > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CwChip Platinum\C-: \Cd%d pcs.\C-", AmountChipPlatinum);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Recipes
+                                if (AmountBluePrint > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CnRecipes\C-: \Cd%d pcs.\C-", AmountBluePrint);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Battery
+                                if (AmountBattery > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CaBattery\C-: \Cd%d pcs.\C-", AmountBattery);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Turret
+                                if (AmountTurret > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CgTurret Parts\C-: \Cd%d pcs.\C-", AmountTurret);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For ModPacks
+                                if (AmountModPacks > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CrModPacks\C-: \Cd%d pcs.\C-", AmountModPacks);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Module
+                                if (AmountModule > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CqModule\C-: \Cd%d pcs.\C-", AmountModule);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+                                // For Augmentation
+                                if (AmountAug > 0)
+                                {
+                                    Y1 += 8.0;
+                                    AddMenuID += 1;
+                                    SetFont("SMALLFONT");
+                                    HudMessage("\CkAugmentation\C-: \Cd%d pcs.\C-", AmountAug);
+                                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + AddMenuID, "White", X + 64.0, Y + Y1 + 272.0, 3.0, 3.0);
+                                }
+
+                                ActivatorSound("mission/complete", 127);
+                                FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 2.0);
+
+                                SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+                                return;
+                            }
+                            else
+                                ActivatorSound("menu/error", 127);
+                        }
+                    }
+                    Delay(1);
                 }
-                else
-                    ActivatorSound("menu/error", 127);
+            }
+            // Assembling
+            else if (CurrentAction == 1)
+            {
+                ActivatorSound("menu/move", 127);
+                Player.OutpostMenu = OMENU_ASSEMBLING;
+
+                // Additional coordinates
+                fixed X1, Y1, Y2;
+
+                // Categories Data
+                int CurrentCategory;
+                int CategoriesData[3] = {0, 3, 9};
+                str CategoriesNames[3] =
+                {
+                    "\CaWeapons",
+                    "\CdArmors",
+                    "\CqBoots"
+                };
+
+                // Rare
+                int CurrentRare;
+                str RareNames[2] =
+                {
+                    "\CtExotic",
+                    "\CdUnique"
+                };
+
+                // Current Item
+                int CurrentItem;
+                int CurrentItemMin;
+                int CurrentItemMax;
+                int CurrentCostMin;
+                int CurrentCostMax;
+                int CurrentCost;
+                int CurrentRank;
+
+                // Current Required Basiс Item
+                int CurrentIndexBasic;
+
+                // Current Required Items
+                int CurrentTypeDetails1;
+                int CurrentAmountDetails1;
+                int CurrentTypeDetails2;
+                int CurrentAmountDetails2;
+                int CurrentTypeDetails3;
+                int CurrentAmountDetails3;
+                int CurrentTypeDetails4;
+                int CurrentAmountDetails4;
+                int CurrentTypeDetails5;
+                int CurrentAmountDetails5;
+                int CurrentTypeDetails6;
+                int CurrentAmountDetails6;
+
+                // So the player's initial interaction is not processed as a menu action
+                Delay(1);
+
+                while (Player.OutpostMenu == OMENU_ASSEMBLING)
+                {
+                    SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+                    // Reset additional coordinates
+                    X1 = 0.0;
+                    Y1 = 0.0;
+                    Y2 = 0.0;
+
+                    // Get Min/Max Item Index
+                    // For Weapon
+                    if (CurrentCategory == 0)
+                    {
+                        if (CurrentRare == 0)
+                        {
+                            CurrentItemMin = 10;
+                            CurrentItemMax = 26;
+                        }
+                        if (CurrentRare == 1)
+                        {
+                            CurrentItemMin = 34;
+                            CurrentItemMax = 62;
+                        }
+                    }
+                    // For Armor
+                    if (CurrentCategory == 1)
+                    {
+                        if (CurrentRare == 0)
+                        {
+                            CurrentItemMin = 29;
+                            CurrentItemMax = 43;
+                        }
+                        if (CurrentRare == 1)
+                        {
+                            CurrentItemMin = 59;
+                            CurrentItemMax = 84;
+                        }
+                    }
+                    // For Boots
+                    if (CurrentCategory == 2)
+                    {
+                        if (CurrentRare == 0)
+                        {
+                            CurrentItemMin = 17;
+                            CurrentItemMax = 20;
+                        }
+                        if (CurrentRare == 1)
+                        {
+                            CurrentItemMin = 21;
+                            CurrentItemMax = 30;
+                        }
+                    }
+                    if (CurrentItem < CurrentItemMin) CurrentItem = CurrentItemMin;
+                    if (CurrentItem > CurrentItemMax) CurrentItem = CurrentItemMax;
+
+                    // Calculate Required Items
+                    ItemInfoPtr Item = &ItemData[CategoriesData[CurrentCategory]][CurrentItem];
+                    // Cost Item
+                    // Min/Max Cost
+                    CurrentCostMin = ItemData[CategoriesData[CurrentCategory]][CurrentItemMin].Price / 20;
+                    CurrentCostMax = ItemData[CategoriesData[CurrentCategory]][CurrentItemMax].Price / 20;
+                    for (int i = CurrentItemMin; i <= CurrentItemMax; i++)
+                    {
+                        if ((ItemData[CategoriesData[CurrentCategory]][i].Price / 20) < CurrentCostMin)
+                            CurrentCostMin = ItemData[CategoriesData[CurrentCategory]][i].Price / 20;
+                        if ((ItemData[CategoriesData[CurrentCategory]][i].Price / 20) > CurrentCostMax)
+                            CurrentCostMax = ItemData[CategoriesData[CurrentCategory]][i].Price / 20;
+                    }
+                    // Calculate Global Current Cost
+                    CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 3) / 250 * 250;
+                    // Rank
+                    if (CurrentRare == 0)
+                        CurrentRank = ItemData[CategoriesData[CurrentCategory]][CurrentItem].Rank - 2;
+                    else
+                        CurrentRank = 6 + (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 0, 8));
+                    // Type/Amount Required Details
+                    // For Weapons
+                    if (CurrentCategory == 0)
+                    {
+                        // Set Default Current Type Details
+                        CurrentTypeDetails1 =  6;
+                        CurrentTypeDetails2 =  7;
+                        CurrentTypeDetails3 =  9;
+
+                        // Set Global Required
+                        // For Exotic Rare
+                        if (CurrentRare == 0)
+                        {
+                            // Calculate Amount Details
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 100)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 50)) / 5 * 5;
+
+                            // Set Default Current Craft Part
+                            if (CurrentRank >= 5)
+                            {
+                                CurrentTypeDetails4 =  10;
+                                CurrentAmountDetails4 = 1;
+                            }
+                            if (CurrentRank >= 6 )
+                            {
+                                CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 30)) / 5 * 5;
+                            }
+
+                            // Set Individual Required
+                            // For Blaster
+                            if (CurrentItem == 10)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails6 =  29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Combat Pistol
+                            if (CurrentItem == 11)
+                            {
+                                CurrentIndexBasic = 1;
+                            }
+                            // For Handcannon
+                            if (CurrentItem == 12)
+                            {
+                                CurrentIndexBasic = 11;
+                            }
+                            // For Marksman Pistol
+                            if (CurrentItem == 13)
+                            {
+                                CurrentIndexBasic = 12;
+                            }
+                            // For Super Shotgun
+                            if (CurrentItem == 14)
+                            {
+                                CurrentIndexBasic = 4;
+                            }
+                            // For Assault Shotgun
+                            if (CurrentItem == 15)
+                            {
+                                CurrentIndexBasic = 3;
+                            }
+                            // For Uzi
+                            if (CurrentItem == 16)
+                            {
+                                CurrentIndexBasic = 11;
+                            }
+                            // For Minigun
+                            if (CurrentItem == 17)
+                            {
+                                CurrentIndexBasic = 5;
+                                CurrentAmountDetails1 = 60;
+                                CurrentAmountDetails2 = 40;
+                                CurrentAmountDetails3 = 20;
+                            }
+                            // For Missile Launcher
+                            if (CurrentItem == 18)
+                            {
+                                CurrentIndexBasic = 7;
+                                CurrentTypeDetails2 =  8;
+                                CurrentAmountDetails2 = 20;
+                            }
+                            // For Napalm Launcher
+                            if (CurrentItem == 19)
+                            {
+                                CurrentIndexBasic = 7;
+                                CurrentTypeDetails2 =  8;
+                                CurrentAmountDetails2 = 30;
+                            }
+                            // For Laser Rifle
+                            if (CurrentItem == 20)
+                            {
+                                CurrentIndexBasic = 10;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Plasma Shotgun
+                            if (CurrentItem == 21)
+                            {
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails6 =  29;
+                                CurrentAmountDetails6 = 10;
+                            }
+                            // For Tristar Blaster
+                            if (CurrentItem == 22)
+                            {
+                                CurrentIndexBasic = 9;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Combat Translocator
+                            if (CurrentItem == 23)
+                            {
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Nuclear Plasma Pistol
+                            if (CurrentItem == 24)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nuclear Plasma Rifle
+                            if (CurrentItem == 25)
+                            {
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nuclear BFG9000
+                            if (CurrentItem == 26)
+                            {
+                                CurrentIndexBasic = 9;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                        }
+                        // For Unique Rare
+                        if (CurrentRare == 1)
+                        {
+                            // Set Default Current Type Details
+                            CurrentTypeDetails4 =  11;
+                            CurrentAmountDetails4 = 1;
+
+                            // Calculate Amount Details
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 120)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 60)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 40)) / 5 * 5;
+
+                            // Set Individual Required
+                            // For Jackhammer
+                            if (CurrentItem == 34)
+                            {
+                                CurrentIndexBasic = 15;
+                            }
+                            // For Railgun
+                            if (CurrentItem == 35)
+                            {
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Mysterious Magnum
+                            if (CurrentItem == 36)
+                            {
+                                CurrentIndexBasic = 75;
+                            }
+                            // For BFG10k
+                            if (CurrentItem == 37)
+                            {
+                                CurrentIndexBasic = 9;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Unknown Herald
+                            if (CurrentItem == 38)
+                            {
+                                CurrentIndexBasic = 104;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Frag Shotgun
+                            if (CurrentItem == 39)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentAmountDetails1 *= 2;
+                                CurrentAmountDetails2 *= 2;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Quad Shotgun
+                            if (CurrentItem == 40)
+                            {
+                                CurrentIndexBasic = 91;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Lightweaver
+                            if (CurrentItem == 41)
+                            {
+                                CurrentIndexBasic = 101;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  29;
+                                CurrentAmountDetails6 = 10;
+                            }
+                            // For Trigun
+                            if (CurrentItem == 42)
+                            {
+                                CurrentIndexBasic = 75;
+                            }
+                            // For Grammaton Cleric Beretta
+                            if (CurrentItem == 43)
+                            {
+                                CurrentIndexBasic = 102;
+                            }
+                            // For Anti-Freak Jackal
+                            if (CurrentItem == 44)
+                            {
+                                CurrentIndexBasic = 104;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Hellsing ARMS Casull
+                            if (CurrentItem == 45)
+                            {
+                                CurrentIndexBasic = 104;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Quantum Tantrum Cannon
+                            if (CurrentItem == 46)
+                            {
+                                CurrentIndexBasic = 101;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  29;
+                                CurrentAmountDetails6 = 15;
+                            }
+                            // For Revenant's Launcher
+                            if (CurrentItem == 47)
+                            {
+                                CurrentTypeDetails1 =  12;
+                                CurrentAmountDetails1 = 50;
+                                CurrentTypeDetails2 =  8;
+                            }
+                            // For Charch's Null Pointer
+                            if (CurrentItem == 48)
+                            {
+                                CurrentIndexBasic = 35;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Particle Beam Cannon
+                            if (CurrentItem == 49)
+                            {
+                                CurrentIndexBasic = 35;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Steel Beast
+                            if (CurrentItem == 50)
+                            {
+                                CurrentIndexBasic = 89;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Plasma Redirection Cannon
+                            if (CurrentItem == 51)
+                            {
+                                CurrentIndexBasic = 22;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Suss Gun
+                            if (CurrentItem == 52)
+                            {
+                                CurrentIndexBasic = 22;
+                                CurrentTypeDetails5 =  12;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 4;
+                            }
+                            // For MIRV Launcher
+                            if (CurrentItem == 53)
+                            {
+                                CurrentIndexBasic = 18;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For MA-75B Assault Rifle
+                            if (CurrentItem == 54)
+                            {
+                                CurrentIndexBasic = 98;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For WSTE-M5 Shotgun
+                            if (CurrentItem == 55)
+                            {
+                                CurrentIndexBasic = 4;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Widowmaker SMG
+                            if (CurrentItem == 56)
+                            {
+                                CurrentIndexBasic = 6;
+                            }
+                            // For Chameleon Rifle
+                            if (CurrentItem == 57)
+                            {
+                                CurrentIndexBasic = 98;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nanomachic Armament Generator
+                            if (CurrentItem == 58)
+                            {
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nuclear Onslaught
+                            if (CurrentItem == 59)
+                            {
+                                CurrentIndexBasic = 25;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Lucifer Cannon
+                            if (CurrentItem == 60)
+                            {
+                                CurrentIndexBasic = 35;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Direct Hit
+                            if (CurrentItem == 61)
+                            {
+                                CurrentIndexBasic = 18;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Triad Cannon
+                            if (CurrentItem == 62)
+                            {
+                                CurrentIndexBasic = 53;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                        }
+                    }
+                    // For Armor
+                    if (CurrentCategory == 1)
+                    {
+                        // Set Default Current Type Details
+                        CurrentTypeDetails1 =  9;
+                        CurrentTypeDetails2 =  10;
+                        CurrentTypeDetails3 =  11;
+
+                        // Set Global Required
+                        // For Exotic Rare
+                        if (CurrentRare == 0)
+                        {
+                            // Calculate Current Cost
+                            CurrentCost = (CurrentCost / 2) / 250 * 250;
+
+                            // Calculate Amount Details
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 50)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 25)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 10)) / 5 * 5;
+
+                            // Set Individual Required
+                            // For Ballistic Shield
+                            if (CurrentItem == 29)
+                            {
+                                CurrentIndexBasic = 11;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Ballistic Vest
+                            if (CurrentItem == 30)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                            }
+                            // For Bulletproof Vest
+                            if (CurrentItem == 31)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                            }
+                            // For Duelist Armor
+                            if (CurrentItem == 32)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                            }
+                            // For Energy-Shielded Vest
+                            if (CurrentItem == 33)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Energy Shield
+                            if (CurrentItem == 34)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Gothic Armor
+                            if (CurrentItem == 35)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Medical Armor
+                            if (CurrentItem == 36)
+                            {
+                                CurrentTypeDetails2 = 0;
+                            }
+                            // For Phaseshift Armor
+                            if (CurrentItem == 37)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Plasma Shield
+                            if (CurrentItem == 38)
+                            {
+                                CurrentIndexBasic = 12;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Onyx Armor
+                            if (CurrentItem == 39)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Overcharge System
+                            if (CurrentItem == 40)
+                            {
+                                CurrentAmountDetails1 *= 2;
+                                CurrentAmountDetails2 *= 2;
+                                CurrentAmountDetails3 *= 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Repulsion Wave Suit
+                            if (CurrentItem == 41)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Survival MediArmor
+                            if (CurrentItem == 42)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails2 = 0;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Cyberwarrior Armor
+                            if (CurrentItem == 43)
+                            {
+                                CurrentIndexBasic = 3;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                        }
+                        // For Unique Rare
+                        if (CurrentRare == 1)
+                        {
+                            // Set Default Current Craft Part
+                            CurrentTypeDetails4 =  11;
+                            CurrentAmountDetails4 = 1;
+
+                            // Calculate Amount Details
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 80)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 40)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 20)) / 5 * 5;
+
+                            // Set Individual Required
+                            // For Berserk Powersuit
+                            if (CurrentItem == 59)
+                            {
+                                CurrentIndexBasic = 43;
+                                CurrentTypeDetails5 =  10;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Phoenix-B Device Suit
+                            if (CurrentItem == 60)
+                            {
+                                CurrentIndexBasic = 27;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Cybernetic Armor
+                            if (CurrentItem == 61)
+                            {
+                                CurrentIndexBasic = 14;
+                                CurrentAmountDetails2 *= 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Energy Discharge Harness
+                            if (CurrentItem == 62)
+                            {
+                                CurrentIndexBasic = 41;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Frontline Engineer Suit
+                            if (CurrentItem == 63)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentIndexBasic = 12;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Geo's Golden Gauntlet
+                            if (CurrentItem == 64)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentTypeDetails2 = 3;
+                                CurrentTypeDetails5 =  10;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Jetpack
+                            if (CurrentItem == 65)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For K-8 Matterstorm Harness
+                            if (CurrentItem == 66)
+                            {
+                                CurrentIndexBasic = 27;
+                                CurrentTypeDetails2 =  3;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For K1-L3 Teslabolt Armor
+                            if (CurrentItem == 67)
+                            {
+                                CurrentIndexBasic = 27;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Lava Armor
+                            if (CurrentItem == 68)
+                            {
+                                CurrentIndexBasic = 28;
+                                CurrentTypeDetails2 = 3;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Malek's Armor
+                            if (CurrentItem == 69)
+                            {
+                                CurrentIndexBasic = 28;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Medical Power Armor
+                            if (CurrentItem == 70)
+                            {
+                                CurrentIndexBasic = 36;
+                                CurrentTypeDetails2 = 0;
+                                CurrentAmountDetails2 *= 2;
+                            }
+                            // For Nano Ablative Armor
+                            if (CurrentItem == 71)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentIndexBasic = 20;
+                                CurrentTypeDetails2 = 3;
+                            }
+                            // For Necro Armor
+                            if (CurrentItem == 72)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentIndexBasic = 11;
+                                CurrentTypeDetails2 = 12;
+                            }
+                            // For Nuclear Armor
+                            if (CurrentItem == 73)
+                            {
+                                CurrentIndexBasic = 28;
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Prototype Assault Shield
+                            if (CurrentItem == 74)
+                            {
+                                CurrentIndexBasic = 34;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For R11-n Psychic Amplifier Suit
+                            if (CurrentItem == 75)
+                            {
+                                CurrentIndexBasic = 26;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Roysten's Command Armor
+                            if (CurrentItem == 76)
+                            {
+                                CurrentIndexBasic = 32;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Shielded Armor
+                            if (CurrentItem == 77)
+                            {
+                                CurrentIndexBasic = 29;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Solo Operative Suit
+                            if (CurrentItem == 78)
+                            {
+                                CurrentIndexBasic = 26;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // Tactical Assembler Suit
+                            if (CurrentItem == 79)
+                            {
+                                CurrentCost = (CurrentCost / 2) / 250 * 250;
+                                CurrentIndexBasic = 13;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // Terminus Battlesuit
+                            if (CurrentItem == 80)
+                            {
+                                CurrentIndexBasic = 26;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Torgue Blastplate Armor
+                            if (CurrentItem == 81)
+                            {
+                                CurrentIndexBasic = 28;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For WW-41 Peacekeeper Armor
+                            if (CurrentItem == 82)
+                            {
+                                CurrentIndexBasic = 32;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Xaser Inc. Powerarmor
+                            if (CurrentItem == 83)
+                            {
+                                CurrentIndexBasic = 27;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For 0D-1a Assaultforce Armor
+                            if (CurrentItem == 84)
+                            {
+                                CurrentIndexBasic = 26;
+                                CurrentTypeDetails2 =  6;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                        }
+                    }
+
+                    // For Boots
+                    if (CurrentCategory == 2)
+                    {
+                        // Set Default Current Type Details
+                        CurrentTypeDetails1 =  9;
+                        CurrentTypeDetails2 =  10;
+                        CurrentTypeDetails3 =  11;
+
+                        // Set Global Required
+                        // For Exotic Rare
+                        if (CurrentRare == 0)
+                        {
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 60)) / 5 * 5;
+                            if (CurrentRank >= 5)
+                            {
+                                // Set Default Current Craft Part
+                                CurrentTypeDetails4 =  10;
+                                CurrentAmountDetails4 = 1;
+
+                                // Calculate Amount Details
+                                CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 30)) / 5 * 5;
+                            }
+                            if (CurrentRank >= 7)
+                            {
+                                // Calculate Amount Details
+                                CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 15)) / 5 * 5;
+                            }
+
+                            // Set Individual Required
+                            // For Acid-Proof Boots
+                            if (CurrentItem == 17)
+                            {
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Gothic Boots
+                            if (CurrentItem == 18)
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Phaseshift Boots
+                            if (CurrentItem == 19)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Shockwave Boots
+                            if (CurrentItem == 20)
+                            {
+                                CurrentIndexBasic = 0;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                        }
+                        // For Unique Rare
+                        if (CurrentRare == 1)
+                        {
+                            CurrentTypeDetails4 =  11;
+                            CurrentAmountDetails4 = 1;
+
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 80)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 40)) / 5 * 5;
+                            CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 20)) / 5 * 5;
+
+                            // Set Individual Required
+                            // For Enviro Boots
+                            if (CurrentItem == 21)
+                            {
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Frontline Engineer Boots
+                            if (CurrentItem == 22)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Lava Boots
+                            if (CurrentItem == 23)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Leonidas' Boots
+                            if (CurrentItem == 24)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  10;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nuclear Boots
+                            if (CurrentItem == 25)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nyarlaptotep's Boots
+                            if (CurrentItem == 26)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Roysten's Combat Boots
+                            if (CurrentItem == 27)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Solo Operative Boots
+                            if (CurrentItem == 28)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Tactical Assembler Boots
+                            if (CurrentItem == 29)
+                            {
+                                CurrentIndexBasic = 4;
+                            }
+                            // For Torgue Blastboots
+                            if (CurrentItem == 30)
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                        }
+                    }
+                    // Draw the background
+                    if (GetCVar("drpg_menudim"))
+                        FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
+
+                    // Set the HUD Size
+                    SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+
+                    // Draw Border
+                    // These are pushed back a bit so the border doesn't overlap anything
+                    if (GetActivatorCVar("drpg_menu_background_border"))
+                        DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470);
+
+                    // Text
+                    SetFont("BIGFONT");
+                    HudMessage("\CdDisassembling Device\C-");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X + 108.0, Y + 16.0, 0.05, 0.05);
+
+                    SetFont("BIGFONT");
+                    HudMessage("Select item for assembling:");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "White", X + 64.0, Y + 56.0, 0.05, 0.05);
+
+                    SetFont("BIGFONT");
+                    HudMessage("Category: %S", CategoriesNames[CurrentCategory]);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "White", X + 124.0, Y + 96.0, 0.05, 0.05);
+
+                    SetFont("BIGFONT");
+                    HudMessage("Rare: %S", RareNames[CurrentRare]);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 164.0, Y + 132.0, 0.05, 0.05);
+
+                    PrintSprite(ItemData[CategoriesData[CurrentCategory]][CurrentItem].Sprite.Name, 0, X + 240.0,  Y + 212.0, 0.05);
+
+                    SetFont("BIGFONT");
+                    HudMessage("Item: %S", ItemData[CategoriesData[CurrentCategory]][CurrentItem].Name);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 32.0, Y + 240.0, 0.05, 0.05);
+
+                    SetFont("SMALLFONT");
+                    HudMessage("Required \Cddetails\C-:");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 32.0, Y + 268.0, 0.05, 0.05);
+
+                    // Required Details
+                    // For Details #1
+                    if (CurrentAmountDetails1 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("%S: %d", ItemData[7][CurrentTypeDetails1].Name, CurrentAmountDetails1);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 32.0, Y + 276.0, 0.05, 0.05);
+                    }
+                    // For Details #2
+                    if (CurrentAmountDetails2 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("%S: %d", ItemData[7][CurrentTypeDetails2].Name, CurrentAmountDetails2);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 32.0, Y + 284.0, 0.05, 0.05);
+                    }
+                    // For Details #3
+                    if (CurrentAmountDetails3 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("%S: %d", ItemData[7][CurrentTypeDetails3].Name, CurrentAmountDetails3);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + (CurrentAmountDetails2 > 0 ? 292.0 : 284.0), 0.05, 0.05);
+                    }
+                    // For Additional Details
+                    if (CurrentAmountDetails4 > 0 || CurrentAmountDetails5 > 0 || CurrentAmountDetails6 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("Required \Cqadditional details\C-:");
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 32.0, Y + 308.0, 0.05, 0.05);
+
+                        // Set additional coordinates
+                        if (CurrentAmountDetails5 > 0 && CurrentAmountDetails4 + CurrentAmountDetails6 > 0)
+                            Y2 += 8.0;
+                        if (CurrentAmountDetails6 > 0 && CurrentAmountDetails4 + CurrentAmountDetails5 > 0)
+                            Y2 += 8.0;
+                    }
+                    // For Details #4 (Additional)
+                    if (CurrentAmountDetails4 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("%S: %d", ItemData[8][CurrentTypeDetails4].Name, CurrentAmountDetails4);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
+
+                        PrintSprite(ItemData[8][CurrentTypeDetails4].Sprite.Name, 0, X + X1 + 32.0,  Y + Y2 + 322.0, 0.05);
+
+                        X1 += 32.0;
+                        Y1 += 8.0;
+                    }
+                    // For Details #5 (Additional)
+                    if (CurrentAmountDetails5 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("%S: %d", ItemData[4][CurrentTypeDetails5].Name, CurrentAmountDetails5);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
+
+                        PrintSprite(ItemData[4][CurrentTypeDetails5].Sprite.Name, 0, X + X1 + 48.0,  Y + Y2 + 376.0, 0.05);
+
+                        X1 += 32.0;
+                        Y1 += 8.0;
+                    }
+                    // For Details #6 (Additional)
+                    if (CurrentAmountDetails6 > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("%S: %d", ItemData[6][CurrentTypeDetails6].Name, CurrentAmountDetails6);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
+
+                        PrintSprite(ItemData[6][CurrentTypeDetails6].Sprite.Name, 0, X + X1 + 48.0,  Y + Y2 + 348.0, 0.05);
+
+                        X1 += 32.0;
+                        Y1 += 8.0;
+                    }
+
+                    SetFont("SMALLFONT");
+                    HudMessage("Required \Cfcredits\C-:\n%d \CfC\C-", CurrentCost);
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 272.0, Y + 268.0, 0.05, 0.05);
+
+                    if (CurrentRank > 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("Required \CkRank\C-:\n%d \Ck(%S)\C-", CurrentRank, LongRanks[CurrentRank]);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 272.0, Y + 290.0, 0.05, 0.05);
+                    }
+
+                    // Required basic Item
+                    if (CurrentIndexBasic >= 0)
+                    {
+                        SetFont("SMALLFONT");
+                        HudMessage("Required \Cabasic item\C-:\n%S", StrLeft(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Name, 26));
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 15, "White", X + 272.0, Y + 314.0, 0.05, 0.05);
+
+                        PrintSprite(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Sprite.Name, 0, X + 336.0,  Y + 372.0, 0.05);
+                    }
+
+                    // Input
+                    if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
+                    {
+                        ActivatorSound("menu/move", 127);
+                        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+                        {
+                            CurrentRare++;
+                            CurrentItem = 0;
+                            CurrentIndexBasic = -1;
+                            CurrentAmountDetails1 = 0;
+                            CurrentAmountDetails2 = 0;
+                            CurrentAmountDetails3 = 0;
+                            CurrentAmountDetails4 = 0;
+                            CurrentAmountDetails5 = 0;
+                            CurrentAmountDetails6 = 0;
+                            if (CurrentRare > 1) CurrentRare = 0;
+                        }
+                        else
+                        {
+                            CurrentCategory++;
+                            CurrentItem = 0;
+                            CurrentIndexBasic = -1;
+                            CurrentAmountDetails1 = 0;
+                            CurrentAmountDetails2 = 0;
+                            CurrentAmountDetails3 = 0;
+                            CurrentAmountDetails4 = 0;
+                            CurrentAmountDetails5 = 0;
+                            CurrentAmountDetails6 = 0;
+                            if (CurrentCategory > 2) CurrentCategory = 0;
+                        }
+
+                    }
+                    if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
+                    {
+                        ActivatorSound("menu/move", 127);
+                        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+                        {
+                            CurrentRare--;
+                            CurrentItem = 0;
+                            CurrentIndexBasic = -1;
+                            CurrentAmountDetails1 = 0;
+                            CurrentAmountDetails2 = 0;
+                            CurrentAmountDetails3 = 0;
+                            CurrentAmountDetails4 = 0;
+                            CurrentAmountDetails5 = 0;
+                            CurrentAmountDetails6 = 0;
+                            if (CurrentRare < 0) CurrentRare = 1;
+                        }
+                        else
+                        {
+                            CurrentCategory--;
+                            CurrentItem = 0;
+                            CurrentIndexBasic = -1;
+                            CurrentAmountDetails1 = 0;
+                            CurrentAmountDetails2 = 0;
+                            CurrentAmountDetails3 = 0;
+                            CurrentAmountDetails4 = 0;
+                            CurrentAmountDetails5 = 0;
+                            CurrentAmountDetails6 = 0;
+                            if (CurrentCategory < 0) CurrentCategory = 2;
+                        }
+                    }
+                    if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
+                    {
+                        ActivatorSound("menu/move", 127);
+                        CurrentItem--;
+                        CurrentIndexBasic = -1;
+                        CurrentAmountDetails1 = 0;
+                        CurrentAmountDetails2 = 0;
+                        CurrentAmountDetails3 = 0;
+                        CurrentAmountDetails4 = 0;
+                        CurrentAmountDetails5 = 0;
+                        CurrentAmountDetails6 = 0;
+                        if (CurrentItem < CurrentItemMin) CurrentItem = CurrentItemMax;
+                    }
+                    if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
+                    {
+                        ActivatorSound("menu/move", 127);
+                        CurrentItem++;
+                        CurrentIndexBasic = -1;
+                        CurrentAmountDetails1 = 0;
+                        CurrentAmountDetails2 = 0;
+                        CurrentAmountDetails3 = 0;
+                        CurrentAmountDetails4 = 0;
+                        CurrentAmountDetails5 = 0;
+                        CurrentAmountDetails6 = 0;
+                        if (CurrentItem > CurrentItemMax) CurrentItem = CurrentItemMin;
+                    }
+                    if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+                    {
+                        if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+                        {
+                            if ((CurrentIndexBasic >= 0 && CheckInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor) || CurrentIndexBasic < 0) && Player.RankLevel >= CurrentRank && CheckInventory("DRPGCredits") >= CurrentCost && CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) >= CurrentAmountDetails1 &&  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) >= CurrentAmountDetails2
+                                    && CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) >= CurrentAmountDetails3 && CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) >= CurrentAmountDetails4 && CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) >= CurrentAmountDetails5 && CheckInventory(ItemData[6][CurrentTypeDetails6].Actor) >= CurrentAmountDetails6)
+                            {
+                                Player.OutpostMenu = 0;
+
+                                // Take Basic Item
+                                if (CurrentIndexBasic >= 0)
+                                {
+                                    // Take Current Basic Item
+                                    TakeInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor, 1);
+
+                                    // Take tokens from DoomRL Arsenal
+                                    if (CompatMode == COMPAT_DRLA)
+                                        RemoveDRLAItem(CategoriesData[CurrentCategory], CurrentIndexBasic);
+                                }
+
+                                // Take Details
+                                TakeInventory("DRPGCredits", CurrentCost);
+                                TakeInventory(ItemData[7][CurrentTypeDetails1].Actor, CurrentAmountDetails1);
+                                TakeInventory(ItemData[7][CurrentTypeDetails2].Actor, CurrentAmountDetails2);
+                                TakeInventory(ItemData[7][CurrentTypeDetails3].Actor, CurrentAmountDetails3);
+                                TakeInventory(ItemData[8][CurrentTypeDetails4].Actor, CurrentAmountDetails4);
+                                TakeInventory(ItemData[4][CurrentTypeDetails5].Actor, CurrentAmountDetails5);
+                                TakeInventory(ItemData[6][CurrentTypeDetails6].Actor, CurrentAmountDetails6);
+
+                                // The effect of sleep immersion
+                                FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
+                                Delay(35 * 1);
+
+                                // Spawn Item in Disassembling Device
+                                SpawnSpotForced(ItemData[CategoriesData[CurrentCategory]][CurrentItem].Actor, DisassemblingDeviceID, UniqueTID(), 0);
+
+                                SetFont("BIGFONT");
+                                HudMessage("Item assembly is complete");
+                                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "Green", X + 64.0, Y + 240.0, 3.0, 2.0);
+                                ActivatorSound("mission/complete", 127);
+                                FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 2.0);
+
+                                SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+                                return;
+                            }
+                            else
+                            {
+                                SetFont("BIGFONT");
+                                if (Player.RankLevel < CurrentRank)
+                                    PrintError("You need higher Rank to assembly this item");
+                                else if (CurrentIndexBasic >= 0 && !CheckInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor))
+                                    PrintError("You need basic item");
+                                else if (CheckInventory("DRPGCredits") < CurrentCost)
+                                    PrintError("Not enough credits to assembly this item");
+                                else if (CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) < CurrentAmountDetails1 ||  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) < CurrentAmountDetails2
+                                         || CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) < CurrentAmountDetails3)
+                                    PrintError("Not enough details to assembly this item");
+                                else if (CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) < CurrentAmountDetails4 || CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) < CurrentAmountDetails5 || CheckInventory(ItemData[6][CurrentTypeDetails6].Actor) < CurrentAmountDetails6)
+                                    PrintError("Not enough additional details to assembly this item");
+                                ActivatorSound("menu/error", 127);
+                            }
+                        }
+                    }
+
+                    Delay(1);
+                }
             }
         }
+
         Delay(1);
     }
 }
