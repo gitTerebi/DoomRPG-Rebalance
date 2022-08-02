@@ -1,3 +1,0 @@
-startuptitle = "Doom RPG SE Rebalance (2022-08-03)"
-startupcolors = "0092FF", "000000"
-startuptype = "Hexen"
