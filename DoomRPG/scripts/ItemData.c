@@ -878,8 +878,16 @@ NamedScript void BuildItemData()
 
         // Powerups
         ITEMDATA_CATEGORY(4, "\CqPowerups", CF_NONE);
+
         ITEMDATA_DEF("InvulnerabilityCharge2",      "Invulnerability Charge",              5000,  2,  7, "CRG2A0",  6, 22);
         ITEMDATA_DEF("InvisibilityCharge2",         "Invisibility Charge",                 2500,  1,  2, "CRG1A0",  6, 22);
+        // Compatibility Handling - DRLA Extended
+        bool IsDRLAX = SpawnForced("DRLAX_FamiliarBall", 0, 0, 0, TID, 0);
+        if (IsDRLAX)
+        {
+            ITEMDATA_DEF("DRLAX_SoulTrap",          "Soul Trap",                           1000,  2,  1, "SNRBD0", 12, 21);
+            Thing_Remove(TID);
+        }
         ITEMDATA_DEF("DRPGTimeSphere",              "Time Sphere",                         1000,  4,  1, "TIMEA0", 16, 45);
         ITEMDATA_DEF("DRPGRegenSphere",             "Regeneration Sphere",                 1000,  2,  1, "REGNA0", 12, 38);
         ITEMDATA_DEF("RadSuit2",                    "Radiation Suit",                       250,  0,  0, "SUITA0", 11, 51);
@@ -904,6 +912,10 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLHomingPhaseDevice",         "Homing Phase Device",                 2500,  2,  2, "PHS2I0", -9, -2);
         ITEMDATA_DEF("RLRecallPhaseDevice",         "Recall Phase Device",                 2500,  2,  2, "PHS3I0", -9, -5);
         ITEMDATA_DEF("RLExperimentalPhaseDevice",   "Experimental Phase Device",          30000, 12,  8, "PHS4I0", -9, -4);
+        if (IsDRLAX)
+        {
+            ITEMDATA_DEF("DRLAX_RadarDevice",       "Radar",                               1000,  2,  1, "SNRBB0",  9, 18);
+        }
         ITEMDATA_CATEGORY_END;
 
         // Mod Packs
