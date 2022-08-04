@@ -1334,7 +1334,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     int Amount;
 
     // Calculate Modifier
-    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1351,7 +1351,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
 
     if (Random(0, 100) <= 25 + RoundInt((fixed)AveragePlayerLevel() / 4.0 + (fixed)AveragePlayerLuck() / 4.0 + 25.0 * MapLevelModifier))
     {
-        RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
+        RarityMin = Random(0, RarityMax / 2);
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {
@@ -1391,7 +1391,7 @@ NamedScript DECORATE void DRPGArmorSpawner()
     int Amount;
 
     // Calculate Modifier
-    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1408,7 +1408,7 @@ NamedScript DECORATE void DRPGArmorSpawner()
 
     if (Random(0, 100) <= 25 + RoundInt((fixed)AveragePlayerLevel() / 4.0 + (fixed)AveragePlayerLuck() / 4.0 + 25.0 * MapLevelModifier))
     {
-        RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
+        RarityMin = Random(0, RarityMax / 2);
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {
@@ -1471,7 +1471,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
     }
 
     // Calculate Modifier
-    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1486,7 +1486,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
+    RarityMin = Random(0, RarityMax / 2);
 
     for (int i = ShieldPartsMin; i <= ShieldPartsMax; i++)
     {
