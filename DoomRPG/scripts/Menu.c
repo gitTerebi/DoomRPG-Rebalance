@@ -2934,6 +2934,7 @@ void MenuHelp()
 
 void DrawPlayerSprite(int PlayerNum, fixed X, fixed Y)
 {
+    // Compatibility Handling - DoomRL Arsenal
     if (CompatMode == COMPAT_DRLA)
     {
         if (PlayerClass(PlayerNum) == 0) // Marine
@@ -2946,6 +2947,21 @@ void DrawPlayerSprite(int PlayerNum, fixed X, fixed Y)
             PrintSprite("PRENA1", 0, X + 4.0, Y - 2.0, 0.05);
         if (PlayerClass(PlayerNum) == 4) // Demolitionist
             PrintSprite("PDMOA1", 0, X + 4.0, Y - 2.0, 0.05);
+
+        // Compatibility Handling - DoomRL Arsenal Extended
+        if (CompatModeEx == COMPAT_DRLAX)
+        {
+            if (PlayerClass(PlayerNum) == 6) // Mechanoid
+                PrintSprite("1337A1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 7) // Nomad
+                PrintSprite("ZHRTA1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 8) // Nano Maniac
+                PrintSprite("DKCPA1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 9) // Phase Sisters
+                PrintSprite("REVYA1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 10) // Sarge
+                PrintSprite("SUT1A1", 0, X + 4.0, Y - 2.0, 0.05);
+        }
     }
     else
         PrintSprite("PLAYA1", 0, X, Y + 2.0, 0.05);

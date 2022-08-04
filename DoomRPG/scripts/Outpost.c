@@ -3783,6 +3783,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                             if (CurrentItem == 17)
                             {
                                 CurrentIndexBasic = 8;
+                                CurrentTypeDetails5 =  15;
+                                CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 = 29;
                                 CurrentAmountDetails6 = 2;
                             }
@@ -3823,6 +3825,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                             if (CurrentItem == 21)
                             {
                                 CurrentIndexBasic = 8;
+                                CurrentTypeDetails5 =  15;
+                                CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 = 29;
                                 CurrentAmountDetails6 = 2;
                             }

@@ -24,6 +24,7 @@
 bool Transported;
 bool GlobalsInitialized;
 int CompatMode;
+int CompatModeEx;
 int CompatMonMode;
 bool MapPacks;
 
@@ -2387,6 +2388,18 @@ void CheckCompatibility()
 
         CompatMode = COMPAT_DRLA;
         SetInventory("DRPGDRLAActive", 1);
+        Thing_Remove(TID);
+    }
+
+    // DoomRL Arsenal Extended
+    Success = SpawnForced("DRLAX_FamiliarBall", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (DebugLog)
+            Log("\CdDEBUG: \CdDoomRL Extended \C-detected");
+
+        CompatModeEx = COMPAT_DRLAX;
+        SetInventory("DRPGDRLAXActive", 1);
         Thing_Remove(TID);
     }
 

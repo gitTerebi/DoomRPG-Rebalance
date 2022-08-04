@@ -2858,12 +2858,12 @@ NamedScript void MonsterDeath()
             DropMonsterItem(Killer, 0, "DRPGShieldSpawner", 48);
             DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
             DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
-            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 48);
+            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 32);
 
             if (CompatMode == COMPAT_DRLA)
             {
-                DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 80);
-                DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 48);
+                DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 32);
+                DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 16);
                 DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32);
                 DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 16);
                 DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 8);
@@ -2889,12 +2889,15 @@ NamedScript void MonsterDeath()
                     Delay(1);
             }
 
+            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 128);
             DropMonsterItem(Killer, 0, "DRPGArmorDropper", 128);
             DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 64);
             DropMonsterItem(Killer, 0, "DRPGUACCard", 16);
 
             if (CompatMode == COMPAT_DRLA)
             {
+                DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 128);
+                DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 64);
                 DropMonsterItem(Killer, 0, "RLBlueprintComputer", 128);
                 DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 64);
                 DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 32);
