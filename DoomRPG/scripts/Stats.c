@@ -757,10 +757,6 @@ void CheckStats()
         if (PlayerClass(PlayerNumber()) == 1)
             Player.JumpHeight *= 1.25;
     }
-
-    // Compatibility Handling - DoomRL Arsenal Extended
-    if (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 7 && Player.NomadLuckBonus < 100 * MapLevelModifier) // Nomad
-        Player.NomadLuckBonus = 100 * MapLevelModifier;
 }
 
 void CheckRegen()
