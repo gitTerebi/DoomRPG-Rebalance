@@ -497,7 +497,7 @@ Class RLPhaseSistersPassive : Inventory
 
     bool IsBlacklisted(Class<Inventory> inv)
     {
-        if(inv is "Key" || inv is "RLAssemblyLearntToken" || inv is "RLUniqueEffectLearntToken")
+        if(inv is "Key" || inv is "RLAssemblyLearntToken" || inv is "RLUniqueEffectLearntToken" || inv is "DRPGCredits" || inv is "DRPGModule")
         {
             return true;
         }
