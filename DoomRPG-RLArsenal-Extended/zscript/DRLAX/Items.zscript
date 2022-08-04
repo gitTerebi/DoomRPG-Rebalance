@@ -622,7 +622,7 @@ class DRLAX_TrappedSoulSphere3 : DRLAX_TrappedSoulBase
 {
 	Default
 	{
-		Inventory.Icon "SOLSOUL";
+		Inventory.Icon "SOLSOUL3";
 		Inventory.PickupMessage "You picked up a Trapped Soul Sphere.";
 		tag "Trapped Soul Sphere";
 	}
@@ -645,7 +645,7 @@ class DRLAX_TrappedSoulSphere4 : DRLAX_TrappedSoulBase
 {
 	Default
 	{
-		Inventory.Icon "SOLSOUL";
+		Inventory.Icon "SOLSOUL4";
 		Inventory.PickupMessage "You picked up a Trapped Soul Sphere.";
 		tag "Trapped Soul Sphere"; 
 	}
