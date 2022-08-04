@@ -949,6 +949,10 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
     if (!CurrentLevel->SecretMap)
         PreviousPrimaryLevelNum = CurrentLevel->LevelNum;
 
+    // Compatibility Handling - DoomRL Arsenal Extended
+    if (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 7 && Player.NomadLuckBonus < 100 * MapLevelModifier) // Nomad
+        Player.NomadLuckBonus = 100 * MapLevelModifier;
+
     // Exits
     if (CurrentLevel->UACArena)
     {
