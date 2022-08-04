@@ -3468,6 +3468,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Medical Armor
                             if (CurrentItem == 36)
                             {
+                                CurrentIndexBasic = 1;
                                 CurrentTypeDetails2 = 0;
                             }
                             // For Phaseshift Armor
