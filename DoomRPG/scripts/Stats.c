@@ -499,7 +499,7 @@ void CheckStats()
     Player.RegenerationTotal = Player.Regeneration + Player.SoulPurpleCount + Player.RegenerationBonus;
     Player.AgilityTotal = Player.Agility + Player.SoulOrangeCount + Player.AgilityBonus;
     Player.CapacityTotal = Player.Capacity + Player.SoulDarkBlueCount + Player.CapacityBonus;
-    Player.LuckTotal = Player.Luck + Player.SoulYellowCount + Player.LuckBonus;
+    Player.LuckTotal = Player.Luck + Player.SoulYellowCount + Player.LuckBonus + Player.NomadLuckBonus;
 
     // Natural stats check
     if (GetCVar("drpg_levelup_natural"))
@@ -757,6 +757,10 @@ void CheckStats()
         if (PlayerClass(PlayerNumber()) == 1)
             Player.JumpHeight *= 1.25;
     }
+
+    // Compatibility Handling - DoomRL Arsenal Extended
+    if (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 7 && Player.NomadLuckBonus < 100 * MapLevelModifier) // Nomad
+        Player.NomadLuckBonus = 100 * MapLevelModifier;
 }
 
 void CheckRegen()

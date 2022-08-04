@@ -526,7 +526,14 @@ void DrawStatsMenu()
         case 7:
         {
             if (Player.LuckTotal > Player.Luck)
-                HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
+            {
+                if ((Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus) > 0 && Player.NomadLuckBonus > 0)
+                    HudMessage("Luck: %d (+%d; +%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus), Player.NomadLuckBonus);
+                else if ((Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus) == 0 && Player.NomadLuckBonus > 0)
+                    HudMessage("Luck: %d (+%d)", Player.Luck, Player.NomadLuckBonus);
+                else
+                    HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
+            }
             else
                 HudMessage("Luck: %d", Player.Luck);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  175.0,  0.05);
@@ -572,7 +579,14 @@ void DrawStatsMenu()
             HudMessage("Capacity: %d", Player.Capacity);
         EndHudMessage(HUDMSG_PLAIN, 0, "Blue",       0.1,    175.0,  0.05);
         if (Player.LuckTotal > Player.Luck)
-            HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
+        {
+            if ((Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus) > 0 && Player.NomadLuckBonus > 0)
+                HudMessage("Luck: %d (+%d; +%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus), Player.NomadLuckBonus);
+            else if ((Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus) == 0 && Player.NomadLuckBonus > 0)
+                HudMessage("Luck: %d (+%d)", Player.Luck, Player.NomadLuckBonus);
+            else
+                HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
+        }
         else
             HudMessage("Luck: %d", Player.Luck);
         EndHudMessage(HUDMSG_PLAIN, 0, "Gold",       200.1,  175.0,  0.05);
