@@ -1,0 +1,765 @@
+class DRLAX_BaseInventory : CustomInventory
+{
+	Default
+	{
+		-COUNTITEM;
+		+INVENTORY.INVBAR;
+		+INVENTORY.UNDROPPABLE;
+		+INVENTORY.UNTOSSABLE;
+		+THRUSPECIES;
+		Inventory.Icon "BMODI0";
+		inventory.maxamount 1;
+		Inventory.Pickupsound "";
+		Inventory.UseSound "";
+		Inventory.PickupMessage "You picked up a DRLA item.";
+		//species "Player";
+		DeathSound "weapons/gundrop";
+	}
+
+	bool hasdropped;
+
+	states
+	{
+		Spawn:
+		BMOD A 3 Bright;
+		loop;
+		Pickup:
+		TNT1 A 0 A_GiveInventory("DRLAX_DummyItemGet", 1); //A_Print("fdsgfd");
+		stop;
+		Use:
+		TNT1 A 0
+		{
+			if(!invoker.hasused)
+			{
+				invoker.UseMessage();
+				invoker.UseSound();
+				TakeInventory("RLWeaponDrop", 999);
+				TakeInventory("RLScavengerDrop", 999);
+				invoker.hasused = true;
+				invoker.curweapon = invoker.owner.player.readyweapon.GetClass();
+				return;
+			}
+
+			if(invoker.hasused && invoker.curweapon == invoker.owner.player.readyweapon.GetClass())
+			{
+				invoker.hasused = false;
+				invoker.curweapon = null;
+				invoker.UseFunction();
+			}
+		}
+		fail;
+	}
+
+	Class<Weapon> curweapon;
+	bool hasused;
+
+	virtual void PressedDrop()
+	{
+		DefaultDrop();
+	}
+
+	Actor DefaultDrop()
+	{
+		bool spawned;
+		Actor act;
+		[spawned, act] = owner.A_SpawnItemEx(GetClass(),0,0,32,9);
+		if(act && spawned)
+		{
+			//act.ObtainInventory(self);
+			return act;
+		}
+		return null;
+	}
+
+	virtual void UseMessage()
+	{
+		owner.A_Print("You used the item.\n\nPress use again to use the item.\n\nChange weapon to cancel, press drop to drop");
+	}
+
+	virtual void DropMessage()
+	{
+		owner.A_Print("You dropped the item");
+	}
+
+	virtual void UseSound()
+	{
+		owner.A_StartSound("UI/PDA/UseCategory", flags:CHANF_LOCAL);
+	}
+
+	virtual void UseFunction()
+	{
+		owner.A_Print("Wowwie you used the item!");
+	}
+
+	override void Tick()
+	{
+		if(!owner)
+		{
+			if(vel.z == 0 && GetAge() > 3)
+			{
+				if(!hasdropped)
+				{
+					A_StartSound(deathsound);
+					hasdropped = true;
+					A_Stop();
+				}
+			}
+
+			curweapon = null;
+		}
+		else
+		{
+			if(curweapon && curweapon != owner.player.readyweapon.GetClass())
+			{
+				hasused = false;
+				curweapon = null;
+			}
+
+			if(GetClass() != owner.player.mo.InvSel.GetClass())
+			{
+				hasused = false;
+				curweapon = null;
+			}
+
+			if(hasused && owner.player.cmd.buttons & BT_ZOOM)
+			{
+				owner.GiveInventory("RLItemManipulationRemover", 1);
+				PressedDrop();
+				DropMessage();
+				ConsumeItem();
+
+				hasused = false;
+				curweapon = null;
+				Super.Tick();
+				return;
+			}
+		}
+		Super.Tick();
+	}
+
+	void ConsumeItem()
+	{
+		if(owner.CountInv(GetClassNAme()) > 1)
+		{
+			owner.TakeInventory(GetClassName(), 1);
+			return;
+		}
+		Destroy();
+	}
+
+	override bool CanPickup(Actor toucher)
+	{
+		if(velz != 0)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	override void Travelled()
+	{
+		hasused = false;
+		curweapon = null;
+	}
+}
+
+Class DRLAX_DummyItemGet : Powerup
+{
+	Default
+	{
+		powerup.duration 1;
+	}
+}
+
+Class DRLAX_FamiliarBall : DRLAX_BaseInventory
+{
+	Default
+	{
+		inventory.amount 1;
+		DeathSound "familiars/familiarballland";
+		Inventory.Icon "FAMLBAL";
+		inventory.pickupsound "familiars/familiarballup";
+		scale 0.35;
+		+FORCEXYBILLBOARD;
+		tag "Empty Familiar Ball";
+	}
+
+	String familiar;
+
+	states
+	{
+		Spawn:
+		FAML B 10;
+		FAML B 10 bright;
+		loop;
+	}
+
+	override void PostBeginPlay()
+	{
+		//Init("Imp");
+	}
+
+	override void UseMessage()
+	{
+		if(!familiar)
+		{
+			return;
+		}
+		String f = familiar;
+		f.ToUpper();
+		String s = Stringtable.Localize("$" .. "TXT_" .. f .. "FAMILIAR");
+		
+		owner.A_Print(s  .. "\n\n------------------------------------------------\n
+		Press use again to summon this familiar. It will fight alongside you forever.\n
+		Press \caDrop Item (DRLA)\c- to drop the Familiar Ball.", 8.0);
+	}
+
+	override void UseFunction()
+	{
+		if(!familiar)
+		{
+			return;
+		}
+		owner.A_Print("");
+
+		DRLAX_FamiliarManager.NewFamiliar(owner, "DRLAX_" .. familiar .. "Familiar");
+		owner.A_StartSound("familiars/familiarball", CHAN_ITEM);
+		ConsumeItem();
+	}
+
+	override void DropMessage()
+	{
+		owner.A_Print("You dropped the \ct" .. GetTag());
+	}
+
+	void Init(String familiarname)
+	{
+		familiar = familiarname;
+		String s = familiar;
+		s.Replace("Familiar", "");
+		SetTag("Familiar Ball - " .. s);
+		//pickupmessage = tag;
+	}
+
+	override void PressedDrop()
+	{
+		bool spawned;
+		Actor act;
+		[spawned, act] = owner.A_SpawnItemEx(GetClass(),0,0,32,9);
+		if(act && spawned)
+		{
+			DRLAX_FamiliarBall f = DRLAX_FamiliarBall(act);
+			if(f)
+			{
+				f.Init(familiar);
+			}
+			//act.ObtainInventory(self);
+		}
+	}
+
+	override String PickupMessage()
+	{
+		return "Picked up a " .. GetTag();
+	}
+}
+
+class DRLAX_RadarDevice : DRLAX_BaseInventory
+{
+	Default
+	{
+		Inventory.Icon "SNRBI";
+		inventory.maxamount 4;
+		inventory.pickupsound "misc/modpackpickup";
+		Inventory.UseSound "";
+		Inventory.PickupMessage "You picked up a Radar Device.";
+		//species "Player";
+		DeathSound "items/radardrop";
+		tag "Radar Device";
+	}
+
+	States
+	{
+		Spawn:
+		SNRB B 8;
+		SNRB C 8 bright;
+		loop;
+	}
+
+	override String PickupMessage()
+	{
+		return "Picked up a " .. GetTag();
+	}
+
+	override void UseMessage()
+	{
+		owner.A_Print("Use the Radar again to reveal monsters, items and other points of interest on the Automap.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 8.0);
+		owner.A_PlaySound("hud/generic");
+	}
+
+	override void UseFunction()
+	{
+		owner.A_Print("");
+		owner.Spawn("DRLAX_RadarCircle", owner.pos);
+		owner.A_PlaySound("misc/trackingmappickup", attenuation:ATTN_NONE);
+		ConsumeItem();
+	}
+
+	override void DropMessage()
+	{
+		owner.A_Print("You dropped the " .. GetTag());
+	}
+}
+
+class DRLAX_RadarCircle : MapMarker
+{
+	Default
+	{
+		Scale 0.0;
+		+NOINTERACTION;
+	}
+
+	States
+	{
+		Spawn:
+		SNRB A 1
+		{
+			A_SetScale(scale.x + 0.06, scale.y + 0.06);
+			if(GetAge() > 35*4)
+			{
+				A_FadeOut(0.1);
+			}
+
+			for(int i; i<actors.Size(); i++)
+			{
+				if(actors[i] && random(0, 5) == 0)
+				{
+					DRLAX_RadarPing sp = DRLAX_RadarPing(Spawn("DRLAX_RadarPing", actors[i].pos));
+					sp.sprite = actors[i].sprite;
+					sp.frame = actors[i].frame;
+					actors[i] = null;
+				}
+			}
+		}
+		loop;
+	}
+
+	Array<Actor> actors;
+
+	override void PostBeginPlay()
+	{
+		ThinkerIterator i = ThinkerIterator.Create("Actor");
+		Actor c;
+		while(c = Actor(i.Next()))
+		{
+			Inventory inv = Inventory(c);
+
+			if(inv && !inv.owner)
+			{
+				if(inv is "RLBaseWeaponPickup" || inv is "RLGenericArmorPickup" || inv is "RLGenericBootsPickup" || inv.bBIGPOWERUP)
+				{
+					actors.push(c);
+				}
+			}
+
+			if(c is "DRLAX_GizmoObject" || (c.bISMONSTER && c.health > 0))
+			{
+				actors.push(c);
+			}
+		}
+	}
+}
+
+class DRLAX_RadarPing : MapMarker
+{
+	Default
+	{
+		+NOINTERACTION;
+		scale 0.25;
+	}
+
+	States
+	{
+		Spawn:
+		"####" "#" 235;
+		Fade:
+		"####" "#" 1 A_FadeOut(0.008);
+		loop;
+	}
+}
+
+
+class DRLAX_SoulTrap : DRLAX_BaseInventory
+{
+	Default
+	{
+		alpha 0.5;
+		scale 0.8;
+		renderstyle "STYLE_TRANSLUCENT";
+		Inventory.Icon "SOLTRAPI";
+		inventory.maxamount 8;
+		Inventory.Pickupsound "familiars/familiarballup";
+		Inventory.UseSound "";
+		Inventory.PickupMessage "You picked up a Soul Trap.";
+		//species "Player";
+		DeathSound "items/glassdrop";
+		tag "Soul Trap";
+	}
+
+	States
+	{
+		Spawn:
+		SNRB D 8;
+		SNRB D 8 bright;
+		loop;
+	}
+
+	override String PickupMessage()
+	{
+		return "Picked up a " .. GetTag();
+	}
+
+	override void UseMessage()
+	{
+		owner.A_Print("Use the Soul Trap again to capture the effect of a nearby Sphere Power Up for later use.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 8.0);
+		owner.A_PlaySound("hud/generic");
+	}
+
+	override void UseFunction()
+	{
+		Array<String> powerups;
+
+		powerups.Push("RLSoulsphere2");
+		powerups.Push("RLSoulsphere3");
+		powerups.Push("RLSoulsphere4");
+		powerups.Push("Megasphere2");
+		powerups.Push("InvulnerabilitySphere2");
+		powerups.Push("BlurSphere2");
+		powerups.Push("RLFIREBLUSphere");
+		powerups.Push("RLAaaghSphere");
+
+		ThinkerIterator i = ThinkerIterator.Create("Inventory");
+		Inventory inv;
+		while(inv = Inventory(i.Next()))
+		{
+			if(inv.owner || owner.Distance3D(inv) > 200)
+			{
+				continue;
+			}
+
+			for(int i = 0; i<powerups.Size(); i++)
+			{
+				if(inv.GetClassName() == powerups[i])
+				{
+					Convert(powerups[i]);
+					ConsumeItem();
+					Spawn("DRLAX_TrappedPowerupFX", inv.pos + (0,0,32));
+					inv.Destroy();
+					return;
+				}
+			}
+		}
+
+		owner.A_Print("No Sphere Power Ups nearby.");
+	}
+
+	override void DropMessage()
+	{
+		owner.A_Print("You dropped the " .. GetTag());
+	}
+
+	void Convert(String p)
+	{
+		String i;
+		if(p ~== "InvulnerabilitySphere2") {i = "DRLAX_TrappedInvulnerabilitySphere";}
+		if(p ~== "BlurSphere2") {i = "DRLAX_TrappedInvisibilitySphere";}
+		if(p ~== "Megasphere2") {i = "DRLAX_TrappedMegaSphere";}
+		if(p ~== "RLSoulsphere2") {i = "DRLAX_TrappedSoulSphere";}
+		if(p ~== "RLSoulsphere3") {i = "DRLAX_TrappedSoulSphere3";}
+		if(p ~== "RLSoulsphere4") {i = "DRLAX_TrappedSoulSphere4";}
+		if(p ~== "RLAaaghSphere") {i = "DRLAX_TrappedAGHSphere";}
+		if(p ~== "RLFIREBLUSphere") { i = "DRLAX_TrappedFirebluSphere";}
+
+		owner.GiveInventory(i, 1);
+		PlayerPawn p = PlayerPawn(owner);
+		Inventory inv = owner.FindInventory(i);
+		p.invsel = inv;
+		inv.owner.A_PlaySound("items/soultrap");
+	}
+}
+
+class DRLAX_TrappedSoulBase : DRLAX_BaseInventory
+{
+	Default
+	{
+		scale 0.5;
+		Inventory.Icon "SOLTRAPI";
+		inventory.maxamount 8;
+		Inventory.Pickupsound "";
+		Inventory.UseSound "";
+		Inventory.PickupMessage "You picked up a Trapped Sphere.";
+		//species "Player";
+		DeathSound "items/glassdrop";
+		tag "Trapped Sphere";
+		translation "CMMDRLA_CyanFog";
+	}
+
+	States
+	{
+		Spawn:
+		SNRB D 8;
+		SNRB D 8 bright;
+		loop;
+	}
+
+	String powerupitem;
+
+	virtual void Init()
+	{
+		powerupitem = "";
+	}
+
+	override void UseMessage()
+	{
+		owner.A_Print("Use the Trapped Sphere again to invoke its effect.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 8.0);
+		owner.A_PlaySound("hud/generic");
+	}
+
+	override void UseFunction()
+	{
+		Spawn(powerupitem, owner.pos);
+		if(owner.velx + owner.vely == 0)
+		{
+			owner.A_ChangeVelocity(0.001, 0, 0, CVF_RELATIVE);
+		}
+
+		ConsumeItem();
+	}
+
+	override void DropMessage()
+	{
+		owner.A_Print("You dropped the " .. GetTag());
+	}
+
+	override void PostBeginPlay()
+	{
+		Init();
+	}
+
+}
+
+class DRLAX_TrappedInvulnerabilitySphere : DRLAX_TrappedSoulBase
+{
+	Default
+	{
+		Inventory.Icon "SOLINVUL";
+		Inventory.PickupMessage "You picked up a Trapped Invulnerability Sphere.";
+		tag "Trapped Invulnerability Sphere";
+	}
+
+	states
+	{
+		Spawn:
+		PINV A 8;
+		PINV A 8 bright;
+		loop;
+	}
+
+	override void Init()
+	{
+		powerupitem = "RLInvulnerabilitySphere";
+	}
+}
+
+class DRLAX_TrappedInvisibilitySphere : DRLAX_TrappedSoulBase
+{
+	Default
+	{
+		Inventory.Icon "SOLBLUR";
+		Inventory.PickupMessage "You picked up a Trapped Invisibility Sphere.";
+		tag "Trapped Invisibility Sphere";
+	}
+
+	states
+	{
+		Spawn:
+		PINS A 8;
+		PINS A 8 bright;
+		loop;
+	}
+
+	override void Init()
+	{
+		powerupitem = "RLBlurSphere";
+	}
+}
+
+
+class DRLAX_TrappedSoulSphere : DRLAX_TrappedSoulBase
+{
+	Default
+	{
+		Inventory.Icon "SOLSOUL";
+		Inventory.PickupMessage "You picked up a Trapped Soul Sphere.";
+		tag "Trapped Soul Sphere";
+	}
+
+	states
+	{
+		Spawn:
+		SOUL A 8;
+		SOUL A 8 bright;
+		loop;
+	}
+
+	override void Init()
+	{
+		powerupitem = "RLSoulSphere2";
+	}
+}
+
+class DRLAX_TrappedSoulSphere3 : DRLAX_TrappedSoulBase
+{
+	Default
+	{
+		Inventory.Icon "SOLSOUL";
+		Inventory.PickupMessage "You picked up a Trapped Soul Sphere.";
+		tag "Trapped Soul Sphere";
+	}
+
+	states
+	{
+		Spawn:
+		SOUL A 8;
+		SOUL A 8 bright;
+		loop;
+	}
+
+	override void Init()
+	{
+		powerupitem = "RLSoulSphere3";
+	}
+}
+
+class DRLAX_TrappedSoulSphere4 : DRLAX_TrappedSoulBase
+{
+	Default
+	{
+		Inventory.Icon "SOLSOUL";
+		Inventory.PickupMessage "You picked up a Trapped Soul Sphere.";
+		tag "Trapped Soul Sphere"; 
+	}
+
+	states
+	{
+		Spawn:
+		SOUL A 8;
+		SOUL A 8 bright;
+		loop;
+	}
+
+	override void Init()
+	{
+		powerupitem = "RLSoulSphere4";
+	}
+}
+
+
+class DRLAX_TrappedMegaSphere : DRLAX_TrappedSoulBase
+{
+	Default
+	{
+		Inventory.Icon "SOLMEGA";
+		Inventory.PickupMessage "You picked up a Trapped Mega Sphere.";
+		tag "Trapped Mega Sphere";
+	}
+
+	states
+	{
+		Spawn:
+		MEGA A 8;
+		MEGA A 8 bright;
+		loop;
+	}
+
+	override void Init()
+	{
+		powerupitem = "RLMegaSphere";
+	}
+}
+
+class DRLAX_TrappedAGHSphere : DRLAX_TrappedSoulBase
+{
+	Default
+	{
+		Inventory.Icon "SOLAAGH";
+		Inventory.PickupMessage "You picked up a Trapped AGH Sphere.";
+		tag "Trapped AGH Sphere";
+	}
+
+	states
+	{
+		Spawn:
+		RSPH A 8;
+		RSPH A 8 bright;
+		loop;
+	}
+
+	override void Init()
+	{
+		powerupitem = "RLAaaghSphere";
+	}
+}
+
+
+class DRLAX_TrappedFirebluSphere : DRLAX_TrappedSoulBase
+{
+	Default
+	{
+		Inventory.Icon "SOLFIRB";
+		Inventory.PickupMessage "You picked up a Trapped Fireblu Sphere.";
+		tag "Trapped Fireblu Sphere";
+	}
+
+	states
+	{
+		Spawn:
+		FBLS A 8;
+		FBLS A 8 bright;
+		loop;
+	}
+
+	override void Init()
+	{
+		powerupitem = "RLFIREBLUSphere";
+	}
+}
+
+class DRLAX_TrappedPowerupFX : Actor
+{
+    Default
+    {
+        +NOINTERACTION;
+        +NOGRAVITY;
+        Height 2;
+        radius 2;
+        Translation "CMMDRLA_CyanFog";
+        Renderstyle "Add";
+        Alpha 0.8;
+		scale 0.5;
+    }
+
+    states
+    {
+        Spawn:
+        TNT1 A 0;
+        NRXP ABCDEF 3 Bright;
+		stop;
+	}
+
+	override void Tick()
+	{
+		A_SetScale(scale.x + 0.1, scale.y + 0.1);
+		Super.Tick();
+	}
+}

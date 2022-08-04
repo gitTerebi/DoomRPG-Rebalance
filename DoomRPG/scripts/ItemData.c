@@ -878,6 +878,7 @@ NamedScript void BuildItemData()
 
         // Powerups
         ITEMDATA_CATEGORY(4, "\CqPowerups", CF_NONE);
+
         ITEMDATA_DEF("InvulnerabilityCharge2",      "Invulnerability Charge",              5000,  2,  7, "CRG2A0",  6, 22);
         ITEMDATA_DEF("InvisibilityCharge2",         "Invisibility Charge",                 2500,  1,  2, "CRG1A0",  6, 22);
         ITEMDATA_DEF("DRPGTimeSphere",              "Time Sphere",                         1000,  4,  1, "TIMEA0", 16, 45);
@@ -904,6 +905,12 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLHomingPhaseDevice",         "Homing Phase Device",                 2500,  2,  2, "PHS2I0", -9, -2);
         ITEMDATA_DEF("RLRecallPhaseDevice",         "Recall Phase Device",                 2500,  2,  2, "PHS3I0", -9, -5);
         ITEMDATA_DEF("RLExperimentalPhaseDevice",   "Experimental Phase Device",          30000, 12,  8, "PHS4I0", -9, -4);
+        // Compatibility Handling - DoomRL Arsenal Extended
+        if (CompatModeEx == COMPAT_DRLAX)
+        {
+            ITEMDATA_DEF("DRLAX_SoulTrap",          "Soul Trap",                           1000,  2,  1, "SNRBD0", 12, 21);
+            ITEMDATA_DEF("DRLAX_RadarDevice",       "Radar",                               1000,  2,  1, "SNRBB0",  9, 18);
+        }
         ITEMDATA_CATEGORY_END;
 
         // Mod Packs
@@ -1277,11 +1284,37 @@ NamedScript DECORATE void DRPGGenericLootSpawner()
     while (!CurrentLevel->Init) Delay(1);
 
     str ActorToSpawn;
+    bool ItemSelected;
 
     if (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512)
         ActorToSpawn = "DRPGHealthBonus";
     else
-        ActorToSpawn = ItemData[7][Random(0, 12)].Actor;
+    {
+        if (Random(0,3) <= 0 && !ItemSelected)
+        {
+            if (Random(0,1) <= 0)
+            {
+                ActorToSpawn = ItemData[7][Random(6,8)].Actor;
+                ItemSelected = true;
+            }
+            else
+            {
+                ActorToSpawn = ItemData[7][Random(9,11)].Actor;
+                ItemSelected = true;
+            }
+
+        }
+        else if (Random(0,15) <= 0 && !ItemSelected)
+        {
+            ActorToSpawn = ItemData[7][12].Actor;
+            ItemSelected = true;
+        }
+        else if (!ItemSelected)
+        {
+            ActorToSpawn = ItemData[7][Random(0,5)].Actor;
+            ItemSelected = true;
+        }
+    }
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
@@ -1301,7 +1334,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     int Amount;
 
     // Calculate Modifier
-    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1318,7 +1351,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
 
     if (Random(0, 100) <= 25 + RoundInt((fixed)AveragePlayerLevel() / 4.0 + (fixed)AveragePlayerLuck() / 4.0 + 25.0 * MapLevelModifier))
     {
-        RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
+        RarityMin = Random(0, RarityMax / 2);
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {
@@ -1358,7 +1391,7 @@ NamedScript DECORATE void DRPGArmorSpawner()
     int Amount;
 
     // Calculate Modifier
-    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1375,7 +1408,7 @@ NamedScript DECORATE void DRPGArmorSpawner()
 
     if (Random(0, 100) <= 25 + RoundInt((fixed)AveragePlayerLevel() / 4.0 + (fixed)AveragePlayerLuck() / 4.0 + 25.0 * MapLevelModifier))
     {
-        RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
+        RarityMin = Random(0, RarityMax / 2);
 
         for (int i = 0; i <= ItemMax[ItemCategory]; i++)
         {
@@ -1438,7 +1471,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
     }
 
     // Calculate Modifier
-    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1453,7 +1486,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    RarityMin = Random(0, RarityMax / (4 - RoundInt(3.0 * MapLevelModifier)));
+    RarityMin = Random(0, RarityMax / 2);
 
     for (int i = ShieldPartsMin; i <= ShieldPartsMax; i++)
     {

@@ -526,7 +526,14 @@ void DrawStatsMenu()
         case 7:
         {
             if (Player.LuckTotal > Player.Luck)
-                HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
+            {
+                if ((Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus) > 0 && Player.NomadLuckBonus > 0)
+                    HudMessage("Luck: %d (+%d; +%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus), Player.NomadLuckBonus);
+                else if ((Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus) == 0 && Player.NomadLuckBonus > 0)
+                    HudMessage("Luck: %d (+%d)", Player.Luck, Player.NomadLuckBonus);
+                else
+                    HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
+            }
             else
                 HudMessage("Luck: %d", Player.Luck);
             EndHudMessage(HUDMSG_PLAIN, 0, MenuCursorColor,   200.1,  175.0,  0.05);
@@ -572,7 +579,14 @@ void DrawStatsMenu()
             HudMessage("Capacity: %d", Player.Capacity);
         EndHudMessage(HUDMSG_PLAIN, 0, "Blue",       0.1,    175.0,  0.05);
         if (Player.LuckTotal > Player.Luck)
-            HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
+        {
+            if ((Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus) > 0 && Player.NomadLuckBonus > 0)
+                HudMessage("Luck: %d (+%d; +%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus), Player.NomadLuckBonus);
+            else if ((Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus) == 0 && Player.NomadLuckBonus > 0)
+                HudMessage("Luck: %d (+%d)", Player.Luck, Player.NomadLuckBonus);
+            else
+                HudMessage("Luck: %d (+%d)", Player.Luck, (Player.LuckNat + Player.SoulYellowCount + Player.LuckBonus));
+        }
         else
             HudMessage("Luck: %d", Player.Luck);
         EndHudMessage(HUDMSG_PLAIN, 0, "Gold",       200.1,  175.0,  0.05);
@@ -2934,6 +2948,7 @@ void MenuHelp()
 
 void DrawPlayerSprite(int PlayerNum, fixed X, fixed Y)
 {
+    // Compatibility Handling - DoomRL Arsenal
     if (CompatMode == COMPAT_DRLA)
     {
         if (PlayerClass(PlayerNum) == 0) // Marine
@@ -2946,6 +2961,21 @@ void DrawPlayerSprite(int PlayerNum, fixed X, fixed Y)
             PrintSprite("PRENA1", 0, X + 4.0, Y - 2.0, 0.05);
         if (PlayerClass(PlayerNum) == 4) // Demolitionist
             PrintSprite("PDMOA1", 0, X + 4.0, Y - 2.0, 0.05);
+
+        // Compatibility Handling - DoomRL Arsenal Extended
+        if (CompatModeEx == COMPAT_DRLAX)
+        {
+            if (PlayerClass(PlayerNum) == 6) // Mechanoid
+                PrintSprite("1337A1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 7) // Nomad
+                PrintSprite("ZHRTA1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 8) // Nano Maniac
+                PrintSprite("DKCPA1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 9) // Phase Sisters
+                PrintSprite("REVYA1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 10) // Sarge
+                PrintSprite("SUT1A1", 0, X + 4.0, Y - 2.0, 0.05);
+        }
     }
     else
         PrintSprite("PLAYA1", 0, X, Y + 2.0, 0.05);

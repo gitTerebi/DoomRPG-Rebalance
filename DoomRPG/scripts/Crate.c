@@ -53,8 +53,8 @@ NamedScript DECORATE void InitCrate()
     int TID = UniqueTID();
     int Amount = 3;
 
-    // Calculate Level/Luck Modifier
-    int Modifier = RoundInt(((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0 + 5.0) * MapLevelModifier);
+    // Calculate Modifier
+    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
     if (Modifier > 15)
         Modifier = 15;
     int Rarity = 0;

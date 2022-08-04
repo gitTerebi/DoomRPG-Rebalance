@@ -602,6 +602,9 @@ struct PlayerData_S
     int CapacityBonus;
     int LuckBonus;
 
+    // Compatibility Handling - DoomRL Arsenal Extended
+    int NomadLuckBonus;
+
     // Stat XP Levels
     long int StrengthXP;
     long int DefenseXP;
