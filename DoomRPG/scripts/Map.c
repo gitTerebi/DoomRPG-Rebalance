@@ -294,6 +294,48 @@ NamedScript Type_OPEN void MapInit()
     // Initialization map packs (WadSmoosh, Lexicon and etc.)
     InitMapPacks();
 
+    // Compatibility Handling - DoomRL Arsenal Extended
+    // Nomad - Give enhanced Pistol for Rank
+    if (CompatModeEx == COMPAT_DRLAX)
+    {
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            if (!PlayerInGame(i)) continue;
+
+            if (PlayerClass(i) != 7) continue;
+
+            SetActivator(Players(i).TID);
+
+            if (Player.RankLevel >= 2)
+            {
+                // Take Pistol
+                TakeInventory(ItemData[0][1].Actor, 1);
+
+                // Take tokens from DoomRL Arsenal
+                RemoveDRLAItem(0, 1);
+
+                // Give enchanced Pistol
+                if (Player.RankLevel >= 12)
+                    GiveInventory("RLHighPowerMarksmanPistol", 1);
+                else if (Player.RankLevel >= 10)
+                    GiveInventory("RLHighPowerHandCannon", 1);
+                else if (Player.RankLevel >= 8)
+                    GiveInventory("RLHighPowerCombatPistol", 1);
+                else if (Player.RankLevel >= 6)
+                    GiveInventory("RLMarksmanPistol", 1);
+                else if (Player.RankLevel >= 4)
+                    GiveInventory("RLHandCannon", 1);
+                else if (Player.RankLevel >= 2)
+                    GiveInventory("RLCombatPistol", 1);
+
+                // Give token from DoomRL Arsenal
+                GiveInventory("RLWeaponLimit", 1);
+            }
+
+            SetActivator(0, AAPTR_NULL);
+        }
+    }
+
     if (CurrentLevel->UACBase || CurrentLevel->UACArena)
     {
         CurrentLevel->Init = true;
@@ -394,48 +436,6 @@ NamedScript Type_OPEN void MapInit()
     if (GetCVar("drpg_jjirandomizer_compat"))
         if (CurrentLevel->Event == MAPEVENT_NONE)
             CallACS("jjirandomizer");
-
-    // Compatibility Handling - DoomRL Arsenal Extended
-    // Nomad - Give enhanced Pistol for Rank
-    if (CompatModeEx == COMPAT_DRLAX)
-    {
-        for (int i = 0; i < MAX_PLAYERS; i++)
-        {
-            if (!PlayerInGame(i)) continue;
-
-            if (PlayerClass(i) != 7) continue;
-
-            SetActivator(Players(i).TID);
-
-            if (Player.RankLevel >= 2)
-            {
-                // Take Pistol
-                TakeInventory(ItemData[0][1].Actor, 1);
-
-                // Take tokens from DoomRL Arsenal
-                RemoveDRLAItem(0, 1);
-
-                // Give enchanced Pistol
-                if (Player.RankLevel >= 12)
-                    GiveInventory("RLHighPowerMarksmanPistol", 1);
-                else if (Player.RankLevel >= 10)
-                    GiveInventory("RLHighPowerHandCannon", 1);
-                else if (Player.RankLevel >= 8)
-                    GiveInventory("RLHighPowerCombatPistol", 1);
-                else if (Player.RankLevel >= 6)
-                    GiveInventory("RLMarksmanPistol", 1);
-                else if (Player.RankLevel >= 4)
-                    GiveInventory("RLHandCannon", 1);
-                else if (Player.RankLevel >= 2)
-                    GiveInventory("RLCombatPistol", 1);
-
-                // Give token from DoomRL Arsenal
-                GiveInventory("RLWeaponLimit", 1);
-            }
-
-            SetActivator(0, AAPTR_NULL);
-        }
-    }
 
     CurrentLevel->Init = true;
 }
