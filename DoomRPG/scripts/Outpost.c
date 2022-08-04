@@ -99,6 +99,20 @@ NamedScript MapSpecial void EnterOutpost()
         // Music
         SetOutpostMusic(OUTPOST_MUSIC_NORMAL);
     }
+
+    // Compatibility Handling - DoomRL Arsenal Extended
+    if (CompatModeEx == COMPAT_DRLAX)
+    {
+        // Spawn DoomRL Arsenal Extended Objects
+        if (AveragePlayerRank() >= 2)
+            SpawnSpotForced("DRLAX_DimensionalBox", 40, UniqueTID(), 0);
+        if (AveragePlayerRank() >= 4)
+            SpawnSpotForced("DRLAX_WeaponRecyclerRPG", 41, UniqueTID(), 0);
+        if (AveragePlayerRank() >= 6)
+            SpawnSpotForced("DRLAX_ModReviser", 42, UniqueTID(), 0);
+        if (AveragePlayerRank() >= 8)
+            SpawnSpotForced("DRLAX_AppraiserObject", 43, UniqueTID(), 0);
+    }
 }
 
 NamedScript MapSpecial void RegenArea(int ID)
@@ -2994,8 +3008,6 @@ NamedScript MapSpecial void DisassemblingDevice()
                         if ((ItemData[CategoriesData[CurrentCategory]][i].Price / 20) > CurrentCostMax)
                             CurrentCostMax = ItemData[CategoriesData[CurrentCategory]][i].Price / 20;
                     }
-                    // Calculate Global Current Cost
-                    CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 3) / 250 * 250;
                     // Rank
                     if (CurrentRare == 0)
                         CurrentRank = ItemData[CategoriesData[CurrentCategory]][CurrentItem].Rank - 2;
@@ -3014,6 +3026,9 @@ NamedScript MapSpecial void DisassemblingDevice()
                         // For Exotic Rare
                         if (CurrentRare == 0)
                         {
+                            // Calculate Current Cost
+                            CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 3) / 250 * 250;
+
                             // Calculate Amount Details
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 100)) / 5 * 5;
                             CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 50)) / 5 * 5;
@@ -3158,6 +3173,9 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // Set Default Current Type Details
                             CurrentTypeDetails4 =  11;
                             CurrentAmountDetails4 = 1;
+
+                            // Calculate Current Cost
+                            CurrentCost = (Item->Price - Item->Price * Player.ShopDiscount / 100) / 250 * 250;
 
                             // Calculate Amount Details
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 120)) / 5 * 5;
@@ -3411,7 +3429,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                         if (CurrentRare == 0)
                         {
                             // Calculate Current Cost
-                            CurrentCost = (CurrentCost / 2) / 250 * 250;
+                            CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 6) / 250 * 250;
 
                             // Calculate Amount Details
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 50)) / 5 * 5;
@@ -3468,6 +3486,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Medical Armor
                             if (CurrentItem == 36)
                             {
+                                CurrentIndexBasic = 1;
                                 CurrentTypeDetails2 = 0;
                             }
                             // For Phaseshift Armor
@@ -3529,6 +3548,9 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // Set Default Current Craft Part
                             CurrentTypeDetails4 =  11;
                             CurrentAmountDetails4 = 1;
+
+                            // Calculate Current Cost
+                            CurrentCost = (Item->Price - Item->Price * Player.ShopDiscount / 100) / 250 * 250;
 
                             // Calculate Amount Details
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 80)) / 5 * 5;
@@ -3762,6 +3784,10 @@ NamedScript MapSpecial void DisassemblingDevice()
                         // For Exotic Rare
                         if (CurrentRare == 0)
                         {
+                            // Calculate Current Cost
+                            CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 3) / 250 * 250;
+
+                            // Calculate Amount Details
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 60)) / 5 * 5;
                             if (CurrentRank >= 5)
                             {
@@ -3783,6 +3809,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                             if (CurrentItem == 17)
                             {
                                 CurrentIndexBasic = 8;
+                                CurrentTypeDetails5 =  15;
+                                CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 = 29;
                                 CurrentAmountDetails6 = 2;
                             }
@@ -3811,6 +3839,10 @@ NamedScript MapSpecial void DisassemblingDevice()
                         // For Unique Rare
                         if (CurrentRare == 1)
                         {
+                            // Calculate Current Cost
+                            CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 3) / 250 * 250;
+
+                            // Calculate Amount Details
                             CurrentTypeDetails4 =  11;
                             CurrentAmountDetails4 = 1;
 
@@ -3823,6 +3855,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                             if (CurrentItem == 21)
                             {
                                 CurrentIndexBasic = 8;
+                                CurrentTypeDetails5 =  15;
+                                CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 = 29;
                                 CurrentAmountDetails6 = 2;
                             }

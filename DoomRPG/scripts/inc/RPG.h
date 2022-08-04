@@ -10,6 +10,7 @@ extern const str Version;
 extern bool Transported;
 extern bool GlobalsInitialized;
 extern int CompatMode;
+extern int CompatModeEx;
 extern int CompatMonMode;
 extern bool MapPacks;
 
