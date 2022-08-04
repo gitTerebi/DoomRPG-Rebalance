@@ -1,0 +1,129 @@
+Class DRLAX_WeaponRecyclerRPG : DRLAX_GizmoObject
+{
+    Default
+	{
+		-SOLID;
+		scale 1.25;
+	}
+
+    bool rng;
+
+	states
+	{
+		Spawn:
+		GIZM J 1 ReadyForWep();
+		loop;
+        WeaponsIn:
+        GIZM J 1;
+        WeaponsInLoop:
+        GIZM JJJJJJKKKKKKK 1 bright ReadyForWep();
+        loop;
+        Death:
+        GIZM J 8;
+        GIZM J 35 A_StartSound("weapons/chameleonriflechangemode");
+        GIZM J -1
+        {
+            for(int i; i<CanHack()+1; i++)
+            {
+                if(rng)
+                {
+                    Spawn("DRPGCraftPartsUnique", pos + (0,0,32));
+                }
+                else
+                {
+                    if (Random(0, 3) == 0)
+                        Spawn("DRPGCraftPartsExotic", pos + (0,0,32));
+                    else
+                    {
+                        int parts = random(3,6);
+                        while (parts--)
+                        {
+                            if (Random(0, 1) == 0)
+                                Spawn("DRPGLootGunParts", pos + (0,0,32));
+                            if (Random(0, 1) == 0)
+                                Spawn("DRPGLootAmmoCasings", pos + (0,0,32));
+                        }
+                    }
+                }
+            }
+        }
+        stop;
+	}
+
+    override void PostBeginPlay()
+    {
+        rng = (random(0, 19) == 0);
+    }
+
+    uint wepcount;
+
+    Void ReadyForWep()
+    {
+        if(!CheckRange(350, true))
+		{
+            let b = FindDroppedWeapon();
+
+            String badweps[] = 
+            {
+                "RLChainsaw",
+                "RLPistol",
+                "RLShotgun",
+                "RLCombatShotgun",
+                "RLDoubleShotgun",
+                "RLChaingun",
+                "RLBattleRifle",
+                "RLRocketLauncher",
+                "RLPlasmaRifle",
+                "RLBFG9000"
+            };
+
+            if(b)
+            {
+                for(int i; i<badweps.Size(); i++)
+                {
+                    String wep = badweps[i] .. "Pickup";
+                    String s = b.GetClassName();
+
+                    if(wep ~== s || wep .. "Modded" ~== s)
+                    {
+                        return;
+                    }
+                }
+
+                wepcount++;
+
+                if(b.master && wepcount < 3)
+                {
+                    String n = b.GetTag();
+                    n.Replace(" [Pickup]", "");
+                    b.master.A_Print("You discarded your " .. n .. ".\n\n\cf" .. 3 - wepcount .. " weapons remain.");
+                }
+
+                if(wepcount == 3)
+                {
+                    SetStateLabel("Death");
+                }
+
+                if(wepcount == 1)
+                {
+                    SetStateLabel("WeaponsIn");
+                }
+                A_StartSound("weapons/flamethrowerload");
+                b.Destroy();
+            }
+        }
+    }
+
+    override bool Used(Actor user)
+	{
+        if(wepcount == 3)
+        {
+            user.A_StartSound("hud/error", flags:CHANF_LOCAL);
+            user.A_Print("This device is no longer usable.", 5);
+            return true;
+        }
+        user.A_Print("\cq- Weapon Fabricator (Outpost) -\n\n\c-Offer 3 weapons of \ctExotic\c- rarity or higher to create a craft parts (25% chance).\n\n\cf" .. 3 - wepcount .. " weapons remain.", 5);
+        return true;
+    }
+    
+}
