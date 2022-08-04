@@ -44,6 +44,92 @@ Class RLNomadEvents : EventHandler
 
 	override void WorldLoaded (WorldEvent e)
 	{
+		ThinkerIterator InvIterator = ThinkerIterator.Create("Inventory");
+		
+		Inventory inv;
+		
+		while(inv = Inventory(InvIterator.Next()))
+		{
+			if(!inv.owner)
+			{
+				continue;
+			}
+			
+			if(inv.owner.GetClassName() == "DoomRLNomadRPG")
+			{
+				if(inv.GetClassName() == "RLDangerLevel"){continue;}
+				if(inv.GetClassName() == "RLUniqueBossLevel"){continue;}
+				if(inv.GetClassName() == "RLDemonArtifactItem"){continue;}
+				
+				if(inv.GetClassName() == "DRPGModule"){continue;}
+				if(inv.GetClassName() == "DRPGCredits"){continue;}
+				if(inv.GetClassName() == "DRPGTurretPart"){continue;}
+
+				if(inv.GetClassName() == "DRPGAugCanister"){continue;}
+				if(inv.GetClassName() == "DRPGAugUpgradeCanister"){continue;}
+
+				if(inv.GetClassName() == "DRPGChipGold"){continue;}
+				if(inv.GetClassName() == "DRPGChipPlatinum"){continue;}
+
+				if(inv is "DRPGStimSmall"){continue;} 								// all stims
+				if(inv.GetClassName() == "DRPGVialStrength"){continue;}
+				if(inv.GetClassName() == "DRPGVialDefense"){continue;}
+				if(inv.GetClassName() == "DRPGVialVitality"){continue;}
+				if(inv.GetClassName() == "DRPGVialEnergy"){continue;}
+				if(inv.GetClassName() == "DRPGVialRegeneration"){continue;}
+				if(inv.GetClassName() == "DRPGVialAgility"){continue;}
+				if(inv.GetClassName() == "DRPGVialCapacity"){continue;}
+				if(inv.GetClassName() == "DRPGVialLuck"){continue;}
+				if(inv.GetClassName() == "DRPGVialPurifier"){continue;}
+				if(inv.GetClassName() == "DRPGVialPotency"){continue;}
+				if(inv.GetClassName() == "DRPGVialIndestructible"){continue;}
+				if(inv.GetClassName() == "DRPGVialShadow"){continue;}
+				if(inv.GetClassName() == "DRPGVialInfinity"){continue;}
+				if(inv.GetClassName() == "DRPGVialChrono"){continue;}
+				if(inv.GetClassName() == "DRPGVialAdrenaline"){continue;}
+				if(inv.GetClassName() == "DRPGVialGravity"){continue;}
+				if(inv.GetClassName() == "DRPGVialVampire"){continue;}
+				if(inv.GetClassName() == "DRPGVialRage"){continue;}
+				if(inv.GetClassName() == "DRPGVialMagnetic"){continue;}
+
+				if(inv.GetClassName() == "DRPGLife"){continue;}						// additional lives / 1up
+				
+				if(inv is "DRPGLoot"){continue;} 									// all quest loot
+				if(inv is "DRPGShieldPart"){continue;} 								// all shield parts
+				if(inv is "DRPGCraftParts"){continue;} 								// crafting parts
+				
+				inv.owner.TakeInventory(inv.GetClassName(), inv.maxamount);
+			}
+		}
+		
+		for(int i = 0; i<Players.Size(); i++)
+		{
+			if(!Players[i].mo || Players[i].mo.GetClassName()!="DoomRLNomadRPG")
+			{
+				continue;
+			}
+
+			Actor a = Players[i].mo;
+			
+			DropItem di = a.default.GetDropItems();
+			
+			while (di != null)
+			{
+				Class<Actor> w;			
+				a.GiveInventory(di.Name, di.amount);
+				
+				w = di.Name;
+				if(w is "Weapon")
+				{
+					a.A_SelectWeapon(di.Name);
+				}
+				di = di.Next;
+			}
+			
+			a.health = a.default.health;
+			Players[i].health = a.default.health;
+		}
+
 		danger = 0;
 		
 		for(int i = 0; i<Players.Size(); i++)
@@ -65,6 +151,7 @@ Class RLNomadEvents : EventHandler
 				}
 
 				Players[i].mo.PickWeapon(1, false);
+				Players[i].mo.GiveInventory("Clip", 10000);
 			}
 		}
 	}
@@ -359,91 +446,17 @@ Class RLNomadEvents : EventHandler
 	override void WorldUnloaded (WorldEvent e) 
 	{
 		//mapsbeat++;
-		
-		ThinkerIterator InvIterator = ThinkerIterator.Create("Inventory");
-		
-		Inventory inv;
-		
-		while(inv = Inventory(InvIterator.Next()))
-		{
-			if(!inv.owner)
-			{
-				continue;
-			}
-			
-			if(inv.owner.GetClassName() == "DoomRLNomadRPG")
-			{
-				if(inv.GetClassName() == "RLDangerLevel"){continue;}
-				if(inv.GetClassName() == "RLUniqueBossLevel"){continue;}
-				if(inv.GetClassName() == "RLDemonArtifactItem"){continue;}
-				
-				if(inv.GetClassName() == "DRPGModule"){continue;}
-				if(inv.GetClassName() == "DRPGCredits"){continue;}
-				if(inv.GetClassName() == "DRPGTurretPart"){continue;}
-
-				if(inv.GetClassName() == "DRPGAugCanister"){continue;}
-				if(inv.GetClassName() == "DRPGAugUpgradeCanister"){continue;}
-
-				if(inv.GetClassName() == "DRPGChipGold"){continue;}
-				if(inv.GetClassName() == "DRPGChipPlatinum"){continue;}
-
-				if(inv is "DRPGStimSmall"){continue;} 								// all stims
-				if(inv.GetClassName() == "DRPGVialStrength"){continue;}
-				if(inv.GetClassName() == "DRPGVialDefense"){continue;}
-				if(inv.GetClassName() == "DRPGVialVitality"){continue;}
-				if(inv.GetClassName() == "DRPGVialEnergy"){continue;}
-				if(inv.GetClassName() == "DRPGVialRegeneration"){continue;}
-				if(inv.GetClassName() == "DRPGVialAgility"){continue;}
-				if(inv.GetClassName() == "DRPGVialCapacity"){continue;}
-				if(inv.GetClassName() == "DRPGVialLuck"){continue;}
-				if(inv.GetClassName() == "DRPGVialPurifier"){continue;}
-				if(inv.GetClassName() == "DRPGVialPotency"){continue;}
-				if(inv.GetClassName() == "DRPGVialIndestructible"){continue;}
-				if(inv.GetClassName() == "DRPGVialShadow"){continue;}
-				if(inv.GetClassName() == "DRPGVialInfinity"){continue;}
-				if(inv.GetClassName() == "DRPGVialChrono"){continue;}
-				if(inv.GetClassName() == "DRPGVialAdrenaline"){continue;}
-				if(inv.GetClassName() == "DRPGVialGravity"){continue;}
-				if(inv.GetClassName() == "DRPGVialVampire"){continue;}
-				if(inv.GetClassName() == "DRPGVialRage"){continue;}
-				if(inv.GetClassName() == "DRPGVialMagnetic"){continue;}
-
-				if(inv.GetClassName() == "DRPGLife"){continue;}						// additional lives / 1up
-				
-				if(inv is "DRPGLoot"){continue;} 									// all quest loot
-				if(inv is "DRPGShieldPart"){continue;} 								// all shield parts
-				if(inv is "DRPGCraftParts"){continue;} 								// crafting parts
-				
-				inv.owner.TakeInventory(inv.GetClassName(), inv.maxamount);
-			}
-		}
-		
 		for(int i = 0; i<Players.Size(); i++)
 		{
 			if(!Players[i].mo || Players[i].mo.GetClassName()!="DoomRLNomadRPG")
 			{
-			continue;
+				continue;
 			}
 
 			Actor a = Players[i].mo;
 			
-			DropItem di = a.default.GetDropItems();
-			
-			while (di != null)
-			{
-				Class<Actor> w;			
-				a.GiveInventory(di.Name, di.amount);
-				
-				w = di.Name;
-				if(w is "Weapon")
-				{
-					a.A_SelectWeapon(di.Name);
-				}
-				di = di.Next;
-			}
-			
-			a.health = a.default.health;
-			Players[i].health = a.default.health;
+			a.health = Players[i].mo.MaxHealth;
+			Players[i].health = Players[i].mo.MaxHealth;
 		}
 	}	
 }
