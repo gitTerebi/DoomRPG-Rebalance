@@ -64,6 +64,7 @@ int AveragePlayerLevel();
 int AveragePlayerRank();
 int AveragePlayerCredits();
 int AveragePlayerLuck();
+bool NomadInGame();
 bool HaveStatusEffect();
 bool DropPlayerItem(str);
 bool IsPlayerMoving();

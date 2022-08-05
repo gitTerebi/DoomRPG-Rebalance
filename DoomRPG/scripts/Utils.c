@@ -955,6 +955,7 @@ int AveragePlayerLuck()
 {
     int NumPlayers;
     int TotalLuck;
+    int AverageLuck;
 
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
@@ -968,7 +969,25 @@ int AveragePlayerLuck()
     if (GetCVar("drpg_levelup_natural"))
         TotalLuck /= 2;
 
-    return TotalLuck / NumPlayers;
+    AverageLuck = TotalLuck / NumPlayers;
+
+    if (AverageLuck > 100)
+        AverageLuck = 100;
+
+    return AverageLuck;
+}
+
+bool NomadInGame()
+{
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (!PlayerInGame(i)) continue;
+
+        if (PlayerClass(i) == 7)
+            return true;
+    }
+
+    return false;
 }
 
 bool HaveStatusEffect()
