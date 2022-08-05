@@ -321,11 +321,18 @@ void DrawMainMenu()
     {
         SetFont("SMALLFONT");
         HudMessage("Monsters: %d / %d", CurrentKills, TotalKills);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? "Green" : "Brick"),       180.1, 120.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? "Green" : "Brick"),       180.1, 129.0, 0.05);
         HudMessage("Items: %d / %d", CurrentItems, TotalItems);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllItems ? "Green" : "LightBlue"),   180.1, 135.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllItems ? "Green" : "LightBlue"),   180.1, 143.0, 0.05);
         HudMessage("Secrets: %d / %d", CurrentSecretsFound, TotalSecretsFound);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? "Green" : "Yellow"),    180.1, 150.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? "Green" : "Yellow"),    180.1, 157.0, 0.05);
+
+        // Compatibility Handling - DoomRL Arsenal
+        if (CompatMode == COMPAT_DRLA)
+        {
+            HudMessage("Danger Level: %d", CheckInventory("RLDangerLevel"));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Red", 180.1, 115.0, 0.05);
+        }
     }
 
     // Chips

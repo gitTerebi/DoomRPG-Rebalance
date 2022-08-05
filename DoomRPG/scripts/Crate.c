@@ -50,15 +50,20 @@ NamedScript DECORATE void InitCrate()
     // Delay while the map is being initialized
     while (!CurrentLevel->Init) Delay(1);
 
+    bool NomadBonus = NomadInGame();
     int TID = UniqueTID();
     int Amount = 3;
-
-    // Calculate Modifier
-    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
-    if (Modifier > 15)
-        Modifier = 15;
     int Rarity = 0;
     int Firewall = 0;
+
+    // Nomad Bonus
+    if (NomadBonus)
+        Rarity += Random(1,2);
+
+    // Calculate Modifier
+    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 20.0);
+    if (Modifier > 15)
+        Modifier = 15;
 
     if (CrateID >= CRATE_MAX)
     {

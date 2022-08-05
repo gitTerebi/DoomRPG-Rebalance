@@ -415,16 +415,16 @@ NamedScript void BuildItemData()
         ITEMDATA_CATEGORY(0, "\CgWeapons", CF_NONE);
         // Common Weapons
         // ITEMDATA_DEF("RLCombatKnife",                           "CombatKnife",                                               20,  0, "CKNIX0", 31, 23);
-        ITEMDATA_DEF("RLChainsaw",                              "Chainsaw",                                                300,  0, -1, "NSAWX0", 31, 23);
-        ITEMDATA_DEF("RLPistol",                                "Pistol",                                                  125,  0, -1, "PISGX0", 11, 13);
-        ITEMDATA_DEF("RLShotgun",                               "Shotgun",                                                 250,  0, -1, "PKSGX0", 31, 17);
-        ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          350,  3, -1, "CSHOX0", 25, 17);
-        ITEMDATA_DEF("RLDoubleShotgun",                         "Double Shotgun",                                          500,  5, -1, "DBLSX0", 14,  8);
-        ITEMDATA_DEF("RLChaingun",                              "Chaingun",                                                750,  0, -1, "PKCGX0", 25, 18);
-        ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle",                                            750,  1, -1, "UACRX0", 23, 15);
-        ITEMDATA_DEF("RLRocketLauncher",                        "Rocket Launcher",                                        1000,  2, -1, "RLAUX0", 31, 18);
-        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           1500,  4, -1, "PLSRX0", 27, 19);
-        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                1750,  5, -1, "BFGGX0", 31, 38);
+        ITEMDATA_DEF("RLChainsaw",                              "Chainsaw",                                                300,  0,-1, "NSAWX0", 31, 23);
+        ITEMDATA_DEF("RLPistol",                                "Pistol",                                                  125,  0, 0, "PISGX0", 11, 13);
+        ITEMDATA_DEF("RLShotgun",                               "Shotgun",                                                 250,  0, 0, "PKSGX0", 31, 17);
+        ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          350,  3, 0, "CSHOX0", 25, 17);
+        ITEMDATA_DEF("RLDoubleShotgun",                         "Double Shotgun",                                          750,  5, 1, "DBLSX0", 14,  8);
+        ITEMDATA_DEF("RLChaingun",                              "Chaingun",                                                750,  0, 0, "PKCGX0", 25, 18);
+        ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle",                                            500,  1, 0, "UACRX0", 23, 15);
+        ITEMDATA_DEF("RLRocketLauncher",                        "Rocket Launcher",                                        1500,  2, 1, "RLAUX0", 31, 18);
+        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           2500,  4, 1, "PLSRX0", 27, 19);
+        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                5000,  5, 2, "BFGGX0", 31, 38);
 
         // Exotic Weapons
         ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                 2000,  2, 1, "BLASX0", 12, 14);
@@ -432,7 +432,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 2, "DEAPX0", 11, 14);
         ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                        10000,  5, 3, "MRKPX0",  9, 12);
         ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          62000, 10, 7, "NSSGX0", 27,  9);
-        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        24000,  6, 4, "ASHOX0", 31, 27);
+        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        24000,  5, 3, "ASHOX0", 31, 27);
         ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     6000,  4, 2, "RUZIX0", 20, 26);
         ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                64000, 10, 7, "ZGGGX0", 30, 20);
         ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                       32000,  7, 5, "CLAUX0", 45, 24);
@@ -440,7 +440,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLLaserRifle",                            "Laser Rifle \Ct[Exotic]\C-",                            66000, 11, 7, "LASRX0", 18, 11);
         ITEMDATA_DEF("RLPlasmaShotgun",                         "Plasma Shotgun \Ct[Exotic]\C-",                         30000,  6, 4, "PSHOX0", 22, 14);
         ITEMDATA_DEF("RLTristarBlaster",                        "Tristar Blaster \Ct[Exotic]\C-",                        68000, 11, 7, "TRISX0", 35, 35);
-        ITEMDATA_DEF("RLCombatTranslocator",                    "Combat Translocator \Ct[Exotic]\C-",                    20000,  5, 3, "CTLOX0", 18, 11);
+        ITEMDATA_DEF("RLCombatTranslocator",                    "Combat Translocator \Ct[Exotic]\C-",                    20000,  6, 4, "CTLOX0", 18, 11);
         ITEMDATA_DEF("RLNuclearPlasmaPistol",                   "Nuclear Plasma Pistol \Ct[Exotic]\C-",                  90000, 12, 8, "NUPPX0", 11, 14);
         ITEMDATA_DEF("RLNuclearPlasmaRifle",                    "Nuclear Plasma Rifle \Ct[Exotic]\C-",                  120000, 12, 8, "NUKPX0", 23, 14);
         ITEMDATA_DEF("RLNuclearBFG9000",                        "Nuclear BFG9000 \Ct[Exotic]\C-",                       200000, 12, 8, "NUKBX0", 28, 18);
@@ -1328,13 +1328,18 @@ NamedScript DECORATE void DRPGWeaponSpawner()
 
     str ActorToSpawn;
     bool ItemSpawned;
+    bool NomadBonus = NomadInGame();
     int ItemCategory = 0;
     int RarityMin;
     int RarityMax;
     int Amount;
 
+    // Nomad Bonus
+    if (NomadBonus)
+        RarityMax += Random(1,2);
+
     // Calculate Modifier
-    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
+    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 20.0);
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1349,29 +1354,34 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    if (Random(0, 100) <= 25 + RoundInt((fixed)AveragePlayerLevel() / 4.0 + (fixed)AveragePlayerLuck() / 4.0 + 25.0 * MapLevelModifier))
+    if ((Random(0, 100) <= 25 + RoundInt(50.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 4.0)) || NomadBonus)
     {
-        RarityMin = Random(0, RarityMax / 2);
+        RarityMin += Random(0, RarityMax / 2);
 
-        for (int i = 0; i <= ItemMax[ItemCategory]; i++)
+        while (!ItemSpawned)
         {
-            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
+            Amount = 0;
+
+            for (int i = 0; i < ItemMax[ItemCategory]; i++)
             {
-                if (Random(0, 1 + Amount) <= 0)
+                if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
                 {
-                    if (CheckSight(ActivatorTID(), MAP_START_TID, 0)|| Distance(ActivatorTID(), MAP_START_TID) <= 512)
-                        ActorToSpawn = ItemData[ItemCategory][Random(0, ((CompatMode == COMPAT_DRLA) ? 9 : 7))].Actor;
-                    else
-                        ActorToSpawn = ItemData[ItemCategory][i].Actor;
-                    ItemSpawned = true;
+                    if (Random(0, 1 + Amount) <= 0)
+                    {
+                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && !NomadBonus)
+                            ActorToSpawn = ItemData[ItemCategory][Random(1, ((CompatMode == COMPAT_DRLA) ? 6 : 4))].Actor;
+                        else
+                            ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                        ItemSpawned = true;
+                    }
+                    Amount++;
                 }
-                Amount++;
             }
         }
     }
 
     if (!ItemSpawned)
-        ActorToSpawn = ItemData[ItemCategory][Random(0, ((CompatMode == COMPAT_DRLA) ? 9 : 7))].Actor;
+        ActorToSpawn = ItemData[ItemCategory][Random(1, ((CompatMode == COMPAT_DRLA) ? 6 : 4))].Actor;
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
@@ -1385,13 +1395,18 @@ NamedScript DECORATE void DRPGArmorSpawner()
 
     str ActorToSpawn;
     bool ItemSpawned;
+    bool NomadBonus = NomadInGame();
     int ItemCategory = (Random(0, 9) <= 0 ? 9 : 3);
     int RarityMin;
     int RarityMax;
     int Amount;
 
+    // Nomad Bonus
+    if (NomadBonus)
+        RarityMax += Random(1,2);
+
     // Calculate Modifier
-    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
+    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 20.0);
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1406,23 +1421,29 @@ NamedScript DECORATE void DRPGArmorSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    if (Random(0, 100) <= 25 + RoundInt((fixed)AveragePlayerLevel() / 4.0 + (fixed)AveragePlayerLuck() / 4.0 + 25.0 * MapLevelModifier))
+    if ((Random(0, 100) <= 25 + RoundInt(50.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 4.0)) || NomadBonus)
     {
-        RarityMin = Random(0, RarityMax / 2);
+        RarityMin += Random(0, RarityMax / 2);
 
-        for (int i = 0; i <= ItemMax[ItemCategory]; i++)
+        while (!ItemSpawned)
         {
-            if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
+
+            Amount = 0;
+
+            for (int i = 0; i < ItemMax[ItemCategory]; i++)
             {
-                if (Random(0, 1 + Amount) <= 0)
+                if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
                 {
-                    if (CheckSight(ActivatorTID(), MAP_START_TID, 0)|| Distance(ActivatorTID(), MAP_START_TID) <= 512)
-                        ActorToSpawn = ItemData[3][Random(1, ((CompatMode == COMPAT_DRLA) ? 3 : 5))].Actor;
-                    else
-                        ActorToSpawn = ItemData[ItemCategory][i].Actor;
-                    ItemSpawned = true;
+                    if (Random(0, 1 + Amount) <= 0)
+                    {
+                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && !NomadBonus)
+                            ActorToSpawn = ItemData[3][Random(1, ((CompatMode == COMPAT_DRLA) ? 3 : 5))].Actor;
+                        else
+                            ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                        ItemSpawned = true;
+                    }
+                    Amount++;
                 }
-                Amount++;
             }
         }
     }
@@ -1442,6 +1463,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
 
     str ActorToSpawn;
     bool ItemSpawned;
+    bool NomadBonus = NomadInGame();
     int ItemCategory = 5;
     int RarityMin;
     int RarityMax;
@@ -1470,8 +1492,12 @@ NamedScript DECORATE void DRPGShieldSpawner()
         break;
     }
 
+    // Nomad Bonus
+    if (NomadBonus)
+        RarityMax += Random(1,2);
+
     // Calculate Modifier
-    int Modifier = RoundInt((fixed)AveragePlayerLevel() / 20.0 + (fixed)AveragePlayerLuck() / 20.0) + 5.0 * MapLevelModifier;
+    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 20.0);
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1486,9 +1512,9 @@ NamedScript DECORATE void DRPGShieldSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    RarityMin = Random(0, RarityMax / 2);
+    RarityMin += Random(0, RarityMax / 2);
 
-    for (int i = ShieldPartsMin; i <= ShieldPartsMax; i++)
+    for (int i = ShieldPartsMin; i < ShieldPartsMax; i++)
     {
         if (ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
         {
