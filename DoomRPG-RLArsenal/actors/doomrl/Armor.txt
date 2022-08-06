@@ -48,6 +48,17 @@ actor RLFrontlineEngineerSentryTechnicianRPG : RLFrontlineEngineerSentryTechnici
     }
 }
 
+actor RLFrontlineEngineerSentryDemolitionistRPG : RLFrontlineEngineerSentryDemolitionist replaces RLFrontlineEngineerSentryDemolitionist
+{
+    Tag "Frontline Engineer Sentry"
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOAURA | MF_NODROPS | MF_NOSTATS)
+        Goto Super::Spawn
+    }
+}
+
 actor RLTacticalAssemblerRestorerRPG : RLTacticalAssemblerRestorer replaces RLTacticalAssemblerRestorer
 {
     Tag "Tactical Assembly Restorer Unit"

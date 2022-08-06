@@ -796,6 +796,11 @@ struct PlayerData_S
     bool AutosaveTimerReset;
     bool SeenEventTip[MAPEVENT_MAX];
 
+    // Nomad
+    str NomadBasicItems[30];
+    str NomadModPacks[30];
+    int NomadAmountModPacks[30];
+
     // Associated Drops
     struct DynamicArray_S DropTID;
 

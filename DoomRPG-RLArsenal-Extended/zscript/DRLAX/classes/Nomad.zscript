@@ -115,6 +115,14 @@ Class RLNomadEvents : EventHandler
 				if(inv is "DRPGShieldPart"){continue;} 								// all shield parts
 				if(inv is "DRPGCraftParts"){continue;} 								// crafting parts
 
+				if(inv is "DRPGImmunityCrystalMelee"){continue;} 					// immunity crystal melee
+				if(inv is "DRPGImmunityCrystalBullet"){continue;} 					// immunity crystal bullet
+				if(inv is "DRPGImmunityCrystalFire"){continue;} 					// immunity crystal fire
+				if(inv is "DRPGImmunityCrystalPlasma"){continue;} 					// immunity crystal plasma
+				if(inv is "DRPGImmunityCrystalLightning"){continue;} 				// immunity crystal lightning
+				if(inv is "DRPGImmunityCrystalToxic"){continue;} 					// immunity crystal toxic
+				if(inv is "DRPGImmunityCrystalRadiation"){continue;} 				// immunity crystal radiation
+
 				if(inv is "Clip"){continue;} 										// Pistol Ammo
 
                 // Legendary Pistols
@@ -236,7 +244,6 @@ Class RLNomadEvents : EventHandler
 				if(Players[i].mo.CountInv("RLNomadOnePistolToken")==0)
                 {
 					Players[i].mo.TakeInventory("RLPistol", 1);
-					Players[i].mo.TakeInventory("Clip", 60);
                 }
 
 				Players[i].mo.PickWeapon(1, false);
