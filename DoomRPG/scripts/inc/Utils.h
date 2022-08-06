@@ -142,6 +142,8 @@ void RemoveDRLAItem(int, int);
 void GiveDRLAArmorToken(str);
 void RemoveDRLAArmorToken(str);
 void CheckDRLASetWeapons();
+void NomadModPacksSave();
+void NomadModPacksLoad();
 
 // Math
 int CalcPercent(int, int);

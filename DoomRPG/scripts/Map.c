@@ -294,6 +294,11 @@ NamedScript Type_OPEN void MapInit()
     // Initialization map packs (WadSmoosh, Lexicon and etc.)
     InitMapPacks();
 
+    // Compatibility Handling - DoomRL Arsenal Extended
+    // Nomad - Mod Packs Load
+    if (CompatModeEx == COMPAT_DRLAX)
+        NomadModPacksLoad();
+
     if (CurrentLevel->UACBase || CurrentLevel->UACArena)
     {
         CurrentLevel->Init = true;
@@ -960,6 +965,8 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
             // Increased Luck Stat for Nomad Players
             if (PlayerClass(i) == 7 && Players(i).NomadLuckBonus < 100 * MapLevelModifier)
                 Players(i).NomadLuckBonus = 100 * MapLevelModifier;
+
+            NomadModPacksSave();
         }
     }
 
