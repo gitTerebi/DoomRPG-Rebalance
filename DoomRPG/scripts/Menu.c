@@ -327,8 +327,8 @@ void DrawMainMenu()
         HudMessage("Secrets: %d / %d", CurrentSecretsFound, TotalSecretsFound);
         EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? "Green" : "Yellow"),    180.1, 157.0, 0.05);
 
-        // Compatibility Handling - DoomRL Arsenal
-        if (CompatMode == COMPAT_DRLA)
+        // Compatibility Handling - DoomRL Monsters
+        if (CompatMonMode == COMPAT_DRLA)
         {
             HudMessage("Danger Level: %d", CheckInventory("RLDangerLevel"));
             EndHudMessage(HUDMSG_PLAIN, 0, "Red", 180.1, 115.0, 0.05);
