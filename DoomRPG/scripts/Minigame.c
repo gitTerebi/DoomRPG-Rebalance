@@ -33,6 +33,8 @@ NamedScript void ItemRoulette(bool Rare)
     Player.InMinigame = true;
 
     int Duds, Index;
+    bool runIsHeld = false;
+    int ChipDelta = 0;
 
     // Set the HUD Size
     SetHudSize(640, 480, false);
@@ -53,12 +55,12 @@ NamedScript void ItemRoulette(bool Rare)
         {
             SetFont("SMALLFONT");
             if (GetCVar("use_joystick") || GetUserCVar(PlayerNumber(), "drpg_deltatouch"))
-                HudMessage("Navigate/Change: \Cd%S/%S/%S/%S\C-\nReady/Play: \Cd%S\C-\nExit: \Cd%S\C-",
-                           "Up", "Down", "Left", "Right", "Use", "Menu");
+                HudMessage("Navigate/Change: \Cd%S/%S/%S/%S\C-\nChange Max: \Cd%S + %S/%S\C-\nReady/Play: \Cd%S\C-\nExit: \Cd%S\C-",
+                           "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Menu");
             else
-                HudMessage("Navigate/Change: \Cd%jS/%jS/%jS/%jS\C-\nReady/Play: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                           "+forward", "+back", "+moveleft", "+moveright", "+use", "drpg_menu");
-            EndHudMessage(HUDMSG_PLAIN, 0, "White", 90.1, 460.0, 0.05);
+                HudMessage("Navigate/Change: \Cd%jS/%jS/%jS/%jS\C-\nChange Max: \Cd%jS + %jS/%jS\C-\nReady/Play: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                           "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "drpg_menu");
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", 90.1, 452.0, 0.05);
         }
 
         // Keep menus closed - This is technically a hack and shouldn't be here
@@ -178,6 +180,7 @@ NamedScript void ItemRoulette(bool Rare)
             ChipIndex++;
             if (ChipIndex > 3) ChipIndex = 0;
         }
+        runIsHeld = (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()));
         if (CheckInput(BT_MOVELEFT, KEY_PRESSED, false, PlayerNumber()) && !Started)
         {
             switch (ChipIndex)
@@ -186,8 +189,9 @@ NamedScript void ItemRoulette(bool Rare)
                 if (ChipRarity > 0)
                 {
                     ActivatorSound("menu/move", 127);
-                    ChipRarity--;
-                    ChipTotal--;
+                    ChipDelta = runIsHeld ? ChipRarity : 1; //Number of chips to remove: either all of them, or just one
+                    ChipRarity -= ChipDelta;
+                    ChipTotal -= ChipDelta;
                     Repick = true;
                 }
                 break;
@@ -195,8 +199,9 @@ NamedScript void ItemRoulette(bool Rare)
                 if (ChipAmount > 0)
                 {
                     ActivatorSound("menu/move", 127);
-                    ChipAmount--;
-                    ChipTotal--;
+                    ChipDelta = runIsHeld ? ChipAmount : 1;
+                    ChipAmount -= ChipDelta;
+                    ChipTotal -= ChipDelta;
                     Repick = true;
                 }
                 break;
@@ -204,8 +209,9 @@ NamedScript void ItemRoulette(bool Rare)
                 if (ChipDuds > 0)
                 {
                     ActivatorSound("menu/move", 127);
-                    ChipDuds--;
-                    ChipTotal--;
+                    ChipDelta = runIsHeld ? ChipDuds : 1;
+                    ChipDuds -= ChipDelta;
+                    ChipTotal -= ChipDelta;
                     Repick = true;
                 }
                 break;
@@ -213,8 +219,9 @@ NamedScript void ItemRoulette(bool Rare)
                 if (ChipSpeed > 0)
                 {
                     ActivatorSound("menu/move", 127);
-                    ChipSpeed--;
-                    ChipTotal--;
+                    ChipDelta = runIsHeld ? ChipSpeed : 1;
+                    ChipSpeed -= ChipDelta;
+                    ChipTotal -= ChipDelta;
                 }
                 break;
             }
@@ -227,8 +234,10 @@ NamedScript void ItemRoulette(bool Rare)
                 if (ChipRarity < 10)
                 {
                     ActivatorSound("menu/move", 127);
-                    ChipRarity++;
-                    ChipTotal++;
+                    ChipDelta = (Rare ? CheckInventory("DRPGChipPlatinum") : CheckInventory("DRPGChipGold")) - ChipTotal; //Number of chips we haven't already committed
+                    ChipDelta = runIsHeld ? (10 - ChipRarity > ChipDelta ? ChipDelta : 10 - ChipRarity) : 1; //Number of chips to add: all of them, to a maximum of ten; or just one
+                    ChipRarity += ChipDelta;
+                    ChipTotal += ChipDelta;
                     Repick = true;
                 }
                 break;
@@ -236,8 +245,10 @@ NamedScript void ItemRoulette(bool Rare)
                 if (ChipAmount < 10)
                 {
                     ActivatorSound("menu/move", 127);
-                    ChipAmount++;
-                    ChipTotal++;
+                    ChipDelta = (Rare ? CheckInventory("DRPGChipPlatinum") : CheckInventory("DRPGChipGold")) - ChipTotal;
+                    ChipDelta = runIsHeld ? (10 - ChipAmount > ChipDelta ? ChipDelta : 10 - ChipAmount) : 1;
+                    ChipAmount += ChipDelta;
+                    ChipTotal += ChipDelta;
                     Repick = true;
                 }
                 break;
@@ -245,8 +256,10 @@ NamedScript void ItemRoulette(bool Rare)
                 if (ChipDuds < 10)
                 {
                     ActivatorSound("menu/move", 127);
-                    ChipDuds++;
-                    ChipTotal++;
+                    ChipDelta = (Rare ? CheckInventory("DRPGChipPlatinum") : CheckInventory("DRPGChipGold")) - ChipTotal;
+                    ChipDelta = runIsHeld ? (10 - ChipDuds > ChipDelta ? ChipDelta : 10 - ChipDuds) : 1;
+                    ChipDuds += ChipDelta;
+                    ChipTotal += ChipDelta;
                     Repick = true;
                 }
                 break;
@@ -254,8 +267,10 @@ NamedScript void ItemRoulette(bool Rare)
                 if (ChipSpeed < 10)
                 {
                     ActivatorSound("menu/move", 127);
-                    ChipSpeed++;
-                    ChipTotal++;
+                    ChipDelta = (Rare ? CheckInventory("DRPGChipPlatinum") : CheckInventory("DRPGChipGold")) - ChipTotal;
+                    ChipDelta = runIsHeld ? (10 - ChipSpeed > ChipDelta ? ChipDelta : 10 - ChipSpeed) : 1;
+                    ChipSpeed += ChipDelta;
+                    ChipTotal += ChipDelta;
                 }
                 break;
             }

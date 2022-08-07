@@ -19,14 +19,6 @@ class RLNomadPassives : Inventory
 	}
 }
 
-Class RLNomadOnePistolToken : Inventory
-{
-	Default
-	{ 
-		Inventory.MaxAmount 1;
-	}
-}
-
 Class RLNomadReroll
 {
 	String item;
@@ -129,12 +121,12 @@ Class RLNomadEvents : EventHandler
 
 		for(int i = 0; i<Players.Size(); i++)
 		{
-			string SavedPistolClass;
 			if(Players[i].mo && Players[i].mo.GetClassName() == "DoomRLNomadRPG")
 			{
 				for (int j = 0; j < Pistols.size(); j++) {
 					// first pistol found in (array)Pistols is saved, while others will be discarded in InvIterator
-					if (Players[i].mo.CountInv(Pistols[j]) && !SavedPistolClass) {
+					if (Players[i].mo.CountInv(Pistols[j]) && !SavedPistolClass)
+					{
 						SavedPistolClass = Pistols[j];
 						break;
 					}
@@ -152,7 +144,6 @@ Class RLNomadEvents : EventHandler
 						if(inv.GetClassName() == "RLDangerLevel"){continue;}
 						if(inv.GetClassName() == "RLUniqueBossLevel"){continue;}
 						if(inv.GetClassName() == "RLDemonArtifactItem"){continue;}
-						if(inv.GetClassName() == "RLNomadOnePistolToken"){continue;}
 						
 						if(inv.GetClassName() == "DRPGModule"){continue;}
 						if(inv.GetClassName() == "DRPGCredits"){continue;}
@@ -216,22 +207,24 @@ Class RLNomadEvents : EventHandler
 					int clipBefore = a.CountInv("Clip");
 					a.GiveInventory(di.Name, di.amount);	
 
-					if(SavedPistolClass != "RLPistol") {
+					if(SavedPistolClass != "RLPistol")
+					{
 						// if better pistol was found - remove pistol gained from starting loadout
 						a.TakeInventory("RLPistol", 1);
 						int clipAfter = a.CountInv("Clip");
 
 						// if clip amount after adding starting loadout is bigger than before = substract it 
-						if(clipAfter > clipBefore) {
+						if(clipAfter > clipBefore)
+						{
 							a.TakeInventory("Clip", clipAfter - clipBefore);
 						}
-						a.A_SelectWeapon(SavedPistolClass);
-					} else {
-						a.A_SelectWeapon("RLPistol");
+					}
+					else
+					{
 						a.GiveInventory("Clip", 10000);	
 					}
 
-					
+					a.A_SelectWeapon("RLFist");
 					
 					di = di.Next;
 				}
