@@ -2974,14 +2974,8 @@ NamedScript void MonsterDeath()
     }
 
     // Corpses cleanup
-    if (GetCVar("drpg_corpses_cleanup") > 0 && Random(1, 2) <= GetCVar("drpg_corpses_cleanup"))
-    {
-        Delay(35 * (GetCVar("drpg_corpses_cleanup_timer")));
-
-        while (ActorSeePlayers(0, 2048)) Delay(35 * 10);
-
-        Thing_Remove(0);
-    }
+    if (GetCVar("drpg_corpses_cleanup") > 0)
+        CorpsesCleanup();
 }
 
 //[[alloc_Aut(16384)]]
