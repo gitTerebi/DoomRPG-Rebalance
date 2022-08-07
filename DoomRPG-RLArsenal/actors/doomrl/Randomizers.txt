@@ -30,6 +30,13 @@ actor DRPGHealthDropper2 : RandomSpawner Replaces DRPGHealthDropper
 // ARMOR ITEMS
 // --------------------------------------------------
 
+// Armor Bonus Locations
+actor DRPGArmorBonusReplacer2 : RandomSpawner Replaces DRPGArmorBonusReplacer
+{
+    DropItem "DRPGArmorBonusSpawner"        255 226
+    DropItem "RLArmorBonusPickup"           255 30
+}
+
 // Green Armor Locations
 actor DRPGGreenArmorRandomizer2 : RandomSpawner Replaces DRPGGreenArmorRandomizer
 {

@@ -448,6 +448,13 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // HEALTH ITEMS
 // --------------------------------------------------
 
+// Health Bonus Locations
+actor DRPGHealthBonusReplacer : RandomSpawner Replaces HealthBonus
+{
+    DropItem "DRPGHealthBonusSpawner"    255 226
+    DropItem "DRPGHealthBonus"           255 30
+}
+
 // Stimpack Locations
 actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 {
@@ -480,6 +487,13 @@ actor DRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
 
 // ARMOR ITEMS
 // --------------------------------------------------
+
+// Armor Bonus Locations
+actor DRPGArmorBonusReplacer : RandomSpawner Replaces ArmorBonus
+{
+    DropItem "DRPGArmorBonusSpawner"    255 226
+    DropItem "DRPGArmorBonus"           255 30
+}
 
 // Green Armor Locations
 actor DRPGGreenArmorRandomizer : RandomSpawner Replaces GreenArmor
@@ -629,9 +643,10 @@ actor DRPGItemDropper
 }
 
 //DOOMRPG REBALANCE ACS RANDOMIZERS
+// --------------------------------------------------
 
-// Health Bonus Locations
-actor DRPGHealthBonusSpawner : MapSpot Replaces HealthBonus
+// Health Bonus Randomizer
+actor DRPGHealthBonusSpawner : MapSpot
 {
     States
     {
@@ -641,8 +656,8 @@ actor DRPGHealthBonusSpawner : MapSpot Replaces HealthBonus
     }
 }
 
-// Armor Bonus Locations
-actor DRPGArmorBonusSpawner : MapSpot Replaces ArmorBonus
+// Armor Bonus Randomizer
+actor DRPGArmorBonusSpawner : MapSpot
 {
     States
     {
