@@ -233,8 +233,19 @@ Class RLNomadEvents : EventHandler
 					}
 					else
 					{
+						int clipAfter = a.CountInv("Clip");
+
+						// if clip amount after adding starting loadout is bigger than before = substract it 
+						if(clipAfter > clipBefore)
+						{
+							a.TakeInventory("Clip", clipAfter - clipBefore);
+						}
+                        if (a.CountInv("Clip") < CVar.GetCVar("drpg_start_ammo_bullet", players[i]).GetInt())
+						{
+							a.SetInventory("Clip", CVar.GetCVar("drpg_start_ammo_bullet", players[i]).GetInt());
+						}
+
 						a.A_SelectWeapon("RLPistol");
-						a.GiveInventory("Clip", 10000);
 					}
 
 					di = di.Next;
