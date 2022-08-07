@@ -692,6 +692,19 @@ bool ActorNotSeePlayers(int MonsterTID, int Dist)
     return true;
 }
 
+// Corpses Cleanup
+NamedScript DECORATE void CorpsesCleanup()
+{
+    if (Random(1, 2) <= GetCVar("drpg_corpses_cleanup"))
+    {
+        Delay(35 * (GetCVar("drpg_corpses_cleanup_timer")));
+
+        while (ActorSeePlayers(0, 2048)) Delay(35 * 10);
+
+        Thing_Remove(0);
+    }
+}
+
 // --------------------------------------------------
 // Players
 //

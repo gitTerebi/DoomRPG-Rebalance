@@ -433,6 +433,27 @@ actor DRPGMarineReinforcementSpawner : RandomSpawner
     DropItem "DRPGMarineBFG9000"                255 2
 }
 
+// LOOT
+// --------------------------------------------------
+
+// Generic Loot locations
+actor DRPGGenericLootRandomizer : RandomSpawner
+{
+    DropItem "DRPGLootMedicalSupplies"     255 30
+    DropItem "DRPGLootChemicals"           255 30
+    DropItem "DRPGLootHazardousMaterials"  255 30
+    DropItem "DRPGLootAnomalousMaterials"  255 30
+    DropItem "DRPGLootBriefcase"           255 30
+    DropItem "DRPGLootComputerData"        255 30
+    DropItem "DRPGLootGunParts"            255 15
+    DropItem "DRPGLootAmmoCasings"         255 15
+    DropItem "DRPGLootFuelCapsule"         255 10
+    DropItem "DRPGLootScrapMetals"         255 15
+    DropItem "DRPGLootScrapElectronics"    255 15
+    DropItem "DRPGLootExperimentalParts"   255 10
+    DropItem "DRPGLootDemonArtifact"       255 5
+}
+
 // AMMO
 // --------------------------------------------------
 
@@ -447,6 +468,13 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 
 // HEALTH ITEMS
 // --------------------------------------------------
+
+// Health Bonus Locations
+actor DRPGHealthBonusReplacer : RandomSpawner Replaces HealthBonus
+{
+    DropItem "DRPGHealthBonusSpawner"    255 226
+    DropItem "DRPGHealthBonus"           255 30
+}
 
 // Stimpack Locations
 actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
@@ -480,6 +508,13 @@ actor DRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
 
 // ARMOR ITEMS
 // --------------------------------------------------
+
+// Armor Bonus Locations
+actor DRPGArmorBonusReplacer : RandomSpawner Replaces ArmorBonus
+{
+    DropItem "DRPGArmorBonusSpawner"    255 226
+    DropItem "DRPGArmorBonus"           255 30
+}
 
 // Green Armor Locations
 actor DRPGGreenArmorRandomizer : RandomSpawner Replaces GreenArmor
@@ -629,9 +664,10 @@ actor DRPGItemDropper
 }
 
 //DOOMRPG REBALANCE ACS RANDOMIZERS
+// --------------------------------------------------
 
-// Health Bonus Locations
-actor DRPGHealthBonusSpawner : MapSpot Replaces HealthBonus
+// Health Bonus Randomizer
+actor DRPGHealthBonusSpawner : MapSpot
 {
     States
     {
@@ -641,8 +677,8 @@ actor DRPGHealthBonusSpawner : MapSpot Replaces HealthBonus
     }
 }
 
-// Armor Bonus Locations
-actor DRPGArmorBonusSpawner : MapSpot Replaces ArmorBonus
+// Armor Bonus Randomizer
+actor DRPGArmorBonusSpawner : MapSpot
 {
     States
     {

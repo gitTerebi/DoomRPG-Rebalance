@@ -224,23 +224,40 @@ Class RLNomadEvents : EventHandler
 					// haxx - saving value before adding starting loadout 	
 					int clipBefore = a.CountInv("Clip");
 					a.GiveInventory(di.Name, di.amount);	
-					if(SavedPistolClass && SavedPistolClass != "RLPistol") {
+					if(SavedPistolClass) {
 						// if better pistol was found - remove pistol gained from starting loadout
-						a.TakeInventory("RLPistol", 1);
-						int clipAfter = a.CountInv("Clip");
-
-						// if clip amount after adding starting loadout is bigger than before = substract it 
-						if(clipAfter > clipBefore)
+                        if (SavedPistolClass != "RLPistol")
 						{
-							a.TakeInventory("Clip", clipAfter - clipBefore);
+							a.TakeInventory("RLPistol", 1);
 						}
+
+
+
 						a.GiveInventory(SavedPistolClassSelected, 1);
 						a.A_SelectWeapon(SavedPistolClass);
 					}
 					else
 					{
-						a.A_SelectWeapon("RLPistol");
-						a.GiveInventory("Clip", 10000);
+						a.TakeInventory("RLPistol", 1);
+						a.TakeInventory("RLWeaponLimit", 1);
+						a.GiveInventory("RLFistSelected", 1);
+						a.A_SelectWeapon("RLFist");
+					}
+
+					int clipAfter = a.CountInv("Clip");
+
+					// if clip amount after adding starting loadout is bigger than before = substract it 
+					if(clipAfter > clipBefore)
+					{
+						a.TakeInventory("Clip", clipAfter - clipBefore);
+					}
+					// if the level starts with a standard Pistol or without a Pistol, the calculation of bullet ammunition is as follows
+                    if (SavedPistolClass == "RLPistol" || !SavedPistolClass)
+					{
+						if (a.CountInv("Clip") < CVar.GetCVar("drpg_start_ammo_bullet", players[i]).GetInt())
+						{
+							a.SetInventory("Clip", CVar.GetCVar("drpg_start_ammo_bullet", players[i]).GetInt());
+						}
 					}
 
 					di = di.Next;
