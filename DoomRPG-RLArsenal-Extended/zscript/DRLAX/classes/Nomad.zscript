@@ -19,14 +19,6 @@ class RLNomadPassives : Inventory
 	}
 }
 
-Class RLNomadOnePistolToken : Inventory
-{
-	Default
-	{ 
-		Inventory.MaxAmount 1;
-	}
-}
-
 Class RLNomadReroll
 {
 	String item;
@@ -154,7 +146,6 @@ Class RLNomadEvents : EventHandler
 						if(inv.GetClassName() == "RLDangerLevel"){continue;}
 						if(inv.GetClassName() == "RLUniqueBossLevel"){continue;}
 						if(inv.GetClassName() == "RLDemonArtifactItem"){continue;}
-						if(inv.GetClassName() == "RLNomadOnePistolToken"){continue;}
 						
 						if(inv.GetClassName() == "DRPGModule"){continue;}
 						if(inv.GetClassName() == "DRPGCredits"){continue;}
@@ -202,18 +193,18 @@ Class RLNomadEvents : EventHandler
 						if(inv is "DRPGImmunityCrystalRadiation"){continue;} 				// immunity crystal radiation
 
 						if(inv is "Clip"){continue;} 										// Pistol Ammo
-			
+
 						if(inv.GetClassName() == SavedPistolClass){continue;}				// saving best Pistol
 						if(inv.GetClassName() == SavedPistolClassSelected){continue;}		// saving selected Pistol token
-	
+
 						if(inv.GetClassName() == "RLStandardWeaponToken"){continue;}		// HUD weapon name & color tokens
 						if(inv.GetClassName() == "RLAssembledWeaponToken"){continue;}
 						if(inv.GetClassName() == "RLExoticWeaponToken"){continue;}
 						if(inv.GetClassName() == "RLSuperiorWeaponToken"){continue;}
 						if(inv.GetClassName() == "RLSuperiorAssembledWeaponToken"){continue;}
-						if(inv.GetClassName() == "RLUniqueWeaponToken"){continue;}		
+						if(inv.GetClassName() == "RLUniqueWeaponToken"){continue;}
 						if(inv.GetClassName() == "RLDemonicWeaponToken"){continue;}
-						if(inv.GetClassName() == "RLLegendaryWeaponToken"){continue;}			
+						if(inv.GetClassName() == "RLLegendaryWeaponToken"){continue;}
 
 						inv.owner.TakeInventory(inv.GetClassName(), inv.maxamount);
 					}
@@ -233,31 +224,21 @@ Class RLNomadEvents : EventHandler
 						int clipAfter = a.CountInv("Clip");
 
 						// if clip amount after adding starting loadout is bigger than before = substract it 
-						if(clipAfter > clipBefore) {
+						if(clipAfter > clipBefore)
+						{
 							a.TakeInventory("Clip", clipAfter - clipBefore);
 						}
-						a.GiveInventory(SavedPistolClassSelected, 1);	
+						a.GiveInventory(SavedPistolClassSelected, 1);
 						a.A_SelectWeapon(SavedPistolClass);
-					} else {
+					}
+					else
+					{
 						a.A_SelectWeapon("RLPistol");
-						a.GiveInventory("Clip", 10000);	
+						a.GiveInventory("Clip", 10000);
 					}
 
 					di = di.Next;
 				}
-
-				/*while (di != null)
-				{
-					Class<Actor> w;			
-					a.GiveInventory(di.Name, di.amount);
-					
-					w = di.Name;
-					if(w is "Weapon")
-					{
-						a.A_SelectWeapon(di.Name);
-					}
-					di = di.Next;
-				}*/
 
 				a.health = a.default.health;
 				Players[i].health = a.default.health;
