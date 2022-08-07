@@ -234,6 +234,8 @@ Class RLNomadEvents : EventHandler
 					{
 						a.TakeInventory("RLPistol", 1);
 						a.TakeInventory("RLWeaponLimit", 1);
+						a.GiveInventory("RLFistSelected", 1);
+						a.A_SelectWeapon("RLFist");
 					}
 
 					int clipAfter = a.CountInv("Clip");
