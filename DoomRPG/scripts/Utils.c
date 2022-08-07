@@ -355,6 +355,34 @@ NamedScript DECORATE int CheckCapacity()
                 Items += CheckInventory(ItemListRL[i]);
     };
 
+    if (CompatModeEx == COMPAT_DRLAX)
+    {
+        str const ItemListRLAX[] =
+        {
+            // DoomRLAX - Items
+            "DRLAX_FamiliarBall",
+            "DRLAX_RadarDevice",
+            "DRLAX_SoulTrap",
+
+            // DoomRLAX - Trapped Soul Spheres
+            "DRLAX_TrappedInvulnerabilitySphere",
+            "DRLAX_TrappedInvisibilitySphere",
+            "DRLAX_TrappedSoulSphere",
+            "DRLAX_TrappedSoulSphere3",
+            "DRLAX_TrappedSoulSphere4",
+            "DRLAX_TrappedMegaSphere",
+            "DRLAX_TrappedAGHSphere",
+            "DRLAX_TrappedFirebluSphere",
+
+            // End of List
+            NULL
+        };
+
+        for (int i = 0; ItemListRLAX[i] != NULL; i++)
+            if (CheckInventory(ItemListRLAX[i]) > 0)
+                Items += CheckInventory(ItemListRLAX[i]);
+    };
+
     Player.InvItems = Items;
 
     if (Items >= MaxItems)
