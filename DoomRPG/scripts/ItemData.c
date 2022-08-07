@@ -1289,32 +1289,7 @@ NamedScript DECORATE void DRPGGenericLootSpawner()
     if (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512)
         ActorToSpawn = "DRPGHealthBonus";
     else
-    {
-        if (Random(0,3) <= 0 && !ItemSelected)
-        {
-            if (Random(0,1) <= 0)
-            {
-                ActorToSpawn = ItemData[7][Random(6,8)].Actor;
-                ItemSelected = true;
-            }
-            else
-            {
-                ActorToSpawn = ItemData[7][Random(9,11)].Actor;
-                ItemSelected = true;
-            }
-
-        }
-        else if (Random(0,15) <= 0 && !ItemSelected)
-        {
-            ActorToSpawn = ItemData[7][12].Actor;
-            ItemSelected = true;
-        }
-        else if (!ItemSelected)
-        {
-            ActorToSpawn = ItemData[7][Random(0,5)].Actor;
-            ItemSelected = true;
-        }
-    }
+        ActorToSpawn = "DRPGGenericLootRandomizer";
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
