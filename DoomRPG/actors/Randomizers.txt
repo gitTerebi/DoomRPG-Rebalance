@@ -433,6 +433,27 @@ actor DRPGMarineReinforcementSpawner : RandomSpawner
     DropItem "DRPGMarineBFG9000"                255 2
 }
 
+// LOOT
+// --------------------------------------------------
+
+// Generic Loot locations
+actor DRPGGenericLootRandomizer : RandomSpawner
+{
+    DropItem "DRPGLootMedicalSupplies"     255 30
+    DropItem "DRPGLootChemicals"           255 30
+    DropItem "DRPGLootHazardousMaterials"  255 30
+    DropItem "DRPGLootAnomalousMaterials"  255 30
+    DropItem "DRPGLootBriefcase"           255 30
+    DropItem "DRPGLootComputerData"        255 30
+    DropItem "DRPGLootGunParts"            255 15
+    DropItem "DRPGLootAmmoCasings"         255 15
+    DropItem "DRPGLootFuelCapsule"         255 10
+    DropItem "DRPGLootScrapMetals"         255 15
+    DropItem "DRPGLootScrapElectronics"    255 15
+    DropItem "DRPGLootExperimentalParts"   255 10
+    DropItem "DRPGLootDemonArtifact"       255 5
+}
+
 // AMMO
 // --------------------------------------------------
 
