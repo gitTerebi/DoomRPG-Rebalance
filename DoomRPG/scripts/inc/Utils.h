@@ -44,6 +44,7 @@ void DropMoney(int, int, int);
 OptionalArgs(6) int DropMonsterItem(int, int, str, int, fixed, fixed, fixed, fixed, fixed, fixed);
 bool ActorSeePlayers(int, int);
 bool ActorNotSeePlayers(int, int);
+NamedScript DECORATE void CorpsesCleanup();
 
 // Players
 NamedScript DECORATE void RegenBoost();
