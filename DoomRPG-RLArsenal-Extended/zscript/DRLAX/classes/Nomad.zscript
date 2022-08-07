@@ -19,14 +19,6 @@ class RLNomadPassives : Inventory
 	}
 }
 
-Class RLNomadOnePistolToken : Inventory
-{
-	Default
-	{ 
-		Inventory.MaxAmount 1;
-	}
-}
-
 Class RLNomadReroll
 {
 	String item;
@@ -56,170 +48,191 @@ Class RLNomadEvents : EventHandler
 		
 		Inventory inv;
 
+		// DRLA pistols array - from best to worst
+		static const string Pistols[] =
+		{
+			// Legendary Pistols
+			"RLBaronBlaster",
+			"RLNeuralStunner",
+			"RLJudgeOfTheDead",
+			"RLLonghorn",
+
+			// Demonic Pistols
+			"RLDeathsGaze",
+
+			// Unique Pistols
+			"RLTantrumCannon",
+			"RLHellsingARMSCasull",
+			"RLAntiFreakJackal",
+			"RLGrammatonClericBeretta",
+			"RLTrigun",
+			"RLLightweaver",
+			"RLUnknownHerald",
+			"RLMysteriousMagnum",
+
+			// Demolition Ammo Pistols
+			"RLDemolitionAmmoMarksmanPistol",
+			"RLDemolitionAmmoCombatPistol",
+			"RLDemolitionAmmoPistol",
+
+			// Nanomanufacture Assembled Pistols
+			"RLNanoManufactureAmmoMarksmanPistol",
+			"RLNanoManufactureAmmoCombatPistol",
+			"RLNanoManufactureAmmoPistol",
+
+			// Advanced Assembled Pistols
+			"RLMiniMissilePistol",
+			"RLSuperchargedNuclearPlasmaPistol",
+			"RLPlasmaMarksmanPistol",
+			"RLPlasmaCombatPistol",
+			"RLPlasmaPistol",
+			"RLStormNuclearPlasmaPistol",
+			"RLStormMarksmanPistol",
+			"RLStormCombatPistol",
+			"RLStormPistol",
+
+			// High Power Pistols
+			"RLHighPowerNuclearPlasmaPistol",
+			"RLHighPowerHuntingRevolver",
+			"RLHighPowerPP7",
+			"RLHighPowerMarksmanPistol",
+			"RLHighPowerHandCannon",
+			"RLHighPowerCombatPistol",
+			"RLHighPowerBlaster",
+			"RLHighPowerPistol",
+
+			// Basic Assembled Pistols
+			"RLShredderPistol",
+			"RLSilencedPistol",
+			"RLSpeedloaderPistol",
+
+			// Basic Pistols
+			"RLNuclearPlasmaPistol",
+			"RLHuntingRevolver",
+			"RLPP7",
+			"RLMarksmanPistol",
+			"RLHandCannon",
+			"RLCombatPistol",
+			"RLBlaster",
+			"RLPistol"
+		};
+
+		string SavedPistolClass;
+
 		for(int i = 0; i<Players.Size(); i++)
 		{
 			if(Players[i].mo && Players[i].mo.GetClassName() == "DoomRLNomadRPG")
 			{
-				Players[i].mo.GiveInventory("RLNomadOnePistolToken", 1);
-			}
-        }
-
-		while(inv = Inventory(InvIterator.Next()))
-		{
-			if(!inv.owner)
-			{
-				continue;
-			}
-			
-			if(inv.owner.GetClassName() == "DoomRLNomadRPG")
-			{
-				if(inv.GetClassName() == "RLDangerLevel"){continue;}
-				if(inv.GetClassName() == "RLUniqueBossLevel"){continue;}
-				if(inv.GetClassName() == "RLDemonArtifactItem"){continue;}
-				if(inv.GetClassName() == "RLNomadOnePistolToken"){continue;}
-				
-				if(inv.GetClassName() == "DRPGModule"){continue;}
-				if(inv.GetClassName() == "DRPGCredits"){continue;}
-				if(inv.GetClassName() == "DRPGTurretPart"){continue;}
-
-				if(inv.GetClassName() == "DRPGAugCanister"){continue;}
-				if(inv.GetClassName() == "DRPGAugUpgradeCanister"){continue;}
-
-				if(inv.GetClassName() == "DRPGChipGold"){continue;}
-				if(inv.GetClassName() == "DRPGChipPlatinum"){continue;}
-
-				if(inv is "DRPGStimSmall"){continue;} 								// all stims
-				if(inv.GetClassName() == "DRPGVialStrength"){continue;}
-				if(inv.GetClassName() == "DRPGVialDefense"){continue;}
-				if(inv.GetClassName() == "DRPGVialVitality"){continue;}
-				if(inv.GetClassName() == "DRPGVialEnergy"){continue;}
-				if(inv.GetClassName() == "DRPGVialRegeneration"){continue;}
-				if(inv.GetClassName() == "DRPGVialAgility"){continue;}
-				if(inv.GetClassName() == "DRPGVialCapacity"){continue;}
-				if(inv.GetClassName() == "DRPGVialLuck"){continue;}
-				if(inv.GetClassName() == "DRPGVialPurifier"){continue;}
-				if(inv.GetClassName() == "DRPGVialPotency"){continue;}
-				if(inv.GetClassName() == "DRPGVialIndestructible"){continue;}
-				if(inv.GetClassName() == "DRPGVialShadow"){continue;}
-				if(inv.GetClassName() == "DRPGVialInfinity"){continue;}
-				if(inv.GetClassName() == "DRPGVialChrono"){continue;}
-				if(inv.GetClassName() == "DRPGVialAdrenaline"){continue;}
-				if(inv.GetClassName() == "DRPGVialGravity"){continue;}
-				if(inv.GetClassName() == "DRPGVialVampire"){continue;}
-				if(inv.GetClassName() == "DRPGVialRage"){continue;}
-				if(inv.GetClassName() == "DRPGVialMagnetic"){continue;}
-
-				if(inv.GetClassName() == "DRPGLife"){continue;}						// additional lives / 1up
-				
-				if(inv is "DRPGLoot"){continue;} 									// all quest loot
-				if(inv is "DRPGShieldPart"){continue;} 								// all shield parts
-				if(inv is "DRPGCraftParts"){continue;} 								// crafting parts
-
-				if(inv is "DRPGImmunityCrystalMelee"){continue;} 					// immunity crystal melee
-				if(inv is "DRPGImmunityCrystalBullet"){continue;} 					// immunity crystal bullet
-				if(inv is "DRPGImmunityCrystalFire"){continue;} 					// immunity crystal fire
-				if(inv is "DRPGImmunityCrystalPlasma"){continue;} 					// immunity crystal plasma
-				if(inv is "DRPGImmunityCrystalLightning"){continue;} 				// immunity crystal lightning
-				if(inv is "DRPGImmunityCrystalToxic"){continue;} 					// immunity crystal toxic
-				if(inv is "DRPGImmunityCrystalRadiation"){continue;} 				// immunity crystal radiation
-
-				if(inv is "Clip"){continue;} 										// Pistol Ammo
-
-                // Legendary Pistols
-				if(inv is "RLBaronBlaster" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLNeuralStunner" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLJudgeOfTheDead" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLLonghorn" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-                // Demonic Pistols
-				if(inv is "RLDeathsGaze" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-                // Unique Pistols
-				if(inv is "RLTantrumCannon" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHellsingARMSCasull" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLAntiFreakJackal" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLGrammatonClericBeretta" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLTrigun" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLLightweaver" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLUnknownHerald" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLMysteriousMagnum" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-                // Demolition Ammo Pistols
-				if(inv is "RLDemolitionAmmoMarksmanPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLDemolitionAmmoCombatPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLDemolitionAmmoPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-                // Nanomanufacture Assembled Pistols
-				if(inv is "RLNanoManufactureAmmoMarksmanPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLNanoManufactureAmmoCombatPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLNanoManufactureAmmoPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-                // Advanced Assembled Pistols
-				if(inv is "RLMiniMissilePistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLSuperchargedNuclearPlasmaPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLPlasmaMarksmanPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLPlasmaCombatPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLPlasmaPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLStormNuclearPlasmaPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLStormMarksmanPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLStormCombatPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLStormPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-                // Hight Power Pistols
-				if(inv is "RLHighPowerNuclearPlasmaPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHighPowerHuntingRevolver" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHighPowerPP7" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHighPowerMarksmanPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHighPowerHandCannon" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHighPowerCombatPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHighPowerBlaster" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHighPowerPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-                // Basic Assembled Pistols
-				if(inv is "RLShredderPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLSilencedPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLSpeedloaderPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-                // Basic Pistols
-				if(inv is "RLNuclearPlasmaPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHuntingRevolver" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLPP7" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLMarksmanPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLHandCannon" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLCombatPistol" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-				if(inv is "RLBlaster" && (inv.owner.CountInv("RLNomadOnePistolToken")>0)){inv.owner.TakeInventory("RLNomadOnePistolToken", inv.maxamount); continue;}
-
-				inv.owner.TakeInventory(inv.GetClassName(), inv.maxamount);
-			}
-		}
-		
-		for(int i = 0; i<Players.Size(); i++)
-		{
-			if(!Players[i].mo || Players[i].mo.GetClassName()!="DoomRLNomadRPG")
-			{
-				continue;
-			}
-
-			Actor a = Players[i].mo;
-
-			DropItem di = a.default.GetDropItems();
-			
-			while (di != null)
-			{
-				Class<Actor> w;			
-				a.GiveInventory(di.Name, di.amount);
-				
-				w = di.Name;
-				if(w is "Weapon")
-				{
-					a.A_SelectWeapon(di.Name);
+				for (int j = 0; j < Pistols.size(); j++) {
+					// first pistol found in (array)Pistols is saved, while others will be discarded in InvIterator
+					if (Players[i].mo.CountInv(Pistols[j]) && !SavedPistolClass)
+					{
+						SavedPistolClass = Pistols[j];
+						break;
+					}
 				}
-				di = di.Next;
-			}
 
-			a.health = a.default.health;
-			Players[i].health = a.default.health;
-		}
+				while(inv = Inventory(InvIterator.Next()))
+				{
+					if(!inv.owner)
+					{
+						continue;
+					}
+					
+					if(inv.owner.GetClassName() == "DoomRLNomadRPG")
+					{
+						if(inv.GetClassName() == "RLDangerLevel"){continue;}
+						if(inv.GetClassName() == "RLUniqueBossLevel"){continue;}
+						if(inv.GetClassName() == "RLDemonArtifactItem"){continue;}
+						
+						if(inv.GetClassName() == "DRPGModule"){continue;}
+						if(inv.GetClassName() == "DRPGCredits"){continue;}
+						if(inv.GetClassName() == "DRPGTurretPart"){continue;}
+
+						if(inv.GetClassName() == "DRPGAugCanister"){continue;}
+						if(inv.GetClassName() == "DRPGAugUpgradeCanister"){continue;}
+
+						if(inv.GetClassName() == "DRPGChipGold"){continue;}
+						if(inv.GetClassName() == "DRPGChipPlatinum"){continue;}
+
+						if(inv is "DRPGStimSmall"){continue;} 								// all stims
+						if(inv.GetClassName() == "DRPGVialStrength"){continue;}
+						if(inv.GetClassName() == "DRPGVialDefense"){continue;}
+						if(inv.GetClassName() == "DRPGVialVitality"){continue;}
+						if(inv.GetClassName() == "DRPGVialEnergy"){continue;}
+						if(inv.GetClassName() == "DRPGVialRegeneration"){continue;}
+						if(inv.GetClassName() == "DRPGVialAgility"){continue;}
+						if(inv.GetClassName() == "DRPGVialCapacity"){continue;}
+						if(inv.GetClassName() == "DRPGVialLuck"){continue;}
+						if(inv.GetClassName() == "DRPGVialPurifier"){continue;}
+						if(inv.GetClassName() == "DRPGVialPotency"){continue;}
+						if(inv.GetClassName() == "DRPGVialIndestructible"){continue;}
+						if(inv.GetClassName() == "DRPGVialShadow"){continue;}
+						if(inv.GetClassName() == "DRPGVialInfinity"){continue;}
+						if(inv.GetClassName() == "DRPGVialChrono"){continue;}
+						if(inv.GetClassName() == "DRPGVialAdrenaline"){continue;}
+						if(inv.GetClassName() == "DRPGVialGravity"){continue;}
+						if(inv.GetClassName() == "DRPGVialVampire"){continue;}
+						if(inv.GetClassName() == "DRPGVialRage"){continue;}
+						if(inv.GetClassName() == "DRPGVialMagnetic"){continue;}
+
+						if(inv.GetClassName() == "DRPGLife"){continue;}						// additional lives / 1up
+						
+						if(inv is "DRPGLoot"){continue;} 									// all quest loot
+						if(inv is "DRPGShieldPart"){continue;} 								// all shield parts
+						if(inv is "DRPGCraftParts"){continue;} 								// crafting parts
+
+						if(inv is "DRPGImmunityCrystalMelee"){continue;} 					// immunity crystal melee
+						if(inv is "DRPGImmunityCrystalBullet"){continue;} 					// immunity crystal bullet
+						if(inv is "DRPGImmunityCrystalFire"){continue;} 					// immunity crystal fire
+						if(inv is "DRPGImmunityCrystalPlasma"){continue;} 					// immunity crystal plasma
+						if(inv is "DRPGImmunityCrystalLightning"){continue;} 				// immunity crystal lightning
+						if(inv is "DRPGImmunityCrystalToxic"){continue;} 					// immunity crystal toxic
+						if(inv is "DRPGImmunityCrystalRadiation"){continue;} 				// immunity crystal radiation
+
+						if(inv is "Clip"){continue;} 										// Pistol Ammo
+						if(inv.GetClassName() == SavedPistolClass){continue;}				// saving best Pistol		
+
+						inv.owner.TakeInventory(inv.GetClassName(), inv.maxamount);
+					}
+				}
+
+				Actor a = Players[i].mo;
+
+				DropItem di = a.default.GetDropItems();
+				while (di != null)
+				{
+					Class<Actor> w;	
+					// haxx - saving value before adding starting loadout 	
+					int clipBefore = a.CountInv("Clip");
+					a.GiveInventory(di.Name, di.amount);	
+
+					if(SavedPistolClass != "RLPistol")
+					{
+						// if better pistol was found - remove pistol gained from starting loadout
+						a.TakeInventory("RLPistol", 1);
+						int clipAfter = a.CountInv("Clip");
+
+						// if clip amount after adding starting loadout is bigger than before = substract it 
+						if(clipAfter > clipBefore)
+						{
+							a.TakeInventory("Clip", clipAfter - clipBefore);
+						}
+					}
+					else
+					{
+						a.GiveInventory("Clip", 10000);	
+					}
+
+					a.A_SelectWeapon("RLFist");
+					
+					di = di.Next;
+				}
+
+				a.health = a.default.health;
+				Players[i].health = a.default.health;
+			} 
+        }
 
 		danger = 0;
 		
@@ -240,11 +253,6 @@ Class RLNomadEvents : EventHandler
 					invName = 'RLUniqueBossLevel';
 					danger = Max(danger, Players[i].mo.CountInv(invName));
 				}
-
-				if(Players[i].mo.CountInv("RLNomadOnePistolToken")==0)
-                {
-					Players[i].mo.TakeInventory("RLPistol", 1);
-                }
 
 				Players[i].mo.PickWeapon(1, false);
 			}
