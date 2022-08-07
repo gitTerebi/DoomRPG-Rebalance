@@ -126,6 +126,7 @@ Class RLNomadEvents : EventHandler
 		};
 
 		string SavedPistolClass;
+		string SavedPistolClassSelected;
 
 		for(int i = 0; i<Players.Size(); i++)
 		{
@@ -136,6 +137,7 @@ Class RLNomadEvents : EventHandler
 					// first pistol found in (array)Pistols is saved, while others will be discarded in InvIterator
 					if (Players[i].mo.CountInv(Pistols[j]) && !SavedPistolClass) {
 						SavedPistolClass = Pistols[j];
+						SavedPistolClassSelected = SavedPistolClass .. "Selected";
 						break;
 					}
 				}
@@ -200,7 +202,18 @@ Class RLNomadEvents : EventHandler
 						if(inv is "DRPGImmunityCrystalRadiation"){continue;} 				// immunity crystal radiation
 
 						if(inv is "Clip"){continue;} 										// Pistol Ammo
-						if(inv.GetClassName() == SavedPistolClass){continue;}				// saving best Pistol		
+			
+						if(inv.GetClassName() == SavedPistolClass){continue;}				// saving best Pistol
+						if(inv.GetClassName() == SavedPistolClassSelected){continue;}		// saving selected Pistol token
+	
+						if(inv.GetClassName() == "RLStandardWeaponToken"){continue;}		// HUD weapon name & color tokens
+						if(inv.GetClassName() == "RLAssembledWeaponToken"){continue;}
+						if(inv.GetClassName() == "RLExoticWeaponToken"){continue;}
+						if(inv.GetClassName() == "RLSuperiorWeaponToken"){continue;}
+						if(inv.GetClassName() == "RLSuperiorAssembledWeaponToken"){continue;}
+						if(inv.GetClassName() == "RLUniqueWeaponToken"){continue;}		
+						if(inv.GetClassName() == "RLDemonicWeaponToken"){continue;}
+						if(inv.GetClassName() == "RLLegendaryWeaponToken"){continue;}			
 
 						inv.owner.TakeInventory(inv.GetClassName(), inv.maxamount);
 					}
@@ -211,12 +224,10 @@ Class RLNomadEvents : EventHandler
 				DropItem di = a.default.GetDropItems();
 				while (di != null)
 				{
-					Class<Actor> w;	
 					// haxx - saving value before adding starting loadout 	
 					int clipBefore = a.CountInv("Clip");
 					a.GiveInventory(di.Name, di.amount);	
-
-					if(SavedPistolClass != "RLPistol") {
+					if(SavedPistolClass && SavedPistolClass != "RLPistol") {
 						// if better pistol was found - remove pistol gained from starting loadout
 						a.TakeInventory("RLPistol", 1);
 						int clipAfter = a.CountInv("Clip");
@@ -225,16 +236,28 @@ Class RLNomadEvents : EventHandler
 						if(clipAfter > clipBefore) {
 							a.TakeInventory("Clip", clipAfter - clipBefore);
 						}
+						a.GiveInventory(SavedPistolClassSelected, 1);	
 						a.A_SelectWeapon(SavedPistolClass);
 					} else {
 						a.A_SelectWeapon("RLPistol");
 						a.GiveInventory("Clip", 10000);	
 					}
 
-					
-					
 					di = di.Next;
 				}
+
+				/*while (di != null)
+				{
+					Class<Actor> w;			
+					a.GiveInventory(di.Name, di.amount);
+					
+					w = di.Name;
+					if(w is "Weapon")
+					{
+						a.A_SelectWeapon(di.Name);
+					}
+					di = di.Next;
+				}*/
 
 				a.health = a.default.health;
 				Players[i].health = a.default.health;
