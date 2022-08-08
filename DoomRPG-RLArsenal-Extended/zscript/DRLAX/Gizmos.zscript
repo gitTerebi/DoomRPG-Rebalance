@@ -1611,116 +1611,159 @@ Class DRLAX_TomeOfSins : DRLAX_GizmoObject
 
         Array<String> exotics, uniques;
 
-        //exotics.push("RLBlasterPickup");
-        exotics.push("RLCombatPistolPickup");
-        //exotics.push("RLMarksmanPistolPickup");
-        //exotics.push("RLHandcannonPickup");
-        exotics.push("RLSuperShotgunPickup");
-        //exotics.push("RLAssaultShotgunPickup");
-        exotics.push("RLPlasmaShotgunPickup");
-        exotics.push("RLMinigunPickup");
-        exotics.push("RLMissileLauncherPickup");
-        exotics.push("RLNapalmLauncherPickup");
-        exotics.push("RLTristarBlasterPickup");
-        exotics.push("RLLaserRiflePickup");
-        exotics.push("RLNuclearPlasmaPistolPickup");
-        exotics.push("RLNuclearPlasmaRiflePickup");
-        exotics.push("RLNuclearBFG9000Pickup");
-        exotics.push("RLCombatTranslocatorPickup");
-        exotics.push("RLBallisticShieldArmorPickup");
-        exotics.push("RLBallisticVestArmorPickup");
-        exotics.push("RLBulletProofVestArmorPickup");
-        exotics.push("RLDuelistArmorPickup");
-        exotics.push("RLEnergyShieldedVestArmorPickup");
-        exotics.push("RLEnergyShieldArmorPickup");
-        exotics.push("RLGothicArmorPickup");
-        exotics.push("RLMedicalArmorPickup");
-        exotics.push("RLPhaseshiftArmorPickup");
-        exotics.push("RLPlasmaShieldArmorPickup");
-        exotics.push("RLOnyxArmorPickup");
-        exotics.push("RLOverchargeSystemArmorPickup");
-        exotics.push("RLCyberwarriorArmorPickup");
-        exotics.push("RLRepulsionWaveSuitArmorPickup");
-        exotics.push("RLSurvivalMediArmorPickup");
-        exotics.push("RLAcidProofBootsPickup");
-        exotics.push("RLGothicBootsPickup");
-        exotics.push("RLPhaseshiftBootsPickup");
-        exotics.push("RLShockwaveBootsPickup");
+        exotics.push("RLBlasterPickup");											// №0,  Rare: 1
+        exotics.push("RLCombatPistolPickup");										// №1,  Rare: 1
+        exotics.push("RLHandcannonPickup");											// №2,  Rare: 2
+        exotics.push("RLUziPickup");												// №3,  Rare: 2
+        exotics.push("RLDuelistArmorPickup");										// №4,  Rare: 2
+        exotics.push("RLMedicalArmorPickup");										// №5,  Rare: 2
+        exotics.push("RLOverchargeSystemArmorPickup");								// №6,  Rare: 2
+        exotics.push("RLRepulsionWaveSuitArmorPickup");								// №7,  Rare: 2
+        exotics.push("RLMarksmanPistolPickup");										// №8,  Rare: 3
+        exotics.push("RLAssaultShotgunPickup");										// №9,  Rare: 3
+        exotics.push("RLBallisticVestArmorPickup");									// №10, Rare: 3
+        exotics.push("RLBulletProofVestArmorPickup");								// №11, Rare: 3
+        exotics.push("RLSurvivalMediArmorPickup");									// №12, Rare: 3
+        exotics.push("RLCyberwarriorArmorPickup");									// №13, Rare: 3
+        exotics.push("RLPlasmaShotgunPickup");										// №14, Rare: 4
+        exotics.push("RLCombatTranslocatorPickup");									// №15, Rare: 4
+        exotics.push("RLEnergyShieldedVestArmorPickup");							// №16, Rare: 4
+        exotics.push("RLOnyxArmorPickup");											// №17, Rare: 4
+        exotics.push("RLMissileLauncherPickup");									// №18, Rare: 5
+        exotics.push("RLBallisticShieldArmorPickup");								// №19, Rare: 5
+        exotics.push("RLGothicArmorPickup");										// №20, Rare: 5
+        exotics.push("RLPhaseshiftArmorPickup");									// №21, Rare: 5
+        exotics.push("RLPlasmaShieldArmorPickup");									// №22, Rare: 5
+        exotics.push("RLShockwaveBootsPickup");										// №23, Rare: 5
+        exotics.push("RLNapalmLauncherPickup");										// №24, Rare: 6
+        exotics.push("RLEnergyShieldArmorPickup");									// №25, Rare: 6
+        exotics.push("RLAcidProofBootsPickup");										// №26, Rare: 6
+        exotics.push("RLSuperShotgunPickup");										// №27, Rare: 7
+        exotics.push("RLMinigunPickup");											// №28, Rare: 7
+        exotics.push("RLLaserRiflePickup");											// №29, Rare: 7
+        exotics.push("RLTristarBlasterPickup");										// №30, Rare: 7
+        exotics.push("RLGothicBootsPickup");										// №31, Rare: 7
+        exotics.push("RLPhaseshiftBootsPickup");									// №32, Rare: 7
+        exotics.push("RLNuclearPlasmaPistolPickup");								// №33, Rare: 8
+        exotics.push("RLNuclearPlasmaRiflePickup");									// №34, Rare: 8
+        exotics.push("RLNuclearBFG9000Pickup");										// №35, Rare: 8
 
-        uniques.push("RLMysteriousMagnumWorldSpawnPickup");
-        uniques.push("RLRailgunWorldSpawnPickup");
-        uniques.push("RLJackhammerWorldSpawnPickup");
-        uniques.push("RLBFG10KWorldSpawnPickup");
-        uniques.push("RLUnknownHeraldWorldSpawnPickup");
-        uniques.push("RLFragShotgunWorldSpawnPickup");
-        uniques.push("RLQuadShotgunWorldSpawnPickup");
-        uniques.push("RLLightweaverWorldSpawnPickup");
-        uniques.push("RLTrigunWorldSpawnPickup");
-        uniques.push("RLGrammatonClericBerettaWorldSpawnPickup");
-        uniques.push("RLAntiFreakJackalWorldSpawnPickup");
-        uniques.push("RLTantrumCannonWorldSpawnPickup");
-        uniques.push("RLRevenantsLauncherWorldSpawnPickup");
-        uniques.push("RLNullPointerWorldSpawnPickup");
-        uniques.push("RLParticleBeamCannonWorldSpawnPickup");
-        uniques.push("RLPlasmaRedirectionCannonWorldSpawnPickup");
-        uniques.push("RLSteelBeastWorldSpawnPickup");
-        uniques.push("RLSussGunWorldSpawnPickup");
-        uniques.push("RLMIRVLauncherWorldSpawnPickup");
-        uniques.push("RLMarathonAssaultRifleWorldSpawnPickup");
-        uniques.push("RLMarathonShotgunsWorldSpawnPickup");
-        uniques.push("RLChameleonRifleWorldSpawnPickup");
-        uniques.push("RLNuclearOnslaughtWorldSpawnPickup");
-        uniques.push("RLLuciferCannonWorldSpawnPickup");
-        uniques.push("RLTriadCannonWorldSpawnPickup");
-        uniques.push("RLDirectHitWorldSpawnPickup");
-        uniques.push("RLCyberneticArmorWorldSpawnPickup");
-        uniques.push("RLLavaArmorWorldSpawnPickup");
-        uniques.push("RLMaleksArmorWorldSpawnPickup");
-        uniques.push("RLMedicalPowerArmorWorldSpawnPickup");
-        uniques.push("RLNecroArmorWorldSpawnPickup");
-        uniques.push("RLShieldedArmorWorldSpawnPickup");
-        uniques.push("RLEnergyDischargeHarnessArmorWorldSpawnPickup");
-        uniques.push("RLPrototypeAssaultShieldArmorWorldSpawnPickup");
-        uniques.push("RLJetpackArmorWorldSpawnPickup");
-        uniques.push("RLBerserkPowersuitArmorWorldSpawnPickup");
-        uniques.push("RLGeosGoldenGauntletArmorWorldSpawnPickup");
-        uniques.push("RLSoulshatterArmorWorldSpawnPickup");
-        uniques.push("RLDemonicCarapaceArmorWorldSpawnPickup");
-        uniques.push("RLNanoAblativeArmorWorldSpawnPickup");
-        uniques.push("RLWildWeaselPeacekeeperArmorWorldSpawnPickup");
-        uniques.push("RLXaserPowerArmorWorldSpawnPickup");
-        uniques.push("RLBlazingPhoenixDeviceSuitArmorWorldSpawnPickup");
-        uniques.push("RLKateMatterstormHarnessArmorWorldSpawnPickup");
-        uniques.push("RLZeroDiamondAssaultforceArmorWorldSpawnPickup");
-        uniques.push("RLKyleTeslaboltArmorWorldSpawnPickup");
-        uniques.push("RLRyanCordellPsychicAmplifierSuitArmorWorldSpawnPickup");
-        uniques.push("RLTerminusEst13BattlesuitArmorWorldSpawnPickup");
-        uniques.push("RLRoystensCommandArmorWorldSpawnPickup");
-        uniques.push("RLSoloOperativeSuitArmorWorldSpawnPickup");
-        uniques.push("RLTorgueBlastplateArmorWorldSpawnPickup");
-        uniques.push("RLFrontlineEngineerSuitArmorWorldSpawnPickup");
-        uniques.push("RLTacticalAssemblerSuitArmorWorldSpawnPickup");
-        uniques.push("RLNuclearPowerArmorWorldSpawnPickup");
-        uniques.push("RLEnviroBootsWorldSpawnPickup");
-        uniques.push("RLNyarlaptotepsBootsWorldSpawnPickup");
-        uniques.push("RLLavaBootsWorldSpawnPickup");
-        uniques.push("RLLeonidasBootsWorldSpawnPickup");
-        uniques.push("RLDemonicBootsWorldSpawnPickup");
-        uniques.push("RLRoystensCombatBootsWorldSpawnPickup");
-        uniques.push("RLSoloOperativeBootsWorldSpawnPickup");
-        uniques.push("RLTorgueBlastBootsWorldSpawnPickup");
-        uniques.push("RLFrontlineEngineerBootsWorldSpawnPickup");
-        uniques.push("RLTacticalAssemblerBootsWorldSpawnPickup");
-        uniques.push("RLNuclearPowerBootsWorldSpawnPickup");
+        uniques.push("RLGeosGoldenGauntletArmorWorldSpawnPickup");					// №0,  Rare: 4
+        uniques.push("RLMedicalPowerArmorWorldSpawnPickup");						// №1,  Rare: 4
+        uniques.push("RLNecroArmorWorldSpawnPickup");								// №2,  Rare: 4
+        uniques.push("RLJackhammerWorldSpawnPickup");								// №3,  Rare: 5
+        uniques.push("RLRailgunWorldSpawnPickup");									// №4,  Rare: 5
+        uniques.push("RLFragShotgunWorldSpawnPickup");								// №5,  Rare: 5
+        uniques.push("RLEnergyDischargeHarnessArmorWorldSpawnPickup");				// №6,  Rare: 5
+        uniques.push("RLFrontlineEngineerSuitArmorWorldSpawnPickup");				// №7,  Rare: 5
+        uniques.push("RLRyanCordellPsychicAmplifierSuitArmorWorldSpawnPickup");		// №8,  Rare: 5
+        uniques.push("RLRoystensCommandArmorWorldSpawnPickup");						// №9,  Rare: 5
+        uniques.push("RLFrontlineEngineerBootsWorldSpawnPickup");					// №10, Rare: 5
+        uniques.push("RLTacticalAssemblerBootsWorldSpawnPickup");					// №11, Rare: 5
+        uniques.push("RLTrigunWorldSpawnPickup");									// №12, Rare: 6
+        uniques.push("RLGrammatonClericBerettaWorldSpawnPickup");					// №13, Rare: 6
+        uniques.push("RLRevenantsLauncherWorldSpawnPickup");						// №14, Rare: 6
+        uniques.push("RLSteelBeastWorldSpawnPickup");								// №15, Rare: 6
+        uniques.push("RLPlasmaRedirectionCannonWorldSpawnPickup");					// №16, Rare: 6
+        uniques.push("RLWidowmakerSMGWorldSpawnPickup");							// №17, Rare: 6
+        uniques.push("RLBerserkPowersuitArmorWorldSpawnPickup");					// №18, Rare: 6
+        uniques.push("RLBlazingPhoenixDeviceSuitArmorWorldSpawnPickup");			// №19, Rare: 6
+        uniques.push("RLCyberneticArmorWorldSpawnPickup");							// №20, Rare: 6
+        uniques.push("RLNanoAblativeArmorWorldSpawnPickup");						// №21, Rare: 6
+        uniques.push("RLTacticalAssemblerSuitArmorWorldSpawnPickup");				// №22, Rare: 6
+        uniques.push("RLEnviroBootsWorldSpawnPickup");								// №23, Rare: 6
+        uniques.push("RLLeonidasBootsWorldSpawnPickup");							// №24, Rare: 6
+        uniques.push("RLMysteriousMagnumWorldSpawnPickup");							// №25, Rare: 7
+        uniques.push("RLUnknownHeraldWorldSpawnPickup");							// №26, Rare: 7
+        uniques.push("RLQuadShotgunWorldSpawnPickup");								// №27, Rare: 7
+        uniques.push("RLAntiFreakJackalWorldSpawnPickup");							// №28, Rare: 7
+        uniques.push("RLTantrumCannonWorldSpawnPickup");							// №29, Rare: 7
+        uniques.push("RLNullPointerWorldSpawnPickup");								// №30, Rare: 7
+        uniques.push("RLSussGunWorldSpawnPickup");									// №31, Rare: 7
+        uniques.push("RLMarathonAssaultRifleWorldSpawnPickup");						// №32, Rare: 7
+        uniques.push("RLJetpackArmorWorldSpawnPickup");								// №33, Rare: 7
+        uniques.push("RLKateMatterstormHarnessArmorWorldSpawnPickup");				// №34, Rare: 7
+        uniques.push("RLShieldedArmorWorldSpawnPickup");							// №35, Rare: 7
+        uniques.push("RLSoloOperativeSuitArmorWorldSpawnPickup");					// №36, Rare: 7
+        uniques.push("RLTerminusEst13BattlesuitArmorWorldSpawnPickup");				// №37, Rare: 7
+        uniques.push("RLWildWeaselPeacekeeperArmorWorldSpawnPickup");				// №38, Rare: 7
+        uniques.push("RLRoystensCombatBootsWorldSpawnPickup");						// №39, Rare: 7
+        uniques.push("RLSoloOperativeBootsWorldSpawnPickup");						// №40, Rare: 7
+        uniques.push("RLBFG10KWorldSpawnPickup");									// №41, Rare: 8
+        uniques.push("RLLightweaverWorldSpawnPickup");								// №42, Rare: 8
+        uniques.push("RLParticleBeamCannonWorldSpawnPickup");						// №43, Rare: 8
+        uniques.push("RLMIRVLauncherWorldSpawnPickup");								// №44, Rare: 8
+        uniques.push("RLMarathonShotgunsWorldSpawnPickup");							// №45, Rare: 8
+        uniques.push("RLChameleonRifleWorldSpawnPickup");							// №46, Rare: 8
+        uniques.push("RLLuciferCannonWorldSpawnPickup");							// №47, Rare: 8
+        uniques.push("RLDirectHitWorldSpawnPickup");								// №48, Rare: 8
+        uniques.push("RLKyleTeslaboltArmorWorldSpawnPickup");						// №49, Rare: 8
+        uniques.push("RLLavaArmorWorldSpawnPickup");								// №50, Rare: 8
+        uniques.push("RLMaleksArmorWorldSpawnPickup");								// №51, Rare: 8
+        uniques.push("RLNuclearPowerArmorWorldSpawnPickup");						// №52, Rare: 8
+        uniques.push("RLPrototypeAssaultShieldArmorWorldSpawnPickup");				// №53, Rare: 8
+        uniques.push("RLTorgueBlastplateArmorWorldSpawnPickup");					// №54, Rare: 8
+        uniques.push("RLXaserPowerArmorWorldSpawnPickup");							// №55, Rare: 8
+        uniques.push("RLZeroDiamondAssaultforceArmorWorldSpawnPickup");				// №56, Rare: 8
+        uniques.push("RLLavaBootsWorldSpawnPickup");								// №57, Rare: 8
+        uniques.push("RLNuclearPowerBootsWorldSpawnPickup");						// №58, Rare: 8
+        uniques.push("RLNyarlaptotepsBootsWorldSpawnPickup");						// №59, Rare: 8
+        uniques.push("RLTorgueBlastBootsWorldSpawnPickup");							// №60, Rare: 8
+        uniques.push("RLNuclearOnslaughtWorldSpawnPickup");							// №61, Rare: 9
+        uniques.push("RLTriadCannonWorldSpawnPickup");								// №62, Rare: 9
+        uniques.push("RLDemonicCarapaceArmorWorldSpawnPickup");						// №63, Rare: 9
+        uniques.push("RLSoulshatterArmorWorldSpawnPickup");							// №64, Rare: 9
+        uniques.push("RLDemonicBootsWorldSpawnPickup");								// №65, Rare: 9
 
         switch(q.tomelevel)
         {
             Case 1:
-            amount = 5;
+            amount = q.tomelevel;
             Switch(random(0, 1))
             {
                 Case 0:
                 Switch(random(0, 3))
+                {
+                    Case 0: prize = "RLBulkModItem"; break;
+                    Case 1: prize = "RLPowerModItem"; break;
+                    Case 2: prize = "RLAgilityModItem"; break;
+                    Case 3: prize = "RLTechnicalModItem"; break;
+                }
+                break;
+                Case 1:
+                prize = exotics[random(0, 13)];
+                break;
+            }
+            break;
+
+            Case 2:
+            amount = q.tomelevel;
+            Switch(random(0, 2))
+            {
+                Case 0:
+                Switch(random(0, 3))
+                {
+                    Case 0: prize = "RLBulkModItem"; break;
+                    Case 1: prize = "RLPowerModItem"; break;
+                    Case 2: prize = "RLAgilityModItem"; break;
+                    Case 3: prize = "RLTechnicalModItem"; break;
+                }
+                break;
+                Case 1:
+                prize = exotics[random(2, 17)];
+                break;
+                Case 2:
+                prize = uniques[random(0, 2)];
+                break;
+            }
+            break;
+            
+            Case 3:
+            amount = q.tomelevel;
+            Switch(random(0, 2))
+            {
+                Case 0:
+                Switch(random(0, 5))
                 {
                     Case 0: prize = "RLBulkModItem"; break;
                     Case 1: prize = "RLPowerModItem"; break;
@@ -1731,14 +1774,75 @@ Class DRLAX_TomeOfSins : DRLAX_GizmoObject
                 }
                 break;
                 Case 1:
-                prize = exotics[random(0, exotics.Size() - 1)];
+                prize = exotics[random(8, 17)];
+                break;
+                Case 2:
+                prize = uniques[random(0, 2)];
                 break;
             }
             break;
 
-            Case 2:
-            amount = 12;
-            Switch(random(0, 1))
+            Case 4:
+            amount = q.tomelevel;
+            Switch(random(0, 2))
+            {
+                Case 0:
+                Switch(random(0, 8))
+                {
+                    Case 0: prize = "RLBulkModItem"; break;
+                    Case 1: prize = "RLPowerModItem"; break;
+                    Case 2: prize = "RLAgilityModItem"; break;
+                    Case 3: prize = "RLTechnicalModItem"; break;
+                    Case 4: prize = "RLArmorModItem"; break;
+                    Case 5: prize = "RLOnyxModItem"; break;
+                    Case 6: prize = "RLFirestormModItem"; break;
+                    Case 7: prize = "RLSniperModItem"; break;
+                    Case 8: prize = "RLNanoModItem"; break;
+                }
+                break;
+                Case 1:
+                prize = exotics[random(8, 23)];
+                break;
+                Case 2:
+                prize = uniques[random(0, 11)];
+                break;
+            }
+            break;
+
+            Case 5:
+            amount = q.tomelevel;
+            Switch(random(0, 3))
+            {
+                Case 0:
+                Switch(random(0, 8))
+                {
+                    Case 0: prize = "RLBulkModItem"; break;
+                    Case 1: prize = "RLPowerModItem"; break;
+                    Case 2: prize = "RLAgilityModItem"; break;
+                    Case 3: prize = "RLTechnicalModItem"; break;
+                    Case 4: prize = "RLArmorModItem"; break;
+                    Case 5: prize = "RLOnyxModItem"; break;
+                    Case 6: prize = "RLFirestormModItem"; break;
+                    Case 7: prize = "RLSniperModItem"; break;
+                    Case 8: prize = "RLNanoModItem"; break;
+                }
+                break;
+                Case 1:
+                prize = exotics[random(8, 23)];
+                break;
+                Case 2:
+                prize = uniques[random(0, 11)];
+                break;
+                Case 3:
+				prize = "DRLAX_FamiliarBall";
+				familiar = DRLAX_AppraiserObject.GetRandomFamiliar();
+				break;
+            }
+            break;
+
+            Case 6:
+            amount = q.tomelevel;
+            Switch(random(0, 3))
             {
                 Case 0:
                 Switch(random(0, 2))
@@ -1749,15 +1853,116 @@ Class DRLAX_TomeOfSins : DRLAX_GizmoObject
                 }
                 break;
                 Case 1:
-                prize = uniques[random(0, exotics.Size() - 1)];
+                prize = exotics[random(14, 26)];
                 break;
+                Case 2:
+                prize = uniques[random(0, 11)];
+                break;
+                Case 3:
+				prize = "DRLAX_FamiliarBall";
+				familiar = DRLAX_AppraiserObject.GetRandomFamiliar();
+				break;
             }
             break;
-            
-            Case 3:
-            amount = 20;
-            prize = "DRLAX_FamiliarBall";
-            familiar = DRLAX_AppraiserObject.GetRandomFamiliar();
+
+            Case 7:
+            amount = q.tomelevel;
+            Switch(random(0, 3))
+            {
+                Case 0:
+                Switch(random(0, 2))
+                {
+                    Case 0: prize = "RLFirestormModItem"; break;
+                    Case 1: prize = "RLSniperModItem"; break;
+                    Case 2: prize = "RLNanoModItem"; break;
+                }
+                break;
+                Case 1:
+                prize = exotics[random(18, 32)];
+                break;
+                Case 2:
+                prize = uniques[random(3, 24)];
+                break;
+                Case 3:
+				prize = "DRLAX_FamiliarBall";
+				familiar = DRLAX_AppraiserObject.GetRandomFamiliar();
+				break;
+            }
+            break;
+
+            Case 8:
+            amount = q.tomelevel;
+            Switch(random(0, 3))
+            {
+                Case 0:
+                Switch(random(0, 2))
+                {
+                    Case 0: prize = "RLFirestormModItem"; break;
+                    Case 1: prize = "RLSniperModItem"; break;
+                    Case 2: prize = "RLNanoModItem"; break;
+                }
+                break;
+                Case 1:
+                prize = exotics[random(24, 32)];
+                break;
+                Case 2:
+                prize = uniques[random(12, 40)];
+                break;
+                Case 3:
+				prize = "DRLAX_FamiliarBall";
+				familiar = DRLAX_AppraiserObject.GetRandomFamiliar();
+				break;
+            }
+            break;
+
+            Case 9:
+            amount = q.tomelevel;
+            Switch(random(0, 3))
+            {
+                Case 0:
+                Switch(random(0, 2))
+                {
+                    Case 0: prize = "RLFirestormModItem"; break;
+                    Case 1: prize = "RLSniperModItem"; break;
+                    Case 2: prize = "RLNanoModItem"; break;
+                }
+                break;
+                Case 1:
+                prize = exotics[random(27, 32)];
+                break;
+                Case 2:
+                prize = uniques[random(25, 60)];
+                break;
+                Case 3:
+				prize = "DRLAX_FamiliarBall";
+				familiar = DRLAX_AppraiserObject.GetRandomFamiliar();
+				break;
+            }
+            break;
+
+            Case 10:
+            amount = q.tomelevel;
+            Switch(random(0, 3))
+            {
+                Case 0:
+                Switch(random(0, 2))
+                {
+                    Case 0: prize = "RLFirestormModItem"; break;
+                    Case 1: prize = "RLSniperModItem"; break;
+                    Case 2: prize = "RLNanoModItem"; break;
+                }
+                break;
+                Case 1:
+                prize = exotics[random(27, 35)];
+                break;
+                Case 2:
+                prize = uniques[random(25, 65)];
+                break;
+                Case 3:
+				prize = "DRLAX_FamiliarBall";
+				familiar = DRLAX_AppraiserObject.GetRandomFamiliar();
+				break;
+            }
             break;
         }
     }
@@ -1809,7 +2014,7 @@ Class DRLAX_TomeOfSins : DRLAX_GizmoObject
                 {
                     corrupts[i].Destroy();
                 }
-                if(man.tomelevel > 3)
+                if(man.tomelevel > 10)
                 {
                     man.tomelevel = 1;
                 }

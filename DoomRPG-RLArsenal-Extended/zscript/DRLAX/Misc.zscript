@@ -1,0 +1,432 @@
+Class DRLAX_ClassEvents : EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		String r;
+
+		if(skill == 7 && !Cvar.GetCvar("DRLAX_brokenadaptivemasterminds").GetBool())
+		{
+			r = "RLSpiderMastermind";
+			if(e.replacee == r)
+			{
+				string s;
+				uint r = random(0, 14);
+
+				if(r >= 2 && r <= 5)
+				{
+					s = "RLSpiderMastermindBFG";
+				}
+				if(r <= 1)
+				{
+					s = "RLSpiderMastermindMortar";
+				}
+
+				e.replacement = s;
+			}
+		}
+	}
+
+	override void WorldThingSpawned (WorldEvent e)
+	{	
+		if(!e.Thing)
+		{
+			return;
+		}
+
+		String clsn = e.Thing.GetClassName();
+
+		if(clsn == "RLDeVileCopyDelay")
+		{
+			String c;
+
+			if(e.Thing.master)
+			{
+				bool spawned = false;
+				if(e.Thing.master.GetClassName() == "DoomRLMechanoid")
+				{
+					c = "RLDeVileCopyDelay_Mechanoid";
+					spawned = true;
+				}
+				
+				if(e.Thing.master.GetClassName() == "DoomRLNomad")
+				{
+					c = "RLDeVileCopyDelay_Nomad";
+					spawned = true;
+				}
+
+				if(e.Thing.master.GetClassName() == "DoomRLNanoManiac")
+				{
+					c = "RLDeVileCopyDelay_NanoManiac";
+					spawned = true;
+				}
+
+				if(e.Thing.master.GetClassName() == "DoomRLPhaseSisters")
+				{
+					c = "RLDeVileCopyDelay_PhaseSisters";
+					spawned = true;
+				}	
+
+				if(e.Thing.master.GetClassName() == "DoomRLSarge")
+				{
+					c = "RLDeVileCopyDelay_Sarge";
+					spawned = true;
+				}	
+
+				if(spawned)
+				{
+					e.Thing.A_SpawnItemEx(c, flags:SXF_TRANSFERPOINTERS);
+					e.Thing.Destroy();
+					return;
+				}			
+			}
+		}
+
+		if(clsn == "RLDeadBodySpawner" && random(0, 18) == 0 && !BodySpawned() && !Cvar.GetCvar("DRLAX_nonewplayercorpses").GetBool())
+		{
+			e.Thing.Spawn("DRLAX_DeadBody", e.Thing.pos);
+			e.Thing.Destroy();
+		}
+
+		if(clsn == "RLRecallPhaseDevice" || clsn == "RLHomingPhaseDevice" || clsn == "RLPhaseDevice")
+		{
+			if(random(0, 9) == 0 && Level.Time < 2)
+			{
+				Actor.Spawn("DRLAX_RadarDevice", e.thing.pos);
+				e.Thing.Destroy();
+			}
+		}
+
+		if(clsn == "RLHatredSkull" || clsn == "RLBloodSkull" || clsn == "RLFireSkull")
+		{
+			if(random(0, 11) == 0 && Level.Time < 2)
+			{
+				Actor.Spawn("DRLAX_SoulTrap", e.thing.pos);
+				e.Thing.Destroy();
+			}
+		}
+
+		if(!Cvar.GetCvar("DRLAX_nodemonicbosspursuit").GetBool())
+		{
+			if(clsn == "RLArtifactGuardian" || clsn == "RLNightmareArtifactGuardian" || clsn == "RLAbominantArtifactGuardian")
+			{
+				DRLAX_ArtifactGuardianHelper g = DRLAX_ArtifactGuardianHelper(Actor.Spawn("DRLAX_ArtifactGuardianHelper"));
+				g.target = e.Thing;
+			}
+		}
+	}
+
+	bool BodySpawned()
+	{
+		ThinkerIterator i = ThinkerIterator.Create("DRLAX_DeadBody");
+		DRLAX_DeadBody c;
+		while(c = DRLAX_DeadBody(i.Next()))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	override void NetworkProcess(ConsoleEvent e)
+	{        
+		Actor player = players[e.player].mo;
+
+		if (e.Name == "DRLAX_ArmorSpecial")
+		{
+			if(player.health > 0)
+			{
+				Inventory inv = player.FindInventory("RLArmorSpecial");
+
+				if(inv)
+				{
+					player.UseInventory(inv);
+				}
+			}
+		}
+
+		if(e.Name == "DRLAX_SargeSpecialOn")
+		{
+			if(player.CountInv("RLSargeInv") > 0)
+			{
+				player.GiveInventory("RLSargeInvTrigger", 1);
+			}
+		}
+
+		if(e.Name == "DRLAX_SargeSpecialOff")
+		{
+			if(player.CountInv("RLSargeInv") > 0)
+			{
+				player.TakeInventory("RLSargeInvTrigger", 1);
+			}
+		}
+	}
+
+	override void WorldUnloaded (WorldEvent e) 
+	{
+		if(!Cvar.GetCvar("DRLAX_nodeathexitprotection").GetBool())
+		{
+			for(int i; i<players.Size(); i++)
+			{
+				if(players[i].mo && players[i].mo.health < 1)
+				{
+					players[i].Resurrect();
+					//players[i].mo.health = 100;
+				}
+			}
+		}
+	}
+}
+
+Class DRLAX_DeadBody : Actor
+{
+	Default
+	{
+		+NOINTERACTION
+	}
+	
+	states
+	{
+		Spawn:
+		TNT1 A 0;
+		TNT1 A -1
+		{
+			Actor a;
+			String s;
+			String n;
+
+			Switch(random(0, 4))
+			{
+				Case 0:
+				n = "RLPlayerMechanoidDeadBody";
+				s = "1337";
+				A_SpawnItemEx("RLModPackSpawner", random(32, 48), 0, 0, frandom(1, 4), angle:random(0,360));
+				break;
+
+				Case 1:
+				n = "RLPlayerNanoManiacDeadBody";
+				s = "DKCP";
+				SpawnRandomModdedWeapon();
+				break;
+
+				Case 2:
+				n = "RLPlayerNomadDeadBody";
+				s = "ZHRT";
+				A_SpawnItemEx("RLClip", random(32, 48), angle:random(0,360));
+				A_SpawnItemEx("RLRandomSkullSpawner", random(32, 48), angle:random(0,360));
+				break;
+
+				Case 3:
+				n = "RLPlayerPhaseSistersDeadBody";
+				s = "REVY";
+				A_SpawnItemEx("RLRandomPhaseDeviceSpawner", random(32, 48), 0, 0, frandom(1, 4), angle:random(0,360));
+				A_SpawnItemEx("RLRandomPhaseDeviceSpawner", random(32, 48), 0, 0, frandom(1, 4), angle:random(0,360));
+				A_SpawnItemEx("RLRandomPhaseDeviceSpawner", random(32, 48), 0, 0, frandom(1, 4), angle:random(0,360));
+				break;
+
+				Case 4:
+				n = "RLPlayerSargeDeadBody";
+				s = "SUT1";
+				A_SpawnItemEx("RLRocketLauncherPickup", random(32, 48), angle:random(0,360));
+				A_SpawnItemEx("DRPGBackpackRandomizer", random(32, 48), angle:random(0,360));
+				break;
+			}
+
+			if(!s || !n)
+			{
+				return;
+			}
+
+			a = Actor(Spawn(n, pos));
+			a.frame = 13;
+			a.sprite = GetSpriteIndex(s);
+		}
+		stop;
+	}
+
+	void SpawnRandomModdedWeapon()
+	{
+		int mods = 1;
+				int emods = random(0, 1);
+				String weps[] = 
+				{
+					"RLPistolPickupModded",
+					"RLShotgunPickupModded",
+					"RLCombatShotgunPickupModded",
+					"RLDoubleShotgunPickupModded",
+					"RLChaingunPickupModded",
+					"RLBattleRiflePickupModded",
+					"RLRocketLauncherPickupModded",
+					"RLPlasmaRiflePickupModded",
+					"RLBFG9000PickupModded"
+				};
+
+				String rmodsarray[] = 
+				{
+					"BulkMod",
+					"PowerMod",
+					"AgilityMod",
+					"TechnicalMod"				
+				};
+
+				String emodsarray[] =
+				{
+					"NanoMod",
+					"FirestormMod",
+					"SniperMod"
+				};
+
+				String chosen = weps[random(0, weps.Size()-1)];
+
+				bool spawned;
+            	Actor act;
+				[spawned, act] = A_SpawnItemEx(chosen, random(16, 32), angle:random(0,360), flags:SXF_NOCHECKPOSITION);
+
+				String wepname = chosen;
+				wepname.Replace("PickupModded", "");
+
+				if(spawned && act)
+				{
+					for(int i; i<mods; i++)
+					{
+						act.GiveInventory(wepname .. "ModLimit", 1);
+
+						if(emods > 0)
+						{
+							act.GiveInventory(wepname .. emodsarray[random(0, emodsarray.Size()-1)], 1);
+							emods--;
+							continue;
+						}
+
+						act.GiveInventory(wepname .. rmodsarray[random(0, rmodsarray.Size()-1)], 1);
+					}
+				}
+	}
+}
+
+
+class DRLAX_ArtifactGuardianHelper : Actor
+{
+	Default
+	{
+		+NOINTERACTION;
+	}
+
+	States
+	{
+		Spawn:
+		TNT1 A -1;
+		stop;
+	}
+
+	int rangecooldown;
+
+	override void Tick()
+	{
+		if(!target || target.health < 1)
+		{
+			Destroy();
+			return;
+		}
+
+		if(!target.target)
+		{
+			target.target = GetRandomPlayer();
+			target.lastheard = GetRandomPlayer();
+		}
+
+		if(rangecooldown == 0)
+		{
+			rangecooldown = 35*10;
+			//Console.Printf("finding new home");
+			FindNewHome();
+		}
+
+		if(target.target)
+		{
+			if(target.Distance2D(target.target) > 600 && !target.CheckSight(target.target, SF_IGNOREVISIBILITY))
+			{
+				rangecooldown--;
+			}
+			else
+			{
+				rangecooldown++;
+			}
+		}
+
+		rangecooldown = Clamp(rangecooldown, 0, 35*10);
+
+		//Console.Printf("".. rangecooldown);
+
+		Super.Tick();
+	}
+
+	CMMSS_Actor_SafeSpawner cb;
+
+	void FindNewHome()
+	{
+		if(cb)
+		{
+			return;
+		}
+
+		cb = CMMSS_Safespawner.New("DRLAX_ArtifactGuardianTeleport", 1, "", target.radius, target.height, 0, CMMSS_Safespawner.SSFLAGS_IGNOREPLAYERSIGHT);
+		cb.SetSpawnLocation(GetRandomPlayer());
+	}
+
+	Actor GetRandomPlayer()
+	{
+		Array<Actor> ps;
+
+		for(int i; i<players.Size(); i++)
+		{
+			if(players[i].mo)
+			{
+				ps.Push(players[i].mo);
+			}
+		}
+
+		if(ps.Size() == 0)
+		{
+			return null;
+		}
+
+		return ps[random(0, ps.Size() - 1)];
+	}
+}
+
+class DRLAX_ArtifactGuardianTeleport : Actor
+{
+	Default
+	{
+		+NOINTERACTION;
+		-SOLID;
+	}
+
+	States
+	{
+		Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_SpawnItemEx("RLDemonicBossTeleportFogMain", 0, 0, 64, flags:SXF_NOCHECKPOSITION);
+		TNT1 AAAA 7 A_StartSound("misc/teleport", flags:CHANF_OVERLAP, attenuation: 0.5);
+		TNT1 AAA 7;
+		TNT1 A 50
+		{
+			ThinkerIterator i = ThinkerIterator.Create("DRLAX_ArtifactGuardianHelper");
+			DRLAX_ArtifactGuardianHelper c;
+			if(c = DRLAX_ArtifactGuardianHelper(i.Next()))
+			{
+				if(c.target)
+				{
+					Spawn("TeleportFog", c.pos + (0,0,c.target.height/2));
+					c.Target.SetOrigin(pos, false);
+					if(c.target.GetAge() > 100)
+					{
+						c.target.A_StartSound(c.target.seesound, slot:CHAN_7, attenuation:ATTN_NONE);
+						return;
+					}
+				}
+			}
+		}
+		stop;
+	}
+}
