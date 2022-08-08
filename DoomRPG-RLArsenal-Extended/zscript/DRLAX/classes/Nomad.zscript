@@ -192,6 +192,12 @@ Class RLNomadEvents : EventHandler
 						if(inv is "DRPGImmunityCrystalToxic"){continue;} 					// immunity crystal toxic
 						if(inv is "DRPGImmunityCrystalRadiation"){continue;} 				// immunity crystal radiation
 
+						if(inv.GetClassName() == "DRPGShield"){continue;}					// Shield
+						if(inv.GetClassName() == "DRPGShieldCharge"){continue;}
+						if(inv.GetClassName() == "DRPGShieldChargeMax"){continue;}
+						if(inv.GetClassName() == "DRPGShieldCapacity"){continue;}
+						if(inv.GetClassName() == "DRPGZShieldDamageHandler"){continue;}
+
 						if(inv is "Clip"){continue;} 										// Pistol Ammo
 
 						if(inv.GetClassName() == SavedPistolClass){continue;}				// saving best Pistol
