@@ -49,29 +49,51 @@ Class RLSargeEvents : StaticEventHandler
         {
             return;
         }
-        
+
         RLSargeInv s = RLSargeInv(players[consoleplayer].mo.FindInventory("RLSargeInv"));
         if(s && s.shoulderweapon)
         {
+			int X = CVar.GetCVar("drpg_drla_x", players[consoleplayer]).GetInt();
+			int Y = CVar.GetCVar("drpg_drla_y", players[consoleplayer]).GetInt();   
+			int XOff, YOff;	
 
-            int aspectoffs;
-
-            if(Screen.GetAspectRatio() < 1.7)
+            if(Screen.GetAspectRatio() < 1.3)
             {
-                aspectoffs = -210;
+                XOff = - 19;
+                YOff = + 5;
+            }
+            else if(Screen.GetAspectRatio() < 1.4)
+            {
+                XOff = + 12;
+                YOff = - 10;
+            }
+            else if(Screen.GetAspectRatio() < 1.7)
+            {
+                XOff = + 77;
+                YOff = - 10;
+            }
+            else if(Screen.GetAspectRatio() < 1.8)
+            {
+                XOff = + 120;
+                YOff = - 10;
+            }			
+            else if(Screen.GetAspectRatio() > 2.3)
+            {
+                XOff = + 262;
+                YOff = - 10;
             }
 
             let window_aspect    = 1.0 * Screen.GetWidth() / Screen.GetHeight();
             let resolution        = 480 * (window_aspect, 1);
 
-            Screen.DrawTexture(TexMan.CheckForTexture("SSHOULDA", TexMan.Type_Sprite, 0), false, 695 + aspectoffs, 60,
+            Screen.DrawTexture(TexMan.CheckForTexture("SSHOULDA", TexMan.Type_Sprite, 0), false, X + XOff, Y + YOff,
             DTA_VIRTUALWIDTHF,    resolution.x,
             DTA_VIRTUALHEIGHTF,    resolution.y,
             DTA_KEEPRATIO, true, DTA_HUDRules);
 
             String rocketammo = "" .. s.owner.CountInv("RocketAmmo");
 
-            Screen.DrawText("CONFONT", Font.CR_GOLD, 710 + aspectoffs, 65, rocketammo, 
+            Screen.DrawText("CONFONT", Font.CR_GOLD, X + XOff + 9, Y + YOff + 5, rocketammo, 
             DTA_VIRTUALWIDTHF,    resolution.x,
             DTA_VIRTUALHEIGHTF,    resolution.y,
             DTA_KEEPRATIO, true, DTA_HUDRules);
@@ -94,7 +116,7 @@ Class RLSargeEvents : StaticEventHandler
                 readylit = TexMan.CheckForTexture("SSHOULDR", TexMan.Type_Sprite, 0);
             }
 
-            Screen.DrawTexture(readylit, false, 695 + aspectoffs, 78,
+            Screen.DrawTexture(readylit, false, X + XOff, Y + YOff + 18,
             DTA_VIRTUALWIDTHF,    resolution.x,
             DTA_VIRTUALHEIGHTF,    resolution.y,
             DTA_KEEPRATIO, true, DTA_HUDRules);
