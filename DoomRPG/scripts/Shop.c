@@ -103,6 +103,13 @@ void ShopItemTryAutoDeposit(ItemInfoPtr Item)
 {
     bool deposited = false;
 
+    // If Shop/Locker anywhere is off
+    if (!CurrentLevel->UACBase && !GetCVar("drpg_shoptype")) return;
+
+    // Compatibility Handling - DoomRL Arsenal Extended
+    // Nomad - cannot use this function outside of Outpost
+    if (!CurrentLevel->UACBase && CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 7) return;
+
     // Special handling for DRLA weapons since you can only keep one weapon with mods in the locker
     if (CompatMode == COMPAT_DRLA && Item->Category == 0 && Player.Locker[Item->Category][Item->Index] > 0) return;
 
