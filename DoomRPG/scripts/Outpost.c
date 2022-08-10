@@ -3423,7 +3423,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Triad Cannon
                             if (ItemData[0][CurrentItem].Actor == "RLTriadCannon")
                             {
-                                CurrentIndexBasic = 53;
+                                CurrentIndexBasic = 54;
                                 CurrentTypeDetails2 =  8;
                                 CurrentTypeDetails5 =  12;
                                 CurrentAmountDetails5 = 1;
