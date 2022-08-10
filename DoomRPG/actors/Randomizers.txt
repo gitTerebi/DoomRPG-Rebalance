@@ -472,8 +472,8 @@ actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // Health Bonus Locations
 actor DRPGHealthBonusReplacer : RandomSpawner Replaces HealthBonus
 {
-    DropItem "DRPGHealthBonusSpawner"    255 226
-    DropItem "DRPGHealthBonus"           255 30
+    DropItem "DRPGHealthBonusSpawner"    255 230
+    DropItem "DRPGHealthBonus"           255 25
 }
 
 // Stimpack Locations
