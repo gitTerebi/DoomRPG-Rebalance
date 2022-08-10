@@ -1553,6 +1553,26 @@ ACTOR RLCrushedLargeRPG : RLCrushedLarge Replaces RLCrushedLarge
 // MONSTER'S ADAPTIVE AMMO AND WEAPONS DROP
 //
 
+ACTOR RLFormerHumanPistolDropRPG : RLFormerHumanPistolDrop replaces RLFormerHumanPistolDrop
+{
+	States
+	{
+	DonutstealDrop: // Drops for Demonsteele
+		TNT1 A 0 A_DropItem("RLClip3")
+		Stop
+	}
+}
+
+ACTOR RLFormerHumanBattleRifleDropRPG : RLFormerHumanBattleRifleDrop replaces RLFormerHumanBattleRifleDrop
+{
+	States
+	{
+	DonutstealDrop: // Drops for Demonsteele
+		TNT1 A 0 A_DropItem("RLClip3")
+		Stop
+	}
+}
+
 ACTOR RLFormerSergeantShotgunDropRPG : RLFormerSergeantShotgunDrop replaces RLFormerSergeantShotgunDrop
 {
 	States
