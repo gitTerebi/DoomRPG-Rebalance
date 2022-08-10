@@ -319,20 +319,33 @@ void DrawMainMenu()
     // Level Stats
     if (!CurrentLevel->UACBase)
     {
-        SetFont("SMALLFONT");
-        HudMessage("Monsters: %d / %d", CurrentKills, TotalKills);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? "Green" : "Brick"),       180.1, 129.0, 0.05);
-        HudMessage("Items: %d / %d", CurrentItems, TotalItems);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllItems ? "Green" : "LightBlue"),   180.1, 143.0, 0.05);
-        HudMessage("Secrets: %d / %d", CurrentSecretsFound, TotalSecretsFound);
-        EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? "Green" : "Yellow"),    180.1, 157.0, 0.05);
+        fixed Y1;
 
         // Compatibility Handling - DoomRL Monsters
-        if (CompatMonMode == COMPAT_DRLA)
+        if (CompatMonMode == COMPAT_DRLA && GameSkill() == 5)
         {
-            HudMessage("Danger Level: %d", CheckInventory("RLDangerLevel"));
+            str NameDangerLevel;
+            fixed DangerLevelMod = (CheckInventory("RLDangerLevel") / (18.0 + (GetCVar("drpg_ws_use_wads") * 32.0)));
+            Y1 = 8.0;
+
+            if (DangerLevelMod >= 0.0) NameDangerLevel = "\CdVery Low\C-";
+            if (DangerLevelMod > 0.10) NameDangerLevel = "\CdLow\C-";
+            if (DangerLevelMod > 0.25) NameDangerLevel = "\CiMedium\C-";
+            if (DangerLevelMod > 0.5) NameDangerLevel = "\CaHigh\C-";
+            if (DangerLevelMod > 0.75) NameDangerLevel = "\CgVery High\C-";
+
+            SetFont("SMALLFONT");
+            HudMessage("Danger Level: %d - %S", CheckInventory("RLDangerLevel"), NameDangerLevel);
             EndHudMessage(HUDMSG_PLAIN, 0, "Red", 180.1, 115.0, 0.05);
         }
+
+        SetFont("SMALLFONT");
+        HudMessage("Monsters: %d / %d", CurrentKills, TotalKills);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? "Green" : "Brick"),       180.1, 121.0 + Y1, 0.05);
+        HudMessage("Items: %d / %d", CurrentItems, TotalItems);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllItems ? "Green" : "LightBlue"),   180.1, 135.0 + Y1, 0.05);
+        HudMessage("Secrets: %d / %d", CurrentSecretsFound, TotalSecretsFound);
+        EndHudMessage(HUDMSG_PLAIN, 0, (AllSecrets ? "Green" : "Yellow"),    180.1, 149.0 + Y1, 0.05);
     }
 
     // Chips

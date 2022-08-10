@@ -184,6 +184,17 @@ actor DRPGWeaponDropper2 : RandomSpawner Replaces DRPGWeaponDropper
     DropItem "DRPGWeaponSpawner"
 }
 
+// Weapon Unique Randomizer
+actor DRPGWeaponUniqueSpawner : MapSpot
+{
+    States
+    {
+    Spawn:
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponUniqueSpawner")
+        Stop
+    }
+}
+
 // POWERUPS
 // --------------------------------------------------
 

@@ -314,8 +314,8 @@ Class RLNomadEvents : EventHandler
 			MapInv.Push(inv);
 		}
 		
-		int rerolls = danger/2;
-		
+		int rerolls = danger/(1 + CVar.GetCVar("drpg_ws_use_wads").GetInt());
+
 		for(int i = 0; i<rerolls; i++)
 		{
 			for(int i = 0; i<MapInv.Size(); i++)
@@ -331,7 +331,9 @@ Class RLNomadEvents : EventHandler
 				
 				if(IsBackPack(MapInv[i]))
 				{
-					AddActorChance("RLBackpack", 800, 0);
+					AddActorChance("DRPGSmallBackpack", 50, 0);
+					AddActorChance("DRPGBackpack", 40, 1);
+					AddActorChance("DRPGBigBackpack", 10, 2);
 				}
 				
 				if(IsBigAmmo(MapInv[i]))
@@ -387,12 +389,18 @@ Class RLNomadEvents : EventHandler
 				
 				if(IsBoots(MapInv[i]))
 				{
-					AddActorChance("DRPGArmorSpawner", 256, 0);
+					AddActorChance("RLSteelBootsPickup", 40, 0);
+					AddActorChance("RLProtectiveBootsPickup", 30, 1);
+					AddActorChance("RLPlasteelBootsPickup", 20, 2);
+					AddActorChance("DRPGArmorSpawner", 10, 3);
 				}
-				
+
 				if(IsArmor(MapInv[i]))
 				{
-					AddActorChance("DRPGArmorSpawner", 256, 0);
+					AddActorChance("RLGreenArmorPickup", 40, 0);
+					AddActorChance("RLBlueArmorPickup", 30, 1);
+					AddActorChance("RLRedArmorPickup", 20, 2);
+					AddActorChance("DRPGArmorSpawner", 10, 3);
 				}
 				
 				if(ReplaceRoll.Size()>0)
@@ -446,10 +454,10 @@ Class RLNomadEvents : EventHandler
 	{
 		String invn = a.GetClassName();
 		//Console.Printf(invn);
-		if(invn == "RLClipBox"){return true;}
-		if(invn == "RLShellBox"){return true;}
-		if(invn == "RLRocketBox"){return true;}
-		if(invn == "RLCellPack"){return true;}
+		if(invn == "RLClipBox2"){return true;}
+		if(invn == "RLShellBox2"){return true;}
+		if(invn == "RLRocketBox2"){return true;}
+		if(invn == "RLCellPack2"){return true;}
 		
 		return false;
 	}
@@ -457,7 +465,7 @@ Class RLNomadEvents : EventHandler
 	bool IsBackPack(Actor a)
 	{
 		String invn = a.GetClassName();
-		if(invn == "RLBackpack"){return true;}
+		if(invn == "DRPGSmallBackpack"){return true;}
 		return false;
 	}
 	
@@ -490,7 +498,7 @@ Class RLNomadEvents : EventHandler
 		if(invn == "RLBattleRiflePickup"){return true;}
 		return false;
 	}
-
+	
 	bool IsRocketLauncher(Actor a)
 	{
 		String invn = a.GetClassName();
@@ -528,7 +536,7 @@ Class RLNomadEvents : EventHandler
 		if(invn == "RLProtectiveBootsPickup"){return true;}
 		if(invn == "RLPlasteelBootsPickup"){return true;}	
 		return false;
-	}	
+	}
 	
 	override void WorldUnloaded (WorldEvent e) 
 	{
