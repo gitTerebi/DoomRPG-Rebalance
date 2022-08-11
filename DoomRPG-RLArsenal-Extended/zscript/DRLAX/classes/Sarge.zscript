@@ -55,7 +55,7 @@ Class RLSargeEvents : StaticEventHandler
         {
 			int X = CVar.GetCVar("drpg_drla_x", players[consoleplayer]).GetInt();
 			int Y = CVar.GetCVar("drpg_drla_y", players[consoleplayer]).GetInt();   
-			int XOff, YOff;	
+			int XOff = + 120, YOff = - 10;	
 
             if(Screen.GetAspectRatio() < 1.3)
             {
