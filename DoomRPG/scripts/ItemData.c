@@ -935,8 +935,8 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLDemonArtifactItem",     "Demon Artifact",     100000, 11, 9, "DMNAA0", 19, 65);
 
         // Crates with Parts for craft
-        ITEMDATA_DEF("DRPGCraftPartsExotic", "Craft Parts \Ct[Exotic]\C-", 50000, -1, -1, "EXCRE", 0, -8);
-        ITEMDATA_DEF("DRPGCraftPartsUnique", "Craft Parts \Cd[Unique]\C-", 50000, -1, -1, "UNCRE", 0, -8);
+        ITEMDATA_DEF("DRPGCraftPartsExotic", "Craft Parts \Ct[Exotic]\C-", 50000, -1, -1, "CREXA", -1, -12);
+        ITEMDATA_DEF("DRPGCraftPartsUnique", "Craft Parts \Cd[Unique]\C-", 50000, -1, -1, "CRUNA", -1, -12);
         ITEMDATA_CATEGORY_END;
 
         // Boots
