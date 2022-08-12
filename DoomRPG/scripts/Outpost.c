@@ -3423,7 +3423,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Triad Cannon
                             if (ItemData[0][CurrentItem].Actor == "RLTriadCannon")
                             {
-                                CurrentIndexBasic = 54;
+                                CurrentIndexBasic = 53;
                                 CurrentTypeDetails2 =  8;
                                 CurrentTypeDetails5 =  12;
                                 CurrentAmountDetails5 = 1;
@@ -4018,9 +4018,9 @@ NamedScript MapSpecial void DisassemblingDevice()
                         HudMessage("%S: %d", ItemData[8][CurrentTypeDetails4].Name, CurrentAmountDetails4);
                         EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
 
-                        PrintSprite(ItemData[8][CurrentTypeDetails4].Sprite.Name, 0, X + X1 + 32.0,  Y + Y2 + 322.0, 0.05);
+                        PrintSprite(ItemData[8][CurrentTypeDetails4].Sprite.Name, 0, X + X1 + 32.0,  Y + Y2 + 315.0, 0.05);
 
-                        X1 += 32.0;
+                        X1 += 44.0;
                         Y1 += 8.0;
                     }
                     // For Details #5 (Additional)
