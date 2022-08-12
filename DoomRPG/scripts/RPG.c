@@ -1011,19 +1011,19 @@ Start:
             break;
         case SHOPSPECIAL_LEVEL:
             MinValue = AveragePlayerLevel() * MAX_LEVEL;
-            MaxValue = AveragePlayerLevel() * (100 * MAX_LEVEL);
+            MaxValue = 1000 + AveragePlayerLevel() * (20 * MAX_LEVEL);
             break;
         case SHOPSPECIAL_RANK:
-            MinValue = AveragePlayerRank() * (18 * MAX_RANK);
-            MaxValue = AveragePlayerRank() * (1800 * MAX_RANK);
+            MinValue = AveragePlayerRank() * (20 * MAX_RANK);
+            MaxValue = 1000 + AveragePlayerRank() * (350 * MAX_RANK);
             break;
         case SHOPSPECIAL_CREDITS:
-            MinValue = AveragePlayerCredits() / 10;
-            MaxValue = AveragePlayerCredits() * 10;
+            MinValue = AveragePlayerCredits() / 20;
+            MaxValue = 1000 + AveragePlayerCredits() * 2;
             break;
         case SHOPSPECIAL_LUCK:
-            MinValue = AveragePlayerLuck() * (GetCVar("drpg_levelup_natural") ? 50 : 100);
-            MaxValue = AveragePlayerLuck() * (GetCVar("drpg_levelup_natural") ? 5000 : 10000);
+            MinValue = AveragePlayerLuck() * 100;
+            MaxValue = 1000 + AveragePlayerLuck() * 2000;
             break;
         }
         if (DebugLog)
@@ -1060,6 +1060,30 @@ Start:
 
             // Skip Loot category entirely
             if (Category == 7)
+            {
+                ValidItem = false;
+                Tries++;
+                continue;
+            }
+
+            // Skip Vial category entirely
+            if (Category == 6 && Index < 24)
+            {
+                ValidItem = false;
+                Tries++;
+                continue;
+            }
+
+            // Skip Ammo category entirely
+            if (Category == 1 && Index < 8)
+            {
+                ValidItem = false;
+                Tries++;
+                continue;
+            }
+
+            // Skip Armor Bonus category entirely
+            if (Category == 3 && Index == 0)
             {
                 ValidItem = false;
                 Tries++;

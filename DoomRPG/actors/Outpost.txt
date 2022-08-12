@@ -18,6 +18,59 @@ actor DRPGLootDropper : RandomSpawner 11190 //Loot Spawner on Missions BBQ
     DropItem "DRPGLootDemonArtifact"                  255 5
 }
 
+ACTOR SerpentDecorationDRPG 11196
+{
+	Health 99999999
+	Speed 20
+	Radius 70
+	Height 10
+	Scale 3
+	RenderStyle "Shaded"
+	StencilColor "#CD5C5C"
+	-SHOOTABLE
+	+NOBLOOD
+	+CANTLEAVEFLOORPIC +NONSHOOTABLE
+	+STAYMORPHED +DONTBLAST +NOTELEOTHER
+	States
+	{
+	Spawn:
+		SSDV J 1 A_FadeOut(0.1)
+		TNT1 A 0 A_ChangeFlag("INVISIBLE",1)
+		SSDV JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ 0 A_Wander
+		TNT1 A random(5, 120)
+		Goto Hump
+	Death:
+		Stop
+	Hump:
+		TNT1 A 0 A_ChangeFlag("INVISIBLE",0)
+		SSPT H 3 A_FadeIn(0.1)
+		SSPT EFGEF 3 //A_SerpentRaiseHump
+		SSPT GEF 3
+		SSPT GEFGE 3 //A_SerpentLowerHump
+		SSPT F 3 //A_SerpentHide
+		Goto Spawn
+	}
+}
+
+Actor DRPGSolarSFX 11197
+{
+ +NoGravity
+ +NoBlockmap
+ +NoInteraction
+ -Solid
+ Speed 5
+ Radius 10
+ Height 10
+ States
+ {
+  Spawn:
+   ABSM ABCDE 4 Bright
+   Loop
+ }
+}
+
+
+
 //---Praticle Effects (pad praticle code based on Tormentor667 Stronghold_Pad praticles )
 Actor DRPGBaseLineMed //Medic
 {
@@ -203,9 +256,10 @@ actor EPPraticle 11195
         
 }
 
+/*
 //--------------------------------------------------------
 // Signs
-actor OutpostSignMissionBBS 11018
+actor OutpostSignMissionBBS //11018
 {
     +SpawnCeiling
     +NoGravity
@@ -219,7 +273,7 @@ Spawn:
     }
 }
 
-actor OutpostSignShop 11019
+actor OutpostSignShop //11019
 {
     +SpawnCeiling
     +NoGravity
@@ -235,7 +289,7 @@ Spawn:
     }
 }
 
-actor OutpostSignTransporter 11017
+actor OutpostSignTransporter //11017
 {
     +SpawnCeiling
     +NoGravity
@@ -251,7 +305,7 @@ Spawn:
     }
 }
 
-actor OutpostSignSkillComputer 11020
+actor OutpostSignSkillComputer //11020
 {
     +SpawnCeiling
     +NoGravity
@@ -265,7 +319,7 @@ Spawn:
     }
 }
 
-actor OutpostSignRechargePads 11021
+actor OutpostSignRechargePads //11021
 {
     +SpawnCeiling
     +NoGravity
@@ -279,7 +333,7 @@ Spawn:
     }
 }
 
-actor OutpostSignEastArea 11022
+actor OutpostSignEastArea //11022
 {
     +SpawnCeiling
     +NoGravity
@@ -293,7 +347,7 @@ Spawn:
     }
 }
 
-actor OutpostSignItemRoulette 11023
+actor OutpostSignItemRoulette //11023
 {
     +SpawnCeiling
     +NoGravity
@@ -307,7 +361,7 @@ Spawn:
     }
 }
 
-actor OutpostSignArena 11024
+actor OutpostSignArena //11024
 {
     +SpawnCeiling
     +NoGravity
@@ -321,7 +375,7 @@ Spawn:
     }
 }
 
-actor OutpostSignArenaFar 11025
+actor OutpostSignArenaFar //11025
 {
     +SpawnCeiling
     +NoGravity
@@ -335,7 +389,7 @@ Spawn:
     }
 }
 
-actor OutpostSignArenaWS 11026
+actor OutpostSignArenaWS //11026
 {
     Scale 0.5
 
@@ -351,7 +405,7 @@ Spawn:
     }
 }
 
-actor OutpostSignArenaStart 11027
+actor OutpostSignArenaStart //11027
 {
     +SpawnCeiling
     +NoGravity
@@ -365,7 +419,7 @@ Spawn:
     }
 }
 
-actor OutpostSignArenaReady 11028
+actor OutpostSignArenaReady //11028
 {
     Scale 0.5
 
@@ -381,7 +435,7 @@ Spawn:
     }
 }
 
-actor OutpostSignShootingRange 11029
+actor OutpostSignShootingRange //11029
 {
     Scale 0.5
 
@@ -397,7 +451,7 @@ Spawn:
     }
 }
 
-actor OutpostSignSale 11030
+actor OutpostSignSale //11030
 {
     Scale 0.5
 
@@ -413,7 +467,7 @@ Spawn:
     }
 }
 
-actor OutpostSignSurgeonCapsule 11031
+actor OutpostSignSurgeonCapsule //11031
 {
     Scale 0.5
 
@@ -429,7 +483,7 @@ Spawn:
     }
 }
 
-actor OutpostSignDisassemblingDevice 11032
+actor OutpostSignDisassemblingDevice //11032
 {
     Scale 0.5
 
@@ -444,6 +498,7 @@ Spawn:
         Stop
     }
 }
+*/
 
 // Stuff
 actor OutpostAdminLamp 12100

@@ -27,6 +27,8 @@ texture ECOMP2, 256, 128 {Patch ECOMP2, 0, 0}
 texture ECOMP3, 256, 128 {Patch ECOMP3, 0, 0}
 texture ECOMP4, 256, 128 {Patch ECOMP4, 0, 0}
 
+texture PorGS97, 853, 480 {Patch PorGS97, 0, 0}
+
 // Agility Save
 Graphic AGISAVE, 429, 220 { XScale 4.0 YScale 4.0 Patch AgiSav_, 0, 0 }
 
