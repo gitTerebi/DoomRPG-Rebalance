@@ -27,6 +27,26 @@ gameinfo
     AddEventHandlers = "DRPGZEHandler", "DRPGZInputHandler"
 }
 
+DoomEdNums
+{
+    11018 = OutpostSignMissionBBS2
+	11019 = OutpostSignShopS2
+	11017 = OutpostSignTransporter2
+	11020 = OutpostSignSkillComputer2
+	11021 = OutpostSignRechargePads2
+	11022 = OutpostSignEastArea2
+	11023 = OutpostSignItemRoulette2
+	11024 = OutpostSignArena2
+	11025 = OutpostSignArenaFar2
+	11026 = OutpostSignArenaWS2
+	11027 = OutpostSignArenaStart2
+	11028 = OutpostSignArenaReady2
+	11029 = OutpostSignShootingRange2
+	11030 = OutpostSignSale2
+	11031 = OutpostSignSurgeonCapsule2
+	11032 = OutpostSignDisassemblingDevice2    
+}
+
 // UAC Outpost
 map Outpost "UAC Outpost"
 {
