@@ -4242,7 +4242,7 @@ NamedScript MapSpecial void OpenSanctuary()
     }
     else
     {
-        PrintError("You have to be rank 10 to enter the Sanctuary");
+        PrintError("You need to be of Rank 10 to enter the Sanctuary");
         ActivatorSound("menu/error", 127);
         return;
     }
@@ -4259,7 +4259,7 @@ NamedScript MapSpecial void DemonAssemblingSanctuary()
     // If don't use an DoomRL Arsenal, terminate
     if (CompatMode != COMPAT_DRLA)
     {
-        PrintError("The Disassembling Device is not working right now");
+        PrintError("You don't hear the whispers of another world");
         ActivatorSound("menu/error", 127);
         return;
     }
