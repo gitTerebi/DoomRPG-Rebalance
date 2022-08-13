@@ -1,7 +1,6 @@
 // Sings Zscript (Many thanks JSO_x for help))
 
-class OutpostSignMissionBBS2: Actor {
-	bool dynlight;
+class OutpostSign: Actor {
 
     Default	{
 	Radius 16;
@@ -11,37 +10,45 @@ class OutpostSignMissionBBS2: Actor {
     +WALLSPRITE;
 	}
 
+	bool dynlight;
+
     override void Tick() {
 
-Super.Tick(); // Specifically here this call is not necessary and in general will slow down a little bit, but the bad habits of the lack of treatment of the parent method do not want to instill in anyone.
+        if (CVar.GetCVar("drpg_toaster").GetBool() == true) {
 
-bool isVisibleToAnyPlayer = false;
+			Super.Tick(); // Specifically here this call is not necessary and in general will slow down a little bit, but the bad habits of the lack of treatment of the parent method do not want to instill in anyone.
 
-for ( int i = 0; i < MAXPLAYERS; i++ ) {
-    PlayerInfo pl = players[ i ];
-	
-    if ( !playeringame[ i ] || !pl || !pl.mo )
-        continue;
+			bool isVisibleToAnyPlayer = false;
+
+			for ( int i = 0; i < MAXPLAYERS; i++ ) {
+				PlayerInfo pl = players[ i ];
+
+				if ( !playeringame[ i ] || !pl || !pl.mo )
+					continue;
 		
-	//if ( ( pl.MovingCamera && pl.MovingCamera.CheckSight( self ) ) || pl.mo.CheckSight( self ) )
+				if ( pl.mo.CheckSight( self ) || pl.mo.Distance2D( self ) < 1024) {
+					isVisibleToAnyPlayer = true;
+					break;
+				}
+			}
 
-    if ( pl.mo.CheckSight( self ) ) {
-        isVisibleToAnyPlayer = true;
-        break;
-    }
-}
+			if ( isVisibleToAnyPlayer ) {
+				if ( !dynlight ) {
+					SetStateLabel( "SpawnDL" );
+					dynlight = true;
+				}
+			} else if ( dynlight ) {
+					SetStateLabel( "SpawnNoDL" );
+				dynlight = false;
+			}
+		}
+		else
+		{
+			SetStateLabel( "SpawnDL" );
+			dynlight = true;
+		}
+	}
 
-if ( isVisibleToAnyPlayer ) {
-    if ( !dynlight ) {
-        SetStateLabel( "SpawnDL" );
-        dynlight = true;
-    }
-} else if ( dynlight ) {
-        SetStateLabel( "SpawnNoDL" );
-    dynlight = false;
-}
-
-    }
     States {
 	Spawn:
 		OMRK A 0;
@@ -54,7 +61,21 @@ if ( isVisibleToAnyPlayer ) {
     }
 }
 
-class OutpostSignShopS2: OutpostSignMissionBBS2 {
+class OutpostSignMissionBBS2: OutpostSign {
+
+    States {
+	Spawn:
+		OMRK A 0;
+	SpawnNoDL:
+        OMRK A -1;
+        Stop;
+      SpawnDL:
+        OMRK A -1 Light("OUTPOSTSIGN");
+        Stop;
+    }
+}
+
+class OutpostSignShopS2: OutpostSign {
 
     Default	{
 	+SpawnCeiling;
@@ -77,7 +98,7 @@ class OutpostSignShopS2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignTransporter2: OutpostSignMissionBBS2 {
+class OutpostSignTransporter2: OutpostSign {
 
     Default	{
 	+SpawnCeiling;
@@ -86,6 +107,43 @@ class OutpostSignTransporter2: OutpostSignMissionBBS2 {
 	Scale 0.5;
 	Radius 16;
 	Height 16;
+	}
+
+    override void Tick() {
+
+        if (CVar.GetCVar("drpg_toaster").GetBool() == true) {
+
+			Super.Tick(); // Specifically here this call is not necessary and in general will slow down a little bit, but the bad habits of the lack of treatment of the parent method do not want to instill in anyone.
+
+			bool isVisibleToAnyPlayer = false;
+
+			for ( int i = 0; i < MAXPLAYERS; i++ ) {
+				PlayerInfo pl = players[ i ];
+
+				if ( !playeringame[ i ] || !pl || !pl.mo )
+					continue;
+		
+				if ( pl.mo.CheckSight( self ) || pl.mo.Distance2D( self ) < 3072) {
+					isVisibleToAnyPlayer = true;
+					break;
+				}
+			}
+
+			if ( isVisibleToAnyPlayer ) {
+				if ( !dynlight ) {
+					SetStateLabel( "SpawnDL" );
+					dynlight = true;
+				}
+			} else if ( dynlight ) {
+					SetStateLabel( "SpawnNoDL" );
+				dynlight = false;
+			}
+		}
+		else
+		{
+			SetStateLabel( "SpawnDL" );
+			dynlight = true;
+		}
 	}
 
     States {
@@ -100,7 +158,7 @@ class OutpostSignTransporter2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignSkillComputer2: OutpostSignMissionBBS2 {
+class OutpostSignSkillComputer2: OutpostSign {
 
     States {
 	Spawn:
@@ -114,7 +172,7 @@ class OutpostSignSkillComputer2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignRechargePads2: OutpostSignMissionBBS2 {
+class OutpostSignRechargePads2: OutpostSign {
 
     States {
 	Spawn:
@@ -128,7 +186,7 @@ class OutpostSignRechargePads2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignEastArea2: OutpostSignMissionBBS2 {
+class OutpostSignEastArea2: OutpostSign {
 
     States {
 	Spawn:
@@ -142,7 +200,7 @@ class OutpostSignEastArea2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignItemRoulette2: OutpostSignMissionBBS2 {
+class OutpostSignItemRoulette2: OutpostSign {
 
     States {
 	Spawn:
@@ -156,7 +214,7 @@ class OutpostSignItemRoulette2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignArena2: OutpostSignMissionBBS2 {
+class OutpostSignArena2: OutpostSign {
 
     States {
 	Spawn:
@@ -170,7 +228,7 @@ class OutpostSignArena2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignArenaFar2: OutpostSignMissionBBS2 {
+class OutpostSignArenaFar2: OutpostSign {
 
     States {
 	Spawn:
@@ -184,7 +242,7 @@ class OutpostSignArenaFar2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignArenaWS2: OutpostSignMissionBBS2 {
+class OutpostSignArenaWS2: OutpostSign {
 
     Default	{
 	+SpawnCeiling;
@@ -207,7 +265,7 @@ class OutpostSignArenaWS2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignArenaStart2: OutpostSignMissionBBS2 {
+class OutpostSignArenaStart2: OutpostSign {
 
     States {
 	Spawn:
@@ -221,7 +279,7 @@ class OutpostSignArenaStart2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignArenaReady2: OutpostSignMissionBBS2 {
+class OutpostSignArenaReady2: OutpostSign {
 
     Default	{
 	+SpawnCeiling;
@@ -244,7 +302,7 @@ class OutpostSignArenaReady2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignShootingRange2: OutpostSignMissionBBS2 {
+class OutpostSignShootingRange2: OutpostSign {
 
     Default	{
 	+SpawnCeiling;
@@ -267,7 +325,7 @@ class OutpostSignShootingRange2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignSale2: OutpostSignMissionBBS2 {
+class OutpostSignSale2: OutpostSign {
 
     Default	{
 	+SpawnCeiling;
@@ -290,7 +348,7 @@ class OutpostSignSale2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignSurgeonCapsule2: OutpostSignMissionBBS2 {
+class OutpostSignSurgeonCapsule2: OutpostSign {
 
     Default	{
 	+SpawnCeiling;
@@ -313,7 +371,7 @@ class OutpostSignSurgeonCapsule2: OutpostSignMissionBBS2 {
     }
 }
 
-class OutpostSignDisassemblingDevice2: OutpostSignMissionBBS2 {
+class OutpostSignDisassemblingDevice2: OutpostSign {
 
     Default	{
 	+SpawnCeiling;

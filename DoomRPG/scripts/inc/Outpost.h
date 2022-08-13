@@ -54,6 +54,8 @@ NamedScript MapSpecial void OutpostSecret();
 NamedScript MapSpecial void PowerOutage();
 NamedScript MapSpecial void OperatingCapsule();
 NamedScript MapSpecial void DisassemblingDevice();
+NamedScript MapSpecial void OpenSanctuary();
+NamedScript MapSpecial void DemonAssemblingSanctuary();
 NamedScript void AlarmLoop();
 NamedScript void PlaceBoss();
 NamedScript void SpawnBoss();

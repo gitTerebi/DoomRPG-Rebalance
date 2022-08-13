@@ -491,8 +491,8 @@ NamedScript void BuildItemData()
         // Demonic Weapons
         // ITEMDATA_DEF("RLMonsterFrisbee",                        "Monster Frisbee \Cg[Demonic]\C-",                       78000, -1, "MFRSX0", 37, 21);
         ITEMDATA_DEF("RLDeathsGaze",                            "Death's Gaze \Cg[Demonic]\C-",                          80000, -1, 7, "DGAZX0", 10, 13);
-        ITEMDATA_DEF("RLHellsReign",                            "Hell's Reign \Cg[Demonic]\C-",                         100000, -1, 8, "HELRX0", 37, 21);
         ITEMDATA_DEF("RLSoulstormRifle",                        "Soulstorm Rifle \Cg[Demonic]\C-",                      120000, -1, 8, "SOLDX0", 27, 17);
+        ITEMDATA_DEF("RLHellsReign",                            "Hell's Reign \Cg[Demonic]\C-",                         200000, -1, 8, "HELRX0", 37, 21);
         // ITEMDATA_DEF("RLMortalyzer",                            "Mortalyzer \Cg[Demonic]\C-",                            58000, -1, "MRTZX0", 37, 21);
         // ITEMDATA_DEF("RLDreadshotMortar",                       "Dreadshot Mortar \Cg[Demonic]\C-",                      60000, -1, "DSMTX0", 37, 21);
         ITEMDATA_DEF("RLUnmaker",                               "Unmaker \Cg[Demonic]\C-",                              500000, -1, 9, "UNMAX0", 39, 17);
