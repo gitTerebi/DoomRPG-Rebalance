@@ -83,7 +83,10 @@ NamedScript MapSpecial void EnterOutpost()
         ChangeCamera(CameraTID, true, false);
         Thing_Activate(CameraTID);
         Delay(35 * Random(3, 5));
-        PissOffMarines(false);
+
+        // Make the Marines fight enemies in title map only if Toaster Mod is off
+        if (!GetCVar("drpg_toaster"))
+            PissOffMarines(false);
 
         ActivatorSound("misc/skillchange", 127);
         if (CompatMonMode == COMPAT_DRLA)
