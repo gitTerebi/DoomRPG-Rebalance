@@ -37,6 +37,7 @@ int RPGMap CameraTID = 1700;
 int RPGMap RiftSpotTID = 1800;
 int RPGMap CreditsBlockerID = 1900;
 int RPGMap DisassemblingDeviceID = 29;
+int RPGMap DemonSanctuaryID = 47;
 
 // Timers
 int RPGMap ForcefieldTimer = 0;
@@ -112,6 +113,8 @@ NamedScript MapSpecial void EnterOutpost()
             SpawnSpotForced("DRLAX_ModReviser", 42, UniqueTID(), 0);
         if (AveragePlayerRank() >= 8)
             SpawnSpotForced("DRLAX_AppraiserObject", 43, UniqueTID(), 0);
+        if (AveragePlayerRank() >= 10)
+            SpawnSpotForced("DRLAX_SkullShrineObjectRPG", 52, UniqueTID(), 0);
     }
 }
 
@@ -3224,6 +3227,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Revenant's Launcher
                             if (ItemData[0][CurrentItem].Actor == "RLRevenantsLauncher")
                             {
+                                CurrentIndexBasic = -1;
                                 CurrentTypeDetails1 =  12;
                                 CurrentAmountDetails1 = 60;
                                 CurrentTypeDetails2 =  8;
@@ -4222,6 +4226,508 @@ NamedScript MapSpecial void DisassemblingDevice()
                     }
 
                     Delay(1);
+                }
+            }
+        }
+
+        Delay(1);
+    }
+}
+
+NamedScript MapSpecial void OpenSanctuary()
+{
+    if (AveragePlayerRank() >= 10)
+    {
+        Door_Open(45, 32, 13);
+    }
+    else
+    {
+        PrintError("You have to be rank 10 to enter the Sanctuary");
+        ActivatorSound("menu/error", 127);
+        return;
+    }
+}
+
+NamedScript MapSpecial void DemonAssemblingSanctuary()
+{
+    // if you're already in a menu, terminate
+    if (Player.InMenu || Player.InShop || Player.OutpostMenu == OMENU_DEMONSANCTUARY) return;
+
+    // If Marines are hostile or the power is out, terminate
+    if (MarinesHostile || PowerOut) return;
+
+    // If don't use an DoomRL Arsenal, terminate
+    if (CompatMode != COMPAT_DRLA)
+    {
+        PrintError("The Disassembling Device is not working right now");
+        ActivatorSound("menu/error", 127);
+        return;
+    }
+
+    ActivatorSound("menu/move", 127);
+    Player.OutpostMenu = OMENU_DEMONSANCTUARY;
+
+    // Main coordinates
+    fixed X = 0.1;
+    fixed Y = 0.1;
+
+    // Additional coordinates
+    fixed X1, Y1, Y2;
+
+    // Categories Data
+    int CurrentCategory;
+    int CategoriesData[3] = {0, 3, 9};
+    str CategoriesNames[3] =
+    {
+        "\CaWeapons",
+        "\CdArmors",
+        "\CqBoots"
+    };
+
+    // Rare
+    int CurrentRare;
+    str RareNames[1] =
+    {
+        "\CgDemonic"
+    };
+
+    // Current Item
+    int CurrentItem;
+    int CurrentItemMin;
+    int CurrentItemMax;
+    int CurrentCost;
+    int CurrentRank;
+
+    // Current Required Basiс Item
+    int CurrentIndexBasic;
+
+    // Current Required Items
+    int CurrentTypeDetails1;
+    int CurrentAmountDetails1;
+    int CurrentTypeDetails2;
+    int CurrentAmountDetails2;
+    int CurrentTypeDetails3;
+    int CurrentAmountDetails3;
+    int CurrentTypeDetails4;
+    int CurrentAmountDetails4;
+    int CurrentTypeDetails5;
+    int CurrentAmountDetails5;
+    int CurrentTypeDetails6;
+    int CurrentAmountDetails6;
+
+    // So the player's initial interaction is not processed as a menu action
+    Delay(1);
+
+    while (Player.OutpostMenu == OMENU_DEMONSANCTUARY)
+    {
+        SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+        // Reset additional coordinates
+        X1 = 0.0;
+        Y1 = 0.0;
+        Y2 = 0.0;
+
+        // Get Min/Max Item Index
+        // For Weapon
+        if (CurrentCategory == 0)
+        {
+            if (CurrentRare == 0)
+            {
+                CurrentItemMin = 63;
+                CurrentItemMax = 66;
+            }
+        }
+        // For Armor
+        if (CurrentCategory == 1)
+        {
+            if (CurrentRare == 0)
+            {
+                CurrentItemMin = 85;
+                CurrentItemMax = 85;
+            }
+        }
+        // For Boots
+        if (CurrentCategory == 2)
+        {
+            if (CurrentRare == 0)
+            {
+                CurrentItemMin = 31;
+                CurrentItemMax = 31;
+            }
+        }
+        if (CurrentItem < CurrentItemMin) CurrentItem = CurrentItemMin;
+        if (CurrentItem > CurrentItemMax) CurrentItem = CurrentItemMax;
+
+        // Calculate Required Items
+        ItemInfoPtr Item = &ItemData[CategoriesData[CurrentCategory]][CurrentItem];
+
+        // Type/Amount Required Details
+        // For Weapons
+        if (CurrentCategory == 0)
+        {
+            // Set Global Current Type Details
+            CurrentTypeDetails2 =  3;
+            CurrentTypeDetails3 =  6;
+
+            // Set Global Required
+            // For Demonic Rare
+            if (CurrentRare == 0)
+            {
+                // Calculate Current Cost
+                CurrentCost = (Item->Price - Item->Price * Player.ShopDiscount / 100) / 250 * 250;
+
+                // Set Default Current Type Details
+                CurrentTypeDetails1 =  12;
+                CurrentTypeDetails4 =  9;
+
+                // Set Individual Required
+                // For Deaths Gaze
+                if (ItemData[0][CurrentItem].Actor == "RLDeathsGaze")
+                {
+                    CurrentRank = 10;
+                    CurrentIndexBasic = -1;
+                    CurrentAmountDetails1 = 30;
+                    CurrentAmountDetails2 = 20;
+                    CurrentAmountDetails3 = 10;
+                    CurrentAmountDetails4 = 1;
+                }
+                // For Soulstorm Rifle
+                if (ItemData[0][CurrentItem].Actor == "RLSoulstormRifle")
+                {
+                    CurrentRank = 11;
+                    CurrentIndexBasic = -1;
+                    CurrentAmountDetails1 = 40;
+                    CurrentAmountDetails2 = 30;
+                    CurrentAmountDetails3 = 15;
+                    CurrentAmountDetails4 = 1;
+                }
+                // For Hells Reign
+                if (ItemData[0][CurrentItem].Actor == "RLHellsReign")
+                {
+                    CurrentRank = 12;
+                    CurrentIndexBasic = -1;
+                    CurrentAmountDetails1 = 60;
+                    CurrentAmountDetails2 = 40;
+                    CurrentAmountDetails3 = 20;
+                    CurrentAmountDetails4 = 2;
+                }
+                // For Unmaker
+                if (ItemData[0][CurrentItem].Actor == "RLUnmaker")
+                {
+                    CurrentRank = 13;
+                    CurrentIndexBasic = -1;
+                    CurrentAmountDetails1 = 80;
+                    CurrentAmountDetails2 = 50;
+                    CurrentAmountDetails3 = 25;
+                    CurrentAmountDetails4 = 3;
+                }
+            }
+        }
+        // For Demonic Armor
+        if (CurrentCategory == 1)
+        {
+            // Set Basic Item
+            CurrentIndexBasic = -1;
+
+            // Set Current Cost
+            CurrentCost = (Item->Price - Item->Price * Player.ShopDiscount / 100) / 250 * 250;
+
+            // Set Individual Required
+            // For Demonic Carapace Armor
+            if (ItemData[3][CurrentItem].Actor == "RLDemonicCarapaceArmorPickup")
+            {
+                // Set Current Rank
+                CurrentRank = 12;
+
+                // Set Type Details
+                CurrentTypeDetails1 =  12;
+                CurrentTypeDetails2 =  3;
+                CurrentTypeDetails3 =  9;
+                CurrentTypeDetails4 =  9;
+
+                // Set Amount Details
+                CurrentAmountDetails1 = 60;
+                CurrentAmountDetails2 = 40;
+                CurrentAmountDetails3 = 20;
+                CurrentAmountDetails4 = 2;
+            }
+        }
+        // For Demonic Boots
+        if (CurrentCategory == 2)
+        {
+            // Set Global Basic Item
+            CurrentIndexBasic = -1;
+
+            // Set Current Cost
+            CurrentCost = (Item->Price - Item->Price * Player.ShopDiscount / 100) / 250 * 250;
+
+            // Set Individual Required
+            // For Demonic Boots
+            if (ItemData[9][CurrentItem].Actor == "RLDemonicBootsPickup")
+            {
+                // Set Current Rank
+                CurrentRank = 12;
+
+                // Set Type Details
+                CurrentTypeDetails1 =  12;
+                CurrentTypeDetails2 =  3;
+                CurrentTypeDetails3 =  9;
+                CurrentTypeDetails4 =  9;
+
+                // Set Amount Details
+                CurrentAmountDetails1 = 30;
+                CurrentAmountDetails2 = 20;
+                CurrentAmountDetails3 = 10;
+                CurrentAmountDetails4 = 1;
+            }
+        }
+        // Draw the background
+        if (GetCVar("drpg_menudim"))
+            FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
+
+        // Set the HUD Size
+        SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+            DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470);
+
+        // Text
+        SetFont("BIGFONT");
+        HudMessage("\CgDemon Sanctuary\C-");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X + 132.0, Y + 16.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("Select item to summoning:");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "White", X + 88.0, Y + 56.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("Category: %S", CategoriesNames[CurrentCategory]);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "White", X + 124.0, Y + 96.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("Rare: %S", RareNames[CurrentRare]);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 164.0, Y + 132.0, 0.05, 0.05);
+
+        PrintSprite(ItemData[CategoriesData[CurrentCategory]][CurrentItem].Sprite.Name, 0, X + 240.0,  Y + 212.0, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("Item: %S", ItemData[CategoriesData[CurrentCategory]][CurrentItem].Name);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 32.0, Y + 240.0, 0.05, 0.05);
+
+        SetFont("SMALLFONT");
+        HudMessage("Required \Cddetails\C-:");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 32.0, Y + 268.0, 0.05, 0.05);
+
+        // Required Details
+        // For Details #1
+        if (CurrentAmountDetails1 > 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("%S: %d", ItemData[7][CurrentTypeDetails1].Name, CurrentAmountDetails1);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 32.0, Y + 276.0, 0.05, 0.05);
+        }
+        // For Details #2
+        if (CurrentAmountDetails2 > 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("%S: %d", ItemData[7][CurrentTypeDetails2].Name, CurrentAmountDetails2);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 32.0, Y + 284.0, 0.05, 0.05);
+        }
+        // For Details #3
+        if (CurrentAmountDetails3 > 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("%S: %d", ItemData[7][CurrentTypeDetails3].Name, CurrentAmountDetails3);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + (CurrentAmountDetails2 > 0 ? 292.0 : 284.0), 0.05, 0.05);
+        }
+        // For Additional Details
+        if (CurrentAmountDetails4 > 0 || CurrentAmountDetails5 > 0 || CurrentAmountDetails6 > 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("Required \Cqadditional details\C-:");
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 32.0, Y + 308.0, 0.05, 0.05);
+
+            // Set additional coordinates
+            if (CurrentAmountDetails5 > 0 && CurrentAmountDetails4 + CurrentAmountDetails6 > 0)
+                Y2 += 8.0;
+            if (CurrentAmountDetails6 > 0 && CurrentAmountDetails4 + CurrentAmountDetails5 > 0)
+                Y2 += 8.0;
+        }
+        // For Details #4 (Additional)
+        if (CurrentAmountDetails4 > 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("%S: %d", ItemData[8][CurrentTypeDetails4].Name, CurrentAmountDetails4);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
+
+            PrintSprite(ItemData[8][CurrentTypeDetails4].Sprite.Name, 0, X + X1 + (CurrentTypeDetails4 == 9 ? 52.0 : 32.0),  Y + Y2 + (CurrentTypeDetails4 == 9 ? 392.0 : 315.0), 0.05);
+
+            X1 += 44.0;
+            Y1 += 8.0;
+        }
+        // For Details #5 (Additional)
+        if (CurrentAmountDetails5 > 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("%S: %d", ItemData[4][CurrentTypeDetails5].Name, CurrentAmountDetails5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
+
+            PrintSprite(ItemData[4][CurrentTypeDetails5].Sprite.Name, 0, X + X1 + 48.0,  Y + Y2 + 376.0, 0.05);
+
+            X1 += 32.0;
+            Y1 += 8.0;
+        }
+        // For Details #6 (Additional)
+        if (CurrentAmountDetails6 > 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("%S: %d", ItemData[6][CurrentTypeDetails6].Name, CurrentAmountDetails6);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + Y1 + 316.0, 0.05, 0.05);
+
+            PrintSprite(ItemData[6][CurrentTypeDetails6].Sprite.Name, 0, X + X1 + 48.0,  Y + Y2 + 348.0, 0.05);
+
+            X1 += 32.0;
+            Y1 += 8.0;
+        }
+
+        SetFont("SMALLFONT");
+        HudMessage("Required \Cfcredits\C-:\n%d \CfC\C-", CurrentCost);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 272.0, Y + 268.0, 0.05, 0.05);
+
+        if (CurrentRank > 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("Required \CkRank\C-:\n%d \Ck(%S)\C-", CurrentRank, LongRanks[CurrentRank]);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 272.0, Y + 290.0, 0.05, 0.05);
+        }
+
+        // Required basic Item
+        if (CurrentIndexBasic >= 0)
+        {
+            SetFont("SMALLFONT");
+            HudMessage("Required \Cabasic item\C-:\n%S", StrLeft(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Name, 26));
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 15, "White", X + 272.0, Y + 314.0, 0.05, 0.05);
+
+            PrintSprite(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Sprite.Name, 0, X + 336.0,  Y + 372.0, 0.05);
+        }
+
+        // Input
+        if (CheckInput(BT_FORWARD, KEY_PRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentCategory++;
+            CurrentItem = 0;
+            CurrentIndexBasic = -1;
+            CurrentAmountDetails1 = 0;
+            CurrentAmountDetails2 = 0;
+            CurrentAmountDetails3 = 0;
+            CurrentAmountDetails4 = 0;
+            CurrentAmountDetails5 = 0;
+            CurrentAmountDetails6 = 0;
+            if (CurrentCategory > 2) CurrentCategory = 0;
+        }
+        if (CheckInput(BT_BACK, KEY_PRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentCategory--;
+            CurrentItem = 0;
+            CurrentIndexBasic = -1;
+            CurrentAmountDetails1 = 0;
+            CurrentAmountDetails2 = 0;
+            CurrentAmountDetails3 = 0;
+            CurrentAmountDetails4 = 0;
+            CurrentAmountDetails5 = 0;
+            CurrentAmountDetails6 = 0;
+            if (CurrentCategory < 0) CurrentCategory = 2;
+        }
+        if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentItem--;
+            CurrentIndexBasic = -1;
+            CurrentAmountDetails1 = 0;
+            CurrentAmountDetails2 = 0;
+            CurrentAmountDetails3 = 0;
+            CurrentAmountDetails4 = 0;
+            CurrentAmountDetails5 = 0;
+            CurrentAmountDetails6 = 0;
+            if (CurrentItem < CurrentItemMin) CurrentItem = CurrentItemMax;
+        }
+        if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentItem++;
+            CurrentIndexBasic = -1;
+            CurrentAmountDetails1 = 0;
+            CurrentAmountDetails2 = 0;
+            CurrentAmountDetails3 = 0;
+            CurrentAmountDetails4 = 0;
+            CurrentAmountDetails5 = 0;
+            CurrentAmountDetails6 = 0;
+            if (CurrentItem > CurrentItemMax) CurrentItem = CurrentItemMin;
+        }
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+        {
+            if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+            {
+                if ((CurrentIndexBasic >= 0 && CheckInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor) || CurrentIndexBasic < 0) && Player.RankLevel >= CurrentRank && CheckInventory("DRPGCredits") >= CurrentCost && CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) >= CurrentAmountDetails1 &&  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) >= CurrentAmountDetails2
+                        && CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) >= CurrentAmountDetails3 && CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) >= CurrentAmountDetails4 && CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) >= CurrentAmountDetails5 && CheckInventory(ItemData[6][CurrentTypeDetails6].Actor) >= CurrentAmountDetails6)
+                {
+                    Player.OutpostMenu = 0;
+
+                    // Take Basic Item
+                    if (CurrentIndexBasic >= 0)
+                    {
+                        // Take Current Basic Item
+                        TakeInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor, 1);
+
+                        // Take tokens from DoomRL Arsenal
+                        if (CompatMode == COMPAT_DRLA)
+                            RemoveDRLAItem(CategoriesData[CurrentCategory], CurrentIndexBasic);
+                    }
+
+                    // Take Details
+                    TakeInventory("DRPGCredits", CurrentCost);
+                    TakeInventory(ItemData[7][CurrentTypeDetails1].Actor, CurrentAmountDetails1);
+                    TakeInventory(ItemData[7][CurrentTypeDetails2].Actor, CurrentAmountDetails2);
+                    TakeInventory(ItemData[7][CurrentTypeDetails3].Actor, CurrentAmountDetails3);
+                    TakeInventory(ItemData[8][CurrentTypeDetails4].Actor, CurrentAmountDetails4);
+                    TakeInventory(ItemData[4][CurrentTypeDetails5].Actor, CurrentAmountDetails5);
+                    TakeInventory(ItemData[6][CurrentTypeDetails6].Actor, CurrentAmountDetails6);
+
+                    // The effect of sleep immersion
+                    FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
+                    Delay(35 * 1);
+
+                    // Spawn Item in Disassembling Device
+                    SpawnSpotForced(ItemData[CategoriesData[CurrentCategory]][CurrentItem].Actor, DemonSanctuaryID, UniqueTID(), 0);
+
+                    SetFont("BIGFONT");
+                    HudMessage("Item summoning is complete");
+                    EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "Green", X + 64.0, Y + 240.0, 3.0, 2.0);
+                    ActivatorSound("mission/complete", 127);
+                    FadeRange(0, 0, 0, 1.0, 0, 0, 0, 0.0, 2.0);
+
+                    SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+                    return;
+                }
+                else
+                {
+                    SetFont("BIGFONT");
+                    if (Player.RankLevel < CurrentRank)
+                        PrintError("You need higher Rank to assembly this item");
+                    else if (CurrentIndexBasic >= 0 && !CheckInventory(ItemData[CategoriesData[CurrentCategory]][CurrentIndexBasic].Actor))
+                        PrintError("You need basic item");
+                    else if (CheckInventory("DRPGCredits") < CurrentCost)
+                        PrintError("Not enough credits to assembly this item");
+                    else if (CheckInventory(ItemData[7][CurrentTypeDetails1].Actor) < CurrentAmountDetails1 ||  CheckInventory(ItemData[7][CurrentTypeDetails2].Actor) < CurrentAmountDetails2
+                             || CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) < CurrentAmountDetails3)
+                        PrintError("Not enough details to assembly this item");
+                    else if (CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) < CurrentAmountDetails4 || CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) < CurrentAmountDetails5 || CheckInventory(ItemData[6][CurrentTypeDetails6].Actor) < CurrentAmountDetails6)
+                        PrintError("Not enough additional details to assembly this item");
+                    ActivatorSound("menu/error", 127);
                 }
             }
         }

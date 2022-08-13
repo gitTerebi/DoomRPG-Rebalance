@@ -3538,5 +3538,5 @@ NamedScript void Silly()
 
 NamedScript Console void Test()
 {
-    NomadModPacksSave();
+    Log("Test is work");
 }

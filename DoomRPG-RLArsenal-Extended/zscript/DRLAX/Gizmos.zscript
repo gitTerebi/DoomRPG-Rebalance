@@ -556,6 +556,7 @@ Class DRLAX_QuestManager : Thinker
     String weapon;
     uint skullbodies;
     uint skulllevel;
+    uint skulllevelsanctuary;
     uint tomelevel;
     uint addamount;
 
@@ -2347,4 +2348,92 @@ Class DRLAX_WeaponRecyclerRPG : DRLAX_GizmoObject
         return true;
     }
     
+}
+
+class DRLAX_SkullShrineObjectRPG : DRLAX_GizmoObject
+{
+    Default
+	{
+		-SOLID;
+        +BRIGHT;
+		scale 0.7;
+	}
+
+    States
+    {
+        Spawn:
+        GIZM N -1;
+        loop;
+        Activated:
+        GIZM N 100;
+        Goto Spawn;
+    }
+
+    void GivePrize(uint which)
+    {
+        Switch(which)
+        {
+            Case 0:
+			A_SpawnItemEx("RLDemonArtifactItem", 0, 0, 32, 8, 0, 1, 0);
+            break;
+
+            Case 1:
+			A_SpawnItemEx("RLDemonArtifactItem", 0, 0, 32, 8, 0, 1, 0);
+            break;
+
+            Case 2:
+			A_SpawnItemEx("RLDemonArtifactItem", 0, 0, 32, 8, 0, 1, 0);
+            break;
+        }
+    }
+
+    override bool Used(Actor user)
+	{
+        let man = DRLAX_QuestManager.GetQuestMan();
+        A_Face(user);
+
+        int skullsneeded;
+
+        switch(man.skulllevelsanctuary)
+        {
+            Case 0:
+            if(man.skullbodies >= 500)
+            {
+                man.skulllevelsanctuary++;
+                GivePrize(0);
+                return true;
+            }
+            skullsneeded = 500;
+            break;
+
+            Case 1:
+            if(man.skullbodies >= 750)
+            {
+                man.skulllevelsanctuary++;
+                GivePrize(1);
+                return true;
+            }
+            skullsneeded = 750;
+            break;
+
+            Case 2:
+            if(man.skullbodies >= 1000)
+            {
+                man.skulllevelsanctuary++;
+                GivePrize(2);
+                return true;
+            }
+            skullsneeded = 1000;
+            break;
+
+            Case 3:
+            user.A_StartSound("hud/error", flags:CHANF_LOCAL);
+            user.A_Print("This device is no longer usable.", 5);
+            return true;
+            break;
+        }
+
+        user.A_Print("\cg- Skull Shrine (Sanctuary) -\n\nDestroy \cf" .. skullsneeded .. "\c- corpses using Skulls to gain rewards from this shrine.\n\n\cf" .. man.skullbodies .. "\c- corpses destroyed.", 6);
+        return true;
+    }
 }
