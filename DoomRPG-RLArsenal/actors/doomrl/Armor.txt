@@ -118,7 +118,9 @@ actor RLArmorBonusPickupRPG : RLArmorBonusPickup replaces RLArmorBonusPickup
 	}
 }
 
-ACTOR RLArmorBonus100RPG : RLArmorBonus100 replaces RLArmorBonus100
+actor RLArmorBonusPickupRPG2 : RLArmorBonusPickupRPG replaces DRPGArmorBonus {}
+
+actor RLArmorBonus100RPG : RLArmorBonus100 replaces RLArmorBonus100
 {
   Armor.SaveAmount 15
 }

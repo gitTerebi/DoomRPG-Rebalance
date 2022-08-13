@@ -672,7 +672,7 @@ actor DRPGHealthBonusSpawner : MapSpot
     States
     {
     Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGGenericLootSpawner")
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGGenericLootSpawner", false)
         Stop
     }
 }
@@ -683,7 +683,7 @@ actor DRPGArmorBonusSpawner : MapSpot
     States
     {
     Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGGenericLootSpawner")
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGGenericLootSpawner", true)
         Stop
     }
 }

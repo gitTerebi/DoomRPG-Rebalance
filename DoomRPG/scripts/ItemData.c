@@ -1278,7 +1278,7 @@ NamedScript DECORATE void SpawnLuckItem()
     Thing_Remove(0);
 }
 
-NamedScript DECORATE void DRPGGenericLootSpawner()
+NamedScript DECORATE void DRPGGenericLootSpawner(bool ArmorBonus)
 {
     // Delay while the map is being initialized
     while (!CurrentLevel->Init) Delay(1);
@@ -1287,7 +1287,7 @@ NamedScript DECORATE void DRPGGenericLootSpawner()
     bool ItemSelected;
 
     if (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512)
-        ActorToSpawn = "DRPGHealthBonus";
+        ActorToSpawn = ArmorBonus ? "DRPGArmorBonus" : "DRPGHealthBonus";
     else
         ActorToSpawn = "DRPGGenericLootRandomizer";
 
@@ -1309,12 +1309,8 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     int RarityMax;
     int Amount;
 
-    // Nomad Bonus
-    if (NomadBonus)
-        RarityMax += Random(1,2);
-
     // Calculate Modifier
-    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 20.0);
+    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 10.0);
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1416,12 +1412,8 @@ NamedScript DECORATE void DRPGArmorSpawner()
     int RarityMax;
     int Amount;
 
-    // Nomad Bonus
-    if (NomadBonus)
-        RarityMax += Random(1,2);
-
     // Calculate Modifier
-    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 20.0);
+    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 10.0);
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1479,7 +1471,6 @@ NamedScript DECORATE void DRPGShieldSpawner()
 
     str ActorToSpawn;
     bool ItemSpawned;
-    bool NomadBonus = NomadInGame();
     int ItemCategory = 5;
     int RarityMin;
     int RarityMax;
@@ -1507,10 +1498,6 @@ NamedScript DECORATE void DRPGShieldSpawner()
         ShieldPartsMax = MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES;
         break;
     }
-
-    // Nomad Bonus
-    if (NomadBonus)
-        RarityMax += Random(1,2);
 
     // Calculate Modifier
     int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 20.0);
