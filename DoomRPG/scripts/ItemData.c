@@ -1303,7 +1303,6 @@ NamedScript DECORATE void DRPGWeaponSpawner()
 
     str ActorToSpawn;
     bool ItemSpawned;
-    bool NomadBonus = NomadInGame();
     int ItemCategory = 0;
     int RarityMin;
     int RarityMax;
@@ -1325,7 +1324,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    if ((Random(0, 100) <= 25 + RoundInt(50.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 4.0)) || NomadBonus)
+    if (Random(0, 100) <= 25 + RoundInt(50.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 2.0))
     {
         RarityMin += Random(0, RarityMax / 2);
 
@@ -1339,7 +1338,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
                 {
                     if (Random(0, 1 + Amount) <= 0)
                     {
-                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && !NomadBonus)
+                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && !NomadInGame())
                             ActorToSpawn = ItemData[ItemCategory][Random(1, ((CompatMode == COMPAT_DRLA) ? 6 : 4))].Actor;
                         else
                             ActorToSpawn = ItemData[ItemCategory][i].Actor;
@@ -1406,7 +1405,6 @@ NamedScript DECORATE void DRPGArmorSpawner()
 
     str ActorToSpawn;
     bool ItemSpawned;
-    bool NomadBonus = NomadInGame();
     int ItemCategory = (Random(0, 9) <= 0 ? 9 : 3);
     int RarityMin;
     int RarityMax;
@@ -1428,7 +1426,7 @@ NamedScript DECORATE void DRPGArmorSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    if ((Random(0, 100) <= 25 + RoundInt(50.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 4.0)) || NomadBonus)
+    if (Random(0, 100) <= 25 + RoundInt(50.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 2.0))
     {
         RarityMin += Random(0, RarityMax / 2);
 
@@ -1443,7 +1441,7 @@ NamedScript DECORATE void DRPGArmorSpawner()
                 {
                     if (Random(0, 1 + Amount) <= 0)
                     {
-                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && !NomadBonus)
+                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && !NomadInGame())
                             ActorToSpawn = ItemData[3][Random(1, ((CompatMode == COMPAT_DRLA) ? 3 : 5))].Actor;
                         else
                             ActorToSpawn = ItemData[ItemCategory][i].Actor;
