@@ -206,7 +206,7 @@ ACTOR RLEnemyWeaponDrop
 		TNT1 A 0 A_Jump(256, "DonutstealDrop")
 		Goto DonutstealDrop
 	WeaponSpawner:
-		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner")
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", Random(0,9))
 		Stop
 
 	WeaponDrop:

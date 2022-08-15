@@ -16,6 +16,14 @@ OptionValue "ShopSpecialCategories"
     9, "\ccBoots"
 }
 
+OptionValue "LootTypes"
+{
+    0, "Adaptive"
+    1, "\caMap Level"
+    2, "\cfLuck Level"
+    3, "\ciDoomRL Arsenal"
+}
+
 OptionMenu "OptionsMenu"
 {
     SubMenu "DoomRL Arsenal Options",   "DoomRLA"

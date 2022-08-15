@@ -342,65 +342,159 @@ Class RLNomadEvents : EventHandler
 					AddActorChance("RLModPackSpawner", 1, 0);
 					dontremove = true;
 				}
-				
-				if(IsChainsaw(MapInv[i]))
-				{
-					AddActorChance("RLChainsawPickup", 80, 0);
-					AddActorChance("DRPGWeaponSpawner", 20, 1);
-				}
-				
-				if(IsShotgun(MapInv[i]))
-				{
-					AddActorChance("RLShotgunPickup", 50, 0);
-					AddActorChance("RLCombatShotgunPickup", 30, 1);
-					AddActorChance("DRPGWeaponSpawner", 20, 2);
-				}
-				
-				if(IsDoubleShotgun(MapInv[i]))
-				{
-					AddActorChance("RLDoubleShotgunPickup", 80, 0);
-					AddActorChance("DRPGWeaponSpawner", 20, 1);
-				}
-				
-				if(IsChaingun(MapInv[i]))
-				{
-					AddActorChance("RLBattleRiflePickup", 50, 0);
-					AddActorChance("RLChaingunPickup", 30, 1);
-					AddActorChance("DRPGWeaponSpawner", 20, 2);
-				}
-				
-				if(IsRocketLauncher(MapInv[i]))
-				{
-					AddActorChance("RLRocketLauncherPickup", 80, 0);
-					AddActorChance("DRPGWeaponSpawner", 20, 1);
-				}
-				
-				if(IsPlasmaRifle(MapInv[i]))
-				{
-					AddActorChance("RLPlasmaRiflePickup", 80, 0);
-					AddActorChance("DRPGWeaponSpawner", 20, 1);
-				}
-				
-				if(IsBFG9000(MapInv[i]))
-				{
-					AddActorChance("RLBFG9000Pickup", 80, 0);
-					AddActorChance("DRPGWeaponSpawner", 20, 1);
-				}
-				
-				if(IsBoots(MapInv[i]))
-				{
-					AddActorChance("RLSteelBootsPickup", 40, 0);
-					AddActorChance("RLProtectiveBootsPickup", 30, 1);
-					AddActorChance("RLPlasteelBootsPickup", 20, 2);
-					AddActorChance("DRPGArmorSpawner", 10, 3);
-				}
 
-				if(IsArmor(MapInv[i]))
-				{
-					AddActorChance("RLGreenArmorPickup", 40, 0);
-					AddActorChance("RLBlueArmorPickup", 30, 1);
-					AddActorChance("RLRedArmorPickup", 20, 2);
-					AddActorChance("DRPGArmorSpawner", 10, 3);
+				if (CVar.GetCVar("drpg_loot_type").GetInt() == 3) {
+
+					if(IsChainsaw(MapInv[i]))
+					{
+						AddActorChance("", 1400, 0);
+						AddActorChance("RLExoticChainsawSpawner", 1, 0);
+					}
+				
+					if(IsShotgun(MapInv[i]))
+					{
+						AddActorChance("RLShotgunPickup", 140, 0);
+						AddActorChance("RLCombatShotgunPickup", 40, 1);
+						AddActorChance("RLAssaultShotgunPickup", 10, 2);
+						AddActorChance("RLPlasmaShotgunPickup", 10, 2);
+						AddActorChance("RLUniqueWeaponSpawner", 1, 3);
+					}
+				
+					if(IsDoubleShotgun(MapInv[i]))
+					{
+						AddActorChance("RLDoubleShotgunPickup", 70, 0);
+						AddActorChance("RLSuperShotgunPickup", 10, 1);
+						AddActorChance("RLUniqueWeaponSpawner", 1, 3);
+					}
+					
+					if(IsChaingun(MapInv[i]))
+					{
+						AddActorChance("RLChaingunPickup", 800, 0);
+						AddActorChance("RLBattleRiflePickup", 650, 1);
+						AddActorChance("RLMinigunPickup", 45, 2);
+						AddActorChance("RLCombatPistolPickup", 80, 2);
+						AddActorChance("RLMarksmanPistolPickup", 75, 2);
+						AddActorChance("RLHandcannonPickup", 60, 2);
+						AddActorChance("RLUziPickup", 52, 2);
+						AddActorChance("RLSuperiorWeaponSpawner", 15, 3);
+						AddActorChance("RLUniqueWeaponSpawner", 10, 4);
+					}
+					
+					if(IsRocketLauncher(MapInv[i]))
+					{
+						AddActorChance("RLRocketLauncherPickup", 120, 0);
+						AddActorChance("RLNapalmLauncherPickup", 80, 1);
+						AddActorChance("RLMissileLauncherPickup", 100, 1);
+						AddActorChance("RLSuperiorWeaponSpawner", 20, 2);
+						AddActorChance("RLUniqueWeaponSpawner", 10, 3);
+					}
+					
+					if(IsPlasmaRifle(MapInv[i]))
+					{
+						AddActorChance("RLPlasmaRiflePickup", 70, 0);
+						AddActorChance("RLNuclearPlasmaPistolPickup", 20, 1);
+						AddActorChance("RLNuclearPlasmaRiflePickup", 20, 1);
+						AddActorChance("RLBlasterPickup", 50, 2);
+						AddActorChance("RLLaserRiflePickup", 40, 2);
+						AddActorChance("RLTristarBlasterPickup", 30, 2);
+						AddActorChance("RLCombatTranslocatorPickup", 30, 2);
+						AddActorChance("RLSuperiorWeaponSpawner", 4, 3);
+						AddActorChance("RLUniqueWeaponSpawner", 1, 4);
+					}
+					
+					if(IsBFG9000(MapInv[i]))
+					{
+						AddActorChance("RLBFG9000Pickup", 40, 0);
+						AddActorChance("RLNuclearBFG9000Pickup", 30, 1);
+						AddActorChance("RLUniqueWeaponSpawner", 1, 2);
+						AddActorChance("RLDemonicWeaponSpawner", 1, 2);
+					}
+					
+					if(IsBoots(MapInv[i]))
+					{
+						AddActorChance("RLSteelBootsPickup", 80, 0);
+						AddActorChance("RLProtectiveBootsPickup", 60, 0);
+						AddActorChance("RLPlasteelBootsPickup", 60, 0);
+						AddActorChance("RLGothicBootsPickup", 20, 1);
+						AddActorChance("RLPhaseshiftBootsPickup", 40, 1);
+						AddActorChance("RLAcidProofBootsPickup", 40, 1);
+						AddActorChance("RLExoticBootsSpawner", 20, 2);
+						AddActorChance("RLAssembledBootsSpawner", 20, 3);
+						AddActorChance("RLUniqueBootsSpawner", 1, 4);
+					}
+					
+					if(IsArmor(MapInv[i]))
+					{
+						AddActorChance("RLGreenArmorPickup", 80, 0);
+						AddActorChance("RLBlueArmorPickup", 80, 1);
+						AddActorChance("RLRedArmorPickup", 80, 2);
+						AddActorChance("RLExoticArmorSpawner", 60, 3);
+						AddActorChance("RLAssembledArmorSpawner", 20, 3);
+						AddActorChance("RLUniqueArmorSpawner", 10, 4);
+						AddActorChance("RLLegendaryArmorSpawner", 1, 4);
+					}
+				}
+				else {
+
+					if(IsChainsaw(MapInv[i]))
+					{
+						AddActorChance("RLChainsawPickup", 80, 0);
+						AddActorChance("RLChainsawSpawnerRPG", 20, 1);
+					}
+				
+					if(IsShotgun(MapInv[i]))
+					{
+						AddActorChance("RLShotgunPickup", 50, 0);
+						AddActorChance("RLCombatShotgunPickup", 30, 1);
+						AddActorChance("RLShotgunSpawnerRPG", 20, 2);
+					}
+				
+					if(IsDoubleShotgun(MapInv[i]))
+					{
+						AddActorChance("RLDoubleShotgunPickup", 80, 0);
+						AddActorChance("RLDoubleShotgunSpawnerRPG", 20, 1);
+					}
+				
+					if(IsChaingun(MapInv[i]))
+					{
+						AddActorChance("RLBattleRiflePickup", 50, 0);
+						AddActorChance("RLChaingunPickup", 30, 1);
+						AddActorChance("RLChaingunSpawnerRPG", 20, 2);
+					}
+				
+					if(IsRocketLauncher(MapInv[i]))
+					{
+						AddActorChance("RLRocketLauncherPickup", 80, 0);
+						AddActorChance("RLRocketLauncherSpawnerRPG", 20, 1);
+					}
+				
+					if(IsPlasmaRifle(MapInv[i]))
+					{
+						AddActorChance("RLPlasmaRiflePickup", 80, 0);
+						AddActorChance("RLPlasmaRifleSpawnerRPG", 20, 1);
+					}
+				
+					if(IsBFG9000(MapInv[i]))
+					{
+						AddActorChance("RLBFG9000Pickup", 80, 0);
+						AddActorChance("RLBFG9000SpawnerRPG", 20, 1);
+					}
+				
+					if(IsBoots(MapInv[i]))
+					{
+						AddActorChance("RLSteelBootsPickup", 40, 0);
+						AddActorChance("RLProtectiveBootsPickup", 30, 1);
+						AddActorChance("RLPlasteelBootsPickup", 20, 2);
+						AddActorChance("DRPGArmorSpawner", 10, 3);
+					}
+
+					if(IsArmor(MapInv[i]))
+					{
+						AddActorChance("RLGreenArmorPickup", 40, 0);
+						AddActorChance("RLBlueArmorPickup", 30, 1);
+						AddActorChance("RLRedArmorPickup", 20, 2);
+						AddActorChance("DRPGArmorSpawner", 10, 3);
+					}
 				}
 				
 				if(ReplaceRoll.Size()>0)
@@ -468,58 +562,97 @@ Class RLNomadEvents : EventHandler
 		if(invn == "DRPGSmallBackpack"){return true;}
 		return false;
 	}
-	
+
 	bool IsChainsaw(Actor a)
 	{
 		String invn = a.GetClassName();
 		if(invn == "RLChainsawPickup"){return true;}
 		return false;
 	}
-	
+		
 	bool IsShotgun(Actor a)
 	{
 		String invn = a.GetClassName();
 		if(invn == "RLShotgunPickup"){return true;}
 		if(invn == "RLCombatShotgunPickup"){return true;}
+
+		if (CVar.GetCVar("drpg_loot_type").GetInt() == 3) {
+			if(invn == "RLAssaultShotgunPickup"){return true;}
+			if(invn == "RLPlasmaShotgunPickup"){return true;}
+		}
+
 		return false;
 	}
-	
+		
 	bool IsDoubleShotgun(Actor a)
 	{
 		String invn = a.GetClassName();
 		if(invn == "RLDoubleShotgunPickup"){return true;}
+
+		if (CVar.GetCVar("drpg_loot_type").GetInt() == 3) {
+			if(invn == "RLSuperShotgunPickup"){return true;}
+		}
+
 		return false;
 	}
-	
+		
 	bool IsChaingun(Actor a)
 	{
 		String invn = a.GetClassName();
 		if(invn == "RLChaingunPickup"){return true;}
 		if(invn == "RLBattleRiflePickup"){return true;}
+
+		if (CVar.GetCVar("drpg_loot_type").GetInt() == 3) {
+			if(invn == "RLCombatPistolPickup"){return true;}
+			if(invn == "RLMarksmanPistolPickup"){return true;}
+			if(invn == "RLHandcannonPickup"){return true;}
+			if(invn == "RLUziPickup"){return true;}
+		}
+
 		return false;
 	}
-	
+		
 	bool IsRocketLauncher(Actor a)
 	{
 		String invn = a.GetClassName();
 		if(invn == "RLRocketLauncherPickup"){return true;}
+
+		if (CVar.GetCVar("drpg_loot_type").GetInt() == 3) {
+			if(invn == "RLNapalmLauncherPickup"){return true;}
+		}
+
 		return false;
 	}
-	
+		
 	bool IsPlasmaRifle(Actor a)
 	{
 		String invn = a.GetClassName();
 		if(invn == "RLPlasmaRiflePickup"){return true;}
+
+		if (CVar.GetCVar("drpg_loot_type").GetInt() == 3) {
+			if(invn == "RLNuclearPlasmaPistolPickup"){return true;}
+			if(invn == "RLNuclearPlasmaRiflePickup"){return true;}
+			if(invn == "RLBlasterPickup"){return true;}
+			if(invn == "RLLaserRiflePickup"){return true;}
+			if(invn == "RLTristarBlasterPickup"){return true;}
+			if(invn == "RLCombatTranslocatorPickup"){return true;}
+		}
+
 		return false;
 	}
-	
+		
 	bool IsBFG9000(Actor a)
 	{
 		String invn = a.GetClassName();
 		if(invn == "RLBFG9000Pickup"){return true;}
+
+		if (CVar.GetCVar("drpg_loot_type").GetInt() == 3) {
+			if(invn == "RLNuclearBFG9000Pickup"){return true;}
+		}
+
 		return false;
 	}
-	
+		
 	bool IsArmor(Actor a)
 	{
 		String invn = a.GetClassName();
@@ -528,7 +661,7 @@ Class RLNomadEvents : EventHandler
 		if(invn == "RLRedArmorPickup"){return true;}		
 		return false;
 	}
-	
+		
 	bool IsBoots(Actor a)
 	{
 		String invn = a.GetClassName();
@@ -537,7 +670,7 @@ Class RLNomadEvents : EventHandler
 		if(invn == "RLPlasteelBootsPickup"){return true;}	
 		return false;
 	}
-	
+
 	override void WorldUnloaded (WorldEvent e) 
 	{
 		//mapsbeat++;

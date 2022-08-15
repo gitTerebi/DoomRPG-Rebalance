@@ -415,7 +415,7 @@ NamedScript void BuildItemData()
         ITEMDATA_CATEGORY(0, "\CgWeapons", CF_NONE);
         // Common Weapons
         // ITEMDATA_DEF("RLCombatKnife",                           "CombatKnife",                                               20,  0, "CKNIX0", 31, 23);
-        ITEMDATA_DEF("RLChainsaw",                              "Chainsaw",                                                300,  0,-1, "NSAWX0", 31, 23);
+        ITEMDATA_DEF("RLChainsaw",                              "Chainsaw",                                                300,  0, 0, "NSAWX0", 31, 23);
         ITEMDATA_DEF("RLPistol",                                "Pistol",                                                  125,  0, 0, "PISGX0", 11, 13);
         ITEMDATA_DEF("RLShotgun",                               "Shotgun",                                                 250,  0, 0, "PKSGX0", 31, 17);
         ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          350,  3, 0, "CSHOX0", 25, 17);
@@ -1296,7 +1296,7 @@ NamedScript DECORATE void DRPGGenericLootSpawner(bool ArmorBonus)
     Thing_Remove(0);
 }
 
-NamedScript DECORATE void DRPGWeaponSpawner()
+NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
 {
     // Delay while the map is being initialized
     while (!CurrentLevel->Init) Delay(1);
@@ -1306,10 +1306,18 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     int ItemCategory = 0;
     int RarityMin;
     int RarityMax;
+    int Modifier;
     int Amount;
 
     // Calculate Modifier
-    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 10.0);
+    if (GetCVar("drpg_loot_type") == 0)
+        Modifier = RoundInt(10.0 * MapLevelModifier + 10.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 1)
+        Modifier = RoundInt(15.0 * MapLevelModifier);
+    if (GetCVar("drpg_loot_type") == 2)
+        Modifier = RoundInt(15.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 3)
+        Modifier = Random(0,15);
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1324,10 +1332,11 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    if (Random(0, 100) <= 25 + RoundInt(50.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 2.0))
-    {
-        RarityMin += Random(0, RarityMax / 2);
+    // Calculate Rarity Min
+    RarityMin += Random(0, RarityMax / 2);
 
+    if (Random(0, 150) <= 10 * Modifier)
+    {
         while (!ItemSpawned)
         {
             Amount = 0;
@@ -1338,8 +1347,10 @@ NamedScript DECORATE void DRPGWeaponSpawner()
                 {
                     if (Random(0, 1 + Amount) <= 0)
                     {
-                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && !NomadInGame())
-                            ActorToSpawn = ItemData[ItemCategory][Random(1, ((CompatMode == COMPAT_DRLA) ? 6 : 4))].Actor;
+                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
+                            ActorToSpawn = ItemData[ItemCategory][Weapon].Actor;
+                        else if (i <= (CompatMode == COMPAT_DRLA ? 9 : 7))
+                            ActorToSpawn = ItemData[ItemCategory][Weapon].Actor;
                         else
                             ActorToSpawn = ItemData[ItemCategory][i].Actor;
                         ItemSpawned = true;
@@ -1352,7 +1363,7 @@ NamedScript DECORATE void DRPGWeaponSpawner()
     }
 
     if (!ItemSpawned)
-        ActorToSpawn = ItemData[ItemCategory][Random(1, ((CompatMode == COMPAT_DRLA) ? 6 : 4))].Actor;
+        ActorToSpawn = ItemData[ItemCategory][Weapon].Actor;
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
@@ -1398,7 +1409,7 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
     Thing_Remove(0);
 }
 
-NamedScript DECORATE void DRPGArmorSpawner()
+NamedScript DECORATE void DRPGArmorSpawner(int Armor)
 {
     // Delay while the map is being initialized
     while (!CurrentLevel->Init) Delay(1);
@@ -1408,10 +1419,18 @@ NamedScript DECORATE void DRPGArmorSpawner()
     int ItemCategory = (Random(0, 9) <= 0 ? 9 : 3);
     int RarityMin;
     int RarityMax;
+    int Modifier;
     int Amount;
 
     // Calculate Modifier
-    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 10.0);
+    if (GetCVar("drpg_loot_type") == 0)
+        Modifier = RoundInt(10.0 * MapLevelModifier + 10.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 1)
+        Modifier = RoundInt(15.0 * MapLevelModifier);
+    if (GetCVar("drpg_loot_type") == 2)
+        Modifier = RoundInt(15.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 3)
+        Modifier = Random(0,15);
     if (Modifier > 15)
         Modifier = 15;
 
@@ -1426,10 +1445,11 @@ NamedScript DECORATE void DRPGArmorSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    if (Random(0, 100) <= 25 + RoundInt(50.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 2.0))
-    {
-        RarityMin += Random(0, RarityMax / 2);
+    // Calculate Rarity Min
+    RarityMin += Random(0, RarityMax / 2);
 
+    if (Random(0, 150) <= 10 * Modifier)
+    {
         while (!ItemSpawned)
         {
 
@@ -1441,8 +1461,10 @@ NamedScript DECORATE void DRPGArmorSpawner()
                 {
                     if (Random(0, 1 + Amount) <= 0)
                     {
-                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && !NomadInGame())
-                            ActorToSpawn = ItemData[3][Random(1, ((CompatMode == COMPAT_DRLA) ? 3 : 5))].Actor;
+                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
+                            ActorToSpawn = ItemData[3][Armor].Actor;
+                        else if (i <= (CompatMode == COMPAT_DRLA ? 3 : 5))
+                            ActorToSpawn = ItemData[ItemCategory][Armor].Actor;
                         else
                             ActorToSpawn = ItemData[ItemCategory][i].Actor;
                         ItemSpawned = true;
@@ -1455,7 +1477,7 @@ NamedScript DECORATE void DRPGArmorSpawner()
     }
 
     if (!ItemSpawned)
-        ActorToSpawn = ItemData[3][0].Actor;
+        ActorToSpawn = ItemData[3][Armor].Actor;
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
@@ -1472,6 +1494,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
     int ItemCategory = 5;
     int RarityMin;
     int RarityMax;
+    int Modifier;
     int Amount;
     int ShieldPartsMin;
     int ShieldPartsMax;
@@ -1498,7 +1521,14 @@ NamedScript DECORATE void DRPGShieldSpawner()
     }
 
     // Calculate Modifier
-    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 20.0);
+    if (GetCVar("drpg_loot_type") == 0)
+        Modifier = RoundInt(10.0 * MapLevelModifier + 10.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 1)
+        Modifier = RoundInt(15.0 * MapLevelModifier);
+    if (GetCVar("drpg_loot_type") == 2)
+        Modifier = RoundInt(15.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 3)
+        Modifier = Random(0,15);
     if (Modifier > 15)
         Modifier = 15;
 

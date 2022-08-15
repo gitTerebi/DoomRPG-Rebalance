@@ -194,6 +194,13 @@ OptionString "OutpostStartLevel"
     "LEVEL01", "LEVEL01 (Doom II BFG)"
 }
 
+OptionValue "LootTypes"
+{
+    0, "Adaptive"
+    1, "\caMap Level"
+    2, "\cfLuck Level"
+}
+
 OptionMenu "DoomRPGXPSystem"
 {
     Title "XP System"
@@ -347,6 +354,9 @@ OptionMenu "DoomRPGLootGeneration"
     StaticText ""
 
     Option "UAC Premium kill bonus", "drpg_uac_premium", "OnOff"
+    StaticText ""
+
+    Option "Weapon/Armor Loot Quality Type", "drpg_loot_type", "LootTypes"
 }
 
 OptionMenu "DoomRPGMapEvents"

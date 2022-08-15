@@ -77,6 +77,7 @@ server  float   drpg_lootgen_factor = 1.0;
 server  bool    drpg_loot_rcm = true; // Rarity Chance Modifier
 server  float   drpg_loot_crate_spc = 35.0; // Shield Part Chance
 server  bool    drpg_uac_premium = false;
+server  int     drpg_loot_type = 0;
 
 // Map Events
 server  float   drpg_mapevent_chance = 10.0;
@@ -164,11 +165,11 @@ server  bool    drpg_multi_revives = false;
 
 // Shop
 server  int     drpg_shoptype = 0;
-server  int     drpg_shopspecial_type = 0;
+server  int     drpg_shopspecial_type = 2;
 server  int     drpg_shopspecial_category = -1;
 server  int     drpg_shopspecial_time = 10;
 server  int     drpg_shopspecial_min = 0;
-server  int     drpg_shopspecial_max = 1000000;
+server  int     drpg_shopspecial_max = 200000;
 server  int     drpg_shopspecial_discount = 25;
 user    int     drpg_pickup_behavior = 0;
 user    bool    drpg_autosell_lockerfallback = false;

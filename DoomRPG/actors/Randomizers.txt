@@ -694,7 +694,7 @@ actor DRPGArmorSpawner : MapSpot
     States
     {
     Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGArmorSpawner")
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGArmorSpawner", Random(1,2))
         Stop
     }
 }
@@ -705,7 +705,7 @@ actor DRPGWeaponSpawner : MapSpot
     States
     {
     Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner")
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", Random(0,7))
         Stop
     }
 }
