@@ -22,6 +22,9 @@ OptionMenu "Doom RLA Monsters Options"
     Option "Enemy Weapon Drop Type", "DRLA_weapondroptype", "WeaponDropTypes"
 
     StaticText ""
+    Option "Weapon/Armor/Modpacks Loot Type", "drpg_loot_type", "LootTypes"
+
+    StaticText ""
     Option "Disable Demonic Bosses", "drpg_drla_demonic_boss_disable", "OnOff"
     Option "Disable Unique Bosses", "drpg_drla_unique_boss_disable", "OnOff"
 }
@@ -29,7 +32,7 @@ OptionMenu "Doom RLA Monsters Options"
 OptionValue "WeaponDropTypes"
 {
     0, "Adaptive"
-    1, "DoomRL Arsenal"
+    1, "\ciDoomRL Arsenal"
     2, "Ammo Only"
     3, "Nope"
 }

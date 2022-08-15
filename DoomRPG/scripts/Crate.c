@@ -51,12 +51,20 @@ NamedScript DECORATE void InitCrate()
     while (!CurrentLevel->Init) Delay(1);
 
     int TID = UniqueTID();
+    int Modifier;
     int Amount = 3;
     int Rarity = 0;
     int Firewall = 0;
 
     // Calculate Modifier
-    int Modifier = RoundInt(10.0 * MapLevelModifier + (fixed)AveragePlayerLuck() / 10.0);
+    if (GetCVar("drpg_loot_type") == 0)
+        Modifier = RoundInt(10.0 * MapLevelModifier + 10.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 1)
+        Modifier = RoundInt(15.0 * MapLevelModifier);
+    if (GetCVar("drpg_loot_type") == 2)
+        Modifier = RoundInt(15.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 3)
+        Modifier = Random(0,15);
     if (Modifier > 15)
         Modifier = 15;
 
