@@ -2952,7 +2952,10 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
             // Compatibility Handling - DoomRL Arsenal Extended
             // Nomad - Mod Packs Save
             if (CompatModeEx == COMPAT_DRLAX)
+            {
                 NomadModPacksSave();
+                NanomaniacTransport();
+            }
         }
 
         TransporterLevel = FindLevelInfo();
@@ -2965,7 +2968,10 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
         // Compatibility Handling - DoomRL Arsenal Extended
         // Nomad - Mod Packs Save
         if (CompatModeEx == COMPAT_DRLAX)
+        {
             NomadModPacksSave();
+            NanomaniacTransport();
+        }
 
         ChangeLevel(TransporterLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, CurrentSkill);
         Transported = true;
