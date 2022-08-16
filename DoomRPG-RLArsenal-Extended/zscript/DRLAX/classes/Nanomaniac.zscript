@@ -381,7 +381,7 @@ Class RLNanoManiacEvents : StaticEventHandler
             rerollmodpacks = 0;
             rerolledweps.Clear();
 
-            if(players[i].mo && players[i].mo.GetClassName() == "DoomRLNanoManiacRPG")
+            if(players[i].mo && players[i].mo.GetClassName() == "DoomRLNanoManiacRPG" && players[i].mo.CountInv("RLNanoManiacTransportToken") <= 0)
             {
                 players[i].mo.GiveInventory("RLNanoManiacRerolled", 1);
                 RerollWeapons(players[i].mo, NormalWeapons);
@@ -389,6 +389,8 @@ Class RLNanoManiacEvents : StaticEventHandler
                 RerollWeapons(players[i].mo, AdvancedWeapons);
                 RerollWeapons(players[i].mo, MasterWeapons);
             }
+			else if(players[i].mo && players[i].mo.GetClassName() == "DoomRLNanoManiacRPG" && players[i].mo.CountInv("RLNanoManiacTransportToken") > 0)
+				players[i].mo.TakeInventory("RLNanoManiacTransportToken", 1);
         }
     }
 
@@ -412,8 +414,8 @@ Class RLNanoManiacEvents : StaticEventHandler
 
                     while(newwep == w || p.CountInv(newwep) > 0 || (CheckSuperior(newwep.GetClassName()) && rerollmodpacks > 2))
                     {
-                        //COnsole.Printf("try again");
-                        newwep = weppool[random(0, weppool.Size()-1)];
+                        //Console.Printf("try again");
+						newwep = weppool[random(0, weppool.Size()-1)];
                     }
 
                     int modcount = rerollmodpacks;
@@ -513,3 +515,5 @@ Class RLNanoManiacEvents : StaticEventHandler
         }
     }
 }
+
+class RLNanoManiacTransportToken : Inventory {Default{Inventory.MaxAmount 1;}}

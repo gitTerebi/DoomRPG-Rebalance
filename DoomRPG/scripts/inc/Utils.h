@@ -145,6 +145,7 @@ void RemoveDRLAArmorToken(str);
 void CheckDRLASetWeapons();
 void NomadModPacksSave();
 void NomadModPacksLoad();
+void NanomaniacTransport();
 
 // Math
 int CalcPercent(int, int);

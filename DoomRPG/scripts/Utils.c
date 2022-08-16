@@ -2482,6 +2482,19 @@ void NomadModPacksLoad()
     }
 }
 
+void NanomaniacTransport()
+{
+    for (int i = 0; i < MAX_PLAYERS; i++)
+    {
+        if (!PlayerInGame(i)) continue;
+        if (PlayerClass(i) != 8) continue;
+
+        SetActivator(Players(i).TID);
+        SetInventory("RLNanoManiacTransportToken", 1);
+        SetActivator(0, AAPTR_NULL);
+    }
+}
+
 // --------------------------------------------------
 // Math
 //

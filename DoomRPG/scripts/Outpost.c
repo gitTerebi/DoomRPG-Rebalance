@@ -739,7 +739,10 @@ NamedScript MapSpecial void LevelTransport()
             // Compatibility Handling - DoomRL Arsenal Extended
             // Nomad - Mod Packs Save
             if (CompatModeEx == COMPAT_DRLAX)
+            {
                 NomadModPacksSave();
+                NanomaniacTransport();
+            }
 
             Delay(35 * 2);
 
@@ -3453,8 +3456,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                             CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 6) / 250 * 250;
 
                             // Calculate Amount Details
-                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 50)) / 5 * 5;
-                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 25)) / 5 * 5;
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 40)) / 5 * 5;
+                            CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 20)) / 5 * 5;
                             CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 10)) / 5 * 5;
 
                             // Set Individual Required

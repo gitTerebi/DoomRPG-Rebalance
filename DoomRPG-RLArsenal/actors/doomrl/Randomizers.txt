@@ -47,7 +47,7 @@ actor DRPGGreenArmorRandomizer2 : MapSpot Replaces DRPGGreenArmorRandomizer
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGArmorSpawner", 1)
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGArmorSpawner", 1)
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLStandardArmorSpawner")
@@ -65,7 +65,7 @@ actor DRPGBlueArmorRandomizer2 : MapSpot Replaces DRPGBlueArmorRandomizer
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGArmorSpawner", Random(2,3))
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGArmorSpawner", Random(2,3))
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLAdvancedArmorSpawner")
@@ -217,7 +217,7 @@ actor RLChainsawSpawnerRPG : MapSpot Replaces RandomSpawner 2005
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 0)
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 0)
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLChainsawSpawner")
@@ -234,7 +234,7 @@ actor RLPistolSpawnerRPG : MapSpot Replaces RandomSpawner 5010
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 1)
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 1)
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLClipSpawner")
@@ -251,7 +251,7 @@ actor RLShotgunSpawnerRPG : MapSpot Replaces RandomSpawner 2001
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", Random(2,3))
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", Random(2,3))
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLShotgunSpawner")
@@ -268,7 +268,7 @@ actor RLDoubleShotgunSpawnerRPG : MapSpot Replaces RandomSpawner 82
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 4)
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 4)
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLDoubleShotgunSpawner")
@@ -285,7 +285,7 @@ actor RLChaingunSpawnerRPG : MapSpot Replaces RandomSpawner 2002
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", Random(5,6))
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", Random(5,6))
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLChaingunSpawner")
@@ -302,7 +302,7 @@ actor RLRocketLauncherSpawnerRPG : MapSpot Replaces RandomSpawner 2003
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 7)
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 7)
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLRocketLauncherSpawner")
@@ -319,7 +319,7 @@ actor RLPlasmaRifleSpawnerRPG :  MapSpot Replaces RandomSpawner 2004
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 8)
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 8)
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLPlasmaRifleSpawner")
@@ -336,7 +336,7 @@ actor RLBFG9000SpawnerRPG : MapSpot Replaces RandomSpawner 2006
 		TNT1 A 0 A_JumpIf(GetCVar("drpg_loot_type") == 3, "SpawnRoguelike")
         Goto SpawnAdaptive
     SpawnAdaptive:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 9)
+        TNT1 A -1 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 9)
         Stop
     SpawnRoguelike:
 		TNT1 A 0 A_SpawnItem("RLBFG9000Spawner")
