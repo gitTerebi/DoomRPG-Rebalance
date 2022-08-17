@@ -517,7 +517,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLElephantGun",                           "Elephant Gun \Cv[Assembled]\C-",                        35000, -1, -1, "ELEGX0", 21, 13);
         ITEMDATA_DEF("RLGatlingGun",                            "Gatling Gun \Cv[Assembled]\C-",                         32500, -1, -1, "DGTGX0", 38, 19);
         ITEMDATA_DEF("RLMicroLauncher",                         "Micro Launcher \Cv[Assembled]\C-",                      30000, -1, -1, "MICFX0", 21,  8);
-        ITEMDATA_DEF("RLTacticalShotgun",                       "Tactical Shotgun \Cv[Assembled]\C-",                    32500, -1, -1, "ASHOX0", 31, 27);
+        ITEMDATA_DEF("RLTacticalShotgun",                       "Tactical Shotgun \Cv[Assembled]\C-",                    32500, -1, -1, "TSHOX0", 31, 27);
         ITEMDATA_DEF("RLFlamethrower",                          "Flamethrower \Cv[Assembled]\C-",                        32500, -1, -1, "FLAMX0", 31, 27);
         ITEMDATA_DEF("RLShrapnelCannon",                        "Shrapnel Cannon \Cv[Assembled]\C-",                     35000, -1, -1, "SHRCX0", 30, 23);
         ITEMDATA_DEF("RLSniperRifle",                           "Sniper Rifle \Cv[Assembled]\C-",                        35000, -1, -1, "SNPRX0", 40, 15);
