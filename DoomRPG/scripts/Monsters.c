@@ -2523,10 +2523,8 @@ NamedScript DECORATE void PropDeathCheck(int PropType)
         int Killer = WhoKilledMe();
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
-        // Set prop's stats for DRPGCredits value calculation
-        CalculateMonsterStats(Stats);
         // Calculate and set prop's DRPGCredits value
-        CalculateMonsterCredits(Stats);
+        SetInventory("DRPGCredits", Random(0, 100 * MapLevelModifier));
 
         if(PropType)
         {
