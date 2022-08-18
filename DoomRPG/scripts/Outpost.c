@@ -333,6 +333,7 @@ NamedScript MapSpecial void LevelTransport()
 {
     fixed X = 100.1;
     fixed Y = 32.0;
+    fixed Y1;
 
     // if you're already in a menu, terminate
     if (Player.InMenu || Player.InShop || Player.OutpostMenu == OMENU_LEVELTRANSPORT) return;
@@ -343,11 +344,155 @@ NamedScript MapSpecial void LevelTransport()
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
     Player.OutpostMenu = OMENU_LEVELTRANSPORT;
 
+    str WadNames[MAX_MAPPACKS] =
+    {
+        "Doom",      // WadSmoosh
+        "Doom II: Hell on Earth",
+        "Master Levels",
+        "No Rest For The Living",
+        "Plutonia",
+        "TNT: Evilution",
+        "Lexicon's Hub",        // Lexicon
+        "Ancient Aliens",
+        "A Clear Line Drawn",
+        "Hot Water Music",
+        "Alien Vendetta",
+        "Back to Saturn X",
+        "Community Chest 1",
+        "Community Chest 2",
+        "Community Chest 3",
+        "Community Chest 4",
+        "Chillax",
+        "Circle Of Caina",
+        "Combat Shock",
+        "Combat Shock 2",
+        "Chainworm",
+        "Doom Core Trilogy",
+        "Drown In Blood",
+        "Dark Encounters",
+        "Destination Unknown",
+        "Deus Vult",
+        "Deus Vult 2",
+        "Epic 1",
+        "Epic 2",
+        "Estranged",
+        "The Eye",
+        "Forest Swords",
+        "Going Down",
+        "Hellcore",
+        "Hellbound",
+        "Hell Pike",
+        "Sens",
+        "Hadephobia",
+        "Hell Revealed",
+        "Hell Revealed 2",
+        "Interception",
+        "Kamasutra",
+        "Khorus Speedy Shit",
+        "Mayhem 17",
+        "Maps Of Chaos",
+        "Monuments Of Mars",
+        "New Gothic Movement",
+        "New Gothic Movement 2",
+        "NOVA",
+        "Pizza Steve",
+        "Doom 2 Redux",
+        "Scythe 2",
+        "Stardate 20x6",
+        "Stardate 20x7",
+        "Swift Death",
+        "Slaughterfest 2012",
+        "Slaughterfest 2013",
+        "Shaitans Luck",
+        "Sunlust",
+        "Sunder",
+        "Speed Of Doom",
+        "Swim With The Whales",
+        "Dark Tartarus",
+        "The Spire",
+        "The Spire 2",
+        "Congestion",
+        "CLAUSTERPHOBIA 2",
+        "CLAUSTERPHOBIA 1",
+        "1997 Tuneup Project",
+        "UAC Ultra",
+        "Unholy Realms",
+        "Valiant",
+        "Vanguard",
+        "D2 The Way ID Did",
+        "Whispers Of Satan",
+        "Zone 300",
+        "Zones Of Fear",
+        "Compemdium's Hub",    // Compemdium
+        "Memento Mori",
+        "Memento Mori II",
+        "Requiem",
+        "Insertion",
+        "Obituary",
+        "Strain",
+        "Biowar",
+        "The Darkening",
+        "The Trooper's Playground",
+        "Predition's Gate",
+        "Post",
+        "Revolution",
+        "Scientist",
+        "Icarus Alien Vanguard",
+        "Hell to Pay",
+        "The Abyss",
+        "The Talosian Incident",
+        "All Hell is Breaking Loose!",
+        "Enigma",
+        "Realm of Chaos",
+        "Dystopia 3",
+        "Eternal Doom",
+        "Rebight",
+        "Scythe",
+        "Caverns of Darkness",
+        "The Darkening 2",
+        "Equinox",
+        "Marsdoom",
+        "Bloodrust",
+        "Osiris",
+        "Brotherhood of Ruin",
+        "Enjay ZDoom",
+        "Daedalus",
+        "Cleimos",
+        "Asdoom 2",
+        "Pleiades",
+        "Dark Covenant",
+        "Slayer",
+        "Hell Factory",
+        "Cyberdreams",
+        "The Final Gathering",
+        "Earth",
+        "End Game",
+        "Doom Resurrection",
+        "Enslavement",
+        "Biotech",
+        "City of Doom",
+        "Project Slipgate",
+        "Dissolution of Eternity",
+        "Suspended in Dusk",
+        "Mancubus",
+        "Last Day on Earth",
+        "Vile Flesh",
+        "The Vilecore",
+        "Twilight Zone II",
+        "Neodoom",
+        "Annie",
+        "99 Ways to Die",
+        "Back to Hell"
+    };
+
     // So the player's initial interaction is not processed as a menu action
     Delay(1);
 
     while (true)
     {
+        // Reset additional coordinates
+        Y1 = 0.0;
+
         // Stop Underflow
         if (LevelChoice < 0)
             LevelChoice = 0;
@@ -369,7 +514,7 @@ NamedScript MapSpecial void LevelTransport()
         // Text
         SetFont("BIGFONT");
         HudMessage("Level Transporter");
-        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X, Y, 0.05, 0.5);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X, Y, 0.05, 0.025);
 
         str TitleColor = "Gold";
         if (TeleDest->NeedsRealInfo || !(TeleDest->Completed))
@@ -384,18 +529,30 @@ NamedScript MapSpecial void LevelTransport()
             MapType = "UAC Base";
         if (TeleDest->UACArena)
             MapType = "UAC Arena";
+        if (MapPacks)
+        {
+            if (!MapPackActive[Player.SelectedMapPack])
+                Player.SelectedMapPack++;
+            else if (LevelChoice > 0)
+            {
+                HudMessage("%S", WadNames[Player.SelectedMapPack]);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "Red", X, Y + 32.1, 0.05, 0.025);
+                Y1 = 32.0;
+            }
+        }
+
         HudMessage("%S", TeleDest->NiceName);
-        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, TitleColor, X, Y + 32.1, 0.05, 0.5);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, TitleColor, X, Y + Y1 + 32.1, 0.05, 0.025);
         SetFont("SMALLFONT");
         if (TeleDest->LevelNum > 0)
         {
             HudMessage("%S, level %d - %S", TeleDest->LumpName, TeleDest->LevelNum, MapType);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "Orange", X, Y + 48.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "Orange", X, Y + Y1 + 48.1, 0.05, 0.025);
         }
         else
         {
             HudMessage("%S - %S", TeleDest->LumpName, MapType);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "DarkGreen", X, Y + 48.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "DarkGreen", X, Y + Y1 + 48.1, 0.05, 0.025);
         }
 
         if (!TeleDest->NeedsRealInfo && !TeleDest->UACBase && !TeleDest->UACArena)
@@ -416,33 +573,33 @@ NamedScript MapSpecial void LevelTransport()
             if (TeleDest->MaxTotalMonsters > 0)
             {
                 HudMessage("Kills: %d / %d (%d%%)", TeleDest->MaxMonstersKilled, TeleDest->MaxTotalMonsters, TeleDest->MaxMonsterPercentage);
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, KillColor, X, Y + 64.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, KillColor, X, Y + Y1 + 64.1, 0.05, 0.025);
             }
             if (TeleDest->MaxTotalItems > 0)
             {
                 HudMessage("Items: %d / %d (%d%%)", TeleDest->MaxItemsFound, TeleDest->MaxTotalItems, TeleDest->MaxItemPercentage);
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, ItemColor, X, Y + 72.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, ItemColor, X, Y + Y1 + 72.1, 0.05, 0.025);
             }
             if (TeleDest->MaxTotalSecrets > 0)
             {
                 HudMessage("Secrets: %d / %d (%d%%)", TeleDest->MaxSecretsFound, TeleDest->MaxTotalSecrets, TeleDest->MaxSecretPercentage);
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, SecretColor, X, Y + 80.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, SecretColor, X, Y + Y1 + 80.1, 0.05, 0.025);
             }
 
             if (TeleDest->Par > 0)
             {
                 HudMessage("Par Time: %S", FormatTime(TeleDest->Par * 35));
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, ParColor, X, Y + 96.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, ParColor, X, Y + Y1 + 96.1, 0.05, 0.025);
             }
             if (TeleDest->ShortestTime < 0x7FFFFFFF)
             {
                 HudMessage("Completion Time: %S", FormatTime(TeleDest->ShortestTime * 35));
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, ParColor, X, Y + 104.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, ParColor, X, Y + Y1 + 104.1, 0.05, 0.025);
             }
             else
             {
                 HudMessage("Completion Time: \C[Red]N/A");
-                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, ParColor, X, Y + 104.1, 0.05, 0.5);
+                EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, ParColor, X, Y + Y1 + 104.1, 0.05, 0.025);
             }
 
             str AreaText = "No anomalies detected";
@@ -549,12 +706,12 @@ NamedScript MapSpecial void LevelTransport()
 
             SetFont("BIGFONT");
             HudMessage("Area Status");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "Green", X, Y + 120.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "Green", X, Y + Y1 + 120.1, 0.05, 0.025);
             SetFont("SMALLFONT");
             HudMessage("Monster level (Approx.): %d - %d", MonsterMinLevel, MonsterMaxLevel);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X, Y + 136.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X, Y + Y1 + 136.1, 0.05, 0.025);
             HudMessage("%S", AreaText);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X, Y + 152.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X, Y + Y1 + 152.1, 0.05, 0.025);
         }
         else if (!TeleDest->NeedsRealInfo && TeleDest->UACBase)
         {
@@ -565,18 +722,18 @@ NamedScript MapSpecial void LevelTransport()
             else if (Invasion || MarinesHostile)
                 AreaText = "\C[Brick]Detected: Security Breach";
             HudMessage("This is a secure UAC military base.");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "DarkGreen", X, Y + 64.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "DarkGreen", X, Y + Y1 + 64.1, 0.05, 0.025);
             SetFont("BIGFONT");
             HudMessage("Area Status");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "Green", X, Y + 120.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "Green", X, Y + Y1 + 120.1, 0.05, 0.025);
             SetFont("SMALLFONT");
             HudMessage("%S", AreaText);
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X, Y + 136.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X, Y + Y1 + 136.1, 0.05, 0.025);
         }
         else if (!TeleDest->NeedsRealInfo && TeleDest->UACArena)
         {
             HudMessage("This is a known UAC battle arena site.");
-            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "LightBlue", X, Y + 64.1, 0.05, 0.5);
+            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "LightBlue", X, Y + Y1 + 64.1, 0.05, 0.025);
         }
 
         // Input

@@ -3672,147 +3672,6 @@ NamedScript void InitMapPacks()
         "drpg_comp_bth01"
     };
 
-    str WadNames[MAX_MAPPACKS] =
-    {
-        "Doom",      // WadSmoosh
-        "Doom 2",
-        "Master Levels",
-        "No Rest For The Living",
-        "Plutonia",
-        "TNT: Evilution",
-        "Lexicon's Hub",        // Lexicon
-        "Ancient Aliens",
-        "A Clear Line Drawn",
-        "Hot Water Music",
-        "Alien Vendetta",
-        "Back to Saturn X",
-        "Community Chest 1",
-        "Community Chest 2",
-        "Community Chest 3",
-        "Community Chest 4",
-        "Chillax",
-        "Circle Of Caina",
-        "Combat Shock",
-        "Combat Shock 2",
-        "Chainworm",
-        "Doom Core Trilogy",
-        "Drown In Blood",
-        "Dark Encounters",
-        "Destination Unknown",
-        "Deus Vult",
-        "Deus Vult 2",
-        "Epic 1",
-        "Epic 2",
-        "Estranged",
-        "The Eye",
-        "Forest Swords",
-        "Going Down",
-        "Hellcore",
-        "Hellbound",
-        "Hell Pike",
-        "Sens",
-        "Hadephobia",
-        "Hell Revealed",
-        "Hell Revealed 2",
-        "Interception",
-        "Kamasutra",
-        "Khorus Speedy Shit",
-        "Mayhem 17",
-        "Maps Of Chaos",
-        "Monuments Of Mars",
-        "New Gothic Movement",
-        "New Gothic Movement 2",
-        "NOVA",
-        "Pizza Steve",
-        "Doom 2 Redux",
-        "Scythe 2",
-        "Stardate 20x6",
-        "Stardate 20x7",
-        "Swift Death",
-        "Slaughterfest 2012",
-        "Slaughterfest 2013",
-        "Shaitans Luck",
-        "Sunlust",
-        "Sunder",
-        "Speed Of Doom",
-        "Swim With The Whales",
-        "Dark Tartarus",
-        "The Spire",
-        "The Spire 2",
-        "Congestion",
-        "CLAUSTERPHOBIA 2",
-        "CLAUSTERPHOBIA 1",
-        "1997 Tuneup Project",
-        "UAC Ultra",
-        "Unholy Realms",
-        "Valiant",
-        "Vanguard",
-        "D2 The Way ID Did",
-        "Whispers Of Satan",
-        "Zone 300",
-        "Zones Of Fear",
-        "Compemdium's Hub",    // Compemdium
-        "Memento Mori",
-        "Memento Mori 2",
-        "Requiem",
-        "Insertion",
-        "Obituary",
-        "Strain",
-        "Biowar",
-        "The Darkening",
-        "The Trooper's Playground",
-        "Predition's Gate",
-        "Post",
-        "Revolution",
-        "Scientist",
-        "Icarus Alien Vanguard",
-        "Hell to Pay",
-        "The Abyss",
-        "The Talosian Incident",
-        "All Hell is Breaking Loose!",
-        "Enigma",
-        "Realm of Chaos",
-        "Dystopia 3",
-        "Eternal Doom",
-        "Rebight",
-        "Scythe",
-        "Caverns of Darkness",
-        "The Darkening 2",
-        "Equinox",
-        "Marsdoom",
-        "Bloodrust",
-        "Osiris",
-        "Brotherhood of Ruin",
-        "Enjay ZDoom",
-        "Daedalus",
-        "Cleimos",
-        "Asdoom 2",
-        "Pleiades",
-        "Dark Covenant",
-        "Slayer",
-        "Hell Factory",
-        "Cyberdreams",
-        "The Final Gathering",
-        "Earth",
-        "End Game",
-        "Doom Resurrection",
-        "Enslavement",
-        "Biotech",
-        "City of Doom",
-        "Project Slipgate",
-        "Dissolution of Eternity",
-        "Suspended in Dusk",
-        "Mancubus",
-        "Last Day on Earth",
-        "Vile Flesh",
-        "The Vilecore",
-        "Twilight Zone II",
-        "Neodoom",
-        "Annie",
-        "99 Ways to Die",
-        "Back to Hell"
-    };
-
     str LumpNames[MAX_MAPPACKS] =
     {
         "E1M1",      // WadSmoosh
@@ -3979,7 +3838,7 @@ NamedScript void InitMapPacks()
             {
                 LevelInfo *NewMap = &((LevelInfo *)KnownLevels->Data)[KnownLevels->Position++];
                 NewMap->LumpName = LumpNames[i];
-                NewMap->NiceName = WadNames[i];
+                NewMap->NiceName = "Unknown Area";
                 NewMap->LevelNum = 0;
                 NewMap->SecretMap = 0;
                 NewMap->UACBase = false;
@@ -4052,7 +3911,7 @@ NamedScript void InitMapPacks()
             //we add our maps manually because AddUnknownMap is expected to run on outpost load
             LevelInfo *NewMap = &((LevelInfo *)KnownLevels->Data)[KnownLevels->Position++];
             NewMap->LumpName = LumpNames[j];
-            NewMap->NiceName = WadNames[j];
+            NewMap->NiceName = "Unknown Area";
             NewMap->LevelNum = 0;
             NewMap->SecretMap = 0;
             NewMap->UACBase = false;
