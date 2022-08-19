@@ -2309,6 +2309,7 @@ void RemoveDRLAArmorToken(str ArmorType)
 
 void CheckDRLASetWeapons()
 {
+    bool hasNuclearWeapon = false;
     str const NuclearWeapons[15] =
     {
         // Nuclear Plasma Pistol
@@ -2343,17 +2344,24 @@ void CheckDRLASetWeapons()
         "RLNuclearOnslaught"
     };
 
-    // Weapon portion of Nuclear Set Bonus Checking
-    for (int i = 0; i < 15; i++)
-        if (!CheckInventory(NuclearWeapons[i]))
+    if (CheckInventory("RLNuclearWeaponSetBonusWeapon"))
+    {
+        // Weapon portion of Nuclear Set Bonus Checking
+        for (int i = 0; i < 15; i++)
+            if (CheckInventory(NuclearWeapons[i]))
+            {
+                hasNuclearWeapon = true;
+                break;
+            }
+        if (!hasNuclearWeapon)
         {
             TakeInventory("RLNuclearWeaponSetBonusWeapon", 1);
             TakeInventory("RLNuclearWeaponSetBonusActive", 1);
-            break;
         }
+    }
 
     // Tristar blaster Set Bonus Checking
-    if (!CheckInventory("RLTristarBlaster") || !CheckInventory("RLHighPowerTristarBlaster") || !CheckInventory("RLNanomanufactureAmmoTristarBlaster"))
+    if (!CheckInventory("RLTristarBlaster") && !CheckInventory("RLHighPowerTristarBlaster") && !CheckInventory("RLNanomanufactureAmmoTristarBlaster"))
     {
         TakeInventory("RLCerberusSetBonusTristarBlaster", 1);
         TakeInventory("RLCerberusSetBonusActive", 1);
