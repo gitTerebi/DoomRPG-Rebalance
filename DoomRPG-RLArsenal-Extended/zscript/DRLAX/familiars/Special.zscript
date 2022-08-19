@@ -98,9 +98,9 @@ class DRLAX_DarkMartyFamiliar : DRLAX_FamiliarBase
         Missile:
         XMRT E 4 A_FaceTracer(0, 0);
         XMRT F 0 A_StartSound(attacksound);
-		XMRT F 6 FamiliarLineAttack(angle, pitch, random(4,8) + extradamage, "Bullet", "RLBulletPuff", 0);//A_CustomBulletAttack(22.5, 0, 1, random(1,5)*3, "RLBulletPuff", 0, CBAF_NORANDOM);
+        XMRT F 6 FamiliarLineAttack(angle, pitch, random(4,8) + extradamage, "Bullet", "RLBulletPuff", 0);//A_CustomBulletAttack(22.5, 0, 1, random(1,5)*3, "RLBulletPuff", 0, CBAF_NORANDOM);
         XMRT E 8 A_FaceTracer;
-		Goto Spawn;
+        Goto Spawn;
     }
 
     override void FamiliarAction()
@@ -127,28 +127,38 @@ class DRLAX_DarkMartyFamiliar : DRLAX_FamiliarBase
             return;
         }
 
-        if(Level.Time < 10 && Level.MapName != "OUTPOST")
+        //This should run when the familiar is initially summoned, so that map completion can be recorded
+        if(Level.MapName == "OUTPOST")
         {
-            f.dmg += 5;
-
+            //If we're entering the outpost, then the previous level wasn't completed
+            f.validMap = false;
+            f.treeCount = 0;
+        }
+        else
+        {
+            if(f.validMap)
+            {
+                //The last map was completed successfully
+                f.dmg += 5 + (10 * f.treeCount);
+            }
+            f.validMap = true;
+            f.treeCount = 0;
+            
             ThinkerIterator ti = ThinkerIterator.Create("Actor");
             Actor a;
-            uint count;
             while(a = Actor(ti.Next()))
             {
-                if(count == 12)
+                if(f.treeCount == 12)
                 {
                     break;
                 }
 
-                if(a is "BigTree" || a is "TorchTree" || a is "Stalagtite")
+                if(a is "BigTree" || a is "MetaBigTree" || a is "TorchTree" || a is "MetaTorchTree" || a is "Stalagtite")
                 {
-                    count++;
-                    f.dmg += 10;
+                    f.treeCount++;
                 }
             }
         }
-
         extradamage = f.dmg;
     }
 }
@@ -156,6 +166,8 @@ class DRLAX_DarkMartyFamiliar : DRLAX_FamiliarBase
 class DRLAX_DarkMartyFamiliarPassive : Inventory
 {
     uint dmg;
+    uint treeCount;
+    bool validMap;
 }
 
 
