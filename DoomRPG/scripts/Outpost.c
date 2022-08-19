@@ -1538,7 +1538,9 @@ NamedScript MapSpecial void ShopSpecial()
 NamedScript MapSpecial void MissionBBS()
 {
     int Index;
-    int Difficulty;
+    int Difficulty = (Player.RankLevel - 1) / 2.0;
+    if (Difficulty >= MAX_DIFFICULTIES - 1)
+        Difficulty = MAX_DIFFICULTIES - 1;
 
     // If Marines are hostile, terminate
     if (MarinesHostile) return;
