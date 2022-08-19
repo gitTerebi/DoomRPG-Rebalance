@@ -1,0 +1,713 @@
+class DRLAX_SpiderbotFamiliar : DRLAX_FamiliarBase
+{
+    Default
+    {
+        attacksound "weapons/widowmakerspidernom";
+        damagetype "Melee";
+        species "Player";
+    }
+
+    bool diving;
+
+    states
+    {
+        Spawn:
+        WSPI ABCB 4 FamiliarIdle();
+        loop;
+        Missile:
+        WSPI E 0 
+        {
+            diving = true;
+            A_FaceTracer(0, 0);
+            A_StartSound(attacksound);
+            Vel3DFromAngle(30, angle, pitch);
+        }
+		WSPI E 10; //A_SpawnProjectile("DRLAX_ImpFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
+        WSPI E 8 A_Explode(BiteDamage(), 64, 0, 0, BiteDamage());
+        WSPI A 3 
+        {
+            A_FaceTracer(0, 0);
+            A_StartSound(attacksound);
+            Vel3DFromAngle(30, angle, pitch);
+        }
+		WSPI E 10; //A_SpawnProjectile("DRLAX_ImpFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
+        WSPI E 8 A_Explode(BiteDamage(), 64, 0, 0, BiteDamage());
+        WSPI C 3
+        {
+            diving = false;
+        }
+		Goto Spawn;
+    }
+
+    virtual uint BiteDamage()
+    {
+        return random(32, 48);
+    }
+
+    override void FamiliarAction()
+    {
+        if(attackcooldown == 0 && random(0, 3) == 0 && Distance2D(tracer) < 200)
+        {
+            SetStateLabel("Missile");
+            attackcooldown = random(1, 5);
+        }
+    }
+
+    override void FamiliarTick()
+    {
+        if(!diving)
+        {
+            MoveToPlatform();
+        }
+        else
+        {
+            A_ScaleVelocity(0.70);
+        }
+    }
+
+    override void FamiliarStart()
+    {
+        GiveStackingPassive("DRLAX_SpiderbotFamiliarPassive", true);
+    }
+
+    override void FamiliarEnd()
+    {
+        GiveStackingPassive("DRLAX_SpiderbotFamiliarPassive", false);
+    }
+
+}
+
+class DRLAX_SpiderbotFamiliarPassive : DRLAX_FamiliarPassive
+{
+}
+
+class DRLAX_DarkMartyFamiliar : DRLAX_FamiliarBase
+{
+    Default
+    {
+        seesound "darkmarty/sight";
+        attacksound "weapons/handcannon";
+        +BRIGHT;
+    }
+    int extradamage;
+    states
+    {
+        Spawn:
+        XMRT ABCD 6 FamiliarIdle();
+        loop;
+        Missile:
+        XMRT E 4 A_FaceTracer(0, 0);
+        XMRT F 0 A_StartSound(attacksound);
+		XMRT F 6 FamiliarLineAttack(angle, pitch, random(4,8) + extradamage, "Bullet", "RLBulletPuff", 0);//A_CustomBulletAttack(22.5, 0, 1, random(1,5)*3, "RLBulletPuff", 0, CBAF_NORANDOM);
+        XMRT E 8 A_FaceTracer;
+		Goto Spawn;
+    }
+
+    override void FamiliarAction()
+    {
+        if(attackcooldown == 0 && random(0, 2) == 0)
+        {
+            SetStateLabel("Missile");
+            attackcooldown = random(10, 100);
+        }
+    }
+
+    override void FamiliarTick()
+    {
+        MoveToPlatform();
+    }
+
+    override void FamiliarStart()
+    {
+        DRLAX_DarkMartyFamiliarPassive f = DRLAX_DarkMartyFamiliarPassive(playeractor.FindInventory("DRLAX_DarkMartyFamiliarPassive"));
+        if(!f)
+        {
+            playeractor.GiveInventory("DRLAX_DarkMartyFamiliarPassive", 1);
+            FamiliarStart();
+            return;
+        }
+
+        if(Level.Time < 10)
+        {
+            f.dmg += 5;
+
+            ThinkerIterator ti = ThinkerIterator.Create("Actor");
+            Actor a;
+            uint count;
+            while(a = Actor(ti.Next()))
+            {
+                if(count == 12)
+                {
+                    break;
+                }
+
+                if(a is "BigTree" || a is "TorchTree" || a is "Stalagtite")
+                {
+                    count++;
+                    f.dmg += 10;
+                }
+            }
+        }
+
+        extradamage = f.dmg;
+    }
+}
+
+class DRLAX_DarkMartyFamiliarPassive : Inventory
+{
+    uint dmg;
+}
+
+
+class DRLAX_CommanderKeenFamiliar : DRLAX_FamiliarBase
+{
+    Default
+    {
+        seesound "weapons/neuralstunnerpickup";
+        +BRIGHT;
+        radius 1;
+    }
+
+    states
+    {
+        Spawn:
+        KEE0 ABCD 6 FamiliarIdle();
+        loop;
+        Missile:
+        KEE0 E 1 A_FaceTracer;
+		KEE0 E 6 A_SpawnProjectile("DRLAX_CommanderKeenFamiliarStun", 2, ptr:AAPTR_TRACER);
+        KEE0 E 8 A_FaceTracer; //A_TroopAttack;
+		Goto Spawn;
+    }
+
+    override void FamiliarAction()
+    {
+        if(attackcooldown == 0 && random(0, 1) == 0 && tracer.CountInv("DRLAX_CommanderKeenFamiliarStunned") == 0)
+        {
+            SetStateLabel("Missile");
+            attackcooldown = 400;
+        }
+    }
+
+    override void FamiliarStart()
+    {
+        GiveStackingPassive("DRLAX_CommanderKeenFamiliarPassive", true);
+    }
+
+    override void FamiliarEnd()
+    {
+        GiveStackingPassive("DRLAX_CommanderKeenFamiliarPassive", false);
+    }
+
+    override void FamiliarTick()
+    {
+        MoveToPlatform();
+    }
+}
+
+class DRLAX_CommanderKeenFamiliarStunned : Powerup
+{
+    Default
+    {
+        powerup.duration 210;
+    }
+}
+
+class DRLAX_CommanderKeenFamiliarStun : DRLAX_FamiliarProjectile
+{
+    Default
+    {
+        SeeSound "weapons/neuralstunner";
+        DeathSound "weapons/neuralstunnerhit";
+        scale 0.5;
+        speed 25;
+        damage (10);
+    }
+
+    Actor hitactor;
+
+    States
+    {
+        Spawn:
+        STNB ABCD 2 Bright;
+        Loop;
+        Death:
+        STNB DE 6 Bright;
+        TNT1 A 210;
+        stop;
+    }
+
+    override int SpecialMissileHit(Actor victim)
+    {
+        if(victim && victim.health > 0 && victim.bISMONSTER)
+        {
+            hitactor = victim;
+            hitactor.GiveInventory("DRLAX_CommanderKeenFamiliarStunned", 1);
+        }
+
+        return Super.SpecialMissileHit(victim);
+    }
+
+    override void Tick()
+    {
+        if(hitactor && GetAge() % 3 == 0)
+        {
+            if(hitactor.bBOSS && random(0, 5) != 0)
+            {
+                Super.Tick();
+                return;
+            }
+
+            hitactor.TriggerPainChance ("Normal", true); 
+        }
+        Super.Tick();
+    }
+}
+
+class DRLAX_CommanderKeenFamiliarPassive : DRLAX_FamiliarPassive
+{
+    override void Tick()
+    {
+        if(owner.vel.z < 0)
+        {
+            for(int i; i<8; i++)
+            {
+                if(JumpAttack(45 * i))
+                {
+                    break;
+                }
+            }
+        }
+        Super.Tick();
+    }
+
+    bool JumpAttack(int ang)
+    {
+        FLineTraceData RemoteRay;
+            bool hit = owner.LineTrace(
+            ang,
+            21,
+            0,
+            offsetz: -8,
+            data: RemoteRay
+            );
+
+            if (hit && RemoteRay.HitType == TRACE_HitActor)
+            {
+                Actor a = RemoteRay.HitActor;
+                if(a.bSHOOTABLE)
+                {
+                    int dmg = (random(4, 6) * 8) * (power + 1);
+
+                    if(owner.CountInv("PowerStrength") > 0)
+                    {
+                        dmg = dmg * 10;
+                    }
+                    a.DamageMobj(owner, owner, dmg, "Melee", DMG_PLAYERATTACK|DMG_THRUSTLESS);
+                    a.A_ChangeVelocity(0, 0, -8, CVF_RELATIVE);
+                    owner.A_ChangeVelocity(owner.vel.x, owner.vel.y, 10, CVF_REPLACE);
+                    owner.TakeInventory("RLStamina", 5);
+                    owner.A_StartSound("weapons/kickhit");
+                }
+
+                return true;
+            }
+
+        return false;
+    }
+}
+
+class DRLAX_RomeroFamiliar : DRLAX_FamiliarBase
+{
+    Default
+    {
+        seesound "brain/sight";
+        scale 0.15;
+    }
+
+    states
+    {
+        Spawn:
+        BBRN A 15 FamiliarIdle();
+        loop;
+        Missile:
+        BBRN B 50 A_Quake(5, 50, 0, 100, "");
+        BBRN A -1;
+		Goto Spawn;
+    }
+
+    override void FamiliarAction()
+    {
+    }
+
+    uint seed;
+
+    override void FamiliarTick()
+    {
+        if(seed == 0)
+        {
+            seed = random(0, 4);
+        }
+
+        if(Level.Time == 35*2)
+        {
+            if(playeractor && playeractor.health > 0)
+            {
+                if(playeractor.health > 200)
+                {
+                    String item;
+                    switch(seed)
+                    {
+                        Case 0: item = "RLNanoModItem"; break;
+                        Case 1: item = "RLFirestormModItem"; break;
+                        Case 2: item = "RLSniperModItem"; break;
+                        Case 3: item = "RLOnyxModItem"; break;
+                        Case 4: item = "RLUniqueItemSpawner"; break;                        
+                    }
+                    A_SpawnItemEx(item, 0, 0, 0, 0, 0, 3);
+                }
+                SetStateLabel("Missile");
+                A_StartSound("brain/spit", CHAN_VOICE);
+                playeractor.health = 666;
+                playeractor.player.health = 666;
+            }
+        }
+        MoveToPlatform();
+    }
+}
+
+class DRLAX_TyphonFamiliar : DRLAX_FamiliarBase
+{
+    Default
+    {
+        damagetype "Melee";
+        species "Player";
+    }
+
+    bool diving;
+    uint throwtics;
+    Actor pickedactor;
+
+    states
+    {
+        Spawn:
+        TYPH ABCD 8 FamiliarIdle();
+        loop;
+        Missile: 
+        TYPH D 0 
+        {
+            if(tracer)
+            {
+                pickedactor = tracer;
+            }
+
+            if(playeractor && plat)
+            {
+                plat.Warp(playeractor, -8, 0, 32, flags:WARPF_NOCHECKPOSITION);
+                SetOrigin(plat.pos, false);
+            }
+            diving = true;
+            A_FaceTracer(0, 0);
+            Vel3DFromAngle(20, angle, pitch);
+            throwtics = 0;
+            pickedactor.TriggerPainChance ("Normal", true); 
+        }
+        TYPH DDDDDDDDDDDDDDDDDDDDDDD 1
+        {
+            throwtics++;
+            if(pickedactor)
+            {
+                pickedactor.SetOrigin(Vec3Lerp(pickedactor.pos, pos + (0, 0, 30), throwtics * 0.03), true);
+            }
+            A_Face(playeractor);
+            angle += 180;
+        }
+        TYPH D 35
+        {
+            A_StartSound("familiars/typhonthrow");
+            bool spawned;
+            Actor act;
+			[spawned, act] = A_SpawnItemEx("DRLAX_TyphonFamiliarThrow", 0, 0, 0, 50, 0, 0, flags:SXF_NOCHECKPOSITION);
+            if(spawned && act)
+            {
+                act.target = playeractor;
+                act.tracer = pickedactor;
+            }
+
+        }
+        TYPH D 1
+        {
+            diving = false;
+        }
+		Goto Spawn;
+    }
+
+    vector3 Vec3Lerp(vector3 a, vector3 b, double t)
+    {	
+		if(t < 0){t = 0;}
+		else if (t > 1.0)
+		{
+			t = 1.0;
+		}
+
+        return (a.x + (b.x - a.x) * t,
+                a.y + (b.y - a.y) * t,
+                a.z + (b.z - a.z) * t);
+    }
+
+    virtual uint BiteDamage()
+    {
+        return random(64, 128);
+    }
+
+    override void FamiliarAction()
+    {
+        if(attackcooldown == 0 && random(0, 3) == 0 && playeractor.Distance2D(tracer) < 200)
+        {
+            if(A_SetSize(tracer.radius, tracer.height, true))
+            {
+                SetStateLabel("Missile");
+
+                attackcooldown = random(50, 100);
+            }
+            A_SetSize(default.radius, default.height, false);
+        }
+    }
+
+    override void FamiliarTick()
+    {
+        if(GetAge() == 5)
+        {
+            A_StartSound("familiars/typhonstart");
+        }
+
+        if(!diving)
+        {
+            MoveToPlatform();
+        }
+        else
+        {
+            A_ScaleVelocity(0.70);
+        }
+    }
+
+    override void FamiliarStart()
+    {
+
+    }
+
+    override void FamiliarEnd()
+    {
+        
+    }
+}
+
+
+class DRLAX_TyphonFamiliarThrow : Actor
+{
+    Default
+    {
+        Radius 8;
+        Height 8;
+        species "Player";
+        +THRUACTORS;
+        speed 20;
+        PROJECTILE;
+        -NOGRAVITY;
+        gravity 0.25;
+        +DONTBLAST;
+        +DONTREFLECT;
+        damagetype "Melee";
+        attacksound "weapons/uppercutswing";
+    }
+
+    States
+    {
+        Spawn:
+        TNT1 A 1
+        {
+            if(tracer)
+            {
+                if(!tracer.Warp(self, 0, 0, 0, 0, WARPF_COPYINTERPOLATION|WARPF_USECALLERANGLE|WARPF_COPYINTERPOLATION))
+                {
+                    SetStateLabel("Death");
+                }
+            }
+        }
+        loop;
+        Death:
+        TNT1 A 0
+        {
+            if(tracer && target)
+            {
+                tracer.DamageMobj(self, target, random(150, 200), "Melee", DMG_THRUSTLESS);
+                tracer.A_ChangeVelocity(random(-5, 5), random(-5, 5), random(3, 5), CVF_RELATIVE);
+                tracer.A_StartSound("familiars/typhonslam");
+            }
+            A_Explode(100, 128, 0);
+        }
+        stop;
+    }
+}
+
+class DRLAX_DogFamiliar : DRLAX_FamiliarBase
+{
+    Default
+    {
+        seesound "stegglesbig/bark";
+        attacksound "stegglesbig/attack";
+        damagetype "Melee";
+        species "Player";
+    }
+
+    bool diving;
+    uint barking;
+
+    states
+    {
+        Spawn:
+        NDOG ABCD 4 FamiliarIdle();
+        loop;
+        Missile:
+        NDOG I 0 
+        {
+            diving = true;
+            A_FaceTracer(0, 0);
+            A_StartSound(attacksound);
+            Vel3DFromAngle(30, angle, pitch);
+        }
+        NDOG I 4; //A_FaceTracer;
+		NDOG J 6 A_Explode(BiteDamage(), 64, 0, 0, BiteDamage()); //A_SpawnProjectile("DRLAX_ImpFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
+        NDOG KI 6;
+        NDOG D 0
+        {
+            diving = false;
+        }
+		Goto Spawn;
+        Bark:
+        NDOG K 0
+        {
+            barking = 35*3;
+            A_StartSound("stegglesbig/bark");
+        }
+        NDOG KJK 4;
+        NDOG K 0
+        {
+            barking = 35*3;
+            A_StartSound("stegglesbig/bark");
+        }
+        NDOG KJ 4;
+        NDOG K 10;
+        NDOG CD 4;
+        Goto Spawn;
+    }
+
+    virtual uint BiteDamage()
+    {
+        return random(64, 128);
+    }
+
+    override void FamiliarAction()
+    {
+        if(attackcooldown == 0 && random(0, 3) == 0 && Distance2D(tracer) < 200)
+        {
+            SetStateLabel("Missile");
+            attackcooldown = random(35, 35*3);
+            return;
+        }
+    }
+
+    bool CheckForSecrets()
+    {
+        for(int i; i<secrets.Size(); i++)
+        {
+            Vector2 spos = secrets[i].s.CenterSpot;
+
+            if(((pos.x, pos.y) - spos).Length() < 300 && secrets[i].s.IsSecret())
+            {
+                SetStateLabel("Bark");
+                Vector2 diff = level.Vec2Diff(pos.xy, (spos.x, spos.y));
+                angle = atan2(diff.y, diff.x);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    override void FamiliarStart()
+    {
+        GetSectors();
+    }
+
+    Array<DRLAX_Point> secrets;
+
+    void GetSectors()
+    {
+        for(int i; i<level.sectors.Size(); i++)
+        {
+            if(level.sectors[i].IsSecret())
+            {
+                DRLAX_Point p = new ("DRLAX_Point");
+                p.s = level.sectors[i];
+                secrets.Push(p);
+            }
+        }
+    }
+
+    void CheckForMonsters()
+    {
+        BlockThingsIterator bti = BlockThingsIterator.Create(self, 300);
+
+        while(bti.Next())
+        {
+            if(bti.thing && 
+            bti.thing.health > 0 && 
+            bti.thing.bISMONSTER && 
+            !bti.thing.bFRIENDLY && 
+            !bti.thing.target && 
+            !bti.thing.lastheard &&
+            Distance3D(bti.thing) < 300)
+            {
+                barking = random(35, 35*4);
+                A_StartSound("stegglesbig/special");
+                A_Face(bti.thing);
+                return;
+            }
+        }
+    }
+
+    override void FamiliarTick()
+    {
+        if(barking > 0)
+        {
+            barking--;
+        }
+        else
+        {
+            if(attackcooldown == 0 && (GetAge() % 35*3) == 0)
+            {
+                if(!CheckForSecrets())
+                {
+                    CheckForMonsters();
+                }
+                
+            }
+        }
+
+        if(!diving)
+        {
+            MoveToPlatform();
+            
+        }
+        else
+        {
+            A_ScaleVelocity(0.70);
+        }
+    }
+}
+
+class DRLAX_Point
+{
+    Sector s;
+}
