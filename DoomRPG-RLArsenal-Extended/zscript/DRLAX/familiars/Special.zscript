@@ -127,7 +127,7 @@ class DRLAX_DarkMartyFamiliar : DRLAX_FamiliarBase
             return;
         }
 
-        if(Level.Time < 10)
+        if(Level.Time < 10 && Level.MapName != "OUTPOST")
         {
             f.dmg += 5;
 
