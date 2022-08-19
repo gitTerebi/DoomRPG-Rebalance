@@ -1665,6 +1665,7 @@ NamedScript MapSpecial void MissionBBS()
             ActivatorSound("mission/get", 127);
             Mission->Active = true;
             Player.Mission = *Mission;
+            Player.Mission.Current = 0;
             CreateMissionAt(Difficulty, Index);
         };
 
