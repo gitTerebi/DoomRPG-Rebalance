@@ -538,9 +538,9 @@ void GetTargetMonster(MissionInfo *Mission)
         BaseAmount = (30 + (320 * Mission->Difficulty)) / EffectiveDifficulty;
     }
 
-    Amount = RandomFixed((fixed)BaseAmount * 0.8, (fixed)BaseAmount * 1.2);
+    Amount = RoundInt(RandomFixed((fixed)BaseAmount * 0.8, (fixed)BaseAmount * 1.2));
 
-    if (Amount <= 1) Amount = 1;
+    if (Amount < 1) Amount = 1;
 
     // Insert info into the passed struct
     Mission->Monster = MonsterPtr;
