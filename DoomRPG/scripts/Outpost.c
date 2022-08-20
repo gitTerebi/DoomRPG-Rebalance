@@ -86,11 +86,14 @@ NamedScript MapSpecial void EnterOutpost()
 
         // Make the Marines fight enemies in title map only if Toaster Mod is off
         if (!GetCVar("drpg_toaster"))
+        {
             PissOffMarines(false);
 
+            if (CompatMonMode == COMPAT_DRLA)
+                AmbientSound("nightmarecyberdemon/sight", 127);
+        }
+
         ActivatorSound("misc/skillchange", 127);
-        if (CompatMonMode == COMPAT_DRLA)
-            AmbientSound("nightmarecyberdemon/sight", 127);
 
         while (InTitle)
         {
@@ -423,7 +426,7 @@ NamedScript MapSpecial void LevelTransport()
         "Whispers Of Satan",
         "Zone 300",
         "Zones Of Fear",
-        "Compemdium's Hub",    // Compemdium
+        "Compendium's Hub",    // Compendium
         "Memento Mori",
         "Memento Mori II",
         "Requiem",

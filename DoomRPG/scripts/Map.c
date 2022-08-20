@@ -3751,7 +3751,7 @@ NamedScript void InitMapPacks()
         "WOS01",
         "ZTH01",
         "ZOF01",
-        "HUBMAP",    // Compemdium
+        "HUBMAP",    // Compendium
         "MM101",
         "MM201",
         "REQ01",
