@@ -1,3 +1,1 @@
 excludemap OUTPOST
-excludemap HUBMAP
-excludemap VR
