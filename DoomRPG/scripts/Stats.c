@@ -788,7 +788,7 @@ void DoRegen()
         HealThing(Player.HPAmount);
 
     // EP Regen
-    if (Player.EPRate >= Player.EPTime && Player.EP < Player.EPMax)
+    if (Player.EPRate >= Player.EPTime)
     {
         Player.EP += Player.EPAmount;
         Overflow = 0;
@@ -842,7 +842,7 @@ void DoRegen()
         HPAmount += Multiplier * Multiplier;
 
         // EP
-        fixed EP = Abs(Player.EP);
+        fixed EP = Max(Player.EP, 0);
         fixed MaxEP = Player.EPMax;
 
         Multiplier = (1.0 - ((fixed)EP / (fixed)MaxEP)) * 1.77;
