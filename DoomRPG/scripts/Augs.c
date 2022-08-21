@@ -439,11 +439,11 @@ void CheckAugs()
     {
         if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 1)
         {
-            Player.HPTime *= 0.75;
+            Player.HPTime /= 1.25;
         }
         if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 2)
         {
-            Player.EPTime *= 0.75;
+            Player.EPTime /= 1.25;
         }
         if (Player.Augs.CurrentLevel[AUG_REGENERATION] >= 3)
         {

@@ -659,64 +659,71 @@ NamedScript DECORATE int AddHealth(int HealthPercent, int MaxPercent)
     int RealMax = Player.HealthMax * MaxPercent / 100;
     int HealthAmount = Player.HealthMax * HealthPercent / 100;
 
-    if (Player.OverHeal)
-        if (MaxPercent >= 200 && Player.ActualHealth + HealthAmount >= RealMax)
-            Player.OverHeal = false;
-
-    if (HealthAmount > 0 && Player.ActualHealth >= RealMax)
-        return 0;
-
-    if (Player.ActualHealth + HealthAmount > RealMax)
-        HealthAmount = RealMax - Player.ActualHealth;
-
-    // Add Vitality XP for using healing items
-    if (GetCVar("drpg_levelup_natural"))
+    if (HealthPercent > 0) //to make this consistent with how AddHealthDirect handles non-positive values
     {
-        fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
-        if (GetCVar("drpg_allow_spec"))
-        {
-            if (GetActivatorCVar("drpg_character_spec") == 3)
-                Scale *= 2;
-        }
+        if (Player.OverHeal)
+            if (MaxPercent >= 200 && Player.ActualHealth + HealthAmount >= RealMax)
+                Player.OverHeal = false;
 
-        int Factor = CalcPercent(HealthAmount, Player.HealthMax);
-        Player.VitalityXP += (int)(Factor * Scale * 10);
+        if (HealthAmount > 0 && Player.ActualHealth >= RealMax)
+            return 0;
+
+        if (Player.ActualHealth + HealthAmount > RealMax)
+            HealthAmount = RealMax - Player.ActualHealth;
+
+        // Add Vitality XP for using healing items
+        if (GetCVar("drpg_levelup_natural"))
+        {
+            fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
+            if (GetCVar("drpg_allow_spec"))
+            {
+                if (GetActivatorCVar("drpg_character_spec") == 3)
+                    Scale *= 2;
+            }
+
+            int Factor = CalcPercent(HealthAmount, Player.HealthMax);
+            Player.VitalityXP += (int)(Factor * Scale * 10);
+        }
     }
 
     Player.ActualHealth += HealthAmount;
-    return 1;
+    HealthPercent = HealthAmount * 100 / Player.HealthMax;
+    return HealthPercent;
 }
 
 NamedScript DECORATE int AddHealthDirect(int HealthAmount, int MaxPercent)
 {
     int RealMax = Player.HealthMax * MaxPercent / 100;
 
-    if (Player.OverHeal)
-        if (MaxPercent >= 200 && Player.ActualHealth + HealthAmount >= RealMax)
-            Player.OverHeal = false;
-
-    if (HealthAmount > 0 && Player.ActualHealth >= RealMax)
-        return 0;
-
-    if (Player.ActualHealth + HealthAmount > RealMax)
-        HealthAmount = RealMax - Player.ActualHealth;
-
-    // Add Vitality XP for using healing items
-    if (GetCVar("drpg_levelup_natural"))
+    if (HealthAmount > 0) //basically none of this applies if you're being directly hurt, or if HealthAmount is zero somehow
     {
-        fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
-        if (GetCVar("drpg_allow_spec"))
-        {
-            if (GetActivatorCVar("drpg_character_spec") == 3)
-                Scale *= 2;
-        }
+        if (Player.OverHeal)
+            if (MaxPercent >= 200 && Player.ActualHealth + HealthAmount >= RealMax)
+                Player.OverHeal = false;
 
-        int Factor = CalcPercent(HealthAmount, Player.HealthMax);
-        Player.VitalityXP += (int)(Factor * Scale * 10);
+        if (Player.ActualHealth >= RealMax)
+            return 0;
+
+        if (Player.ActualHealth + HealthAmount > RealMax)
+            HealthAmount = RealMax - Player.ActualHealth;
+
+        // Add Vitality XP for using healing items
+        if (GetCVar("drpg_levelup_natural"))
+        {
+            fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
+            if (GetCVar("drpg_allow_spec"))
+            {
+                if (GetActivatorCVar("drpg_character_spec") == 3)
+                    Scale *= 2;
+            }
+
+            int Factor = CalcPercent(HealthAmount, Player.HealthMax);
+            Player.VitalityXP += (int)(Factor * Scale * 10);
+        }
     }
 
     Player.ActualHealth += HealthAmount;
-    return 1;
+    return HealthAmount;
 }
 
 typedef struct
