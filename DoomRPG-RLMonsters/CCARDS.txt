@@ -1,6 +1,5 @@
 //Zombie DRLA monsters groups
-monstergroup "Former Human [Pistol/Uzi] and its species", RLFormerHumanPistolRPG, RLEliteHumanCombatPistolRPG, RLEliteHumanHandcannonRPG, RLEliteHumanUziRPG
-monstergroup "Former Human [Battle Rifle] and its species", RLFormerHumanBattleRifleRPG, RLFormerHumanBattleRifle2RPG, RLFormerHumanBattleRifle3RPG, RLEliteHumanBattleRifleRPG, RLEliteHumanBattleRifle2RPG, RLFormerCyborgBattleRifleRPG, RLFormerAssaultTrooperRPG
+monstergroup "Former Human and its species", RLFormerHumanPistolRPG, RLEliteHumanCombatPistolRPG, RLEliteHumanHandcannonRPG, RLEliteHumanUziRPG, RLFormerHumanBattleRifleRPG, RLFormerHumanBattleRifle2RPG, RLFormerHumanBattleRifle3RPG, RLEliteHumanBattleRifleRPG, RLEliteHumanBattleRifle2RPG, RLFormerCyborgBattleRifleRPG, RLFormerAssaultTrooperRPG
 monstergroup "Former Sergeant and its species", RLFormerSergeantShotgunRPG, RLFormerSergeantCombatShotgunRPG, RLEliteSergeantDoubleShotgunRPG, RLEliteSergeantAssaultShotgunRPG, RLEliteSergeantPlasmaShotgunRPG, RLFormerOverwatchRPG
 monstergroup "Former Commando and its species", RLFormerCommandoChaingunRPG, RLFormerCommandoBattleRifleRPG, RLEliteCommandoMinigunRPG, RLFormerShocktrooperRPG
 monstergroup "Former Captain and its species", RLFormerCaptainPlasmaRifleRPG, RLEliteCaptainTristarBlasterRPG
