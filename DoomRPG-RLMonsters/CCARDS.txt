@@ -1,0 +1,29 @@
+//Zombie DRLA monsters groups
+monstergroup "Former Humans", RLFormerHumanPistolRPG, RLFormerHumanBattleRifleRPG, RLFormerHumanBattleRifle2RPG, RLFormerHumanBattleRifle3RPG, RLEliteHumanCombatPistolRPG, RLEliteHumanHandcannonRPG, RLEliteHumanBattleRifleRPG, RLEliteHumanBattleRifle2RPG, RLEliteHumanUziRPG, RLFormerCyborgBattleRifleRPG, RLFormerAssaultTrooperRPG
+monstergroup "Former Sergeants", RLFormerSergeantShotgunRPG, RLFormerSergeantCombatShotgunRPG, RLEliteSergeantDoubleShotgunRPG, RLEliteSergeantAssaultShotgunRPG, RLEliteSergeantPlasmaShotgunRPG, RLFormerOverwatchRPG
+monstergroup "Former Commandos", RLFormerCommandoChaingunRPG, RLFormerCommandoBattleRifleRPG, RLEliteCommandoMinigunRPG, RLFormerShocktrooperRPG
+monstergroup "Former Captains", RLFormerCaptainPlasmaRifleRPG, RLEliteCaptainTristarBlasterRPG
+
+//Wildcard DRLA monsters groups
+monstergroup "Wildcard Bosses", RLBruiserBrotherRPG, RLTerminatorRPG, RLAgonyElementalRPG, RLAbominantRPG
+
+//Dificulty DRLA monsters groups
+monstergroup "Ultra-Violence monsters", RLImpRPG, RLDemonRPG, RLSpectreRPG, RLLostSoulRPG, RLCacodemonRPG, RLHellKnightRPG, RLBaronOfHellRPG, RLArachnotronRPG, RLPainElementalRPG, RLRevenantRPG, RLMancubusRPG, RLArchvileRPG, RLCyberdemonRPG, RLSpiderMastermindRPG, RLSpiderMastermindBFGRPG, RLSpiderMastermindMortarRPG
+monstergroup "Nightmare monsters", RLNightmareImpRPG, RLNightmareDemonRPG, RLNightmareSpectreRPG, RLNightmareLostSoulRPG, RLNightmareCacodemonRPG, RLNightmareHellKnightRPG, RLNightmareBaronOfHellRPG, RLNightmareArachnotronRPG, RLNightmarePainElementalRPG, RLNightmareRevenantRPG, RLNightmareMancubusRPG, RLNightmareArchvileRPG, RLNightmareCyberdemonRPG, RLNightmareSpiderMastermindRPG
+monstergroup "Technophobia monsters", RLCyberneticImpRPG, RLCyberneticDemonRPG, RLCyberneticSpectreRPG, RLCyberneticLostSoulRPG, RLCyberneticHellKnightRPG, RLCyberneticBaronOfHellRPG, RLCyberneticArachnotronRPG, RLCyberneticPainElementalRPG, RLCyberneticRevenantRPG, RLCyberneticMancubusRPG, RLCyberneticArchvileRPG, RLCyberneticCyberdemonRPG
+monstergroup "Armageddon monsters", RLArmageddonImpRPG, RLArmageddonDemonRPG, RLArmageddonLostSoulRPG, RLArmageddonCacodemonRPG, RLArmageddonBaronOfHellRPG, RLArmageddonArachnotronRPG, RLArmageddonPainElementalRPG, RLArmageddonRevenantRPG, RLArmageddonMancubusRPG, RLArmageddonArchvileRPG
+
+//Zombie DRLA monsters groups sprites
+monstergroupsprite "Former Humans", RL_FORMH
+monstergroupsprite "Former Sergeants", RL_FORMS
+monstergroupsprite "Former Commandos", RL_FORMC
+monstergroupsprite "Former Captains", RL_FORMA
+
+//Wildcard DRLA monsters groups sprites
+monstergroupsprite "Wildcard Bosses", RL_WILDB
+
+//Dificulty DRLA monsters groups sprites
+monstergroupsprite "Ultra-Violence monsters", RL_ULTVI
+monstergroupsprite "Nightmare monsters", RL_NIGHT
+monstergroupsprite "Technophobia monsters", RL_TECHF
+monstergroupsprite "Armageddon monsters", RL_ARMAG
