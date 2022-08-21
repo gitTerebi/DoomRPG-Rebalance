@@ -1202,7 +1202,7 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_BONUS_RAINBOWS:
         return (GetCVar("drpg_mapevent_rainbows") &&
-                !Random(0, 15));
+                MapLevelModifier >= 0.40 && !Random(0, 15));
 
     case MAPEVENT_SKILL_TECHNOPHOBIA:
         return  (CompatMonMode == COMPAT_DRLA &&
