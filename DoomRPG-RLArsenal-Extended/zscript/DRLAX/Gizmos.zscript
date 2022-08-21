@@ -839,6 +839,7 @@ Class DRLAX_AppraiserObject : DRLAX_GizmoObject
         Array<String> fams;
 
         fams.Push("ShotgunGuy");
+        fams.Push("ChaingunGuy");
         fams.Push("Imp");
         fams.Push("Demon");
         fams.Push("Spectre");
@@ -847,6 +848,7 @@ Class DRLAX_AppraiserObject : DRLAX_GizmoObject
         fams.Push("HellKnight");
         fams.Push("BaronOfHell");
         fams.Push("Revenant");
+	fams.Push("PainElemental");
         fams.Push("Mancubus");
         fams.Push("Arachnotron");
         fams.Push("Archvile");
@@ -1020,7 +1022,7 @@ Class DRLAX_ModReviser : DRLAX_GizmoObject
             }
         }
 
-        for(int i; i<CanHack()+1; i++)
+        for(int q; q<CanHack()+1; q++)
         {
             A_SpawnItemEx(modpacks[i], 0, 0, 32, frandom(-5, 5), 0, 3, random(0, 360));
         }
