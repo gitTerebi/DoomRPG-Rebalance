@@ -58,7 +58,7 @@ NamedScript DECORATE void InitCrate()
 
     // Calculate Modifier
     if (GetCVar("drpg_loot_type") == 0)
-        Modifier = RoundInt(10.0 * MapLevelModifier + 10.0 * (fixed)AveragePlayerLuck() / 100.0);
+        Modifier = RoundInt(7.5 * MapLevelModifier + 7.5 * (fixed)AveragePlayerLuck() / 100.0);
     if (GetCVar("drpg_loot_type") == 1)
         Modifier = RoundInt(15.0 * MapLevelModifier);
     if (GetCVar("drpg_loot_type") == 2)
