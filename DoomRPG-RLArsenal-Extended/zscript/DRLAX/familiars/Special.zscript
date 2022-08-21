@@ -146,6 +146,9 @@ class DRLAX_DarkMartyFamiliar : DRLAX_FamiliarBase
             
             ThinkerIterator ti = ThinkerIterator.Create("Actor");
             Actor a;
+	    class<actor> BigTree = GetReplacement("BigTree");
+            class<actor> TorchTree = GetReplacement("TorchTree");
+            class<actor> Stalagtite = GetReplacement("Stalagtite");
             while(a = Actor(ti.Next()))
             {
                 if(f.treeCount == 12)
@@ -153,7 +156,7 @@ class DRLAX_DarkMartyFamiliar : DRLAX_FamiliarBase
                     break;
                 }
 
-                if(a is "BigTree" || a is "MetaBigTree" || a is "TorchTree" || a is "MetaTorchTree" || a is "Stalagtite")
+                if(a is BigTree || a is TorchTree || a is Stalagtite)
                 {
                     f.treeCount++;
                 }
