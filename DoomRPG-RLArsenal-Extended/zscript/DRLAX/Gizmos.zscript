@@ -240,8 +240,9 @@ Class DRLAX_GizmoHandler : Thinker
         }
 
 		ss.speed = 3;
+
+		return true;
 	}
-	return true;
 }
 
 Class DRLAX_GizmoObject : Actor
