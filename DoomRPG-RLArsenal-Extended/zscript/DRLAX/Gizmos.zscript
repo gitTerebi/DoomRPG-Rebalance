@@ -198,7 +198,12 @@ Class DRLAX_GizmoHandler : Thinker
                 }
 
                 int r = random(0, gizmos.Size() - 1);
-                SpawnGizmo(gizmos[r]);
+                if(!SpawnGizmo(gizmos[r])) {
+                    //If the gizmo failed to spawn, just push it to the next map	
+                    count = 1;
+		    levels++;
+		    return;
+		}
                 gizmos.Delete(r);
                 position++;
             }
@@ -208,13 +213,15 @@ Class DRLAX_GizmoHandler : Thinker
         }
     }
 
-    static void SpawnGizmo(String gizmo)
+    static bool SpawnGizmo(String gizmo) //please note that in vanilla DRLAX this is void
 	{
         //Console.Printf("spawned");
 		CMMSS_Actor_SafeSpawner ss = CMMSS_SafeSpawner.New(gizmo, 1, "", 48, 64, 0, CMMSS_SafeSpawner.SSFLAGS_NOMONSTERS);
-
+		if(ss == null) {
+			return false;
+		}
+		
 		Array<Actor> actorlist;
-
 		actorlist.Copy(ss.actorlist);
 		ss.actorlist.Clear();
 
@@ -234,7 +241,7 @@ Class DRLAX_GizmoHandler : Thinker
 
 		ss.speed = 3;
 	}
-
+	return true;
 }
 
 Class DRLAX_GizmoObject : Actor
