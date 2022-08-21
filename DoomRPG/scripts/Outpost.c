@@ -4863,6 +4863,8 @@ NamedScript MapSpecial void DemonAssemblingSanctuary()
                     TakeInventory(ItemData[7][CurrentTypeDetails2].Actor, CurrentAmountDetails2);
                     TakeInventory(ItemData[7][CurrentTypeDetails3].Actor, CurrentAmountDetails3);
                     TakeInventory(ItemData[8][CurrentTypeDetails4].Actor, CurrentAmountDetails4);
+                    for(int i = 0; i < CurrentAmountDetails4; i++)
+                        RemoveDRLAItem(8, CurrentTypeDetails4);
                     TakeInventory(ItemData[4][CurrentTypeDetails5].Actor, CurrentAmountDetails5);
                     TakeInventory(ItemData[6][CurrentTypeDetails6].Actor, CurrentAmountDetails6);
 
