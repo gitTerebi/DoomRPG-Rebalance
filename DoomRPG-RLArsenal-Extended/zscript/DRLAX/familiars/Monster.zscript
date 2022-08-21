@@ -666,7 +666,7 @@ class DRLAX_HellKnightFamiliar : DRLAX_FamiliarBase
     {
         MoveToPlatform();
 
-        if(true || level.Time % 10 == 0)
+        if(level.Time % 10 == 0)
         {
             ThinkerIterator ti = ThinkerIterator.Create("Powerup");
             Powerup p;
@@ -678,12 +678,15 @@ class DRLAX_HellKnightFamiliar : DRLAX_FamiliarBase
 
                     if(c.Left(7) == "PowerRL")
                     {
-                        p.effecttics-=5;
+		        if(c.Mid(c.Length()-8, 8) == "Cooldown")
+			{
+                            p.effecttics-=5;
 
-                        if(p.effecttics < 0)
-                        {
-                            p.Destroy();
-                            continue;
+                            if(p.effecttics < 0)
+                            {
+                                p.Destroy();
+                                continue;
+                            }
                         }
                     }
                 }
@@ -1200,7 +1203,7 @@ class DRLAX_ArachnotronFamiliar : DRLAX_FamiliarBase
 
             if(tracer && !tracer.player)
             {
-                SetStateLabel("ReMissile");
+                SetStateLabel("Missile");
                 return;
             }
         }
