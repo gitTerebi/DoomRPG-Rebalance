@@ -4866,6 +4866,10 @@ NamedScript MapSpecial void DemonAssemblingSanctuary()
                     TakeInventory(ItemData[4][CurrentTypeDetails5].Actor, CurrentAmountDetails5);
                     TakeInventory(ItemData[6][CurrentTypeDetails6].Actor, CurrentAmountDetails6);
 
+                    // Take Demon Artifacts Limit tokens from DoomRL Arsenal
+                    for(int i = 0; i < CurrentAmountDetails4; i++)
+                        RemoveDRLAItem(8, CurrentTypeDetails4);
+
                     // The effect of sleep immersion
                     FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
                     Delay(35 * 1);
