@@ -1080,22 +1080,23 @@ void CheckPerks()
 {
     // If you're dead, return
     if (GetActorProperty(Player.TID, APROP_Health) <= 0) return;
+    bool naturalStats = GetCVar("drpg_levelup_natural");
 
-    if (Player.StrengthTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75))     Player.Perks[STAT_STRENGTH] = true;
+    if (Player.StrengthTotal >= (naturalStats ? 150 : 75))     Player.Perks[STAT_STRENGTH] = true;
     else Player.Perks[STAT_STRENGTH] = false;
-    if (Player.DefenseTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75))      Player.Perks[STAT_DEFENSE] = true;
+    if (Player.DefenseTotal >= (naturalStats ? 150 : 75))      Player.Perks[STAT_DEFENSE] = true;
     else Player.Perks[STAT_DEFENSE] = false;
-    if (Player.VitalityTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75))     Player.Perks[STAT_VITALITY] = true;
+    if (Player.VitalityTotal >= (naturalStats ? 150 : 75))     Player.Perks[STAT_VITALITY] = true;
     else Player.Perks[STAT_VITALITY] = false;
-    if (Player.EnergyTotal >= (GetCVar("drpg_levelup_natural") ? 100 : 50))       Player.Perks[STAT_ENERGY] = true;
+    if (Player.EnergyTotal >= (naturalStats ? 100 : 50))       Player.Perks[STAT_ENERGY] = true;
     else Player.Perks[STAT_ENERGY] = false;
-    if (Player.RegenerationTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75)) Player.Perks[STAT_REGENERATION] = true;
+    if (Player.RegenerationTotal >= (naturalStats ? 150 : 75)) Player.Perks[STAT_REGENERATION] = true;
     else Player.Perks[STAT_REGENERATION] = false;
-    if (Player.AgilityTotal >= (GetCVar("drpg_levelup_natural") ? 150 : 75))      Player.Perks[STAT_AGILITY] = true;
+    if (Player.AgilityTotal >= (naturalStats ? 150 : 75))      Player.Perks[STAT_AGILITY] = true;
     else Player.Perks[STAT_AGILITY] = false;
-    if (Player.CapacityTotal >= (GetCVar("drpg_levelup_natural") ? 200 : 100))    Player.Perks[STAT_CAPACITY] = true;
+    if (Player.CapacityTotal >= (naturalStats ? 200 : 100))    Player.Perks[STAT_CAPACITY] = true;
     else Player.Perks[STAT_CAPACITY] = false;
-    if (Player.LuckTotal >= (GetCVar("drpg_levelup_natural") ? 200 : 100))        Player.Perks[STAT_LUCK] = true;
+    if (Player.LuckTotal >= (naturalStats ? 200 : 100))        Player.Perks[STAT_LUCK] = true;
     else Player.Perks[STAT_LUCK] = false;
 
     fixed StrengthPercent = ((fixed)Player.ActualHealth / (fixed)Player.HealthMax * 100);
