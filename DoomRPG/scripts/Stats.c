@@ -528,12 +528,12 @@ void CheckStats()
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
-    Player.JumpHeight = 8.0 + (2.0 * ((fixed)Player.Agility / 100));
+    Player.JumpHeight = 8.0;
     Player.WeaponSpeed = Player.AgilityTotal / 2;
     SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
     SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
-    SetAmmoCapacity("RocketAmmo", 20 + Player.CapacityTotal * 2);
-    SetAmmoCapacity("Cell", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
+    SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
+    SetAmmoCapacity("Cell", (75 + Player.CapacityTotal * 5) / 10 * 10);
     Player.Stim.VialMax = Player.CapacityTotal * 2.5;
     Player.SurvivalBonus = Player.AgilityTotal / 5;
     if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
