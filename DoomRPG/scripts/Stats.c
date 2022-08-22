@@ -528,12 +528,12 @@ void CheckStats()
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
-    Player.JumpHeight = 8.0;
+    Player.JumpHeight = 8.0 + (2.0 * ((fixed)Player.Agility / 100));
     Player.WeaponSpeed = Player.AgilityTotal / 2;
     SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
     SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
-    SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
-    SetAmmoCapacity("Cell", (75 + Player.CapacityTotal * 5) / 10 * 10);
+    SetAmmoCapacity("RocketAmmo", 20 + Player.CapacityTotal * 2);
+    SetAmmoCapacity("Cell", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
     Player.Stim.VialMax = Player.CapacityTotal * 2.5;
     Player.SurvivalBonus = Player.AgilityTotal / 5;
     if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
@@ -779,8 +779,8 @@ void CheckRegen()
 // Regeneration
 void DoRegen()
 {
-    int HPAmount = 1;
-    int EPAmount = 1;
+    int HPProgress = 1;
+    int EPProgress = 1;
     int Overflow = 0;
 
     // HP Regen
@@ -806,7 +806,12 @@ void DoRegen()
         }
     }
 
-    // Check and Reset timers
+    // Check and reduce timers
+    if (Player.HPRate >= Player.HPTime)
+        Player.HPRate -= Player.HPTime;
+    if (Player.EPRate >= Player.EPTime)
+        Player.EPRate -= Player.EPTime;
+    // Zero them out if they're filling completely in less than one tick (this is possible, but only with movement-based regen)
     if (Player.HPRate >= Player.HPTime)
         Player.HPRate = 0;
     if (Player.EPRate >= Player.EPTime)
@@ -839,14 +844,14 @@ void DoRegen()
         fixed MaxHealth = Player.HealthMax;
 
         fixed Multiplier = (1.0 - ((fixed)Health / (fixed)MaxHealth)) * 1.77;
-        HPAmount += Multiplier * Multiplier;
+        HPProgress += Multiplier * Multiplier;
 
         // EP
         fixed EP = Max(Player.EP, 0);
         fixed MaxEP = Player.EPMax;
 
         Multiplier = (1.0 - ((fixed)EP / (fixed)MaxEP)) * 1.77;
-        EPAmount += Multiplier * Multiplier;
+        EPProgress += Multiplier * Multiplier;
     }
 
     // Movement/Crouching/Idling mechanics
@@ -854,24 +859,37 @@ void DoRegen()
     {
         if (IsPlayerMoving()) // Movement - 50% Regen Rate
         {
-            Player.HPRate += HPAmount;
-            Player.EPRate += EPAmount;
+            Player.MovementRegenDelay = !Player.MovementRegenDelay;
+            if(Player.MovementRegenDelay)
+            {
+                Player.HPRate += HPProgress;
+                Player.EPRate += EPProgress;
+            }
         }
         else if (CheckInput(BT_CROUCH, KEY_HELD, true, PlayerNumber())) // Crouch - 150% Regen Rate
         {
-            Player.HPRate += HPAmount + 3;
-            Player.EPRate += EPAmount + 3;
+            Player.MovementRegenDelay = !Player.MovementRegenDelay;
+            if(Player.MovementRegenDelay)
+            {
+                Player.HPRate += HPProgress * 2;
+                Player.EPRate += EPProgress * 2;
+            }
+            else
+            {
+                Player.HPRate += HPProgress;
+                Player.EPRate += EPProgress;
+            }
         }
         else // Idle - 100% Regen Rate
         {
-            Player.HPRate += HPAmount + 2;
-            Player.EPRate += EPAmount + 2;
+            Player.HPRate += HPProgress;
+            Player.EPRate += EPProgress;
         }
     }
     else
     {
-        Player.HPRate += HPAmount;
-        Player.EPRate += EPAmount;
+        Player.HPRate += HPProgress;
+        Player.EPRate += EPProgress;
     }
 }
 
