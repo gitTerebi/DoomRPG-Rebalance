@@ -23,7 +23,10 @@ NamedScript void ItemRoulette(bool Rare)
     int Amount = 0;
     int Radius = 0;
     int Selection = 0;
+    int LastSelection = 0;
     int ChipIndex = 0;
+    int TickCooldown = 0;
+    int WaitCountdown = 24;
     fixed Speed = 0;
     fixed Offset = 0;
 
@@ -103,7 +106,6 @@ NamedScript void ItemRoulette(bool Rare)
         // Recalculate Speed and Total
         if (!Started)
         {
-            Speed = 12 - ChipSpeed;
             ChipTotal = 1 + ChipRarity + ChipSpeed + ChipAmount + ChipDuds;
         }
 
@@ -156,15 +158,36 @@ NamedScript void ItemRoulette(bool Rare)
             PrintSprite("ItemBoxH", 0, 320, 240 + Radius, 0.05);
 
         // Sound Loop
+        //maybe I should have used math to determine tick rate instead of looking at Selection
         if (Started)
-            PlaySound(0, "menu/click", CHAN_BODY, 0.8, true, ATTN_NORM);
+        {
+            //    PlaySound(0, "menu/click", CHAN_BODY, 0.8, true, ATTN_NORM);
+            if (TickCooldown-- <= 0 && LastSelection != Selection)
+            {
+                PlaySound(0, "menu/click", CHAN_BODY, 0.8, false, ATTN_NORM);
+                TickCooldown = 1;
+            }
+            LastSelection = Selection;
+        }
 
         // Input Handling
         if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()) && Spinning)
         {
             ActivatorSound("menu/move", 127);
             if (!Started)
+            {
                 Started = true;
+                Speed = 12 - ChipSpeed;
+                if(Player.LuckTotal < 100)
+                {
+                    Speed += RandomFixed(-0.5 + (0.004 * Player.LuckTotal), 0.5 - (0.004 * Player.LuckTotal));
+                }
+                else
+                {
+                    //This doesn't really add much variation, but it's there
+                    Speed += RandomFixed(-0.1, 0.1);
+                }
+            }
             else
                 Spinning = false;
         }
@@ -279,6 +302,8 @@ NamedScript void ItemRoulette(bool Rare)
         // Slowly decrease the spin when done
         if (!Spinning)
             Speed -= 0.05;
+        if (Speed <= 0)
+            Speed = 0;
 
         // Spin
         Offset += (Speed * 0.005);
@@ -286,40 +311,49 @@ NamedScript void ItemRoulette(bool Rare)
         // Finished
         if (!Spinning && Speed <= 0)
         {
-            // Draw Name
-            SetFont("BIGFONT");
-            HudMessage("%S", (WheelItems[Selection] == GetBlankItem() ? "\CaNothing" : WheelItems[Selection]->Name));
-            EndHudMessage(HUDMSG_FADEOUT, 0, (WheelItems[Selection] == GetBlankItem() ? "Red" : "Green"), 320, 240 + Radius + 32, 2.0, 1.0);
-
-            // Draw Box
-            PrintSpriteFade("ItemBoxR", 0, 320, 240 + Radius, 0.25, 0.75);
-
-            // Draw Icon
-            PrintSpriteFade(WheelItems[Selection]->Sprite.Name, 0, 320 + WheelItems[Selection]->Sprite.XOff, 240 + Radius + WheelItems[Selection]->Sprite.YOff, 2.0, 1.0);
-
-            // Give the item if it wasn't a blank
-            if (WheelItems[Selection] != GetBlankItem())
+            //0.25 = -0.25 + ((1.0 / Amount) * Selection) + Offset;
+            //desired Offset = 0.5 - ((1.0 / Amount) * Selection)
+            fixed delta = (0.5 - ((1.0 / Amount) * Selection)) - (Offset % 1);
+            if(delta < -0.5)
+                delta += 1;
+            Offset += delta / WaitCountdown;
+            if (--WaitCountdown <= 0)
             {
-                ActivatorSound("transfer/complete", 127);
+                // Draw Name
+                SetFont("BIGFONT");
+                HudMessage("%S", (WheelItems[Selection] == GetBlankItem() ? "\CaNothing" : WheelItems[Selection]->Name));
+                EndHudMessage(HUDMSG_FADEOUT, 0, (WheelItems[Selection] == GetBlankItem() ? "Red" : "Green"), 320, 240 + Radius + 32, 2.0, 1.0);
 
-                // Item
-                str ItemActor = WheelItems[Selection]->Actor;
+                // Draw Box
+                PrintSpriteFade("ItemBoxR", 0, 320, 240 + Radius, 0.25, 0.75);
 
-                // Spawn Item and try to pick it up
-                SpawnForced(ItemActor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-                SetActorVelocity(Player.TID, 0.01, 0.01, 0, true, false);
+                // Draw Icon
+                PrintSpriteFade(WheelItems[Selection]->Sprite.Name, 0, 320 + WheelItems[Selection]->Sprite.XOff, 240 + Radius + WheelItems[Selection]->Sprite.YOff, 2.0, 1.0);
+
+                // Give the item if it wasn't a blank
+                if (WheelItems[Selection] != GetBlankItem())
+                {
+                    ActivatorSound("transfer/complete", 127);
+
+                    // Item
+                    str ItemActor = WheelItems[Selection]->Actor;
+
+                    // Spawn Item and try to pick it up
+                    SpawnForced(ItemActor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+                    SetActorVelocity(Player.TID, 0.01, 0.01, 0, true, false);
+                }
+                else
+                    ActivatorSound("menu/error", 127);
+
+                // Take Chips
+                if (Rare)
+                    TakeInventory("DRPGChipPlatinum", ChipTotal);
+                else
+                    TakeInventory("DRPGChipGold", ChipTotal);
+
+                //StopSound(0, CHAN_BODY); // Stop the looping sound
+                Finished = true;
             }
-            else
-                ActivatorSound("menu/error", 127);
-
-            // Take Chips
-            if (Rare)
-                TakeInventory("DRPGChipPlatinum", ChipTotal);
-            else
-                TakeInventory("DRPGChipGold", ChipTotal);
-
-            StopSound(0, CHAN_BODY); // Stop the looping sound
-            Finished = true;
         }
 
         Delay(1);
