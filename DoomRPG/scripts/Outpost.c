@@ -2233,6 +2233,7 @@ NamedScript MapSpecial void DisassemblingDevice()
 
                 // Shield Parts Data
                 int ShieldData;
+                int ShieldIndexes[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
                 str ShieldActors[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
                 str ShieldNames[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
                 str ShieldIcons[MAX_BODIES + MAX_BATTERIES + MAX_CAPACITORS + MAX_ACCESSORIES];
@@ -2314,6 +2315,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             if (i == 2)
                             {
                                 ItemInfoPtr Item = &ItemData[CategoriesData[i]][j];
+                                ShieldIndexes[ShieldData] = j;
                                 ShieldActors[ShieldData] = Item->Actor;
                                 ShieldNames[ShieldData] = Item->Name;
                                 ShieldIcons[ShieldData] = Item->Sprite.Name;
@@ -2367,6 +2369,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                     if (CurrentCategory == 2 && ShieldData > 0)
                     {
                         CurrentData = ShieldData;
+                        CurrentIndex = ShieldIndexes[CurrentItem];
                         CurrentActor = ShieldActors[CurrentItem];
                         CurrentName = ShieldNames[CurrentItem];
                         CurrentIcon = ShieldIcons[CurrentItem];
@@ -2550,24 +2553,34 @@ NamedScript MapSpecial void DisassemblingDevice()
 
                     if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
                     {
+                        if(CheckInventory(CurrentActor) > 1)
+                        {
+                            ItemInfoPtr Item = &ItemData[CategoriesData[CurrentCategory]][CurrentIndex];
+                            int CurrentXOffset = Item->Sprite.XOff;
+                            int CurrentYOffset = Item->Sprite.YOff;
+                            SetFont("SMALLFONT");
+                            HudMessage("%d", CheckInventory(CurrentActor));
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 240.2 + CurrentXOffset, Y + 188.2, 0.05, 0.05);
+                        }
+
                         PrintSprite(CurrentIcon, 0, X + 240.0,  Y + 188.0, 0.05);
 
                         SetFont("BIGFONT");
                         HudMessage("Item: %S", CurrentName);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 32.0, Y + 230.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 32.0, Y + 230.0, 0.05, 0.05);
 
                         SetFont("SMALLFONT");
                         HudMessage("Extent of Extraction:");
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 280.0, Y + 272.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 280.0, Y + 272.0, 0.05, 0.05);
 
                         SetFont("BIGFONT");
                         HudMessage("%S", ExtentExtraction[CurrentExtraction]);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 5, "White", X + 304.0, Y + 304.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 304.0, Y + 304.0, 0.05, 0.05);
 
 
                         SetFont("SMALLFONT");
                         HudMessage("Possible Extraction:\n\nMaximum amount: \Cd%d pcs.\C-", MaxAmount);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 32.0, Y + 272.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 32.0, Y + 272.0, 0.05, 0.05);
 
                         // Possible Extraction
                         // For Details
@@ -2575,56 +2588,56 @@ NamedScript MapSpecial void DisassemblingDevice()
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CdDetails\C- rate: \Cf%.2k%%\C-", ChanceDetails);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 32.0, Y + 280.0 + 24.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + 280.0 + 24.0, 0.05, 0.05);
                         }
                         // For Chips
                         if (ChanceChips > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CfChips\C- rate: \Cf%.2k%%\C-", ChanceChips);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + 280.0 + 32.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 32.0, Y + 280.0 + 32.0, 0.05, 0.05);
                         }
                         // For Recipes
                         if (ChanceBluePrint > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CnRecipes\C- rate: \Cf%.2k%%\C-", ChanceBluePrint);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 32.0, Y + 280.0 + 40.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + 280.0 + 40.0, 0.05, 0.05);
                         }
                         // For Battery
                         if (ChanceBattery > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CaBattery\C- rate: \Cf%.2k%%\C-", ChanceBattery);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + 280.0 + 48.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + 280.0 + 48.0, 0.05, 0.05);
                         }
                         // For Turret Parts
                         if (ChanceTurret > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CgTurret Parts\C- rate: \Cf%.2k%%\C-", ChanceTurret);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + 280.0 + 56.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + 280.0 + 56.0, 0.05, 0.05);
                         }
                         // For ModPacks
                         if (ChanceModPacks > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CrModPacks\C- rate: \Cf%.2k%%\C-", ChanceModPacks);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + 280.0 + 64.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 32.0, Y + 280.0 + 64.0, 0.05, 0.05);
                         }
                         // For Module
                         if (ChanceModule > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CqModule\C- rate: \Cf%.2k%%\C-", ChanceModule);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 32.0, Y + 280.0 + 72.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 32.0, Y + 280.0 + 72.0, 0.05, 0.05);
                         }
                         // For Augmentation
                         if (ChanceAug > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CkAugmentation\C- rate: \Cf%.2k%%\C-", ChanceAug);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 32.0, Y + 280.0 + 80.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 15, "White", X + 32.0, Y + 280.0 + 80.0, 0.05, 0.05);
                         }
                     }
                     else
