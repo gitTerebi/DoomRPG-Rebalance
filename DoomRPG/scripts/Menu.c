@@ -915,21 +915,21 @@ void DrawStatsMenu()
         {
             // Strength
             {
-                StrParam("Level %d:", (naturalStats ? 150 : 75)),
+                StrParam("Strength level - %d:", (naturalStats ? 150 : 75)),
                 "Damage exponentially increases as health lowers",
                 NULL
             },
 
             // Defense
             {
-                StrParam("Level %d:", (naturalStats ? 150 : 75)),
+                StrParam("Defense level - %d:", (naturalStats ? 150 : 75)),
                 "Damage taken exponentially decreases as health lowers",
                 NULL
             },
 
             // Vitality
             {
-                StrParam("Level %d:", (naturalStats ? 150 : 75)),
+                StrParam("Vitality level - %d:", (naturalStats ? 150 : 75)),
                 "No movement penalties at low health",
                 "2x HP regeneration rate below 20% health",
                 NULL
@@ -937,22 +937,22 @@ void DrawStatsMenu()
 
             // Energy
             {
-                StrParam("Level %d:", (naturalStats ? 100 : 50)),
+                StrParam("Energy level - %d:", (naturalStats ? 100 : 50)),
                 "2x EP regeneration rate when burned out",
-                "Can stack an extra Aura every 25 Energy invested",
+                (naturalStats ? "Can stack an extra Aura every 50 Energy invested" : "Can stack an extra Aura every 25 Energy invested"),
                 NULL
             },
 
             // Regeneration
             {
-                StrParam("Level %d:", (naturalStats ? 150 : 75)),
+                StrParam("Regen level - %d:", (naturalStats ? 150 : 75)),
                 "Regeneration speeds increase as your HP/EP gets lower",
                 NULL
             },
 
             // Agility
             {
-                StrParam("Level %d:", (naturalStats ? 150 : 75)),
+                StrParam("Agility level - %d:", (naturalStats ? 150 : 75)),
                 "+15% Survival Bonus",
                 "Movement increases Regeneration speed",
                 NULL
@@ -960,14 +960,14 @@ void DrawStatsMenu()
 
             // Capacity
             {
-                StrParam("Level %d:", (naturalStats ? 200 : 100)),
+                StrParam("Capacity level - %d:", (naturalStats ? 200 : 100)),
                 "Ammo regeneration",
                 NULL
             },
 
             // Luck
             {
-                StrParam("Level %d:", (naturalStats ? 200 : 100)),
+                StrParam("Luck level - %d:", (naturalStats ? 200 : 100)),
                 "Always have full automap",
                 NULL
             }

@@ -1344,7 +1344,7 @@ NamedScript Console bool DropSupply(SkillLevelInfo *SkillLevel, void *Data)
 NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
 {
     int Index = *(int *)Data;
-    int StackMax = 2 + ((Player.EnergyTotal - 50) / 25);
+    int StackMax = 1;
     int Auras = 0;
     int ActiveAuras = 0;
     bool Stack = false;
@@ -1356,8 +1356,21 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
     if (!Stack)
     {
         // Aura stacking handling with Energy perk
-        if (Player.Perks[STAT_ENERGY])
+        if (Player.Perks[STAT_ENERGY] || Player.AuraBonus)
         {
+            // Calculate Aura Max Stack
+            if (Player.Perks[STAT_ENERGY])
+            {
+                if (GetCVar("drpg_levelup_natural") && Player.EnergyTotal >= 100)
+                    StackMax += (Player.EnergyTotal - 50) / 50;
+                else if (Player.EnergyTotal >= 50)
+                    StackMax += (Player.EnergyTotal - 25) / 25;
+            }
+
+            // Add +1 to Aura Max Stack if AUG Energy is active
+            if (Player.AuraBonus)
+                StackMax += 1;
+
             Log("\CnAura Max Stack: %d", StackMax);
 
             // Count the current Auras
@@ -1392,7 +1405,6 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
         }
         else // Remove all other Auras first if you don't have the Energy
         {
-            StackMax = 1;
             for (int i = 0; i < AURA_MAX; i++)
             {
                 if (Player.Aura.Type[i].Active)
@@ -1408,14 +1420,14 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
     }
 
     // Should the timer be stacked because you used the same Aura?
-    if (Stack || Player.Perks[STAT_ENERGY])
+    if (Stack || Player.Perks[STAT_ENERGY] || Player.AuraBonus)
         Player.Aura.Time += (long int)AURA_CALCTIME;
     else
         Player.Aura.Time = (long int)AURA_CALCTIME;
 
-    // Cap Aura Timer - 10 min
-    if (Player.Aura.Time > 35 * 600)
-        Player.Aura.Time = 35 * 600;
+    // Cap Aura Timer - 20 min
+    if (Player.Aura.Time > 35 * 1200)
+        Player.Aura.Time = 35 * 1200;
 
     // Apply Aura
     Player.Aura.Type[Index].Active = true;
