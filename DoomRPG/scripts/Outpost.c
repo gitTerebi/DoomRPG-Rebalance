@@ -2684,7 +2684,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 str ActorToSpawn;
                                 bool PartReceived;
                                 int Attempts = MaxAmount;
-                                int AddMenuID = 3;
+                                int AddMenuID = 4;
                                 fixed Y1;
 
                                 // Take Current Item
