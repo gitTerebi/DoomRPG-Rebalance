@@ -1546,56 +1546,56 @@ void DrawShieldMenu()
                 if (Player.ShieldPage == SHIELDPAGE_BODY && Player.NewShieldParts[SHIELDPAGE_BODY][Index] && CheckInventory(CurrentPart->Actor) > 0)
                 {
                     HudMessage("NEW!");
-                    EndHudMessage(HUDMSG_PLAIN, 0, "White",     0.1 + (j * 34.0), 20.1 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "White",     1.1 + (j * 34.0), 20.1 + (i * 34.0), 0.05);
                 }
                 if (Player.ShieldPage == SHIELDPAGE_BATTERY && Player.NewShieldParts[SHIELDPAGE_BATTERY][Index] && CheckInventory(CurrentPart->Actor) > 0)
                 {
                     HudMessage("NEW!");
-                    EndHudMessage(HUDMSG_PLAIN, 0, "Gold",      0.1 + (j * 34.0), 20.1 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "Gold",      1.1 + (j * 34.0), 20.1 + (i * 34.0), 0.05);
                 }
                 if (Player.ShieldPage == SHIELDPAGE_CAPACITOR && Player.NewShieldParts[SHIELDPAGE_CAPACITOR][Index] && CheckInventory(CurrentPart->Actor) > 0)
                 {
                     HudMessage("NEW!");
-                    EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 0.1 + (j * 34.0), 20.1 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 1.1 + (j * 34.0), 20.1 + (i * 34.0), 0.05);
                 }
                 if (Player.ShieldPage == SHIELDPAGE_ACCESSORY && Player.NewShieldAccessoryParts[Index] && CheckInventory(CurrentAccessory->Actor) > 0)
                 {
                     HudMessage("NEW!");
-                    EndHudMessage(HUDMSG_PLAIN, 0, "Green",     0.1 + (j * 34.0), 20.1 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "Green",     1.1 + (j * 34.0), 20.1 + (i * 34.0), 0.05);
                 }
 
                 // Draw Equipped Status
                 if (Player.ShieldPage == SHIELDPAGE_BODY && Player.Shield.Body && !StrCmp(Player.Shield.Body->Actor, CurrentPart->Actor))
                 {
                     HudMessage("E");
-                    EndHudMessage(HUDMSG_PLAIN, 0, "White",        0.1 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "White",        1.1 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
                 }
                 if (Player.ShieldPage == SHIELDPAGE_BATTERY && Player.Shield.Battery && !StrCmp(Player.Shield.Battery->Actor, CurrentPart->Actor))
                 {
                     HudMessage("E");
-                    EndHudMessage(HUDMSG_PLAIN, 0, "Gold",         0.1 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "Gold",         1.1 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
                 }
                 if (Player.ShieldPage == SHIELDPAGE_CAPACITOR && Player.Shield.Capacitor && !StrCmp(Player.Shield.Capacitor->Actor, CurrentPart->Actor))
                 {
                     HudMessage("E");
-                    EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",    0.1 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",    1.1 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
                 }
                 if (Player.ShieldPage == SHIELDPAGE_ACCESSORY && Player.Shield.Accessory && !StrCmp(Player.Shield.Accessory->Actor, CurrentAccessory->Actor))
                 {
                     HudMessage("E");
-                    EndHudMessage(HUDMSG_PLAIN, 0, "Green",        0.1 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "Green",        1.1 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
                 }
 
                 // Draw Quantity if you have more than one
                 if (Player.ShieldPage < SHIELDPAGE_ACCESSORY && CheckInventory(CurrentPart->Actor) > 1)
                 {
                     HudMessage("%d", CheckInventory(CurrentPart->Actor));
-                    EndHudMessage(HUDMSG_PLAIN, 0, "White", 32.2 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "White", 33.2 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
                 }
                 if (Player.ShieldPage == SHIELDPAGE_ACCESSORY && CheckInventory(CurrentAccessory->Actor) > 1)
                 {
                     HudMessage("%d", CheckInventory(CurrentAccessory->Actor));
-                    EndHudMessage(HUDMSG_PLAIN, 0, "White", 32.2 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
+                    EndHudMessage(HUDMSG_PLAIN, 0, "White", 33.2 + (j * 34.0), 48.0 + (i * 34.0), 0.05);
                 }
             }
 
