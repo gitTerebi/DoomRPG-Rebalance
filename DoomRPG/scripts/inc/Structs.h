@@ -667,6 +667,7 @@ struct PlayerData_S
     int EPTime;
     int EPAmount;
     int RegenBoostTimer;
+    bool MovementRegenDelay;
 
     // Can Drop / Drop Chance Percentages
     bool HealthDrop;
