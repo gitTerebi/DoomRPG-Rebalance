@@ -54,7 +54,7 @@ server  bool    drpg_monster_yellow_moneydrain = false;
 // Game Difficulty
 server  float   drpg_skill_costscale = 1.0;
 server  bool    drpg_skill_keepauras = false;
-server  int     drpg_skill_auracaptimer = 20;
+server  int     drpg_skill_auratimercap = 20;
 server  int     drpg_skill_costcooldown = 10;
 server  bool    drpg_shield_reset = true;
 server  bool    drpg_levelup_heal = true;
