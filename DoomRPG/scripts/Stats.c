@@ -1279,7 +1279,7 @@ void CheckStatusEffects()
     }
 
     if (Player.StatusType[SE_SILENCE]) // Silence
-        RemoveAura();
+        RemoveAura(true);
 
     if (Player.StatusType[SE_CURSE]) // Curse
         Player.DamageFactor = Player.DamageFactor * (1.0 * (Player.StatusIntensity[SE_CURSE] + 1));

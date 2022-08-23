@@ -3026,7 +3026,7 @@ NamedScript void TransportInFX(int tid)
     SetActorPropertyFixed(0, APROP_Alpha, 1.0);
 }
 
-NamedScript DECORATE void RemoveAura()
+NamedScript DECORATE void RemoveAura(bool SaveSkillCostMult)
 {
     Player.Aura.Time = 0;
     Player.Aura.Team = false;
@@ -3036,6 +3036,9 @@ NamedScript DECORATE void RemoveAura()
         Player.Aura.Type[i].Active = false;
         Player.Aura.Type[i].Level = 0;
     }
+
+    if (!SaveSkillCostMult)
+        Player.SkillCostMult = 0;
 }
 
 NamedScript DECORATE void ClearStatusEffects()
