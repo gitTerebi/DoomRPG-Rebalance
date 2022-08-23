@@ -63,7 +63,7 @@ AugInfo RPGMap AugData[AUG_MAX] =
             "+50% EP Regen Amounts",
             "+25% Max EP Amounts",
             "+50% Max EP Amounts",
-            "+50% Aura Timer",
+            "+50% Aura Timer and +1 Aura Max Stack",
             "+10% Skill Cost Refund",
             "+15% Skill Cost Refund",
             "+20% Skill Cost Refund",

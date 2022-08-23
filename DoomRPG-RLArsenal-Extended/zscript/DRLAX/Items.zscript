@@ -273,6 +273,7 @@ class DRLAX_RadarDevice : DRLAX_BaseInventory
 	{
 		Inventory.Icon "SNRBI";
 		inventory.maxamount 4;
+		Inventory.InterhubAmount 4;
 		inventory.pickupsound "misc/modpackpickup";
 		Inventory.UseSound "";
 		Inventory.PickupMessage "You picked up a Radar Device.";
@@ -401,6 +402,7 @@ class DRLAX_SoulTrap : DRLAX_BaseInventory
 		renderstyle "STYLE_TRANSLUCENT";
 		Inventory.Icon "SOLTRAPI";
 		inventory.maxamount 8;
+		Inventory.InterhubAmount 8;
 		Inventory.Pickupsound "familiars/familiarballup";
 		Inventory.UseSound "";
 		Inventory.PickupMessage "You picked up a Soul Trap.";
@@ -498,6 +500,7 @@ class DRLAX_TrappedSoulBase : DRLAX_BaseInventory
 		scale 0.5;
 		Inventory.Icon "SOLTRAPI";
 		inventory.maxamount 8;
+		Inventory.InterhubAmount 8;
 		Inventory.Pickupsound "";
 		Inventory.UseSound "";
 		Inventory.PickupMessage "You picked up a Trapped Sphere.";

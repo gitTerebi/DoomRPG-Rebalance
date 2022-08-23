@@ -681,9 +681,9 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",          230.1,  102.0,  0.05);
         HudMessage("%d Aura Range", (int)Player.Aura.Range);
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",          230.1,  110.0,  0.05);
-        HudMessage("HP Timer: %.2k Sec", (fixed)(Player.HPTime / (35.0K * 2.0K)));
+        HudMessage("HP Timer: %.2k Sec", (fixed)(Player.HPTime / 35.0K));
         EndHudMessage(HUDMSG_PLAIN, 0, "Brick",              30.1,   136.0,  0.05);
-        HudMessage("EP Timer: %.2k Sec", (fixed)(Player.EPTime / (35.0K * 2.0K)));
+        HudMessage("EP Timer: %.2k Sec", (fixed)(Player.EPTime / 35.0K));
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",          30.1,   144.0,  0.05);
         HudMessage("Regen Sphere: %d Sec", (int)(15 + (Player.RegenerationTotal / 2)));
         EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
@@ -908,23 +908,28 @@ void DrawStatsMenu()
     // Perks Page
     case STATPAGE_PERKS:
     {
+        bool naturalStats = GetCVar("drpg_levelup_natural");
+
         // Holds the perk information
-        str const PerkInfo[STAT_MAX][3] =
+        str const PerkInfo[STAT_MAX][4] =
         {
             // Strength
             {
+                StrParam("Strength level - %d:", (naturalStats ? 150 : 75)),
                 "Damage exponentially increases as health lowers",
                 NULL
             },
 
             // Defense
             {
+                StrParam("Defense level - %d:", (naturalStats ? 150 : 75)),
                 "Damage taken exponentially decreases as health lowers",
                 NULL
             },
 
             // Vitality
             {
+                StrParam("Vitality level - %d:", (naturalStats ? 150 : 75)),
                 "No movement penalties at low health",
                 "2x HP regeneration rate below 20% health",
                 NULL
@@ -932,19 +937,22 @@ void DrawStatsMenu()
 
             // Energy
             {
+                StrParam("Energy level - %d:", (naturalStats ? 100 : 50)),
                 "2x EP regeneration rate when burned out",
-                "Can stack an extra Aura every 25 Energy invested",
+                (naturalStats ? "Can stack an extra Aura every 50 Energy invested" : "Can stack an extra Aura every 25 Energy invested"),
                 NULL
             },
 
             // Regeneration
             {
+                StrParam("Regen level - %d:", (naturalStats ? 150 : 75)),
                 "Regeneration speeds increase as your HP/EP gets lower",
                 NULL
             },
 
             // Agility
             {
+                StrParam("Agility level - %d:", (naturalStats ? 150 : 75)),
                 "+15% Survival Bonus",
                 "Movement increases Regeneration speed",
                 NULL
@@ -952,12 +960,14 @@ void DrawStatsMenu()
 
             // Capacity
             {
+                StrParam("Capacity level - %d:", (naturalStats ? 200 : 100)),
                 "Ammo regeneration",
                 NULL
             },
 
             // Luck
             {
+                StrParam("Luck level - %d:", (naturalStats ? 200 : 100)),
                 "Always have full automap",
                 NULL
             }
@@ -975,7 +985,7 @@ void DrawStatsMenu()
                 PrintSpriteAlpha(StrParam("STAT%d", i + 1), 0, 16.1, 56.1 + (i * 44.0), 0.05, 0.5);
 
             // Build description string
-            for (int j = 0; PerkInfo[i][j] != NULL; j++)
+            for (int j = (Player.Perks[i] ? 1 : 0); PerkInfo[i][j] != NULL; j++)
                 Description = StrParam("%S%S\n", Description, PerkInfo[i][j]);
 
             // Determine Color
