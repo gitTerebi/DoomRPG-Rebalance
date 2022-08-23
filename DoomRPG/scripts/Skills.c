@@ -1425,9 +1425,9 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
     else
         Player.Aura.Time = (long int)AURA_CALCTIME;
 
-    // Cap Aura Timer - 20 min
-    if (Player.Aura.Time > 35 * 1200)
-        Player.Aura.Time = 35 * 1200;
+    // Aura Cap Timer
+    if (Player.Aura.Time > 35 * 60 * GetCVar("drpg_skill_auracaptimer"))
+        Player.Aura.Time = 35 * 60 * GetCVar("drpg_skill_auracaptimer");
 
     // Apply Aura
     Player.Aura.Type[Index].Active = true;

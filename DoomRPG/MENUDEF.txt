@@ -311,6 +311,7 @@ OptionMenu "DoomRPGDifficulty"
 
     Slider "Scale EP Costs", "drpg_skill_costscale", 0.5, 10.0, 0.1
     Option "Keep Auras between levels", "drpg_skill_keepauras", "OnOff"
+    Slider "Aura Cap Timer (Min.)", "drpg_skill_auracaptimer", 1, 60, 1
     Slider "Skill Cost Cooldown Time (Sec.)", "drpg_skill_costcooldown", 1, 60, 1
     StaticText ""
 
