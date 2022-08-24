@@ -559,6 +559,8 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
             HudMessage("Used an Extra Life!");
             EndHudMessage(HUDMSG_FADEOUT, 0, "Gold", 160.0, 140.0, 0.5, 1.5);
             PrintSpriteFade("P1UPA0", 0, 172.0, 210.0, 0.5, 1.5);
+
+            return 0;
         }
 
         // Survival Bonus
@@ -577,6 +579,8 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
             HudMessage("Agility Save!");
             EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 160.0, 140.0, 0.5, 0.5);
             PrintSpriteFade("AGISAVE", 0, 160.0, 140.0, 0.5, 0.5);
+
+            return 0;
         }
     }
 
