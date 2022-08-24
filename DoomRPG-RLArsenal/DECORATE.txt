@@ -12,6 +12,7 @@
 #include "actors/DoomRL/Props.txt"
 #include "actors/DoomRL/Randomizers.txt"
 #include "actors/DoomRL/Shield.txt"
+#include "actors/DoomRL/Skulls.txt"
 #include "actors/DoomRL/Summons.txt"
 #include "actors/DoomRL/Weapons.txt"
 

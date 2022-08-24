@@ -231,8 +231,6 @@ Class RLNomadEvents : EventHandler
 							a.TakeInventory("RLPistol", 1);
 						}
 
-
-
 						a.GiveInventory(SavedPistolClassSelected, 1);
 						a.A_SelectWeapon(SavedPistolClass);
 					}
@@ -262,10 +260,7 @@ Class RLNomadEvents : EventHandler
 
 					di = di.Next;
 				}
-
-				a.health = a.default.health;
-				Players[i].health = a.default.health;
-			} 
+			}
         }
 
 		danger = 0;
