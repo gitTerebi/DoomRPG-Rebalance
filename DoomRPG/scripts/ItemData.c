@@ -1335,7 +1335,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
     // Calculate Rarity Min
     RarityMin += Random(0, RarityMax / 2);
 
-    if (Random(0, 200) <= 50 + 10 * Modifier)
+    if (Random(0, 250) <= 50 + 10 * Modifier)
     {
         while (!ItemSpawned)
         {
@@ -1448,7 +1448,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
     // Calculate Rarity Min
     RarityMin += Random(0, RarityMax / 2);
 
-    if (Random(0, 200) <= 50 + 10 * Modifier)
+    if (Random(0, 250) <= 50 + 10 * Modifier)
     {
         while (!ItemSpawned)
         {
