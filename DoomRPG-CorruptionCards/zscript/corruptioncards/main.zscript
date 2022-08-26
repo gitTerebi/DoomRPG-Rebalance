@@ -634,6 +634,11 @@ Class CCards_Game : EventHandler
 			{
 				global.permacount++;
 			}
+
+            if(global.progress > 0)
+			{
+				global.progress--;
+			}
 		}
 
 		if(Level.MapName == "TITLEMAP" || CCards_Functions.GameDisabled() || level.ClusterFlags & Level.CLUSTER_HUB)
