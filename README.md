@@ -13,7 +13,7 @@ Enjoy!
 ## Installing (build)
 
 Below is the download link:
-1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.7.1)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
+1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.8.2)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
 
 Installation Instructions:
 
@@ -25,7 +25,7 @@ Installation Instructions:
 
 ## Manual Installing
 
-- [GZDoom v4.7.1](https://github.com/coelckers/gzdoom/releases/download/g4.7.1/gzdoom-4-7-1-Windows-64bit.zip) is required to play this mod.
+- [GZDoom v4.8.2](https://github.com/coelckers/gzdoom/releases/download/g4.8.2/gzdoom-4-8-2-Windows-64bit.zip) is required to play this mod.
 - LZDoom v3.83a or higher.
 - Delta Touch (Android) v4.6 or higher (includes the above versions or higher).
 
@@ -38,13 +38,15 @@ Use the following load order:
 1. [WadSmoosh](https://github.com/WNC12k/DoomRPG-WadSmoosh/releases) and/or [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) or another mapset;
 2. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
 3. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [Colourful Hell v0.98c](https://forum.zdoom.org/viewtopic.php?t=47980) or [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193) or [Dehacked Attack v3.1](https://forum.zdoom.org/viewtopic.php?f=43&t=72362);
-4. [DoomRL Arsenal Extended - v0.9be](https://forum.zdoom.org/viewtopic.php?f=43&t=70549).
+4. [DoomRL Arsenal Extended 0.9be](https://forum.zdoom.org/viewtopic.php?f=43&t=70549);
+5. [Corruption Cards 3.9](https://forum.zdoom.org/viewtopic.php?t=67939).
 
 ## Compatible mods
 
 - [DoomRL Arsenal - v1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044);
 - [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044);
 - [DoomRL Arsenal Extended - v0.9be](https://forum.zdoom.org/viewtopic.php?f=43&t=70549);
+- [Corruption Cards 3.9](https://forum.zdoom.org/viewtopic.php?t=67939);
 - [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193);
 - [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
 - [Colourful Hell v0.98c](https://forum.zdoom.org/viewtopic.php?t=47980);

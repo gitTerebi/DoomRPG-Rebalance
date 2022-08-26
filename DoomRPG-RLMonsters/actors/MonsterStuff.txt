@@ -219,7 +219,11 @@ ACTOR RLEnemyWeaponDrop
 		TNT1 A 0 A_DropItem("Chaingun")
 		Stop
 	DonutstealDrop:
-		TNT1 A 0 A_DropItem("ClipBox")
+		TNT1 A 0 A_Jump(32, "FullAmmoDrop")
+		TNT1 A 0 A_DropItem("ClipBox3")
+		Stop
+	FullAmmoDrop:
+		TNT1 A 0 A_DropItem("ClipBox2")
 		Stop
 	Nope:
 		TNT1 A 0
