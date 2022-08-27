@@ -593,6 +593,14 @@ Class CCards_Game : EventHandler
 
 	override void WorldUnloaded(WorldEvent e)
 	{
+		global = CCards_Global.Get();	
+
+		if(!isReturnedMap() && !CCards_Functions.CheckBannedMap(Level.MapName))
+		{
+			global.donemaps.Push(Level.MapName);
+			global.progress++;
+		}
+
 		if(!e.isSaveGame)
 		{
 			for(int i; i<players.Size(); i++)
@@ -630,14 +638,19 @@ Class CCards_Game : EventHandler
 		{
 			global = CCards_Global.Get();
 
-			if(Cvar.GetCvar("ccards_allowreturnmaps").GetBool() == true && global.rules.permaprogression > 0 && global.permacount < global.rules.permaprogression + 1)
+			if(Cvar.GetCvar("ccards_allowreturnmaps").GetBool() && global.rules.permaprogression > 0 && global.permacount < global.rules.permaprogression + 1)
 			{
 				global.permacount++;
 			}
 
-            if(global.progress > 0)
+            if(Cvar.GetCvar("ccards_allowreturnmaps").GetBool() && global.progress-1 > 0)
 			{
 				global.progress--;
+			}
+
+			if(global.progress-1 < 0)
+			{
+				global.progress++;
 			}
 		}
 
@@ -668,9 +681,11 @@ Class CCards_Game : EventHandler
 				global.collection[i].PreGameStart();
 				global.collection[i].started = true;
 			}
-			global.progress++;
-			
-			CCards_Functions.Log("Win Streak: " .. global.progress-1);
+
+			if(global.progress-1 >= 0)
+			{
+				CCards_Functions.Log("Win Streak: " .. global.progress-1);
+			}
 
 			if(global.rules.cvarname != "")
 			{
@@ -702,8 +717,6 @@ Class CCards_Game : EventHandler
 					}
 				}
 			}
-
-
 		}
 		
 		if(global.collection.Size()>0)
@@ -747,7 +760,6 @@ Class CCards_Game : EventHandler
 				permanentChoice = true;
 				global.permacount = global.rules.permaprogression + 1; 
 			}
-
 		}
 
 		/*
@@ -775,10 +787,6 @@ Class CCards_Game : EventHandler
 		{
 			Start();
 			return;
-		}
-		else
-		{
-			global.donemaps.Push(Level.MapName);
 		}
 		
 		if(!selector)
