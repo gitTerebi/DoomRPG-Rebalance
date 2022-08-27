@@ -1,43 +1,52 @@
 class DRPGZInputHandler : EventHandler
 {
+    // Supported Bindings
+    static const string drpgBindings[] =
+    {
+        "+forward",
+        "+back",
+        "+moveleft",
+        "+moveright",
+        "+crouch",
+        "+speed",
+        "+use",
+        "+attack",
+        "+altattack",
+        "+zoom",
+        "+jump",
+        "+user1",
+        "+user2"
+    };
+
+    // Values for ACS
+    static const int drpgBindingValues[] =
+    {
+        BT_FORWARD,
+        BT_BACK,
+        BT_MOVELEFT,
+        BT_MOVERIGHT,
+        BT_CROUCH,
+        BT_SPEED,
+        BT_USE,
+        BT_ATTACK,
+        BT_ALTATTACK,
+        BT_ZOOM,
+        BT_JUMP,
+        BT_USER1,
+        BT_USER2
+    };
+
+    // Up all the keys at the beginning of the level
+	override void WorldLoaded (WorldEvent e)
+    {
+            for(int i = 0; i<drpgBindingValues.Size(); i++)
+            {
+                CallACS("UpdateInput", drpgBindingValues[i], false, CVar.GetCVar("drpg_menu_repetition", players[consoleplayer]).GetBool());
+            }
+    }
+
     override bool InputProcess(InputEvent e)
     {
-        // Supported Bindings
-        static const string drpgBindings[] =
-        {
-            "+forward",
-            "+back",
-            "+moveleft",
-            "+moveright",
-            "+crouch",
-            "+speed",
-            "+use",
-            "+attack",
-            "+altattack",
-            "+zoom",
-            "+jump",
-            "+user1",
-            "+user2"
-        };
-
-        // Values for ACS
-        static const int drpgBindingValues[] =
-        {
-            BT_FORWARD,
-            BT_BACK,
-            BT_MOVELEFT,
-            BT_MOVERIGHT,
-            BT_CROUCH,
-            BT_SPEED,
-            BT_USE,
-            BT_ATTACK,
-            BT_ALTATTACK,
-            BT_ZOOM,
-            BT_JUMP,
-            BT_USER1,
-            BT_USER2
-        };
-
         // Data
         string keyCurrent = "";
         int keySupported = 0;
