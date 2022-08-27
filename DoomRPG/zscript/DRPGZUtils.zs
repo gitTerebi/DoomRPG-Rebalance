@@ -36,13 +36,22 @@ class DRPGZInputHandler : EventHandler
         BT_USER2
     };
 
+    // Up all the keys at the end of the level
+	override void WorldUnloaded (WorldEvent e)
+    {
+        for(int i = 0; i<drpgBindingValues.Size(); i++)
+        {
+            CallACS("UpdateInput", drpgBindingValues[i], false, false);
+        }
+    }
+
     // Up all the keys at the beginning of the level
 	override void WorldLoaded (WorldEvent e)
     {
-            for(int i = 0; i<drpgBindingValues.Size(); i++)
-            {
-                CallACS("UpdateInput", drpgBindingValues[i], false, CVar.GetCVar("drpg_menu_repetition", players[consoleplayer]).GetBool());
-            }
+        for(int i = 0; i<drpgBindingValues.Size(); i++)
+        {
+            CallACS("UpdateInput", drpgBindingValues[i], false, false);
+        }
     }
 
     override bool InputProcess(InputEvent e)
@@ -57,7 +66,7 @@ class DRPGZInputHandler : EventHandler
             return false;
 
         // KeyDown detection
-        if 			(e.Type == e.Type_KeyDown)
+        if (e.Type == e.Type_KeyDown)
             KeyDown = true;
         else if (e.Type == e.Type_KeyUp)
             KeyDown = false;
