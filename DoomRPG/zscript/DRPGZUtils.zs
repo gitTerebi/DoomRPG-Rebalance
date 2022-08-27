@@ -36,20 +36,15 @@ class DRPGZInputHandler : EventHandler
         BT_USER2
     };
 
-    // Up all the keys at the end of the level
-    override void WorldUnloaded (WorldEvent e)
-    {
-        for(int i = 0; i<drpgBindingValues.Size(); i++)
-        {
-            CallACS("UpdateInput", drpgBindingValues[i], false, false);
-        }
-    }
-
     // Up all the keys at the beginning of the level
     override void WorldLoaded (WorldEvent e)
     {
         for(int i = 0; i<drpgBindingValues.Size(); i++)
         {
+            if (i == 6)
+            {
+                CallACS("UpdateInput", drpgBindingValues[i], true, false);
+            }
             CallACS("UpdateInput", drpgBindingValues[i], false, false);
         }
     }
