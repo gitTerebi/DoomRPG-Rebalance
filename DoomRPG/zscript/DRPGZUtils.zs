@@ -37,7 +37,7 @@ class DRPGZInputHandler : EventHandler
     };
 
     // Up all the keys at the end of the level
-	override void WorldUnloaded (WorldEvent e)
+    override void WorldUnloaded (WorldEvent e)
     {
         for(int i = 0; i<drpgBindingValues.Size(); i++)
         {
@@ -46,7 +46,7 @@ class DRPGZInputHandler : EventHandler
     }
 
     // Up all the keys at the beginning of the level
-	override void WorldLoaded (WorldEvent e)
+    override void WorldLoaded (WorldEvent e)
     {
         for(int i = 0; i<drpgBindingValues.Size(); i++)
         {
