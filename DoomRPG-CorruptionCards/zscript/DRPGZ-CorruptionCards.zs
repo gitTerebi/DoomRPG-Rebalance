@@ -11,7 +11,7 @@ class CCards_MonsterInit : EventHandler
             // Monsters that cannot be defined via Decorate are handled here
             static const string CCMonsters[] =
             {
-				"CCards_Actor_Maestro",
+                "CCards_Actor_Maestro",
                 "CCards_Actor_Shark",
                 "CCards_Actor_Santa"
             };
