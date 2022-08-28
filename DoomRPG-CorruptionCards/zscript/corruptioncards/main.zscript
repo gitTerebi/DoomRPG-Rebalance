@@ -62,7 +62,7 @@ Class CCards_Global : Thinker
 		vc.Init();		
 		rules = new ("CCards_Rules");
 		rules.global = self;
-		ccversion = "3.9";
+		ccversion = "4.0";
 		scoreneeded = random(4, 8);
 		return self;
 	}
@@ -400,7 +400,6 @@ Class CCards_Game : EventHandler
 		w.user = null;//Spawn("PlayerPawn");
 		w.game = self;
 		
-		SetPlayerProperty(1, 0, 4);
 		
 		for(int i; i<publicdeck.Size(); i++)
 		{
@@ -455,6 +454,8 @@ Class CCards_Game : EventHandler
 
 		CCards_BuffManager ev = CCards_BuffManager.Get();
 		ev.FindBuffs();
+
+		//global.donemaps.Push(Level.MapName);
 	}
 
 	Line wildcardLine;
@@ -787,6 +788,10 @@ Class CCards_Game : EventHandler
 		{
 			Start();
 			return;
+		}
+		else
+		{
+			//global.donemaps.Push(Level.MapName);
 		}
 		
 		if(!selector)
