@@ -718,6 +718,8 @@ Class CCards_Game : EventHandler
 					}
 				}
 			}
+
+
 		}
 		
 		if(global.collection.Size()>0)
@@ -751,6 +753,7 @@ Class CCards_Game : EventHandler
 			Start();
 			return;
 		}
+
 		if(global.rules.permaprogression > -1)
 		{
 			global.permacount--;
@@ -761,6 +764,7 @@ Class CCards_Game : EventHandler
 				permanentChoice = true;
 				global.permacount = global.rules.permaprogression + 1; 
 			}
+
 		}
 
 		/*
