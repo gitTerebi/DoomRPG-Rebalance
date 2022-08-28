@@ -942,7 +942,7 @@ NamedScript void BuildItemData()
         // Boots
         ITEMDATA_CATEGORY(9, "\CcBoots", CF_NONE);
         // Common Boots
-        ITEMDATA_DEF("RLSteelBootsPickup",                  "Steel Boots",                                            1000, 0, 1, "BOOTS0", 13, 26);
+        ITEMDATA_DEF("RLSteelBootsPickup",                  "Steel Boots",                                            1000, 0, 0, "BOOTS0", 13, 26);
         ITEMDATA_DEF("RLProtectiveBootsPickup",             "Protective Boots",                                       2000, 4, 1, "BOOTG0", 13, 26);
         ITEMDATA_DEF("RLPlasteelBootsPickup",               "Plasteel Boots",                                         4000, 6, 2, "BOOTB0", 13, 26);
 
@@ -1463,7 +1463,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
                     {
                         if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
                             ActorToSpawn = ItemData[3][Armor].Actor;
-                        else if (i <= (CompatMode == COMPAT_DRLA ? 3 : 5))
+                        else if (ItemCategory == 3 && i <= (CompatMode == COMPAT_DRLA ? 3 : 5))
                             ActorToSpawn = ItemData[3][Armor].Actor;
                         else
                             ActorToSpawn = ItemData[ItemCategory][i].Actor;
