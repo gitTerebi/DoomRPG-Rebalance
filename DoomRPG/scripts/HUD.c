@@ -1511,6 +1511,11 @@ Start:
     Skulls = CheckInventory("RLSkullLimit");
     Devices = CheckInventory("RLPhaseDeviceLimit");
 
+    // Compatibility Handling - DoomRL Arsenal Extended
+    // Phase Sisters - Change the Weapons calculation
+    if (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 9)
+        Weapons -= 2;
+
     SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
 
     // Counters
@@ -1585,7 +1590,7 @@ Start:
         if (Weapons > 0 || GetCVar("drpg_hud_preview"))
         {
             SetFont("BIGFONT");
-            if (Weapons >= 6)
+            if (Weapons >= DRLA_WEAPON_MAX)
             {
                 HudMessage("%d", Weapons);
                 EndHudMessage(HUDMSG_ALPHA, 0, "Gold", XOff, Y + 12.0, 0.05, 0.75 + (Sin((fixed)Timer() / 32.0) * 0.25));

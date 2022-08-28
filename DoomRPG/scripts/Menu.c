@@ -718,7 +718,12 @@ void DrawStatsMenu()
         }
         if (CompatMode == COMPAT_DRLA)
         {
-            HudMessage("Weapons: %d/%d", CheckInventory("RLWeaponLimit"), DRLA_WEAPON_MAX);
+            // Compatibility Handling - DoomRL Arsenal Extended
+            // Phase Sisters - Change the Weapons calculation
+            if (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 9)
+                HudMessage("Weapons: %d/%d", CheckInventory("RLWeaponLimit") - 2, DRLA_WEAPON_MAX);
+            else
+                HudMessage("Weapons: %d/%d", CheckInventory("RLWeaponLimit"), DRLA_WEAPON_MAX);
             EndHudMessage(HUDMSG_PLAIN, 0, "Brick",              30.1,   250.0,  0.05);
             HudMessage("Armors: %d/%d", CheckInventory("RLArmorInInventory"), DRLA_ARMOR_MAX);
             EndHudMessage(HUDMSG_PLAIN, 0, "Green",              30.1,   258.0,  0.05);
