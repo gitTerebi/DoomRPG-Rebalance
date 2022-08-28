@@ -1416,7 +1416,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
 
     str ActorToSpawn;
     bool ItemSpawned;
-    int ItemCategory = (Random(0, 9) <= 0 ? 9 : 3);
+    int ItemCategory = (CompatMode == COMPAT_DRLA && Random(0, 9) <= 0 ? 9 : 3);
     int RarityMin;
     int RarityMax;
     int Modifier;
@@ -1464,7 +1464,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
                         if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
                             ActorToSpawn = ItemData[3][Armor].Actor;
                         else if (i <= (CompatMode == COMPAT_DRLA ? 3 : 5))
-                            ActorToSpawn = ItemData[ItemCategory][Armor].Actor;
+                            ActorToSpawn = ItemData[3][Armor].Actor;
                         else
                             ActorToSpawn = ItemData[ItemCategory][i].Actor;
                         ItemSpawned = true;
