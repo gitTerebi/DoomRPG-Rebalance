@@ -13,7 +13,8 @@ class CCards_MonsterInit : EventHandler
             {
                 "CCards_Actor_Maestro",
                 "CCards_Actor_Shark",
-                "CCards_Actor_Santa"
+                "CCards_Actor_Santa",
+                "CCards_SpookySkeleton"
             };
 
             static const string CCBosses[] =

@@ -423,14 +423,14 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLChaingun",                              "Chaingun",                                                750,  0, 0, "PKCGX0", 25, 18);
         ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle",                                            500,  1, 0, "UACRX0", 23, 15);
         ITEMDATA_DEF("RLRocketLauncher",                        "Rocket Launcher",                                        1500,  2, 1, "RLAUX0", 31, 18);
-        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           2500,  4, 1, "PLSRX0", 27, 19);
-        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                5000,  5, 2, "BFGGX0", 31, 38);
+        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           2500,  4, 2, "PLSRX0", 27, 19);
+        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                5000,  5, 3, "BFGGX0", 31, 38);
 
         // Exotic Weapons
         ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                 2000,  2, 1, "BLASX0", 12, 14);
-        ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 1, "OLOKX0", 10, 13);
-        ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 2, "DEAPX0", 11, 14);
-        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                        10000,  5, 3, "MRKPX0",  9, 12);
+        ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 2, "OLOKX0", 10, 13);
+        ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 3, "DEAPX0", 11, 14);
+        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                        10000,  5, 4, "MRKPX0",  9, 12);
         ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          62000, 10, 7, "NSSGX0", 27,  9);
         ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        24000,  5, 3, "ASHOX0", 31, 27);
         ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     6000,  4, 2, "RUZIX0", 20, 26);
@@ -448,9 +448,9 @@ NamedScript void BuildItemData()
         // Superior Weapons
         ITEMDATA_DEF("RLMarksmanRifle",                         "Marksman Rifle \Ci[Superior]\C-",                       52000,  8, 6, "MRKRX0", 26, 18);
         ITEMDATA_DEF("RLVanguardRifle",                         "Vanguard Rifle \Ci[Superior]\C-",                       60000,  8, 6, "VANRX0", 26, 13);
-        ITEMDATA_DEF("RLHuntingRevolver",                       "Hunting Revolver \Ci[Superior]\C-",                     35000,  7, 5, "HREVX0", 12, 14);
+        ITEMDATA_DEF("RLHuntingRevolver",                       "Hunting Revolver \Ci[Superior]\C-",                     35000,  7, 6, "HREVX0", 12, 14);
         ITEMDATA_DEF("RLThompson",                              "Tommy Gun \Ci[Superior]\C-",                            30000,  7, 5, "TGUNX0", 23, 17);
-        ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  26000,  6, 4, "BPP7X0", 8,  10);
+        ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  26000,  6, 5, "BPP7X0", 8,  10);
         ITEMDATA_DEF("RLHuntingShotgun",                        "Hunting Shotgun \Ci[Superior]\C-",                      80000, 12, 8, "HUNTX0", 32, 12);
         ITEMDATA_DEF("RLRCP90",                                 "RC-P90 \Ci[Superior]\C-",                               76000, 11, 7, "RCP9X0", 24, 15);
 
