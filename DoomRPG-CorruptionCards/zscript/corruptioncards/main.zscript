@@ -644,7 +644,7 @@ Class CCards_Game : EventHandler
 				global.permacount++;
 			}
 
-            if(Cvar.GetCvar("ccards_allowreturnmaps").GetBool() && global.progress-1 > 0)
+			if(Cvar.GetCvar("ccards_allowreturnmaps").GetBool() && global.progress-1 > 0)
 			{
 				global.progress--;
 			}
