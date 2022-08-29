@@ -295,7 +295,6 @@ NamedScript Type_OPEN void MapInit()
     InitMapPacks();
 
     // Compatibility Handling - DoomRL Arsenal Extended
-    // Nomad - Mod Packs Load
     if (CompatModeEx == COMPAT_DRLAX)
         NomadModPacksLoad();
 
@@ -1142,11 +1141,11 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     {
     case MAPEVENT_MEGABOSS:
         return (GetCVar("drpg_mapevent_megaboss") &&
-                MapLevelModifier >= 0.85);
+                MapLevelModifier >= 0.80);
 
     case MAPEVENT_TOXICHAZARD:
         return (GetCVar("drpg_mapevent_toxichazard") &&
-                MapLevelModifier >= 0.40);
+                MapLevelModifier >= 0.30);
 
     case MAPEVENT_NUCLEARBOMB:
         return (GetCVar("drpg_mapevent_nuclearbomb") &&
@@ -1154,27 +1153,27 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
 
     case MAPEVENT_LOWPOWER:
         return (GetCVar("drpg_mapevent_lowpower") &&
-                MapLevelModifier >= 0.30);
+                MapLevelModifier >= 0.40);
 
     case MAPEVENT_ALLAURAS:
         return (GetCVar("drpg_mapevent_allauras") &&
-                MapLevelModifier >= 0.70);
+                MapLevelModifier >= 0.60);
 
     case MAPEVENT_ONEMONSTER:
         return (GetCVar("drpg_mapevent_onemonster") &&
-                MapLevelModifier >= 0.40);
+                MapLevelModifier >= 0.30);
 
     case MAPEVENT_HELLUNLEASHED:
         return (GetCVar("drpg_mapevent_hellunleashed") &&
-                MapLevelModifier >= 0.85);
+                MapLevelModifier >= 0.80);
 
     case MAPEVENT_HARMONIZEDAURAS:
         return (GetCVar("drpg_mapevent_harmonizedauras") &&
-                MapLevelModifier >= 0.80);
+                MapLevelModifier >= 0.70);
 
     case MAPEVENT_TELEPORTCRACKS:
         return (GetCVar("drpg_mapevent_teleportcracks") &&
-                MapLevelModifier >= 0.60);
+                MapLevelModifier >= 0.50);
 
     case MAPEVENT_DOOMSDAY:
         return (GetCVar("drpg_mapevent_doomsday") &&
@@ -1193,12 +1192,12 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     case MAPEVENT_DRLA_FEEDINGFRENZY:
         return (CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_feedingfrenzy") &&
-                MapLevelModifier >= 0.70);
+                MapLevelModifier >= 0.60);
 
     case MAPEVENT_DRLA_OVERMIND:
         return (GetCVar("drpg_mapevent_overmind") &&
                 CompatMode == COMPAT_DRLA && CompatMonMode == COMPAT_DRLA &&
-                MapLevelModifier >= 0.85);
+                MapLevelModifier >= 0.80);
 
     case MAPEVENT_BONUS_RAINBOWS:
         return (GetCVar("drpg_mapevent_rainbows") &&
@@ -1207,13 +1206,13 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
     case MAPEVENT_SKILL_TECHNOPHOBIA:
         return  (CompatMonMode == COMPAT_DRLA &&
                  GetCVar("drpg_mapevent_skill_technophobia") &&
-                 MapLevelModifier >= 0.65 &&
+                 MapLevelModifier >= 0.50 &&
                  CurrentSkill != 6);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
                 GetCVar("drpg_mapevent_skill_armageddon") &&
-                MapLevelModifier >= 0.80 &&
+                MapLevelModifier >= 0.70 &&
                 CurrentSkill != 7);
 
     case MAPEVENT_SPECIAL_SINSTORM:
@@ -1470,7 +1469,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
     break;
     case MAPEVENT_TOXICHAZARD:
     {
-        TargetLevel->HazardLevel = Random(1, 5);
+        TargetLevel->HazardLevel = Random(1, 1 + RoundInt(4.0 * MapLevelModifier));
         TargetLevel->RadLeft = 100;
     }
     break;
@@ -1481,9 +1480,13 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
         fixed MonsterLevelDivisor;
 
         // Going to leave this enabled without DRLA's monsters because DRLA's weapons are powerful.
-        if (CompatMode == COMPAT_DRLA)
+        if (CompatMode == COMPAT_DRLA && CompatMonMode != COMPAT_DRLA)
         {
             MonsterLevelDivisor = 2.5;
+        }
+        else if (CompatMonMode == COMPAT_DRLA)
+        {
+            MonsterLevelDivisor = 10.00;
         }
         else
         {
@@ -1502,7 +1505,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
             if (DebugLog)
                 Log("\CdDEBUG: \CcPotential monster: \Cg%S \Cc/ Needed level: \Cg%d", TempMonster->Name, RequiredLevel);
 
-            if (AverageLevel >= RequiredLevel && TempMonster->ThreatLevel <= 5)
+            if (AverageLevel >= RequiredLevel && TempMonster->ThreatLevel < 24)
                 PotentialMonsters[NumPotentialMonsters++] = TempMonster;
         }
 

@@ -19,6 +19,9 @@ OptionMenu "Doom RLA Monsters Options"
     Slider "Estimated counts of WADs", "drpg_ws_use_wads", 1, 20, 1, 0
 
     StaticText ""
+    Slider "Starting Map/Danger Level", "drpg_monster_mapweight", 1, 1000, 1, 0
+
+    StaticText ""
     Option "Enemy Weapon Drop Type", "DRLA_weapondroptype", "WeaponDropTypes"
 
     StaticText ""

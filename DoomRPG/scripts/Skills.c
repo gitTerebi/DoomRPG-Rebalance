@@ -2967,17 +2967,15 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
     // Transport
     if (!CurrentLevel->UACBase)
     {
-        if (CompatMode == COMPAT_DRLA)
-        {
+        // Compatibility Handling - DoomRL Monsters
+        if (CompatMonMode == COMPAT_DRLA)
             TakeInventory("RLDangerLevel", 2);
 
-            // Compatibility Handling - DoomRL Arsenal Extended
-            // Nomad - Mod Packs Save
-            if (CompatModeEx == COMPAT_DRLAX)
-            {
-                NomadModPacksSave();
-                NanomaniacTransport();
-            }
+        // Compatibility Handling - DoomRL Arsenal Extended
+        if (CompatModeEx == COMPAT_DRLAX)
+        {
+            NomadModPacksSave();
+            NanomaniacTransport();
         }
 
         TransporterLevel = FindLevelInfo();
@@ -2988,7 +2986,6 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
     else
     {
         // Compatibility Handling - DoomRL Arsenal Extended
-        // Nomad - Mod Packs Save
         if (CompatModeEx == COMPAT_DRLAX)
         {
             NomadModPacksSave();
