@@ -897,7 +897,6 @@ NamedScript MapSpecial void LevelTransport()
             TransportOutFX(0);
 
             // Compatibility Handling - DoomRL Arsenal Extended
-            // Nomad - Mod Packs Save
             if (CompatModeEx == COMPAT_DRLAX)
             {
                 NomadModPacksSave();
