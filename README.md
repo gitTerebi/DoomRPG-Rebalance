@@ -39,14 +39,14 @@ Use the following load order:
 2. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
 3. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [Colourful Hell v0.98c](https://forum.zdoom.org/viewtopic.php?t=47980) or [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193) or [Dehacked Attack v3.1](https://forum.zdoom.org/viewtopic.php?f=43&t=72362);
 4. [DoomRL Arsenal Extended 0.9be](https://forum.zdoom.org/viewtopic.php?f=43&t=70549);
-5. [Corruption Cards 3.9](https://forum.zdoom.org/viewtopic.php?t=67939).
+5. [Corruption Cards 4.0](https://forum.zdoom.org/viewtopic.php?t=67939).
 
 ## Compatible mods
 
 - [DoomRL Arsenal - v1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044);
 - [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044);
 - [DoomRL Arsenal Extended - v0.9be](https://forum.zdoom.org/viewtopic.php?f=43&t=70549);
-- [Corruption Cards 3.9](https://forum.zdoom.org/viewtopic.php?t=67939);
+- [Corruption Cards 4.0](https://forum.zdoom.org/viewtopic.php?t=67939);
 - [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193);
 - [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
 - [Colourful Hell v0.98c](https://forum.zdoom.org/viewtopic.php?t=47980);

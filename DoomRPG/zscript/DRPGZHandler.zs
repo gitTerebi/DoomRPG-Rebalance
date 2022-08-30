@@ -73,9 +73,9 @@ class DRPGZEHandler : EventHandler
             vector3 SpawnPos = (CurrSec.CenterSpot.x + random(-16, 16), CurrSec.CenterSpot.y + random(-16, 16), Floor.ZAtPoint(CurrSec.CenterSpot));
 
             // Spawn Crate in a secret with a 20% chance, only if secret's sector is not a door (looking at you, Doom 1)
-            if (CurrSec.IsSecret() && centerHeight > 0 && random(1, 100) <= 20)
+            if (CurrSec.IsSecret() && centerHeight > 0)
             {
-                Actor.Spawn("DRPGCrate", SpawnPos);
+                Actor.Spawn("DRPGSecretSpawner", SpawnPos);
             }
         }
     }
