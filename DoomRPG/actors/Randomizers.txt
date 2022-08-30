@@ -720,3 +720,14 @@ actor DRPGShieldSpawner : MapSpot
         Stop
     }
 }
+
+// Secret Randomizer
+actor DRPGSecretSpawner : MapSpot
+{
+    States
+    {
+    Spawn:
+        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGSecretSpawner")
+        Stop
+    }
+}

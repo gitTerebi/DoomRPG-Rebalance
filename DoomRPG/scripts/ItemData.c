@@ -1259,7 +1259,7 @@ NamedScript DECORATE void SpawnLuckItem()
 
     ActorToSpawn = "DRPGEmpty";
 
-    if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <=  15.00) ActorToSpawn = "DRPGChipDropper";
+    if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <=  10.00) ActorToSpawn = "DRPGChipDropper";
     if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <=  10.00) ActorToSpawn = "DRPGBatteryDropper";
     // if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=   5.00) ActorToSpawn = "DRPGCrate";
 
@@ -1284,7 +1284,6 @@ NamedScript DECORATE void DRPGGenericLootSpawner(bool ArmorBonus)
     while (!CurrentLevel->Init) Delay(1);
 
     str ActorToSpawn;
-    bool ItemSelected;
 
     if (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512)
         ActorToSpawn = ArmorBonus ? "DRPGArmorBonus" : "DRPGHealthBonus";
@@ -1292,6 +1291,50 @@ NamedScript DECORATE void DRPGGenericLootSpawner(bool ArmorBonus)
         ActorToSpawn = "DRPGGenericLootRandomizer";
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+
+    Thing_Remove(0);
+}
+
+NamedScript DECORATE void DRPGSecretSpawner()
+{
+    // Delay while the map is being initialized
+    while (!CurrentLevel->Init) Delay(1);
+
+    str ActorToSpawn;
+    bool ItemSpawned;
+    int Modifier;
+
+    // Calculate Modifier
+    if (GetCVar("drpg_loot_type") == 0)
+        Modifier = RoundInt(7.5 * MapLevelModifier + 7.5 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 1)
+        Modifier = RoundInt(15.0 * MapLevelModifier);
+    if (GetCVar("drpg_loot_type") == 2)
+        Modifier = RoundInt(15.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 3)
+        Modifier = Random(0,15);
+    if (Modifier > 15)
+        Modifier = 15;
+
+    if ((Random(0, 250) <= 50 + 5 * Modifier) && (!CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) > 512))
+    {
+        if (CompatMode == COMPAT_DRLA)
+        {
+            if (!ItemSpawned && Random(0, 250) <= 50 + 5 * Modifier)
+            {
+                ActorToSpawn = "RLModPackSpawner";
+                ItemSpawned = true;
+            }
+        }
+
+        if (!ItemSpawned)
+        {
+            ActorToSpawn = "DRPGCrate";
+            ItemSpawned = true;
+        }
+
+        SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+    }
 
     Thing_Remove(0);
 }
