@@ -201,6 +201,43 @@ OptionValue "LootTypes"
     2, "\cfLuck Level"
 }
 
+OptionMenu "DoomRPGControls"
+{
+    Title "Customize Controls"
+	ScrollTop 2
+	StaticTextSwitchable 	"ENTER to change, BACKSPACE to clear", "Press new key for control, ESC to cancel", "ControlMessage"
+	StaticText 	""
+	SubMenu "Full Control Menu",		"CustomizeControls"
+	StaticText 	""
+	StaticText 	"Controls", "White"
+    Control "Open Menu", drpg_menu
+    Control "Open Shop", drpg_shop
+    Control "Quick Heal", drpg_quickheal
+    Control "Focus Mode", drpg_focusmode
+    Control "Toggle Shield", drpg_shield
+    Control "Use Stim", drpg_usestim
+    Control "Dispose Stim", drpg_throwawaystim
+    Control "Skill Wheel", "+user1"
+    Control "Turret Command Wheel", "+user2"
+    Control "Use Skill", drpg_useskill
+    Control "Quick Use Skill 1", drpg_useskill_1
+    Control "Quick Use Skill 2", drpg_useskill_2
+    Control "Quick Use Skill 3", drpg_useskill_3
+    Control "Quick Use Skill 4", drpg_useskill_4
+    Control "Quick Use Skill 5", drpg_useskill_5
+    Control "Quick Use Skill 6", drpg_useskill_6
+    Control "Quick Use Skill 7", drpg_useskill_7
+    Control "Quick Use Skill 8", drpg_useskill_8
+    Control "Reactivate disabled augs", drpg_augs_reactivate
+
+	StaticText 	""
+	StaticText 	"Gamepad Control Helper", "White"
+    Control "Open Gamepad Control Helper", Gamepad_Control_Helper_Open
+    Control "Toggle Freelook", freelook_on_gch
+    Control "Toggle Map", toggle_map_gch
+    Control "Open/Close DoomRLA PDA/LegenDoom Weapon Menu", drla_pda_open_gch
+}
+
 OptionMenu "DoomRPGXPSystem"
 {
     Title "XP System"
@@ -847,6 +884,7 @@ OptionMenu "DoomRPG"
     StaticText "Changes to options marked * take effect upon next map.", "Orange"
     StaticText ""
 
+    SubMenu "Customize Controls",           "DoomRPGControls"
     SubMenu "XP System",                    "DoomRPGXPSystem"
     SubMenu "Monster Levels/Stat System",   "DoomRPGMonsters"
     SubMenu "Game Difficulty",              "DoomRPGDifficulty"
