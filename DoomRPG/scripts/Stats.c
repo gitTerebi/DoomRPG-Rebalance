@@ -278,7 +278,7 @@ void CheckLevel()
         if (GetActivatorCVar("drpg_notifications_detailed"))
             HudMessage("You have reached level %d", 0);
         else
-            HudMessage("You get Level Up!");
+            HudMessage("Level up!");
         EndHudMessage(HUDMSG_FADEOUT, LEVELUP_ID, "White", X + 0.4, Y, 3.0, 2.0);
         if (GetActivatorCVar("drpg_notifications_detailed"))
         {
@@ -311,7 +311,7 @@ void CheckLevel()
             if (GetActivatorCVar("drpg_notifications_detailed"))
                 HudMessage("You have reached level %d", Player.Level);
             else
-                HudMessage("You get Level Up!");
+                HudMessage("Level up!");
             EndHudMessage(HUDMSG_FADEOUT, LEVELUP_ID, "White", X + 0.4, Y, 3.0, 2.0);
 
             // Get a bonus for every 10 levels
@@ -387,7 +387,7 @@ void CheckRank()
         if (GetActivatorCVar("drpg_notifications_detailed"))
             HudMessage("\CkYou have been promoted to rank %d: %S", 0, LongRanks[0]);
         else
-            HudMessage("\CkYou get Rank Up!");
+            HudMessage("\CkRank up!");
         EndHudMessage(HUDMSG_FADEOUT, RANKUP_ID, "Yellow", X + 0.4, Y, 3.0, 2.0);
         if (GetActivatorCVar("drpg_notifications_detailed"))
         {
@@ -411,7 +411,7 @@ void CheckRank()
             if (GetActivatorCVar("drpg_notifications_detailed"))
                 HudMessage("\CaYou have been demoted to rank %d: %S", Player.RankLevel, LongRanks[Player.RankLevel]);
             else
-                HudMessage("\CaYou get Rank Down!");
+                HudMessage("\CaDemotion in rank!");
             EndHudMessage(HUDMSG_FADEOUT, RANKUP_ID, "Yellow", X + 0.4, Y, 3.0, 2.0);
         }
 
@@ -441,7 +441,7 @@ void CheckRank()
             if (GetActivatorCVar("drpg_notifications_detailed"))
                 HudMessage("\CkYou have been promoted to rank %d: %S", Player.RankLevel, LongRanks[Player.RankLevel]);
             else
-                HudMessage("\CkYou get Rank Up!");
+                HudMessage("\CkRank up!");
             EndHudMessage(HUDMSG_FADEOUT, RANKUP_ID, "Yellow", X + 0.4, Y, 3.0, 2.0);
 
             SpawnForced("DRPGRankUpArrow", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(Player.TID, APROP_Height), 0, 0);
