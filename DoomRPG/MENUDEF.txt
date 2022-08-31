@@ -204,12 +204,12 @@ OptionValue "LootTypes"
 OptionMenu "DoomRPGControls"
 {
     Title "Customize Controls"
-	ScrollTop 2
-	StaticTextSwitchable 	"ENTER to change, BACKSPACE to clear", "Press new key for control, ESC to cancel", "ControlMessage"
-	StaticText 	""
-	SubMenu "Full Control Menu",		"CustomizeControls"
-	StaticText 	""
-	StaticText 	"Controls", "White"
+    ScrollTop 2
+    StaticTextSwitchable "ENTER to change, BACKSPACE to clear", "Press new key for control, ESC to cancel", "ControlMessage"
+    StaticText ""
+    SubMenu "Full Control Menu", "CustomizeControls"
+    StaticText ""
+    StaticText "Controls", "White"
     Control "Open Menu", drpg_menu
     Control "Open Shop", drpg_shop
     Control "Quick Heal", drpg_quickheal
@@ -230,8 +230,8 @@ OptionMenu "DoomRPGControls"
     Control "Quick Use Skill 8", drpg_useskill_8
     Control "Reactivate disabled augs", drpg_augs_reactivate
 
-	StaticText 	""
-	StaticText 	"Gamepad Control Helper", "White"
+    StaticText ""
+    StaticText "Gamepad Control Helper", "White"
     Control "Open Gamepad Control Helper", Gamepad_Control_Helper_Open
     Control "Toggle Freelook", freelook_on_gch
     Control "Toggle Map", toggle_map_gch
@@ -424,9 +424,9 @@ OptionMenu "DoomRPGMapEvents"
     Option "Technophobia", "drpg_mapevent_skill_technophobia", "OnOff"
     Option "Armageddon", "drpg_mapevent_skill_armageddon", "OnOff"
     Option "Sinstorm", "drpg_mapevent_sinstorm", "OnOff"
-	StaticText ""
+    StaticText ""
 
-	StaticText "Advanced option"
+    StaticText "Advanced option"
     StaticText ""
 
     Slider "Intensity acid rain in event Vicious Downpour", "drpg_acidrain_intensity", 1, 5, 1
@@ -543,7 +543,7 @@ OptionMenu "DoomRPGMultiplayer"
     Option "Share credit drops", "drpg_multi_sharecredits", "OnOff"
     StaticText ""
 
-	Option "Player revive mechanics", "drpg_multi_revives", "OnOff"
+    Option "Player revive mechanics", "drpg_multi_revives", "OnOff"
 }
 
 OptionMenu "DoomRPGShop"
@@ -922,32 +922,32 @@ OptionMenu "OptionsMenu"
 
 OptionMenu Gamepad_Control_Helper
 {
-	Title "Gamepad Control Helper"
-	StaticText " "
+    Title "Gamepad Control Helper"
+    StaticText " "
 
-	StaticText "General Commands"
-	Command "Main Menu", menu_main
-	Command "Save Menu", menu_save
-	Command "Load Menu", menu_load
-	StaticText " "
+    StaticText "General Commands"
+    Command "Main Menu", menu_main
+    Command "Save Menu", menu_save
+    Command "Load Menu", menu_load
+    StaticText " "
 
-	StaticText "DoomRPG Commands"
-	Command "Quick Heal", drpg_quickheal_gch
-	Command "Focus Mode", drpg_focusmode_gch
-	Command "Toggle Shield", drpg_shield_gch
-	Command "Use Stim", drpg_usestim_gch
-	Command "Dispose Stim", drpg_throwawaystim_gch
-	StaticText " "
+    StaticText "DoomRPG Commands"
+    Command "Quick Heal", drpg_quickheal_gch
+    Command "Focus Mode", drpg_focusmode_gch
+    Command "Toggle Shield", drpg_shield_gch
+    Command "Use Stim", drpg_usestim_gch
+    Command "Dispose Stim", drpg_throwawaystim_gch
+    StaticText " "
 
-	StaticText "DoomRPG Skills"
-	Command "Recall", drpg_recall_gch
-	Command "Transport", drpg_transport_gch
-	StaticText " "
+    StaticText "DoomRPG Skills"
+    Command "Recall", drpg_recall_gch
+    Command "Transport", drpg_transport_gch
+    StaticText " "
 
-	StaticText "Music Box Commands"
-	Command "Next Song", nextsong_gch
-	Command "Original Song", origsong_gch
-	Command "Auto Next On", autonexton_gch
-	Command "Auto Next Off", autonextoff_gch
-	StaticText " "
+    StaticText "Music Box Commands"
+    Command "Next Song", nextsong_gch
+    Command "Original Song", origsong_gch
+    Command "Auto Next On", autonexton_gch
+    Command "Auto Next Off", autonextoff_gch
+    StaticText " "
 }
