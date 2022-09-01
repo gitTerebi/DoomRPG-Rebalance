@@ -645,6 +645,7 @@ struct PlayerData_S
     int Level;
     long int XP;
     long int XPNext;
+    int XPPercent;
 
     // Rank
     str RankString;
