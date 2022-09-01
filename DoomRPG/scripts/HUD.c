@@ -222,7 +222,36 @@ NamedScript Type_ENTER void OverviewHUD()
     // Misc
     int CreditColor;
 
-    fixed X, Y;
+    // XP Bar
+    str ClassName[10];
+    int CurrentClass = PlayerClass(PlayerNumber());
+    int Iterations;
+    int XPPercentCurrent = Player.XPPercent;
+    int XPPercentOld = Player.XPPercent;
+
+    // Compatibility Handling - DoomRL Arsenal
+    if (CompatMode == COMPAT_DRLA)
+    {
+        ClassName[0] = "Marine";
+        ClassName[1] = "Scout";
+        ClassName[2] = "Technician";
+        ClassName[3] = "Renegade";
+        ClassName[4] = "Demolitionist";
+
+        // Compatibility Handling - DoomRL Arsenal Extended
+        if (CompatModeEx == COMPAT_DRLAX)
+        {
+            ClassName[6] = "Mechanoid";
+            ClassName[7] = "Nomad";
+            ClassName[8] = "Nano Maniac";
+            ClassName[9] = "Phase Sisters";
+            ClassName[10] = "Sarge";
+        }
+    }
+    else
+        ClassName[0] = "Doom Guy";
+
+    fixed X, X1, Y, Y1;
 
 Start:
     NOP;
@@ -242,6 +271,8 @@ Start:
 
     X = GetActivatorCVar("drpg_credits_x");
     Y = GetActivatorCVar("drpg_credits_y");
+    X1 = GetActivatorCVar("drpg_xp_bar_x");
+    Y1 = GetActivatorCVar("drpg_xp_bar_y");
 
     SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
 
@@ -260,6 +291,60 @@ Start:
     {
         ModulesCollected += (Modules.Value - Modules.OldValue);
         ModulesCollectionTimer = 35 * 6;
+    }
+
+    // XP Bar
+    if (GetActivatorCVar("drpg_xp_bar_enable"))
+    {
+        SetFont("SMALLFONT");
+        HudMessage("%d LVL %S", Player.Level, ClassName[CurrentClass]);
+        EndHudMessage(HUDMSG_PLAIN, 0, "White", X1, Y1 - 8.0, 0.05);
+
+        XPPercentCurrent = Player.XPPercent;
+        if (XPPercentCurrent < 1 && Player.XP > 0)
+            XPPercentCurrent = 1;
+
+        if (XPPercentCurrent == XPPercentOld && Player.XPGained <= 0)
+        {
+            SetHudClipRect(X1 - 75.0, Y1 - 5.0, RoundInt(XPPercentCurrent * 1.5), 8.0);
+            PrintSprite("XPBarPr1", 0, X1, Y1, 0.05);
+        }
+        else
+        {
+            if (XPPercentCurrent > XPPercentOld)
+            {
+                SetHudClipRect(X1 - 75.0, Y1 - 4.0, RoundInt(XPPercentOld * 1.5), 8.0);
+                PrintSprite("XPBarPr1", 0, X1, Y1, 0.05);
+                SetHudClipRect(X1 + XPPercentOld * 1.5 - 75.0, Y1 - 4.0, RoundInt((XPPercentCurrent - XPPercentOld) * 1.5), 8.0);
+                PrintSpriteAlpha("XPBarPr2", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+            }
+            else if (XPPercentCurrent < XPPercentOld)
+            {
+                SetHudClipRect(X1 - 75.0, Y1 - 4.0, RoundInt(XPPercentCurrent * 1.5), 8.0);
+                PrintSpriteAlpha("XPBarPr2", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+            }
+            else if (Player.XPGained > 0)
+            {
+                SetHudClipRect(X1 - 75.0, Y1 - 4.0, RoundInt(XPPercentOld * 1.5) - 1, 8.0);
+                PrintSprite("XPBarPr1", 0, X1, Y1, 0.05);
+                SetHudClipRect(X1 + XPPercentOld * 1.5 - 75.0 - 1.0, Y1 - 4.0, RoundInt((XPPercentCurrent - XPPercentOld + 1) * 1.5), 8.0);
+                PrintSpriteAlpha("XPBarPr2", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+            }
+
+            if (Player.XPGained > 0)
+                Iterations = 0;
+            else
+                Iterations++;
+
+            if (Iterations > 35)
+            {
+                XPPercentOld = XPPercentCurrent;
+                Iterations = 0;
+            }
+        }
+
+        SetHudClipRect(0, 0, 0, 0);
+        PrintSprite("XPBarFll", 0, X1, Y1, 0.05);
     }
 
     // Credits

@@ -268,6 +268,10 @@ void CheckLevel()
         Player.XPNext = XPTable[MAX_LEVEL - 1];
     }
 
+    // Calculating XP Percent
+    if (GetActivatorCVar("drpg_xp_bar_enable"))
+        Player.XPPercent = (int)((Player.XP + Player.XPGained) * 100l / Player.XPNext);
+
     // Set HUD size and font for notifications
     SetHudSize(GetActivatorCVar("drpg_hud_width"), GetActivatorCVar("drpg_hud_height"), false);
     SetFont("BIGFONT");

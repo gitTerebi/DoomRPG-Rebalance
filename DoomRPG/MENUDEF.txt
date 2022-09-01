@@ -686,6 +686,12 @@ OptionMenu "DoomRPGHUD"
     Slider "Turret Info Y Position", "drpg_turret_y", -240, 1080, 1
     StaticText ""
 
+    StaticText "XP Bar"
+    Option "XP Bar Enable", "drpg_xp_bar_enable", "OnOff"
+    Slider "XP Bar X Position", "drpg_xp_bar_x", -320, 1920, 1
+    Slider "XP Bar Y Position", "drpg_xp_bar_y", -240, 1080, 1
+    StaticText ""
+
     StaticText "Notifications"
     Option "Notifications Preview", "drpg_notifications_preview", "OnOff"
     Option "Detailed Notifications", "drpg_notifications_detailed", "OnOff"
