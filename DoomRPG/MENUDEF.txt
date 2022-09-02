@@ -201,6 +201,13 @@ OptionValue "LootTypes"
     2, "\cfLuck Level"
 }
 
+OptionValue "XPBarColor"
+{
+    0, "Blue"
+    1, "Red"
+    2, "White"
+}
+
 OptionMenu "DoomRPGControls"
 {
     Title "Customize Controls"
@@ -686,10 +693,12 @@ OptionMenu "DoomRPGHUD"
     Slider "Turret Info Y Position", "drpg_turret_y", -240, 1080, 1
     StaticText ""
 
-    StaticText "XP Bar"
+    StaticText "XP/Rank Bar"
     Option "XP Bar Enable", "drpg_xp_bar_enable", "OnOff"
-    Slider "XP Bar X Position", "drpg_xp_bar_x", -320, 1920, 1
-    Slider "XP Bar Y Position", "drpg_xp_bar_y", -240, 1080, 1
+    Option "Rank Bar Enable", "drpg_rank_bar_enable", "OnOff"
+    Option "XP Bar Color", "drpg_xp_bar_color", "XPBarColor"
+    Slider "XP/Rank Bar X Position", "drpg_xp_bar_x", -320, 1920, 1
+    Slider "XP/Rank Bar Y Position", "drpg_xp_bar_y", -240, 1080, 1
     StaticText ""
 
     StaticText "Notifications"
