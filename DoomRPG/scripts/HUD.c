@@ -225,9 +225,14 @@ NamedScript Type_ENTER void OverviewHUD()
     // XP Bar
     str ClassName[10];
     int CurrentClass = PlayerClass(PlayerNumber());
-    int Iterations;
     int XPPercentCurrent = Player.XPPercent;
     int XPPercentOld = Player.XPPercent;
+    int XPIterations;
+
+    // Rank Bar
+    int RankPercentCurrent = Player.RankPercent;
+    int RankPercentOld = Player.RankPercent;
+    int RankIterations;
 
     // Compatibility Handling - DoomRL Arsenal
     if (CompatMode == COMPAT_DRLA)
@@ -250,6 +255,27 @@ NamedScript Type_ENTER void OverviewHUD()
     }
     else
         ClassName[0] = "Doom Guy";
+
+    str XPBarColorEmpty[3] =
+    {
+        "LXPBarB1",
+        "LXPBarR1",
+        "LXPBarW1"
+    };
+
+    str XPBarColorProgress[3] =
+    {
+        "LXPBarB2",
+        "LXPBarR2",
+        "LXPBarW2"
+    };
+
+    str XPBarColorProgressAnim[3] =
+    {
+        "LXPBarB3",
+        "LXPBarR3",
+        "LXPBarW3"
+    };
 
     fixed X, X1, Y, Y1;
 
@@ -307,44 +333,103 @@ Start:
         if (XPPercentCurrent == XPPercentOld && Player.XPGained <= 0)
         {
             SetHudClipRect(X1 - 75.0, Y1 - 5.0, RoundInt(XPPercentCurrent * 1.5), 8.0);
-            PrintSprite("XPBarPr1", 0, X1, Y1, 0.05);
+            PrintSprite(XPBarColorProgress[GetActivatorCVar("drpg_xp_bar_color")], 0, X1, Y1, 0.05);
         }
         else
         {
             if (XPPercentCurrent > XPPercentOld)
             {
                 SetHudClipRect(X1 - 75.0, Y1 - 4.0, RoundInt(XPPercentOld * 1.5), 8.0);
-                PrintSprite("XPBarPr1", 0, X1, Y1, 0.05);
+                PrintSprite(XPBarColorProgress[GetActivatorCVar("drpg_xp_bar_color")], 0, X1, Y1, 0.05);
                 SetHudClipRect(X1 + XPPercentOld * 1.5 - 75.0, Y1 - 4.0, RoundInt((XPPercentCurrent - XPPercentOld) * 1.5), 8.0);
-                PrintSpriteAlpha("XPBarPr2", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+                PrintSpriteAlpha(XPBarColorProgressAnim[GetActivatorCVar("drpg_xp_bar_color")], 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
             }
             else if (XPPercentCurrent < XPPercentOld)
             {
                 SetHudClipRect(X1 - 75.0, Y1 - 4.0, RoundInt(XPPercentCurrent * 1.5), 8.0);
-                PrintSpriteAlpha("XPBarPr2", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+                PrintSpriteAlpha(XPBarColorProgressAnim[GetActivatorCVar("drpg_xp_bar_color")], 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
             }
             else if (Player.XPGained > 0)
             {
                 SetHudClipRect(X1 - 75.0, Y1 - 4.0, RoundInt(XPPercentOld * 1.5) - 1, 8.0);
-                PrintSprite("XPBarPr1", 0, X1, Y1, 0.05);
+                PrintSprite(XPBarColorProgress[GetActivatorCVar("drpg_xp_bar_color")], 0, X1, Y1, 0.05);
                 SetHudClipRect(X1 + XPPercentOld * 1.5 - 75.0 - 1.0, Y1 - 4.0, RoundInt((XPPercentCurrent - XPPercentOld + 1) * 1.5), 8.0);
-                PrintSpriteAlpha("XPBarPr2", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+                PrintSpriteAlpha(XPBarColorProgressAnim[GetActivatorCVar("drpg_xp_bar_color")], 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
             }
 
             if (Player.XPGained > 0)
-                Iterations = 0;
+                XPIterations = 0;
             else
-                Iterations++;
+                XPIterations++;
 
-            if (Iterations > 35)
+            if (XPIterations > 35)
             {
                 XPPercentOld = XPPercentCurrent;
-                Iterations = 0;
+                XPIterations = 0;
             }
         }
 
         SetHudClipRect(0, 0, 0, 0);
-        PrintSprite("XPBarFll", 0, X1, Y1, 0.05);
+        PrintSprite(XPBarColorEmpty[GetActivatorCVar("drpg_xp_bar_color")], 0, X1, Y1, 0.05);
+    }
+
+    // Rank Bar
+    if (GetActivatorCVar("drpg_rank_bar_enable"))
+    {
+        Y1 += 6.0;
+
+        if (!GetActivatorCVar("drpg_xp_bar_enable"))
+        {
+            SetFont("SMALLFONT");
+            HudMessage("%d RANK %S", Player.RankLevel, Ranks[Player.RankLevel]);
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X1, Y1 - 8.0, 0.05);
+        }
+
+        RankPercentCurrent = Player.RankPercent;
+        if (RankPercentCurrent < 1 && Player.Rank > 0)
+            RankPercentCurrent = 1;
+
+        if (RankPercentCurrent == RankPercentOld && Player.RankGained <= 0)
+        {
+            SetHudClipRect(X1 - 75.0, Y1 - 2.0, RoundInt(RankPercentCurrent * 1.5), 4.0);
+            PrintSprite("RNKBar2", 0, X1, Y1, 0.05);
+        }
+        else
+        {
+            if (RankPercentCurrent > RankPercentOld)
+            {
+                SetHudClipRect(X1 - 75.0, Y1 - 2.0, RoundInt(RankPercentOld * 1.5), 4.0);
+                PrintSprite("RNKBar2", 0, X1, Y1, 0.05);
+                SetHudClipRect(X1 + RankPercentOld * 1.5 - 75.0, Y1 - 2.0, RoundInt((RankPercentCurrent - RankPercentOld) * 1.5), 4.0);
+                PrintSpriteAlpha("RNKBar3", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+            }
+            else if (RankPercentCurrent < RankPercentOld)
+            {
+                SetHudClipRect(X1 - 75.0, Y1 - 2.0, RoundInt(RankPercentCurrent * 1.5), 4.0);
+                PrintSpriteAlpha("RNKBar3", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+            }
+            else if (Player.RankGained > 0)
+            {
+                SetHudClipRect(X1 - 75.0, Y1 - 2.0, RoundInt(RankPercentOld * 1.5) - 1, 4.0);
+                PrintSprite("RNKBar2", 0, X1, Y1, 0.05);
+                SetHudClipRect(X1 + RankPercentOld * 1.5 - 75.0 - 1.0, Y1 - 2.0, RoundInt((RankPercentCurrent - RankPercentOld + 1) * 1.5), 4.0);
+                PrintSpriteAlpha("RNKBar3", 0, X1, Y1, 0.05, 0.75 + Sin((Timer()) / 32.0) * 0.25);
+            }
+
+            if (Player.RankGained > 0)
+                RankIterations = 0;
+            else
+                RankIterations++;
+
+            if (RankIterations > 35)
+            {
+                RankPercentOld = RankPercentCurrent;
+                RankIterations = 0;
+            }
+        }
+
+        SetHudClipRect(0, 0, 0, 0);
+        PrintSprite("RNKBar1", 0, X1, Y1, 0.05);
     }
 
     // Credits

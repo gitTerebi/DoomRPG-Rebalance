@@ -652,6 +652,7 @@ struct PlayerData_S
     int RankLevel;
     long int Rank;
     long int RankNext;
+    int RankPercent;
 
     // Combo System
     int Combo;
