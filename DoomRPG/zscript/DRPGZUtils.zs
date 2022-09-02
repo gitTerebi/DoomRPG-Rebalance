@@ -37,33 +37,33 @@ class DRPGZInputHandler : EventHandler
     };
 
     // Up all the keys at the beginning of the level
-	int tics;
-	override void WorldTick()
-	{
-		if (tics < 35)
-		{
-			tics++;
-		}
+    int tics;
+    override void WorldTick()
+    {
+        if (tics < 35)
+        {
+            tics++;
+        }
 
-		if (tics < 15)
-		{
-			for(int i = 0; i<drpgBindingValues.Size(); i++)
-			{
-				if (i == 6)
-				{
-					CallACS("UpdateInput", drpgBindingValues[i], true, false);
-				}
-			}
-		}
+        if (tics < 15)
+        {
+            for(int i = 0; i<drpgBindingValues.Size(); i++)
+            {
+                if (i == 6)
+                {
+                    CallACS("UpdateInput", drpgBindingValues[i], true, false);
+                }
+            }
+        }
 
-		if (tics < 35)
-		{
-			for(int i = 0; i<drpgBindingValues.Size(); i++)
-			{
-				CallACS("UpdateInput", drpgBindingValues[i], false, false);
-			}
-		}
-	}
+        if (tics < 35)
+        {
+            for(int i = 0; i<drpgBindingValues.Size(); i++)
+            {
+                CallACS("UpdateInput", drpgBindingValues[i], false, false);
+            }
+        }
+    }
 
     override bool InputProcess(InputEvent e)
     {
