@@ -49,7 +49,7 @@ NamedScript MapSpecial void ModuleConverter();
 NamedScript MapSpecial void CreditRoom(int);
 NamedScript MapSpecial void ShopSpecial();
 NamedScript MapSpecial void MissionBBS();
-NamedScript MapSpecial void MinigameHandler();
+NamedScript MapSpecial void MinigameHandler(bool);
 NamedScript MapSpecial void OutpostSecret();
 NamedScript MapSpecial void PowerOutage();
 NamedScript MapSpecial void OperatingCapsule();

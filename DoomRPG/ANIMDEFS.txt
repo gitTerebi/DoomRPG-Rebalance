@@ -18,6 +18,7 @@ texture	OPANA1 range OPANA4	tics 6
 texture OPANAA1 range OPANAA4 tics 6
 texture CGCANI00 range CGCANI07 tics 4
 texture ECOMP1 range ECOMP4 tics 5
+texture TSORT1 range TSORT9 tics 4
 
 // --------------------------------------------------
 // MENU
