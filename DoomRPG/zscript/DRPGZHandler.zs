@@ -149,7 +149,7 @@ class DRPGZEHandler : EventHandler
     {
         if (e.Thing) 
         {
-            if(!e.Thing.bIsMonster) 
+            if(!e.Thing.bIsMonster && !e.Thing.Player) 
             {
                 // Kinsie Metaprops - Tech
                 static const string PropTech[] =
