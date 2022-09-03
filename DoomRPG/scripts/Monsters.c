@@ -2521,7 +2521,6 @@ NamedScript DECORATE void PropDeathCheck(int PropType)
         Delay(1);
 
         int Killer = WhoKilledMe();
-        MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
         // Calculate and set prop's DRPGCredits value
         SetInventory("DRPGCredits", Random(0, 100 * MapLevelModifier));
@@ -2549,7 +2548,7 @@ NamedScript DECORATE void PropDeathCheck(int PropType)
             }
         }
 
-        DropCredits(Killer, Stats);
+        DropCredits(Killer, NULL);
     }
 }
 
@@ -2600,7 +2599,7 @@ NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
     int CreditsUAC;
 
     // Fair sharing
-    if (GetCVar("drpg_multi_sharecredits"))
+    if (GetCVar("drpg_multi_sharecredits") && Stats != NULL)
     {
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
@@ -2641,7 +2640,7 @@ NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
             CreditsAmount *= 2;
 
         // UAC Premium
-        if (GetCVar("drpg_uac_premium"))
+        if (GetCVar("drpg_uac_premium") && Stats != NULL)
         {
             CreditsUAC = (fixed)Stats->Threat + CreditsAmount / 100.0 * (4.0 + (fixed)Players(Killer).RankLevel * 4.0);
             GiveActorInventory(Players(Killer).TID, "DRPGCredits", CreditsUAC);
@@ -2651,7 +2650,7 @@ NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
     //Log("\CfInitial Amount: %d\n\CfLuck Mult: %d\n\CfMin: %d\n\CfMax: %d\n\CfAmount: %d", CheckInventory("DRPGCredits"), LuckMult, CreditsMin, CreditsMax, CreditsAmount);
     if (GetCVar("drpg_virtual_credits"))
     {
-        if (GetCVar("drpg_multi_sharecredits"))
+        if (GetCVar("drpg_multi_sharecredits") && Stats != NULL)
         {
             for (int i = 0; i < MAX_PLAYERS; i++)
                 if (PlayerInGame(i))
@@ -2662,7 +2661,7 @@ NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
     }
     else
     {
-        if (GetCVar("drpg_multi_sharecredits"))
+        if (GetCVar("drpg_multi_sharecredits") && Stats != NULL)
         {
             for (int i = 0; i < MAX_PLAYERS; i++)
                 if (PlayerInGame(i))
