@@ -20,36 +20,54 @@ actor DRPGLootDropper : RandomSpawner 11190 //Loot Spawner on Missions BBQ
 
 ACTOR SerpentDecorationDRPG 11196
 {
-	Health 99999999
-	Speed 20
-	Radius 70
-	Height 10
-	Scale 3
-	RenderStyle "Shaded"
-	StencilColor "#CD5C5C"
-	-SHOOTABLE
-	+NOBLOOD
-	+CANTLEAVEFLOORPIC +NONSHOOTABLE
-	+STAYMORPHED +DONTBLAST +NOTELEOTHER
-	States
-	{
-	Spawn:
-		SSDV J 1 A_FadeOut(0.1)
-		TNT1 A 0 A_ChangeFlag("INVISIBLE",1)
-		SSDV JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ 0 A_Wander
-		TNT1 A random(5, 120)
-		Goto Hump
-	Death:
-		Stop
-	Hump:
-		TNT1 A 0 A_ChangeFlag("INVISIBLE",0)
-		SSPT H 3 A_FadeIn(0.1)
-		SSPT EFGEF 3 //A_SerpentRaiseHump
-		SSPT GEF 3
-		SSPT GEFGE 3 //A_SerpentLowerHump
-		SSPT F 3 //A_SerpentHide
-		Goto Spawn
-	}
+    Health 999
+    Speed 20
+    Radius 70
+    Height 30
+    Scale 4
+    RenderStyle "Shaded"
+    StencilColor "#CD5C5C"
+    -SHOOTABLE
+    +NOBLOOD
+    +CANTLEAVEFLOORPIC
+    +NONSHOOTABLE
+    +STAYMORPHED
+    +DONTBLAST
+    +NOTELEOTHER
+    States
+    {
+    Spawn:
+        SSDV JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ 0 A_Wander
+        TNT1 A random(5, 120)
+        Goto Hump
+    Hump:
+        TNT1 A 0 A_SpawnItem("SerpentDecVisualVersion")
+        TNT1 A 45
+        Goto Spawn
+    Death:
+        Goto Hump
+    }
+}
+
+Actor SerpentDecVisualVersion
+{
+    Radius 0
+    Height 0
+    Scale 3
+    RenderStyle "Shaded"
+    StencilColor "#CD5C5C"
+    +NoInteraction
+    +DontThrust
+    States
+    {
+    Spawn:
+        SSPT H 3
+        SSPT EFGEF 3
+        SSPT GEF 3
+        SSPT GEFGE 3 ThrustThingZ(0, 20, 1, 0)
+        SSPT F 3
+        Stop
+    }
 }
 
 Actor DRPGSolarSFX 11197
