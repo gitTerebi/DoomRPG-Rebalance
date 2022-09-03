@@ -1,0 +1,4 @@
+actor DRPGLegenDoomMonsterInit : Inventory
+{
+    Inventory.MaxAmount 1
+}

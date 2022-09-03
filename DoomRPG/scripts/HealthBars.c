@@ -215,7 +215,7 @@ Start:
             }
 
             // LegenDoom Legendary Skull
-            if (CompatMode == COMPAT_LEGENDOOM && CheckActorInventory(Info.TID, "LDLegendaryMonsterToken"))
+            if (CheckActorInventory(Info.TID, "LDLegendaryMonsterToken"))
             {
                 HealthBarX -= 250.0;
                 HealthBarY -= 25.0 + (int)(Sin(Timer() / 64.0) * 4);

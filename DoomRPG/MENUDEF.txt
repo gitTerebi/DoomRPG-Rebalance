@@ -199,6 +199,7 @@ OptionValue "LootTypes"
     0, "Adaptive"
     1, "\caMap Level"
     2, "\cfLuck Level"
+    3, "\ciRoguelike"
 }
 
 OptionValue "XPBarColor"

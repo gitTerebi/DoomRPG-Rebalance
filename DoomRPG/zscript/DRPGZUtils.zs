@@ -40,12 +40,12 @@ class DRPGZInputHandler : EventHandler
     int tics;
     override void WorldTick()
     {
-        if (tics < 35)
+        if (tics < 20)
         {
             tics++;
         }
 
-        if (tics < 15)
+        if (tics < 10)
         {
             for(int i = 0; i<drpgBindingValues.Size(); i++)
             {
@@ -56,7 +56,7 @@ class DRPGZInputHandler : EventHandler
             }
         }
 
-        if (tics < 35)
+        if (tics < 20)
         {
             for(int i = 0; i<drpgBindingValues.Size(); i++)
             {
