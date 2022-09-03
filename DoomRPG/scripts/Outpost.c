@@ -1688,7 +1688,7 @@ NamedScript MapSpecial void MissionBBS()
 }
 
 // Roulette
-NamedScript MapSpecial void MinigameHandler()
+NamedScript MapSpecial void MinigameHandler(bool Rare)
 {
     // Return if already in a minigame
     if (Player.InMenu || Player.InShop || Player.InMinigame) return;
@@ -1696,7 +1696,7 @@ NamedScript MapSpecial void MinigameHandler()
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
 
     // TODO: This will just play Roulette for now
-    if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
+    if (Rare)
     {
         if (CheckInventory("DRPGChipPlatinum") > 0)
         {
