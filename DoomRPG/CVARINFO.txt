@@ -236,6 +236,7 @@ user    int     drpg_xp_bar_color = 0;
 user    bool    drpg_rank_bar_enable = true;
 user    int     drpg_rank_bar_text = 0;
 user    int     drpg_rank_bar_type = 0;
+user    bool    drpg_xp_bar_anim_enable = true;
 user    int     drpg_xp_bar_x = 50;
 user    int     drpg_xp_bar_y = 470;
 user    bool    drpg_notifications_preview = false;
