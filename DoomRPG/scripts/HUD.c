@@ -320,7 +320,7 @@ Start:
     }
 
     // XP Bar
-    if (GetActivatorCVar("drpg_xp_bar_enable"))
+    if (GetActivatorCVar("drpg_xp_bar_enable") && !(Player.InMenu || Player.InShop || Player.OutpostMenu > 0))
     {
         SetFont("SMALLFONT");
         HudMessage("%d LVL %S", Player.Level, ClassName[CurrentClass]);
@@ -374,7 +374,7 @@ Start:
     }
 
     // Rank Bar
-    if (GetActivatorCVar("drpg_rank_bar_enable"))
+    if (GetActivatorCVar("drpg_rank_bar_enable") && !(Player.InMenu || Player.InShop || Player.OutpostMenu > 0))
     {
         Y1 += 6.0;
 

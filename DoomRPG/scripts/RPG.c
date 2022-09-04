@@ -1694,6 +1694,9 @@ NamedScript Type_RESPAWN void Respawn()
         long int XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
         long int RankPenalty = (long int)(RankTable[Player.RankLevel] * GetCVar("drpg_multi_takexp_percent") / 100);
 
+        if (XPPenalty > Player.XP) XPPenalty = Player.XP;
+        if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
+
         if (XPPenalty > 0 || RankPenalty > 0)
         {
             Player.XP -= XPPenalty;
