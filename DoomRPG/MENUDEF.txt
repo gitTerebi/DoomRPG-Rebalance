@@ -202,11 +202,41 @@ OptionValue "LootTypes"
     3, "\ciRoguelike"
 }
 
-OptionValue "XPBarColor"
+OptionValue "XPBarTypes"
+{
+    0, "Short Thin"
+    1, "Short Wide"
+    2, "Long Thin"
+    3, "Long Wide"
+}
+
+OptionValue "XPBarTextTypes"
+{
+    0, "Off"
+    1, "Left"
+    2, "Middle"
+    3, "Right"
+}
+
+OptionValue "XPBarColors"
 {
     0, "Blue"
     1, "Red"
     2, "White"
+}
+
+OptionValue "RankBarTypes"
+{
+    0, "Short Thin"
+    1, "Long Thin"
+}
+
+OptionValue "RankBarTextTypes"
+{
+    0, "Off"
+    1, "Left"
+    2, "Middle"
+    3, "Right"
 }
 
 OptionMenu "DoomRPGControls"
@@ -696,8 +726,16 @@ OptionMenu "DoomRPGHUD"
 
     StaticText "XP/Rank Bar"
     Option "XP Bar Enable", "drpg_xp_bar_enable", "OnOff"
+    Option "XP Bar Text", "drpg_xp_bar_text", "XPBarTextTypes"
+    Option "XP Bar Type", "drpg_xp_bar_type", "XPBarTypes"
+    Option "XP Bar Color", "drpg_xp_bar_color", "XPBarColors"
+    StaticText ""
+
     Option "Rank Bar Enable", "drpg_rank_bar_enable", "OnOff"
-    Option "XP Bar Color", "drpg_xp_bar_color", "XPBarColor"
+    Option "Rank Bar Text", "drpg_rank_bar_text", "RankBarTextTypes"
+    Option "Rank Bar Type", "drpg_rank_bar_type", "RankBarTypes"
+    StaticText ""
+
     Slider "XP/Rank Bar X Position", "drpg_xp_bar_x", -320, 1920, 1
     Slider "XP/Rank Bar Y Position", "drpg_xp_bar_y", -240, 1080, 1
     StaticText ""
