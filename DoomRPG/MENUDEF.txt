@@ -736,6 +736,7 @@ OptionMenu "DoomRPGHUD"
     Option "Rank Bar Type", "drpg_rank_bar_type", "RankBarTypes"
     StaticText ""
 
+    Option "XP/Rank Bar Animation Enable", "drpg_xp_bar_anim_enable", "OnOff"
     Slider "XP/Rank Bar X Position", "drpg_xp_bar_x", -320, 1920, 1
     Slider "XP/Rank Bar Y Position", "drpg_xp_bar_y", -240, 1080, 1
     StaticText ""

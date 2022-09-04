@@ -529,7 +529,7 @@ Start:
         if (XPPercentCurrent < 1 && Player.XP > 0)
             XPPercentCurrent = 1;
 
-        if (XPPercentCurrent == XPPercentOld && Player.XPGained <= 0)
+        if ((XPPercentCurrent == XPPercentOld && Player.XPGained <= 0) || !GetActivatorCVar("drpg_xp_bar_anim_enable"))
         {
             SetHudClipRect(X1 - XpBarHalfLength, Y1 - (XpBarHeigh / 2.0), RoundInt(XPPercentCurrent * XpProgressPercentModifier), XpBarHeigh);
             PrintSprite(XpBarProgress, 0, X1, Y1, 0.05);
@@ -639,7 +639,7 @@ Start:
         if (RankPercentCurrent < 1 && Player.Rank > 0)
             RankPercentCurrent = 1;
 
-        if (RankPercentCurrent == RankPercentOld && Player.RankGained <= 0)
+        if ((RankPercentCurrent == RankPercentOld && Player.RankGained <= 0) || !GetActivatorCVar("drpg_xp_bar_anim_enable"))
         {
             SetHudClipRect(X1 - RankBarHalfLength, Y1 - (RankBarHeigh / 2.0), RoundInt(RankPercentCurrent * RankProgressPercentModifier), RankBarHeigh);
             PrintSprite(RankBarProgress, 0, X1, Y1, 0.05);
