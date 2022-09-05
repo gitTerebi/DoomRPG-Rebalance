@@ -223,7 +223,7 @@ NamedScript Type_ENTER void OverviewHUD()
     int CreditColor;
 
     // XP Bar
-    str ClassName[10];
+    str ClassName[11];
     int CurrentClass = PlayerClass(PlayerNumber());
     int XPPercentCurrent = Player.XPPercent;
     int XPPercentOld = Player.XPPercent;
