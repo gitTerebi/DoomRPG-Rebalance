@@ -29,7 +29,7 @@ Installation Instructions:
 - LZDoom v3.83a or higher.
 - Delta Touch (Android) v4.6 or higher (includes the above versions or higher).
 
-To run the mod I recommend using [Doom RPG SE Launcher 1.3.0](https://github.com/Forevener/DRPGSEL/releases/tag/1.3.0).
+To run the mod I recommend using [Doom RPG SE Launcher 1.3.1](https://github.com/Forevener/DRPGSEL/releases/tag/1.3.1).
 
 After installation be sure to DoomRPG settings reset (Options -> DoomRPG Otions -> Reset to defaults).
 
