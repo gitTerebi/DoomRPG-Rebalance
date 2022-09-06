@@ -836,7 +836,7 @@ OptionMenu "DoomRPGCharacter"
     StaticText ""
 
     StaticText "Save/Load", 1
-    SafeCommand "Save Character", "pukename SaveCharacter", "Are you sure? Put your armour and boots into your inventory before continuing!"
+    SafeCommand "Save Character", "pukename SaveCharacter", "Are you sure? Put your armour, boots and shoulder weapon into your inventory before continuing!"
     SafeCommand "Load Character", "pukename LoadCharacter", "Are you sure?"
     SafeCommand "Clear Character", "pukename ClearCharacter", "Are you sure?"
     StaticText ""
