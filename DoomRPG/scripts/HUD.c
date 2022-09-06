@@ -366,7 +366,7 @@ NamedScript Type_ENTER void OverviewHUD()
         "XLWBarW3"
     };
 
-    // Rank Bar Types/Color
+    // Rank Bar Types
     str RankBarThinEmpty[3] =
     {
         "RSTBar1",
@@ -384,8 +384,6 @@ NamedScript Type_ENTER void OverviewHUD()
         "RSTBar3",
         "RLTBar3"
     };
-
-
 
     fixed X, X1, Y, Y1;
 
@@ -430,7 +428,7 @@ Start:
     }
 
     // XP Bar
-    if (GetActivatorCVar("drpg_xp_bar_enable") && !(Player.InMenu || Player.InShop || Player.OutpostMenu > 0))
+    if (GetActivatorCVar("drpg_xp_bar_enable") && !(Player.InMenu || Player.InShop || Player.InMinigame || Player.OutpostMenu > 0))
     {
         // Set XP Bar Type/Color
         if (GetActivatorCVar("drpg_xp_bar_type") == 0)
@@ -573,7 +571,7 @@ Start:
     }
 
     // Rank Bar
-    if (GetActivatorCVar("drpg_rank_bar_enable") && !(Player.InMenu || Player.InShop || Player.OutpostMenu > 0))
+    if (GetActivatorCVar("drpg_rank_bar_enable") && !(Player.InMenu || Player.InShop || Player.InMinigame || Player.OutpostMenu > 0))
     {
         // Set Rank Bar Type
         if (GetActivatorCVar("drpg_rank_bar_type") == 0)
@@ -1914,7 +1912,7 @@ Start:
     // If we're on the title map, terminate
     if (InTitle) return;
 
-    if (Player.GUI.Open || Player.InMenu || Player.InShop || Player.OutpostMenu)
+    if (Player.GUI.Open || Player.InMenu || Player.InShop || Player.InMinigame || Player.OutpostMenu)
     {
         Delay(1);
         goto Start;
