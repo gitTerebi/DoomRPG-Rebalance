@@ -2364,6 +2364,7 @@ void CheckCompatibility()
     SkillLevelsMax = MAX_SKILLLEVELS_DF;
 
     CompatMode = COMPAT_NONE;
+    CompatModeEx = COMPAT_NONE;
     CompatMonMode = COMPAT_NONE;
 
     MonsterData = MonsterDataDF;
