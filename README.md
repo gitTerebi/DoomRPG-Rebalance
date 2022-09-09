@@ -18,9 +18,9 @@ Below is the download link:
 Installation Instructions:
 
 1. The archive has a folder DoomRPG SE Rebalance. Unzip this folder to any location on the drive;
-2. Put your doom2.wad in "..\DoomRPG SE Rebalance\DoomRPG-wads". doom2.wad is the main file of the original game. You can buy it on [Steam](https://store.steampowered.com/app/2300/DOOM_II/);
+2. Put your doom2.wad in "..\DoomRPG SE Rebalance\DoomRPG-wads". doom2.wad is the main file of the original game. Can buy it in [Steam](https://store.steampowered.com/app/2300/DOOM_II/) market;
 3. The archive has a folder Extras, it has screenshots of DoomRPG Launcher with the order of launching modifications (DoomRLA, Lexicon, etc.). Make sure your Load Order in the "Mods" tab of the Launcher matches the screenshots;
-4. Run the Doom RPG SE Launcher.exe and click "launch Doom RPG" to start playing.
+4. Run the DoomRPG.exe and click "Launch Doom RPG" to start playing.
 
 ## Manual Installing
 

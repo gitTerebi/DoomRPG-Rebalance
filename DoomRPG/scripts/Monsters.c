@@ -2860,7 +2860,8 @@ NamedScript void MonsterDeath()
             if (CompatMode == COMPAT_DRLA)
             {
                 DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 32);
-                DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 16);
+                if (MapLevelModifier > 0.25)
+                    DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 16);
                 DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32);
                 DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 16);
                 DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 8);

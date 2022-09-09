@@ -537,7 +537,7 @@ Start:
 
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0, 1.0);
 
-            RankBonus = (((long int)(RankTable[Players(i).RankLevel]) / 200l) + 250) / 250 * 250;
+            RankBonus = (((long int)(RankTable[Players(i).RankLevel]) / (long)(100 + RoundInt(100.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
             Players(i).Rank += RankBonus;
 
             if (Players(i).Mission.Type != MT_SECRETS)
@@ -582,7 +582,7 @@ Start:
 
             if (Players(i).Level < MAX_LEVEL)
             {
-                XPBonus = ((XPTable[Players(i).Level] / 20l) + 50) / 50 * 50;
+                XPBonus = ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
                 Player.XP += XPBonus;
 
                 HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
@@ -639,7 +639,7 @@ Start:
 
             if (Players(i).RankLevel < MAX_RANK)
             {
-                RankBonus = ((RankTable[Players(i).RankLevel] / 40l) + 250) / 250 * 250;
+                RankBonus = ((RankTable[Players(i).RankLevel] / (long)(20 + RoundInt(20.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
                 Players(i).Rank += RankBonus;
 
                 HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
@@ -676,8 +676,8 @@ Start:
 
             if (Players(i).Level < MAX_LEVEL && Players(i).RankLevel < MAX_RANK)
             {
-                XPBonus = ((XPTable[Players(i).Level] / 20l) + 50) / 50 * 50;
-                RankBonus = ((RankTable[Players(i).RankLevel] / 40l) + 250) / 250 * 250;
+                XPBonus = ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
+                RankBonus = ((RankTable[Players(i).RankLevel] / (long)(20 + RoundInt(20.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
 
                 Players(i).XP += XPBonus;
                 Players(i).Rank += RankBonus;
@@ -696,7 +696,7 @@ Start:
 
             if (Players(i).Level == MAX_LEVEL && Players(i).RankLevel < MAX_RANK)
             {
-                RankBonus = ((RankTable[Players(i).RankLevel] / 40l) + 250) / 250 * 250;
+                RankBonus = ((RankTable[Players(i).RankLevel] / (long)(20 + RoundInt(20.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
 
                 Players(i).Rank += RankBonus;
                 GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
@@ -707,7 +707,7 @@ Start:
 
             if (Players(i).Level < MAX_LEVEL && Players(i).RankLevel == MAX_RANK)
             {
-                XPBonus = ((XPTable[Players(i).Level] / 20l) + 50) / 50 * 50;
+                XPBonus = ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
 
                 Players(i).XP += XPBonus;
                 GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
@@ -917,7 +917,7 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
 
             if (Players(i).RankLevel < MAX_RANK)
             {
-                long int RankBonus = ((RankTable[Players(i).RankLevel] / 20l) + 250) / 250 * 250;
+                long int RankBonus = ((RankTable[Players(i).RankLevel] / (long)(10 + RoundInt(10.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
                 Players(i).Rank += RankBonus;
 
                 HudMessage("Par Time Beaten!\n%ld Rank Bonus", RankBonus);
@@ -1261,7 +1261,7 @@ void MapEventReward()
 
             if (Player.Level < MAX_LEVEL)
             {
-                long int XPBonus = ((XPTable[Player.Level] / 10l) + 50) / 50 * 50;
+                long int XPBonus = ((XPTable[Player.Level] / (long)(5 + RoundInt(5.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
                 Player.XP += XPBonus;
 
                 PrintMessage(StrParam("\CfBonus:\C- %ld XP and Crate", XPBonus), 2, 0);

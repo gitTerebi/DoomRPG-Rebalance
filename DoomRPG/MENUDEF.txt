@@ -641,7 +641,8 @@ OptionMenu "DoomRPGMenus"
     Option "Delta Touch Compatibility", "drpg_deltatouch", "OnOff"
     StaticText ""
 
-    StaticText "Emulates the effect of holding down key(s) while navigating menus. May cause input lag. Only works in singleplayer.", "Orange"
+    StaticText "Emulates the effect of holding down key(s) while navigating menus.", "Orange"
+    StaticText "May cause input lag. Only works in singleplayer.", "Orange"
     Option "Input Repetition", "drpg_menu_repetition", "OnOff"
 }
 
