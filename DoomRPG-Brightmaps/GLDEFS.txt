@@ -1,4 +1,6 @@
 // Health Items
+brightmap sprite STIMA0 { map "brightmaps/doomrpg/STIMA0.png" }
+brightmap sprite MEDIA0 { map "brightmaps/doomrpg/MEDIA0.png" }
 brightmap sprite MEDLA0 { map "brightmaps/doomrpg/MEDLA0.png" }
 brightmap sprite MEDXA0 { map "brightmaps/doomrpg/MEDXA0.png" }
 brightmap sprite MEDPA0 { map "brightmaps/doomrpg/MEDPA0.png" }
