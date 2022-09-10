@@ -156,7 +156,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGRegenSphere",             "Regeneration Sphere",              1000, 2, 1, "REGNA0", 12, 38);
     ITEMDATA_DEF("DRPGRadSuit",                 "Radiation Suit",                    250, 0, 0, "SUITA0", 11, 51);
     ITEMDATA_DEF("DRPGInfrared",                "IR Goggles",                        500, 0, 0, "PVISA0", 11,  9);
-    ITEMDATA_DEF("DRPGBerserk",                 "Berserk Pack",                     5000, 6, -1, "PSTRA0", 12, 15);
+    ITEMDATA_DEF("DRPGBerserk",                 "Berserk Pack",                     5000, 6, -1,"PSTRA0", 12, 15);
     ITEMDATA_DEF("DRPGAllMap",                  "Computer Area Map",                1000, 1, 1, "PMAPA0", 13, 23);
     ITEMDATA_DEF("DRPGWings",                   "Wings",                            5000, 2, 2, "WINGA0", 13, 36);
     ITEMDATA_DEF("DRPGMegasphere",              "Megasphere",                       5000, 4, 4, "MEGAA0", 12, 32);
@@ -167,6 +167,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGImmunityCrystalLightning","Lightning Immunity Crystal",      50000, 8, 8, "CRYSE0", 16, 48);
     ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",          50000, 8, 8, "CRYSF0", 16, 48);
     ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",      50000, 8, 8, "CRYSG0", 16, 48);
+    ITEMDATA_DEF("DRPGThermonuclearBombPickup", "Thermonuclear Bomb",             100000, -1,-1,  "NUKE", -1,  0);
     ITEMDATA_CATEGORY_END;
 
     // Shield Parts - Built Dynamically
@@ -896,6 +897,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGImmunityCrystalLightning","\CfLightning\C- Immunity Crystal",   50000, -1,  8, "CRYSE0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "\CdToxic\C- Immunity Crystal",       50000, -1,  8, "CRYSF0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalRadiation","\CqRadiation\C- Immunity Crystal",   50000, -1,  8, "CRYSG0", 16, 48);
+        ITEMDATA_DEF("DRPGThermonuclearBombPickup", "Thermonuclear Bomb",                100000, -1, -1,   "NUKE", -1,  0);
         ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                        2000,  4,  2, "MMAPA0", 14, 23);
         ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",                 12500,  5,  2, "BLUPA0", 14, 23);
         ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                        5000,  6,  6, "ISKLA0", 10, 18);
