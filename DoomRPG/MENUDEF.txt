@@ -824,6 +824,7 @@ OptionMenu "DoomRPGPerformance"
     StaticText ""
 
     Option "Virtual credit drops", "drpg_virtual_credits", "OnOff"
+	Option "No credit clips", "drpg_noclip_credits", "OnOff"
 }
 
 OptionMenu "DoomRPGCharacter"
