@@ -2507,19 +2507,6 @@ void CheckCompatibility()
         Thing_Remove(TID);
     }
 
-    // Pandemonia Monsters
-    Success = SpawnForced("LaserRifleZombieDRPG", 0, 0, 0, TID, 0);
-    if (Success)
-    {
-        if (DebugLog)
-            Log("\CdDEBUG: \CdPandemonia Monsters\C- detected");
-
-        CompatMonMode = COMPAT_PANDEMONIA;
-        MonsterData = MonsterDataPANDM;
-        MonsterDataAmount = MAX_DEF_MONSTERS_PANDM;
-        Thing_Remove(TID);
-    }
-
     if (DebugLog && CompatMode == COMPAT_NONE && CompatMonMode == COMPAT_NONE && !MapPacks)
         Log("\CdDEBUG: \C-No compatible mods found");
 }

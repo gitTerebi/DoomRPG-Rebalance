@@ -3245,7 +3245,7 @@ void BuildSkillData()
         Skills[4][16].Description[2] = "Summons a Rare Spider Mastermind";
     }
     // Rampancy Compatibility
-    else if (CompatMonMode == COMPAT_RAMPANCY || CompatMonMode == COMPAT_DEHACKED || CompatMonMode == COMPAT_PANDEMONIA)
+    else if (CompatMonMode == COMPAT_RAMPANCY || CompatMonMode == COMPAT_DEHACKED)
     {
         for (int i = 1; i < 17; i++)
         {
