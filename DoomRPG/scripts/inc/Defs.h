@@ -1054,7 +1054,7 @@ typedef struct LegendaryDef_S       LegendaryDef;
 //
 
 // WadSmoosh Map Packs
-#define MAX_WSMAPPACKS  6
+#define MAX_WSMAPPACKS  7
 typedef enum
 {
     WS_DOOM1,
