@@ -61,6 +61,17 @@ map E4M8 lookup "HUSTR_E4M8"
 }
 
 //end of episode need to send back to outpost rather than end game
+map E5M8 lookup "$HUSTR_E5M8"
+{
+	levelnum = 48
+	titlepatch = "WILV47"
+	next = "OUTPOST"
+	nosoundclipping
+	music = "D_E5M8"
+	par = 300
+}
+
+//end of episode need to send back to outpost rather than end game
 map MAP30 lookup "HUSTR_30"
 {
 	next = "OUTPOST"
