@@ -561,7 +561,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
 
     // Delay if Toaster Mode on
     if (GetCVar("drpg_toaster"))
-        while (ActorNotSeePlayers(0, 2048)) Delay(70);
+        while (ActorNotSeePlayers(0, 1024)) Delay(20);
 
     // Start Damage Numbers Script
     DamageNumbers();
@@ -1241,9 +1241,12 @@ NamedScript void MonsterAggressionHandler()
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
+    // Init Toaster Mode
+    bool ToasterMod = GetCVar("drpg_toaster");
+
     // Calculate delay time
     int DelayTime = 10;
-    if (GetCVar("drpg_toaster"))
+    if (ToasterMod)
         DelayTime = 35;
 
     int Capacity = Stats->Capacity;
@@ -1260,7 +1263,7 @@ Start:
         return;
 
     // Delay if Toaster Mode on
-    if (GetCVar("drpg_toaster"))
+    if (ToasterMod)
         while (ActorNotSeePlayers(0, 0)) Delay(35);
 
     // Changing the AI of monsters in case if there are summoned monsters
@@ -1491,9 +1494,12 @@ NamedScript void MonsterStatsHandler()
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
+    // Init Toaster Mode
+    bool ToasterMod = GetCVar("drpg_toaster");
+
     // Calculate delay time
     int DelayTime = 4;
-    if (GetCVar("drpg_toaster"))
+    if (ToasterMod)
         DelayTime = 15;
 
     int OldStrength;
@@ -1745,7 +1751,7 @@ Start:
     }
 
     // Delay if Toaster Mode on
-    if (GetCVar("drpg_toaster"))
+    if (ToasterMod)
         while (ActorNotSeePlayers(0, 0)) Delay(35);
 
     Delay(DelayTime);

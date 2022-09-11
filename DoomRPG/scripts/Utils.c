@@ -662,8 +662,16 @@ bool ActorSeePlayers(int MonsterTID, int Dist)
     {
         if (!PlayerInGame(i)) continue;
 
-        if (!CheckSight(MonsterTID, Players(i).TID, 0) || Distance(MonsterTID, Players(i).TID) > Dist)
-            return false;
+        if (Dist > 0)
+        {
+            if (!CheckSight(MonsterTID, Players(i).TID, 0) || Distance(MonsterTID, Players(i).TID) > Dist)
+                return false;
+        }
+        else
+        {
+            if (!CheckSight(MonsterTID, Players(i).TID, 0))
+                return false;
+        }
     }
 
     return true;
