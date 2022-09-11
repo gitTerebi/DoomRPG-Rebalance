@@ -1326,9 +1326,15 @@ NamedScript Console void ItemDump()
 }
 
 // Dynamic Loot Generation System
-NamedScript bool DynamicLootGeneratorCheckRemoval(int TID, fixed Z)
+NamedScript bool DynamicLootGeneratorCheckRemoval(int TID, fixed Z, bool monster)
 {
     bool Remove = true;
+
+    // [KS] Don't spawn stuff on special-effects flats like skyfloor or blackness, or at extreme height differences, because more often than not those are used as void space filler or instakill floors.
+    // Examples: Epic2 MAP14, SF2012 MAP02, some CC4 maps.
+    bool BadFloor = (CheckActorFloorTexture(TID, "F_SKY1") || CheckActorFloorTexture(TID, "F_SKY2") || CheckActorFloorTexture(TID, "BLACK") || CheckActorFloorTexture(TID, "FBLACK") || CheckActorFloorTexture(TID, "ALLBLAKF"));
+	bool LegitSector = monster && GetCVar("drpg_spawnercheck_sector") ? ScriptCall("DRPGZUtilities", "CheckActorInLegitSector", TID, monster) : true;
+	bool check = monster ? GetCVar("drpg_spawnercheck_sight") : true;
 
     for (int i = 0; ItemTIDs[i] != -1; i++)
     {
@@ -1338,13 +1344,9 @@ NamedScript bool DynamicLootGeneratorCheckRemoval(int TID, fixed Z)
         // Randomly continue for variance
         if (Random(1, 4) == 1) continue;
 
-        bool CanSee = CheckSight(ItemTIDs[i], TID, 0);
+        bool CanSee = check ? CheckSight(ItemTIDs[i], TID, 0) : true;
 
-        // [KS] Don't spawn stuff on special-effects flats like skyfloor or blackness, or at extreme height differences, because more often than not those are used as void space filler or instakill floors.
-        // Examples: Epic2 MAP14, SF2012 MAP02, some CC4 maps.
-        bool BadFloor = (CheckActorFloorTexture(TID, "F_SKY1") || CheckActorFloorTexture(TID, "F_SKY2") || CheckActorFloorTexture(TID, "BLACK") || CheckActorFloorTexture(TID, "FBLACK") || CheckActorFloorTexture(TID, "ALLBLAKF"));
-
-        if (CanSee && !BadFloor && Abs(Z - GetActorZ(ItemTIDs[i])) <= 24)
+        if (CanSee && LegitSector && !BadFloor && Abs(Z - GetActorZ(ItemTIDs[i])) <= 24)
         {
             Remove = false;
             break;
@@ -1443,7 +1445,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
 
         if (Spawned)
         {
-            bool Remove = ScriptCall("DRPGZUtilities", "CheckActorInMap", TID) ? DynamicLootGeneratorCheckRemoval(TID, Z) : true;
+            bool Remove = ScriptCall("DRPGZUtilities", "CheckActorInMap", TID) ? DynamicLootGeneratorCheckRemoval(TID, Z, MaxItems < 0) : true;
             bool Visible = false;
 
             if (!Remove)

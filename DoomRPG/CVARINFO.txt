@@ -64,6 +64,8 @@ server  bool    drpg_invulnerability_plus = false;
 server  bool    drpg_combo_damage = false;
 server  int     drpg_monster_mapweight = 1;
 server  int     drpg_monster_population = 100;
+server	bool	drpg_spawnercheck_sight = false;
+server	bool	drpg_spawnercheck_sector = true;
 server  int     drpg_monster_limit = 0;
 server  bool    drpg_monster_adaptive_spawns = true;
 server  int     drpg_aurasteal_rate = 70;
@@ -283,6 +285,7 @@ server  int     drpg_corpses_cleanup_timer = 60;
 server  int     drpg_auras_drawdistance = 1650;
 server  int     drpg_popoffs_drawdistance = 1650;
 server  bool    drpg_virtual_credits = false;
+server  bool    drpg_noclip_credits = false;
 
 // Stored Character
 user    int     drpg_char_data_len = 0;
