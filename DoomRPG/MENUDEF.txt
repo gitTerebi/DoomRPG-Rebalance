@@ -404,8 +404,8 @@ OptionMenu "DoomRPGDifficulty"
     Slider "Monster Population %", "drpg_monster_population", 10.0, 200.0, 1.0
     Slider "Absolute Monster Limit", "drpg_monster_limit", 0.0, 16200.0, 50.0
     Option "Map-based monster spawns", "drpg_monster_adaptive_spawns", "OnOff"
-	Option "Monster spawner sight constraint ", "drpg_spawnercheck_sight", "OnOff"
-	Option "Monster spawner sector constraint", "drpg_spawnercheck_sector", "OnOff"
+    Option "Monster spawner sight constraint ", "drpg_spawnercheck_sight", "OnOff"
+    Option "Monster spawner sector constraint", "drpg_spawnercheck_sector", "OnOff"
     StaticText ""
 
     Slider "Enemy Aura Steal Rate", "drpg_aurasteal_rate", 10, 175, 1
@@ -826,7 +826,7 @@ OptionMenu "DoomRPGPerformance"
     StaticText ""
 
     Option "Virtual credit drops", "drpg_virtual_credits", "OnOff"
-	Option "No credit clips", "drpg_noclip_credits", "OnOff"
+    Option "No credit clips", "drpg_noclip_credits", "OnOff"
 }
 
 OptionMenu "DoomRPGCharacter"
