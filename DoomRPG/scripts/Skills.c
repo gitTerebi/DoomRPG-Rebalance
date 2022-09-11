@@ -2996,6 +2996,9 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
             NanomaniacTransport();
         }
 
+        if (TransporterLevel == NULL)
+            TransporterLevel = DefaultOutpost;
+
         ChangeLevel(TransporterLevel->LumpName, 0, CHANGELEVEL_NOINTERMISSION, CurrentSkill);
         Transported = true;
         return true;
