@@ -350,7 +350,6 @@ NamedScript MapSpecial void LevelTransport()
     str WadNames[MAX_MAPPACKS] =
     {
         "Doom",      // WadSmoosh
-        "Sigil",
         "Doom II: Hell on Earth",
         "Master Levels",
         "No Rest For The Living",

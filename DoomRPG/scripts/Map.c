@@ -3537,7 +3537,6 @@ NamedScript void InitMapPacks()
     str CvarNames[MAX_MAPPACKS] =
     {
         "drpg_ws_doom1",
-        "drpg_ws_sigil",
         "drpg_ws_doom2",
         "drpg_ws_master",
         "drpg_ws_nerve",
@@ -3679,7 +3678,6 @@ NamedScript void InitMapPacks()
     str LumpNames[MAX_MAPPACKS] =
     {
         "E1M1",      // WadSmoosh
-        "E5M1",
         "MAP01",
         "ML_MAP01",
         "NV_MAP01",

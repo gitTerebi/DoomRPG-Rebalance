@@ -1333,8 +1333,8 @@ NamedScript bool DynamicLootGeneratorCheckRemoval(int TID, fixed Z, bool monster
     // [KS] Don't spawn stuff on special-effects flats like skyfloor or blackness, or at extreme height differences, because more often than not those are used as void space filler or instakill floors.
     // Examples: Epic2 MAP14, SF2012 MAP02, some CC4 maps.
     bool BadFloor = (CheckActorFloorTexture(TID, "F_SKY1") || CheckActorFloorTexture(TID, "F_SKY2") || CheckActorFloorTexture(TID, "BLACK") || CheckActorFloorTexture(TID, "FBLACK") || CheckActorFloorTexture(TID, "ALLBLAKF"));
-    bool LegitSector = monster && GetCVar("drpg_spawnercheck_sector") ? ScriptCall("DRPGZUtilities", "CheckActorInLegitSector", TID, monster) : true;
-    bool check = monster ? GetCVar("drpg_spawnercheck_sight") : true;
+	bool LegitSector = monster && GetCVar("drpg_spawnercheck_sector") ? ScriptCall("DRPGZUtilities", "CheckActorInLegitSector", TID, monster) : true;
+	bool check = monster ? GetCVar("drpg_spawnercheck_sight") : true;
 
     for (int i = 0; ItemTIDs[i] != -1; i++)
     {

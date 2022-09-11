@@ -1,5 +1,4 @@
 server	bool 	drpg_ws_doom1 = true;
-server	bool 	drpg_ws_sigil = true;
 server	bool 	drpg_ws_doom2 = true;
 server	bool 	drpg_ws_master = true;
 server	bool 	drpg_ws_nerve = true;
