@@ -269,11 +269,11 @@ void CheckLevel()
     }
 
     // Calculating XP Percent
-    if (GetActivatorCVar("drpg_xp_bar_enable") && (Player.XPGained > 0 || (Timer() % 20) == 0))
+    if (GetActivatorCVar("drpg_xp_bar_enable") && ((Player.XPGained != 0 && Timer() % 2 == 0) || (Player.XPGained == 0 && Timer() % 20 == 0)))
         Player.XPPercent = (int)((Player.XP + Player.XPGained) * 100l / Player.XPNext);
 
     // Calculating Rank Percent
-    if (GetActivatorCVar("drpg_rank_bar_enable") && (Player.RankGained > 0 || (Timer() % 20) == 0))
+    if (GetActivatorCVar("drpg_rank_bar_enable") && ((Player.RankGained != 0 && Timer() % 2 == 0) || (Player.XPGained == 0 && Timer() % 20 == 0)))
         Player.RankPercent = (int)((Player.Rank + Player.RankGained) * 100l / Player.RankNext);
 
     // Set HUD size and font for notifications
