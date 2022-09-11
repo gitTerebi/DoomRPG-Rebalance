@@ -2739,6 +2739,9 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
 
     for (int i = 1; i < tmpTIDPos; i++)
     {
+        if (tmpTIDPos > 256 && i % 4 == 0)
+            continue;
+
         int ii = i;
         while (ii > 0 && tmpTIDDist[ii] < tmpTIDDist[ii-1])
         {
@@ -2776,6 +2779,7 @@ NamedScript Console bool Magnetize(SkillLevelInfo *SkillLevel, void *Data)
             SetActorPosition(TID[i], X, Y, Z, 0);
             SetActorVelocity(TID[i], 0, 0, 0, false, false);
         }
+        SetActorVelocity(Player.TID, 0.01, 0.01, 0, true, false);
     }
     else
     {

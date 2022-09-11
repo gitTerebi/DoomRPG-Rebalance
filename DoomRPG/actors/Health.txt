@@ -28,6 +28,7 @@ actor DRPGBasicHealth : Health
 // Health Bonus
 actor DRPGHealthBonus : CustomInventory
 {
+    +COUNTITEM
     +INVENTORY.ALWAYSPICKUP
     
     Inventory.PickupMessage "$GOTHTHBONUS"
