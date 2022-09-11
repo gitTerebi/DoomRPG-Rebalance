@@ -1031,7 +1031,7 @@ NamedScript void HellSkillTransport(int player)
     {
         MonsterInfoPtr TempMonster = &MonsterData[i];
 
-        if (CompatMonMode == COMPAT_DRLA)
+        if (CompatMonMode == COMPAT_DRLA || CompatMonMode == COMPAT_PANDEMONIA)
         {
             if (GameSkill() < 5)
             {
@@ -1484,7 +1484,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
         {
             MonsterLevelDivisor = 2.5;
         }
-        else if (CompatMonMode == COMPAT_DRLA)
+        else if (CompatMonMode == COMPAT_DRLA || CompatMonMode == COMPAT_PANDEMONIA)
         {
             MonsterLevelDivisor = 10.00;
         }
