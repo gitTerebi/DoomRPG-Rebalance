@@ -49,6 +49,8 @@ Class WidowBigShotRPG : WidowBigShot replaces WidowBigShot
   Death:
 	TNT1 A 0 
 		{
+		A_SetScale(1.4);
+		A_SetRoll(random(0,360));
 		A_SpawnItemEx("RedPlasmaExplosionFlare");
 		for(user_fx = 0;user_fx<=30;user_fx++)
 			A_SpawnParticle(GetParticleColor(),SPF_FULLBRIGHT|SPF_RELATIVE,random(10,17),frandom(12,14),random(0,360),frandom(0,6),0,frandom(-6,6),frandom(0,6),0,frandom(-6,6),0,0,0,1,-1,-1.2);
