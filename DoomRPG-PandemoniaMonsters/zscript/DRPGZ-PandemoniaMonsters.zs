@@ -18,6 +18,47 @@ Class PyrobruiserCometDRPGFix : PyrobruiserComet replaces PyrobruiserComet 					
 	}
 }
 
+Class OverchargedPlasmaBallTrailRPG : OverchargedPlasmaBallTrail replaces OverchargedPlasmaBallTrail
+{
+  States
+  {
+  Spawn:
+	TNT1 A 2;
+	PLOV C 1
+		{
+		A_SetScale(Scale.X-0.15);
+		A_FadeOut(0.15);
+		}
+	Wait;
+  	}
+}
+
+Class WidowBigShotRPG : WidowBigShot replaces WidowBigShot
+{
+  States
+  {
+  Spawn:
+	PLOV AAABBB 1 Bright Light("RedPlasma") 
+		{
+		A_SpawnItemEx("RedPlasmaLightningTrail",0,0,0,0,0,0,0,0,220);
+		A_SpawnItemEx("OverchargedPlasmaBallTrail");
+		for(user_fx = 0;user_fx<=2;user_fx++)
+			A_SpawnParticle(GetParticleColor(),SPF_FULLBRIGHT|SPF_RELATIVE,10,frandom(5,10),0,frandom(-8,0),frandom(-5,5),frandom(-5,5),frandom(-4,0),frandom(-1,1),0,0,0,0,1.0,-1,-0.75);
+		}
+	Loop;
+  Death:
+	TNT1 A 0 
+		{
+		A_SetScale(1.4);
+		A_SetRoll(random(0,360));
+		A_SpawnItemEx("RedPlasmaExplosionFlare");
+		for(user_fx = 0;user_fx<=30;user_fx++)
+			A_SpawnParticle(GetParticleColor(),SPF_FULLBRIGHT|SPF_RELATIVE,random(10,17),frandom(12,14),random(0,360),frandom(0,6),0,frandom(-6,6),frandom(0,6),0,frandom(-6,6),0,0,0,1,-1,-1.2);
+		}
+	PLRE ABCDEFGHIJKL 2 Bright;
+	Stop;
+	}
+}
 
 //Monsters Things (damage types etc.)
 
