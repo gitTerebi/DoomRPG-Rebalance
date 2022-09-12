@@ -434,7 +434,7 @@ void GetTargetMonster(MissionInfo *Mission)
             TestAmount = (30 + (320 * Mission->Difficulty)) / TestDifficulty;
         }
 
-        if (CompatMonMode == COMPAT_DRLA)
+        if (CompatMonMode == COMPAT_DRLA || CompatMonMode == COMPAT_PANDEMONIA)
         {
             if (Mission->Type == MT_KILL)
             {
@@ -529,7 +529,7 @@ void GetTargetMonster(MissionInfo *Mission)
     int EffectiveDifficulty = MonsterPtr->Difficulty + (10 * MonsterPtr->ThreatLevel);
     int BaseAmount;
 
-    if (CompatMonMode == COMPAT_DRLA)
+    if (CompatMonMode == COMPAT_DRLA || CompatMonMode == COMPAT_PANDEMONIA)
     {
         BaseAmount = (15.0 * (26.0 - (fixed)MonsterPtr->ThreatLevel) / 26.0) * (1.0 + (fixed)Mission->Difficulty / (4.0 + ((fixed)MonsterPtr->ThreatLevel + 1.0) / 5.2)) * (1.0 + (fixed)AveragePlayerLevel() / (75.0 - (fixed)Mission->Difficulty * 5.0));
     }
