@@ -1,6 +1,101 @@
 // DOOMRPG COMPATIBILITY
 // --------------------------------------------------
 
+// Calling the ACS MonsterInit script for monsters
+class Pandemonia_MonsterInit : EventHandler
+{
+    override void WorldThingSpawned(WorldEvent e)
+    {
+        if (e.Thing && e.Thing.bIsMonster)
+        {
+			 static const string PandemoniaMonsters[] =
+            {
+                		"LaserRifleZombieRPG", "PistolZombieRPG", "PlasmaPistolZombieRPG",					//Zombies
+				"SpecOpsRiflemanRPG", 					
+				
+               			"AutoShotgunZombieRPG", "ChaosWarriorRPG", "RocketZombieRPG", "ShotgunAdmiralRPG", 			//Shotgunners
+				"NewShotgunguyRPG",	"SlugShotgunZombieRPG", "SpecOpsShotgunnerRPG", "SuperShotgunZombieRPG",
+				
+				"AssaultGunnerRPG", "BFG10kWarriorRPG", "BFGCommandoRPG", "ChaingunZombieRPG", 				//Commandos
+				"ChaosDeathmarkRPG", "NailborgCommandoRPG", "PlasmaRifleZombieRPG", "SpecOpsGunnerRPG", 
+				"SpecOpsLieutenantRPG",
+				
+				"ChaosImpRPG",	"DarkImpRPG", "DevilRPG", "HarvesterRPG", "NewImpRPG", "PhaseImpRPG", 			//Imps
+				"PlaguelingRPG", "ScoundrelRPG",
+				
+				"BloodFiendRPG", "ChaosFlayerRPG", "MagmaDemonRPG", "PandMaulerRPG", "MechDemonRPG", 			//Pinkys
+				"NewDemonRPG",
+				
+				"ChaosOphydianRPG", "DarkbeastRPG", "DelusionRPG", "NightmareDemonRPG",	"NewSpectreRPG", 		//Spectres
+				"WretchRPG",
+				
+				"ChaosUmbraRPG", "ElectrosoulRPG", "NewLostSoulRPG", "PhantasmRPG", "SoullessDroneRPG",			//Lost Souls
+				"PandWraithRPG",			
+				
+				"ChaosHollowRPG", "DarkRevenantRPG", "MissileRevenantRPG", "NewRevenantRPG", "PandSentinelRPG",		 //Revevants
+				"SentryRPG",
+				
+				"AgathodemonRPG", "CacobotRPG", "NewCacodemonRPG", "CrackodemonRPG", "DarkCacodemonRPG", 		//Cacodemons
+				"WitherdemonRPG",
+				
+				"ArachknightRPG", "NewArachnotronRPG", "AugmentedArachnotronRPG", "ChaosObserverRPG", 			//Arachnotrons
+				"FusionArachnotronRPG", "NailgunArachnotronRPG", "WidowRPG", 
+				
+				"ChaosBeholderRPG", "DarkElementalRPG", "HadesElementalRPG", "NewPainElementalRPG", 			//Pain Elementals
+				"PlasmaticElementalRPG",	
+				
+				"CorpulentRPG", "HectebusRPG", "MafibusRPG", "MancubusRPG", "MaxibusRPG", "TankubusRPG",		//Mancubuses
+				
+				"CyberHellKnightRPG", "CyberHellViscountRPG", "NewHellKnightRPG", "HellViscountRPG", 			//Knights
+				"HellWardenRPG", "InfernobleRPG", 
+				
+				"AfritRPG", "ArchonOfHellRPG", "NewBaronOfHellRPG", "BruiserDemonRPG", "CyberwardenRPG", 		//Barons
+				"CybruiserRPG",	"DarkCybruiserRPG", "PyrobruiserRPG", 
+				
+				"NewArchvileRPG", "CryptekRPG", "DarkVileRPG", "DiabolistRPG", "DistortionistRPG", 			//Arch-Viles
+				"InfernalistRPG",
+				
+				"Epic2AlienRPG", "Scythe2AfritRPG", "Scythe2MarineRPG"							//Patch
+            };
+			
+            static const string PandemoniaBosses[] =
+            {
+               			"AnnihilatorRPG", "NewCyberdemonRPG", "DarkCardinalRPG", "DarkCyberdemonRPG", "DreamweaverRPG",		//Cyberdemons
+				"EradicatorRPG", "PlamexisRPG", "TerminatorRPG", 
+				
+				"ArachnophyteRPG", "ChaosMonolithRPG", "DemolisherRPG", "NewSpiderMastermindRPG", 			//Masterminds
+				"SpiderMastersparkRPG",	
+				
+				"MyrkuraRPG", "GeneralRoasterockRPG"									//Special Bosses
+		};
+
+			static const string PandemoniaOtherThings[] =
+            {
+                		"SayoriRPG", "Epic2KeenRPG"										//Other Things
+            };
+
+            for (int i = 0; i < PandemoniaMonsters.size(); i++)
+            {
+                if (e.Thing.GetClassName() == PandemoniaMonsters[i])
+                {
+                    if (e.Thing.master is "ChaosMonolithRPG")                        
+						e.Thing.ACS_ScriptCall("MonsterInit", MF_NOXP | MF_NOAURA | MF_NODROPS);
+                    else
+                        e.Thing.ACS_ScriptCall("MonsterInit", 0);
+                }
+            }
+				
+			for (int i = 0; i < PandemoniaBosses.size(); i++)
+				if (e.Thing.GetClassName() == PandemoniaBosses[i])
+					e.Thing.ACS_ScriptCall("MonsterInit", MF_BOSS);
+					
+			for (int i = 0; i < PandemoniaOtherThings.size(); i++)
+				if (e.Thing.GetClassName() == PandemoniaOtherThings[i])
+					e.Thing.ACS_ScriptCall("MonsterInit", MF_NOXP | MF_NOAURA | MF_NODROPS);
+        }
+    }
+}
+
 Class PyrobruiserCometDRPGFix : PyrobruiserComet replaces PyrobruiserComet 										//Fix for Pyrobruiser Comet with DRLA i think
 {
   States
@@ -792,104 +887,300 @@ Class MonolithFluxBallDRPG : MonolithFluxBall replaces MonolithFluxBall
 }
 Class MonolithHomingFluxDRPG : MonolithFluxBallDRPG replaces MonolithHomingFlux {}
 
+Class MonolithDeployerRPG : MonolithDeployer replaces MonolithDeployer
+{
+  actor a;
+  int spawnchance;
+  States
+  {
+  Spawn:
+	TNT1 A 1 NoDelay 
+		{
+		A_Warp(AAPTR_DEFAULT,0,0,-1000);
+		A_SpawnItemEx("MonolithDeployerEffectSpawner");
+		A_PlaySound("Monolith/Spawn",1);
+		MonolithEnemySpawn();
+		}
+	Stop;
+	}
+  void MonolithEnemySpawn()
+	{
+	spawnchance = random(1,50);
+	if(spawnchance <= 10)
+		{
+		for(int i = 0;i<4;i++)
+			SpawnChaosEnemy("ChaosWarriorRPG",1);
+		}
+	else if(spawnchance <= 20)
+		{
+		for(int i = 0;i<3;i++)
+			SpawnChaosEnemy("ChaosImpRPG",1);
+		}
+	else if(spawnchance <= 30)
+		{
+		for(int i = 0;i<3;i++)
+			SpawnChaosEnemy("ChaosDeathmarkRPG",1);
+		}
+	else if(spawnchance <= 35)
+		{
+		for(int i = 0;i<2;i++)
+			SpawnChaosEnemy("ChaosFlayerRPG",1);
+		}
+	else if(spawnchance <= 40)
+		{
+		for(int i = 0;i<2;i++)
+			SpawnChaosEnemy("ChaosOphydianRPG",1);
+		}
+	else if(spawnchance <= 45)
+		{
+		for(int i = 0;i<2;i++)
+			SpawnChaosEnemy("ChaosHollowRPG",1);
+		}
+	else if(spawnchance <= 48)
+		SpawnChaosEnemy("ChaosObserverRPG");
+	else if(spawnchance <= 49)
+		SpawnChaosEnemy("ChaosBeholderRPG");
+	else if(spawnchance <= 50)
+		SpawnChaosEnemy("CryptekRPG");
+	}
+  void SpawnChaosEnemy(name enemy, bool shouldthrust = 0)
+	{
+	a = Spawn(enemy,self.pos);
+	a.A_SetAngle(random(0,360));
+	if(shouldthrust)
+		a.Thrust(random(2,6),a.angle);
+	a.master = master;
+	a.Species = "Chaos";
+	master.GiveInventory("MonolithSpawnCount",1);
+	}
+}
+
+Class MonolithEnemySpawnerRPG : MonolithEnemySpawner replaces MonolithEnemySpawner
+{
+  Default
+  {
+  DropItem "ChaosWarriorRPG", 256, 10;
+  DropItem "ChaosDeathmarkRPG", 256, 10;
+  DropItem "ChaosImpRPG", 256, 10;
+  DropItem "ChaosHollowRPG", 256, 5;
+  DropItem "ChaosObserverRPG", 256, 3;
+  DropItem "ChaosBeholderRPG", 256, 1;
+  DropItem "CryptekRPG", 256, 1;
+  }
+}
+
 //SpecialsBosses
 Class GeneralRoasterockRPG : GeneralRoasterock replaces GeneralRoasterock {}
 Class MyrkuraRPG : Myrkura replaces Myrkura {}
 
-
-
-
-// Calling the ACS MonsterInit script for monsters
-class Pandemonia_MonsterInit : EventHandler
+//Specials Boss spawners
+Class PandPursuerBossSpawnerRPG : PandPursuerBossSpawner replaces PandPursuerBossSpawner
 {
-    override void WorldThingSpawned(WorldEvent e)
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay
+		{
+		let g = PandGlobalVariables.Get();
+		if(g && g.PickedBoss == 2)
+			{
+			if(pan_debugmsg)
+				Console.printf("Myrkura");
+			Destroy();
+			}
+		else
+			{
+			if(pan_debugmsg)
+				Console.printf("Roasterock");
+			SetStateLabel("SpawnRoasterock");
+			targetplayer = target;
+			}
+		}
+	Stop;
+  SpawnRoasterock:
+	TNT1 A 1
+		{
+		let RoastWait = random(1050,10500);
+		A_SetTics(RoastWait);
+		if(pan_debugmsg)
+			Console.Printf("Roasterock spawning in: %d", RoastWait);
+		}
+	TNT1 A 100 SetOrigin(targetplayer.pos,0);
+	TNT1 A 0
+		{
+		bFLATSPRITE = true;
+		bROLLSPRITE = true;
+		A_SetScale(0.05);
+		A_SetRenderstyle(0.0,STYLE_ADD);
+		A_StartSound("Roasterock/Spawn",1);
+		effectloop = 0;
+		}
+  SpawnRoasterockLoop:
+	SPKR A 1 Bright Light("RBFGBALL")
+		{
+		if(effectloop == 80)
+			SetStateLabel("SpawnRoasterockFinish");
+		if(Scale.x < 1.5)
+			A_SetScale(Scale.x+0.03);
+		A_FadeIn(0.08);
+		A_SetRoll(roll+15,SPF_INTERPOLATE);
+		for(user_fx = 0;user_fx<=2;user_fx++)
+			{
+			user_pcolor = random(1,4);
+			if(user_pcolor == 1) { A_SpawnParticle("FF4949",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,20),0,frandom(0,4),0,0,frandom(2,3),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 2) { A_SpawnParticle("FF2424",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,20),0,frandom(0,4),0,0,frandom(2,3),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 3) { A_SpawnParticle("FF6D6D",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,20),0,frandom(0,4),0,0,frandom(2,3),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 4) { A_SpawnParticle("FF0000",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,20),0,frandom(0,4),0,0,frandom(2,3),0,0,0,1,-1,-1); }
+			}
+		effectloop++;
+		}
+	Wait;
+  SpawnRoasterockFinish:
+	TNT1 A 0
+		{
+		let rockerstocker = Spawn("GeneralRoasterockRPG",pos);
+		Spawn("TeleportFog",pos);
+		let g = PandGlobalVariables.Get();
+		let BeatRoast = g.BeatRoast;
+		if(BeatRoast >= 5)
+			rockerstocker.health = 5000;
+		else
+			rockerstocker.health = (rockerstocker.health) + (BeatRoast*500);
+		rockerstocker.target = target;
+		rockerstocker.A_StartSound("Roasterock/Sight",2,0,1.0,0);
+		if(pan_bossmusic)
+			S_ChangeMusic("P_ROAST");
+		}	
+	SPKR A 1 Bright Light("RBFGBALL")
+		{
+		A_SetRoll(roll+20,SPF_INTERPOLATE);
+		A_FadeOut(0.1);
+		A_SetScale(Scale.x-0.03);
+		effectloop++;
+		}
+	Wait;
+	}
+}
+
+Class MyrkuraSpawnerRPG : MyrkuraSpawner replaces MyrkuraSpawner
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NoDelay 
+		{
+		A_StartSound("Myrkura/Spawn2",15,0,1.0,0);
+		if(pan_bossmusic)
+			S_ChangeMusic("P_MYRKRA");
+		}
+	MRC3 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1
+		{
+		for(user_fx = 0;user_fx<=3;user_fx++)
+			{
+			user_pcolor = random(1,4);
+			if(user_pcolor == 1) { A_SpawnParticle("FF4949",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 2) { A_SpawnParticle("FF2424",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 3) { A_SpawnParticle("FF6D6D",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 4) { A_SpawnParticle("FF0000",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),0,0,0,1,-1,-1); }
+			}
+		}
+	MRC3 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1
+		{
+		for(user_fx = 0;user_fx<=3;user_fx++)
+			{
+			user_pcolor = random(1,4);
+			if(user_pcolor == 1) { A_SpawnParticle("FF4949",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 2) { A_SpawnParticle("FF2424",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 3) { A_SpawnParticle("FF6D6D",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),0,0,0,1,-1,-1); }
+			else if(user_pcolor == 4) { A_SpawnParticle("FF0000",SPF_FULLBRIGHT|SPF_RELATIVE,25,frandom(15,16),random(0,360),frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),0,0,0,1,-1,-1); }
+			}
+		A_SpawnItemEx("RedFireProjectileTrail2",frandom(0,250),0,frandom(0,4),0,0,frandom(5,10),random(0,360));
+		}
+	TNT1 A 0
+		{
+		A_StartSound("Myrkura/Spawn",1,0,1.0,0);
+		for(fxloop = 0;fxloop<=360;fxloop = fxloop+3)
+			{
+			A_SpawnItemEx("RedFireProjectileTrail2",265,0,random(0,4),0,0,frandom(2,6),fxloop);
+			}
+		let mykura = Spawn("MyrkuraRPG",pos);
+		mykura.target = target;
+		}
+	MRC3 A 1 A_FadeOut;
+	Wait;
+	}
+}
+
+//RandomSpawner of the Chaos event i think
+Class ChaosRandomSpawnerRPG : ChaosRandomSpawner replaces ChaosRandomSpawner 			
+{
+  override void PostSpawn(Actor spawned)
     {
-        if (e.Thing && e.Thing.bIsMonster)
+    if(spawned && spawned is "PandMonster")
         {
-			 static const string PandemoniaMonsters[] =
+        let spawnspec = PandMonster(spawned).spec2;
+        if(spawned.Health <= 300 && spawnspec == "Chaos")
             {
-                "LaserRifleZombieRPG", "PistolZombieRPG", "PlasmaPistolZombieRPG",								//Zombies
-				"SpecOpsRiflemanRPG", 					
-				
-                "AutoShotgunZombieRPG", "ChaosWarriorRPG", "RocketZombieRPG", "ShotgunAdmiralRPG", 				//Shotgunners
-				"NewShotgunguyRPG",	"SlugShotgunZombieRPG", "SpecOpsShotgunnerRPG", "SuperShotgunZombieRPG",
-				
-				"AssaultGunnerRPG", "BFG10kWarriorRPG", "BFGCommandoRPG", "ChaingunZombieRPG", 					//Commandos
-				"ChaosDeathmarkRPG", "NailborgCommandoRPG", "PlasmaRifleZombieRPG", "SpecOpsGunnerRPG", 
-				"SpecOpsLieutenantRPG",
-				
-				"ChaosImpRPG",	"DarkImpRPG", "DevilRPG", "HarvesterRPG", "NewImpRPG", "PhaseImpRPG", 			//Imps
-				"PlaguelingRPG", "ScoundrelRPG",
-				
-				"BloodFiendRPG", "ChaosFlayerRPG", "MagmaDemonRPG", "PandMaulerRPG", "MechDemonRPG", 			//Pinkys
-				"NewDemonRPG",
-				
-				"ChaosOphydianRPG", "DarkbeastRPG", "DelusionRPG", "NightmareDemonRPG",	"NewSpectreRPG", 		//Spectres
-				"WretchRPG",
-				
-				"ChaosUmbraRPG", "ElectrosoulRPG", "NewLostSoulRPG", "PhantasmRPG", "SoullessDroneRPG",			//Lost Souls
-				"PandWraithRPG",			
-				
-				"ChaosHollowRPG", "DarkRevenantRPG", "MissileRevenantRPG", "NewRevenantRPG", "PandSentinelRPG", //Revevants
-				"SentryRPG",
-				
-				"AgathodemonRPG", "CacobotRPG", "NewCacodemonRPG", "CrackodemonRPG", "DarkCacodemonRPG", 		//Cacodemons
-				"WitherdemonRPG",
-				
-				"ArachknightRPG", "NewArachnotronRPG", "AugmentedArachnotronRPG", "ChaosObserverRPG", 			//Arachnotrons
-				"FusionArachnotronRPG", "NailgunArachnotronRPG", "WidowRPG", 
-				
-				"ChaosBeholderRPG", "DarkElementalRPG", "HadesElementalRPG", "NewPainElementalRPG", 			//Pain Elementals
-				"PlasmaticElementalRPG",	
-				
-				"CorpulentRPG", "HectebusRPG", "MafibusRPG", "MancubusRPG", "MaxibusRPG", "TankubusRPG",		//Mancubuses
-				
-				"CyberHellKnightRPG", "CyberHellViscountRPG", "NewHellKnightRPG", "HellViscountRPG", 			//Knights
-				"HellWardenRPG", "InfernobleRPG", 
-				
-				"AfritRPG", "ArchonOfHellRPG", "NewBaronOfHellRPG", "BruiserDemonRPG", "CyberwardenRPG", 		//Barons
-				"CybruiserRPG",	"DarkCybruiserRPG", "PyrobruiserRPG", 
-				
-				"NewArchvileRPG", "CryptekRPG", "DarkVileRPG", "DiabolistRPG", "DistortionistRPG", 				//Arch-Viles
-				"InfernalistRPG",
-				
-				"Epic2AlienRPG", "Scythe2AfritRPG", "Scythe2MarineRPG"											//Patch
-            };
-			
-            static const string PandemoniaBosses[] =
-            {
-                "AnnihilatorRPG", "NewCyberdemonRPG", "DarkCardinalRPG", "DarkCyberdemonRPG", "DreamweaverRPG", //Cyberdemons
-				"EradicatorRPG", "PlamexisRPG", "TerminatorRPG", 
-				
-				"ArachnophyteRPG", "ChaosMonolithRPG", "DemolisherRPG", "NewSpiderMastermindRPG", 				//Masterminds
-				"SpiderMastersparkRPG",	
-				
-				"MyrkuraRPG", "GeneralRoasterockRPG"															//Special Bosses
-			};
-
-			static const string PandemoniaOtherThings[] =
-            {
-                "SayoriRPG", "Epic2KeenRPG"																		//Other Things
-            };
-
-            for (int i = 0; i < PandemoniaMonsters.size(); i++)
-            {
-                if (e.Thing.GetClassName() == PandemoniaMonsters[i])
-                {
-                    if (e.Thing.master is "ChaosMonolithRPG")                        
-						e.Thing.ACS_ScriptCall("MonsterInit", MF_NOXP | MF_NOAURA | MF_NODROPS);
-                    else
-                        e.Thing.ACS_ScriptCall("MonsterInit", 0);
-                }
+            for(int i = 0;i<2;i++)
+			    SpawnChaosEnemy(spawned.GetClassName(),1);
             }
-				
-			for (int i = 0; i < PandemoniaBosses.size(); i++)
-				if (e.Thing.GetClassName() == PandemoniaBosses[i])
-					e.Thing.ACS_ScriptCall("MonsterInit", MF_BOSS);
-					
-			for (int i = 0; i < PandemoniaOtherThings.size(); i++)
-				if (e.Thing.GetClassName() == PandemoniaOtherThings[i])
-					e.Thing.ACS_ScriptCall("MonsterInit", MF_NOXP | MF_NOAURA | MF_NODROPS);
+        else if(spawned.Health < 1000 && spawnspec == "Chaos")
+            {
+			SpawnChaosEnemy(spawned.GetClassName(),1);
+            }
+        else if(spawned.Health >= 1000 && random(1,4) == 1 && spawnspec == "Chaos")
+            {
+            MonolithEnemySpawn();
+            }
         }
     }
+
+  void MonolithEnemySpawn()
+	{
+	int spawnchance = random(1,50);
+	if(spawnchance <= 10)
+		{
+		for(int i = 0;i<4;i++)
+			SpawnChaosEnemy("ChaosWarriorRPG",1);
+		}
+	else if(spawnchance <= 20)
+		{
+		for(int i = 0;i<3;i++)
+			SpawnChaosEnemy("ChaosImpRPG",1);
+		}
+	else if(spawnchance <= 30)
+		{
+		for(int i = 0;i<3;i++)
+			SpawnChaosEnemy("ChaosDeathmarkRPG",1);
+		}
+	else if(spawnchance <= 35)
+		{
+		for(int i = 0;i<2;i++)
+			SpawnChaosEnemy("ChaosFlayerRPG",1);
+		}
+	else if(spawnchance <= 40)
+		{
+		for(int i = 0;i<2;i++)
+			SpawnChaosEnemy("ChaosOphydianRPG",1);
+		}
+	else if(spawnchance <= 45)
+		{
+		for(int i = 0;i<2;i++)
+			SpawnChaosEnemy("ChaosHollowRPG",1);
+		}
+	else if(spawnchance <= 48)
+		SpawnChaosEnemy("ChaosObserverRPG");
+	else if(spawnchance <= 49)
+		SpawnChaosEnemy("ChaosBeholderRPG");
+	else if(spawnchance <= 50)
+		SpawnChaosEnemy("CryptekRPG");
+	}
+
+  void SpawnChaosEnemy(name enemy, bool shouldthrust = 0)
+	{
+	let a = Spawn(enemy,self.pos);
+	a.A_SetAngle(random(0,360));
+	if(shouldthrust)
+		a.Thrust(random(2,6),a.angle);
+	}
 }
