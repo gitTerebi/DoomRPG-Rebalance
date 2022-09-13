@@ -203,7 +203,8 @@ Class NailborgCommandoRPG : NailborgCommando replaces NailborgCommando
 {
 	Default
 	{
-		DropItem "DRPGClipSpawner", 256;
+		DropItem "DRPGChaingun", 48;
+		DropItem "DRPGClipBoxSpawner", 208;
 	}
 }
 
@@ -220,9 +221,8 @@ Class SpecOpsLieutenantRPG : SpecOpsLieutenant replaces SpecOpsLieutenant
 {
 	Default
 	{
-		DropItem "DRPGClipSpawner", 192;
-		DropItem "DRPGClipBoxSpawner", 32;
-		DropItem "DRPGRocketAmmoSpawner", 32;
+		DropItem "DRPGClipBoxSpawner", 128;
+		DropItem "DRPGRocketAmmoSpawner", 128;
 	}
 }
 
