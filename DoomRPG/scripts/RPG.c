@@ -579,15 +579,6 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
 
             return 0;
         }
-
-        // Save ammo for revives
-        if (GetCVar("drpg_multi_revives"))
-        {
-            Player.Ammo.Bullets = CheckInventory("Clip");
-            Player.Ammo.Shells = CheckInventory("Shell");
-            Player.Ammo.Rockets = CheckInventory("RocketAmmo");
-            Player.Ammo.Cells = CheckInventory("Cell");
-        }
     }
 
     SetActorProperty(0, APROP_Health, Player.ActualHealth);
@@ -1707,16 +1698,12 @@ NamedScript Type_RESPAWN void Respawn()
         Delay(4);
     AssignTIDs();
 
-    // Heal to max health if revives are disabled or revive at the body's location and give ammo back
+    // Heal to max health if revives are disabled or revive at the body's location
     if (Player.ReviverTID > 0 && Player.BodyTID > 0)
     {
         SetActorFlag(Player.BodyTID, "INVISIBLE", true);
         SetActorPosition(Player.TID, GetActorX(Player.BodyTID), GetActorY(Player.BodyTID), GetActorZ(Player.BodyTID), false);
         SetActorAngle(Player.TID, GetActorAngle(Player.BodyTID));
-        SetInventory("Clip", Player.Ammo.Bullets);
-        SetInventory("Shell", Player.Ammo.Shells);
-        SetInventory("RocketAmmo", Player.Ammo.Rockets);
-        SetInventory("Cell", Player.Ammo.Cells);
         Thing_Remove(Player.BodyTID);
     }
     else

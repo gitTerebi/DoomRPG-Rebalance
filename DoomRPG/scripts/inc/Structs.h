@@ -537,13 +537,6 @@ struct PlayerData_S
 
     // Revive stuff
     int BodyTID;
-    struct
-    {
-        int Bullets;
-        int Shells;
-        int Rockets;
-        int Cells;
-    } Ammo;
     int ReviveKeyTimer;
     int ReviverTID;
 
