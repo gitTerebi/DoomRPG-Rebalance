@@ -484,7 +484,7 @@ MonsterInfo const MonsterDataPANDM[MAX_DEF_MONSTERS_PANDM] =
     { "Mancubus",                          "Mancubus",                          102,     16, false, "You hear deep, guttural noises!" },
     { "Hectebus",                          "Hectebus",                          109,     16, false, "You hear deep growling and the priming of heavy plasma cannons!" },
     { "Mafibus",                           "Mafibus",                           120,     16, false, "From the darkness, a red brawn is coming at you!" },
-    { "Tankubus",                          "Tankubus",                          142,     17, false, "Tracks of tank treads capture your attention!" },
+//  { "Tankubus",                          "Tankubus",                          142,     17, false, "Tracks of tank treads capture your attention!" },
     { "Corpulent",                         "Corpulent",                         153,     18, false, "Deep growling and blasts of searing heat greet you here!" },
     { "Maxibus",                           "Maxibus",                           157,     18, false, "You hear deep, guttural noises!" },
 

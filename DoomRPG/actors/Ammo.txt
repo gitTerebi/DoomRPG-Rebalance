@@ -1,3 +1,10 @@
+// --------------------------------------------------
+// AMMO ITEMS
+//
+
+// --------------------------------------------------
+// Full Ammo
+
 actor DRPGClip : Clip Replaces Clip
 {
     Inventory.PickupSound "items/clip"
@@ -102,6 +109,110 @@ actor DRPGCellPack : CellPack Replaces CellPack
     }
 }
 
+// --------------------------------------------------
+// Half Ammo
+
+actor DRPGClipHalf : DRPGClip
+{
+    Inventory.Amount 5
+    Inventory.PickupSound "items/clip"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		CLP2 A -1
+        Stop
+    }
+}
+
+actor DRPGClipBoxHalf : DRPGClipBox
+{
+    Inventory.Amount 25
+    Inventory.PickupSound "items/clipbox"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		AMM2 A -1
+        Stop
+    }
+}
+
+actor DRPGShellHalf : DRPGShell
+{
+    Inventory.Amount 2
+    Inventory.PickupSound "items/shell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		SHL2 A -1
+        Stop
+    }
+}
+
+actor DRPGShellBoxHalf : DRPGShellBox
+{
+    Inventory.Amount 10
+    Inventory.PickupSound "items/shell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		SBX2 A -1
+        Stop
+    }
+}
+
+actor DRPGRocketBoxHalf : DRPGRocketBox
+{
+    Inventory.Amount 3
+    Inventory.PickupSound "items/rocket"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		BRK2 A -1
+        Stop
+    }
+}
+
+actor DRPGCellHalf : DRPGCell
+{
+    Inventory.Amount 10
+    Inventory.PickupSound "items/cell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		CEL2 A -1
+        Stop
+    }
+}
+
+actor DRPGCellPackHalf : DRPGCellPack
+{
+    Inventory.Amount 50
+    Inventory.PickupSound "items/cell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		CBP2 A -1
+        Stop
+    }
+}
+
+// --------------------------------------------------
+// Backpacks
+
 ACTOR DRPGBackpack : CustomInventory
 {
     Inventory.PickupMessage "$GOTBACKPACK"
@@ -162,6 +273,9 @@ actor DRPGBigBackpack : DRPGBackpack
         Stop
     }
 }
+
+// --------------------------------------------------
+// Stolen Tokens
 
 // Givers to give back stolen ammo
 ACTOR DRPGStolenClip : CustomInventory
