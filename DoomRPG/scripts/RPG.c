@@ -239,9 +239,6 @@ NamedScript Type_ENTER void Init()
         // Set default selected skill to nothing
         Player.SkillSelected = -1;
 
-        // Unset current reviver
-        Player.Reviver = -1;
-
         // Fill Augmentation Battery
         Player.Augs.Battery = 100;
 
@@ -581,6 +578,15 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
             PrintSpriteFade("AGISAVE", 0, 160.0, 140.0, 0.5, 0.5);
 
             return 0;
+        }
+
+        // Save ammo for revives
+        if (GetCVar("drpg_multi_revives"))
+        {
+            Player.Ammo.Bullets = CheckInventory("Clip");
+            Player.Ammo.Shells = CheckInventory("Shell");
+            Player.Ammo.Rockets = CheckInventory("RocketAmmo");
+            Player.Ammo.Cells = CheckInventory("Cell");
         }
     }
 
@@ -1497,16 +1503,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
                         case 3:
                             GiveActorInventory(TID, "LDLegendaryMonsterPickupUV", 1);
                             break;
-                        case 4:
-                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
-                            break;
-                        case 5:
-                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
-                            break;
-                        case 6:
-                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
-                            break;
-                        case 7:
+                        default:
                             GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
                             break;
                         }
@@ -1710,20 +1707,25 @@ NamedScript Type_RESPAWN void Respawn()
         Delay(4);
     AssignTIDs();
 
-    // Heal to max health if revives are disabled or revive at the body's location
-    if (!GetCVar("drpg_multi_revives"))
-        Player.ActualHealth = Player.HealthMax;
-    else if (Player.BodyTID != 0)
+    // Heal to max health if revives are disabled or revive at the body's location and give ammo back
+    if (Player.ReviverTID > 0 && Player.BodyTID > 0)
     {
-        SetActorPosition(Player.TID, GetActorX(Player.BodyTID), GetActorY(Player.BodyTID), GetActorZ(Player.BodyTID), 0);
+        SetActorFlag(Player.BodyTID, "INVISIBLE", true);
+        SetActorPosition(Player.TID, GetActorX(Player.BodyTID), GetActorY(Player.BodyTID), GetActorZ(Player.BodyTID), false);
         SetActorAngle(Player.TID, GetActorAngle(Player.BodyTID));
+        SetInventory("Clip", Player.Ammo.Bullets);
+        SetInventory("Shell", Player.Ammo.Shells);
+        SetInventory("RocketAmmo", Player.Ammo.Rockets);
+        SetInventory("Cell", Player.Ammo.Cells);
         Thing_Remove(Player.BodyTID);
-        Player.BodyTID = 0;
     }
+    else
+        Player.ActualHealth = Player.HealthMax;
+
     SetActorProperty(0, APROP_Health, Player.ActualHealth);
 
     // XP/Rank Penalty
-    if (GetCVar("drpg_multi_takexp"))
+    if (GetCVar("drpg_multi_takexp") && Player.ReviverTID == 0)
     {
         long int XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
         long int RankPenalty = (long int)(RankTable[Player.RankLevel] * GetCVar("drpg_multi_takexp_percent") / 100);
@@ -1742,11 +1744,11 @@ NamedScript Type_RESPAWN void Respawn()
     }
 
     // Restore EP if CVAR is set
-    if (GetCVar("drpg_multi_restoreep"))
+    if (GetCVar("drpg_multi_restoreep") && Player.ReviverTID == 0)
         Player.EP = Player.EPMax;
 
     // Give a box of ammo if a specific ammo type is empty if the CVAR is set
-    if (GetCVar("drpg_multi_restoreammo"))
+    if (GetCVar("drpg_multi_restoreammo") && Player.ReviverTID == 0)
     {
         if (CheckInventory("Clip") < GetAmmoAmount("Clip") * (Player.CapacityTotal / 10))
             SetInventory("Clip", GetAmmoAmount("Clip") * (Player.CapacityTotal / 10));
@@ -1756,6 +1758,14 @@ NamedScript Type_RESPAWN void Respawn()
             SetInventory("RocketAmmo", GetAmmoAmount("RocketAmmo") * (Player.CapacityTotal / 10));
         if (CheckInventory("Cell") < GetAmmoAmount("Cell") * (Player.CapacityTotal / 10))
             SetInventory("Cell", GetAmmoAmount("Cell") * (Player.CapacityTotal / 10));
+    }
+
+    // Reset revive stuff
+    if (GetCVar("drpg_multi_revives"))
+    {
+        Player.ReviveKeyTimer = 0;
+        Player.ReviverTID = 0;
+        Player.BodyTID = 0;
     }
 
     // Apply camera textures and vars
@@ -2575,7 +2585,7 @@ NamedScript void ReviveHandler()
             {
                 SetHudSize(0, 0, false);
                 SetFont("BIGFONT");
-                if (Players(i).Reviver == -1 || Players(i).Reviver == PlayerNumber())
+                if (Players(i).ReviverTID == 0 || Players(i).ReviverTID == Player.TID)
                 {
                     if (Player.Medkit > 0)
                     {
@@ -2585,25 +2595,26 @@ NamedScript void ReviveHandler()
                         if (CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()))
                         {
                             SetPlayerProperty(PlayerNumber(), true, PROP_TOTALLYFROZEN);
+                            Players(i).ReviverTID = Player.TID;
                             Players(i).ReviveKeyTimer++;
                             if (Players(i).ReviveKeyTimer >= 105)
                             {
-                                if (!Stabilize)
+                                if (Stabilize)
+                                {
+                                    Players(i).ReviverTID = 0;
+                                    Players(i).ReviveKeyTimer = 0;
+                                    HudMessage("%tS was stabilized", i + 1);
+                                    EndHudMessage(HUDMSG_FADEOUT, 0, "Green", 1.5, 0.7, 1.0, 1.0);
+                                }
+                                else
                                 {
                                     ScriptCall("DRPGZUtilities", "ForceRespawn", i);
                                     HudMessage("%tS was revived", i + 1);
                                     EndHudMessageBold(HUDMSG_FADEOUT, 0, "Green", 1.5, 0.8, 1.0, 1.0);
                                 }
-                                else
-                                {
-                                    HudMessage("%tS was stabilized", i + 1);
-                                    EndHudMessage(HUDMSG_FADEOUT, 0, "Green", 1.5, 0.7, 1.0, 1.0);
-                                }
                                 SetPlayerProperty(PlayerNumber(), false, PROP_TOTALLYFROZEN);
                                 Players(i).ActualHealth += Expense;
                                 Player.Medkit -= Expense;
-                                Players(i).ReviveKeyTimer = 0;
-                                Players(i).Reviver = -1;
                             }
                             else if (Players(i).ReviveKeyTimer > 0)
                             {
@@ -2618,7 +2629,7 @@ NamedScript void ReviveHandler()
                         {
                             SetPlayerProperty(PlayerNumber(), false, PROP_TOTALLYFROZEN);
                             Players(i).ReviveKeyTimer = 0;
-                            Players(i).Reviver = -1;
+                            Players(i).ReviverTID = 0;
                             if (!Stabilize)
                                 HudMessage("Hold \Cd%jS\C- to revive", "+use");
                             else
