@@ -534,7 +534,11 @@ struct PlayerData_S
 {
     int TID;
     int PlayerView;
+
+    // Revive stuff
     int BodyTID;
+    int ReviveKeyTimer;
+    int ReviverTID;
 
     // Flags
     bool FirstRun;
@@ -739,8 +743,6 @@ struct PlayerData_S
     int StatusTimer[SE_MAX];
     int StatusTimerMax[SE_MAX];
     int Toxicity;
-    int ReviveKeyTimer;
-    int Reviver;
 
     // Locker
     bool LockerMode;

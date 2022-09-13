@@ -3002,6 +3002,12 @@ NamedScript void MonsterDeath()
 
         Delay(1);
 
+        // LegenDoom monster drops
+        if (CheckInventory("LDLegendaryMonsterToken") && GetCVar("LD_droptype") == 1)
+        {
+            DropMonsterItem(Killer, 0, "DRPGLuckDropper", 256);
+        }
+
         // Boss Drops
         if (Stats->Flags & MF_BOSS)
         {
