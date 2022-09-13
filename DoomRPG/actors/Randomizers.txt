@@ -161,14 +161,14 @@ actor DRPGWeaponDropper : RandomSpawner 25005
 
 actor DRPGAmmoDropper : RandomSpawner 25006
 {
-    DropItem "DRPGClip"                 255 80
-	DropItem "DRPGShell"                255 60
-    DropItem "DRPGRocketAmmo"           255 20
-    DropItem "DRPGCell"                 255 10
-    DropItem "DRPGClipBox"              255 4
-    DropItem "DRPGShellBox"             255 3	
-    DropItem "DRPGRocketBox"            255 2	
-    DropItem "DRPGCellPack"             255 1
+    DropItem "DRPGClipSpawner"           255 80
+    DropItem "DRPGShellSpawner"          255 60
+    DropItem "DRPGRocketAmmoSpawner"     255 20
+    DropItem "DRPGCellSpawner"           255 10
+    DropItem "DRPGClipBoxSpawner"        255 4
+    DropItem "DRPGShellBoxSpawner"       255 3	
+    DropItem "DRPGRocketBoxSpawner"      255 2	
+    DropItem "DRPGCellPackSpawner"       255 1
 }
 
 actor DRPGModuleDropper : RandomSpawner 25007
@@ -396,10 +396,10 @@ actor DRPGEPMonsterDropper : RandomSpawner 20157
 
 actor DRPGAmmoMonsterDropper : RandomSpawner 20158
 {
-    DropItem "DRPGClip"                 255 150
-	DropItem "DRPGShell"                255 75
-	DropItem "DRPGRocketAmmo"           255 45
-	DropItem "DRPGCell"                 255 30
+    DropItem "DRPGClipSpawner"          255 150
+    DropItem "DRPGShellSpawner"         255 75
+    DropItem "DRPGRocketAmmoSpawner"    255 45
+    DropItem "DRPGCellSpawner"          255 30
 }
 
 actor DRPGTurretMonsterDropper : RandomSpawner 20159
@@ -728,6 +728,157 @@ actor DRPGSecretSpawner : MapSpot
     {
     Spawn:
         TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGSecretSpawner")
+        Stop
+    }
+}
+
+// Ammo: Clip Randomizer
+actor DRPGClipSpawner : RandomSpawner
+{
+    DropItem "DRPGClip"              255 32
+    DropItem "DRPGClipHalf"          255 224
+}
+
+// Ammo: Clip Box Randomizer
+actor DRPGClipBoxSpawner : RandomSpawner
+{
+    DropItem "DRPGClipBox"           255 32
+    DropItem "DRPGClipBoxHalf"       255 224
+}
+
+// Ammo: Shell Randomizer
+actor DRPGShellSpawner : RandomSpawner
+{
+    DropItem "DRPGShell"             255 32
+    DropItem "DRPGShellHalf"         255 224
+}
+
+// Ammo: Shell Box Randomizer
+actor DRPGShellBoxSpawner : RandomSpawner
+{
+    DropItem "DRPGShellBox"          255 32
+    DropItem "DRPGShellBoxHalf"      255 224
+}
+
+// Ammo: Rocket Randomizer
+actor DRPGRocketAmmoSpawner : RandomSpawner
+{
+    DropItem "DRPGRocketAmmo"        255 255
+}
+
+// Ammo: Rocket Box Randomizer
+actor DRPGRocketBoxSpawner : RandomSpawner
+{
+    DropItem "DRPGRocketBox"         255 32
+    DropItem "DRPGRocketBoxHalf"     255 224
+}
+
+// Ammo: Cell Randomizer
+actor DRPGCellSpawner : RandomSpawner
+{
+    DropItem "DRPGCell"              255 32
+    DropItem "DRPGCellHalf"          255 224
+}
+
+// Ammo: Cell Pack Randomizer
+actor DRPGCellPackSpawner : RandomSpawner
+{
+    DropItem "DRPGCellPack"          255 32
+    DropItem "DRPGCellPackHalf"      255 224
+}
+
+// Weapon: Chainsaw Randomizer
+actor DRPGChainsawSpawner : MapSpot Replaces RandomSpawner 2005
+{
+    States
+    {
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 0)
+        Stop
+    }
+}
+
+// Weapon: Pistol Randomizer
+actor DRPGPistolSpawner : MapSpot Replaces RandomSpawner 5010
+{
+    States
+    {
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 1)
+        Stop
+    }
+}
+
+// Weapon: Shotgun Randomizer
+actor DRPGShotgunSpawner : MapSpot Replaces RandomSpawner 2001
+{
+    States
+    {
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 2)
+        Stop
+    }
+}
+
+// Weapon: Super Shotgun Randomizer
+actor DRPGSuperShotgunSpawner : MapSpot Replaces RandomSpawner 82
+{
+    States
+    {
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 3)
+        Stop
+    }
+}
+
+// Weapon: Chaingun Randomizer
+actor DRPGChaingunSpawner : MapSpot Replaces RandomSpawner 2002
+{
+    States
+    {
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 4)
+        Stop
+    }
+}
+
+// Weapon: Rocket Launcher Randomizer
+actor DRPGRocketLauncherSpawner : MapSpot Replaces RandomSpawner 2003
+{
+    States
+    {
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 5)
+        Stop
+    }
+}
+
+// Weapon: Plasma Rifle Randomizer
+actor DRPGPlasmaRifleSpawner :  MapSpot Replaces RandomSpawner 2004
+{
+    States
+    {
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 6)
+        Stop
+    }
+}
+
+// Weapon: BFG9000 Randomizer
+actor DRPGBFG9000Spawner : MapSpot Replaces RandomSpawner 2006
+{
+    States
+    {
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteWithResult("DRPGWeaponSpawner", 7)
         Stop
     }
 }

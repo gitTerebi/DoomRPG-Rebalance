@@ -18,7 +18,7 @@ actor RLClip2 : RLClip Replaces RLClip
     }
 }
 
-actor RLClip3 : RLClip
+actor RLClip3 : RLClip Replaces DRPGClipHalf
 {
 	Inventory.PickupSound "items/clip"
     
@@ -26,10 +26,10 @@ actor RLClip3 : RLClip
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CLP3 A -1
+		CLP2 A -1
         Stop
     SpawnLoop:
-        CLP3 A -1
+        CLP2 A -1
         Stop
     Pickup:
 		TNT1 A 0 A_GiveInventory("Clip",5)
@@ -51,7 +51,7 @@ actor RLClipBox2 : RLClipBox Replaces RLClipBox
     }
 }
 
-actor RLClipBox3 : RLClipBox
+actor RLClipBox3 : RLClipBox Replaces DRPGClipBoxHalf
 {
 	Inventory.PickupSound "items/clipbox"
     
@@ -59,10 +59,10 @@ actor RLClipBox3 : RLClipBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		AMM3 A -1
+		AMM2 A -1
         Stop
     SpawnLoop:
-        AMM3 A -1
+        AMM2 A -1
         Stop
     Pickup:
 		TNT1 A 0 A_JumpIfInventory("Clip",0, "Nope")
@@ -86,7 +86,7 @@ actor RLShell2 : RLShell Replaces DRPGShell
     }
 }
 
-actor RLShell3 : RLShell
+actor RLShell3 : RLShell Replaces DRPGShellHalf
 {
     Inventory.PickupSound "items/shell"
     
@@ -94,10 +94,10 @@ actor RLShell3 : RLShell
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		SHL3 A -1
+		SHL2 A -1
         Stop
     SpawnLoop:
-        SHL3 A -1
+        SHL2 A -1
         Stop
     Pickup:
         TNT1 A 0 A_JumpIfInventory("Shell",0, "Nope")
@@ -124,7 +124,7 @@ actor RLShellBox2 : RLShellBox Replaces RLShellBox
     }
 }
 
-actor RLShellBox3 : RLShellBox
+actor RLShellBox3 : RLShellBox Replaces DRPGShellBoxHalf
 {
 	Inventory.PickupSound "items/shell"
     
@@ -132,10 +132,10 @@ actor RLShellBox3 : RLShellBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		SBX3 A -1
+		SBX2 A -1
         Stop
     SpawnLoop:
-        SBX3 A -1
+        SBX2 A -1
         Stop
     Pickup:
         TNT1 A 0 A_JumpIfInventory("Shell",0, "Nope")
@@ -176,7 +176,7 @@ actor RLRocketBox2 : RLRocketBox Replaces RLRocketBox
     }
 }
 
-actor RLRocketBox3 : RLRocketBox
+actor RLRocketBox3 : RLRocketBox Replaces DRPGRocketBoxHalf
 {
 	Inventory.PickupSound "items/rocket"
 
@@ -184,10 +184,10 @@ actor RLRocketBox3 : RLRocketBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		BRK3 A -1
+		BRK2 A -1
         Stop
     SpawnLoop:
-        BRK3 A -1
+        BRK2 A -1
         Stop
     Pickup:
         TNT1 A 0 A_JumpIfInventory("Cell",0, "Nope")
@@ -211,7 +211,7 @@ actor RLCell2 : RLCell Replaces RLCell
     }
 }
 
-actor RLCell3 : RLCell
+actor RLCell3 : RLCell Replaces DRPGCellHalf
 {
 	Inventory.PickupSound "items/cell"
 
@@ -219,10 +219,10 @@ actor RLCell3 : RLCell
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CEL3 A -1
+		CEL2 A -1
         Stop
     SpawnLoop:
-        CEL3 A -1
+        CEL2 A -1
         Stop
     Pickup:
         TNT1 A 0 A_JumpIfInventory("Cell",0, "Nope")
@@ -245,7 +245,7 @@ actor RLCellPack2 : RLCellPack Replaces RLCellPack
     }
 }
 
-actor RLCellPack3 : RLCellPack
+actor RLCellPack3 : RLCellPack Replaces DRPGCellPackHalf
 {
 	Inventory.PickupSound "items/cell"
     
@@ -253,10 +253,10 @@ actor RLCellPack3 : RLCellPack
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CBP3 A -1
+		CBP2 A -1
         Stop
     SpawnLoop:
-        CBP3 A -1
+        CBP2 A -1
         Stop
     Pickup:
 //      TNT1 A 0 A_JumpIfInventory("RLScroungerBackpackToken",1,2)

@@ -147,9 +147,9 @@ class DRPGZEHandler : EventHandler
 
     override void WorldThingDied(WorldEvent e)
     {
-        if (e.Thing) 
+        if (e.Thing && !e.Thing.Player) 
         {
-            if(!e.Thing.bIsMonster && !e.Thing.Player) 
+            if(!e.Thing.bIsMonster) 
             {
                 // Kinsie Metaprops - Tech
                 static const string PropTech[] =
