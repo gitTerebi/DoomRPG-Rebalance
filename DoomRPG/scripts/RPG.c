@@ -1479,6 +1479,38 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
                         SpawnMonster = Actor;
                     if (!Visible && Spawn(SpawnMonster, X, Y, Z, TID, A))
                         Items++;
+
+                    // LegenDoom(Lite) roll
+                    if (CheckClass("LDLegendaryMonsterPickupEasy"))
+                    {
+                        switch (GameSkill())
+                        {
+                        case 0:
+                            GiveActorInventory(TID, "LDLegendaryMonsterPickupEasy", 1);
+                            break;
+                        case 1:
+                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNormal", 1);
+                            break;
+                        case 2:
+                            GiveActorInventory(TID, "LDLegendaryMonsterPickupHard", 1);
+                            break;
+                        case 3:
+                            GiveActorInventory(TID, "LDLegendaryMonsterPickupUV", 1);
+                            break;
+                        case 4:
+                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
+                            break;
+                        case 5:
+                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
+                            break;
+                        case 6:
+                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
+                            break;
+                        case 7:
+                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
+                            break;
+                        }
+                    }
                 }
                 else if (Spawn(Actor, X, Y, Z, TID, A))
                     Items++;
