@@ -399,104 +399,104 @@ MonsterInfo const MonsterDataPANDM[MAX_DEF_MONSTERS_PANDM] =
     { "PistolZombie",                      "Pistol Zombie",                     1,       0, false, "You hear shuffling footsteps and moans!" },
     { "PlasmaPistolZombie",                "Plasma Pistol Zombie",              1,       1, false, "Scientist notes laying around there..." },
     { "LaserRifleZombie",                  "Laser Rifle Zombie",                3,       2, false, "You feel like you're being targeted!" },
-    { "SpecOpsRifleman",                   "Spec Ops Rifleman",                 4,       4, false, "Systems catch a radio communications!\nYou smell a plasma..." },
+    { "SpecOpsRifleman",                   "Spec Ops Rifleman",                 4,       4, false, "Systems catch a mumbling radio communications.\nYou smell a plasma..." },
 
     //Shotgunners
     { "NewShotgunguy",                     "Shotgun Zombie",                    12,      1, false, "You hear the sound of shotguns pumping!" },
-    { "SlugShotgunZombie",                 "Slug Shotgun Zombie",               18,      1, false, "You hear the sound of shotguns pumping!\nCorpses laying around with a single holes in the head..." },
-    { "AutoShotgunZombie",                 "Auto Shotgun Zombie",               26,      5, false, "You see couple 12cal. mag`s!" },
-    { "RocketZombie",                      "Rocket Zombie",                     29,      5, false, "You hear the whoosh of rockets!" },
-    { "SuperShotgunZombie",                "Super Shotgun Zombie",              33,      8, false, "You found a broken SSG..." },
-    { "SpecOpsShotgunner",                 "Spec Ops Shotgunner",               40,      10, false, "Systems catch a radio communications!\nYou hear the sound of shotguns pumping behind your back!" },
-    { "ChaosWarrior",                      "Chaos Warrior",                     50,      15, false, "Something is wrong here...\nA warriors calls!" },
-    { "ShotgunAdmiral",                    "Shotgun Admiral",                   55,      16, false, "Torn corpses all around you... and the walls are covered in bullet holes!" },
+    { "SlugShotgunZombie",                 "Slug Shotgun Zombie",               18,      1, false, "You hear the sound of shotguns pumping!\nCorpses are lying around with a single hole in their heads..." },
+    { "AutoShotgunZombie",                 "Auto Shotgun Zombie",               26,      5, false, "You see couple of 12cal. mags on the ground!" },
+    { "RocketZombie",                      "Rocket Zombie",                     29,      5, false, "A persistent smell of blood and rocket fuel is in the air." },
+    { "SuperShotgunZombie",                "Super Shotgun Zombie",              33,      8, false, "The sound of break action flies above splattered bodies!" },
+    { "SpecOpsShotgunner",                 "Spec Ops Shotgunner",               40,      10, false, "Systems catch a mumbling radio communications.\nYou hear the sound of shotguns pumping behind your back!" },
+    { "ChaosWarrior",                      "Chaos Warrior",                     50,      15, false, "Something is wrong here...\nAn undead, silent warriors are stalking this place." },
+    { "ShotgunAdmiral",                    "Shotgun Admiral",                   55,      16, false, "Torn corpses are all around you... and the walls are covered in bullet holes!" },
 
     //Commandos
     { "AssaultGunner",                     "Assault Gunner",                    29,      1, false, "You notice a lot of empty rifle magazines on the ground..." },
     { "ChaingunZombie",                    "Chaingunner",                       35,      2, false, "Ammo belts rustle and clank in the dark!" },
     { "PlasmaRifleZombie",                 "Plasmagunner",                      40,      3, false, "The sound of a plasma rifle priming makes you flinch!" },
-    { "NailborgCommando",                  "Nailborg Commando",                 41,      6, false, "Someone`s hand nailed to the wall!" },
-    { "SpecOpsGunner",                     "Spec Ops Gunner",                   50,      7, false, "Systems catch a radio communications!\nYou notice a lot of empty rifle magazines on the ground..." },
-    { "BFGCommando",                       "BFG Commando",                      60,      8, false, "You notice some power cells on the floor,\nused only by the most powerful weapons!" },
-    { "SpecOpsLieutenant",                 "Spec Ops Lieutenant",               80,      10, false, "You hear evil laughter on the radio!" },
-    { "ChaosDeathmark",                    "Chaos Deathmark",                   60,      14, false, "Something is wrong here...\nYou see green beam nearby." },
-    { "BFG10kWarrior",                     "BFG10k Warrior",                    80,      18, false, "You see plasma holes in the walls!" },
+    { "NailborgCommando",                  "Nailborg Commando",                 41,      6, false, "Someone`s hand is nailed to the wall!" },
+    { "SpecOpsGunner",                     "Spec Ops Gunner",                   50,      7, false, "Systems catch a mumbling radio communications.\nYou notice a lot of empty rifle magazines on the ground..." },
+    { "BFGCommando",                       "BFG Commando",                      60,      8, false, "You notice some wasted power cells on the floor,\nused only by the most powerful weapons!" },
+    { "SpecOpsLieutenant",                 "Spec Ops Lieutenant",               80,      10, false, "An evil laughter echoes everywhere! \nThe infernal gods demand a sacrifice..." },
+    { "ChaosDeathmark",                    "Chaos Deathmark",                   60,      14, false, "Something is wrong here...\nYou are marked for death!" },
+    { "BFG10kWarrior",                     "BFG10k Warrior",                    80,      18, false, "Walls around you are twisted with a huge plasma holes." },
 
     //Lost Souls
-    { "NewLostSoul",                       "Lost Soul",                         38,      1, false, "The sound of many flames echo about!" },
-    { "Phantasm",                          "Phantasm",                          42,      2, false, "Security turrer`s burn with green fire in this place..." },
+    { "NewLostSoul",                       "Lost Soul",                         38,      1, false, "The sound of many flames echo around!" },
+    { "Phantasm",                          "Phantasm",                          42,      2, false, "An overwhelming stench of green flames is in the air." },
     { "Electrosoul",                       "Electrosoul",                       45,      2, false, "All the lighting in this place burned out..." },
-    { "SoullessDrone",                     "Soulless Drone",                    50,      4, false, "Looks like demons have hacked our security system." },
+    { "SoullessDrone",                     "Soulless Drone",                    50,      4, false, "Looks like the soulless automatons have overtaken this place." },
     { "PandWraith",                        "Wraith",                            60,      4, false, "You hear the whispers of lost souls!" },
     { "ChaosUmbra",                        "Chaos Umbra",                       65,      5, false, "Something is wrong here...\nAn otherworldly scream wafts above your head!" },
 
     //Imps
     { "NewImp",                            "Imp",                               22,      2, false, "The walls are scratched and flame-scorched!" },
-    { "DarkImp",                           "Dark Imp",                          28,      3, false, "The walls are scratched and plasma-scorched!" },
+    { "DarkImp",                           "Dark Imp",                          28,      3, false, "A sharp-toothed smiles are blinking in the darkness." },
     { "Devil",                             "Devil",                             33,      5, false, "The walls are scratched and flame-scorched!" },
-    { "Scoundrel",                         "Scoundrel",                         30,      4, false, "You hear scratching a claws!" },
-    { "PhaseImp",                          "Phase Imp",                         35,      9, false, "You hear otherworldly sounds!" },
-    { "Plagueling",                        "Plagueling",                        45,      14, false, "You coughed at the toxic scent." },
+    { "Scoundrel",                         "Scoundrel",                         30,      4, false, "You hear a mad beast chunter in the dark!" },
+    { "PhaseImp",                          "Phase Imp",                         35,      9, false, "Something is watching you from another dimension." },
+    { "Plagueling",                        "Plagueling",                        45,      14, false, "A gruesome toxic scent makes it hard to breathe." },
     { "ChaosImp",                          "Chaos Imp",                         59,      17, false, "Something is wrong here...\nRadioactive electrical zaps can be heard there." },
 
     //Pinkys
     { "NewDemon",                          "Demon",                             30,      4, false, "Hungry growls echo around you!" },
-    { "MechDemon",                         "Mech Demon",                        40,      6, false, "Stomping metal feet ring in your ears!" },
+    { "MechDemon",                         "Mech Demon",                        40,      6, false, "Heavy metal stomps ringing in your ears!" },
     { "BloodFiend",                        "Blood Fiend",                       45,      9, false, "You see uncoagulated blood on the floor..." },
-    { "MagmaDemon",                        "Magma Demon",                       47,      13, false, "You see obsidian particles on the walls..." },
-    { "PandMauler",                        "Mauler",                            50,      14, false, "You hear the menacing stomp of metal paws!" },
-    { "ChaosFlayer",                       "Chaos Flayer",                      65,      17, false, "Something is wrong here...\nThe dosimeter goes off the scale near wall scratch!" },
+    { "MagmaDemon",                        "Magma Demon",                       47,      13, false, "Solidified magma particles are scattered everywhere." },
+    { "PandMauler",                        "Mauler",                            50,      14, false, "Heavy stomps and menaing growls are heard around you!" },
+    { "ChaosFlayer",                       "Chaos Flayer",                      65,      17, false, "Something is wrong here...\nThe dosimeter goes off the scale near THE wall scratch!" },
 
     //Spectres
     { "NewSpectre",                        "Spectre",                           35,      5, false, "It's dark, you are likely to be eaten by a... Spectre?" },
-    { "Delusion",                          "Delusion",                          40,      7, false, "This creature mimics a familiar aura!" },
-    { "NightmareDemon",                    "Nightmare Demon",                   45,      10, false, "Some shadows lurking around!" },
-    { "Wretch",                            "Wretch",                            45,      13, false, "This place looks empty. And dangerous." },
-    { "Darkbeast",                         "Darkbeast",                         50,      15, false, "Sensors detected magic in the area!" },
-    { "ChaosOphydian",                     "Chaos Ophydian",                    70,      17, false, "Something is wrong here...\nYou hear the invisibility mechanism working!" },
+    { "Delusion",                          "Delusion",                          40,      7, false, "These creatures mimic a familiar aura!" },
+    { "NightmareDemon",                    "Nightmare Demon",                   45,      10, false, "Shadows are lurking around!" },
+    { "Wretch",                            "Wretch",                            45,      13, false, "You feel an eyeless things watching you..." },
+    { "Darkbeast",                         "Darkbeast",                         50,      15, false, "Sensors detected the high concentration of metal and magic in the area!" },
+    { "ChaosOphydian",                     "Chaos Ophydian",                    70,      17, false, "Something is wrong here...\nYou hear the invisibility mechanisms working!" },
 
     //Revevants
     { "NewRevenant",                       "Revenant",                          92,      15, false, "Bones clatter all around you!" },
-    { "DarkRevenant",                      "Dark Revenant",                     110,     15, false, "Bones clatter all around you!" },
-    { "MissileRevenant",                   "Missile Revenant",                  130,     16, false, "You hear the whistling of heavy missiles!" },
+    { "DarkRevenant",                      "Dark Revenant",                     110,     15, false, "Aggressive bone clatter all around you!" },
+    { "MissileRevenant",                   "Missile Revenant",                  130,     16, false, "Sensors detect a large heavy rocket supplies in the area.\n...and no living sings." },
     { "Sentry",                            "Sentry",                            140,     17, false, "Screeching of bones and metal echoes from the corner!" },
-    { "ChaosHollow",                       "Chaos Hollow",                      170,     18, false, "Something is wrong here...\nEmpty eye sockets look straight into your soul!" },
-    { "PandSentinel",                      "Sentinel",                          220,     20, false, "Incoming radio transmission...\nEnemy heavy machines has been detected in your sector!" },
+    { "ChaosHollow",                       "Chaos Hollow",                      170,     18, false, "Something is wrong here...\nEmpty eye sockets are looking straight into your soul!" },
+    { "PandSentinel",                      "Sentinel",                          220,     20, false, "Incoming radio transmission...\nEnemy heavy machines have been detected in your sector!" },
 
     //Cacodemons
     { "NewCacodemon",                      "Cacodemon",                         54,      7, false, "Screeches drown out all other sound!" },
-    { "DarkCacodemon",                     "Dark Cacodemon",                    64,      7, false, "Screeches drown out all other sound!" },
-    { "Agathodemon",                       "Agathodemon",                       79,      9, false, "You hear the hum of an electrical substation..." },
+    { "DarkCacodemon",                     "Dark Cacodemon",                    64,      7, false, "Aggressive screeches drown out all other sound!" },
+    { "Agathodemon",                       "Agathodemon",                       79,      9, false, "You hear the hum of an electrical substation...\nWhich is not there!" },
     { "Crackodemon",                       "Crackodemon",                       89,      11, false, "Your hair is on end from the electric field in this place!" },
     { "Witherdemon",                       "Witherdemon",                       97,      13, false, "The local corpses melted from some infection!" },
     { "Cacobot",                           "Cacobot",                           110,     15, false, "Something is interrupting the incoming signal..." },
 
     //Arachnotrons
     { "NewArachnotron",                    "Arachnotron",                       85,      12, false, "Leg servos squeak and whirr nearby!" },
-    { "NailgunArachnotron",                "Nailgun Arachnotron",               90,      12, false, "Leg servos squeak and whirr nearby!" },
-    { "FusionArachnotron",                 "Fusion Arachnotron",                95,      13, false, "The walls are covered with marks of plasma!" },
+    { "NailgunArachnotron",                "Nailgun Arachnotron",               90,      12, false, "Somebody's leg is nailed to the wall!" },
+    { "FusionArachnotron",                 "Fusion Arachnotron",                95,      13, false, "The walls are covered with numberless marks of red plasma." },
     { "AugmentedArachnotron",              "Augmented Arachnotron",             100,     14, false, "The charging of heavy plasma guns fills the air with humming!" },
-    { "Widow",                             "Widow",                             105,     16, false, "From this place, our forces were fired with high-voltage plasma!" },
+    { "Widow",                             "Widow",                             105,     16, false, "Surrounding corpses have railgun and plasma marks on them." },
     { "Arachknight",                       "Arachknight",                       110,     17, false, "The ancient technology of hell has awakened!" },
-    { "ChaosObserver",                     "Chaos Observer",                    150,     21, false, "Something is wrong here...\nYou hear BFG explosions in the distance!" },
+    { "ChaosObserver",                     "Chaos Observer",                    150,     21, false, "Something is wrong here...\nFlying radiation sources detected in close proximity!" },
 
     //Mancubuses
     { "Mancubus",                          "Mancubus",                          102,     16, false, "You hear deep, guttural noises!" },
     { "Hectebus",                          "Hectebus",                          109,     16, false, "You hear deep growling and the priming of heavy plasma cannons!" },
     { "Mafibus",                           "Mafibus",                           120,     16, false, "From the darkness, a red brawn is coming at you!" },
-//  { "Tankubus",                          "Tankubus",                          142,     17, false, "Tracks of tank treads capture your attention!" },
+    //{ "Tankubus",                          "Tankubus",                          142,     17, false, "Tracks of tank treads capture your attention!" },
     { "Corpulent",                         "Corpulent",                         153,     18, false, "Deep growling and blasts of searing heat greet you here!" },
-    { "Maxibus",                           "Maxibus",                           157,     18, false, "You hear deep, guttural noises!" },
+    { "Maxibus",                           "Maxibus",                           157,     18, false, "You hear deeper, more guttular noises!" },
 
     //Pain Elementals
-    { "NewPainElemental",                  "Pain Elemental",                    74,      19, false, "You feel you are being watched!" },
-    { "DarkElemental",                     "Dark Elemental",                    80,      19, false, "Toxic traces everywhere!" },
-    { "PlasmaticElemental",                "Plasmatic Elemental",               100,     20, false, "Sounds as a BFG shot being prepared somewhere!" },
+    { "NewPainElemental",                  "Pain Elemental",                    74,      19, false, "You feel like you're about to get swarmed!" },
+    { "DarkElemental",                     "Dark Elemental",                    80,      19, false, "Toxic traces are everywhere!" },
+    { "PlasmaticElemental",                "Plasmatic Elemental",               100,     20, false, "Sounds like a BFG shot is being prepared somewhere!" },
     { "HadesElemental",                    "Hades Elemental",                   110,     20, false, "An electric shriek can be heard from afar!" },
     { "ChaosBeholder",                     "Chaos Beholder",                    130,     21, false, "Something is wrong here...\nThe level of radioactive plasma exceeds all norms in this place!" },
 
     //Hell Knights
-    { "NewHellKnight",                     "Hell Knight",                       62,      12, false, "A battle cry chants in the distance!!" },
+    { "NewHellKnight",                     "Hell Knight",                       62,      12, false, "A battle cry chants in the distance!" },
     { "HellViscount",                      "Hell Viscount",                     72,      12, false, "Heavy hoofsteps echo through the chambers!" },
     { "HellWarden",                        "Hell Warden",                       80,      13, false, "Shield strikes can be heard from afar!" },
     { "CyberHellKnight",                   "Cyber Hell Knight",                 95,      14, false, "Clanking footsteps herald Hell's mechanical legions!" },
@@ -504,50 +504,50 @@ MonsterInfo const MonsterDataPANDM[MAX_DEF_MONSTERS_PANDM] =
     { "Infernoble",                        "Infernoble",                        120,     16, false, "An evil laugh can be heard through the flames!" },
 
     //Archviles
-    { "NewArchvile",                       "Arch-Vile",                         112,     18, false, "You hear crackling flames!" },
-    { "DarkVile",                          "Dark-Vile",                         132,     18, false, "Green flames visible around!" },
+    { "NewArchvile",                       "Arch-Vile",                         112,     18, false, "You hear a crackling flames!" },
+    { "DarkVile",                          "Dark-Vile",                         132,     18, false, "Green flames are visible around!" },
     { "Diabolist",                         "Diabolist",                         152,     18, false, "It looks like there was a big fire here..." },
-    { "Infernalist",                       "Infernalist",                       172,     19, false, "Some of our forces were burned alive..." },
-    { "Distortionist",                     "Distortionist",                     182,     19, false, "You hear the sounds of space breaking!" },
-    { "Cryptek",                           "Cryptek",                           200,     21, false, "Something is wrong here...\nThe presence of evil squeezes your throat!" },
+    { "Infernalist",                       "Infernalist",                       172,     19, false, "An infernal levels of heat detected in this area." },
+    { "Distortionist",                     "Distortionist",                     182,     19, false, "You feel the space and time distorting around you." },
+    { "Cryptek",                           "Cryptek",                           200,     21, false, "Something is wrong here...\nCryptic destuctive power lingers nearby." },
 
     //Barons Of Hell
     { "NewBaronOfHell",                    "Baron Of Hell",                     72,      14, false, "Seems you've found Hell's nobility!" },
-    { "Afrit",                             "Afrit",                             82,      14, false, "The heat hit you face!" },
+    { "Afrit",                             "Afrit",                             82,      14, false, "The heat hits you in the face!" },
     { "Cybruiser",                         "Cybruiser",                         100,     15, false, "Uneven footsteps marks the arrival of some of Hell's cyberforces!" },
-    { "ArchonOfHell",                      "Archon Of Hell",                    120,     16, false, "You feel you've intruded somewhere that you should not have!" },
+    { "ArchonOfHell",                      "Archon Of Hell",                    120,     16, false, "Dying green flames are burning all around." },
     { "BruiserDemon",                      "BruiserDemon",                      130,     16, false, "The heat in here has gotten intense!" },
     { "DarkCybruiser",                     "Dark Cybruiser",                    140,     17, false, "Sensors detected dark technology in this location!" },
-    { "Cyberwarden",                       "Cyberwarden",                       160,     18, false, "It seems that the forces of hell have sent an elite unit." },
+    { "Cyberwarden",                       "Cyberwarden",                       160,     18, false, "Sounds of shield bashing and guns loading echoes throught this sector." },
     { "Pyrobruiser",                       "Pyrobruiser",                       200,     21, false, "The walls tremble from the onslaught of the fiery army!" },
 
     //Other
     { "Epic2Alien",                        "Alien",                             3,       2, false, "It seems aliens are hunting for our technology." },
-    { "Scythe2Marine",                     "Traitor`s",                         60,      5, false, "Traitors want to sacrifice you to the infernal gods!" },
-    { "Scythe2Afrit",                      "Commander Afrit",                   82,      14, false, "Strong flames burn your gear!" },
+    { "Scythe2Marine",                     "Traitor Marine",                    60,      5, false, "Traitors want to sacrifice you to the infernal gods!" },
+    { "Scythe2Afrit",                      "Infernal Afrit",                    82,      14, false, "Strong flames are burning your gear!" },
 
     //Masterminds
-    { "NewSpiderMastermind",               "Spider Mastermind",                 278,     24, true, "The smell of sulfur and gunpowder hangs in the air, the war machine is close." },
-    { "Demolisher",                        "Demolisher",                        298,     24, true, "Some buildings were destroyed in this sector." },
+    { "NewSpiderMastermind",               "Spider Mastermind",                 278,     24, true, "The smell of metal and gunpowder hangs in the air, the war machine is close." },
+    { "Demolisher",                        "Demolisher",                        298,     24, true, "Superheavy weapon platforms detected in this area." },
     { "Arachnophyte",                      "Arachnophyte",                      299,     24, true, "Infernal aviation razes this place to the ground!" },
     { "SpiderMasterspark",                 "Spider Masterspark",                305,     24, true, "Some thoughts of hell have reached space..." },
     { "ChaosMonolith",                     "ChaosMonolith",                     318,     25, true, "Something is wrong here...\nAll wrong..." },
 
     //Cybies
-    { "NewCyberdemon",                     "Cyberdemon",                        240,     24, true, "Suddenly you have a great urge to turn back!\nBut you not!" },
-    { "Annihilator",                       "Annihilator",                       250,     24, true, "Suddenly you have a great urge to turn back!\nYou scream in TERROR!" },
-    { "DarkCyberdemon",                    "Dark Cyberdemon",                   260,     24, true, "Hell's whisper is trying to gain control over you!" },
+    { "NewCyberdemon",                     "Cyberdemon",                        240,     24, true, "Deafening metal footsteps are heard all around.\nYou hear the rocket launchers being loaded..." },
+    { "Annihilator",                       "Annihilator",                       250,     24, true, "Deafening metal footsteps are heard all around.\nYou hear the rocket launchers being loaded... Twice as fast!" },
+    { "DarkCyberdemon",                    "Dark Cyberdemon",                   260,     24, true, "Hell's whispering heralds a great pain and destruction!" },
     { "DarkCardinal",                      "Dark Cardinal",                     270,     24, true, "You hear screams of terror and a guttural roar!" },
-    { "Terminator",                        "Terminator",                        280,     24, true, "The forces of hell have hacked our advanced weapons systems!\nIt will be hot!" },
-    { "Dreamweaver",                       "Dreamweaver",                       285,     24, true, "The forces of hell have hacked our advanced weapons systems!\nBut what is this unit?!" },
+    { "Terminator",                        "Terminator",                        280,     24, true, "Heavily armed demons desire your termination!" },
+    { "Dreamweaver",                       "Dreamweaver",                       285,     24, true, "Something otherworldly and devastating weaves at the edge of your senses..." },
     { "Plamexis",                          "Plamexis",                          290,     25, true, "Hell's sun is shining on you!" },
-    { "Eradicator",                        "Eradicator",                        300,     25, true, "The forces of hell have hacked our advanced weapons systems!\nYou will die if you disturb them!" },
+    { "Eradicator",                        "Eradicator",                        300,     25, true, "The strongest demonic beasts have come to eradicate your soul!\n...And your ears." },
 
     //Special Bosses
-    { "GeneralRoasterock",                 "General Roasterock",                240,     24, true, "The entire command of the traitors gathered here!\nHowever, they are armed as much as possible!" },
-    { "Myrkura",                           "Myrkura",                           260,     24, true, "Demonic anomalies filled the place!" },
+    { "GeneralRoasterock",                 "General Roasterock",                240,     24, true, "You feel like you're about to get roasted!" },
+    { "Myrkura",                           "Myrkura",                           260,     24, true, "Bloodthirsty anomalous entities filled this place!" },
 
-};
+}; //Thanks TheSkyBug for helping with monsters announcements!
 
 MegabossInfo const MegaBossesDF[MAX_MEGABOSSES_DF] =
 {
