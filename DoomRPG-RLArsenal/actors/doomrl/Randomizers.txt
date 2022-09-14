@@ -208,7 +208,7 @@ actor DRPGBackpackRandomizer2 : RandomSpawner Replaces DRPGBackpackRandomizer
 // WEAPONS SPAWNERS
 // --------------------------------------------------
 
-actor RLChainsawSpawnerRPG : MapSpot Replaces RandomSpawner 2005
+actor RLChainsawSpawnerRPG : MapSpot Replaces DRPGChainsawSpawner
 {
     States
     {
@@ -225,7 +225,7 @@ actor RLChainsawSpawnerRPG : MapSpot Replaces RandomSpawner 2005
     }
 }
 
-actor RLPistolSpawnerRPG : MapSpot Replaces RandomSpawner 5010
+actor RLPistolSpawnerRPG : MapSpot Replaces DRPGPistolSpawner
 {
     States
     {
@@ -242,7 +242,7 @@ actor RLPistolSpawnerRPG : MapSpot Replaces RandomSpawner 5010
     }
 }
 
-actor RLShotgunSpawnerRPG : MapSpot Replaces RandomSpawner 2001
+actor RLShotgunSpawnerRPG : MapSpot Replaces DRPGShotgunSpawner
 {
     States
     {
@@ -259,7 +259,7 @@ actor RLShotgunSpawnerRPG : MapSpot Replaces RandomSpawner 2001
     }
 }
 
-actor RLDoubleShotgunSpawnerRPG : MapSpot Replaces RandomSpawner 82
+actor RLDoubleShotgunSpawnerRPG : MapSpot Replaces DRPGSuperShotgunSpawner
 {
     States
     {
@@ -276,7 +276,7 @@ actor RLDoubleShotgunSpawnerRPG : MapSpot Replaces RandomSpawner 82
     }
 }
 
-actor RLChaingunSpawnerRPG : MapSpot Replaces RandomSpawner 2002
+actor RLChaingunSpawnerRPG : MapSpot Replaces DRPGChaingunSpawner
 {
     States
     {
@@ -293,7 +293,7 @@ actor RLChaingunSpawnerRPG : MapSpot Replaces RandomSpawner 2002
     }
 }
 
-actor RLRocketLauncherSpawnerRPG : MapSpot Replaces RandomSpawner 2003
+actor RLRocketLauncherSpawnerRPG : MapSpot Replaces DRPGRocketLauncherSpawner
 {
     States
     {
@@ -310,7 +310,7 @@ actor RLRocketLauncherSpawnerRPG : MapSpot Replaces RandomSpawner 2003
     }
 }
 
-actor RLPlasmaRifleSpawnerRPG :  MapSpot Replaces RandomSpawner 2004
+actor RLPlasmaRifleSpawnerRPG :  MapSpot Replaces DRPGPlasmaRifleSpawner
 {
     States
     {
@@ -327,7 +327,7 @@ actor RLPlasmaRifleSpawnerRPG :  MapSpot Replaces RandomSpawner 2004
     }
 }
 
-actor RLBFG9000SpawnerRPG : MapSpot Replaces RandomSpawner 2006
+actor RLBFG9000SpawnerRPG : MapSpot Replaces DRPGBFG9000Spawner
 {
     States
     {
