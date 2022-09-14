@@ -1,3 +1,4 @@
 GameInfo
 {
     AddEventHandlers = "Pandemonia_MonsterInit"
+}

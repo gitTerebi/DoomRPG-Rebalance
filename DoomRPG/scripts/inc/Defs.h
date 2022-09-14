@@ -1060,6 +1060,7 @@ typedef struct LegendaryDef_S       LegendaryDef;
 typedef enum
 {
     WS_DOOM1,
+    WS_SIGIL,
     WS_DOOM2,
     WS_MASTER,
     WS_NERVE,
