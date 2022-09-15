@@ -469,8 +469,8 @@ OptionMenu "DoomRPGMapEvents"
     StaticText "Advanced option"
     StaticText ""
 
-    Slider "Intensity acid rain in event Vicious Downpour", "drpg_acidrain_intensity", 1, 5, 1
-    Slider "Intensity floor mist in event The Dark Zone", "drpg_darkzone_floormist_intensity", 1, 5, 1
+    Slider "Acid rain intensity during Vicious Downpour", "drpg_acidrain_intensity", 1, 5, 1
+    Slider "Floor mist intensity during The Dark Zone", "drpg_darkzone_floormist_intensity", 1, 5, 1
 }
 
 OptionMenu "DoomRPGStats"
@@ -508,7 +508,7 @@ OptionMenu "DoomRPGStats"
 
     Option "Disable Luck perk", "drpg_disable_luck_perk", "YesNo"
     StaticText "Disables constant full map reveal gained by having 100/200+ Luck", "Orange"
-    StaticText "Switch to 'Yes' if spoiles gameplay", "Orange"
+    StaticText "Switch to 'Yes' if it spoils gameplay", "Orange"
 }
 
 OptionMenu "DoomRPGStatsNatural"
@@ -795,18 +795,18 @@ OptionMenu "DoomRPGMisc"
     Slider "Minimum Distance For Teleport", "drpg_monster_friendly_teleport_distance", 0, 10, 1
     StaticText ""
 
-    Option "Sound Empty Enegry Shield", "drpg_shield_sound_empty_enable", "OnOff"
-    Option "Sound Charging Enegry Shield", "drpg_shield_sound_charge_enable", "OnOff"
-    Option "Sound Full Enegry Shield", "drpg_shield_sound_full_enable", "OnOff"
-    Option "Sound and Effect of Hitting Enegry Shield", "drpg_shield_effect_hit_enable", "OnOff"
+    Option "Sound Empty Energy Shield", "drpg_shield_sound_empty_enable", "OnOff"
+    Option "Sound Charging Energy Shield", "drpg_shield_sound_charge_enable", "OnOff"
+    Option "Sound Full Energy Shield", "drpg_shield_sound_full_enable", "OnOff"
+    Option "Sound and Effect of Hitting Energy Shield", "drpg_shield_effect_hit_enable", "OnOff"
     StaticText ""
 
-    StaticText "Quality loot items, armor, weapons and spawn monsters depends on the number of WADs passed."
-    StaticText "Lower number of WADs that you plan to go through to increases the intensity."
+    StaticText "Quality loot items, armor, weapons and monster spawns depend on the number of WADs passed."
+    StaticText "Lower number of WADs that you plan to go through to increase the intensity."
     StaticText ""
     StaticText "Use the slider below to set up the number of WADs that you plan to go through."
     StaticText ""
-    Slider "Estimated counts of WADs", "drpg_ws_use_wads", 1, 20, 1, 0
+    Slider "Estimated count of WADs", "drpg_ws_use_wads", 1, 20, 1, 0
     StaticText ""
 }
 
@@ -840,7 +840,7 @@ OptionMenu "DoomRPGCharacter"
     StaticText ""
 
     StaticText "Save/Load", 1
-    SafeCommand "Save Character", "pukename SaveCharacter", "Are you sure? Put your armour, boots and shoulder weapon into your inventory before continuing!"
+    SafeCommand "Save Character", "pukename SaveCharacter", "Are you sure? Put your armor, boots and shoulder weapon into your inventory before continuing!"
     SafeCommand "Load Character", "pukename LoadCharacter", "Are you sure?"
     SafeCommand "Clear Character", "pukename ClearCharacter", "Are you sure?"
     StaticText ""
