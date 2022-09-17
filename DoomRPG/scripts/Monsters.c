@@ -1543,7 +1543,7 @@ Start:
 
     Capacity = Stats->Capacity;
 
-    fixed Aggression = 0.25 + (Capacity * 0.01);
+    fixed Aggression = 0.25 + (Capacity * 0.02);
 
     if (Aggression < 1.0)
     {
