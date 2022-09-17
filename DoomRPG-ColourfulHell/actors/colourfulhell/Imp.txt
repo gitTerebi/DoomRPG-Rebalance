@@ -12,6 +12,8 @@ ACTOR CommonImpRPG : CommonImp Replaces CommonImp
 {
 	Tag "Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -27,6 +29,8 @@ ACTOR CommonImpRPG : CommonImp Replaces CommonImp
 ACTOR GreenImpRPG : GreenImp Replaces GreenImp
 {
 	Tag "Uncommon Imp"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -44,6 +48,8 @@ ACTOR BlueImpRPG : BlueImp Replaces BlueImp
 {
 	Tag "Rare Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -59,6 +65,8 @@ ACTOR BlueImpRPG : BlueImp Replaces BlueImp
 ACTOR BrownImp2RPG : BrownImp2 Replaces BrownImp2
 {
 	Tag "Monstrous Imp"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -76,6 +84,8 @@ ACTOR CyanImp2RPG : CyanImp2 Replaces CyanImp2
 {
 	Tag "Icy Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -91,6 +101,8 @@ ACTOR CyanImp2RPG : CyanImp2 Replaces CyanImp2
 ACTOR AbyssImp2RPG : AbyssImp2 Replaces AbyssImp2
 {
 	Tag "Abyssal Imp"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -108,6 +120,8 @@ ACTOR PurpleImpRPG : PurpleImp Replaces PurpleImp
 {
 	Tag "Epic Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -123,6 +137,8 @@ ACTOR PurpleImpRPG : PurpleImp Replaces PurpleImp
 ACTOR FireBluImp2RPG : FireBluImp2 Replaces FireBluImp2
 {
 	Tag "Enchanted Imp"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -140,6 +156,8 @@ ACTOR GrayImp2RPG : GrayImp2 Replaces GrayImp2
 {
 	Tag "Ancient Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -155,6 +173,8 @@ ACTOR GrayImp2RPG : GrayImp2 Replaces GrayImp2
 ACTOR YellowImpRPG : YellowImp Replaces YellowImp
 {
 	Tag "Legendary Imp"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -172,6 +192,8 @@ ACTOR RedImpRPG : RedImp Replaces RedImp
 {
 	Tag "Demonic Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -187,6 +209,8 @@ ACTOR RedImpRPG : RedImp Replaces RedImp
 ACTOR BlackImp1RPG : BlackImp1 Replaces BlackImp1
 {
 	Tag "Smoking Black Imp"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -204,6 +228,8 @@ ACTOR BlackImpEXRPG : BlackImpEX Replaces BlackImpEX
 {
 	Tag "Smoking Black Imp EX"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -219,6 +245,8 @@ ACTOR BlackImpEXRPG : BlackImpEX Replaces BlackImpEX
 ACTOR WhiteImp2RPG : WhiteImp2 Replaces WhiteImp2
 {
 	Tag "Imp Master"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -236,6 +264,8 @@ ACTOR SpecialImp4RPG : SpecialImp4 Replaces SpecialImp4
 {
 	Tag "Ghostly Uncommon Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -249,6 +279,8 @@ ACTOR SpecialImp4RPG : SpecialImp4 Replaces SpecialImp4
 ACTOR SpecialImp3RPG : SpecialImp3 Replaces SpecialImp3
 {
 	Tag "Ghostly Rare Imp"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -264,6 +296,8 @@ ACTOR SpecialImp5RPG : SpecialImp5 Replaces SpecialImp5
 {
 	Tag "Ghostly Epic Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -278,6 +312,8 @@ ACTOR SpecialImp6RPG : SpecialImp6 Replaces SpecialImp6
 {
 	Tag "Ghostly Legendary Imp"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -291,6 +327,8 @@ ACTOR SpecialImp6RPG : SpecialImp6 Replaces SpecialImp6
 ACTOR SpecialImp7RPG : SpecialImp7 Replaces SpecialImp7
 {
 	Tag "Ghostly Demonic Imp"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{

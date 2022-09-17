@@ -12,6 +12,9 @@ ACTOR CommonSGRPG : CommonSG Replaces CommonSG
 {
 	Tag "Former Sergeant"
 
+    DropItem "DRPGShotgun", 48
+    DropItem "DRPGShellSpawner", 208
+
 	States
 	{
 	Spawn:
@@ -27,6 +30,9 @@ ACTOR CommonSGRPG : CommonSG Replaces CommonSG
 ACTOR GreenSGRPG : GreenSG Replaces GreenSG
 {
 	Tag "Uncommon Former Sergeant"
+
+    DropItem "DRPGShotgun", 48
+    DropItem "DRPGCellSpawner", 208
 
 	States
 	{
@@ -44,6 +50,8 @@ ACTOR CyanSG2RPG : CyanSG2 Replaces CyanSG2
 {
 	Tag "Icy Former Sergeant"
 
+    DropItem "DRPGSmallBackpack"
+
 	States
 	{
 	Spawn:
@@ -59,6 +67,8 @@ ACTOR CyanSG2RPG : CyanSG2 Replaces CyanSG2
 ACTOR BlueSGRPG : BlueSG Replaces BlueSG
 {
 	Tag "Rare Former Sergeant"
+
+    DropItem "DRPGCellSpawner"
 
 	States
 	{
@@ -76,6 +86,8 @@ ACTOR PurpleSGRPG : PurpleSG Replaces PurpleSG
 {
 	Tag "Epic Former Sergeant"
 
+    DropItem "DRPGSmallBackpack"
+
 	States
 	{
 	Spawn:
@@ -91,6 +103,8 @@ ACTOR PurpleSGRPG : PurpleSG Replaces PurpleSG
 ACTOR GraySG2RPG : GraySG2 Replaces GraySG2
 {
 	Tag "Ancient Sergeant"
+
+    DropItem "DRPGSmallBackpack"
 
 	States
 	{
@@ -108,6 +122,8 @@ ACTOR AbyssSG2RPG : AbyssSG2 Replaces AbyssSG2
 {
 	Tag "Abyssal Sergeant"
 
+    DropItem "DRPGSmallBackpack"
+
 	States
 	{
 	Spawn:
@@ -123,6 +139,9 @@ ACTOR AbyssSG2RPG : AbyssSG2 Replaces AbyssSG2
 ACTOR YellowSGRPG : YellowSG Replaces YellowSG
 {
 	Tag "Legendary Former Sergeant"
+
+    DropItem "DRPGShellSpawner", 208
+    DropItem "DRPGShellBoxSpawner", 48
 
 	States
 	{
@@ -140,6 +159,9 @@ ACTOR BrownSG2RPG : BrownSG2 Replaces BrownSG2
 {
 	Tag "Monstrous Former Sergeant"
 
+    DropItem "DRPGShellSpawner", 208
+    DropItem "DRPGShellBoxSpawner", 48
+
 	States
 	{
 	Spawn:
@@ -155,6 +177,8 @@ ACTOR BrownSG2RPG : BrownSG2 Replaces BrownSG2
 ACTOR FireBluSG2RPG : FireBluSG2 Replaces FireBluSG2
 {
 	Tag "Enchanted Sergeant"
+
+    DropItem "DRPGCellSpawner"
 
 	States
 	{
@@ -172,6 +196,9 @@ ACTOR RedSGRPG : RedSG Replaces RedSG
 {
 	Tag "Demonic Former Sergeant"
 
+    DropItem "DRPGShellSpawner", 208
+    DropItem "DRPGShellBoxSpawner", 48
+
 	States
 	{
 	Spawn:
@@ -187,6 +214,8 @@ ACTOR RedSGRPG : RedSG Replaces RedSG
 ACTOR BlackSG3RPG : BlackSG3 Replaces BlackSG3
 {
 	Tag "Shotgun Crew Commander"
+
+    DropItem "DRPGBackpackRandomizer"
 
 	States
 	{
@@ -204,6 +233,9 @@ ACTOR BlackSG2RPG : BlackSG2 Replaces BlackSG2
 {
 	Tag "Shotgun Crew Trooper"
 
+    DropItem "DRPGShellSpawner", 220
+    DropItem "DRPGBackpackRandomizer", 36
+
 	States
 	{
 	Spawn:
@@ -220,6 +252,8 @@ ACTOR WhiteSG2RPG : WhiteSG2 Replaces WhiteSG2
 {
 	Tag "Benellus, God of Shotguns"
 
+    DropItem "DRPGBackpackRandomizer"
+
 	States
 	{
 	Spawn:
@@ -235,6 +269,8 @@ ACTOR WhiteSG2RPG : WhiteSG2 Replaces WhiteSG2
 ACTOR WhiteSGEXRPG : WhiteSGEX Replaces WhiteSGEX
 {
 	Tag "Benellus, God of Shotguns, Angrier"
+
+    DropItem "DRPGBackpackRandomizer"
 
 	States
 	{

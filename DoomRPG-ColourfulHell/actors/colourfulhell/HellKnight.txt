@@ -12,6 +12,8 @@ ACTOR CommonHKRPG : CommonHK Replaces CommonHK
 {
 	Tag "Hell Knight"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -27,6 +29,8 @@ ACTOR CommonHKRPG : CommonHK Replaces CommonHK
 ACTOR GreenHKRPG : GreenHK Replaces GreenHK
 {
 	Tag "Uncommon Hell Knight"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -44,6 +48,8 @@ ACTOR CyanHK2RPG : CyanHK2 Replaces CyanHK2
 {
 	Tag "Icy Hell Knight"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -59,6 +65,8 @@ ACTOR CyanHK2RPG : CyanHK2 Replaces CyanHK2
 ACTOR BrownHK2RPG : BrownHK2 Replaces BrownHK2
 {
 	Tag "Monstrous Hell Knight"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -76,6 +84,8 @@ ACTOR BlueHKRPG : BlueHK Replaces BlueHK
 {
 	Tag "Rare Hell Knight"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -91,6 +101,8 @@ ACTOR BlueHKRPG : BlueHK Replaces BlueHK
 ACTOR GrayHK2RPG : GrayHK2 Replaces GrayHK2
 {
 	Tag "Ancient Knight"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -108,6 +120,8 @@ ACTOR PurpleHKRPG : PurpleHK Replaces PurpleHK
 {
 	Tag "Epic Hell Knight"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -123,6 +137,8 @@ ACTOR PurpleHKRPG : PurpleHK Replaces PurpleHK
 ACTOR YellowHKRPG : YellowHK Replaces YellowHK
 {
 	Tag "Bruiser"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -140,6 +156,8 @@ ACTOR AbyssHK2RPG : AbyssHK2 Replaces AbyssHK2
 {
 	Tag "Abyssal Knight"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -155,6 +173,8 @@ ACTOR AbyssHK2RPG : AbyssHK2 Replaces AbyssHK2
 ACTOR FireBluHK2RPG : FireBluHK2 Replaces FireBluHK2
 {
 	Tag "Enchanted Knight"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -172,6 +192,8 @@ ACTOR RedHKRPG : RedHK Replaces RedHK
 {
 	Tag "Hell Knightmare"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -187,6 +209,8 @@ ACTOR SpecialImpRPG : SpecialImp Replaces SpecialImp
 {
 	Tag "Blue Imp Imago"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -201,6 +225,8 @@ ACTOR SpecialImpRPG : SpecialImp Replaces SpecialImp
 // Black Hell Knight
 ACTOR BlackHK2RPG : BlackHK2 Replaces BlackHK2
 {
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -215,6 +241,8 @@ ACTOR BlackHK2RPG : BlackHK2 Replaces BlackHK2
 // Black Hell Knight EX
 ACTOR BlackHKEXRPG : BlackHKEX Replaces BlackHKEX
 {
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -231,6 +259,8 @@ ACTOR WhiteHK3RPG : WhiteHK3 Replaces WhiteHK3
 {
 	Tag "Ghost of 1993"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -245,6 +275,8 @@ ACTOR WhiteHK3RPG : WhiteHK3 Replaces WhiteHK3
 // Specials
 ACTOR WhiteHK2RPG : WhiteHK2 Replaces WhiteHK2
 {
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -257,6 +289,8 @@ ACTOR WhiteHK2RPG : WhiteHK2 Replaces WhiteHK2
 }
 ACTOR SpecialSpectre2RPG : SpecialSpectre2 Replaces SpecialSpectre2
 {
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -271,6 +305,8 @@ ACTOR SpecialSpectre2RPG : SpecialSpectre2 Replaces SpecialSpectre2
 ACTOR MiniPhantomRPG : MiniPhantom Replaces MiniPhantom
 {
 	Tag "Mini Phantom"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{

@@ -9,6 +9,8 @@ ACTOR DEHZombiemanRPG : DEHZombieman Replaces DEHZombieman
 {
     Tag "Former Human"
 
+    DropItem "DRPGClipSpawner"
+
 	States
 	{
 	Spawn:
@@ -23,6 +25,8 @@ ACTOR DEHZombiemanRPG : DEHZombieman Replaces DEHZombieman
 ACTOR FormerRangerRPG : FormerRanger Replaces FormerRanger
 {
     Tag "Former Ranger"
+
+    DropItem "DRPGCellSpawner"
 
 	States
 	{
@@ -39,6 +43,8 @@ ACTOR RocketGuyRPG : RocketGuy Replaces RocketGuy
 {
     Tag "Rocket Guy"
 
+    DropItem "DRPGRocketAmmoSpawner"
+
 	States
 	{
 	Spawn:
@@ -53,6 +59,9 @@ ACTOR RocketGuyRPG : RocketGuy Replaces RocketGuy
 ACTOR SSGZombieManRPG : SSGZombieMan Replaces SSGZombieMan
 {
     Tag "Former Human (SSG)"
+
+    DropItem "DRPGSuperShotgun", 48
+    DropItem "DRPGShellBoxSpawner", 208
 
 	States
 	{
@@ -72,6 +81,9 @@ ACTOR DEHShotgunguyRPG : DEHShotgunguy Replaces DEHShotgunguy
 {
     Tag "Former Sergeant"
 
+    DropItem "DRPGShotgun", 48
+    DropItem "DRPGShellSpawner", 208
+
 	States
 	{
 	Spawn:
@@ -86,6 +98,9 @@ ACTOR DEHShotgunguyRPG : DEHShotgunguy Replaces DEHShotgunguy
 ACTOR PlasmaZombieRPG : PlasmaZombie Replaces PlasmaZombie
 {
     Tag "Former Sergeant (Plasma)"
+
+    DropItem "DRPGPlasmaRifle", 48
+    DropItem "DRPGCellSpawner", 208
 
 	States
 	{
@@ -102,6 +117,8 @@ ACTOR StealthPlasmaAlienRPG : StealthPlasmaAlien Replaces StealthPlasmaAlien
 {
     Tag "Stealth Alien (Plasma)"
 
+    DropItem "DRPGCellSpawner"
+
 	States
 	{
 	Spawn:
@@ -117,6 +134,8 @@ ACTOR JenesisMutantRPG : JenesisMutant Replaces JenesisMutant
 {
     Tag "Mutant"
 
+    DropItem "DRPGClipSpawner"
+
 	States
 	{
 	Spawn:
@@ -131,6 +150,8 @@ ACTOR JenesisMutantRPG : JenesisMutant Replaces JenesisMutant
 ACTOR StealthFighterRPG : StealthFighter Replaces StealthFighter
 {
     Tag "Stealth Fighter"
+
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -150,6 +171,9 @@ ACTOR DEHChaingunguyRPG : DEHChaingunguy Replaces DEHChaingunguy
 {
     Tag "Former Commando"
 
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
+
 	States
 	{
 	Spawn:
@@ -164,6 +188,9 @@ ACTOR DEHChaingunguyRPG : DEHChaingunguy Replaces DEHChaingunguy
 ACTOR SubvertedGuardRPG : SubvertedGuard Replaces SubvertedGuard
 {
     Tag "Subverted Guard"
+
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{
@@ -180,6 +207,8 @@ ACTOR RevMissileGuyRPG : RevMissileGuy Replaces RevMissileGuy
 {
     Tag "Missile Guy"
 
+    DropItem "DRPGRocketAmmoSpawner"
+
 	States
 	{
 	Spawn:
@@ -195,6 +224,8 @@ ACTOR PlasmaEliteRPG : PlasmaElite Replaces PlasmaElite
 {
     Tag "Plasma Elite"
 
+    DropItem "DRPGCellSpawner"
+
 	States
 	{
 	Spawn:
@@ -209,6 +240,8 @@ ACTOR PlasmaEliteRPG : PlasmaElite Replaces PlasmaElite
 ACTOR FormerCaptainRPG : FormerCaptain Replaces FormerCaptain
 {
     Tag "Former Captain"
+
+    DropItem "DRPGCellSpawner"
 
 	States
 	{
@@ -1682,6 +1715,8 @@ ACTOR Hierophant1RPG : Hierophant1 Replaces Hierophant1
 ACTOR EvilMarineRPG : EvilMarine Replaces EvilMarine
 {
     Tag "Evil Marine"
+
+    DropItem "DRPGCellSpawner"
 
 	States
 	{

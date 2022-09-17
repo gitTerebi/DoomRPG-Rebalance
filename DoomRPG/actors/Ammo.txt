@@ -3,7 +3,7 @@
 //
 
 // --------------------------------------------------
-// Full Ammo
+// Standart Ammo
 
 actor DRPGClip : Clip Replaces Clip
 {
@@ -97,6 +97,100 @@ actor DRPGCell : Cell Replaces Cell
 }
 
 actor DRPGCellPack : CellPack Replaces CellPack
+{
+    Inventory.PickupSound "items/cell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        CELP A -1
+        Stop
+    }
+}
+
+// --------------------------------------------------
+// Full Ammo
+
+actor DRPGClipFull : Clip Replaces Clip
+{
+    Inventory.PickupSound "items/clip"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        CLIP A -1
+        Stop
+    }
+}
+
+actor DRPGClipBoxFull : ClipBox replaces ClipBox
+{
+    Inventory.PickupSound "items/clipbox"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        AMMO A -1
+        Stop
+    }
+}
+
+actor DRPGShellFull : Shell Replaces Shell
+{
+    Inventory.PickupSound "items/shell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        SHEL A -1
+        Stop
+    }
+}
+
+actor DRPGShellBoxFull : ShellBox Replaces ShellBox
+{
+    Inventory.PickupSound "items/shell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        SBOX A -1
+        Stop
+    }
+}
+
+actor DRPGRocketBoxFull : RocketBox Replaces RocketBox
+{
+    Inventory.PickupSound "items/rocket"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        BROK A -1
+        Stop
+    }
+}
+
+actor DRPGCellFull : Cell Replaces Cell
+{
+    Inventory.PickupSound "items/cell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        CELL A -1
+        Stop
+    }
+}
+
+actor DRPGCellPackFull : CellPack Replaces CellPack
 {
     Inventory.PickupSound "items/cell"
     

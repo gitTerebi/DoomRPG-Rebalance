@@ -12,6 +12,8 @@ ACTOR CommonDemonRPG : CommonDemon Replaces CommonDemon
 {
 	Tag "Demon"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -27,6 +29,8 @@ ACTOR CommonDemonRPG : CommonDemon Replaces CommonDemon
 ACTOR GreenDemonRPG : GreenDemon Replaces GreenDemon
 {
 	Tag "Uncommon Demon"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -44,6 +48,8 @@ ACTOR CyanDemon2RPG : CyanDemon2 Replaces CyanDemon2
 {
 	Tag "Icy Worm"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -59,6 +65,8 @@ ACTOR CyanDemon2RPG : CyanDemon2 Replaces CyanDemon2
 ACTOR BrownDemon2RPG : BrownDemon2 Replaces BrownDemon2
 {
 	Tag "Monstrous Worm"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -76,6 +84,8 @@ ACTOR BlueDemonRPG : BlueDemon Replaces BlueDemon
 {
 	Tag "Rare Demon"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -91,6 +101,8 @@ ACTOR BlueDemonRPG : BlueDemon Replaces BlueDemon
 ACTOR FireBluDemon2RPG : FireBluDemon2 Replaces FireBluDemon2
 {
 	Tag "Enchanted Demon"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -108,6 +120,8 @@ ACTOR PurpleDemonRPG : PurpleDemon Replaces PurpleDemon
 {
 	Tag "Epic Demon"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -123,6 +137,8 @@ ACTOR PurpleDemonRPG : PurpleDemon Replaces PurpleDemon
 ACTOR YellowDemonRPG : YellowDemon Replaces YellowDemon
 {
 	Tag "Legendary Demon"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -140,6 +156,8 @@ ACTOR AbyssDemon2RPG : AbyssDemon2 Replaces AbyssDemon2
 {
 	Tag "Abyssal Demon"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -155,6 +173,8 @@ ACTOR AbyssDemon2RPG : AbyssDemon2 Replaces AbyssDemon2
 ACTOR GreyDemon2RPG : GreyDemon2 Replaces GreyDemon2
 {
 	Tag "Ancient Demonic Worm"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -173,6 +193,8 @@ ACTOR RedDemonRPG : RedDemon Replaces RedDemon
 {
 	Tag "Demonic Demon"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -188,6 +210,8 @@ ACTOR RedDemonRPG : RedDemon Replaces RedDemon
 ACTOR WhiteDemon2RPG : WhiteDemon2 Replaces WhiteDemon2
 {
 	Tag "The Juggernaut"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -205,6 +229,8 @@ ACTOR BlackDemon3RPG : BlackDemon3 Replaces BlackDemon3
 {
 	Tag "The Butcher"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -220,6 +246,8 @@ ACTOR BlackDemon3RPG : BlackDemon3 Replaces BlackDemon3
 ACTOR WHOLETTHEDOGSOUTRPG : WHOLETTHEDOGSOUT Replaces WHOLETTHEDOGSOUT
 {
 	Tag "Butcher's Hound"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{

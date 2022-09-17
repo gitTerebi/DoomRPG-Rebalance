@@ -12,6 +12,8 @@ ACTOR CommonPERPG : CommonPE Replaces CommonPE
 {
 	Tag "Pain Elemental"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -27,6 +29,8 @@ ACTOR CommonPERPG : CommonPE Replaces CommonPE
 ACTOR GreenPERPG : GreenPE Replaces GreenPE
 {
 	Tag "Uncommon Pain Elemental"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -44,6 +48,8 @@ ACTOR BrownPE2RPG : BrownPE2 Replaces BrownPE2
 {
 	Tag "Monstrous Pain Elemental"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -59,6 +65,8 @@ ACTOR BrownPE2RPG : BrownPE2 Replaces BrownPE2
 ACTOR BluePERPG : BluePE Replaces BluePE
 {
 	Tag "Rare Pain Elemental"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -76,6 +84,8 @@ ACTOR CyanPE2RPG : CyanPE2 Replaces CyanPE2
 {
 	Tag "Icy Elemental"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -91,6 +101,8 @@ ACTOR CyanPE2RPG : CyanPE2 Replaces CyanPE2
 ACTOR PurplePERPG : PurplePE Replaces PurplePE
 {
 	Tag "Epic Pain Elemental"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -108,6 +120,8 @@ ACTOR YellowPERPG : YellowPE Replaces YellowPE
 {
 	Tag "Volcanic Pain Elemental"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -123,6 +137,8 @@ ACTOR YellowPERPG : YellowPE Replaces YellowPE
 ACTOR FireBluPE2RPG : FireBluPE2 Replaces FireBluPE2
 {
 	Tag "Enchanted Elemental"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -140,6 +156,8 @@ ACTOR RedPERPG : RedPE Replaces RedPE
 {
 	Tag "Rage Elemental"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -155,6 +173,8 @@ ACTOR RedPERPG : RedPE Replaces RedPE
 ACTOR GrayPE2RPG : GrayPE2 Replaces GrayPE2
 {
 	Tag "Nasty Hive"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -172,6 +192,8 @@ ACTOR AbyssPE2RPG : AbyssPE2 Replaces AbyssPE2
 {
 	Tag "Abyssal Elemental"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -187,6 +209,8 @@ ACTOR AbyssPE2RPG : AbyssPE2 Replaces AbyssPE2
 ACTOR BlackPE2RPG : BlackPE2 Replaces BlackPE2
 {
 	Tag "Hell Soul Elemental"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -214,6 +238,8 @@ ACTOR WhitePE2RPG : WhitePE2 Replaces WhitePE2
 {
 	Tag "The Watcher"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -228,6 +254,8 @@ ACTOR WhitePE2RPG : WhitePE2 Replaces WhitePE2
 ACTOR WhitePE3RPG : WhitePE3 Replaces WhitePE3
 {
 	Tag "The Pilot"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -244,6 +272,8 @@ ACTOR HealthFountainWhitePERPG : HealthFountainWhitePE Replaces HealthFountainWh
 {
 	Tag "Health Fountain"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -259,7 +289,9 @@ ACTOR HealthFountainWhitePERPG : HealthFountainWhitePE Replaces HealthFountainWh
 ACTOR MiniSentinelPERPG : MiniSentinelPE Replaces MiniSentinelPE
 {
 	Tag "Mini Sentinel"
-	
+
+    DropItem "DRPGEmpty"
+
 	-COUNTKILL
 
 	States
