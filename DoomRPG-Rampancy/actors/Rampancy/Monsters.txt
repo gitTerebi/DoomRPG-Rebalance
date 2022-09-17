@@ -9,6 +9,8 @@ ACTOR Robot_SentryBotRPG : Robot_SentryBot Replaces Robot_SentryBot
 {
     Tag "Sentry Bot"
 
+    DropItem "DRPGClipSpawner"
+
 	States
 	{
 	Spawn:
@@ -27,6 +29,9 @@ ACTOR Robot_DefenderBotRPG : Robot_DefenderBot Replaces Robot_DefenderBot
 {
     Tag "Defender Bot"
 
+    DropItem "DRPGShotgun", 48
+    DropItem "DRPGShellSpawner", 208
+
 	States
 	{
 	Spawn:
@@ -44,6 +49,9 @@ ACTOR Robot_DefenderBotRPG : Robot_DefenderBot Replaces Robot_DefenderBot
 ACTOR Robot_SecurityBotSmallRPG : Robot_SecurityBotSmall Replaces Robot_SecurityBotSmall
 {
     Tag "Security Bot Small"
+
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{

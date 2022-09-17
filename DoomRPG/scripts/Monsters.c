@@ -21,6 +21,8 @@ int MonsterDataAmount;
 MegabossInfoPtr MegaBosses;
 int MegaBossesAmount;
 
+fixed MonsterDelayModifier = 1.0;
+
 NoInit MonsterStats RPGMap Monsters[MAX_MONSTERS];
 
 MonsterInfo const MonsterDataDF[MAX_DEF_MONSTERS_DF] =
@@ -972,7 +974,7 @@ NamedScript void CalculateMonsterStats(MonsterStatsPtr Stats)
     if (GetActorClass(0) == "DRPGSuperPowerSuit")
         Stats->Level = 1000;
 
-    MonsterStatPool = (40 + GameSkill() * Stats->Level) * StatsNatModifier;
+    MonsterStatPool = (40 + GameSkill() * Stats->Level) * (GetCVar("drpg_levelup_natural") ? StatsNatMod() : 1.0);
 
     // Minimal Points
     Stats->Strength = Stats->Level / 2;
@@ -1408,7 +1410,13 @@ NamedScript void MonsterAggressionHandler()
 
     int Capacity = Stats->Capacity;
 
+    if (ToasterMod)
+        MonsterSeeAmount++;
+
 Start:
+
+    if (ToasterMod)
+        MonsterSeeAmount--;
 
     if (!CheckInventory("DRPGMonsterAggressionHandler"))
         return;
@@ -1421,7 +1429,10 @@ Start:
 
     // Delay if Toaster Mode on
     if (ToasterMod)
+    {
         while (ActorNotSeePlayers(0, 0)) Delay(35);
+        MonsterSeeAmount++;
+    }
 
     // Changing the AI of monsters in case if there are summoned monsters
     for (int i = 0; i < MAX_PLAYERS; i++)
@@ -1500,14 +1511,14 @@ Start:
             if (GetActorProperty(0, APROP_Friendly))
             {
                 // Clearing a friendly monster's target in case the enemy is out of sight
-                if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyClearTarget") && Random(0, 100) <= 15)
+                if (MonsterHasTarget() && Random(0, 100) <= 15)
                 {
                     GiveInventory("DRPGFriendlyClearTarget", 1);
                     Delay(DelayTime);
                 }
 
                 // More enemies aggression to summoned monsters
-                if (MonsterHasTarget() && !CheckInventory("DRPGFriendlyAlertMonsters") && Random(0, 100) <= 15)
+                if (MonsterHasTarget() && Random(0, 100) <= 15)
                 {
                     GiveInventory("DRPGFriendlyAlertMonsters", 1);
                     Delay(DelayTime);
@@ -1547,7 +1558,7 @@ Start:
             GiveInventory("DRPGMonsterAttackMore", 1);
     }
 
-    Delay(DelayTime);
+    Delay(DelayTime * MonsterDelayModifier);
     goto Start;
 }
 
@@ -1565,6 +1576,14 @@ NamedScript void MonsterFriendlyTeleport()
 
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
+
+    // Init Toaster Mode
+    bool ToasterMod = GetCVar("drpg_toaster");
+
+    // Calculate delay time
+    int DelayTime = 35;
+    if (ToasterMod)
+        DelayTime = 50;
 
     int PlayerTID;
     int PlayerNumber;
@@ -1587,8 +1606,6 @@ NamedScript void MonsterFriendlyTeleport()
     }
 
 Start:
-
-    Delay(35);
 
     if (!GetUserCVar(PlayerNumber, "drpg_monster_friendly_teleport_enable")) goto Start;
 
@@ -1635,6 +1652,7 @@ Start:
         }
     }
 
+    Delay(DelayTime * MonsterDelayModifier);
     goto Start;
 }
 
@@ -1911,7 +1929,7 @@ Start:
     if (ToasterMod)
         while (ActorNotSeePlayers(0, 0)) Delay(35);
 
-    Delay(DelayTime);
+    Delay(DelayTime * MonsterDelayModifier);
     goto Start;
 }
 

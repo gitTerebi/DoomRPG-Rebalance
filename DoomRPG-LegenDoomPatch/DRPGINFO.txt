@@ -1,4 +1,0 @@
-Name=LegenDoom (Patch for Monsters Packs)
-Conflicts=DoomRL Arsenal
-Conflicts=Extras
-Requires=LegenDoom

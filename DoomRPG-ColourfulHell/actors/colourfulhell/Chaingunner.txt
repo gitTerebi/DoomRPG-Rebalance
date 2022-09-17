@@ -12,6 +12,9 @@ ACTOR CommonCguyRPG : CommonCguy Replaces CommonCguy
 {
 	Tag "Former Commando"
 
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
+
 	States
 	{
 	Spawn:
@@ -27,6 +30,9 @@ ACTOR CommonCguyRPG : CommonCguy Replaces CommonCguy
 ACTOR GreenCguyRPG : GreenCguy Replaces GreenCguy
 {
 	Tag "Uncommon Former Commando"
+
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGCellSpawner", 208
 
 	States
 	{
@@ -44,6 +50,8 @@ ACTOR CyanCGuy2RPG : CyanCGuy2 Replaces CyanCGuy2
 {
 	Tag "Icy Former Commando"
 
+    DropItem "DRPGSmallBackpack"
+
 	States
 	{
 	Spawn:
@@ -59,6 +67,8 @@ ACTOR CyanCGuy2RPG : CyanCGuy2 Replaces CyanCGuy2
 ACTOR BlueCguyRPG : BlueCguy Replaces BlueCguy
 {
 	Tag "Rare Former Commando"
+
+    DropItem "DRPGSmallBackpack"
 
 	States
 	{
@@ -76,6 +86,8 @@ ACTOR PurpleCguyRPG : PurpleCguy Replaces PurpleCguy
 {
 	Tag "Epic Former Commando"
 
+    DropItem "DRPGSmallBackpack"
+
 	States
 	{
 	Spawn:
@@ -91,6 +103,8 @@ ACTOR PurpleCguyRPG : PurpleCguy Replaces PurpleCguy
 ACTOR GrayCguy2RPG : GrayCguy2 Replaces GrayCguy2
 {
 	Tag "Ancient Former Commando"
+
+    DropItem "DRPGSmallBackpack"
 
 	States
 	{
@@ -108,6 +122,8 @@ ACTOR BrownCGuy2RPG : BrownCGuy2 Replaces BrownCGuy2
 {
 	Tag "Monstrous Former Commando"
 
+    DropItem "DRPGSmallBackpack"
+
 	States
 	{
 	Spawn:
@@ -123,6 +139,8 @@ ACTOR BrownCGuy2RPG : BrownCGuy2 Replaces BrownCGuy2
 ACTOR AbyssCGuy2RPG : AbyssCGuy2 Replaces AbyssCGuy2
 {
 	Tag "Abyssal Commando"
+
+    DropItem "DRPGSmallBackpack"
 
 	States
 	{
@@ -140,6 +158,9 @@ ACTOR YellowCguyRPG : YellowCguy Replaces YellowCguy
 {
 	Tag "Legendary Former Commando"
 
+    DropItem "DRPGPlasmaRifle", 48
+    DropItem "DRPGCellSpawner", 208
+
 	States
 	{
 	Spawn:
@@ -155,6 +176,8 @@ ACTOR YellowCguyRPG : YellowCguy Replaces YellowCguy
 ACTOR FireBluCguy2RPG : FireBluCguy2 Replaces FireBluCguy2
 {
 	Tag "Enchanted Commando"
+
+    DropItem "DRPGCellSpawner"
 
 	States
 	{
@@ -172,6 +195,8 @@ ACTOR RedCguyRPG : RedCguy Replaces RedCguy
 {
 	Tag "Demonic Former Commando"
 
+    DropItem "DRPGClipBoxSpawner"
+
 	States
 	{
 	Spawn:
@@ -187,6 +212,8 @@ ACTOR RedCguyRPG : RedCguy Replaces RedCguy
 ACTOR BlackCguy2RPG : BlackCguy2 Replaces BlackCguy2
 {
 	Tag "Mr. General"
+
+    DropItem "DRPGBackpackRandomizer"
 
 	States
 	{
@@ -204,6 +231,8 @@ ACTOR BlackCGuyEXRPG : BlackCGuyEX Replaces BlackCGuyEX
 {
 	Tag "Mr. General EX"
 
+    DropItem "DRPGBackpackRandomizer"
+
 	States
 	{
 	Spawn:
@@ -219,6 +248,8 @@ ACTOR BlackCGuyEXRPG : BlackCGuyEX Replaces BlackCGuyEX
 ACTOR WhiteCguy2RPG : WhiteCguy2 Replaces WhiteCguy2
 {
 	Tag "Crazy Lady Scientist"
+
+    DropItem "DRPGBackpackRandomizer"
 
 	States
 	{
@@ -236,6 +267,8 @@ ACTOR SlimyWormRPG : SlimyWorm Replaces SlimyWorm
 {
 	Tag "Slimy Worm"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -251,6 +284,8 @@ ACTOR SlimyWormRPG : SlimyWorm Replaces SlimyWorm
 ACTOR VolativeCacoRPG : VolativeCaco Replaces VolativeCaco
 {
 	Tag "Unstable Cacodemon"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -268,6 +303,8 @@ ACTOR SpliceBaronRPG : SpliceBaron Replaces SpliceBaron
 {
 	Tag "Spliced Baron"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -283,6 +320,8 @@ ACTOR SpliceBaronRPG : SpliceBaron Replaces SpliceBaron
 ACTOR BabyCacoRPG : BabyCaco Replaces BabyCaco
 {
 	Tag "Baby Cacodemon"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{

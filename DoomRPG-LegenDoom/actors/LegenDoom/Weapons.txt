@@ -1,3 +1,4 @@
+// Standard Weapon
 actor LDChainsawRPG : LDChainsaw Replaces DRPGChainsaw {}
 actor LDPistolRPG : LDPistol Replaces DRPGPistol {}
 actor LDShotgunRPG : LDShotgun Replaces DRPGShotgun {}
@@ -6,6 +7,16 @@ actor LDChaingunRPG : LDChaingun Replaces DRPGChaingun {}
 actor LDRocketLauncherRPG : LDRocketLauncher Replaces DRPGRocketLauncher {}
 actor LDPlasmaRifleRPG : LDPlasmaRifle Replaces DRPGPlasmaRifle {}
 actor LDBFG9000RPG : LDBFG9000 Replaces DRPGBFG9000 {}
+
+// Weapon spawners
+actor LDChainsawSpawnerRPG : LDChainsaw Replaces DRPGChainsawSpawner {}
+actor LDPistolSpawnerRPG : LDPistol Replaces DRPGPistolSpawner {}
+actor LDShotgunSpawnerRPG : LDShotgun Replaces DRPGShotgunSpawner {}
+actor LDSuperShotgunSpawnerRPG : LDSuperShotgun Replaces DRPGSuperShotgunSpawner {}
+actor LDChaingunSpawnerRPG : LDChaingun Replaces DRPGChaingunSpawner {}
+actor LDRocketLauncherSpawnerRPG : LDRocketLauncher Replaces DRPGRocketLauncherSpawner {}
+actor LDPlasmaRifleSpawnerRPG : LDPlasmaRifle Replaces DRPGPlasmaRifleSpawner {}
+actor LDBFG9000SpawnerRPG : LDBFG9000 Replaces DRPGBFG9000Spawner {}
 
 actor LDPistolPickupRPG : LDPistolPickup Replaces LDPistolPickup
 {

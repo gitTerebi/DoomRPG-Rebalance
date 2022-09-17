@@ -143,9 +143,6 @@
 // Calculate Map Level Modifier
 #define MapLevelModifier        MapLevelMod()
 
-// Calculate Natural Stat Leveling Modifier
-#define StatsNatModifier        (GetCVar("drpg_levelup_natural") ? StatsNatMod() : 1.0)
-
 // Struct Aliases
 #define Players(N)              _PlayerData[(N)]
 #define Player                  _PlayerData[PlayerNumber()]

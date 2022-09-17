@@ -1,81 +1,156 @@
-actor LDClipBoxPickupRPG : LDClipBoxPickup Replaces DRPGClipBox {}
-actor LDShellBoxPickupRPG : LDShellBoxPickup replaces DRPGShellBox {}
-actor LDRocketPickupRPG : LDRocketPickup replaces DRPGRocketAmmo {}
-actor LDRocketBoxPickupRPG : LDRocketBoxPickup replaces DRPGRocketBox {}
-actor LDCellPackPickupRPG : LDCellPackPickup replaces DRPGCellPack {}
-
-actor LDClipPickupRPG : LDClipPickup Replaces DRPGClip
+// Clip Ammo
+actor LDClipPickupRPG : LDClipPickup Replaces DRPGClip {}
+actor LDClipPickupFullRPG : LDClipPickup Replaces DRPGClipFull {}
+actor LDClipPickupHalfRPG : LDClipPickup Replaces DRPGClipHalf
 {
     States
     {
+    Spawn:
+        CLP2 A -1
+        Stop
     PickupNormal:
-        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
-        TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "PickupHard")
-        goto Super::PickupNormal
-    PickupHard:
         TNT1 A 0 A_GiveInventory ("Clip", 5)
-        
+
         TNT1 A 0 A_JumpIfInventory ("LDPistolEffect_Hoarder", 1, "HoarderEffect")
         TNT1 A 0 A_JumpIfInventory ("LDChaingunEffect_Hoarder", 1, "HoarderEffect")
-        goto ScroungerEffect
-
+        Goto ScroungerEffect
     HoarderEffectAmmo:
-        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
-        TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "HoarderEffectAmmoHard")
-        goto Super::HoarderEffectAmmo
-    HoarderEffectAmmoHard:
         TNT1 A 0 A_GiveInventory ("Clip", 5)
-        goto Super::HoarderEffect
+        Goto HoarderEffect
     }
 }
 
-actor LDShellPickupRPG : LDShellPickup replaces DRPGShell
+// Clip Box Ammo
+actor LDClipBoxPickupRPG : LDClipBoxPickup Replaces DRPGClipBox {}
+actor LDClipBoxPickupFullRPG : LDClipBoxPickup Replaces DRPGClipBoxFull {}
+actor LDClipBoxPickupHalfRPG : LDClipBoxPickup Replaces DRPGClipBoxHalf
 {
     States
     {
+    Spawn:
+        AMM2 A -1
+        Stop
     PickupNormal:
-        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
-        TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "PickupHard")
-        goto Super::PickupNormal
-    PickupHard:
+        TNT1 A 0 A_GiveInventory ("Clip", 25)
+
+        TNT1 A 0 A_JumpIfInventory ("LDPistolEffect_Hoarder", 1, "HoarderEffect")
+        TNT1 A 0 A_JumpIfInventory ("LDChaingunEffect_Hoarder", 1, "HoarderEffect")
+        Goto ScroungerEffect
+    HoarderEffectAmmo:
+        TNT1 A 0 A_GiveInventory ("Clip", 25)
+        Goto HoarderEffect
+    }
+}
+
+// Shell Ammo
+actor LDShellPickupRPG : LDShellPickup replaces DRPGShell {}
+actor LDShellPickupFullRPG : LDShellPickup replaces DRPGShellFull {}
+actor LDShellPickupHalfRPG : LDShellPickup replaces DRPGShellHalf
+{
+    States
+    {
+    Spawn:
+        SHL2 A -1
+        Stop
+    PickupNormal:
         TNT1 A 0 A_GiveInventory ("Shell", 2)
-        
+
         TNT1 A 0 A_JumpIfInventory ("LDShotgunEffect_Hoarder", 1, "HoarderEffect")
         TNT1 A 0 A_JumpIfInventory ("LDSuperShotgunEffect_Hoarder", 1, "HoarderEffect")
-        goto ScroungerEffect
-
+        Goto ScroungerEffect
     HoarderEffectAmmo:
-        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
-        TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "HoarderEffectAmmoHard")
-        goto Super::HoarderEffectAmmo
-    HoarderEffectAmmoHard:
         TNT1 A 0 A_GiveInventory ("Shell", 2)
-        goto Super::HoarderEffect
+        Goto HoarderEffect
     }
 }
 
-actor LDCellPickupRPG : LDCellPickup replaces DRPGCell
+// Shell Box Ammo
+actor LDShellBoxPickupRPG : LDShellBoxPickup replaces DRPGShellBox {}
+actor LDShellBoxPickupFullRPG : LDShellBoxPickup replaces DRPGShellBoxFull {}
+actor LDShellBoxPickupHalfRPG : LDShellBoxPickup replaces DRPGShellBoxHalf
 {
     States
     {
+    Spawn:
+        SBX2 A -1
+        Stop
     PickupNormal:
-        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
-        TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "PickupHard")
-        goto Super::PickupNormal
-    PickupHard:
+        TNT1 A 0 A_GiveInventory ("Shell", 10)
+
+        TNT1 A 0 A_JumpIfInventory ("LDShotgunEffect_Hoarder", 1, "HoarderEffect")
+        TNT1 A 0 A_JumpIfInventory ("LDSuperShotgunEffect_Hoarder", 1, "HoarderEffect")
+        Goto ScroungerEffect
+    HoarderEffectAmmo:
+        TNT1 A 0 A_GiveInventory ("Shell", 10)
+        Goto HoarderEffect
+    }
+}
+
+// Rocket Ammo
+actor LDRocketPickupRPG : LDRocketPickup replaces DRPGRocketAmmo {}
+
+// Rocket Box Ammo
+actor LDRocketBoxPickupRPG : LDRocketBoxPickup replaces DRPGRocketBox {}
+actor LDRocketBoxPickupFullRPG : LDRocketBoxPickup replaces DRPGRocketBoxFull {}
+actor LDRocketBoxPickupHalfRPG : LDRocketBoxPickup replaces DRPGRocketBoxHalf
+{
+    States
+    {
+    Spawn:
+        BRK2 A -1
+        Stop
+    PickupNormal:
+        TNT1 A 0 A_GiveInventory ("RocketAmmo", 3)
+
+        TNT1 A 0 A_JumpIfInventory ("LDRocketLauncherEffect_Hoarder", 1, "HoarderEffect")
+        Goto ScroungerEffect
+    HoarderEffectAmmo:
+        TNT1 A 0 A_GiveInventory ("RocketAmmo", 3)
+        Goto HoarderEffect
+    }
+}
+
+// Cell Ammo
+actor LDCellPickupRPG : LDCellPickup replaces DRPGCell {}
+actor LDCellPickupFullRPG : LDCellPickup replaces DRPGCellFull {}
+actor LDCellPickupHalfRPG : LDCellPickup replaces DRPGCellHalf
+{
+    States
+    {
+    Spawn:
+        CEL2 A -1
+        Stop
+    PickupNormal:
         TNT1 A 0 A_GiveInventory ("Cell", 10)
-    	
+	
         TNT1 A 0 A_JumpIfInventory ("LDPlasmaRifleEffect_Hoarder", 1, "HoarderEffect")
         TNT1 A 0 A_JumpIfInventory ("LDBFG9000Effect_Hoarder", 1, "HoarderEffect")
-        goto ScroungerEffect
-
+        Goto ScroungerEffect
     HoarderEffectAmmo:
-        TNT1 A 0 A_JumpIf(CallACS("InOutpost") == 1, "Super::PickupNormal")
-        TNT1 A 0 A_JumpIf(CallACS("GetSkillLevel") > 2, "HoarderEffectAmmoHard")
-        goto Super::HoarderEffectAmmo
-    HoarderEffectAmmoHard:
         TNT1 A 0 A_GiveInventory ("Cell", 10)
-        goto Super::HoarderEffect
+        Goto HoarderEffect
+    }
+}
+
+// Cell Pack Ammo
+actor LDCellPackPickupRPG : LDCellPackPickup replaces DRPGCellPack {}
+actor LDCellPackPickupFullRPG : LDCellPackPickup replaces DRPGCellPackFull {}
+actor LDCellPackPickupHalfRPG : LDCellPackPickup replaces DRPGCellPackHalf
+{
+    States
+    {
+    Spawn:
+        CBP2 A -1
+        Stop
+    PickupNormal:
+        TNT1 A 0 A_GiveInventory ("Cell", 50)
+
+        TNT1 A 0 A_JumpIfInventory ("LDPlasmaRifleEffect_Hoarder", 1, "HoarderEffect")
+        TNT1 A 0 A_JumpIfInventory ("LDBFG9000Effect_Hoarder", 1, "HoarderEffect")
+        Goto ScroungerEffect
+    HoarderEffectAmmo:
+        TNT1 A 0 A_GiveInventory ("Cell", 50)
+        Goto HoarderEffect
     }
 }
 

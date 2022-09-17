@@ -430,6 +430,15 @@ Start:
     // Store your current weapon in the Player Weapon array
     PlayerWeapon[PlayerNumber()] = GetWeapon();
 
+    // Set monster delay modifier
+    if (Timer() % 60 == 0)
+    {
+        if (GetCVar("drpg_toaster") && MonsterSeeAmount > 0)
+            MonsterDelayModifier = MonsterDelayMod();
+        else
+            MonsterDelayModifier = 1.0;
+    }
+
     // DRLA Debug Mode
     if (GetCVar("drpg_debug_drla") & DDM_NOLIMITS)
     {
@@ -1090,8 +1099,16 @@ Start:
                 continue;
             }
 
-            // Skip Armor Bonus category entirely
+            // Skip Armor Bonus
             if (Category == 3 && Index == 0)
+            {
+                ValidItem = false;
+                Tries++;
+                continue;
+            }
+
+            // Skip Thermonuclear Bomb
+            if (Category == 4 && Index == 17)
             {
                 ValidItem = false;
                 Tries++;

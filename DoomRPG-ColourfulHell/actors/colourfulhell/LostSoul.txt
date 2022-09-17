@@ -12,6 +12,8 @@ ACTOR CommonLSoulRPG : CommonLSoul Replaces CommonLSoul
 {
 	Tag "Lost Soul"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -45,7 +47,9 @@ ACTOR CommonLSoulRPG : CommonLSoul Replaces CommonLSoul
 ACTOR GreenLSoulRPG : GreenLSoul Replaces GreenLSoul
 {
 	Tag "Uncommon Lost Soul"
-	
+
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -79,7 +83,9 @@ ACTOR GreenLSoulRPG : GreenLSoul Replaces GreenLSoul
 ACTOR BrownLSoul2RPG : BrownLSoul2 Replaces BrownLSoul2
 {
 	Tag "Monstrous Lost Soul"
-	
+
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -113,6 +119,8 @@ ACTOR BrownLSoul2RPG : BrownLSoul2 Replaces BrownLSoul2
 ACTOR CyanLSoul2RPG : CyanLSoul2 Replaces CyanLSoul2
 {
 	Tag "Icy Lost Soul"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -148,6 +156,8 @@ ACTOR BlueLSoulRPG : BlueLSoul Replaces BlueLSoul
 {
 	Tag "Rare Lost Soul"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -181,6 +191,8 @@ ACTOR BlueLSoulRPG : BlueLSoul Replaces BlueLSoul
 ACTOR FireBluLSoul2RPG : FireBluLSoul2 Replaces FireBluLSoul2
 {
 	Tag "Charred Skull"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -216,6 +228,8 @@ ACTOR PurpleLSoulRPG : PurpleLSoul Replaces PurpleLSoul
 {
 	Tag "Epic Lost Soul"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -249,6 +263,8 @@ ACTOR PurpleLSoulRPG : PurpleLSoul Replaces PurpleLSoul
 ACTOR GrayLSoul2RPG : GrayLSoul2 Replaces GrayLSoul2
 {
 	Tag "Hive"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -284,6 +300,8 @@ ACTOR YellowLSoulRPG : YellowLSoul Replaces YellowLSoul
 {
 	Tag "Legendary Lost Soul"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -317,6 +335,8 @@ ACTOR YellowLSoulRPG : YellowLSoul Replaces YellowLSoul
 ACTOR RedLSoulRPG : RedLSoul Replaces RedLSoul
 {
 	Tag "Bloody Lost Soul"
+
+    DropItem "DRPGEmpty"
 
 	States
 	{
@@ -352,6 +372,8 @@ ACTOR AbyssLSoul2RPG : AbyssLSoul2 Replaces AbyssLSoul2
 {
 	Tag "Beetlejuice"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -386,6 +408,8 @@ ACTOR BlackLSoul3RPG : BlackLSoul3 Replaces BlackLSoul3
 {
 	Tag "Queen Bee"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -403,7 +427,9 @@ ACTOR BlackLSoul3RPG : BlackLSoul3 Replaces BlackLSoul3
 ACTOR BlackLSoul2RPG : BlackLSoul2 Replaces BlackLSoul2
 {
 	Tag "Bee"
-	
+
+    DropItem "DRPGEmpty"
+
 	-COUNTKILL
 
 	States
@@ -424,6 +450,8 @@ ACTOR WhiteLSoul2RPG : WhiteLSoul2 Replaces WhiteLSoul2
 {
 	Tag "The Shifter"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -442,6 +470,8 @@ ACTOR WhiteLSoulEXRPG : WhiteLSoulEX Replaces WhiteLSoulEX
 {
 	Tag "The Vengeful Soul"
 
+    DropItem "DRPGEmpty"
+
 	States
 	{
 	Spawn:
@@ -458,7 +488,9 @@ ACTOR WhiteLSoulEXRPG : WhiteLSoulEX Replaces WhiteLSoulEX
 ACTOR HKEggRPG : HKEgg Replaces HKEgg
 {
 	Tag "Egg"
-	
+
+    DropItem "DRPGEmpty"
+
 	-COUNTKILL
 
 	States
@@ -475,7 +507,9 @@ ACTOR HKEggRPG : HKEgg Replaces HKEgg
 ACTOR RevEggRPG : HKEgg Replaces HKEgg
 {
 	Tag "Egg"
-	
+
+    DropItem "DRPGEmpty"
+
 	-COUNTKILL
 
 	States
