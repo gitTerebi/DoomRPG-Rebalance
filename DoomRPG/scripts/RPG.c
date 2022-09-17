@@ -302,6 +302,9 @@ NamedScript Type_ENTER void Init()
     // Mission Initialization
     InitMission();
 
+    // Set Monster Delay Modifier
+    MonsterDelayModifier = 1.0;
+
     // Small delay before initializing the scripts for mod compatibility
     Delay(4);
 

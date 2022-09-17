@@ -21,8 +21,6 @@ int MonsterDataAmount;
 MegabossInfoPtr MegaBosses;
 int MegaBossesAmount;
 
-fixed MonsterDelayModifier = 1.0;
-
 NoInit MonsterStats RPGMap Monsters[MAX_MONSTERS];
 
 MonsterInfo const MonsterDataDF[MAX_DEF_MONSTERS_DF] =
