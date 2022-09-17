@@ -1099,8 +1099,16 @@ Start:
                 continue;
             }
 
-            // Skip Armor Bonus category entirely
+            // Skip Armor Bonus
             if (Category == 3 && Index == 0)
+            {
+                ValidItem = false;
+                Tries++;
+                continue;
+            }
+
+            // Skip Thermonuclear Bomb
+            if (Category == 4 && Index == 17)
             {
                 ValidItem = false;
                 Tries++;
