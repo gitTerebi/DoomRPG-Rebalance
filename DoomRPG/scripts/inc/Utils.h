@@ -75,6 +75,7 @@ OptionalArgs(1) bool SetActivatorToTargetExtended(int, int);
 bool IsTimeFrozen();
 fixed MapLevelMod();
 fixed StatsNatMod();
+fixed MonsterDelayMod();
 
 // Inventory
 int CheckInventoryTID(int, str);

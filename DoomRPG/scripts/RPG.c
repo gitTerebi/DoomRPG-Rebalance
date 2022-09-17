@@ -430,6 +430,15 @@ Start:
     // Store your current weapon in the Player Weapon array
     PlayerWeapon[PlayerNumber()] = GetWeapon();
 
+    // Set monster delay modifier
+    if (Timer() % 70 == 0)
+    {
+        if (GetCVar("drpg_toaster") && MonsterSeeAmount > 0)
+            MonsterDelayModifier = MonsterDelayMod();
+        else
+            MonsterDelayModifier = 1.0;
+    }
+
     // DRLA Debug Mode
     if (GetCVar("drpg_debug_drla") & DDM_NOLIMITS)
     {
