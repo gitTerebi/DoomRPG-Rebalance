@@ -431,7 +431,7 @@ Start:
     PlayerWeapon[PlayerNumber()] = GetWeapon();
 
     // Set monster delay modifier
-    if (Timer() % 70 == 0)
+    if (Timer() % 60 == 0)
     {
         if (GetCVar("drpg_toaster") && MonsterSeeAmount > 0)
             MonsterDelayModifier = MonsterDelayMod();
