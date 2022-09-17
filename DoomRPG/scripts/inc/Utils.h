@@ -18,6 +18,7 @@ NamedScript DECORATE int InOutpost();
 NamedScript DECORATE int GetUniqueTID();
 NamedScript DECORATE int GetAmmoMax(int);
 NamedScript DECORATE void SoulEffect(int);
+NamedScript DECORATE void SoulCalculate();
 NamedScript DECORATE void DestroyImmunity();
 NamedScript DECORATE int GetSkillLevel();
 NamedScript DECORATE int GetShopCard();

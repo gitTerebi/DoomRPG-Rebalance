@@ -192,17 +192,30 @@ NamedScript DECORATE void SoulEffect(int Type)
     Player.Aura.Type[Type].Active = true;
 
     if (Player.SoulsCount < 40)
-        Player.Aura.Time += (35 * 30) * (1 - (Player.SoulsCount / 50));
+        Player.Aura.Time += (35 * 30) * (1.0 - (Player.SoulsCount / 50.0));
     else
         Player.Aura.Time += 35 * 6;
 
-    // Cap Aura Timer - 10 min
-    if (Player.Aura.Time > 35 * 600)
-    {
-        Player.Aura.Time = 35 * 600;
-    }
+    // Aura Timer Cap
+    if (Player.Aura.Time > 35 * 60 * GetCVar("drpg_skill_auratimercap"))
+        Player.Aura.Time = 35 * 60 * GetCVar("drpg_skill_auratimercap");
 
     Player.SoulActive[Type] = true;
+}
+
+NamedScript DECORATE void SoulCalculate()
+{
+    Player.SoulWhiteCount = CheckInventory("DRPGSoulWhiteToken");
+    Player.SoulRedCount = CheckInventory("DRPGSoulRedToken") + Player.SoulWhiteCount;
+    Player.SoulGreenCount = CheckInventory("DRPGSoulGreenToken") + Player.SoulWhiteCount;
+    Player.SoulPinkCount = CheckInventory("DRPGSoulPinkToken") + Player.SoulWhiteCount;
+    Player.SoulBlueCount = CheckInventory("DRPGSoulBlueToken") + Player.SoulWhiteCount;
+    Player.SoulPurpleCount = CheckInventory("DRPGSoulPurpleToken") + Player.SoulWhiteCount;
+    Player.SoulOrangeCount = CheckInventory("DRPGSoulOrangeToken") + Player.SoulWhiteCount;
+    Player.SoulDarkBlueCount = CheckInventory("DRPGSoulDarkBlueToken") + Player.SoulWhiteCount;
+    Player.SoulYellowCount = CheckInventory("DRPGSoulYellowToken") + Player.SoulWhiteCount;
+
+    Player.SoulsCount = (Player.SoulRedCount + Player.SoulGreenCount + Player.SoulPinkCount + Player.SoulBlueCount + Player.SoulPurpleCount + Player.SoulOrangeCount + Player.SoulDarkBlueCount + Player.SoulYellowCount);
 }
 
 // Used by DECORATE and the Immunity Crystals plus Anti-Demon Field
