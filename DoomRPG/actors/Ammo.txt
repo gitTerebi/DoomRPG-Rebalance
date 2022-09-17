@@ -13,7 +13,7 @@ actor DRPGClip : Clip Replaces Clip
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CLIP A -1
+        CLIP A -1
         Stop
     }
 }
@@ -26,7 +26,7 @@ actor DRPGClipBox : ClipBox replaces ClipBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		AMMO A -1
+        AMMO A -1
         Stop
     }
 }
@@ -39,7 +39,7 @@ actor DRPGShell : Shell Replaces Shell
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		SHEL A -1
+        SHEL A -1
         Stop
     }
 }
@@ -52,7 +52,7 @@ actor DRPGShellBox : ShellBox Replaces ShellBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		SBOX A -1
+        SBOX A -1
         Stop
     }
 }
@@ -65,7 +65,7 @@ actor DRPGRocketAmmo : RocketAmmo Replaces RocketAmmo
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		ROCK A -1
+        ROCK A -1
         Stop
     }
 }
@@ -78,7 +78,7 @@ actor DRPGRocketBox : RocketBox Replaces RocketBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		BROK A -1
+        BROK A -1
         Stop
     }
 }
@@ -91,7 +91,7 @@ actor DRPGCell : Cell Replaces Cell
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CELL A -1
+        CELL A -1
         Stop
     }
 }
@@ -104,7 +104,7 @@ actor DRPGCellPack : CellPack Replaces CellPack
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CELP A -1
+        CELP A -1
         Stop
     }
 }
@@ -121,7 +121,7 @@ actor DRPGClipHalf : DRPGClip
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CLP2 A -1
+        CLP2 A -1
         Stop
     }
 }
@@ -135,7 +135,7 @@ actor DRPGClipBoxHalf : DRPGClipBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		AMM2 A -1
+        AMM2 A -1
         Stop
     }
 }
@@ -149,7 +149,7 @@ actor DRPGShellHalf : DRPGShell
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		SHL2 A -1
+        SHL2 A -1
         Stop
     }
 }
@@ -163,7 +163,7 @@ actor DRPGShellBoxHalf : DRPGShellBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		SBX2 A -1
+        SBX2 A -1
         Stop
     }
 }
@@ -177,7 +177,7 @@ actor DRPGRocketBoxHalf : DRPGRocketBox
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		BRK2 A -1
+        BRK2 A -1
         Stop
     }
 }
@@ -191,7 +191,7 @@ actor DRPGCellHalf : DRPGCell
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CEL2 A -1
+        CEL2 A -1
         Stop
     }
 }
@@ -205,7 +205,7 @@ actor DRPGCellPackHalf : DRPGCellPack
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-		CBP2 A -1
+        CBP2 A -1
         Stop
     }
 }

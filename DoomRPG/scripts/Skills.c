@@ -326,7 +326,7 @@ Skill RPGGlobal SkillData[MAX_CATEGORIES][MAX_SKILLS] =
         },
         {
             .Name = "Soul Steal",
-            .Cost = 50,
+            .Cost = 25,
             .MaxLevel = 1,
             .Use = SoulSteal,
             .Description =
@@ -1343,6 +1343,14 @@ NamedScript Console bool DropSupply(SkillLevelInfo *SkillLevel, void *Data)
 
 NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
 {
+    // Refund - If the Player has stolen Souls
+    if (Player.SoulsCount > 0)
+    {
+        PrintError("Aura cannot be used if you have stolen souls");
+        ActivatorSound("menu/error", 127);
+        return false;
+    }
+
     int Index = *(int *)Data;
     int StackMax = 1;
     int Auras = 0;
@@ -1435,7 +1443,7 @@ NamedScript Console bool UseAura(SkillLevelInfo *SkillLevel, void *Data)
     else
         Player.Aura.Time = (long int)AURA_CALCTIME;
 
-    // Aura Cap Timer
+    // Aura Timer Cap
     if (Player.Aura.Time > 35 * 60 * GetCVar("drpg_skill_auratimercap"))
         Player.Aura.Time = 35 * 60 * GetCVar("drpg_skill_auratimercap");
 
@@ -3304,31 +3312,11 @@ void CheckSkills()
     // Increase EP cost of skills "Soul Steal" and Auras for every accumulated soul
     if (Player.SoulsCount > 0)
     {
-        Skills[3][4].Cost = 50 + (Player.SoulsCount * 5); //Increase EP cost of skill "Soul Steal"
-
-        Skills[2][0].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Red Aura
-        Skills[2][1].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Green Aura
-        Skills[2][2].Cost = Skills[3][4].Cost * 4; // Increase EP cost of White Aura
-        Skills[2][3].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Pink Aura
-        Skills[2][4].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Blue Aura
-        Skills[2][5].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Purple Aura
-        Skills[2][6].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Orange Aura
-        Skills[2][7].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Dark Blue Aura
-        Skills[2][8].Cost = Skills[3][4].Cost * 4; // Increase EP cost of Yellow Aura
+        Skills[3][4].Cost = 25 + (Player.SoulsCount * 5); //Increase EP cost of skill "Soul Steal"
     }
     else
     {
-        Skills[3][4].Cost = 50; // Standart EP cost of skill "Soul Steal"
-
-        Skills[2][0].Cost = 125; // Standart EP cost of Red Aura
-        Skills[2][1].Cost = 125; // Standart EP cost of Green Aura
-        Skills[2][2].Cost = 150; // Standart EP cost of White Aura
-        Skills[2][3].Cost = 150; // Standart EP cost of Pink Aura
-        Skills[2][4].Cost = 150; // Standart EP cost of Blue Aura
-        Skills[2][5].Cost = 150; // Standart EP cost of Purple Aura
-        Skills[2][6].Cost = 150; // Standart EP cost of Orange Aura
-        Skills[2][7].Cost = 150; // Standart EP cost of Dark Blue Aura
-        Skills[2][8].Cost = 150; // Standart EP cost of Yellow Aura
+        Skills[3][4].Cost = 25; // Standart EP cost of skill "Soul Steal"
     }
 
     // Increase the cost of skills associated with "Summoning" depending on the number of summoned allies
@@ -3615,7 +3603,6 @@ void CheckAuras()
                 Player.DamageMult += 0.401;
             if (Player.Aura.Type[AURA_RED].Level == 6)
                 Player.DamageMult += 0.501;
-
         }
 
         // Green Aura
@@ -3807,5 +3794,19 @@ void CheckAuras()
         // Reset Souls
         for (int i = 0; i < SOUL_MAX; i++)
             Player.SoulActive[i] = false;
+    }
+
+    if (Player.SoulsCount > 0 && Player.Aura.Time <= 0)
+    {
+        TakeInventory("DRPGSoulRedToken", Player.SoulsCount);
+        TakeInventory("DRPGSoulGreenToken", Player.SoulsCount);
+        TakeInventory("DRPGSoulWhiteToken", Player.SoulsCount);
+        TakeInventory("DRPGSoulPinkToken", Player.SoulsCount);
+        TakeInventory("DRPGSoulBlueToken", Player.SoulsCount);
+        TakeInventory("DRPGSoulPurpleToken", Player.SoulsCount);
+        TakeInventory("DRPGSoulOrangeToken", Player.SoulsCount);
+        TakeInventory("DRPGSoulDarkBlueToken", Player.SoulsCount);
+        TakeInventory("DRPGSoulYellowToken", Player.SoulsCount);
+        SoulCalculate();
     }
 }
