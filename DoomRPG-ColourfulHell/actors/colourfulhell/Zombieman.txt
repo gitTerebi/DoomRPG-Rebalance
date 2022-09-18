@@ -84,7 +84,7 @@ ACTOR CyanZombie2RPG : CyanZombie2 Replaces CyanZombie2
 {
 	Tag "Icy Former Human"
 
-    DropItem "DRPGCellSpawner"
+    DropItem "DRPGClipSpawner"
 
 	States
 	{
@@ -102,7 +102,7 @@ ACTOR AbyssZombie2RPG : AbyssZombie2 Replaces AbyssZombie2
 {
 	Tag "Abyssal Former Human"
 
-    DropItem "DRPGCellSpawner"
+    DropItem "DRPGClipSpawner"
 
 	States
 	{
@@ -120,7 +120,7 @@ ACTOR AbyssZombie3RPG : AbyssZombie3 Replaces AbyssZombie3
 {
 	Tag "Abyssal Former Human"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGClipSpawner"
 
 	States
 	{
@@ -138,7 +138,7 @@ ACTOR GrayZombie2RPG : GrayZombie2 Replaces GrayZombie2
 {
 	Tag "Ancient Former Human"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGClipSpawner"
 
 	States
 	{
@@ -192,7 +192,7 @@ ACTOR YellowZombieRPG : YellowZombie Replaces YellowZombie
 {
 	Tag "Legendary Former Human"
 
-    DropItem "DRPGClipBoxSpawner"
+    DropItem "DRPGClipSpawner"
 
 	States
 	{
@@ -210,7 +210,7 @@ ACTOR RedZombieRPG : RedZombie Replaces RedZombie
 {
 	Tag "Demonic Former Human"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGClipSpawner"
 
 	States
 	{

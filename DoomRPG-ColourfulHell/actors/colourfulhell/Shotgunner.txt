@@ -32,7 +32,7 @@ ACTOR GreenSGRPG : GreenSG Replaces GreenSG
 	Tag "Uncommon Former Sergeant"
 
     DropItem "DRPGShotgun", 48
-    DropItem "DRPGCellSpawner", 208
+    DropItem "DRPGShellSpawner", 208
 
 	States
 	{
@@ -50,7 +50,7 @@ ACTOR CyanSG2RPG : CyanSG2 Replaces CyanSG2
 {
 	Tag "Icy Former Sergeant"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGShellSpawner"
 
 	States
 	{
@@ -68,7 +68,7 @@ ACTOR BlueSGRPG : BlueSG Replaces BlueSG
 {
 	Tag "Rare Former Sergeant"
 
-    DropItem "DRPGCellSpawner"
+    DropItem "DRPGShellSpawner"
 
 	States
 	{
@@ -86,7 +86,7 @@ ACTOR PurpleSGRPG : PurpleSG Replaces PurpleSG
 {
 	Tag "Epic Former Sergeant"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGShellSpawner"
 
 	States
 	{
@@ -104,7 +104,7 @@ ACTOR GraySG2RPG : GraySG2 Replaces GraySG2
 {
 	Tag "Ancient Sergeant"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGShellSpawner"
 
 	States
 	{
@@ -122,7 +122,7 @@ ACTOR AbyssSG2RPG : AbyssSG2 Replaces AbyssSG2
 {
 	Tag "Abyssal Sergeant"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGShellSpawner"
 
 	States
 	{
@@ -178,7 +178,7 @@ ACTOR FireBluSG2RPG : FireBluSG2 Replaces FireBluSG2
 {
 	Tag "Enchanted Sergeant"
 
-    DropItem "DRPGCellSpawner"
+    DropItem "DRPGRocketAmmoSpawner"
 
 	States
 	{
@@ -233,8 +233,7 @@ ACTOR BlackSG2RPG : BlackSG2 Replaces BlackSG2
 {
 	Tag "Shotgun Crew Trooper"
 
-    DropItem "DRPGShellSpawner", 220
-    DropItem "DRPGBackpackRandomizer", 36
+    DropItem "DRPGBackpackRandomizer"
 
 	States
 	{
