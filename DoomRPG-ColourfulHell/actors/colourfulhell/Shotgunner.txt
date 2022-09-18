@@ -13,7 +13,7 @@ ACTOR CommonSGRPG : CommonSG Replaces CommonSG
 	Tag "Former Sergeant"
 
     DropItem "DRPGShotgun", 48
-    DropItem "DRPGShellSpawner", 208
+    DropItem "DRPGShellSpawner"
 
 	States
 	{
@@ -32,7 +32,7 @@ ACTOR GreenSGRPG : GreenSG Replaces GreenSG
 	Tag "Uncommon Former Sergeant"
 
     DropItem "DRPGShotgun", 48
-    DropItem "DRPGShellSpawner", 208
+    DropItem "DRPGShellSpawner"
 
 	States
 	{
@@ -140,8 +140,8 @@ ACTOR YellowSGRPG : YellowSG Replaces YellowSG
 {
 	Tag "Legendary Former Sergeant"
 
-    DropItem "DRPGShellSpawner", 208
-    DropItem "DRPGShellBoxSpawner", 48
+    DropItem "DRPGShellSpawner"
+    DropItem "DRPGShellBoxSpawner", 64
 
 	States
 	{
@@ -159,8 +159,8 @@ ACTOR BrownSG2RPG : BrownSG2 Replaces BrownSG2
 {
 	Tag "Monstrous Former Sergeant"
 
-    DropItem "DRPGShellSpawner", 208
-    DropItem "DRPGShellBoxSpawner", 48
+    DropItem "DRPGShellSpawner"
+    DropItem "DRPGShellBoxSpawner", 64
 
 	States
 	{
@@ -196,8 +196,9 @@ ACTOR RedSGRPG : RedSG Replaces RedSG
 {
 	Tag "Demonic Former Sergeant"
 
-    DropItem "DRPGShellSpawner", 208
-    DropItem "DRPGShellBoxSpawner", 48
+    DropItem "DRPGSuperShotgun", 48
+    DropItem "DRPGShellSpawner"
+    DropItem "DRPGShellBoxSpawner", 64
 
 	States
 	{

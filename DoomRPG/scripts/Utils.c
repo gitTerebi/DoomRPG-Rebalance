@@ -293,10 +293,10 @@ NamedScript DECORATE int CheckCapacity()
             // Calculate capacity usage per category in DRLA, excluding weapons and modpacks
             int DRLAItems = CheckInventory("RLArmorInInventory") + CheckInventory("RLSkullLimit") + CheckInventory("RLPhaseDeviceLimit") + (IsTechnician ? CheckInventory("RLScavengerModLimit") : CheckInventory("RLModLimit"));
             int DRLAMaxItems = DRLA_ARMOR_MAX + DRLA_SKULL_MAX + DRLA_DEVICE_MAX + DRLA_MODPACKS_MAX;
-            Player.CapacityXP += (int)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 20.0);
+            Player.CapacityXP += (int)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 5.0);
         }
         else
-            Player.CapacityXP += (int)(Player.InvItems * Scale / MaxItems * 20.0);
+            Player.CapacityXP += (int)(Player.InvItems * Scale / MaxItems * 5.0);
     }
 
     // Don't do checks if you have the system disabled

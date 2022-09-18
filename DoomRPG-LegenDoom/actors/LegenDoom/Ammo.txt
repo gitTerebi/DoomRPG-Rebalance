@@ -1,11 +1,32 @@
+// --------------------------------------------------
 // Clip Ammo
-actor LDClipPickupRPG : LDClipPickup Replaces DRPGClip {}
-actor LDClipPickupFullRPG : LDClipPickup Replaces DRPGClipFull {}
+
+actor LDClipPickupRPG : LDClipPickup Replaces DRPGClip
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDClipPickupFullRPG : LDClipPickup Replaces DRPGClipFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDClipPickupHalfRPG : LDClipPickup Replaces DRPGClipHalf
 {
     States
     {
     Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         CLP2 A -1
         Stop
     PickupNormal:
@@ -20,14 +41,35 @@ actor LDClipPickupHalfRPG : LDClipPickup Replaces DRPGClipHalf
     }
 }
 
+// --------------------------------------------------
 // Clip Box Ammo
-actor LDClipBoxPickupRPG : LDClipBoxPickup Replaces DRPGClipBox {}
-actor LDClipBoxPickupFullRPG : LDClipBoxPickup Replaces DRPGClipBoxFull {}
+
+actor LDClipBoxPickupRPG : LDClipBoxPickup Replaces DRPGClipBox
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDClipBoxPickupFullRPG : LDClipBoxPickup Replaces DRPGClipBoxFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDClipBoxPickupHalfRPG : LDClipBoxPickup Replaces DRPGClipBoxHalf
 {
     States
     {
     Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         AMM2 A -1
         Stop
     PickupNormal:
@@ -42,14 +84,35 @@ actor LDClipBoxPickupHalfRPG : LDClipBoxPickup Replaces DRPGClipBoxHalf
     }
 }
 
+// --------------------------------------------------
 // Shell Ammo
-actor LDShellPickupRPG : LDShellPickup replaces DRPGShell {}
-actor LDShellPickupFullRPG : LDShellPickup replaces DRPGShellFull {}
+
+actor LDShellPickupRPG : LDShellPickup replaces DRPGShell
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDShellPickupFullRPG : LDShellPickup replaces DRPGShellFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDShellPickupHalfRPG : LDShellPickup replaces DRPGShellHalf
 {
     States
     {
     Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         SHL2 A -1
         Stop
     PickupNormal:
@@ -64,14 +127,35 @@ actor LDShellPickupHalfRPG : LDShellPickup replaces DRPGShellHalf
     }
 }
 
+// --------------------------------------------------
 // Shell Box Ammo
-actor LDShellBoxPickupRPG : LDShellBoxPickup replaces DRPGShellBox {}
-actor LDShellBoxPickupFullRPG : LDShellBoxPickup replaces DRPGShellBoxFull {}
+
+actor LDShellBoxPickupRPG : LDShellBoxPickup replaces DRPGShellBox
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDShellBoxPickupFullRPG : LDShellBoxPickup replaces DRPGShellBoxFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDShellBoxPickupHalfRPG : LDShellBoxPickup replaces DRPGShellBoxHalf
 {
     States
     {
     Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         SBX2 A -1
         Stop
     PickupNormal:
@@ -86,17 +170,49 @@ actor LDShellBoxPickupHalfRPG : LDShellBoxPickup replaces DRPGShellBoxHalf
     }
 }
 
+// --------------------------------------------------
 // Rocket Ammo
-actor LDRocketPickupRPG : LDRocketPickup replaces DRPGRocketAmmo {}
 
+actor LDRocketPickupRPG : LDRocketPickup replaces DRPGRocketAmmo
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+
+// --------------------------------------------------
 // Rocket Box Ammo
-actor LDRocketBoxPickupRPG : LDRocketBoxPickup replaces DRPGRocketBox {}
-actor LDRocketBoxPickupFullRPG : LDRocketBoxPickup replaces DRPGRocketBoxFull {}
+
+actor LDRocketBoxPickupRPG : LDRocketBoxPickup replaces DRPGRocketBox
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDRocketBoxPickupFullRPG : LDRocketBoxPickup replaces DRPGRocketBoxFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDRocketBoxPickupHalfRPG : LDRocketBoxPickup replaces DRPGRocketBoxHalf
 {
     States
     {
     Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         BRK2 A -1
         Stop
     PickupNormal:
@@ -110,14 +226,35 @@ actor LDRocketBoxPickupHalfRPG : LDRocketBoxPickup replaces DRPGRocketBoxHalf
     }
 }
 
+// --------------------------------------------------
 // Cell Ammo
-actor LDCellPickupRPG : LDCellPickup replaces DRPGCell {}
-actor LDCellPickupFullRPG : LDCellPickup replaces DRPGCellFull {}
+
+actor LDCellPickupRPG : LDCellPickup replaces DRPGCell
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDCellPickupFullRPG : LDCellPickup replaces DRPGCellFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDCellPickupHalfRPG : LDCellPickup replaces DRPGCellHalf
 {
     States
     {
     Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         CEL2 A -1
         Stop
     PickupNormal:
@@ -132,14 +269,35 @@ actor LDCellPickupHalfRPG : LDCellPickup replaces DRPGCellHalf
     }
 }
 
+// --------------------------------------------------
 // Cell Pack Ammo
-actor LDCellPackPickupRPG : LDCellPackPickup replaces DRPGCellPack {}
-actor LDCellPackPickupFullRPG : LDCellPackPickup replaces DRPGCellPackFull {}
+
+actor LDCellPackPickupRPG : LDCellPackPickup replaces DRPGCellPack
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDCellPackPickupFullRPG : LDCellPackPickup replaces DRPGCellPackFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDCellPackPickupHalfRPG : LDCellPackPickup replaces DRPGCellPackHalf
 {
     States
     {
     Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         CBP2 A -1
         Stop
     PickupNormal:
@@ -154,7 +312,10 @@ actor LDCellPackPickupHalfRPG : LDCellPackPickup replaces DRPGCellPackHalf
     }
 }
 
-ACTOR LDBackpackPickupRPG : LDBackpackPickup replaces LDBackpackPickup
+// --------------------------------------------------
+// Backpacks
+
+actor LDBackpackPickupRPG : LDBackpackPickup replaces LDBackpackPickup
 {
     States
     {

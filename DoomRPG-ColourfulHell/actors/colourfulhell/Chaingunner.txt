@@ -13,7 +13,7 @@ ACTOR CommonCguyRPG : CommonCguy Replaces CommonCguy
 	Tag "Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -32,7 +32,7 @@ ACTOR GreenCguyRPG : GreenCguy Replaces GreenCguy
 	Tag "Uncommon Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -51,7 +51,7 @@ ACTOR CyanCGuy2RPG : CyanCGuy2 Replaces CyanCGuy2
 	Tag "Icy Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -70,7 +70,7 @@ ACTOR BlueCguyRPG : BlueCguy Replaces BlueCguy
 	Tag "Rare Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -89,7 +89,7 @@ ACTOR PurpleCguyRPG : PurpleCguy Replaces PurpleCguy
 	Tag "Epic Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -108,7 +108,7 @@ ACTOR GrayCguy2RPG : GrayCguy2 Replaces GrayCguy2
 	Tag "Ancient Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -127,7 +127,7 @@ ACTOR BrownCGuy2RPG : BrownCGuy2 Replaces BrownCGuy2
 	Tag "Monstrous Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -146,7 +146,7 @@ ACTOR AbyssCGuy2RPG : AbyssCGuy2 Replaces AbyssCGuy2
 	Tag "Abyssal Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
@@ -165,7 +165,7 @@ ACTOR YellowCguyRPG : YellowCguy Replaces YellowCguy
 	Tag "Legendary Former Commando"
 
     DropItem "DRPGPlasmaRifle", 48
-    DropItem "DRPGCellSpawner", 208
+    DropItem "DRPGCellSpawner"
 
 	States
 	{
@@ -202,7 +202,7 @@ ACTOR RedCguyRPG : RedCguy Replaces RedCguy
 	Tag "Demonic Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGClipBoxSpawner", 208
+    DropItem "DRPGClipBoxSpawner"
 
 	States
 	{
