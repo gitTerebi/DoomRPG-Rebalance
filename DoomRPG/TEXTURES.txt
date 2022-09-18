@@ -402,7 +402,11 @@ Graphic CRYSF, 32, 32 { Offset -2, -5 XScale 1.1 YScale 1.1 Graphic CRYSF0, 0, 0
 Graphic CRYSG, 32, 32 { Offset -2, -2 XScale 1.1 YScale 1.1 Graphic CRYSG0, 0, 0 }
 Graphic STIM, 14, 14 { Offset -8, -9 Graphic STIMA0, 0, 0 }
 Graphic NUKE, 50, 50 { Offset 0, 6 XScale 1.75 YScale 1.75 Graphic TBOMA0, 0, 0 }
-Graphic PSTR, 28, 19 { Offset -1, -6 Graphic PSTRA0, 0, 0 }
+Graphic PMAP, 28, 27 { Offset -3, -4 XScale 1.15 YScale 1.15 Graphic PMAPA0, 0, 0 }
+Graphic PMAPB, 28, 27 { Offset -3, -4 XScale 1.15 YScale 1.15 Graphic PMAPB0, 0, 0 }
+Graphic PMAPC, 28, 27 { Offset -3, -4 XScale 1.15 YScale 1.15 Graphic PMAPC0, 0, 0 }
+Graphic PMAPD, 28, 27 { Offset -3, -4 XScale 1.15 YScale 1.15 Graphic PMAPD0, 0, 0 }
+Graphic PSTR, 28, 19 { Offset -2, -7 XScale 1.1 YScale 1.1 Graphic PSTRA0, 0, 0 }
 Graphic PVIS, 28, 13 { Offset -1, -9 Graphic PVISA0, 0, 0 }
 Graphic PVISB, 28, 13 { Offset -1, -9 Graphic PVISB0, 0, 0 }
 Graphic REGN, 25, 25 { Offset -2, -3 Graphic REGNA0, 0, 0 }

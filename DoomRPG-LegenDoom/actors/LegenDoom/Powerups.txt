@@ -124,6 +124,38 @@ actor LDShamanInvulnerabilityEffectDRPG : LDShamanInvulnerabilityEffect replaces
     }
 }
 
+actor LDInvulnerabilityChargeRPG : CustomInventory
+{
+    +INVBAR
+
+    Tag "Invulnerability Charge - Reflective Invulnerability for 30 seconds"
+
+    Inventory.DefMaxAmount
+    Inventory.InterHubAmount 1000
+    Inventory.PickupMessage "You got an Invulnerability Charge!"
+    Inventory.PickupSound "powerups/protect"
+    Inventory.UseSound "powerups/protect"
+    Inventory.Icon "CRG2"
+
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        CRG2 ABC 3 Bright
+        Goto Spawn+1
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
+    Use:
+        TNT1 A 0 A_JumpIf(CallACS("GetStimPowerupActive"), "UseFail")
+        TNT1 A 0 A_GiveInventory("LDInvulnerabilitySpherePickupRPG", 1)
+        Stop
+    UseFail:
+        TNT1 A 0
+        Fail
+    } 
+}
+
 Actor DRPGInvisibilityPowerLD : DRPGInvisibilityPower
 {
     Powerup.Duration -30
@@ -254,6 +286,38 @@ actor LDShamanBlurSphereEffectDRPG : LDShamanBlurSphereEffect replaces LDShamanB
     }
 }
 
+actor LDInvisibilityChargeRPG : CustomInventory
+{
+    +INVBAR
+
+    Tag "Invisibility Charge - Complete Invisibility for 60 seconds"
+
+    Inventory.DefMaxAmount
+    Inventory.InterHubAmount 1000
+    Inventory.PickupMessage "You got an Invisibility Charge!"
+    Inventory.PickupSound "powerups/invis"
+    Inventory.UseSound "powerups/invis"
+    Inventory.Icon "CRG1"
+
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        CRG1 ABC 3 Bright
+        Goto Spawn+1
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
+    Use:
+        TNT1 A 0 A_JumpIf(CallACS("GetStimPowerupActive"), "UseFail")
+        TNT1 A 0 A_GiveInventory("LDBlurSpherePickupRPG", 1)
+        Stop
+    UseFail:
+        TNT1 A 0
+        Fail
+    }
+} 
+
 Actor DRPGRadSuitPowerLD : DRPGRadSuitPower
 {
     Powerup.Duration -30
@@ -264,7 +328,9 @@ ACTOR LDRadsuitPickupRPG : LDRadsuitPickup replaces DRPGRadSuit
     Tag "Radiation Suit"
 
     +INVBAR
-    
+    -COUNTITEM
+    -INVENTORY.ALWAYSPICKUP
+
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
     Inventory.PickupMessage "You got a Radiation Suit!"
@@ -394,7 +460,8 @@ ACTOR LDInfraredPickupRPG : LDInfraredPickup Replaces DRPGInfrared
     
     +INVBAR
     -COUNTITEM
-    
+    -INVENTORY.ALWAYSPICKUP
+
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
     Inventory.PickupMessage "You got a pair of Infrared Goggles!"
@@ -515,20 +582,29 @@ actor LDShamanInfraredEffectDRPG : LDShamanInfraredEffect replaces LDShamanInfra
 
 actor LDAllMapPickupRPG : LDAllMapPickup Replaces DRPGAllMap
 {
-    +INVENTORY.AUTOACTIVATE
-    +INVENTORY.FANCYPICKUPSOUND
-    +INVENTORY.ALWAYSPICKUP
+    Tag "Computer Area Map"
     
+    +INVBAR
+    -COUNTITEM
+    -INVENTORY.ALWAYSPICKUP
+    -INVENTORY.AUTOACTIVATE
+    -INVENTORY.FANCYPICKUPSOUND
+
+    Inventory.DefMaxAmount
+    Inventory.InterHubAmount 1000
     Inventory.PickupMessage "You got a Computer Area Map!"
     Inventory.PickupSound "powerups/map"
-    
-    -COUNTITEM
-    
+    Inventory.UseSound "powerups/map" 
+    Inventory.Icon "PMAP"
+
     States
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         Goto Super::Spawn
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         Goto Super::Pickup
     }

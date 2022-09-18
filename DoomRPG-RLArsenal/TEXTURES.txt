@@ -70,6 +70,12 @@ Graphic "UNCRE", 62, 33
 	Graphic "CRUNN0", 0, 0
 }
 
+// Tracking Map
+Graphic "MMAP", 28, 27 {XScale 1.150 YScale 1.150 Offset -3, -4 Graphic "MMAPA0", 0, 0 }
+Graphic "MMAPB", 28, 27 {XScale 1.150 YScale 1.150 Offset -3, -4 Graphic "MMAPB0", 0, 0 }
+Graphic "MMAPC", 28, 27 {XScale 1.150 YScale 1.150 Offset -3, -4 Graphic "MMAPC0", 0, 0 }
+Graphic "MMAPD", 28, 27 {XScale 1.150 YScale 1.150 Offset -3, -4 Graphic "MMAPD0", 0, 0 }
+
 // --------------------------------------------------
 // CRAFT PARTS
 // 

@@ -211,6 +211,15 @@ texture MMAPA0
     pic MMAPC0 tics 6
     pic MMAPB0 tics 6
 
+// Tracking Map Inventory Icon
+texture MMAP
+    pic MMAP tics 6
+    pic MMAPB tics 6
+    pic MMAPC tics 6
+    pic MMAPD tics 6
+    pic MMAPC tics 6
+    pic MMAPB tics 6
+
 // Blueprint Computer
 texture BLUPA0
     pic BLUPA0 tics 12
