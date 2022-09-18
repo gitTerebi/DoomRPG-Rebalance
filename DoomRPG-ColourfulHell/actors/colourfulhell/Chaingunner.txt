@@ -32,7 +32,7 @@ ACTOR GreenCguyRPG : GreenCguy Replaces GreenCguy
 	Tag "Uncommon Former Commando"
 
     DropItem "DRPGChaingun", 48
-    DropItem "DRPGCellSpawner", 208
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{
@@ -50,7 +50,8 @@ ACTOR CyanCGuy2RPG : CyanCGuy2 Replaces CyanCGuy2
 {
 	Tag "Icy Former Commando"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{
@@ -68,7 +69,8 @@ ACTOR BlueCguyRPG : BlueCguy Replaces BlueCguy
 {
 	Tag "Rare Former Commando"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{
@@ -86,7 +88,8 @@ ACTOR PurpleCguyRPG : PurpleCguy Replaces PurpleCguy
 {
 	Tag "Epic Former Commando"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{
@@ -104,7 +107,8 @@ ACTOR GrayCguy2RPG : GrayCguy2 Replaces GrayCguy2
 {
 	Tag "Ancient Former Commando"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{
@@ -122,7 +126,8 @@ ACTOR BrownCGuy2RPG : BrownCGuy2 Replaces BrownCGuy2
 {
 	Tag "Monstrous Former Commando"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{
@@ -140,7 +145,8 @@ ACTOR AbyssCGuy2RPG : AbyssCGuy2 Replaces AbyssCGuy2
 {
 	Tag "Abyssal Commando"
 
-    DropItem "DRPGSmallBackpack"
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{
@@ -177,7 +183,7 @@ ACTOR FireBluCguy2RPG : FireBluCguy2 Replaces FireBluCguy2
 {
 	Tag "Enchanted Commando"
 
-    DropItem "DRPGCellSpawner"
+    DropItem "DRPGRocketAmmoSpawner"
 
 	States
 	{
@@ -195,7 +201,8 @@ ACTOR RedCguyRPG : RedCguy Replaces RedCguy
 {
 	Tag "Demonic Former Commando"
 
-    DropItem "DRPGClipBoxSpawner"
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner", 208
 
 	States
 	{

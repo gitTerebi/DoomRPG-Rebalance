@@ -2,4 +2,5 @@ Name=Colourful Hell
 Conflicts=DoomRL Arsenal - Monster Pack
 Conflicts=Rampancy
 Conflicts=Dehacked Attack
+Conflicts=Pandemonia - Monster Pack
 Mods=ColourfulHell98c.pk3

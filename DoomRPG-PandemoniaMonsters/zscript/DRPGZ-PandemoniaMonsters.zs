@@ -214,6 +214,7 @@ Class SpecOpsGunnerRPG : SpecOpsGunner replaces SpecOpsGunner
 	{
 		DropItem "DRPGClipSpawner", 224;
 		DropItem "DRPGClipBoxSpawner", 32;
+		DropItem "PandGameLevelIncreaser", 40;
 	}
 }
 
@@ -223,6 +224,7 @@ Class SpecOpsLieutenantRPG : SpecOpsLieutenant replaces SpecOpsLieutenant
 	{
 		DropItem "DRPGClipBoxSpawner", 128;
 		DropItem "DRPGRocketAmmoSpawner", 128;
+		DropItem "PandGameLevelIncreaser", 32;
 	}
 }
 
@@ -667,6 +669,7 @@ Class CacobotRPG : Cacobot replaces Cacobot
 	{
 		DropItem "DRPGCellSpawner", 256;
 		DropItem "DRPGCellSpawner", 32;
+		DropItem "PandGameLevelIncreaser", 40;
 	}
 }
 
@@ -1069,6 +1072,7 @@ Class CyberwardenRPG : Cyberwarden replaces Cyberwarden
 		DropItem "DRPGRocketLauncher", 32;
 		DropItem "DRPGRocketAmmoSpawner", 192;
 		DropItem "DRPGRocketBoxSpawner", 32;
+		DropItem "PandGameLevelIncreaser", 64;
 	}
 }
 
@@ -1098,6 +1102,7 @@ Class PyrobruiserRPG : Pyrobruiser replaces Pyrobruiser
 		DropItem "DRPGRocketLauncher", 32;
 		DropItem "DRPGRocketAmmoSpawner", 192;
 		DropItem "DRPGRocketBoxSpawner", 32;
+		DropItem "PandGameLevelIncreaser", 40;
 	}
 }
 
@@ -1374,7 +1379,6 @@ Class GeneralRoasterockRPG : GeneralRoasterock replaces GeneralRoasterock
 	Default
 	{
 		DropItem "DRPGBackpackRandomizer", 256;
-		DropItem "CompletionistRewardSpawner", 256;
 	}
 }
 
@@ -1383,9 +1387,6 @@ Class MyrkuraRPG : Myrkura replaces Myrkura
 	Default
 	{
 		DropItem "DRPGBackpackRandomizer", 256;
-		DropItem "CompletionistRewardSpawner", 256;
-		DropItem "CompletionistRewardSpawner", 256;
-		DropItem "CompletionistRewardLevel50", 256;
 	}
 }
 

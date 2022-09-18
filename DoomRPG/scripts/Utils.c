@@ -344,6 +344,33 @@ NamedScript DECORATE int CheckCapacity()
         if (CheckInventory(ItemList[i]) > 0)
             Items += CheckInventory(ItemList[i]);
 
+    if (CompatMode == COMPAT_LEGENDOOM)
+    {
+        str const ItemListLD[] =
+        {
+            // Normal Armor
+            "LDGreenArmorPickupRPG",
+            "LDBlueArmorPickupRPG",
+            "LDYellowArmorPickupRPG",
+            "LDRedArmorPickupRPG",
+            "LDWhiteArmorPickupRPG",
+
+            // Reinforced Armor
+            "LDReinforcedGreenArmorPickupRPG",
+            "LDReinforcedBlueArmorPickupRPG",
+            "LDReinforcedYellowArmorPickupRPG",
+            "LDReinforcedRedArmorPickupRPG",
+            "LDReinforcedWhiteArmorPickupRPG",
+
+            // End of List
+            NULL
+        };
+
+        for (int i = 0; ItemListLD[i] != NULL; i++)
+            if (CheckInventory(ItemListLD[i]) > 0)
+                Items += CheckInventory(ItemListLD[i]);
+    };
+
     if (CompatMode == COMPAT_DRLA)
     {
         str const ItemListRL[] =
