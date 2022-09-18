@@ -157,7 +157,7 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGRadSuit",                 "Radiation Suit",                    250, 0, 0, "SUITA0", 11, 51);
     ITEMDATA_DEF("DRPGInfrared",                "IR Goggles",                        500, 0, 0, "PVISA0", 11,  9);
     ITEMDATA_DEF("DRPGBerserk",                 "Berserk Pack",                     5000, 6, -1,"PSTRA0", 12, 15);
-    ITEMDATA_DEF("DRPGAllMap",                  "Computer Area Map",                1000, 1, 1, "PMAPA0", 13, 23);
+    ITEMDATA_DEF("DRPGAllMap",                  "Computer Area Map",               10000, 4, 3, "PMAPA0", 13, 23);
     ITEMDATA_DEF("DRPGWings",                   "Wings",                            5000, 2, 2, "WINGA0", 13, 36);
     ITEMDATA_DEF("DRPGMegasphere",              "Megasphere",                       5000, 4, 4, "MEGAA0", 12, 32);
     ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",          50000, 8, 8, "CRYSA0", 16, 48);
@@ -887,7 +887,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RadSuit2",                    "Radiation Suit",                       250,  0,  0, "SUITA0", 11, 51);
         ITEMDATA_DEF("Infrared2",                   "IR Goggles",                           500,  0,  0, "PVISA0", 11,  9);
         ITEMDATA_DEF("Berserk2",                    "Berserk Pack",                        5000,  6, -1, "PSTRA0", 12, 15);
-        ITEMDATA_DEF("DRPGAllMap",                  "Computer Area Map",                   1000,  1,  1, "PMAPA0", 13, 23);
+        ITEMDATA_DEF("RLAllmap2",                   "Computer Area Map",                  10000,  4,  3, "PMAPA0", 13, 23);
         ITEMDATA_DEF("DRPGWings",                   "Wings",                               5000,  2,  5, "WINGA0", 13, 36);
         ITEMDATA_DEF("Megasphere2",                 "Megasphere",                          5000,  4,  7, "MEGAA0", 12, 32);
         ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",             50000, -1,  8, "CRYSA0", 16, 48);
@@ -898,7 +898,7 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "\CdToxic\C- Immunity Crystal",       50000, -1,  8, "CRYSF0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalRadiation","\CqRadiation\C- Immunity Crystal",   50000, -1,  8, "CRYSG0", 16, 48);
         ITEMDATA_DEF("DRPGThermonuclearBombPickup", "Thermonuclear Bomb",                100000, -1, -1,   "NUKE", -1,  0);
-        ITEMDATA_DEF("RLTrackingMap",               "Tracking Map",                        2000,  4,  2, "MMAPA0", 14, 23);
+        ITEMDATA_DEF("RLTrackingMap2",               "Tracking Map",                      20000,  5,  4, "MMAPA0", 14, 23);
         ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",                 12500,  5,  2, "BLUPA0", 14, 23);
         ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                        5000,  6,  6, "ISKLA0", 10, 18);
         ITEMDATA_DEF("RLBloodSkull",                "Blood Skull",                         3000,  6,  4, "ISKLC0", 10, 18);
@@ -1025,10 +1025,12 @@ NamedScript void BuildItemData()
         ITEMDATA_CATEGORY_END;
 
         // Powerups
-        ItemData[4][0].Actor = "LDInvulnerabilitySpherePickupRPG";
-        ItemData[4][1].Actor = "LDBlurSpherePickupRPG";
+        ItemData[4][0].Actor = "LDInvulnerabilityChargeRPG";
+        ItemData[4][1].Actor = "LDInvisibilityChargeRPG";
         ItemData[4][4].Actor = "LDRadsuitPickupRPG";
         ItemData[4][5].Actor = "LDInfraredPickupRPG";
+        ItemData[4][6].Actor = "LDBerserkPickupRPG";
+        ItemData[4][7].Actor = "LDAllMapPickupRPG";
     }
 
     // Misc Hidden Stuff

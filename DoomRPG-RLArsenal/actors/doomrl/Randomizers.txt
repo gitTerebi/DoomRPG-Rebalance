@@ -372,17 +372,6 @@ actor DRPGWeaponDropper2 : RandomSpawner Replaces DRPGWeaponDropper
     DropItem "DRPGWeaponSpawner2"
 }
 
-// POWERUPS
-// --------------------------------------------------
-
-actor RLAllmap2 : RLAllmap { -COUNTITEM }
-actor RLTrackingMap2 : RLTrackingMap { -COUNTITEM }
-
-actor RLAllMapSpawner2 : RandomSpawner replaces DRPGAllMap
-{
-    DropItem "RLAllmap2"
-}
-
 // MARINES
 // --------------------------------------------------
 

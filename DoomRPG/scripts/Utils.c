@@ -258,10 +258,15 @@ NamedScript DECORATE int CheckAugBatteryMax()
 // Get the max inventory size
 NamedScript DECORATE int CheckInventoryMax()
 {
-    int MaxItems = 5 + Player.CapacityTotal / 2;
+    int MaxItems;
 
-    if (MaxItems > 100)
-        MaxItems = 100;
+    if (GetCVar("drpg_levelup_natural"))
+        MaxItems = 9 + Player.CapacityTotal / 6;
+    else
+        MaxItems = 7 + Player.CapacityTotal / 3;
+
+    if (MaxItems > 50)
+        MaxItems = 50;
 
     return MaxItems;
 }
@@ -330,6 +335,18 @@ NamedScript DECORATE int CheckCapacity()
         "DRPGBerserk",
         "DRPGWings",
 
+        // Immunity Crystals
+        "DRPGImmunityCrystalMelee",
+        "DRPGImmunityCrystalBullet",
+        "DRPGImmunityCrystalFire",
+        "DRPGImmunityCrystalPlasma",
+        "DRPGImmunityCrystalLightning",
+        "DRPGImmunityCrystalToxic",
+        "DRPGImmunityCrystalRadiation",
+
+        // Thermonuclear Bomb
+        "DRPGThermonuclearBombPickup",
+
         // Stims
         "DRPGStimDetox",
 
@@ -362,6 +379,14 @@ NamedScript DECORATE int CheckCapacity()
             "LDReinforcedRedArmorPickupRPG",
             "LDReinforcedWhiteArmorPickupRPG",
 
+            // Powerups
+            "LDInvulnerabilityChargeRPG",
+            "LDInvisibilityChargeRPG",
+            "LDRadsuitPickupRPG",
+            "LDInfraredPickupRPG",
+            "LDBerserkPickupRPG",
+            "LDAllMapPickupRPG",
+
             // End of List
             NULL
         };
@@ -381,6 +406,8 @@ NamedScript DECORATE int CheckCapacity()
             "InvisibilityCharge2",
             "Infrared2",
             "Berserk2",
+            "RLAllmap2",
+            "RLTrackingMap2",
 
             // Craft Parts
             "DRPGCraftPartsExotic",

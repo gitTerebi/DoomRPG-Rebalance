@@ -369,6 +369,15 @@ texture PVIS
 	pic PVIS tics 6
 	pic PVISB tics 6
 
+// Automap Inventory Icon
+texture PMAP
+	pic PMAP tics 6
+	pic PMAPB tics 6
+	pic PMAPC tics 6
+	pic PMAPD tics 6
+	pic PMAPC tics 6
+	pic PMAPB tics 6
+
 // Regeneration Sphere
 texture REGN
 	pic REGN tics 4

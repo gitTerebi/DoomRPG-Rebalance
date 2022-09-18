@@ -346,15 +346,22 @@ ACTOR DRPGInfrared : CustomInventory Replaces Infrared
 }
 
 // Computer Area Map and Scanner
-actor DRPGAllMap : AllMap Replaces AllMap
+actor DRPGAllMap : CustomInventory Replaces AllMap
 {
-    +INVENTORY.AUTOACTIVATE
+    Tag "Computer Area Map"
+
+    +INVBAR
     +INVENTORY.FANCYPICKUPSOUND
-    +INVENTORY.ALWAYSPICKUP
-    
+    -INVENTORY.AUTOACTIVATE
+    -INVENTORY.ALWAYSPICKUP
+
+    Inventory.DefMaxAmount
+    Inventory.InterHubAmount 1000
     Inventory.PickupMessage "You got a Computer Area Map!"
     Inventory.PickupSound "powerups/map"
-    
+    Inventory.UseSound "powerups/map"
+    Inventory.Icon "PMAP"
+
     -COUNTITEM
     
     States
@@ -363,6 +370,9 @@ actor DRPGAllMap : AllMap Replaces AllMap
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
         PMAP ABCDCB 6 Bright
         Goto Spawn+1
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         TNT1 A 1 A_GiveInventory("DRPGAllMapRevealer", 1)
 //      TNT1 A 1 A_GiveInventory("DRPGAllMapScanner", 1)
@@ -529,6 +539,9 @@ actor DRPGImmunityCrystalMelee : CustomInventory
         TNT1 A 0 A_RadiusGive("DRPGPowerImmunityMelee", 512.0, RGF_PLAYERS)
         CRYS A 1 A_SpawnItemEx("DRPGImmunityCrystalPulseMelee", Random(-8, 8), Random(-8, 8), Random(-16, 8), 0, 0, 0, 0, SXF_NOCHECKPOSITION)
         Loop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         TNT1 A 0 A_SpawnItemEx("DRPGImmunityCrystalMelee", 0, 0, 40, 16, 0, 0, 0, SXF_SETMASTER)
         Stop
@@ -582,6 +595,9 @@ actor DRPGImmunityCrystalBullet : CustomInventory
         TNT1 A 0 A_RadiusGive("DRPGPowerImmunityBullet", 512.0, RGF_PLAYERS)
         CRYS B 1 A_SpawnItemEx("DRPGImmunityCrystalPulseBullet", Random(-8, 8), Random(-8, 8), Random(-16, 8), 0, 0, 0, 0, SXF_NOCHECKPOSITION)
         Loop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         TNT1 A 0 A_SpawnItemEx("DRPGImmunityCrystalBullet", 0, 0, 40, 16, 0, 0, 0, SXF_SETMASTER)
         Stop
@@ -635,6 +651,9 @@ actor DRPGImmunityCrystalFire : CustomInventory
         TNT1 A 0 A_RadiusGive("DRPGPowerImmunityFire", 512.0, RGF_PLAYERS)
         CRYS C 1 A_SpawnItemEx("DRPGImmunityCrystalPulseFire", Random(-8, 8), Random(-8, 8), Random(-16, 8), 0, 0, 0, 0, SXF_NOCHECKPOSITION)
         Loop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         TNT1 A 0 A_SpawnItemEx("DRPGImmunityCrystalFire", 0, 0, 40, 16, 0, 0, 0, SXF_SETMASTER)
         Stop
@@ -688,6 +707,9 @@ actor DRPGImmunityCrystalPlasma : CustomInventory
         TNT1 A 0 A_RadiusGive("DRPGPowerImmunityPlasma", 512.0, RGF_PLAYERS)
         CRYS D 1 A_SpawnItemEx("DRPGImmunityCrystalPulsePlasma", Random(-8, 8), Random(-8, 8), Random(-16, 8), 0, 0, 0, 0, SXF_NOCHECKPOSITION)
         Loop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         TNT1 A 0 A_SpawnItemEx("DRPGImmunityCrystalPlasma", 0, 0, 40, 16, 0, 0, 0, SXF_SETMASTER)
         Stop
@@ -741,6 +763,9 @@ actor DRPGImmunityCrystalLightning : CustomInventory
         TNT1 A 0 A_RadiusGive("DRPGPowerImmunityLightning", 512.0, RGF_PLAYERS)
         CRYS E 1 A_SpawnItemEx("DRPGImmunityCrystalPulseLightning", Random(-8, 8), Random(-8, 8), Random(-16, 8), 0, 0, 0, 0, SXF_NOCHECKPOSITION)
         Loop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         TNT1 A 0 A_SpawnItemEx("DRPGImmunityCrystalLightning", 0, 0, 40, 16, 0, 0, 0, SXF_SETMASTER)
         Stop
@@ -794,6 +819,9 @@ actor DRPGImmunityCrystalToxic : CustomInventory
         TNT1 A 0 A_RadiusGive("DRPGPowerImmunityToxic", 512.0, RGF_PLAYERS)
         CRYS F 1 A_SpawnItemEx("DRPGImmunityCrystalPulseToxic", Random(-8, 8), Random(-8, 8), Random(-16, 8), 0, 0, 0, 0, SXF_NOCHECKPOSITION)
         Loop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         TNT1 A 0 A_SpawnItemEx("DRPGImmunityCrystalToxic", 0, 0, 40, 16, 0, 0, 0, SXF_SETMASTER)
         Stop
@@ -847,6 +875,9 @@ actor DRPGImmunityCrystalRadiation : CustomInventory
         TNT1 A 0 A_RadiusGive("DRPGPowerImmunityRadiation", 512.0, RGF_PLAYERS)
         CRYS G 1 A_SpawnItemEx("DRPGImmunityCrystalPulseRadiation", Random(-8, 8), Random(-8, 8), Random(-16, 8), 0, 0, 0, 0, SXF_NOCHECKPOSITION)
         Loop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
     Use:
         TNT1 A 0 A_SpawnItemEx("DRPGImmunityCrystalRadiation", 0, 0, 40, 16, 0, 0, 0, SXF_SETMASTER)
         Stop

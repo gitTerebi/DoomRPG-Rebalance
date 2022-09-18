@@ -272,14 +272,26 @@ actor Berserk2 : RLBerserk Replaces DRPGBerserk
 {
 	Tag "Berserk Pack - Full Health and Increased Melee Damage"
 	
+    +INVBAR
     -COUNTITEM
-	
+    -INVENTORY.ALWAYSPICKUP
+
+    Inventory.DefMaxAmount
+    Inventory.InterHubAmount 1000
 	Inventory.PickupMessage "You got a Berserk Pack!"
 	Inventory.PickupSound "powerups/berserk"
-    
+    Inventory.UseSound "powerups/berserk"
+    Inventory.Icon "PSTR"
+
     States
     {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        Goto Super::Spawn
     Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
+    Use:
         TNT1 A 0 A_JumpIfInventory("PowerStrength", 1, 2)
         TNT1 A 0 ACS_NamedExecuteAlways("AddToxicity", 0, 10)
         TNT1 A 0 ACS_NamedExecuteAlways("AMShieldCharge", 0)
@@ -351,4 +363,60 @@ actor Megasphere2 : DRPGMegasphere
 ACTOR RLLavaSetBonusGiver2 : RLLavaSetBonusGiver Replaces RLLavaSetBonusGiver
 {
     Powerup.Color 255, 255, 0, 0.015
+}
+
+actor RLAllmap2 : RLAllmap Replaces DRPGAllMap
+{
+    Tag "Computer Area Map"
+    
+    +INVBAR
+    -COUNTITEM
+    -INVENTORY.ALWAYSPICKUP
+
+    Inventory.DefMaxAmount
+    Inventory.InterHubAmount 1000
+    Inventory.PickupMessage "You got a Computer Area Map!"
+    Inventory.PickupSound "powerups/map"
+    Inventory.UseSound "powerups/map" 
+    Inventory.Icon "PMAP"
+
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        Goto Super::Spawn
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
+    Use:
+        Goto Super::Pickup
+    }
+}
+
+actor RLTrackingMap2 : RLTrackingMap Replaces RLTrackingMap
+{
+    Tag "Tracking Map"
+    
+    +INVBAR
+    -COUNTITEM
+    -INVENTORY.ALWAYSPICKUP
+
+    Inventory.DefMaxAmount
+    Inventory.InterHubAmount 1000
+    Inventory.PickupMessage "Tracking Map!"
+    Inventory.PickupSound "powerups/map"
+    Inventory.UseSound "misc/trackingmappickup" 
+    Inventory.Icon "MMAP"
+
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        Goto Super::Spawn
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("CheckCapacity")
+        Stop
+    Use:
+        Goto Super::Pickup
+    }
 }
