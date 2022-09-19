@@ -302,9 +302,6 @@ NamedScript Type_ENTER void Init()
     // Mission Initialization
     InitMission();
 
-    // Set Monster Delay Modifier
-    MonsterDelayModifier = 1.0;
-
     // Small delay before initializing the scripts for mod compatibility
     Delay(4);
 
@@ -432,15 +429,6 @@ Start:
 
     // Store your current weapon in the Player Weapon array
     PlayerWeapon[PlayerNumber()] = GetWeapon();
-
-    // Set monster delay modifier
-    if (Timer() % 60 == 0)
-    {
-        if (GetCVar("drpg_toaster") && MonsterSeeAmount > 0)
-            MonsterDelayModifier = MonsterDelayMod();
-        else
-            MonsterDelayModifier = 1.0;
-    }
 
     // DRLA Debug Mode
     if (GetCVar("drpg_debug_drla") & DDM_NOLIMITS)
@@ -1240,9 +1228,21 @@ NamedScript void ItemHandler()
 
             // Enable/Disable clipping on this item
             if (NoClip)
-                SetActorInventory(ItemTIDs[i], "DRPGItemNoClip", 1);
+            {
+                SetActorFlag(ItemTIDs[i], "NOCLIP", true);
+                SetActorFlag(ItemTIDs[i], "NOGRAVITY", true);
+                SetActorFlag(ItemTIDs[i], "NOTELEPORT", true);
+                SetActorFlag(ItemTIDs[i], "VISIBILITYPULSE", true);
+                SetActorFlag(ItemTIDs[i], "BRIGHT", true);
+            }
             else
-                SetActorInventory(ItemTIDs[i], "DRPGItemNoClipOff", 1);
+            {
+                SetActorFlag(ItemTIDs[i], "NOCLIP", false);
+                SetActorFlag(ItemTIDs[i], "NOGRAVITY", false);
+                SetActorFlag(ItemTIDs[i], "NOTELEPORT", false);
+                SetActorFlag(ItemTIDs[i], "VISIBILITYPULSE", false);
+                SetActorFlag(ItemTIDs[i], "BRIGHT", false);
+            }
         }
 
         for (int i = 0; i < MAX_PLAYERS; i++)
@@ -1285,9 +1285,21 @@ NamedScript void ItemHandler()
                 NoClip = true;
 
                 if (NoClip)
-                    SetActorInventory(ItemTID[j], "DRPGItemNoClip", 1);
+                {
+                    SetActorFlag(ItemTIDs[i], "NOCLIP", true);
+                    SetActorFlag(ItemTIDs[i], "NOGRAVITY", true);
+                    SetActorFlag(ItemTIDs[i], "NOTELEPORT", true);
+                    SetActorFlag(ItemTIDs[i], "VISIBILITYPULSE", true);
+                    SetActorFlag(ItemTIDs[i], "BRIGHT", true);
+                }
                 else
-                    SetActorInventory(ItemTID[j], "DRPGItemNoClipOff", 1);
+                {
+                    SetActorFlag(ItemTIDs[i], "NOCLIP", false);
+                    SetActorFlag(ItemTIDs[i], "NOGRAVITY", false);
+                    SetActorFlag(ItemTIDs[i], "NOTELEPORT", false);
+                    SetActorFlag(ItemTIDs[i], "VISIBILITYPULSE", false);
+                    SetActorFlag(ItemTIDs[i], "BRIGHT", false);
+                }
             }
         }
 
