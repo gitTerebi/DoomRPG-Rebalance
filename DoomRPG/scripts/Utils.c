@@ -1252,24 +1252,6 @@ fixed StatsNatMod()
     return (1.0 + (Modifier / (fixed)NumPlayers));
 }
 
-// Calculate monster delay modifier
-fixed MonsterDelayMod()
-{
-    fixed DelayModCalculate;
-
-    fixed MaxMonsters = 10;
-    int CurrentMonsters = MonsterSeeAmount;
-
-    DelayModCalculate = (1.0 + (CurrentMonsters / MaxMonsters));
-
-    if (DelayModCalculate < 1.0)
-        DelayModCalculate = 1.0;
-    if (DelayModCalculate > 5.0)
-        DelayModCalculate = 5.0;
-
-    return DelayModCalculate;
-}
-
 // --------------------------------------------------
 // Inventory
 //

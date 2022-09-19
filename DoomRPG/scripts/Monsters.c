@@ -972,7 +972,7 @@ NamedScript void CalculateMonsterStats(MonsterStatsPtr Stats)
     if (GetActorClass(0) == "DRPGSuperPowerSuit")
         Stats->Level = 1000;
 
-    MonsterStatPool = (40 + GameSkill() * Stats->Level) * (GetCVar("drpg_levelup_natural") ? StatsNatMod() : 1.0);
+    MonsterStatPool = (40 + 5 * Stats->Level) * (GetCVar("drpg_levelup_natural") ? StatsNatMod() : 1.0);
 
     // Minimal Points
     Stats->Strength = Stats->Level / 2;
@@ -1286,7 +1286,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
     {
         if (Stats->Level + Stats->LevelAdd >= MonsterLevelCap)
             Stats->LevelAdd = MonsterLevelCap - Stats->Level;
-        MonsterStatPool = GameSkill() * Stats->LevelAdd;
+        MonsterStatPool = 5 * Stats->LevelAdd;
 
         int StrengthAdd = 0;
         int DefenseAdd = 0;
@@ -1407,14 +1407,9 @@ NamedScript void MonsterAggressionHandler()
         DelayTime = 35;
 
     int Capacity = Stats->Capacity;
-
-    if (ToasterMod)
-        MonsterSeeAmount++;
+    int Aggression = 25 + Capacity * 2;
 
 Start:
-
-    if (ToasterMod)
-        MonsterSeeAmount--;
 
     if (!CheckInventory("DRPGMonsterAggressionHandler"))
         return;
@@ -1427,10 +1422,7 @@ Start:
 
     // Delay if Toaster Mode on
     if (ToasterMod)
-    {
         while (ActorNotSeePlayers(0, 0)) Delay(35);
-        MonsterSeeAmount++;
-    }
 
     // Changing the AI of monsters in case if there are summoned monsters
     for (int i = 0; i < MAX_PLAYERS; i++)
@@ -1541,22 +1533,24 @@ Start:
         goto Start;
     }
 
-    Capacity = Stats->Capacity;
-
-    fixed Aggression = 0.25 + (Capacity * 0.02);
-
-    if (Aggression < 1.0)
+    if (Aggression < 100)
     {
-        if (RandomFixed(0.0, 1.0) > Aggression)
-            GiveInventory("DRPGMonsterDontAttack", 1);
+        if (Random(0, 100) > Aggression)
+        {
+            SetActorFlag(0, "JUSTHIT", false);
+            SetActorFlag(0, "JUSTATTACKED", true);
+        }
     }
     else
     {
-        if (RandomFixed(0.0, 1.0) < ((Aggression - 1.0) / 4.0))
-            GiveInventory("DRPGMonsterAttackMore", 1);
+        if (Random(0, 100) < (Aggression - 100) / 4)
+        {
+            SetActorFlag(0, "JUSTHIT", true);
+            SetActorFlag(0, "JUSTATTACKED", false);
+        }
     }
 
-    Delay(DelayTime * MonsterDelayModifier);
+    Delay(DelayTime);
     goto Start;
 }
 
@@ -1650,7 +1644,7 @@ Start:
         }
     }
 
-    Delay(DelayTime * MonsterDelayModifier);
+    Delay(DelayTime);
     goto Start;
 }
 
@@ -1927,7 +1921,7 @@ Start:
     if (ToasterMod)
         while (ActorNotSeePlayers(0, 0)) Delay(35);
 
-    Delay(DelayTime * MonsterDelayModifier);
+    Delay(DelayTime);
     goto Start;
 }
 
@@ -3351,7 +3345,7 @@ void MonsterLevelup(MonsterStatsPtr Stats)
     // Apply the stats to the monster
     Stats->Level++;
 
-    int Pool = GameSkill();
+    int Pool = 5;
 
     while (Pool > 0)
     {

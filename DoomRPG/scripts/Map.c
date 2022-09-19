@@ -399,10 +399,6 @@ NamedScript Type_OPEN void MapInit()
         if (CurrentLevel->Event == MAPEVENT_NONE)
             CallACS("jjirandomizer");
 
-    // Reset the amount of monsters that see Player
-    if (MonsterSeeAmount > 0)
-        MonsterSeeAmount = 0;
-
     CurrentLevel->Init = true;
 }
 
