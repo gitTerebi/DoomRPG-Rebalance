@@ -1286,19 +1286,19 @@ NamedScript void ItemHandler()
 
                 if (NoClip)
                 {
-                    SetActorFlag(ItemTIDs[i], "NOCLIP", true);
-                    SetActorFlag(ItemTIDs[i], "NOGRAVITY", true);
-                    SetActorFlag(ItemTIDs[i], "NOTELEPORT", true);
-                    SetActorFlag(ItemTIDs[i], "VISIBILITYPULSE", true);
-                    SetActorFlag(ItemTIDs[i], "BRIGHT", true);
+                    SetActorFlag(ItemTID[j], "NOCLIP", true);
+                    SetActorFlag(ItemTID[j], "NOGRAVITY", true);
+                    SetActorFlag(ItemTID[j], "NOTELEPORT", true);
+                    SetActorFlag(ItemTID[j], "VISIBILITYPULSE", true);
+                    SetActorFlag(ItemTID[j], "BRIGHT", true);
                 }
                 else
                 {
-                    SetActorFlag(ItemTIDs[i], "NOCLIP", false);
-                    SetActorFlag(ItemTIDs[i], "NOGRAVITY", false);
-                    SetActorFlag(ItemTIDs[i], "NOTELEPORT", false);
-                    SetActorFlag(ItemTIDs[i], "VISIBILITYPULSE", false);
-                    SetActorFlag(ItemTIDs[i], "BRIGHT", false);
+                    SetActorFlag(ItemTID[j], "NOCLIP", false);
+                    SetActorFlag(ItemTID[j], "NOGRAVITY", false);
+                    SetActorFlag(ItemTID[j], "NOTELEPORT", false);
+                    SetActorFlag(ItemTID[j], "VISIBILITYPULSE", false);
+                    SetActorFlag(ItemTID[j], "BRIGHT", false);
                 }
             }
         }
