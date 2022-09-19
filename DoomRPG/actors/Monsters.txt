@@ -1,7 +1,9 @@
 actor DRPGZombieMan : Zombieman Replaces Zombieman
 {
     Tag "Former Human"
-    
+
+    DropItem "DRPGClipSpawner"
+
     States
     {
     Spawn:
@@ -16,7 +18,10 @@ actor DRPGZombieMan : Zombieman Replaces Zombieman
 actor DRPGShotgunGuy : ShotgunGuy Replaces ShotgunGuy
 {
     Tag "Former Sergeant"
-    
+
+    DropItem "DRPGShotgun", 48
+    DropItem "DRPGShellSpawner"
+
     States
     {
     Spawn:
@@ -31,7 +36,10 @@ actor DRPGShotgunGuy : ShotgunGuy Replaces ShotgunGuy
 actor DRPGChaingunGuy : ChaingunGuy Replaces ChaingunGuy
 {
     Tag "Former Commando"
-    
+
+    DropItem "DRPGChaingun", 48
+    DropItem "DRPGClipBoxSpawner"
+
     States
     {
     Spawn:
