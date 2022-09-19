@@ -68,8 +68,7 @@ Class PistolZombieRPG : PistolZombie replaces PistolZombie
 	Default
 	{
 		DropItem "DRPGPistol", 48;
-		DropItem "DRPGClipSpawner", 208;
-		DamageType "Plasma";
+		DropItem "DRPGClipSpawner";
 	}
 }
 
@@ -77,7 +76,7 @@ Class LaserRifleZombieRPG : LaserRifleZombie replaces LaserRifleZombie
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 		DamageType "Plasma";
 	}
 }
@@ -86,7 +85,7 @@ Class PlasmaPistolZombieRPG : PlasmaPistolZombie replaces PlasmaPistolZombie
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 		DamageType "Plasma";
 	}
 }
@@ -95,7 +94,7 @@ Class SpecOpsRiflemanRPG : SpecOpsRifleman replaces SpecOpsRifleman
 {
 	Default
 	{
-		DropItem "DRPGClipSpawner", 224;
+		DropItem "DRPGClipSpawner";
 		DropItem "DRPGCellSpawner", 32;
 		DamageType "Plasma";
 	}
@@ -115,7 +114,7 @@ Class RocketZombieRPG : RocketZombie replaces RocketZombie
 	Default
 	{
 		DropItem "DRPGRocketLauncher", 48;
-		DropItem "DRPGRocketAmmoSpawner", 208;
+		DropItem "DRPGRocketAmmoSpawner";
 	}
 }
 
@@ -133,7 +132,7 @@ Class NewShotgunguyRPG : NewShotgunguy replaces NewShotgunguy
 	Default
 	{
 		DropItem "DRPGShotgun", 48;
-		DropItem "DRPGShellSpawner", 208;
+		DropItem "DRPGShellSpawner";
 	}
 }
 
@@ -160,7 +159,7 @@ Class SuperShotgunZombieRPG : SuperShotgunZombie replaces SuperShotgunZombie
 	Default
 	{
 		DropItem "DRPGSuperShotgun", 48;
-		DropItem "DRPGShellSpawner", 208;
+		DropItem "DRPGShellSpawner";
 	}
 }
 
@@ -168,7 +167,7 @@ Class ChaosWarriorRPG : ChaosWarrior replaces ChaosWarrior
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 		DamageType "Radiation";
 		DamageFactor "Radiation", 0;
 	}
@@ -195,7 +194,7 @@ Class ChaingunZombieRPG : ChaingunZombie replaces ChaingunZombie
 	Default
 	{
 		DropItem "DRPGChaingun", 48;
-		DropItem "DRPGClipBoxSpawner", 208;
+		DropItem "DRPGClipBoxSpawner";
 	}
 }
 
@@ -204,7 +203,7 @@ Class NailborgCommandoRPG : NailborgCommando replaces NailborgCommando
 	Default
 	{
 		DropItem "DRPGChaingun", 48;
-		DropItem "DRPGClipBoxSpawner", 208;
+		DropItem "DRPGClipBoxSpawner";
 	}
 }
 
@@ -250,7 +249,7 @@ Class PlasmaRifleZombieRPG : PlasmaRifleZombie replaces PlasmaRifleZombie
 	Default
 	{
 		DropItem "DRPGPlasmaRifle", 48;
-		DropItem "DRPGCellSpawner", 208;
+		DropItem "DRPGCellSpawner";
 		DamageType "Plasma";
 	}
 }
