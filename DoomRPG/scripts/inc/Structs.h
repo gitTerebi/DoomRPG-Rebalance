@@ -539,6 +539,7 @@ struct PlayerData_S
     int BodyTID;
     int ReviveKeyTimer;
     int ReviverTID;
+	int ReviveeNum;
 
     // Flags
     bool FirstRun;
