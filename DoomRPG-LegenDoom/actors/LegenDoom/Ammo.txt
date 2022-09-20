@@ -11,6 +11,16 @@ actor LDClipPickupRPG : LDClipPickup Replaces DRPGClip
     }
 }
 
+actor LDClipPickupFullRPG : LDClipPickup Replaces DRPGClipFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDClipPickupHalfRPG : LDClipPickup Replaces DRPGClipHalf
 {
     States
@@ -35,6 +45,16 @@ actor LDClipPickupHalfRPG : LDClipPickup Replaces DRPGClipHalf
 // Clip Box Ammo
 
 actor LDClipBoxPickupRPG : LDClipBoxPickup Replaces DRPGClipBox
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDClipBoxPickupFullRPG : LDClipBoxPickup Replaces DRPGClipBoxFull
 {
     States
     {
@@ -77,6 +97,16 @@ actor LDShellPickupRPG : LDShellPickup replaces DRPGShell
     }
 }
 
+actor LDShellPickupFullRPG : LDShellPickup replaces DRPGShellFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDShellPickupHalfRPG : LDShellPickup replaces DRPGShellHalf
 {
     States
@@ -101,6 +131,16 @@ actor LDShellPickupHalfRPG : LDShellPickup replaces DRPGShellHalf
 // Shell Box Ammo
 
 actor LDShellBoxPickupRPG : LDShellBoxPickup replaces DRPGShellBox
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDShellBoxPickupFullRPG : LDShellBoxPickup replaces DRPGShellBoxFull
 {
     States
     {
@@ -157,6 +197,16 @@ actor LDRocketBoxPickupRPG : LDRocketBoxPickup replaces DRPGRocketBox
     }
 }
 
+actor LDRocketBoxPickupFullRPG : LDRocketBoxPickup replaces DRPGRocketBoxFull
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
 actor LDRocketBoxPickupHalfRPG : LDRocketBoxPickup replaces DRPGRocketBoxHalf
 {
     States
@@ -180,6 +230,16 @@ actor LDRocketBoxPickupHalfRPG : LDRocketBoxPickup replaces DRPGRocketBoxHalf
 // Cell Ammo
 
 actor LDCellPickupRPG : LDCellPickup replaces DRPGCell
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDCellPickupFullRPG : LDCellPickup replaces DRPGCellFull
 {
     States
     {
@@ -213,6 +273,16 @@ actor LDCellPickupHalfRPG : LDCellPickup replaces DRPGCellHalf
 // Cell Pack Ammo
 
 actor LDCellPackPickupRPG : LDCellPackPickup replaces DRPGCellPack
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+        goto Super::Spawn
+    }
+}
+
+actor LDCellPackPickupFullRPG : LDCellPackPickup replaces DRPGCellPackFull
 {
     States
     {
