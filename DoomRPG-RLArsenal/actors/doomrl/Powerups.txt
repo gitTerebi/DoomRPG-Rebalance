@@ -1,8 +1,8 @@
 actor InvulnerabilitySphere2 : CustomInventory Replaces DRPGInvulnerabilitySphere
 {
-	Tag "Invulnerability Sphere - Invulnerability for 30 seconds"
+	Tag "Invulnerability sphere (gives invulnerability for 30 seconds)"
 	
-    Inventory.PickupMessage "You got an Invulnerability Sphere!"
+    Inventory.PickupMessage "You picked up an invulnerability sphere."
 	Inventory.PickupSound "powerups/protect"
 	Inventory.UseSound "powerups/protect"
 	Inventory.Icon "PINV"
@@ -78,7 +78,7 @@ ACTOR RLInvulnerabilityChargeMarine : RLInvulnerabilityChargeNormal
 
 ACTOR BlurSphere2 : CustomInventory Replaces DRPGBlurSphere
 {
-	Tag "Blur Sphere - Partial Invisibility for 60 seconds"
+	Tag "Invisibility sphere (provides partial invisibility for 60 seconds)"
 	
 	+INVENTORY.ADDITIVETIME
 	+INVENTORY.PERSISTENTPOWER
@@ -86,7 +86,7 @@ ACTOR BlurSphere2 : CustomInventory Replaces DRPGBlurSphere
 	+FLOATBOB
     -COUNTITEM
 
-	Inventory.PickupMessage "You got an Invisibility Sphere!"
+	Inventory.PickupMessage "You picked up an invisibility sphere."
 	Inventory.PickupSound "powerups/invis"
 	Inventory.UseSound "powerups/invis"
 	Inventory.Icon "PINS"
@@ -157,7 +157,7 @@ ACTOR RLInvisibilityChargeMarine : RLInvisibilityChargeNormal
 
 actor RadSuit2 : CustomInventory Replaces DRPGRadSuit
 {
-	Tag "Radiation Suit - Protects against Damage Floors"
+	Tag "Radiation suit (protects against damaging environments for 60 seconds)"
 
 	+INVBAR
 	+INVENTORY.ADDITIVETIME
@@ -165,7 +165,7 @@ actor RadSuit2 : CustomInventory Replaces DRPGRadSuit
 	
 	Inventory.DefMaxAmount
 	Inventory.InterHubAmount 1000
-	Inventory.PickupMessage "You got a Radiation Suit!"
+	Inventory.PickupMessage "You picked up a radiation suit."
 	Inventory.PickupSound "powerups/suit"
 	Inventory.UseSound "powerups/suit"
 	Inventory.Icon "SUIT"
@@ -224,7 +224,7 @@ actor RLRadSuitIronPickupMarineGiver2 : RLRadSuitIronPickupMarineGiver replaces 
 
 actor Infrared2 : CustomInventory Replaces DRPGInfrared
 {
-	Tag "Night-Vision Goggles - See in the Dark"
+	Tag "Night vision goggles (enables night vision for 120 seconds)"
 	
 	+INVBAR
 	+INVENTORY.ADDITIVETIME
@@ -233,7 +233,7 @@ actor Infrared2 : CustomInventory Replaces DRPGInfrared
 	
 	Inventory.DefMaxAmount
 	Inventory.InterHubAmount 1000
-	Inventory.PickupMessage "You got a pair of Infrared Goggles!"
+	Inventory.PickupMessage "You picked up night vision goggles."
 	Inventory.PickupSound "powerups/light"
 	Inventory.UseSound "powerups/light"	
 	Inventory.Icon "PVIS"
@@ -270,7 +270,7 @@ ACTOR RLInfraredPickupMarineGiver2 : RLInfraredPickupMarineGiver replaces RLInfr
 
 actor Berserk2 : RLBerserk Replaces DRPGBerserk
 {
-	Tag "Berserk Pack - Full Health and Increased Melee Damage"
+	Tag "Berserk pack (heals fully plus increases melee damage until map leave)"
 	
     +INVBAR
     -COUNTITEM
@@ -278,7 +278,7 @@ actor Berserk2 : RLBerserk Replaces DRPGBerserk
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-	Inventory.PickupMessage "You got a Berserk Pack!"
+	Inventory.PickupMessage "You picked up a berserk pack."
 	Inventory.PickupSound "powerups/berserk"
     Inventory.UseSound "powerups/berserk"
     Inventory.Icon "PSTR"
@@ -367,7 +367,7 @@ ACTOR RLLavaSetBonusGiver2 : RLLavaSetBonusGiver Replaces RLLavaSetBonusGiver
 
 actor RLAllmap2 : RLAllmap Replaces DRPGAllMap
 {
-    Tag "Computer Area Map"
+    Tag "Computer map (reveals auto map until map leave)"
     
     +INVBAR
     -COUNTITEM
@@ -375,7 +375,7 @@ actor RLAllmap2 : RLAllmap Replaces DRPGAllMap
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "You got a Computer Area Map!"
+    Inventory.PickupMessage "You picked up a computer map."
     Inventory.PickupSound "powerups/map"
     Inventory.UseSound "powerups/map" 
     Inventory.Icon "PMAP"
@@ -395,7 +395,7 @@ actor RLAllmap2 : RLAllmap Replaces DRPGAllMap
 
 actor RLTrackingMap2 : RLTrackingMap Replaces RLTrackingMap
 {
-    Tag "Tracking Map"
+    Tag "Tracking map (reveals auto map with contents until map leave)"
     
     +INVBAR
     -COUNTITEM
@@ -403,7 +403,7 @@ actor RLTrackingMap2 : RLTrackingMap Replaces RLTrackingMap
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "Tracking Map!"
+    Inventory.PickupMessage "You picked up a tracking map."
     Inventory.PickupSound "powerups/map"
     Inventory.UseSound "misc/trackingmappickup" 
     Inventory.Icon "MMAP"
