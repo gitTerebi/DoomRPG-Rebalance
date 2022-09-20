@@ -1,7 +1,7 @@
 // --------------------------------------------------
 // Clip Ammo
 
-actor RLClip1 : RLClip Replaces DRPGClip
+actor RLClip1 : RLClip Replaces DRPGClipFull
 {
 	Inventory.PickupSound "items/clip"
     
@@ -50,7 +50,7 @@ actor RLClip3 : RLClip Replaces DRPGClipHalf
 // --------------------------------------------------
 // Clip Box Ammo
 
-actor RLClipBox1 : RLClipBox Replaces DRPGClipBox
+actor RLClipBox1 : RLClipBox Replaces DRPGClipBoxFull
 {
 	Inventory.PickupSound "items/clipbox"
     
@@ -101,7 +101,7 @@ actor RLClipBox3 : RLClipBox Replaces DRPGClipBoxHalf
 // --------------------------------------------------
 // Shell Ammo
 
-actor RLShell1 : RLShell Replaces DRPGShell
+actor RLShell1 : RLShell Replaces DRPGShellFull
 {
     Inventory.PickupSound "items/shell"
     
@@ -155,7 +155,7 @@ actor RLShell3 : RLShell Replaces DRPGShellHalf
 // --------------------------------------------------
 // Shell Box Ammo
 
-actor RLShellBox1 : RLShellBox Replaces DRPGShellBox
+actor RLShellBox1 : RLShellBox Replaces DRPGShellBoxFull
 {
 	Inventory.PickupSound "items/shell"
     
@@ -239,7 +239,7 @@ actor RLRocketAmmo2 : RLRocketAmmo Replaces RLRocketAmmo
 // --------------------------------------------------
 // Rocket Box Ammo
 
-actor RLRocketBox1 : RLRocketBox Replaces DRPGRocketBox
+actor RLRocketBox1 : RLRocketBox Replaces DRPGRocketBoxFull
 {
 	Inventory.PickupSound "items/rocket"
     
@@ -290,7 +290,7 @@ actor RLRocketBox3 : RLRocketBox Replaces DRPGRocketBoxHalf
 // --------------------------------------------------
 // Cell Ammo
 
-actor RLCell1 : RLCell Replaces DRPGCell
+actor RLCell1 : RLCell Replaces DRPGCellFull
 {
 	Inventory.PickupSound "items/cell"
 
@@ -340,7 +340,7 @@ actor RLCell3 : RLCell Replaces DRPGCellHalf
 // --------------------------------------------------
 // Cell Pack Ammo
 
-actor RLCellPack1 : RLCellPack Replaces DRPGCellPack
+actor RLCellPack1 : RLCellPack Replaces DRPGCellPackFull
 {
 	Inventory.PickupSound "items/cell"
     
