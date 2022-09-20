@@ -104,7 +104,7 @@ Class PlasmaPistolZombieRPG : PlasmaPistolZombie replaces PlasmaPistolZombie
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner";
+		DropItem "DRPGCellSpawner", 128;
 		DamageType "Plasma";
 	}
 }
@@ -122,8 +122,6 @@ Class SpecOpsRiflemanDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGPistol",         255, 48;
-		DropItem "DRPGPistolSpawner",  255, 4;
 		DropItem "DRPGClipSpawner",    255, 208;
 		DropItem "DRPGCellSpawner",    255, 48;
 	}
@@ -353,9 +351,7 @@ Class SpecOpsGunnerDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGPistol",              255, 48;
 		DropItem "DRPGBattleRifle",         255, 48;
-		DropItem "DRPGPistolSpawner",       255, 4;
 		DropItem "DRPGBattleRifleSpawner",  255, 4;
 		DropItem "DRPGClipBoxSpawner",      255, 208;
 	}
@@ -824,7 +820,7 @@ Class SentryRPG : Sentry replaces Sentry
 {
 	Default
 	{
-		DropItem "DRPGShellSpawner", 256;
+		DropItem "DRPGShellSpawner";
 	}
 }
 
@@ -858,7 +854,7 @@ Class CacobotRPG : Cacobot replaces Cacobot
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 		DropItem "DRPGCellSpawner", 32;
 		DropItem "PandGameLevelIncreaser", 40;
 	}
@@ -1047,7 +1043,7 @@ Class CorpulentRPG : Corpulent replaces Corpulent
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 	}
 }
 
@@ -1232,7 +1228,7 @@ Class CyberHellKnightRPG : CyberHellKnight replaces CyberHellKnight
 {
 	Default
 	{
-		DropItem "DRPGRocketAmmoSpawner", 256;
+		DropItem "DRPGRocketAmmoSpawner";
 	}
 }
 
@@ -1305,7 +1301,7 @@ Class DistortionistRPG : Distortionist replaces Distortionist
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 	}
 }
 
@@ -1313,7 +1309,7 @@ Class InfernalistRPG : Infernalist replaces Infernalist
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 	}
 }
 
@@ -1321,7 +1317,7 @@ Class CryptekRPG : Cryptek replaces Cryptek
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 		DamageType "Radiation";
 		DamageFactor "Radiation", 0;
 	}
@@ -1347,7 +1343,7 @@ Class Epic2AlienRPG : Epic2Alien replaces Epic2Alien
 {
 	Default
 	{
-		DropItem "DRPGClipSpawner", 256;
+		DropItem "DRPGClipSpawner";
 	}
 }
 
@@ -1357,7 +1353,7 @@ Class Scythe2MarineRPG : Scythe2Marine replaces Scythe2Marine
 {
 	Default
 	{
-		DropItem "DRPGCellSpawner", 256;
+		DropItem "DRPGCellSpawner";
 	}
 }
 
@@ -1367,7 +1363,7 @@ Class AnnihilatorRPG : Annihilator replaces Annihilator
 {
 	Default
 	{
-		DropItem "DRPGRocketBoxSpawner", 256;
+		DropItem "DRPGRocketBoxSpawner";
 		DropItem "DRPGRocketBoxSpawner", 32;
 	}
 }
@@ -1377,7 +1373,7 @@ Class DarkCardinalRPG : DarkCardinal replaces DarkCardinal
 {
 	Default
 	{
-		DropItem "DRPGCellPackSpawner", 256;
+		DropItem "DRPGCellPackSpawner";
 		DropItem "DRPGCellPackSpawner", 32;
 	}
 }
@@ -1386,7 +1382,7 @@ Class DarkCyberdemonRPG : DarkCyberdemon replaces DarkCyberdemon
 {
 	Default
 	{
-		DropItem "DRPGCellPackSpawner", 256;
+		DropItem "DRPGCellPackSpawner";
 		DropItem "DRPGCellPackSpawner", 32;
 	}
 }
@@ -1395,7 +1391,7 @@ Class EradicatorRPG : Eradicator replaces Eradicator
 {
 	Default
 	{
-		DropItem "DRPGCellPackSpawner", 256;
+		DropItem "DRPGCellPackSpawner";
 		DropItem "DRPGCellPackSpawner", 32;
 	}
 }
@@ -1404,7 +1400,7 @@ Class PlamexisRPG : Plamexis replaces Plamexis
 {
 	Default
 	{
-		DropItem "DRPGCellPackSpawner", 256;
+		DropItem "DRPGCellPackSpawner";
 		DropItem "DRPGCellPackSpawner", 32;
 	}
 }
@@ -1413,7 +1409,7 @@ Class TerminatorRPG : Terminator replaces Terminator
 {
 	Default
 	{
-		DropItem "DRPGCellPackSpawner", 256;
+		DropItem "DRPGCellPackSpawner";
 		DropItem "DRPGCellPackSpawner", 32;
 	}
 }
@@ -1422,7 +1418,7 @@ Class DreamweaverRPG : Dreamweaver replaces Dreamweaver //I dreamt about a fucki
 {
 	Default
 	{
-		DropItem "DRPGCellPackSpawner", 256;
+		DropItem "DRPGCellPackSpawner";
 		DropItem "DRPGCellPackSpawner", 32;
 		DamageFactor "Fire", 1.5;
 	}
@@ -1459,8 +1455,8 @@ Class ChaosMonolithRPG : ChaosMonolith replaces ChaosMonolith
 {
 	Default
 	{
-		DropItem "PandGameLevelIncreaser", 256;
-		DropItem "DRPGCellPackSpawner", 256;
+		DropItem "PandGameLevelIncreaser";
+		DropItem "DRPGCellPackSpawner";
 		DamageType "Radiation";
 		DamageFactor "Radiation", 0;
 	}
@@ -1569,7 +1565,7 @@ Class GeneralRoasterockRPG : GeneralRoasterock replaces GeneralRoasterock
 {
 	Default
 	{
-		DropItem "DRPGBackpackRandomizer", 256;
+		DropItem "DRPGBackpackRandomizer";
 	}
 }
 
@@ -1577,7 +1573,7 @@ Class MyrkuraRPG : Myrkura replaces Myrkura
 {
 	Default
 	{
-		DropItem "DRPGBackpackRandomizer", 256;
+		DropItem "DRPGBackpackRandomizer";
 	}
 }
 

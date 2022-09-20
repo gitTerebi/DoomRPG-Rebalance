@@ -339,6 +339,24 @@ void DrawMainMenu()
             EndHudMessage(HUDMSG_PLAIN, 0, "Red", 180.1, 115.0, 0.05);
         }
 
+        // Compatibility Handling - Pandemonia Monsters
+        if (CompatMonMode == COMPAT_PANDEMONIA)
+        {
+            str NameGameLevel;
+            fixed GameLevelMod = (CheckInventory("PMGameLevel") / (GetCVar("drpg_ws_use_wads") * 32.0 * 4.0));
+            Y1 = 8.0;
+
+            if (GameLevelMod >= 0.0) NameGameLevel = "\CdVery Low\C-";
+            if (GameLevelMod > 0.10) NameGameLevel = "\CdLow\C-";
+            if (GameLevelMod > 0.25) NameGameLevel = "\CiMedium\C-";
+            if (GameLevelMod > 0.5) NameGameLevel = "\CaHigh\C-";
+            if (GameLevelMod > 0.75) NameGameLevel = "\CgVery High\C-";
+
+            SetFont("SMALLFONT");
+            HudMessage("Game Level: %d - %S", CheckInventory("PMGameLevel"), NameGameLevel);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Red", 180.1, 115.0, 0.05);
+        }
+
         SetFont("SMALLFONT");
         HudMessage("Monsters: %d / %d", CurrentKills, TotalKills);
         EndHudMessage(HUDMSG_PLAIN, 0, (AllKills ? "Green" : "Brick"),       180.1, 121.0 + Y1, 0.05);
