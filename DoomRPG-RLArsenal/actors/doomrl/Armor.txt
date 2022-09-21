@@ -105,6 +105,8 @@ actor RLTacticalAssemblerRestorer2TechnicianRPG : RLTacticalAssemblerRestorer2Te
 
 actor RLArmorBonusPickupRPG : RLArmorBonusPickup replaces RLArmorBonusPickup
 {
+	Inventory.PickupMessage "You picked up an armor shard."
+
 	States
 	{
 	100ArmorRepair:
