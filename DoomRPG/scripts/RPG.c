@@ -442,7 +442,7 @@ Start:
         SetInventory("RLPhaseDeviceLimit", 0);
     }
 
-    if (GetCVar("drpg_multi_revives"))
+    if (InMultiplayer && GetCVar("drpg_multi_revives"))
         ReviveHandler();
 
     if (Player.FocusingCooldown > 0)
@@ -1782,6 +1782,7 @@ NamedScript Type_RESPAWN void Respawn()
     // Reset revive stuff
     if (GetCVar("drpg_multi_revives"))
     {
+        Player.ReviveeNum = -1;
         Player.ReviveKeyTimer = 0;
         Player.ReviverTID = 0;
         Player.BodyTID = 0;
@@ -2596,11 +2597,11 @@ void AssignTIDs()
 
 NamedScript void ReviveHandler()
 {
-    for (int i = 0; i < PlayerCount(); i++)
+    if ((!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
     {
-        if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Players(i).BodyTID > 0 && Distance(Player.TID, Players(i).BodyTID) < 48)
+        for (int i = 0; i < PlayerCount(); i++)
         {
-            if ((!Player.InMenu && !Player.InShop && !Player.OutpostMenu && !Player.CrateOpen) && !Player.MenuBlock)
+            if (i != PlayerNumber() && Players(i).ActualHealth <= 0 && Players(i).BodyTID > 0 && Distance(Player.TID, Players(i).BodyTID) < 48)
             {
                 SetHudSize(0, 0, false);
                 SetFont("BIGFONT");
@@ -2614,6 +2615,7 @@ NamedScript void ReviveHandler()
                         if (CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()))
                         {
                             SetPlayerProperty(PlayerNumber(), true, PROP_TOTALLYFROZEN);
+                            Player.ReviveeNum = i;
                             Players(i).ReviverTID = Player.TID;
                             Players(i).ReviveKeyTimer++;
                             if (Players(i).ReviveKeyTimer >= 105)
@@ -2643,12 +2645,11 @@ NamedScript void ReviveHandler()
                                 else
                                     DrawProgressBar("Stabilizing", Percent);
                             }
+
+                            return;
                         }
                         else
                         {
-                            SetPlayerProperty(PlayerNumber(), false, PROP_TOTALLYFROZEN);
-                            Players(i).ReviveKeyTimer = 0;
-                            Players(i).ReviverTID = 0;
                             if (!Stabilize)
                                 HudMessage("Hold \Cd%jS\C- to revive", "+use");
                             else
@@ -2669,6 +2670,14 @@ NamedScript void ReviveHandler()
                 }
             }
         }
+    }
+
+    if (Player.ReviveeNum >= 0)
+    {
+        SetPlayerProperty(PlayerNumber(), false, PROP_TOTALLYFROZEN);
+        Players(Player.ReviveeNum).ReviveKeyTimer = 0;
+        Players(Player.ReviveeNum).ReviverTID = 0;
+        Player.ReviveeNum = -1;
     }
 }
 
