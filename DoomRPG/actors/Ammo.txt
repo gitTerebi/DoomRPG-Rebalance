@@ -1,5 +1,9 @@
+// --------------------------------------------------
+// AMMO ITEMS
+//
 
-// --- Standard ammo pickups ---
+// --------------------------------------------------
+// Standart Ammo
 
 actor DRPGClip : Clip Replaces Clip
 {
@@ -113,7 +117,8 @@ actor DRPGCellPack : CellPack Replaces CellPack
 	}
 }
 
-// --- Full ammo pickups ---
+// --------------------------------------------------
+// Full Ammo
 
 actor DRPGClipFull : DRPGClip
 {
@@ -213,7 +218,8 @@ actor DRPGCellPackFull : DRPGCellPack
 	}
 }
 
-// --- Half ammo pickups ---
+// --------------------------------------------------
+// Half Ammo
 
 actor DRPGClipHalf : DRPGClip
 {
@@ -320,7 +326,8 @@ actor DRPGCellPackHalf : DRPGCellPack
 	}
 }
 
-// --- Backpacks pickups ---
+// --------------------------------------------------
+// Backpacks
 
 actor DRPGBackpack : CustomInventory
 {
@@ -383,7 +390,8 @@ actor DRPGBigBackpack : DRPGBackpack
 	}
 }
 
-// --- Stolen ammo pickups ---
+// --------------------------------------------------
+// Stolen Ammo Tokens
 
 actor DRPGStolenClip : CustomInventory
 {
