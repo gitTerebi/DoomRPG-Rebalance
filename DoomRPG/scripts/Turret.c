@@ -1239,7 +1239,7 @@ Start:
         EnemyPitch = VectorAngle(Distance(0, TargetTID), GetActorZ(TargetTID) - GetActorZ(0));
 
         TurretTurn(EnemyAngle, EnemyPitch);
-        if (!GetCVar("drpg_toaster"))
+        if (GetCVar("drpg_turret_targeting_laser"))
             GiveInventory("DRPGTurretTargetingLaser", 1);
 
         if (Distance(0, TargetTID) <= GetActorPropertyFixed(TargetTID, APROP_Radius) + TurretEnemyDistance)

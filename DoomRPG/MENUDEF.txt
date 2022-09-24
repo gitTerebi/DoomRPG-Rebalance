@@ -621,6 +621,9 @@ OptionMenu "DoomRPGTurret"
 
     Slider "Pursuit Time (Sec.)", "drpg_turret_pursuittime", 1.0, 20.0, 1.0
     Slider "Teleport Wait Time (Sec.)", "drpg_turret_telewaittime", 2.0, 20.0, 1.0
+    StaticText ""
+
+    Option "Targeting Laser", "drpg_turret_targeting_laser", "OnOff"
 }
 
 OptionMenu "DoomRPGMenus"
