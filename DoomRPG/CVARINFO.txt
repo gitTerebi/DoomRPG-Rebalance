@@ -184,6 +184,7 @@ user    float   drpg_turret_playerdist = 144.0;
 user    float   drpg_turret_enemydist = 176.0;
 user    int     drpg_turret_pursuittime = 6;
 user    int     drpg_turret_telewaittime = 8;
+server  bool    drpg_turret_targeting_laser = true;
 
 // Menus
 server  bool    drpg_menudim = true;

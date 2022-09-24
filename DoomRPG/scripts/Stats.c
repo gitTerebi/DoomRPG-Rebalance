@@ -536,7 +536,7 @@ void CheckStats()
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
-    Player.JumpHeight = 8.0;
+    Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.AgilityTotal / 100));
     Player.WeaponSpeed = Player.AgilityTotal / 2;
     SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
     SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
