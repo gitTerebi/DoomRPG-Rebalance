@@ -2869,11 +2869,11 @@ void MenuHelp()
             if (MapPacks)
             {
                 if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
-                    HudMessage("Select Level: \Cd%S/%S/%S/%S\C-\nSelect IWAD: \Cd%S+%S/%S+%S\C-\nTeleport to Level: \Cd%S\C-\nExit: \Cd%S\C-",
-                               "Up", "Down", "Left", "Right", "Run", "Left", "Run", "Right", "Use", "Menu");
+                    HudMessage("Select Level: \Cd%S/%S/%S/%S\C-\nSelect IWAD: \Cd%S + %S/%S\C-\nTeleport to Level: \Cd%S\C-\nExit: \Cd%S\C-",
+                               "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use", "Menu");
                 else
-                    HudMessage("Select Level: \Cd%jS/%jS/%jS/%jS\C-\nSelect IWAD: \Cd%jS+%jS/%jS+%jS\C-\nTeleport to Level: \Cd%jS\C-\nExit: \Cd%jS\C-",
-                               "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+speed", "+moveright", "+use", "drpg_menu");
+                    HudMessage("Select Level: \Cd%jS/%jS/%jS/%jS\C-\nSelect IWAD: \Cd%jS + %jS/%jS\C-\nTeleport to Level: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                               "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use", "drpg_menu");
             }
             else
             {
