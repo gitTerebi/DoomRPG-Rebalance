@@ -1345,6 +1345,10 @@ void DrawSkillMenu()
     int SkillCost = ScaleEPCost(CurrentSkill->Cost * SkillLevel->CurrentLevel);
     int SkillCostNext = ScaleEPCost(CurrentSkill->Cost * (SkillLevel->CurrentLevel + 1));
 
+    // Hold EP cost of skill "Magnetize"
+    if (CurrentSkill->Name == "Magnetize")
+        SkillCostNext = 25;
+
     // Title
     SetFont("BIGFONT");
     HudMessage("Skills");
