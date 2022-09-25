@@ -122,6 +122,7 @@
 // Aliases
 #define CallACS(script)         ACS_NamedExecuteWithResult((script))
 #define Arbitrator              (PlayerNumber() == 0)
+#define InSingleplayer          (GameType() == GAME_SINGLE_PLAYER)
 #define InMultiplayer           (GameType() == GAME_NET_COOPERATIVE)
 #define InTitle                 (GameType() == GAME_TITLE_MAP)
 #define GetMonsterID(N)         GetActorProperty((N), APROP_Score)

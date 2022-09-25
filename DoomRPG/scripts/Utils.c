@@ -725,19 +725,35 @@ int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed
 // Use for while if you want to make a delay when the monster sees the players
 bool ActorSeePlayers(int MonsterTID, int Dist)
 {
-    for (int i = 0; i < MAX_PLAYERS; i++)
+    if (InSingleplayer)
     {
-        if (!PlayerInGame(i)) continue;
-
         if (Dist > 0)
         {
-            if (!CheckSight(MonsterTID, Players(i).TID, 0) || Distance(MonsterTID, Players(i).TID) > Dist)
+            if (!CheckSight(MonsterTID, Players(0).TID, CSF_NOBLOCKALL) || Distance(MonsterTID, Players(0).TID) > Dist)
                 return false;
         }
         else
         {
-            if (!CheckSight(MonsterTID, Players(i).TID, 0))
+            if (!CheckSight(MonsterTID, Players(0).TID, CSF_NOBLOCKALL))
                 return false;
+        }
+    }
+    else
+    {
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            if (!PlayerInGame(i)) continue;
+
+            if (Dist > 0)
+            {
+                if (!CheckSight(MonsterTID, Players(i).TID, CSF_NOBLOCKALL) || Distance(MonsterTID, Players(i).TID) > Dist)
+                    return false;
+            }
+            else
+            {
+                if (!CheckSight(MonsterTID, Players(i).TID, CSF_NOBLOCKALL))
+                    return false;
+            }
         }
     }
 
@@ -747,19 +763,36 @@ bool ActorSeePlayers(int MonsterTID, int Dist)
 // Use for while if you want to make a delay when the monster doesn't see the players
 bool ActorNotSeePlayers(int MonsterTID, int Dist)
 {
-    for (int i = 0; i < MAX_PLAYERS; i++)
+    if (InSingleplayer)
     {
-        if (!PlayerInGame(i)) continue;
-
-        if (CheckSight(MonsterTID, Players(i).TID, 0) || Distance(MonsterTID, Players(i).TID) <= Dist)
+        if (CheckSight(MonsterTID, Players(0).TID, CSF_NOBLOCKALL) || Distance(MonsterTID, Players(0).TID) <= Dist)
             return false;
 
-        if (!Players(i).Summons == 0)
+        if (!Players(0).Summons == 0)
         {
-            for (int j = 0; j < Players(i).Summons; j++)
+            for (int j = 0; j < Players(0).Summons; j++)
             {
-                if (CheckSight(MonsterTID, Players(i).SummonTID[j], 0) || Distance(MonsterTID, Players(i).SummonTID[j]) <= Dist)
+                if (CheckSight(MonsterTID, Players(0).SummonTID[j], CSF_NOBLOCKALL) || Distance(MonsterTID, Players(0).SummonTID[j]) <= Dist)
                     return false;
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            if (!PlayerInGame(i)) continue;
+
+            if (CheckSight(MonsterTID, Players(i).TID, CSF_NOBLOCKALL) || Distance(MonsterTID, Players(i).TID) <= Dist)
+                return false;
+
+            if (!Players(i).Summons == 0)
+            {
+                for (int j = 0; j < Players(i).Summons; j++)
+                {
+                    if (CheckSight(MonsterTID, Players(i).SummonTID[j], CSF_NOBLOCKALL) || Distance(MonsterTID, Players(i).SummonTID[j]) <= Dist)
+                        return false;
+                }
             }
         }
     }
@@ -1720,7 +1753,7 @@ void SpawnAuras(int TID, bool ForceFancy)
             return;
 
         // LOS Checks
-        if (GameType() == GAME_SINGLE_PLAYER)
+        if (InSingleplayer)
         {
             if (CheckSight(Players(0).TID, TID, CSF_NOBLOCKALL))
                 SpawnOK = true;
