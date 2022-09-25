@@ -1934,57 +1934,35 @@ NamedScript void MonsterAuraDisplayHandler()
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
     int DrawDist = GetCVar("drpg_auras_drawdistance");
-    bool CloseToPlayers;
 
-    while(true)
-    {
-        if (GetActorProperty(0, APROP_Health) <= 0)
-            break;
+Start:
 
-        if (ClassifyActor(0) & ACTOR_WORLD)
-            break;
+    if (GetActorProperty(0, APROP_Health) <= 0)
+        return;
 
-        for (int i = 0; i < MAX_PLAYERS; i++)
-        {
-            if (!PlayerInGame(i))
-                continue;
+    if (ClassifyActor(0) & ACTOR_WORLD)
+        return;
 
-            if (Distance(Players(i).TID, 0) < DrawDist)
-                CloseToPlayers = true;
-            else
-            {
-                CloseToPlayers = false;
-                break;
-            }
+    while (ActorNotSeePlayers(0, DrawDist)) Delay(35);
 
-            if (CheckSight(Players(i).TID, 0, CSF_NOBLOCKALL))
-                break;
-        }
+    // Spawn Auras
+    if (MonsterHasAura(Stats) || (GetActorProperty(0, APROP_Friendly) && !CurrentLevel->UACBase))
+        SpawnAuras(0, false);
 
-        if (!CloseToPlayers)
-        {
-            Delay(35);
-            continue;
-        }
+    // Shadow Aura Effects
+    if (MonsterHasShadowAura(Stats))
+        SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
 
-        // Spawn Auras
-        if (MonsterHasAura(Stats) || (GetActorProperty(0, APROP_Friendly) && !CurrentLevel->UACBase))
-            SpawnAuras(0, false);
+    // Spawn Assassination Target
+    if (Stats->Target > 0)
+        SpawnForced("DRPGAssassinationIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
 
-        // Shadow Aura Effects
-        if (MonsterHasShadowAura(Stats))
-            SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
+    // Spawn Disruption Icon
+    if (MonsterHasAura(Stats) && CheckInventory("DRPGMonsterDisrupted"))
+        SpawnForced("DRPGDisruptionIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
 
-        // Spawn Assassination Target
-        if (Stats->Target > 0)
-            SpawnForced("DRPGAssassinationIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
-
-        // Spawn Disruption Icon
-        if (MonsterHasAura(Stats) && CheckInventory("DRPGMonsterDisrupted"))
-            SpawnForced("DRPGDisruptionIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
-
-        Delay(1);
-    }
+    Delay(1);
+    goto Start;
 }
 
 NamedScript void MonsterLevelupHandler()
