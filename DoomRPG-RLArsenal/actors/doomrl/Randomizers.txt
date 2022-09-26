@@ -1,4 +1,4 @@
-actor RLStandardWeaponSpawner : RandomSpawner
+actor RLStandardWeaponSpawner2 : RandomSpawner Replaces RLStandardWeaponSpawner
 {
     DropItem "RLChainsawPickup"
     DropItem "RLPistolPickup"
@@ -458,7 +458,7 @@ actor DRPGShopPowerupRandomizer2 : RandomSpawner Replaces DRPGShopPowerupRandomi
     DropItem "RadSuit2"
     DropItem "Infrared2"
     DropItem "DRPGAllMap"
-    DropItem "Berserk2"
+    DropItem "RLBerserk2"
 
     DropItem "RLTrackingMap"
 }
