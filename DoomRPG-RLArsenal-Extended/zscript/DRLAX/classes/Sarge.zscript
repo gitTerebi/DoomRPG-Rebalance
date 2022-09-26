@@ -416,12 +416,12 @@ Class RLSargeItemChance : Actor
                     switch(random(0, 6))
                     {
                         Case 0:
-                        Case 1: spawneditem = "RLHealthBonus"; break;
+                        Case 1: spawneditem = "DRPGHealthBonus2"; break;
                         Case 2: spawneditem = "RLArmorBonusPickup"; break;
                         Case 3: spawneditem = "RLClip3"; break;
                         Case 4: spawneditem = "RLShell3"; break;
                         Case 5: spawneditem = "RLCell3"; break;
-                        Case 6: spawneditem = "RLRocketAmmo"; break;
+                        Case 6: spawneditem = "RLRocketAmmo2"; break;
                     }
                 }
             }

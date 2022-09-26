@@ -46,6 +46,11 @@ actor DRPGHealthBonus : CustomInventory
     }
 }
 
+actor DRPGHealthBonus2 : DRPGHealthBonus
+{
+    -COUNTITEM
+}
+
 // Stimpack
 ACTOR DRPGStimpack : CustomInventory
 {

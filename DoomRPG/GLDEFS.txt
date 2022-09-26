@@ -175,6 +175,7 @@ pulselight MEGASPHERE
 
 // Health Bonus
 object DRPGHealthBonus  	    { frame BON1 { light HEALTHBONUS } }
+object DRPGHealthBonus2  	    { frame BON1 { light HEALTHBONUS } }
 object DRPGArmorBonusReplacer  	{ frame BON1 { light HEALTHBONUS } }
 
 // Soulspheres
