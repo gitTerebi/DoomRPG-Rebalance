@@ -91,7 +91,7 @@ ACTOR DRPGMedikit : CustomInventory
 }
 
 // Large Medikit
-actor DRPGLargeMedikit : CustomInventory 25030
+actor DRPGLargeMedikit : CustomInventory
 {
     Inventory.PickupMessage "You picked up a large medikit."
     Inventory.PickupSound "items/health"
@@ -113,7 +113,7 @@ actor DRPGLargeMedikit : CustomInventory 25030
 }
 
 // Extra-Large Medikit
-actor DRPGXLMedikit : CustomInventory 25031
+actor DRPGXLMedikit : CustomInventory
 {
     Inventory.PickupMessage "You picked up an extra large medikit."
     Inventory.PickupSound "items/health"
@@ -135,7 +135,7 @@ actor DRPGXLMedikit : CustomInventory 25031
 }
 
 // Med Pack
-actor DRPGMedPack : CustomInventory 25032
+actor DRPGMedPack : CustomInventory
 {
     Inventory.PickupMessage "You picked up a med pack."
     Inventory.PickupSound "items/health"
@@ -157,7 +157,7 @@ actor DRPGMedPack : CustomInventory 25032
 }
 
 // Surgery Kit
-actor DRPGSurgeryKit : CustomInventory 25033
+actor DRPGSurgeryKit : CustomInventory
 {
     Inventory.PickupMessage "You picked up a surgery kit."
     Inventory.PickupSound "items/health"
@@ -222,7 +222,7 @@ ACTOR DRPGSoulsphere : CustomInventory
     }
 }
 
-ACTOR DRPGSoulsphere2 : DRPGSoulsphere 25034
+ACTOR DRPGSoulsphere2 : DRPGSoulsphere
 {
     Inventory.PickupMessage "You picked up a soul sphere."
 
@@ -237,7 +237,7 @@ ACTOR DRPGSoulsphere2 : DRPGSoulsphere 25034
     }
 }
 
-ACTOR DRPGSoulsphere3 : DRPGSoulsphere 25035
+ACTOR DRPGSoulsphere3 : DRPGSoulsphere
 {
     Inventory.PickupMessage "You picked up a greater soul sphere."
 
@@ -263,7 +263,7 @@ ACTOR DRPGLife : Inventory
     Inventory.PickupSound "health/1up"
 }
 
-ACTOR DRPG1Up : CustomInventory 25036
+ACTOR DRPG1Up : CustomInventory 20178
 {
     -INVBAR
     +FLOATBOB
@@ -330,7 +330,7 @@ ACTOR DRPG5Up : DRPG1Up
 }
 
 // EP Capsule
-actor DRPGEPCapsule : CustomInventory 25037
+actor DRPGEPCapsule : CustomInventory
 {
     Inventory.PickupMessage "You picked up an energy capsule."
     Inventory.PickupSound "health/epcapsule"
@@ -352,7 +352,7 @@ actor DRPGEPCapsule : CustomInventory 25037
 }
 
 // Little EP Capsule
-actor DRPGLittleEPCapsule : DRPGEPCapsule 25039
+actor DRPGLittleEPCapsule : DRPGEPCapsule
 {
 	Inventory.PickupMessage "You picked up a little energy capsule."
 
@@ -368,7 +368,7 @@ actor DRPGLittleEPCapsule : DRPGEPCapsule 25039
 }
 
 // Big EP Capsule
-actor DRPGBigEPCapsule : DRPGEPCapsule 25038
+actor DRPGBigEPCapsule : DRPGEPCapsule
 {
 	Inventory.PickupMessage "You picked up a big energy capsule."
 

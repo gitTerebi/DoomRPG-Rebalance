@@ -1,5 +1,5 @@
 
-actor DRPGStimSmall : Inventory 20100
+actor DRPGStimSmall : Inventory
 {
     Scale 0.25
     
@@ -18,28 +18,28 @@ actor DRPGStimSmall : Inventory 20100
     }
 }
 
-actor DRPGStimMedium : DRPGStimSmall 20101
+actor DRPGStimMedium : DRPGStimSmall
 {
     Scale 0.325
 
     Inventory.PickupMessage "You picked up a medium stim."
 }
 
-actor DRPGStimLarge : DRPGStimSmall 20102
+actor DRPGStimLarge : DRPGStimSmall
 {
     Scale 0.4
     
     Inventory.PickupMessage "You picked up a large stim."
 }
 
-actor DRPGStimXL : DRPGStimSmall 20103
+actor DRPGStimXL : DRPGStimSmall
 {
     Scale 0.5
     
     Inventory.PickupMessage "You picked up an extra large stim."
 }
 
-actor DRPGStimDetox : CustomInventory 20104
+actor DRPGStimDetox : CustomInventory
 {
     Scale 0.5
     
@@ -168,7 +168,7 @@ actor DRPGStimXLTossed : DRPGStimXL
 }
 
 // Vials
-actor DRPGVialStrength : CustomInventory 20110
+actor DRPGVialStrength : CustomInventory
 {
     Scale 0.5
     
@@ -187,7 +187,7 @@ actor DRPGVialStrength : CustomInventory 20110
     }
 }
 
-actor DRPGVialDefense : CustomInventory 20111
+actor DRPGVialDefense : CustomInventory
 {
     Scale 0.5
 
@@ -206,7 +206,7 @@ actor DRPGVialDefense : CustomInventory 20111
     }
 }
 
-actor DRPGVialVitality : CustomInventory 20112
+actor DRPGVialVitality : CustomInventory
 {
     Scale 0.5
 
@@ -225,7 +225,7 @@ actor DRPGVialVitality : CustomInventory 20112
     }
 }
 
-actor DRPGVialEnergy : CustomInventory 20113
+actor DRPGVialEnergy : CustomInventory
 {
     Scale 0.5
 
@@ -244,7 +244,7 @@ actor DRPGVialEnergy : CustomInventory 20113
     }
 }
 
-actor DRPGVialRegeneration : CustomInventory 20114
+actor DRPGVialRegeneration : CustomInventory
 {
     Scale 0.5
 
@@ -263,7 +263,7 @@ actor DRPGVialRegeneration : CustomInventory 20114
     }
 }
 
-actor DRPGVialAgility : CustomInventory 20115
+actor DRPGVialAgility : CustomInventory
 {
     Scale 0.5
 
@@ -282,7 +282,7 @@ actor DRPGVialAgility : CustomInventory 20115
     }
 }
 
-actor DRPGVialCapacity : CustomInventory 20116
+actor DRPGVialCapacity : CustomInventory
 {
     Scale 0.5
 
@@ -301,7 +301,7 @@ actor DRPGVialCapacity : CustomInventory 20116
     }
 }
 
-actor DRPGVialLuck : CustomInventory 20117
+actor DRPGVialLuck : CustomInventory
 {
     Scale 0.5
 
@@ -320,7 +320,7 @@ actor DRPGVialLuck : CustomInventory 20117
     }
 }
 
-actor DRPGVialPurifier : CustomInventory 20118
+actor DRPGVialPurifier : CustomInventory
 {
     Scale 0.5
 
@@ -339,7 +339,7 @@ actor DRPGVialPurifier : CustomInventory 20118
     }
 }
 
-actor DRPGVialPotency : CustomInventory 20119
+actor DRPGVialPotency : CustomInventory
 {
     Scale 0.5
 
@@ -358,7 +358,7 @@ actor DRPGVialPotency : CustomInventory 20119
     }
 }
 
-actor DRPGVialIndestructible : CustomInventory 20120
+actor DRPGVialIndestructible : CustomInventory
 {
     Scale 0.5
 
@@ -377,7 +377,7 @@ actor DRPGVialIndestructible : CustomInventory 20120
     }
 }
 
-actor DRPGVialShadow : CustomInventory 20121
+actor DRPGVialShadow : CustomInventory
 {
     Scale 0.5
 
@@ -396,7 +396,7 @@ actor DRPGVialShadow : CustomInventory 20121
     }
 }
 
-actor DRPGVialInfinity : CustomInventory 20122
+actor DRPGVialInfinity : CustomInventory
 {
     Scale 0.5
 
@@ -415,7 +415,7 @@ actor DRPGVialInfinity : CustomInventory 20122
     }
 }
 
-actor DRPGVialChrono : CustomInventory 20123
+actor DRPGVialChrono : CustomInventory
 {
     Scale 0.5
 
@@ -434,7 +434,7 @@ actor DRPGVialChrono : CustomInventory 20123
     }
 }
 
-actor DRPGVialAdrenaline : CustomInventory 20124
+actor DRPGVialAdrenaline : CustomInventory
 {
     Scale 0.5
 
@@ -453,7 +453,7 @@ actor DRPGVialAdrenaline : CustomInventory 20124
     }
 }
 
-actor DRPGVialGravity : CustomInventory 20125
+actor DRPGVialGravity : CustomInventory
 {
     Scale 0.5
 
@@ -472,7 +472,7 @@ actor DRPGVialGravity : CustomInventory 20125
     }
 }
 
-actor DRPGVialVampire : CustomInventory 20126
+actor DRPGVialVampire : CustomInventory
 {
     Scale 0.5
 
@@ -491,7 +491,7 @@ actor DRPGVialVampire : CustomInventory 20126
     }
 }
 
-actor DRPGVialRage : CustomInventory 20127
+actor DRPGVialRage : CustomInventory
 {
     Scale 0.5
 
@@ -510,7 +510,7 @@ actor DRPGVialRage : CustomInventory 20127
     }
 }
 
-actor DRPGVialMagnetic : CustomInventory 20128
+actor DRPGVialMagnetic : CustomInventory
 {
     Scale 0.5
 
@@ -530,7 +530,7 @@ actor DRPGVialMagnetic : CustomInventory 20128
 }
 
 // Stim Packages
-actor DRPGStimPackageStat : CustomInventory 20130
+actor DRPGStimPackageStat : CustomInventory
 {
     Scale 0.5
 
@@ -558,7 +558,7 @@ actor DRPGStimPackageStat : CustomInventory 20130
     }
 }
 
-actor DRPGStimPackagePowerup : CustomInventory 20131
+actor DRPGStimPackagePowerup : CustomInventory
 {
     Scale 0.5
 

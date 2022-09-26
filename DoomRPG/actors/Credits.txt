@@ -30,7 +30,7 @@ actor DRPGCreditsEmpty
 }
 
 // 1 Credit - Green
-actor DRPGCredits1 : CustomInventory 25020
+actor DRPGCredits1 : CustomInventory
 {
     scale 0.5
     
@@ -53,7 +53,7 @@ actor DRPGCredits1 : CustomInventory 25020
 }
 
 // 5 Credits - Blue
-actor DRPGCredits5 : DRPGCredits1 25021
+actor DRPGCredits5 : DRPGCredits1
 {
     Inventory.PickupMessage "You picked up \cn5 credits\c-."
     
@@ -73,7 +73,7 @@ actor DRPGCredits5 : DRPGCredits1 25021
 }
 
 // 10 Credits - Yellow
-actor DRPGCredits10 : DRPGCredits1 25022
+actor DRPGCredits10 : DRPGCredits1
 {
     Inventory.PickupMessage "You picked up \cf10 credits\c-."
     
@@ -93,7 +93,7 @@ actor DRPGCredits10 : DRPGCredits1 25022
 }
 
 // 20 Credits - Red
-actor DRPGCredits20 : DRPGCredits1 25023
+actor DRPGCredits20 : DRPGCredits1
 {
     Inventory.PickupMessage "You picked up \ca20 credits\c-."
     
@@ -113,7 +113,7 @@ actor DRPGCredits20 : DRPGCredits1 25023
 }
 
 // 50 Credits - Purple
-actor DRPGCredits50 : DRPGCredits1 25024
+actor DRPGCredits50 : DRPGCredits1
 {
     Inventory.PickupMessage "You picked up \ct50 credits\c-."
     
@@ -133,7 +133,7 @@ actor DRPGCredits50 : DRPGCredits1 25024
 }
 
 // 100 Credits - Orange
-actor DRPGCredits100 : DRPGCredits1 25025
+actor DRPGCredits100 : DRPGCredits1
 {
     Inventory.PickupMessage "You picked up \ci100 credits\c-."
     
@@ -153,7 +153,7 @@ actor DRPGCredits100 : DRPGCredits1 25025
 }
 
 // 250 Credits - Silver
-actor DRPGCredits250 : DRPGCredits1 25027
+actor DRPGCredits250 : DRPGCredits1
 {
     Inventory.PickupMessage "You picked up \cw250 credits\c-."
     
@@ -173,7 +173,7 @@ actor DRPGCredits250 : DRPGCredits1 25027
 }
 
 // 500 Credits - Gold
-actor DRPGCredits500 : DRPGCredits1 25028
+actor DRPGCredits500 : DRPGCredits1
 {
     Inventory.PickupMessage "You picked up \cf500 credits\c-."
     
@@ -193,7 +193,7 @@ actor DRPGCredits500 : DRPGCredits1 25028
 }
 
 // 1000 Credits - Rainbow
-actor DRPGCredits1000 : DRPGCredits1 25026
+actor DRPGCredits1000 : DRPGCredits1
 {
     Inventory.PickupMessage "You picked up 1000 \cjc\cdr\cne\cfd\cai\ctt\cis\c-. Holy shit!"
     

@@ -4,8 +4,6 @@ actor InvulnerabilitySphere2 : CustomInventory Replaces DRPGInvulnerabilitySpher
 	
     Inventory.PickupMessage "You picked up an invulnerability sphere."
 	Inventory.PickupSound "powerups/protect"
-	Inventory.UseSound "powerups/protect"
-	Inventory.Icon "PINV"
     
     -COUNTITEM
     
@@ -88,8 +86,6 @@ ACTOR BlurSphere2 : CustomInventory Replaces DRPGBlurSphere
 
 	Inventory.PickupMessage "You picked up an invisibility sphere."
 	Inventory.PickupSound "powerups/invis"
-	Inventory.UseSound "powerups/invis"
-	Inventory.Icon "PINS"
 
 	RenderStyle Translucent
 	
@@ -268,7 +264,7 @@ ACTOR RLInfraredPickupMarineGiver2 : RLInfraredPickupMarineGiver replaces RLInfr
 	+INVENTORY.ADDITIVETIME
 }
 
-actor Berserk2 : RLBerserk Replaces DRPGBerserk
+actor RLBerserk2 : RLBerserk Replaces DRPGBerserk
 {
 	Tag "Berserk pack (heals fully plus increases melee damage until map leave)"
 	

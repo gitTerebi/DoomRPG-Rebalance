@@ -1,4 +1,4 @@
-actor DRPGChipGold : Inventory     
+actor DRPGChipGold : Inventory
 {
     Scale 0.25
     
@@ -15,7 +15,7 @@ actor DRPGChipGold : Inventory
     }
 }
 
-actor DRPGChipGoldPack : CustomInventory     
+actor DRPGChipGoldPack : CustomInventory
 {
     Scale 0.25
     
@@ -34,7 +34,7 @@ actor DRPGChipGoldPack : CustomInventory
     }
 }
 
-actor DRPGChipPlatinum : Inventory     
+actor DRPGChipPlatinum : Inventory
 {
     Var int user_cycle;
     
@@ -58,7 +58,7 @@ actor DRPGChipPlatinum : Inventory
     }
 }
 
-actor DRPGChipPlatinumPack : CustomInventory     
+actor DRPGChipPlatinumPack : CustomInventory
 {
     Var int user_cycle;
     
