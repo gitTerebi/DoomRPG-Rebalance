@@ -10,7 +10,7 @@ ACTOR RLTacticalShotgun : RLWeapon
   Weapon.AmmoGive1 0
   Weapon.AmmoType1 "RLTacticalShotgunClip"
   Weapon.AmmoType2 "Shell"
-  Inventory.Icon "AA12ICON"
+  Inventory.Icon "TS12ICON"
   States
   {
   Ready:

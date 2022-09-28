@@ -19,6 +19,12 @@ brightmap sprite EPUPG0 { map "brightmaps/doomrpg/EPUPA0.png" disablefullbright 
 brightmap sprite EPUPH0 { map "brightmaps/doomrpg/EPUPA0.png" disablefullbright }
 brightmap sprite EPUPI0 { map "brightmaps/doomrpg/EPUPA0.png" disablefullbright }
 
+//Ammo
+brightmap sprite CELLA0 { map "brightmaps/doom/CELLA0.png" }
+brightmap sprite CELPA0 { map "brightmaps/doom/CELPA0.png" }
+brightmap sprite CEL2A0 { map "brightmaps/doomrpg/CEL2A0.png" }
+brightmap sprite CBP2A0 { map "brightmaps/doomrpg/CBP2A0.png" }
+
 // Detox Stim
 brightmap sprite STIMC0 { map "brightmaps/doomrpg/STIMC0.png" disablefullbright }
 
