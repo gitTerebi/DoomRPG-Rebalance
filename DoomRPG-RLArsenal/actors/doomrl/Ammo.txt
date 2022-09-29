@@ -168,6 +168,20 @@ actor RLShell3 : RLShell Replaces DRPGShellHalf
     }
 }
 
+actor RLShell4 : RLShell Replaces DRPGShell
+{
+    Inventory.PickupMessage "You picked up four shotgun shells."
+    Inventory.PickupSound "items/shell"
+    
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
+		SHEL A -1
+        Stop
+    }
+}
+
 // --------------------------------------------------
 // Shell Box Ammo
 
