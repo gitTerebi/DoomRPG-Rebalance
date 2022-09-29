@@ -739,9 +739,6 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Stat-Change Handling
     MonsterStatsHandler();
 
-    // Aura Spawner
-    MonsterAuraDisplayHandler();
-
     // Regeneration Stat Handling
     if (!(Flags & MF_NOSTATS))
         MonsterRegenerationHandler();
@@ -1604,7 +1601,11 @@ NamedScript void MonsterFriendlyTeleport()
 
 Start:
 
-    if (!GetUserCVar(PlayerNumber, "drpg_monster_friendly_teleport_enable")) goto Start;
+    if (!GetUserCVar(PlayerNumber, "drpg_monster_friendly_teleport_enable"))
+    {
+        Delay(35);
+        goto Start;
+    }
 
     if (ClassifyActor(0) & ACTOR_WORLD || ClassifyActor(0) & ACTOR_DEAD) return;
 
@@ -1686,6 +1687,7 @@ NamedScript void MonsterStatsHandler()
     int HealthPercentage;
     int LevelNum = CurrentLevel->LevelNum;
     bool StatsChanged;
+    bool HasAuraDisplay = false;
     bool MonsterWasDisrupted = false;
     bool Friendly = GetActorProperty(0, APROP_Friendly); // Sanity check for when APROP_Friendly gets removed from summons
 
@@ -1920,6 +1922,13 @@ Start:
                 }
             }
         }
+    }
+
+    // Aura Spawner
+    if (!HasAuraDisplay && (Stats->HasAura || Stats->Target > 0 || (GetActorProperty(0, APROP_Friendly) && !CurrentLevel->UACBase)))
+    {
+        MonsterAuraDisplayHandler();
+        HasAuraDisplay = true;
     }
 
     // Delay if Toaster Mode on
@@ -2661,7 +2670,6 @@ NamedScript DECORATE void MonsterRevive()
     // Reboot handlers
     DamageNumbers();
     MonsterStatsHandler();
-    MonsterAuraDisplayHandler();
     MonsterAggressionHandler();
     if (!(Stats->Flags & MF_NOSTATS))
         MonsterRegenerationHandler();

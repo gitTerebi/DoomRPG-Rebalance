@@ -430,7 +430,7 @@ class DRPGZUtilities
             "drpg_multi_restoreep",
             "drpg_multi_restoreammo",
             "drpg_multi_sharecredits",
-			"drpg_multi_sharexp",
+            "drpg_multi_sharexp",
             "drpg_multi_revives",
             "drpg_shoptype",
             "drpg_shopspecial_type",
