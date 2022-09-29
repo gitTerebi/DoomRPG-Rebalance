@@ -164,6 +164,7 @@ server  bool    drpg_multi_dropinv = false;
 server  bool    drpg_multi_restoreep = false;
 server  bool    drpg_multi_restoreammo = false;
 server  bool    drpg_multi_sharecredits = false;
+server  bool    drpg_multi_sharexp = false;
 server  bool    drpg_multi_revives = false;
 
 // Shop

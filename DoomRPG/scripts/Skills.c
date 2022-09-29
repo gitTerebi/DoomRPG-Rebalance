@@ -1600,7 +1600,7 @@ NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
     }
 
     // Refund - If the target doesn't have an Aura
-    if (!MonsterHasAura(Stats))
+    if (!Stats->HasAura)
     {
         SetActivator(Players(PlayerNum).TID);
         PrintError("Target does not have any auras");
@@ -1618,7 +1618,7 @@ NamedScript Console bool AuraSteal(SkillLevelInfo *SkillLevel, void *Data)
     }
 
     // Refund - If the target has a shadow Aura
-    if (MonsterHasShadowAura(Stats))
+    if (Stats->HasShadowAura)
     {
         SetActivator(Players(PlayerNum).TID);
         PrintError("Target's auras are too strong");
@@ -1748,7 +1748,7 @@ NamedScript Console bool SoulSteal(SkillLevelInfo *SkillLevel, void *Data)
     SetActivator(UniqueMonsterTID);
 
     // Drop the Soul
-    if (MonsterHasAura(Stats))
+    if (Stats->HasAura)
     {
         for (int i = 0; i < AURA_MAX; i++)
             if (Stats->Aura.Type[i].Active)
@@ -1815,7 +1815,7 @@ NamedScript Console bool Disruption(SkillLevelInfo *SkillLevel, void *Data)
     }
 
     // Refund - If the target can't be disrupted (eg. has no aura)
-    if (!MonsterHasAura(Stats) || (MonsterHasShadowAura(Stats) && SkillLevel->CurrentLevel < 2))
+    if (!Stats->HasAura || (MonsterHasShadowAura(Stats) && SkillLevel->CurrentLevel < 2))
     {
         SetActivator(Players(PlayerNum).TID);
         PrintError("Target cannot be disrupted");
