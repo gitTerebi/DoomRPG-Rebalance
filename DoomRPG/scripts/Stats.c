@@ -726,9 +726,6 @@ void CheckStats()
     {
         Player.Speed = Player.Speed * (1.0 / (((fixed)Player.StatusIntensity[SE_FATIGUE] / 1.5) + 1));
         Player.JumpHeight = Player.JumpHeight * (1.0 / (((fixed)Player.StatusIntensity[SE_FATIGUE] / 1.5) + 1));
-
-        if (Player.StatusIntensity[SE_FATIGUE] > 3)
-            SetMugShotState("Rampage");
     }
 
     // DRLA Checking
