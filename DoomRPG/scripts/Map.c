@@ -2545,10 +2545,9 @@ NamedScript void HarmonizedDestructionEvent()
         if (CurrentLevel->AuraType == AURA_MAX)
         {
             for (int j = 0; j < AURA_MAX; j++)
-            {
                 Monsters[i].Aura.Type[j].Active = true;
-                Monsters[i].HasShadowAura = true;
-            }
+
+            Monsters[i].HasShadowAura = true;
         }
         else
             Monsters[i].Aura.Type[CurrentLevel->AuraType].Active = true;
