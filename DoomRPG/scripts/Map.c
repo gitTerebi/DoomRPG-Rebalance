@@ -2545,11 +2545,15 @@ NamedScript void HarmonizedDestructionEvent()
         if (CurrentLevel->AuraType == AURA_MAX)
         {
             for (int j = 0; j < AURA_MAX; j++)
+            {
                 Monsters[i].Aura.Type[j].Active = true;
+                Monsters[i].HasShadowAura = true;
+            }
         }
         else
             Monsters[i].Aura.Type[CurrentLevel->AuraType].Active = true;
 
+        Monsters[i].HasAura = true;
         Monsters[i].Flags &= MF_NOAURAGEN; // Don't let our aura get overwritten
     }
 
@@ -2924,7 +2928,7 @@ NamedScript void DarkZoneEvent()
     {
         for (int i = 0; i < MonsterID; i++)
         {
-            if (!Monsters[i].Init || MonsterHasShadowAura(&(Monsters[i])) || ClassifyActor(Monsters[i].TID) & ACTOR_DEAD && !CanRaiseActor(Monsters[i].TID))
+            if (!Monsters[i].Init || &Monsters[i].HasShadowAura || ClassifyActor(Monsters[i].TID) & ACTOR_DEAD && !CanRaiseActor(Monsters[i].TID))
                 continue;
 
             if (ClassifyActor(Monsters[i].TID) & ACTOR_DEAD)
