@@ -208,6 +208,7 @@ Class RLPhaseSistersPassive : Inventory
         blacklist.Push("RLPhasesistersSwapCD");
 
         blacklist.Push("RLDangerLevel");
+        blacklist.Push("PMGameLevel");
         blacklist.Push("RLStatusBarHUDType");
         blacklist.Push("RLStatusBarAltHUDType");
         blacklist.Push("RLFullscreenOriginalHUDType");
@@ -230,6 +231,7 @@ Class RLPhaseSistersPassive : Inventory
         blacklist.Push("RLModLimit");
 
         blacklist.Push("RLDangerLevel");
+        blacklist.Push("PMGameLevel");
 
         lasthealth = 100;
     }
