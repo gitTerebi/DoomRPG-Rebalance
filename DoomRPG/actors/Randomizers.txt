@@ -799,7 +799,7 @@ actor DRPGChainsawSpawner : MapSpot 2005
 }
 
 // Weapon: Pistol Randomizer
-actor DRPGPistolSpawner : MapSpot 5010
+actor DRPGPistolSpawner : MapSpot
 {
     States
     {
