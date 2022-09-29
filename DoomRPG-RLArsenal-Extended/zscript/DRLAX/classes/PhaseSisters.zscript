@@ -389,17 +389,17 @@ Class RLPhaseSistersPassive : Inventory
         {
             Console.Printf(owner.player.GetUserName() .. " \c-swapped to \ctPortia\c-.");
             owner.A_SpawnItemEx("RLPhaseSistersTeleportFX1", 8);
+            owner.player.mo.SetInventory("RLPhaseSistersSwapToken", 1, true);
             owner.player.mo.soundclass = "phase-portia";
             spritename = "ILLP";
-            owner.player.mo.SetInventory("RLPhaseSistersSwapToken", 1, true);
         }
         else
         {
             Console.Printf(owner.player.GetUserName() .. " \c-swapped to \cvTerri\c-.");
             owner.A_SpawnItemEx("RLPhaseSistersTeleportFX2", 8);
+            owner.player.mo.SetInventory("RLPhaseSistersSwapToken", 0, true);
             owner.player.mo.soundclass = "phase-terri";
             spritename = "REVY";
-            owner.player.mo.SetInventory("RLPhaseSistersSwapToken", 0, true);
         }
         
         owner.A_SelectWeapon(newwep, SWF_SELECTPRIORITY);
