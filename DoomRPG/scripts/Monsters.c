@@ -588,6 +588,8 @@ int NewMonsterID()
     Monsters[CurrentID].Level = 0;
     Monsters[CurrentID].LevelAdd = 0;
     Monsters[CurrentID].Aura.Time = 0;
+    Monsters[CurrentID].HasAura = false;
+    Monsters[CurrentID].HasShadowAura = false;
     for (int i = 0; i < AURA_MAX; i++)
     {
         Monsters[CurrentID].Aura.Type[i].Active = false;
@@ -1278,6 +1280,9 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
         MonsterMoneyDrainHandler();
     }
 
+    Stats->HasAura = MonsterHasAura(Stats);
+    Stats->HasShadowAura = MonsterHasShadowAura(Stats);
+
     // Calculate Aura time
     Stats->Aura.Time = (30 * 35) + (int)((fixed)Stats->Energy * 0.57) * 35;
 
@@ -1364,7 +1369,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int StatFlags)
     SetActorProperty(0, APROP_Health, Stats->HealthMax);
 
     // Generate Name
-    if (!Stats->Named && (Stats->Flags & MF_MEGABOSS || Stats->Flags & MF_NAMEGEN || MonsterHasShadowAura(Stats)))
+    if (!Stats->Named && (Stats->Flags & MF_MEGABOSS || Stats->Flags & MF_NAMEGEN || Stats->HasShadowAura))
     {
         SetActorPropertyString(0, APROP_NameTag, GenerateName(GetActorClass(0), GetActorPropertyString(0, APROP_NameTag)));
         Stats->Named = true;
@@ -1865,7 +1870,7 @@ Start:
             MonsterWasDisrupted = true;
         }
 
-        TakeInventory("DRPGMonsterDisrupted", MonsterHasShadowAura(Stats) ? 12 : 4);
+        TakeInventory("DRPGMonsterDisrupted", Stats->HasShadowAura ? 12 : 4);
     }
     else
     {
@@ -1946,11 +1951,11 @@ Start:
     while (ActorNotSeePlayers(0, DrawDist)) Delay(35);
 
     // Spawn Auras
-    if (MonsterHasAura(Stats) || (GetActorProperty(0, APROP_Friendly) && !CurrentLevel->UACBase))
+    if (Stats->HasAura || (GetActorProperty(0, APROP_Friendly) && !CurrentLevel->UACBase))
         SpawnAuras(0, false);
 
     // Shadow Aura Effects
-    if (MonsterHasShadowAura(Stats))
+    if (Stats->HasShadowAura)
         SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
 
     // Spawn Assassination Target
@@ -1958,7 +1963,7 @@ Start:
         SpawnForced("DRPGAssassinationIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
 
     // Spawn Disruption Icon
-    if (MonsterHasAura(Stats) && CheckInventory("DRPGMonsterDisrupted"))
+    if (Stats->HasAura && CheckInventory("DRPGMonsterDisrupted"))
         SpawnForced("DRPGDisruptionIcon", GetActorX(0), GetActorY(0), GetActorZ(0) + GetActorPropertyFixed(0, APROP_Height) + 16.0 + (Sin(Timer() / 64.0) * 8.0), 0, 0);
 
     Delay(1);
@@ -2916,10 +2921,16 @@ NamedScript void MonsterDeath()
 
             Stats->DamageTable[i] = Clamp(0, Stats->DamageTable[i], Stats->HealthMax);
 
-            if (Stats->DamageTable[i] > 0)
+            float mult = 1.0;
+            if (!GetCVar("drpg_multi_sharexp"))
+                mult = (float)Stats->DamageTable[i] / (float)Stats->HealthMax;
+            else if (Killer < 0)
+                mult = 0;
+
+            if (mult > 0)
             {
-                XPAmount = ((XPAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100);
-                RankAmount = ((RankAmount * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100);
+                XPAmount = (int)(XPAmount * mult);
+                RankAmount = (int)(RankAmount * mult);
 
                 AddXP(i, XPAmount, RankAmount);
                 if (GetCVar("drpg_levelup_natural"))
@@ -2930,7 +2941,7 @@ NamedScript void MonsterDeath()
                         if (GetActivatorCVar("drpg_character_spec") == 1)
                             Scale *= 2;
                     }
-                    Players(i).StrengthXP += (int)(((HealthXP * (Stats->DamageTable[i] * 100) / Stats->HealthMax) / 100) * Scale);
+                    Players(i).StrengthXP += (int)(HealthXP * mult * Scale);
                 }
             }
         }
@@ -3480,6 +3491,8 @@ void RemoveMonsterAura(MonsterStatsPtr Stats)
 {
     Stats->Aura.Time = 0;
     Stats->Aura.Team = false;
+    Stats->HasAura = false;
+    Stats->HasShadowAura = false;
 
     for (int i = 0; i < AURA_MAX; i++)
     {

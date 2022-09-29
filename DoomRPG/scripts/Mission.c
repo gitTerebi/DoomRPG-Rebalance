@@ -166,7 +166,7 @@ NamedScript void MissionDeathCheck(int Killer, MonsterStatsPtr Stats)
         }
 
         // Kill Auras Mission
-        if (MonsterHasAura(Stats))
+        if (Stats->HasAura)
         {
             for (int i = 0; i < MAX_PLAYERS; i++)
             {

@@ -1662,7 +1662,7 @@ NamedScript DECORATE void GetAuraTokens()
         SetInventory("DRPGDarkBlueAuraToken", 1);
     if (Aura->Type[AURA_YELLOW].Active)
         SetInventory("DRPGYellowAuraToken", 1);
-    if (MonsterHasShadowAura(Stats))
+    if (Stats->HasShadowAura)
         SetInventory("DRPGShadowAuraToken", 1);
 }
 
