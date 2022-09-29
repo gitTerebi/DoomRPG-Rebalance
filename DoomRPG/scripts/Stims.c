@@ -423,10 +423,6 @@ void CheckStim()
     for (int i = 0; i < STIM_MAX; i++)
         Player.Stim.Amount += Player.Stim.Current[i];
 
-    // Mugshot
-    if (Player.Stim.Timer > 0)
-        SetMugShotState("Ouch");
-
     if ((!CurrentLevel->UACBase || ArenaActive || MarinesHostile) && Timer() > 4)
     {
         // Stim Timer handling

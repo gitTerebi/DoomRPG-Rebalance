@@ -3030,7 +3030,9 @@ void DrawPlayerSprite(int PlayerNum, fixed X, fixed Y)
                 PrintSprite("ZHRTA1", 0, X + 4.0, Y - 2.0, 0.05);
             if (PlayerClass(PlayerNum) == 8) // Nano Maniac
                 PrintSprite("DKCPA1", 0, X + 4.0, Y - 2.0, 0.05);
-            if (PlayerClass(PlayerNum) == 9) // Phase Sisters
+            if (PlayerClass(PlayerNum) == 9 && CheckActorInventory(Players(PlayerNum).TID, "RLPhaseSistersSwapToken") == 1) // Phase Sisters Portia
+                PrintSprite("ILLPA1", 0, X + 4.0, Y - 2.0, 0.05);
+            if (PlayerClass(PlayerNum) == 9 && CheckActorInventory(Players(PlayerNum).TID, "RLPhaseSistersSwapToken") == 0) // Phase Sisters Terri
                 PrintSprite("REVYA1", 0, X + 4.0, Y - 2.0, 0.05);
             if (PlayerClass(PlayerNum) == 10) // Sarge
                 PrintSprite("SUT1A1", 0, X + 4.0, Y - 2.0, 0.05);

@@ -391,6 +391,7 @@ Class RLPhaseSistersPassive : Inventory
             owner.A_SpawnItemEx("RLPhaseSistersTeleportFX1", 8);
             owner.player.mo.soundclass = "phase-portia";
             spritename = "ILLP";
+            owner.player.mo.SetInventory("RLPhaseSistersSwapToken", 1, true);
         }
         else
         {
@@ -398,6 +399,7 @@ Class RLPhaseSistersPassive : Inventory
             owner.A_SpawnItemEx("RLPhaseSistersTeleportFX2", 8);
             owner.player.mo.soundclass = "phase-terri";
             spritename = "REVY";
+            owner.player.mo.SetInventory("RLPhaseSistersSwapToken", 0, true);
         }
         
         owner.A_SelectWeapon(newwep, SWF_SELECTPRIORITY);
@@ -560,3 +562,5 @@ class RLPhaseSistersHomingTrigger : CustomInventory
         stop;
     }
 }
+
+class RLPhaseSistersSwapToken : Inventory {}

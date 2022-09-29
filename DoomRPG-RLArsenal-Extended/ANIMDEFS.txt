@@ -23,7 +23,14 @@ texture DKCPA1
 	pic DKCPC1 tics 6
 	pic DKCPD1 tics 6
 
-// PhaseSisters
+// PhaseSisters Portia
+texture ILLPA1
+	pic ILLPA1 tics 6
+	pic ILLPB1 tics 6
+	pic ILLPC1 tics 6
+	pic ILLPD1 tics 6
+
+// PhaseSisters Terri
 texture REVYA1
 	pic REVYA1 tics 6
 	pic REVYB1 tics 6
