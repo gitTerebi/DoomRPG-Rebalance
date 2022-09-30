@@ -1,4 +1,0 @@
-actor DRPGDRLAXActive : Inventory
-{
-    Inventory.MaxAmount 1
-}

@@ -2505,14 +2505,13 @@ void CheckCompatibility()
     }
 
     // DoomRL Arsenal Extended
-    Success = SpawnForced("DRLAX_FamiliarBall", 0, 0, 0, TID, 0);
+    Success = SpawnForced("DRLAX_RadarDevice", 0, 0, 0, TID, 0);
     if (Success)
     {
         if (DebugLog)
             Log("\CdDEBUG: \CdDoomRL Extended \C-detected");
 
         CompatModeEx = COMPAT_DRLAX;
-        SetInventory("DRPGDRLAXActive", 1);
         Thing_Remove(TID);
     }
 
