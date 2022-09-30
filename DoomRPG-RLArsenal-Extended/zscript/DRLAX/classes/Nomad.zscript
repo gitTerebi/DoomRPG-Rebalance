@@ -143,10 +143,14 @@ Class RLNomadEvents : EventHandler
 					
 					if(inv.owner.GetClassName() == "DoomRLNomadRPG")
 					{
+						if(inv.GetClassName() == "DRPGDRLAActive"){continue;}
+
 						if(inv.GetClassName() == "RLDangerLevel"){continue;}
 						if(inv.GetClassName() == "RLUniqueBossLevel"){continue;}
 						if(inv.GetClassName() == "RLDemonArtifactItem"){continue;}
-						
+
+						if(inv.GetClassName() == "PMGameLevel"){continue;}
+
 						if(inv.GetClassName() == "DRPGModule"){continue;}
 						if(inv.GetClassName() == "DRPGCredits"){continue;}
 						if(inv.GetClassName() == "DRPGTurretPart"){continue;}

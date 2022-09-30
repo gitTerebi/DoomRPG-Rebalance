@@ -1307,7 +1307,7 @@ NamedScript void ShieldTimerReset()
     Player.Shield.Timer = 35.0 * Player.Shield.DelayRate;
 }
 
-NamedScript bool ActivateShield()
+NamedScript DECORATE bool ActivateShield()
 {
     if (Player.Shield.Active)
         return true;
@@ -1346,7 +1346,7 @@ NamedScript bool ActivateShield()
     return true;
 }
 
-NamedScript bool DeactivateShield()
+NamedScript DECORATE bool DeactivateShield()
 {
     if (!Player.Shield.Active)
         return true;

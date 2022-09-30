@@ -208,7 +208,6 @@ Class RLPhaseSistersPassive : Inventory
         blacklist.Push("RLPhasesistersSwapCD");
 
         blacklist.Push("RLDangerLevel");
-        blacklist.Push("PMGameLevel");
         blacklist.Push("RLStatusBarHUDType");
         blacklist.Push("RLStatusBarAltHUDType");
         blacklist.Push("RLFullscreenOriginalHUDType");
@@ -230,6 +229,7 @@ Class RLPhaseSistersPassive : Inventory
         blacklist.Push("RLPhaseDeviceLimit");
         blacklist.Push("RLModLimit");
 
+        blacklist.Push("DRPGDRLAActive");
         blacklist.Push("RLDangerLevel");
         blacklist.Push("PMGameLevel");
 
@@ -280,6 +280,11 @@ Class RLPhaseSistersPassive : Inventory
     
     void Swap()
     {
+        if(owner.ACS_ScriptCall("ShieldActive"))
+        {
+            owner.ACS_ScriptCall("DeactivateShield");
+        }
+
         if(owner.CountInv("RLPhasesistersSwapCD") > 0 || owner.health < 1)
         {
             return;
@@ -298,7 +303,7 @@ Class RLPhaseSistersPassive : Inventory
 
         tempitems.Copy(items);
         items.Clear();
-        
+
 		while(inv = Inventory(i.Next()))
 		{    
 			if(inv.owner != owner)

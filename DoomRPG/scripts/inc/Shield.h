@@ -9,8 +9,8 @@ extern ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES];
 
 NamedScript void ShieldTimer();
 NamedScript void ShieldTimerReset();
-NamedScript bool ActivateShield();
-NamedScript bool DeactivateShield();
+NamedScript DECORATE bool ActivateShield();
+NamedScript DECORATE bool DeactivateShield();
 
 NamedScript DECORATE void AMShieldCharge();
 NamedScript KeyBind void ToggleShield();
