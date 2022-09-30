@@ -2611,6 +2611,160 @@ void NanomaniacTransport()
     }
 }
 
+NamedScript DECORATE void PhaseSistersShieldPartsSave()
+{
+    // Save Energy Shield for Portia
+    if (CheckInventory("RLPhaseSistersSwapToken") == 1)
+    {
+        // Current Parts
+        Player.PortiaShield.Body = Player.Shield.Body;
+        Player.PortiaShield.Battery = Player.Shield.Battery;
+        Player.PortiaShield.Capacitor = Player.Shield.Capacitor;
+        Player.PortiaShield.Accessory = Player.Shield.Accessory;
+
+        // Flags
+        Player.PortiaShield.Active = Player.Shield.Active;
+        Player.PortiaShield.Full = Player.Shield.Full;
+
+        // Stats
+        Player.PortiaShield.Charge = Player.Shield.Charge;
+        Player.PortiaShield.Capacity = Player.Shield.Capacity;
+        Player.PortiaShield.Interval = Player.Shield.Interval;
+        Player.PortiaShield.ChargeRate = Player.Shield.ChargeRate;
+        Player.PortiaShield.DelayRate = Player.Shield.DelayRate;
+        Player.PortiaShield.Timer = Player.Shield.Timer;
+
+        // Accessories
+        Player.PortiaShield.AccessoryBattery = Player.Shield.AccessoryBattery;
+        Player.PortiaShield.AccessoryTimer = Player.Shield.AccessoryTimer;
+
+        // Accessories Position
+        Player.PortiaShield.AccessoryPosition.X = Player.Shield.AccessoryPosition.X;
+        Player.PortiaShield.AccessoryPosition.Y = Player.Shield.AccessoryPosition.Y;
+        Player.PortiaShield.AccessoryPosition.Z = Player.Shield.AccessoryPosition.Z;
+        Player.PortiaShield.AccessoryPosition.Angle = Player.Shield.AccessoryPosition.Angle;
+        Player.PortiaShield.AccessoryPosition.Pitch = Player.Shield.AccessoryPosition.Pitch;
+
+        // Deactivate Shield
+        if (Player.TerriShield.Active == false)
+            DeactivateShield();
+    }
+
+    // Save Energy Shield for Terri
+    if (CheckInventory("RLPhaseSistersSwapToken") == 0)
+    {
+        // Current Parts
+        Player.TerriShield.Body = Player.Shield.Body;
+        Player.TerriShield.Battery = Player.Shield.Battery;
+        Player.TerriShield.Capacitor = Player.Shield.Capacitor;
+        Player.TerriShield.Accessory = Player.Shield.Accessory;
+
+        // Flags
+        Player.TerriShield.Active = Player.Shield.Active;
+        Player.TerriShield.Full = Player.Shield.Full;
+
+        // Stats
+        Player.TerriShield.Charge = Player.Shield.Charge;
+        Player.TerriShield.Capacity = Player.Shield.Capacity;
+        Player.TerriShield.Interval = Player.Shield.Interval;
+        Player.TerriShield.ChargeRate = Player.Shield.ChargeRate;
+        Player.TerriShield.DelayRate = Player.Shield.DelayRate;
+        Player.TerriShield.Timer = Player.Shield.Timer;
+
+        // Accessories
+        Player.TerriShield.AccessoryBattery = Player.Shield.AccessoryBattery;
+        Player.TerriShield.AccessoryTimer = Player.Shield.AccessoryTimer;
+
+        // Accessories Position
+        Player.TerriShield.AccessoryPosition.X = Player.Shield.AccessoryPosition.X;
+        Player.TerriShield.AccessoryPosition.Y = Player.Shield.AccessoryPosition.Y;
+        Player.TerriShield.AccessoryPosition.Z = Player.Shield.AccessoryPosition.Z;
+        Player.TerriShield.AccessoryPosition.Angle = Player.Shield.AccessoryPosition.Angle;
+        Player.TerriShield.AccessoryPosition.Pitch = Player.Shield.AccessoryPosition.Pitch;
+
+        // Deactivate Shield
+        if (Player.PortiaShield.Active == false)
+            DeactivateShield();
+    }
+}
+
+NamedScript DECORATE void PhaseSistersShieldPartsLoad()
+{
+    // Load Energy Shield for Portia
+    if (CheckInventory("RLPhaseSistersSwapToken") == 1)
+    {
+        // Current Parts
+        Player.Shield.Body = Player.PortiaShield.Body;
+        Player.Shield.Battery = Player.PortiaShield.Battery;
+        Player.Shield.Capacitor = Player.PortiaShield.Capacitor;
+        Player.Shield.Accessory = Player.PortiaShield.Accessory;
+
+        // Flags
+        Player.Shield.Active = Player.PortiaShield.Active;
+        Player.Shield.Full = Player.PortiaShield.Full;
+
+        // Stats
+        Player.Shield.Charge = Player.PortiaShield.Charge;
+        Player.Shield.Capacity = Player.PortiaShield.Capacity;
+        Player.Shield.Interval = Player.PortiaShield.Interval;
+        Player.Shield.ChargeRate = Player.PortiaShield.ChargeRate;
+        Player.Shield.DelayRate = Player.PortiaShield.DelayRate;
+        Player.Shield.Timer = Player.PortiaShield.Timer;
+
+        // Accessories
+        Player.Shield.AccessoryBattery = Player.PortiaShield.AccessoryBattery;
+        Player.Shield.AccessoryTimer = Player.PortiaShield.AccessoryTimer;
+
+        // Accessories Position
+        Player.Shield.AccessoryPosition.X = Player.PortiaShield.AccessoryPosition.X;
+        Player.Shield.AccessoryPosition.Y = Player.PortiaShield.AccessoryPosition.Y;
+        Player.Shield.AccessoryPosition.Z = Player.PortiaShield.AccessoryPosition.Z;
+        Player.Shield.AccessoryPosition.Angle = Player.PortiaShield.AccessoryPosition.Angle;
+        Player.Shield.AccessoryPosition.Pitch = Player.PortiaShield.AccessoryPosition.Pitch;
+
+        // Activate Shield
+        if (Player.PortiaShield.Active)
+            ActivateShield();
+    }
+
+    // Load Energy Shield for Terri
+    if (CheckInventory("RLPhaseSistersSwapToken") == 0)
+    {
+        // Current Parts
+        Player.Shield.Body = Player.TerriShield.Body;
+        Player.Shield.Battery = Player.TerriShield.Battery;
+        Player.Shield.Capacitor = Player.TerriShield.Capacitor;
+        Player.Shield.Accessory = Player.TerriShield.Accessory;
+
+        // Flags
+        Player.Shield.Active = Player.TerriShield.Active;
+        Player.Shield.Full = Player.TerriShield.Full;
+
+        // Stats
+        Player.Shield.Charge = Player.TerriShield.Charge;
+        Player.Shield.Capacity = Player.TerriShield.Capacity;
+        Player.Shield.Interval = Player.TerriShield.Interval;
+        Player.Shield.ChargeRate = Player.TerriShield.ChargeRate;
+        Player.Shield.DelayRate = Player.TerriShield.DelayRate;
+        Player.Shield.Timer = Player.TerriShield.Timer;
+
+        // Accessories
+        Player.Shield.AccessoryBattery = Player.TerriShield.AccessoryBattery;
+        Player.Shield.AccessoryTimer = Player.TerriShield.AccessoryTimer;
+
+        // Accessories Position
+        Player.Shield.AccessoryPosition.X = Player.TerriShield.AccessoryPosition.X;
+        Player.Shield.AccessoryPosition.Y = Player.TerriShield.AccessoryPosition.Y;
+        Player.Shield.AccessoryPosition.Z = Player.TerriShield.AccessoryPosition.Z;
+        Player.Shield.AccessoryPosition.Angle = Player.TerriShield.AccessoryPosition.Angle;
+        Player.Shield.AccessoryPosition.Pitch = Player.TerriShield.AccessoryPosition.Pitch;
+
+        // Activate Shield
+        if (Player.TerriShield.Active)
+            ActivateShield();
+    }
+}
+
 // --------------------------------------------------
 // Math
 //
@@ -3667,5 +3821,5 @@ NamedScript void Silly()
 
 NamedScript Console void Test()
 {
-    Log("Test is work");
+    Log("Test is work!");
 }

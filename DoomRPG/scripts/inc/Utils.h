@@ -147,6 +147,8 @@ void CheckDRLASetWeapons();
 void NomadModPacksSave();
 void NomadModPacksLoad();
 void NanomaniacTransport();
+NamedScript DECORATE void PhaseSistersShieldPartsSave();
+NamedScript DECORATE void PhaseSistersShieldPartsLoad();
 
 // Math
 int CalcPercent(int, int);

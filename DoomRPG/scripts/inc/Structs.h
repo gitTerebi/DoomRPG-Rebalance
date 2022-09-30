@@ -809,6 +809,61 @@ struct PlayerData_S
     str NomadModPacks[30];
     int NomadAmountModPacks[30];
 
+    // Phase Sisters
+    // Portia
+    struct
+    {
+        // Current Parts
+        struct ShieldPart_S const *Body;
+        struct ShieldPart_S const *Battery;
+        struct ShieldPart_S const *Capacitor;
+        struct ShieldAccessory_S const *Accessory;
+
+        // Flags
+        bool Active;
+        bool Full;
+
+        // Stats
+        int Charge;
+        int Capacity;
+        int Interval;
+        int ChargeRate;
+        fixed DelayRate;
+        int Timer;
+
+        // Accessories
+        int AccessoryBattery;
+        int AccessoryTimer;
+        struct Position_S AccessoryPosition;
+    } PortiaShield;
+
+    // Terri
+    struct
+    {
+        // Current Parts
+        struct ShieldPart_S const *Body;
+        struct ShieldPart_S const *Battery;
+        struct ShieldPart_S const *Capacitor;
+        struct ShieldAccessory_S const *Accessory;
+
+        // Flags
+        bool Active;
+        bool Full;
+
+        // Stats
+        int Charge;
+        int Capacity;
+        int Interval;
+        int ChargeRate;
+        fixed DelayRate;
+        int Timer;
+
+        // Accessories
+        int AccessoryBattery;
+        int AccessoryTimer;
+        struct Position_S AccessoryPosition;
+    } TerriShield;
+
     // Associated Drops
     struct DynamicArray_S DropTID;
 

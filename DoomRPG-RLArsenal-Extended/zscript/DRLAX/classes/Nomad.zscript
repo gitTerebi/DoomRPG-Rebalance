@@ -157,6 +157,7 @@ Class RLNomadEvents : EventHandler
 
 						if(inv.GetClassName() == "DRPGAugCanister"){continue;}
 						if(inv.GetClassName() == "DRPGAugUpgradeCanister"){continue;}
+						if(inv.GetClassName() == "DRPGAugSlotUpgrade"){continue;}
 
 						if(inv.GetClassName() == "DRPGChipGold"){continue;}
 						if(inv.GetClassName() == "DRPGChipPlatinum"){continue;}

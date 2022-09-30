@@ -233,6 +233,10 @@ Class RLPhaseSistersPassive : Inventory
         blacklist.Push("RLDangerLevel");
         blacklist.Push("PMGameLevel");
 
+        blacklist.Push("DRPGAugCanister");
+        blacklist.Push("DRPGAugUpgradeCanister");
+        blacklist.Push("DRPGAugSlotUpgrade");
+
         lasthealth = 100;
     }
 
@@ -280,11 +284,6 @@ Class RLPhaseSistersPassive : Inventory
     
     void Swap()
     {
-        if(owner.ACS_ScriptCall("ShieldActive"))
-        {
-            owner.ACS_ScriptCall("DeactivateShield");
-        }
-
         if(owner.CountInv("RLPhasesistersSwapCD") > 0 || owner.health < 1)
         {
             return;
@@ -300,6 +299,8 @@ Class RLPhaseSistersPassive : Inventory
         Array<RLPhaseSistersTempInv> tempitems;
         Class<Weapon> newwep = lastwep;
         lastwep = owner.player.ReadyWeapon.GetClass();
+
+        owner.ACS_ScriptCall("PhaseSistersShieldPartsSave");
 
         tempitems.Copy(items);
         items.Clear();
@@ -408,7 +409,7 @@ Class RLPhaseSistersPassive : Inventory
             owner.player.mo.soundclass = "phase-terri";
             spritename = "REVY";
         }
-        
+
         owner.A_SelectWeapon(newwep, SWF_SELECTPRIORITY);
         owner.A_Print("");
 
@@ -417,6 +418,8 @@ Class RLPhaseSistersPassive : Inventory
         owner.player.health = lasthealth;
 
         lasthealth = newhealth;
+
+        owner.ACS_ScriptCall("PhaseSistersShieldPartsLoad");
 
         SetLimits();
     }
