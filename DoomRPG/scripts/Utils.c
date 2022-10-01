@@ -761,37 +761,76 @@ bool ActorSeePlayers(int MonsterTID, int Dist)
 }
 
 // Use for while if you want to make a delay when the monster doesn't see the players
-bool ActorNotSeePlayers(int MonsterTID, int Dist)
+bool ActorNotSeePlayers(int MonsterTID, int Dist, bool ThroughWall)
 {
     if (InSingleplayer)
     {
-        if (CheckSight(MonsterTID, Players(0).TID, CSF_NOBLOCKALL) || Distance(MonsterTID, Players(0).TID) <= Dist)
-            return false;
-
-        if (!Players(0).Summons == 0)
+        if (ThroughWall)
         {
-            for (int j = 0; j < Players(0).Summons; j++)
+            if (CheckSight(MonsterTID, Players(0).TID, CSF_NOBLOCKALL) || Distance(MonsterTID, Players(0).TID) <= Dist)
+                return false;
+
+            if (!Players(0).Summons == 0)
             {
-                if (CheckSight(MonsterTID, Players(0).SummonTID[j], CSF_NOBLOCKALL) || Distance(MonsterTID, Players(0).SummonTID[j]) <= Dist)
-                    return false;
+                for (int j = 0; j < Players(0).Summons; j++)
+                {
+                    if (CheckSight(MonsterTID, Players(0).SummonTID[j], CSF_NOBLOCKALL) || Distance(MonsterTID, Players(0).SummonTID[j]) <= Dist)
+                        return false;
+                }
+            }
+        }
+        else
+        {
+            if (CheckSight(MonsterTID, Players(0).TID, CSF_NOBLOCKALL) && Distance(MonsterTID, Players(0).TID) <= Dist)
+                return false;
+
+            if (!Players(0).Summons == 0)
+            {
+                for (int j = 0; j < Players(0).Summons; j++)
+                {
+                    if (CheckSight(MonsterTID, Players(0).SummonTID[j], CSF_NOBLOCKALL) && Distance(MonsterTID, Players(0).SummonTID[j]) <= Dist)
+                        return false;
+                }
             }
         }
     }
     else
     {
-        for (int i = 0; i < MAX_PLAYERS; i++)
+        if (ThroughWall)
         {
-            if (!PlayerInGame(i)) continue;
-
-            if (CheckSight(MonsterTID, Players(i).TID, CSF_NOBLOCKALL) || Distance(MonsterTID, Players(i).TID) <= Dist)
-                return false;
-
-            if (!Players(i).Summons == 0)
+            for (int i = 0; i < MAX_PLAYERS; i++)
             {
-                for (int j = 0; j < Players(i).Summons; j++)
+                if (!PlayerInGame(i)) continue;
+
+                if (CheckSight(MonsterTID, Players(i).TID, CSF_NOBLOCKALL) || Distance(MonsterTID, Players(i).TID) <= Dist)
+                    return false;
+
+                if (!Players(i).Summons == 0)
                 {
-                    if (CheckSight(MonsterTID, Players(i).SummonTID[j], CSF_NOBLOCKALL) || Distance(MonsterTID, Players(i).SummonTID[j]) <= Dist)
-                        return false;
+                    for (int j = 0; j < Players(i).Summons; j++)
+                    {
+                        if (CheckSight(MonsterTID, Players(i).SummonTID[j], CSF_NOBLOCKALL) || Distance(MonsterTID, Players(i).SummonTID[j]) <= Dist)
+                            return false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < MAX_PLAYERS; i++)
+            {
+                if (!PlayerInGame(i)) continue;
+
+                if (CheckSight(MonsterTID, Players(i).TID, CSF_NOBLOCKALL) && Distance(MonsterTID, Players(i).TID) <= Dist)
+                    return false;
+
+                if (!Players(i).Summons == 0)
+                {
+                    for (int j = 0; j < Players(i).Summons; j++)
+                    {
+                        if (CheckSight(MonsterTID, Players(i).SummonTID[j], CSF_NOBLOCKALL) && Distance(MonsterTID, Players(i).SummonTID[j]) <= Dist)
+                            return false;
+                    }
                 }
             }
         }
