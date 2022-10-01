@@ -44,7 +44,7 @@ NamedScript DECORATE void TeleportMonster();
 void DropMoney(int, int, int);
 OptionalArgs(6) int DropMonsterItem(int, int, str, int, fixed, fixed, fixed, fixed, fixed, fixed);
 bool ActorSeePlayers(int, int);
-bool ActorNotSeePlayers(int, int);
+bool ActorNotSeePlayers(int, int, bool);
 NamedScript DECORATE void CorpsesCleanup();
 
 // Players

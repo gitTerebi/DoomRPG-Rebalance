@@ -720,10 +720,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
 
     // Delay if Toaster Mode on
     if (GetCVar("drpg_toaster"))
-        while (ActorNotSeePlayers(0, 1024)) Delay(20);
-
-    // Start Damage Numbers Script
-    DamageNumbers();
+        while (ActorNotSeePlayers(0, 1024, true)) Delay(20);
 
     // Give it a Health Bar
     if (!(Flags & MF_NOHEALTHBAR))
@@ -1424,7 +1421,7 @@ Start:
 
     // Delay if Toaster Mode on
     if (ToasterMod)
-        while (ActorNotSeePlayers(0, 0)) Delay(35);
+        while (ActorNotSeePlayers(0, 0, true)) Delay(35);
 
     // Changing the AI of monsters in case if there are summoned monsters
     for (int i = 0; i < MAX_PLAYERS; i++)
@@ -1686,9 +1683,11 @@ NamedScript void MonsterStatsHandler()
     int StolenCredits;
     int HealthPercentage;
     int LevelNum = CurrentLevel->LevelNum;
+    int PopoffsDrawDist = GetCVar("drpg_popoffs_drawdistance");
     bool StatsChanged;
     bool HasAuraDisplay = false;
     bool MonsterWasDisrupted = false;
+    bool HasDamageNumbers = false;
     bool Friendly = GetActorProperty(0, APROP_Friendly); // Sanity check for when APROP_Friendly gets removed from summons
 
 Start:
@@ -1931,9 +1930,16 @@ Start:
         HasAuraDisplay = true;
     }
 
+    // Damage Numbers
+    if (!HasDamageNumbers && !ActorNotSeePlayers(0, PopoffsDrawDist, true))
+    {
+        DamageNumbers();
+        HasDamageNumbers = true;
+    }
+
     // Delay if Toaster Mode on
     if (ToasterMod)
-        while (ActorNotSeePlayers(0, 0)) Delay(35);
+        while (ActorNotSeePlayers(0, 0, true)) Delay(35);
 
     Delay(DelayTime);
     goto Start;
@@ -1957,7 +1963,8 @@ Start:
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
 
-    while (ActorNotSeePlayers(0, DrawDist)) Delay(35);
+    // Distance and sight checks
+    while (ActorNotSeePlayers(0, DrawDist, false)) Delay(35);
 
     // Spawn Auras
     if (Stats->HasAura || (GetActorProperty(0, APROP_Friendly) && !CurrentLevel->UACBase))
@@ -2668,7 +2675,6 @@ NamedScript DECORATE void MonsterRevive()
         SetActorPropertyString(0, APROP_Species, "None");
 
     // Reboot handlers
-    DamageNumbers();
     MonsterStatsHandler();
     MonsterAggressionHandler();
     if (!(Stats->Flags & MF_NOSTATS))
