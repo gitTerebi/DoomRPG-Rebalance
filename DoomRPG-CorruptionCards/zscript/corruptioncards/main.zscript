@@ -62,7 +62,7 @@ Class CCards_Global : Thinker
 		vc.Init();		
 		rules = new ("CCards_Rules");
 		rules.global = self;
-		ccversion = "4.0";
+		ccversion = "4.1";
 		scoreneeded = random(4, 8);
 		return self;
 	}
@@ -139,7 +139,7 @@ Class CCards_WorldResolver : Thinker
 	{
 		if(time == 0)
 		{
-			SetPlayerProperty(1, 0, 4);
+			//SetPlayerProperty(1, 0, 4);
 		}
 		super.Tick();
 		time++;
@@ -353,8 +353,6 @@ Class CCards_Game : EventHandler
 	
 	void Start()
 	{	
-		SetPlayerProperty(1, 0, 4);
-
 		DeckOperationCard op;
 
 		if(!CCards_Functions.CheckBannedMap(Level.MapName)) // Prevent mutation crash
