@@ -27,9 +27,9 @@ NamedScript void DamageNumbers()
     bool ToasterMod = GetCVar("drpg_toaster");
 
     // Calculate delay time
-    int DelayTime = 20;
+    int DelayTime = 8;
     if (ToasterMod)
-        DelayTime = 35;
+        DelayTime = 16;
 
     // Initial delay so we don't show max health being calculated or other nonsense
     Delay(4);
