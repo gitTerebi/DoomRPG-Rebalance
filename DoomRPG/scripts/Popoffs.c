@@ -23,17 +23,24 @@ NamedScript void DamageNumbers()
 
     IsPlayer = PlayerNumber() > -1;
 
+    // Init Toaster Mode
+    bool ToasterMod = GetCVar("drpg_toaster");
+
+    // Calculate delay time
+    int DelayTime = 20;
+    if (ToasterMod)
+        DelayTime = 35;
+
     // Initial delay so we don't show max health being calculated or other nonsense
     Delay(4);
 
 Start:
 
-    // Terminate if Damage Numbers is turn off
-    if (!GetCVar("drpg_damagenumbers"))
-        return;
+    // While if Damage Numbers is turn off
+    while (!GetCVar("drpg_damagenumbers")) Delay(105);
 
     // Distance and sight checks
-    while (ActorNotSeePlayers(0, DrawDist, false)) Delay(35);
+    while (ActorNotSeePlayers(0, DrawDist, false)) Delay(DelayTime);
 
     Health = GetActorProperty(0, APROP_Health);
     if (IsPlayer)
