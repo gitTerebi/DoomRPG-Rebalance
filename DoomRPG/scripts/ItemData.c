@@ -1320,11 +1320,11 @@ NamedScript DECORATE void DRPGSecretSpawner()
     if (Modifier > 15)
         Modifier = 15;
 
-    if ((Random(0, 250) <= 50 + 5 * Modifier) && (!CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) > 512))
+    if ((Random(0, 250) <= 50 + 5 * Modifier) && (!CheckSight(ActivatorTID(), MAP_START_TID, 0) && Distance(ActivatorTID(), MAP_START_TID) > 512))
     {
         if (CompatMode == COMPAT_DRLA)
         {
-            if (!ItemSpawned && Random(0, 250) <= 50 + 5 * Modifier)
+            if (!ItemSpawned && Random(0, 250) <= 25 + 5 * Modifier)
             {
                 ActorToSpawn = "RLModPackSpawner";
                 ItemSpawned = true;
