@@ -242,6 +242,22 @@ void ShopLoop()
     // Setup dynamic Medikit refill pricing
     ItemData[2][0].Price = Player.MedkitMax * 3;
 
+    // Compatibility Handling - DoomRL Arsenal Extended
+    if (CompatModeEx == COMPAT_DRLAX)
+    {
+        // If the player's class is Phase Sisters, replace the Phase Device to a Phase Sisters Device
+        if (PlayerClass(PlayerNumber()) == 9)
+        {
+            ItemData[4][23].Actor = "RLPhaseSistersDevice";
+            ItemData[4][24].Actor = "RLPhaseSistersHomingDevice";
+        }
+        else
+        {
+            ItemData[4][23].Actor = "RLPhaseDevice";
+            ItemData[4][24].Actor = "RLHomingPhaseDevice";
+        }
+    }
+
     SetFont("BIGFONT");
     if (Player.LockerMode)
     {
