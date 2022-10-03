@@ -5,7 +5,6 @@ skill baby
 {
 	AutoUseHealth
 	AmmoFactor = 2
-	DropAmmoFactor = 1
 	DamageFactor = 0.5
 	EasyBossBrain
 	SpawnFilter = Baby
@@ -37,8 +36,6 @@ skill baby
 skill easy
 {
 	AutoUseHealth
-	AmmoFactor = 1
-	DropAmmoFactor = 1
 	EasyBossBrain
 	SpawnFilter = Easy
 	PicName = "M_EASY"
@@ -69,8 +66,6 @@ skill easy
 skill normal
 {
 	AutoUseHealth
-	AmmoFactor = 1
-	DropAmmoFactor = 1
 	SpawnFilter = Normal
 	PicName = "M_MODER"
 	Key = "3"
@@ -100,8 +95,6 @@ skill normal
 skill hard
 {
 	AutoUseHealth
-	AmmoFactor = 1
-	DropAmmoFactor = 0.5
 	SpawnFilter = Hard
 	PicName = "M_STAND"
 	Name = "$SKILL_HARD"
@@ -131,8 +124,6 @@ skill hard
 skill adaptive
 {
 	AutoUseHealth
-	AmmoFactor = 1
-	DropAmmoFactor = 0.5
 	SpawnFilter = Nightmare
 	PicName = "M_ADAPT"
 	Name = "Adaptive"
@@ -166,8 +157,6 @@ skill adaptive
 skill nightmare
 {
 	AutoUseHealth
-	AmmoFactor = 1
-	DropAmmoFactor = 0.5
 	SpawnFilter = Hard
 	PicName = "M_NIGHT"
 	Name = "$SKILL_NIGHTMARE"
@@ -198,8 +187,6 @@ skill nightmare
 skill technophobia
 {
 	AutoUseHealth
-	AmmoFactor = 1
-	DropAmmoFactor = 0.5
 	SpawnFilter = Hard
 	PicName = "M_TECHN"
 	Name = "Technophobia"
@@ -231,8 +218,6 @@ skill technophobia
 skill armageddon
 {
 	AutoUseHealth
-	AmmoFactor = 1
-	DropAmmoFactor = 0.5
 	SpawnFilter = Nightmare
 	PicName = "M_ARMAG"
 	Name = "Armageddon"
