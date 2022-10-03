@@ -2385,6 +2385,11 @@ void DrawBorder(str Prefix, int StartID, int BorderSize, int X, int Y, int Width
 // Compatibility/Extensions
 //
 
+NamedScript DECORATE bool DRPGCheck()
+{
+    return true;
+}
+
 void RemoveDRLAItem(int Category, int Index)
 {
     str ItemActor = ItemData[Category][Index].Actor;
