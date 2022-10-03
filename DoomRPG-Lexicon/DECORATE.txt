@@ -1,7 +1,1006 @@
 actor DRPGLexiconActive {}
 
+// --------------------------------------------------
+// Dark Tartarus
+
+// Disco Imp
+ACTOR TAT__DiscoImpRPG : TAT__DiscoImp replaces TAT__DiscoImp
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Disco Imp Red
+ACTOR TAT__DiscoImpRedRPG : TAT__DiscoImpRed replaces TAT__DiscoImpRed
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Disco Imp Green
+ACTOR TAT__DiscoImpGreenRPG : TAT__DiscoImpGreen replaces TAT__DiscoImpGreen
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Disco Imp Blue
+ACTOR TAT__DiscoImpBlueRPG : TAT__DiscoImpBlue replaces TAT__DiscoImpBlue
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Disco Imp Blood
+ACTOR TAT__DiscoImpBloodRPG : TAT__DiscoImpBlood replaces TAT__DiscoImpBlood
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Disco Imp Gold
+ACTOR TAT__DiscoImpGoldRPG : TAT__DiscoImpGold replaces TAT__DiscoImpGold
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Disco Imp Brown
+ACTOR TAT__DiscoImpBrownRPG : TAT__DiscoImpBrown replaces TAT__DiscoImpBrown
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Disco Imp Orange
+ACTOR TAT__DiscoImpOrangeRPG : TAT__DiscoImpOrange replaces TAT__DiscoImpOrange
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Super Boss
+ACTOR TAT__SuperBossRPG : TAT__SuperBoss replaces TAT__SuperBoss
+{
+    Tag "Super Boss"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Super Boss 2
+ACTOR TAT__SuperBoss2RPG : TAT__SuperBoss2 replaces TAT__SuperBoss2
+{
+    Tag "Super Boss"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Super Boss 3
+ACTOR TAT__SuperBoss3RPG : TAT__SuperBoss3 replaces TAT__SuperBoss3
+{
+    Tag "Super Boss"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Super Boss 4
+ACTOR TAT__SuperBoss4RPG : TAT__SuperBoss4 replaces TAT__SuperBoss4
+{
+    Tag "Super Boss"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Super Boss 5
+ACTOR TAT__SuperBoss5RPG : TAT__SuperBoss5 replaces TAT__SuperBoss5
+{
+    Tag "Super Boss"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Cyberspider
+ACTOR TAT__CyberSpiderRPG : TAT__CyberSpider replaces TAT__CyberSpider
+{
+    Tag "Cyberspider"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Cyberspider 2
+ACTOR TAT__CyberSpider2RPG : TAT__CyberSpider2 replaces TAT__CyberSpider2
+{
+    Tag "Cyberspider"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Cyberspider 3
+ACTOR TAT__CyberSpider3RPG : TAT__CyberSpider3 replaces TAT__CyberSpider3
+{
+    Tag "Cyberspider"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Spidercyber
+ACTOR TAT__SpiderCyberRPG : TAT__SpiderCyber replaces TAT__SpiderCyber
+{
+    Tag "Spidercyber"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// Deus Vult 2
+
+// Hell Cleric
+ACTOR DVActor15RPG : DVActor15 replaces DVActor15
+{
+    Tag "Hell Cleric"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// D2TWID
+
+// Dopefish
+ACTOR DopefishRPG : Dopefish replaces Dopefish
+{
+    Tag "Dopefish"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Yorp
+ACTOR YorpRPG : Yorp replaces Yorp
+{
+    Tag "Yorp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Yorp
+ACTOR GargRPG : Garg replaces Garg
+{
+    Tag "Garg"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// Scythe 2
+
+// Afrit
+ACTOR AfritRPG : Afrit replaces Afrit
+{
+    Tag "Afrit"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// Epic 1
+
+// Imp
+ACTOR Epic1A7RPG : Epic1A7 replaces Epic1A7
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Zombie Man
+ACTOR Epic1A8RPG : Epic1A8 replaces Epic1A8
+{
+    Tag "Zombie Man"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Shotgun Guy
+ACTOR Epic1A11RPG : Epic1A11 replaces Epic1A11
+{
+    Tag "Shotgun Guy"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Chaingun Guy
+ACTOR Epic1A9RPG : Epic1A9 replaces Epic1A9
+{
+    Tag "ChaingunGuy"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Revenant
+ACTOR Epic1A10RPG : Epic1A10 replaces Epic1A10
+{
+    Tag "Revenant"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// Epic 2
+
+// Imp
+ACTOR Epic2A36RPG : Epic2A36 replaces Epic2A36
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Pain Elemental
+ACTOR Epic2A37RPG : Epic2A37 replaces Epic2A37
+{
+    Tag "Pain Elemental"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Wolfenstein SS
+ACTOR Epic2A38RPG : Epic2A38 replaces Epic2A38
+{
+    Tag "Wolfenstein SS"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// Ancient Aliens
+
+// Alien Guardian
+ACTOR AAA13RPG : AAA13 replaces AAA13
+{
+    Tag "Alien Guardian"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Xenu, Alien Emperor
+ACTOR AAA14RPG : AAA14 replaces AAA14
+{
+    Tag "Xenu, Alien Emperor"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Alien Queen
+ACTOR AAA15RPG : AAA15 replaces AAA15
+{
+    Tag "Alien Queen"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Reptilian Alien
+ACTOR AAA16RPG : AAA16 replaces AAA16
+{
+    Tag "Reptilian Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Gray Alien
+ACTOR AAA17RPG : AAA17 replaces AAA17
+{
+    Tag "Gray Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Alien Pastry Chef
+ACTOR AAA19RPG : AAA19 replaces AAA19
+{
+    Tag "Alien Pastry Chef"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Robo-Alien
+ACTOR AAA120RPG : AAA120 replaces AAA120
+{
+    Tag "Robo-Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Big Green Alien
+ACTOR AAA22RPG : AAA22 replaces AAA22
+{
+    Tag "Big Green Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Little Green Alien
+ACTOR AAA23RPG : AAA23 replaces AAA23
+{
+    Tag "Little Green Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Alien
+ACTOR AAA24RPG : AAA24 replaces AAA24
+{
+    Tag "Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Alien Invader
+ACTOR AAA25RPG : AAA25 replaces AAA25
+{
+    Tag "Alien Invader"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Alien UFO
+ACTOR AAA27RPG : AAA27 replaces AAA27
+{
+    Tag "Alien UFO"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Amphibian Alien
+ACTOR AAA28RPG : AAA28 replaces AAA28
+{
+    Tag "Amphibian Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// An Alien
+ACTOR AAA29RPG : AAA29 replaces AAA29
+{
+    Tag "An Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Illegal Alien
+ACTOR AAA30RPG : AAA30 replaces AAA30
+{
+    Tag "Illegal Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Alien Sympathizer
+ACTOR AAA31RPG : AAA31 replaces AAA31
+{
+    Tag "Alien Sympathizer"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// A Alien
+ACTOR AAA32RPG : AAA32 replaces AAA32
+{
+    Tag "A Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Stealth Plasma Alien
+ACTOR AAA33RPG : AAA33 replaces AAA33
+{
+    Tag "Stealth Plasma Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Stealth Plasma Alien
+ACTOR AAA34RPG : AAA34 replaces AAA34
+{
+    Tag "Stealth Plasma Alien"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// Stardate 20x6
+
+// Hell Knight
+ACTOR SD20x6A3RPG : SD20x6A3 replaces SD20x6A3
+{
+    Tag "Hell Knight"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Baron of Hell
+ACTOR SD20x6A4RPG : SD20x6A4 replaces SD20x6A4
+{
+    Tag "Baron of Hell"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Afrit
+ACTOR SD20x7A9RPG : SD20x7A9 replaces SD20x7A9
+{
+    Tag "Afrit"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Boss Brain
+ACTOR SD20x7A8RPG : SD20x7A8 replaces SD20x7A8
+{
+    Tag "Boss Brain"
+
+	States
+	{
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOSTATS | MF_NOAURA | MF_NOPAYKILL | MF_NODROPS | MF_NOHEALTHBAR)
+        Goto Super::Spawn
+	}
+}
+
+// --------------------------------------------------
 // Valiant
-// Arachnoorb
+
+// Imp
+ACTOR ValiantImpRPG : ValiantImp replaces ValiantImp
+{
+    Tag "Imp"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Demon
+ACTOR ValiantDemonRPG : ValiantDemon replaces ValiantDemon
+{
+    Tag "Demon"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Dark Demon
+ACTOR ValiantDarkDemonRPG : ValiantDarkDemon replaces ValiantDarkDemon
+{
+    Tag "Dark Demon"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Spectre
+ACTOR ValiantSpectreRPG : ValiantSpectre replaces ValiantSpectre
+{
+    Tag "Spectre"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Lost Soul
+ACTOR ValiantLostSoulRPG : ValiantLostSoul replaces ValiantLostSoul
+{
+    Tag "Lost Soul"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Super Mancubus
+ACTOR ValiantSuperMancubusRPG : ValiantSuperMancubus replaces ValiantSuperMancubus
+{
+    Tag "Super Mancubus"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Pyro Demon
+ACTOR ValiantPyroDemonRPG : ValiantPyroDemon replaces ValiantPyroDemon
+{
+    Tag "Pyro Demon"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Arachnotron
+ACTOR ValiantArachnotronRPG : ValiantArachnotron replaces ValiantArachnotron
+{
+    Tag "Arachnotron"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Arachnorb
 ACTOR ValiantArachnorbRPG : ValiantArachnorb replaces ValiantArachnorb
 {
     Tag "Arachnorb"
@@ -9,10 +1008,192 @@ ACTOR ValiantArachnorbRPG : ValiantArachnorb replaces ValiantArachnorb
 	States
 	{
 	Spawn:
-		AAAN A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::Spawn
 	See:
-		AAAN A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
+	}
+}
+
+// Suicide Bomber
+ACTOR SuicideBomberRPG : SuicideBomber replaces SuicideBomber
+{
+    Tag "Suicide Bomber"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Cybruiser
+ACTOR ValiantCybruiserRPG : ValiantCybruiser replaces ValiantCybruiser
+{
+    Tag "Cybruiser"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Spider Mastermind
+ACTOR ValiantSpiderMastermindRPG : ValiantSpiderMastermind replaces ValiantSpiderMastermind
+{
+    Tag "Spider Mastermind"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Final Boss
+ACTOR ValiantFinalBossRPG : ValiantFinalBoss replaces ValiantFinalBoss
+{
+    Tag "Final Boss"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// Mayhem17
+
+// Bowser
+ACTOR BowserCoopRPG : BowserCoop replaces BowserCoop
+{
+    Tag "Bowser"
+
+	States
+	{
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOSTATS | MF_NOAURA | MF_NOPAYKILL | MF_NODROPS | MF_NOHEALTHBAR)
+        Goto Super::Spawn
+	}
+}
+
+// --------------------------------------------------
+// UAC Ultra
+
+// Demon Smith
+ACTOR "Demon Smith RPG" : "Demon Smith" replaces "Demon Smith"
+{
+    Tag "Demon Smith"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// 1024
+
+// Arachnorb
+ACTOR HPArachnorbRPG : HPArachnorb replaces HPArachnorb
+{
+    Tag "Arachnorb"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Afrit
+ACTOR hpAfritRPG : hpAfrit replaces hpAfrit
+{
+    Tag "Afrit"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// Hell Pike
+ACTOR HellPikeRPG : HellPike replaces HellPike
+{
+    Tag "Hell Pike"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		Goto Super::See
+	}
+}
+
+// Healer
+ACTOR HPHealerRPG : HPHealer replaces HPHealer
+{
+    Tag "Suicide Bomber"
+
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}
+
+// --------------------------------------------------
+// Chillax
+
+// Boss Brain
+ACTOR CHXBossBrainRPG : CHXBossBrain replaces CHXBossBrain
+{
+    Tag "Boss Brain"
+
+	States
+	{
+    Spawn:
+        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_NOXP | MF_NOSTATS | MF_NOAURA | MF_NOPAYKILL | MF_NODROPS | MF_NOHEALTHBAR)
+        Goto Super::Spawn
 	}
 }
