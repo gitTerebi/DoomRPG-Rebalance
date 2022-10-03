@@ -298,7 +298,7 @@ NamedScript Type_OPEN void MapInit()
     if (CompatModeEx == COMPAT_DRLAX)
         NomadModPacksLoad();
 
-    if (CurrentLevel->UACBase || CurrentLevel->UACArena)
+    if (CurrentLevel->UACBase || CurrentLevel->UACArena || CurrentLevel->LumpName == "HUBMAP" || CurrentLevel->LumpName == "VR")
     {
         CurrentLevel->Init = true;
         return; // [KS] These maps set themselves up, so nothing more to do.
@@ -384,10 +384,10 @@ NamedScript Type_OPEN void MapInit()
         break;
     }
 
-    // Hell Skill has some additional challenges
-    if (GetCVar("drpg_minibosses") == 1 && GameSkill() >= 5 && CurrentLevel->Event != MAPEVENT_MEGABOSS || GetCVar("drpg_minibosses") == 2 && CurrentLevel->Event != MAPEVENT_MEGABOSS)
+    // Hard Skill has some additional challenges
+    if (GetCVar("drpg_minibosses") == 1 && GameSkill() >= (CompatMonMode == COMPAT_DRLA ? 5 : 3) && CurrentLevel->Event != MAPEVENT_MEGABOSS || GetCVar("drpg_minibosses") == 2 && CurrentLevel->Event != MAPEVENT_MEGABOSS)
         AddMiniboss();
-    if (GetCVar("drpg_reinforcements") == 1 && GameSkill() >= 5 && CurrentLevel->Event != MAPEVENT_MEGABOSS || GetCVar("drpg_reinforcements") == 2 && CurrentLevel->Event != MAPEVENT_MEGABOSS)
+    if (GetCVar("drpg_reinforcements") == 1 && GameSkill() >= (CompatMonMode == COMPAT_DRLA ? 5 : 3) && CurrentLevel->Event != MAPEVENT_MEGABOSS || GetCVar("drpg_reinforcements") == 2 && CurrentLevel->Event != MAPEVENT_MEGABOSS)
         for (int i = 0; i < MAX_PLAYERS; i++)
             if (PlayerInGame(i))
                 HellSkillTransport(i);
@@ -1024,14 +1024,14 @@ NamedScript void HellSkillTransport(int player)
     int BossesSpawned = 0;
     int LevelNum = CurrentLevel->LevelNum;
 
-    Delay(35 * Random(60,300)); // Grace Period
+    Delay(35 * Random(60, 240)); // Grace Period
 
     // Build a list of monsters
     for (int i = 0; i < MonsterDataAmount && MonsterListLength < MAX_TEMP_MONSTERS; i++)
     {
         MonsterInfoPtr TempMonster = &MonsterData[i];
 
-        if (CompatMonMode == COMPAT_DRLA || CompatMonMode == COMPAT_PANDEMONIA)
+        if (CompatMonMode == COMPAT_DRLA)
         {
             if (GameSkill() < 5)
             {
@@ -1043,6 +1043,21 @@ NamedScript void HellSkillTransport(int player)
             {
                 if ((fixed)TempMonster->Difficulty >= ((((fixed)GameSkill() - 5.0) * 50.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 5.0) * 50.0)) + (fixed)AveragePlayerLevel() - 20.0) &&
                         (fixed)TempMonster->Difficulty <= ((((fixed)GameSkill() - 5.0) * 50.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 5.0) * 50.0)) + (fixed)AveragePlayerLevel() + 20.0))
+                    MonsterList[MonsterListLength++] = TempMonster;
+            }
+        }
+        else if (CompatMonMode == COMPAT_PANDEMONIA)
+        {
+            if (GameSkill() < 3)
+            {
+                if ((fixed)TempMonster->Difficulty >= ((((fixed)GameSkill() - 1.0) * 8.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 1.0) * 8.0)) + (fixed)AveragePlayerLevel() - 20.0) &&
+                        (fixed)TempMonster->Difficulty <= ((((fixed)GameSkill() - 1.0) * 8.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 1.0) * 8.0)) + (fixed)AveragePlayerLevel() + 20.0))
+                    MonsterList[MonsterListLength++] = TempMonster;
+            }
+            if (GameSkill() >= 3)
+            {
+                if ((fixed)TempMonster->Difficulty >= ((((fixed)GameSkill() - 3.0) * 50.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 3.0) * 50.0)) + (fixed)AveragePlayerLevel() - 20.0) &&
+                        (fixed)TempMonster->Difficulty <= ((((fixed)GameSkill() - 3.0) * 50.0) + ((fixed)LevelNum / ((fixed)GetCVar("drpg_ws_use_wads") * 32.0)) * (200.0 - (((fixed)GameSkill() - 3.0) * 50.0)) + (fixed)AveragePlayerLevel() + 20.0))
                     MonsterList[MonsterListLength++] = TempMonster;
             }
         }
