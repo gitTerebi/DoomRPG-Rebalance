@@ -180,7 +180,7 @@ OptionValue "StartDRLAArmorTypes"
 OptionValue "ExtraMapChallenges"
 {
     0, "Never"
-    1, "Adaptive and above"
+    1, "Hard Skill and above"
     2, "Always"
 }
 

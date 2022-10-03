@@ -39,3 +39,10 @@ OptionValue "WeaponDropTypes"
     2, "Ammo Only"
     3, "Nope"
 }
+
+OptionValue "ExtraMapChallenges"
+{
+    0, "Never"
+    1, "Adaptive Skill and above"
+    2, "Always"
+}
