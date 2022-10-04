@@ -75,9 +75,9 @@ Class PistolZombieDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGPistol",         255, 36;
-		DropItem "DRPGPistolSpawner",  255, 4;
-		DropItem "DRPGClipSpawner",    255, 216;
+		DropItem "DRPGPistol",         255, 48;
+		DropItem "DRPGPistolSpawner",  255, 6;
+		DropItem "DRPGClipSpawner",    255, 204;
 	}
 }
 
@@ -94,9 +94,9 @@ Class LaserRifleZombieDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGPlasmaRifle",         255, 36;
-		DropItem "DRPGPlasmaRifleSpawner",  255, 4;
-		DropItem "DRPGCellSpawner",         255, 216;
+		DropItem "DRPGPlasmaRifle",         255, 48;
+		DropItem "DRPGPlasmaRifleSpawner",  255, 6;
+		DropItem "DRPGCellSpawner",         255, 204;
 	}
 }
 
@@ -140,9 +140,9 @@ Class NewShotgunguyDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGShotgun",         255, 36;
-		DropItem "DRPGShotgunSpawner",  255, 4;
-		DropItem "DRPGShellSpawner",    255, 216;
+		DropItem "DRPGShotgun",         255, 48;
+		DropItem "DRPGShotgunSpawner",  255, 6;
+		DropItem "DRPGShellSpawner",    255, 204;
 	}
 }
 
@@ -158,9 +158,9 @@ Class AutoShotgunZombieDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGCombatShotgun",           255, 36;
-		DropItem "DRPGCombatShotgunSpawner",    255, 4;
-		DropItem "DRPGShellSpawner",            255, 216;
+		DropItem "DRPGCombatShotgun",           255, 48;
+		DropItem "DRPGCombatShotgunSpawner",    255, 6;
+		DropItem "DRPGShellSpawner",            255, 204;
 		DropItem "DRPGShellBoxSpawner",         255, 48;
 	}
 }
@@ -177,9 +177,9 @@ Class RocketZombieDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGRocketLauncher",          255, 36;
-		DropItem "DRPGRocketLauncherSpawner",   255, 4;
-		DropItem "DRPGRocketAmmoSpawner",       255, 216;
+		DropItem "DRPGRocketLauncher",          255, 48;
+		DropItem "DRPGRocketLauncherSpawner",   255, 6;
+		DropItem "DRPGRocketAmmoSpawner",       255, 204;
 	}
 }
 
@@ -195,9 +195,9 @@ Class ShotgunAdmiralDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGChaingun",           255, 36;
-		DropItem "DRPGChaingunSpawner",    255, 4;
-		DropItem "DRPGShellBoxSpawner",    255, 216;
+		DropItem "DRPGChaingun",           255, 48;
+		DropItem "DRPGChaingunSpawner",    255, 6;
+		DropItem "DRPGShellBoxSpawner",    255, 204;
 	}
 }
 
@@ -213,9 +213,9 @@ Class SlugShotgunZombieDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGShotgun",          255, 36;
-		DropItem "DRPGShotgunSpawner",   255, 4;
-		DropItem "DRPGShellSpawner",     255, 216;
+		DropItem "DRPGShotgun",          255, 48;
+		DropItem "DRPGShotgunSpawner",   255, 6;
+		DropItem "DRPGShellSpawner",     255, 204;
 	}
 }
 
@@ -231,9 +231,9 @@ Class SpecOpsShotgunnerDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGCombatShotgun",           255, 36;
-		DropItem "DRPGCombatShotgunSpawner",    255, 4;
-		DropItem "DRPGShellSpawner",            255, 216;
+		DropItem "DRPGCombatShotgun",           255, 48;
+		DropItem "DRPGCombatShotgunSpawner",    255, 6;
+		DropItem "DRPGShellSpawner",            255, 204;
 		DropItem "DRPGShellBoxSpawner",         255, 48;
 	}
 }
@@ -250,9 +250,9 @@ Class SuperShotgunZombieDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGSuperShotgun",          255, 36;
-		DropItem "DRPGSuperShotgunSpawner",   255, 4;
-		DropItem "DRPGShellSpawner",          255, 216;
+		DropItem "DRPGSuperShotgun",          255, 48;
+		DropItem "DRPGSuperShotgunSpawner",   255, 6;
+		DropItem "DRPGShellSpawner",          255, 204;
 	}
 }
 
@@ -296,9 +296,9 @@ Class ChaingunZombieDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGChaingun",          255, 36;
-		DropItem "DRPGChaingunSpawner",   255, 4;
-		DropItem "DRPGClipBoxSpawner",    255, 216;
+		DropItem "DRPGChaingun",          255, 48;
+		DropItem "DRPGChaingunSpawner",   255, 6;
+		DropItem "DRPGClipBoxSpawner",    255, 204;
 	}
 }
 
@@ -314,9 +314,9 @@ Class AssaultGunnerDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGBattleRifle",          255, 36;
-		DropItem "DRPGBattleRifleSpawner",   255, 4;
-		DropItem "DRPGClipBoxSpawner",       255, 216;
+		DropItem "DRPGBattleRifle",          255, 48;
+		DropItem "DRPGBattleRifleSpawner",   255, 6;
+		DropItem "DRPGClipBoxSpawner",       255, 204;
 	}
 }
 
@@ -332,9 +332,9 @@ Class NailborgCommandoDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGChaingun",          255, 36;
-		DropItem "DRPGChaingunSpawner",   255, 4;
-		DropItem "DRPGClipBoxSpawner",    255, 216;
+		DropItem "DRPGChaingun",          255, 48;
+		DropItem "DRPGChaingunSpawner",   255, 6;
+		DropItem "DRPGClipBoxSpawner",    255, 204;
 	}
 }
 
@@ -351,9 +351,9 @@ Class SpecOpsGunnerDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGBattleRifle",         255, 36;
-		DropItem "DRPGBattleRifleSpawner",  255, 4;
-		DropItem "DRPGClipBoxSpawner",      255, 216;
+		DropItem "DRPGBattleRifle",         255, 48;
+		DropItem "DRPGBattleRifleSpawner",  255, 6;
+		DropItem "DRPGClipBoxSpawner",      255, 204;
 	}
 }
 
@@ -370,8 +370,8 @@ Class SpecOpsLieutenantDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGChaingun",           255, 36;
-		DropItem "DRPGChaingunSpawner",    255, 4;
+		DropItem "DRPGChaingun",           255, 48;
+		DropItem "DRPGChaingunSpawner",    255, 6;
 		DropItem "DRPGClipBoxSpawner",     255, 128;
 		DropItem "DRPGRocketAmmoSpawner",  255, 128;
 	}
@@ -417,9 +417,9 @@ Class PlasmaRifleZombieDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGPlasmaRifle",         255, 36;
-		DropItem "DRPGPlasmaRifleSpawner",  255, 4;
-		DropItem "DRPGCellSpawner",         255, 216;
+		DropItem "DRPGPlasmaRifle",         255, 48;
+		DropItem "DRPGPlasmaRifleSpawner",  255, 6;
+		DropItem "DRPGCellSpawner",         255, 204;
 	}
 }
 
@@ -437,9 +437,9 @@ Class BFG10kWarriorDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGBFG9000",          255, 36;
-		DropItem "DRPGBFG9000Spawner",   255, 4;
-		DropItem "DRPGCellPackSpawner",  255, 216;
+		DropItem "DRPGBFG9000",          255, 48;
+		DropItem "DRPGBFG9000Spawner",   255, 6;
+		DropItem "DRPGCellPackSpawner",  255, 204;
 	}
 }
 
@@ -456,9 +456,9 @@ Class BFGCommandoDropRPG : RandomSpawner
 {
 	Default
 	{
-		DropItem "DRPGBFG9000",          255, 36;
-		DropItem "DRPGBFG9000Spawner",   255, 4;
-		DropItem "DRPGCellPackSpawner",  255, 216;
+		DropItem "DRPGBFG9000",          255, 48;
+		DropItem "DRPGBFG9000Spawner",   255, 6;
+		DropItem "DRPGCellPackSpawner",  255, 204;
 	}
 }
 
