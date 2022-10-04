@@ -281,7 +281,8 @@ NamedScript DECORATE int CheckCapacity()
     // Add Capacity XP for total carried items
     if (GetCVar("drpg_levelup_natural") && Timer() % 7 == 0)
     {
-        fixed Scale = GetCVarFixed("drpg_capacity_scalexp");
+        fixed Scale = GetCVarFixed("drpg_capacity_scalexp") / GetCVar("drpg_ws_use_wads");
+        if (Scale < 0.20) Scale = 0.20;
         if (GetCVar("drpg_allow_spec"))
         {
             if (GetActivatorCVar("drpg_character_spec") == 7)
@@ -293,10 +294,10 @@ NamedScript DECORATE int CheckCapacity()
             // Calculate capacity usage per category in DRLA, excluding weapons and modpacks
             int DRLAItems = CheckInventory("RLArmorInInventory") + CheckInventory("RLSkullLimit") + CheckInventory("RLPhaseDeviceLimit") + (IsTechnician ? CheckInventory("RLScavengerModLimit") : CheckInventory("RLModLimit"));
             int DRLAMaxItems = DRLA_ARMOR_MAX + DRLA_SKULL_MAX + DRLA_DEVICE_MAX + DRLA_MODPACKS_MAX;
-            Player.CapacityXP += (int)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 5.0);
+            Player.CapacityXP += (RoundInt)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 5.0);
         }
         else
-            Player.CapacityXP += (int)(Player.InvItems * Scale / MaxItems * 5.0);
+            Player.CapacityXP += (RoundInt)(Player.InvItems * Scale / MaxItems * 5.0);
     }
 
     // Don't do checks if you have the system disabled
@@ -2851,6 +2852,12 @@ int RoundInt(fixed x)
     return (int)(x + 0.5);
 }
 
+// Rounds a long fixed to the nearest long integer
+long int RoundLongInt(long fixed x)
+{
+    return (long int)(x + 0.5l);
+}
+
 // Return the absolute value of a fixed-point value
 fixed AbsFixed(fixed x)
 {
@@ -3865,5 +3872,5 @@ NamedScript void Silly()
 
 NamedScript Console void Test()
 {
-    Log("Test is work!");
+    Log("Test if work!");
 }

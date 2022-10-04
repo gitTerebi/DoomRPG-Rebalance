@@ -156,6 +156,7 @@ int Pow(int, int);
 fixed PowFixed(fixed, int);
 int Abs(int);
 int RoundInt(fixed);
+long int RoundLongInt(long fixed);
 fixed AbsFixed(fixed);
 fixed Min(fixed, fixed);
 fixed Max(fixed, fixed);

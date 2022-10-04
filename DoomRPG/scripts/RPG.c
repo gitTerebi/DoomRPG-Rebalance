@@ -675,7 +675,7 @@ NamedScript DECORATE int AddHealth(int HealthPercent, int MaxPercent)
         // Add Vitality XP for using healing items
         if (GetCVar("drpg_levelup_natural"))
         {
-            fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
+            fixed Scale = GetCVarFixed("drpg_vitality_scalexp") / GetCVar("drpg_ws_use_wads");
             if (GetCVar("drpg_allow_spec"))
             {
                 if (GetActivatorCVar("drpg_character_spec") == 3)
@@ -683,7 +683,7 @@ NamedScript DECORATE int AddHealth(int HealthPercent, int MaxPercent)
             }
 
             int Factor = CalcPercent(HealthAmount, Player.HealthMax);
-            Player.VitalityXP += (int)(Factor * Scale * 10);
+            Player.VitalityXP += (RoundInt)(Factor * Scale * 10);
         }
     }
 
@@ -711,7 +711,7 @@ NamedScript DECORATE int AddHealthDirect(int HealthAmount, int MaxPercent)
         // Add Vitality XP for using healing items
         if (GetCVar("drpg_levelup_natural"))
         {
-            fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
+            fixed Scale = GetCVarFixed("drpg_vitality_scalexp") / GetCVar("drpg_ws_use_wads");
             if (GetCVar("drpg_allow_spec"))
             {
                 if (GetActivatorCVar("drpg_character_spec") == 3)
@@ -719,7 +719,7 @@ NamedScript DECORATE int AddHealthDirect(int HealthAmount, int MaxPercent)
             }
 
             int Factor = CalcPercent(HealthAmount, Player.HealthMax);
-            Player.VitalityXP += (int)(Factor * Scale * 10);
+            Player.VitalityXP += (RoundInt)(Factor * Scale * 10);
         }
     }
 
@@ -1699,7 +1699,7 @@ NamedScript Type_DEATH void Dead()
         // Incapacitation announcement
         SetHudSize(320, 200, false);
         SetFont("SMALLFONT");
-        if (AlivePlayers() >= 1)
+        if (SomePlayerAlive())
             HudMessage("%tS was incapacitated", PlayerNumber() + 1);
         else
             HudMessage("%tS has died", PlayerNumber() + 1);
@@ -2675,16 +2675,17 @@ NamedScript void ReviveHandler()
     {
         SetPlayerProperty(PlayerNumber(), false, PROP_TOTALLYFROZEN);
         Players(Player.ReviveeNum).ReviveKeyTimer = 0;
-        Players(Player.ReviveeNum).ReviverTID = 0;
+        if (Players(Player.ReviveeNum).ActualHealth <= 0)
+            Players(Player.ReviveeNum).ReviverTID = 0;
         Player.ReviveeNum = -1;
     }
 }
 
-NamedScript int AlivePlayers()
+NamedScript bool SomePlayerAlive()
 {
-    int AlivePlayers = 0;
     for (int i = 0; i < PlayerCount(); i++)
         if (Players(i).ActualHealth > 0)
-            AlivePlayers++;
-    return AlivePlayers;
+            return true;
+
+    return false;
 }
