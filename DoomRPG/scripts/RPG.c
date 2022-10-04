@@ -2683,7 +2683,6 @@ NamedScript void ReviveHandler()
 
 NamedScript bool SomePlayerAlive()
 {
-    int AlivePlayers = 0;
     for (int i = 0; i < PlayerCount(); i++)
         if (Players(i).ActualHealth > 0)
             return true;
