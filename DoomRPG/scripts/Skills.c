@@ -973,13 +973,13 @@ NamedScript KeyBind void UseSkill(int Key)
             // Energy Stat XP for skill usage
             if (GetCVar("drpg_levelup_natural"))
             {
-                fixed Scale = GetCVarFixed("drpg_energy_scalexp");
+                fixed Scale = GetCVarFixed("drpg_energy_scalexp") / GetCVar("drpg_ws_use_wads");
                 if (GetCVar("drpg_allow_spec"))
                 {
                     if (GetActivatorCVar("drpg_character_spec") == 4)
                         Scale *= 2;
                 }
-                Player.EnergyXP += (int)(EPCost * 10 * Scale);
+                Player.EnergyXP += (RoundInt)(EPCost * 10 * Scale);
             }
 
             // EFF-C13 Shield Accessory

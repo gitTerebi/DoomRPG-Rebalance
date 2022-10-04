@@ -153,7 +153,7 @@ Start:
     {
         SetHudSize(0, 0, false);
         SetFont("BIGFONT");
-        if (AlivePlayers() >= 1)
+        if (SomePlayerAlive())
         {
             HudMessage("Incapacitated\nHealth: %d", Player.ActualHealth);
             EndHudMessage(HUDMSG_PLAIN, 0, "Brick", 1.5, 0.25, 0.05);

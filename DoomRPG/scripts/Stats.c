@@ -156,7 +156,7 @@ NamedScript KeyBind void UseMedkit()
     // Add Vitality XP for using healing items
     if (GetCVar("drpg_levelup_natural"))
     {
-        fixed Scale = GetCVarFixed("drpg_vitality_scalexp");
+        fixed Scale = GetCVarFixed("drpg_vitality_scalexp") / GetCVar("drpg_ws_use_wads");
         if (GetCVar("drpg_allow_spec"))
         {
             if (GetActivatorCVar("drpg_character_spec") == 3)
@@ -164,7 +164,7 @@ NamedScript KeyBind void UseMedkit()
         }
 
         int Factor = CalcPercent(HealAmount, Player.HealthMax);
-        Player.VitalityXP += (int)(Factor * Scale * 10);
+        Player.VitalityXP += (RoundInt)(Factor * Scale * 10);
     }
 
     ActivatorSound("items/healthuse", 127);
@@ -627,7 +627,8 @@ void CheckStats()
         {
             if (Timer() % 7 == 0)
             {
-                fixed Scale = GetCVarFixed("drpg_regeneration_scalexp");
+                fixed Scale = GetCVarFixed("drpg_regeneration_scalexp") / GetCVar("drpg_ws_use_wads");
+                if (Scale < 0.15) Scale = 0.15;
                 if (GetCVar("drpg_allow_spec"))
                 {
                     if (GetActivatorCVar("drpg_character_spec") == 5)
@@ -635,7 +636,7 @@ void CheckStats()
                 }
                 fixed Factor = 2.0 - AbsFixed(((Player.ActualHealth <= Player.HealthMax ? ((fixed)Player.ActualHealth / (fixed)Player.HealthMax) : 1.0) + (Player.EP < Player.EPMax && Player.EPMax > 0 ? ((fixed)Player.EP / Player.EPMax) : 0)));
                 Factor += Player.Focusing ? 1 : 0;
-                Player.RegenerationXP += (int)(Factor * (8.25 * Scale));
+                Player.RegenerationXP += (RoundInt)(Factor * (8.25 * Scale));
             }
         }
 
@@ -644,31 +645,32 @@ void CheckStats()
         {
             if (Player.ActualHealth < Player.PrevHealth)
             {
-                fixed Scale = GetCVarFixed("drpg_defense_scalexp");
+                fixed Scale = GetCVarFixed("drpg_defense_scalexp") / GetCVar("drpg_ws_use_wads");
                 if (GetCVar("drpg_allow_spec"))
                 {
                     if (GetActivatorCVar("drpg_character_spec") == 2)
                         Scale *= 2;
                 }
                 int Factor = Player.PrevHealth - Player.ActualHealth;
-                Player.DefenseXP += (int)(Factor * (11.25 * Scale));
+                Player.DefenseXP += (RoundInt)(Factor * (11.25 * Scale));
             }
 
             Player.PrevHealth = Player.ActualHealth;
         }
 
         // Add Luck XP for increases in Credits
-        if (Player.PrevCredits != CheckInventory("DRPGCredits") && !CurrentLevel->UACBase || Player.PrevCredits != CheckInventory("DRPGCredits") && CurrentLevel->UACBase && ArenaActive || Player.PrevCredits != CheckInventory("DRPGCredits") && Player.InShop)
+        if (Player.PrevCredits != CheckInventory("DRPGCredits"))
         {
-            if (CheckInventory("DRPGCredits") > Player.PrevCredits)
+            if (CheckInventory("DRPGCredits") > Player.PrevCredits && (!CurrentLevel->UACBase || CurrentLevel->UACBase && ArenaActive || CurrentLevel->UACBase && Player.InShop))
             {
-                fixed Scale = GetCVarFixed("drpg_luck_scalexp");
+                long fixed Scale = GetCVarFixed("drpg_luck_scalexp") / GetCVar("drpg_ws_use_wads");
+                if (Scale < 0.1) Scale = 0.1;
                 if (GetCVar("drpg_allow_spec"))
                 {
                     if (GetActivatorCVar("drpg_character_spec") == 8)
                         Scale *= 2;
                 }
-                Player.LuckXP += (int)((CheckInventory("DRPGCredits") - Player.PrevCredits) * (2.25 * Scale));
+                Player.LuckXP += (RoundLongInt)((CheckInventory("DRPGCredits") - Player.PrevCredits) * (2.25 * Scale));
             }
 
             Player.PrevCredits = CheckInventory("DRPGCredits");
@@ -678,13 +680,14 @@ void CheckStats()
         fixed Velocity = AbsFixed(GetActorVelX(0)) + AbsFixed(GetActorVelY(0));
         if (Timer() % 7 == 0)
         {
-            fixed Scale = GetCVarFixed("drpg_agility_scalexp");
+            fixed Scale = GetCVarFixed("drpg_agility_scalexp") / GetCVar("drpg_ws_use_wads");
+            if (Scale < 0.1) Scale = 0.1;
             if (GetCVar("drpg_allow_spec"))
             {
                 if (GetActivatorCVar("drpg_character_spec") == 6)
                     Scale *= 2;
             }
-            Player.AgilityXP += (int)(Velocity * (0.333 * Scale));
+            Player.AgilityXP += (RoundInt)(Velocity * (0.333 * Scale));
         }
     }
 

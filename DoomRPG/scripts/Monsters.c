@@ -2935,9 +2935,9 @@ NamedScript void MonsterDeath()
 
             Stats->DamageTable[i] = Clamp(0, Stats->DamageTable[i], Stats->HealthMax);
 
-            float mult = 1.0;
-            if (!GetCVar("drpg_multi_sharexp"))
-                mult = (float)Stats->DamageTable[i] / (float)Stats->HealthMax;
+            long fixed mult = 1.0;
+            if (InMultiplayer && !GetCVar("drpg_multi_sharexp"))
+                mult = (long fixed)Stats->DamageTable[i] / (long fixed)Stats->HealthMax;
             else if (Killer < 0)
                 mult = 0;
 
@@ -2949,13 +2949,13 @@ NamedScript void MonsterDeath()
                 AddXP(i, XPAmount, RankAmount);
                 if (GetCVar("drpg_levelup_natural"))
                 {
-                    fixed Scale = GetCVarFixed("drpg_strength_scalexp");
+                    long fixed Scale = GetCVarFixed("drpg_strength_scalexp") / GetCVar("drpg_ws_use_wads");
                     if (GetCVar("drpg_allow_spec"))
                     {
                         if (GetActivatorCVar("drpg_character_spec") == 1)
                             Scale *= 2;
                     }
-                    Players(i).StrengthXP += (int)(HealthXP * mult * Scale);
+                    Players(i).StrengthXP += (long int)(HealthXP * mult * Scale);
                 }
             }
         }
