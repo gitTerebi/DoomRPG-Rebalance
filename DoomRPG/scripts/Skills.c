@@ -2348,7 +2348,7 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
 
             if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 5) Delay (1 * 35);
 
-            fixed BaseStatePoint = (40.0 + (fixed)GameSkill() * (fixed)Stats->Level) / 8.0;
+            fixed BaseStatePoint = (40.0 + 5.0 * (fixed)Stats->Level) / 8.0;
 
             if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 1)
                 Stats->Vitality += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);

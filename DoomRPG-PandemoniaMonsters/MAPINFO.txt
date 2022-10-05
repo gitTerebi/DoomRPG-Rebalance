@@ -9,6 +9,7 @@ clearskills
 // Easy skill
 skill easy
 {
+    damagefactor = 1.0
     monsterhealth = 0.75
     aggressiveness = 0.0
     spawnfilter = normal
@@ -26,6 +27,7 @@ skill easy
 // Normal skill
 skill normal
 {
+    damagefactor = 1.0
     monsterhealth = 1.0
     aggressiveness = 0.25
     spawnfilter = hard
@@ -41,6 +43,7 @@ skill normal
 // Hard skill
 skill hard
 {
+    damagefactor = 1.0
     monsterhealth = 1.25
     aggressiveness = 0.5
     spawnfilter = nightmare
@@ -57,6 +60,7 @@ skill hard
 // Nightmare skill
 skill nightmare
 {
+    damagefactor = 1.25
     monsterhealth = 1.5
     aggressiveness = 1.0
     spawnfilter = nightmare
@@ -72,11 +76,11 @@ skill nightmare
 // Hell skill
 skill hell
 {
+    damagefactor = 1.5
     monsterhealth = 2.0
     aggressiveness = 1.0
     spawnfilter = nightmare
     
-    disablecheats
     autousehealth
 
     acsreturn = 5
