@@ -1024,7 +1024,7 @@ NamedScript void HellSkillTransport(int player)
     int BossesSpawned = 0;
     int LevelNum = CurrentLevel->LevelNum;
 
-    Delay(35 * Random(60, 240)); // Grace Period
+    Delay(35 * 60); // Grace Period
 
     // Build a list of monsters
     for (int i = 0; i < MonsterDataAmount && MonsterListLength < MAX_TEMP_MONSTERS; i++)
@@ -1071,26 +1071,16 @@ NamedScript void HellSkillTransport(int player)
     //Log("%d monsters", MonsterListLength);
 
     fixed X, Y, Z;
-    int MonsterIndex;
     fixed SpawnX;
     fixed SpawnY;
-    int TID;
-    bool Success;
-    int SpawnTries;
-    int CurrentRadius;
+    bool Success, IsBoss;
+    int MonsterIndex, TID, SpawnTries, RadiusMin, RadiusMax;
 
     while (GetLevelInfo(LEVELINFO_KILLED_MONSTERS) < GetLevelInfo(LEVELINFO_TOTAL_MONSTERS))
     {
         X = GetActorX(0);
         Y = GetActorY(0);
         Z = GetActorZ(0);
-        MonsterIndex = 0;
-        SpawnX = 0.0;
-        SpawnY = 0.0;
-        TID = 0;
-        Success = false;
-        SpawnTries = 0;
-        CurrentRadius = 0;
 
         // Stop spawning if time is frozen
         while (IsTimeFrozen()) Delay(1);
@@ -1098,14 +1088,16 @@ NamedScript void HellSkillTransport(int player)
         TID = UniqueTID();
         Success = false;
         SpawnTries = 0;
-        CurrentRadius = 1024;
+        RadiusMin = 256;
+        RadiusMax = 1024;
+        IsBoss = false;
 
         while (!Success && SpawnTries < 3)
         {
             MonsterIndex = Random(0, MonsterListLength - 1);
 
-            SpawnX = RandomFixed(-(fixed)CurrentRadius, (fixed)CurrentRadius);
-            SpawnY = RandomFixed(-(fixed)CurrentRadius, (fixed)CurrentRadius);
+            SpawnX = RandomFixed(-(fixed)RadiusMax, (fixed)RadiusMax);
+            SpawnY = RandomFixed(-(fixed)RadiusMax, (fixed)RadiusMax);
 
             // Get the floor Z position at this spot
             SpawnForced("MapSpot", X + SpawnX, Y + SpawnY, Z, TID, 0);
@@ -1114,10 +1106,10 @@ NamedScript void HellSkillTransport(int player)
 
             Success = Spawn(GetMissionMonsterActor(MonsterList[MonsterIndex]->Actor), X + SpawnX, Y + SpawnY, Z, TID, 0);
 
-            bool IsBoss = CheckFlag(TID, "BOSS");
+            IsBoss = CheckFlag(TID, "BOSS");
 
             if (Success)
-                Success = CheckSight(0, TID, 0);
+                Success = CheckSight(0, TID, 0) && Distance(0, TID) > RadiusMin;
             if (Success)
                 Success = !IsBoss || (!Random (0, 3) && BossesSpawned < 3);
 
@@ -1125,7 +1117,9 @@ NamedScript void HellSkillTransport(int player)
             {
                 // Try again, closer to the player each time, up to 3 times, before giving up.
                 Thing_Remove(TID);
-                CurrentRadius /= 2;
+                RadiusMax /= 2;
+                if (SpawnTries == 1)
+                    RadiusMin /= 2;
             }
             else
             {
@@ -1134,6 +1128,7 @@ NamedScript void HellSkillTransport(int player)
             }
 
             SpawnTries++;
+            Delay(1);
         }
 
         if (Success)
@@ -1142,9 +1137,10 @@ NamedScript void HellSkillTransport(int player)
             Thing_Hate(TID, Player.TID);
             Thing_ChangeTID(TID, 0); // Get rid of the ID
             Spawn("TeleportFog", X + SpawnX, Y + SpawnY, Z, 0, 0);
+            Delay(35 * Random(60, 120));
         }
 
-        Delay(35 * Random(20,30));
+        Delay(1);
     }
 }
 
