@@ -808,6 +808,7 @@ struct PlayerData_S
     str NomadBasicItems[30];
     str NomadModPacks[30];
     int NomadAmountModPacks[30];
+    bool NomadModPacksSave;
 
     // Phase Sisters
     // Portia
