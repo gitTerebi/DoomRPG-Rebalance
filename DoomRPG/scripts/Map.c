@@ -363,7 +363,7 @@ NamedScript Type_OPEN void MapInit()
         DynamicLootGenerator("DRPGLuckDropper");
 
         // guarentee at least 4 mods 99% of time
-        DynamicLootGenerator("DRPGLootMods", 4);
+        DynamicLootGenerator("DRPGLootMods", 2);
     }
 
     AddAdditionalMonsters();
