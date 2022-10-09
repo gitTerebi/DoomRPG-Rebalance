@@ -161,9 +161,9 @@ actor DRPGWeaponDropper : RandomSpawner
 
 actor DRPGAmmoDropper : RandomSpawner 20195
 {
-    //DropItem "DRPGClipSpawner"           255 80
-    //DropItem "DRPGShellSpawner"          255 60
-    //DropItem "DRPGRocketAmmoSpawner"     255 20
+    DropItem "DRPGClipSpawner"           255 80
+    DropItem "DRPGShellSpawner"          255 60
+    DropItem "DRPGRocketAmmoSpawner"     255 20
     DropItem "DRPGCellSpawner"           255 25
     DropItem "DRPGClipBoxSpawner"        255 50
     DropItem "DRPGShellBoxSpawner"       255 50	
