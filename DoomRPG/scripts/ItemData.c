@@ -1263,19 +1263,19 @@ NamedScript DECORATE void SpawnLuckItem()
 
     ActorToSpawn = "DRPGEmpty";
 
-    if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <=  10.00) ActorToSpawn = "DRPGChipDropper";
-    if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <=  10.00) ActorToSpawn = "DRPGBatteryDropper";
-    // if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=   5.00) ActorToSpawn = "DRPGCrate";
 
+    // if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=   5.00) ActorToSpawn = "DRPGCrate";
+    if (Luck >= LUCK_AMMODROP      && RandomFixed(0.0, 100.0) <= LUCK_MAXAMMOCHANCE)    ActorToSpawn = "DRPGAmmoDropper";
     if (Luck >= LUCK_HEALTHDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXHEALTHCHANCE)      ActorToSpawn = "DRPGHealthDropper";
     if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <= LUCK_MAXEPCHANCE)          ActorToSpawn = "DRPGEPDropper";
-    if (Luck >= LUCK_AMMODROP    && RandomFixed(0.0, 100.0) <= LUCK_MAXAMMOCHANCE)        ActorToSpawn = "DRPGAmmoDropper";
-    if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXTURRETCHANCE / 2)  ActorToSpawn = "DRPGTurretDropper";
-    if (Luck >= LUCK_MODULEDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXMODULECHANCE / 2)  ActorToSpawn = "DRPGModuleDropper";
-    if (Luck >= LUCK_ARMORDROP   && RandomFixed(0.0, 100.0) <= LUCK_MAXARMORCHANCE / 3)   ActorToSpawn = "DRPGArmorDropper";
+    //if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXTURRETCHANCE)  ActorToSpawn = "DRPGTurretDropper";
+    if (Luck >= LUCK_MODULEDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXMODULECHANCE)  ActorToSpawn = "DRPGModuleDropper";
+    if (Luck >= LUCK_ARMORDROP   && RandomFixed(0.0, 100.0) <= LUCK_MAXARMORCHANCE)   ActorToSpawn = "DRPGArmorDropper";
     if (Luck >= LUCK_WEAPONDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXWEAPONCHANCE / 3)  ActorToSpawn = "DRPGWeaponDropper";
-    if (Luck >= LUCK_AUGDROP     && RandomFixed(0.0, 100.0) <= LUCK_MAXAUGCHANCE / 4)     ActorToSpawn = "DRPGAugDropper";
-    if (Luck >= LUCK_SHIELDDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXSHIELDCHANCE / 4)  ActorToSpawn = "DRPGShieldDropper";
+    if (Luck >= LUCK_AUGDROP     && RandomFixed(0.0, 100.0) <= LUCK_MAXAUGCHANCE)     ActorToSpawn = "DRPGAugDropper";
+    if (Luck >= LUCK_SHIELDDROP  && RandomFixed(0.0, 100.0) <= LUCK_MAXSHIELDCHANCE)  ActorToSpawn = "DRPGShieldDropper";
+    if (Luck >= LUCK_EPDROP      && RandomFixed(0.0, 100.0) <=  1.00) ActorToSpawn = "DRPGChipDropper";
+    if (Luck >= LUCK_TURRETDROP  && RandomFixed(0.0, 100.0) <=  1.00) ActorToSpawn = "DRPGBatteryDropper";
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 

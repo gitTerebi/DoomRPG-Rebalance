@@ -161,14 +161,14 @@ actor DRPGWeaponDropper : RandomSpawner
 
 actor DRPGAmmoDropper : RandomSpawner 20195
 {
-    DropItem "DRPGClipSpawner"           255 80
-    DropItem "DRPGShellSpawner"          255 60
-    DropItem "DRPGRocketAmmoSpawner"     255 20
-    DropItem "DRPGCellSpawner"           255 10
-    DropItem "DRPGClipBoxSpawner"        255 4
-    DropItem "DRPGShellBoxSpawner"       255 3	
-    DropItem "DRPGRocketBoxSpawner"      255 2	
-    DropItem "DRPGCellPackSpawner"       255 1
+    //DropItem "DRPGClipSpawner"           255 80
+    //DropItem "DRPGShellSpawner"          255 60
+    //DropItem "DRPGRocketAmmoSpawner"     255 20
+    DropItem "DRPGCellSpawner"           255 25
+    DropItem "DRPGClipBoxSpawner"        255 50
+    DropItem "DRPGShellBoxSpawner"       255 50	
+    DropItem "DRPGRocketBoxSpawner"      255 10	
+    DropItem "DRPGCellPackSpawner"       255 10
 }
 
 actor DRPGModuleDropper : RandomSpawner
@@ -742,8 +742,9 @@ actor DRPGClipSpawner : RandomSpawner
 // Ammo: Clip Box Randomizer
 actor DRPGClipBoxSpawner : RandomSpawner
 {
-    DropItem "DRPGClipBoxFull"       255 32
-    DropItem "DRPGClipBoxHalf"       255 224
+    DropItem "DRPGClipBox"             255 255
+    //DropItem "DRPGClipBoxFull"       255 32
+    //DropItem "DRPGClipBoxHalf"       255 224
 }
 
 // Ammo: Shell Randomizer
@@ -756,8 +757,9 @@ actor DRPGShellSpawner : RandomSpawner
 // Ammo: Shell Box Randomizer
 actor DRPGShellBoxSpawner : RandomSpawner
 {
-    DropItem "DRPGShellBoxFull"      255 32
-    DropItem "DRPGShellBoxHalf"      255 224
+    DropItem "DRPGShellBox"          255 255
+    //DropItem "DRPGShellBoxFull"      255 32
+    //DropItem "DRPGShellBoxHalf"      255 224
 }
 
 // Ammo: Rocket Randomizer
