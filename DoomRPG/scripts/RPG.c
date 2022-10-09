@@ -1407,6 +1407,7 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
     if (MaxItems == 0)
     {
         MaxItems = RoundInt(RandomFixed(24.0, 56.0) * ((fixed)AveragePlayerLuck() / 100.0));
+        MaxItems = MaxItems + 10;
         MaxItems *= GetCVarFixed("drpg_lootgen_factor");
     }
 

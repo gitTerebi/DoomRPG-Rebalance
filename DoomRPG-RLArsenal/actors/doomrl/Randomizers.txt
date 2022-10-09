@@ -549,3 +549,19 @@ actor RLBerserkSpawnerRPG : RandomSpawner 2023
     DropItem "DRPGModulePickup"     255 1
     //DropItem "RLBlueprintComputer"  255 1
 }
+
+actor DRPGLootMods : RandomSpawner
+{
+    DropItem "RLBulkModItem"       255 10
+    DropItem "RLPowerModItem"      255 10
+    DropItem "RLAgilityModItem"    255 10
+    DropItem "RLTechnicalModItem"  255 10
+    DropItem "RLNanoModItem"       255 5
+    DropItem "RLSniperModItem"     255 5
+    DropItem "RLFirestormModItem"  255 5
+    DropItem "RLOnyxModItem"       255 5
+    DropItem "RLArmorModItem"      255 1
+    DropItem "DRPGNothing"         255 1
+}
+
+actor DRPGNothing {}
