@@ -280,7 +280,7 @@ OptionMenu "DoomRPGXPSystem"
 {
     Title "XP System"
 
-    Slider "XP Multiplier", "drpg_scalexp", 0.25, 8.0, 0.25
+    Slider "XP Multiplier", "drpg_scalexp", 0.25, 20.0, 0.25
     Slider "Combo XP Multiplier", "drpg_scalecomboxp", 0.25, 8.0, 0.25
     Slider "XP Curve", "drpg_xp_curve", 0, 500, 5
 //    Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
@@ -482,7 +482,7 @@ OptionMenu "DoomRPGStats"
 
     Slider "Modules Spawn Amount Factor", "drpg_module_spawnfactor", 0.5, 10.0, 0.1
     Slider "Modules Levelup Amount Factor", "drpg_module_levelfactor", 0.5, 10.0, 0.1
-    Slider "Modules Stat Cost Amount Factor", "drpg_module_statfactor", 0.5, 10.0, 0.1
+    Slider "Modules Stat Cost Amount Factor", "drpg_module_statfactor", 1.0, 10.0, 0.1
     Slider "Modules Skill Cost Amount Factor", "drpg_module_skillfactor", 0.5, 10.0, 0.1
     StaticText ""
 

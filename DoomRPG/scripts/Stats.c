@@ -306,7 +306,10 @@ void CheckLevel()
 
             // Level Up
             Player.Level++;
-            GiveInventory("DRPGModule", Modules);
+            // GiveInventory("DRPGModule", Modules);
+
+            // Every level five 5 modules
+            GiveInventory("DRPGModule", 5);
 
             if (GetCVar("drpg_levelup_heal"))
             {

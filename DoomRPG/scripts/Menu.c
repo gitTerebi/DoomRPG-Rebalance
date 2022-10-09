@@ -564,11 +564,13 @@ void DrawStatsMenu()
     {
     case STATPAGE_STATS:
     {
-        int Cost = (int)((((fixed)*Stats[Player.MenuIndex] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
-        if (Cost < 0)
-            Cost = -Cost;
-        else if (Cost == 0)
-            Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+        // int Cost = (int)((((fixed)*Stats[Player.MenuIndex] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+        // if (Cost < 0)
+        //     Cost = -Cost;
+        // else if (Cost == 0)
+        //     Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+
+        int Cost = 1 * GetCVarFixed("drpg_module_statfactor");
 
         // Upgrade Modules
         PrintSprite("UMODA0", 0, 16.1, 304.1, 0.05);
@@ -2662,11 +2664,12 @@ void IncreaseStat(int Stat)
     };
 
     // Determine the cost of the stat upgrade
-    int Cost = (int)((((fixed)*Stats[Stat] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
-    if (Cost < 0)
-        Cost = -Cost;
-    else if (Cost == 0)
-        Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+    int Cost = 1;
+    // int Cost = (int)((((fixed)*Stats[Stat] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+    // if (Cost < 0)
+    //     Cost = -Cost;
+    // else if (Cost == 0)
+    //     Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
 
     // Make sure you have enough Modules
     if (CheckInventory("DRPGModule") < Cost && (Player.InMenu || Player.GUI.Open))
