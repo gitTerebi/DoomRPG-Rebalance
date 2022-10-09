@@ -1261,7 +1261,7 @@ NamedScript DECORATE void SpawnLuckItem()
     int Luck = AveragePlayerLuck();
     str ActorToSpawn;
 
-    ActorToSpawn = "DRPGEmpty";
+    ActorToSpawn = "DRPGMoneyDropper";
 
 
     // if (/* Crates always appear  */ RandomFixed(0.0, 100.0) <=   5.00) ActorToSpawn = "DRPGCrate";
@@ -1292,7 +1292,8 @@ NamedScript DECORATE void DRPGGenericLootSpawner(bool ArmorBonus)
     if (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512)
         ActorToSpawn = ArmorBonus ? "DRPGArmorBonus" : "DRPGHealthBonus";
     else
-        ActorToSpawn = "DRPGGenericLootRandomizer";
+        ActorToSpawn = "DRPGMoneyDropper"; // Just do money
+        //ActorToSpawn = "DRPGGenericLootRandomizer";
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 

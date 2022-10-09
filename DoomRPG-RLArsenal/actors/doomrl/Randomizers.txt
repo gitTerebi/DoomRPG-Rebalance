@@ -114,7 +114,7 @@ actor DRPGRLClipBoxSpawner2 : MapSpot replaces DRPGClipBox
 actor RLClipBoxSpawnerRPG : RandomSpawner
 {
     DropItem "RLClipBox2"          255 183
-    DropItem "RLModPackSpawner"    255 120
+    DropItem "RLModPackSpawner"    255 10
     //DropItem "DRPGTurretPart"      255 10
     //DropItem "RLBlueprintComputer" 255 1
 }
@@ -140,7 +140,7 @@ actor DRPGRLShellBoxSpawner2 : MapSpot replaces DRPGShellBox
 actor RLShellBoxSpawnerRPG : RandomSpawner
 {
     DropItem "RLShellBox2"         255 183
-    DropItem "RLModPackSpawner"    255 120
+    DropItem "RLModPackSpawner"    255 10
     //DropItem "DRPGTurretPart"      255 10
     //DropItem "RLBlueprintComputer" 255 1
 }
@@ -166,8 +166,8 @@ actor DRPGRLRocketBoxSpawner2 : MapSpot replaces DRPGRocketBox
 actor RLRocketBoxSpawnerRPG : RandomSpawner
 {
     DropItem "RLRocketBox2"        255 185
+    DropItem "RLModPackSpawner"    255 10
     //DropItem "DRPGTurretPart"      255 10
-    DropItem "RLModPackSpawner"    255 120
 }
 
 // Cell Pack
@@ -191,8 +191,8 @@ actor DRPGRLCellPackSpawner2 : MapSpot replaces DRPGCellPack
 actor RLCellPackSpawnerRPG : RandomSpawner
 {
     DropItem "RLCellPack2"         255 183
-    //DropItem "DRPGTurretPart"      255 10
-    DropItem "RLModPackSpawner"    255 120
+    DropItem "RLModPackSpawner"    255 10
+    //DropItem "DRPGTurretPart"      255 10    
     //DropItem "RLBlueprintComputer" 255 1
 }
 
