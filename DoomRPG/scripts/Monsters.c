@@ -3490,6 +3490,9 @@ int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)
         GiveInventory("DRPGLegenDoomMonsterInit", 1);
     }
 
+        // Scale monster health
+    Health = (Health * (int)(GetCVarFixed("drpg_monster_health_multi") * 100)) / 100;
+
     return Health;
 }
 

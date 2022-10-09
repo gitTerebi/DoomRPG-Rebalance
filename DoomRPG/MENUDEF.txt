@@ -383,7 +383,10 @@ OptionMenu "DoomRPGMonsterAuraSettings"
 OptionMenu "DoomRPGDifficulty"
 {
     Title "Game Difficulty"
-
+    
+    Slider "Extra Player Damage Multiplier", "drpg_dmg_mult", 0, 10, 0.1
+    Slider "Monster Health Multiplier", "drpg_monster_health_multi", 0.1, 2, 0.1    
+    StaticText ""
     Slider "Scale EP Costs", "drpg_skill_costscale", 0.5, 10.0, 0.1
     Option "Keep Auras between levels", "drpg_skill_keepauras", "OnOff"
     Slider "Aura Timer Cap (Min.)", "drpg_skill_auratimercap", 1, 60, 1

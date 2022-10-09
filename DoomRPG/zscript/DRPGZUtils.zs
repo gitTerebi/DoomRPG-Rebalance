@@ -287,6 +287,8 @@ class DRPGZUtilities
         // All CVars except Character data
         static const string drpgCVars[] =
         {
+            "drpg_dmg_mult",
+            "drpg_monster_health_multi",
             "drpg_scalexp",
             "drpg_scalecomboxp",
             "drpg_xp_curve",
