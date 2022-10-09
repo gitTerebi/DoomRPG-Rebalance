@@ -19,8 +19,8 @@
 str RPGMap MainMenu[MAX_MENU] =
 {
     "Stats",
-    "Augs",
     "Skills",
+    "Augs",
     "Shield",
     "Stims",
     "Turret",
