@@ -286,22 +286,22 @@ void ShopLoop()
         // Price
         if (ItemCategoryFlags[Player.ShopPage] & CF_NOBUY && ItemCategoryFlags[Player.ShopPage] & CF_NOSELL) // No Buying or Selling
         {
-            HudMessage("(Discount: %d%%)", Player.ShopDiscount);
+            HudMessage("Disc %d%%", Player.ShopDiscount);
             EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 24.1, 38.0, 0.05);
         }
-        else if (ItemCategoryFlags[Player.ShopPage] & CF_NOBUY || Rank == -1) // No Buying
+        else if (ItemCategoryFlags[Player.ShopPage] & CF_NOBUY) // || Rank == -1) // No Buying
         {
-            HudMessage("\Ci%d C \Ck(Discount: %d%%)", SellPrice, Player.ShopDiscount);
+            HudMessage("\CiSELL %d \CkDisc %d%%", SellPrice, Player.ShopDiscount);
             EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 24.1, 38.0, 0.05);
         }
         else if (ItemCategoryFlags[Player.ShopPage] & CF_NOSELL) // No Selling
         {
-            HudMessage("\Cj%d C \Ck(Discount: %d%%)", Cost, Player.ShopDiscount);
+            HudMessage("\CjBUY %d \CkDisc %d%%", Cost, Player.ShopDiscount);
             EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 24.1, 38.0, 0.05);
         }
         else // Normal
         {
-            HudMessage("\Cj%d C \Ci(%d C) \Ck(Discount: %d%%)", Cost, SellPrice, Player.ShopDiscount);
+            HudMessage("\CjBUY %d \CiSELL %d \CkDisc %d%%", Cost, SellPrice, Player.ShopDiscount);
             EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 24.1, 38.0, 0.05);
         }
     }
@@ -494,7 +494,7 @@ void BuyItem(str Item)
     }
 
     // If the item (or category) is flagged to never be buyable, return
-    if (ItemPtr->Rank == -1 || ItemCategoryFlags[Player.ShopPage] & CF_NOBUY)
+    if (ItemCategoryFlags[Player.ShopPage] & CF_NOBUY) // || ItemPtr->Rank == -1)
     {
         PrintError("You cannot buy this item");
         ActivatorSound("menu/error", 127);
