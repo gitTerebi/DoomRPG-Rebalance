@@ -153,6 +153,89 @@ NamedScript KeyBind void OpenMenu()
     }
 }
 
+NamedScript KeyBind void OpenStats()
+{
+    // If you're dead, terminate
+    if (GetActorProperty(0, APROP_Health) <= 0) return;
+
+    // Exit handling for Outpost menus.
+    if (Player.OutpostMenu > 0)
+    {
+        ActivatorSound("menu/leave", 127);
+        SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+        Player.OutpostMenu = 0;
+        return;
+    }
+    // Exit handling for Crates.
+    else if (Player.CrateOpen)
+    {
+        ActivatorSound("crate/close", 127);
+        Player.CrateOpen = false;
+
+        // Set the crate to it's inactive state if it's empty
+        if (CrateEmpty(Player.CrateID))
+        {
+            SetActorState(Crates[Player.CrateID].TID, "Empty");
+            Crates[Player.CrateID].Empty = true;
+        }
+
+        return;
+    }
+    else if (Player.CrateHacking)
+    {
+        ActivatorSound("hacking/select", 127);
+        Player.CrateHacking = false;
+        return;
+    }
+    // Exit handling for Minigames.
+    else if (Player.InMinigame)
+    {
+        Player.InMinigame = false;
+        StopSound(0, CHAN_BODY);
+        return;
+    }
+
+    if (Player.InShop && CurrentLevel->UACBase)
+    {
+        ActivatorSound("menu/leave", 127);
+        SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+        Player.InMenu = false;
+        Player.InShop = false;
+        return;
+    }
+    else if (Player.InShop)
+        Player.InShop = false;
+
+    if (Player.InMenu)
+    {
+        if (Player.Menu != MENUPAGE_STATS)
+        {
+            Player.Menu = MENUPAGE_STATS;
+            Player.MenuIndex = 0;
+            ClearToxicityMeter();
+            return;
+        }
+        else
+        {
+            ActivatorSound("menu/leave", 127);
+            SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+            Player.InMenu = false;
+            Player.MenuIndex = 0;
+            Player.Menu = MENUPAGE_STATS;
+            ClearToxicityMeter();
+        }
+    }
+    else
+    {
+        if (DebugLog)
+            Log("\CdDEBUG: \CfOpening Menu");
+        ActivatorSound("menu/enter", 127);
+        Player.InMenu = true;
+        Player.Menu = MENUPAGE_STATS;
+        Player.MenuIndex = 0;
+    }
+}
+
 void MenuLoop()
 {
     // Freeze the Player

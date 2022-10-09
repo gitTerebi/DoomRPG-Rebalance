@@ -12,6 +12,10 @@ alias drpg_menu "pukename OpenMenu"
 addmenukey "Open Shop" drpg_shop
 alias drpg_shop "pukename OpenShop"
 
+// Stats
+addmenukey "Open Stats" drpg_stats
+alias drpg_stats "pukename OpenStats"
+
 // Quick Heal
 addmenukey "Quick Heal" drpg_quickheal
 alias drpg_quickheal "pukename UseMedkit"
