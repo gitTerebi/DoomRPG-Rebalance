@@ -486,15 +486,15 @@ actor RLModPackSpawnerRPG2 : RandomSpawner
 {
   Tag "Random Modpack"
     //$category "DRLA Spawners"
-    DropItem "RLBulkModItem"       255 120
+    DropItem "RLBulkModItem"       255 180
     DropItem "RLPowerModItem"      255 180
-    DropItem "RLAgilityModItem"    255 260
-    DropItem "RLTechnicalModItem"  255 140
-    DropItem "RLNanoModItem"       255 10
+    DropItem "RLAgilityModItem"    255 180
+    DropItem "RLTechnicalModItem"  255 180
+    DropItem "RLNanoModItem"       255 30
     DropItem "RLSniperModItem"     255 30
     DropItem "RLFirestormModItem"  255 30
     DropItem "RLOnyxModItem"       255 10
-    DropItem "RLArmorModItem"      255 60
+    DropItem "RLArmorModItem"      255 10
 }
 
 actor RLModPackSpawnerRPG3 : RandomSpawner
