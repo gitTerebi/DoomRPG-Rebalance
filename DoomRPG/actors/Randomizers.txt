@@ -771,8 +771,9 @@ actor DRPGRocketAmmoSpawner : RandomSpawner
 // Ammo: Rocket Box Randomizer
 actor DRPGRocketBoxSpawner : RandomSpawner
 {
-    DropItem "DRPGRocketBoxFull"     255 32
-    DropItem "DRPGRocketBoxHalf"     255 224
+     DropItem "DRPGRocketBox"     255 255
+   //DropItem "DRPGRocketBoxFull"     255 32
+   //DropItem "DRPGRocketBoxHalf"     255 224
 }
 
 // Ammo: Cell Randomizer
@@ -785,8 +786,9 @@ actor DRPGCellSpawner : RandomSpawner
 // Ammo: Cell Pack Randomizer
 actor DRPGCellPackSpawner : RandomSpawner
 {
-    DropItem "DRPGCellPackFull"      255 32
-    DropItem "DRPGCellPackHalf"      255 224
+    DropItem "DRPGCellPack"      255 255
+    //DropItem "DRPGCellPackFull"      255 32
+    //DropItem "DRPGCellPackHalf"      255 224
 }
 
 // Weapon: Chainsaw Randomizer
