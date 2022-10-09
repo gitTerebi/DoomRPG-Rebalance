@@ -110,7 +110,7 @@ NamedScript void AddXP(int PlayerNum, long int XP, long int Rank)
     XP = (XP * (int)(GetCVarFixed("drpg_scalexp") * 100)) / 100;
 
     // Caps for add XP and Rank
-    if (XP > Players(PlayerNum).XPNext / 10l) XP = Players(PlayerNum).XPNext / 10l;
+    //if (XP > Players(PlayerNum).XPNext / 2l) XP = Players(PlayerNum).XPNext / 2l;
     if (Rank > Players(PlayerNum).RankNext / 40l) Rank = Players(PlayerNum).RankNext / 40l;
 
     Players(PlayerNum).ComboTimer = COMBO_MAX;

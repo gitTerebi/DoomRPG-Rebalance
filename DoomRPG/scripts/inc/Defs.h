@@ -710,8 +710,8 @@ typedef enum
 #define RANKUP_ID               (MAKE_ID('R', 'K', 'U', 'P'))
 #define CONFUSION_ID            (MAKE_ID('C', 'O', 'N', 'F'))
 
-#define MODULE_STAT_MULT        25
-#define MODULE_SKILL_MULT       250
+#define MODULE_STAT_MULT        1
+#define MODULE_SKILL_MULT       1
 
 #define LUCK_HEALTHDROP         (GetCVar("drpg_levelup_natural") ? 15 : 10)
 #define LUCK_EPDROP             (GetCVar("drpg_levelup_natural") ? 25 : 15)
