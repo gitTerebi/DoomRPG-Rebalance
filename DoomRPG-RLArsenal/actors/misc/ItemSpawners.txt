@@ -235,7 +235,7 @@ actor RLAllMapSpawner : RandomSpawner
 {
     DropItem "RLAllmap" 255 3
     DropItem "RLTrackingMap" 255 1
-    DropItem "RLBlueprintComputer" 255 1
+    //DropItem "RLBlueprintComputer" 255 1
 }
 
 //------------------------------------------------------------------------------

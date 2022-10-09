@@ -20,7 +20,8 @@ actor RLTechnicianGunSpawnerRPG : RLTechnicianGunSpawner replaces RLTechnicianGu
     DropItem "RLRocketBox"                 255 10
     DropItem "DRPGWeaponSpawner"           255 40
     DropItem "DRPGTurretPart"              255 5
-    DropItem "RLBlueprintComputer"         255 5
+    //DropItem "RLBlueprintComputer"         255 5
+    DropItem "RLBasicModPackSpawner"         255 5
 }
 
 actor RLRenegadeGunSpawnerRPG : RLRenegadeGunSpawner replaces RLRenegadeGunSpawner

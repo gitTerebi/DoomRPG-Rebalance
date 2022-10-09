@@ -3044,7 +3044,7 @@ NamedScript void MonsterDeath()
                 DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 32);
                 if (MapLevelModifier > 0.25)
                     DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 16);
-                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32);
+                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 32);
                 DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 16);
                 DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 8);
             }
@@ -3078,7 +3078,7 @@ NamedScript void MonsterDeath()
             {
                 DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 128);
                 DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 64);
-                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 128);
+                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 128);
                 DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 64);
                 DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 32);
             }
