@@ -975,7 +975,6 @@ NamedScript KeyBind void Respec(bool DoStats, bool DoSkills)
         // Reset skills, add skill levels together into a pool of tokens to give back to the player
         for (int i = 0; i < MAX_CATEGORIES; i++)
             for (int j = 0; j < SkillCategoryMax[i]; j++)
-                if (!(i == 5 && j == 7)) // Skip Transport
                     while (Player.SkillLevel[i][j].Level > 0)
                     {
                         Modules += (int)(((fixed)Player.SkillLevel[i][j].Level * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor"));
@@ -3750,19 +3749,19 @@ void ClearInfo(CharSaveInfo *Info)
 
 void ArrayCreate(DynamicArray *Array, str Name, int InitSize, int ItemSize)
 {
-    if (DebugLog)
-    {
-        Log("acArgName: %S", Name);
-        Log("acArgInitSize: %i", InitSize);
-        Log("acArgItemSize: %i", ItemSize);
+    // if (DebugLog)
+    // {
+    //     Log("acArgName: %S", Name);
+    //     Log("acArgInitSize: %i", InitSize);
+    //     Log("acArgItemSize: %i", ItemSize);
 
-        Log("Array: %i", Array);
-        Log("Array->Name: %S", Array->Name);
-        Log("Array->Position: %i", Array->Position);
-        Log("Array->Size: %i", Array->Size);
-        Log("Array->ItemSize: %i", Array->ItemSize);
-        Log("Array->Data: %i", Array->Data);
-    }
+    //     Log("Array: %i", Array);
+    //     Log("Array->Name: %S", Array->Name);
+    //     Log("Array->Position: %i", Array->Position);
+    //     Log("Array->Size: %i", Array->Size);
+    //     Log("Array->ItemSize: %i", Array->ItemSize);
+    //     Log("Array->Data: %i", Array->Data);
+    // }
 
     bool Recreate = false;
     if (Array && Array->Data != NULL)
@@ -3771,8 +3770,8 @@ void ArrayCreate(DynamicArray *Array, str Name, int InitSize, int ItemSize)
     Array->Name = Name;
     Array->Position = 0;
 
-    if (DebugLog)
-        Log("\CdDynamicArray: Allocating \Cj%S", Array->Name);
+    // if (DebugLog)
+    //     Log("\CdDynamicArray: Allocating \Cj%S", Array->Name);
 
     if (Recreate)
     {
@@ -3793,7 +3792,7 @@ void ArrayCreate(DynamicArray *Array, str Name, int InitSize, int ItemSize)
     {
         Array->Size = InitSize;
         Array->ItemSize = ItemSize;
-        LogMessage("Creating Array",LOG_DEBUG);
+        // LogMessage("Creating Array",LOG_DEBUG);
         Array->Data = calloc(Array->Size, Array->ItemSize);
     }
 
@@ -3803,8 +3802,8 @@ void ArrayCreate(DynamicArray *Array, str Name, int InitSize, int ItemSize)
         return;
     }
 
-    if (DebugLog)
-        Log("\CdDynamicArray: \Cj%S\Cd @ %p", Array->Name, Array->Data);
+    // if (DebugLog)
+    //     Log("\CdDynamicArray: \Cj%S\Cd @ %p", Array->Name, Array->Data);
 
     //memset(Array->Data, 0xAAAAAAAA, Array->Size * Array->ItemSize);
 }
@@ -3832,8 +3831,8 @@ void ArrayResize(DynamicArray *Array)
         return;
     }
 
-    if (DebugLog)
-        Log("\CdDynamicArray: Resizing array \Cj%S\Cd @ %p to \Cj%d\Cd elements", Array->Name, Array->Data, Array->Size);
+    // if (DebugLog)
+    //     Log("\CdDynamicArray: Resizing array \Cj%S\Cd @ %p to \Cj%d\Cd elements", Array->Name, Array->Data, Array->Size);
 
     Array->Data = tmp;
 
@@ -3842,8 +3841,8 @@ void ArrayResize(DynamicArray *Array)
 
 void ArrayDestroy(DynamicArray *Array)
 {
-    if (DebugLog)
-        Log("\CdDynamicArray: Destroying array \Cj%S\Cd @ %p", Array->Name, Array->Data);
+    // if (DebugLog)
+    //     Log("\CdDynamicArray: Destroying array \Cj%S\Cd @ %p", Array->Name, Array->Data);
 
     free(Array->Data);
 

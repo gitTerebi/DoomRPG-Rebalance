@@ -1413,6 +1413,10 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
     if (!ItemSpawned)
         ActorToSpawn = ItemData[ItemCategory][Weapon].Actor;
 
+
+    if (DebugLog)
+        Log("\CdDebug: \C-Rarity Min \Cd%d\C- Max \Cd%d Weapon %S", RarityMin, RarityMax, ActorToSpawn);
+
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
     Thing_Remove(0);

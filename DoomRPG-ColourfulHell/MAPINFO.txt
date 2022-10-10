@@ -80,7 +80,6 @@ skill hard
     spawnfilter = nightmare
     
     autousehealth
-    defaultskill
 
     acsreturn = 3
     
@@ -143,12 +142,14 @@ skill nightmare
 // Hell skill
 skill hell
 {
-    damagefactor = 1.25
-    monsterhealth = 1.25
+    damagefactor = 1.50
+    monsterhealth = 1.0
     aggressiveness = 1.0
     spawnfilter = nightmare
     
     autousehealth
+
+    defaultskill
 
     acsreturn = 5
     

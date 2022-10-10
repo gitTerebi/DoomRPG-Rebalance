@@ -483,7 +483,7 @@ OptionMenu "DoomRPGStats"
     Slider "Modules Spawn Amount Factor", "drpg_module_spawnfactor", 0.5, 10.0, 0.1
     Slider "Modules Levelup Amount Factor", "drpg_module_levelfactor", 0.5, 10.0, 0.1
     Slider "Modules Stat Cost Amount Factor", "drpg_module_statfactor", 1.0, 10.0, 0.1
-    Slider "Modules Skill Cost Amount Factor", "drpg_module_skillfactor", 0.5, 10.0, 0.1
+    Slider "Modules Skill Cost Amount Factor", "drpg_module_skillfactor", 1.0, 10.0, 0.1
     StaticText ""
 
     Slider "Hard Stat Cap", "drpg_hard_stat_cap", 1, 10000, 1

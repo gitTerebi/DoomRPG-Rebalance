@@ -1553,6 +1553,9 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
             DynamicLootGenerator(Actor, MaxItems - Items);
             return;
         }*/
+
+        if(Iterations == 9999)
+            return;
     }
 
     if (DebugLog)
@@ -2591,8 +2594,8 @@ void AssignTIDs()
     Player.TID = PLAYER_TID + PlayerNumber();
     Thing_ChangeTID(0, Player.TID);
 
-    if (DebugLog)
-        Log("\CdDEBUG: Player TID: %d", Player.TID);
+    // if (DebugLog)
+    //     Log("\CdDEBUG: Player TID: %d", Player.TID);
 }
 
 NamedScript void ReviveHandler()
