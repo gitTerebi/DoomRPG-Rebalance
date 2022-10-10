@@ -859,13 +859,13 @@ Start:
     {
         if (XP.DisplayValue >= 10000l || Bonus.DisplayValue >= 1000l)
         {
-            if (XP.DisplayValue >= 1000l)
-                HudMessage("%ld k.", XP.DisplayValue / 1000l);
-            else
-                HudMessage("< 1 k.");
+            //if (XP.DisplayValue >= 1000l)
+                HudMessage("+%ldk xp", XP.DisplayValue / 1000l);
+            //else
+            //    HudMessage("+< 1 k. xp");
         }
         else
-            HudMessage("%ld", XP.DisplayValue);
+            HudMessage("+%ld xp", XP.DisplayValue);
 
         EndHudMessage(HUDMSG_PLAIN, 0, (XP.DisplayValue >= 0 ? "White" : "Gray"), X + 0.1, Y + 22.0, 0.05);
     }
@@ -873,13 +873,13 @@ Start:
     {
         if (XP.DisplayValue >= 10000l || Bonus.DisplayValue >= 1000l)
         {
-            if (Rank.DisplayValue >= 1000l)
-                HudMessage("%ld k.", Rank.DisplayValue / 1000l);
-            else
-                HudMessage("< 1 k.");
+            //if (Rank.DisplayValue >= 1000l)
+                HudMessage("+%ldk rank", Rank.DisplayValue / 1000l);
+            //else
+            //    HudMessage("+ <1 k rank");
         }
         else
-            HudMessage("%ld", Rank.DisplayValue);
+            HudMessage("+%ld rank", Rank.DisplayValue);
 
         EndHudMessage(HUDMSG_PLAIN, 0, (Rank.DisplayValue >= 0 ? "Yellow" : "DarkBrown"), X + 0.1, Y + 34.0, 0.05);
     }
@@ -887,13 +887,13 @@ Start:
     {
         if (XP.DisplayValue >= 10000l || Bonus.DisplayValue >= 1000l)
         {
-            if (Bonus.DisplayValue >= 1000l)
-                HudMessage("%ld k.", Bonus.DisplayValue / 1000l);
-            else
-                HudMessage("< 1 k.");
+            //if (Bonus.DisplayValue >= 1000l)
+                HudMessage("+%ldk xp", Bonus.DisplayValue / 1000l);
+            //else
+            //    HudMessage("< 1 k.");
         }
         else
-            HudMessage("%ld", Bonus.DisplayValue);
+            HudMessage("%ld xp", Bonus.DisplayValue);
 
         EndHudMessage(HUDMSG_PLAIN, 0, (Bonus.DisplayValue >= 0 ? "Green" : "DarkGreen"), X + 0.1, Y + 46.0, 0.05);
     }

@@ -769,8 +769,8 @@ NamedScript void BuildItemData()
         ITEMDATA_CATEGORY(3, "\CdArmor", CF_NONE);
         // Common Armors
         ITEMDATA_DEF("RLArmorBonusPickup",                              "Armor Bonus",                                         100, 0, -1, "BON2A0",  7, 13);
-        ITEMDATA_DEF("RLGreenArmorPickup",                              "Security Armor",                                      250, 1, 0, "ARM1A0", 15, 17);
-        ITEMDATA_DEF("RLBlueArmorPickup",                               "Combat Armor",                                        500, 1, 0, "ARM2A0", 15, 17);
+        ITEMDATA_DEF("RLGreenArmorPickup",                              "Security Armor 15P 0M 15B 0F 0P",                     250, 1, 0, "ARM1A0", 15, 17);
+        ITEMDATA_DEF("RLBlueArmorPickup",                               "Combat Armor 30P 0M 0B 0F 30P",                       500, 1, 0, "ARM2A0", 15, 17);
         ITEMDATA_DEF("RLRedArmorPickup",                                "Commando Armor",                                     1000, 1, 0, "ARM3A0", 16, 18);
 
         // Assembled Armors
