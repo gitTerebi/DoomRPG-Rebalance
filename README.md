@@ -4,10 +4,16 @@ My own personal take on things borrowing from many other RPGs and games to make 
 
 ## Simplified
 * On level up you get 5 modules. Each stat increase costs 1 module. Each skill unlock is 1 module per level, ie 2 modules to get skill level 2 etc. This makes it easier to plan out a build as you know exactly how much it costs to grow a stat from 1 -> 10. Just 2 levels at 5 modules a level.
-
-
+* Generic Loot eg "materials" no longer drop. Instead money is dropped.
 
 ## New Mechanics
+* When you die, you respawn automatically. You can choose how much XP, RANK and CREDITS you lose each time you die. CREDITS are dropped at where you died.
+* All items at shop can be bought.
+* All static weapon drop locations have a chance to drop a DRLA weapon now. The chance depends on the loot drop setting in DoomRPG. Its set to 'adaptive' by default.
+* You will always get up to 2 mod pack spawns on each level.
+* You can carry 32 mod packs and 12 weapons.
+* You can edit directly how much DMG you do in game via slider. 
+* You can edit the max health of monsters as well. Now you can reduce the chances of bullet sponge gameplay. Think highly deadly, for both you and monsters.
 
 ## Installing (build)
 
