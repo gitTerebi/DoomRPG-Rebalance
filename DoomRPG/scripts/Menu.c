@@ -2306,7 +2306,7 @@ void MenuInput()
                 if (Player.MenuIndex > STAT_MAX - 1) Player.MenuIndex = 0;
             }
         }
-        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+        if (CheckInput(BT_USE, KEY_REPEAT, false, PlayerNumber()))
             if (Player.StatPage == STATPAGE_STATS)
                 IncreaseStat(Player.MenuIndex);
             else if (Player.StatPage == STATPAGE_TEAM && Player.MenuIndex != PlayerNumber())
