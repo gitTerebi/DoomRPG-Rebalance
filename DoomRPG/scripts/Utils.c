@@ -649,40 +649,42 @@ void DropMoney(int Killer, int TID, int Amount)
     int Total = Amount;
     int Drops;
 
-    Drops = Total / 1000;
+    Drops = Total / 10000;
     while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits1000", 256);
+    Total %= 10000;
+
+    Drops = Total / 5000;
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits500", 256);
+    Total %= 5000;
+
+    Drops = Total / 2500;
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits250", 256);
+    Total %= 2500;
+
+    Drops = Total / 1000;
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits100", 256);
     Total %= 1000;
 
     Drops = Total / 500;
-    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits500", 256);
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits50", 256);
     Total %= 500;
 
-    Drops = Total / 250;
-    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits250", 256);
-    Total %= 250;
+    Drops = Total / 200;
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits20", 256);
+    Total %= 200;
 
     Drops = Total / 100;
-    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits100", 256);
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits10", 256);
     Total %= 100;
 
     Drops = Total / 50;
-    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits50", 256);
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits5", 256);
     Total %= 50;
-
-    Drops = Total / 20;
-    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits20", 256);
-    Total %= 20;
-
+    
     Drops = Total / 10;
-    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits10", 256);
+    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits1", 256);
     Total %= 10;
 
-    Drops = Total / 5;
-    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits5", 256);
-    Total %= 5;
-
-    Drops = Total;
-    while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits1", 256);
 }
 
 int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed YAdd, fixed ZAdd, fixed XVelAdd, fixed YVelAdd, fixed ZVelAdd)

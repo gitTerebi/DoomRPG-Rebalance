@@ -566,7 +566,7 @@ OptionMenu "DoomRPGHealthBars"
 
 OptionMenu "DoomRPGMultiplayer"
 {
-    Title "Multiplayer"
+    Title "Respawn"
 
     Option "XP/Rank Loss on Death", "drpg_multi_takexp", "OnOff"
     Slider "XP/Rank Loss Percentage", "drpg_multi_takexp_percent", 1, 100, 1
@@ -576,6 +576,7 @@ OptionMenu "DoomRPGMultiplayer"
     Slider "Drop Credits Percentage", "drpg_multi_dropcredits_percent", 1, 100, 1
     StaticText ""
 
+    StaticText "Multiplayer ONLY", "Orange"
     Option "Drop Inventory on Death", "drpg_multi_dropinv", "OnOff"
     StaticText ""
 
@@ -960,7 +961,7 @@ OptionMenu "DoomRPG"
     SubMenu "Natural Stat Leveling",        "DoomRPGStatsNatural"
     SubMenu "Popoffs",                      "DoomRPGPopoffs"
     SubMenu "Health Bars",                  "DoomRPGHealthBars"
-    SubMenu "Multiplayer",                  "DoomRPGMultiplayer"
+    SubMenu "Respawn",                  "DoomRPGMultiplayer"
     SubMenu "Shop",                         "DoomRPGShop"
     SubMenu "Turret",                       "DoomRPGTurret"
     SubMenu "Menus",                        "DoomRPGMenus"
