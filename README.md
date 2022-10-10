@@ -1,14 +1,13 @@
 ## Fork overview
 
-DoomRPG and DoomRLA contain a lot of content which can be enough for the passage of several WADs in a row. However, the original versions of these modifications give players most of the content in a short period of time, which is why the player does not have time to feel the depth of the possibilities of DoomRPG and DoomRLA.
+My own personal take on things borrowing from many other RPGs and games to make mechanics simpler to understand so you can pick up and play DoomRPG + DoomRLA without looking at a manual.
 
-This fork intends to solve this problem. Now the content is served to the player as you progress through the levels (maps), increase the level of the character and the level of luck (a little hint: I recommend paying special attention to this parameter).
+## Simplified
+* On level up you get 5 modules. Each stat increase costs 1 module. Each skill unlock is 1 module per level, ie 2 modules to get skill level 2 etc. This makes it easier to plan out a build as you know exactly how much it costs to grow a stat from 1 -> 10. Just 2 levels at 5 modules a level.
 
-In addition, some of the content (RPG's Skills, Stims, AUG, Auras, etc.) are now the things that need to be applied to survive.
 
-Among other things, the Adaptive difficulty mode (DoomRLA's stuff) was revised. Changed the intensity of the appearance of more difficulty monsters on the levels. In addition, you will be able to adjust it. Just go to DoomRPG Options -> Misc and see for yourself.
 
-Enjoy! 
+## New Mechanics
 
 ## Installing (build)
 
