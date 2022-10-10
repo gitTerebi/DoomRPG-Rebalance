@@ -550,7 +550,7 @@ actor RLBerserkSpawnerRPG : RandomSpawner 2023
     //DropItem "RLBlueprintComputer"  255 1
 }
 
-actor DRPGLootMods : RandomSpawner
+actor DRPGRlaMods : RandomSpawner
 {
     DropItem "RLBulkModItem"       255 10
     DropItem "RLPowerModItem"      255 10
