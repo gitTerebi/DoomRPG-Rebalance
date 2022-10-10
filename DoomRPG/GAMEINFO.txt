@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 startuptitle = "Doom RPG SE Rebalance (2022-10-11)"
+=======
+startuptitle = "Doom RPG SE Rebalance (2022-10-10)"
+>>>>>>> DoomRPG-Rebalance/master
 startupcolors = "0092FF", "000000"
 startuptype = "Hexen"

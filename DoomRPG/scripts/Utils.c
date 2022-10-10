@@ -2547,79 +2547,77 @@ void NomadModPacksSave()
 
         if (PlayerClass(i) != 7) continue;
 
-        SetActivator(Players(i).TID);
-
-        for (int i = 0; i < ItemMax[Category]; i++)
-            if (CheckInventory(ItemData[Category][i].Actor))
+        for (int j = 0; j < ItemMax[Category]; j++)
+            if (CheckActorInventory(Players(i).TID, ItemData[Category][j].Actor))
             {
-                ItemPtr = &ItemData[Category][i];
+                ItemPtr = &ItemData[Category][j];
 
-                if ((ItemPtr->CompatMods & RL_MOD_LIMIT) && CheckInventory(StrParam("%SModLimit", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_MOD_LIMIT) && CheckActorInventory(Players(i).TID, StrParam("%SModLimit", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%SModLimit", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%SModLimit", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%SModLimit", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%SModLimit", ItemPtr->Actor));
                     Number++;
                 }
-                if ((ItemPtr->CompatMods & RL_POWER_MOD) && CheckInventory(StrParam("%SPowerMod", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_POWER_MOD) && CheckActorInventory(Players(i).TID, StrParam("%SPowerMod", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%SPowerMod", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%SPowerMod", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%SPowerMod", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%SPowerMod", ItemPtr->Actor));
                     Number++;
                 }
-                if ((ItemPtr->CompatMods & RL_BULK_MOD) && CheckInventory(StrParam("%SBulkMod", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_BULK_MOD) && CheckActorInventory(Players(i).TID, StrParam("%SBulkMod", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%SBulkMod", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%SBulkMod", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%SBulkMod", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%SBulkMod", ItemPtr->Actor));
                     Number++;
                 }
-                if ((ItemPtr->CompatMods & RL_AGILITY_MOD) && CheckInventory(StrParam("%SAgilityMod", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_AGILITY_MOD) && CheckActorInventory(Players(i).TID, StrParam("%SAgilityMod", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%SAgilityMod", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%SAgilityMod", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%SAgilityMod", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%SAgilityMod", ItemPtr->Actor));
                     Number++;
                 }
-                if ((ItemPtr->CompatMods & RL_TECH_MOD) && CheckInventory(StrParam("%STechnicalMod", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_TECH_MOD) && CheckActorInventory(Players(i).TID, StrParam("%STechnicalMod", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%STechnicalMod", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%STechnicalMod", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%STechnicalMod", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%STechnicalMod", ItemPtr->Actor));
                     Number++;
                 }
-                if ((ItemPtr->CompatMods & RL_SNIPER_MOD) && CheckInventory(StrParam("%SSniperMod", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_SNIPER_MOD) && CheckActorInventory(Players(i).TID, StrParam("%SSniperMod", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%SSniperMod", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%SSniperMod", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%SSniperMod", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%SSniperMod", ItemPtr->Actor));
                     Number++;
                 }
-                if ((ItemPtr->CompatMods & RL_FIREST_MOD) && CheckInventory(StrParam("%SFirestormMod", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_FIREST_MOD) && CheckActorInventory(Players(i).TID, StrParam("%SFirestormMod", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%SFirestormMod", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%SFirestormMod", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%SFirestormMod", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%SFirestormMod", ItemPtr->Actor));
                     Number++;
                 }
-                if ((ItemPtr->CompatMods & RL_NANO_MOD) && CheckInventory(StrParam("%SNanoMod", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_NANO_MOD) && CheckActorInventory(Players(i).TID, StrParam("%SNanoMod", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%SNanoMod", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%SNanoMod", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%SNanoMod", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%SNanoMod", ItemPtr->Actor));
                     Number++;
                 }
-                if ((ItemPtr->CompatMods & RL_DEMON_MOD) && CheckInventory(StrParam("%SDemonArtifacts", ItemPtr->Actor)))
+                if ((ItemPtr->CompatMods & RL_DEMON_MOD) && CheckActorInventory(Players(i).TID, StrParam("%SDemonArtifacts", ItemPtr->Actor)))
                 {
-                    Player.NomadBasicItems[Number] = ItemPtr->Actor;
-                    Player.NomadModPacks[Number] = StrParam("%SDemonArtifacts", ItemPtr->Actor);
-                    Player.NomadAmountModPacks[Number] = CheckInventory(StrParam("%SDemonArtifacts", ItemPtr->Actor));
+                    Players(i).NomadBasicItems[Number] = ItemPtr->Actor;
+                    Players(i).NomadModPacks[Number] = StrParam("%SDemonArtifacts", ItemPtr->Actor);
+                    Players(i).NomadAmountModPacks[Number] = CheckActorInventory(Players(i).TID, StrParam("%SDemonArtifacts", ItemPtr->Actor));
                     Number++;
                 }
             }
 
-        SetActivator(0, AAPTR_NULL);
+        Players(i).NomadModPacksSave = true;
     }
 }
 
@@ -2633,27 +2631,27 @@ void NomadModPacksLoad()
 
         if (PlayerClass(i) != 7) continue;
 
-        SetActivator(Players(i).TID);
+        if (Players(i).NomadModPacksSave == false) continue;
 
-        for (int i = 0; i < ItemMax[Category]; i++)
-            if (CheckInventory(ItemData[Category][i].Actor))
+        for (int j = 0; j < ItemMax[Category]; j++)
+            if (CheckActorInventory(Players(i).TID, ItemData[Category][j].Actor))
             {
-                for (int j = 0; j < 30; j++)
+                for (int k = 0; k < 30; k++)
                 {
-                    if (ItemData[Category][i].Actor == Player.NomadBasicItems[j])
-                        SetInventory(Player.NomadModPacks[j], Player.NomadAmountModPacks[j]);
+                    if (ItemData[Category][j].Actor == Players(i).NomadBasicItems[k])
+                        SetActorInventory(Players(i).TID, Players(i).NomadModPacks[k], Players(i).NomadAmountModPacks[k]);
                 }
             }
 
         // Clear Data
-        for (int i = 0; i < 30; i++)
+        for (int n = 0; n < 30; n++)
         {
-            Player.NomadBasicItems[i] = 0;
-            Player.NomadModPacks[i] = 0;
-            Player.NomadAmountModPacks[i] = 0;
+            Players(i).NomadBasicItems[n] = 0;
+            Players(i).NomadModPacks[n] = 0;
+            Players(i).NomadAmountModPacks[n] = 0;
         }
 
-        SetActivator(0, AAPTR_NULL);
+        Players(i).NomadModPacksSave = false;
     }
 }
 
@@ -2664,9 +2662,7 @@ void NanomaniacTransport()
         if (!PlayerInGame(i)) continue;
         if (PlayerClass(i) != 8) continue;
 
-        SetActivator(Players(i).TID);
-        SetInventory("RLNanoManiacTransportToken", 1);
-        SetActivator(0, AAPTR_NULL);
+        SetActorInventory(Players(i).TID, "RLNanoManiacTransportToken", 1);
     }
 }
 
