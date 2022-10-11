@@ -484,13 +484,10 @@ NamedScript void PlayerSurvive()
     while (true)
     {
         Player.CanSurvive = (Random(0, 100) <= Player.SurvivalBonus);
-        // if (Player.CanSurvive || CheckInventory("DRPGLife"))
-        //     SetPlayerProperty(0, 1, PROP_BUDDHA);
-        // else
-        //     SetPlayerProperty(0, 0, PROP_BUDDHA);
-        
-        // Must be buddha to have time to respawn
-        SetPlayerProperty(0, 1, PROP_BUDDHA);
+        if (Player.CanSurvive || CheckInventory("DRPGLife") || GetCVar("drpg_allow_respawn"))
+            SetPlayerProperty(0, 1, PROP_BUDDHA);
+        else
+            SetPlayerProperty(0, 0, PROP_BUDDHA);
         Delay(35);
     }
 }
@@ -583,50 +580,59 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
             return 0;
         }
 
-        // Respawn
+        if(GetCVar("drpg_allow_respawn"))
+        {          
+            long int DropAmount = 0;
+            long int XPPenalty = 0;
+            long int RankPenalty = 0;
 
-        // Drop Credits
-        long int DropAmount = 0;
-        if (GetCVar("drpg_multi_dropcredits") && CheckInventory("DRPGCredits") > 0)
-        {
-            DropAmount = (long int)(CheckInventory("DRPGCredits") / 100 * GetCVar("drpg_multi_dropcredits_percent"));
+            // Clear combo
+            Player.XPGained = 0;
+            Player.RankGained = 0;
+            Player.BonusGained = 0;
+            Player.Combo = 0;
 
-            // Cap out at a million so if you have stupid amounts of Credits you don't freeze/nuke the game
-            if (DropAmount > 1000000) DropAmount = 1000000;
-
-            TakeInventory("DRPGCredits", DropAmount);
-            DropMoney(PlayerNumber(), 0, DropAmount);
-        }
-
-        // Now teleport back home
-        if (!CurrentLevel->UACBase)
-        {
-            SetInventory("ArtiTeleport", 1);
-            UseInventory("ArtiTeleport");
-        }       
-
-        // XP/Rank Penalty
-        if (GetCVar("drpg_multi_takexp")){
-            long int XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
-            long int RankPenalty = (long int)(RankTable[Player.RankLevel] * GetCVar("drpg_multi_takexp_percent") / 100);
-
-            if (XPPenalty > Player.XP) XPPenalty = Player.XP;
-            if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
-
-            if (XPPenalty > 0 || RankPenalty > 0)
+            // Drop Credits
+            if (GetCVar("drpg_multi_dropcredits") && CheckInventory("DRPGCredits") > 0)
             {
+                DropAmount = (long int)(CheckInventory("DRPGCredits") / 100 * GetCVar("drpg_multi_dropcredits_percent"));
+
+                // Cap out at a million so if you have stupid amounts of Credits you don't freeze/nuke the game
+                if (DropAmount > 1000000) DropAmount = 1000000;
+
+                TakeInventory("DRPGCredits", DropAmount);
+                DropMoney(PlayerNumber(), 0, DropAmount);
+            }
+
+            // Now teleport back home
+            Player.ActualHealth = Player.HealthMax;
+            ActivatorSound("health/resurrect", 127);
+            if (!CurrentLevel->UACBase)
+            {
+                SetInventory("ArtiTeleport", 1);
+                UseInventory("ArtiTeleport");
+            }       
+
+            // XP/Rank Penalty
+            if (GetCVar("drpg_multi_takexp")){
+                XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
+                RankPenalty = (long int)(RankTable[Player.RankLevel] * GetCVar("drpg_multi_takexp_percent") / 100);
+
+                if (XPPenalty > Player.XP) XPPenalty = Player.XP;
+                if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
+
                 Player.XP -= XPPenalty;
                 Player.Rank -= RankPenalty;
-                Log("\CdRESPAWN: \C- -%ld XP -%ld RANK -%ld CREDITS", XPPenalty, RankPenalty, DropAmount);
-                SetHudSize(640, 480, false);            
-                SetFont("BIGFONT");            
-                HudMessage("\CdRESPAWN! \C- \Ca-%ld XP \Cb-%ld RANK \Ce-%ld CREDITS", XPPenalty, RankPenalty, DropAmount);
-                EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 90.0, 0.5, 4.0);
             }
-        }
 
-        Player.ActualHealth = Player.HealthMax;
-        ActivatorSound("health/resurrect", 127);
+            Log("\CdRESPAWN: \C- -%ld XP -%ld RANK -%ld CREDITS", XPPenalty, RankPenalty, DropAmount);
+            SetHudSize(640, 480, false);            
+            SetFont("BIGFONT");            
+            HudMessage("\CdRESPAWN! \C- \Ca-%ld XP \Cb-%ld RANK \Ce-%ld CREDITS", XPPenalty, RankPenalty, DropAmount);
+            EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 150.0, 0.5, 5.0);
+
+            return 0;
+        }
     }
 
     SetActorProperty(0, APROP_Health, Player.ActualHealth);

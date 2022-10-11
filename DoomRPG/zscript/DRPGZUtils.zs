@@ -426,6 +426,7 @@ class DRPGZUtilities
             "drpg_healthbars_y",
             "drpg_multi_takexp",
             "drpg_multi_takexp_percent",
+            "drpg_allow_respawn",
             "drpg_multi_dropcredits",
             "drpg_multi_dropcredits_percent",
             "drpg_multi_dropinv",

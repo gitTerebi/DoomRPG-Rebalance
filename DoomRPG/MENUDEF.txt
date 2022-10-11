@@ -567,6 +567,8 @@ OptionMenu "DoomRPGHealthBars"
 OptionMenu "DoomRPGMultiplayer"
 {
     Title "Respawn"
+    Option "Allow Respawn on Death", "drpg_allow_respawn", "OnOff"
+    StaticText ""
 
     Option "XP/Rank Loss on Death", "drpg_multi_takexp", "OnOff"
     Slider "XP/Rank Loss Percentage", "drpg_multi_takexp_percent", 1, 100, 1

@@ -158,6 +158,7 @@ user    int     drpg_healthbars_x = 400;
 user    int     drpg_healthbars_y = 100;
 
 // Multiplayer
+server  bool    drpg_allow_respawn = false;
 server  bool    drpg_multi_takexp = true;
 server  int     drpg_multi_takexp_percent = 10;
 server  bool    drpg_multi_dropcredits = false;
