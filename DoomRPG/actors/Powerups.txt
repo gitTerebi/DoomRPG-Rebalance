@@ -92,7 +92,7 @@ Actor DRPGInvulnerabilitySurvive : PowerupGiver
     +INVENTORY.PERSISTENTPOWER
 
     Powerup.Type Invulnerable
-    Powerup.Duration -3
+    Powerup.Duration -5
 }
 
 // Invisibility Sphere

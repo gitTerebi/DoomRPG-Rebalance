@@ -606,6 +606,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
 
             // Now teleport back home
             Player.ActualHealth = Player.HealthMax;
+            SetInventory("DRPGInvulnerabilitySurvive", 1);
             ActivatorSound("health/resurrect", 127);
             if (!CurrentLevel->UACBase)
             {
