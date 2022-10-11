@@ -559,7 +559,7 @@ struct PlayerData_S
     int Energy;         // Increases max EP and EP regen rate
     int PrevEnergy;     // Player's Energy from last tic
     int Regeneration;   // Increases both HP/EP regen rate
-    int Agility;        // Increases movement speed, jump height and survival bonus (and optionally weapon speed)
+    int Agility;        // Increases movement speed, jump height and 2nd wind chance (and optionally weapon speed)
     int Capacity;       // Increases max ammo capacities
     int Luck;           // Increases drop chances
     int ActualHealth;   // The player's real, actual Health

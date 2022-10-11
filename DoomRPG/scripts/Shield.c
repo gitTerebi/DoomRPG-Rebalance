@@ -346,7 +346,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory32",
         "\CiRUS-ROU1",   "SHA2F0",   48000,
-        "\Cd+1000% Damage Taken\n\Ci5 In 6 Survival Bonus\C-",
+        "\Cd+1000% Damage Taken\n\Ci5 In 6 2nd Wind Chance\C-",
         SHIELD_PASS_ROULETTE, // To bypass the 75% survival cap
         RussianRouletteMod, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },
@@ -360,7 +360,7 @@ ShieldAccessory const ShieldAccessories[MAX_ACCESSORIES] =
     {
         "DRPGShieldAccessory34",
         "\CdTEEM-AU5",   "SHA2H0",   50000,
-        "When your \Cisurvival bonus\C- goes off, your \CvShield\C- reactivates and is \Cdfully recharged",
+        "When your \2nd wind\C- goes off, your \CvShield\C- reactivates and is \Cdfully recharged",
         SHIELD_PASS_SURVIVECHARGE,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     },

@@ -803,12 +803,12 @@ NamedScript void GiveTip()
         { "\CaVitality",                        "Your Vitality stat determines your max health and health regeneration rate.", },
         { "\CnEnergy",                          "Your Energy stat determines your max EP and EP regeneration rate.", },
         { "\CtRegeneration",                    "Your Regeneration stat determines your regeneration rate and the time that Regeneration Spheres last.", },
-        { "\CiAgility",                         "Your Agility stat governs your movement, jumping and fire speeds as well as your survival bonus.", },
+        { "\CiAgility",                         "Your Agility stat governs your movement, jumping and fire speeds as well as your 2nd bonus chance.", },
         { "\ChCapacity",                        "Your Capacity stat determines your ammo carrying capacity, how many compounds of each type you can carry for Stims as well as how many inventory items you can hold", },
         { "\CfLuck",                            "Your Luck stat determines which items can drop as well as the chance which they will drop. Luck also affects several other hidden factors as well.", },
 
         // Stats Extended
-        { "\CiSurvival Bonus",                  "Survival Bonus is a special attribute which works as a last stand mechanic. When you take a hit that would kill you and your survival bonus is triggered, you will not be killed by the attack.", },
+        { "\CiSurvival Bonus",                  "Survival Bonus is a special attribute which works as a last stand mechanic. When you take a hit that would kill you and your 2 wind chance is triggered, you will not be killed by the attack.", },
         { "\CdPerks",                           "Perks are special enhancements that you receive when you upgrade a stat to 100 points or more.", },
         { "\CgStat Cap",                        "You can only increase a stat past 100 up to the maximum of your current level + 100.", },
 
