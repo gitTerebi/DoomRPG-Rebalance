@@ -150,7 +150,6 @@ skill hell
     autousehealth
 
     defaultskill
-	AllowRespawn
     acsreturn = 5
     
     name = "Hell"

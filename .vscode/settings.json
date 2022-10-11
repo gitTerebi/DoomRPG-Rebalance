@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "itemdata.h": "c",
-        "stats.h": "c"
+        "stats.h": "c",
+        "*.zs": "c"
     }
 }

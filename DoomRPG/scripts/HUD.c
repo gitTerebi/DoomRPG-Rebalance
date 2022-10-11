@@ -857,13 +857,8 @@ Start:
     }
     if (XP.DisplayValue != 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
-        if (XP.DisplayValue >= 10000l)
-        {
-            //if (XP.DisplayValue >= 1000l)
+        if (XP.DisplayValue >= 100000l)
             HudMessage("+%ldk xp", XP.DisplayValue / 1000l);
-            //else
-            //    HudMessage("+< 1 k. xp");
-        }
         else
             HudMessage("+%ld xp", XP.DisplayValue);
 
@@ -871,13 +866,8 @@ Start:
     }
     if (Rank.DisplayValue != 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
-        if (Rank.DisplayValue >= 10000l)
-        {
-            //if (Rank.DisplayValue >= 1000l)
+        if (Rank.DisplayValue >= 100000l)
             HudMessage("+%ldk rank", Rank.DisplayValue / 1000l);
-            //else
-            //    HudMessage("+ <1 k rank");
-        }
         else
             HudMessage("+%ld rank", Rank.DisplayValue);
 
@@ -885,13 +875,8 @@ Start:
     }
     if (Bonus.DisplayValue != 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
-        if (Bonus.DisplayValue >= 1000l)
-        {
-            //if (Bonus.DisplayValue >= 1000l)
+        if (Bonus.DisplayValue >= 100000l)
             HudMessage("+%ldk xp", Bonus.DisplayValue / 1000l);
-            //else
-            //    HudMessage("< 1 k.");
-        }
         else
             HudMessage("%ld xp", Bonus.DisplayValue);
 

@@ -1074,6 +1074,11 @@ Object DRPGLootDemonArtifact
     frame LT13 { light LOOTDEMONS }
 }
 
+Object DRPGTombstone
+{
+    frame LT16 { light LOOTDEMONS }
+}
+
 pointlight FIREPARTICLEGLOW
 {
     color 1.0 0.33 0.0

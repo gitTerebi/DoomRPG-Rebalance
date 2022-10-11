@@ -581,38 +581,28 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
         }
 
         if(GetCVar("drpg_allow_respawn"))
-        {          
-            long int DropAmount = 0;
-            long int XPPenalty = 0;
-            long int RankPenalty = 0;
-
+        {   
             // Clear combo
             Player.XPGained = 0;
             Player.RankGained = 0;
             Player.BonusGained = 0;
             Player.Combo = 0;
 
+            // Player tombstone save
+            Player.TombStoneX = GetActorX(0);
+            Player.TombStoneY = GetActorY(0);
+            Player.TombStoneZ = GetActorZ(0);
+
+            long int CreditPenalty = 0;
+            long int XPPenalty = 0;
+            long int RankPenalty = 0;
+
             // Drop Credits
             if (GetCVar("drpg_multi_dropcredits") && CheckInventory("DRPGCredits") > 0)
             {
-                DropAmount = (long int)(CheckInventory("DRPGCredits") / 100 * GetCVar("drpg_multi_dropcredits_percent"));
-
-                // Cap out at a million so if you have stupid amounts of Credits you don't freeze/nuke the game
-                if (DropAmount > 1000000) DropAmount = 1000000;
-
-                TakeInventory("DRPGCredits", DropAmount);
-                DropMoney(PlayerNumber(), 0, DropAmount);
+                CreditPenalty = (long int)(CheckInventory("DRPGCredits") / 100 * GetCVar("drpg_multi_dropcredits_percent"));
+                TakeInventory("DRPGCredits", CreditPenalty);
             }
-
-            // Now teleport back home
-            Player.ActualHealth = Player.HealthMax;
-            SetInventory("DRPGInvulnerabilitySurvive", 1);
-            ActivatorSound("health/resurrect", 127);
-            if (!CurrentLevel->UACBase)
-            {
-                SetInventory("ArtiTeleport", 1);
-                UseInventory("ArtiTeleport");
-            }       
 
             // XP/Rank Penalty
             if (GetCVar("drpg_multi_takexp")){
@@ -625,12 +615,24 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
                 Player.XP -= XPPenalty;
                 Player.Rank -= RankPenalty;
             }
+            
+            if(XPPenalty > 0 || RankPenalty > 0 || CreditPenalty > 0)
+                Log("\CdRESPAWN: \C- -%ld XP -%ld RANK -%ld CREDITS", XPPenalty, RankPenalty, CreditPenalty);
 
-            Log("\CdRESPAWN: \C- -%ld XP -%ld RANK -%ld CREDITS", XPPenalty, RankPenalty, DropAmount);
-            SetHudSize(640, 480, false);            
-            SetFont("BIGFONT");            
-            HudMessage("\CdRESPAWN! \C- \Ca-%ld XP \Cb-%ld RANK \Ce-%ld CREDITS", XPPenalty, RankPenalty, DropAmount);
-            EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 150.0, 0.5, 5.0);
+            Player.CreditPenalty = CreditPenalty;
+            Player.XPPenalty = XPPenalty;
+            Player.RankPenalty = RankPenalty;
+
+            // Compatibility Handling - DoomRL Arsenal Extended
+            if (CompatModeEx == COMPAT_DRLAX)
+            {
+                NomadModPacksSave();
+                NanomaniacTransport();
+            }
+
+            // Delay and unfreeze Player
+            Delay(35 * 3);                        
+            ChangeLevel(FindLevelInfo()->LumpName, 0, CHANGELEVEL_NOINTERMISSION, -1);    
 
             return 0;
         }
@@ -1361,6 +1363,26 @@ NamedScript void ItemHandler()
     }
 }
 
+NamedScript DECORATE void PickUpTombstone()
+{
+    Log("\Cd  ===== Your tombstone DATA =====");
+    Log("Got tombstone worth %ld XP %ld RANK %ld CREDITS", Player.XPPenalty, Player.RankPenalty, Player.CreditPenalty);
+    
+    ActivatorSound("health/resurrect", 127);        
+    Player.XP += Player.XPPenalty;
+    Player.Rank += Player.RankPenalty;
+    GiveInventory("DRPGCredits", Player.CreditPenalty);
+
+    SetHudSize(640, 480, false);            
+    SetFont("BIGFONT");            
+    HudMessage("\CdTombstone retrieved\C- \Ca%ld XP \Cb%ld RANK \Ce%ld CREDITS",  Player.XPPenalty, Player.RankPenalty, Player.CreditPenalty);
+    EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 120.0, 0.5, 6.0);
+
+    Player.XPPenalty = 0;
+    Player.RankPenalty = 0;
+    Player.CreditPenalty = 0;
+}
+
 // Initializes an item and adds it to the Items array
 NamedScript DECORATE void ItemInit()
 {
@@ -1378,8 +1400,8 @@ NamedScript DECORATE void ItemInit()
     for (int i = 0; i < MAX_ITEMS; i++)
         if (ItemTIDs[i] == -1)
         {
-            if (DebugLog)
-                Log("\CdDEBUG: \C-Item \Cd%S\C- added (Index \Cd%d\C-)", GetActorClass(0), i);
+            //if (DebugLog)
+            //    Log("\CdDEBUG: \C-Item \Cd%S\C- added (Index \Cd%d\C-)", GetActorClass(0), i);
 
             // Doesn't have a TID, so assign it one
             if (ActivatorTID() == 0)

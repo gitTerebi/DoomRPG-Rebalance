@@ -212,3 +212,20 @@ Actor DRPGLootDemonArtifact : DRPGLoot
         Stop
     }
 }
+
+Actor DRPGTombstone : CustomInventory
+{
+    Inventory.PickupMessage "You picked up your tombstone."
+
+    Scale 1.0
+
+    States
+    {
+    Spawn:
+        GY_T D -1
+        Stop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteAlways("PickUpTombstone", 0)
+        Stop
+    }
+}

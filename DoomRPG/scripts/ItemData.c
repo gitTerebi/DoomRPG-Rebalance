@@ -1378,8 +1378,8 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
     // if (RarityMax > 1 + RoundInt(10.0 * MapLevelModifier))
     //     RarityMax = 1 + RoundInt(10.0 * MapLevelModifier);
 
-    if (DebugLog)
-        Log("\CdDebug: \C-P1 %d LVL %d MOD %d", RoundInt(7.5 * (fixed)AveragePlayerLuck() / 100.0), RoundInt(7.5 * MapLevelModifier), Modifier);
+    // if (DebugLog)
+    //     Log("\CdDebug: \C-P1 %d LVL %d MOD %d", RoundInt(7.5 * (fixed)AveragePlayerLuck() / 100.0), RoundInt(7.5 * MapLevelModifier), Modifier);
 
     // Calculate Rarities
     RarityMax += Random(Modifier / 2, Modifier);

@@ -280,7 +280,7 @@ OptionMenu "DoomRPGXPSystem"
 {
     Title "XP System"
 
-    Slider "XP Multiplier", "drpg_scalexp", 0.25, 20.0, 0.25
+    Slider "XP Multiplier", "drpg_scalexp", 0.1, 10.0, 0.1
     Slider "Combo XP Multiplier", "drpg_scalecomboxp", 0.25, 8.0, 0.25
     Slider "XP Curve", "drpg_xp_curve", 0, 500, 5
 //    Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
@@ -567,7 +567,8 @@ OptionMenu "DoomRPGHealthBars"
 OptionMenu "DoomRPGMultiplayer"
 {
     Title "Respawn"
-    Option "Allow Respawn on Death", "drpg_allow_respawn", "OnOff"
+    Option "Drop a Tombstone on Death", "drpg_allow_respawn", "OnOff"
+    StaticText "Pickup the tombstone to retrieve xp, rank and credits."
     StaticText ""
 
     Option "XP/Rank Loss on Death", "drpg_multi_takexp", "OnOff"

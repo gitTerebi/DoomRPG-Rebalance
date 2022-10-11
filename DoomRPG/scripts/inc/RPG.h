@@ -60,6 +60,7 @@ NamedScript void AutosaveHandler();
 NamedScript Type_OPEN void ShopSpecialHandler();
 NamedScript void ItemHandler();
 NamedScript DECORATE void ItemInit();
+NamedScript DECORATE void PickUpTombstone();
 NamedScript OptionalArgs(1) void DynamicLootGenerator(str, int);
 NamedScript Type_DEATH void Dead();
 NamedScript Type_RESPAWN void Respawn();

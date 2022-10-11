@@ -3817,8 +3817,8 @@ void ArrayResize(DynamicArray *Array)
     int OldSize = Array->Size;
     Array->Size *= 2;
 
-    if (DebugLog)
-        Log("\CdAttempting to resize DynamicArray: \Cj%S\Cd @ %p", Array->Name, Array->Data);
+    //if (DebugLog)
+    //    Log("\CdAttempting to resize DynamicArray: \Cj%S\Cd @ %p", Array->Name, Array->Data);
 
     void *tmp = realloc(Array->Data, Array->ItemSize * Array->Size);
 

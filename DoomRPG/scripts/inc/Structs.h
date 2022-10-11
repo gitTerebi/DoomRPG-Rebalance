@@ -668,6 +668,16 @@ struct PlayerData_S
     int XPGained;
     int RankGained;
 
+    // Tombstone
+    fixed TombStoneX;
+    fixed TombStoneY;
+    fixed TombStoneZ;
+
+    // Penalty
+    long int CreditPenalty;
+    long int XPPenalty;
+    long int RankPenalty;
+
     // HP/EP Regen Timers
     int HPRate;
     int HPTime;

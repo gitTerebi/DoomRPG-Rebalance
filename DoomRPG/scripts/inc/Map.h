@@ -108,6 +108,7 @@ NamedScript MapSpecial void AddUnknownMap(str, str, int, int);
 
 int LevelSort(void const *, void const *);
 void AddAdditionalMonsters();
+NamedScript void DropTombStones();
 bool SpawnEventActor(str, int);
 bool CheckMapEvent(int, LevelInfo *);
 void MapEventReward();

@@ -2907,7 +2907,7 @@ NamedScript Console bool Transport(SkillLevelInfo *SkillLevel, void *Data)
         {
             Transported = true;
 
-            SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+            SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
 
             // Approved
             if (PlayersApprove > PlayersDeny || Force)
