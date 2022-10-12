@@ -13,6 +13,7 @@
 #include "Stats.h"
 #include "Outpost.h"
 #include "Utils.h"
+#include "Tombstone.h"
 
 // Level Info
 DynamicArray ExtraMapPacks[MAX_MAPPACKS];
@@ -367,7 +368,9 @@ NamedScript Type_OPEN void MapInit()
     }
 
     AddAdditionalMonsters();
+
     DropTombStones();
+    
     // Setup missions which require generation
     SetupMapMissions();
 
@@ -404,30 +407,6 @@ NamedScript Type_OPEN void MapInit()
             CallACS("jjirandomizer");
 
     CurrentLevel->Init = true;
-}
-
-NamedScript void DropTombStones()
-{
-    while (!ItemTIDsInitialized) Delay(1);
-    Delay(35 * 2);
-
-    for (int i = 0; i < MAX_PLAYERS; i++)
-    {
-        if (!PlayerInGame(i)) continue;
-
-        if(Players(i).XPPenalty == 0 && Players(i).RankPenalty == 0 && Players(i).CreditPenalty == 0) 
-        {
-            Log("\CdRESPAWN: \CaTombstone \C-worth nothing not spawned");
-            break;
-        }
-        
-        // Spawn Tombstone
-        SpawnForced("DRPGTombstone", Players(i).TombStoneX, Players(i).TombStoneY, Players(i).TombStoneZ , 0, 0);
-        Log("\CdRESPAWN: \C-Spawned a \CaTombstone worth %ld XP", Players(i).XPPenalty);
-        break;
-    }
-
-    return;
 }
 
 // Map Exiting Script

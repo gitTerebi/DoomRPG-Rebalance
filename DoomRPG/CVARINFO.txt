@@ -158,9 +158,13 @@ user    int     drpg_healthbars_x = 400;
 user    int     drpg_healthbars_y = 100;
 
 // Multiplayer
-user    int     drpg_lost_credits = 0;
-user    int     drpg_lost_xp = 0;
-user    int     drpg_lost_rank = 0;
+user    int     drpg_lost_credits = 10;
+user    int     drpg_lost_xp = 10;
+user    int     drpg_lost_rank = 10;
+user    float   drpg_tombx = 0;
+user    float   drpg_tomby = 0;
+user    float   drpg_tombz = 0;
+
 server  bool    drpg_allow_respawn = false;
 server  bool    drpg_multi_takexp = true;
 server  int     drpg_multi_takexp_percent = 50;

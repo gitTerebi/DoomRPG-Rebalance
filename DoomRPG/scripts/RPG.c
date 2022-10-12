@@ -582,6 +582,8 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
 
         if(GetCVar("drpg_allow_respawn"))
         {   
+            SetActorProperty(0, APROP_Invulnerable, true);
+
             // Clear combo
             Player.XPGained = 0;
             Player.RankGained = 0;
@@ -617,11 +619,17 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
             }
             
             if(XPPenalty > 0 || RankPenalty > 0 || CreditPenalty > 0)
+            {
                 Log("\CdRESPAWN: \C- -%ld XP -%ld RANK -%ld CREDITS", XPPenalty, RankPenalty, CreditPenalty);
+                Player.CreditPenalty = CreditPenalty;
+                Player.XPPenalty = XPPenalty;
+                Player.RankPenalty = RankPenalty;
+            }
 
-            Player.CreditPenalty = CreditPenalty;
-            Player.XPPenalty = XPPenalty;
-            Player.RankPenalty = RankPenalty;
+            Log("\CdRESPAWN: \C-Save tombstone");
+            Player.TombStoneX = GetActorX(0);
+            Player.TombStoneY = GetActorY(0);
+            Player.TombStoneZ = GetActorZ(0);
 
             // Compatibility Handling - DoomRL Arsenal Extended
             if (CompatModeEx == COMPAT_DRLAX)
@@ -633,6 +641,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
             // Delay and unfreeze Player
             Delay(35 * 3);                        
             ChangeLevel(FindLevelInfo()->LumpName, 0, CHANGELEVEL_NOINTERMISSION, -1);    
+            Player.ActualHealth = Player.HealthMax;
 
             return 0;
         }
@@ -1361,26 +1370,6 @@ NamedScript void ItemHandler()
 
         Delay(4);
     }
-}
-
-NamedScript DECORATE void PickUpTombstone()
-{
-    Log("\Cd  ===== Your tombstone DATA =====");
-    Log("Got tombstone worth %ld XP %ld RANK %ld CREDITS", Player.XPPenalty, Player.RankPenalty, Player.CreditPenalty);
-    
-    ActivatorSound("health/resurrect", 127);        
-    Player.XP += Player.XPPenalty;
-    Player.Rank += Player.RankPenalty;
-    GiveInventory("DRPGCredits", Player.CreditPenalty);
-
-    SetHudSize(640, 480, false);            
-    SetFont("BIGFONT");            
-    HudMessage("\CdTombstone retrieved\C- \Ca%ld XP \Cb%ld RANK \Ce%ld CREDITS",  Player.XPPenalty, Player.RankPenalty, Player.CreditPenalty);
-    EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 120.0, 0.5, 6.0);
-
-    Player.XPPenalty = 0;
-    Player.RankPenalty = 0;
-    Player.CreditPenalty = 0;
 }
 
 // Initializes an item and adds it to the Items array

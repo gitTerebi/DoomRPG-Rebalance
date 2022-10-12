@@ -1,13 +1,16 @@
 ## Fork overview
+Darksouls like mod for DOOMRPG + DOOMRLA. You will die alot. High damage dealing enemies, low health pools. 
 
-My own personal take on things borrowing from many other RPGs and games to make mechanics simpler to understand so you can pick up and play DoomRPG + DoomRLA without looking at a manual.
+Instead of save scumming, when you die you keep all your items and progression. 
+
+You will respawn back at the start of the level with items/monsters also respawned. All your xp, rank and credits are dropped where you died so you need to reclaim it by picking up your tombstone.
 
 ## Simplified
 * On level up you get 5 modules. Each stat increase costs 1 module. Each skill unlock is 1 module per level, ie 2 modules to get skill level 2 etc. This makes it easier to plan out a build as you know exactly how much it costs to grow a stat from 1 -> 10. Just 2 levels at 5 modules a level.
 * Generic Loot eg "materials" no longer drop. Instead money is dropped.
 
 ## New Mechanics
-* When you die, you respawn automatically. You can choose how much XP, RANK and CREDITS you lose each time you die. CREDITS are dropped at where you died.
+* When you die, you respawn automatically at the start of the level. Just like in Dark Souls, you will drop all your xp, rank and credits where you died. To retrieve your missing stats find and collect the tombstone. 
 * All items at shop can be bought.
 * All static weapon drop locations have a chance to drop a DRLA weapon now. The chance depends on the loot drop setting in DoomRPG. Its set to 'adaptive' by default.
 * You will always get up to 2 mod pack spawns on each level.

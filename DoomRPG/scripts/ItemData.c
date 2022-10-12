@@ -1425,8 +1425,8 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
         ActorRarity= ItemData[ItemCategory][Weapon].Rarity;
     }
 
-    if (DebugLog)
-        Log("\CdDebug: \C-Rarity Min \Cd%d \C-Max \Cd%d \CSpawn Weapon %S Rarity \Cd%d \C", RarityMin, RarityMax, ActorToSpawn, ActorRarity);
+    //if (DebugLog)
+    //    Log("\CdDebug: \C-Rarity Min \Cd%d \C-Max \Cd%d \CSpawn Weapon %S Rarity \Cd%d \C", RarityMin, RarityMax, ActorToSpawn, ActorRarity);
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 

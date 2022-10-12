@@ -3,6 +3,8 @@
     "files.associations": {
         "itemdata.h": "c",
         "stats.h": "c",
-        "*.zs": "c"
+        "*.zs": "c",
+        "utils.h": "c",
+        "hud.h": "c"
     }
 }
