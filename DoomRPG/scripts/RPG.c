@@ -2493,8 +2493,8 @@ void CheckCompatibility()
     bool Success = false;
     int TID = UniqueTID();
 
-    if (DebugLog)
-        Log("\CdDEBUG: \C-Checking Compatibility...");
+    // if (DebugLog)
+    //     Log("\CdDEBUG: \C-Checking Compatibility...");
 
     SkillLevelsMax = MAX_SKILLLEVELS_DF;
 

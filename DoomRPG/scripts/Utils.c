@@ -3783,7 +3783,7 @@ void ArrayCreate(DynamicArray *Array, str Name, int InitSize, int ItemSize)
             Array->Data = realloc(Array->Data, Array->Size * Array->ItemSize);
         }
 
-        LogMessage("Erasing Leftover data",LOG_DEBUG);
+        // LogMessage("Erasing Leftover data",LOG_DEBUG);
         memset(Array->Data, NULL, Array->Size * Array->ItemSize);
     }
     else

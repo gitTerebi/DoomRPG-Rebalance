@@ -1299,6 +1299,12 @@ void MapEventReward()
 
 NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 {
+    if(DisableEvent)
+    {
+        TargetLevel->Event = MAPEVENT_NONE;
+        return;
+    }
+
     if (DebugLog)
         Log("\CdDEBUG: \ChDeciding event for \Cd%S", TargetLevel->LumpName);
 
@@ -1449,8 +1455,14 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
             TargetLevel->Event = MAPEVENT_NONE;
             return;
         }
+        
+        if(DisableEvent)
+        {
+            TargetLevel->Event = MAPEVENT_NONE;
+            return;
+        }
 
-        if (RandomFixed(0.0, 99.9) > GetCVarFixed("drpg_mapevent_chance") || DisableEvent)
+        if (Random(0, 99) > (int)GetCVarFixed("drpg_mapevent_chance"))
         {
             TargetLevel->Event = MAPEVENT_NONE;
             return; // No special event

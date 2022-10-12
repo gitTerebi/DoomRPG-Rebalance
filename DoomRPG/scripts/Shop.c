@@ -96,7 +96,7 @@ NamedScript void UpdateShopAutoList()
             // LogMessage(StrParam("Completed Item #%i, %S", j, ItemData[i][j].Name), LOG_DEBUG);
         }
     }
-    LogMessage("Completed AutoUpdateShopList", LOG_DEBUG);
+    // LogMessage("Completed AutoUpdateShopList", LOG_DEBUG);
 }
 
 void ShopItemTryAutoDeposit(ItemInfoPtr Item)
