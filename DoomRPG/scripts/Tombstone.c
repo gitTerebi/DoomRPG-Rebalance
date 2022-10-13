@@ -14,7 +14,7 @@ NamedScript void DropTombStones()
         {
             if (Players(i).CreditPenalty == 0 && Players(i).XPPenalty == 0 && Players(i).RankPenalty == 0)
             {
-                Log("\CdRESPAWN: \CaTombstone \C-worth \Ca%ld XP", Players(i).XPPenalty);
+                Log("\CdRESPAWN: \C-Found \CaTombstone \C-worth \Ca%ld XP", Players(i).XPPenalty);
                 break;
             }
 

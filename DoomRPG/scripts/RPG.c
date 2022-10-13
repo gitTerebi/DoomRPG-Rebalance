@@ -484,10 +484,11 @@ NamedScript void PlayerSurvive()
     while (true)
     {
         Player.CanSurvive = (Random(0, 100) <= Player.SurvivalBonus);
-        if (Player.CanSurvive || CheckInventory("DRPGLife") || GetCVar("drpg_allow_respawn"))
+        if (Player.CanSurvive || CheckInventory("DRPGLife"))
             SetPlayerProperty(0, 1, PROP_BUDDHA);
         else
             SetPlayerProperty(0, 0, PROP_BUDDHA);
+            
         Delay(35);
     }
 }
@@ -580,71 +581,6 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
             return 0;
         }
 
-        if(GetCVar("drpg_allow_respawn"))
-        {   
-            SetActorProperty(0, APROP_Invulnerable, true);
-
-            // Clear combo
-            Player.XPGained = 0;
-            Player.RankGained = 0;
-            Player.BonusGained = 0;
-            Player.Combo = 0;
-
-            // Player tombstone save
-            Player.TombStoneX = GetActorX(0);
-            Player.TombStoneY = GetActorY(0);
-            Player.TombStoneZ = GetActorZ(0);
-
-            long int CreditPenalty = 0;
-            long int XPPenalty = 0;
-            long int RankPenalty = 0;
-
-            // Drop Credits
-            if (GetCVar("drpg_multi_dropcredits") && CheckInventory("DRPGCredits") > 0)
-            {
-                CreditPenalty = (long int)(CheckInventory("DRPGCredits") / 100 * GetCVar("drpg_multi_dropcredits_percent"));
-                TakeInventory("DRPGCredits", CreditPenalty);
-            }
-
-            // XP/Rank Penalty
-            if (GetCVar("drpg_multi_takexp")){
-                XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
-                RankPenalty = (long int)(RankTable[Player.RankLevel] * GetCVar("drpg_multi_takexp_percent") / 100);
-
-                if (XPPenalty > Player.XP) XPPenalty = Player.XP;
-                if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
-
-                Player.XP -= XPPenalty;
-                Player.Rank -= RankPenalty;
-            }
-            
-            if(XPPenalty > 0 || RankPenalty > 0 || CreditPenalty > 0)
-            {
-                Log("\CdRESPAWN: \C- -%ld XP -%ld RANK -%ld CREDITS", XPPenalty, RankPenalty, CreditPenalty);
-                Player.CreditPenalty = CreditPenalty;
-                Player.XPPenalty = XPPenalty;
-                Player.RankPenalty = RankPenalty;
-            }
-
-            Log("\CdRESPAWN: \C-Save tombstone");
-            Player.TombStoneX = GetActorX(0);
-            Player.TombStoneY = GetActorY(0);
-            Player.TombStoneZ = GetActorZ(0);
-
-            // Compatibility Handling - DoomRL Arsenal Extended
-            if (CompatModeEx == COMPAT_DRLAX)
-            {
-                NomadModPacksSave();
-                NanomaniacTransport();
-            }
-
-            // Delay and unfreeze Player
-            Delay(35 * 3);                        
-            ChangeLevel(FindLevelInfo()->LumpName, 0, CHANGELEVEL_NOINTERMISSION, -1);    
-            Player.ActualHealth = Player.HealthMax;
-
-            return 0;
-        }
     }
 
     SetActorProperty(0, APROP_Health, Player.ActualHealth);
@@ -1736,14 +1672,12 @@ NamedScript Type_DEATH void Dead()
     for (int i = 0; i < SE_MAX; i++)
         Player.StatusTimer[i] = 0;
 
-    // Drop Credits
-    if (GetCVar("drpg_multi_dropcredits") && CheckInventory("DRPGCredits") > 0)
+    // Drop Credits for multi revives
+    if (GetCVar("drpg_multi_revives") && GetCVar("drpg_multi_dropcredits") && CheckInventory("DRPGCredits") > 0)
     {
         int DropAmount = CheckInventory("DRPGCredits") / 100 * GetCVar("drpg_multi_dropcredits_percent");
-
         // Cap out at a million so if you have stupid amounts of Credits you don't freeze/nuke the game
         if (DropAmount > 1000000) DropAmount = 1000000;
-
         TakeInventory("DRPGCredits", DropAmount);
         DropMoney(PlayerNumber(), 0, DropAmount);
     }
@@ -1790,6 +1724,63 @@ NamedScript Type_DEATH void Dead()
     {
         // Remove TID
         Thing_ChangeTID(Player.TID, 0);
+    }
+
+    // Do respawn only if multi revives are off
+    if(GetCVar("drpg_allow_respawn") && !GetCVar("drpg_multi_revives"))
+    {   
+        Log("\CdRespawn: Doing respawn script!");
+        // Clear combo
+        Player.XPGained = 0;
+        Player.RankGained = 0;
+        Player.BonusGained = 0;
+        Player.Combo = 0;
+
+        // Player tombstone save
+        Player.TombStoneX = GetActorX(0);
+        Player.TombStoneY = GetActorY(0);
+        Player.TombStoneZ = GetActorZ(0);
+
+        long int CreditPenalty = 0;
+        long int XPPenalty = 0;
+        long int RankPenalty = 0;
+
+        // Drop Credits
+        if (GetCVar("drpg_multi_dropcredits") && CheckInventory("DRPGCredits") > 0)
+        {
+            CreditPenalty = (long int)(CheckInventory("DRPGCredits") / 100 * GetCVar("drpg_multi_dropcredits_percent"));
+            TakeInventory("DRPGCredits", CreditPenalty);
+        }
+
+        // XP/Rank Penalty
+        if (GetCVar("drpg_multi_takexp")){
+            XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
+            RankPenalty = (long int)(RankTable[Player.RankLevel] * GetCVar("drpg_multi_takexp_percent") / 100);
+
+            if (XPPenalty > Player.XP) XPPenalty = Player.XP;
+            if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
+
+            Player.XP -= XPPenalty;
+            Player.Rank -= RankPenalty;
+        }
+        
+        if(XPPenalty > 0 || RankPenalty > 0 || CreditPenalty > 0)
+        {
+            Log("\CdRESPAWN: \C- -%ld XP -%ld RANK -%ld CREDITS", XPPenalty, RankPenalty, CreditPenalty);
+            Player.CreditPenalty = CreditPenalty;
+            Player.XPPenalty = XPPenalty;
+            Player.RankPenalty = RankPenalty;
+        }
+
+        Log("\CdRESPAWN: \C-Saved tombstone");
+        Player.TombStoneX = GetActorX(0);
+        Player.TombStoneY = GetActorY(0);
+        Player.TombStoneZ = GetActorZ(0);
+
+        // Delay and unfreeze Player              
+        Delay(35 * 2);         
+        ChangeLevel(FindLevelInfo()->LumpName, 0, CHANGELEVEL_NOINTERMISSION, -1);    
+        Player.ActualHealth = Player.HealthMax;
     }
 }
 
