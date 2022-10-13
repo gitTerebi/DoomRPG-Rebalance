@@ -288,6 +288,7 @@ class DRPGZUtilities
         static const string drpgCVars[] =
         {
             "drpg_dmg_mult",
+            'drpg_dmg_factor',
             "drpg_monster_health_multi",
             "drpg_scalexp",
             "drpg_scalecomboxp",

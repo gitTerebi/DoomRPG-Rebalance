@@ -2770,7 +2770,7 @@ void PrintStatError()
 {
     SetHudSize(0, 0, false);
     SetFont("BIGFONT");
-    HudMessage("You cannot increase stats past %d", Player.StatCap);
+    HudMessage("You can not increase stats past %d", Player.StatCap);
     EndHudMessage(HUDMSG_FADEOUT, 0, "Red", 0.5, 0.5, 2.0, 1.0);
     ActivatorSound("menu/error", 127);
 }

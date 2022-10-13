@@ -528,12 +528,12 @@ void CheckStats()
 
     Player.LevelDamage = Player.Level;
     Player.BonusDamage = Player.StrengthTotal;
-    Player.DamageMult = 1.0 + GetCVarFixed("drpg_dmg_mult");
+    Player.DamageMult = GetCVarFixed("drpg_dmg_mult");
     Player.TotalDamage = Player.LevelDamage + Player.BonusDamage;
     if (Player.DefenseTotal > 0)
-        Player.DamageFactor = (Player.DefenseTotal > 200 ? 0.25 : 1.0 - Curve((fixed)Player.DefenseTotal, 0, 200, 0.01, 0.75));
+        Player.DamageFactor = (Player.DefenseTotal > 200 ? 0.25 : GetCVarFixed("drpg_dmg_factor") - Curve((fixed)Player.DefenseTotal, 0, 200, 0.01, GetCVarFixed("drpg_dmg_factor") - 0.25));
     else
-        Player.DamageFactor = 1.0 + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
+        Player.DamageFactor = GetCVarFixed("drpg_dmg_factor") + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
     Player.Mass = 100 + (Player.DefenseTotal * 10);
     // Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
     Player.HealthMax = 50 + Player.VitalityTotal * 2;

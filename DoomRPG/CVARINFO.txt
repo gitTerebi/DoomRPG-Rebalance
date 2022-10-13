@@ -52,7 +52,8 @@ server  bool    drpg_monster_darkblue_ammodrain = false;
 server  bool    drpg_monster_yellow_moneydrain = false;
 
 // Game Difficulty
-server  float   drpg_dmg_mult = 0;
+server  float   drpg_dmg_mult = 1;
+server  float   drpg_dmg_factor = 1;
 server  float   drpg_monster_health_multi = 1.0;
 server  float   drpg_skill_costscale = 1.0;
 server  bool    drpg_skill_keepauras = false;
