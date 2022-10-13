@@ -549,7 +549,7 @@ NamedScript MenuEntry void LoadCharacter()
     }
 
     Player.EP = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
-    Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
+    Player.HealthMax = 50 + Player.VitalityTotal * 2;
     Player.ActualHealth = Player.HealthMax;
     SetActorProperty(0, APROP_Health, Player.HealthMax);
     Player.PrevHealth = Player.ActualHealth;
