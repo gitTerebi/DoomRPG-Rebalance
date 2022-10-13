@@ -3868,5 +3868,15 @@ NamedScript void Silly()
 
 NamedScript Console void Test()
 {
-    Log("Test if work!");
+    Log("Test is work!");
+}
+
+NamedScript Console int GetPlayerShieldCharge(int i)
+{
+    return Players(i).Shield.Charge;
+}
+
+NamedScript Console int GetPlayerShieldCapacity(int i)
+{
+    return Players(i).Shield.Capacity;
 }
