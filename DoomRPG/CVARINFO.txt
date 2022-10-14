@@ -229,6 +229,7 @@ user    int     drpg_ld_y = 20;
 user    int     drpg_coopview_x = 0;
 user    int     drpg_coopview_y = 0;
 user    bool    drpg_multiplayer_hud = false;
+user    bool    drpg_multiplayer_hud_skip = false;
 user    int     drpg_multiplayer_x = 80;
 user    int     drpg_multiplayer_y = 8;
 user    int     drpg_turret_x = -75;

@@ -1517,6 +1517,18 @@ NamedScript DECORATE bool ShieldHealthMax()
     return (Player.ActualHealth >= Player.HealthMax);
 }
 
+// Returns the current charge of player's Shield
+NamedScript Console int GetPlayerShieldCharge(int i)
+{
+    return Players(i).Shield.Charge;
+}
+
+// Returns the capacity of player's current Shield
+NamedScript Console int GetPlayerShieldCapacity(int i)
+{
+    return Players(i).Shield.Capacity;
+}
+
 // --------------------------------------------------
 // EP
 //
@@ -3868,5 +3880,5 @@ NamedScript void Silly()
 
 NamedScript Console void Test()
 {
-    Log("Test if work!");
+    Log("Test is work!");
 }

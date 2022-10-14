@@ -1549,7 +1549,7 @@ Start:
         Delay(1);
     }
 }
-
+/*
 NamedScript Type_ENTER void MultiplayerHUD()
 {
     fixed X, Y, Alpha;
@@ -1616,7 +1616,7 @@ Start:
     Delay(1);
     goto Start;
 }
-
+*/
 NamedScript Type_ENTER void TurretHUD()
 {
     str const AmmoColors[5] =
