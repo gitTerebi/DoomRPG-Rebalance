@@ -487,6 +487,7 @@ class DRPGZUtilities
             "drpg_coopview_x",
             "drpg_coopview_y",
             "drpg_multiplayer_hud",
+            "drpg_multiplayer_hud_skip",
             "drpg_multiplayer_x",
             "drpg_multiplayer_y",
             "drpg_turret_x",

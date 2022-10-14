@@ -60,8 +60,6 @@ NamedScript DECORATE void AddStimImmunity(int);
 NamedScript DECORATE void ClearBurnout();
 NamedScript KeyBind  void PurgeDrops();
 NamedScript Console  void CheckArmorStats();
-NamedScript Console int GetPlayerShieldCharge();
-NamedScript Console int GetPlayerShieldCapacity();
 
 bool StatsCapped();
 int AveragePlayerLevel();
@@ -98,6 +96,8 @@ NamedScript DECORATE bool ShieldActive();
 NamedScript DECORATE int GetShield();
 NamedScript DECORATE int GetShieldMax();
 NamedScript DECORATE bool ShieldHealthMax();
+NamedScript Console int GetPlayerShieldCharge(int);
+NamedScript Console int GetPlayerShieldCapacity(int);
 
 // EP
 NamedScript DECORATE void AddEP(int, bool);

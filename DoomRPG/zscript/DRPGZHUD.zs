@@ -1,7 +1,7 @@
 class DRPGZHUD : EventHandler
 {
     // Multiplayer HUD CVars
-	private transient CVar multi_hud;
+    private transient CVar multi_hud;
     private transient CVar multi_hud_skip;
     private transient CVar multi_hud_x;
     private transient CVar multi_hud_y;
@@ -13,7 +13,7 @@ class DRPGZHUD : EventHandler
     override void OnRegister()
     {
         // Load CVars
-		multi_hud = CVar.FindCVar('drpg_multiplayer_hud');
+        multi_hud = CVar.FindCVar('drpg_multiplayer_hud');
         multi_hud_skip = CVar.FindCVar('drpg_multiplayer_hud_skip');
         multi_hud_x = CVar.FindCVar('drpg_multiplayer_x');
         multi_hud_y = CVar.FindCVar('drpg_multiplayer_y');
@@ -52,7 +52,7 @@ class DRPGZHUD : EventHandler
                     skip++;
                     continue;
                 }
-				
+                
                 // Calculate offset
                 int offset = (i - skip) * 45;
                 
@@ -65,7 +65,7 @@ class DRPGZHUD : EventHandler
                     DTA_KeepRatio, true,
                     DTA_Color, Color(players[i].GetColor() | 0xFF000000));
                 
-				// Draw healthbar when player is alive and another one when overhealed
+                // Draw healthbar when player is alive and another one when overhealed
                 if (players[i].mo.Health >= 0)
                 {
                     int max = players[i].mo.GetMaxHealth();
@@ -86,16 +86,16 @@ class DRPGZHUD : EventHandler
                     }
                 }
                 
-				// Get shield charge and capacity when shield is enabled
-				int Capacity, Charge;
-				
+                // Get shield charge and capacity when shield is enabled
+                int Capacity, Charge;
+                
                 if (players[i].mo.FindInventory("DRPGShield"))
                 {
                     Capacity = ACS_NamedExecuteWithResult("GetPlayerShieldCapacity", i);
                     Charge = ACS_NamedExecuteWithResult("GetPlayerShieldCharge", i);
                 }
                 
-				// Draw shieldbar and shield charge/capacity when shield has some charge
+                // Draw shieldbar and shield charge/capacity when shield has some charge
                 if (Charge > 0)
                 {
                     Screen.DrawTexture(Tex[1], false,
@@ -111,7 +111,7 @@ class DRPGZHUD : EventHandler
                         DTA_VirtualHeight, 1080,
                         DTA_KeepRatio, true);
                 }
-				// Draw only health and maxhealth if shield has no charge
+                // Draw only health and maxhealth if shield has no charge
                 else
                 {
                     Screen.DrawText(NewSmallFont, Font.CR_BRICK,
