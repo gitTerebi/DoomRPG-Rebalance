@@ -96,6 +96,8 @@ NamedScript DECORATE bool ShieldActive();
 NamedScript DECORATE int GetShield();
 NamedScript DECORATE int GetShieldMax();
 NamedScript DECORATE bool ShieldHealthMax();
+NamedScript Console int GetPlayerShieldCharge(int);
+NamedScript Console int GetPlayerShieldCapacity(int);
 
 // EP
 NamedScript DECORATE void AddEP(int, bool);
