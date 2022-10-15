@@ -5,6 +5,7 @@
         "stats.h": "c",
         "*.zs": "c",
         "utils.h": "c",
-        "hud.h": "c"
+        "hud.h": "c",
+        "rpg.h": "c"
     }
 }

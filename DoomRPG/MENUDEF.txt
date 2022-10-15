@@ -249,6 +249,7 @@ OptionMenu "DoomRPGControls"
     StaticText ""
     StaticText "Controls", "White"
     Control "Open Menu", drpg_menu
+    Control "Open Stats", drpg_stats
     Control "Open Shop", drpg_shop
     Control "Quick Heal", drpg_quickheal
     Control "Focus Mode", drpg_focusmode
@@ -278,14 +279,16 @@ OptionMenu "DoomRPGControls"
 
 OptionMenu "DoomRPGXPSystem"
 {
-    Title "XP System"
+    Title "Credits Combo System"
 
-    Slider "XP Multiplier", "drpg_scalexp", 0.1, 10.0, 0.1
-    Slider "Combo XP Multiplier", "drpg_scalecomboxp", 0.25, 8.0, 0.25
-    Slider "XP Curve", "drpg_xp_curve", 0, 500, 5
-//    Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
-    Slider "XP based on monster health", "drpg_xp_health_awareness", 0, 1, 0.1
-    Slider "Summon's damage XP award %", "drpg_xp_summon_percent", 0, 100, 1
+    Slider "Kill Credits Multiplier", "drpg_scalexp", 0.1, 10.0, 0.1
+    Slider "Combo Credits Multiplier", "drpg_scalecomboxp", 0.25, 8.0, 0.25
+    Slider "Credits Spawn Amount Factor", "drpg_module_spawnfactor", 0.5, 10.0, 0.1
+    Slider "Credits Levelup Amount Factor", "drpg_module_levelfactor", 0.5, 10.0, 0.1
+    
+    //    Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
+    Slider "Credits based on monster health", "drpg_xp_health_awareness", 0, 1, 0.1
+    Slider "Summon's damage Credit award %", "drpg_xp_summon_percent", 0, 100, 1
 }
 
 OptionMenu "DoomRPGMonsters"
@@ -481,10 +484,8 @@ OptionMenu "DoomRPGStats"
 {
     Title "Stat System"
 
-    Slider "Modules Spawn Amount Factor", "drpg_module_spawnfactor", 0.5, 10.0, 0.1
-    Slider "Modules Levelup Amount Factor", "drpg_module_levelfactor", 0.5, 10.0, 0.1
-    Slider "Modules Stat Cost Amount Factor", "drpg_module_statfactor", 1.0, 10.0, 0.1
-    Slider "Modules Skill Cost Amount Factor", "drpg_module_skillfactor", 1.0, 10.0, 0.1
+    Slider "Stat Cost Amount Factor", "drpg_module_statfactor", 1.0, 10.0, 0.1
+    Slider "Skill Cost Amount Factor", "drpg_module_skillfactor", 1.0, 10.0, 0.1
     StaticText ""
 
     Slider "Hard Stat Cap", "drpg_hard_stat_cap", 1, 10000, 1
@@ -524,6 +525,9 @@ OptionMenu "DoomRPGStatsNatural"
 
     Option "Allow Specialization", "drpg_allow_spec", "YesNo"
     Option "Stat Specialization", "drpg_character_spec", "StatPreference"
+    StaticText ""
+
+    Slider "XP Curve", "drpg_xp_curve", 0, 500, 5
     StaticText ""
 
     Slider "Strength XP Multiplier", "drpg_strength_scalexp", 0.1, 8.0, 0.1
@@ -569,7 +573,7 @@ OptionMenu "DoomRPGMultiplayer"
 {
     Title "Respawn"
     Option "Drop a Tombstone on Death", "drpg_allow_respawn", "OnOff"
-    StaticText "Pickup the tombstone to retrieve xp, rank and credits."
+    StaticText "Pickup the tombstone to retrieve rank and credits."
     StaticText ""
 
     Option "XP/Rank Loss on Death", "drpg_multi_takexp", "OnOff"
@@ -881,14 +885,14 @@ OptionMenu "DoomRPGStart"
     StaticText ""
 
     StaticText "Stats", 1
-    Slider "Strength", "drpg_start_strength", -100, 100, 1
-    Slider "Defense", "drpg_start_defense", -100, 100, 1
-    Slider "Vitality", "drpg_start_vitality", 1, 100, 1
+    Slider "Strength", "drpg_start_strength", 0, 100, 1
+    Slider "Defense", "drpg_start_defense", 0, 100, 1
+    Slider "Vitality", "drpg_start_vitality", 0, 100, 1
     Slider "Energy", "drpg_start_energy", 0, 100, 1
-    Slider "Regeneration", "drpg_start_regeneration", -100, 100, 1
-    Slider "Agility", "drpg_start_agility", -100, 100, 1
-    Slider "Capacity", "drpg_start_capacity", 1, 100, 1
-    Slider "Luck", "drpg_start_luck", -100, 100, 1
+    Slider "Regeneration", "drpg_start_regeneration", 0, 100, 1
+    Slider "Agility", "drpg_start_agility", 0, 100, 1
+    Slider "Capacity", "drpg_start_capacity", 0, 100, 1
+    Slider "Luck", "drpg_start_luck", 0, 100, 1
     StaticText ""
 
     StaticText "Weapons/Ammo/Armor/Medkit", 1
@@ -956,7 +960,7 @@ OptionMenu "DoomRPG"
     StaticText ""
 
     SubMenu "Customize Controls",           "DoomRPGControls"
-    SubMenu "XP System",                    "DoomRPGXPSystem"
+    SubMenu "Credits Combo System",         "DoomRPGXPSystem"
     SubMenu "Monster Levels/Stat System",   "DoomRPGMonsters"
     SubMenu "Game Difficulty",              "DoomRPGDifficulty"
     SubMenu "Loot Generation",              "DoomRPGLootGeneration"

@@ -564,18 +564,19 @@ void DrawStatsMenu()
     {
     case STATPAGE_STATS:
     {
-        // int Cost = (int)((((fixed)*Stats[Player.MenuIndex] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
-        // if (Cost < 0)
-        //     Cost = -Cost;
-        // else if (Cost == 0)
-        //     Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+        int Cost = (int)((((fixed)*Stats[Player.MenuIndex] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+        if (Cost < 0)
+            Cost = -Cost;
+        else if (Cost == 0)
+            Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
 
-        int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
+       // int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
 
-        // Upgrade Modules
-        PrintSprite("UMODA0", 0, 16.1, 304.1, 0.05);
+        // Upgrade Modules        
+        PrintSprite("CREDA0", 0, 16.1, 304.1, 0.05);
+        // PrintSprite("UMODA0", 0, 16.1, 304.1, 0.05);
         SetFont("BIGFONT");
-        HudMessage("%d", CheckInventory("DRPGModule"));
+        HudMessage("%d", CheckInventory("DRPGCredits"));
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 40.1, 288.1, 0.05);
         HudMessage("-%d", Cost);
         EndHudMessage(HUDMSG_PLAIN, 0, "Red", 40.1, 302.1, 0.05);
@@ -1444,16 +1445,19 @@ void DrawSkillMenu()
     EndHudMessage(HUDMSG_PLAIN, 0, "White", 0.1, 25.0, 0.05);
 
     // Upgrade Modules
-    PrintSprite("UMODA0", 0, 232.1, 64.1, 0.05);
+    
+    PrintSprite("CREDA0", 0, 232.1, 64.1, 0.05);
+    //PrintSprite("UMODA0", 0, 232.1, 64.1, 0.05);
     SetFont("BIGFONT");
     if (SkillLevel->Level < CurrentSkill->MaxLevel)
     {
-        HudMessage("%d \Cg(-%d)", CheckInventory("DRPGModule"), (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor")));
+        HudMessage("%d \Cg(-%d)", CheckInventory("DRPGCredits"), (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor")));
+        // HudMessage("%d \Cg(-%d)", CheckInventory("DRPGModule"), (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor")));
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 256.1, 54.0, 0.05);
     }
     else
     {
-        HudMessage("%d", CheckInventory("DRPGModule"));
+        HudMessage("%d", CheckInventory("DRPGCredits"));
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 256.1, 54.0, 0.05);
     }
 
@@ -2664,18 +2668,20 @@ void IncreaseStat(int Stat)
     };
 
     // Determine the cost of the stat upgrade
-    int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
-    // int Cost = (int)((((fixed)*Stats[Stat] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
-    // if (Cost < 0)
-    //     Cost = -Cost;
-    // else if (Cost == 0)
-    //     Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+    //int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
+    int Cost = (int)((((fixed)*Stats[Stat] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
+    if (Cost < 0)
+        Cost = -Cost;
+    else if (Cost == 0)
+        Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
 
     // Make sure you have enough Modules
-    if (CheckInventory("DRPGModule") < Cost && (Player.InMenu || Player.GUI.Open))
+    
+    //if (CheckInventory("DRPGModule") < Cost && (Player.InMenu || Player.GUI.Open))
+    if (CheckInventory("DRPGCredits") < Cost && (Player.InMenu || Player.GUI.Open))
     {
         if (GetActivatorCVar("drpg_auto_spend")) return;
-        PrintError("You don't have enough Modules to upgrade this stat");
+        PrintError("You don't have enough credits to upgrade this stat");
         ActivatorSound("menu/error", 127);
 
         return;
@@ -2698,7 +2704,7 @@ void IncreaseStat(int Stat)
     if (Player.InMenu || Player.GUI.Open) // Spent the point in the menu, make a sound
         ActivatorSound("menu/move", 127);
 
-    TakeInventory("DRPGModule", Cost);
+    TakeInventory("DRPGCredits", Cost);
 }
 
 void IncreaseSkill(int Category, int Index)
@@ -2707,19 +2713,19 @@ void IncreaseSkill(int Category, int Index)
     SkillLevelInfo *SkillLevel = &Player.SkillLevel[Category][Index];
     int Cost = (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor"));
 
-    if (CheckInventory("DRPGModule") >= Cost)
+    if (CheckInventory("DRPGCredits") >= Cost)
     {
-        if (SkillLevel->Level < CurrentSkill->MaxLevel && CheckInventory("DRPGModule") >= Cost)
+        if (SkillLevel->Level < CurrentSkill->MaxLevel && CheckInventory("DRPGCredits") >= Cost)
         {
             SkillLevel->Level++;
             SkillLevel->CurrentLevel++;
-            TakeInventory("DRPGModule", Cost);
+            TakeInventory("DRPGCredits", Cost);
             ActivatorSound("menu/move", 127);
         }
     }
     else
     {
-        PrintError("You don't have enough Modules");
+        PrintError("You don't have enough Credits");
         ActivatorSound("menu/error", 127);
     }
 }

@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "Defs.h"
 
 #include "Arena.h"
@@ -493,11 +495,12 @@ NamedScript void PlayerSurvive()
     }
 }
 
-NamedScript void RespawnPlayer(){
-            
+NamedScript void RespawnPlayer(){    
     Log("\CdRespawn: Doing respawn script!");
     
     SetInventory("DRPGInvulnerabilitySurvive", 1);
+    Delay(35);
+    
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
     SetActorProperty(0, APROP_Health, Player.HealthMax);
     ActivatorSound("player/male/death1", 127);
@@ -514,7 +517,7 @@ NamedScript void RespawnPlayer(){
     Player.TombStoneZ = GetActorZ(0);
 
     long int CreditPenalty = 0;
-    long int XPPenalty = 0;
+    // long int XPPenalty = 0;
     long int RankPenalty = 0;
 
     // Drop Credits
@@ -526,21 +529,21 @@ NamedScript void RespawnPlayer(){
 
     // XP/Rank Penalty
     if (GetCVar("drpg_multi_takexp")){
-        XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
+        //XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
         RankPenalty = (long int)(RankTable[Player.RankLevel] * GetCVar("drpg_multi_takexp_percent") / 100);
 
-        if (XPPenalty > Player.XP) XPPenalty = Player.XP;
+        //if (XPPenalty > Player.XP) XPPenalty = Player.XP;
         if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
 
-        Player.XP -= XPPenalty;
+       // Player.XP -= XPPenalty;
         Player.Rank -= RankPenalty;
     }
     
-    if(XPPenalty > 0 || RankPenalty > 0 || CreditPenalty > 0)
+    if(RankPenalty > 0 || CreditPenalty > 0)
     {
-        Log("\CdRESPAWN: \C- -%ld XP -%ld RANK -%ld CREDITS", XPPenalty, RankPenalty, CreditPenalty);
+        Log("\CdRESPAWN: \C- -%ld RANK -%ld CREDITS", RankPenalty, CreditPenalty);
         Player.CreditPenalty = CreditPenalty;
-        Player.XPPenalty = XPPenalty;
+        // Player.XPPenalty = XPPenalty;
         Player.RankPenalty = RankPenalty;
     }
 
@@ -551,10 +554,10 @@ NamedScript void RespawnPlayer(){
 
     SetHudSize(640, 480, false);
     SetFont("BIGFONT");
-    HudMessage("\CdYou died!");
-    EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 120.0, 0.5, 6.0);
+    HudMessage("\CdYou died! Lost \C- \Cb%ld RANK \Ce%ld CREDITS", RankPenalty, CreditPenalty);
+    EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 140.0, 0.5, 6.0);
 
-    FadeTo(255, 0, 0, 0.75, 1.0);
+    FadeTo(255, 0, 0, 0.85, 1.0);
 
     Delay(35 * 2);
 
@@ -582,7 +585,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     LuckChance = (fixed)Monsters[MonsterID].Luck / 20.0;
     EnergyLevel = (fixed)Monsters[MonsterID].Energy / 12.5;
 
-    // Calculate a critical hit
+    //Calculate a critical hit
     if (Player.DamageTID > 0 && MonsterID > 0)
         if (RandomFixed(0.0, 100.0) <= EnergyLevel)
         {
@@ -602,6 +605,10 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     DamageHUD(DamageTaken, Critical);
 
     Player.DamageType = DT_NONE;
+
+    // Don't do more than 85% HP damage
+    DamageTaken = fmin((int)(Player.HealthMax * 0.85), DamageTaken);
+    Log("Took damage %d of %d", DamageTaken, Player.ActualHealth);
 
     if(GetCVar("drpg_allow_respawn") && !GetCVar("drpg_multi_revives") && Player.ActualHealth <= DamageTaken)
     {

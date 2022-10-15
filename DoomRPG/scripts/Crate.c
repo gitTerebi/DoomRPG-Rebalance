@@ -395,7 +395,8 @@ NamedScript void CrateHack()
                             SetFont("SMALLFONT");
                             HudMessage("+%ld XP", XPBonus);
                             EndHudMessage(HUDMSG_FADEOUT, 0, "White", 160.0, 140.0, 2.0, 1.0);
-                            Player.XP += XPBonus;
+                            // Player.XP += XPBonus;
+                            GiveInventory("DRPGCredits",  XPBonus);
                             break;
                         case NODE_RANK:
                             ActivatorSound("hacking/select", 127);

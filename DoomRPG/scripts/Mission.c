@@ -381,14 +381,15 @@ void CheckMission()
         EndHudMessage(HUDMSG_FADEOUT, MISSION_ID, "Green", GetActivatorCVar("drpg_mission_complete_x") + 0.4, GetActivatorCVar("drpg_mission_complete_y"), 3.0, 2.0);
 
         // Reward - XP/Rank
-        Player.XP += Player.Mission.RewardXP;
+        // Player.XP += Player.Mission.RewardXP;
+        GiveInventory("DRPGCredits",  Player.Mission.RewardXP);
         Player.Rank += Player.Mission.RewardRank;
 
         // Credits
         GiveInventory("DRPGCredits", Player.Mission.RewardCredits);
 
         // Modules
-        GiveInventory("DRPGModule", Player.Mission.RewardModules);
+        // GiveInventory("DRPGModule", Player.Mission.RewardModules);
 
         // Spawn Item and try to pick it up
         SpawnForced(Player.Mission.RewardItem->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);

@@ -721,26 +721,26 @@ Start:
     }
 
     // Modules
-    PrintSprite("UMODA0", 0, X - 4.0, Y + 56.0, 0.05);
-    SetFont("BIGFONT");
-    HudMessage("%ld", Modules.DisplayValue);
-    EndHudMessage(HUDMSG_PLAIN, 0, "Green", X + 16.1, Y + 24.0, 0.05);
-    if (ModulesCollected != 0)
-    {
-        HudMessage("%+d", ModulesCollected);
-        EndHudMessage(HUDMSG_FADEOUT, PAY_ID + 1, (ModulesCollected > 0 ? "DarkGreen" : "DarkRed"), X + 16.1, Y + 36.0, 0.05, 2.0, 1.0);
-    }
+    // PrintSprite("UMODA0", 0, X - 4.0, Y + 56.0, 0.05);
+    // SetFont("BIGFONT");
+    // HudMessage("%ld", Modules.DisplayValue);
+    // EndHudMessage(HUDMSG_PLAIN, 0, "Green", X + 16.1, Y + 24.0, 0.05);
+    // if (ModulesCollected != 0)
+    // {
+    //     HudMessage("%+d", ModulesCollected);
+    //     EndHudMessage(HUDMSG_FADEOUT, PAY_ID + 1, (ModulesCollected > 0 ? "DarkGreen" : "DarkRed"), X + 16.1, Y + 36.0, 0.05, 2.0, 1.0);
+    // }
 
     // Medkit
-    PrintSprite("MEDKA0", 0, X, Y + 80.0, 0.05);
+    PrintSprite("MEDKA0", 0, X, Y + 56.0, 0.05);
     SetFont("BIGFONT");
     HudMessage("%ld", Medkit.DisplayValue);
     if (Medkit.DisplayValue >= Player.MedkitMax)
-        EndHudMessage(HUDMSG_PLAIN, 0, "BrickPink", X + 16.1, Y + 56.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "BrickPink", X + 16.1, Y + 40.0, 0.05);
     else if (Medkit.DisplayValue == 0)
-        EndHudMessage(HUDMSG_PLAIN, 0, "Red", X + 16.1, Y + 56.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "Red", X + 16.1, Y + 40.0, 0.05);
     else
-        EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 16.1, Y + 56.0, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "Brick", X + 16.1, Y + 40.0, 0.05);
 
     // Collection timer handling
     if (CreditsCollectionTimer > 0)
@@ -858,9 +858,9 @@ Start:
     if (XP.DisplayValue != 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
         if (XP.DisplayValue >= 100000l)
-            HudMessage("+%ldk xp", XP.DisplayValue / 1000l);
+            HudMessage("+%ldk credits", XP.DisplayValue / 1000l);
         else
-            HudMessage("+%ld xp", XP.DisplayValue);
+            HudMessage("+%ld credits", XP.DisplayValue);
 
         EndHudMessage(HUDMSG_PLAIN, 0, (XP.DisplayValue >= 0 ? "White" : "Gray"), X + 0.1, Y + 22.0, 0.05);
     }
@@ -876,9 +876,9 @@ Start:
     if (Bonus.DisplayValue != 0 && Combo.DisplayValue <= (GetLevelInfo(LEVELINFO_TOTAL_MONSTERS) * 2 + 100) || GetActivatorCVar("drpg_hud_preview"))
     {
         if (Bonus.DisplayValue >= 100000l)
-            HudMessage("+%ldk xp", Bonus.DisplayValue / 1000l);
+            HudMessage("+%ldk credits", Bonus.DisplayValue / 1000l);
         else
-            HudMessage("%ld xp", Bonus.DisplayValue);
+            HudMessage("%ld credits", Bonus.DisplayValue);
 
         EndHudMessage(HUDMSG_PLAIN, 0, (Bonus.DisplayValue >= 0 ? "Green" : "DarkGreen"), X + 0.1, Y + 46.0, 0.05);
     }

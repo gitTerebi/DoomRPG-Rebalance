@@ -590,7 +590,8 @@ Start:
             if (Players(i).Level < MAX_LEVEL)
             {
                 XPBonus = ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
-                Player.XP += XPBonus;
+                // Player.XP += XPBonus;
+                GiveInventory("DRPGCredits",  XPBonus);
 
                 HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
             }
@@ -1280,8 +1281,8 @@ void MapEventReward()
             if (Player.Level < MAX_LEVEL)
             {
                 long int XPBonus = ((XPTable[Player.Level] / (long)(5 + RoundInt(5.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
-                Player.XP += XPBonus;
-
+                // Player.XP += XPBonus;
+                GiveInventory("DRPGCredits",  XPBonus);
                 PrintMessage(StrParam("\CfBonus:\C- %ld XP and Crate", XPBonus), 2, 0);
             }
 

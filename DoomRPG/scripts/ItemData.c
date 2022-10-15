@@ -109,18 +109,18 @@ NamedScript void BuildItemData()
 
     // Ammo
     ITEMDATA_CATEGORY(1, "\CeAmmo", CF_NOSELL);
-    ITEMDATA_DEF("DRPGClip",            "Clip",               10, 0, -1, "CLIPA0",  2, 11);
-    ITEMDATA_DEF("DRPGClipBox",         "Box of Bullets",     50, 0, -1, "AMMOA0", 12, 16);
-    ITEMDATA_DEF("DRPGShell",           "Shells",             25, 0, -1, "SHELA0",  5,  7);
-    ITEMDATA_DEF("DRPGShellBox",        "Box of Shells",     125, 0, -1, "SBOXA0", 16, 12);
-    ITEMDATA_DEF("DRPGRocketAmmo",      "Rockets",            50, 1, -1, "ROCKA0",  6, 27);
-    ITEMDATA_DEF("DRPGRocketBox",       "Box of Rockets",    250, 1, -1, "BROKA0", 27, 20);
-    ITEMDATA_DEF("DRPGCell",            "Cells",             200, 1, -1, "CELLA0",  8, 12);
-    ITEMDATA_DEF("DRPGCellPack",        "Cell Pack",        1000, 1, -1, "CELPA0", 15, 20);
+    ITEMDATA_DEF("DRPGClip",            "Clip",               100, 0, -1, "CLIPA0",  2, 11);
+    ITEMDATA_DEF("DRPGClipBox",         "Box of Bullets",     500, 0, -1, "AMMOA0", 12, 16);
+    ITEMDATA_DEF("DRPGShell",           "Shells",             250, 0, -1, "SHELA0",  5,  7);
+    ITEMDATA_DEF("DRPGShellBox",        "Box of Shells",     1250, 0, -1, "SBOXA0", 16, 12);
+    ITEMDATA_DEF("DRPGRocketAmmo",      "Rockets",            500, 1, -1, "ROCKA0",  6, 27);
+    ITEMDATA_DEF("DRPGRocketBox",       "Box of Rockets",    2500, 1, -1, "BROKA0", 27, 20);
+    ITEMDATA_DEF("DRPGCell",            "Cells",             2000, 1, -1, "CELLA0",  8, 12);
+    ITEMDATA_DEF("DRPGCellPack",        "Cell Pack",        10000, 1, -1, "CELPA0", 15, 20);
 
-    ITEMDATA_DEF("DRPGSmallBackpack",   "Ammo Satchel",      500, 1, -1, "ASCHA0", 14, 30);
-    ITEMDATA_DEF("DRPGBackpack",        "Backpack",         1250, 1, -1, "BPAKA0",  8, 25);
-    ITEMDATA_DEF("DRPGBigBackpack",     "Big Backpack",     2500, 1, -1, "GPAKA0", 11, 29);
+    ITEMDATA_DEF("DRPGSmallBackpack",   "Ammo Satchel",      5000, 1, -1, "ASCHA0", 14, 30);
+    ITEMDATA_DEF("DRPGBackpack",        "Backpack",         12500, 1, -1, "BPAKA0",  8, 25);
+    ITEMDATA_DEF("DRPGBigBackpack",     "Big Backpack",     25000, 1, -1, "GPAKA0", 11, 29);
     ITEMDATA_CATEGORY_END;
 
     // Health

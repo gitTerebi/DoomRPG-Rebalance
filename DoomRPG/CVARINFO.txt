@@ -336,11 +336,11 @@ user    int     drpg_start_rank = 0;
 // Stats
 user    int     drpg_start_strength = 0;
 user    int     drpg_start_defense = 0;
-user    int     drpg_start_vitality = 10;
-user    int     drpg_start_energy = 10;
+user    int     drpg_start_vitality = 0;
+user    int     drpg_start_energy = 0;
 user    int     drpg_start_regeneration = 0;
 user    int     drpg_start_agility = 0;
-user    int     drpg_start_capacity = 10;
+user    int     drpg_start_capacity = 0;
 user    int     drpg_start_luck = 0;
 
 // Weapons/Ammo/Armor

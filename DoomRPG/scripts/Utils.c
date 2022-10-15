@@ -905,45 +905,31 @@ NamedScript KeyBind void Respec(bool DoStats, bool DoSkills)
     }
 
     int Modules;
-    int OldCredits;
 
     // Respec Stats
     if (DoStats)
     {
         // Add stats into a pool of tokens to give back to the player
-        Modules += Player.Strength * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        Modules += Player.Defense * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        Modules += Player.Vitality * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        Modules += Player.Energy * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        Modules += Player.Regeneration * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        Modules += Player.Agility * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        Modules += Player.Capacity * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        Modules += Player.Luck * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
+        for (int i = 0; i <= Player.Strength; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
+        for (int i = 0; i <= Player.Defense; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
+        for (int i = 0; i <= Player.Vitality; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
+        for (int i = 0; i <= Player.Energy; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
+        for (int i = 0; i <= Player.Regeneration; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
+        for (int i = 0; i <= Player.Agility; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
+        for (int i = 0; i <= Player.Capacity; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
+        for (int i = 0; i <= Player.Luck; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
 
         // Compensation for standard Stats (Vitality, Energy and Capacity)
-        Modules -= 30 * (int)((fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-    
-        // for (int i = 0; i <= Player.Strength; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        // for (int i = 0; i <= Player.Defense; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        // for (int i = 0; i <= Player.Vitality; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        // for (int i = 0; i <= Player.Energy; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        // for (int i = 0; i <= Player.Regeneration; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        // for (int i = 0; i <= Player.Agility; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        // for (int i = 0; i <= Player.Capacity; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-        // for (int i = 0; i <= Player.Luck; i++) Modules += (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor"));
-
-        // // Compensation for standard Stats (Vitality, Energy and Capacity)
-        // for (int i = 0; i <= 10; i++) Modules -= (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor") * 3);
-
+        // for (int i = 0; i <= 10; i++) Modules -= (int)(i * (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor") * 2);
 
         // Reset Stats
         Player.Strength = 0;
         Player.Defense = 0;
-        Player.Vitality = 10;
-        Player.Energy = 10;
+        Player.Vitality = 0;
+        Player.Energy = 0;
         Player.Regeneration = 0;
         Player.Agility = 0;
-        Player.Capacity = 10;
+        Player.Capacity = 0;
         Player.Luck = 0;
 
         // Reset Natural Bonuses
@@ -977,6 +963,7 @@ NamedScript KeyBind void Respec(bool DoStats, bool DoSkills)
         // Reset skills, add skill levels together into a pool of tokens to give back to the player
         for (int i = 0; i < MAX_CATEGORIES; i++)
             for (int j = 0; j < SkillCategoryMax[i]; j++)
+                if (!(i == 5 && j == 6)) // Ignore teleport
                     while (Player.SkillLevel[i][j].Level > 0)
                     {
                         Modules += (int)(((fixed)Player.SkillLevel[i][j].Level * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor"));
@@ -988,17 +975,17 @@ NamedScript KeyBind void Respec(bool DoStats, bool DoSkills)
         RemoveAura();
     }
 
-    // Give Respecced Modules
-    GiveInventory("DRPGModule", Modules);
-
+    // Give Respecced credits back
+    Player.PrevCredits = CheckInventory("DRPGCredits") + Modules; // dont trigger luck xp
+    GiveInventory("DRPGCredits", Modules);  
+    
     // Take Credits
-    GiveInventory("DRPGCredits", OldCredits);
     TakeInventory("DRPGCredits", Player.Level * 750);
 
     // FX
     FadeRange(255, 255, 255, 0.75, 0, 0, 0, 0.0, 2.5);
     SetFont("BIGFONT");
-    HudMessage("Respec Complete");
+    HudMessage("Respec Complete -%d Credits", Player.Level * 750);
     EndHudMessage(HUDMSG_FADEOUT, 0, "White", 0.5, 0.5, 2.5, 2.5);
     ActivatorSound("misc/secret", 127);
 }

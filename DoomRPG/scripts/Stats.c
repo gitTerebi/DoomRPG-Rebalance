@@ -231,12 +231,14 @@ void CheckCombo()
         if (Player.Combo > 1)
         {
             Player.BonusGained += ComboBonus;
-            Player.XP += Player.XPGained + ComboBonus;
+            // Player.XP += Player.XPGained + ComboBonus;
+            GiveInventory("DRPGCredits",  Player.XPGained + ComboBonus);
             Player.Rank += Player.RankGained + ComboBonus;
         }
         else
         {
-            Player.XP += Player.XPGained;
+            // Player.XP += Player.XPGained;
+            GiveInventory("DRPGCredits",  Player.XPGained);
             Player.Rank += Player.RankGained;
         }
 
@@ -298,19 +300,21 @@ void CheckLevel()
     else
     {
         // Now check for a level up
-        if (Player.XP >= XPTable[Player.Level] && Player.Level < MAX_LEVEL)
+        int calcLevel = (int)((Player.Strength + Player.Defense + Player.Vitality + Player.Energy + Player.Regeneration 
+            + Player.Agility + Player.Capacity + Player.Luck) / 8);
+
+        //  every 8 pts = 1 level up
+        // if (Player.XP >= XPTable[Player.Level] && Player.Level < MAX_LEVEL)
+        if (Player.Level < MAX_LEVEL && Player.Level < calcLevel)
         {
-            int Modules = (int)((((fixed)Player.Level + 1) * 100.0) * GetCVarFixed("drpg_module_levelfactor"));
+            // int Modules = (int)((((fixed)Player.Level + 1) * 100.0) * GetCVarFixed("drpg_module_levelfactor"));
+            // GiveInventory("DRPGModule", Modules);
 
             // Take XP
-            Player.XP -= XPTable[Player.Level];
+            //Player.XP -= XPTable[Player.Level];
 
             // Level Up
             Player.Level++;
-            // GiveInventory("DRPGModule", Modules);
-
-            // Every level five 5 modules
-            GiveInventory("DRPGModule", 5);
 
             if (GetCVar("drpg_levelup_heal"))
             {
@@ -675,7 +679,7 @@ void CheckStats()
                     if (GetActivatorCVar("drpg_character_spec") == 8)
                         Scale *= 2;
                 }
-                Player.LuckXP += (RoundLongInt)((CheckInventory("DRPGCredits") - Player.PrevCredits) * (2.25 * Scale));
+                Player.LuckXP += (RoundLongInt)((CheckInventory("DRPGCredits") - Player.PrevCredits) * Scale);
             }
 
             Player.PrevCredits = CheckInventory("DRPGCredits");
