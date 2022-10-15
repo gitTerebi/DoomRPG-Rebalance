@@ -240,7 +240,7 @@ void ShopLoop()
         Player.LockerMode = true;
 
     // Setup dynamic Medikit refill pricing
-    ItemData[2][0].Price = Player.MedkitMax * 3;
+    ItemData[2][0].Price = Player.MedkitMax * 100;
 
     // Compatibility Handling - DoomRL Arsenal Extended
     if (CompatModeEx == COMPAT_DRLAX)
@@ -296,12 +296,19 @@ void ShopLoop()
         }
         else if (ItemCategoryFlags[Player.ShopPage] & CF_NOSELL) // No Selling
         {
-            HudMessage("\CjBUY %d \CkDisc %d%%", Cost, Player.ShopDiscount);
+            if(Cost == 0)
+                HudMessage("\CjBUY N/A \CkDisc %d%%", Player.ShopDiscount);            
+            else
+                HudMessage("\CjBUY %d \CkDisc %d%%", Cost, Player.ShopDiscount);
+            
             EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 24.1, 38.0, 0.05);
         }
         else // Normal
         {
-            HudMessage("\CjBUY %d \CiSELL %d \CkDisc %d%%", Cost, SellPrice, Player.ShopDiscount);
+            if(Cost == 0)
+                HudMessage("\CjBUY N/A \CkDisc %d%%", Player.ShopDiscount);            
+            else
+                HudMessage("\CjBUY %d \CiSELL %d \CkDisc %d%%", Cost, SellPrice, Player.ShopDiscount);
             EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 24.1, 38.0, 0.05);
         }
     }

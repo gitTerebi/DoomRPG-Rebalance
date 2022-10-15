@@ -38,6 +38,9 @@ NamedScript DECORATE void PickUpTombstone()
     ActivatorSound("health/resurrect", 127);
     // Player.XP += Player.XPPenalty;
     Player.Rank += Player.RankPenalty;
+
+    // Don't trigger luck XP
+    Player.PrevCredits = Player.CreditPenalty + CheckInventory("DRPGCredits");
     GiveInventory("DRPGCredits", Player.CreditPenalty);
 
     SetHudSize(640, 480, false);

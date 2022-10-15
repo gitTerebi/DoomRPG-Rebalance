@@ -679,7 +679,7 @@ void CheckStats()
                     if (GetActivatorCVar("drpg_character_spec") == 8)
                         Scale *= 2;
                 }
-                Player.LuckXP += (RoundLongInt)((CheckInventory("DRPGCredits") - Player.PrevCredits) * Scale);
+                Player.LuckXP += (RoundLongInt)((CheckInventory("DRPGCredits") - Player.PrevCredits) * 0.1 * ( 2 * Scale));
             }
 
             Player.PrevCredits = CheckInventory("DRPGCredits");
