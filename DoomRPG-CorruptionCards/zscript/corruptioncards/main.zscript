@@ -62,7 +62,7 @@ Class CCards_Global : Thinker
 		vc.Init();		
 		rules = new ("CCards_Rules");
 		rules.global = self;
-		ccversion = "4.1";
+		ccversion = "4.2";
 		scoreneeded = random(4, 8);
 		return self;
 	}
@@ -247,61 +247,6 @@ Class CCards_Game : EventHandler
 		//Console.Printf("\cvAdded: \cj" .. gen.hand[cardno].GetHint());
 	}
 	
-	/*
-	void CardChosen(int cardno)
-	{
-
-		Let c = gen.hand[cardno];
-		c.game = self;
-
-		DeckOperationCard op;
-
-		for(int i; i<global.collection.Size(); i++)
-		{
-			op = DeckOperationCard(global.collection[i]);
-
-			if(op)
-			{
-				op.Operation();
-			}
-		}
-
-		op = null;
-		op = DeckOperationCard(c);
-
-		if(op)
-		{
-			op.Operation();
-		}
-
-		c.stackIndex = CCards_Functions.GetCardStackIndex(c);
-
-		if(permanentChoice)
-		{
-			c.chosen = true;
-			global.collection.Push(c);
-			
-			for(int i; i<gen.hand.Size(); i++)
-			{
-				global.history.Push(gen.hand[i]);
-			}
-			//Console.Printf("" .. c.spriteimage);
-			deck.Push(c);
-		}
-		else
-		{
-			deck.Push(c);
-		}
-
-		chosenCardClass = c.GetClass();
-
-		publicdeck.Copy(deck);
-
-		SortDeckByPriority();
-
-		Start();
-	}
-	*/
 
 	void SortDeckByPriority()
 	{
@@ -574,8 +519,13 @@ Class CCards_Game : EventHandler
 	{
 		if(Cvar.GetCvar("ccards_choiceoption", players[0]).GetInt() == 1)
 		{
-				global.player = 0;
-				return;
+			global.player = 0;
+			return;
+		}
+
+		if(global.progress == 0)
+		{
+			return;
 		}
 
 		global.player++;
@@ -583,9 +533,10 @@ Class CCards_Game : EventHandler
 		while(PlayerInGame[global.player] == false)
 		{
 			global.player++;
+
 			if(global.player>PlayerInGame.Size()-1)
 			{
-			global.player = 0;
+				global.player = 0;
 			} 
 		}
 	}
@@ -993,8 +944,8 @@ Class CCards_Rules
 
 	void SetTiers(int a, int b)
 	{
-		Clamp(a, 1, 5);
-		Clamp(b, 1, 5);
+		a = Clamp(a, 1, 5);
+		b = Clamp(b, 1, 5);
 
 		if(a>b)
 		{
