@@ -496,14 +496,16 @@ NamedScript void PlayerSurvive()
 }
 
 NamedScript void RespawnPlayer(){    
-    Log("\CdRespawn: Doing respawn script!");
-    
+
     SetInventory("DRPGInvulnerabilitySurvive", 1);
-    Delay(35);
-    
+    Delay(35);   
+
+    fixed cameraHeight = GetActorPropertyFixed(0, APROP_ViewHeight);
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+    SetActorPropertyFixed(0, APROP_ViewHeight, cameraHeight * 0.25);
     SetActorProperty(0, APROP_Health, Player.HealthMax);
-    ActivatorSound("player/male/death1", 127);
+    Radius_Quake2(0, 9, 35, 0, 16, "player/male/death1");
+    //ActivatorSound("player/male/death1", 127);
 
     // Clear combo
     Player.Combo = 0;
@@ -558,10 +560,10 @@ NamedScript void RespawnPlayer(){
     EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 140.0, 0.5, 6.0);
 
     FadeTo(255, 0, 0, 0.85, 1.0);
-
     Delay(35 * 2);
 
     ChangeLevel(FindLevelInfo()->LumpName, 0, CHANGELEVEL_NOINTERMISSION, -1);    
+    SetActorPropertyFixed(0, APROP_ViewHeight, cameraHeight);
 
 }
 
