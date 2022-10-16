@@ -506,10 +506,10 @@ NamedScript void RespawnPlayer(){
     ActivatorSound("player/male/death1", 127);
 
     // Clear combo
+    Player.Combo = 0;
+    Player.BonusGained = 0;
     Player.XPGained = 0;
     Player.RankGained = 0;
-    Player.BonusGained = 0;
-    Player.Combo = 0;
 
     // Player tombstone save
     Player.TombStoneX = GetActorX(0);
@@ -523,14 +523,14 @@ NamedScript void RespawnPlayer(){
     // Drop Credits
     if (GetCVar("drpg_multi_dropcredits") && CheckInventory("DRPGCredits") > 0)
     {
-        CreditPenalty = (long int)(CheckInventory("DRPGCredits") / 100 * GetCVar("drpg_multi_dropcredits_percent"));
+        CreditPenalty = (long int)(CheckInventory("DRPGCredits") * (GetCVar("drpg_multi_dropcredits_percent")/100));
         TakeInventory("DRPGCredits", CreditPenalty);
     }
 
     // XP/Rank Penalty
     if (GetCVar("drpg_multi_takexp")){
         //XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
-        RankPenalty = (long int)(RankTable[Player.RankLevel] * GetCVar("drpg_multi_takexp_percent") / 100);
+        RankPenalty = (long int)(RankTable[Player.RankLevel] * (GetCVar("drpg_multi_takexp_percent") / 100));
 
         //if (XPPenalty > Player.XP) XPPenalty = Player.XP;
         if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
@@ -606,8 +606,8 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
 
     Player.DamageType = DT_NONE;
 
-    // Don't do more than 85% HP damage
-    DamageTaken = fmin((int)(Player.HealthMax * 0.85), DamageTaken);
+    // Don't do more than 90% HP damage - avoid one shot kills
+    DamageTaken = fmin((int)(Player.HealthMax * 0.90), DamageTaken);
     Log("Took damage %d of %d", DamageTaken, Player.ActualHealth);
 
     if(GetCVar("drpg_allow_respawn") && !GetCVar("drpg_multi_revives") && Player.ActualHealth <= DamageTaken)
@@ -617,6 +617,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     }
     
     Player.ActualHealth -= DamageTaken;
+
     // Receiving damage to health interrupts focusing
     Player.Focusing = false;
 

@@ -754,7 +754,7 @@ typedef enum
 #define LUCK_AUGINC             0.00025
 
 #define AURA_CALCTIME           (((GetCVar("drpg_levelup_natural")) ? ((35 * 100) + (35 * Player.EnergyTotal * 2)) : ((35 * 80) + (35 * Player.EnergyTotal * 4))) * (1.0 + Player.AuraBonus * 0.5))
-#define DRLA_WEAPON_MAX         (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 9 ? 8 : 12)
+#define DRLA_WEAPON_MAX         (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 9 ? 2 + Player.Rank : 4 + Player.Rank)
 #define DRLA_ARMOR_MAX          3 + ((GetCVar("drpg_levelup_natural")) ? (Player.CapacityTotal / 50) : (Player.CapacityTotal / 25))
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX
 #define DRLA_DEVICE_MAX         4 + (Player.CapacityTotal / 50)
