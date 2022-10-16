@@ -297,16 +297,16 @@ void ShopLoop()
         else if (ItemCategoryFlags[Player.ShopPage] & CF_NOSELL) // No Selling
         {
             if(Cost == 0)
-                HudMessage("\CjBUY N/A \CkDisc %d%%", Player.ShopDiscount);            
+                HudMessage("\CjBUY N/A \CkDisc %d%%", Player.ShopDiscount);
             else
                 HudMessage("\CjBUY %d \CkDisc %d%%", Cost, Player.ShopDiscount);
-            
+
             EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 24.1, 38.0, 0.05);
         }
         else // Normal
         {
             if(Cost == 0)
-                HudMessage("\CjBUY N/A \CkDisc %d%%", Player.ShopDiscount);            
+                HudMessage("\CjBUY N/A \CkDisc %d%%", Player.ShopDiscount);
             else
                 HudMessage("\CjBUY %d \CiSELL %d \CkDisc %d%%", Cost, SellPrice, Player.ShopDiscount);
             EndHudMessage(HUDMSG_PLAIN, 0, "Gold", 24.1, 38.0, 0.05);

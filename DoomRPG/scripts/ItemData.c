@@ -1293,7 +1293,7 @@ NamedScript DECORATE void DRPGGenericLootSpawner(bool ArmorBonus)
         ActorToSpawn = ArmorBonus ? "DRPGArmorBonus" : "DRPGHealthBonus";
     else
         ActorToSpawn = "DRPGMoneyDropper"; // Just do money
-        //ActorToSpawn = "DRPGGenericLootRandomizer";
+    //ActorToSpawn = "DRPGGenericLootRandomizer";
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
@@ -1390,7 +1390,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
 
     //if (Random(0, 250) <= 50 + 10 * Modifier)
     //{
-    
+
     // Always drop a rare on a map
     int ActorRarity;
     while (!ItemSpawned)

@@ -680,7 +680,7 @@ void DropMoney(int Killer, int TID, int Amount)
     Drops = Total / 50;
     while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits5", 256);
     Total %= 50;
-    
+
     Drops = Total / 10;
     while (Drops--) DropMonsterItem(Killer, TID, "DRPGCredits1", 256);
     Total %= 10;
@@ -688,7 +688,7 @@ void DropMoney(int Killer, int TID, int Amount)
 }
 
 void DropHealthShard(int Killer, int TID, int Amount)
-{   
+{
     Log("Dropping Health shards %d", Amount);
 
     int Total = Amount;
@@ -701,7 +701,7 @@ void DropHealthShard(int Killer, int TID, int Amount)
     Drops = Total / 5;
     while (Drops--) DropMonsterItem(Killer, TID, "HealthShards5", 256);
     Total %= 5;
-    
+
     Drops = Total / 1;
     while (Drops--) DropMonsterItem(Killer, TID, "HealthShards1", 256);
     Total %= 1;
@@ -999,8 +999,8 @@ NamedScript KeyBind void Respec(bool DoStats, bool DoSkills)
 
     // Give Respecced credits back
     Player.PrevCredits = CheckInventory("DRPGCredits") + Modules; // dont trigger luck xp
-    GiveInventory("DRPGCredits", Modules);  
-    
+    GiveInventory("DRPGCredits", Modules);
+
     // Take Credits
     TakeInventory("DRPGCredits", Player.Level * 750);
 

@@ -2847,9 +2847,9 @@ NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
         int HealthDelta = Players(Killer).HealthMax - Players(Killer).ActualHealth;
         int HealthShardsAmount = Random((int)(HealthDelta * .25), (int)(HealthDelta * .75));
         if(HealthShardsAmount > 0)
-            DropHealthShard(Killer, 0 , HealthShardsAmount);
+            DropHealthShard(Killer, 0, HealthShardsAmount);
     }
-    
+
 }
 
 NamedScript void MonsterDeath()
@@ -3495,7 +3495,7 @@ int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)
         GiveInventory("DRPGLegenDoomMonsterInit", 1);
     }
 
-        // Scale monster health
+    // Scale monster health
     Health = (Health * (int)(GetCVarFixed("drpg_monster_health_multi") * 100)) / 100;
 
     return Health;

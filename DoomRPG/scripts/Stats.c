@@ -300,8 +300,8 @@ void CheckLevel()
     else
     {
         // Now check for a level up
-        int calcLevel = (int)((Player.Strength + Player.Defense + Player.Vitality + Player.Energy + Player.Regeneration 
-            + Player.Agility + Player.Capacity + Player.Luck) / 8);
+        int calcLevel = (int)((Player.Strength + Player.Defense + Player.Vitality + Player.Energy + Player.Regeneration
+                               + Player.Agility + Player.Capacity + Player.Luck) / 8);
 
         //  every 8 pts = 1 level up
         // if (Player.XP >= XPTable[Player.Level] && Player.Level < MAX_LEVEL)
@@ -559,9 +559,9 @@ void CheckStats()
         SetAmmoCapacity("RLSkullLimit", DRLA_SKULL_MAX);
         SetAmmoCapacity("RLPhaseDeviceLimit", DRLA_DEVICE_MAX);
         SetAmmoCapacity("RLModLimit", DRLA_MODPACKS_MAX);
-        SetAmmoCapacity("RLWeaponLimit", DRLA_WEAPON_MAX); 
+        SetAmmoCapacity("RLWeaponLimit", DRLA_WEAPON_MAX);
     }
-    
+
     Player.MedkitMax = Player.CapacityTotal * 5;
 
     // Determine current stat cap

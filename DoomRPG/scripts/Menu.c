@@ -570,9 +570,9 @@ void DrawStatsMenu()
         else if (Cost == 0)
             Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
 
-       // int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
+        // int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
 
-        // Upgrade Modules        
+        // Upgrade Modules
         PrintSprite("CREDA0", 0, 16.1, 314.1, 0.05);
         // PrintSprite("UMODA0", 0, 16.1, 304.1, 0.05);
         SetFont("BIGFONT");
@@ -841,7 +841,7 @@ void DrawStatsMenu()
                 HudMessage("Modpacks: %d/%d", CheckInventory("RLScavengerModLimit"), DRLA_MODPACKS_MAX);
             else
                 HudMessage("Modpacks: %d/%d", CheckInventory("RLModLimit"), DRLA_MODPACKS_MAX);
-            
+
             EndHudMessage(HUDMSG_PLAIN, 0, "Yellow",               30.1,   282.0,  0.05);
         };
 
@@ -1453,7 +1453,7 @@ void DrawSkillMenu()
     EndHudMessage(HUDMSG_PLAIN, 0, "White", 0.1, 25.0, 0.05);
 
     // Upgrade Modules
-    
+
     PrintSprite("CREDA0", 0, 232.1, 64.1, 0.05);
     //PrintSprite("UMODA0", 0, 232.1, 64.1, 0.05);
     SetFont("BIGFONT");
@@ -2684,7 +2684,7 @@ void IncreaseStat(int Stat)
         Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
 
     // Make sure you have enough Modules
-    
+
     //if (CheckInventory("DRPGModule") < Cost && (Player.InMenu || Player.GUI.Open))
     if (CheckInventory("DRPGCredits") < Cost && (Player.InMenu || Player.GUI.Open))
     {

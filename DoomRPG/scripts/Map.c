@@ -360,7 +360,8 @@ NamedScript Type_OPEN void MapInit()
 
     // Initialize the Dynamic Loot Generator
     // [KS] Call it here so that events can modify the loot it spawns
-    if (GetCVar("drpg_loot_system") && !CurrentLevel->UACBase){
+    if (GetCVar("drpg_loot_system") && !CurrentLevel->UACBase)
+    {
         DynamicLootGenerator("DRPGLuckDropper");
 
         // guarentee at least 4 mods 99% of time
@@ -370,7 +371,7 @@ NamedScript Type_OPEN void MapInit()
     AddAdditionalMonsters();
 
     DropTombStones();
-    
+
     // Setup missions which require generation
     SetupMapMissions();
 
@@ -1456,7 +1457,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
             TargetLevel->Event = MAPEVENT_NONE;
             return;
         }
-        
+
         if(DisableEvent)
         {
             TargetLevel->Event = MAPEVENT_NONE;

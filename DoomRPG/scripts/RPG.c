@@ -495,10 +495,11 @@ NamedScript void PlayerSurvive()
     }
 }
 
-NamedScript void RespawnPlayer(){    
+NamedScript void RespawnPlayer()
+{
 
     SetInventory("DRPGInvulnerabilitySurvive", 1);
-    Delay(35);   
+    Delay(35);
 
     fixed cameraHeight = GetActorPropertyFixed(0, APROP_ViewHeight);
     SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
@@ -528,14 +529,15 @@ NamedScript void RespawnPlayer(){
     }
 
     // XP/Rank Penalty
-    if (GetCVar("drpg_multi_takexp")){
+    if (GetCVar("drpg_multi_takexp"))
+    {
         RankPenalty = (long int)(RankTable[Player.RankLevel] * (GetCVar("drpg_multi_takexp_percent") / 100));
-      
+
         if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
 
         Player.Rank -= RankPenalty;
     }
-    
+
     if(RankPenalty > 0 || CreditPenalty > 0)
     {
         Log("\CdRESPAWN: \C- -%ld RANK -%ld CREDITS", RankPenalty, CreditPenalty);
@@ -556,7 +558,7 @@ NamedScript void RespawnPlayer(){
     FadeTo(255, 0, 0, 0.85, 1.0);
     Delay(35 * 2);
 
-    ChangeLevel(FindLevelInfo()->LumpName, 0, CHANGELEVEL_NOINTERMISSION, -1);    
+    ChangeLevel(FindLevelInfo()->LumpName, 0, CHANGELEVEL_NOINTERMISSION, -1);
     SetActorPropertyFixed(0, APROP_ViewHeight, cameraHeight);
 }
 
@@ -603,20 +605,20 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
 
     // Don't do more than 90% HP damage - avoid one shot kills
     DamageTaken = (int)fmin(Player.HealthMax * 0.90, DamageTaken);
-    
+
     if(GetCVar("drpg_allow_respawn") && !GetCVar("drpg_multi_revives") && Player.ActualHealth <= DamageTaken)
     {
         RespawnPlayer();
         return 0;
     }
-    
+
     Player.ActualHealth -= DamageTaken;
 
     // Receiving damage to health interrupts focusing
     Player.Focusing = false;
 
     if (Player.ActualHealth <= 1) // Near-Death stuff
-    {        
+    {
         // Extra Life check
         if (!Player.CanSurvive && CheckInventory("DRPGLife"))
         {
