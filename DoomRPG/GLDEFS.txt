@@ -1043,6 +1043,35 @@ Object DRPGLootAnomalousMaterials
     frame LT04 { light LOOTANOMALOUS }
 }
 
+Object HealthShards1
+{
+    frame LT04 { light LOOTANOMALOUS }
+}
+
+pulselight HS5LIGHT
+{
+    color 1.0 0.5 0.0
+    size 12
+	secondarySize 24
+	interval 3.0
+}
+Object HealthShards5
+{
+    frame LT14 { light HS5LIGHT }
+}
+
+pulselight HS10LIGHT
+{
+    color 0.6 0.1 0.9
+    size 12
+	secondarySize 24
+	interval 3.0
+}
+Object HealthShards10
+{
+    frame LT15 { light HS10LIGHT }
+}
+
 pointlight LOOTPARTS1
 {
     color 0.5 0.0 0.0

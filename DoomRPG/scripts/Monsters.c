@@ -2840,6 +2840,15 @@ NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
         else
             DropMoney(Killer, 0, CreditsAmount);
     }
+
+    // 50% of time monster killed drop health based on regen
+    if(Random(0, 100) > 50 )
+    {
+        int HealthShardsAmount = Random(0, Players(Killer).HPAmount * 2);
+        if(HealthShardsAmount > 0)
+            DropHealthShard(Killer, 0 , HealthShardsAmount);
+    }
+    
 }
 
 NamedScript void MonsterDeath()
@@ -3105,6 +3114,7 @@ NamedScript void MonsterDeath()
     {
         DropCredits(Killer, Stats);
     }
+
 
     // Drop stolen ammo
     int Count = 0;

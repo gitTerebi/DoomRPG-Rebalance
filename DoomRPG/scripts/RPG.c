@@ -505,7 +505,6 @@ NamedScript void RespawnPlayer(){
     SetActorPropertyFixed(0, APROP_ViewHeight, cameraHeight * 0.25);
     SetActorProperty(0, APROP_Health, Player.HealthMax);
     Radius_Quake2(0, 9, 35, 0, 16, "player/male/death1");
-    //ActivatorSound("player/male/death1", 127);
 
     // Clear combo
     Player.Combo = 0;
@@ -519,7 +518,6 @@ NamedScript void RespawnPlayer(){
     Player.TombStoneZ = GetActorZ(0);
 
     long int CreditPenalty = 0;
-    // long int XPPenalty = 0;
     long int RankPenalty = 0;
 
     // Drop Credits
@@ -531,13 +529,10 @@ NamedScript void RespawnPlayer(){
 
     // XP/Rank Penalty
     if (GetCVar("drpg_multi_takexp")){
-        //XPPenalty = (long int)(XPTable[Player.Level] * GetCVar("drpg_multi_takexp_percent") / 100);
         RankPenalty = (long int)(RankTable[Player.RankLevel] * (GetCVar("drpg_multi_takexp_percent") / 100));
-
-        //if (XPPenalty > Player.XP) XPPenalty = Player.XP;
+      
         if (RankPenalty > Player.Rank) RankPenalty = Player.Rank;
 
-       // Player.XP -= XPPenalty;
         Player.Rank -= RankPenalty;
     }
     
@@ -545,7 +540,6 @@ NamedScript void RespawnPlayer(){
     {
         Log("\CdRESPAWN: \C- -%ld RANK -%ld CREDITS", RankPenalty, CreditPenalty);
         Player.CreditPenalty = CreditPenalty;
-        // Player.XPPenalty = XPPenalty;
         Player.RankPenalty = RankPenalty;
     }
 
@@ -564,7 +558,6 @@ NamedScript void RespawnPlayer(){
 
     ChangeLevel(FindLevelInfo()->LumpName, 0, CHANGELEVEL_NOINTERMISSION, -1);    
     SetActorPropertyFixed(0, APROP_ViewHeight, cameraHeight);
-
 }
 
 // Damage Handler Entry Point
@@ -610,8 +603,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
 
     // Don't do more than 90% HP damage - avoid one shot kills
     DamageTaken = (int)fmin(Player.HealthMax * 0.90, DamageTaken);
-    Log("Took damage %d of %d", DamageTaken, Player.ActualHealth);
-
+    
     if(GetCVar("drpg_allow_respawn") && !GetCVar("drpg_multi_revives") && Player.ActualHealth <= DamageTaken)
     {
         RespawnPlayer();

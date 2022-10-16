@@ -1,0 +1,57 @@
+// 1 Credit - Green
+actor HealthShards1 : CustomInventory
+{
+    scale 0.33
+    
+    Inventory.PickupMessage "You picked up 1 \cdhp\c-."
+    Inventory.PickupSound "items/vial"
+    
+    States
+    {
+    Spawn:
+        LT04 A -1 Bright
+        Stop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealthDirect", 1, 100)
+        TNT1 A 0
+        Stop
+    }
+}
+
+actor HealthShards5 : CustomInventory
+{
+    scale 0.45
+    
+    Inventory.PickupMessage "You picked up 5 \cdhp\c-."
+    Inventory.PickupSound "items/vial"
+    
+    States
+    {
+    Spawn:
+        LT14 A -1 Bright
+        Stop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealthDirect", 15, 100)
+        TNT1 A 0
+        Stop
+    }
+}
+
+actor HealthShards10 : CustomInventory
+{
+    scale 0.55
+    
+    Inventory.PickupMessage "You picked up 10 \cdhp\c-."
+    Inventory.PickupSound "items/vial"
+    
+    States
+    {
+    Spawn:
+        LT15 A -1 Bright
+        Stop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealthDirect", 10, 100)
+        TNT1 A 0
+        Stop
+    }
+}

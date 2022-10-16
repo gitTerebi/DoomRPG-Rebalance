@@ -687,6 +687,28 @@ void DropMoney(int Killer, int TID, int Amount)
 
 }
 
+void DropHealthShard(int Killer, int TID, int Amount)
+{   
+    Log("Dropping Health shards %d", Amount);
+
+    int Total = Amount;
+    int Drops;
+
+    Drops = Total / 10;
+    while (Drops--) DropMonsterItem(Killer, TID, "HealthShards10", 256);
+    Total %= 10;
+
+    Drops = Total / 5;
+    while (Drops--) DropMonsterItem(Killer, TID, "HealthShards5", 256);
+    Total %= 5;
+    
+    Drops = Total / 1;
+    while (Drops--) DropMonsterItem(Killer, TID, "HealthShards1", 256);
+    Total %= 1;
+
+}
+
+
 int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed YAdd, fixed ZAdd, fixed XVelAdd, fixed YVelAdd, fixed ZVelAdd)
 {
     // if this is an invalid killer, return
