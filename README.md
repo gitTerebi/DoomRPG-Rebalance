@@ -1,22 +1,12 @@
 ## Fork overview
-Darksouls like mod for DOOMRPG + DOOMRLA. You will die alot. High damage dealing enemies, low health pools. 
+Combines DoomRPG + Doom RogueLite Arsenal and puts a soulslike spin on it.
 
-Instead of save scumming, when you die you keep all your items and progression. 
+When you die you keep all your items and level progression. Instead you lose all your 'credit/ranks' ie souls. You will respawn back at the start of the level togther with all items/monsters. A tombstone is dropped where you died, retrieve it to get back your lost credits.
 
-You will respawn back at the start of the level with items/monsters also respawned. All your xp, rank and credits are dropped where you died so you need to reclaim it by picking up your tombstone.
-
-## Simplified
-* On level up you get 5 modules. Each stat increase costs 1 module. Each skill unlock is 1 module per level, ie 2 modules to get skill level 2 etc. This makes it easier to plan out a build as you know exactly how much it costs to grow a stat from 1 -> 10. Just 2 levels at 5 modules a level.
-* Generic Loot eg "materials" no longer drop. Instead money is dropped.
-
-## New Mechanics
-* When you die, you respawn automatically at the start of the level. Just like in Dark Souls, you will drop all your xp, rank and credits where you died. To retrieve your missing stats find and collect the tombstone. 
-* All items at shop can be bought.
-* All static weapon drop locations have a chance to drop a DRLA weapon now. The chance depends on the loot drop setting in DoomRPG. Its set to 'adaptive' by default.
-* You will always get up to 2 mod pack spawns on each level.
-* You can carry 32 mod packs and 12 weapons.
-* You can edit directly how much DMG you do in game via slider. 
-* You can edit the max health of monsters as well. Now you can reduce the chances of bullet sponge gameplay. Think highly deadly, for both you and monsters.
+## Design Notes
+* Encourage aggression. Health drops from dead monsters. The lower your health the more likely its drops.
+* Drop important credits to encourage you to keep playing to retrieve it.
+* You will die alot, but you can upgrade your stats to keep you going for longer.
 
 ## Installing (build)
 

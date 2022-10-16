@@ -283,11 +283,11 @@ OptionMenu "DoomRPGXPSystem"
 
     Slider "Kill Credits Multiplier", "drpg_scalexp", 0.1, 10.0, 0.1
     Slider "Combo Credits Multiplier", "drpg_scalecomboxp", 0.25, 8.0, 0.25
-    Slider "Credits Spawn Amount Factor", "drpg_module_spawnfactor", 0.5, 10.0, 0.1
+    //Slider "Credits Spawn Amount Factor", "drpg_module_spawnfactor", 0.5, 10.0, 0.1
     Slider "Credits Levelup Amount Factor", "drpg_module_levelfactor", 0.5, 10.0, 0.1
     
-    //    Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
-    Slider "Credits based on monster health", "drpg_xp_health_awareness", 0, 1, 0.1
+    //Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
+    Slider "Credits based on monster health", "drpg_xp_health_awareness", 0, 5, 0.1
     Slider "Summon's damage Credit award %", "drpg_xp_summon_percent", 0, 100, 1
 }
 

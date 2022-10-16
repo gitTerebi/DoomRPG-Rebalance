@@ -20,11 +20,10 @@ NamedScript void DropTombStones()
 
             SpawnForced("DRPGTombstone", Players(i).TombStoneX, Players(i).TombStoneY, Players(i).TombStoneZ, 0, 0);
             SetHudSize(640, 480, false);
-            SetFont("SMALLFONT");
-            HudMessage("\CdSpawned Tombstone worth \C- \Cb%ld RANK \Ce%ld CREDITS", Players(i).RankPenalty, Players(i).CreditPenalty);
-            EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 120.0, 0.5, 6.0);
+            SetFont("BIGFONT");
+            HudMessage("\CdSpawned Tombstone \Ca%ld CREDITS", Players(i).CreditPenalty);
+            EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 120.0, 0.5, 9.0);
 
-            Log("\CdRESPAWN: \C-Spawned a \CaTombstone worth %ld Credits", Players(i).CreditPenalty);
             break;
         }
     }
@@ -32,9 +31,6 @@ NamedScript void DropTombStones()
 
 NamedScript DECORATE void PickUpTombstone()
 {
-    Log("\Cd  ===== Your tombstone DATA =====");
-    Log("Got tombstone worth %ld RANK %ld CREDITS", Player.RankPenalty, Player.CreditPenalty);
-
     ActivatorSound("health/resurrect", 127);
     // Player.XP += Player.XPPenalty;
     Player.Rank += Player.RankPenalty;
@@ -45,7 +41,7 @@ NamedScript DECORATE void PickUpTombstone()
 
     SetHudSize(640, 480, false);
     SetFont("BIGFONT");
-    HudMessage("\CdTombstone retrieved\C- \Cb%ld RANK \Ce%ld CREDITS", Player.RankPenalty, Player.CreditPenalty);
+    HudMessage("\CdTombstone retrieved \Ca%ld CREDITS \Cb%ld RANK", Player.CreditPenalty, Player.RankPenalty);
     EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 120.0, 0.5, 6.0);
 
     // Player.XPPenalty = 0;

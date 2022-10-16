@@ -2841,10 +2841,11 @@ NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
             DropMoney(Killer, 0, CreditsAmount);
     }
 
-    // 50% of time monster killed drop health based on regen
-    if(Random(0, 100) > 50 )
+    // Drop health with chance inc as your health drops.
+    if( Random(0, Players(Killer).HealthMax) > Players(Killer).ActualHealth )
     {
-        int HealthShardsAmount = Random(0, Players(Killer).HPAmount * 2);
+        int HealthDelta = Players(Killer).HealthMax - Players(Killer).ActualHealth;
+        int HealthShardsAmount = Random(HealthDelta / 4, HealthDelta / 2);
         if(HealthShardsAmount > 0)
             DropHealthShard(Killer, 0 , HealthShardsAmount);
     }
@@ -2857,12 +2858,7 @@ NamedScript void MonsterDeath()
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
     // Don't forget to remove stupid fixed-point avoidance code after migration (if it happens)
     int Killer = WhoKilledMe();
-    long int HealthXP;
-
-    if (GetCVarFixed("drpg_xp_health_awareness") < 1.0)
-        HealthXP = (long int)Stats->SpawnHealth + (((long int)Stats->HealthMax - (long int)Stats->SpawnHealth) * (long int)(GetCVarFixed("drpg_xp_health_awareness") * 10l)) / 10l;
-    else
-        HealthXP = ((long int)Stats->HealthMax * (long int)(GetCVarFixed("drpg_xp_health_awareness") * 10l)) / 10l;
+    long int HealthXP = (long int)(Stats->HealthMax * GetCVarFixed("drpg_xp_health_awareness"));
 
     fixed ThreatMult = (fixed)Stats->Threat + ((fixed)Stats->Level / ((fixed)GetCVar("drpg_ws_use_wads") * 6.0)) + 8.0 * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
     if (ThreatMult < 1.0)
