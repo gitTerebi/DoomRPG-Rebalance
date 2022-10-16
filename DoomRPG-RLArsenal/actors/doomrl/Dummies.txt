@@ -1,2 +1,13 @@
 // DRLA Active Flag
 actor DRPGDRLAActive : Inventory               { Inventory.MaxAmount 1 +INVENTORY.UNDROPPABLE }
+
+
+Actor RLWeaponLimit1 : RLPermanentInventory replaces RLWeaponLimit // Altering it to ammo allows it to be modified, but also breaks with any ammo giving cheat
+{
+    inventory.maxamount 99 // Change this value to alter max weapon amount
+}
+
+Actor RLModLimit1 :  RLPermanentInventory replaces RLModLimit // Altering it to ammo allows it to be modified, but also breaks with any ammo giving cheat
+{
+    inventory.maxamount 99 // Change this value to break everything ever, you dastardly rogue you
+}

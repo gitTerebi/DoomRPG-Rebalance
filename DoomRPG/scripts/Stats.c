@@ -558,7 +558,10 @@ void CheckStats()
         SetAmmoCapacity("RLArmorInInventory", DRLA_ARMOR_MAX);
         SetAmmoCapacity("RLSkullLimit", DRLA_SKULL_MAX);
         SetAmmoCapacity("RLPhaseDeviceLimit", DRLA_DEVICE_MAX);
+        SetAmmoCapacity("RLModLimit", DRLA_MODPACKS_MAX);
+        SetAmmoCapacity("RLWeaponLimit", DRLA_WEAPON_MAX); 
     }
+    
     Player.MedkitMax = Player.CapacityTotal * 5;
 
     // Determine current stat cap

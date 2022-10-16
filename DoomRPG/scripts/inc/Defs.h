@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdfix.h>
 #include <limits.h>
+#include <math.h>
 
 // Aliases
 #define EndHudMessage2      EndHudMessageX
@@ -710,7 +711,7 @@ typedef enum
 #define RANKUP_ID               (MAKE_ID('R', 'K', 'U', 'P'))
 #define CONFUSION_ID            (MAKE_ID('C', 'O', 'N', 'F'))
 
-#define MODULE_STAT_MULT        100
+#define MODULE_STAT_MULT        10
 #define MODULE_SKILL_MULT       2500
 
 #define LUCK_HEALTHDROP         (GetCVar("drpg_levelup_natural") ? 15 : 10)
@@ -754,11 +755,11 @@ typedef enum
 #define LUCK_AUGINC             0.00025
 
 #define AURA_CALCTIME           (((GetCVar("drpg_levelup_natural")) ? ((35 * 100) + (35 * Player.EnergyTotal * 2)) : ((35 * 80) + (35 * Player.EnergyTotal * 4))) * (1.0 + Player.AuraBonus * 0.5))
-#define DRLA_WEAPON_MAX         (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 9 ? 2 + Player.Rank : 4 + Player.Rank)
+#define DRLA_WEAPON_MAX         (int)fmin((CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 9 ? 2 : 4) + (Player.CapacityTotal / 10) , 12)
 #define DRLA_ARMOR_MAX          3 + ((GetCVar("drpg_levelup_natural")) ? (Player.CapacityTotal / 50) : (Player.CapacityTotal / 25))
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX
 #define DRLA_DEVICE_MAX         4 + (Player.CapacityTotal / 50)
-#define DRLA_MODPACKS_MAX       (CompatMode == COMPAT_DRLA && PlayerClass(PlayerNumber()) == 2 ? 48 : 32)
+#define DRLA_MODPACKS_MAX       (int)fmin( (CompatMode == COMPAT_DRLA && PlayerClass(PlayerNumber()) == 2 ? 8 : 6) + (Player.CapacityTotal / 10) , 99)
 
 #define NATURALCAP              100
 

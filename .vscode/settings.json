@@ -1,11 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "itemdata.h": "c",
-        "stats.h": "c",
         "*.zs": "c",
-        "utils.h": "c",
-        "hud.h": "c",
-        "rpg.h": "c"
+        "*.acs": "c"
     }
 }

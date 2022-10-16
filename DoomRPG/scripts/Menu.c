@@ -573,13 +573,13 @@ void DrawStatsMenu()
        // int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
 
         // Upgrade Modules        
-        PrintSprite("CREDA0", 0, 16.1, 304.1, 0.05);
+        PrintSprite("CREDA0", 0, 16.1, 314.1, 0.05);
         // PrintSprite("UMODA0", 0, 16.1, 304.1, 0.05);
         SetFont("BIGFONT");
         HudMessage("%d", CheckInventory("DRPGCredits"));
-        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 40.1, 288.1, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 40.1, 298.1, 0.05);
         HudMessage("-%d", Cost);
-        EndHudMessage(HUDMSG_PLAIN, 0, "Red", 40.1, 302.1, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "Red", 40.1, 312.1, 0.05);
 
         SetFont("BIGFONT");
         switch(Player.MenuIndex)
@@ -835,6 +835,14 @@ void DrawStatsMenu()
             EndHudMessage(HUDMSG_PLAIN, 0, "Orange",             30.1,   266.0,  0.05);
             HudMessage("Phase Devices: %d/%d", CheckInventory("RLPhaseDeviceLimit"), DRLA_DEVICE_MAX);
             EndHudMessage(HUDMSG_PLAIN, 0, "Gray",               30.1,   274.0,  0.05);
+
+            bool IsTechnician = (PlayerClass(PlayerNumber()) == 2);
+            if(IsTechnician)
+                HudMessage("Modpacks: %d/%d", CheckInventory("RLScavengerModLimit"), DRLA_MODPACKS_MAX);
+            else
+                HudMessage("Modpacks: %d/%d", CheckInventory("RLModLimit"), DRLA_MODPACKS_MAX);
+            
+            EndHudMessage(HUDMSG_PLAIN, 0, "Yellow",               30.1,   282.0,  0.05);
         };
 
         // Luck

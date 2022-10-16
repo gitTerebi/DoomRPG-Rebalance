@@ -1,0 +1,208 @@
+//==============================================================================
+//		IMPORTANT THINGAMATHINGS
+//==============================================================================
+
+Actor RLWeaponLimit : Ammo // Altering it to ammo allows it to be modified, but also breaks with any ammo giving cheat
+{
+inventory.maxamount 12 // Change this value to alter max weapon amount
+}
+
+Actor RLModLimit : Ammo // Altering it to ammo allows it to be modified, but also breaks with any ammo giving cheat
+{
+inventory.maxamount 99 // Change this value to break everything ever, you dastardly rogue you
+}
+
+Actor RLScavengerModLimit : Ammo // Altering it to ammo allows it to be modified, but also breaks with any ammo giving cheat
+{
+inventory.maxamount 4 // Technicians friggin love these things, man
+}
+
+Actor RLDemonArtifactLimit : Ammo // Altering it to ammo allows it to be modified, but also breaks with any ammo giving cheat
+{
+inventory.maxamount 8 // Collecting these is a terrible hobby
+}
+
+ // OH NO IT'S THE HUDPOCALYPSE
+ 
+ // Status Bar HUD Types
+Actor RLStatusBarHUDType : RLPermanentInventory {} // Yholl's design of health and armor locations
+Actor RLStatusBarAltHUDType : RLPermanentInventory {} // Shiver's design of health and armor locations
+
+ // Fullscreen HUD Types
+Actor RLFullscreenOriginalHUDType : RLPermanentInventory {} // The original DRLA HUD, slightly revamped
+Actor RLFullscreenShinyHUDType : RLPermanentInventory {} // The super fancy Shiny HUD, by Ryan
+Actor RLFullscreenDookHUDType : RLPermanentInventory {} // The Duke3D HUD, also by Ryan
+
+
+Actor RLSpecialHUD : RLPermanentInventory {} // Indicates non-standard HUD
+Actor RLGoodbyeGalaxyMode : RLPermanentInventory {} // Commander Keen Game Mode
+Actor RLImBackMode : RLPermanentInventory {} // Duke Nukem II Game Mode
+Actor RLBackPhforMoreMode : RLPermanentInventory {} // Marathon Game Mode
+Actor RLOverkillMode : RLPermanentInventory {} // Overkill Weapons Game Mode
+
+Actor RLSynthFireLeft : RLPermanentInventory {} // Pewpew first gun
+Actor RLSynthFireRight : RLPermanentInventory {} // Pewpew second gun
+Actor RLSynthFireReload : RLPermanentInventory {} // Clunkyclink gun
+Actor RLSynthFireSelectActivate : RLPermanentInventory {} // For max gunning while already gunning
+Actor RLSynthFireDisabled : RLPermanentInventory {} // For not shooting things while in menus you prat why are you walking around pointing guns at people
+
+Actor RLRapidfireTypeWeapon : RLPermanentInventory {} // Rapidfire or Burst weapons affected by Marine
+Actor RLPistolTypeWeapon : RLPermanentInventory {} // Pistol weapons affected by Scout
+Actor RLShotgunTypeWeapon : RLPermanentInventory {} // Non-fixed multi-projectile single shot weapons affected by Renegade
+Actor RLEfficientAmmoTypeWeapon : RLPermanentInventory {} // Weapons that use more than one non-shell ammo per shot affected by Demolitionist
+Actor RLMeleeTypeWeapon : RLPermanentInventory {} // Melee weapons affected by Commando
+Actor RLSingleShotRifleTypeWeapon : RLPermanentInventory {} // Single shot two handed weapons affected by Sniper
+Actor RLBasicAssemblyTypeWeapon : RLPermanentInventory {} // Basic Assembly weapons affected by Technician
+Actor RLAdvancedAssemblyTypeWeapon : RLPermanentInventory {} // Advanced Assembly weapons affected by Technician
+Actor RLMasterAssemblyTypeWeapon : RLPermanentInventory {} // Master Assembly weapons affected by Technician
+	
+Actor RLMultiAmmoWeapon : RLPermanentInventory {} // So the hud can actually be nice and sensible fuck sbarinfo
+Actor RLInfiniteAmmoWeapon : RLPermanentInventory {} // All weapons that shootbang but don't use ammo
+Actor RLNuclearAmmoWeapon : RLPermanentInventory {} // All recharging weapons that are part of the Nuclear set
+Actor RLRechargingAmmoWeapon : RLPermanentInventory {} // All recharging weapons that are not part of the Nuclear set
+
+Actor RLWeaponDrop : RLPermanentInventory {} // For fumbling purposes only
+Actor RLScavengerDrop : RLPermanentInventory {} // For purposeful fumbling
+
+Actor RLUniqueBossActive : RLPermanentInventory {} // You found a really cool thing but now you are in danger
+Actor RLLegendaryBossActive : RLPermanentInventory {} // oh shit oh shit better hope you're super stronk right now
+Actor RLDemonicBossActive : RLPermanentInventory {} // You found a horrible thing and now bad things want you ded
+Actor RLDemonicWeaponMaxed : RLPermanentInventory {} // oh god you maxed it out now you can never again know the peace of safety
+
+Actor RLBasicAssemblyItemFound : RLPermanentInventory {} // nice, pretty cool thing you got there
+Actor RLAdvancedAssemblyItemFound : RLPermanentInventory {} // now this is nice and fancy
+Actor RLMasterAssemblyItemFound : RLPermanentInventory {} // ho boy, now this is a gnu (unless its not)
+
+Actor RLUniqueItemSpawnMessageLimiter : RLLevelRestrictedInventory {}
+Actor RLDemonicItemSpawnMessageLimiter : RLLevelRestrictedInventory {}
+Actor RLLegendaryItemSpawnMessageLimiter : RLLevelRestrictedInventory {}
+Actor RLMasterItemSpawnMessageLimiter : RLLevelRestrictedInventory {}
+Actor RLNuclearBarrelSpawnMessageLimiter : RLLevelRestrictedInventory {}
+
+Actor RLAmmochainPerk : RLPermanentInventory {} // Marine's identifying token
+Actor RLSharpshooterPerk : RLPermanentInventory {} // Scout's identifying token
+Actor RLScavengerPerk : RLPermanentInventory {} // Technician's identifying token
+Actor RLShellshockPerk : RLPermanentInventory {} // Renegade's identifying token
+Actor RLFireangelPerk : RLPermanentInventory {} // Demolitionist's identifying token
+Actor RLBerserkerPerk : RLPermanentInventory {} // Commando's identifying token
+
+Actor RLDeadeyePerk : RLPermanentInventory {} // Sniper's identifying token
+Actor RLChemicalCatalystPerk : RLPermanentInventory {} // Scientist's identifying token
+Actor RLTranshumanismPerk : RLPermanentInventory {} // Cyborg's identifying token
+Actor RLWhambulancePerk : RLPermanentInventory {} // Medic's identifying token
+Actor RLBlitzkriegPerk : RLPermanentInventory {} // Saboteur's identifying token
+
+//------------------------------------------------------------------------------
+//		SPECIAL LEVEL STUFF
+
+// Can only use melee weapons.
+Actor RLRestrictionMeleeOnly : RLLevelRestrictedInventory {}
+// Can only use quiet weapons.
+Actor RLRestrictionSilencedOnly : RLLevelRestrictedInventory {}
+// Cannot use explosive weapons.
+Actor RLRestrictionNoBoom : RLLevelRestrictedInventory {}
+// Can only use explosive weapons.
+Actor RLRestrictionBoomOnly : RLLevelRestrictedInventory {}
+// Can only use simplistic weapons.
+Actor RLRestrictionLowTechOnly : RLLevelRestrictedInventory {}
+// Can only use advanced electronic weapons.
+Actor RLRestrictionHighTechOnly : RLLevelRestrictedInventory {}
+// Cannot attack.
+Actor RLRestrictionCunningOnly : RLLevelRestrictedInventory {}
+// Rechargable weapons will not recharge.
+Actor RLRestrictionNoRecharge : RLLevelRestrictedInventory {}
+
+//------------------------------------------------------------------------------
+//		WEIRD STUFF
+
+// You can now drop your fists! Congratulations!
+Actor RLFistDropAttempt : RLLevelRestrictedInventory
+{
+inventory.maxamount 4 // spleesh
+}
+
+Actor RLHUDDebug : RLPermanentInventory {} // Adds some hidden values to the hud for testing
+
+//==============================================================================
+//		TOKENS FOR THINGIES
+//==============================================================================
+
+Actor RLStandardWeaponToken : RLPermanentInventory {} // Indicates to the HUD that this is a standard Doom weapon
+Actor RLAssembledWeaponToken : RLPermanentInventory {} // Indicates to the HUD that this is a weapon assembled from another weapon
+Actor RLExoticWeaponToken : RLPermanentInventory {} // Indicates to the HUD that this is an uncommon and interesting weapon
+Actor RLSuperiorWeaponToken : RLPermanentInventory {} // Indicates to the HUD that this is a powerful and rare weapon that can't be modded much
+Actor RLSuperiorAssembledWeaponToken : RLPermanentInventory {} // Superior weapons with basic Assemblies, maximum snowflake
+Actor RLUniqueWeaponToken : RLPermanentInventory {} // Indicates to the HUD that this is a super awesome gun
+Actor RLDemonicWeaponToken : RLPermanentInventory {} // Indicates to the HUD that this is a deadly demonic thingy that can be upgraded with demon artifacts
+Actor RLLegendaryWeaponToken : RLPermanentInventory {} // Indicates to the HUD that this is the best thing evaaaar
+
+Actor RLDeathPowerCheck : RLClearableInventory {} // Restores permanent powerups upon death
+Actor RLDeathZombieCheck : RLClearableInventory {} // Turns you into a zombie
+Actor RLDeathFallingCheck : RLClearableInventory {} // Turns you into a crater of broken dreams and misery
+Actor RLScoutMapCheck : RLPermanentInventory {} // Gives the Scout a computer map at the start of each level
+
+Actor RLSlimeDamageToken : RLClearableInventory {}
+Actor RLAaaghDamageToken : RLClearableInventory {}
+Actor RLStep : RLClearableInventory {}
+
+ACTOR RLMisfireSpamPreventionCooldown : Powerup
+{
+	Powerup.Duration 10
+}
+
+Actor RLSetBonusLevelCooldown : RLClearableInventory
+{
+inventory.maxamount 4 // After receiving a set bonus item, you will not receive another for at least 5 maps (including current)
+}
+
+Actor RLMarineAnimationState : RLClearableInventory {}
+
+ACTOR RLMarineAnimationBuffer : Powerup
+{
+	Powerup.Duration 1
+}
+// What the fuck did you do to the playerpawn, you absolute shitheads
+// I'm so fucking mad I feel sick
+// calling the fucking Melee state twice with hitscans, yeah that totally won't break shit
+
+
+Actor RLRenegadeExtraShot : RLClearableInventory {}
+
+
+ACTOR RLWeaponZoomCooldown : Powerup
+{
+	Powerup.Duration 15 // Prevents massive zoom spam
+	+INVENTORY.UNTOSSABLE
+}
+
+Actor RLPlayerHasBeenCorrupted : Powerup
+{
+	Powerup.Duration 5 // Makes Overminds happy
+	+INVENTORY.UNTOSSABLE
+}
+
+Actor RLHUDPage : RLPermanentInventory
+{
+	inventory.maxamount 6 // Used to switch pages of HUD menus
+}
+
+Actor RLFistMessageSpamPreventer : Powerup
+{
+	Powerup.Duration 25 // Stops infinite fist dropping message spam
+  +INVENTORY.UNTOSSABLE
+}
+
+ // The monsterpack checks for this thing to see whether or not Arsenal is being loaded with it.
+ACTOR RLArsenalThingo
+{
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+	TNT1 A 10
+    Stop
+  }
+}
+
+
+// EOF

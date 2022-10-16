@@ -607,7 +607,7 @@ NamedScript DECORATE int PlayerDamage(int Inflictor, int DamageTaken)
     Player.DamageType = DT_NONE;
 
     // Don't do more than 90% HP damage - avoid one shot kills
-    DamageTaken = fmin((int)(Player.HealthMax * 0.90), DamageTaken);
+    DamageTaken = (int)fmin(Player.HealthMax * 0.90, DamageTaken);
     Log("Took damage %d of %d", DamageTaken, Player.ActualHealth);
 
     if(GetCVar("drpg_allow_respawn") && !GetCVar("drpg_multi_revives") && Player.ActualHealth <= DamageTaken)
@@ -1622,11 +1622,11 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
             }
         }
 
-        if (DebugLog)
-        {
-            HudMessage("\CfGenerating Loot\n\Cd%d \Cj/ \Cd%d\n\n\CdActor: \C-%S\n\CdIteration: %d\n\CiBoundaries: %.2k-%.2k, %.2k-%.2k\n\nX: %.2k\nY: %.2k\nZ: %.2k", Items, MaxItems, Actor, Iterations, LowerX, UpperX, LowerY, UpperY, X, Y, Z);
-            EndHudMessage(HUDMSG_FADEOUT, MAKE_ID('L', 'O', 'O', 'T'), "White", 1.5, 0.8, 1.5, 0.5);
-        }
+        // if (DebugLog)
+        // {
+        //     HudMessage("\CfGenerating Loot\n\Cd%d \Cj/ \Cd%d\n\n\CdActor: \C-%S\n\CdIteration: %d\n\CiBoundaries: %.2k-%.2k, %.2k-%.2k\n\nX: %.2k\nY: %.2k\nZ: %.2k", Items, MaxItems, Actor, Iterations, LowerX, UpperX, LowerY, UpperY, X, Y, Z);
+        //     EndHudMessage(HUDMSG_FADEOUT, MAKE_ID('L', 'O', 'O', 'T'), "White", 1.5, 0.8, 1.5, 0.5);
+        // }
 
         if (Iterations % 50 == 0) Delay(1);
 

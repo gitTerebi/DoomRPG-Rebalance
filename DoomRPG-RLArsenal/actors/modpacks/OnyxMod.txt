@@ -1,0 +1,428 @@
+
+//-------------------------------------------------------------------
+//		ONYX MOD
+
+ACTOR RLOnyxModItem : CustomInventory 16508
+{
+  -COUNTITEM
+  +INVENTORY.INVBAR
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.UNTOSSABLE
+  +INVENTORY.BIGPOWERUP
+  +INVENTORY.NEVERRESPAWN
+  +DONTGIB
+  Tag "Onyx Modpack"
+    //$category "DRLA Items"
+  Inventory.InterHubAmount 99
+  Inventory.MaxAmount 99
+  Inventory.Icon "OMODI0"
+  Inventory.Pickupsound "misc/modpackpickup"
+  Inventory.UseSound "modpack/onyx"
+  Inventory.PickupMessage "You picked up an Onyx Mod Pack."
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(CallACS("DRPGCheckTiem"), "DRPGInit")
+  SpecialStartCheck:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_specialstarts") == 2, "Duke2Stuff")
+  SpawnLoop:
+    OMOD ABCDCB 3
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_lettermodpacks") == 1, "SpawnLetter")
+    Loop
+  SpawnLetter:
+    OMOD E 5 Bright
+    GMOD B 1
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_lettermodpacks") == 1, "SpawnLetter")
+    Goto SpawnLoop
+	
+  Pickup:
+	TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,3)
+	TNT1 A 0 A_JumpIfInventory("RLModLimit",0,"NoPickup")
+    TNT1 A 0 A_GiveInventory("RLModLimit", 1)
+    Stop
+	TNT1 A 0 A_JumpIfInventory("RLScavengerModLimit",0,"NoPickup")
+    TNT1 A 0 A_GiveInventory("RLScavengerModLimit", 1)
+    Stop
+  NoPickup:
+	TNT1 A 0 A_JumpIfInventory("DRLA_ModsAntiLogFloodCheck",1,"NoPickup_NoPrint")
+	TNT1 A 0 A_GiveInventory("DRLA_ModsAntiLogFloodCheck")
+	TNT1 A 0 A_Print("\cu= Onyx Mod =", 2, "CONFONT")
+   NoPickup_NoPrint:
+    TNT1 A 0
+	Fail
+	
+  Use:
+	TNT1 A 0 A_GiveInventory("RLMisfireSpamPreventionCooldown",1)
+//Check for Cybernetic armor being modded.
+	TNT1 A 0 A_JumpIfInventory("RLCyberneticArmorModdingConfirm",1,"CyberneticArmorModding")
+//Check for already active armors for instant usage
+    TNT1 A 0 A_JumpIfInventory("RLGenericArmorUse",1,"GenericArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLGreenArmorUse",1,"GreenArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLBlueArmorUse",1,"BlueArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLRedArmorUse",1,"RedArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLBallisticVestArmorUse",1,"BallisticVestArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLBulletProofVestArmorUse",1,"BulletProofVestArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLDuelistArmorUse",1,"DuelistArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLEnergyShieldedVestArmorUse",1,"EnergyShieldedVestArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLGothicArmorUse",1,"GothicArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLMedicalArmorUse",1,"MedicalArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLPhaseshiftArmorUse",1,"PhaseshiftArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLCyberwarriorArmorUse",1,"CyberwarriorArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLRepulsionWaveSuitArmorUse",1,"RepulsionWaveSuitArmorHeldUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLSurvivalMediArmorUse",1,"SurvivalMediArmorHeldUpgrade")
+//Check for Onyx mod being activated once for confirmation
+	TNT1 A 0 A_JumpIfInventory("RLUseOnyxMod",1,"ArmorSelect")
+    TNT1 A 0 A_GiveInventory("RLUseOnyxMod", 1)
+    TNT1 A 0 A_PlaySound("hud/generic", 5)
+//Check for worn armors to change the activation message
+    TNT1 A 0 A_JumpIfInventory("RLGenericArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLGreenArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBlueArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLRedArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBallisticVestArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBulletProofVestArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLDuelistArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLEnergyShieldedVestArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLGothicArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLMedicalArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLPhaseshiftArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLCyberwarriorArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLRepulsionWaveSuitArmorToken",1,"UseWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLSurvivalMediArmorToken",1,"UseWearingArmor")
+	
+//Check for held armors to change the activation message
+    TNT1 A 0 A_JumpIfInventory("RLGenericArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLGreenArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBlueArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLRedArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBallisticVestArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBulletProofVestArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLDuelistArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLEnergyShieldedVestArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLGothicArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLMedicalArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLPhaseshiftArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLCyberwarriorArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLRepulsionWaveSuitArmorPickup",1,"UseCarryingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLSurvivalMediArmorPickup",1,"UseCarryingArmor")
+	TNT1 A 0 A_Print("You have no armors you can use this on.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 5)
+    Fail
+  UseWearingArmor:
+//Check for held armors to change the activation message
+    TNT1 A 0 A_JumpIfInventory("RLGenericArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLGreenArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBlueArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLRedArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBallisticVestArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLBulletProofVestArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLDuelistArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLEnergyShieldedVestArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLGothicArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLMedicalArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLPhaseshiftArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLCyberwarriorArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLRepulsionWaveSuitArmorPickup",1,"UseCarryingWearingArmor")
+    TNT1 A 0 A_JumpIfInventory("RLSurvivalMediArmorPickup",1,"UseCarryingWearingArmor")
+	TNT1 A 0 A_Print("Use Onyx Mod again to apply to currently worn armor.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 5)
+    Fail
+  UseCarryingArmor:
+	TNT1 A 0 A_Print("Activate a compatible armor in your inventory to apply the Onyx mod to it.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 5)
+    Fail
+  UseCarryingWearingArmor:
+	TNT1 A 0 A_Print("Use Onyx Mod again to apply to currently worn armor.\n\nActivate a compatible armor in your inventory to apply the Onyx mod to it.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 5)
+    Fail
+  ArmorSelect:
+	TNT1 A 0 A_GiveInventory("RLDeselectionFunction",1)
+    TNT1 A 0 A_JumpIfInventory("RLIndestructibleArmorWorn",1,"IndestructibleUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLGenericArmorToken",1,"GenericArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLGreenArmorToken",1,"GreenArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLBlueArmorToken",1,"BlueArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLRedArmorToken",1,"RedArmorUpgrade")
+// Exotic Armors
+    TNT1 A 0 A_JumpIfInventory("RLBallisticVestArmorToken",1,"BallisticVestArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLBulletProofVestArmorToken",1,"BulletProofVestArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLDuelistArmorToken",1,"DuelistArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLEnergyShieldedVestArmorToken",1,"EnergyShieldedVestArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLGothicArmorToken",1,"GothicArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLMedicalArmorToken",1,"MedicalArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLPhaseshiftArmorToken",1,"PhaseshiftArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLCyberwarriorArmorToken",1,"CyberwarriorArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLRepulsionWaveSuitArmorToken",1,"RepulsionWaveSuitArmorUpgrade")
+    TNT1 A 0 A_JumpIfInventory("RLSurvivalMediArmorToken",1,"SurvivalMediArmorUpgrade")
+// nope.avi
+	TNT1 A 0 A_Print("This armor cannot be made \cuindestructible\c-.", 4)
+    Fail
+	
+// Worn armors turning \cuindestructible\c-.
+  GenericArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLGenericArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_SpawnItemEx("RLAaaghSphere", 32,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+    TNT1 A 0 A_Print("As an award for doing weird shit, you get a thingy.")
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  GreenArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLGreenArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModGreenArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModGreenArmor",1)
+	TNT1 A 0 A_Print("Your \cjSecurity Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  BlueArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLBlueArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModBlueArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModBlueArmor",1)
+	TNT1 A 0 A_Print("Your \cjCombat Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  RedArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLRedArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModRedArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModRedArmor",1)
+	TNT1 A 0 A_Print("Your \cjCommando Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  BallisticVestArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLBallisticVestArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModBallisticVestArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModBallisticVestArmor",1)
+	TNT1 A 0 A_Print("Your \ctBallistic Vest\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  BulletProofVestArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLBulletProofVestArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModBulletProofVestArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModBulletProofVestArmor",1)
+	TNT1 A 0 A_Print("Your \ctBullet-proof Vest\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  DuelistArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLDuelistArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModDuelistArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModDuelistArmor",1)
+	TNT1 A 0 A_Print("Your \ctDuelist Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  EnergyShieldedVestArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLEnergyShieldedVestArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModEnergyShieldedVestArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModEnergyShieldedVestArmor",1)
+	TNT1 A 0 A_Print("Your \ctEnergy-shielded Vest\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  GothicArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL200ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLGothicArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModGothicArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModGothicArmor",1)
+	TNT1 A 0 A_Print("Your \ctGothic Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  MedicalArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLMedicalArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("RLMedicalArmorBonus", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModMedicalArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLOModMedicalArmorBonus",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModMedicalArmor",1)
+	TNT1 A 0 A_Print("Your \ctMedical Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  PhaseshiftArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLPhaseshiftArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModPhaseshiftArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModPhaseshiftArmor",1)
+	TNT1 A 0 A_Print("Your \ctPhaseshift Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  CyberwarriorArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLCyberwarriorArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModCyberwarriorArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModCyberwarriorArmor",1)
+	TNT1 A 0 A_Print("Your \ctCyberwarrior Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  RepulsionWaveSuitArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLRepulsionWaveSuitArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("RLRepulsionWaveSuitArmorBonus", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModRepulsionWaveSuitArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLOModRepulsionWaveSuitArmorBonus",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModRepulsionWaveSuitArmor",1)
+	TNT1 A 0 A_Print("Your \ctRepulsion Wave Suit\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  SurvivalMediArmorUpgrade:
+	TNT1 A 0 A_TakeInventory("RL100ArmorWorn",1)
+    TNT1 A 0 A_TakeInventory("RLSurvivalMediArmorToken", 1)
+    TNT1 A 0 A_TakeInventory("BasicArmor", 99999)
+    TNT1 A 0 A_GiveInventory("RLOModSurvivalMediArmorToken",1)
+    TNT1 A 0 A_GiveInventory("RLIndestructibleArmorWorn", 1)
+    TNT1 A 0 A_GiveInventory("RLOModSurvivalMediArmor",1)
+	TNT1 A 0 A_Print("Your \ctSurvival MediArmor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+	
+// Held armors turning \cuindestructible\c-.
+  GenericArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLGenericArmorPickup", 1)
+    TNT1 A 0 A_SpawnItemEx("RLAaaghSphere", 32,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION)
+    TNT1 A 0 A_Print("As an award for doing weird shit, you get a thingy.")
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  GreenArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLGreenArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModGreenArmorPickup",1)
+	TNT1 A 0 A_Print("Your \cjSecurity Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  BlueArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLBlueArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModBlueArmorPickup",1)
+	TNT1 A 0 A_Print("Your \cjCombat Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  RedArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLRedArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModRedArmorPickup",1)
+	TNT1 A 0 A_Print("Your \cjCommando Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  BallisticVestArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLBallisticVestArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModBallisticVestArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctBallistic Vest\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  BulletProofVestArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLBulletProofVestArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModBulletProofVestArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctBullet-proof Vest\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  DuelistArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLDuelistArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModDuelistArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctDuelist Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  EnergyShieldedVestArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLEnergyShieldedVestArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModEnergyShieldedVestArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctEnergy-shielded Vest\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  GothicArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLGothicArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModGothicArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctGothic Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  MedicalArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLMedicalArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModMedicalArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctMedical Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  PhaseshiftArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLPhaseshiftArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModPhaseshiftArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctPhaseshift Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  CyberwarriorArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLCyberwarriorArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModCyberwarriorArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctCyberwarrior Armor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  RepulsionWaveSuitArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLRepulsionWaveSuitArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModRepulsionWaveSuitArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctRepulsion Wave Suit\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+  SurvivalMediArmorHeldUpgrade:
+	TNT1 A 0 A_TakeInventory("RLArmorInInventory",1)
+    TNT1 A 0 A_TakeInventory("RLSurvivalMediArmorPickup", 1)
+    TNT1 A 0 A_GiveInventory("RLOModSurvivalMediArmorPickup",1)
+	TNT1 A 0 A_Print("Your \ctSurvival MediArmor\c- has been made \cuindestructible\c-.")
+	Goto SuccessfulModding
+
+//Cybernetic armor being modded.
+  CyberneticArmorModding:
+	TNT1 A 0 A_GiveInventory("RLDeselectionFunction",1)
+    TNT1 A 0 A_Print("Your \cdCybernetic Armor\c- has been Onyx \c-modded.")
+    TNT1 A 0 A_TakeInventory("RLCyberneticArmorModdingConfirm",1)
+    TNT1 A 0 A_JumpIfInventory("RLShellshockPerk",1,"CyberneticArmorModdingRenegade")
+    TNT1 A 0 A_TakeInventory("RLCyberneticArmor",1)
+    TNT1 A 0 A_TakeInventory("BasicArmor",99999)
+    TNT1 A 0 A_GiveInventory("RLCyberneticArmorOnyx", 1)
+	Goto CyberneticArmorModdingContinue
+  CyberneticArmorModdingContinue:
+    TNT1 A 0 A_GiveInventory("RLCyberneticArmorOnyxToken", 1)
+    TNT1 A 0 A_GiveInventory("RLCyberneticArmorModdedToken", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  CyberneticArmorModdingRenegade:
+    TNT1 A 0 A_TakeInventory("RLCyberneticArmorRenegade",1)
+    TNT1 A 0 A_TakeInventory("BasicArmor",99999)
+    TNT1 A 0 A_GiveInventory("RLCyberneticArmorRenegadeOnyx", 1)
+	Goto CyberneticArmorModdingContinue
+  IndestructibleUpgrade:
+    TNT1 A 0 A_Print("This armor is already \cuindestructible\c-.")
+    Fail
+  SuccessfulModding:
+	TNT1 A 0 A_GiveInventory("RLDeselectionFunction",1)
+    TNT1 A 0 A_Print("This armor has been made \cuindestructible\c-.")
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+//==============================================================================
+	Duke2Stuff:
+		"####" "#" 0 A_SpawnItemEx("RLDuke2WeaponCrate",0,0,0, 0,0,0, 0,SXF_NOCHECKPOSITION)
+		Stop
+//==============================================================================
+//					--	DRPG Compatibility Stuff  --
+//==============================================================================
+	DRPGInit:
+		"####" "#" 0 ACS_NamedExecuteAlways("ItemInit", 0)
+		"####" "#" 0 A_Jump (256, "SpecialStartCheck")
+		Goto SpecialStartCheck
+  }
+}

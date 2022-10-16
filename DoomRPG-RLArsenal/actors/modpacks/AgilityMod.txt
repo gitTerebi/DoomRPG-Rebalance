@@ -1,0 +1,2862 @@
+
+//-------------------------------------------------------------------
+//		AGILITY MOD
+
+ACTOR RLAgilityModItem : CustomInventory 16502
+{
+  -COUNTITEM
+  +INVENTORY.INVBAR
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.UNTOSSABLE
+  +INVENTORY.BIGPOWERUP
+  +DONTGIB
+  Tag "Agility Modpack"
+    //$category "DRLA Items"
+  Inventory.InterHubAmount 99
+  Inventory.MaxAmount 99
+  Inventory.Icon "AMODI0"
+  Inventory.Pickupsound "misc/modpackpickup"
+  Inventory.UseSound "modpack/agility"
+  Inventory.PickupMessage "You picked up an Agility Mod Pack."
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(CallACS("DRPGCheckTiem"), "DRPGInit")
+  SpecialStartCheck:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_specialstarts") == 2, "Duke2Stuff")
+  SpawnLoop:
+    AMOD ABCDCB 3 Bright
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_lettermodpacks") == 1, "SpawnLetter")
+    Loop
+  SpawnLetter:
+    AMOD E 5 Bright
+    GMOD A 1
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_lettermodpacks") == 1, "SpawnLetter")
+    Goto SpawnLoop
+	
+  Pickup:
+	TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,3)
+	TNT1 A 0 A_JumpIfInventory("RLModLimit",0,"NoPickup")
+    TNT1 A 0 A_GiveInventory("RLModLimit", 1)
+    Stop
+	TNT1 A 0 A_JumpIfInventory("RLScavengerModLimit",0,"NoPickup")
+    TNT1 A 0 A_GiveInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  Use:
+	TNT1 A 0 A_JumpIfInventory("RLCyberneticArmorModdingConfirm",1,"CyberneticArmorModding")
+	TNT1 A 0 A_JumpIfInventory("RLUseAgilityMod",1,"WeaponSelect")
+    TNT1 A 0 A_GiveInventory("RLUseAgilityMod", 1)
+    TNT1 A 0 A_PlaySound("hud/generic", 5)
+	TNT1 A 0 A_JumpIfInventory("RLFistSelected",1,"FistSelection")
+	TNT1 A 0 A_JumpIfInventory("RLAntiFreakJackalSelected",1,"HellsingSelection")
+  UseAgainToMod:
+	TNT1 A 0 A_Print("Use Agility Mod again to apply to current weapon.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 5)
+    Fail
+  FistSelection:
+	TNT1 A 0 A_Print("Press \caDrop Item (DRLA)\c- to drop Agility Mod, or switch weapons to cancel.", 5)
+    Fail
+  HellsingSelection:
+	TNT1 A 0 A_JumpIfInventory("RLAntiFreakJackalDemonArtifacts",1,1)
+	Goto UseAgainToMod
+	TNT1 A 0 A_Print("Use Agility Mod again to apply to current weapon.\nPress \crAltFire\c- to switch which gun you wish to mod.\n\nPress \caDrop Item (DRLA)\c- to drop it, or switch weapons to cancel.", 5)
+    Fail
+  WeaponSelect:
+	TNT1 A 0 A_GiveInventory("RLMisfireSpamPreventionCooldown",1)
+    TNT1 A 0 A_Print (" ", 0)
+	TNT1 A 0 A_JumpIfInventory("RLFistSelected",1,"FistSelection")
+	TNT1 A 0 A_TakeInventory("RLDoubleChainsawConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLRipperConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLSpeedloaderPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLStormPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLEnergyPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLDemolitionAmmoPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLElephantGunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHeavyShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaticShrapnelShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAutoshotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoShrapnelShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLTacticalShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaticShrapnelCombatShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoShrapnelCombatShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHeavyDoubleShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaticShrapnelDoubleShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAutoDoubleShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoShrapnelDoubleShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLFocusedDoubleShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLGatlingGunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerChaingunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBulletstormChaingunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAssaultRifleChaingunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBurstCannonChaingunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoChaingunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLDemolitionAmmoChaingunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLMotherInLawConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLMicroLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLTacticalRocketLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoRocketLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerPlasmaRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHyperBlasterConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaRifleMkIIConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAssaultRiflePlasmaRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBurstCannonPlasmaRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoPlasmaRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaRefractorConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerBFG9000Confirm",1)
+	TNT1 A 0 A_TakeInventory("RLVBFG9000Confirm",1)
+	TNT1 A 0 A_TakeInventory("RLBiggestFuckingGunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerBlasterConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoBlasterConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerCombatPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLStormCombatPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLEnergyCombatPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoCombatPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLDemolitionAmmoCombatPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerHandcannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLMiniMissilePistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoHandcannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLDemolitionAmmoHandcannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerUziConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAssaultRifleUziConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBurstCannonUziConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoUziConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLDemolitionAmmoUziConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerBattleRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAssaultRifleBattleRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBurstCannonBattleRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoBattleRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLDemolitionAmmoBattleRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaticShrapnelSuperShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoShrapnelSuperShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaticShrapnelAssaultShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoShrapnelAssaultShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaticShrapnelPlasmaShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoShrapnelPlasmaShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerMinigunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAssaultRifleMinigunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBurstCannonMinigunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAutocannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoMinigunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLDemolitionAmmoMinigunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoMissileLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerLaserRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAssaultRifleLaserRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBurstCannonLaserRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNanoManufactureAmmoLaserRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerNuclearPlasmaRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAssaultRifleNuclearPlasmaRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBurstCannonNuclearPlasmaRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerNuclearBFG9000Confirm",1)
+	TNT1 A 0 A_TakeInventory("RLNuclearVBFG9000Confirm",1)
+	TNT1 A 0 A_TakeInventory("RLNuclearBiggestFuckingGunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerNuclearPlasmaPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLSilencedPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLShredderPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLShredderShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLGrenadeLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLStormHandcannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLStormUziConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLStormBlasterConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLStormNuclearPlasmaPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaHandcannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaUziConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLOverchargedBlasterConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLSuperchargedNuclearPlasmaPistolConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHeavyCombatShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHeavySuperShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHeavyAssaultShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHeavyPlasmaShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaShotgunMkIIConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLFlamethrowerConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLShrapnelCannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNuclearPlasmaRevolverConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNuclearPlasmaShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLNuclearPlasmaRifleMkIIConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLStealthRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLSniperRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLMegatonShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLVoltgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLConquerorShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLClusterBombLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLGaussRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLAntiMaterielRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLZeusCannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLBulletstormRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLLaserShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLSuperMachinegunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLInfusionLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLLaserMinigunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaCannonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLLaserPulseLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHeavyPulseBlasterConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLEnergysawConfirm",1)
+//	TNT1 A 0 A_TakeInventory("RLEnergyBladeConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLIncinerationDeviceLauncherConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerMarksmanRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerVanguardRifleConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerHuntingRevolverConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerThompsonConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerPP7Confirm",1)
+	TNT1 A 0 A_TakeInventory("RLPlasmaticShrapnelHuntingShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHeavyHuntingShotgunConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLHighPowerRCP90Confirm",1)
+	TNT1 A 0 A_TakeInventory("RLPiercingChainsawConfirm",1)
+/*	TNT1 A 0 A_TakeInventory("RLPiercingCombatKnifeConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPiercingAxeConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPiercingMaceConfirm",1)
+	TNT1 A 0 A_TakeInventory("RLPiercingMacheteConfirm",1)*/
+	TNT1 A 0 A_Jump(256, "AddonAssemblyConfirmationRemoval")
+	Goto AddonAssemblyConfirmationRemoval
+	
+	
+ // When making addon weapons, inherit the modpack and copy this state into it.
+ // Then fill it with any assembly confirm tokens you've added so that the mod
+ // will clear them on use.
+ 
+  AddonAssemblyConfirmationRemoval:
+//	TNT1 A 0 A_TakeInventory("RLAddonAssemblyConfirm",1) // Like dis
+	TNT1 A 0 A_Jump(256, "WeaponSelectMain")
+	Goto WeaponSelectMain
+	
+  WeaponSelectMain:
+    TNT1 A 0 A_TakeInventory("RLUseAgilityMod", 1)
+//    TNT1 A 0 A_JumpIfInventory("RLCombatKnifeSelected",1,"RLCombatKnife")
+    TNT1 A 0 A_JumpIfInventory("RLChainsawSelected",1,"RLChainsaw")
+    TNT1 A 0 A_JumpIfInventory("RLPistolSelected",1,"RLPistol")
+    TNT1 A 0 A_JumpIfInventory("RLShotgunSelected",1,"RLShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLCombatShotgunSelected",1,"RLCombatShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunSelected",1,"RLDoubleShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLChaingunSelected",1,"RLChaingun")
+    TNT1 A 0 A_JumpIfInventory("RLBattleRifleSelected",1,"RLBattleRifle")
+    TNT1 A 0 A_JumpIfInventory("RLRocketLauncherSelected",1,"RLRocketLauncher")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleSelected",1,"RLPlasmaRifle")
+    TNT1 A 0 A_JumpIfInventory("RLBFG9000Selected",1,"RLBFG9000")
+// Exotic Weapons
+    TNT1 A 0 A_JumpIfInventory("RLBlasterSelected",1,"RLBlaster")
+    TNT1 A 0 A_JumpIfInventory("RLCombatPistolSelected",1,"RLCombatPistol")
+    TNT1 A 0 A_JumpIfInventory("RLMarksmanPistolSelected",1,"RLMarksmanPistol")
+    TNT1 A 0 A_JumpIfInventory("RLHandcannonSelected",1,"RLHandcannon")
+    TNT1 A 0 A_JumpIfInventory("RLSuperShotgunSelected",1,"RLSuperShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLAssaultShotgunSelected",1,"RLAssaultShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLTristarBlasterSelected",1,"RLTristarBlaster")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaShotgunSelected",1,"RLPlasmaShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLMissileLauncherSelected",1,"RLMissileLauncher")
+    TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherSelected",1,"RLNapalmLauncher")
+    TNT1 A 0 A_JumpIfInventory("RLMinigunSelected",1,"RLMinigun")
+    TNT1 A 0 A_JumpIfInventory("RLLaserRifleSelected",1,"RLLaserRifle")
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolSelected",1,"RLNuclearPlasmaPistol")
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleSelected",1,"RLNuclearPlasmaRifle")
+    TNT1 A 0 A_JumpIfInventory("RLNuclearBFG9000Selected",1,"RLNuclearBFG9000")
+    TNT1 A 0 A_JumpIfInventory("RLUziSelected",1,"RLUzi")
+//    TNT1 A 0 A_JumpIfInventory("RLAxeSelected",1,"RLAxe")
+//    TNT1 A 0 A_JumpIfInventory("RLMaceSelected",1,"RLMace")
+//    TNT1 A 0 A_JumpIfInventory("RLMacheteSelected",1,"RLMachete")
+// Superior Weapons
+    TNT1 A 0 A_JumpIfInventory("RLMarksmanRifleSelected",1,"RLMarksmanRifle")
+    TNT1 A 0 A_JumpIfInventory("RLVanguardRifleSelected",1,"RLVanguardRifle")
+    TNT1 A 0 A_JumpIfInventory("RLHuntingRevolverSelected",1,"RLHuntingRevolver")
+    TNT1 A 0 A_JumpIfInventory("RLThompsonSelected",1,"RLThompson")
+    TNT1 A 0 A_JumpIfInventory("RLPP7Selected",1,"RLPP7")
+    TNT1 A 0 A_JumpIfInventory("RLHuntingShotgunSelected",1,"RLHuntingShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLRCP90Selected",1,"RLRCP90")
+// Unique Weapons
+    TNT1 A 0 A_JumpIfInventory("RLJackhammerSelected",1,"RLJackhammer")
+    TNT1 A 0 A_JumpIfInventory("RLRailgunSelected",1,"RLRailgun")
+    TNT1 A 0 A_JumpIfInventory("RLMysteriousMagnumSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLBFG10KSelected",1,"RLBFG10K")
+    TNT1 A 0 A_JumpIfInventory("RLUnknownHeraldSelected",1,"RLUnknownHerald")
+    TNT1 A 0 A_JumpIfInventory("RLNullPointerSelected",1,"RLNullPointer")
+    TNT1 A 0 A_JumpIfInventory("RLFragShotgunSelected",1,"RLFragShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLQuadShotgunSelected",1,"RLQuadShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLLightweaverSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLTantrumCannonSelected",1,"RLTantrumCannon")
+    TNT1 A 0 A_JumpIfInventory("RLRevenantsLauncherSelected",1,"RLRevenantsLauncher")
+    TNT1 A 0 A_JumpIfInventory("RLGrammatonClericBerettaSelected",1,"RLGrammatonClericBeretta")
+    TNT1 A 0 A_JumpIfInventory("RLAntiFreakJackalSelected",1,"RLAntiFreakJackal")
+    TNT1 A 0 A_JumpIfInventory("RLHellsingARMSCasullSelected",1,"RLHellsingARMSCasull")
+    TNT1 A 0 A_JumpIfInventory("RLTrigunSelected",1,"RLTrigun")
+    TNT1 A 0 A_JumpIfInventory("RLParticleBeamCannonSelected",1,"RLParticleBeamCannon")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaRedirectionCannonSelected",1,"RLPlasmaRedirectionCannon")
+    TNT1 A 0 A_JumpIfInventory("RLSteelBeastSelected",1,"RLSteelBeast")
+    TNT1 A 0 A_JumpIfInventory("RLSussGunSelected",1,"RLSussGun")
+    TNT1 A 0 A_JumpIfInventory("RLMIRVLauncherSelected",1,"RLMIRVLauncher")
+//    TNT1 A 0 A_JumpIfInventory("RLSubtleKnifeSelected",1,"RLSubtleKnife")
+    TNT1 A 0 A_JumpIfInventory("RLNuclearOnslaughtSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLLuciferCannonSelected",1,"AdvancedWeapon")
+//    TNT1 A 0 A_JumpIfInventory("RLSpectreRevolverSelected",1,"RLSpectreRevolver")
+    TNT1 A 0 A_JumpIfInventory("RLMarathonAssaultRifleSelected",1,"RLMarathonAssaultRifle")
+    TNT1 A 0 A_JumpIfInventory("RLMarathonShotgunsSelected",1,"RLMarathonShotguns")
+    TNT1 A 0 A_JumpIfInventory("RLWidowmakerSMGSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLChameleonRifleSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLNanomachicArmamentGeneratorSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLTriadCannonSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLDirectHitSelected",1,"AdvancedWeapon")
+// Demonic Weapons
+//    TNT1 A 0 A_JumpIfInventory("RLMonsterFrisbeeSelected",1,"RLMonsterFrisbee")
+    TNT1 A 0 A_JumpIfInventory("RLDeathsGazeSelected",1,"RLDeathsGaze")
+    TNT1 A 0 A_JumpIfInventory("RLHellsReignSelected",1,"RLHellsReign")
+    TNT1 A 0 A_JumpIfInventory("RLSoulstormRifleSelected",1,"RLSoulstormRifle")
+//    TNT1 A 0 A_JumpIfInventory("RLMortalyzerSelected",1,"RLMortalyzer")
+//    TNT1 A 0 A_JumpIfInventory("RLDreadshotMortarSelected",1,"RLDreadshotMortar")
+    TNT1 A 0 A_JumpIfInventory("RLUnmakerSelected",1,"RLUnmaker")
+// Legendary Weapons
+    TNT1 A 0 A_JumpIfInventory("RLJudgeOfTheDeadSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLHurricaneCannonSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLNeuralStunnerSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLBaronBlasterSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLRealityDistortionArraySelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLBFGInfinitySelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLDuke2RifleSelected",1,"RLDuke2Rifle")
+    TNT1 A 0 A_JumpIfInventory("RLLonghornSelected",1,"AdvancedWeapon")
+    TNT1 A 0 A_JumpIfInventory("RLDragonslayerSelected",1,"AdvancedWeapon")
+// Basic Assemblies
+    TNT1 A 0 A_JumpIfInventory("RLSilencedPistolSelected",1,"RLSilencedPistol")
+    TNT1 A 0 A_JumpIfInventory("RLShredderPistolSelected",1,"RLShredderPistol")
+    TNT1 A 0 A_JumpIfInventory("RLShredderShotgunSelected",1,"RLShredderShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLSpeedloaderPistolSelected",1,"RLSpeedloaderPistol")
+    TNT1 A 0 A_JumpIfInventory("RLElephantGunSelected",1,"RLElephantGun")
+    TNT1 A 0 A_JumpIfInventory("RLGatlingGunSelected",1,"RLGatlingGun")
+    TNT1 A 0 A_JumpIfInventory("RLMicroLauncherSelected",1,"RLMicroLauncher")
+    TNT1 A 0 A_JumpIfInventory("RLTacticalShotgunSelected",1,"RLTacticalShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLHeavyShotgunSelected",1,"RLHeavyShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLHeavyCombatShotgunSelected",1,"RLHeavyCombatShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLHeavyDoubleShotgunSelected",1,"RLHeavyDoubleShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLHeavySuperShotgunSelected",1,"RLHeavySuperShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLHeavyAssaultShotgunSelected",1,"RLHeavyAssaultShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLHeavyPlasmaShotgunSelected",1,"RLHeavyPlasmaShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLFlamethrowerSelected",1,"RLFlamethrower")
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRevolverSelected",1,"RLNuclearPlasmaRevolver")
+    TNT1 A 0 A_JumpIfInventory("RLStealthRifleSelected",1,"RLStealthRifle")
+    TNT1 A 0 A_JumpIfInventory("RLSniperRifleSelected",1,"RLSniperRifle")
+    TNT1 A 0 A_JumpIfInventory("RLShrapnelCannonSelected",1,"RLShrapnelCannon")
+// Nanoedge/Piercing
+    TNT1 A 0 A_JumpIfInventory("RLPiercingChainsawSelected",1,"RLPiercingChainsaw")
+/*	TNT1 A 0 A_JumpIfInventory("RLPiercingCombatKnifeSelected",1,"RLPiercingChainsaw")
+	TNT1 A 0 A_JumpIfInventory("RLPiercingFireAxeSelected",1,"RLPiercingAxe")
+	TNT1 A 0 A_JumpIfInventory("RLPiercingAxeSelected",1,"RLPiercingAxe")
+	TNT1 A 0 A_JumpIfInventory("RLPiercingMaceSelected",1,"RLPiercingMace")
+	TNT1 A 0 A_JumpIfInventory("RLPiercingMacheteSelected",1,"RLPiercingMachete")*/
+// High Power
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerPistolSelected",1,"RLHighPowerPistol")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerChaingunSelected",1,"RLHighPowerChaingun")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerBattleRifleSelected",1,"RLHighPowerBattleRifle")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerPlasmaRifleSelected",1,"RLHighPowerPlasmaRifle")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerBFG9000Selected",1,"RLHighPowerBFG9000")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerBlasterSelected",1,"RLHighPowerBlaster")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerCombatPistolSelected",1,"RLHighPowerCombatPistol")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerMarksmanPistolSelected",1,"RLHighPowerMarksmanPistol")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerHandcannonSelected",1,"RLHighPowerHandcannon")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerMinigunSelected",1,"RLHighPowerMinigun")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerLaserRifleSelected",1,"RLHighPowerLaserRifle")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerNuclearPlasmaPistolSelected",1,"RLHighPowerNuclearPlasmaPistol")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerNuclearPlasmaRifleSelected",1,"RLHighPowerNuclearPlasmaRifle")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerTristarBlasterSelected",1,"RLHighPowerTristarBlaster")
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerUziSelected",1,"RLHighPowerUzi")
+// HAHAHA PLEASE GOD NO
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerNuclearBFG9000Selected",1,"RLHighPowerNuclearBFG9000")
+// Plasmatic Shrapnel
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelShotgunSelected",1,"RLPlasmaticShrapnelShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelCombatShotgunSelected",1,"RLPlasmaticShrapnelCombatShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelDoubleShotgunSelected",1,"RLPlasmaticShrapnelDoubleShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelAssaultShotgunSelected",1,"RLPlasmaticShrapnelAssaultShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelSuperShotgunSelected",1,"RLPlasmaticShrapnelSuperShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelPlasmaShotgunSelected",1,"RLPlasmaticShrapnelPlasmaShotgun")
+// Advanced Assemblies
+    TNT1 A 0 A_JumpIfInventory("RLDoubleChainsawSelected",1,"RLDoubleChainsaw")
+    TNT1 A 0 A_JumpIfInventory("RLTacticalRocketLauncherSelected",1,"RLTacticalRocketLauncher")
+    TNT1 A 0 A_JumpIfInventory("RLStormPistolSelected",1,"RLStormPistol")
+    TNT1 A 0 A_JumpIfInventory("RLStormCombatPistolSelected",1,"RLStormCombatPistol")
+    TNT1 A 0 A_JumpIfInventory("RLStormMarksmanPistolSelected",1,"RLStormMarksmanPistol")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaPistolSelected",1,"RLPlasmaPistol")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaCombatPistolSelected",1,"RLPlasmaCombatPistol")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaMarksmanPistolSelected",1,"RLPlasmaMarksmanPistol")
+    TNT1 A 0 A_JumpIfInventory("RLStormHandcannonSelected",1,"RLStormHandcannon")
+    TNT1 A 0 A_JumpIfInventory("RLStormUziSelected",1,"RLStormUzi")
+    TNT1 A 0 A_JumpIfInventory("RLStormBlasterSelected",1,"RLStormBlaster")
+    TNT1 A 0 A_JumpIfInventory("RLStormNuclearPlasmaPistolSelected",1,"RLStormNuclearPlasmaPistol")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaHandcannonSelected",1,"RLPlasmaHandcannon")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaUziSelected",1,"RLPlasmaUzi")
+    TNT1 A 0 A_JumpIfInventory("RLOverchargedBlasterSelected",1,"RLOverchargedBlaster")
+    TNT1 A 0 A_JumpIfInventory("RLSuperchargedNuclearPlasmaPistolSelected",1,"RLSuperchargedNuclearPlasmaPistol")
+    TNT1 A 0 A_JumpIfInventory("RLFocusedDoubleShotgunSelected",1,"RLFocusedDoubleShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLHyperblasterSelected",1,"RLHyperblaster")
+    TNT1 A 0 A_JumpIfInventory("RLBulletstormChaingunSelected",1,"RLBulletstormChaingun")
+    TNT1 A 0 A_JumpIfInventory("RLMiniMissilePistolSelected",1,"RLMiniMissilePistol")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleMkIISelected",1,"RLPlasmaRifleMkII")
+    TNT1 A 0 A_JumpIfInventory("RLAutoshotgunSelected",1,"RLAutoshotgun")
+    TNT1 A 0 A_JumpIfInventory("RLAutoDoubleShotgunSelected",1,"RLAutoDoubleShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLVBFG9000Selected",1,"RLVBFG9000")
+    TNT1 A 0 A_JumpIfInventory("RLNuclearVBFG9000Selected",1,"RLNuclearVBFG9000")
+    TNT1 A 0 A_JumpIfInventory("RLGrenadeLauncherSelected",1,"RLGrenadeLauncher")
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaShotgunMkIISelected",1,"RLPlasmaShotgunMkII")
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaShotgunSelected",1,"RLNuclearPlasmaShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleMkIISelected",1,"RLNuclearPlasmaRifleMkII")
+    TNT1 A 0 A_JumpIfInventory("RLBulletstormRifleSelected",1,"RLBulletstormRifle")
+    TNT1 A 0 A_JumpIfInventory("RLLaserShotgunSelected",1,"RLLaserShotgun")
+// Assault Rifle
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleChaingunSelected",1,"RLAssaultRifleChaingun")
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRiflePlasmaRifleSelected",1,"RLAssaultRiflePlasmaRifle")
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleLaserRifleSelected",1,"RLAssaultRifleLaserRifle")
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleMinigunSelected",1,"RLAssaultRifleMinigun")
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleNuclearPlasmaRifleSelected",1,"RLAssaultRifleNuclearPlasmaRifle")
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleUziSelected",1,"RLAssaultRifleUzi")
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleBattleRifleSelected",1,"RLAssaultRifleBattleRifle")
+// Burst Cannon
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonChaingunSelected",1,"RLBurstCannonChaingun")
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonPlasmaRifleSelected",1,"RLBurstCannonPlasmaRifle")
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonLaserRifleSelected",1,"RLBurstCannonLaserRifle")
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonMinigunSelected",1,"RLBurstCannonMinigun")
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonNuclearPlasmaRifleSelected",1,"RLBurstCannonNuclearPlasmaRifle")
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonUziSelected",1,"RLBurstCannonUzi")
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonBattleRifleSelected",1,"RLBurstCannonBattleRifle")
+// Nano Shrapnel
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelShotgunSelected",1,"RLNanoShrapnelShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelCombatShotgunSelected",1,"RLNanoShrapnelCombatShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelDoubleShotgunSelected",1,"RLNanoShrapnelDoubleShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelSuperShotgunSelected",1,"RLNanoShrapnelSuperShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelAssaultShotgunSelected",1,"RLNanoShrapnelAssaultShotgun")
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelPlasmaShotgunSelected",1,"RLNanoShrapnelPlasmaShotgun")
+	TNT1 A 0 A_Jump(256, "AddonWeaponSelection")
+	Goto AddonWeaponSelection
+	
+	
+ // When making addon weapons, inherit the modpack and copy this state into it.
+ // Then fill it with any checks for weapon tokens you've added.
+ // Add the state it will jump to and fill it with whatever assembly combinations
+ // and modding it needs, in the same style as the ones that exist below.
+ //
+ // A weapon will go through all combinations of mods for assemblies and check
+ // if any match, and at the end, regardless of whether it does or not, it adds
+ // one mod of the specified type to the weapon.
+ //
+ // The Confirm item for an assembly will be given if it matches up to a combination
+ // of mods exactly, in addition to the mod being applied.
+ 
+  AddonWeaponSelection:
+//	TNT1 A 0 A_JumpIfInventory("RLAddonWeaponSelected",1,"RLAddonWeapon") // Like dis
+	TNT1 A 0 A_Jump(256, "UnableToMod")
+	Goto UnableToMod
+	
+  UnableToMod:
+	TNT1 A 0 A_Print("This weapon is unable to support this mod pack.", 4)
+    Fail
+	
+//==============================================================================
+// STANDARD
+//==============================================================================
+
+/*  RLCombatKnife:
+  RLPiercingCombatKnife:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLEnergyBladeAssembly // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifeTechnicalMod",1,"RLCombatKnifeModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifeBulkMod",1,"RLCombatKnifeModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifeAgilityMod",1,"RLCombatKnifeModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifePowerMod",2,"RLCombatKnifeModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifePowerMod",1,1)
+    Goto RLEnergyBladeAssembly // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLPiercingCombatKnifeConfirm", 1) // Piercing Combat Knife
+    TNT1 A 0 A_GiveInventory("RLPiercingBladeAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvNanoedge Combat Knife?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLCombatKnifeModding
+  RLEnergyBladeAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLEnergyBladeAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLEnergyBladeAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLCombatKnifeModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifeBulkMod",1,"RLChainsawModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifeTechnicalMod",1,"RLChainsawModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifeAgilityMod",2,"RLChainsawModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifePowerMod",4,"RLChainsawModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatKnifePowerMod",3,1)
+    Goto RLCombatKnifeModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLEnergyBladeConfirm", 1) // Energy Blade
+    TNT1 A 0 A_GiveInventory("RLEnergyBladeAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvEnergy Blade?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLCombatKnifeModding
+  RLCombatKnifeModding:
+    TNT1 A 0 A_JumpIfInventory("RLCombatKnifeModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLCombatKnifeModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLCombatKnifeAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop*/
+	
+  RLChainsaw:
+  RLPiercingChainsawAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLEnergysawAssembly // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLChainsawTechnicalMod",1,"RLEnergysawAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLChainsawBulkMod",1,"RLEnergysawAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLChainsawAgilityMod",1,"RLEnergysawAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLChainsawPowerMod",2,"RLEnergysawAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLChainsawPowerMod",1,1)
+    Goto RLEnergysawAssembly // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLPiercingChainsawConfirm", 1) // Piercing Chainsaw
+    TNT1 A 0 A_GiveInventory("RLPiercingBladeAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvNanoedge Chainsaw?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLChainsawModding
+  RLEnergysawAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLEnergyBladeAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLEnergyBladeAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLChainsawModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLChainsawBulkMod",1,"RLChainsawModding")
+	TNT1 A 0 A_JumpIfInventory("RLChainsawTechnicalMod",1,"RLChainsawModding")
+	TNT1 A 0 A_JumpIfInventory("RLChainsawAgilityMod",2,"RLChainsawModding")
+	TNT1 A 0 A_JumpIfInventory("RLChainsawPowerMod",4,"RLChainsawModding")
+	TNT1 A 0 A_JumpIfInventory("RLChainsawPowerMod",3,1)
+    Goto RLChainsawModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLEnergysawConfirm", 1) // Energysaw
+    TNT1 A 0 A_GiveInventory("RLEnergyBladeAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvEnergysaw?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLChainsawModding
+  RLChainsawModding:
+    TNT1 A 0 A_JumpIfInventory("RLChainsawModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLChainsawModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLChainsawAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLPistol:
+  RLPistolSpeedloader:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLSpeedloaderPistolAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLSpeedloaderPistolAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLPistolModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLPistolFirestormMod",1,"RLPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLPistolNanoMod",1,"RLPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLPistolSniperMod",1,"RLPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLPistolBulkMod",1,"RLPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLPistolAgilityMod",1,"RLPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLPistolPowerMod",1,"RLPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLPistolTechnicalMod",2,"RLPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLPistolTechnicalMod",1,1)
+    Goto RLPistolModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLSpeedloaderPistolConfirm", 1) // Speedloader Pistol
+    TNT1 A 0 A_GiveInventory("RLSpeedloaderPistolAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvRevolver?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLPistolModding
+  RLPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLShotgun:
+  RLShrapnelCannonAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLShrapnelCannonAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLShrapnelCannonAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLShotgunModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLShotgunNanoMod",1,"RLShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLShotgunSniperMod",1,"RLShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLShotgunTechnicalMod",1,"RLShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLShotgunFirestormMod",1,"RLShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLShotgunBulkMod",1,"RLShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLShotgunPowerMod",2,"RLShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLShotgunAgilityMod",1,"RLShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLShotgunPowerMod",1,1)
+    Goto RLShotgunModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLShrapnelCannonConfirm", 1) // Shrapnel Cannon
+    TNT1 A 0 A_GiveInventory("RLShrapnelCannonAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvShrapnel Cannon?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLShotgunModding
+  RLShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLCombatShotgun:
+  RLConquerorShotgunAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLConquerorShotgunAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLConquerorShotgunAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLCombatShotgunModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunNanoMod",1,"RLCombatShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunSniperMod",1,"RLCombatShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunTechnicalMod",1,"RLCombatShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunFirestormMod",2,"RLCombatShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunAgilityMod",1,"RLCombatShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunPowerMod",2,"RLCombatShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunBulkMod",2,"RLCombatShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunBulkMod",1,1)
+    Goto RLCombatShotgunModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunPowerMod",1,1)
+    Goto RLCombatShotgunModding
+	TNT1 A 0 A_JumpIfInventory("RLCombatShotgunFirestormMod",1,1)
+    Goto RLCombatShotgunModding
+    TNT1 A 0 A_GiveInventory("RLConquerorShotgunConfirm", 1) // Conqueror Shotgun
+    TNT1 A 0 A_GiveInventory("RLConquerorShotgunAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvConqueror Shotgun?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLCombatShotgunModding
+  RLCombatShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLCombatShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLCombatShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLCombatShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLDoubleShotgun:
+  RLFocusedDoubleShotgunAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLFocusedDoubleShotgunAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLFocusedDoubleShotgunAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLDoubleShotgunModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunFirestormMod",1,"RLDoubleShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunNanoMod",1,"RLDoubleShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunSniperMod",1,"RLDoubleShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunBulkMod",1,"RLDoubleShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunAgilityMod",1,"RLDoubleShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunPowerMod",2,"RLDoubleShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunTechnicalMod",2,"RLDoubleShotgunModding")
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunTechnicalMod",1,1)
+    Goto RLDoubleShotgunModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunPowerMod",1,1)
+    Goto RLDoubleShotgunModding
+    TNT1 A 0 A_GiveInventory("RLFocusedDoubleShotgunConfirm", 1) // Focused Double Shotgun
+    TNT1 A 0 A_GiveInventory("RLFocusedDoubleShotgunAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvFocused Double Shotgun?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLDoubleShotgunModding
+  RLDoubleShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLDoubleShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLDoubleShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLDoubleShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLChaingun:
+  RLChaingunAssaultRifle:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLChaingunModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLChaingunFirestormMod",1,"RLChaingunModding")
+	TNT1 A 0 A_JumpIfInventory("RLChaingunNanoMod",1,"RLChaingunModding")
+	TNT1 A 0 A_JumpIfInventory("RLChaingunSniperMod",1,"RLChaingunModding")
+	TNT1 A 0 A_JumpIfInventory("RLChaingunTechnicalMod",1,"RLChaingunModding")
+	TNT1 A 0 A_JumpIfInventory("RLChaingunPowerMod",1,"RLChaingunModding")
+	TNT1 A 0 A_JumpIfInventory("RLChaingunBulkMod",1,"RLChaingunModding")
+	TNT1 A 0 A_JumpIfInventory("RLChaingunAgilityMod",3,"RLChaingunModding")
+	TNT1 A 0 A_JumpIfInventory("RLChaingunAgilityMod",2,1)
+    Goto RLChaingunModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleChaingunConfirm", 1) // Assault Rifle Chaingun
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvAssault Chaingun?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLChaingunModding
+  RLChaingunModding:
+    TNT1 A 0 A_JumpIfInventory("RLChaingunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLChaingunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLChaingunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLBattleRifle:
+  RLSniperRifleAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLSniperRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLSniperRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLBattleRifleAssaultRifle // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleNanoMod",1,"RLBattleRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleBulkMod",1,"RLBattleRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleAgilityMod",1,"RLBattleRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleFirestormMod",1,"RLBattleRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleTechnicalMod",1,"RLBattleRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRiflePowerMod",1,"RLBattleRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleSniperMod",2,"RLBattleRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleSniperMod",1,1)
+    Goto RLBattleRifleAssaultRifle // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLSniperRifleConfirm", 1) // Sniper Rifle
+    TNT1 A 0 A_GiveInventory("RLSniperRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvSniper Rifle?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLBattleRifleModding
+  RLBattleRifleAssaultRifle:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLAntiMaterielRifleAssembly // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleFirestormMod",1,"RLAntiMaterielRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleNanoMod",1,"RLAntiMaterielRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleSniperMod",1,"RLAntiMaterielRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleTechnicalMod",1,"RLAntiMaterielRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRiflePowerMod",1,"RLAntiMaterielRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleBulkMod",1,"RLAntiMaterielRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleAgilityMod",3,"RLAntiMaterielRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleAgilityMod",2,1)
+    Goto RLAntiMaterielRifleAssembly // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleBattleRifleConfirm", 1) // Scoped Rifle
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvScoped Rifle?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLBattleRifleModding
+  RLAntiMaterielRifleAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLAntiMaterielRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLAntiMaterielRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLBattleRifleModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleNanoMod",1,"RLBattleRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleBulkMod",1,"RLBattleRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleAgilityMod",1,"RLBattleRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleFirestormMod",1,"RLBattleRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleTechnicalMod",1,"RLBattleRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleSniperMod",3,"RLBattleRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRiflePowerMod",2,"RLBattleRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLBattleRiflePowerMod",1,1)
+    Goto RLBattleRifleModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLBattleRifleSniperMod",2,1)
+    Goto RLBattleRifleModding
+    TNT1 A 0 A_GiveInventory("RLAntiMaterielRifleConfirm", 1) // Anti-materiel Rifle
+    TNT1 A 0 A_GiveInventory("RLAntiMaterielRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvAnti-materiel Rifle?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLBattleRifleModding
+  RLBattleRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLBattleRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBattleRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBattleRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLRocketLauncher:
+  RLGrenadeLauncherAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLGrenadeLauncherAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLGrenadeLauncherAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLInfusionLauncherAssembly // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherFirestormMod",1,"RLInfusionLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherNanoMod",1,"RLInfusionLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherSniperMod",1,"RLInfusionLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherTechnicalMod",1,"RLInfusionLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherPowerMod",1,"RLInfusionLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherBulkMod",1,"RLInfusionLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherAgilityMod",3,"RLInfusionLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherAgilityMod",2,1)
+    Goto RLInfusionLauncherAssembly // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLGrenadeLauncherConfirm", 1) // Grenade Launcher
+    TNT1 A 0 A_GiveInventory("RLGrenadeLauncherAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvGrenade Launcher?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLRocketLauncherModding
+  RLInfusionLauncherAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLRocketLauncherModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherFirestormMod",1,"RLRocketLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherNanoMod",1,"RLRocketLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherBulkMod",1,"RLRocketLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherAgilityMod",1,"RLRocketLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherSniperMod",2,"RLRocketLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherTechnicalMod",2,"RLRocketLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherPowerMod",2,"RLRocketLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherPowerMod",1,1)
+    Goto RLRocketLauncherModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherTechnicalMod",1,1)
+    Goto RLRocketLauncherModding
+	TNT1 A 0 A_JumpIfInventory("RLRocketLauncherSniperMod",1,1)
+    Goto RLRocketLauncherModding
+    TNT1 A 0 A_GiveInventory("RLInfusionLauncherConfirm", 1) // Plascharge Launcher
+    TNT1 A 0 A_GiveInventory("RLPlasmaInfusionAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvPlascharge Launcher?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLRocketLauncherModding
+  RLRocketLauncherModding:
+    TNT1 A 0 A_JumpIfInventory("RLRocketLauncherModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLRocketLauncherModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLRocketLauncherAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLPlasmaRifle:
+  RLPlasmaCannonAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLPlasmaRifleAssaultRifle // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleFirestormMod",1,"RLPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleNanoMod",1,"RLPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleAgilityMod",1,"RLPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleBulkMod",1,"RLPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleSniperMod",2,"RLPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleTechnicalMod",2,"RLPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRiflePowerMod",2,"RLPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRiflePowerMod",1,1)
+    Goto RLPlasmaRifleAssaultRifle // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleTechnicalMod",1,1)
+    Goto RLPlasmaRifleAssaultRifle
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleSniperMod",1,1)
+    Goto RLPlasmaRifleAssaultRifle
+    TNT1 A 0 A_GiveInventory("RLPlasmaCannonConfirm", 1) // Plasma Cannon
+    TNT1 A 0 A_GiveInventory("RLPlasmaInfusionAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvPlasma Cannon?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLPlasmaRifleModding
+  RLPlasmaRifleAssaultRifle:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLHyperBlasterAssembly // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleFirestormMod",1,"RLHyperBlasterAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleNanoMod",1,"RLHyperBlasterAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleSniperMod",1,"RLHyperBlasterAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleTechnicalMod",1,"RLHyperBlasterAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRiflePowerMod",1,"RLHyperBlasterAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleBulkMod",1,"RLHyperBlasterAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleAgilityMod",3,"RLHyperBlasterAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleAgilityMod",2,1)
+    Goto RLHyperBlasterAssembly // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLAssaultRiflePlasmaRifleConfirm", 1) // Assault Rifle Plasma Rifle
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvAssault Plasma Rifle?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLPlasmaRifleModding
+  RLHyperBlasterAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLHyperblasterAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLHyperblasterAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLPlasmaRifleModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleFirestormMod",1,"RLPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleNanoMod",1,"RLPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleSniperMod",1,"RLPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRiflePowerMod",1,"RLPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleBulkMod",1,"RLPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleAgilityMod",1,"RLPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleTechnicalMod",3,"RLPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleTechnicalMod",2,1)
+    Goto RLPlasmaRifleModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLHyperblasterConfirm", 1) // Hyperblaster
+    TNT1 A 0 A_GiveInventory("RLHyperblasterAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvHyperblaster?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLPlasmaRifleModding
+  RLPlasmaRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLBFG9000:
+  RLBFG9000Modding:
+    TNT1 A 0 A_JumpIfInventory("RLBFG9000ModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBFG9000ModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBFG9000AgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+//==============================================================================
+// EXOTICS
+//==============================================================================
+
+  RLBlaster:
+  RLHeavyPulseBlasterAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLBlasterModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLBlasterFirestormMod",1,"RLBlasterModding")
+	TNT1 A 0 A_JumpIfInventory("RLBlasterNanoMod",1,"RLBlasterModding")
+	TNT1 A 0 A_JumpIfInventory("RLBlasterAgilityMod",1,"RLBlasterModding")
+	TNT1 A 0 A_JumpIfInventory("RLBlasterBulkMod",1,"RLBlasterModding")
+	TNT1 A 0 A_JumpIfInventory("RLBlasterSniperMod",2,"RLBlasterModding")
+	TNT1 A 0 A_JumpIfInventory("RLBlasterTechnicalMod",2,"RLBlasterModding")
+	TNT1 A 0 A_JumpIfInventory("RLBlasterPowerMod",2,"RLBlasterModding")
+	TNT1 A 0 A_JumpIfInventory("RLBlasterPowerMod",1,1)
+    Goto RLBlasterModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLBlasterTechnicalMod",1,1)
+    Goto RLBlasterModding
+	TNT1 A 0 A_JumpIfInventory("RLBlasterSniperMod",1,1)
+    Goto RLBlasterModding
+    TNT1 A 0 A_GiveInventory("RLHeavyPulseBlasterConfirm", 1) // Heavy Pulse Blaster
+    TNT1 A 0 A_GiveInventory("RLPlasmaInfusionAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvHeavy Pulse Blaster?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLBlasterModding
+  RLBlasterModding:
+    TNT1 A 0 A_JumpIfInventory("RLBlasterModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBlasterModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBlasterAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLCombatPistol:
+  RLCombatPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLCombatPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLCombatPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLCombatPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLMarksmanPistol:
+  RLMarksmanPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLMarksmanPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMarksmanPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMarksmanPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLHandcannon:
+  RLMiniMissilePistolAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLMiniMissilePistolAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLMiniMissilePistolAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLHandcannonModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonFirestormMod",1,"RLHandcannonModding")
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonNanoMod",1,"RLHandcannonModding")
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonSniperMod",1,"RLHandcannonModding")
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonPowerMod",1,"RLHandcannonModding")
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonBulkMod",1,"RLHandcannonModding")
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonTechnicalMod",2,"RLHandcannonModding")
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonAgilityMod",2,"RLHandcannonModding")
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonAgilityMod",1,1)
+    Goto RLHandcannonModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLHandcannonTechnicalMod",1,1)
+    Goto RLHandcannonModding
+    TNT1 A 0 A_GiveInventory("RLMiniMissilePistolConfirm", 1) // Mini-missile Pistol
+    TNT1 A 0 A_GiveInventory("RLMiniMissilePistolAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvMini-missile Pistol?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLHandcannonModding
+  RLHandcannonModding:
+    TNT1 A 0 A_JumpIfInventory("RLHandcannonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHandcannonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHandcannonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLUzi:
+  RLUziAssaultRifle:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLUziModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLUziFirestormMod",1,"RLUziModding")
+	TNT1 A 0 A_JumpIfInventory("RLUziNanoMod",1,"RLUziModding")
+	TNT1 A 0 A_JumpIfInventory("RLUziSniperMod",1,"RLUziModding")
+	TNT1 A 0 A_JumpIfInventory("RLUziTechnicalMod",1,"RLUziModding")
+	TNT1 A 0 A_JumpIfInventory("RLUziPowerMod",1,"RLUziModding")
+	TNT1 A 0 A_JumpIfInventory("RLUziBulkMod",1,"RLUziModding")
+	TNT1 A 0 A_JumpIfInventory("RLUziAgilityMod",3,"RLUziModding")
+	TNT1 A 0 A_JumpIfInventory("RLUziAgilityMod",2,1)
+    Goto RLUziModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleUziConfirm", 1) // Assault Rifle Uzi
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvAssault Uzi?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLUziModding
+  RLUziModding:
+    TNT1 A 0 A_JumpIfInventory("RLUziModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLUziModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLUziAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLSuperShotgun:
+  RLSuperShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLSuperShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSuperShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSuperShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLAssaultShotgun:
+  RLAssaultShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLAssaultShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAssaultShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAssaultShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLTristarBlaster:
+  RLTristarBlasterModding:
+    TNT1 A 0 A_JumpIfInventory("RLTristarBlasterModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLTristarBlasterModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLTristarBlasterAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLPlasmaShotgun:
+  RLPlasmaShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLMissileLauncher:
+  RLLaserPulseLauncherAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLClusterBombLauncherAssembly // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherFirestormMod",1,"RLClusterBombLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherNanoMod",1,"RLClusterBombLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherAgilityMod",1,"RLClusterBombLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherBulkMod",1,"RLClusterBombLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherSniperMod",2,"RLClusterBombLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherTechnicalMod",2,"RLClusterBombLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherPowerMod",2,"RLClusterBombLauncherAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherPowerMod",1,1)
+    Goto RLClusterBombLauncherAssembly // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherTechnicalMod",1,1)
+    Goto RLClusterBombLauncherAssembly
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherSniperMod",1,1)
+    Goto RLClusterBombLauncherAssembly
+    TNT1 A 0 A_GiveInventory("RLLaserPulseLauncherConfirm", 1) // Defence Drone Launcher
+    TNT1 A 0 A_GiveInventory("RLPlasmaInfusionAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvDefence Drone Launcher?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLMissileLauncherModding
+  RLClusterBombLauncherAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLClusterBombLauncherAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLClusterBombLauncherAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLMissileLauncherModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherNanoMod",1,"RLMissileLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherSniperMod",1,"RLMissileLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherPowerMod",1,"RLMissileLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherTechnicalMod",1,"RLMissileLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherAgilityMod",1,"RLMissileLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherBulkMod",3,"RLMissileLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherFirestormMod",2,1)
+    Goto RLMissileLauncherModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLMissileLauncherBulkMod",1,1)
+    Goto RLMissileLauncherModding
+    TNT1 A 0 A_GiveInventory("RLClusterBombLauncherConfirm", 1) // Cluster Bomb Launcher
+    TNT1 A 0 A_GiveInventory("RLClusterBombLauncherAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvCluster Bomb Launcher?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLMissileLauncherModding
+  RLMissileLauncherModding:
+    TNT1 A 0 A_JumpIfInventory("RLMissileLauncherModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMissileLauncherModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMissileLauncherAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLNapalmLauncher:
+  RLIncinerationDeviceLauncherAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLNapalmLauncherModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherFirestormMod",1,"RLNapalmLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherNanoMod",1,"RLNapalmLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherAgilityMod",1,"RLNapalmLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherBulkMod",1,"RLNapalmLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherSniperMod",2,"RLNapalmLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherTechnicalMod",2,"RLNapalmLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherPowerMod",2,"RLNapalmLauncherModding")
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherPowerMod",1,1)
+    Goto RLNapalmLauncherModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherTechnicalMod",1,1)
+    Goto RLNapalmLauncherModding
+	TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherSniperMod",1,1)
+    Goto RLNapalmLauncherModding
+    TNT1 A 0 A_GiveInventory("RLIncinerationDeviceLauncherConfirm", 1) // Incineration Device Launcher
+    TNT1 A 0 A_GiveInventory("RLPlasmaInfusionAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvIncineration Device Launcher?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLNapalmLauncherModding
+  RLNapalmLauncherModding:
+    TNT1 A 0 A_JumpIfInventory("RLNapalmLauncherModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNapalmLauncherModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNapalmLauncherAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLMinigun:
+  RLMinigunAssaultRifle:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLLaserMinigunAssembly // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLMinigunFirestormMod",1,"RLLaserMinigunAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunNanoMod",1,"RLLaserMinigunAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunSniperMod",1,"RLLaserMinigunAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunTechnicalMod",1,"RLLaserMinigunAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunPowerMod",1,"RLLaserMinigunAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunBulkMod",1,"RLLaserMinigunAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunAgilityMod",3,"RLLaserMinigunAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunAgilityMod",2,1)
+    Goto RLLaserMinigunAssembly // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleMinigunConfirm", 1) // Assault Rifle Minigun
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvAssault Minigun?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLMinigunModding
+  RLLaserMinigunAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPlasmaInfusionAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLMinigunModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLMinigunFirestormMod",1,"RLMinigunModding")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunNanoMod",1,"RLMinigunModding")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunAgilityMod",1,"RLMinigunModding")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunBulkMod",1,"RLMinigunModding")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunSniperMod",2,"RLMinigunModding")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunTechnicalMod",2,"RLMinigunModding")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunPowerMod",2,"RLMinigunModding")
+	TNT1 A 0 A_JumpIfInventory("RLMinigunPowerMod",1,1)
+    Goto RLMinigunModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLMinigunTechnicalMod",1,1)
+    Goto RLMinigunModding
+	TNT1 A 0 A_JumpIfInventory("RLMinigunSniperMod",1,1)
+    Goto RLMinigunModding
+    TNT1 A 0 A_GiveInventory("RLLaserMinigunConfirm", 1) // Laser Minigun
+    TNT1 A 0 A_GiveInventory("RLPlasmaInfusionAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvLaser Minigun?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLMinigunModding
+  RLMinigunModding:
+    TNT1 A 0 A_JumpIfInventory("RLMinigunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMinigunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMinigunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLLaserRifle:
+  RLLaserShotgunAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaShotgunAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaShotgunAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLLaserRifleAssaultRifle // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleFirestormMod",1,"RLLaserRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleNanoMod",1,"RLLaserRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleSniperMod",1,"RLLaserRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleTechnicalMod",1,"RLLaserRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRiflePowerMod",1,"RLLaserRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleAgilityMod",2,"RLLaserRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleBulkMod",2,"RLLaserRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleBulkMod",1,1)
+    Goto RLLaserRifleAssaultRifle // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleAgilityMod",1,1)
+    Goto RLLaserRifleAssaultRifle // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLLaserShotgunConfirm", 1) // Laser Shotgun
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaShotgunAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvLaser Shotgun?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLLaserRifleModding
+  RLLaserRifleAssaultRifle:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLGaussRifleAssembly // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleFirestormMod",1,"RLGaussRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleNanoMod",1,"RLGaussRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleSniperMod",1,"RLGaussRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleTechnicalMod",1,"RLGaussRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRiflePowerMod",1,"RLGaussRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleBulkMod",1,"RLGaussRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleAgilityMod",3,"RLGaussRifleAssembly")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleAgilityMod",2,1)
+    Goto RLGaussRifleAssembly // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleLaserRifleConfirm", 1) // Assault Rifle Laser Rifle
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvAssault Laser Rifle?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLLaserRifleModding
+  RLGaussRifleAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLGaussRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLGaussRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLLaserRifleModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleNanoMod",1,"RLLaserRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleTechnicalMod",1,"RLLaserRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleBulkMod",1,"RLLaserRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleAgilityMod",1,"RLLaserRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleSniperMod",2,"RLLaserRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleFirestormMod",2,"RLLaserRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRiflePowerMod",2,"RLLaserRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLLaserRiflePowerMod",1,1)
+    Goto RLLaserRifleModding // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleFirestormMod",1,1)
+    Goto RLLaserRifleModding
+	TNT1 A 0 A_JumpIfInventory("RLLaserRifleSniperMod",1,1)
+    Goto RLLaserRifleModding
+    TNT1 A 0 A_GiveInventory("RLGaussRifleConfirm", 1) // Gauss Rifle
+    TNT1 A 0 A_GiveInventory("RLGaussRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvGauss Rifle?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLLaserRifleModding
+  RLLaserRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLLaserRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLLaserRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLLaserRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLNuclearPlasmaPistol:
+  RLNuclearPlasmaRevolverAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLSpeedloaderPistolAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLSpeedloaderPistolAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLNuclearPlasmaPistolModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolFirestormMod",1,"RLNuclearPlasmaPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolSniperMod",1,"RLNuclearPlasmaPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolBulkMod",1,"RLNuclearPlasmaPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolAgilityMod",1,"RLNuclearPlasmaPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolPowerMod",1,"RLNuclearPlasmaPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolTechnicalMod",2,"RLNuclearPlasmaPistolModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolTechnicalMod",1,1)
+    Goto RLNuclearPlasmaPistolModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaRevolverConfirm", 1) // Nuclear Plasma Revolver
+    TNT1 A 0 A_GiveInventory("RLSpeedloaderPistolAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvNuclear Plasma Revolver?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLNuclearPlasmaPistolModding
+  RLNuclearPlasmaPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLNuclearPlasmaRifle:
+  RLNuclearPlasmaShotgunAssembly:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaShotgunAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaShotgunAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLNuclearPlasmaRifleAssaultRifle // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleFirestormMod",1,"RLNuclearPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleTechnicalMod",1,"RLNuclearPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleSniperMod",1,"RLNuclearPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRiflePowerMod",1,"RLNuclearPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleAgilityMod",2,"RLNuclearPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleBulkMod",2,"RLNuclearPlasmaRifleAssaultRifle")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleBulkMod",1,1)
+    Goto RLNuclearPlasmaRifleAssaultRifle // Change to the next assembly to check.
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleAgilityMod",1,1)
+    Goto RLNuclearPlasmaRifleAssaultRifle // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaShotgunConfirm", 1) // Heavy Shotgun
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaShotgunAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvNuclear Plasma Shotgun?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLNuclearPlasmaRifleModding
+  RLNuclearPlasmaRifleAssaultRifle:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLAssaultRifleAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLNuclearPlasmaRifleModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleFirestormMod",1,"RLNuclearPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleSniperMod",1,"RLNuclearPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRiflePowerMod",1,"RLNuclearPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleBulkMod",1,"RLNuclearPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleAgilityMod",3,"RLNuclearPlasmaRifleModding")
+	TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleAgilityMod",2,1)
+    Goto RLNuclearPlasmaRifleModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleNuclearPlasmaRifleConfirm", 1) // Assault Rifle Nuclear Plasma Rifle
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvAssault Nuclear Plasma Rifle?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLNuclearPlasmaRifleModding
+  RLNuclearPlasmaRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLNuclearBFG9000:
+  RLNuclearBFG9000Modding:
+    TNT1 A 0 A_JumpIfInventory("RLNuclearBFG9000ModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNuclearBFG9000ModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNuclearBFG9000AgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+/*  RLAxe:
+  RLPiercingAxe:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLAxeModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLAxeTechnicalMod",1,"RLAxeModding")
+	TNT1 A 0 A_JumpIfInventory("RLAxeBulkMod",1,"RLAxeModding")
+	TNT1 A 0 A_JumpIfInventory("RLAxeAgilityMod",1,"RLAxeModding")
+	TNT1 A 0 A_JumpIfInventory("RLAxePowerMod",2,"RLAxeModding")
+	TNT1 A 0 A_JumpIfInventory("RLAxePowerMod",1,1)
+    Goto RLAxeModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLPiercingAxeConfirm", 1) // Piercing Axe
+    TNT1 A 0 A_GiveInventory("RLPiercingBladeAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvNanoedge Axe?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLAxeModding
+  RLAxeModding:
+    TNT1 A 0 A_JumpIfInventory("RLAxeModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAxeModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAxeAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLMace:
+  RLPiercingMace:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLMaceModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLMaceTechnicalMod",1,"RLMaceModding")
+	TNT1 A 0 A_JumpIfInventory("RLMaceBulkMod",1,"RLMaceModding")
+	TNT1 A 0 A_JumpIfInventory("RLMaceAgilityMod",1,"RLMaceModding")
+	TNT1 A 0 A_JumpIfInventory("RLMacePowerMod",2,"RLMaceModding")
+	TNT1 A 0 A_JumpIfInventory("RLMacePowerMod",1,1)
+    Goto RLMaceModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLPiercingMaceConfirm", 1) // Piercing Mace
+    TNT1 A 0 A_GiveInventory("RLPiercingBladeAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvNanoedge Mace?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLMaceModding
+  RLMaceModding:
+    TNT1 A 0 A_JumpIfInventory("RLMaceModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMaceModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMaceAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLMachete:
+  RLPiercingMachete:
+	TNT1 A 0 A_JumpIf(CallACS("DRLA_AssemblyLearning") == 0, 3) // Skip this check if required assembly learning is off.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,2, AAPTR_PLAYER1) // You need to know how to make this assembly.
+	TNT1 A 0 A_JumpIfInventory("RLPiercingBladeAssemblyLearntToken",1,1) // Extra check for multiplayer.
+    Goto RLMacheteModding // Change to the next assembly if you don't know how to make it.
+	TNT1 A 0 A_JumpIfInventory("RLMacheteTechnicalMod",1,"RLMacheteModding")
+	TNT1 A 0 A_JumpIfInventory("RLMacheteBulkMod",1,"RLMacheteModding")
+	TNT1 A 0 A_JumpIfInventory("RLMacheteAgilityMod",1,"RLMacheteModding")
+	TNT1 A 0 A_JumpIfInventory("RLMachetePowerMod",2,"RLMacheteModding")
+	TNT1 A 0 A_JumpIfInventory("RLMachetePowerMod",1,1)
+    Goto RLMacheteModding // Change to the next assembly to check.
+    TNT1 A 0 A_GiveInventory("RLPiercingMacheteConfirm", 1) // Piercing Machete
+    TNT1 A 0 A_GiveInventory("RLPiercingBladeAssemblyLearntToken", 1) // Assembly is now listed in the HUD menus
+	TNT1 A 0 A_Print("Do you want to assemble the \cvNanoedge Machete?\n\ciFire\c- confirms - \cr\crAltFire\c-\c- cancels.", 5)
+    TNT1 A 0 A_PlaySound("hud/assemblyalert", 5)
+    Goto RLMacheteModding
+  RLMacheteModding:
+    TNT1 A 0 A_JumpIfInventory("RLMacheteModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMacheteModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMacheteAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop*/
+	
+//==============================================================================
+// SUPERIORS
+//==============================================================================
+
+  RLMarksmanRifle:
+  RLMarksmanRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLMarksmanRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMarksmanRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMarksmanRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLVanguardRifle:
+  RLVanguardRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLVanguardRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLVanguardRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLVanguardRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLHuntingRevolver:
+  RLHuntingRevolverModding:
+    TNT1 A 0 A_JumpIfInventory("RLHuntingRevolverModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHuntingRevolverModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHuntingRevolverAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLThompson:
+  RLThompsonModding:
+    TNT1 A 0 A_JumpIfInventory("RLThompsonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLThompsonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLThompsonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLPP7:
+  RLPP7Modding:
+    TNT1 A 0 A_JumpIfInventory("RLPP7ModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPP7ModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPP7AgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLHuntingShotgun:
+  RLHuntingShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHuntingShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHuntingShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHuntingShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+  RLRCP90:
+  RLRCP90Modding:
+    TNT1 A 0 A_JumpIfInventory("RLRCP90ModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLRCP90ModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLRCP90AgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+//==============================================================================
+// UNIQUES
+//==============================================================================
+
+  RLJackhammer:
+  RLJackhammerModding:
+    TNT1 A 0 A_JumpIfInventory("RLJackhammerModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLJackhammerModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLJackhammerAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLRailgun:
+  RLRailgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLRailgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLRailgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLRailgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBFG10K:
+  RLBFG10KModding:
+    TNT1 A 0 A_JumpIfInventory("RLBFG10KModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBFG10KModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBFG10KAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLUnknownHerald:
+  RLUnknownHeraldModding:
+    TNT1 A 0 A_JumpIfInventory("RLUnknownHeraldModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLUnknownHeraldModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLUnknownHeraldAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNullPointer:
+  RLNullPointerModding:
+    TNT1 A 0 A_JumpIfInventory("RLNullPointerModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNullPointerModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNullPointerAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLFragShotgun:
+  RLFragShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLFragShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLFragShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLFragShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLQuadShotgun:
+  RLQuadShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLQuadShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLQuadShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLQuadShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLTantrumCannon:
+  RLTantrumCannonModding:
+    TNT1 A 0 A_JumpIfInventory("RLTantrumCannonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLTantrumCannonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLTantrumCannonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLRevenantsLauncher:
+  RLRevenantsLauncherModding:
+    TNT1 A 0 A_JumpIfInventory("RLRevenantsLauncherModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLRevenantsLauncherModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLRevenantsLauncherAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLGrammatonClericBeretta:
+  RLGrammatonClericBerettaModding:
+    TNT1 A 0 A_JumpIfInventory("RLGrammatonClericBerettaModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLGrammatonClericBerettaModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLGrammatonClericBerettaAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAntiFreakJackal:
+    TNT1 A 0 A_JumpIfInventory("RLAlucardFuMod",1,"RLHellsingARMSCasull")
+  RLAntiFreakJackalModding:
+    TNT1 A 0 A_JumpIfInventory("RLAntiFreakJackalModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAntiFreakJackalModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAntiFreakJackalAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHellsingARMSCasull:
+  RLHellsingARMSCasullModding:
+    TNT1 A 0 A_JumpIfInventory("RLHellsingARMSCasullModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHellsingARMSCasullModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHellsingARMSCasullAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLTrigun:
+  RLTrigunModding:
+    TNT1 A 0 A_JumpIfInventory("RLTrigunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLTrigunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLTrigunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLParticleBeamCannon:
+  RLParticleBeamCannonModding:
+    TNT1 A 0 A_JumpIfInventory("RLParticleBeamCannonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLParticleBeamCannonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLParticleBeamCannonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaRedirectionCannon:
+  RLPlasmaRedirectionCannonModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaRedirectionCannonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaRedirectionCannonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaRedirectionCannonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLSteelBeast:
+  RLSteelBeastModding:
+    TNT1 A 0 A_JumpIfInventory("RLSteelBeastModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSteelBeastModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSteelBeastAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLSussGun:
+  RLSussGunModding:
+    TNT1 A 0 A_JumpIfInventory("RLSussGunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSussGunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSussGunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLMIRVLauncher:
+  RLMIRVLauncherModding:
+    TNT1 A 0 A_JumpIfInventory("RLMIRVLauncherModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMIRVLauncherModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMIRVLauncherAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+/*  RLSubtleKnife:
+  RLSubtleKnifeModding:
+    TNT1 A 0 A_JumpIfInventory("RLSubtleKnifeModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSubtleKnifeModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSubtleKnifeAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop*/
+/*  RLSpectreRevolver:
+  RLSpectreRevolverModding:
+    TNT1 A 0 A_JumpIfInventory("RLSpectreRevolverModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSpectreRevolverModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSpectreRevolverAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop*/
+  RLMarathonAssaultRifle:
+  RLMarathonAssaultRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLMarathonAssaultRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMarathonAssaultRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMarathonAssaultRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLMarathonShotguns:
+  RLMarathonShotgunsModding:
+    TNT1 A 0 A_JumpIfInventory("RLMarathonShotgunsModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMarathonShotgunsModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMarathonShotgunsAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+//==============================================================================
+// DEMONICS
+//==============================================================================
+
+/*  RLMonsterFrisbee:
+  RLMonsterFrisbeeModding:
+    TNT1 A 0 A_JumpIfInventory("RLMonsterFrisbeeModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMonsterFrisbeeModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMonsterFrisbeeAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop*/
+  RLHellsReign:
+  RLHellsReignModding:
+    TNT1 A 0 A_JumpIfInventory("RLHellsReignModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHellsReignModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHellsReignAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLDeathsGaze:
+  RLDeathsGazeModding:
+    TNT1 A 0 A_JumpIfInventory("RLDeathsGazeModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLDeathsGazeModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLDeathsGazeAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLSoulstormRifle:
+  RLSoulstormRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLSoulstormRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSoulstormRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSoulstormRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+/*  RLMortalyzer:
+  RLMortalyzerModding:
+    TNT1 A 0 A_JumpIfInventory("RLMortalyzerModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMortalyzerModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMortalyzerAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLDreadshotMortar:
+  RLDreadshotMortarModding:
+    TNT1 A 0 A_JumpIfInventory("RLDreadshotMortarModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLDreadshotMortarModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLDreadshotMortarAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop*/
+  RLUnmaker:
+	TNT1 A 0 A_Print("\crThis weapon can only be upgraded with demon artifacts.", 5)
+    Fail
+	
+//==============================================================================
+// LEGENDARIES
+//==============================================================================
+
+  RLDuke2Rifle:
+  RLDuke2RifleModding:
+    TNT1 A 0 A_PlaySound("weapons/dn2gunpickup",7)
+    TNT1 A 0 A_GiveInventory("RLDuke2RifleRapidFireGiver",1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+//==============================================================================
+// ASSEMBLIES
+// BASIC
+//==============================================================================
+
+  RLSilencedPistol:
+  RLSilencedPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLSilencedPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSilencedPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSilencedPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLShredderPistol:
+  RLShredderPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLShredderPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLShredderPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLShredderPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLShredderShotgun:
+  RLShredderShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLShredderShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLShredderShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLShredderShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLSpeedloaderPistol:
+  RLSpeedloaderPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLSpeedloaderPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSpeedloaderPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSpeedloaderPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLElephantGun:
+  RLElephantGunModding:
+    TNT1 A 0 A_JumpIfInventory("RLElephantGunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLElephantGunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLElephantGunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLGatlingGun:
+  RLGatlingGunModding:
+    TNT1 A 0 A_JumpIfInventory("RLGatlingGunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLGatlingGunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLGatlingGunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLMicroLauncher:
+  RLMicroLauncherModding:
+    TNT1 A 0 A_JumpIfInventory("RLMicroLauncherModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMicroLauncherModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMicroLauncherAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLTacticalShotgun:
+  RLTacticalShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLTacticalShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLTacticalShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLTacticalShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHeavyShotgun:
+  RLHeavyShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHeavyShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHeavyShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHeavyShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHeavyCombatShotgun:
+  RLHeavyCombatShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHeavyCombatShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHeavyCombatShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHeavyCombatShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHeavyDoubleShotgun:
+  RLHeavyDoubleShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHeavyDoubleShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHeavyDoubleShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHeavyDoubleShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHeavySuperShotgun:
+  RLHeavySuperShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHeavySuperShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHeavySuperShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHeavySuperShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHeavyAssaultShotgun:
+  RLHeavyAssaultShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHeavyAssaultShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHeavyAssaultShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHeavyAssaultShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHeavyPlasmaShotgun:
+  RLHeavyPlasmaShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHeavyPlasmaShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHeavyPlasmaShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHeavyPlasmaShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLFlamethrower:
+  RLFlamethrowerModding:
+    TNT1 A 0 A_JumpIfInventory("RLFlamethrowerModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLFlamethrowerModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLFlamethrowerAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLShrapnelCannon:
+  RLShrapnelCannonModding:
+    TNT1 A 0 A_JumpIfInventory("RLShrapnelCannonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLShrapnelCannonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLShrapnelCannonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNuclearPlasmaRevolver:
+  RLNuclearPlasmaRevolverModding:
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRevolverModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaRevolverModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaRevolverAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLStealthRifle:
+  RLStealthRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLStealthRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLStealthRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLStealthRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLSniperRifle:
+  RLSniperRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLSniperRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSniperRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSniperRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+// NANOEDGE / PIERCING
+  RLPiercingChainsaw:
+  RLPiercingChainsawModding:
+    TNT1 A 0 A_JumpIfInventory("RLPiercingChainsawModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPiercingChainsawModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPiercingChainsawAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+// HIGH POWER
+  RLHighPowerPistol:
+  RLHighPowerPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerChaingun:
+  RLHighPowerChaingunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerChaingunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerChaingunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerChaingunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerPlasmaRifle:
+  RLHighPowerPlasmaRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerPlasmaRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerPlasmaRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerPlasmaRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerBFG9000:
+  RLHighPowerBFG9000Modding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerBFG9000ModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerBFG9000ModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerBFG9000AgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerBlaster:
+  RLHighPowerBlasterModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerBlasterModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerBlasterModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerBlasterAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerCombatPistol:
+  RLHighPowerCombatPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerCombatPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerCombatPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerCombatPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerMarksmanPistol:
+  RLHighPowerMarksmanPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerMarksmanPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerMarksmanPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerMarksmanPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerHandcannon:
+  RLHighPowerHandcannonModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerHandcannonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerHandcannonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerHandcannonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerMinigun:
+  RLHighPowerMinigunModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerMinigunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerMinigunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerMinigunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerLaserRifle:
+  RLHighPowerLaserRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerLaserRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerLaserRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerLaserRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerNuclearPlasmaPistol:
+  RLHighPowerNuclearPlasmaPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerNuclearPlasmaPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerNuclearPlasmaPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerNuclearPlasmaPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerNuclearPlasmaRifle:
+  RLHighPowerNuclearPlasmaRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerNuclearPlasmaRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerNuclearPlasmaRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerNuclearPlasmaRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerNuclearBFG9000:
+  RLHighPowerNuclearBFG9000Modding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerNuclearBFG9000ModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerNuclearBFG9000ModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerNuclearBFG9000AgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerTristarBlaster:
+  RLHighPowerTristarBlasterModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerTristarBlasterModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerTristarBlasterModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerTristarBlasterAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerUzi:
+  RLHighPowerUziModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerUziModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerUziModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerUziAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHighPowerBattleRifle:
+  RLHighPowerBattleRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLHighPowerBattleRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHighPowerBattleRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHighPowerBattleRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+// PLASMATIC SHRAPNEL
+  RLPlasmaticShrapnelShotgun:
+  RLPlasmaticShrapnelShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaticShrapnelCombatShotgun:
+  RLPlasmaticShrapnelCombatShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelCombatShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelCombatShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelCombatShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaticShrapnelDoubleShotgun:
+  RLPlasmaticShrapnelDoubleShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelDoubleShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelDoubleShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelDoubleShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaticShrapnelSuperShotgun:
+  RLPlasmaticShrapnelSuperShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelSuperShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelSuperShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelSuperShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaticShrapnelAssaultShotgun:
+  RLPlasmaticShrapnelAssaultShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelAssaultShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelAssaultShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelAssaultShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaticShrapnelPlasmaShotgun:
+  RLPlasmaticShrapnelPlasmaShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaticShrapnelPlasmaShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelPlasmaShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaticShrapnelPlasmaShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+	
+//==============================================================================
+// ADVANCED
+//==============================================================================
+
+  RLDoubleChainsaw:
+  RLDoubleChainsawModding:
+    TNT1 A 0 A_JumpIfInventory("RLDoubleChainsawModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLDoubleChainsawModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLDoubleChainsawAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLTacticalRocketLauncher:
+  RLTacticalRocketLauncherModding:
+    TNT1 A 0 A_JumpIfInventory("RLTacticalRocketLauncherModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLTacticalRocketLauncherModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLTacticalRocketLauncherAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLStormPistol:
+  RLStormPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLStormPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLStormPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLStormPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLStormCombatPistol:
+  RLStormCombatPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLStormCombatPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLStormCombatPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLStormCombatPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLStormMarksmanPistol:
+  RLStormMarksmanPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLStormMarksmanPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLStormMarksmanPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLStormMarksmanPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaPistol:
+  RLPlasmaPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaCombatPistol:
+  RLPlasmaCombatPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaCombatPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaCombatPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaCombatPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaMarksmanPistol:
+  RLPlasmaMarksmanPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaMarksmanPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaMarksmanPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaMarksmanPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLStormHandcannon:
+  RLStormHandcannonModding:
+    TNT1 A 0 A_JumpIfInventory("RLStormHandcannonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLStormHandcannonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLStormHandcannonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLStormUzi:
+  RLStormUziModding:
+    TNT1 A 0 A_JumpIfInventory("RLStormUziModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLStormUziModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLStormUziAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLStormBlaster:
+  RLStormBlasterModding:
+    TNT1 A 0 A_JumpIfInventory("RLStormBlasterModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLStormBlasterModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLStormBlasterAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLStormNuclearPlasmaPistol:
+  RLStormNuclearPlasmaPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLStormNuclearPlasmaPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLStormNuclearPlasmaPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLStormNuclearPlasmaPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaHandcannon:
+  RLPlasmaHandcannonModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaHandcannonModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaHandcannonModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaHandcannonAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaUzi:
+  RLPlasmaUziModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaUziModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaUziModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaUziAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLOverchargedBlaster:
+  RLOverchargedBlasterModding:
+    TNT1 A 0 A_JumpIfInventory("RLOverchargedBlasterModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLOverchargedBlasterModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLOverchargedBlasterAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLSuperchargedNuclearPlasmaPistol:
+  RLSuperchargedNuclearPlasmaPistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLSuperchargedNuclearPlasmaPistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLSuperchargedNuclearPlasmaPistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLSuperchargedNuclearPlasmaPistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLFocusedDoubleShotgun:
+  RLFocusedDoubleShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLFocusedDoubleShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLFocusedDoubleShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLFocusedDoubleShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLHyperblaster:
+  RLHyperblasterModding:
+    TNT1 A 0 A_JumpIfInventory("RLHyperblasterModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLHyperblasterModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLHyperblasterAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLVBFG9000:
+  RLVBFG9000Modding:
+    TNT1 A 0 A_JumpIfInventory("RLVBFG9000ModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLVBFG9000ModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLVBFG9000AgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNuclearVBFG9000:
+  RLNuclearVBFG9000Modding:
+    TNT1 A 0 A_JumpIfInventory("RLNuclearVBFG9000ModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNuclearVBFG9000ModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNuclearVBFG9000AgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAutoshotgun:
+  RLAutoshotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLAutoshotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAutoshotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAutoshotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAutoDoubleShotgun:
+  RLAutoDoubleShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLAutoDoubleShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAutoDoubleShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAutoDoubleShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBulletstormChaingun:
+  RLBulletstormChaingunModding:
+    TNT1 A 0 A_JumpIfInventory("RLBulletstormChaingunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBulletstormChaingunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBulletstormChaingunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLMiniMissilePistol:
+  RLMiniMissilePistolModding:
+    TNT1 A 0 A_JumpIfInventory("RLMiniMissilePistolModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLMiniMissilePistolModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLMiniMissilePistolAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaRifleMkII:
+  RLPlasmaRifleMkIIModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaRifleMkIIModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaRifleMkIIModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaRifleMkIIAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLGrenadeLauncher:
+  RLGrenadeLauncherModding:
+    TNT1 A 0 A_JumpIfInventory("RLGrenadeLauncherModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLGrenadeLauncherModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLGrenadeLauncherAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLPlasmaShotgunMkII:
+  RLPlasmaShotgunMkIIModding:
+    TNT1 A 0 A_JumpIfInventory("RLPlasmaShotgunMkIIModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLPlasmaShotgunMkIIModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLPlasmaShotgunMkIIAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNuclearPlasmaShotgun:
+  RLNuclearPlasmaShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNuclearPlasmaRifleMkII:
+  RLNuclearPlasmaRifleMkIIModding:
+    TNT1 A 0 A_JumpIfInventory("RLNuclearPlasmaRifleMkIIModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaRifleMkIIModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNuclearPlasmaRifleMkIIAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBulletstormRifle:
+  RLBulletstormRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLBulletstormRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBulletstormRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBulletstormRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLLaserShotgun:
+  RLLaserShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLLaserShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLLaserShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLLaserShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+// ASSAULT RIFLE
+  RLAssaultRifleChaingun:
+  RLAssaultRifleChaingunModding:
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleChaingunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleChaingunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleChaingunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAssaultRiflePlasmaRifle:
+  RLAssaultRiflePlasmaRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRiflePlasmaRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAssaultRiflePlasmaRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAssaultRiflePlasmaRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAssaultRifleMinigun:
+  RLAssaultRifleMinigunModding:
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleMinigunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleMinigunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleMinigunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAssaultRifleLaserRifle:
+  RLAssaultRifleLaserRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleLaserRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleLaserRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleLaserRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAssaultRifleNuclearPlasmaRifle:
+  RLAssaultRifleNuclearPlasmaRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleNuclearPlasmaRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleNuclearPlasmaRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleNuclearPlasmaRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAssaultRifleUzi:
+  RLAssaultRifleUziModding:
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleUziModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleUziModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleUziAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLAssaultRifleBattleRifle:
+  RLAssaultRifleBattleRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLAssaultRifleBattleRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleBattleRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLAssaultRifleBattleRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+// BURST CANNON
+  RLBurstCannonChaingun:
+  RLBurstCannonChaingunModding:
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonChaingunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBurstCannonChaingunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBurstCannonChaingunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBurstCannonPlasmaRifle:
+  RLBurstCannonPlasmaRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonPlasmaRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBurstCannonPlasmaRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBurstCannonPlasmaRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBurstCannonMinigun:
+  RLBurstCannonMinigunModding:
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonMinigunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBurstCannonMinigunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBurstCannonMinigunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBurstCannonLaserRifle:
+  RLBurstCannonLaserRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonLaserRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBurstCannonLaserRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBurstCannonLaserRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBurstCannonNuclearPlasmaRifle:
+  RLBurstCannonNuclearPlasmaRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonNuclearPlasmaRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBurstCannonNuclearPlasmaRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBurstCannonNuclearPlasmaRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBurstCannonUzi:
+  RLBurstCannonUziModding:
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonUziModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBurstCannonUziModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBurstCannonUziAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLBurstCannonBattleRifle:
+  RLBurstCannonBattleRifleModding:
+    TNT1 A 0 A_JumpIfInventory("RLBurstCannonBattleRifleModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLBurstCannonBattleRifleModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLBurstCannonBattleRifleAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+// NANO SHRAPNEL
+  RLNanoShrapnelShotgun:
+  RLNanoShrapnelShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNanoShrapnelCombatShotgun:
+  RLNanoShrapnelCombatShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelCombatShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelCombatShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelCombatShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNanoShrapnelDoubleShotgun:
+  RLNanoShrapnelDoubleShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelDoubleShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelDoubleShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelDoubleShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNanoShrapnelSuperShotgun:
+  RLNanoShrapnelSuperShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelSuperShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelSuperShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelSuperShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNanoShrapnelAssaultShotgun:
+  RLNanoShrapnelAssaultShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelAssaultShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelAssaultShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelAssaultShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  RLNanoShrapnelPlasmaShotgun:
+  RLNanoShrapnelPlasmaShotgunModding:
+    TNT1 A 0 A_JumpIfInventory("RLNanoShrapnelPlasmaShotgunModLimit",0,"NoMod")
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelPlasmaShotgunModLimit",1)
+    TNT1 A 0 A_GiveInventory("RLNanoShrapnelPlasmaShotgunAgilityMod", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  CyberneticArmorModding:
+    TNT1 A 0 A_TakeInventory("RLCyberneticArmorModdingConfirm",1)
+    TNT1 A 0 A_JumpIfInventory("RLShellshockPerk",1,"CyberneticArmorModdingRenegade")
+    TNT1 A 0 A_TakeInventory("RLCyberneticArmor",1)
+    TNT1 A 0 A_TakeInventory("BasicArmor",99999)
+    TNT1 A 0 A_GiveInventory("RLCyberneticArmorAgility", 1)
+	Goto CyberneticArmorModdingContinue
+  CyberneticArmorModdingContinue:
+    TNT1 A 0 A_GiveInventory("RLCyberneticArmorAgilityToken", 1)
+    TNT1 A 0 A_GiveInventory("RLCyberneticArmorModdedToken", 1)
+    TNT1 A 0 A_JumpIfInventory("RLScavengerPerk",1,2)
+    TNT1 A 0 A_TakeInventory("RLModLimit", 1)
+    Stop
+    TNT1 A 0 A_TakeInventory("RLScavengerModLimit", 1)
+    Stop
+  CyberneticArmorModdingRenegade:
+    TNT1 A 0 A_TakeInventory("RLCyberneticArmorRenegade",1)
+    TNT1 A 0 A_TakeInventory("BasicArmor",99999)
+    TNT1 A 0 A_GiveInventory("RLCyberneticArmorRenegadeAgility", 1)
+	Goto CyberneticArmorModdingContinue
+  NoMod:
+    TNT1 A 0 A_Print("This weapon cannot support further modification.", 2)
+    Fail
+  OnlyExoticMods:
+    TNT1 A 0 A_Print("This weapon cannot support basic mods at this time.", 2)
+    Fail
+  AdvancedWeapon:
+    TNT1 A 0 A_Print("This weapon is too advanced for basic modification.", 2)
+    Fail
+  NoPickup:
+	TNT1 A 0 A_JumpIfInventory("DRLA_ModsAntiLogFloodCheck",1,"NoPickup_NoPrint")
+	TNT1 A 0 A_GiveInventory("DRLA_ModsAntiLogFloodCheck")
+	TNT1 A 0 A_Print("\cd= Agility Mod =", 2, "CONFONT")
+   NoPickup_NoPrint:
+    TNT1 A 0
+	Fail
+//==============================================================================
+	Duke2Stuff:
+		"####" "#" 0 A_SpawnItemEx("RLDuke2WeaponCrate",0,0,0, 0,0,0, 0,SXF_NOCHECKPOSITION)
+		Stop
+//==============================================================================
+//					--	DRPG Compatibility Stuff  --
+//==============================================================================
+	DRPGInit:
+		"####" "#" 0 ACS_NamedExecuteAlways("ItemInit", 0)
+		"####" "#" 0 A_Jump (256, "SpecialStartCheck")
+		Goto SpecialStartCheck
+  }
+}
+
+ACTOR RLAgilityModAuto : RLAgilityModItem
+{
+  -INVENTORY.INVBAR
+  Inventory.Pickupsound ""
+  Inventory.UseSound ""
+  Inventory.PickupMessage ""
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0
+    Stop
+	
+  Pickup:
+  Use:
+	TNT1 A 0 A_JumpIfInventory("RLFistSelected",1,"Nope")
+    Goto WeaponSelect
+	
+  Nope:
+	TNT1 A 0
+    Fail
+	
+  WeaponSelect:
+	TNT1 A 0 A_GiveInventory("RLMisfireSpamPreventionCooldown",1)
+    TNT1 A 0 A_Print (" ", 0)
+	TNT1 A 0 A_Jump(256, "WeaponSelectMain")
+	Goto WeaponSelectMain
+  }
+}
