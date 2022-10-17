@@ -592,16 +592,16 @@ Start:
             {
                 XPBonus = ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
                 // Player.XP += XPBonus;
-                GiveInventory("DRPGCredits",  XPBonus);
+                GiveInventory("DRPGCredits",  XPBonus * 150);
 
                 HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
             }
 
             if (Players(i).Level == MAX_LEVEL)
             {
-                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
+                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000 * 150);
 
-                HudMessage("Monsters Killed Bonus!\n%d Credits Bonus", 1000);
+                HudMessage("Monsters Killed Bonus!\n%d Credits Bonus", 1000 * 150);
             }
 
             EndHudMessage(HUDMSG_FADEOUT, 0, "Brick", 1.5, 0.4, 3.0, 3.0);
@@ -1923,6 +1923,7 @@ NamedScript void EnvironmentalHazard()
     bool NeutralizerSpawned = false;
     int NeutralizerTID;
     SetMusic("EvHazard");
+    CurrentLevel->GeneratorFuel = 10;
 
     for (int i = 0; i < MAX_PLAYERS; i++)
     {

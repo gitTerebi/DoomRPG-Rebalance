@@ -41,7 +41,7 @@ actor DRPGCredits1 : CustomInventory
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        CRED A -1 Bright
+        CRED H -1 Bright
         Stop
     Pickup:
         TNT1 A 0 A_GiveInventory("DRPGCredits", 10)
@@ -61,7 +61,7 @@ actor DRPGCredits5 : DRPGCredits1
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        CRED B -1 Bright
+        CRED G -1 Bright
         Stop
     Pickup:
         TNT1 A 0 A_GiveInventory("DRPGCredits", 50)
@@ -81,7 +81,7 @@ actor DRPGCredits10 : DRPGCredits1
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        CRED C -1 Bright
+        CRED A -1 Bright
         Stop
     Pickup:
         TNT1 A 0 A_GiveInventory("DRPGCredits", 100)
@@ -101,7 +101,7 @@ actor DRPGCredits20 : DRPGCredits1
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        CRED D -1 Bright
+        CRED B -1 Bright
         Stop
     Pickup:
         TNT1 A 0 A_GiveInventory("DRPGCredits", 200)
@@ -121,7 +121,7 @@ actor DRPGCredits50 : DRPGCredits1
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        CRED E -1 Bright
+        CRED C -1 Bright
         Stop
     Pickup:
         TNT1 A 0 A_GiveInventory("DRPGCredits", 500)
@@ -141,7 +141,7 @@ actor DRPGCredits100 : DRPGCredits1
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        CRED F -1 Bright
+        CRED D -1 Bright
         Stop
     Pickup:
         TNT1 A 0 A_GiveInventory("DRPGCredits", 1000)
@@ -161,7 +161,7 @@ actor DRPGCredits250 : DRPGCredits1
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        CRED G -1 Bright
+        CRED E -1 Bright
         Stop
     Pickup:
         TNT1 A 0 A_GiveInventory("DRPGCredits", 2500)
@@ -181,7 +181,7 @@ actor DRPGCredits500 : DRPGCredits1
     {
     Spawn:
         TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        CRED H -1 Bright
+        CRED F -1 Bright
         Stop
     Pickup:
         TNT1 A 0 A_GiveInventory("DRPGCredits", 5000)

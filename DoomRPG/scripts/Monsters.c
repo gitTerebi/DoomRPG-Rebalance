@@ -2845,7 +2845,7 @@ NamedScript void DropCredits(int Killer, MonsterStatsPtr Stats)
     if( Random(0, Players(Killer).HealthMax) > Players(Killer).ActualHealth )
     {
         int HealthDelta = Players(Killer).HealthMax - Players(Killer).ActualHealth;
-        int HealthShardsAmount = Random((int)(HealthDelta * .25), (int)(HealthDelta * .75));
+        int HealthShardsAmount = Random((int)(HealthDelta * .12), (int)(HealthDelta * .33));
         if(HealthShardsAmount > 0)
             DropHealthShard(Killer, 0, HealthShardsAmount);
     }

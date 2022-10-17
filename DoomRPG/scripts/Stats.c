@@ -547,7 +547,7 @@ void CheckStats()
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
     Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.AgilityTotal / 100));
     Player.WeaponSpeed = Player.AgilityTotal / 2;
-    SetAmmoCapacity("Clip", (int)(25 + Player.CapacityTotal * 7.5) / 10 * 10);
+    SetAmmoCapacity("Clip", (int)(30 + Player.CapacityTotal * 7.5) / 10 * 10);
     SetAmmoCapacity("Shell", 10 + Player.CapacityTotal * 2);
     SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
     SetAmmoCapacity("Cell", (50 + Player.CapacityTotal * 5) / 10 * 10);

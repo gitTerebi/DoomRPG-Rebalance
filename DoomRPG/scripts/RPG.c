@@ -552,7 +552,7 @@ NamedScript void RespawnPlayer()
 
     SetHudSize(640, 480, false);
     SetFont("BIGFONT");
-    HudMessage("\C-You died! -\Ce%ld CREDITS", RankPenalty, CreditPenalty);
+    HudMessage("\C-You died! -\Ce%ld CREDITS", CreditPenalty);
     EndHudMessage(HUDMSG_FADEOUT, 0, "Orange", 320.0, 140.0, 0.5, 6.0);
 
     FadeTo(255, 0, 0, 0.85, 1.0);

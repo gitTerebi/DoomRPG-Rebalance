@@ -84,12 +84,10 @@ actor DRPGGenericBossDropper : RandomSpawner
 
 actor DRPGMoneyDropper : RandomSpawner 25000
 {
-    DropItem "DRPGCredits1"         255 75
-    DropItem "DRPGCredits5"         255 10
-    DropItem "DRPGCredits10"        255 8
-    DropItem "DRPGCredits20"        255 4
-    DropItem "DRPGCredits50"        255 2
-    DropItem "DRPGCredits100"       255 1
+    DropItem "DRPGCredits10"        255 75
+    DropItem "DRPGCredits20"        255 10
+    DropItem "DRPGCredits50"        255 5
+    DropItem "DRPGCredits100"       255 2
 }
 
 actor DRPGHealthDropper : RandomSpawner
