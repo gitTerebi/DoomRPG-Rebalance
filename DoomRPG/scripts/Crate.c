@@ -349,8 +349,8 @@ NamedScript void CrateHack()
         if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
         {
             bool HitNothing = true;
-            XPBonus = ((XPTable[Player.Level] / (long)(20 + RoundInt(80.0 * (Player.Level / 100.0)))) + 50) / 50 * 50;
-            RankBonus = ((RankTable[Player.RankLevel] / (long)(40 + RoundInt(160.0 * (Player.RankLevel / 24.0)))) + 250) / 250 * 250;
+            XPBonus = Player.Level * 150;
+            RankBonus = Player.Level * 150;
 
             // Check Nodes
             for (int i = 0; i < MAX_NODES; i++)
@@ -393,9 +393,8 @@ NamedScript void CrateHack()
                         case NODE_XP:
                             ActivatorSound("hacking/select", 127);
                             SetFont("SMALLFONT");
-                            HudMessage("+%ld XP", XPBonus);
+                            HudMessage("+%ld Credits", XPBonus);
                             EndHudMessage(HUDMSG_FADEOUT, 0, "White", 160.0, 140.0, 2.0, 1.0);
-                            // Player.XP += XPBonus;
                             GiveInventory("DRPGCredits",  XPBonus);
                             break;
                         case NODE_RANK:

@@ -160,7 +160,7 @@ NamedScript Type_ENTER void Init()
         // Funds
         GiveInventory("DRPGCredits", GetActivatorCVar("drpg_start_credits"));
         Player.PrevCredits = CheckInventory("DRPGCredits");
-        GiveInventory("DRPGModule", GetActivatorCVar("drpg_start_modules"));
+        // GiveInventory("DRPGModule", GetActivatorCVar("drpg_start_modules"));
         GiveInventory("DRPGTurretPart", GetActivatorCVar("drpg_start_turretparts"));
 
         // Level/Rank

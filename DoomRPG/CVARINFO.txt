@@ -327,7 +327,7 @@ server  bool    drpg_addstartmap = false;
 
 // Funds
 user    int     drpg_start_credits = 100;
-user    int     drpg_start_modules = 5;
+user    int     drpg_start_modules = 0;
 user    int     drpg_start_turretparts = 0;
 
 // Level/Rank

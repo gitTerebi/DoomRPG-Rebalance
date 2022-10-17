@@ -507,7 +507,6 @@ NamedScript void SetupMapMissions()
 
 NamedScript void MapLoop()
 {
-    long int XPBonus;
     long int RankBonus;
 
     int ItemsFound;
@@ -588,20 +587,10 @@ Start:
 
             FadeRange(255, 0, 0, 0.25, 255, 0, 0, 0, 1.0);
 
-            // if (Players(i).Level < MAX_LEVEL)
-            // {
-            XPBonus = 10 * ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
-            GiveInventory("DRPGCredits",  XPBonus);
-            HudMessage("Monsters Killed Bonus!\n%ld Credits Bonus", XPBonus);
-            // }
+            long int XPBonus = Players(i).Level * 200;
+            GiveActorInventory(Players(i).TID, "DRPGCredits", XPBonus);
 
-            // if (Players(i).Level == MAX_LEVEL)
-            // {
-            //     XPBonus = 15000;
-            //     GiveActorInventory(Players(i).TID, "DRPGCredits",XPBonus);
-            //     HudMessage("Monsters Killed Bonus!\n%d Credits Bonus", XPBonus);
-            // }
-
+            HudMessage("Monsters Killed Bonus!\n%ld Credits", XPBonus);
             EndHudMessage(HUDMSG_FADEOUT, 0, "Brick", 1.5, 0.4, 3.0, 3.0);
         }
 
@@ -681,48 +670,11 @@ Start:
             HealThing(MAX_HEALTH);
             Players(i).EP = Players(i).EPMax;
 
-            if (Players(i).Level < MAX_LEVEL && Players(i).RankLevel < MAX_RANK)
-            {
-                XPBonus = ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
-                RankBonus = ((RankTable[Players(i).RankLevel] / (long)(20 + RoundInt(20.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
+            long int XPBonus = Players(i).Level * 200;
+            GiveActorInventory(Players(i).TID, "DRPGCredits", XPBonus);
 
-                Players(i).XP += XPBonus;
-                Players(i).Rank += RankBonus;
-
-                HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%ld XP Bonus\n\Ck%ld Rank Bonus\n\CnFull HP/EP Restore",
-                           XPBonus, RankBonus);
-            }
-
-            if (Players(i).Level == MAX_LEVEL && Players(i).RankLevel == MAX_RANK)
-            {
-                GiveActorInventory(Players(i).TID, "DRPGCredits", 2000);
-
-                HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%d Credits Bonus\n\Ck%d Credits Bonus\n\CnFull HP/EP Restore",
-                           1000, 1000);
-            }
-
-            if (Players(i).Level == MAX_LEVEL && Players(i).RankLevel < MAX_RANK)
-            {
-                RankBonus = ((RankTable[Players(i).RankLevel] / (long)(20 + RoundInt(20.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
-
-                Players(i).Rank += RankBonus;
-                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
-
-                HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%d Credits Bonus\n\Ck%ld Rank Bonus\n\CnFull HP/EP Restore",
-                           1000, RankBonus);
-            }
-
-            if (Players(i).Level < MAX_LEVEL && Players(i).RankLevel == MAX_RANK)
-            {
-                XPBonus = ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
-
-                Players(i).XP += XPBonus;
-                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
-
-                HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%ld XP Bonus\n\Ck%d Credits Bonus\n\CnFull HP/EP Restore",
-                           XPBonus, 1000);
-            }
-
+            HudMessage("\CaMonsters Killed Bonus!\n\CnItems Found Bonus!\n\CkSecrets Found Bonus!\n\n\Cj%ld Credits\n\CnFull HP/EP Restore",
+                       XPBonus);
             EndHudMessage(HUDMSG_FADEOUT, 0, "White", 0.5, 0.2, 5.0, 5.0);
         }
 
@@ -922,23 +874,10 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
             SetFont("SMALLFONT");
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0.0, 1.0);
 
-            // if (Players(i).RankLevel < MAX_RANK)
-            // {
+            long int XPBonus = Players(i).Level * 200;
+            GiveActorInventory(Players(i).TID, "DRPGCredits", XPBonus);
 
-            long int XPBonus = 10 * ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
-            GiveInventory("DRPGCredits",  XPBonus);
-            HudMessage("Par Time Beaten!\n%ld Credits Bonus", XPBonus);
-
-            // long int RankBonus = ((RankTable[Players(i).RankLevel] / (long)(10 + RoundInt(10.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
-            // Players(i).Rank += RankBonus;
-
-            // if (Players(i).RankLevel == MAX_RANK)
-            // {
-            //     XPBonus =  15000;
-            //     GiveActorInventory(Players(i).TID, "DRPGCredits", XPBonus);
-            //     HudMessage("Par Time Beaten!\n%d Credits Bonus", 1000);
-            // }
-
+            HudMessage("Par Time Beaten!\n%ld Credits", XPBonus);
             EndHudMessage(HUDMSG_FADEOUT, 0, "Gold", 1.5, 0.5, 3.0, 2.0);
         }
 
@@ -1279,20 +1218,10 @@ void MapEventReward()
             ActivatorSound("mission/complete", 127);
             PrintMessage(Message, 1, -32);
 
-            if (Player.Level < MAX_LEVEL)
-            {
-                long int XPBonus = ((XPTable[Player.Level] / (long)(5 + RoundInt(5.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
-                // Player.XP += XPBonus;
-                GiveInventory("DRPGCredits",  XPBonus * 10);
-                PrintMessage(StrParam("\CfBonus:\C- %ld XP and Crate", XPBonus * 10), 2, 0);
-            }
+            long int XPBonus = Player.Level * 200;
+            GiveInventory("DRPGCredits",  XPBonus);
 
-            if (Player.Level == MAX_LEVEL)
-            {
-                GiveActorInventory(Player.TID, "DRPGCredits", 5000 * 10);
-
-                PrintMessage(StrParam("\CfBonus:\C- %d Credits and Crate", 5000 * 10), 2, 0);
-            }
+            PrintMessage(StrParam("\CfBonus:\C- %d Credits and Crate", XPBonus), 2, 0);
 
             Spawn("DRPGCrate", GetActorX(0), GetActorY(0), GetActorZ(0), 0, GetActorAngle(0));
         }
@@ -1923,7 +1852,6 @@ NamedScript void EnvironmentalHazard()
     bool NeutralizerSpawned = false;
     int NeutralizerTID;
     SetMusic("EvHazard");
-    CurrentLevel->GeneratorFuel = 10;
 
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
