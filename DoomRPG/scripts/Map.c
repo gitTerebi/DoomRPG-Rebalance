@@ -588,21 +588,19 @@ Start:
 
             FadeRange(255, 0, 0, 0.25, 255, 0, 0, 0, 1.0);
 
-            if (Players(i).Level < MAX_LEVEL)
-            {
-                XPBonus = ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
-                // Player.XP += XPBonus;
-                GiveInventory("DRPGCredits",  XPBonus * 150);
+            // if (Players(i).Level < MAX_LEVEL)
+            // {
+            XPBonus = 10 * ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
+            GiveInventory("DRPGCredits",  XPBonus);
+            HudMessage("Monsters Killed Bonus!\n%ld Credits Bonus", XPBonus);
+            // }
 
-                HudMessage("Monsters Killed Bonus!\n%ld XP Bonus", XPBonus);
-            }
-
-            if (Players(i).Level == MAX_LEVEL)
-            {
-                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000 * 150);
-
-                HudMessage("Monsters Killed Bonus!\n%d Credits Bonus", 1000 * 150);
-            }
+            // if (Players(i).Level == MAX_LEVEL)
+            // {
+            //     XPBonus = 15000;
+            //     GiveActorInventory(Players(i).TID, "DRPGCredits",XPBonus);
+            //     HudMessage("Monsters Killed Bonus!\n%d Credits Bonus", XPBonus);
+            // }
 
             EndHudMessage(HUDMSG_FADEOUT, 0, "Brick", 1.5, 0.4, 3.0, 3.0);
         }
@@ -924,20 +922,22 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
             SetFont("SMALLFONT");
             FadeRange(255, 255, 0, 0.25, 255, 255, 0, 0.0, 1.0);
 
-            if (Players(i).RankLevel < MAX_RANK)
-            {
-                long int RankBonus = ((RankTable[Players(i).RankLevel] / (long)(10 + RoundInt(10.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
-                Players(i).Rank += RankBonus;
+            // if (Players(i).RankLevel < MAX_RANK)
+            // {
 
-                HudMessage("Par Time Beaten!\n%ld Rank Bonus", RankBonus);
-            }
+            long int XPBonus = 10 * ((XPTable[Players(i).Level] / (long)(10 + RoundInt(10.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
+            GiveInventory("DRPGCredits",  XPBonus);
+            HudMessage("Par Time Beaten!\n%ld Credits Bonus", XPBonus);
 
-            if (Players(i).RankLevel == MAX_RANK)
-            {
-                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
+            // long int RankBonus = ((RankTable[Players(i).RankLevel] / (long)(10 + RoundInt(10.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
+            // Players(i).Rank += RankBonus;
 
-                HudMessage("Par Time Beaten!\n%d Credits Bonus", 1000);
-            }
+            // if (Players(i).RankLevel == MAX_RANK)
+            // {
+            //     XPBonus =  15000;
+            //     GiveActorInventory(Players(i).TID, "DRPGCredits", XPBonus);
+            //     HudMessage("Par Time Beaten!\n%d Credits Bonus", 1000);
+            // }
 
             EndHudMessage(HUDMSG_FADEOUT, 0, "Gold", 1.5, 0.5, 3.0, 2.0);
         }
@@ -1283,15 +1283,15 @@ void MapEventReward()
             {
                 long int XPBonus = ((XPTable[Player.Level] / (long)(5 + RoundInt(5.0 * (Player.Level / 100.0)))) + 50l) / 50l * 50l;
                 // Player.XP += XPBonus;
-                GiveInventory("DRPGCredits",  XPBonus);
-                PrintMessage(StrParam("\CfBonus:\C- %ld XP and Crate", XPBonus), 2, 0);
+                GiveInventory("DRPGCredits",  XPBonus * 10);
+                PrintMessage(StrParam("\CfBonus:\C- %ld XP and Crate", XPBonus * 10), 2, 0);
             }
 
             if (Player.Level == MAX_LEVEL)
             {
-                GiveActorInventory(Player.TID, "DRPGCredits", 5000);
+                GiveActorInventory(Player.TID, "DRPGCredits", 5000 * 10);
 
-                PrintMessage(StrParam("\CfBonus:\C- %d Credits and Crate", 5000), 2, 0);
+                PrintMessage(StrParam("\CfBonus:\C- %d Credits and Crate", 5000 * 10), 2, 0);
             }
 
             Spawn("DRPGCrate", GetActorX(0), GetActorY(0), GetActorZ(0), 0, GetActorAngle(0));
