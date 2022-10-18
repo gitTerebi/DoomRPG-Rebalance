@@ -150,24 +150,25 @@ NamedScript void BuildItemData()
 
     // Powerups
     ITEMDATA_CATEGORY(4, "\CqPowerups", CF_NONE);
-    ITEMDATA_DEF("DRPGInvulnerabilityCharge",   "Invulnerability Charge",           5000, 2, 5, "CRG2A0",  6, 22);
-    ITEMDATA_DEF("DRPGInvisibilityCharge",      "Invisibility Charge",              2500, 1, 1, "CRG1A0",  6, 22);
-    ITEMDATA_DEF("DRPGTimeSphere",              "Time Sphere",                      1000, 4, 1, "TIMEA0", 16, 45);
-    ITEMDATA_DEF("DRPGRegenSphere",             "Regeneration Sphere",              1000, 2, 1, "REGNA0", 12, 38);
-    ITEMDATA_DEF("DRPGRadSuit",                 "Radiation Suit",                    250, 0, 0, "SUITA0", 11, 51);
-    ITEMDATA_DEF("DRPGInfrared",                "IR Goggles",                        500, 0, 0, "PVISA0", 11,  9);
-    ITEMDATA_DEF("DRPGBerserk",                 "Berserk Pack",                     5000, 6, -1,"PSTRA0", 12, 15);
-    ITEMDATA_DEF("DRPGAllMap",                  "Computer Area Map",               10000, 4, 3, "PMAPA0", 13, 23);
-    ITEMDATA_DEF("DRPGWings",                   "Wings",                            5000, 2, 2, "WINGA0", 13, 36);
-    ITEMDATA_DEF("DRPGMegasphere",              "Megasphere",                       5000, 4, 4, "MEGAA0", 12, 32);
-    ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",          50000, 8, 8, "CRYSA0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalBullet",   "Bullet Immunity Crystal",         50000, 8, 8, "CRYSB0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalFire",     "Fire Immunity Crystal",           50000, 8, 8, "CRYSC0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalPlasma",   "Plasma Immunity Crystal",         50000, 8, 8, "CRYSD0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalLightning","Lightning Immunity Crystal",      50000, 8, 8, "CRYSE0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "Toxic Immunity Crystal",          50000, 8, 8, "CRYSF0", 16, 48);
-    ITEMDATA_DEF("DRPGImmunityCrystalRadiation","Radiation Immunity Crystal",      50000, 8, 8, "CRYSG0", 16, 48);
-    ITEMDATA_DEF("DRPGThermonuclearBombPickup", "Thermonuclear Bomb",             100000, -1,-1,  "NUKE", -1,  0);
+    ITEMDATA_DEF("DRPGInvulnerabilityCharge",    "Invulnerability Charge",              5000, 2, 5, "CRG2A0",  6, 22);
+    ITEMDATA_DEF("DRPGInvisibilityCharge",       "Invisibility Charge",                 2500, 1, 1, "CRG1A0",  6, 22);
+    ITEMDATA_DEF("DRPGTimeSphere",               "Time Sphere",                         1000, 4, 1, "TIMEA0", 16, 45);
+    ITEMDATA_DEF("DRPGRegenSphere",              "Regeneration Sphere",                 1000, 2, 1, "REGNA0", 12, 38);
+    ITEMDATA_DEF("DRPGRadSuit",                  "Radiation Suit",                       250, 0, 0, "SUITA0", 11, 51);
+    ITEMDATA_DEF("DRPGInfrared",                 "IR Goggles",                           500, 0, 0, "PVISA0", 11,  9);
+    ITEMDATA_DEF("DRPGBerserk",                  "Berserk Pack",                        5000, 6,-1, "PSTRA0", 12, 15);
+    ITEMDATA_DEF("DRPGAllMap",                   "Computer Area Map",                  10000, 4, 3, "PMAPA0", 13, 23);
+    ITEMDATA_DEF("DRPGWings",                    "Wings",                               5000, 2, 2, "WINGA0", 13, 36);
+    ITEMDATA_DEF("DRPGMegasphere",               "Megasphere",                          5000, 4, 4, "MEGAA0", 12, 32);
+    ITEMDATA_DEF("DRPGImmunityCrystalMelee",     "Melee Immunity Crystal",             50000, 8, 8, "CRYSA0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalBullet",    "\CcBullet\C- Immunity Crystal",      50000, 8, 8, "CRYSB0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalFire",      "\CaFire\C- Immunity Crystal",        50000, 8, 8, "CRYSC0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalPlasma",    "\CnPlasma\C- Immunity Crystal",      50000, 8, 8, "CRYSD0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalLightning", "\CfLightning\C- Immunity Crystal",   50000, 8, 8, "CRYSE0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalToxic",     "\CdToxic\C- Immunity Crystal",       50000, 8, 8, "CRYSF0", 16, 48);
+    ITEMDATA_DEF("DRPGImmunityCrystalRadiation", "\CqRadiation\C- Immunity Crystal",   50000, 8, 8, "CRYSG0", 16, 48);
+    ITEMDATA_DEF("DRPGThermonuclearBombPickup",  "Thermonuclear Bomb",                100000,-1,-1,   "NUKE", -1,  0);
+    ITEMDATA_DEF("DRPGLife",                     "\CdExtra Life\C-",                   20000,-1,-1, "L1UPA0",  0,  4);
     ITEMDATA_CATEGORY_END;
 
     // Shield Parts - Built Dynamically
@@ -880,33 +881,34 @@ NamedScript void BuildItemData()
         // Powerups
         ITEMDATA_CATEGORY(4, "\CqPowerups", CF_NONE);
 
-        ITEMDATA_DEF("InvulnerabilityCharge2",      "Invulnerability Charge",              5000,  2,  7, "CRG2A0",  6, 22);
-        ITEMDATA_DEF("InvisibilityCharge2",         "Invisibility Charge",                 2500,  1,  2, "CRG1A0",  6, 22);
-        ITEMDATA_DEF("DRPGTimeSphere",              "Time Sphere",                         1000,  4,  1, "TIMEA0", 16, 45);
-        ITEMDATA_DEF("DRPGRegenSphere",             "Regeneration Sphere",                 1000,  2,  1, "REGNA0", 12, 38);
-        ITEMDATA_DEF("RadSuit2",                    "Radiation Suit",                       250,  0,  0, "SUITA0", 11, 51);
-        ITEMDATA_DEF("Infrared2",                   "IR Goggles",                           500,  0,  0, "PVISA0", 11,  9);
-        ITEMDATA_DEF("Berserk2",                    "Berserk Pack",                        5000,  6, -1, "PSTRA0", 12, 15);
-        ITEMDATA_DEF("RLAllmap2",                   "Computer Area Map",                  10000,  4,  3, "PMAPA0", 13, 23);
-        ITEMDATA_DEF("DRPGWings",                   "Wings",                               5000,  2,  5, "WINGA0", 13, 36);
-        ITEMDATA_DEF("Megasphere2",                 "Megasphere",                          5000,  4,  7, "MEGAA0", 12, 32);
-        ITEMDATA_DEF("DRPGImmunityCrystalMelee",    "Melee Immunity Crystal",             50000, -1,  8, "CRYSA0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalBullet",   "\CcBullet\C- Immunity Crystal",      50000, -1,  8, "CRYSB0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalFire",     "\CaFire\C- Immunity Crystal",        50000, -1,  8, "CRYSC0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalPlasma",   "\CnPlasma\C- Immunity Crystal",      50000, -1,  8, "CRYSD0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalLightning","\CfLightning\C- Immunity Crystal",   50000, -1,  8, "CRYSE0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalToxic",    "\CdToxic\C- Immunity Crystal",       50000, -1,  8, "CRYSF0", 16, 48);
-        ITEMDATA_DEF("DRPGImmunityCrystalRadiation","\CqRadiation\C- Immunity Crystal",   50000, -1,  8, "CRYSG0", 16, 48);
-        ITEMDATA_DEF("DRPGThermonuclearBombPickup", "Thermonuclear Bomb",                100000, -1, -1,   "NUKE", -1,  0);
-        ITEMDATA_DEF("RLTrackingMap2",               "Tracking Map",                      20000,  5,  4, "MMAPA0", 14, 23);
-        ITEMDATA_DEF("RLBlueprintComputer",         "Blueprint Computer",                 12500,  5,  2, "BLUPA0", 14, 23);
-        ITEMDATA_DEF("RLHatredSkull",               "Hatred Skull",                        5000,  6,  6, "ISKLA0", 10, 18);
-        ITEMDATA_DEF("RLBloodSkull",                "Blood Skull",                         3000,  6,  4, "ISKLC0", 10, 18);
-        ITEMDATA_DEF("RLFireSkull",                 "Fire Skull",                          4000,  6,  5, "ISKLE0", 10, 18);
-        ITEMDATA_DEF("RLPhaseDevice",               "Phase Device",                        1000,  1,  1, "PHS1I0", -9, -2);
-        ITEMDATA_DEF("RLHomingPhaseDevice",         "Homing Phase Device",                 2500,  2,  2, "PHS2I0", -9, -2);
-        ITEMDATA_DEF("RLRecallPhaseDevice",         "Recall Phase Device",                 2500,  2,  2, "PHS3I0", -9, -5);
-        ITEMDATA_DEF("RLExperimentalPhaseDevice",   "Experimental Phase Device",          30000, 12,  8, "PHS4I0", -9, -4);
+        ITEMDATA_DEF("InvulnerabilityCharge2",       "Invulnerability Charge",              5000,  2,  7, "CRG2A0",  6, 22);
+        ITEMDATA_DEF("InvisibilityCharge2",          "Invisibility Charge",                 2500,  1,  2, "CRG1A0",  6, 22);
+        ITEMDATA_DEF("DRPGTimeSphere",               "Time Sphere",                         1000,  4,  1, "TIMEA0", 16, 45);
+        ITEMDATA_DEF("DRPGRegenSphere",              "Regeneration Sphere",                 1000,  2,  1, "REGNA0", 12, 38);
+        ITEMDATA_DEF("RadSuit2",                     "Radiation Suit",                       250,  0,  0, "SUITA0", 11, 51);
+        ITEMDATA_DEF("Infrared2",                    "IR Goggles",                           500,  0,  0, "PVISA0", 11,  9);
+        ITEMDATA_DEF("Berserk2",                     "Berserk Pack",                        5000,  6, -1, "PSTRA0", 12, 15);
+        ITEMDATA_DEF("RLAllmap2",                    "Computer Area Map",                  10000,  4,  3, "PMAPA0", 13, 23);
+        ITEMDATA_DEF("DRPGWings",                    "Wings",                               5000,  2,  5, "WINGA0", 13, 36);
+        ITEMDATA_DEF("Megasphere2",                  "Megasphere",                          5000,  4,  7, "MEGAA0", 12, 32);
+        ITEMDATA_DEF("DRPGImmunityCrystalMelee",     "Melee Immunity Crystal",             50000, -1,  8, "CRYSA0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalBullet",    "\CcBullet\C- Immunity Crystal",      50000, -1,  8, "CRYSB0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalFire",      "\CaFire\C- Immunity Crystal",        50000, -1,  8, "CRYSC0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalPlasma",    "\CnPlasma\C- Immunity Crystal",      50000, -1,  8, "CRYSD0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalLightning", "\CfLightning\C- Immunity Crystal",   50000, -1,  8, "CRYSE0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalToxic",     "\CdToxic\C- Immunity Crystal",       50000, -1,  8, "CRYSF0", 16, 48);
+        ITEMDATA_DEF("DRPGImmunityCrystalRadiation", "\CqRadiation\C- Immunity Crystal",   50000, -1,  8, "CRYSG0", 16, 48);
+        ITEMDATA_DEF("DRPGThermonuclearBombPickup",  "Thermonuclear Bomb",                100000, -1, -1,   "NUKE", -1,  0);
+        ITEMDATA_DEF("DRPGLife",                     "\CdExtra Life\C-",                   20000, -1, -1, "L1UPA0",  0,  4);
+        ITEMDATA_DEF("RLTrackingMap2",               "Tracking Map",                       20000,  5,  4, "MMAPA0", 14, 23);
+        ITEMDATA_DEF("RLBlueprintComputer",          "Blueprint Computer",                 12500,  5,  2, "BLUPA0", 14, 23);
+        ITEMDATA_DEF("RLHatredSkull",                "Hatred Skull",                        5000,  6,  6, "ISKLA0", 10, 18);
+        ITEMDATA_DEF("RLBloodSkull",                 "Blood Skull",                         3000,  6,  4, "ISKLC0", 10, 18);
+        ITEMDATA_DEF("RLFireSkull",                  "Fire Skull",                          4000,  6,  5, "ISKLE0", 10, 18);
+        ITEMDATA_DEF("RLPhaseDevice",                "Phase Device",                        1000,  1,  1, "PHS1I0", -9, -2);
+        ITEMDATA_DEF("RLHomingPhaseDevice",          "Homing Phase Device",                 2500,  2,  2, "PHS2I0", -9, -2);
+        ITEMDATA_DEF("RLRecallPhaseDevice",          "Recall Phase Device",                 2500,  2,  2, "PHS3I0", -9, -5);
+        ITEMDATA_DEF("RLExperimentalPhaseDevice",    "Experimental Phase Device",          30000, 12,  8, "PHS4I0", -9, -4);
         // Compatibility Handling - DoomRL Arsenal Extended
         if (CompatModeEx == COMPAT_DRLAX)
         {

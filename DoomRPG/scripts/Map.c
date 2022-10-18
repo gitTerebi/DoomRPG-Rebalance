@@ -3550,14 +3550,14 @@ NamedScript void InitMapPacks()
 {
     str CvarNames[MAX_MAPPACKS] =
     {
-        "drpg_ws_doom1",
+        "drpg_ws_doom1",      // WadSmoosh
         "drpg_ws_sigil",
         "drpg_ws_doom2",
-        "drpg_ws_master",
         "drpg_ws_nerve",
-        "drpg_ws_plut",
+        "drpg_ws_master",
         "drpg_ws_tnt",
-        "drpg_lex_vr",
+        "drpg_ws_plut",
+        "drpg_lex_vr",        // Lexicon
         "drpg_lex_aa1",
         "drpg_lex_aaa1",
         "drpg_lex_aaa2",
@@ -3628,7 +3628,7 @@ NamedScript void InitMapPacks()
         "drpg_lex_wos",
         "drpg_lex_zth",
         "drpg_lex_zof",
-        "drpg_comp_hubmap",
+        "drpg_comp_hubmap",   // Compendium
         "drpg_comp_mm101",
         "drpg_comp_mm201",
         "drpg_comp_req01",
@@ -3695,10 +3695,10 @@ NamedScript void InitMapPacks()
         "E1M1",      // WadSmoosh
         "E5M1",
         "MAP01",
-        "ML_MAP01",
         "NV_MAP01",
-        "PL_MAP01",
+        "ML_MAP01",
         "TN_MAP01",
+        "PL_MAP01",
         "VR",        // Lexicon
         "AA101",
         "AAA01",
