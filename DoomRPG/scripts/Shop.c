@@ -248,13 +248,13 @@ void ShopLoop()
         // If the player's class is Phase Sisters, replace the Phase Device to a Phase Sisters Device
         if (PlayerClass(PlayerNumber()) == 9)
         {
-            ItemData[4][23].Actor = "RLPhaseSistersDevice";
-            ItemData[4][24].Actor = "RLPhaseSistersHomingDevice";
+            ItemData[4][24].Actor = "RLPhaseSistersDevice";
+            ItemData[4][25].Actor = "RLPhaseSistersHomingDevice";
         }
         else
         {
-            ItemData[4][23].Actor = "RLPhaseDevice";
-            ItemData[4][24].Actor = "RLHomingPhaseDevice";
+            ItemData[4][24].Actor = "RLPhaseDevice";
+            ItemData[4][25].Actor = "RLHomingPhaseDevice";
         }
     }
 

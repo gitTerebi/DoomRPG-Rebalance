@@ -248,12 +248,18 @@ texture P5UPA0
     pic P5UPD0 tics 4
     
 // Blanks
+texture L1UPA0
+    pic L1UPA0 tics 4
+    pic L1UPB0 tics 4
+    pic L1UPC0 tics 4
+    pic L1UPD0 tics 4
+
 texture P1UBA0
     pic P1UBA0 tics 4
     pic P1UBB0 tics 4
     pic P1UBC0 tics 4
     pic P1UBD0 tics 4
-    
+
 texture P3UBA0
     pic P3UBA0 tics 4
     pic P3UBB0 tics 4

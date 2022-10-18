@@ -1098,8 +1098,8 @@ Start:
                 continue;
             }
 
-            // Skip Thermonuclear Bomb
-            if (Category == 4 && Index == 17)
+            // Skip Thermonuclear Bomb and Extra Life
+            if (Category == 4 && (Index == 17 || Index == 18))
             {
                 ValidItem = false;
                 Tries++;
