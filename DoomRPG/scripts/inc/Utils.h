@@ -170,6 +170,7 @@ int LerpInt(int, int, int);
 void Interpolate(InterpData *);
 fixed Map(fixed, fixed, fixed, fixed, fixed);
 fixed Curve(fixed, fixed, fixed, fixed, fixed);
+fixed LogCurve(fixed, fixed, fixed);
 fixed AltCurve(fixed, fixed, fixed, fixed, fixed);
 
 // Strings

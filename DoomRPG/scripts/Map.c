@@ -635,7 +635,7 @@ Start:
 
             if (Players(i).RankLevel < MAX_RANK)
             {
-                RankBonus = ((RankTable[Players(i).RankLevel] / (long)(20 + RoundInt(20.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
+                RankBonus = 10 * ((RankTable[Players(i).RankLevel] / (long)(20 + RoundInt(20.0 * (Player.RankLevel / 24.0)))) + 250l) / 250l * 250l;
                 Players(i).Rank += RankBonus;
 
                 HudMessage("Secrets Found Bonus!\n%ld Rank Bonus", RankBonus);
@@ -643,9 +643,9 @@ Start:
 
             if (Players(i).RankLevel == MAX_RANK)
             {
-                GiveActorInventory(Players(i).TID, "DRPGCredits", 1000);
+                GiveActorInventory(Players(i).TID, "DRPGCredits", Players(i).RankLevel * 200);
 
-                HudMessage("Secrets Found Bonus!\n%d Credits Bonus", 1000);
+                HudMessage("Secrets Found Bonus!\n%d Credits Bonus", Players(i).RankLevel * 200);
             }
 
             EndHudMessage(HUDMSG_FADEOUT, 0, "Yellow", 1.5, 0.8, 3.0, 3.0);

@@ -703,7 +703,7 @@ typedef enum
 //
 
 #define MAX_HEALTH              1000000
-#define MAX_LEVEL               100
+#define MAX_LEVEL               200
 #define MAX_RANK                24
 #define COMBO_MAX               (35 * 4)
 #define COMBO_STOP              (35 * 2)

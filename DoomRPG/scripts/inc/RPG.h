@@ -56,7 +56,6 @@ NamedScript void RespawnPlayer();
 NamedScript DECORATE int PlayerDamage(int, int);
 NamedScript DECORATE int ShieldDamage(int);
 NamedScript void MoneyChecker();
-NamedScript void StatRandomizer();
 NamedScript void AutosaveHandler();
 NamedScript Type_OPEN void ShopSpecialHandler();
 NamedScript void ItemHandler();

@@ -283,8 +283,8 @@ OptionMenu "DoomRPGXPSystem"
 
     Slider "Kill Credits Multiplier", "drpg_scalexp", 0.1, 10.0, 0.1
     Slider "Combo Credits Multiplier", "drpg_scalecomboxp", 0.25, 8.0, 0.25
-    //Slider "Credits Spawn Amount Factor", "drpg_module_spawnfactor", 0.5, 10.0, 0.1
-    Slider "Credits Levelup Amount Factor", "drpg_module_levelfactor", 0.5, 10.0, 0.1
+    Slider "Credits Stash Multiplier", "drpg_module_spawnfactor", 0.5, 10.0, 0.1
+    // Slider "Credits Levelup Amount Factor", "drpg_module_levelfactor", 0.5, 10.0, 0.1
     
     //Slider "Max Player Level", "drpg_max_player_level", 1, 1000, 1
     Slider "Credits based on monster health", "drpg_xp_health_awareness", 0, 5, 0.1
@@ -484,14 +484,11 @@ OptionMenu "DoomRPGStats"
 {
     Title "Stat System"
 
-    Slider "Stat Cost Amount Factor", "drpg_module_statfactor", 1.0, 10.0, 0.1
-    Slider "Skill Cost Amount Factor", "drpg_module_skillfactor", 1.0, 10.0, 0.1
+    Slider "Stat Cost Multiplier", "drpg_module_statfactor", 1.0, 10.0, 0.1
+    Slider "Skill Cost Multiplier", "drpg_module_skillfactor", 1.0, 10.0, 0.1
     StaticText ""
 
-    Slider "Hard Stat Cap", "drpg_hard_stat_cap", 1, 10000, 1
-    Slider "Soft Stat Cap Multiplier", "drpg_soft_stat_cap_mult", 1, 100, 1
-    Option "Stat Randomizer", "drpg_auto_spend", "OnOff"
-    Option "Stat Preference", "drpg_auto_spend_pref", "StatPreference"
+    Slider "Hard Stat Cap", "drpg_hard_stat_cap", 1, 400, 1
     StaticText ""
 
     Option "Auto Healing", "drpg_auto_heal", "OnOff"
@@ -886,14 +883,14 @@ OptionMenu "DoomRPGStart"
     StaticText ""
 
     StaticText "Stats", 1
-    Slider "Strength", "drpg_start_strength", 0, 100, 1
-    Slider "Defense", "drpg_start_defense", 0, 100, 1
-    Slider "Vitality", "drpg_start_vitality", 0, 100, 1
-    Slider "Energy", "drpg_start_energy", 0, 100, 1
-    Slider "Regeneration", "drpg_start_regeneration", 0, 100, 1
-    Slider "Agility", "drpg_start_agility", 0, 100, 1
-    Slider "Capacity", "drpg_start_capacity", 0, 100, 1
-    Slider "Luck", "drpg_start_luck", 0, 100, 1
+    Slider "Strength", "drpg_start_strength", 0, 200, 1
+    Slider "Defense", "drpg_start_defense", 0, 200, 1
+    Slider "Vitality", "drpg_start_vitality", 0, 200, 1
+    Slider "Energy", "drpg_start_energy", 0, 200, 1
+    Slider "Regeneration", "drpg_start_regeneration", 0, 200, 1
+    Slider "Agility", "drpg_start_agility", 0, 200, 1
+    Slider "Capacity", "drpg_start_capacity", 0, 200, 1
+    Slider "Luck", "drpg_start_luck", 0, 200, 1
     StaticText ""
 
     StaticText "Weapons/Ammo/Armor/Medkit", 1

@@ -318,7 +318,6 @@ NamedScript Type_ENTER void Init()
     MoneyChecker();
     ShieldTimer();
     WeaponSpeed();
-    StatRandomizer();
     DamageNumbers();
     InfoPopoffs();
     HealthBars();
@@ -1003,29 +1002,6 @@ Start:
         SetInventory("DRPGSpeed", 1);
 
     Delay(Time);
-    goto Start;
-}
-
-// Stat Randomizer Script
-NamedScript void StatRandomizer()
-{
-Start:
-
-    if (GetActivatorCVar("drpg_auto_spend"))
-    {
-        while (CheckInventory("DRPGModule") > 0 && !StatsCapped())
-        {
-            // Select Preferred Stat
-            if (Random(1, 2) == 1 && GetActivatorCVar("drpg_auto_spend_pref") >= 0)
-                IncreaseStat(GetActivatorCVar("drpg_auto_spend_pref"));
-            else // Select Random Stat
-                IncreaseStat(Random(0, STAT_MAX - 1));
-
-            Delay(1);
-        }
-    }
-
-    Delay(1);
     goto Start;
 }
 

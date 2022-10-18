@@ -2675,6 +2675,8 @@ void IncreaseStat(int Stat)
         &Player.Luck
     };
 
+    // Don't increase if at cap
+
     // Determine the cost of the stat upgrade
     //int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
     int Cost = (int)((((fixed)*Stats[Stat] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
@@ -2683,15 +2685,11 @@ void IncreaseStat(int Stat)
     else if (Cost == 0)
         Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
 
-    // Make sure you have enough Modules
-
-    //if (CheckInventory("DRPGModule") < Cost && (Player.InMenu || Player.GUI.Open))
+    // Make sure you have enough money
     if (CheckInventory("DRPGCredits") < Cost && (Player.InMenu || Player.GUI.Open))
     {
-        if (GetActivatorCVar("drpg_auto_spend")) return;
         PrintError("You don't have enough credits to upgrade this stat");
         ActivatorSound("menu/error", 127);
-
         return;
     }
 
@@ -2703,9 +2701,7 @@ void IncreaseStat(int Stat)
         (*Stats[Stat])++;
     else
     {
-        if (!GetActivatorCVar("drpg_auto_spend")) // From the menu
-            PrintStatError();
-
+        PrintStatError();
         return;
     }
 

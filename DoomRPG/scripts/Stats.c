@@ -358,7 +358,7 @@ void CheckLevel()
                     }
                     else if (Player.Level == i * 5)
                     {
-                        int Credits = Random(i * 100 + 500, i * 200 + 1000) / 250 * 250;;
+                        int Credits = Random(i * 100 + 500, i * 200 + 1000) / 250 * 100;
                         GiveActorInventory(Player.TID, "DRPGCredits", i * Credits);
                         if (GetActivatorCVar("drpg_notifications_detailed"))
                             HudMessage("\CfBonus:\C- \Cf%d Credits\C-", i * Credits);
@@ -540,7 +540,7 @@ void CheckStats()
         Player.DamageFactor = GetCVarFixed("drpg_dmg_factor") + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
     Player.Mass = 100 + (Player.DefenseTotal * 10);
     // Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
-    Player.HealthMax = 50 + Player.VitalityTotal * 3;
+    Player.HealthMax = 25 +  Curve((fixed)Player.VitalityTotal, 0, 200, 1, 275);
     Player.StatusEffectResist = (fixed)Player.VitalityTotal * 0.5;
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;
@@ -565,7 +565,7 @@ void CheckStats()
     Player.MedkitMax = Player.CapacityTotal * 5;
 
     // Determine current stat cap
-    Player.StatCap = SoftStatCap + Player.Level * GetCVar("drpg_soft_stat_cap_mult");
+    Player.StatCap = GetCVar("drpg_hard_stat_cap");
 
     // Per-stat leveling
     if (GetCVar("drpg_levelup_natural"))

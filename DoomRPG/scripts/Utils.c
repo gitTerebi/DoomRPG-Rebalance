@@ -2988,6 +2988,11 @@ fixed Curve(fixed Value, fixed Low1, fixed High1, fixed Low2, fixed High2)
     return Map(Value, Low1, High1, CurveLow, High2);
 }
 
+fixed LogCurve(fixed Value, fixed Low1, fixed High1)
+{
+    return log((Value + 1)/Low1) / log(High1/Low1) * High1;
+}
+
 // Here's an alternative curve that starts gradually and accelerates. --SidDoyle
 fixed AltCurve(fixed Value, fixed Low1, fixed High1, fixed Low2, fixed High2)
 {
