@@ -539,8 +539,7 @@ void CheckStats()
     else
         Player.DamageFactor = GetCVarFixed("drpg_dmg_factor") + AbsFixed(((fixed)Player.DefenseTotal / 100.0));
     Player.Mass = 100 + (Player.DefenseTotal * 10);
-    // Player.HealthMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.VitalityTotal * 5;
-    Player.HealthMax = 25 +  Curve((fixed)Player.VitalityTotal, 0, 200, 1, 275);
+    Player.HealthMax = 25 + Curve((fixed)Player.VitalityTotal, 0, 200, 0, 275);
     Player.StatusEffectResist = (fixed)Player.VitalityTotal * 0.5;
     Player.EPMax = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
     Player.Aura.Range = Player.EnergyTotal * 16;

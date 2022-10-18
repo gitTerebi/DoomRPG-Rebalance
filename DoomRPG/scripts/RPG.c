@@ -216,10 +216,7 @@ NamedScript Type_ENTER void Init()
         Player.LuckXP = 0;
 
         // Default Health/EP
-        Player.EP = 50 + ((Player.Level + 1) / 2) * 5 + Player.EnergyTotal * 5;
-        Player.ActualHealth = 50 + Player.VitalityTotal * 2;
-        Player.PrevHealth = Player.ActualHealth;
-        SetActorProperty(0, APROP_Health, Player.ActualHealth);
+        CheckStats();
 
         // Setup HUD stuff
         Player.StatusTypeHUD = SE_NONE;
@@ -267,7 +264,10 @@ NamedScript Type_ENTER void Init()
 
     // Death exit handling
     if (Player.ActualHealth <= 0)
+    {
+        Player.EP = Player.EPMax;
         Player.ActualHealth = Player.HealthMax;
+    }
 
     // Apply camera textures and vars
     SetCameraToTexture(Player.TID, StrParam("P%iVIEW", PlayerNumber() + 1), 110);

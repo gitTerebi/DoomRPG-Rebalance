@@ -2675,10 +2675,7 @@ void IncreaseStat(int Stat)
         &Player.Luck
     };
 
-    // Don't increase if at cap
-
     // Determine the cost of the stat upgrade
-    //int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
     int Cost = (int)((((fixed)*Stats[Stat] + 1) * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
     if (Cost < 0)
         Cost = -Cost;
@@ -2688,7 +2685,7 @@ void IncreaseStat(int Stat)
     // Make sure you have enough money
     if (CheckInventory("DRPGCredits") < Cost && (Player.InMenu || Player.GUI.Open))
     {
-        PrintError("You don't have enough credits to upgrade this stat");
+        PrintError("Not enough credits for stat upgrade");
         ActivatorSound("menu/error", 127);
         return;
     }
@@ -2729,7 +2726,7 @@ void IncreaseSkill(int Category, int Index)
     }
     else
     {
-        PrintError("You don't have enough Credits");
+        PrintError("Not have enough Credits");
         ActivatorSound("menu/error", 127);
     }
 }
