@@ -109,10 +109,10 @@ map NV_MAP08 lookup "NHUSTR_8"
 // attack
 map ML_MAP01 lookup "ML_ATTACK"
 {
-    next = "ML_MAP02"
-    sky1 = "RSKY1"
-    music = "$MUSIC_RUNNIN"
-    Author = "$WS_AU_WILLITS_CHASAR"
+	next = "ML_MAP02"
+	sky1 = "RSKY1"
+	music = "$MUSIC_RUNNIN"
+	Author = "$WS_AU_WILLITS_CHASAR"
 	//ResetHealth
 	//ResetInventory
 }
@@ -120,10 +120,10 @@ map ML_MAP01 lookup "ML_ATTACK"
 // canyon
 map ML_MAP02 lookup "ML_CANYON"
 {
-    next = "ML_MAP03"
-    sky1 = "RSKY1"
-    music = "$MUSIC_STALKS"
-    Author = "$WS_AU_WILLITS_CHASAR"
+	next = "ML_MAP03"
+	sky1 = "RSKY1"
+	music = "$MUSIC_STALKS"
+	Author = "$WS_AU_WILLITS_CHASAR"
 	//ResetHealth
 	//ResetInventory
 }
@@ -131,10 +131,10 @@ map ML_MAP02 lookup "ML_CANYON"
 // the catwalk
 map ML_MAP03 lookup "ML_CATWALK"
 {
-    next = "ML_MAP04"
-    sky1 = "RSKY1"
-    music = "$MUSIC_COUNTD"
-    Author = "$WS_AU_KLIE"
+	next = "ML_MAP04"
+	sky1 = "RSKY1"
+	music = "$MUSIC_COUNTD"
+	Author = "$WS_AU_KLIE"
 	//ResetHealth
 	//ResetInventory
 }
@@ -142,10 +142,10 @@ map ML_MAP03 lookup "ML_CATWALK"
 // the combine
 map ML_MAP04 lookup "ML_FISTULA"
 {
-    next = "ML_MAP05"
-    sky1 = "RSKY1"
-    music = "$MUSIC_DOOM"
-    Author = "$WS_AU_KLIE"
+	next = "ML_MAP05"
+	sky1 = "RSKY1"
+	music = "$MUSIC_DOOM"
+	Author = "$WS_AU_KLIE"
 	//ResetHealth
 	//ResetInventory
 }
@@ -153,10 +153,10 @@ map ML_MAP04 lookup "ML_FISTULA"
 // the fistula
 map ML_MAP05 lookup "ML_COMBINE"
 {
-    next = "ML_MAP06"
-    sky1 = "ML_SKY1"
-    music = "$MUSIC_BETWEE"
-    Author = "$WS_AU_KLIE"
+	next = "ML_MAP06"
+	sky1 = "ML_SKY1"
+	music = "$MUSIC_BETWEE"
+	Author = "$WS_AU_KLIE"
 	//ResetHealth
 	//ResetInventory
 }
@@ -164,10 +164,10 @@ map ML_MAP05 lookup "ML_COMBINE"
 // the garrison
 map ML_MAP06 lookup "ML_SUBSPACE"
 {
-    next = "ML_MAP07"
-    sky1 = "RSKY1"
-    music = "$MUSIC_IN_CIT"
-    Author = "$WS_AU_KLIE"
+	next = "ML_MAP07"
+	sky1 = "RSKY1"
+	music = "$MUSIC_IN_CIT"
+	Author = "$WS_AU_KLIE"
 	//ResetHealth
 	//ResetInventory
 }
@@ -175,10 +175,10 @@ map ML_MAP06 lookup "ML_SUBSPACE"
 // titan manor
 map ML_MAP07 lookup "ML_PARADOX"
 {
-    next = "ML_MAP08"
-    sky1 = "RSKY1"
-    music = "$MUSIC_DDTBLU"
-    Author = "$WS_AU_MUSTAINE"
+	next = "ML_MAP08"
+	sky1 = "RSKY1"
+	music = "$MUSIC_DDTBLU"
+	Author = "$WS_AU_MUSTAINE"
 	//ResetHealth
 	//ResetInventory
 }
@@ -186,10 +186,10 @@ map ML_MAP07 lookup "ML_PARADOX"
 // paradox
 map ML_MAP08 lookup "ML_SUBTERRA"
 {
-    next = "ML_MAP09"
-    sky1 = "RSKY1"
-    music = "$MUSIC_DEAD"
-    Author = "$WS_AU_KLIE"
+	next = "ML_MAP09"
+	sky1 = "RSKY1"
+	music = "$MUSIC_DEAD"
+	Author = "$WS_AU_KLIE"
 	//ResetHealth
 	//ResetInventory
 }
@@ -197,10 +197,10 @@ map ML_MAP08 lookup "ML_SUBTERRA"
 // subspace
 map ML_MAP09 lookup "ML_GARRISON"
 {
-    next = "ML_MAP10"
-    sky1 = "RSKY1"
-    music = "$MUSIC_THE_DA"
-    Author = "$WS_AU_KLIE"
+	next = "ML_MAP10"
+	sky1 = "RSKY1"
+	music = "$MUSIC_THE_DA"
+	Author = "$WS_AU_KLIE"
 	//ResetHealth
 	//ResetInventory
 }
@@ -208,10 +208,10 @@ map ML_MAP09 lookup "ML_GARRISON"
 // subterra
 map ML_MAP10 lookup "ML_BLACKTWR"
 {
-    next = "ML_MAP11"
-    sky1 = "RSKY3"
-    music = "$MUSIC_ADRIAN"
-    Author = "$WS_AU_KVERNMO"
+	next = "ML_MAP11"
+	sky1 = "RSKY3"
+	music = "$MUSIC_ADRIAN"
+	Author = "$WS_AU_KVERNMO"
 	//ResetHealth
 	//ResetInventory
 }
@@ -219,10 +219,10 @@ map ML_MAP10 lookup "ML_BLACKTWR"
 // trapped on titan
 map ML_MAP11 lookup "ML_VIRGIL"
 {
-    next = "ML_MAP12"
-    sky1 = "ML_SKY3"
-    music = "$MUSIC_COUNTD"
-    Author = "$WS_AU_ANDERSON"
+	next = "ML_MAP12"
+	sky1 = "ML_SKY3"
+	music = "$MUSIC_COUNTD"
+	Author = "$WS_AU_ANDERSON"
 	//ResetHealth
 	//ResetInventory
 }
@@ -230,10 +230,10 @@ map ML_MAP11 lookup "ML_VIRGIL"
 // virgil's lead
 map ML_MAP12 lookup "ML_MINOS"
 {
-    next = "ML_MAP13"
-    sky1 = "ML_SKY3"
-    music = "$MUSIC_DOOM"
-    Author = "$WS_AU_ANDERSON"
+	next = "ML_MAP13"
+	sky1 = "ML_SKY3"
+	music = "$MUSIC_DOOM"
+	Author = "$WS_AU_ANDERSON"
 	//ResetHealth
 	//ResetInventory
 }
@@ -241,10 +241,10 @@ map ML_MAP12 lookup "ML_MINOS"
 // minos' judgment
 map ML_MAP13 lookup "ML_NESSUS"
 {
-    next = "ML_MAP14"
-    sky1 = "ML_SKY3"
-    music = "$MUSIC_SHAWN"
-    Author = "$WS_AU_ANDERSON"
+	next = "ML_MAP14"
+	sky1 = "ML_SKY3"
+	music = "$MUSIC_SHAWN"
+	Author = "$WS_AU_ANDERSON"
 	//ResetHealth
 	//ResetInventory
 }
@@ -252,10 +252,10 @@ map ML_MAP13 lookup "ML_NESSUS"
 // bloodsea keep
 map ML_MAP14 lookup "ML_GERYON"
 {
-    next = "ML_MAP15"
-    sky1 = "ML_SKY3"
-    music = "$MUSIC_DDTBLU"
-    Author = "$WS_AU_ANDERSON"
+	next = "ML_MAP15"
+	sky1 = "ML_SKY3"
+	music = "$MUSIC_DDTBLU"
+	Author = "$WS_AU_ANDERSON"
 	//ResetHealth
 	//ResetInventory
 }
@@ -263,10 +263,10 @@ map ML_MAP14 lookup "ML_GERYON"
 // mephisto's mausoleum
 map ML_MAP15 lookup "ML_VESPERAS"
 {
-    next = "ML_MAP16"
-    sky1 = "ML_SKY3"
-    music = "$MUSIC_IN_CIT"
-    Author = "$WS_AU_ANDERSON"
+	next = "ML_MAP16"
+	sky1 = "ML_SKY3"
+	music = "$MUSIC_IN_CIT"
+	Author = "$WS_AU_ANDERSON"
 	//ResetHealth
 	//ResetInventory
 }
@@ -274,10 +274,10 @@ map ML_MAP15 lookup "ML_VESPERAS"
 // nessus
 map ML_MAP16 lookup "ML_MANOR"
 {
-    next = "ML_MAP17"
-    sky1 = "ML_SKY2"
-    music = "$MUSIC_SHAWN"
-    Author = "$WS_AU_FLYNN"
+	next = "ML_MAP17"
+	sky1 = "ML_SKY2"
+	music = "$MUSIC_SHAWN"
+	Author = "$WS_AU_FLYNN"
 	//ResetHealth
 	//ResetInventory
 }
@@ -285,10 +285,10 @@ map ML_MAP16 lookup "ML_MANOR"
 // geryon
 map ML_MAP17 lookup "ML_TTRAP"
 {
-    next = "ML_MAP18"
-    sky1 = "ML_SKY2"
-    music = "$MUSIC_STLKS2"
-    Author = "$WS_AU_FLYNN"
+	next = "ML_MAP18"
+	sky1 = "ML_SKY2"
+	music = "$MUSIC_STLKS2"
+	Author = "$WS_AU_FLYNN"
 	//ResetHealth
 	//ResetInventory
 }
@@ -296,11 +296,11 @@ map ML_MAP17 lookup "ML_TTRAP"
 // vesperas
 map ML_MAP18 lookup "ML_TEETH"
 {
-    next = "ML_MAP19"
-    secretnext = "ML_MAP21"
-    sky1 = "RSKY1"
-    music = "$MUSIC_EVIL"
-    Author = "$WS_AU_KVERNMO"
+	next = "ML_MAP19"
+	secretnext = "ML_MAP21"
+	sky1 = "RSKY1"
+	music = "$MUSIC_EVIL"
+	Author = "$WS_AU_KVERNMO"
 	//ResetHealth
 	//ResetInventory
 }
@@ -308,11 +308,11 @@ map ML_MAP18 lookup "ML_TEETH"
 // black tower
 map ML_MAP19 lookup "ML_BLOODSEA"
 {
-    next = "ML_MAP20"
-    sky1 = "RSKY1"
-    music = "$MUSIC_SHAWN"
-    Author = "$WS_AU_KVERNMO"
-    map07special
+	next = "ML_MAP20"
+	sky1 = "RSKY1"
+	music = "$MUSIC_SHAWN"
+	Author = "$WS_AU_KVERNMO"
+	map07special
 	//ResetHealth
 	//ResetInventory
 }
@@ -323,26 +323,26 @@ map ML_MAP20 lookup "ML_MEPHISTO"
 {
 	// finish if normal exit pressed
 	next = "OUTPOST"
-    sky1 = "RSKY1"
-    music = "$MUSIC_OPENIN"
-    Author = "$WS_AU_KVERNMO"
-    map07special
+	sky1 = "RSKY1"
+	music = "$MUSIC_OPENIN"
+	Author = "$WS_AU_KVERNMO"
+	map07special
 	//ResetHealth
 	//ResetInventory
 
-    sky1 = "RSKY1"
-    music = "$MUSIC_OPENIN"
-    Author = "$WS_AU_KVERNMO"
-    map07special
+	sky1 = "RSKY1"
+	music = "$MUSIC_OPENIN"
+	Author = "$WS_AU_KVERNMO"
+	map07special
 }
 
 // bad dream
 map ML_MAP21 lookup "ML_TEETH_SECRET"
 {
-    next = "ML_MAP19"
-    sky1 = "RSKY1"
-    music = "$MUSIC_ULTIMA"
-    Author = "$WS_AU_KVERNMO"
+	next = "ML_MAP19"
+	sky1 = "RSKY1"
+	music = "$MUSIC_ULTIMA"
+	Author = "$WS_AU_KVERNMO"
 }
 
 //end of episode need to send back to outpost rather than end game
@@ -375,7 +375,7 @@ map PL_MAP30 lookup "PHUSTR_30"
 clearepisodes
 episode OUTPOST
 {
-    name = "UAC Outpost"
-    key = "U"
-    optional
+	name = "UAC Outpost"
+	key = "U"
+	optional
 }
