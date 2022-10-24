@@ -353,6 +353,7 @@ map TN_MAP30 lookup "THUSTR_30"
 	titlepatch = "TWILV29"
 	par = 180
 	allowmonstertelefrags
+	compat_stairs
 	music = "T_OPENIN"
 	ExitPic = "TNTINTER"
 	next = "OUTPOST"

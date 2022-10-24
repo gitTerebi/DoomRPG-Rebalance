@@ -356,10 +356,10 @@ ACTOR AfritRPG : Afrit replaces Afrit
 	States
 	{
 	Spawn:
-		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::Spawn
 	See:
-		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS)
+		TNT1 A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
 		Goto Super::See
 	}
 }
