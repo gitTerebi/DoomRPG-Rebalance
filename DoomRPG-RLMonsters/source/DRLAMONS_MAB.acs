@@ -105,9 +105,22 @@ script "RLAdaptiveSpawnPicker" (void) // [marrub]
 			// logASdebug("Cybernetic", dangermod, danger, rand, rmul);
 		}
 	}
-	else
+	else if (ACS_NamedExecuteWithResult("MapLevelMod") >= 0.6)
 	{
 		SetActorState(0, "SpawnArmageddon");
 		// logASdebug("Armageddon", dangermod, danger, rand, rmul);
+	}
+	else
+	{
+		if (Random(0, 1) <= 0)
+		{
+			SetActorState(0, "SpawnNightmare");
+			// logASdebug("Nightmare", dangermod, danger, rand, rmul);
+		}
+		else
+		{
+			SetActorState(0, "SpawnCybernetic");
+			// logASdebug("Cybernetic", dangermod, danger, rand, rmul);
+		}
 	}
 }

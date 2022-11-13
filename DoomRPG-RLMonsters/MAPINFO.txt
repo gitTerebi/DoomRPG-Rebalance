@@ -148,8 +148,8 @@ skill adaptive
 	ReplaceActor = "Revenant", "RLAdaptiveRevenant"
 	ReplaceActor = "Fatso", "RLAdaptiveMancubus"
 	ReplaceActor = "Archvile", "RLAdaptiveArchvile"
-	ReplaceActor = "Cyberdemon", "RLAdaptiveCyberdemonRPG"
-	ReplaceActor = "SpiderMastermind", "RLAdaptiveSpiderMastermindRPG"
+	ReplaceActor = "Cyberdemon", "RLAdaptiveCyberdemon"
+	ReplaceActor = "SpiderMastermind", "RLAdaptiveSpiderMastermind"
 	ReplaceActor = "BossEye", "RLUVBossEye"
 	ReplaceActor = "BossBrain", "RLBossBrain"
 }
