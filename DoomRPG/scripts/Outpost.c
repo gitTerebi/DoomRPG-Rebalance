@@ -349,14 +349,14 @@ NamedScript MapSpecial void LevelTransport()
 
     str WadNames[MAX_MAPPACKS] =
     {
-        "Doom",      // WadSmoosh
+        "Doom",                      // WadSmoosh
         "Sigil",
         "Doom II: Hell on Earth",
-        "Master Levels",
         "No Rest For The Living",
-        "Plutonia",
+        "Master Levels",
         "TNT: Evilution",
-        "Lexicon's Hub",        // Lexicon
+        "Plutonia",
+        "Lexicon's Hub",             // Lexicon
         "Ancient Aliens",
         "A Clear Line Drawn",
         "Hot Water Music",
@@ -427,7 +427,7 @@ NamedScript MapSpecial void LevelTransport()
         "Whispers Of Satan",
         "Zone 300",
         "Zones Of Fear",
-        "Compendium's Hub",    // Compendium
+        "Compendium's Hub",          // Compendium
         "Memento Mori",
         "Memento Mori II",
         "Requiem",

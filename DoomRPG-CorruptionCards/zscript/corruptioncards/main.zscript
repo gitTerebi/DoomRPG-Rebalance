@@ -62,7 +62,7 @@ Class CCards_Global : Thinker
 		vc.Init();		
 		rules = new ("CCards_Rules");
 		rules.global = self;
-		ccversion = "4.2";
+		ccversion = "4.3";
 		scoreneeded = random(4, 8);
 		return self;
 	}
@@ -230,6 +230,12 @@ Class CCards_Game : EventHandler
 		c.game = self;
 		c.chosen = true;
 
+		if(gen.wildcardoffered && gen.hand[cardno].wildcard)
+		{
+			//Console.Printf("picked wildcard");
+			gen.wildcardoffered = false;
+		}
+
 		if(permanentChoice)
 		{
 			global.collection.Push(c);
@@ -381,18 +387,23 @@ Class CCards_Game : EventHandler
 		
 		isStarted = true;
 		//CallACS("CC_ACS_CardScrollerStart", deck.Size());
-		
-		if(gen)
-		{
-			gen.Destroy();
-		}
 
 		if(global.spawnwildcard || Cvar.GetCvar("ccards_wildcarddebug").GetBool())
 		{
-			//Actor.Spawn("CCards_Actor_WildCardSpawner");
-			//global.spawnwildcard = false;
-			SetWildcardLine();
-			//Console.Printf("WILDY WILD");
+			if(!(global.rules.nopermawildcards && global.rules.permaprogression > -1 && global.permacount == 1))
+			{
+				SetWildcardLine();
+			}
+		}
+
+		if(gen)
+		{
+			if(gen.wildcardoffered)
+			{
+				global.wildscore = global.scoreneeded = 1;
+				//Console.Printf("YOU DIDNT PICK ONE AAAAAA");
+			}
+			gen.Destroy();
 		}
 
 		CCards_BuffManager ev = CCards_BuffManager.Get();
@@ -400,6 +411,7 @@ Class CCards_Game : EventHandler
 
 		//global.donemaps.Push(Level.MapName);
 	}
+
 
 	Line wildcardLine;
 
@@ -801,24 +813,18 @@ Class CCards_Game : EventHandler
 
 		// Check if is a legit projectile and not some weird actor checker
 		if(e.Thing.bMissile && e.Thing.bNoTeleport && e.Thing.target)
-		{
-			/*
-			if(e.Thing.target.CountInv("CCards_Actor_TitanBuff")>0)
-			{
-				let t = CCards_Actor_TitanMonsterProjectile(e.Thing.Spawn("CCards_Actor_TitanMonsterProjectile", e.Thing.pos));
-				if(t)
-				{
-					t.proj = e.Thing;
-					t.target = e.Thing.target;
-				}
-			}
-			*/
-			
+		{		
 			if(e.Thing.target.CountInv("CCards_Actor_HalfProjectileZOff")>0)
 			{
-				e.Thing.SetOrigin((e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z - e.Thing.target.height/2), false);
+				int z = e.Thing.pos.z - e.Thing.target.height/2;
+				while(z < e.Thing.floorz + 6)
+				{
+					z++;
+				}
+				e.Thing.SetOrigin((e.Thing.pos.x, e.Thing.pos.y, z), false);
+
 			}
-			
+	
 			// Other stuff
 			if(e.Thing.target.CountInv("CCards_Actor_ProjectileModHitscan")>0)
 			{
@@ -932,12 +938,13 @@ Class CCards_Rules
 	
 	int forcedseed;
 	bool useBundles;
-	bool nowildcards;
 	bool draft;
 	bool concealed;
 
 	bool nounlocks;
 
+	bool nowildcards;
+	bool nopermawildcards;
 	uint forcedwildcard;
 
 	CCards_Global global;
@@ -968,6 +975,7 @@ Class CCards_Rules
 		cardamount = 1;
 		maxTierIncrease = 3;
 		minTierIncrease = 10;
+		nopermawildcards = true;
 	}
 	
 	void SetHardcoreRules()
@@ -979,6 +987,7 @@ Class CCards_Rules
 		handsize = 3;
 		cardamount = 1;
 		minTierIncrease = 8;
+		nopermawildcards = true;
 	}
 	
 	void SetChaosRules()
@@ -1007,6 +1016,7 @@ Class CCards_Rules
 		handsize = Clamp(CvarSetting('ccards_handsize'), 1, 8);
 		cardamount = Clamp(CvarSetting('ccards_cardamount'), 1, 8);
 		nowildcards = CvarSetting('ccards_nowildcards');
+		nopermawildcards = CvarSetting('ccards_nopermawildcards');
 		//Console.Printf("" .. permaProgression);
 	}
 

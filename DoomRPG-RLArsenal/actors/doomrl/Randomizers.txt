@@ -458,7 +458,7 @@ actor DRPGShopPowerupRandomizer2 : RandomSpawner Replaces DRPGShopPowerupRandomi
     DropItem "RadSuit2"
     DropItem "Infrared2"
     DropItem "DRPGAllMap"
-    DropItem "RLBerserk2"
+    DropItem "Berserk2"
 
     DropItem "RLTrackingMap"
 }

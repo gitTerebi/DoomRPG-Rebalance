@@ -1061,10 +1061,10 @@ typedef enum
     WS_DOOM1,
     WS_SIGIL,
     WS_DOOM2,
-    WS_MASTER,
     WS_NERVE,
-    WS_PLUT,
-    WS_TNT
+    WS_MASTER,
+    WS_TNT,
+    WS_PLUT
 } EnumWSMapSets;
 
 // Lexicon Map Packs
