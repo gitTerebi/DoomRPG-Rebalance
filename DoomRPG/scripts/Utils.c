@@ -1290,7 +1290,7 @@ bool IsTimeFrozen()
 }
 
 // Calculate current map level modifier
-fixed MapLevelMod()
+NamedScript DECORATE fixed MapLevelMod()
 {
     fixed LevelNum = CurrentLevel->LevelNum;
     fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
