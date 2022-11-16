@@ -74,7 +74,7 @@ bool IsPlayerMoving();
 int FindPlayerID(int);
 OptionalArgs(1) bool SetActivatorToTargetExtended(int, int);
 bool IsTimeFrozen();
-fixed MapLevelMod();
+NamedScript DECORATE fixed MapLevelMod();
 fixed StatsNatMod();
 
 // Inventory

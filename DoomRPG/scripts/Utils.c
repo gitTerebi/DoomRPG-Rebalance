@@ -191,8 +191,14 @@ NamedScript DECORATE void SoulEffect(int Type)
 {
     Player.Aura.Type[Type].Active = true;
 
-    if (Player.SoulsCount < 40)
-        Player.Aura.Time += (35 * 30) * (1.0 - (Player.SoulsCount / 50.0));
+    if (Player.SoulsCount < 5)
+        Player.Aura.Time += 35 * 30;
+    else if (Player.SoulsCount < 10)
+        Player.Aura.Time += 35 * 24;
+    else if (Player.SoulsCount < 30)
+        Player.Aura.Time += 35 * 18;
+    else if (Player.SoulsCount < 40)
+        Player.Aura.Time += 35 * 12;
     else
         Player.Aura.Time += 35 * 6;
 
@@ -1307,7 +1313,7 @@ bool IsTimeFrozen()
 }
 
 // Calculate current map level modifier
-fixed MapLevelMod()
+NamedScript DECORATE fixed MapLevelMod()
 {
     fixed LevelNum = CurrentLevel->LevelNum;
     fixed LevelMax = GetCVar("drpg_ws_use_wads") * 32.0;
