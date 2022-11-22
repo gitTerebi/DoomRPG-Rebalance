@@ -119,7 +119,7 @@ map MOC12 "The Factory"
 	music = d_theda2
 }
 	
-map MOC13 "The Factory"
+map MOC13 "Downtown"
 	{
 	next = "MOC14"
 	sky1 = RSKY2
@@ -129,7 +129,7 @@ map MOC13 "The Factory"
 	music = d_doom2
 }
 	
-map MOC14 "Downtown"
+map MOC14 "The Inmost Dens"
 	{
 	next = "MOC15"
 	sky1 = RSKY2

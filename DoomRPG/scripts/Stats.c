@@ -540,17 +540,24 @@ void CheckStats()
     Player.WeaponSpeed = Player.AgilityTotal / 2;
     SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
     SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
-    SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
+    SetAmmoCapacity("RocketAmmo", 5 + Player.CapacityTotal * 0.6);
     SetAmmoCapacity("Cell", (75 + Player.CapacityTotal * 5) / 10 * 10);
     Player.Stim.VialMax = Player.CapacityTotal * 2.5;
     Player.SurvivalBonus = Player.AgilityTotal / 5;
-    if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
+    Player.MedkitMax = Player.CapacityTotal * 5;
+
+    // Compatibility Handling - DoomRL Arsenal
+    if (CompatMode == COMPAT_DRLA)
     {
+        // Total Armors/Boots, Skulls
         SetAmmoCapacity("RLArmorInInventory", DRLA_ARMOR_MAX);
         SetAmmoCapacity("RLSkullLimit", DRLA_SKULL_MAX);
         SetAmmoCapacity("RLPhaseDeviceLimit", DRLA_DEVICE_MAX);
+
+        // Increasing Rocket Ammo capacity for Demolitionist
+        if (PlayerClass(PlayerNumber()) == 4)
+            SetAmmoCapacity("RocketAmmo", 9 + Player.CapacityTotal * 1.2);
     }
-    Player.MedkitMax = Player.CapacityTotal * 5;
 
     // Determine current stat cap
     Player.StatCap = SoftStatCap + Player.Level * GetCVar("drpg_soft_stat_cap_mult");

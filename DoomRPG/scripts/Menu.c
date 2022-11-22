@@ -2886,6 +2886,15 @@ void MenuHelp()
             }
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
+        case OMENU_ARENATRANSPORT:
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
+                HudMessage("Select Arena: \Cd%S/%S\C-\nTeleport to Arena: \Cd%S\C-\nExit: \Cd%S\C-",
+                           "Left", "Right", "Use", "Menu");
+            else
+                HudMessage("Select Arena: \Cd%jS/%jS\C-\nTeleport to Arena: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                           "+moveleft", "+moveright", "+use", "drpg_menu");
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            break;
         case OMENU_SKILLCOMPUTER:
             if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
                 HudMessage("Navigate: \Cd%S/%S\C-\nChange Skill: \Cd%S\C-\nExit: \Cd%S\C-",

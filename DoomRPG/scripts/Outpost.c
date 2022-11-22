@@ -931,6 +931,139 @@ NamedScript MapSpecial void LevelTransport()
     }
 }
 
+NamedScript MapSpecial void ArenaTransport()
+{
+    // if you're already in a menu, terminate
+    if (Player.InMenu || Player.InShop || Player.OutpostMenu == OMENU_ARENATRANSPORT) return;
+
+    // If Marines are hostile or the power is out, terminate
+    if (MarinesHostile || PowerOut) return;
+
+    ActivatorSound("menu/move", 127);
+    Player.OutpostMenu = OMENU_ARENATRANSPORT;
+
+    // Main coordinates
+    fixed X = 0.1;
+    fixed Y = 0.1;
+
+    // Additional coordinates
+    fixed X1, Y1, Y2;
+
+    // Arena Data
+    int CurrentArena;
+    str ArenaLumpNames[2] =
+    {
+        "DAM01",
+        "DAM02"
+    };
+    str ArenaNiceNames[2] =
+    {
+        "Training Ground",
+        "Arena 2"
+    };
+    str ArenaDescription[2] =
+    {
+        "Arena from DoomRPG Sumwunn Edition",
+        "Arena from Obaddon's contributor"
+    };
+    str ArenaAuthor[2] =
+    {
+        "Sumwunn",
+        "Demiosis"
+    };
+
+    // So the player's initial interaction is not processed as a menu action
+    Delay(1);
+
+    while (Player.OutpostMenu == OMENU_ARENATRANSPORT)
+    {
+        SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+        // Reset additional coordinates
+        X1 = 0.0;
+        Y1 = 0.0;
+        Y2 = 0.0;
+
+        // Draw the background
+        if (GetCVar("drpg_menudim"))
+            FadeRange(0, 0, 0, 0.65, 0, 0, 0, 0.0, 0.25);
+
+        // Set the HUD Size
+        SetHudSize(GetActivatorCVar("drpg_menu_width"), GetActivatorCVar("drpg_menu_height"), true);
+
+        // Draw Border
+        // These are pushed back a bit so the border doesn't overlap anything
+        if (GetActivatorCVar("drpg_menu_background_border"))
+            DrawBorder("Bor", -1, 8, -5.0, 0.0, 470, 470);
+
+        // Text
+        SetFont("BIGFONT");
+        HudMessage("Arena Transport");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID, "White", X + 132.0, Y + 16.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("\CfSelect arena to transport:\C-");
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 1, "White", X + 64.0, Y + 56.0, 0.05, 0.05);
+
+        SetFont("BIGFONT");
+        HudMessage("\CaArena:\C- %S", ArenaNiceNames[CurrentArena]);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 2, "White", X + 32.0, Y + 96.0, 0.05, 0.05);
+
+        SetFont("SMALLFONT");
+        HudMessage("\CdDescription\C-:\n\n%S", ArenaDescription[CurrentArena]);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 3, "White", X + 32.0, Y + 132.0, 0.05, 0.05);
+
+        SetFont("SMALLFONT");
+        HudMessage("\CdAuthor\C-:\n\n%S", ArenaAuthor[CurrentArena]);
+        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 4, "White", X + 32.0, Y + 164.0, 0.05, 0.05);
+
+        // Input
+        if (CheckInput(BT_MOVELEFT, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentArena--;
+            if (CurrentArena < 0) CurrentArena = 1;
+        }
+        if (CheckInput(BT_MOVERIGHT, KEY_ONLYPRESSED, false, PlayerNumber()))
+        {
+            ActivatorSound("menu/move", 127);
+            CurrentArena++;
+            if (CurrentArena > 1) CurrentArena = 0;
+        }
+        if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
+        {
+            Player.OutpostMenu = 0;
+
+            TransportOutFX(0);
+
+            // Compatibility Handling - DoomRL Arsenal Extended
+            if (CompatModeEx == COMPAT_DRLAX)
+            {
+                NomadModPacksSave();
+                NanomaniacTransport();
+            }
+
+            Delay(35 * 2);
+
+            SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+            SetPlayerProperty(0, 0, PROP_FROZEN);
+            Transported = true;
+
+            if (BossDead)
+                OutpostNotoriety++;
+
+            ChangeLevel(ArenaLumpNames[CurrentArena], 0, CHANGELEVEL_NOINTERMISSION, -1);
+
+            break;
+        }
+
+        if (Player.OutpostMenu == 0)
+            return;
+
+        Delay(1);
+    }
+}
+
 NamedScript MapSpecial void SkillComputer()
 {
     // If Marines are hostile or the power is out, terminate
