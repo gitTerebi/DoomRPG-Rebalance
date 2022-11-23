@@ -959,12 +959,12 @@ NamedScript MapSpecial void ArenaTransport()
     str ArenaNiceNames[2] =
     {
         "Training Ground",
-        "Arena 2"
+        "Throne Room"
     };
     str ArenaDescription[2] =
     {
         "Arena from DoomRPG Sumwunn Edition",
-        "Arena from Obaddon's contributor"
+        "Arena from Obsidian's contributor"
     };
     str ArenaAuthor[2] =
     {
