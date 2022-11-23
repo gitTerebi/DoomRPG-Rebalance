@@ -541,7 +541,7 @@ void ArenaCheckMod()
 
 void ArenaSpawnMobs()
 {
-    int MonsterDiffLimit = 2 + ArenaWave;
+    int MonsterDiffLimit = 2 + ArenaWave * ((CompatMonMode == COMPAT_DRLA || CompatMonMode == COMPAT_PANDEMONIA) ? 3 : 1);
     int Spawned;
     int SpawnChanceModifier;
     bool Boss = false;
