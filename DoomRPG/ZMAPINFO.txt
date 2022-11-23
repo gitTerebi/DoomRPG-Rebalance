@@ -71,6 +71,10 @@ episode OUTPOST
     noskillmenu
 }
 
+// Arenas
+map DAM01 "Training Ground" {}
+map DAM02 "Throne Room" {}
+
 // Rejigger the skills
 clearskills
 
