@@ -23,6 +23,8 @@ int MegaBossesAmount;
 
 NoInit MonsterStats RPGMap Monsters[MAX_MONSTERS];
 
+int TotalBosses;
+
 MonsterInfo const MonsterDataDF[MAX_DEF_MONSTERS_DF] =
 {
     { "ZombieMan",                          "Former Human",                      1,      0, false, "You hear shuffling footsteps and moans!" },
@@ -705,6 +707,10 @@ NamedScript DECORATE void MonsterInit(int Flags)
 
     // Store Monster Flags
     Stats->Flags = Flags;
+
+    // Calculate Total Bosses
+    if (Stats->Flags & MF_BOSS)
+        TotalBosses++;
 
     // Set the Height and Radius
     Stats->Height = GetActorPropertyFixed(0, APROP_Height);
@@ -2971,46 +2977,49 @@ NamedScript void MonsterDeath()
     // Drops
     if (!(Stats->Flags & MF_NODROPS) && !GetActorProperty(0, APROP_Friendly) && !GetCVar("drpg_monster_shadows"))
     {
+        // Calculate current map total monsters modifier
+        fixed DropMonsterModifier = MapTotalMonstersMod();
+
         // Auras have a chance of rare vial drops
         for (int i = 0; i < AURA_MAX; i++)
             if (Stats->Aura.Type[i].Active)
-                DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 8);
+                DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 8 * DropMonsterModifier);
 
         // Aura Drops
         if (Stats->Aura.Type[AURA_RED].Active) // Red Aura - Strength
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_WHITE].Active) // White Aura - XP
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_PURPLE].Active) // Purple Aura - Regeneration
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_ORANGE].Active) // Orange Aura - Agility
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_YELLOW].Active) // Yellow Aura - Luck
         {
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
-            DropMonsterItem(Killer, 0, "DRPGChipDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGChipDropper", 32 * DropMonsterModifier);
         }
 
         // Luck-based Drops
         if (Killer > -1 && !(Stats->Flags & MF_MEGABOSS))
         {
-            if (Players(Killer).HealthDrop && RandomFixed(0.0, 100.0) < Players(Killer).HealthChance)    DropMonsterItem(Killer, 0, "DRPGHealthMonsterDropper", 256);
-            if (Players(Killer).EPDrop && RandomFixed(0.0, 100.0) < Players(Killer).EPChance)            DropMonsterItem(Killer, 0, "DRPGEPMonsterDropper", 256);
-            if (Players(Killer).AmmoDrop && RandomFixed(0.0, 100.0) < Players(Killer).AmmoChance)        DropMonsterItem(Killer, 0, "DRPGAmmoMonsterDropper", 256);
-            if (Players(Killer).TurretDrop && RandomFixed(0.0, 100.0) < Players(Killer).TurretChance)    DropMonsterItem(Killer, 0, "DRPGTurretMonsterDropper", 256);
-            if (Players(Killer).ModuleDrop && RandomFixed(0.0, 100.0) < Players(Killer).ModuleChance)    DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256);
-            if (Players(Killer).ArmorDrop && RandomFixed(0.0, 100.0) < Players(Killer).ArmorChance)      DropMonsterItem(Killer, 0, "DRPGArmorDropper", 256);
-            if (Players(Killer).WeaponDrop && RandomFixed(0.0, 100.0) < Players(Killer).WeaponChance)    DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 256);
-            if (Players(Killer).ShieldDrop && RandomFixed(0.0, 100.0) < Players(Killer).ShieldChance)    DropMonsterItem(Killer, 0, "DRPGShieldDropper", 256);
-            if (Players(Killer).AugDrop && RandomFixed(0.0, 100.0) < Players(Killer).AugChance)          DropMonsterItem(Killer, 0, "DRPGAugDropper", 256);
+            if (Players(Killer).HealthDrop && RandomFixed(0.0, 100.0) < Players(Killer).HealthChance)    DropMonsterItem(Killer, 0, "DRPGHealthMonsterDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).EPDrop && RandomFixed(0.0, 100.0) < Players(Killer).EPChance)            DropMonsterItem(Killer, 0, "DRPGEPMonsterDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).AmmoDrop && RandomFixed(0.0, 100.0) < Players(Killer).AmmoChance)        DropMonsterItem(Killer, 0, "DRPGAmmoMonsterDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).TurretDrop && RandomFixed(0.0, 100.0) < Players(Killer).TurretChance)    DropMonsterItem(Killer, 0, "DRPGTurretMonsterDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).ModuleDrop && RandomFixed(0.0, 100.0) < Players(Killer).ModuleChance)    DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).ArmorDrop && RandomFixed(0.0, 100.0) < Players(Killer).ArmorChance)      DropMonsterItem(Killer, 0, "DRPGArmorDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).WeaponDrop && RandomFixed(0.0, 100.0) < Players(Killer).WeaponChance)    DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).ShieldDrop && RandomFixed(0.0, 100.0) < Players(Killer).ShieldChance)    DropMonsterItem(Killer, 0, "DRPGShieldDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).AugDrop && RandomFixed(0.0, 100.0) < Players(Killer).AugChance)          DropMonsterItem(Killer, 0, "DRPGAugDropper", 256 * DropMonsterModifier);
         }
 
         Delay(1);
@@ -3024,29 +3033,31 @@ NamedScript void MonsterDeath()
         // Boss Drops
         if (Stats->Flags & MF_BOSS)
         {
-            DropMonsterItem(Killer, 0, "DRPGCredits250", 200);
-            DropMonsterItem(Killer, 0, "DRPGCredits500", 170);
-            DropMonsterItem(Killer, 0, "DRPGCredits1000", 256);
-            DropMonsterItem(Killer, 0, "DRPGSoulsphereRandomizer", 256);
-            DropMonsterItem(Killer, 0, "DRPGLifeDropper", 96);
-            DropMonsterItem(Killer, 0, "DRPGModulePickup", 256);
-            DropMonsterItem(Killer, 0, "DRPGAugDropper", 96);
-            DropMonsterItem(Killer, 0, "DRPGUACCard", (40 / (Players(Killer).ShopCard + 1)));
-            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 48);
-            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 24);
-            DropMonsterItem(Killer, 0, "DRPGShieldSpawner", 48);
-            DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
-            DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
-            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 32);
+            fixed DropBossModifier = MapTotalBossesMod();
+
+            DropMonsterItem(Killer, 0, "DRPGCredits250", 200 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGCredits500", 170 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGCredits1000", 256 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGSoulsphereRandomizer", 256 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGLifeDropper", 96 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGModulePickup", 256 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGAugDropper", 96 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGUACCard", (40 / (Players(Killer).ShopCard + 1)) * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 48 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 24 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGShieldSpawner", 48 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 32 * DropBossModifier);
 
             if (CompatMode == COMPAT_DRLA)
             {
-                DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 32);
+                DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 32 * DropBossModifier);
                 if (MapLevelModifier > 0.25)
-                    DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 16);
-                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32);
-                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 16);
-                DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 8);
+                    DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 16 * DropBossModifier);
+                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32 * DropBossModifier);
+                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 16 * DropBossModifier);
+                DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 8 * DropBossModifier);
             }
         }
 
@@ -3761,6 +3772,33 @@ NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
         SetActivator(GetActorProperty(0, APROP_MasterTID));
         Stats->DamageTable[PlayerNumber()] += (Damage * GetCVar("drpg_xp_summon_percent")) / 100;
     }
+}
+
+// Calculate current map total monsters modifier
+fixed MapTotalMonstersMod()
+{
+    fixed MapTotalMonstersMod = 1.0;
+    int TotalMonsters = GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
+
+    if (TotalMonsters > 256)
+        MapTotalMonstersMod = 256.0 / TotalMonsters;
+    if (MapTotalMonstersMod < 0.25)
+        MapTotalMonstersMod = 0.25;
+
+    return MapTotalMonstersMod;
+}
+
+// Calculate current map total bosses modifier
+fixed MapTotalBossesMod()
+{
+    fixed MapTotalBossesMod = 1.0;
+
+    if (TotalBosses > 4)
+        MapTotalBossesMod = 4.0 / TotalBosses;
+    if (MapTotalBossesMod < 0.25)
+        MapTotalBossesMod = 0.25;
+
+    return MapTotalBossesMod;
 }
 
 NamedScript DECORATE int GetMonsterHealthMax()
