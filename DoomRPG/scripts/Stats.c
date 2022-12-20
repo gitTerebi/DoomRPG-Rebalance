@@ -107,7 +107,7 @@ NamedScript void AddXP(int PlayerNum, long int XP, long int Rank)
 {
     // Scale XP/Rank Gains using the XP Scaling Option
     // Don't forget to remove stupid fixed-point avoidance code after migration (if it happens)
-    XP = (XP * (int)(GetCVarFixed("drpg_scalexp") * 100)) / 100;
+    XP = (XP * (long int)(GetCVarFixed("drpg_scalexp") * 100l)) / 100l;
 
     // Caps for add XP and Rank
     if (XP > Players(PlayerNum).XPNext / 10l) XP = Players(PlayerNum).XPNext / 10l;
