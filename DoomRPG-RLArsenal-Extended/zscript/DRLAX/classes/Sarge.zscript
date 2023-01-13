@@ -28,18 +28,28 @@ Class RLSargeEvents : StaticEventHandler
             DTA_ALPHA, 1.0,
             DTA_KEEPRATIO, true, DTA_HUDRules);
 
-            
-            if(!(s.firingframe > 1 && s.firingframe < 4))
-            {
-                int lv = players[consoleplayer].mo.cursector.LightLevel;
+            // light
+            double lv = 256 - Clamp(players[consoleplayer].mo.cursector.LightLevel, 0, 256);
 
-                Screen.DrawTexture(TexMan.CheckForTexture(s.ssprite, TexMan.Type_Sprite, 0), false, 32 + s.offs.x + aspectoffs, 0 + s.offs.y,
-                DTA_VIRTUALWIDTHF,    resolution.x,
-                DTA_VIRTUALHEIGHTF,    resolution.y,
-                DTA_FillColor, Color(0,0,0),
-                DTA_ALPHA, 1.0 - (lv * 0.01),
-                DTA_KEEPRATIO, true, DTA_HUDRules);
-            }
+            lv = lv / 256;
+
+            Screen.DrawTexture(TexMan.CheckForTexture(s.ssprite, TexMan.Type_Sprite, 0), false, 32 + s.offs.x + aspectoffs, 0 + s.offs.y,
+            DTA_VIRTUALWIDTHF,    resolution.x,
+            DTA_VIRTUALHEIGHTF,    resolution.y,
+            DTA_FillColor, Color(0,0,0),
+            DTA_ALPHA, lv,
+            DTA_KEEPRATIO, true, DTA_HUDRules);
+
+            // brightmap
+
+            String br = s.ssprite;
+            br.Replace("D", "B");
+
+            Screen.DrawTexture(TexMan.CheckForTexture(br, TexMan.Type_Sprite, 0), false, 32 + s.offs.x + aspectoffs, 0 + s.offs.y,
+            DTA_VIRTUALWIDTHF,    resolution.x,
+            DTA_VIRTUALHEIGHTF,    resolution.y,
+            DTA_ALPHA, 1.0,
+            DTA_KEEPRATIO, true, DTA_HUDRules);
         }
     }
 
@@ -544,6 +554,7 @@ Class RLSargeInv : Inventory
         "RLShredderShotgun",
         "RLSniperRifle",
         //"RLStormUzi",
+        "RLWidowmakerSMG",
         "RLNanoShrapnelDoubleShotgun",
         "RLHeavyPulseBlaster",
         "RLLaserPulseLauncher",
