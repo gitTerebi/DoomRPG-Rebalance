@@ -198,12 +198,7 @@ Class DRLAX_GizmoHandler : Thinker
                 }
 
                 int r = random(0, gizmos.Size() - 1);
-                if(!SpawnGizmo(gizmos[r])) {
-                    //If the gizmo failed to spawn, just push it to the next map	
-                    count = 1;
-		    levels++;
-		    return;
-		}
+                SpawnGizmo(gizmos[r]);
                 gizmos.Delete(r);
                 position++;
             }
@@ -213,16 +208,20 @@ Class DRLAX_GizmoHandler : Thinker
         }
     }
 
-    static bool SpawnGizmo(String gizmo) //please note that in vanilla DRLAX this is void
-	{
+    static void SpawnGizmo(String gizmo)
+	{ 
         //Console.Printf("spawned");
 		CMMSS_Actor_SafeSpawner ss = CMMSS_SafeSpawner.New(gizmo, 1, "", 48, 64, 0, CMMSS_SafeSpawner.SSFLAGS_NOMONSTERS);
-		if(ss == null) {
-			return false;
-		}
-		
+
+        if(!ss || ss.actorlist.Size() == 0)
+        {
+            return;
+        }
+
 		Array<Actor> actorlist;
+
 		actorlist.Copy(ss.actorlist);
+
 		ss.actorlist.Clear();
 
 		for(int i; i<actorlist.Size(); i++)
@@ -240,8 +239,6 @@ Class DRLAX_GizmoHandler : Thinker
         }
 
 		ss.speed = 3;
-
-		return true;
 	}
 }
 
@@ -849,8 +846,8 @@ Class DRLAX_AppraiserObject : DRLAX_GizmoObject
         fams.Push("HellKnight");
         fams.Push("BaronOfHell");
         fams.Push("Revenant");
-	fams.Push("PainElemental");
         fams.Push("Mancubus");
+        fams.Push("PainElemental");
         fams.Push("Arachnotron");
         fams.Push("Archvile");
         fams.Push("SpiderMastermind");
@@ -1023,16 +1020,16 @@ Class DRLAX_ModReviser : DRLAX_GizmoObject
             }
         }
 
-        for(int q; q<CanHack()+1; q++)
+        for(int h; h<CanHack()+1; h++)
         {
             A_SpawnItemEx(modpacks[i], 0, 0, 32, frandom(-5, 5), 0, 3, random(0, 360));
         }
 
         iteration++;
 
-        for(int i; i<blacklistpacks.Size(); i++)
+        for(int b; b<blacklistpacks.Size(); b++)
         {
-            blacklistpacks[i] = false;
+            blacklistpacks[b] = false;
         }
 
         modpacks.Clear();
@@ -1474,6 +1471,11 @@ Class DRLAX_Familiardeployer : DRLAX_GizmoObject
 
     override bool Used(Actor user)
 	{
+        if(user.CountInv("DRLAX_Debug") > 0)
+        {
+            isready = true;
+        }
+
         if(familiar)
         {
             return false;

@@ -159,6 +159,7 @@ Class DRLAX_ClassEvents : EventHandler
 				player.TakeInventory("RLSargeInvTrigger", 1);
 			}
 		}
+
 	}
 
 	override void WorldUnloaded (WorldEvent e) 
@@ -429,4 +430,9 @@ class DRLAX_ArtifactGuardianTeleport : Actor
 		}
 		stop;
 	}
+}
+
+
+class DRLAX_Debug : Inventory
+{
 }
