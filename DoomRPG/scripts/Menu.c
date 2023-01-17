@@ -2015,16 +2015,24 @@ void DrawTurretInfo(fixed X, fixed Y, int Index)
         Info = StrParam("\Ca%d", Player.Turret.HealthMax);
         break;
     case TU_ARMOR_PLATING_MELEE:
-        Info = StrParam("\Cc%d%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] * 5);
+        Info = StrParam("\Cc%.1k%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] * 5.0);
+        if (Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] > 10)
+            Info = StrParam("\Cc%.1k%%", 50.0 + (Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] - 10) * 2.5);
         break;
     case TU_ARMOR_PLATING_BULLET:
-        Info = StrParam("\Cj%d%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] * 5);
+        Info = StrParam("\Cj%.1k%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] * 5.0);
+        if (Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] > 10)
+            Info = StrParam("\Cj%.1k%%", 50.0 + (Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] - 10) * 2.5);
         break;
     case TU_ARMOR_PLATING_FIRE:
-        Info = StrParam("\Cg%d%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_FIRE] * 5);
+        Info = StrParam("\Cg%.1k%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_FIRE] * 5.0);
+        if (Player.Turret.Upgrade[TU_ARMOR_PLATING_FIRE] > 10)
+            Info = StrParam("\Cg%.1k%%", 50.0 + (Player.Turret.Upgrade[TU_ARMOR_PLATING_FIRE] - 10) * 2.5);
         break;
     case TU_ARMOR_PLATING_PLASMA:
-        Info = StrParam("\Cn%d%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_PLASMA] * 5);
+        Info = StrParam("\Cn%.1k%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_PLASMA] * 5.0);
+        if (Player.Turret.Upgrade[TU_ARMOR_PLATING_PLASMA] > 10)
+            Info = StrParam("\Cn%.1k%%", 50.0 + (Player.Turret.Upgrade[TU_ARMOR_PLATING_PLASMA] - 10) * 2.5);
         break;
     case TU_ARMOR_MODULE_PHASE:
         Y -= 4.0;
