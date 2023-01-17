@@ -86,7 +86,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         ""
     },
     {
-        "Weapon Module - Pellet - Amount", 10, 3,
+        "Weapon Module - Pellet - Amount", 5, 5,
         "Increases the number of pellets fired per shot",
         "",
         ""
@@ -100,7 +100,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Issuing this command will load the rocket weapon module"
     },
     {
-        "Weapon Module - Rocket - Damage", 10, 3,
+        "Weapon Module - Rocket - Damage", 20, 3,
         "Increases the damage of the turret's rockets",
         "",
         ""
@@ -132,7 +132,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Issuing this command will load the plasma weapon module"
     },
     {
-        "Weapon Module - Plasma - Damage", 10, 3,
+        "Weapon Module - Plasma - Damage", 20, 3,
         "Increases the damage of the turret's plasma shots",
         "",
         ""
@@ -158,7 +158,7 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         "Issuing this command will load the railgun weapon module"
     },
     {
-        "Weapon Module - Railgun - Damage", 10, 3,
+        "Weapon Module - Railgun - Damage", 20, 3,
         "Increases the damage of the turret's railgun shots",
         "",
         ""
@@ -231,25 +231,25 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
         ""
     },
     {
-        "Armor Plating - Melee", 10, 5,
+        "Armor Plating - Melee", 20, 5,
         "Plating which protects against melee damage",
         "Upgrades increase protection amount",
         ""
     },
     {
-        "Armor Plating - Bullet", 10, 5,
+        "Armor Plating - Bullet", 20, 5,
         "Plating which protects against bullet damage",
         "Upgrades increase protection amount",
         ""
     },
     {
-        "Armor Plating - Fire", 10, 5,
+        "Armor Plating - Fire", 20, 5,
         "Plating which protects against fire damage",
         "Upgrades increase protection amount",
         ""
     },
     {
-        "Armor Plating - Plasma", 10, 5,
+        "Armor Plating - Plasma", 20, 5,
         "Plating which protects against plasma damage",
         "Upgrades increase protection amount",
         ""
@@ -286,10 +286,10 @@ TurretUpgrade RPGMap TurretUpgradeData[MAX_UPGRADES] =
     //
 
     {
-        "Battery - AUG Battery Adapter", 1, 5,
+        "Battery - AUG Battery Adapter", 1, 10,
         "Use turret from your AUG battery",
         "",
-        "issuing this command will toggle AUG Battery Adapter on and off"
+        "Issuing this command will toggle AUG Battery Adapter on and off"
     },
     {
         "Battery - Capacity", 10, 5,
@@ -941,9 +941,9 @@ NamedScript DECORATE int TurretGetProjectileDamage(int Type)
     SetActivator(GetActorProperty(0, APROP_MasterTID)); // Transfer from Turret to Player
 
     if (Type == TP_ROCKET)
-        return (100 * (Player.Turret.Upgrade[TU_WEAPON_ROCKET_DAMAGE] + 1));
+        return (100 * (Player.Turret.Upgrade[TU_WEAPON_ROCKET_DAMAGE] + 1) * (1.0 + Player.Turret.Upgrade[TU_WEAPON_ROCKET_DAMAGE] / 40.0));
     else if (Type == TP_PLASMA)
-        return (10 * (Player.Turret.Upgrade[TU_WEAPON_PLASMA_DAMAGE] + 1));
+        return (10 * (Player.Turret.Upgrade[TU_WEAPON_PLASMA_DAMAGE] + 1) * (1.0 + Player.Turret.Upgrade[TU_WEAPON_PLASMA_DAMAGE] / 40.0));
 
     return 0;
 }
@@ -1309,19 +1309,19 @@ Start:
             switch (Weapon)
             {
             case TW_BULLET:
-                HeatLevel += 5;
+                HeatLevel += 5 - (GetUserVariable(0, "user_bullet_rof") * 0.4);
                 break;
             case TW_PELLET:
-                HeatLevel += 15;
+                HeatLevel += 15 - (GetUserVariable(0, "user_pellet_rof") * 1.2);
                 break;
             case TW_ROCKET:
-                HeatLevel += 30;
+                HeatLevel += 30 - (GetUserVariable(0, "user_rocket_rof") * 2.4);
                 break;
             case TW_PLASMA:
-                HeatLevel += 8;
+                HeatLevel += 8 - (GetUserVariable(0, "user_plasma_rof") * 1.0);
                 break;
             case TW_RAILGUN:
-                HeatLevel += 50;
+                HeatLevel += 50 - (GetUserVariable(0, "user_railgun_rof") * 4.0);
                 break;
             }
         }
@@ -1624,7 +1624,7 @@ bool TurretLoadAmmo(int Type)
         "turret/reloadplasma",
         "turret/reloadrail"
     };
-    int MinAmount[5] = { 50, 20, 5, 100, 50 };
+    int MinAmount[5] = { 50, 20, 5, 100, 25 };
     int *Ammo[5] =
     {
         &Player.Turret.BulletAmmo,
@@ -1816,7 +1816,7 @@ void TurretCommand(int Index)
         if (!TurretLoadAmmo(TU_WEAPON_RAILGUN))
         {
             ActivatorSound("menu/error", 127);
-            PrintError("You need at least \Cd50 Cells\C- to load into the turret");
+            PrintError("You need at least \Cd25 Cells\C- to load into the turret");
         }
     }
 
