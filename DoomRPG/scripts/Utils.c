@@ -729,6 +729,30 @@ int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed
     return ItemTID;
 }
 
+// Find out if the monster sees its target
+bool MonsterSeeTarget(int MonsterTID)
+{
+    SetActivatorToTarget(MonsterTID);
+
+    if (!CheckSight(MonsterTID, 0, CSF_NOBLOCKALL))
+    {
+        SetActivator(MonsterTID);
+        return false;
+    }
+
+    SetActivator(MonsterTID);
+    return true;
+}
+
+// Get the distance to the monster's target
+fixed MonsterDistanceTarget(int MonsterTID)
+{
+    SetActivatorToTarget(MonsterTID);
+    int MonsterDistanceTarget = Distance(MonsterTID, 0);
+    SetActivator(MonsterTID);
+    return MonsterDistanceTarget;
+}
+
 // Use for while if you want to make a delay when the monster sees the players
 bool ActorSeePlayers(int MonsterTID, int Dist)
 {

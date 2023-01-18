@@ -104,7 +104,7 @@ actor DRPGPortableTurret
     Missile.Pellet:
         PTUR A 0 A_SetUserVar("user_firing", 1)
         PTUR A 0 A_PlaySound("weapons/sshotf", CHAN_WEAPON, 1.0, 0, 0.6)
-        PTUR B 0 Bright A_CustomBulletAttack(16 - (user_pellet_spread * 3), 16 - (user_pellet_spread * 3), 3 * (user_pellet_amount + 1), Random(5, 10) * (1 + user_pellet_damage) * (1.0 + user_pellet_damage / 40.0), "BulletPuff", 0, CBAF_NORANDOM)
+        PTUR B 0 Bright A_CustomBulletAttack(15 - user_pellet_spread, 15 - (user_pellet_spread * 2), 5 + (user_pellet_amount * 2), ((Random(2, 6) * 3) + Random(2, 6) * user_pellet_damage) * (1.0 + user_pellet_damage / 40.0), "BulletPuff", 0, CBAF_NORANDOM)
         PTUR A 0 ACS_NamedExecuteAlways("TurretUseAmmo", 0, TW_PELLET)
         PTUR B 10 Bright
         PTUR A 0 A_SetTics(35 - (user_pellet_rof * 5))
