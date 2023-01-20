@@ -1437,7 +1437,78 @@ Start:
     {
         if (!PlayerInGame(i)) continue;
 
-        // Changing the AI of monsters in case if there are turret
+        // Changing the AI of monsters in case if there are summoned monsters
+        if (Players(i).Summons > 0)
+        {
+            for (int j = 0; j < Players(i).Summons; j++)
+            {
+                if (!GetActorProperty(0, APROP_Friendly))
+                {
+                    // If the enemy has no target and the summoned monster is in his field of vision he immediately becomes aggressive towards summoned monster
+                    if (!MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) <= 1536 && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
+                    {
+                        Thing_Hate (0, Players(i).SummonTID[j], 3);
+                        Delay(DelayTime);
+                    }
+
+                    // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
+                    if (MonsterHasTarget() && !MonsterSeeTarget(MonsterTID) && Random(0, 100) <= 15)
+                    {
+                        if (CheckSight(0, Players(i).SummonTID[j], 0))
+                        {
+                            GiveInventory("DRPGEnemyClearTarget1", 1);
+                            Delay(DelayTime);
+                        }
+                        else
+                        {
+                            GiveInventory("DRPGEnemyClearTarget2", 1);
+                            Delay(DelayTime);
+                        }
+                    }
+
+                    // Switch to another target if it is closer than the current target
+                    if (MonsterHasTarget() && MonsterSeeTarget(MonsterTID) && MonsterDistanceTarget(MonsterTID) > Random(256, 512) && Random(0, 100) <= 15)
+                    {
+                        if (CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
+                        {
+                            if (Distance(0, Players(i).SummonTID[j]) < MonsterDistanceTarget(MonsterTID))
+                            {
+                                Thing_Hate (0, Players(i).SummonTID[j], 4);
+                                Delay(DelayTime);
+                            }
+                        }
+                        else if (CheckSight(0, Players(i).TID, 0) && Distance(0, Players(i).TID) < Distance(0, Players(i).SummonTID[j]))
+                        {
+                            if (Distance(0, Players(i).TID) < MonsterDistanceTarget(MonsterTID))
+                            {
+                                Thing_Hate (0, Players(i).TID, 4);
+                                Delay(DelayTime);
+                            }
+                        }
+                    }
+
+                    // Summons switch to another target if it is closer than the current target
+                    if (MonsterHasTarget() && CheckSight(Players(i).SummonTID[j], MonsterTID, 0) && Distance(Players(i).SummonTID[j], MonsterTID) <= 256 && Random(0, 100) <= 15)
+                    {
+                        if (MonsterSeeTarget(Players(i).SummonTID[j]) && MonsterDistanceTarget(Players(i).SummonTID[j]) > Random(256, 512))
+                        {
+                            if (Distance(Players(i).SummonTID[j], MonsterTID) < MonsterDistanceTarget(Players(i).SummonTID[j]))
+                            {
+                                Thing_Hate (Players(i).SummonTID[j], MonsterTID);
+                                Delay(DelayTime);
+                            }
+                        }
+                        else if (!MonsterSeeTarget(Players(i).SummonTID[j]))
+                        {
+                            Thing_Hate (Players(i).SummonTID[j], MonsterTID);
+                            Delay(DelayTime);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Changing the AI of enemy monsters in case if there are turret
         if (!GetActorProperty(0, APROP_Friendly) && Players(i).Turret.Active)
         {
             // If the enemy has no target and the turret is in his field of vision he immediately becomes aggressive towards turret
@@ -1463,112 +1534,51 @@ Start:
             }
 
             // Switch to another target if it is closer than the current target
-            if (MonsterHasTarget() && CheckSight(0, Players(i).Turret.TID, 0) && CheckSight(0, Players(i).TID, 0) && MonsterDistanceTarget(MonsterTID) > Random(256, 512) && Random(0, 100) <= 15)
+            if (MonsterHasTarget() && MonsterSeeTarget(MonsterTID) && MonsterDistanceTarget(MonsterTID) > Random(256, 512) && Random(0, 100) <= 15)
             {
-                if (Distance(0, Players(i).Turret.TID) <= Random(64, 256) && Distance(0, Players(i).Turret.TID) < MonsterDistanceTarget(MonsterTID))
+                if (CheckSight(0, Players(i).Turret.TID, 0) && Distance(0, Players(i).Turret.TID) < Distance(0, Players(i).TID))
                 {
-                    Thing_Hate (0, Players(i).Turret.TID, 4);
-                    Delay(DelayTime);
+                    if (Distance(0, Players(i).Turret.TID) < MonsterDistanceTarget(MonsterTID))
+                    {
+                        Thing_Hate (0, Players(i).Turret.TID, 4);
+                        Delay(DelayTime);
+                    }
                 }
-
-                if (Distance(0, Players(i).TID) <= Random(64, 256) && Distance(0, Players(i).TID) < MonsterDistanceTarget(MonsterTID))
+                else if (CheckSight(0, Players(i).TID, 0) && Distance(0, Players(i).TID) < Distance(0, Players(i).Turret.TID))
                 {
-                    Thing_Hate (0, Players(i).TID, 4);
-                    Delay(DelayTime);
+                    if (Distance(0, Players(i).TID) < MonsterDistanceTarget(MonsterTID))
+                    {
+                        Thing_Hate (0, Players(i).TID, 4);
+                        Delay(DelayTime);
+                    }
                 }
             }
         }
 
-        // Changing the AI of monsters in case if there are summoned monsters
-        if (Players(i).Summons > 0)
+        // Changing the AI for friendly monsters
+        if (GetActorProperty(0, APROP_Friendly))
         {
-            for (int j = 0; j < Players(i).Summons; j++)
+            // Clearing a friendly monster's target in case the enemy is out of sight
+            if (MonsterHasTarget() && !MonsterSeeTarget(MonsterTID) && Random(0, 100) <= 15)
             {
-                if (!GetActorProperty(0, APROP_Friendly))
+                GiveInventory("DRPGFriendlyClearTarget", 1);
+                Delay(DelayTime);
+            }
+
+            // More enemies aggression to summoned monsters
+            if (MonsterHasTarget() && MonsterSeeTarget(MonsterTID) && Random(0, 100) <= 15)
+            {
+                GiveInventory("DRPGFriendlyAlertMonsters", 1);
+                Delay(DelayTime);
+            }
+
+            // Used to change the AI of friendly marines
+            if (CheckInventory("DRPGMarineSummonedToken"))
+            {
+                if (!MonsterHasTarget() && Distance(0, Players(i).TID) <= 200 && Random(0, 100) <= 25)
                 {
-                    // If the enemy has no target and the summoned monster is in his field of vision he immediately becomes aggressive towards summoned monster
-                    if (!MonsterHasTarget() && Distance(0, Players(i).SummonTID[j]) <= 1536 && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
-                    {
-                        Thing_Hate (0, Players(i).SummonTID[j], 3);
-                        Delay(DelayTime);
-                    }
-
-                    // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
-                    if (MonsterHasTarget() && !MonsterSeeTarget(MonsterTID) && Random(0, 100) <= 15)
-                    {
-                        if (CheckSight(0, Players(i).SummonTID[j], 0))
-                        {
-                            GiveInventory("DRPGEnemyClearTarget1", 1);
-                            Delay(DelayTime);
-                        }
-                        else
-                        {
-                            GiveInventory("DRPGEnemyClearTarget2", 1);
-                            Delay(DelayTime);
-                        }
-                    }
-
-                    // Switch to another target if it is closer than the current target
-                    if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && CheckSight(0, Players(i).TID, 0) && MonsterDistanceTarget(MonsterTID) > Random(256, 512) && Random(0, 100) <= 15)
-                    {
-                        if (Distance(0, Players(i).SummonTID[j]) <= Random(64, 256) && Distance(0, Players(i).SummonTID[j]) < MonsterDistanceTarget(MonsterTID))
-                        {
-                            Thing_Hate (0, Players(i).SummonTID[j], 4);
-                            Delay(DelayTime);
-                        }
-
-                        if (Distance(0, Players(i).TID) <= Random(64, 256) && Distance(0, Players(i).TID) < MonsterDistanceTarget(MonsterTID))
-                        {
-                            Thing_Hate (0, Players(i).TID, 4);
-                            Delay(DelayTime);
-                        }
-                    }
-
-                    // Summons switch to another target if it is closer than the current target
-                    if (MonsterHasTarget() && CheckSight(Players(i).SummonTID[j], MonsterTID, 0) && Distance(Players(i).SummonTID[j], MonsterTID) <= 256 && Random(0, 100) <= 15)
-                    {
-                        if (MonsterSeeTarget(Players(i).SummonTID[j]) && MonsterDistanceTarget(Players(i).SummonTID[j]) > Random(256, 512))
-                        {
-                            if (Distance(Players(i).SummonTID[j], MonsterTID) < MonsterDistanceTarget(Players(i).SummonTID[j]))
-                            {
-                                Thing_Hate (Players(i).SummonTID[j], MonsterTID);
-                                Delay(DelayTime);
-                            }
-                        }
-
-                        if (!MonsterSeeTarget(Players(i).SummonTID[j]))
-                        {
-                            Thing_Hate (Players(i).SummonTID[j], MonsterTID);
-                            Delay(DelayTime);
-                        }
-                    }
-                }
-
-                if (GetActorProperty(0, APROP_Friendly))
-                {
-                    // Clearing a friendly monster's target in case the enemy is out of sight
-                    if (MonsterHasTarget() && Random(0, 100) <= 15)
-                    {
-                        GiveInventory("DRPGFriendlyClearTarget", 1);
-                        Delay(DelayTime);
-                    }
-
-                    // More enemies aggression to summoned monsters
-                    if (MonsterHasTarget() && Random(0, 100) <= 15)
-                    {
-                        GiveInventory("DRPGFriendlyAlertMonsters", 1);
-                        Delay(DelayTime);
-                    }
-                }
-
-                if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGMarineSummonedToken"))
-                {
-                    // Used to change the AI of friendly marines
-                    if (!MonsterHasTarget() && Distance(0, Players(i).TID) <= 200 && Random(0, 100) <= 25)
-                    {
-                        Thing_Hate(0, Players(i).TID);
-                        Delay(DelayTime);
-                    }
+                    Thing_Hate(0, Players(i).TID);
+                    Delay(DelayTime);
                 }
             }
         }
