@@ -13,7 +13,7 @@ Enjoy!
 ## Installing (build)
 
 Below is the download link:
-1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.8.2)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
+1. [DoomRPG SE Rebalance Last Build (for GZDoom 4.10.0)](https://drive.google.com/drive/folders/1lbhGQVh_MXSTBQ-iCmuOIHOE31HREPUE?usp=sharing)
 
 Installation Instructions:
 
@@ -24,7 +24,7 @@ Installation Instructions:
 
 ## Manual Installing
 
-- [GZDoom v4.8.2](https://github.com/coelckers/gzdoom/releases/download/g4.8.2/gzdoom-4-8-2-Windows-64bit.zip) is required to play this mod.
+- [GZDoom v4.10.0](https://github.com/coelckers/gzdoom/releases/download/g4.10.0/gzdoom-4-10-0-Windows-64bit.zip) is required to play this mod.
 - LZDoom v3.83a or higher.
 - Delta Touch (Android) v4.6 or higher (includes the above versions or higher).
 
