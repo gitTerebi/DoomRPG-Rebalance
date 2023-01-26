@@ -38,6 +38,8 @@ Class CCards_Global : Thinker
 
 	uint scoreneeded;
 	uint wildscore;
+
+	int systemtime;
 	
 	CCards_Deck GetChosenDeck()
 	{
@@ -62,7 +64,7 @@ Class CCards_Global : Thinker
 		vc.Init();		
 		rules = new ("CCards_Rules");
 		rules.global = self;
-		ccversion = "4.3";
+		ccversion = "4.4";
 		scoreneeded = random(4, 8);
 		return self;
 	}
@@ -194,7 +196,7 @@ Class CCards_Game : EventHandler
 
 	override void WorldTick()
 	{
-		String c = Cvar.GetCvar("ccards_disablecard", Players[0]).GetString();
+		String c = Cvar.GetCvar("ccards_disablecard", players[Net_Arbitrator]).GetString();
 		if(c != "")
 		{
 			c.ToUpper();
@@ -218,7 +220,7 @@ Class CCards_Game : EventHandler
 				}
 			}
 
-			Cvar.GetCvar("ccards_disablecard", Players[0]).SetString("");
+			Cvar.GetCvar("ccards_disablecard", players[Net_Arbitrator]).SetString("");
 		}
 	}
 
@@ -352,6 +354,8 @@ Class CCards_Game : EventHandler
 		
 		for(int i; i<publicdeck.Size(); i++)
 		{
+			publicdeck[i].game = CCards_Functions.GetGame();
+			
 			if(!publicdeck[i].started)
 			{
 				publicdeck[i].PreGameStart();
@@ -493,7 +497,7 @@ Class CCards_Game : EventHandler
 
 	void SetupSeed(void)
 	{
-		CVar seedcvar = CVar.GetCvar('ccards_seed', Players[0]);
+		CVar seedcvar = CVar.GetCvar('ccards_seed', players[Net_Arbitrator]);
 		
 		if(seedcvar.GetInt()<1 || seedcvar.GetInt()>9999)
 		{
@@ -529,7 +533,7 @@ Class CCards_Game : EventHandler
 	
 	void NextPlayer()
 	{
-		if(Cvar.GetCvar("ccards_choiceoption", players[0]).GetInt() == 1)
+		if(Cvar.GetCvar("ccards_choiceoption", players[Net_Arbitrator]).GetInt() == 1)
 		{
 			global.player = 0;
 			return;
@@ -868,6 +872,59 @@ Class CCards_Game : EventHandler
 		if(t.user)
 		{
 			t.user.GiveInventory("CCards_ChoiceInvulnerability", 1);
+		}
+	}
+
+	static const int doorspecials[] = {
+		7, 8, 10, 11, 12, 13, 105, 106, 202, 249
+	};
+
+	int get_sector_tag(sector s)
+    {
+		if(!s)
+		{
+			return 0;
+		}
+
+        int sector_tag = -15;
+        for(int i = 1; i < 100/*or what maximum tags index are?*/; i++)
+        {
+            SectorTagIterator sec_tags = level.CreateSectorTagIterator(i);
+            
+            int sector_id = -15;
+            while( sector_id = sec_tags.next() )
+            {
+                if(sector_id < 0)
+                    break;
+                if(sector_id == s.index())
+                {
+                    //console.printf("sector found");
+                    sector_tag = i;
+                    break;
+                }
+                
+            }
+            if(sector_tag >= 0)
+                break;
+        }
+        return sector_tag;
+    }
+
+	override void WorldLineActivated (WorldEvent e) 
+	{
+		if(e.Thing && e.Thing.player && e.ActivationType == SPAC_Use)
+		{
+			if(e.ActivatedLine.args[0] == 0 || e.ActivatedLine.args[0] == get_sector_tag(e.ActivatedLine.BackSector))
+			{
+				return;
+			}
+
+			CCard_SpecialSwitches sws = CCard_SpecialSwitches(CCards_Functions.FindCardByName("CCard_SpecialSwitches"));
+
+			if(sws)
+			{
+				sws.Trigger(e.ActivatedLine, e.Thing);
+			}
 		}
 	}
 
