@@ -36,9 +36,9 @@ Use the following load order:
 
 1. [WadSmoosh](https://forum.zdoom.org/viewtopic.php?f=19&t=52757) and/or [The Sentinel's Lexicon - PvE mapset Compilaition](https://github.com/WNC12k/DoomRPG-Lexicon/releases) or another mapset;
 2. [DoomRL Arsenal 1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
-3. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [Colourful Hell v0.99a](https://forum.zdoom.org/viewtopic.php?t=47980) or [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193) or [Dehacked Attack v4.0](https://forum.zdoom.org/viewtopic.php?f=43&t=72362) or [Pandemonia Monsters v2.2](https://forum.zdoom.org/viewtopic.php?t=60984);
+3. [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044) or [Colourful Hell v0.99b](https://forum.zdoom.org/viewtopic.php?t=47980) or [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193) or [Dehacked Attack v4.0](https://forum.zdoom.org/viewtopic.php?f=43&t=72362) or [Pandemonia Monsters v2.2](https://forum.zdoom.org/viewtopic.php?t=60984);
 4. [DoomRL Arsenal Extended 1.0 beta](https://forum.zdoom.org/viewtopic.php?f=43&t=70549);
-5. [Corruption Cards 4.4](https://forum.zdoom.org/viewtopic.php?t=67939);
+5. [Corruption Cards 4.4a](https://forum.zdoom.org/viewtopic.php?t=67939);
 6. DoomRPG;
 7. DoomRPG compatibility patches (as per modifications).
 
@@ -47,10 +47,10 @@ Use the following load order:
 - [DoomRL Arsenal - v1.1.5](https://forum.zdoom.org/viewtopic.php?f=43&t=37044);
 - [DoomRL Monsters Beta 7.3](https://forum.zdoom.org/viewtopic.php?f=43&t=37044);
 - [DoomRL Arsenal Extended - v1.0 beta](https://forum.zdoom.org/viewtopic.php?f=43&t=70549);
-- [Corruption Cards 4.4](https://forum.zdoom.org/viewtopic.php?t=67939);
+- [Corruption Cards 4.4a](https://forum.zdoom.org/viewtopic.php?t=67939);
 - [Rampancy v1.3](https://forum.zdoom.org/viewtopic.php?f=43&t=67193);
 - [LegenDoom v2.8.3](https://forum.zdoom.org/viewtopic.php?t=51035);
-- [Colourful Hell v0.99a](https://forum.zdoom.org/viewtopic.php?t=47980);
+- [Colourful Hell v0.99b](https://forum.zdoom.org/viewtopic.php?t=47980);
 - [Dehacked Attack v4.0](https://forum.zdoom.org/viewtopic.php?f=43&t=72362);
 - [Pandemonia Monsters v2.2](https://forum.zdoom.org/viewtopic.php?t=60984);
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
