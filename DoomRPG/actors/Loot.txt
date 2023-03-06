@@ -41,6 +41,11 @@ Actor DRPGLootChemicals : DRPGLoot
     }
 }
 
+Actor DRPGLootChemicals2 : DRPGLootChemicals
+{
+    -COUNTITEM
+}
+
 // Hazardous Materials
 Actor DRPGLootHazardousMaterials : DRPGLoot
 {
@@ -163,6 +168,11 @@ Actor DRPGLootScrapMetals : DRPGLoot
         LT10 A -1
         Stop
     }
+}
+
+Actor DRPGLootScrapMetals2 : DRPGLootScrapMetals
+{
+    -COUNTITEM
 }
 
 // Scrap Electronics
