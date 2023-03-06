@@ -2758,7 +2758,7 @@ NamedScript DECORATE void PropDeathCheck(int PropType)
             switch(PropType)
             {
             case 1: // tech
-                DropMonsterItem(Killer, 0, "DRPGLootScrapMetals",      37); // ~30%
+                DropMonsterItem(Killer, 0, "DRPGLootScrapMetals2",     37); // ~30%
                 DropMonsterItem(Killer, 0, "DRPGTurretPart",           25); // ~20%
                 DropMonsterItem(Killer, 0, "DRPGBatterySmall",         10); // ~4%
                 break;
@@ -2771,7 +2771,7 @@ NamedScript DECORATE void PropDeathCheck(int PropType)
                 break;
 
             case 3: // barrels
-                DropMonsterItem(Killer, 0, "DRPGLootChemicals",        12); // ~10%
+                DropMonsterItem(Killer, 0, "DRPGLootChemicals2",       12); // ~10%
                 break;
             }
         }
