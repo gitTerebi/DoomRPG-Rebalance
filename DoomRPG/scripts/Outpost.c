@@ -3469,7 +3469,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentIndexBasic = 8;
                                 CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails6 =  29;
-                                CurrentAmountDetails6 = 10;
+                                CurrentAmountDetails6 = 6;
                             }
                             // For Tristar Blaster
                             if (ItemData[0][CurrentItem].Actor == "RLTristarBlaster")
@@ -3682,7 +3682,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails5 =  12;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  29;
-                                CurrentAmountDetails6 = 15;
+                                CurrentAmountDetails6 = 6;
                             }
                             // For Particle Beam Cannon
                             if (ItemData[0][CurrentItem].Actor == "RLParticleBeamCannon")
@@ -3737,7 +3737,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails5 =  14;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  29;
-                                CurrentAmountDetails6 = 10;
+                                CurrentAmountDetails6 = 6;
                             }
                             // For Lucifer Cannon
                             if (ItemData[0][CurrentItem].Actor == "RLLuciferCannon")

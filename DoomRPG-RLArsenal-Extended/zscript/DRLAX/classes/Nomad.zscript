@@ -162,7 +162,7 @@ Class RLNomadEvents : EventHandler
 						if(inv.GetClassName() == "DRPGChipGold"){continue;}
 						if(inv.GetClassName() == "DRPGChipPlatinum"){continue;}
 
-						if(inv is "DRPGStimSmall"){continue;} 								// all stims
+						if(inv is "DRPGStimSmall"){continue;} 											// all stims
 						if(inv.GetClassName() == "DRPGVialStrength"){continue;}
 						if(inv.GetClassName() == "DRPGVialDefense"){continue;}
 						if(inv.GetClassName() == "DRPGVialVitality"){continue;}
@@ -183,39 +183,76 @@ Class RLNomadEvents : EventHandler
 						if(inv.GetClassName() == "DRPGVialRage"){continue;}
 						if(inv.GetClassName() == "DRPGVialMagnetic"){continue;}
 
-						if(inv.GetClassName() == "DRPGLife"){continue;}						// additional lives / 1up
+						if(inv.GetClassName() == "DRPGLife"){continue;}									// additional lives / 1up
 						
-						if(inv is "DRPGLoot"){continue;} 									// all quest loot
-						if(inv is "DRPGShieldPart"){continue;} 								// all shield parts
-						if(inv is "DRPGCraftParts"){continue;} 								// crafting parts
+						if(inv is "DRPGLoot"){continue;} 												// all quest loot
+						if(inv is "DRPGShieldPart"){continue;} 											// all shield parts
+						if(inv is "DRPGCraftParts"){continue;} 											// crafting parts
 
-						if(inv is "DRPGImmunityCrystalMelee"){continue;} 					// immunity crystal melee
-						if(inv is "DRPGImmunityCrystalBullet"){continue;} 					// immunity crystal bullet
-						if(inv is "DRPGImmunityCrystalFire"){continue;} 					// immunity crystal fire
-						if(inv is "DRPGImmunityCrystalPlasma"){continue;} 					// immunity crystal plasma
-						if(inv is "DRPGImmunityCrystalLightning"){continue;} 				// immunity crystal lightning
-						if(inv is "DRPGImmunityCrystalToxic"){continue;} 					// immunity crystal toxic
-						if(inv is "DRPGImmunityCrystalRadiation"){continue;} 				// immunity crystal radiation
+						if(inv.GetClassName() == "DRPGBatterySmall"){continue;} 						// small battery
+						if(inv.GetClassName() == "DRPGBatteryLarge"){continue;} 						// large battery
 
-						if(inv.GetClassName() == "DRPGShield"){continue;}					// shield
+						if(inv.GetClassName() == "InvulnerabilityCharge2"){continue;} 					// invulnerability charge
+						if(inv.GetClassName() == "InvisibilityCharge2"){continue;} 						// invisibility charge
+						if(inv.GetClassName() == "DRPGTimeSphere"){continue;} 							// time sphere
+						if(inv.GetClassName() == "DRPGRegenSphere"){continue;} 							// regeneration sphere
+						if(inv.GetClassName() == "RadSuit2"){continue;} 								// radiation suit
+						if(inv.GetClassName() == "Infrared2"){continue;} 								// ir goggles
+						if(inv.GetClassName() == "Berserk2"){continue;} 								// berserk pack
+						if(inv.GetClassName() == "RLAllmap2"){continue;} 								// computer area map
+						if(inv.GetClassName() == "DRPGWings"){continue;} 								// wings
+						if(inv.GetClassName() == "RLTrackingMap2"){continue;} 							// tracking Map
+
+						if(inv.GetClassName() == "DRPGImmunityCrystalMelee"){continue;} 				// immunity crystal melee
+						if(inv.GetClassName() == "DRPGImmunityCrystalBullet"){continue;} 				// immunity crystal bullet
+						if(inv.GetClassName() == "DRPGImmunityCrystalFire"){continue;} 					// immunity crystal fire
+						if(inv.GetClassName() == "DRPGImmunityCrystalPlasma"){continue;} 				// immunity crystal plasma
+						if(inv.GetClassName() == "DRPGImmunityCrystalLightning"){continue;} 			// immunity crystal lightning
+						if(inv.GetClassName() == "DRPGImmunityCrystalToxic"){continue;} 				// immunity crystal toxic
+						if(inv.GetClassName() == "DRPGImmunityCrystalRadiation"){continue;} 			// immunity crystal radiation
+
+						if(inv.GetClassName() == "RLHatredSkull"){continue;} 							// hatred skull
+						if(inv.GetClassName() == "RLBloodSkull"){continue;} 							// blood skull
+						if(inv.GetClassName() == "RLFireSkull"){continue;} 								// fire skull
+						if(inv.GetClassName() == "RLSkullLimit"){continue;} 							// skull limit token
+
+						if(inv.GetClassName() == "RLPhaseDevice"){continue;} 							// phase device
+						if(inv.GetClassName() == "RLHomingPhaseDevice"){continue;} 						// homing phase device
+						if(inv.GetClassName() == "RLRecallPhaseDevice"){continue;} 						// recall phase device
+						if(inv.GetClassName() == "RLExperimentalPhaseDevice"){continue;} 				// experimental phase device
+						if(inv.GetClassName() == "RLPhaseDeviceLimit"){continue;} 						// phase device limit token
+
+						if(inv.GetClassName() == "DRLAX_SoulTrap"){continue;} 							// soul trap
+						if(inv.GetClassName() == "DRLAX_TrappedInvulnerabilitySphere"){continue;} 		// trapped invulnerability sphere
+						if(inv.GetClassName() == "DRLAX_TrappedInvisibilitySphere"){continue;} 			// trapped invisibility sphere
+						if(inv.GetClassName() == "DRLAX_TrappedSoulSphere"){continue;} 					// trapped soul sphere
+						if(inv.GetClassName() == "DRLAX_TrappedSoulSphere3"){continue;} 				// trapped soul sphere
+						if(inv.GetClassName() == "DRLAX_TrappedSoulSphere4"){continue;} 				// trapped soul sphere
+						if(inv.GetClassName() == "DRLAX_TrappedMegaSphere"){continue;} 					// trapped mega sphere
+						if(inv.GetClassName() == "DRLAX_TrappedAGHSphere"){continue;} 					// trapped agh sphere
+						if(inv.GetClassName() == "DRLAX_TrappedFirebluSphere"){continue;} 				// trapped fireblu sphere
+
+						if(inv.GetClassName() == "DRLAX_RadarDevice"){continue;} 						// radar
+
+						if(inv.GetClassName() == "DRPGShield"){continue;}								// shield
 						if(inv.GetClassName() == "DRPGShieldCharge"){continue;}
 						if(inv.GetClassName() == "DRPGShieldChargeMax"){continue;}
 						if(inv.GetClassName() == "DRPGShieldCapacity"){continue;}
 						if(inv.GetClassName() == "DRPGZShieldDamageHandler"){continue;}
 
-						if(inv.GetClassName() == "DRPGPortableStimInjectorItem"){continue;}	// portable always-use items
+						if(inv.GetClassName() == "DRPGPortableStimInjectorItem"){continue;}				// portable always-use items
 						if(inv.GetClassName() == "DRPGPortableStimDisposalItem"){continue;}
 						if(inv.GetClassName() == "DRPGPortableShieldItem"){continue;}
 						if(inv.GetClassName() == "DRPGPortableMedkitItem"){continue;}
 						if(inv.GetClassName() == "DRPGPortableFocusItem"){continue;}
 						if(inv.GetClassName() == "DRPGPortableAugItem"){continue;}
 
-						if(inv is "Clip"){continue;} 										// pistol ammo
+						if(inv is "Clip"){continue;} 													// pistol ammo
 
-						if(inv.GetClassName() == SavedPistolClass){continue;}				// saving best Pistol
-						if(inv.GetClassName() == SavedPistolClassSelected){continue;}		// saving selected Pistol token
+						if(inv.GetClassName() == SavedPistolClass){continue;}							// saving best Pistol
+						if(inv.GetClassName() == SavedPistolClassSelected){continue;}					// saving selected Pistol token
 
-						if(inv.GetClassName() == "RLStandardWeaponToken"){continue;}		// HUD weapon name & color tokens
+						if(inv.GetClassName() == "RLStandardWeaponToken"){continue;}					// HUD weapon name & color tokens
 						if(inv.GetClassName() == "RLAssembledWeaponToken"){continue;}
 						if(inv.GetClassName() == "RLExoticWeaponToken"){continue;}
 						if(inv.GetClassName() == "RLSuperiorWeaponToken"){continue;}
