@@ -2496,6 +2496,28 @@ NamedScript Console bool Rally(SkillLevelInfo *SkillLevel, void *Data)
 
 NamedScript Console bool Unsummon(SkillLevelInfo *SkillLevel, void *Data)
 {
+    // Compatibility Handling - DoomRL Arsenal Extended
+    if (CompatModeEx == COMPAT_DRLAX && Player.Overdrive)
+    {
+        // Fail if you have no familiars active
+        if (!Player.Familiars)
+        {
+            PrintError("You have no familiars");
+            ActivatorSound("menu/error", 127);
+            return false;
+        }
+
+        // Remove familiars
+        for (int j = 0; j < MAX_FAMILIARS; j++)
+            ScriptCall("DRLAX_FamiliarManager", "DRPGRemoveFamiliar", PlayerNumber(), j);
+
+        Player.Familiars = false;
+
+        FadeRange(192, 0, 0, 0.5, 192, 0, 0, 0.0, 1.0);
+        ActivatorSound("skills/unsummon", 127);
+        return true;
+    }
+
     int EPAdd;
 
     // Fail if you have no summons active
@@ -2525,10 +2547,11 @@ NamedScript Console bool Unsummon(SkillLevelInfo *SkillLevel, void *Data)
         Player.SummonTID[i] = 0;
     }
 
-
-    Log("EPAdd: %d", EPAdd);
     if (SkillLevel->CurrentLevel == 2)
+    {
         Player.EP += EPAdd;
+        Log("EPAdd: %d", EPAdd);
+    }
 
     Player.Summons = 0;
 
@@ -3381,6 +3404,7 @@ void CheckSkills()
     else
         Skills[5][5].Cost = 25;
 
+    // Compatibility Handling - DoomRL Arsenal
     // Summoning Skills - Marines Descriptions
     if (CompatMode == COMPAT_DRLA)
     {
@@ -3477,6 +3501,13 @@ void CheckSkills()
         {
             Skills[4][0].Description[7] = "BFG 10000";
         }
+    }
+
+    // Compatibility Handling - DoomRL Arsenal Extended
+    if (CompatModeEx == COMPAT_DRLAX)
+    {
+        Skills[5][3].Description[0] = "Banishes all of the friendly creatures under your control\n\n\CiOverdrive\C-:\nBanishes all of the familiars under your control";
+        Skills[5][3].Description[1] = "Banishes all of the friendly creatures under your control\nEach creature banished restores \Cn1% EP\C-\n\n\CiOverdrive\C-:\nBanishes all of the familiars under your control";
     }
 
     // Reset the Skill refund multiplier from the Blue Aura and Energy Augmentation

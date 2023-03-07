@@ -75,7 +75,8 @@ NamedScript void MonsterOrangeAuraCheck(bool);
 fixed MapTotalMonstersMod();
 fixed MapTotalBossesMod();
 
+// Compatibility/Extensions
+NamedScript DECORATE void FamiliarInit(int, int);
 NamedScript DECORATE int GetMonsterHealthMax();
 NamedScript DECORATE int GetMonsterLevel();
-
 #endif

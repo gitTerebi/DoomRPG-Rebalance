@@ -3853,6 +3853,27 @@ fixed MapTotalBossesMod()
     return MapTotalBossesMod;
 }
 
+// Compatibility Handling - DoomRL Arsenal Extended
+// Familiar Init Script
+NamedScript DECORATE void FamiliarInit(int PlayerNum, int Slot)
+{
+    // Get a new ID for the familiar
+    if (GetMonsterID(0) == 0)
+        SetMonsterID(0, NewMonsterID());
+
+    // Store TID
+    if (ActivatorTID() == 0)
+    {
+        int TID = UniqueTID();
+        Thing_ChangeTID(0, TID);
+        Players(PlayerNum).FamiliarTID[Slot] = TID;
+    }
+    else
+        Players(PlayerNum).FamiliarTID[Slot] = ActivatorTID();
+
+    Players(PlayerNum).Familiars = true;
+}
+
 NamedScript DECORATE int GetMonsterHealthMax()
 {
     // Pointer

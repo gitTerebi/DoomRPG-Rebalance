@@ -804,6 +804,10 @@ struct PlayerData_S
     bool AutosaveTimerReset;
     bool SeenEventTip[MAPEVENT_MAX];
 
+    // Familiars
+    bool Familiars;
+    int FamiliarTID[MAX_FAMILIARS];
+
     // Nomad
     str NomadBasicItems[30];
     str NomadModPacks[30];
