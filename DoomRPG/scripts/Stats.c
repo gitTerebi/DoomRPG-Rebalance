@@ -538,13 +538,28 @@ void CheckStats()
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
     Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.AgilityTotal / 100));
     Player.WeaponSpeed = Player.AgilityTotal / 2;
-    SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
-    SetAmmoCapacity("Shell", 20 + Player.CapacityTotal * 2);
-    SetAmmoCapacity("RocketAmmo", 5 + Player.CapacityTotal * 0.6);
-    SetAmmoCapacity("Cell", (75 + Player.CapacityTotal * 5) / 10 * 10);
-    Player.Stim.VialMax = Player.CapacityTotal * 2.5;
+
+    // Calculate Ammo Capacity
+    if (GetCVar("drpg_levelup_natural"))
+    {
+        SetAmmoCapacity("Clip", (int)(140 + Player.CapacityTotal * 5.0) / 10 * 10);
+        SetAmmoCapacity("Shell", (int)(27 + Player.CapacityTotal * 1.4) / 2 * 2);
+        SetAmmoCapacity("RocketAmmo", (int)(7 + Player.CapacityTotal * 0.4));
+        SetAmmoCapacity("Cell", (int)(92 + Player.CapacityTotal * 3.4) / 10 * 10);
+        Player.Stim.VialMax = (int)(8 + Player.CapacityTotal * 1.8) / 5 * 5;
+        Player.MedkitMax = (int)(16 + Player.CapacityTotal * 3.5) / 5 * 5;
+    }
+    else
+    {
+        SetAmmoCapacity("Clip", (int)(115 + Player.CapacityTotal * 7.5) / 10 * 10);
+        SetAmmoCapacity("Shell", (int)(20 + Player.CapacityTotal * 2));
+        SetAmmoCapacity("RocketAmmo", (int)(5 + Player.CapacityTotal * 0.6));
+        SetAmmoCapacity("Cell", (int)(75 + Player.CapacityTotal * 5) / 10 * 10);
+        Player.Stim.VialMax = (int)(Player.CapacityTotal * 2.5) / 5 * 5;
+        Player.MedkitMax = Player.CapacityTotal * 5;
+    }
+
     Player.SurvivalBonus = Player.AgilityTotal / 5;
-    Player.MedkitMax = Player.CapacityTotal * 5;
 
     // Compatibility Handling - DoomRL Arsenal
     if (CompatMode == COMPAT_DRLA)
@@ -556,7 +571,10 @@ void CheckStats()
 
         // Increasing Rocket Ammo capacity for Demolitionist
         if (PlayerClass(PlayerNumber()) == 4)
-            SetAmmoCapacity("RocketAmmo", 9 + Player.CapacityTotal * 1.2);
+            if (GetCVar("drpg_levelup_natural"))
+                SetAmmoCapacity("RocketAmmo", (int)(9 + Player.CapacityTotal * 1.2));
+            else
+                SetAmmoCapacity("RocketAmmo", (int)(13 + Player.CapacityTotal * 0.8));
     }
 
     // Determine current stat cap

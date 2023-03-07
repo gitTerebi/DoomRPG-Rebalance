@@ -668,6 +668,7 @@ typedef enum
 #define MAX_SKILLS              17
 #define MAX_LEVELS              16
 #define MAX_SUMMONS             10
+#define MAX_FAMILIARS           5
 #define MAX_SKILLKEYS           8
 
 typedef enum

@@ -2383,6 +2383,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                 int CostMin;
                 int CostMax;
                 int CurrentExtraction;
+                int CurrentExtractionCost;
 
                 // Chances of getting parts
                 int MaxAmount;
@@ -2671,6 +2672,9 @@ NamedScript MapSpecial void DisassemblingDevice()
                         ChanceDetails = 100.0 -  ChanceChips - ChanceBattery - ChanceTurret - ChanceBluePrint - ChanceModPacks - ChanceModule - ChanceAug;
                     }
 
+                    // Calculate Current Extraction Cost
+                    CurrentExtractionCost = (25 * MaxAmount - (25 * MaxAmount * Player.ShopDiscount / 100)) / 5 * 5;
+
                     // Text
                     SetFont("BIGFONT");
                     HudMessage("\CdDisassembling Device\C-");
@@ -2710,10 +2714,21 @@ NamedScript MapSpecial void DisassemblingDevice()
                         HudMessage("%S", ExtentExtraction[CurrentExtraction]);
                         EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 6, "White", X + 304.0, Y + 304.0, 0.05, 0.05);
 
+                        SetFont("SMALLFONT");
+                        HudMessage("Cost of Extraction:");
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 288.0, Y + 336.0, 0.05, 0.05);
+
+                        SetFont("BIGFONT");
+                        HudMessage("\Cf%d C\C-", CurrentExtractionCost);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 336.0, Y + 368.0, 0.05, 0.05);
+
+                        SetFont("SMALLFONT");
+                        HudMessage("\Ck(Discount: %d%%)", Player.ShopDiscount);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 304.0, Y + 400.0, 0.05, 0.05);
 
                         SetFont("SMALLFONT");
                         HudMessage("Possible Extraction:\n\nMaximum amount: \Cd%d pcs.\C-", MaxAmount);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 32.0, Y + 272.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + 272.0, 0.05, 0.05);
 
                         // Possible Extraction
                         // For Details
@@ -2721,56 +2736,56 @@ NamedScript MapSpecial void DisassemblingDevice()
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CdDetails\C- rate: \Cf%.2k%%\C-", ChanceDetails);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 8, "White", X + 32.0, Y + 280.0 + 24.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + 280.0 + 24.0, 0.05, 0.05);
                         }
                         // For Chips
                         if (ChanceChips > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CfChips\C- rate: \Cf%.2k%%\C-", ChanceChips);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 32.0, Y + 280.0 + 32.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + 280.0 + 32.0, 0.05, 0.05);
                         }
                         // For Recipes
                         if (ChanceBluePrint > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CnRecipes\C- rate: \Cf%.2k%%\C-", ChanceBluePrint);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 10, "White", X + 32.0, Y + 280.0 + 40.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 32.0, Y + 280.0 + 40.0, 0.05, 0.05);
                         }
                         // For Battery
                         if (ChanceBattery > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CaBattery\C- rate: \Cf%.2k%%\C-", ChanceBattery);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 11, "White", X + 32.0, Y + 280.0 + 48.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 32.0, Y + 280.0 + 48.0, 0.05, 0.05);
                         }
                         // For Turret Parts
                         if (ChanceTurret > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CgTurret Parts\C- rate: \Cf%.2k%%\C-", ChanceTurret);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 12, "White", X + 32.0, Y + 280.0 + 56.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 15, "White", X + 32.0, Y + 280.0 + 56.0, 0.05, 0.05);
                         }
                         // For ModPacks
                         if (ChanceModPacks > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CrModPacks\C- rate: \Cf%.2k%%\C-", ChanceModPacks);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 13, "White", X + 32.0, Y + 280.0 + 64.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 16, "White", X + 32.0, Y + 280.0 + 64.0, 0.05, 0.05);
                         }
                         // For Module
                         if (ChanceModule > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CqModule\C- rate: \Cf%.2k%%\C-", ChanceModule);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 14, "White", X + 32.0, Y + 280.0 + 72.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 17, "White", X + 32.0, Y + 280.0 + 72.0, 0.05, 0.05);
                         }
                         // For Augmentation
                         if (ChanceAug > 0)
                         {
                             SetFont("SMALLFONT");
                             HudMessage("\CkAugmentation\C- rate: \Cf%.2k%%\C-", ChanceAug);
-                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 15, "White", X + 32.0, Y + 280.0 + 80.0, 0.05, 0.05);
+                            EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 18, "White", X + 32.0, Y + 280.0 + 80.0, 0.05, 0.05);
                         }
                     }
                     else
@@ -2811,7 +2826,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                     {
                         if (CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()))
                         {
-                            if (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0)
+                            if (CheckInventory("DRPGCredits") >= CurrentExtractionCost && (CurrentCategory == 0 && WeaponData > 0 || CurrentCategory == 1 && ArmorData > 0 || CurrentCategory == 2 && ShieldData > 0))
                             {
                                 Player.OutpostMenu = 0;
                                 str ActorToSpawn;
@@ -2820,8 +2835,11 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 int AddMenuID = 4;
                                 fixed Y1;
 
+                                // Take Current Extraction Cost
+                                TakeInventory("DRPGCredits", CurrentExtractionCost);
+
                                 // Take Current Item
-                                TakeInventory(CurrentActor,1);
+                                TakeInventory(CurrentActor, 1);
 
                                 // Take tokens from DoomRL Arsenal
                                 if (CompatMode == COMPAT_DRLA);
@@ -3201,7 +3219,15 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 return;
                             }
                             else
+                            {
+                                SetFont("BIGFONT");
+                                if (CurrentCategory == 0 && WeaponData <= 0 || CurrentCategory == 1 && ArmorData <= 0 || CurrentCategory == 2 && ShieldData <= 0)
+                                    PrintError("Item is not selected for disassembly");
+                                else if (CheckInventory("DRPGCredits") < CurrentExtractionCost)
+                                    PrintError("Not enough credits to disassemble this item");
+
                                 ActivatorSound("menu/error", 127);
+                            }
                         }
                     }
                     Delay(1);

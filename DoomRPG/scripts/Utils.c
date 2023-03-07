@@ -267,12 +267,12 @@ NamedScript DECORATE int CheckInventoryMax()
     int MaxItems;
 
     if (GetCVar("drpg_levelup_natural"))
-        MaxItems = 9 + Player.CapacityTotal / 6;
+        MaxItems = 5 + Player.CapacityTotal / 8;
     else
-        MaxItems = 7 + Player.CapacityTotal / 3;
+        MaxItems = 4 + Player.CapacityTotal / 5;
 
-    if (MaxItems > 50)
-        MaxItems = 50;
+    if (MaxItems > 25)
+        MaxItems = 25;
 
     return MaxItems;
 }
@@ -298,9 +298,15 @@ NamedScript DECORATE int CheckCapacity()
         if (CompatMode == COMPAT_DRLA)
         {
             // Calculate capacity usage per category in DRLA, excluding weapons and modpacks
+            int AddCapacityXP;
             int DRLAItems = CheckInventory("RLArmorInInventory") + CheckInventory("RLSkullLimit") + CheckInventory("RLPhaseDeviceLimit") + (IsTechnician ? CheckInventory("RLScavengerModLimit") : CheckInventory("RLModLimit"));
             int DRLAMaxItems = DRLA_ARMOR_MAX + DRLA_SKULL_MAX + DRLA_DEVICE_MAX + DRLA_MODPACKS_MAX;
-            Player.CapacityXP += (RoundInt)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 5.0);
+            AddCapacityXP = (RoundInt)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 5.0);
+
+            if (AddCapacityXP > 0)
+                Player.CapacityXP += AddCapacityXP;
+            else if (DRLAItems + Player.InvItems >= 3 && (Timer() % 35) == 0)
+                Player.CapacityXP += (DRLAItems + Player.InvItems) / 3;
         }
         else
             Player.CapacityXP += (RoundInt)(Player.InvItems * Scale / MaxItems * 5.0);
