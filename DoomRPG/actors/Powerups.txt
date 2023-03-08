@@ -191,12 +191,12 @@ actor DRPGTimeFreezer : PowerupGiver
     
     Powerup.Type "TimeFreezer"
     Powerup.Color Black
-    Powerup.Duration -10
+    Powerup.Duration -15
 }
 
 actor DRPGTimeSphere : CustomInventory
 {
-    Tag "Time sphere (stops time for 10 seconds)"
+    Tag "Time sphere (stops time for 15 seconds)"
     
     Scale 0.75  
     
@@ -232,7 +232,7 @@ actor DRPGTimeSphere : CustomInventory
 // Regeneration Sphere
 actor DRPGRegenSphere : CustomInventory
 {
-    Tag "Regeneration sphere (regenerates health and energy rapidly for 30 seconds)"
+    Tag "Regeneration sphere (regenerates health and energy rapidly)"
     
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000

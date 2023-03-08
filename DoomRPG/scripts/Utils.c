@@ -896,7 +896,19 @@ NamedScript DECORATE void CorpsesCleanup()
 // Used by the RegenSphere to temporarily increase regen rates
 NamedScript DECORATE void RegenBoost()
 {
-    Player.RegenBoostTimer += (35 * 15) + ((Player.RegenerationTotal / 2) * 35);
+    int AddBoostTimer;
+
+    if (GetCVar("drpg_levelup_natural"))
+        AddBoostTimer = (int)(40 + Player.RegenerationTotal);
+    else
+        AddBoostTimer = (int)(40 + Player.RegenerationTotal * 2);
+
+    if (AddBoostTimer > 180) AddBoostTimer = 180;
+
+    Player.RegenBoostTimer += AddBoostTimer * 35;
+
+    if (Player.RegenBoostTimer > 35 * 60 * GetCVar("drpg_skill_auratimercap"))
+        Player.RegenBoostTimer = 35 * 60 * GetCVar("drpg_skill_auratimercap");
 }
 
 // Set Skill Level during the game

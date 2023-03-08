@@ -151,8 +151,8 @@ NamedScript void BuildItemData()
     // Powerups
     ITEMDATA_CATEGORY(4, "\CqPowerups", CF_NONE);
     ITEMDATA_DEF("DRPGInvulnerabilityCharge",    "Invulnerability Charge",              5000, 2, 5, "CRG2A0",  6, 22);
-    ITEMDATA_DEF("DRPGInvisibilityCharge",       "Invisibility Charge",                 2500, 1, 1, "CRG1A0",  6, 22);
-    ITEMDATA_DEF("DRPGTimeSphere",               "Time Sphere",                         1000, 4, 1, "TIMEA0", 16, 45);
+    ITEMDATA_DEF("DRPGInvisibilityCharge",       "Invisibility Charge",                 2000, 1, 1, "CRG1A0",  6, 22);
+    ITEMDATA_DEF("DRPGTimeSphere",               "Time Sphere",                         2500, 4, 1, "TIMEA0", 16, 45);
     ITEMDATA_DEF("DRPGRegenSphere",              "Regeneration Sphere",                 1000, 2, 1, "REGNA0", 12, 38);
     ITEMDATA_DEF("DRPGRadSuit",                  "Radiation Suit",                       250, 0, 0, "SUITA0", 11, 51);
     ITEMDATA_DEF("DRPGInfrared",                 "IR Goggles",                           500, 0, 0, "PVISA0", 11,  9);
@@ -881,16 +881,16 @@ NamedScript void BuildItemData()
         // Powerups
         ITEMDATA_CATEGORY(4, "\CqPowerups", CF_NONE);
 
-        ITEMDATA_DEF("InvulnerabilityCharge2",       "Invulnerability Charge",              5000,  2,  7, "CRG2A0",  6, 22);
-        ITEMDATA_DEF("InvisibilityCharge2",          "Invisibility Charge",                 2500,  1,  2, "CRG1A0",  6, 22);
-        ITEMDATA_DEF("DRPGTimeSphere",               "Time Sphere",                         1000,  4,  1, "TIMEA0", 16, 45);
+        ITEMDATA_DEF("InvulnerabilityCharge2",       "Invulnerability Charge",              5000,  3,  7, "CRG2A0",  6, 22);
+        ITEMDATA_DEF("InvisibilityCharge2",          "Invisibility Charge",                 2000,  1,  2, "CRG1A0",  6, 22);
+        ITEMDATA_DEF("DRPGTimeSphere",               "Time Sphere",                         2500,  4,  1, "TIMEA0", 16, 45);
         ITEMDATA_DEF("DRPGRegenSphere",              "Regeneration Sphere",                 1000,  2,  1, "REGNA0", 12, 38);
         ITEMDATA_DEF("RadSuit2",                     "Radiation Suit",                       250,  0,  0, "SUITA0", 11, 51);
         ITEMDATA_DEF("Infrared2",                    "IR Goggles",                           500,  0,  0, "PVISA0", 11,  9);
         ITEMDATA_DEF("Berserk2",                     "Berserk Pack",                        5000,  6, -1, "PSTRA0", 12, 15);
         ITEMDATA_DEF("RLAllmap2",                    "Computer Area Map",                  10000,  4,  3, "PMAPA0", 13, 23);
-        ITEMDATA_DEF("DRPGWings",                    "Wings",                               5000,  2,  5, "WINGA0", 13, 36);
-        ITEMDATA_DEF("Megasphere2",                  "Megasphere",                          5000,  4,  7, "MEGAA0", 12, 32);
+        ITEMDATA_DEF("DRPGWings",                    "Wings",                               5000,  5,  6, "WINGA0", 13, 36);
+        ITEMDATA_DEF("Megasphere2",                  "Megasphere",                          3000,  4,  4, "MEGAA0", 12, 32);
         ITEMDATA_DEF("DRPGImmunityCrystalMelee",     "Melee Immunity Crystal",             50000, -1,  8, "CRYSA0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalBullet",    "\CcBullet\C- Immunity Crystal",      50000, -1,  8, "CRYSB0", 16, 48);
         ITEMDATA_DEF("DRPGImmunityCrystalFire",      "\CaFire\C- Immunity Crystal",        50000, -1,  8, "CRYSC0", 16, 48);

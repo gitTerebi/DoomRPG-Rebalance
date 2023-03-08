@@ -703,7 +703,17 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "Brick",              30.1,   136.0,  0.05);
         HudMessage("EP Timer: %.2k Sec", (fixed)(Player.EPTime / 35.0K));
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",          30.1,   144.0,  0.05);
-        HudMessage("Regen Sphere: %d Sec", (int)(15 + (Player.RegenerationTotal / 2)));
+        if (GetCVar("drpg_levelup_natural"))
+        {
+            HudMessage("Regen Sphere: %d Sec", (int)(40 + Player.RegenerationTotal));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
+        }
+        else
+        {
+            HudMessage("Regen Sphere: %d Sec", (int)(40 + Player.RegenerationTotal * 2));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
+        }
+        HudMessage("Regen Sphere: %d Sec", (int)(40 + Player.RegenerationTotal * 2));
         EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
         HudMessage("Toxicity Regen: %d Sec", 30 - Player.ToxicityRegenBonus);
         EndHudMessage(HUDMSG_PLAIN, 0, "Green",              30.1,   160.0,  0.05);
