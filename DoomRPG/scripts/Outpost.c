@@ -3791,7 +3791,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 6) / 250 * 250;
 
                             // Calculate Amount Details
-                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 20, 40)) / 5 * 5;
+                            CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 15, 35)) / 5 * 5;
                             CurrentAmountDetails2 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 20)) / 5 * 5;
                             CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 10)) / 5 * 5;
 
@@ -3799,7 +3799,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Ballistic Shield
                             if (ItemData[3][CurrentItem].Actor == "RLBallisticShieldArmorPickup")
                             {
-                                CurrentIndexBasic = 11;
+                                CurrentIndexBasic = 4;
                                 CurrentTypeDetails6 = 29;
                                 CurrentAmountDetails6 = 1;
                             }
@@ -3807,7 +3807,9 @@ NamedScript MapSpecial void DisassemblingDevice()
                             if (ItemData[3][CurrentItem].Actor == "RLBallisticVestArmorPickup")
                             {
                                 CurrentIndexBasic = 1;
+                                CurrentAmountDetails1 = 10;
                                 CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 = 0;
                             }
                             // For Bulletproof Vest
                             if (ItemData[3][CurrentItem].Actor == "RLBulletproofVestArmorPickup")
@@ -3819,13 +3821,17 @@ NamedScript MapSpecial void DisassemblingDevice()
                             if (ItemData[3][CurrentItem].Actor == "RLDuelistArmorPickup")
                             {
                                 CurrentIndexBasic = 1;
+                                CurrentAmountDetails1 = 15;
                                 CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 = 0;
                             }
                             // For Energy-Shielded Vest
                             if (ItemData[3][CurrentItem].Actor == "RLEnergyShieldedVestArmorPickup")
                             {
                                 CurrentIndexBasic = 2;
                                 CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 10;
+                                CurrentAmountDetails2 = 10;
                                 CurrentAmountDetails6 = 1;
                             }
                             // For Energy Shield
@@ -3833,12 +3839,14 @@ NamedScript MapSpecial void DisassemblingDevice()
                             {
                                 CurrentIndexBasic = 2;
                                 CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 15;
+                                CurrentAmountDetails2 = 20;
                                 CurrentAmountDetails6 = 1;
                             }
                             // For Gothic Armor
                             if (ItemData[3][CurrentItem].Actor == "RLGothicArmorPickup")
                             {
-                                CurrentIndexBasic = 1;
+                                CurrentIndexBasic = 4;
                                 CurrentAmountDetails2 = 0;
                                 CurrentAmountDetails3 *= 2;
                             }
@@ -3847,19 +3855,26 @@ NamedScript MapSpecial void DisassemblingDevice()
                             {
                                 CurrentIndexBasic = 1;
                                 CurrentTypeDetails2 = 0;
+                                CurrentAmountDetails1 = 10;
+                                CurrentAmountDetails2 = 15;
                             }
                             // For Phaseshift Armor
                             if (ItemData[3][CurrentItem].Actor == "RLPhaseshiftArmorPickup")
                             {
-                                CurrentIndexBasic = 1;
+                                CurrentIndexBasic = 4;
                                 CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 25;
+                                CurrentAmountDetails2 = 15;
+                                CurrentAmountDetails3 = 15;
                                 CurrentAmountDetails6 = 1;
                             }
                             // For Plasma Shield
                             if (ItemData[3][CurrentItem].Actor == "RLPlasmaShieldArmorPickup")
                             {
-                                CurrentIndexBasic = 12;
+                                CurrentIndexBasic = 5;
                                 CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 20;
+                                CurrentAmountDetails2 = 25;
                                 CurrentAmountDetails6 = 2;
                             }
                             // For Onyx Armor
@@ -3872,9 +3887,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Overcharge System
                             if (ItemData[3][CurrentItem].Actor == "RLOverchargeSystemArmorPickup")
                             {
-                                CurrentAmountDetails1 *= 2;
-                                CurrentAmountDetails2 *= 2;
-                                CurrentAmountDetails3 *= 2;
+                                CurrentAmountDetails1 = 10;
                                 CurrentTypeDetails6 = 29;
                                 CurrentAmountDetails6 = 2;
                             }
@@ -3883,14 +3896,19 @@ NamedScript MapSpecial void DisassemblingDevice()
                             {
                                 CurrentIndexBasic = 1;
                                 CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 15;
+                                CurrentAmountDetails2 = 5;
+                                CurrentAmountDetails3 = 5;
                                 CurrentAmountDetails6 = 1;
                             }
                             // For Survival MediArmor
                             if (ItemData[3][CurrentItem].Actor == "RLSurvivalMediArmorPickup")
                             {
-                                CurrentIndexBasic = 1;
+                                CurrentIndexBasic = 3;
                                 CurrentTypeDetails2 = 0;
                                 CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 10;
+                                CurrentAmountDetails2 = 20;
                                 CurrentAmountDetails6 = 1;
                             }
                             // For Cyberwarrior Armor
@@ -3917,57 +3935,160 @@ NamedScript MapSpecial void DisassemblingDevice()
                             CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 20)) / 5 * 5;
 
                             // Set Individual Required
-                            // For Berserk Powersuit
-                            if (ItemData[3][CurrentItem].Actor == "RLBerserkPowersuitArmorPickup")
+                            // For Geo's Golden Gauntlet
+                            if (ItemData[3][CurrentItem].Actor == "RLGeosGoldenGauntletArmorPickup")
                             {
-                                CurrentIndexBasic = 43;
+                                CurrentRank = 4;
+                                CurrentCost = (CurrentCost / 6) / 250 * 250;
+                                CurrentTypeDetails2 = 3;
                                 CurrentTypeDetails5 =  10;
+                                CurrentAmountDetails1 = 10;
+                                CurrentAmountDetails3 = 0;
+                                CurrentAmountDetails4 = 0;
                                 CurrentAmountDetails5 = 1;
+                            }
+                            // For Necro Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLNecroArmorPickup")
+                            {
+                                CurrentCost = (CurrentCost / 4) / 250 * 250;
+                                CurrentIndexBasic = 4;
+                                CurrentTypeDetails2 = 12;
+                                CurrentAmountDetails1 = 15;
+                                CurrentAmountDetails2 = 30;
+                                CurrentAmountDetails4 = 0;
+                            }
+                            // For Medical Power Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLMedicalPowerArmorPickup")
+                            {
+                                CurrentIndexBasic = 29;
+                                CurrentTypeDetails2 = 0;
+                                CurrentAmountDetails2 *= 2;
+                            }
+                            // Tactical Assembler Suit
+                            if (ItemData[3][CurrentItem].Actor == "RLTacticalAssemblerSuitArmorPickup")
+                            {
+                                CurrentCost = (CurrentCost / 5) / 250 * 250;
+                                CurrentIndexBasic = 6;
+                                CurrentTypeDetails2 = 0;
+                                CurrentAmountDetails1 = 15;
+                                CurrentAmountDetails2 = 20;
+                                CurrentAmountDetails3 = 15;
+                                CurrentAmountDetails4 = 0;
+                            }
+                            // For Frontline Engineer Suit
+                            if (ItemData[3][CurrentItem].Actor == "RLFrontlineEngineerSuitArmorPickup")
+                            {
+                                CurrentCost = (CurrentCost / 5) / 250 * 250;
+                                CurrentIndexBasic = 5;
+                                CurrentAmountDetails1 = 15;
+                                CurrentAmountDetails2 = 20;
+                                CurrentAmountDetails3 = 15;
+                                CurrentAmountDetails4 = 0;
+                            }
+                            // For Energy Discharge Harness
+                            if (ItemData[3][CurrentItem].Actor == "RLEnergyDischargeHarnessArmorPickup")
+                            {
+                                CurrentIndexBasic = 31;
+                                CurrentTypeDetails5 =  12;
                                 CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails5 = 1;
                                 CurrentAmountDetails6 = 1;
                             }
                             // For Phoenix-B Device Suit
                             if (ItemData[3][CurrentItem].Actor == "RLBlazingPhoenixDeviceSuitArmorPickup")
                             {
-                                CurrentIndexBasic = 27;
+                                CurrentCost = (CurrentCost / 6) / 250 * 250;
+                                CurrentIndexBasic = 19;
                                 CurrentTypeDetails5 =  13;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails1 = 25;
+                                CurrentAmountDetails2 = 15;
+                                CurrentAmountDetails3 = 10;
+                                CurrentAmountDetails4 = 0;
                                 CurrentAmountDetails5 = 1;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Roysten's Command Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLRoystensCommandArmorPickup")
+                            {
+                                CurrentIndexBasic = 33;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For R11-n Psychic Amplifier Suit
+                            if (ItemData[3][CurrentItem].Actor == "RLRyanCordellPsychicAmplifierSuitArmorPickup")
+                            {
+                                CurrentIndexBasic = 18;
                                 CurrentTypeDetails6 = 30;
                                 CurrentAmountDetails6 = 1;
+                            }
+                            // For Berserk Powersuit
+                            if (ItemData[3][CurrentItem].Actor == "RLBerserkPowersuitArmorPickup")
+                            {
+                                CurrentIndexBasic = 35;
+                                CurrentTypeDetails5 =  10;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails5 = 1;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For WW-41 Peacekeeper Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLWildWeaselPeacekeeperArmorPickup")
+                            {
+                                CurrentCost = (CurrentCost / 5) / 250 * 250;
+                                CurrentIndexBasic = 33;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails1 = 30;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                                CurrentAmountDetails4 = 0;
+                                CurrentAmountDetails5 = 1;
                             }
                             // For Cybernetic Armor
                             if (ItemData[3][CurrentItem].Actor == "RLCyberneticArmorPickup")
                             {
-                                CurrentIndexBasic = 14;
-                                CurrentAmountDetails2 *= 2;
+                                CurrentIndexBasic = 26;
                                 CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails2 *= 2;
+                                CurrentAmountDetails5 = 1;
                                 CurrentAmountDetails6 = 2;
                             }
-                            // For Energy Discharge Harness
-                            if (ItemData[3][CurrentItem].Actor == "RLEnergyDischargeHarnessArmorPickup")
+                            // For Nano Ablative Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLNanoAblativeArmorPickup")
                             {
-                                CurrentIndexBasic = 41;
-                                CurrentTypeDetails5 =  12;
-                                CurrentAmountDetails5 = 1;
+                                CurrentCost = (CurrentCost / 4) / 250 * 250;
+                                CurrentIndexBasic = 15;
+                                CurrentTypeDetails2 = 3;
+                                CurrentAmountDetails1 = 20;
+                                CurrentAmountDetails2 = 30;
+                                CurrentAmountDetails3 = 10;
+                                CurrentAmountDetails4 = 0;
+                            }
+                            // For Shielded Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLShieldedArmorPickup")
+                            {
+                                CurrentIndexBasic = 19;
                                 CurrentTypeDetails6 = 30;
                                 CurrentAmountDetails6 = 1;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
                             }
-                            // For Frontline Engineer Suit
-                            if (ItemData[3][CurrentItem].Actor == "RLFrontlineEngineerSuitArmorPickup")
+                            // Terminus Battlesuit
+                            if (ItemData[3][CurrentItem].Actor == "RLTerminusEst13BattlesuitArmorPickup")
                             {
-                                CurrentCost = (CurrentCost / 2) / 250 * 250;
-                                CurrentIndexBasic = 12;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 *= 2;
+                                CurrentIndexBasic = 18;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
                             }
-                            // For Geo's Golden Gauntlet
-                            if (ItemData[3][CurrentItem].Actor == "RLGeosGoldenGauntletArmorPickup")
+                            // For K-8 Matterstorm Harness
+                            if (ItemData[3][CurrentItem].Actor == "RLKateMatterstormHarnessArmorPickup")
                             {
-                                CurrentCost = (CurrentCost / 2) / 250 * 250;
-                                CurrentTypeDetails2 = 3;
-                                CurrentTypeDetails5 =  10;
+                                CurrentIndexBasic = 19;
+                                CurrentTypeDetails2 =  3;
+                                CurrentTypeDetails5 =  13;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Jetpack
@@ -3977,156 +4098,79 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 2;
                             }
-                            // For K-8 Matterstorm Harness
-                            if (ItemData[3][CurrentItem].Actor == "RLKateMatterstormHarnessArmorPickup")
+                            // For Solo Operative Suit
+                            if (ItemData[3][CurrentItem].Actor == "RLSoloOperativeSuitArmorPickup")
                             {
-                                CurrentIndexBasic = 27;
-                                CurrentTypeDetails2 =  3;
-                                CurrentTypeDetails5 =  13;
+                                CurrentIndexBasic = 18;
+                                CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
-                            }
-                            // For K1-L3 Teslabolt Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLKyleTeslaboltArmorPickup")
-                            {
-                                CurrentIndexBasic = 27;
-                                CurrentTypeDetails5 =  14;
-                                CurrentAmountDetails5 = 1;
-                                CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 2;
-                            }
-                            // For Lava Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLLavaArmorPickup")
-                            {
-                                CurrentIndexBasic = 28;
-                                CurrentTypeDetails2 = 3;
-                                CurrentTypeDetails5 =  12;
-                                CurrentAmountDetails5 = 1;
-                            }
-                            // For Malek's Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLMaleksArmorPickup")
-                            {
-                                CurrentIndexBasic = 28;
-                                CurrentTypeDetails5 =  12;
-                                CurrentAmountDetails5 = 1;
-                                CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 2;
-                            }
-                            // For Medical Power Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLMedicalPowerArmorPickup")
-                            {
-                                CurrentIndexBasic = 36;
-                                CurrentTypeDetails2 = 0;
-                                CurrentAmountDetails2 *= 2;
-                            }
-                            // For Nano Ablative Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLNanoAblativeArmorPickup")
-                            {
-                                CurrentCost = (CurrentCost / 2) / 250 * 250;
-                                CurrentIndexBasic = 20;
-                                CurrentTypeDetails2 = 3;
-                            }
-                            // For Necro Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLNecroArmorPickup")
-                            {
-                                CurrentCost = (CurrentCost / 2) / 250 * 250;
-                                CurrentIndexBasic = 11;
-                                CurrentTypeDetails2 = 12;
-                            }
-                            // For Nuclear Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLNuclearPowerArmorPickup")
-                            {
-                                CurrentIndexBasic = 28;
-                                CurrentTypeDetails5 =  16;
-                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails6 = 1;
                             }
                             // For Prototype Assault Shield
                             if (ItemData[3][CurrentItem].Actor == "RLPrototypeAssaultShieldArmorPickup")
                             {
-                                CurrentIndexBasic = 34;
+                                CurrentIndexBasic = 41;
                                 CurrentTypeDetails6 = 30;
-                                CurrentAmountDetails6 = 2;
-                            }
-                            // For R11-n Psychic Amplifier Suit
-                            if (ItemData[3][CurrentItem].Actor == "RLRyanCordellPsychicAmplifierSuitArmorPickup")
-                            {
-                                CurrentIndexBasic = 26;
-                                CurrentTypeDetails6 = 30;
-                                CurrentAmountDetails6 = 1;
-                            }
-                            // For Roysten's Command Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLRoystensCommandArmorPickup")
-                            {
-                                CurrentIndexBasic = 32;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 *= 2;
-                                CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
-                            }
-                            // For Shielded Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLShieldedArmorPickup")
-                            {
-                                CurrentIndexBasic = 29;
-                                CurrentTypeDetails6 = 30;
-                                CurrentAmountDetails6 = 1;
-                                CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
-                            }
-                            // For Solo Operative Suit
-                            if (ItemData[3][CurrentItem].Actor == "RLSoloOperativeSuitArmorPickup")
-                            {
-                                CurrentIndexBasic = 26;
-                                CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
-                                CurrentTypeDetails6 = 30;
-                                CurrentAmountDetails6 = 1;
-                            }
-                            // Tactical Assembler Suit
-                            if (ItemData[3][CurrentItem].Actor == "RLTacticalAssemblerSuitArmorPickup")
-                            {
-                                CurrentCost = (CurrentCost / 2) / 250 * 250;
-                                CurrentIndexBasic = 13;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 *= 2;
-                            }
-                            // Terminus Battlesuit
-                            if (ItemData[3][CurrentItem].Actor == "RLTerminusEst13BattlesuitArmorPickup")
-                            {
-                                CurrentIndexBasic = 26;
-                                CurrentTypeDetails2 =  8;
-                                CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
-                            }
-                            // For Torgue Blastplate Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLTorgueBlastplateArmorPickup")
-                            {
-                                CurrentIndexBasic = 28;
-                                CurrentTypeDetails2 =  8;
-                                CurrentTypeDetails5 =  12;
-                                CurrentAmountDetails5 = 1;
-                            }
-                            // For WW-41 Peacekeeper Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLWildWeaselPeacekeeperArmorPickup")
-                            {
-                                CurrentIndexBasic = 32;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 *= 2;
-                            }
-                            // For Xaser Inc. Powerarmor
-                            if (ItemData[3][CurrentItem].Actor == "RLXaserPowerarmorPickup")
-                            {
-                                CurrentIndexBasic = 27;
-                                CurrentTypeDetails5 =  13;
-                                CurrentAmountDetails5 = 1;
-                                CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 2;
                             }
                             // For 0D-1a Assaultforce Armor
                             if (ItemData[3][CurrentItem].Actor == "RLZeroDiamondAssaultforceArmorPickup")
                             {
-                                CurrentIndexBasic = 26;
+                                CurrentIndexBasic = 18;
                                 CurrentTypeDetails2 =  6;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
+                            }
+                            // For Malek's Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLMaleksArmorPickup")
+                            {
+                                CurrentIndexBasic = 20;
+                                CurrentTypeDetails5 =  12;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails5 = 1;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For K1-L3 Teslabolt Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLKyleTeslaboltArmorPickup")
+                            {
+                                CurrentIndexBasic = 19;
+                                CurrentTypeDetails5 =  14;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails5 = 1;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Torgue Blastplate Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLTorgueBlastplateArmorPickup")
+                            {
+                                CurrentIndexBasic = 20;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Lava Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLLavaArmorPickup")
+                            {
+                                CurrentIndexBasic = 20;
+                                CurrentTypeDetails2 = 3;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nuclear Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLNuclearPowerArmorPickup")
+                            {
+                                CurrentIndexBasic = 20;
+                                CurrentTypeDetails5 =  16;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Xaser Inc. Powerarmor
+                            if (ItemData[3][CurrentItem].Actor == "RLXaserPowerarmorPickup")
+                            {
+                                CurrentIndexBasic = 19;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
                             }
                         }
                     }
@@ -4223,8 +4267,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                             if (ItemData[9][CurrentItem].Actor == "RLFrontlineEngineerBootsPickup")
                             {
                                 CurrentIndexBasic = 2;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 *= 2;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
                             }
                             // For Lava Boots
                             if (ItemData[9][CurrentItem].Actor == "RLLavaBootsPickup")
@@ -4271,7 +4315,9 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Tactical Assembler Boots
                             if (ItemData[9][CurrentItem].Actor == "RLTacticalAssemblerBootsPickup")
                             {
-                                CurrentIndexBasic = 4;
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
                             }
                             // For Torgue Blastboots
                             if (ItemData[9][CurrentItem].Actor == "RLTorgueBlastBootsPickup")

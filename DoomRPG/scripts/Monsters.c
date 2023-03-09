@@ -2786,9 +2786,9 @@ OptionalArgs(1) NamedScript void CalculateMonsterCredits(MonsterStatsPtr Stats, 
     if(StolenCredits)
         Amount = Stats->Capacity + StolenCredits;
 
-    if (GetCVar("drpg_ws_use_wads") < 6)
+    if (GetCVar("drpg_ws_use_wads") < 4)
     {
-        fixed Modifier = 6.0 / GetCVar("drpg_ws_use_wads") * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
+        fixed Modifier = 4.0 / GetCVar("drpg_ws_use_wads") * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
 
         if (Modifier < 1.0)
             Modifier = 1.0;
