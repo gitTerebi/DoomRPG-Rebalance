@@ -116,8 +116,15 @@ struct CharSaveInfo_S
 
     // ----- COMPATIBILITY EXTENSIONS -----
 
+    // Compatibility Handling - DoomRL Arsenal
     // DRLA Tokens
     bool DRLATokens[DRLA_MAX_TOKENS];
+
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary armor
+    int ArmorChances[5];
+
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
+    int WeaponsChances[5];
 
     // ------------------------------------
 
@@ -156,6 +163,8 @@ struct ItemInfo_S
     unsigned int CompatMods;
     int Category;
     int Index;
+
+    bool Dropped;
 };
 
 // Crates
@@ -697,6 +706,18 @@ struct PlayerData_S
     fixed WeaponChance;
     fixed ShieldChance;
     fixed AugChance;
+
+    // Compatibility Handling - DoomRL Arsenal
+    fixed ArmorExoticChance;
+    fixed ArmorSuperiorChance;
+    fixed ArmorUniqueChance;
+    fixed ArmorDemonicChance;
+    fixed ArmorLegendaryChance;
+    fixed WeaponExoticChance;
+    fixed WeaponSuperiorChance;
+    fixed WeaponUniqueChance;
+    fixed WeaponDemonicChance;
+    fixed WeaponLegendaryChance;
 
     // Menu Data
     bool MenuBlock;
