@@ -3957,13 +3957,6 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentAmountDetails2 = 30;
                                 CurrentAmountDetails4 = 0;
                             }
-                            // For Medical Power Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLMedicalPowerArmorPickup")
-                            {
-                                CurrentIndexBasic = 29;
-                                CurrentTypeDetails2 = 0;
-                                CurrentAmountDetails2 *= 2;
-                            }
                             // Tactical Assembler Suit
                             if (ItemData[3][CurrentItem].Actor == "RLTacticalAssemblerSuitArmorPickup")
                             {
@@ -3985,6 +3978,18 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentAmountDetails3 = 15;
                                 CurrentAmountDetails4 = 0;
                             }
+                            // For Phoenix-B Device Suit
+                            if (ItemData[3][CurrentItem].Actor == "RLBlazingPhoenixDeviceSuitArmorPickup")
+                            {
+                                CurrentCost = (CurrentCost / 5) / 250 * 250;
+                                CurrentIndexBasic = 19;
+                                CurrentTypeDetails6 = 30;
+                                CurrentAmountDetails1 = 25;
+                                CurrentAmountDetails2 = 15;
+                                CurrentAmountDetails3 = 10;
+                                CurrentAmountDetails4 = 0;
+                                CurrentAmountDetails6 = 1;
+                            }
                             // For Energy Discharge Harness
                             if (ItemData[3][CurrentItem].Actor == "RLEnergyDischargeHarnessArmorPickup")
                             {
@@ -3994,19 +3999,12 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentAmountDetails5 = 1;
                                 CurrentAmountDetails6 = 1;
                             }
-                            // For Phoenix-B Device Suit
-                            if (ItemData[3][CurrentItem].Actor == "RLBlazingPhoenixDeviceSuitArmorPickup")
+                            // For Medical Power Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLMedicalPowerArmorPickup")
                             {
-                                CurrentCost = (CurrentCost / 6) / 250 * 250;
-                                CurrentIndexBasic = 19;
-                                CurrentTypeDetails5 =  13;
-                                CurrentTypeDetails6 = 30;
-                                CurrentAmountDetails1 = 25;
-                                CurrentAmountDetails2 = 15;
-                                CurrentAmountDetails3 = 10;
-                                CurrentAmountDetails4 = 0;
-                                CurrentAmountDetails5 = 1;
-                                CurrentAmountDetails6 = 1;
+                                CurrentIndexBasic = 29;
+                                CurrentTypeDetails2 = 0;
+                                CurrentAmountDetails2 *= 2;
                             }
                             // For Roysten's Command Armor
                             if (ItemData[3][CurrentItem].Actor == "RLRoystensCommandArmorPickup")
