@@ -627,12 +627,13 @@ NamedScript MenuEntry void LoadCharacter()
                 SetInventory(DRLATokens[i], 1);
 
     // Compatibility Handling - DoomRL Arsenal
-    // Chances for Exotic/Superior/Unique/Demonic/Legendary armor
-    Player.ArmorExoticChance = Info.ArmorChances[0];
-    Player.ArmorSuperiorChance = Info.ArmorChances[1];
-    Player.ArmorUniqueChance = Info.ArmorChances[2];
-    Player.ArmorDemonicChance = Info.ArmorChances[3];
-    Player.ArmorLegendaryChance = Info.ArmorChances[4];
+    // Chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    Player.ArmorAssembledChance = Info.ArmorChances[0];
+    Player.ArmorExoticChance = Info.ArmorChances[1];
+    Player.ArmorSuperiorChance = Info.ArmorChances[2];
+    Player.ArmorUniqueChance = Info.ArmorChances[3];
+    Player.ArmorDemonicChance = Info.ArmorChances[4];
+    Player.ArmorLegendaryChance = Info.ArmorChances[5];
 
     // Compatibility Handling - DoomRL Arsenal
     // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
@@ -879,12 +880,13 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
                 Info->DRLATokens[i] = true;
 
     // Compatibility Handling - DoomRL Arsenal
-    // Chances for Exotic/Superior/Unique/Demonic/Legendary armor
-    Info->ArmorChances[0] = Player.ArmorExoticChance;
-    Info->ArmorChances[1] = Player.ArmorSuperiorChance;
-    Info->ArmorChances[2] = Player.ArmorUniqueChance;
-    Info->ArmorChances[3] = Player.ArmorDemonicChance;
-    Info->ArmorChances[4] = Player.ArmorLegendaryChance;
+    // Chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    Info->ArmorChances[0] = Player.ArmorAssembledChance;
+    Info->ArmorChances[1] = Player.ArmorExoticChance;
+    Info->ArmorChances[2] = Player.ArmorSuperiorChance;
+    Info->ArmorChances[3] = Player.ArmorUniqueChance;
+    Info->ArmorChances[4] = Player.ArmorDemonicChance;
+    Info->ArmorChances[5] = Player.ArmorLegendaryChance;
 
     // Compatibility Handling - DoomRL Arsenal
     // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
@@ -1050,8 +1052,8 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     }
 
     // Compatibility Handling - DoomRL Arsenal
-    // Chances for Exotic/Superior/Unique/Demonic/Legendary armor
-    for (int i = 0; i < 5; i++)
+    // Chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    for (int i = 0; i < 6; i++)
     {
         Info->ArmorChances[i] = HexToInteger(String + StringPos, 2);
         StringPos += 2;
@@ -1302,8 +1304,8 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
     }
 
     // Compatibility Handling - DoomRL Arsenal
-    // Chances for Exotic/Superior/Unique/Demonic/Legendary armor
-    for (int i = 0; i < 5; i++)
+    // Chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    for (int i = 0; i < 6; i++)
     {
         SaveString[pos + 1] = ToHexChar(Info->ArmorChances[i]);
         SaveString[pos + 0] = ToHexChar(Info->ArmorChances[i] >> 4);

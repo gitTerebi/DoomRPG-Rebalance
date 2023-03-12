@@ -417,32 +417,32 @@ NamedScript void BuildItemData()
         ITEMDATA_CATEGORY(0, "\CgWeapons", CF_NONE);
         // Common Weapons
         // ITEMDATA_DEF("RLCombatKnife",                           "CombatKnife",                                               20,  0, "CKNIX0", 31, 23);
-        ITEMDATA_DEF("RLChainsaw",                              "Chainsaw",                                                300,  0, 0, "NSAWX0", 31, 23);
-        ITEMDATA_DEF("RLPistol",                                "Pistol",                                                  125,  0, 0, "PISGX0", 11, 13);
-        ITEMDATA_DEF("RLShotgun",                               "Shotgun",                                                 250,  0, 0, "PKSGX0", 31, 17);
-        ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun",                                          350,  3, 0, "CSHOX0", 25, 17);
-        ITEMDATA_DEF("RLDoubleShotgun",                         "Double Shotgun",                                          750,  5, 1, "DBLSX0", 14,  8);
-        ITEMDATA_DEF("RLChaingun",                              "Chaingun",                                                750,  0, 0, "PKCGX0", 25, 18);
-        ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle",                                            500,  1, 0, "UACRX0", 23, 15);
-        ITEMDATA_DEF("RLRocketLauncher",                        "Rocket Launcher",                                        1500,  2, 1, "RLAUX0", 31, 18);
-        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle",                                           2500,  4, 2, "PLSRX0", 27, 19);
-        ITEMDATA_DEF("RLBFG9000",                               "BFG9000",                                                5000,  5, 3, "BFGGX0", 31, 38);
+        ITEMDATA_DEF("RLChainsaw",                              "Chainsaw \Cc[Common]\C-",                                 300,  0, 0, "NSAWX0", 31, 23);
+        ITEMDATA_DEF("RLPistol",                                "Pistol \Cc[Common]\C-",                                   125,  0, 0, "PISGX0", 11, 13);
+        ITEMDATA_DEF("RLShotgun",                               "Shotgun \Cc[Common]\C-",                                  250,  0, 0, "PKSGX0", 31, 17);
+        ITEMDATA_DEF("RLCombatShotgun",                         "Combat Shotgun \Cc[Common]\C-",                           350,  3, 0, "CSHOX0", 25, 17);
+        ITEMDATA_DEF("RLDoubleShotgun",                         "Double Shotgun \Cc[Common]\C-",                           750,  5, 1, "DBLSX0", 14,  8);
+        ITEMDATA_DEF("RLChaingun",                              "Chaingun \Cc[Common]\C-",                                 750,  0, 0, "PKCGX0", 25, 18);
+        ITEMDATA_DEF("RLBattleRifle",                           "Battle Rifle \Cc[Common]\C-",                             500,  1, 0, "UACRX0", 23, 15);
+        ITEMDATA_DEF("RLRocketLauncher",                        "Rocket Launcher \Cc[Common]\C-",                         1500,  2, 1, "RLAUX0", 31, 18);
+        ITEMDATA_DEF("RLPlasmaRifle",                           "Plasma Rifle \Cc[Common]\C-",                            2500,  4, 2, "PLSRX0", 27, 19);
+        ITEMDATA_DEF("RLBFG9000",                               "BFG9000 \Cc[Common]\C-",                                 5000,  5, 3, "BFGGX0", 31, 38);
 
         // Exotic Weapons
         ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                 2000,  2, 1, "BLASX0", 12, 14);
         ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 2, "OLOKX0", 10, 13);
         ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 3, "DEAPX0", 11, 14);
         ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                        10000,  5, 4, "MRKPX0",  9, 12);
-        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          62000, 10, 7, "NSSGX0", 27,  9);
-        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        24000,  5, 3, "ASHOX0", 31, 27);
         ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     6000,  4, 2, "RUZIX0", 20, 26);
-        ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                64000, 10, 7, "ZGGGX0", 30, 20);
+        ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        24000,  5, 3, "ASHOX0", 31, 27);
+        ITEMDATA_DEF("RLPlasmaShotgun",                         "Plasma Shotgun \Ct[Exotic]\C-",                         30000,  6, 4, "PSHOX0", 22, 14);
+        ITEMDATA_DEF("RLCombatTranslocator",                    "Combat Translocator \Ct[Exotic]\C-",                    20000,  6, 4, "CTLOX0", 18, 11);
         ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                       32000,  7, 5, "CLAUX0", 45, 24);
         ITEMDATA_DEF("RLNapalmLauncher",                        "Napalm Launcher \Ct[Exotic]\C-",                        48000,  8, 6, "NAPAX0", 22, 20);
+        ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                62000, 10, 7, "ZGGGX0", 30, 20);
+        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          64000, 10, 7, "NSSGX0", 27,  9);
         ITEMDATA_DEF("RLLaserRifle",                            "Laser Rifle \Ct[Exotic]\C-",                            66000, 11, 7, "LASRX0", 18, 11);
-        ITEMDATA_DEF("RLPlasmaShotgun",                         "Plasma Shotgun \Ct[Exotic]\C-",                         30000,  6, 4, "PSHOX0", 22, 14);
         ITEMDATA_DEF("RLTristarBlaster",                        "Tristar Blaster \Ct[Exotic]\C-",                        68000, 11, 7, "TRISX0", 35, 35);
-        ITEMDATA_DEF("RLCombatTranslocator",                    "Combat Translocator \Ct[Exotic]\C-",                    20000,  6, 4, "CTLOX0", 18, 11);
         ITEMDATA_DEF("RLNuclearPlasmaPistol",                   "Nuclear Plasma Pistol \Ct[Exotic]\C-",                  90000, 12, 8, "NUPPX0", 11, 14);
         ITEMDATA_DEF("RLNuclearPlasmaRifle",                    "Nuclear Plasma Rifle \Ct[Exotic]\C-",                  120000, 12, 9, "NUKPX0", 23, 14);
         ITEMDATA_DEF("RLNuclearBFG9000",                        "Nuclear BFG9000 \Ct[Exotic]\C-",                       200000, 12, 10, "NUKBX0", 28, 18);
@@ -768,11 +768,15 @@ NamedScript void BuildItemData()
 
         // Armors
         ITEMDATA_CATEGORY(3, "\CdArmor", CF_NONE);
+        // Armor Bonus
+        ITEMDATA_DEF("RLArmorBonusPickup",                              "Armor Bonus",                                        100, 0, -1, "BON2A0",  7, 13);
+
         // Common Armors
-        ITEMDATA_DEF("RLArmorBonusPickup",                              "Armor Bonus",                                         100, 0, -1, "BON2A0",  7, 13);
-        ITEMDATA_DEF("RLGreenArmorPickup",                              "Security Armor",                                      250, 1, 0, "ARM1A0", 15, 17);
-        ITEMDATA_DEF("RLBlueArmorPickup",                               "Combat Armor",                                        500, 1, 0, "ARM2A0", 15, 17);
-        ITEMDATA_DEF("RLRedArmorPickup",                                "Commando Armor",                                     1000, 1, 0, "ARM3A0", 16, 18);
+        ITEMDATA_DEF("RLGreenArmorPickup",                              "Security Armor \Cc[Common]\C-",                       250, 1, 0, "ARM1A0", 15, 17);
+        ITEMDATA_DEF("RLBlueArmorPickup",                               "Combat Armor \Cc[Common]\C-",                         500, 1, 0, "ARM2A0", 15, 17);
+        ITEMDATA_DEF("RLRedArmorPickup",                                "Commando Armor \Cc[Common]\C-",                      1000, 1, 0, "ARM3A0", 16, 18);
+
+        // Assembled Armors
         ITEMDATA_DEF("RLBallisticGreenArmorPickup",                     "Ballistic Security Armor \Cv[Assembled]\C-",         1250, 2, 1, "BLA1A0", 15, 18);
         ITEMDATA_DEF("RLBallisticBlueArmorPickup",                      "Ballistic Combat Armor \Cv[Assembled]\C-",           1500, 2, 2, "BLA2A0", 15, 18);
         ITEMDATA_DEF("RLBallisticRedArmorPickup",                       "Ballistic Commando Armor \Cv[Assembled]\C-",         2000, 2, 3, "BLA3A0", 15, 18);
@@ -943,9 +947,9 @@ NamedScript void BuildItemData()
         // Boots
         ITEMDATA_CATEGORY(9, "\CcBoots", CF_NONE);
         // Common Boots
-        ITEMDATA_DEF("RLSteelBootsPickup",                  "Steel Boots",                                            1000, 0, 0, "BOOTS0", 13, 26);
-        ITEMDATA_DEF("RLProtectiveBootsPickup",             "Protective Boots",                                       2000, 4, 1, "BOOTG0", 13, 26);
-        ITEMDATA_DEF("RLPlasteelBootsPickup",               "Plasteel Boots",                                         4000, 6, 2, "BOOTB0", 13, 26);
+        ITEMDATA_DEF("RLSteelBootsPickup",                  "Steel Boots \Cc[Common]\C-",                              1000, 0, 0, "BOOTS0", 13, 26);
+        ITEMDATA_DEF("RLProtectiveBootsPickup",             "Protective Boots \Cc[Common]\C-",                         2000, 4, 1, "BOOTG0", 13, 26);
+        ITEMDATA_DEF("RLPlasteelBootsPickup",               "Plasteel Boots \Cc[Common]\C-",                           4000, 6, 2, "BOOTB0", 13, 26);
 
         // Assembled Boots
         ITEMDATA_DEF("RLCerberusBootsPickup",               "Cerberus Boots \Cv[Assembled]\C-",                      27000, 10, 6, "CERBA0", 13, 24);
@@ -1353,9 +1357,9 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
     int RarityMin;
     int RarityMax;
     int Modifier;
-    int Iterations;
     int Amount;
     int Index;
+    int Iterations;
 
     // Calculate Modifier
     if (GetCVar("drpg_loot_type") == 0)
@@ -1381,23 +1385,36 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
         RarityMax = 10;
 
     // Calculate Rarity Min
-    RarityMin += Random(0, RoundInt(RarityMax / 2.5));
+    if (RarityMax > 1)
+        RarityMin = Random(RarityMax / 4, RarityMax - 1);
 
-    if (!CurrentLevel->UACBase && Random(0, 250) <= 50 + 10 * Modifier)
+    if (!CurrentLevel->UACBase && Random(0, 250) <= 75 + RoundInt(7.5 * (fixed)Modifier))
     {
         // Compatibility Handling - DoomRL Arsenal
-        // Calculate the chances for Exotic/Superior/Unique/Demonic/Legendary weapons
+        // Set variables for Common/Exotic/Superior/Unique/Demonic/Legendary weapons
+        bool CommonChance;
         bool ExoticChance;
         bool SuperiorChance;
         bool UniqueChance;
         bool DemonicChance;
         bool LegendaryChance;
 
-        ExoticChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).WeaponExoticChance);
-        SuperiorChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).WeaponSuperiorChance);
-        UniqueChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).WeaponUniqueChance);
-        DemonicChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).WeaponDemonicChance);
-        LegendaryChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).WeaponLegendaryChance);
+        // Calculate the chances for Exotic/Superior/Unique/Demonic/Legendary weapons
+        if (CompatMode == COMPAT_DRLA)
+        {
+            ExoticChance = (RarityMax >= 1 && RandomFixed(0.0, 100.0) <= Players(0).WeaponExoticChance);
+            SuperiorChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).WeaponSuperiorChance && !ExoticChance);
+            UniqueChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).WeaponUniqueChance && !ExoticChance && !SuperiorChance);
+            DemonicChance = (RarityMax >= 7 && RandomFixed(0.0, 100.0) <= Players(0).WeaponDemonicChance && !ExoticChance && !SuperiorChance && !UniqueChance);
+            LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(0).WeaponLegendaryChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance);
+            CommonChance = (!ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance && !LegendaryChance);
+
+            if (DebugLog)
+            {
+                Log("------------------------------------");
+                Log("Weapon rarity: %d - %d", RarityMin, RarityMax);
+            }
+        }
 
         while (!ItemSpawned)
         {
@@ -1407,6 +1424,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
                 // Check chances for Exotic/Superior/Unique/Demonic/Legendary weapons
                 if (CompatMode == COMPAT_DRLA)
                 {
+                    if (!CommonChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 9, 6) == "Common") continue;
                     if (!ExoticChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 9, 6) == "Exotic") continue;
                     if (!SuperiorChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 11, 8) == "Superior") continue;
                     if (!UniqueChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 9, 6) == "Unique") continue;
@@ -1414,14 +1432,14 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
                     if (!LegendaryChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 12, 9) == "Legendary") continue;
                 }
 
-                if (ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
+                if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
                 {
-                    if (Random(0, (1 + Amount) * (ItemData[ItemCategory][j].Dropped ? 2 : 1)) <= 0)
+                    if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Dropped * 4)) <= 50)
                     {
                         // Set weapon index
                         Index = j;
 
-                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
+                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 256) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
                             Index = Weapon;
                         else if (Index <= (CompatMode == COMPAT_DRLA ? 9 : 7))
                             Index = Weapon;
@@ -1448,45 +1466,48 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
         if (CompatMode == COMPAT_DRLA && ItemSpawned)
         {
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Exotic")
+            {
                 Players(0).WeaponExoticChance = 0;
+                ItemData[ItemCategory][Index].Dropped++;
+            }
             else
-                Players(0).WeaponExoticChance += 20.0 * (fixed)Modifier / 15.0;
+                Players(0).WeaponExoticChance += 10.0 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 11, 8) == "Superior")
             {
                 Players(0).WeaponSuperiorChance = 0;
-                ItemData[ItemCategory][Index].Dropped = true;
+                ItemData[ItemCategory][Index].Dropped++;
             }
             else
-                Players(0).WeaponSuperiorChance += 4.0 * (fixed)Modifier / 15.0;
+                Players(0).WeaponSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Unique")
             {
                 Players(0).WeaponUniqueChance = 0;
-                ItemData[ItemCategory][Index].Dropped = true;
+                ItemData[ItemCategory][Index].Dropped++;;
             }
             else
-                Players(0).WeaponUniqueChance += 6.0 * (fixed)Modifier / 15.0;
+                Players(0).WeaponUniqueChance += 2.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 10, 7) == "Demonic")
             {
                 Players(0).WeaponDemonicChance = 0;
-                ItemData[ItemCategory][Index].Dropped = true;
+                ItemData[ItemCategory][Index].Dropped++;;
             }
             else
-                Players(0).WeaponDemonicChance += 0.7 * (fixed)Modifier / 15.0;
+                Players(0).WeaponDemonicChance += 0.3 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Legendary")
             {
                 Players(0).WeaponLegendaryChance = 0;
-                ItemData[ItemCategory][Index].Dropped = true;
+                ItemData[ItemCategory][Index].Dropped++;;
             }
             else
-                Players(0).WeaponLegendaryChance += 0.3 * (fixed)Modifier / 15.0;
+                Players(0).WeaponLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
 
             if (DebugLog)
             {
-                Log("Weapon drop actor: %S", ActorToSpawn);
+                Log("Item #%d. %S", Index, ItemData[ItemCategory][Index].Name);
                 Log("Weapon drop chance \CtExotic\C-: %.2k", Players(0).WeaponExoticChance);
                 Log("Weapon drop chance \CiSuperior\C-: %.2k", Players(0).WeaponSuperiorChance);
                 Log("Weapon drop chance \CdUnique\C-: %.2k", Players(0).WeaponUniqueChance);
@@ -1582,33 +1603,64 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
         RarityMax = 10;
 
     // Calculate Rarity Min
-    if (ItemCategory == 3)
-        RarityMin += Random(0, RoundInt(RarityMax / 2.5));
+    if (RarityMax > 1)
+        RarityMin = Random(RarityMax / 4, RarityMax - 1);
 
     if (!CurrentLevel->UACBase && Random(0, 250) <= 75 + RoundInt(7.5 * (fixed)Modifier))
     {
         // Compatibility Handling - DoomRL Arsenal
-        // Calculate the chances for Exotic/Superior/Unique/Demonic/Legendary armor
+        // Set variables for Common/Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+        bool CommonChance;
+        bool AssembledChance;
         bool ExoticChance;
         bool SuperiorChance;
         bool UniqueChance;
         bool DemonicChance;
         bool LegendaryChance;
 
-        ExoticChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).ArmorExoticChance);
-        SuperiorChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).ArmorSuperiorChance);
-        UniqueChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).ArmorUniqueChance);
-        DemonicChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).ArmorDemonicChance);
-        LegendaryChance = (CompatMode == COMPAT_DRLA && RandomFixed(0.0, 100.0) <= Players(0).ArmorLegendaryChance);
+        // Compatibility Handling - DoomRL Arsenal
+        // Calculate the chances for Common/Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+        if (CompatMode == COMPAT_DRLA)
+        {
+            // For armor
+            if (ItemCategory == 3)
+            {
+                AssembledChance = (RarityMax >= 1 && RandomFixed(0.0, 100.0) <= Players(0).ArmorAssembledChance);
+                ExoticChance = (RarityMax >= 2 && RandomFixed(0.0, 100.0) <= Players(0).ArmorExoticChance && !AssembledChance);
+                SuperiorChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).ArmorSuperiorChance && !AssembledChance && !ExoticChance);
+                UniqueChance = (RarityMax >= 3 && RandomFixed(0.0, 100.0) <= Players(0).ArmorUniqueChance && !AssembledChance && !ExoticChance && !SuperiorChance);
+                DemonicChance = (RarityMax >= 9 && RandomFixed(0.0, 100.0) <= Players(0).ArmorDemonicChance && !AssembledChance && !ExoticChance && !SuperiorChance && !UniqueChance);
+                LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(0).ArmorLegendaryChance && !AssembledChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance);
+                CommonChance = (!AssembledChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance && !LegendaryChance);
+            }
+            // For boots
+            if (ItemCategory == 9)
+            {
+                AssembledChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).ArmorAssembledChance);
+                ExoticChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).ArmorExoticChance && !AssembledChance);
+                UniqueChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).ArmorUniqueChance && !AssembledChance && !ExoticChance);
+                DemonicChance = (RarityMax >= 9 && RandomFixed(0.0, 100.0) <= Players(0).ArmorDemonicChance && !AssembledChance && !ExoticChance && !UniqueChance);
+                LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(0).ArmorLegendaryChance && !AssembledChance && !ExoticChance && !UniqueChance && !DemonicChance);
+                CommonChance = (!AssembledChance && !ExoticChance && !UniqueChance && !DemonicChance && !LegendaryChance);
+            }
+
+            if (DebugLog)
+            {
+                Log("------------------------------------");
+                Log("Armor rarity: %d - %d", RarityMin, RarityMax);
+            }
+        }
 
         while (!ItemSpawned)
         {
             for (int j = 0; j < ItemMax[ItemCategory]; j++)
             {
                 // Compatibility Handling - DoomRL Arsenal
-                // Check chances for Exotic/Superior/Unique/Demonic/Legendary armor
+                // Check chances for Common/Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
                 if (CompatMode == COMPAT_DRLA)
                 {
+                    if (!CommonChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 9, 6) == "Common") continue;
+                    if (!AssembledChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 12, 9) == "Assembled") continue;
                     if (!ExoticChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 9, 6) == "Exotic") continue;
                     if (!SuperiorChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 11, 8) == "Superior") continue;
                     if (!UniqueChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 9, 6) == "Unique") continue;
@@ -1616,14 +1668,14 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
                     if (!LegendaryChance && StrMid(ItemData[ItemCategory][j].Name, StrLen(ItemData[ItemCategory][j].Name) - 12, 9) == "Legendary") continue;
                 }
 
-                if (ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
+                if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
                 {
-                    if (Random(0, (1 + Amount) * (ItemData[ItemCategory][j].Dropped ? 2 : 1)) <= 0)
+                    if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Dropped * 4)) <= 50)
                     {
                         // Set armor index
                         Index = j;
 
-                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
+                        if ((CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 256) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
                         {
                             ItemCategory = 3;
                             Index = Armor;
@@ -1649,49 +1701,61 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
         }
 
         // Compatibility Handling - DoomRL Arsenal
-        // Set chances for Exotic/Superior/Unique/Demonic/Legendary armor
+        // Set chances for Common/Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
         if (CompatMode == COMPAT_DRLA && ItemSpawned)
         {
-            if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Exotic")
-                Players(0).ArmorExoticChance -= (Random(0, 1) <= 0 ? Players(0).ArmorExoticChance : Players(0).ArmorExoticChance / 2);
+            if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Assembled")
+            {
+                Players(0).ArmorAssembledChance = 0;
+                ItemData[ItemCategory][Index].Dropped++;
+            }
             else
-                Players(0).ArmorExoticChance += 25.0 * (fixed)Modifier / 15.0;
+                Players(0).ArmorAssembledChance += 50.0 * (fixed)Modifier / 15.0;
+
+            if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Exotic")
+            {
+                Players(0).ArmorExoticChance = 0;
+                ItemData[ItemCategory][Index].Dropped++;
+            }
+            else
+                Players(0).ArmorExoticChance += 30.0 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 11, 8) == "Superior")
             {
                 Players(0).ArmorSuperiorChance = 0;
-                ItemData[ItemCategory][Index].Dropped = true;
+                ItemData[ItemCategory][Index].Dropped++;
             }
             else
-                Players(0).ArmorSuperiorChance += 2.5 * (fixed)Modifier / 15.0;
+                Players(0).ArmorSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Unique")
             {
                 Players(0).ArmorUniqueChance = 0;
-                ItemData[ItemCategory][Index].Dropped = true;
+                ItemData[ItemCategory][Index].Dropped++;
             }
             else
-                Players(0).ArmorUniqueChance += 4.0 * (fixed)Modifier / 15.0;
+                Players(0).ArmorUniqueChance += 2.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 10, 7) == "Demonic")
             {
                 Players(0).ArmorDemonicChance = 0;
-                ItemData[ItemCategory][Index].Dropped = true;
+                ItemData[ItemCategory][Index].Dropped++;
             }
             else
-                Players(0).ArmorDemonicChance += 0.5 * (fixed)Modifier / 15.0;
+                Players(0).ArmorDemonicChance += 0.3 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Legendary")
             {
                 Players(0).ArmorLegendaryChance = 0;
-                ItemData[ItemCategory][Index].Dropped = true;
+                ItemData[ItemCategory][Index].Dropped++;
             }
             else
                 Players(0).ArmorLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
 
             if (DebugLog)
             {
-                Log("Armor drop actor: %S", ActorToSpawn);
+                Log("Item #%d. %S", Index, ItemData[ItemCategory][Index].Name);
+                Log("Armor drop chance \CvAssembled\C-: %.2k", Players(0).ArmorAssembledChance);
                 Log("Armor drop chance \CtExotic\C-: %.2k", Players(0).ArmorExoticChance);
                 Log("Armor drop chance \CiSuperior\C-: %.2k", Players(0).ArmorSuperiorChance);
                 Log("Armor drop chance \CdUnique\C-: %.2k", Players(0).ArmorUniqueChance);

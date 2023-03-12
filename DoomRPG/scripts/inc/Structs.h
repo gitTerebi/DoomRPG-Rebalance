@@ -120,8 +120,8 @@ struct CharSaveInfo_S
     // DRLA Tokens
     bool DRLATokens[DRLA_MAX_TOKENS];
 
-    // Chances for Exotic/Superior/Unique/Demonic/Legendary armor
-    int ArmorChances[5];
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    int ArmorChances[6];
 
     // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
     int WeaponsChances[5];
@@ -164,7 +164,7 @@ struct ItemInfo_S
     int Category;
     int Index;
 
-    bool Dropped;
+    int Dropped;
 };
 
 // Crates
@@ -708,6 +708,7 @@ struct PlayerData_S
     fixed AugChance;
 
     // Compatibility Handling - DoomRL Arsenal
+    fixed ArmorAssembledChance;
     fixed ArmorExoticChance;
     fixed ArmorSuperiorChance;
     fixed ArmorUniqueChance;

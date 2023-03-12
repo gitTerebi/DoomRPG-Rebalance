@@ -3928,5 +3928,30 @@ NamedScript void Silly()
 
 NamedScript Console void Test()
 {
+    /*  // For test the drop system
+        if (DebugLog)
+        {
+            Log("------------------------------------");
+            Log("Weapon dropped:");
+            for (int i = 0; i < ItemMax[0]; i++)
+                if (ItemData[0][i].Dropped > 0)
+                    Log("Item #%d. %S - %d dropped", i, ItemData[0][i].Name, ItemData[0][i].Dropped);
+
+            Log("------------------------------------");
+            Log("Armors dropped:");
+            for (int j = 0; j < ItemMax[3]; j++)
+                if (ItemData[3][j].Dropped > 0)
+                    Log("Item #%d. %S - %d dropped", j, ItemData[3][j].Name, ItemData[3][j].Dropped);
+
+            Log("------------------------------------");
+            Log("Boots dropped:");
+            for (int k = 0; k < ItemMax[9]; k++)
+                if (ItemData[9][k].Dropped > 0)
+                    Log("Item #%d. %S - %d dropped", k, ItemData[9][k].Name, ItemData[9][k].Dropped);
+
+            Log("------------------------------------");
+        }
+    */
+
     Log("Test is work!");
 }
