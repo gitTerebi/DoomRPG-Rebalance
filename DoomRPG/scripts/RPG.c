@@ -252,19 +252,20 @@ NamedScript Type_ENTER void Init()
         // Compatibility Handling - DoomRL Arsenal
         if (CompatMode == COMPAT_DRLA)
         {
-            // Set start chances for Exotic/Superior/Unique/Demonic/Legendary armor
+            // Set start chances for Exotic/Superior/Unique/Demonic/Legendary armor and boots
+            Player.ArmorAssembledChance = 75.0;
             Player.ArmorExoticChance = 50.0;
-            Player.ArmorSuperiorChance = 5.0;
-            Player.ArmorUniqueChance = 20.0;
-            Player.ArmorDemonicChance = 0.75;
-            Player.ArmorLegendaryChance = 0.25;
+            Player.ArmorSuperiorChance = 3.0;
+            Player.ArmorUniqueChance = 5.0;
+            Player.ArmorDemonicChance = 0.3;
+            Player.ArmorLegendaryChance = 0.2;
 
             // Set start chances for Exotic/Superior/Unique/Demonic/Legendary weapon
             Player.WeaponExoticChance = 50.0;
-            Player.WeaponSuperiorChance = 12.5;
-            Player.WeaponUniqueChance = 25.0;
-            Player.WeaponDemonicChance = 1.5;
-            Player.WeaponLegendaryChance = 0.5;
+            Player.WeaponSuperiorChance = 3.0;
+            Player.WeaponUniqueChance = 10.0;
+            Player.WeaponDemonicChance = 0.3;
+            Player.WeaponLegendaryChance = 0.2;
         }
 
         // Compatibility Handling - DoomRL Monsters

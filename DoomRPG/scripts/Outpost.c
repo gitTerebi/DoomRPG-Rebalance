@@ -3417,28 +3417,31 @@ NamedScript MapSpecial void DisassemblingDevice()
                             {
                                 CurrentIndexBasic = 12;
                             }
-                            // For Super Shotgun
-                            if (ItemData[0][CurrentItem].Actor == "RLSuperShotgun")
+                            // For Uzi
+                            if (ItemData[0][CurrentItem].Actor == "RLUzi")
                             {
-                                CurrentIndexBasic = 4;
+                                CurrentIndexBasic = 11;
                             }
                             // For Assault Shotgun
                             if (ItemData[0][CurrentItem].Actor == "RLAssaultShotgun")
                             {
                                 CurrentIndexBasic = 3;
                             }
-                            // For Uzi
-                            if (ItemData[0][CurrentItem].Actor == "RLUzi")
+                            // For Plasma Shotgun
+                            if (ItemData[0][CurrentItem].Actor == "RLPlasmaShotgun")
                             {
-                                CurrentIndexBasic = 11;
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails6 =  29;
+                                CurrentAmountDetails6 = 6;
                             }
-                            // For Minigun
-                            if (ItemData[0][CurrentItem].Actor == "RLMinigun")
+                            // For Combat Translocator
+                            if (ItemData[0][CurrentItem].Actor == "RLCombatTranslocator")
                             {
-                                CurrentIndexBasic = 5;
-                                CurrentAmountDetails1 = 60;
-                                CurrentAmountDetails2 = 40;
-                                CurrentAmountDetails3 = 20;
+                                CurrentIndexBasic = 8;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 1;
                             }
                             // For Missile Launcher
                             if (ItemData[0][CurrentItem].Actor == "RLMissileLauncher")
@@ -3454,6 +3457,19 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails2 =  8;
                                 CurrentAmountDetails2 = 30;
                             }
+                            // For Minigun
+                            if (ItemData[0][CurrentItem].Actor == "RLMinigun")
+                            {
+                                CurrentIndexBasic = 5;
+                                CurrentAmountDetails1 = 60;
+                                CurrentAmountDetails2 = 40;
+                                CurrentAmountDetails3 = 20;
+                            }
+                            // For Super Shotgun
+                            if (ItemData[0][CurrentItem].Actor == "RLSuperShotgun")
+                            {
+                                CurrentIndexBasic = 4;
+                            }
                             // For Laser Rifle
                             if (ItemData[0][CurrentItem].Actor == "RLLaserRifle")
                             {
@@ -3462,14 +3478,6 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 2;
-                            }
-                            // For Plasma Shotgun
-                            if (ItemData[0][CurrentItem].Actor == "RLPlasmaShotgun")
-                            {
-                                CurrentIndexBasic = 8;
-                                CurrentTypeDetails2 =  10;
-                                CurrentTypeDetails6 =  29;
-                                CurrentAmountDetails6 = 6;
                             }
                             // For Tristar Blaster
                             if (ItemData[0][CurrentItem].Actor == "RLTristarBlaster")
@@ -3480,14 +3488,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 2;
                             }
-                            // For Combat Translocator
-                            if (ItemData[0][CurrentItem].Actor == "RLCombatTranslocator")
-                            {
-                                CurrentIndexBasic = 8;
-                                CurrentTypeDetails2 =  10;
-                                CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 1;
-                            }
+
                             // For Nuclear Plasma Pistol
                             if (ItemData[0][CurrentItem].Actor == "RLNuclearPlasmaPistol")
                             {
@@ -3595,7 +3596,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Plasma Redirection Cannon
                             if (ItemData[0][CurrentItem].Actor == "RLPlasmaRedirectionCannon")
                             {
-                                CurrentIndexBasic = 22;
+                                CurrentIndexBasic = 23;
                                 CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  13;
@@ -3629,7 +3630,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Suss Gun
                             if (ItemData[0][CurrentItem].Actor == "RLSussGun")
                             {
-                                CurrentIndexBasic = 22;
+                                CurrentIndexBasic = 23;
                                 CurrentTypeDetails5 =  12;
                                 CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails3 =  11;
@@ -3796,60 +3797,6 @@ NamedScript MapSpecial void DisassemblingDevice()
                             CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 5, 10)) / 5 * 5;
 
                             // Set Individual Required
-                            // For Ballistic Shield
-                            if (ItemData[3][CurrentItem].Actor == "RLBallisticShieldArmorPickup")
-                            {
-                                CurrentIndexBasic = 4;
-                                CurrentTypeDetails6 = 29;
-                                CurrentAmountDetails6 = 1;
-                            }
-                            // For Ballistic Vest
-                            if (ItemData[3][CurrentItem].Actor == "RLBallisticVestArmorPickup")
-                            {
-                                CurrentIndexBasic = 1;
-                                CurrentAmountDetails1 = 10;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 = 0;
-                            }
-                            // For Bulletproof Vest
-                            if (ItemData[3][CurrentItem].Actor == "RLBulletproofVestArmorPickup")
-                            {
-                                CurrentIndexBasic = 1;
-                                CurrentAmountDetails2 = 0;
-                            }
-                            // For Duelist Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLDuelistArmorPickup")
-                            {
-                                CurrentIndexBasic = 1;
-                                CurrentAmountDetails1 = 15;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 = 0;
-                            }
-                            // For Energy-Shielded Vest
-                            if (ItemData[3][CurrentItem].Actor == "RLEnergyShieldedVestArmorPickup")
-                            {
-                                CurrentIndexBasic = 2;
-                                CurrentTypeDetails6 = 29;
-                                CurrentAmountDetails1 = 10;
-                                CurrentAmountDetails2 = 10;
-                                CurrentAmountDetails6 = 1;
-                            }
-                            // For Energy Shield
-                            if (ItemData[3][CurrentItem].Actor == "RLEnergyShieldArmorPickup")
-                            {
-                                CurrentIndexBasic = 2;
-                                CurrentTypeDetails6 = 29;
-                                CurrentAmountDetails1 = 15;
-                                CurrentAmountDetails2 = 20;
-                                CurrentAmountDetails6 = 1;
-                            }
-                            // For Gothic Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLGothicArmorPickup")
-                            {
-                                CurrentIndexBasic = 4;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 *= 2;
-                            }
                             // For Medical Armor
                             if (ItemData[3][CurrentItem].Actor == "RLMedicalArmorPickup")
                             {
@@ -3857,32 +3804,6 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails2 = 0;
                                 CurrentAmountDetails1 = 10;
                                 CurrentAmountDetails2 = 15;
-                            }
-                            // For Phaseshift Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLPhaseshiftArmorPickup")
-                            {
-                                CurrentIndexBasic = 4;
-                                CurrentTypeDetails6 = 29;
-                                CurrentAmountDetails1 = 25;
-                                CurrentAmountDetails2 = 15;
-                                CurrentAmountDetails3 = 15;
-                                CurrentAmountDetails6 = 1;
-                            }
-                            // For Plasma Shield
-                            if (ItemData[3][CurrentItem].Actor == "RLPlasmaShieldArmorPickup")
-                            {
-                                CurrentIndexBasic = 5;
-                                CurrentTypeDetails6 = 29;
-                                CurrentAmountDetails1 = 20;
-                                CurrentAmountDetails2 = 25;
-                                CurrentAmountDetails6 = 2;
-                            }
-                            // For Onyx Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLOnyxArmorPickup")
-                            {
-                                CurrentIndexBasic = 1;
-                                CurrentAmountDetails2 = 0;
-                                CurrentAmountDetails3 *= 2;
                             }
                             // For Overcharge System
                             if (ItemData[3][CurrentItem].Actor == "RLOverchargeSystemArmorPickup")
@@ -3901,9 +3822,26 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentAmountDetails3 = 5;
                                 CurrentAmountDetails6 = 1;
                             }
+                            // For Ballistic Vest
+                            if (ItemData[3][CurrentItem].Actor == "RLBallisticVestArmorPickup")
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails1 = 10;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 = 0;
+                            }
+                            // For Duelist Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLDuelistArmorPickup")
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails1 = 15;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 = 0;
+                            }
                             // For Survival MediArmor
                             if (ItemData[3][CurrentItem].Actor == "RLSurvivalMediArmorPickup")
                             {
+                                CurrentRank = 3;
                                 CurrentIndexBasic = 3;
                                 CurrentTypeDetails2 = 0;
                                 CurrentTypeDetails6 = 29;
@@ -3914,8 +3852,76 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Cyberwarrior Armor
                             if (ItemData[3][CurrentItem].Actor == "RLCyberwarriorArmorPickup")
                             {
+                                CurrentRank = 3;
                                 CurrentIndexBasic = 3;
                                 CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Bulletproof Vest
+                            if (ItemData[3][CurrentItem].Actor == "RLBulletproofVestArmorPickup")
+                            {
+                                CurrentRank = 4;
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                            }
+                            // For Energy-Shielded Vest
+                            if (ItemData[3][CurrentItem].Actor == "RLEnergyShieldedVestArmorPickup")
+                            {
+                                CurrentRank = 4;
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 10;
+                                CurrentAmountDetails2 = 10;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Onyx Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLOnyxArmorPickup")
+                            {
+                                CurrentIndexBasic = 1;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+                            // For Ballistic Shield
+                            if (ItemData[3][CurrentItem].Actor == "RLBallisticShieldArmorPickup")
+                            {
+                                CurrentIndexBasic = 4;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Plasma Shield
+                            if (ItemData[3][CurrentItem].Actor == "RLPlasmaShieldArmorPickup")
+                            {
+                                CurrentIndexBasic = 5;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 20;
+                                CurrentAmountDetails2 = 25;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Energy Shield
+                            if (ItemData[3][CurrentItem].Actor == "RLEnergyShieldArmorPickup")
+                            {
+                                CurrentIndexBasic = 2;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 15;
+                                CurrentAmountDetails2 = 20;
+                                CurrentAmountDetails6 = 1;
+                            }
+                            // For Gothic Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLGothicArmorPickup")
+                            {
+                                CurrentIndexBasic = 4;
+                                CurrentAmountDetails2 = 0;
+                                CurrentAmountDetails3 *= 2;
+                            }
+
+                            // For Phaseshift Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLPhaseshiftArmorPickup")
+                            {
+                                CurrentIndexBasic = 4;
+                                CurrentTypeDetails6 = 29;
+                                CurrentAmountDetails1 = 25;
+                                CurrentAmountDetails2 = 15;
+                                CurrentAmountDetails3 = 15;
                                 CurrentAmountDetails6 = 1;
                             }
                         }
