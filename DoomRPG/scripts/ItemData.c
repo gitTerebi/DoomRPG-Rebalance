@@ -1471,7 +1471,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
                 ItemData[ItemCategory][Index].Dropped++;
             }
             else
-                Players(0).WeaponExoticChance += 10.0 * (fixed)Modifier / 15.0;
+                Players(0).WeaponExoticChance += 15.0 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 11, 8) == "Superior")
             {
