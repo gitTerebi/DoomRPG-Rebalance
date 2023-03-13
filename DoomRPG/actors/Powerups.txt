@@ -505,7 +505,7 @@ actor DRPGImmunityCrystalMelee : CustomInventory
 
     Inventory.Amount 1
     Inventory.MaxAmount 1
-	Inventory.PickupMessage "Picked up a melee immunity crystal."
+	Inventory.PickupMessage "You picked up a melee immunity crystal."
 	Inventory.PickupSound "powerups/crystal"
 	Inventory.Icon "CRYSA"
     
@@ -561,7 +561,7 @@ actor DRPGImmunityCrystalBullet : CustomInventory
 
     Inventory.Amount 1
     Inventory.MaxAmount 1
-	Inventory.PickupMessage "Picked up a bullet immunity crystal."
+	Inventory.PickupMessage "You picked up a bullet immunity crystal."
 	Inventory.PickupSound "powerups/crystal"
 	Inventory.Icon "CRYSB"
     
@@ -617,7 +617,7 @@ actor DRPGImmunityCrystalFire : CustomInventory
 
     Inventory.Amount 1
     Inventory.MaxAmount 1
-	Inventory.PickupMessage "Picked up a fire immunity crystal."
+	Inventory.PickupMessage "You picked up a fire immunity crystal."
 	Inventory.PickupSound "powerups/crystal"
 	Inventory.Icon "CRYSC"
     
@@ -673,7 +673,7 @@ actor DRPGImmunityCrystalPlasma : CustomInventory
 
     Inventory.Amount 1
     Inventory.MaxAmount 1
-	Inventory.PickupMessage "Picked up a plasma immunity crystal."
+	Inventory.PickupMessage "You picked up a plasma immunity crystal."
 	Inventory.PickupSound "powerups/crystal"
 	Inventory.Icon "CRYSD"
     
@@ -729,7 +729,7 @@ actor DRPGImmunityCrystalLightning : CustomInventory
 
     Inventory.Amount 1
     Inventory.MaxAmount 1
-	Inventory.PickupMessage "Picked up a lightning immunity crystal."
+	Inventory.PickupMessage "You picked up a lightning immunity crystal."
 	Inventory.PickupSound "powerups/crystal"
 	Inventory.Icon "CRYSE"
     
@@ -785,7 +785,7 @@ actor DRPGImmunityCrystalToxic : CustomInventory
 
     Inventory.Amount 1
     Inventory.MaxAmount 1
-	Inventory.PickupMessage "Picked up a toxic immunity crystal."
+	Inventory.PickupMessage "You picked up a toxic immunity crystal."
 	Inventory.PickupSound "powerups/crystal"
 	Inventory.Icon "CRYSF"
     
@@ -841,7 +841,7 @@ actor DRPGImmunityCrystalRadiation : CustomInventory
 
     Inventory.Amount 1
     Inventory.MaxAmount 1
-	Inventory.PickupMessage "Picked up a radiation immunity crystal."
+	Inventory.PickupMessage "You picked up a radiation immunity crystal."
 	Inventory.PickupSound "powerups/crystal"
 	Inventory.Icon "CRYSG"
     
