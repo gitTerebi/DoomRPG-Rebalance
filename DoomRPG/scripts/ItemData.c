@@ -1586,7 +1586,7 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
                     // Set weapon index
                     Index = i;
 
-                    ActorToSpawn = StrParam("%SPickup", ItemData[ItemCategory][Index].Actor);
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ItemData[ItemCategory][Index].Actor);
                     ItemSpawned = true;
                 }
                 Amount++;
@@ -1746,7 +1746,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
         {
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Assembled")
             {
-                if ((ItemCategory == 3 && (Index == 22 || Index == 26 || Index == 27 || Index == 28)) || (ItemCategory == 9 && Index == 3))
+                if ((ItemCategory == 3 && (ActorToSpawn == "RLCerberusArmorPickup" || ActorToSpawn == "RLCyberNanoGreenArmorPickup" || ActorToSpawn == "RLCyberNanoBlueArmorPickup" || ActorToSpawn == "RLCyberNanoRedArmorPickup")) || (ItemCategory == 9 && ActorToSpawn == "RLCerberusBootsPickup"))
                     ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
                 Players(0).ArmorAssembledChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
@@ -1830,6 +1830,8 @@ NamedScript DECORATE void DRPGShieldSpawner()
     int RarityMax;
     int Modifier;
     int Amount;
+    int Index;
+    int Iterations;
     int ShieldPartsMin;
     int ShieldPartsMax;
 
@@ -1877,36 +1879,58 @@ NamedScript DECORATE void DRPGShieldSpawner()
     if (RarityMax > 10)
         RarityMax = 10;
 
-    RarityMin += Random(0, RarityMax / 3);
+    RarityMin += Random(0, RarityMax / 2);
 
-    for (int j = ShieldPartsMin; j < ShieldPartsMax; j++)
+    while (!ItemSpawned)
     {
-        if (ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
+        for (int j = ShieldPartsMin; j < ShieldPartsMax; j++)
         {
-            if (Random(0, 1 + Amount) <= 0)
+            if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
             {
-                ActorToSpawn = ItemData[ItemCategory][j].Actor;
-                ItemSpawned = true;
+                if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Spawned * 4)) <= 50)
+                {
+                    // Set shield part index
+                    Index = j;
+
+                    ActorToSpawn = ItemData[ItemCategory][Index].Actor;
+                    ItemSpawned = true;
+                }
+                Amount++;
             }
-            Amount++;
+        }
+
+        Amount = 0;
+        Iterations++;
+
+        if (!ItemSpawned && Iterations >= 9)
+            switch (Random(0,2))
+            {
+            case 0:
+                Index = 1;
+                ActorToSpawn = ItemData[ItemCategory][Index].Actor;
+                ItemSpawned = true;
+                break;
+            case 1:
+                Index = MAX_BODIES + 1;
+                ActorToSpawn = ItemData[ItemCategory][Index].Actor;
+                ItemSpawned = true;
+                break;
+            case 2:
+                Index = MAX_BODIES + MAX_BATTERIES + 1;
+                ActorToSpawn = ItemData[ItemCategory][Index].Actor;
+                ItemSpawned = true;
+                break;
+            }
+
+        if (Iterations % 3 == 0)
+        {
+            RarityMin--;
+            if (RarityMin < 0) RarityMin = 0;
         }
     }
 
-    if (!ItemSpawned)
-        switch (Random(0,2))
-        {
-        case 0:
-            ActorToSpawn = ItemData[ItemCategory][1].Actor;
-            break;
-        case 1:
-            ActorToSpawn = ItemData[ItemCategory][MAX_BODIES + 1].Actor;
-            break;
-        case 2:
-            ActorToSpawn = ItemData[ItemCategory][MAX_BODIES + MAX_BATTERIES + 1].Actor;
-            break;
-        }
-
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
+    ItemData[ItemCategory][Index].Spawned++;
 
     Thing_Remove(0);
 }
@@ -1928,7 +1952,7 @@ NamedScript Console void DumpItemData()
     Log("\Cd---------- BEGIN REWARDLIST DUMP ----------");
 
     for (int i = 0; i < (MAX_DIFFICULTIES + 2); i++) //+1 is demonic, +2 is legendary
-        for (int j = 0; j < MaxRewards[i]; j++)
+        for (int j = 0; j < RewardsCount[i]; j++)
              Log("%S, %d, %d",RewardList[i][j]->Actor, j, RewardList[i][j]->Rarity);
 
     Log("\Cd---------- END REWARDLIST DUMP ----------");

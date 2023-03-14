@@ -4593,8 +4593,21 @@ NamedScript MapSpecial void DisassemblingDevice()
 
                                 // Set actor to spawn
                                 ActorToSpawn = ItemData[CategoriesData[CurrentCategory]][CurrentItem].Actor;
-                                if (CompatMode == COMPAT_DRLA && CurrentCategory == 0)
-                                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                                if (CompatMode == COMPAT_DRLA)
+                                {
+                                    // For exotic weapon
+                                    if (CurrentCategory == 0 && CurrentRare == 0)
+                                        ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                                    // For unique weapon
+                                    if (CurrentCategory == 0 && CurrentRare == 1)
+                                        ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+                                    // For unique armor
+                                    if (CurrentCategory == 1 && CurrentRare == 1)
+                                        ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                                    // For unique boots
+                                    if (CurrentCategory == 2 && CurrentRare == 1)
+                                        ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                                }
 
                                 // Spawn Item in Disassembling Device
                                 SpawnSpotForced(ActorToSpawn, DisassemblingDeviceID, UniqueTID(), 0);
@@ -5110,8 +5123,18 @@ NamedScript MapSpecial void DemonAssemblingSanctuary()
 
                     // Set actor to spawn
                     ActorToSpawn = ItemData[CategoriesData[CurrentCategory]][CurrentItem].Actor;
-                    if (CompatMode == COMPAT_DRLA && CurrentCategory == 0)
-                        ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                    if (CompatMode == COMPAT_DRLA)
+                    {
+                        // For demonic weapon
+                        if (CurrentCategory == 0)
+                            ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+                        // For demonic armor
+                        if (CurrentCategory == 1)
+                            ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                        // For demonic boots
+                        if (CurrentCategory == 2)
+                            ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                    }
 
                     // Spawn Item in Disassembling Device
                     SpawnSpotForced(ActorToSpawn, DemonSanctuaryID, UniqueTID(), 0);
