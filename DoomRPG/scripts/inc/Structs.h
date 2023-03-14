@@ -164,7 +164,7 @@ struct ItemInfo_S
     int Category;
     int Index;
 
-    int Dropped;
+    int Spawned;
 };
 
 // Crates
