@@ -6869,7 +6869,7 @@ music = "MM_02"
 //sky1 = 0XSKY103 0.0 20jul2002 gg
 sky1 = "0XSKY103", 0.01
 forcenoskystretch
-cluster = 1
+cluster = 161
 levelnum = 1
 nointermission
 }
@@ -6880,7 +6880,7 @@ map dae02 "Engineering"
 next = "dae03"
 music = "MM_03"
 sky1 = "0XSKY103", 0.01
-cluster = 1
+cluster = 161
 levelnum = 2
 forcenoskystretch
 nointermission
@@ -6892,7 +6892,7 @@ map dae03 "Kitchen"
 next = "dae04"
 music = "MM_04"
 sky1 = "0XSKY103", 0.01
-cluster = 1
+cluster = 161
 levelnum = 3
 forcenoskystretch
 nointermission
@@ -6904,7 +6904,7 @@ map dae04 "Sleeping Quarters"
 next = "dae05"
 music = "MM_05"
 sky1 = "0XSKY103", 0.01
-cluster = 1
+cluster = 161
 levelnum = 4
 forcenoskystretch
 nointermission
@@ -6916,7 +6916,7 @@ map dae05 "Engine Room"
 next = "dae06"
 music = "MM_06"
 sky1 = "0XSKY103", 0.01
-cluster = 1
+cluster = 161
 levelnum = 5
 forcenoskystretch
 nointermission
@@ -6928,7 +6928,7 @@ map dae06 "Environmental Control"
 next = "dae07"
 music = "MM_07"
 sky1 = "0XSKY103", 0.01
-cluster = 1
+cluster = 161
 levelnum = 6
 forcenoskystretch
 nointermission
@@ -6941,7 +6941,7 @@ next = "dae08"
 music = "MM_02"
 sky1 = "0XSKY101", 0.01
 forcenoskystretch
-cluster = 1
+cluster = 161
 levelnum = 7
 enterpic = "DAEDINT"
 exitpic = "DAEDINT"
@@ -6954,7 +6954,7 @@ map dae14 "Travel Tube"
 {
 // next map not specified--direct warp to next map used
 sky1 = "sky1", 0.0
-cluster = 1
+cluster = 161
 levelnum = 14
 forcenoskystretch
 nointermission
@@ -6968,7 +6968,7 @@ map dae08 "Secondary Bridge"
 next = "dae09"
 music = "MM_03"
 sky1 = "0XSKY103", 0
-cluster = 2
+cluster = 162
 levelnum = 8
 forcenoskystretch
 nointermission
@@ -6980,7 +6980,7 @@ map dae09 "Cryonics"
 next = "dae10"
 music = "MM_04"
 sky1 = "0XSKY103", 0.01
-cluster = 2
+cluster = 162
 levelnum = 9
 forcenoskystretch
 nointermission
@@ -6992,7 +6992,7 @@ map dae10 "Armory"
 next = "dae11"
 music = "MM_05"
 sky1 = "0XSKY103", 0.01
-cluster = 2
+cluster = 162
 levelnum = 10
 forcenoskystretch
 nointermission
@@ -7004,7 +7004,7 @@ map dae11 "Brig"
 next = "dae12"
 music = "MM_06"
 sky1 = "0XSKY103", 0.01
-cluster = 2
+cluster = 162
 levelnum = 11
 forcenoskystretch
 nointermission
@@ -7016,7 +7016,7 @@ map dae12 "Storage"
 next = "dae16"
 music = "MM_07"
 sky1 = "0XSKY103", 0.01
-cluster = 2
+cluster = 162
 levelnum = 12
 forcenoskystretch
 nointermission
@@ -7029,7 +7029,7 @@ map dae16 "Scout Bay"
 next = "dae21"
 music = "MM_02"
 sky1 = "0XSKY103", 0.01
-cluster = 2
+cluster = 162
 levelnum = 16
 forcenoskystretch
 enterpic = "DAEDINT"
@@ -7046,7 +7046,7 @@ map dae18 "Officers' Quarters"
 next = "dae18"
 music = "MM_03"
 sky1 = "0XSKY301", 0.01
-cluster = 2
+cluster = 162
 levelnum = 18
 forcenoskystretch
 nointermission
@@ -7059,7 +7059,7 @@ map dae19 "Disco"
 next = "dae18"    // back to 18
 music = "MM_04"
 sky1 = "0XSKY103", 0.01
-cluster = 2
+cluster = 162
 levelnum = 19
 forcenoskystretch
 nointermission
@@ -7070,7 +7070,7 @@ map dae15 "Travel Tube"
 {
 // next = map not specified--direct warp to next = map used
 sky1 = "0XSKY103", 0.01
-cluster = 2
+cluster = 162
 levelnum = 15
 forcenoskystretch
 nointermission
@@ -7082,7 +7082,7 @@ map dae13 "Travel Tube"
 {
 // next = map not specified--direct warp to next = map used
 sky1 = "0XSKY103", 0.01
-cluster = 3
+cluster = 163
 levelnum = 13
 forcenoskystretch
 nointermission
@@ -7094,7 +7094,7 @@ map dae21 "Landing Site"
 next = "dae22"
 music = "MM_05"
 sky1 = "0XSKY103", 0.01
-cluster = 3
+cluster = 163
 levelnum = 21
 forcenoskystretch
 nointermission 
@@ -7106,7 +7106,7 @@ map dae22 "Tunnels"
 next = "dae23"
 music = "MM_06"
 sky1 = "0XSKY302", 0.01
-cluster = 3
+cluster = 163
 levelnum = 22
 forcenoskystretch
 nointermission 
@@ -7118,7 +7118,7 @@ map dae23 "Warehouse"
 next = "dae24"
 music = "MM_07"
 sky1 = "0XSKY302", 0.01
-cluster = 3
+cluster = 163
 levelnum = 23
 forcenoskystretch
 nointermission 
@@ -7130,7 +7130,7 @@ map dae24 "Control Center"
 next = "dae25"
 music = "MM_02"
 sky1 = "0XSKY103", 0.01
-cluster = 3
+cluster = 163
 levelnum = 24
 forcenoskystretch
 nointermission 
@@ -7142,7 +7142,7 @@ map dae25 "Laboratory"
 next = "dae26"
 music = "MM_03"
 sky1 = "0XSKY302", 0.01
-cluster = 3
+cluster = 163
 levelnum = 25
 forcenoskystretch
 nointermission 
@@ -7154,7 +7154,7 @@ map dae26 "Teleport Control"
 next = "dae28"
 music = "MM_04"
 sky1 = "0XSKY103", 0.01
-cluster = 3
+cluster = 163
 levelnum = 26
 forcenoskystretch
 enterpic = "DAEDINT"
@@ -7170,7 +7170,7 @@ map dae20 "Travel Tube"
 {
 // next = map not specified--direct warp to next = map used
 sky1 = "0XSKY103", 0.01
-cluster = 4
+cluster = 164
 levelnum = 20
 forcenoskystretch
 nointermission
@@ -7181,7 +7181,7 @@ map dae27 "Underground Train"
 {
 // next = map not specified--direct warp to next = map used
 sky1 = "0XSKY303", 0.01
-cluster = 4
+cluster = 164
 levelnum = 27
 forcenoskystretch
 nointermission
@@ -7193,7 +7193,7 @@ map dae28 "Federation Systems Control"
 next = "dae29"
 music = "MM_05"
 sky1 = "0XSKY303", 0.01
-cluster = 4
+cluster = 164
 levelnum = 28
 forcenoskystretch
 nointermission 
@@ -7205,7 +7205,7 @@ map dae29 "Language Labs and Classrooms"
 next = "dae30"
 music = "MM_06"
 sky1 = "0XSKY303", 0.01
-cluster = 4
+cluster = 164
 levelnum = 29
 forcenoskystretch
 nointermission 
@@ -7217,7 +7217,7 @@ map dae30 "Dimensional Shift"
 next = "dae31"
 music = "MM_07"
 sky1 = "0XSKY302", 0.0
-cluster = 4
+cluster = 164
 levelnum = 30
 forcenoskystretch
 nointermission 
@@ -7230,7 +7230,7 @@ next = "dae32"
 music = "MM_02"
 sky1 = "0XSKY303", 0.01
 forcenoskystretch
-cluster = 4
+cluster = 164
 levelnum = 31
 enterpic = "DAEDINT"
 exitpic = "DAEDINT"
@@ -7256,28 +7256,28 @@ intermusic = "MM_01"
 // ------------ cluster = Definitions -----------
 // Hub 1 "Out of the trashcan and into the fire"
 // MAPS 01-02-03-04-05-06-07 +14
-clusterdef 1
+clusterdef 161
 {
 hub
 }
 
 // Hub 2 "Gentlebeings, start your engines"
 // MAPS 08-09-10-11-12-16-18 +15
-clusterdef 2
+clusterdef 162
 {
 hub
 }
 
 // Hub 3 "Driving Miss Deadly"
 // MAPS 21-22-23-24-25-26
-Clusterdef 3
+Clusterdef 163
 {
 hub
 }
 
 // Hub 4 "Wo ist der ubahn, bitte?"
 // MAPS 28-29-30-31-32 +27
-Clusterdef 4
+Clusterdef 164
 {
 hub
 }
