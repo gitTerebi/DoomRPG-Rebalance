@@ -1363,10 +1363,8 @@ fixed StatsNatMod()
         // Skip player if they're not ingame
         if (!PlayerInGame(i)) continue;
 
-        PlayerLevel = Players(i).Level;
-        if (PlayerLevel <= 0) PlayerLevel = 1;
         StatsNat = Players(i).StrengthNat + Players(i).DefenseNat + Players(i).VitalityNat + Players(i).EnergyNat + Players(i).RegenerationNat + Players(i).AgilityNat + Players(i).CapacityNat + Players(i).LuckNat;
-        Modifier += ((fixed)StatsNat / ((fixed)PlayerLevel * 8.0) > 1.0 ? 1.0 : (fixed)StatsNat / ((fixed)PlayerLevel * 8.0));
+        Modifier += (fixed)StatsNat / 800.0 > 1.0 ? 1.0 : (fixed)StatsNat / 800.0;
         NumPlayers++;
     }
 
@@ -3928,30 +3926,29 @@ NamedScript void Silly()
 
 NamedScript Console void Test()
 {
-    /*  // For test the drop system
-        if (DebugLog)
-        {
-            Log("------------------------------------");
-            Log("Weapon dropped:");
-            for (int i = 0; i < ItemMax[0]; i++)
-                if (ItemData[0][i].Dropped > 0)
-                    Log("Item #%d. %S - %d dropped", i, ItemData[0][i].Name, ItemData[0][i].Dropped);
+    // For test the drop system
+    if (DebugLog)
+    {
+        Log("------------------------------------");
+        Log("Weapon dropped:");
+        for (int i = 0; i < ItemMax[0]; i++)
+            if (ItemData[0][i].Spawned > 0)
+                Log("Item #%d. %S - %d dropped", i, ItemData[0][i].Name, ItemData[0][i].Spawned);
 
-            Log("------------------------------------");
-            Log("Armors dropped:");
-            for (int j = 0; j < ItemMax[3]; j++)
-                if (ItemData[3][j].Dropped > 0)
-                    Log("Item #%d. %S - %d dropped", j, ItemData[3][j].Name, ItemData[3][j].Dropped);
+        Log("------------------------------------");
+        Log("Armors dropped:");
+        for (int j = 0; j < ItemMax[3]; j++)
+            if (ItemData[3][j].Spawned > 0)
+                Log("Item #%d. %S - %d dropped", j, ItemData[3][j].Name, ItemData[3][j].Spawned);
 
-            Log("------------------------------------");
-            Log("Boots dropped:");
-            for (int k = 0; k < ItemMax[9]; k++)
-                if (ItemData[9][k].Dropped > 0)
-                    Log("Item #%d. %S - %d dropped", k, ItemData[9][k].Name, ItemData[9][k].Dropped);
+        Log("------------------------------------");
+        Log("Boots dropped:");
+        for (int k = 0; k < ItemMax[9]; k++)
+            if (ItemData[9][k].Spawned > 0)
+                Log("Item #%d. %S - %d dropped", k, ItemData[9][k].Name, ItemData[9][k].Spawned);
 
-            Log("------------------------------------");
-        }
-    */
+        Log("------------------------------------");
+    }
 
     Log("Test is work!");
 }

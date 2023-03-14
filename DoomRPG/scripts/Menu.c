@@ -713,8 +713,6 @@ void DrawStatsMenu()
             HudMessage("Regen Sphere: %d Sec", (int)(40 + Player.RegenerationTotal * 2));
             EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
         }
-        HudMessage("Regen Sphere: %d Sec", (int)(40 + Player.RegenerationTotal * 2));
-        EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
         HudMessage("Toxicity Regen: %d Sec", 30 - Player.ToxicityRegenBonus);
         EndHudMessage(HUDMSG_PLAIN, 0, "Green",              30.1,   160.0,  0.05);
         HudMessage("Speed: %.2k", Player.Speed);

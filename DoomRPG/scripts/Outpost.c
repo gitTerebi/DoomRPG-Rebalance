@@ -2716,7 +2716,7 @@ NamedScript MapSpecial void DisassemblingDevice()
 
                         SetFont("SMALLFONT");
                         HudMessage("Cost of Extraction:");
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 288.0, Y + 336.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 7, "White", X + 292.0, Y + 336.0, 0.05, 0.05);
 
                         SetFont("BIGFONT");
                         HudMessage("\Cf%d C\C-", CurrentExtractionCost);
@@ -2724,7 +2724,7 @@ NamedScript MapSpecial void DisassemblingDevice()
 
                         SetFont("SMALLFONT");
                         HudMessage("\Ck(Discount: %d%%)", Player.ShopDiscount);
-                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 304.0, Y + 400.0, 0.05, 0.05);
+                        EndHudMessage(HUDMSG_FADEOUT, MENU_ID + 9, "White", X + 308.0, Y + 400.0, 0.05, 0.05);
 
                         SetFont("SMALLFONT");
                         HudMessage("Possible Extraction:\n\nMaximum amount: \Cd%d pcs.\C-", MaxAmount);
@@ -3525,7 +3525,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             CurrentAmountDetails4 = 1;
 
                             // Calculate Current Cost
-                            CurrentCost = (Item->Price - Item->Price * Player.ShopDiscount / 100) / 250 * 250;
+                            CurrentCost = ((Item->Price - Item->Price * Player.ShopDiscount / 100) / 2) / 250 * 250;
 
                             // Calculate Amount Details
                             CurrentAmountDetails1 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 30, 120)) / 5 * 5;
@@ -3533,26 +3533,61 @@ NamedScript MapSpecial void DisassemblingDevice()
                             CurrentAmountDetails3 = (int)(Curve(Item->Price / 20, CurrentCostMin, CurrentCostMax, 10, 40)) / 5 * 5;
 
                             // Set Individual Required
-                            // For Trigun
-                            if (ItemData[0][CurrentItem].Actor == "RLTrigun")
+                            // For Grammaton Cleric Beretta
+                            if (ItemData[0][CurrentItem].Actor == "RLGrammatonClericBeretta")
                             {
-                                CurrentIndexBasic = 75;
+                                CurrentIndexBasic = 11;
                             }
                             // For Widowmaker SMG
                             if (ItemData[0][CurrentItem].Actor == "RLWidowmakerSMG")
                             {
                                 CurrentIndexBasic = 6;
-                                CurrentAmountDetails1 *= 2;
-                                CurrentAmountDetails2 *= 2;
-                                CurrentAmountDetails3 *= 2;
+                                CurrentAmountDetails1 = 45;
+                                CurrentAmountDetails2 = 30;
+                                CurrentAmountDetails3 = 15;
+                            }
+                            // For Revenant's Launcher
+                            if (ItemData[0][CurrentItem].Actor == "RLRevenantsLauncher")
+                            {
+                                CurrentIndexBasic = -1;
+                                CurrentTypeDetails1 =  12;
+                                CurrentTypeDetails2 =  8;
+                                CurrentAmountDetails1 = 60;
+                                CurrentAmountDetails2 = 40;
+                                CurrentAmountDetails3 = 20;
+                            }
+                            // For Plasma Redirection Cannon
+                            if (ItemData[0][CurrentItem].Actor == "RLPlasmaRedirectionCannon")
+                            {
+                                CurrentIndexBasic = 9;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  13;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails5 = 1;
+                                CurrentAmountDetails6 = 2;
+                            }
+                            // For Trigun
+                            if (ItemData[0][CurrentItem].Actor == "RLTrigun")
+                            {
+                                CurrentIndexBasic = 75;
+                            }
+                            // For Chameleon Rifle
+                            if (ItemData[0][CurrentItem].Actor == "RLChameleonRifle")
+                            {
+                                CurrentIndexBasic = 98;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails1 = 40;
+                                CurrentAmountDetails5 = 1;
                             }
                             // For Frag Shotgun
                             if (ItemData[0][CurrentItem].Actor == "RLFragShotgun")
                             {
                                 CurrentIndexBasic = 2;
-                                CurrentAmountDetails1 *= 2;
-                                CurrentAmountDetails2 *= 2;
-                                CurrentAmountDetails3 *= 2;
+                                CurrentAmountDetails1 = 50;
+                                CurrentAmountDetails2 = 30;
+                                CurrentAmountDetails3 = 20;
                             }
                             // For Railgun
                             if (ItemData[0][CurrentItem].Actor == "RLRailgun")
@@ -3562,86 +3597,21 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 1;
-                                CurrentAmountDetails1 *= 2;
-                                CurrentAmountDetails2 *= 2;
-                                CurrentAmountDetails3 *= 2;
+                                CurrentAmountDetails1 = 50;
+                                CurrentAmountDetails2 = 30;
+                                CurrentAmountDetails3 = 20;
                             }
-                            // For Revenant's Launcher
-                            if (ItemData[0][CurrentItem].Actor == "RLRevenantsLauncher")
+                            // For Hellsing ARMS Casull
+                            if (ItemData[0][CurrentItem].Actor == "RLHellsingARMSCasull")
                             {
-                                CurrentIndexBasic = -1;
-                                CurrentTypeDetails1 =  12;
-                                CurrentAmountDetails1 = 60;
-                                CurrentTypeDetails2 =  8;
-                                CurrentAmountDetails2 *= 2;
-                                CurrentAmountDetails3 *= 2;
-                            }
-                            // For Grammaton Cleric Beretta
-                            if (ItemData[0][CurrentItem].Actor == "RLGrammatonClericBeretta")
-                            {
-                                CurrentIndexBasic = 102;
-                            }
-                            // For Jackhammer
-                            if (ItemData[0][CurrentItem].Actor == "RLJackhammer")
-                            {
-                                CurrentIndexBasic = 15;
-                            }
-                            // For Steel Beast
-                            if (ItemData[0][CurrentItem].Actor == "RLSteelBeast")
-                            {
-                                CurrentIndexBasic = 89;
-                                CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
-                            }
-                            // For Plasma Redirection Cannon
-                            if (ItemData[0][CurrentItem].Actor == "RLPlasmaRedirectionCannon")
-                            {
-                                CurrentIndexBasic = 23;
-                                CurrentTypeDetails2 =  10;
-                                CurrentTypeDetails3 =  11;
-                                CurrentTypeDetails5 =  13;
-                                CurrentAmountDetails5 = 1;
-                                CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 2;
-                            }
-                            // For Mysterious Magnum
-                            if (ItemData[0][CurrentItem].Actor == "RLMysteriousMagnum")
-                            {
-                                CurrentIndexBasic = 75;
-                            }
-                            // For Nanomachic Armament Generator
-                            if (ItemData[0][CurrentItem].Actor == "RLNanomachicArmamentGenerator")
-                            {
-                                CurrentIndexBasic = 199;
-                                CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
-                            }
-                            // For Charch's Null Pointer
-                            if (ItemData[0][CurrentItem].Actor == "RLNullPointer")
-                            {
-                                CurrentIndexBasic = 37;
-                                CurrentTypeDetails2 =  10;
-                                CurrentTypeDetails3 =  11;
+                                CurrentIndexBasic = 13;
                                 CurrentTypeDetails5 =  14;
                                 CurrentAmountDetails5 = 1;
-                                CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 1;
-                            }
-                            // For Suss Gun
-                            if (ItemData[0][CurrentItem].Actor == "RLSussGun")
-                            {
-                                CurrentIndexBasic = 23;
-                                CurrentTypeDetails5 =  12;
-                                CurrentTypeDetails2 =  10;
-                                CurrentTypeDetails3 =  11;
-                                CurrentAmountDetails5 = 1;
-                                CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 4;
                             }
                             // For MA-75B Assault Rifle
                             if (ItemData[0][CurrentItem].Actor == "RLMarathonAssaultRifle")
                             {
-                                CurrentIndexBasic = 98;
+                                CurrentIndexBasic = 6;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
@@ -3652,25 +3622,18 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
-                            // For Anti-Freak Jackal
-                            if (ItemData[0][CurrentItem].Actor == "RLAntiFreakJackal")
+                            // For Jackhammer
+                            if (ItemData[0][CurrentItem].Actor == "RLJackhammer")
                             {
-                                CurrentIndexBasic = 104;
-                                CurrentTypeDetails5 =  14;
-                                CurrentAmountDetails5 = 1;
+                                CurrentIndexBasic = 15;
+                                CurrentAmountDetails1 = 60;
+                                CurrentAmountDetails2 = 40;
+                                CurrentAmountDetails3 = 20;
                             }
-                            // For Hellsing ARMS Casull
-                            if (ItemData[0][CurrentItem].Actor == "RLHellsingARMSCasull")
+                            // For Steel Beast
+                            if (ItemData[0][CurrentItem].Actor == "RLSteelBeast")
                             {
-                                CurrentIndexBasic = 104;
-                                CurrentTypeDetails5 =  14;
-                                CurrentAmountDetails5 = 1;
-                            }
-                            // For Unknown Herald
-                            if (ItemData[0][CurrentItem].Actor == "RLUnknownHerald")
-                            {
-                                CurrentIndexBasic = 104;
-                                CurrentTypeDetails2 =  8;
+                                CurrentIndexBasic = 89;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
@@ -3681,28 +3644,77 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  12;
-                                CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  29;
+                                CurrentAmountDetails5 = 1;
                                 CurrentAmountDetails6 = 6;
                             }
-                            // For Particle Beam Cannon
-                            if (ItemData[0][CurrentItem].Actor == "RLParticleBeamCannon")
+                            // For Mysterious Magnum
+                            if (ItemData[0][CurrentItem].Actor == "RLMysteriousMagnum")
                             {
-                                CurrentIndexBasic = 37;
+                                CurrentIndexBasic = 75;
+                            }
+                            // For Unknown Herald
+                            if (ItemData[0][CurrentItem].Actor == "RLUnknownHerald")
+                            {
+                                CurrentIndexBasic = 12;
+                                CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Nanomachic Armament Generator
+                            if (ItemData[0][CurrentItem].Actor == "RLNanomachicArmamentGenerator")
+                            {
+                                CurrentIndexBasic = 199;
+                                CurrentTypeDetails5 =  11;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Suss Gun
+                            if (ItemData[0][CurrentItem].Actor == "RLSussGun")
+                            {
+                                CurrentIndexBasic = 20;
+                                CurrentTypeDetails5 =  12;
                                 CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails3 =  11;
-                                CurrentTypeDetails5 =  13;
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  30;
-                                CurrentAmountDetails6 = 2;
+                                CurrentAmountDetails6 = 4;
+                            }
+                            // For Charch's Null Pointer
+                            if (ItemData[0][CurrentItem].Actor == "RLNullPointer")
+                            {
+                                CurrentIndexBasic = 41;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 1;
                             }
                             // For MIRV Launcher
                             if (ItemData[0][CurrentItem].Actor == "RLMIRVLauncher")
                             {
                                 CurrentIndexBasic = 18;
                                 CurrentTypeDetails2 =  8;
-                                CurrentTypeDetails5 =  11;
+                                CurrentTypeDetails5 =  12;
                                 CurrentAmountDetails5 = 1;
+                            }
+                            // For Anti-Freak Jackal
+                            if (ItemData[0][CurrentItem].Actor == "RLAntiFreakJackal")
+                            {
+                                CurrentIndexBasic = 104;
+                                CurrentTypeDetails5 =  14;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For Particle Beam Cannon
+                            if (ItemData[0][CurrentItem].Actor == "RLParticleBeamCannon")
+                            {
+                                CurrentIndexBasic = 41;
+                                CurrentTypeDetails2 =  10;
+                                CurrentTypeDetails3 =  11;
+                                CurrentTypeDetails5 =  13;
+                                CurrentAmountDetails5 = 1;
+                                CurrentTypeDetails6 =  30;
+                                CurrentAmountDetails6 = 2;
                             }
                             // For BFG10k
                             if (ItemData[0][CurrentItem].Actor == "RLBFG10k")
@@ -3714,13 +3726,6 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentAmountDetails5 = 1;
                                 CurrentTypeDetails6 =  30;
                                 CurrentAmountDetails6 = 2;
-                            }
-                            // For Chameleon Rifle
-                            if (ItemData[0][CurrentItem].Actor == "RLChameleonRifle")
-                            {
-                                CurrentIndexBasic = 98;
-                                CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
                             }
                             // For Quad Shotgun
                             if (ItemData[0][CurrentItem].Actor == "RLQuadShotgun")
@@ -3743,7 +3748,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             // For Lucifer Cannon
                             if (ItemData[0][CurrentItem].Actor == "RLLuciferCannon")
                             {
-                                CurrentIndexBasic = 37;
+                                CurrentIndexBasic = 41;
                                 CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails3 =  11;
                                 CurrentTypeDetails5 =  14;
@@ -3754,7 +3759,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                             {
                                 CurrentIndexBasic = 18;
                                 CurrentTypeDetails2 =  8;
-                                CurrentTypeDetails5 =  11;
+                                CurrentTypeDetails5 =  12;
                                 CurrentAmountDetails5 = 1;
                             }
                             // For Nuclear Onslaught
@@ -4084,6 +4089,14 @@ NamedScript MapSpecial void DisassemblingDevice()
                             {
                                 CurrentIndexBasic = 18;
                                 CurrentTypeDetails2 =  8;
+                                CurrentTypeDetails5 =  12;
+                                CurrentAmountDetails5 = 1;
+                            }
+                            // For 0D-1a Assaultforce Armor
+                            if (ItemData[3][CurrentItem].Actor == "RLZeroDiamondAssaultforceArmorPickup")
+                            {
+                                CurrentIndexBasic = 18;
+                                CurrentTypeDetails2 =  6;
                                 CurrentTypeDetails5 =  11;
                                 CurrentAmountDetails5 = 1;
                             }
@@ -4117,14 +4130,6 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentIndexBasic = 41;
                                 CurrentTypeDetails6 = 30;
                                 CurrentAmountDetails6 = 2;
-                            }
-                            // For 0D-1a Assaultforce Armor
-                            if (ItemData[3][CurrentItem].Actor == "RLZeroDiamondAssaultforceArmorPickup")
-                            {
-                                CurrentIndexBasic = 18;
-                                CurrentTypeDetails2 =  6;
-                                CurrentTypeDetails5 =  11;
-                                CurrentAmountDetails5 = 1;
                             }
                             // For Malek's Armor
                             if (ItemData[3][CurrentItem].Actor == "RLMaleksArmorPickup")
@@ -4560,6 +4565,7 @@ NamedScript MapSpecial void DisassemblingDevice()
                                     && CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) >= CurrentAmountDetails3 && CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) >= CurrentAmountDetails4 && CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) >= CurrentAmountDetails5 && CheckInventory(ItemData[6][CurrentTypeDetails6].Actor) >= CurrentAmountDetails6)
                             {
                                 Player.OutpostMenu = 0;
+                                str ActorToSpawn;
 
                                 // Take Basic Item
                                 if (CurrentIndexBasic >= 0)
@@ -4585,8 +4591,13 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
                                 Delay(35 * 1);
 
+                                // Set actor to spawn
+                                ActorToSpawn = ItemData[CategoriesData[CurrentCategory]][CurrentItem].Actor;
+                                if (CompatMode == COMPAT_DRLA && CurrentCategory == 0)
+                                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+
                                 // Spawn Item in Disassembling Device
-                                SpawnSpotForced(ItemData[CategoriesData[CurrentCategory]][CurrentItem].Actor, DisassemblingDeviceID, UniqueTID(), 0);
+                                SpawnSpotForced(ActorToSpawn, DisassemblingDeviceID, UniqueTID(), 0);
 
                                 SetFont("BIGFONT");
                                 HudMessage("Item assembly is complete");
@@ -5067,6 +5078,7 @@ NamedScript MapSpecial void DemonAssemblingSanctuary()
                         && CheckInventory(ItemData[7][CurrentTypeDetails3].Actor) >= CurrentAmountDetails3 && CheckInventory(ItemData[8][CurrentTypeDetails4].Actor) >= CurrentAmountDetails4 && CheckInventory(ItemData[4][CurrentTypeDetails5].Actor) >= CurrentAmountDetails5 && CheckInventory(ItemData[6][CurrentTypeDetails6].Actor) >= CurrentAmountDetails6)
                 {
                     Player.OutpostMenu = 0;
+                    str ActorToSpawn;
 
                     // Take Basic Item
                     if (CurrentIndexBasic >= 0)
@@ -5096,8 +5108,13 @@ NamedScript MapSpecial void DemonAssemblingSanctuary()
                     FadeRange(0, 0, 0, 0.5, 0, 0, 0, 1.0, 1.0);
                     Delay(35 * 1);
 
+                    // Set actor to spawn
+                    ActorToSpawn = ItemData[CategoriesData[CurrentCategory]][CurrentItem].Actor;
+                    if (CompatMode == COMPAT_DRLA && CurrentCategory == 0)
+                        ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+
                     // Spawn Item in Disassembling Device
-                    SpawnSpotForced(ItemData[CategoriesData[CurrentCategory]][CurrentItem].Actor, DemonSanctuaryID, UniqueTID(), 0);
+                    SpawnSpotForced(ActorToSpawn, DemonSanctuaryID, UniqueTID(), 0);
 
                     SetFont("BIGFONT");
                     HudMessage("Item summoning is complete");

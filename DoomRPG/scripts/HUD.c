@@ -2332,8 +2332,8 @@ Start:
             {
                 if (CheckWeapon("RLAntiFreakJackal") && CheckInventory("RLAntiFreakJackalDemonArtifacts")) // Jackal/Casull
                 {
-                    JackelItem = &ItemData[0][42]; // Should probably come up with a better way to reference these?
-                    CasullItem = &ItemData[0][43];
+                    JackelItem = &ItemData[0][54]; // Should probably come up with a better way to reference these?
+                    CasullItem = &ItemData[0][42];
 
                     PrintSprite(JackelItem->Sprite.Name, 0, X + JackelItem->Sprite.XOff, Y + JackelItem->Sprite.YOff + (int)(Sin((fixed)Timer() / 128.0) * 4.0), 0.05);
                     PrintSprite(CasullItem->Sprite.Name, 0, X + CasullItem->Sprite.XOff + 32.0, Y + CasullItem->Sprite.YOff + (int)(Cos((fixed)Timer() / 128.0) * 4.0), 0.05);

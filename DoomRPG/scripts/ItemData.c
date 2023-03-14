@@ -430,60 +430,60 @@ NamedScript void BuildItemData()
 
         // Exotic Weapons
         ITEMDATA_DEF("RLBlaster",                               "Blaster \Ct[Exotic]\C-",                                 2000,  2, 1, "BLASX0", 12, 14);
-        ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 2, "OLOKX0", 10, 13);
-        ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 3, "DEAPX0", 11, 14);
-        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                        10000,  5, 4, "MRKPX0",  9, 12);
+        ITEMDATA_DEF("RLCombatPistol",                          "Combat Pistol \Ct[Exotic]\C-",                           3000,  3, 1, "OLOKX0", 10, 13);
+        ITEMDATA_DEF("RLHandCannon",                            "Handcannon \Ct[Exotic]\C-",                              4000,  4, 2, "DEAPX0", 11, 14);
+        ITEMDATA_DEF("RLMarksmanPistol",                        "Marksman Pistol \Ct[Exotic]\C-",                        10000,  5, 3, "MRKPX0",  9, 12);
         ITEMDATA_DEF("RLUzi",                                   "Uzi \Ct[Exotic]\C-",                                     6000,  4, 2, "RUZIX0", 20, 26);
         ITEMDATA_DEF("RLAssaultShotgun",                        "Assault Shotgun \Ct[Exotic]\C-",                        24000,  5, 3, "ASHOX0", 31, 27);
         ITEMDATA_DEF("RLPlasmaShotgun",                         "Plasma Shotgun \Ct[Exotic]\C-",                         30000,  6, 4, "PSHOX0", 22, 14);
         ITEMDATA_DEF("RLCombatTranslocator",                    "Combat Translocator \Ct[Exotic]\C-",                    20000,  6, 4, "CTLOX0", 18, 11);
         ITEMDATA_DEF("RLMissileLauncher",                       "Missile Launcher \Ct[Exotic]\C-",                       32000,  7, 5, "CLAUX0", 45, 24);
         ITEMDATA_DEF("RLNapalmLauncher",                        "Napalm Launcher \Ct[Exotic]\C-",                        48000,  8, 6, "NAPAX0", 22, 20);
-        ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                62000, 10, 7, "ZGGGX0", 30, 20);
-        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          64000, 10, 7, "NSSGX0", 27,  9);
-        ITEMDATA_DEF("RLLaserRifle",                            "Laser Rifle \Ct[Exotic]\C-",                            66000, 11, 7, "LASRX0", 18, 11);
-        ITEMDATA_DEF("RLTristarBlaster",                        "Tristar Blaster \Ct[Exotic]\C-",                        68000, 11, 7, "TRISX0", 35, 35);
+        ITEMDATA_DEF("RLTristarBlaster",                        "Tristar Blaster \Ct[Exotic]\C-",                        50000,  8, 6, "TRISX0", 35, 35);
+        ITEMDATA_DEF("RLMinigun",                               "Minigun \Ct[Exotic]\C-",                                60000, 10, 7, "ZGGGX0", 30, 20);
+        ITEMDATA_DEF("RLSuperShotgun",                          "Super Shotgun \Ct[Exotic]\C-",                          65000, 10, 7, "NSSGX0", 27,  9);
+        ITEMDATA_DEF("RLLaserRifle",                            "Laser Rifle \Ct[Exotic]\C-",                            67500, 11, 7, "LASRX0", 18, 11);
         ITEMDATA_DEF("RLNuclearPlasmaPistol",                   "Nuclear Plasma Pistol \Ct[Exotic]\C-",                  90000, 12, 8, "NUPPX0", 11, 14);
         ITEMDATA_DEF("RLNuclearPlasmaRifle",                    "Nuclear Plasma Rifle \Ct[Exotic]\C-",                  120000, 12, 9, "NUKPX0", 23, 14);
         ITEMDATA_DEF("RLNuclearBFG9000",                        "Nuclear BFG9000 \Ct[Exotic]\C-",                       200000, 12, 10, "NUKBX0", 28, 18);
 
         // Superior Weapons
-        ITEMDATA_DEF("RLMarksmanRifle",                         "Marksman Rifle \Ci[Superior]\C-",                       52000,  8, 6, "MRKRX0", 26, 18);
+        ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  26000,  6, 4, "BPP7X0", 8,  10);
+        ITEMDATA_DEF("RLThompson",                              "Tommy Gun \Ci[Superior]\C-",                            30000,  7, 4, "TGUNX0", 23, 17);
+        ITEMDATA_DEF("RLMarksmanRifle",                         "Marksman Rifle \Ci[Superior]\C-",                       40000,  7, 5, "MRKRX0", 26, 18);
+        ITEMDATA_DEF("RLHuntingRevolver",                       "Hunting Revolver \Ci[Superior]\C-",                     50000,  8, 6, "HREVX0", 12, 14);
         ITEMDATA_DEF("RLVanguardRifle",                         "Vanguard Rifle \Ci[Superior]\C-",                       60000,  8, 6, "VANRX0", 26, 13);
-        ITEMDATA_DEF("RLHuntingRevolver",                       "Hunting Revolver \Ci[Superior]\C-",                     35000,  7, 6, "HREVX0", 12, 14);
-        ITEMDATA_DEF("RLThompson",                              "Tommy Gun \Ci[Superior]\C-",                            30000,  7, 5, "TGUNX0", 23, 17);
-        ITEMDATA_DEF("RLPP7",                                   "PP7 \Ci[Superior]\C-",                                  26000,  6, 5, "BPP7X0", 8,  10);
-        ITEMDATA_DEF("RLHuntingShotgun",                        "Hunting Shotgun \Ci[Superior]\C-",                      80000, 12, 8, "HUNTX0", 32, 12);
         ITEMDATA_DEF("RLRCP90",                                 "RC-P90 \Ci[Superior]\C-",                               76000, 11, 7, "RCP9X0", 24, 15);
+        ITEMDATA_DEF("RLHuntingShotgun",                        "Hunting Shotgun \Ci[Superior]\C-",                      80000, 12, 8, "HUNTX0", 32, 12);
 
         // Unique Weapons
+        ITEMDATA_DEF("RLGrammatonClericBeretta",                "Grammaton Cleric Beretta \Cd[Unique]\C-",               30000, -1, 4, "GCBPX0", 12, 13);
+        ITEMDATA_DEF("RLWidowmakerSMG",                         "Widowmaker SMG \Cd[Unique]\C-",                         32500, -1, 4, "WSMGX0", 24, 20);
+        ITEMDATA_DEF("RLRevenantsLauncher",                     "Revenant's Launcher \Cd[Unique]\C-",                    35000, -1, 4, "REVLX0", 22, 13);
+        ITEMDATA_DEF("RLPlasmaRedirectionCannon",               "Plasma Redirection Cannon \Cd[Unique]\C-",              37500, -1, 4, "PRDCX0", 32, 24);
         ITEMDATA_DEF("RLTrigun",                                "Trigun \Cd[Unique]\C-",                                 40000, -1, 5, "TRIGX0", 15, 12);
-        ITEMDATA_DEF("RLWidowmakerSMG",                         "Widowmaker SMG \Cd[Unique]\C-",                         34000, -1, 5, "WSMGX0", 24, 20);
-        ITEMDATA_DEF("RLFragShotgun",                           "Frag Shotgun \Cd[Unique]\C-",                           30000, -1, 5, "FRSHX0", 28, 11);
-        ITEMDATA_DEF("RLRailgun",                               "Railgun \Cd[Unique]\C-",                                38000, -1, 5, "RAILX0", 23, 13);
-        ITEMDATA_DEF("RLRevenantsLauncher",                     "Revenant's Launcher \Cd[Unique]\C-",                    40000, -1, 5, "REVLX0", 22, 13);
-        ITEMDATA_DEF("RLGrammatonClericBeretta",                "Grammaton Cleric Beretta \Cd[Unique]\C-",               50000, -1, 6, "GCBPX0", 12, 13);
-        ITEMDATA_DEF("RLJackhammer",                            "Jackhammer \Cd[Unique]\C-",                             55000, -1, 6, "JHAMX0", 27, 14);
+        ITEMDATA_DEF("RLChameleonRifle",                        "Chameleon Rifle \Cd[Unique]\C-",                        42500, -1, 5, "CRM1X0", 26, 18);
+        ITEMDATA_DEF("RLFragShotgun",                           "Frag Shotgun \Cd[Unique]\C-",                           45000, -1, 5, "FRSHX0", 28, 11);
+        ITEMDATA_DEF("RLRailgun",                               "Railgun \Cd[Unique]\C-",                                47500, -1, 5, "RAILX0", 23, 13);
+        ITEMDATA_DEF("RLHellsingARMSCasull",                    "Hellsing ARMS Casull \Cd[Unique]\C-",                   50000, -1, 6, "HSACX0", 15, 14);
+        ITEMDATA_DEF("RLMarathonAssaultRifle",                  "MA-75B Assault Rifle \Cd[Unique]\C-",                   52500, -1, 6, "MA75Y0",  0,  0);
+        ITEMDATA_DEF("RLMarathonShotguns",                      "WSTE-M5 Shotgun \Cd[Unique]\C-",                        55000, -1, 6, "WSTEY0",  6,  6);
+        ITEMDATA_DEF("RLJackhammer",                            "Jackhammer \Cd[Unique]\C-",                             57500, -1, 6, "JHAMX0", 27, 14);
         ITEMDATA_DEF("RLSteelBeast",                            "Steel Beast \Cd[Unique]\C-",                            60000, -1, 6, "STBEX0", 36, 11);
-        ITEMDATA_DEF("RLPlasmaRedirectionCannon",               "Plasma Redirection Cannon \Cd[Unique]\C-",              65000, -1, 6, "PRDCX0", 32, 24);
-        ITEMDATA_DEF("RLMysteriousMagnum",                      "Mysterious Magnum \Cd[Unique]\C-",                      70000, -1, 7, "MMAGX0", 15, 12);
-        ITEMDATA_DEF("RLNullPointer",                           "Charch's Null Pointer \Cd[Unique]\C-",                  72000, -1, 7, "NULPX0", 23, 14);
-        ITEMDATA_DEF("RLSussGun",                               "Suss Gun \Cd[Unique]\C-",                               74000, -1, 7, "SUSSX0", 38, 37);
-        ITEMDATA_DEF("RLMarathonAssaultRifle",                  "MA-75B Assault Rifle \Cd[Unique]\C-",                   76000, -1, 7, "MA75Y0",  0,  0);
-        ITEMDATA_DEF("RLMarathonShotguns",                      "WSTE-M5 Shotgun \Cd[Unique]\C-",                        76000, -1, 7, "WSTEY0",  6,  6);
-        ITEMDATA_DEF("RLAntiFreakJackal",                       "Anti-Freak Jackal \Cd[Unique]\C-",                      76000, -1, 7, "AFJKX0", 15, 14);
-        ITEMDATA_DEF("RLHellsingARMSCasull",                    "Hellsing ARMS Casull \Cd[Unique]\C-",                   78000, -1, 7, "HSACX0", 15, 14);
-        ITEMDATA_DEF("RLUnknownHerald",                         "Unknown Herald \Cd[Unique]\C-",                         78000, -1, 7, "UNKHX0",  8, 10);
-        ITEMDATA_DEF("RLTantrumCannon",                         "Quantum Tantrum Cannon \Cd[Unique]\C-",                 80000, -1, 7, "QTCWX0", 14, 13);
-        ITEMDATA_DEF("RLParticleBeamCannon",                    "Particle Beam Cannon \Cd[Unique]\C-",                   84000, -1, 8, "PBCNX0", 26, 16);
-        ITEMDATA_DEF("RLMIRVLauncher",                          "MIRV Launcher \Cd[Unique]\C-",                          86000, -1, 8, "MIRVX0", 20, 16);
+        ITEMDATA_DEF("RLTantrumCannon",                         "Quantum Tantrum Cannon \Cd[Unique]\C-",                 62500, -1, 6, "QTCWX0", 14, 13);
+        ITEMDATA_DEF("RLMysteriousMagnum",                      "Mysterious Magnum \Cd[Unique]\C-",                      65000, -1, 7, "MMAGX0", 15, 12);
+        ITEMDATA_DEF("RLUnknownHerald",                         "Unknown Herald \Cd[Unique]\C-",                         67500, -1, 7, "UNKHX0",  8, 10);
+        ITEMDATA_DEF("RLNanomachicArmamentGenerator",           "Nanomachic Armament Generator \Cd[Unique]\C-",          70000, -1, 7, "NAG0X0", 13, 19);
+        ITEMDATA_DEF("RLSussGun",                               "Suss Gun \Cd[Unique]\C-",                               72500, -1, 7, "SUSSX0", 38, 37);
+        ITEMDATA_DEF("RLNullPointer",                           "Charch's Null Pointer \Cd[Unique]\C-",                  75000, -1, 7, "NULPX0", 23, 14);
+        ITEMDATA_DEF("RLMIRVLauncher",                          "MIRV Launcher \Cd[Unique]\C-",                          77500, -1, 7, "MIRVX0", 20, 16);
+        ITEMDATA_DEF("RLAntiFreakJackal",                       "Anti-Freak Jackal \Cd[Unique]\C-",                      80000, -1, 8, "AFJKX0", 15, 14);
+        ITEMDATA_DEF("RLParticleBeamCannon",                    "Particle Beam Cannon \Cd[Unique]\C-",                   85000, -1, 8, "PBCNX0", 26, 16);
         ITEMDATA_DEF("RLBFG10k",                                "BFG10k \Cd[Unique]\C-",                                 90000, -1, 8, "BFG4X0", 34, 24);
-        ITEMDATA_DEF("RLChameleonRifle",                        "Chameleon Rifle \Cd[Unique]\C-",                       100000, -1, 8, "CRM1X0", 26, 18);
-        ITEMDATA_DEF("RLQuadShotgun",                           "Quad Shotgun \Cd[Unique]\C-",                          125000, -1, 8, "SHT4X0", 26, 16);
-        ITEMDATA_DEF("RLNanomachicArmamentGenerator",           "Nanomachic Armament Generator \Cd[Unique]\C-",         150000, -1, 8, "NAG0X0", 13, 19);
-        ITEMDATA_DEF("RLLightweaver",                           "Lightweaver \Cd[Unique]\C-",                           175000, -1, 8, "KARAX0", 16, 10);
-        ITEMDATA_DEF("RLLuciferCannon",                         "Lucifer Cannon \Cd[Unique]\C-",                        225000, -1, 8, "LCFGX0", 30, 26);
-        ITEMDATA_DEF("RLDirectHit",                             "Direct Hit \Cd[Unique]\C-",                            275000, -1, 8, "DHTGX0", 20, 20);
+        ITEMDATA_DEF("RLQuadShotgun",                           "Quad Shotgun \Cd[Unique]\C-",                          100000, -1, 8, "SHT4X0", 26, 16);
+        ITEMDATA_DEF("RLLightweaver",                           "Lightweaver \Cd[Unique]\C-",                           150000, -1, 8, "KARAX0", 16, 10);
+        ITEMDATA_DEF("RLLuciferCannon",                         "Lucifer Cannon \Cd[Unique]\C-",                        200000, -1, 8, "LCFGX0", 30, 26);
+        ITEMDATA_DEF("RLDirectHit",                             "Direct Hit \Cd[Unique]\C-",                            250000, -1, 8, "DHTGX0", 20, 20);
         ITEMDATA_DEF("RLNuclearOnslaught",                      "Nuclear Onslaught \Cd[Unique]\C-",                     300000, -1, 9, "NKO0X0", 29, 54);
         ITEMDATA_DEF("RLTriadCannon",                           "Triad Cannon \Cd[Unique]\C-",                          350000, -1, 9, "TRIDX0", 25, 26);
         // ITEMDATA_DEF("RLSubtleKnife",                           "Subtle Knife \Cd[Unique]\C-",                           30000, -1, "SUBKX0", 38, 37);
@@ -492,8 +492,8 @@ NamedScript void BuildItemData()
 
         // Demonic Weapons
         // ITEMDATA_DEF("RLMonsterFrisbee",                        "Monster Frisbee \Cg[Demonic]\C-",                       78000, -1, "MFRSX0", 37, 21);
-        ITEMDATA_DEF("RLDeathsGaze",                            "Death's Gaze \Cg[Demonic]\C-",                          80000, -1, 7, "DGAZX0", 10, 13);
-        ITEMDATA_DEF("RLSoulstormRifle",                        "Soulstorm Rifle \Cg[Demonic]\C-",                      120000, -1, 8, "SOLDX0", 27, 17);
+        ITEMDATA_DEF("RLDeathsGaze",                            "Death's Gaze \Cg[Demonic]\C-",                          80000, -1, 6, "DGAZX0", 10, 13);
+        ITEMDATA_DEF("RLSoulstormRifle",                        "Soulstorm Rifle \Cg[Demonic]\C-",                      120000, -1, 7, "SOLDX0", 27, 17);
         ITEMDATA_DEF("RLHellsReign",                            "Hell's Reign \Cg[Demonic]\C-",                         200000, -1, 8, "HELRX0", 37, 21);
         // ITEMDATA_DEF("RLMortalyzer",                            "Mortalyzer \Cg[Demonic]\C-",                            58000, -1, "MRTZX0", 37, 21);
         // ITEMDATA_DEF("RLDreadshotMortar",                       "Dreadshot Mortar \Cg[Demonic]\C-",                      60000, -1, "DSMTX0", 37, 21);
@@ -856,11 +856,11 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLNanoAblativeArmorPickup",                       "Nano Ablative Armor \Cd[Unique]\C-",                40000, -1, 6, "NABLA0", 16, 19);
         ITEMDATA_DEF("RLShieldedArmorPickup",                           "Shielded Armor \Cd[Unique]\C-",                     40000, -1, 7, "SSHDA0", 16, 25);
         ITEMDATA_DEF("RLTerminusEst13BattlesuitArmorPickup",            "Terminus Battlesuit \Cd[Unique]\C-",                41000, -1, 7, "TEBSA0", 17, 30);
-        ITEMDATA_DEF("RLKateMatterstormHarnessArmorPickup",             "K-8 Matterstorm Harness \Cd[Unique]\C-",            41000, -1, 7, "K8MHA0", 16, 18);
-        ITEMDATA_DEF("RLJetpackArmorPickup",                            "Jetpack \Cd[Unique]\C-",                            42000, -1, 7, "JETPA0", 14, 36);
+        ITEMDATA_DEF("RLZeroDiamondAssaultforceArmorPickup",            "0D-1a Assaultforce Armor \Cd[Unique]\C-",           42000, -1, 7, "0DAFA0", 15, 32);
+        ITEMDATA_DEF("RLKateMatterstormHarnessArmorPickup",             "K-8 Matterstorm Harness \Cd[Unique]\C-",            42500, -1, 7, "K8MHA0", 16, 18);
+        ITEMDATA_DEF("RLJetpackArmorPickup",                            "Jetpack \Cd[Unique]\C-",                            43000, -1, 7, "JETPA0", 14, 36);
         ITEMDATA_DEF("RLSoloOperativeSuitArmorPickup",                  "Solo Operative Suit \Cd[Unique]\C-",                44444, -1, 7, "SSOSA0", 11, 35);
         ITEMDATA_DEF("RLPrototypeAssaultShieldArmorPickup",             "Prototype Assault Shield \Cd[Unique]\C-",           45000, -1, 8, "PASSA0", 12, 18);
-        ITEMDATA_DEF("RLZeroDiamondAssaultforceArmorPickup",            "0D-1a Assaultforce Armor \Cd[Unique]\C-",           47000, -1, 8, "0DAFA0", 15, 32);
         ITEMDATA_DEF("RLMaleksArmorPickup",                             "Malek's Armor \Cd[Unique]\C-",                      50000, -1, 8, "MALKA0", 15, 31);
         ITEMDATA_DEF("RLKyleTeslaboltArmorPickup",                      "K1-L3 Teslabolt Armor \Cd[Unique]\C-",              56000, -1, 8, "KTESA0", 17, 30);
         ITEMDATA_DEF("RLTorgueBlastplateArmorPickup",                   "Torgue Blastplate Armor \Cd[Unique]\C-",            60000, -1, 8, "TORAA0", 17, 21);
@@ -1434,7 +1434,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
 
                 if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
                 {
-                    if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Dropped * 4)) <= 50)
+                    if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Spawned * 4)) <= 50)
                     {
                         // Set weapon index
                         Index = j;
@@ -1465,42 +1465,51 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
         // Set chances for Exotic/Superior/Unique/Demonic/Legendary weapons
         if (CompatMode == COMPAT_DRLA && ItemSpawned)
         {
+            if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Common")
+            {
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+            }
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Exotic")
             {
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
                 Players(0).WeaponExoticChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).WeaponExoticChance += 15.0 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 11, 8) == "Superior")
             {
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
                 Players(0).WeaponSuperiorChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).WeaponSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Unique")
             {
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
                 Players(0).WeaponUniqueChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;;
+                ItemData[ItemCategory][Index].Spawned++;;
             }
             else
                 Players(0).WeaponUniqueChance += 2.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 10, 7) == "Demonic")
             {
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
                 Players(0).WeaponDemonicChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;;
+                ItemData[ItemCategory][Index].Spawned++;;
             }
             else
                 Players(0).WeaponDemonicChance += 0.3 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Legendary")
             {
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
                 Players(0).WeaponLegendaryChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;;
+                ItemData[ItemCategory][Index].Spawned++;;
             }
             else
                 Players(0).WeaponLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
@@ -1533,31 +1542,62 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
     str ActorToSpawn;
     bool ItemSpawned;
     int ItemCategory = 0;
-    int RarityMin = 5;
-    int RarityMax = 5 + RoundInt(5.0 * MapLevelModifier);
+    int RarityMin;
+    int RarityMax = 5;
+    int Modifier;
     int Amount;
+    int Index;
 
-    if (RarityMax > 9)
-        RarityMax = 9;
+    // Calculate Modifier
+    if (GetCVar("drpg_loot_type") == 0)
+        Modifier = RoundInt(7.5 * MapLevelModifier + 7.5 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 1)
+        Modifier = RoundInt(15.0 * MapLevelModifier);
+    if (GetCVar("drpg_loot_type") == 2)
+        Modifier = RoundInt(15.0 * (fixed)AveragePlayerLuck() / 100.0);
+    if (GetCVar("drpg_loot_type") == 3)
+        Modifier = Random(0,15);
+    if (Modifier > 15)
+        Modifier = 15;
+
+    // Calculate Rarity Max
+    for (int i = RarityMax; i < 10; i++)
+        if (Random(0, Random(3, 7) + RarityMax - Modifier) <= 0)
+            RarityMax++;
+    if (RarityMax < 5) // Make sure the Rarity still isn't -1, or else bad things will happen
+        RarityMax = 5;
+    if (RarityMax > 5 + RoundInt(5.0 * MapLevelModifier))
+        RarityMax = 5 + RoundInt(5.0 * MapLevelModifier);
+    if (RarityMax > 10)
+        RarityMax = 10;
+
+    // Calculate Rarity Min
+    if (RarityMax > 1)
+        RarityMin = Random(RarityMax / 4, RarityMax - 1);
 
     while (!ItemSpawned)
     {
-        Amount = 0;
-
         for (int i = 0; i < ItemMax[ItemCategory]; i++)
         {
-            if (StrMid(ItemData[ItemCategory][i].Name, StrLen(ItemData[ItemCategory][i].Name) - 9, 6) == "Unique" && ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
+            if (!ItemSpawned && StrMid(ItemData[ItemCategory][i].Name, StrLen(ItemData[ItemCategory][i].Name) - 9, 6) == "Unique" && ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
             {
-                if (Random(0, 1 + Amount) <= 0)
+                if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][i].Spawned * 4)) <= 50)
                 {
-                    ActorToSpawn = ItemData[ItemCategory][i].Actor;
+                    // Set weapon index
+                    Index = i;
+
+                    ActorToSpawn = StrParam("%SPickup", ItemData[ItemCategory][Index].Actor);
                     ItemSpawned = true;
                 }
                 Amount++;
             }
-            if (Amount > ItemMax[ItemCategory]) Amount = 0;
+
+            Amount = 0;
         }
     }
+
+    if (ItemSpawned)
+        ItemData[ItemCategory][Index].Spawned++;;
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
@@ -1670,7 +1710,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
 
                 if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
                 {
-                    if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Dropped * 4)) <= 50)
+                    if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Spawned * 4)) <= 50)
                     {
                         // Set armor index
                         Index = j;
@@ -1706,8 +1746,10 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
         {
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Assembled")
             {
+                if ((ItemCategory == 3 && (Index == 22 || Index == 26 || Index == 27 || Index == 28)) || (ItemCategory == 9 && Index == 3))
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
                 Players(0).ArmorAssembledChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).ArmorAssembledChance += 50.0 * (fixed)Modifier / 15.0;
@@ -1715,7 +1757,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Exotic")
             {
                 Players(0).ArmorExoticChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).ArmorExoticChance += 30.0 * (fixed)Modifier / 15.0;
@@ -1723,31 +1765,34 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 11, 8) == "Superior")
             {
                 Players(0).ArmorSuperiorChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).ArmorSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Unique")
             {
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
                 Players(0).ArmorUniqueChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).ArmorUniqueChance += 2.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 10, 7) == "Demonic")
             {
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
                 Players(0).ArmorDemonicChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).ArmorDemonicChance += 0.3 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Legendary")
             {
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
                 Players(0).ArmorLegendaryChance = 0;
-                ItemData[ItemCategory][Index].Dropped++;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).ArmorLegendaryChance += 0.2 * (fixed)Modifier / 15.0;

@@ -3035,29 +3035,29 @@ NamedScript void MonsterDeath()
         // Auras have a chance of rare vial drops
         for (int i = 0; i < AURA_MAX; i++)
             if (Stats->Aura.Type[i].Active)
-                DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 8 * DropMonsterModifier);
+                DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 16 * DropMonsterModifier);
 
         // Aura Drops
         if (Stats->Aura.Type[AURA_RED].Active) // Red Aura - Strength
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_WHITE].Active) // White Aura - XP
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_PURPLE].Active) // Purple Aura - Regeneration
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_ORANGE].Active) // Orange Aura - Agility
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_YELLOW].Active) // Yellow Aura - Luck
         {
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32 * DropMonsterModifier);
-            DropMonsterItem(Killer, 0, "DRPGChipDropper", 32 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGChipDropper", 64 * DropMonsterModifier);
         }
 
         // Luck-based Drops

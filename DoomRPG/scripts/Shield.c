@@ -1047,8 +1047,8 @@ NamedScript void SanicMod()
 
 NamedScript void NakedMod()
 {
-    if (Player.Shield.Active && CheckInventory("Armor") > 0)
-        GiveInventory("DRPGShieldNakedResist", 1);
+    if (Player.Shield.Active && CheckInventory("Armor") <= 0)
+        Player.DamageFactor *= 0.75;
 }
 
 NamedScript void BloodyShieldSoRealMod()

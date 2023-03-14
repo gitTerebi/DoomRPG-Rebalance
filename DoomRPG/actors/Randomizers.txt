@@ -502,7 +502,7 @@ actor DRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
 {
     DropItem "DRPGSoulsphere"   255 70
     DropItem "DRPGSoulsphere2"  255 20
-    DropItem "DRPGRegenSphere"  255 15
+    DropItem "DRPGRegenSphere"  255 10
     DropItem "DRPGSoulsphere3"  255 9
     DropItem "DRPGLifeDropper"  255 1
 }
