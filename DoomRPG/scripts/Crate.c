@@ -519,14 +519,43 @@ void GenerateCrate(int ID, int Amount)
         Crates[ID].Active[i] = true;
         Crates[ID].Item[i] = Item;
 
-        // Reget the item in case of repetition
+        // Reget the item
         for (int j = 0; j < i; j++)
         {
+            //  If the item was spawned before the crate was opened
+            if (Crates[ID].Item[i]->Spawned > 0 && Random(0, (Crates[ID].Item[i]->Spawned * 2) * 25) > 25)
+            {
+                Crates[ID].Item[i] = &ItemData[ItemCategories][Random(1, 22)];
+                break;
+            }
+            //  If the item repetition in crate
             if (Crates[ID].Item[i] == Crates[ID].Item[j])
             {
                 Crates[ID].Item[i] = &ItemData[ItemCategories][Random(1, 22)];
                 break;
             }
+            //  If the category repetition in crate
+            if (Crates[ID].Item[i]->Category == Crates[ID].Item[j]->Category && (Crates[ID].Item[i]->Category != 1 && Crates[ID].Item[i]->Category != 6 && Crates[ID].Item[i]->Category != ItemCategories))
+            {
+                Crates[ID].Item[i] = &ItemData[ItemCategories][Random(1, 22)];
+                break;
+            }
+            //  If the weapons, armor and boots together in crate
+            if ((Crates[ID].Item[i]->Category == 0 && (Crates[ID].Item[j]->Category == 3 || Crates[ID].Item[j]->Category == 9))
+                    || (Crates[ID].Item[i]->Category == 3 && (Crates[ID].Item[j]->Category == 0 || Crates[ID].Item[j]->Category == 9))
+                    || (Crates[ID].Item[i]->Category == 9 && (Crates[ID].Item[j]->Category == 0 || Crates[ID].Item[j]->Category == 3)))
+            {
+                Crates[ID].Item[i] = &ItemData[ItemCategories][Random(1, 22)];
+                break;
+            }
+        }
+
+        // Add to the Spawned counter if the item is weapons, armor, boots or shield parts
+        if (Crates[ID].Item[i]->Category == 0 || Crates[ID].Item[i]->Category == 3 || Crates[ID].Item[i]->Category == 5 || Crates[ID].Item[i]->Category == 9)
+        {
+            for (int k = 0; k < ItemMax[Crates[ID].Item[i]->Category]; k++)
+                if (Crates[ID].Item[i]->Actor == ItemData[Crates[ID].Item[i]->Category][k].Actor)
+                    ItemData[Crates[ID].Item[i]->Category][k].Spawned++;;
         }
 
         if (Random(0, MAX_DIFFICULTIES - Rarity) <= 0) Rarity--;
@@ -775,7 +804,48 @@ void GenerateCrate(int ID, int Amount)
 
 void CrateTakeItem()
 {
-    bool Spawned = SpawnForced(Crates[Player.CrateID].Item[Player.CrateIndex]->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+    str ActorToSpawn = Crates[Player.CrateID].Item[Player.CrateIndex]->Actor;
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Set actors
+    if (CompatMode == COMPAT_DRLA)
+    {
+        str ItemName = Crates[Player.CrateID].Item[Player.CrateIndex]->Name;
+        int ItemCategory = Crates[Player.CrateID].Item[Player.CrateIndex]->Category;
+
+        // For weapons
+        if (ItemCategory == 0)
+        {
+            if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Common")
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Exotic")
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 11, 8) == "Superior")
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+        }
+
+        // For armors and boots
+        if (ItemCategory == 3 || ItemCategory == 9)
+        {
+            if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Assembled")
+                if ((ItemCategory == 3 && (ActorToSpawn == "RLCerberusArmorPickup" || ActorToSpawn == "RLCyberNanoGreenArmorPickup" || ActorToSpawn == "RLCyberNanoBlueArmorPickup" || ActorToSpawn == "RLCyberNanoRedArmorPickup")) || (ItemCategory == 9 && ActorToSpawn == "RLCerberusBootsPickup"))
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+        }
+    }
+
+    bool Spawned = SpawnForced(ActorToSpawn, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
 
     if (Spawned)
     {
@@ -793,7 +863,48 @@ void CrateTakeAll()
 
     for (Player.CrateIndex = 0; Player.CrateIndex < Crates[Player.CrateID].Amount; Player.CrateIndex++)
     {
-        bool Spawned = SpawnForced(Crates[Player.CrateID].Item[Player.CrateIndex]->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+        str ActorToSpawn = Crates[Player.CrateID].Item[Player.CrateIndex]->Actor;
+
+        // Compatibility Handling - DoomRL Arsenal
+        // Set actors
+        if (CompatMode == COMPAT_DRLA)
+        {
+            str ItemName = Crates[Player.CrateID].Item[Player.CrateIndex]->Name;
+            int ItemCategory = Crates[Player.CrateID].Item[Player.CrateIndex]->Category;
+
+            // For weapons
+            if (ItemCategory == 0)
+            {
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Common")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Exotic")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 11, 8) == "Superior")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+            }
+
+            // For armors and boots
+            if (ItemCategory == 3 || ItemCategory == 9)
+            {
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Assembled")
+                    if ((ItemCategory == 3 && (ActorToSpawn == "RLCerberusArmorPickup" || ActorToSpawn == "RLCyberNanoGreenArmorPickup" || ActorToSpawn == "RLCyberNanoBlueArmorPickup" || ActorToSpawn == "RLCyberNanoRedArmorPickup")) || (ItemCategory == 9 && ActorToSpawn == "RLCerberusBootsPickup"))
+                        ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            }
+        }
+
+        bool Spawned = SpawnForced(ActorToSpawn, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
 
         if (Spawned)
         {
@@ -802,7 +913,6 @@ void CrateTakeAll()
             Crates[Player.CrateID].Active[Player.CrateIndex] = false;
             Crates[Player.CrateID].Item[Player.CrateIndex] = NULL;
         }
-
     }
 
     // Restore index.
