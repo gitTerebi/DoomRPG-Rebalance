@@ -1041,22 +1041,20 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("None",                    "\CaUnknown Item\C-",           0, -1, -1, "SprNone", 0, 0);
 
     // Items for Crates/Rewards - Basic
-    ITEMDATA_DEF("DRPGStimSmall",           "Small Stim",                   0, -1, -1, "STIMB0", 16, 29);
     ITEMDATA_DEF("DRPGVialStrength",        "\CgStrength\C- Vial",          0, -1, -1, "STVLA0",  4, 16);
     ITEMDATA_DEF("DRPGVialDefense",         "\CdDefense\C- Vial",           0, -1, -1, "STVLB0",  4, 16);
     ITEMDATA_DEF("DRPGVialVitality",        "\CaVitality\C- Vial",          0, -1, -1, "STVLC0",  4, 16);
     ITEMDATA_DEF("DRPGVialEnergy",          "\CnEnergy\C- Vial",            0, -1, -1, "STVLD0",  4, 16);
+    ITEMDATA_DEF("DRPGSmallBackpack",       "Ammo Satchel",                 0, -1, -1, "ASCHA0", 14, 30);
 
     // Items for Crates/Rewards -  Common
     ITEMDATA_DEF("DRPGVialRegeneration",    "\CtRegeneration\C- Vial",      0, -1, -1, "STVLE0",  4, 16);
     ITEMDATA_DEF("DRPGVialAgility",         "\CiAgility\C- Vial",           0, -1, -1, "STVLF0",  4, 16);
     ITEMDATA_DEF("DRPGVialCapacity",        "\ChCapacity\C- Vial",          0, -1, -1, "STVLG0",  4, 16);
     ITEMDATA_DEF("DRPGVialLuck",            "\CfLuck\C- Vial",              0, -1, -1, "STVLH0",  4, 16);
-    ITEMDATA_DEF("DRPGSmallBackpack",       "Ammo Satchel",                 0, -1, -1, "ASCHA0", 14, 30);
     ITEMDATA_DEF("DRPGChipGoldPack",        "\CfGold Chips (3 pcs.)\C-",    0, -1, -1, "CHPGB0",  0,  0);
 
     // Items for Crates/Rewards -  Uncommon
-    ITEMDATA_DEF("DRPGStimMedium",          "Medium Stim",                  0, -1, -1, "STIMB0", 16, 29);
     ITEMDATA_DEF("DRPGVialPurifier",        "\CcPurifier\C- Vial",          0, -1, -1, "STVLI0",  4, 16);
     ITEMDATA_DEF("DRPGVialPotency",         "\CjPotency\C- Vial",           0, -1, -1, "STVLJ0",  4, 16);
     ITEMDATA_DEF("DRPGVialIndestructible",  "\CqIndestructible\C- Vial",    0, -1, -1, "STVLK0",  4, 16);
@@ -1072,7 +1070,6 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGBackpack",            "Backpack",                     0, -1, -1, "BPAKA0",  8, 25);
 
     // Items for Crates/Rewards -  Rare
-    ITEMDATA_DEF("DRPGStimLarge",           "Large Stim",                   0, -1, -1, "STIMB0", 16, 29);
     ITEMDATA_DEF("DRPGVialVampire",         "\CaVampire\C- Vial",           0, -1, -1, "STVLQ0",  4, 16);
     ITEMDATA_DEF("DRPGVialRage",            "\CmRage\C- Vial",              0, -1, -1, "STVLR0",  4, 16);
     ITEMDATA_DEF("DRPGVialMagnetic",        "\CcMagnetic\C- Vial",          0, -1, -1, "STVLS0",  4, 16);
@@ -1084,7 +1081,6 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGBatteryLarge",        "Large Battery",                0, -1, -1, "BATTB0", 14, 21);
 
     // Items for Crates/Rewards -  Elite
-    ITEMDATA_DEF("DRPGStimXL",              "Extra-Large Stim",             0, -1, -1, "STIMB0", 16, 29);
     ITEMDATA_DEF("DRPGTurretPartCrate",     "Turret Parts Crate",           0, -1, -1, "TCRTA0", 29, 26);
 
     // Items for Crates/Rewards -  Legendary
@@ -1111,6 +1107,16 @@ NamedScript void BuildItemData()
     ITEMDATA_DEF("DRPGGeneratorCellDead",   "Dead Generator Cell",          0, -1, -1, "GCELH0",  8, 33);
 
     ITEMDATA_DEF("DRPGNeutralizerFuel",     "Radiation Neutralizer Fuel",   0, -1, -1, "RADMB0",  9, 20);
+
+    ITEMDATA_DEF("DRPGCredits1",            "1 \CfCredit\C-",               0, -1, -1, "CREDA0", 16, 12);
+    ITEMDATA_DEF("DRPGCredits5",            "5 \CfCredits\C-",              0, -1, -1, "CREDB0", 16, 12);
+    ITEMDATA_DEF("DRPGCredits10",           "10 \CfCredits\C-",             0, -1, -1, "CREDC0", 16, 12);
+    ITEMDATA_DEF("DRPGCredits20",           "20 \CfCredits\C-",             0, -1, -1, "CREDD0", 16, 12);
+    ITEMDATA_DEF("DRPGCredits50",           "50 \CfCredits\C-",             0, -1, -1, "CREDE0", 16, 12);
+    ITEMDATA_DEF("DRPGCredits100",          "100 \CfCredits\C-",            0, -1, -1, "CREDF0", 16, 12);
+    ITEMDATA_DEF("DRPGCredits250",          "250 \CfCredits\C-",            0, -1, -1, "CREDG0", 16, 12);
+    ITEMDATA_DEF("DRPGCredits500",          "500 \CfCredits\C-",            0, -1, -1, "CREDH0", 16, 12);
+    ITEMDATA_DEF("DRPGCredits1000",         "1000 \CfCredits\C-",           0, -1, -1, "CREDH0", 16, 12);
     ITEMDATA_CATEGORY_END;
 
     // Remove rank limitations in Debug Mode
@@ -1181,31 +1187,31 @@ ItemInfoPtr OptionalArgs(1) GetRewardItem(int Difficulty, bool SkipShieldPart)
                 Cap = 6;
                 break;
             case 1:
-                Cap = 12;
+                Cap = 11;
                 break;
             case 2:
-                Cap = 18;
+                Cap = 16;
                 break;
             case 3:
-                Cap = 24;
+                Cap = 22;
                 break;
             case 4:
-                Cap = 30;
+                Cap = 27;
                 break;
             case 5:
-                Cap = 32;
+                Cap = 29;
                 break;
             case 6:
-                Cap = 34;
+                Cap = 30;
                 break;
             case 7:
-                Cap = 35;
+                Cap = 31;
                 break;
             case 8:
-                Cap = 36;
+                Cap = 32;
                 break;
             case 9:
-                Cap = 36;
+                Cap = 32;
                 break;
             }
 
@@ -1403,9 +1409,9 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
         if (CompatMode == COMPAT_DRLA)
         {
             ExoticChance = (RarityMax >= 1 && RandomFixed(0.0, 100.0) <= Players(0).WeaponExoticChance);
-            SuperiorChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).WeaponSuperiorChance && !ExoticChance);
-            UniqueChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).WeaponUniqueChance && !ExoticChance && !SuperiorChance);
-            DemonicChance = (RarityMax >= 7 && RandomFixed(0.0, 100.0) <= Players(0).WeaponDemonicChance && !ExoticChance && !SuperiorChance && !UniqueChance);
+            SuperiorChance = (RarityMax >= 4 && RandomFixed(0.0, 100.0) <= Players(0).WeaponSuperiorChance && !ExoticChance);
+            UniqueChance = (RarityMax >= 4 && RandomFixed(0.0, 100.0) <= Players(0).WeaponUniqueChance && !ExoticChance && !SuperiorChance);
+            DemonicChance = (RarityMax >= 6 && RandomFixed(0.0, 100.0) <= Players(0).WeaponDemonicChance && !ExoticChance && !SuperiorChance && !UniqueChance);
             LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(0).WeaponLegendaryChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance);
             CommonChance = (!ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance && !LegendaryChance);
 
@@ -1491,7 +1497,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
                 Players(0).WeaponUniqueChance = 0;
-                ItemData[ItemCategory][Index].Spawned++;;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).WeaponUniqueChance += 2.5 * (fixed)Modifier / 15.0;
@@ -1500,7 +1506,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
                 Players(0).WeaponDemonicChance = 0;
-                ItemData[ItemCategory][Index].Spawned++;;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).WeaponDemonicChance += 0.3 * (fixed)Modifier / 15.0;
@@ -1509,7 +1515,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
                 Players(0).WeaponLegendaryChance = 0;
-                ItemData[ItemCategory][Index].Spawned++;;
+                ItemData[ItemCategory][Index].Spawned++;
             }
             else
                 Players(0).WeaponLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
@@ -1597,7 +1603,7 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
     }
 
     if (ItemSpawned)
-        ItemData[ItemCategory][Index].Spawned++;;
+        ItemData[ItemCategory][Index].Spawned++;
 
     SpawnSpotFacingForced(ActorToSpawn, 0, ActivatorTID());
 
@@ -1741,7 +1747,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
         }
 
         // Compatibility Handling - DoomRL Arsenal
-        // Set chances for Common/Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+        // Set chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
         if (CompatMode == COMPAT_DRLA && ItemSpawned)
         {
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Assembled")
@@ -1767,7 +1773,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
                 Players(0).ArmorSuperiorChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
-            else
+            else if (ItemCategory == 3)
                 Players(0).ArmorSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Unique")
