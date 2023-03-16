@@ -750,7 +750,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
     MonsterAggressionHandler();
 
     // Friendly Monsters Teleport To The Player Handling
-    MonsterFriendlyTeleport();
+    MonsterFriendlyTeleport(false);
 
     // Death Handler
     // Handled via ZScript
@@ -1423,7 +1423,10 @@ Start:
         return;
 
     if (GetActorProperty(0, APROP_Health) <= 0)
+    {
+        TakeInventory("DRPGMonsterAggressionHandler", 1);
         return;
+    }
 
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
@@ -1611,7 +1614,7 @@ Start:
     goto Start;
 }
 
-NamedScript void MonsterFriendlyTeleport()
+NamedScript void MonsterFriendlyTeleport(bool SpecialMonster)
 {
     if (!GetActorProperty(0, APROP_Friendly) || CurrentLevel->UACBase)
         return;
@@ -1619,6 +1622,8 @@ NamedScript void MonsterFriendlyTeleport()
     // Check class
     if (GetActorClass(0) == "DRPGForceWall" || GetActorClass(0) == "DRPGPortableTurret")
         return;
+    if (GetActorClass(0) == "RLDRPGSummonedLostSoulPE" || GetActorClass(0) == "RLDRPGSummonedLostSoulNPE" || GetActorClass(0) == "RLDRPGSummonedNightmareLostSoulNPE")
+        SpecialMonster = true;
 
     // Delay Stagger
     Delay(35 + (GetMonsterID(0) % 4));
@@ -1637,24 +1642,31 @@ NamedScript void MonsterFriendlyTeleport()
     int PlayerTID;
     int PlayerNumber;
     int MonsterTID = Stats->TID;
+    int MasterTID = GetActorProperty(0, APROP_MasterTID);
     int TeleportDistance;
 
-    if (InSingleplayer)
-        PlayerTID = Players(PlayerNumber).TID;
-    else
+    for (int i = 0; i < MAX_PLAYERS; i++)
     {
-        for (int i = 0; i < MAX_PLAYERS; i++)
-        {
-            if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
+        if (!PlayerInGame(i)) continue;
 
-            for (int j = 0; j < Players(i).Summons; j++)
+        // Checking if a player is monster's master by another reason
+        if (SpecialMonster && MasterTID == Players(i).TID)
+        {
+            PlayerTID = Players(i).TID;
+            PlayerNumber = i;
+            break;
+        }
+
+        if (Players(i).Summons == 0) continue;
+
+        // Checking if a monster is summoned by a player
+        for (int j = 0; j < Players(i).Summons; j++)
+        {
+            if (MonsterTID == Players(i).SummonTID[j])
             {
-                if (Players(i).SummonTID[j] == MonsterTID)
-                {
-                    PlayerTID = Players(i).TID;
-                    PlayerNumber = i;
-                    break;
-                }
+                PlayerTID = Players(i).TID;
+                PlayerNumber = i;
+                break;
             }
         }
     }
@@ -1771,6 +1783,7 @@ Start:
             OldEnergy = 0;
             OldLuck = 0;
         }
+        TakeInventory("DRPGMonsterStatsHandler", 1);
         return;
     }
 
@@ -2203,7 +2216,10 @@ NamedScript void MonsterRegenerationHandler()
 Start:
 
     if (GetActorProperty(0, APROP_Health) <= 0)
+    {
+        TakeInventory("DRPGMonsterRegenerationHandler", 1);
         return;
+    }
 
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
@@ -2732,7 +2748,7 @@ NamedScript DECORATE void MonsterRevive()
 
         SetActorPropertyString(0, APROP_Species, "Player");
         GiveInventory("DRPGFriendlyReviveMonster", 1);
-        MonsterFriendlyTeleport();
+        MonsterFriendlyTeleport(true);
     }
     else
         SetActorPropertyString(0, APROP_Species, "None");

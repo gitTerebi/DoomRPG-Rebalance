@@ -649,14 +649,14 @@ NamedScript void BuildItemData()
         ITEMDATA_DEF("RLZeusCannon",                            "Zeus Cannon \Cv[Assembled]\C-",                        250000, -1, -1, "ZEUSX0", 28, 28);
 
         // Plasma Infusion Assembled Weapons
-        // ITEMDATA_DEF("RLEnergyBlade",                           "Energy Blade \Cv[Assembled]\C-",                        70000, -1, "EKNIX0", 43, 19);
-        ITEMDATA_DEF("RLEnergysaw",                             "Energysaw \Cv[Assembled]\C-",                           90000, -1, -1, "ESAWX0", 22, 23);
-        ITEMDATA_DEF("RLLaserMinigun",                          "Laser Minigun \Cv[Assembled]\C-",                       60000, -1, -1, "LMINX0", 28, 13);
-        ITEMDATA_DEF("RLPlasmaCannon",                          "Plasma Cannon \Cv[Assembled]\C-",                       75000, -1, -1, "PLSCX0", 33, 13);
-        ITEMDATA_DEF("RLHeavyPulseBlaster",                     "Heavy Pulse Blaster \Cv[Assembled]\C-",                 65000, -1, -1, "HBLAX0", 14, 12);
-        ITEMDATA_DEF("RLInfusionLauncher",                      "Plascharge Launcher \Cv[Assembled]\C-",                110000, -1, -1, "RLAUX0", 43, 19);
+        // ITEMDATA_DEF("RLEnergyBlade",                           "Energy Blade \Cv[Assembled]\C-",                        60000, -1, "EKNIX0", 43, 19);
+        ITEMDATA_DEF("RLEnergysaw",                             "Energysaw \Cv[Assembled]\C-",                           80000, -1, -1, "ESAWX0", 22, 23);
+        ITEMDATA_DEF("RLHeavyPulseBlaster",                     "Heavy Pulse Blaster \Cv[Assembled]\C-",                100000, -1, -1, "HBLAX0", 14, 12);
+        ITEMDATA_DEF("RLLaserMinigun",                          "Laser Minigun \Cv[Assembled]\C-",                      120000, -1, -1, "LMINX0", 28, 13);
+        ITEMDATA_DEF("RLPlasmaCannon",                          "Plasma Cannon \Cv[Assembled]\C-",                      140000, -1, -1, "PLSCX0", 33, 13);
+        ITEMDATA_DEF("RLInfusionLauncher",                      "Plascharge Launcher \Cv[Assembled]\C-",                160000, -1, -1, "RLAUX0", 43, 19);
         ITEMDATA_DEF("RLLaserPulseLauncher",                    "Defence Drone Launcher \Cv[Assembled]\C-",             180000, -1, -1, "DDRLX0", 19, 18);
-        ITEMDATA_DEF("RLIncinerationDeviceLauncher",            "Incineration Device Launcher \Cv[Assembled]\C-",       180000, -1, -1, "IDLAX0", 23, 21);
+        ITEMDATA_DEF("RLIncinerationDeviceLauncher",            "Incineration Device Launcher \Cv[Assembled]\C-",       200000, -1, -1, "IDLAX0", 23, 21);
 
         // Nanomanufacture Assembled Weapons
         ITEMDATA_DEF("RLNanoManufactureAmmoPistol",             "Nanomachic Pistol \Cv[Assembled]\C-",                   50000, -1, -1, "MPISX0", 11, 13);

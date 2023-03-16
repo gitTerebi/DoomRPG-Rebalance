@@ -33,7 +33,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int);
 NamedScript void MonsterStatsHandler();
 NamedScript void MonsterAuraDisplayHandler();
 NamedScript void MonsterAggressionHandler();
-NamedScript void MonsterFriendlyTeleport();
+NamedScript void MonsterFriendlyTeleport(bool);
 NamedScript void MonsterLevelupHandler();
 NamedScript void MonsterEPDrainHandler();
 NamedScript void MonsterRegenerationHandler();
