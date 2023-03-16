@@ -11,8 +11,8 @@ str const CrateRarityNames[MAX_DIFFICULTIES] =
 {
     "\CcBasic",
     "\CjCommon",
-    "\CdUncommon",
-    "\CdSuperior",
+    "\CqUncommon",
+    "\CiSuperior",
     "\CnRare",
     "\CnVery Rare",
     "\CiElite",
@@ -477,16 +477,18 @@ void GenerateCrate(int ID, int Amount)
     int i;
     int Firewalls;
     int NumPlayers = PlayerCount();
-    int Modifier;
+    fixed Modifier;
     fixed ShieldPartChance = GetCVarFixed("drpg_loot_crate_spc");
 
     // Set variables for new item
     ItemInfoPtr NewItem;
     str NewItemName;
     str NewItemActor;
+    int NewItemIndex;
     int NewItemCategory;
     int NewItemSpawned;
     bool NewItemSelected;
+    bool NewItemIsAdditional;
 
     // Set variables for old item
     ItemInfoPtr OldItem;
@@ -494,16 +496,7 @@ void GenerateCrate(int ID, int Amount)
     int OldItemCategory;
 
     // Calculate Modifier
-    if (GetCVar("drpg_loot_type") == 0)
-        Modifier = RoundInt(7.5 * MapLevelModifier + 7.5 * (fixed)AveragePlayerLuck() / 100.0);
-    if (GetCVar("drpg_loot_type") == 1)
-        Modifier = RoundInt(15.0 * MapLevelModifier);
-    if (GetCVar("drpg_loot_type") == 2)
-        Modifier = RoundInt(15.0 * (fixed)AveragePlayerLuck() / 100.0);
-    if (GetCVar("drpg_loot_type") == 3)
-        Modifier = Random(0,15);
-    if (Modifier > 15)
-        Modifier = 15;
+    Modifier = (fixed)Crates[ID].Rarity / ((fixed)MAX_DIFFICULTIES - 1.0);
 
     if (Crates[ID].SupplyDrop)
     {
@@ -548,19 +541,19 @@ void GenerateCrate(int ID, int Amount)
     if (CompatMode == COMPAT_DRLA)
     {
         // For weapon
-        WeaponExoticChance = RandomFixed(0.0, 100.0) <= Players(0).WeaponExoticChance;
-        WeaponSuperiorChance = RandomFixed(0.0, 100.0) <= Players(0).WeaponSuperiorChance;
-        WeaponUniqueChance = RandomFixed(0.0, 100.0) <= Players(0).WeaponUniqueChance;
-        WeaponDemonicChance = RandomFixed(0.0, 100.0) <= Players(0).WeaponDemonicChance;
-        WeaponLegendaryChance = RandomFixed(0.0, 100.0) <= Players(0).WeaponLegendaryChance;
+        WeaponExoticChance = RandomFixed(0.0, 100.0) <= Player.WeaponExoticChance;
+        WeaponSuperiorChance = RandomFixed(0.0, 100.0) <= Player.WeaponSuperiorChance;
+        WeaponUniqueChance = RandomFixed(0.0, 100.0) <= Player.WeaponUniqueChance;
+        WeaponDemonicChance = RandomFixed(0.0, 100.0) <= Player.WeaponDemonicChance;
+        WeaponLegendaryChance = RandomFixed(0.0, 100.0) <= Player.WeaponLegendaryChance;
 
         // For armor
-        ArmorAssembledChance = RandomFixed(0.0, 100.0) <= Players(0).ArmorAssembledChance;
-        ArmorExoticChance = RandomFixed(0.0, 100.0) <= Players(0).ArmorExoticChance;
-        ArmorSuperiorChance = RandomFixed(0.0, 100.0) <= Players(0).ArmorSuperiorChance;
-        ArmorUniqueChance = RandomFixed(0.0, 100.0) <= Players(0).ArmorUniqueChance;
-        ArmorDemonicChance = RandomFixed(0.0, 100.0) <= Players(0).ArmorDemonicChance;
-        ArmorLegendaryChance = RandomFixed(0.0, 100.0) <= Players(0).ArmorLegendaryChance;
+        ArmorAssembledChance = RandomFixed(0.0, 100.0) <= Player.ArmorAssembledChance;
+        ArmorExoticChance = RandomFixed(0.0, 100.0) <= Player.ArmorExoticChance;
+        ArmorSuperiorChance = RandomFixed(0.0, 100.0) <= Player.ArmorSuperiorChance;
+        ArmorUniqueChance = RandomFixed(0.0, 100.0) <= Player.ArmorUniqueChance;
+        ArmorDemonicChance = RandomFixed(0.0, 100.0) <= Player.ArmorDemonicChance;
+        ArmorLegendaryChance = RandomFixed(0.0, 100.0) <= Player.ArmorLegendaryChance;
     }
 
     for (bool SkipShieldPart = true; i < Amount; i++)
@@ -581,14 +574,8 @@ void GenerateCrate(int ID, int Amount)
             else
                 NewItemSelected = true;
 
-            // Get info for new item
-            NewItemName = NewItem->Name;
-            NewItemActor = NewItem->Actor;
-            NewItemCategory = NewItem->Category;
-            NewItemSpawned = NewItem->Spawned;
-
-            // Add items for random if item categories is Misc (chance is 50%)
-            if (NewItemCategory == ItemCategories && Random(0, 100) < 50)
+            // Add items for random if item categories is Misc (chance is 35%)
+            if (NewItem->Category == ItemCategories && Random(0, 100) > 65)
             {
                 int AddItemCategory;
                 int IndexMin;
@@ -599,25 +586,35 @@ void GenerateCrate(int ID, int Amount)
                 // Credits
                 case 0:
                     AddItemCategory = 10;
-                    IndexMin = ItemMax[AddItemCategory] - (7 - RoundInt(3.0 * (fixed)Rarity / (MAX_DIFFICULTIES - 1)));
-                    IndexMax = ItemMax[AddItemCategory] - (7 - RoundInt(6.0 * (fixed)Rarity / (MAX_DIFFICULTIES - 1)));
+                    IndexMin = ItemMax[AddItemCategory] - (8 - RoundInt(4.0 * Modifier));
+                    IndexMax = ItemMax[AddItemCategory] - (7 - RoundInt(6.0 * Modifier));
+                    NewItemIsAdditional = true;
                     break;
                 // Ammo
                 case 1:
                     AddItemCategory = 1;
                     IndexMin = 0;
                     IndexMax = ItemMax[AddItemCategory] - 4;
+                    NewItemIsAdditional = true;
                     break;
                 // Loot
                 case 2:
                     AddItemCategory = 7;
                     IndexMin = 0;
                     IndexMax = ItemMax[AddItemCategory] - 1;
+                    NewItemIsAdditional = true;
                     break;
                 }
 
                 NewItem = &ItemData[AddItemCategory][Random(IndexMin, IndexMax)];
             }
+
+            // Get info for new item
+            NewItemName = NewItem->Name;
+            NewItemActor = NewItem->Actor;
+            NewItemIndex = NewItem->Index;
+            NewItemCategory = NewItem->Category;
+            NewItemSpawned = NewItem->Spawned;
 
             // Check the item
             for (int j = 0; j < i; j++)
@@ -634,13 +631,19 @@ void GenerateCrate(int ID, int Amount)
                     break;
                 }
                 //  Item check fails if the item repetition in crate
-                else if (NewItemActor == OldItemActor)
+                else if (NewItemActor == OldItemActor && !NewItemIsAdditional)
                 {
                     NewItemSelected = false;
                     break;
                 }
                 //  Item check fails if the category repetition in crate
                 else if (NewItemCategory == OldItemCategory && (NewItemCategory != 1 && NewItemCategory != 6 && NewItemCategory != 7 && NewItemCategory != ItemCategories))
+                {
+                    NewItemSelected = false;
+                    break;
+                }
+                //  Item check fails if the small ammo appear in rare crates
+                else if (NewItemCategory == 1 && Rarity > 1 && (NewItemIndex == 0 || NewItemIndex == 2 || NewItemIndex == 4 || NewItemIndex == 6))
                 {
                     NewItemSelected = false;
                     break;
@@ -680,7 +683,7 @@ void GenerateCrate(int ID, int Amount)
                 }
 
                 // Special chance check for boots (standard 10% chance from DoomRL Arsenal)
-                if (NewItemCategory == 9 && Random(0, 100) > 10)  NewItemSelected = false;
+                if (NewItemCategory == 9 && Random(0, 100) < 90)  NewItemSelected = false;
             }
 
             // Set a new item for crate, if it has been selected
@@ -705,63 +708,63 @@ void GenerateCrate(int ID, int Amount)
             {
                 // For Exotic
                 if (StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Exotic")
-                    Players(0).WeaponExoticChance = 0;
+                    Player.WeaponExoticChance = 0;
                 else
-                    Players(0).WeaponExoticChance += 15.0 * (fixed)Modifier / 15.0;
+                    Player.WeaponExoticChance += 15.0 * Modifier / 15.0;
                 // For Superior
                 if (StrMid(NewItemName, StrLen(NewItemName) - 11, 8) == "Superior")
-                    Players(0).WeaponSuperiorChance = 0;
+                    Player.WeaponSuperiorChance = 0;
                 else
-                    Players(0).WeaponSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
+                    Player.WeaponSuperiorChance += 0.5 * Modifier / 15.0;
                 // For Unique
                 if (StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Unique")
-                    Players(0).WeaponUniqueChance = 0;
+                    Player.WeaponUniqueChance = 0;
                 else
-                    Players(0).WeaponUniqueChance += 2.5 * (fixed)Modifier / 15.0;
+                    Player.WeaponUniqueChance += 2.5 * Modifier / 15.0;
                 // For Demonic
                 if (StrMid(NewItemName, StrLen(NewItemName) - 10, 7) == "Demonic")
-                    Players(0).WeaponDemonicChance = 0;
+                    Player.WeaponDemonicChance = 0;
                 else
-                    Players(0).WeaponDemonicChance += 0.3 * (fixed)Modifier / 15.0;
+                    Player.WeaponDemonicChance += 0.3 * Modifier / 15.0;
                 // For Legendary
                 if (StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Legendary")
-                    Players(0).WeaponLegendaryChance = 0;
+                    Player.WeaponLegendaryChance = 0;
                 else
-                    Players(0).WeaponLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
+                    Player.WeaponLegendaryChance += 0.2 * Modifier / 15.0;
             }
             // Set chances for armors and boots
             if (NewItemCategory == 3 || NewItemCategory == 9)
             {
                 // For Assembled
                 if (StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Assembled")
-                    Players(0).ArmorAssembledChance = 0;
+                    Player.ArmorAssembledChance = 0;
                 else
-                    Players(0).ArmorAssembledChance += 50.0 * (fixed)Modifier / 15.0;
+                    Player.ArmorAssembledChance += 50.0 * Modifier / 15.0;
                 // For Exotic
                 if (StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Exotic")
-                    Players(0).ArmorExoticChance = 0;
+                    Player.ArmorExoticChance = 0;
                 else
-                    Players(0).ArmorExoticChance += 15.0 * (fixed)Modifier / 15.0;
+                    Player.ArmorExoticChance += 15.0 * Modifier / 15.0;
                 // For Superior
                 if (StrMid(NewItemName, StrLen(NewItemName) - 11, 8) == "Superior")
-                    Players(0).ArmorSuperiorChance = 0;
+                    Player.ArmorSuperiorChance = 0;
                 else if (NewItemCategory == 3)
-                    Players(0).ArmorSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
+                    Player.ArmorSuperiorChance += 0.5 * Modifier / 15.0;
                 // For Unique
                 if (StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Unique")
-                    Players(0).ArmorUniqueChance = 0;
+                    Player.ArmorUniqueChance = 0;
                 else
-                    Players(0).ArmorUniqueChance += 2.5 * (fixed)Modifier / 15.0;
+                    Player.ArmorUniqueChance += 2.5 * Modifier / 15.0;
                 // For Demonic
                 if (StrMid(NewItemName, StrLen(NewItemName) - 10, 7) == "Demonic")
-                    Players(0).ArmorDemonicChance = 0;
+                    Player.ArmorDemonicChance = 0;
                 else
-                    Players(0).ArmorDemonicChance += 0.3 * (fixed)Modifier / 15.0;
+                    Player.ArmorDemonicChance += 0.3 * Modifier / 15.0;
                 // For Legendary
                 if (StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Legendary")
-                    Players(0).ArmorLegendaryChance = 0;
+                    Player.ArmorLegendaryChance = 0;
                 else
-                    Players(0).ArmorLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
+                    Player.ArmorLegendaryChance += 0.2 * Modifier / 15.0;
             }
 
             // Add to the spawned counter for Assembled/Exotic/Superior/Unique/Demonic/Legendary weapons and armor
@@ -771,8 +774,9 @@ void GenerateCrate(int ID, int Amount)
                         ItemData[NewItemCategory][h].Spawned++;
         }
 
-        // Reset the variable for next cycle
+        // Reset the variables for next cycle
         NewItemSelected = false;
+        NewItemIsAdditional = false;
 
         if (Random(0, MAX_DIFFICULTIES - Rarity) <= 0) Rarity--;
         if (Rarity < 0) Rarity = 0;

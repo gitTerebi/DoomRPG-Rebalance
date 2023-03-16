@@ -1639,17 +1639,22 @@ NamedScript void MonsterFriendlyTeleport()
     int MonsterTID = Stats->TID;
     int TeleportDistance;
 
-    for (int i = 0; i < MAX_PLAYERS; i++)
+    if (InSingleplayer)
+        PlayerTID = Players(PlayerNumber).TID;
+    else
     {
-        if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
-
-        for (int j = 0; j < Players(i).Summons; j++)
+        for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            if (Players(i).SummonTID[j] == MonsterTID)
+            if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
+
+            for (int j = 0; j < Players(i).Summons; j++)
             {
-                PlayerTID = Players(i).TID;
-                PlayerNumber = i;
-                break;
+                if (Players(i).SummonTID[j] == MonsterTID)
+                {
+                    PlayerTID = Players(i).TID;
+                    PlayerNumber = i;
+                    break;
+                }
             }
         }
     }
