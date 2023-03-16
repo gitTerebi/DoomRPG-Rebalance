@@ -1359,13 +1359,26 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
 
     str ActorToSpawn;
     bool ItemSpawned;
-    int ItemCategory = 0;
+    int PlayerNumber;
+    int ItemCategory;
     int RarityMin;
     int RarityMax;
     int Modifier;
     int Amount;
     int Index;
     int Iterations;
+
+    // Selecting a player number in multiplayer for calculate the chances
+    if (InMultiplayer)
+    {
+        for (int p = 0; p < MAX_PLAYERS; p++)
+        {
+            if (!PlayerInGame(p)) continue;
+            PlayerNumber = p;
+            if (Random(0, PlayerCount() - 1) <= 0)
+                break;
+        }
+    }
 
     // Calculate Modifier
     if (GetCVar("drpg_loot_type") == 0)
@@ -1408,11 +1421,11 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
         // Calculate the chances for Exotic/Superior/Unique/Demonic/Legendary weapons
         if (CompatMode == COMPAT_DRLA)
         {
-            ExoticChance = (RarityMax >= 1 && RandomFixed(0.0, 100.0) <= Players(0).WeaponExoticChance);
-            SuperiorChance = (RarityMax >= 4 && RandomFixed(0.0, 100.0) <= Players(0).WeaponSuperiorChance && !ExoticChance);
-            UniqueChance = (RarityMax >= 4 && RandomFixed(0.0, 100.0) <= Players(0).WeaponUniqueChance && !ExoticChance && !SuperiorChance);
-            DemonicChance = (RarityMax >= 6 && RandomFixed(0.0, 100.0) <= Players(0).WeaponDemonicChance && !ExoticChance && !SuperiorChance && !UniqueChance);
-            LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(0).WeaponLegendaryChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance);
+            ExoticChance = (RarityMax >= 1 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).WeaponExoticChance);
+            SuperiorChance = (RarityMax >= 4 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).WeaponSuperiorChance && !ExoticChance);
+            UniqueChance = (RarityMax >= 4 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).WeaponUniqueChance && !ExoticChance && !SuperiorChance);
+            DemonicChance = (RarityMax >= 6 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).WeaponDemonicChance && !ExoticChance && !SuperiorChance && !UniqueChance);
+            LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).WeaponLegendaryChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance);
             CommonChance = (!ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance && !LegendaryChance);
 
             if (DebugLog)
@@ -1478,56 +1491,56 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Exotic")
             {
                 ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
-                Players(0).WeaponExoticChance = 0;
+                Players(PlayerNumber).WeaponExoticChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).WeaponExoticChance += 15.0 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).WeaponExoticChance += 15.0 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 11, 8) == "Superior")
             {
                 ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
-                Players(0).WeaponSuperiorChance = 0;
+                Players(PlayerNumber).WeaponSuperiorChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).WeaponSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).WeaponSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Unique")
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
-                Players(0).WeaponUniqueChance = 0;
+                Players(PlayerNumber).WeaponUniqueChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).WeaponUniqueChance += 2.5 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).WeaponUniqueChance += 2.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 10, 7) == "Demonic")
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
-                Players(0).WeaponDemonicChance = 0;
+                Players(PlayerNumber).WeaponDemonicChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).WeaponDemonicChance += 0.3 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).WeaponDemonicChance += 0.3 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Legendary")
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
-                Players(0).WeaponLegendaryChance = 0;
+                Players(PlayerNumber).WeaponLegendaryChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).WeaponLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).WeaponLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
 
             if (DebugLog)
             {
                 Log("Item #%d. %S", Index, ItemData[ItemCategory][Index].Name);
-                Log("Weapon drop chance \CtExotic\C-: %.2k", Players(0).WeaponExoticChance);
-                Log("Weapon drop chance \CiSuperior\C-: %.2k", Players(0).WeaponSuperiorChance);
-                Log("Weapon drop chance \CdUnique\C-: %.2k", Players(0).WeaponUniqueChance);
-                Log("Weapon drop chance \CgDemonic\C-: %.2k", Players(0).WeaponDemonicChance);
-                Log("Weapon drop chance \CfLegendary\C-: %.2k", Players(0).WeaponLegendaryChance);
+                Log("Weapon drop chance \CtExotic\C-: %.2k", Players(PlayerNumber).WeaponExoticChance);
+                Log("Weapon drop chance \CiSuperior\C-: %.2k", Players(PlayerNumber).WeaponSuperiorChance);
+                Log("Weapon drop chance \CdUnique\C-: %.2k", Players(PlayerNumber).WeaponUniqueChance);
+                Log("Weapon drop chance \CgDemonic\C-: %.2k", Players(PlayerNumber).WeaponDemonicChance);
+                Log("Weapon drop chance \CfLegendary\C-: %.2k", Players(PlayerNumber).WeaponLegendaryChance);
             }
         }
     }
@@ -1617,6 +1630,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
 
     str ActorToSpawn;
     bool ItemSpawned;
+    int PlayerNumber;
     int ItemCategory = (CompatMode == COMPAT_DRLA && Random(0, 9) <= 0 ? 9 : 3);
     int RarityMin;
     int RarityMax;
@@ -1624,6 +1638,18 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
     int Amount;
     int Index;
     int Iterations;
+
+    // Selecting a player number in multiplayer for calculate the chances
+    if (InMultiplayer)
+    {
+        for (int p = 0; p < MAX_PLAYERS; p++)
+        {
+            if (!PlayerInGame(p)) continue;
+            PlayerNumber = p;
+            if (Random(0, PlayerCount() - 1) <= 0)
+                break;
+        }
+    }
 
     // Calculate Modifier
     if (GetCVar("drpg_loot_type") == 0)
@@ -1671,22 +1697,22 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
             // For armor
             if (ItemCategory == 3)
             {
-                AssembledChance = (RarityMax >= 1 && RandomFixed(0.0, 100.0) <= Players(0).ArmorAssembledChance);
-                ExoticChance = (RarityMax >= 2 && RandomFixed(0.0, 100.0) <= Players(0).ArmorExoticChance && !AssembledChance);
-                SuperiorChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).ArmorSuperiorChance && !AssembledChance && !ExoticChance);
-                UniqueChance = (RarityMax >= 3 && RandomFixed(0.0, 100.0) <= Players(0).ArmorUniqueChance && !AssembledChance && !ExoticChance && !SuperiorChance);
-                DemonicChance = (RarityMax >= 9 && RandomFixed(0.0, 100.0) <= Players(0).ArmorDemonicChance && !AssembledChance && !ExoticChance && !SuperiorChance && !UniqueChance);
-                LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(0).ArmorLegendaryChance && !AssembledChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance);
+                AssembledChance = (RarityMax >= 1 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorAssembledChance);
+                ExoticChance = (RarityMax >= 2 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorExoticChance && !AssembledChance);
+                SuperiorChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorSuperiorChance && !AssembledChance && !ExoticChance);
+                UniqueChance = (RarityMax >= 3 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorUniqueChance && !AssembledChance && !ExoticChance && !SuperiorChance);
+                DemonicChance = (RarityMax >= 9 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorDemonicChance && !AssembledChance && !ExoticChance && !SuperiorChance && !UniqueChance);
+                LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorLegendaryChance && !AssembledChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance);
                 CommonChance = (!AssembledChance && !ExoticChance && !SuperiorChance && !UniqueChance && !DemonicChance && !LegendaryChance);
             }
             // For boots
             if (ItemCategory == 9)
             {
-                AssembledChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).ArmorAssembledChance);
-                ExoticChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).ArmorExoticChance && !AssembledChance);
-                UniqueChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(0).ArmorUniqueChance && !AssembledChance && !ExoticChance);
-                DemonicChance = (RarityMax >= 9 && RandomFixed(0.0, 100.0) <= Players(0).ArmorDemonicChance && !AssembledChance && !ExoticChance && !UniqueChance);
-                LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(0).ArmorLegendaryChance && !AssembledChance && !ExoticChance && !UniqueChance && !DemonicChance);
+                AssembledChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorAssembledChance);
+                ExoticChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorExoticChance && !AssembledChance);
+                UniqueChance = (RarityMax >= 5 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorUniqueChance && !AssembledChance && !ExoticChance);
+                DemonicChance = (RarityMax >= 9 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorDemonicChance && !AssembledChance && !ExoticChance && !UniqueChance);
+                LegendaryChance = (RarityMax >= 10 && RandomFixed(0.0, 100.0) <= Players(PlayerNumber).ArmorLegendaryChance && !AssembledChance && !ExoticChance && !UniqueChance && !DemonicChance);
                 CommonChance = (!AssembledChance && !ExoticChance && !UniqueChance && !DemonicChance && !LegendaryChance);
             }
 
@@ -1754,64 +1780,64 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
             {
                 if ((ItemCategory == 3 && (ActorToSpawn == "RLCerberusArmorPickup" || ActorToSpawn == "RLCyberNanoGreenArmorPickup" || ActorToSpawn == "RLCyberNanoBlueArmorPickup" || ActorToSpawn == "RLCyberNanoRedArmorPickup")) || (ItemCategory == 9 && ActorToSpawn == "RLCerberusBootsPickup"))
                     ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
-                Players(0).ArmorAssembledChance = 0;
+                Players(PlayerNumber).ArmorAssembledChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).ArmorAssembledChance += 50.0 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).ArmorAssembledChance += 50.0 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Exotic")
             {
-                Players(0).ArmorExoticChance = 0;
+                Players(PlayerNumber).ArmorExoticChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).ArmorExoticChance += 30.0 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).ArmorExoticChance += 30.0 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 11, 8) == "Superior")
             {
-                Players(0).ArmorSuperiorChance = 0;
+                Players(PlayerNumber).ArmorSuperiorChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else if (ItemCategory == 3)
-                Players(0).ArmorSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).ArmorSuperiorChance += 0.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 9, 6) == "Unique")
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
-                Players(0).ArmorUniqueChance = 0;
+                Players(PlayerNumber).ArmorUniqueChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).ArmorUniqueChance += 2.5 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).ArmorUniqueChance += 2.5 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 10, 7) == "Demonic")
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
-                Players(0).ArmorDemonicChance = 0;
+                Players(PlayerNumber).ArmorDemonicChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).ArmorDemonicChance += 0.3 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).ArmorDemonicChance += 0.3 * (fixed)Modifier / 15.0;
 
             if (StrMid(ItemData[ItemCategory][Index].Name, StrLen(ItemData[ItemCategory][Index].Name) - 12, 9) == "Legendary")
             {
                 ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
-                Players(0).ArmorLegendaryChance = 0;
+                Players(PlayerNumber).ArmorLegendaryChance = 0;
                 ItemData[ItemCategory][Index].Spawned++;
             }
             else
-                Players(0).ArmorLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
+                Players(PlayerNumber).ArmorLegendaryChance += 0.2 * (fixed)Modifier / 15.0;
 
             if (DebugLog)
             {
                 Log("Item #%d. %S", Index, ItemData[ItemCategory][Index].Name);
-                Log("Armor drop chance \CvAssembled\C-: %.2k", Players(0).ArmorAssembledChance);
-                Log("Armor drop chance \CtExotic\C-: %.2k", Players(0).ArmorExoticChance);
-                Log("Armor drop chance \CiSuperior\C-: %.2k", Players(0).ArmorSuperiorChance);
-                Log("Armor drop chance \CdUnique\C-: %.2k", Players(0).ArmorUniqueChance);
-                Log("Armor drop chance \CgDemonic\C-: %.2k", Players(0).ArmorDemonicChance);
-                Log("Armor drop chance \CfLegendary\C-: %.2k", Players(0).ArmorLegendaryChance);
+                Log("Armor drop chance \CvAssembled\C-: %.2k", Players(PlayerNumber).ArmorAssembledChance);
+                Log("Armor drop chance \CtExotic\C-: %.2k", Players(PlayerNumber).ArmorExoticChance);
+                Log("Armor drop chance \CiSuperior\C-: %.2k", Players(PlayerNumber).ArmorSuperiorChance);
+                Log("Armor drop chance \CdUnique\C-: %.2k", Players(PlayerNumber).ArmorUniqueChance);
+                Log("Armor drop chance \CgDemonic\C-: %.2k", Players(PlayerNumber).ArmorDemonicChance);
+                Log("Armor drop chance \CfLegendary\C-: %.2k", Players(PlayerNumber).ArmorLegendaryChance);
             }
         }
     }

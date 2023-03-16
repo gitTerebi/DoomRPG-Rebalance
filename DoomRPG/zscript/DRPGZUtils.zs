@@ -40,6 +40,10 @@ class DRPGZInputHandler : EventHandler
     int tics;
     override void WorldTick()
     {
+        // This input code is for singleplayer only due to desync caused by CallACS(?)
+        if (multiplayer)
+            return;
+
         if (tics < 20)
         {
             tics++;
