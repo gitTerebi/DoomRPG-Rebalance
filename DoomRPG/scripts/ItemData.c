@@ -1458,7 +1458,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
                         // Set weapon index
                         Index = j;
 
-                        if (Timer() < 105 && (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 384) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
+                        if (Timer() < 105 && (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
                             Index = Weapon;
                         else if (Index <= (CompatMode == COMPAT_DRLA ? 9 : 7))
                             Index = Weapon;
@@ -1747,7 +1747,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
                         // Set armor index
                         Index = j;
 
-                        if (Timer() < 105 && (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 384) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
+                        if (Timer() < 105 && (CheckSight(ActivatorTID(), MAP_START_TID, 0) || Distance(ActivatorTID(), MAP_START_TID) <= 512) && GetCVar("drpg_loot_type") == 0 && !NomadInGame())
                         {
                             ItemCategory = 3;
                             Index = Armor;
