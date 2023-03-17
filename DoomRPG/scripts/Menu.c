@@ -1414,16 +1414,8 @@ void DrawSkillMenu()
         YOffset += 32.0;
         PrintSprite("UMODA0", 0, 232.1, 32.1 + YOffset, 0.05);
         SetFont("BIGFONT");
-        if (SkillLevel->Level < CurrentSkill->MaxLevel)
-        {
-            HudMessage("%d \Cg(-%d)", CheckInventory("DRPGModule"), (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor")));
-            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 256.1, 22.0 + YOffset, 0.05);
-        }
-        else
-        {
-            HudMessage("%d", CheckInventory("DRPGModule"));
-            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 256.1, 22.0 + YOffset, 0.05);
-        }
+        HudMessage("%d \Cg(-%d)", CheckInventory("DRPGModule"), (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor")));
+        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 256.1, 22.0 + YOffset, 0.05);
     }
 
     // Additional items
@@ -1433,16 +1425,8 @@ void DrawSkillMenu()
         str TextColor = (Player.SkillPage == 4 && Player.MenuIndex > 0 ? "Brick" : "White");
         PrintSprite(AdditionalItem->Sprite.Name, 0, 232.1, 32.1 + YOffset, 0.05);
         SetFont("BIGFONT");
-        if (SkillLevel->Level < CurrentSkill->MaxLevel)
-        {
-            HudMessage("%d \Cg(-%d)", CheckInventory(AdditionalItem->Actor), AdditionalItemAmount);
-            EndHudMessage(HUDMSG_PLAIN, 0, TextColor, 256.1, 22.0 + YOffset, 0.05);
-        }
-        else
-        {
-            HudMessage("%d", CheckInventory(AdditionalItem->Actor));
-            EndHudMessage(HUDMSG_PLAIN, 0, TextColor, 256.1, 22.0 + YOffset, 0.05);
-        }
+        HudMessage("%d \Cg(-%d)", CheckInventory(AdditionalItem->Actor), AdditionalItemAmount);
+        EndHudMessage(HUDMSG_PLAIN, 0, TextColor, 256.1, 22.0 + YOffset, 0.05);
     }
 
     // Skill Cost/Next Level Cost
