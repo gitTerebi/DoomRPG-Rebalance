@@ -839,6 +839,8 @@ NamedScript KeyBind void UseSkill(int Key)
 {
     // Current Skill
     int Index = (Player.InMenu && Player.Menu == 3 ? -1 : Player.SkillSelected);
+    int SkillIndex;
+    int SkillCategory;
     SkillPtr CurrentSkill;
     SkillLevelInfo *SkillLevel;
 
@@ -847,11 +849,15 @@ NamedScript KeyBind void UseSkill(int Key)
     {
         CurrentSkill = &Skills[Player.SkillCategory[Key - 1]][Player.SkillIndex[Key - 1]];
         SkillLevel = &Player.SkillLevel[Player.SkillCategory[Key - 1]][Player.SkillIndex[Key - 1]];
+        SkillIndex = Player.SkillIndex[Key - 1];
+        SkillCategory = Player.SkillCategory[Key - 1];
     }
     else
     {
         CurrentSkill = &Skills[Player.SkillCategory[Index]][Player.SkillIndex[Index]];
         SkillLevel = &Player.SkillLevel[Player.SkillCategory[Index]][Player.SkillIndex[Index]];
+        SkillIndex = Player.SkillIndex[Index];
+        SkillCategory = Player.SkillCategory[Index];
     }
 
     // If you're dead, terminate
@@ -881,6 +887,8 @@ NamedScript KeyBind void UseSkill(int Key)
     {
         CurrentSkill = &Skills[Player.SkillPage][Player.MenuIndex];
         SkillLevel = &Player.SkillLevel[Player.SkillPage][Player.MenuIndex];
+        SkillIndex = Player.MenuIndex;
+        SkillCategory = Player.SkillPage;
     }
 
     int EPCost = ScaleEPCost(CurrentSkill->Cost * SkillLevel->CurrentLevel);
@@ -892,13 +900,9 @@ NamedScript KeyBind void UseSkill(int Key)
         Player.Overdrive = true;
 
     // Overdriving an unlearnt skill will learn it
-    if (Player.Overdrive && CheckInventory("DRPGModule") >= MODULE_SKILL_MULT && SkillLevel->Level == 0)
+    if (Player.Overdrive && SkillLevel->Level == 0)
     {
-        SkillLevel->Level++;
-        SkillLevel->CurrentLevel++;
-        TakeInventory("DRPGModule", MODULE_SKILL_MULT);
-        FadeRange(0, 255, 255, 0.5, 0, 255, 255, 0.0, 0.5);
-        ActivatorSound("health/epcapsule", 127);
+        IncreaseSkill(SkillCategory, SkillIndex, true);
         return;
     }
 
