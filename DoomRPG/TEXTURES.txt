@@ -54,6 +54,9 @@ Graphic L1UPB0, 26, 54 { Offset 0, 6 XScale 1.75 YScale 1.5 Graphic P1UBB0, 0, 0
 Graphic L1UPC0, 26, 54 { Offset 0, 6 XScale 1.75 YScale 1.5 Graphic P1UBC0, 0, 0 }
 Graphic L1UPD0, 26, 54 { Offset 0, 6 XScale 1.75 YScale 1.5 Graphic P1UBD0, 0, 0 }
 
+// Chemicals (for shop)
+Graphic LT02CH, 21, 34 { Offset 11, 33 XScale 1.5 YScale 1.5 Graphic LT02A0, 0, 0 }
+
 // Basic Shield Package
 Sprite SHPAA0, 32, 32
 {

@@ -549,9 +549,6 @@ actor DRPGEnemyClearTarget2 : CustomInventory
     }
 }
 
-// Token for monsters revived by friendly Archvile
-actor DRPGFriendlyReviveMonster : Inventory {}
-
 // Red Aura Giver
 actor DRPGRedAuraGiver : CustomInventory
 {

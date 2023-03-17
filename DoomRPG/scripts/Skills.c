@@ -2330,40 +2330,6 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         // Setup Stats
         Delay(4); // We need this initial delay to make sure the ID is valid
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(NewID)];
-
-        if (Player.Augs.Active[AUG_SUMMONER])
-        {
-            fixed AugSummonerModifier;
-
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 5)
-                AugSummonerModifier = 0.10;
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 6)
-                AugSummonerModifier = 0.15;
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 7)
-                AugSummonerModifier = 0.20;
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 8)
-                AugSummonerModifier = 0.25;
-
-            Stats->LevelAdd += RandomFixed(0.0, (fixed)Stats->Level * (1.0 + AugSummonerModifier) - (fixed)Stats->Level + 0.5);
-
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 5) Delay (1 * 35);
-
-            fixed BaseStatePoint = (40.0 + 5.0 * (fixed)Stats->Level) / 8.0;
-
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 1)
-                Stats->Vitality += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 2)
-                Stats->Defense += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 3)
-                Stats->Strength += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 4)
-            {
-                GiveActorInventory(NewID, "DRPGSummonedRegenerationBoosterToken", 1);
-            }
-
-            SetActorInventory(NewID, "DRPGAugTokenSummoner", 1);
-        }
-
         Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(NewID)]);
         Stats->Flags |= MF_NOXP;
         Stats->Flags |= MF_NODROPS;

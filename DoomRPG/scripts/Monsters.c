@@ -1649,7 +1649,7 @@ NamedScript void MonsterFriendlyTeleport(bool SpecialMonster)
     {
         if (!PlayerInGame(i)) continue;
 
-        // Checking if a player is monster's master by another reason
+        // Checking if a player is monster's master
         if (SpecialMonster && MasterTID == Players(i).TID)
         {
             PlayerTID = Players(i).TID;
@@ -1747,6 +1747,7 @@ NamedScript void MonsterStatsHandler()
     if (ToasterMod)
         DelayTime = 15;
 
+    // Set standart variables
     int OldStrength;
     int OldDefense;
     int OldCapacity;
@@ -1764,6 +1765,21 @@ NamedScript void MonsterStatsHandler()
     bool MonsterWasDisrupted = false;
     bool HasDamageNumbers = false;
     bool Friendly = GetActorProperty(0, APROP_Friendly); // Sanity check for when APROP_Friendly gets removed from summons
+
+    // Set variables for summons (for AUG)
+    int MonsterTID = Stats->TID;
+    int MasterTID = GetActorProperty(0, APROP_MasterTID);
+    int PlayerTID;
+    int PlayerNumber;
+    int OldAugStatus;
+    int OldStrengthAug = Stats->Strength;
+    int OldDefenseAug = Stats->Defense;
+    int OldCapacityAug = Stats->Capacity;
+    int OldVitalityAug = Stats->Vitality;
+    int OldAgilityAug = Stats->Agility;
+    int OldRegenerationAug = Stats->Regeneration;
+    int OldEnergyAug = Stats->Energy;
+    int OldLuckAug = Stats->Luck;
 
 Start:
 
@@ -1970,32 +1986,120 @@ Start:
         }
     }
 
-    if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGAugTokenSummoner"))
+    if (Friendly && !CurrentLevel->UACBase)
     {
-        for (int i = 0; i < MAX_PLAYERS; i++)
+        // Find master player
+        if (PlayerTID == 0)
         {
-            if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
-
-            for (int j = 0; j < Players(i).Summons; j++)
+            for (int i = 0; i < MAX_PLAYERS; i++)
             {
-                if (Players(i).SummonTID[j] == Stats->TID)
+                if (!PlayerInGame(i)) continue;
+
+                // Checking if a player is monster's master
+                if (MasterTID == Players(i).TID)
                 {
-                    if (!Players(i).Augs.Active[AUG_SUMMONER])
+                    PlayerTID = Players(i).TID;
+                    PlayerNumber = i;
+                    break;
+                }
+
+                if (Players(i).Summons == 0) continue;
+
+                // Checking if a monster is summoned by a player
+                for (int j = 0; j < Players(i).Summons; j++)
+                {
+                    if (MonsterTID == Players(i).SummonTID[j])
                     {
-                        int Health = GetActorProperty(0, APROP_Health);
-
-                        MonsterInitStats();
-
-                        if (Health > Stats->HealthMax)
-                            SetActorProperty(0, APROP_Health, Stats->HealthMax);
-                        else
-                            SetActorProperty(0, APROP_Health, Health);
-
-                        SetInventory("DRPGSummonedRegenerationBoosterToken", 0);
-                        SetInventory("DRPGAugTokenSummoner", 0);
+                        PlayerTID = Players(i).TID;
+                        PlayerNumber = i;
+                        break;
                     }
                 }
             }
+        }
+
+        // Check AUG Summoner status for master player
+        if (Players(PlayerNumber).Augs.Active[AUG_SUMMONER] * Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] != OldAugStatus)
+        {
+            if (Players(PlayerNumber).Augs.Active[AUG_SUMMONER])
+            {
+                fixed BaseStatePoint = (40.0 + 5.0 * (fixed)Stats->Level) / 8.0;
+                fixed AugSummonerModifier;
+                int AddStrength;
+                int AddDefense;
+                int AddCapacity;
+                int AddVitality;
+                int AddAgility;
+                int AddRegeneration;
+                int AddEnergy;
+                int AddLuck;
+
+                // Calculate add stats
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 1)
+                    AddVitality = 20 + RoundInt(BaseStatePoint * ((fixed)Players(PlayerNumber).EnergyTotal * (0.5 - (fixed)Players(PlayerNumber).EnergyTotal * 0.0025)) / 100.0);
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 2)
+                    AddDefense = 20 + RoundInt(BaseStatePoint * ((fixed)Players(PlayerNumber).EnergyTotal * (0.5 - (fixed)Players(PlayerNumber).EnergyTotal * 0.0025)) / 100.0);
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 3)
+                    AddStrength = 20 + RoundInt(BaseStatePoint * ((fixed)Players(PlayerNumber).EnergyTotal * (0.5 - (fixed)Players(PlayerNumber).EnergyTotal * 0.0025)) / 100.0);
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 4)
+                    SetActorInventory(MonsterTID, "DRPGSummonedRegenerationBoosterToken", 1);
+
+                // Calculate add level
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] == 5)
+                    AugSummonerModifier = 0.10;
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] == 6)
+                    AugSummonerModifier = 0.15;
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] == 7)
+                    AugSummonerModifier = 0.20;
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 8)
+                    AugSummonerModifier = 0.25;
+                if (AugSummonerModifier > 0)
+                {
+                    AddStrength += Stats->Strength * AugSummonerModifier;
+                    AddDefense += Stats->Defense * AugSummonerModifier;
+                    AddCapacity += Stats->Capacity * AugSummonerModifier;
+                    AddVitality += Stats->Vitality * AugSummonerModifier;
+                    AddAgility += Stats->Agility * AugSummonerModifier;
+                    AddRegeneration += Stats->Regeneration * AugSummonerModifier;
+                    AddEnergy += Stats->Energy * AugSummonerModifier;
+                    AddLuck += Stats->Luck * AugSummonerModifier;
+                }
+
+                // Set actual stats
+                Stats->Strength = OldStrengthAug + AddStrength;
+                Stats->Defense = OldDefenseAug + AddDefense;
+                Stats->Capacity = OldCapacityAug + AddCapacity;
+                Stats->Vitality = OldVitalityAug + AddVitality;
+                Stats->Agility = OldAgilityAug + AddAgility;
+                Stats->Regeneration = OldRegenerationAug + AddRegeneration;
+                Stats->Energy = OldEnergyAug + AddEnergy;
+                Stats->Luck = OldLuckAug + AddLuck;
+            }
+            else if (!Players(PlayerNumber).Augs.Active[AUG_SUMMONER])
+            {
+                // Set actual stats if AUG is off
+                Stats->Strength = OldStrengthAug;
+                Stats->Defense = OldDefenseAug;
+                Stats->Capacity = OldCapacityAug;
+                Stats->Vitality = OldVitalityAug;
+                Stats->Agility = OldAgilityAug;
+                Stats->Regeneration = OldRegenerationAug;
+                Stats->Energy = OldEnergyAug;
+                Stats->Luck = OldLuckAug;
+                SetActorInventory(MonsterTID, "DRPGSummonedRegenerationBoosterToken", 0);
+            }
+
+            // Set actual health
+            int Health = GetActorProperty(0, APROP_Health);
+            if (Health > Stats->HealthMax)
+                SetActorProperty(0, APROP_Health, Stats->HealthMax);
+            else
+                SetActorProperty(0, APROP_Health, Health);
+
+            // Re-calculate threat level
+            Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(MonsterTID)]);
+
+            OldAugStatus = Players(PlayerNumber).Augs.Active[AUG_SUMMONER] * Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER];
         }
     }
 
@@ -2699,56 +2803,89 @@ NamedScript DECORATE void MonsterRevive()
     // Account for monsters revived by friendly Archvile
     if (GetActorProperty(0, APROP_Friendly))
     {
-        if (Random(0, 100) <= 80)
+        int MonsterTID = Stats->TID;
+        int MasterTID = GetActorProperty(MonsterTID, APROP_MasterTID);
+        int PlayerNumber;
+
+        for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            switch (Random(1, 8))
+            if (!PlayerInGame(i)) continue;
+
+            // Checking if a player is monster's master
+            if (MasterTID == Players(i).TID)
             {
-            case 1:
-                if (Random(0, 100) <= 15) Spawn("DRPGMoneyDropper", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                PlayerNumber = i;
                 break;
-            case 2:
-                if (Random(0, 100) <= 15) Spawn("DRPGStimpack", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 3:
-                if (Random(0, 100) <= 15) Spawn("DRPGClip", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 4:
-                if (Random(0, 100) <= 15) Spawn("DRPGShell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 5:
-                if (Random(0, 100) <= 15)
+            }
+        }
+
+        // If summons more than the maximum number or failure - the corpse is burned
+        if (Players(PlayerNumber).Summons >= MAX_SUMMONS || Random(0, 100) <= 80)
+        {
+            // Chance 10% for get stuff from corpse
+            if (Random(0, 100) <= 10)
+            {
+                switch (Random(1, 8))
                 {
+                case 1:
+                    Spawn("DRPGMoneyDropper", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 2:
+                    Spawn("DRPGStimpack", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 3:
+                    Spawn("DRPGClip", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 4:
+                    Spawn("DRPGShell", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 5:
                     if (CompatMode == COMPAT_DRLA)
                     {
-                        Spawn("RLArmorBonusPickup", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                        Spawn("RLArmorBonusPickup", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
                     }
                     else
-                        Spawn("DRPGArmorBonus", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                        Spawn("DRPGArmorBonus", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 6:
+                    Spawn("DRPGEPCapsule", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 7:
+                    Spawn("DRPGRocketAmmo", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 8:
+                    Spawn("DRPGCell", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
                 }
-                break;
-            case 6:
-                if (Random(0, 100) <= 15) Spawn("DRPGEPCapsule", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 7:
-                if (Random(0, 100) <= 15) Spawn("DRPGRocketAmmo", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 8:
-                if (Random(0, 100) <= 15) Spawn("DRPGCell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-
             }
 
             ActivatorSound("vile/firestrt", 127);
-            SpawnForced("SpawnFire", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-            SpawnForced("DRPGBurnedCorpse", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-            Thing_Remove(0);
-
+            SpawnForced("SpawnFire", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID), 0, 0);
+            SpawnForced("DRPGBurnedCorpse", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID), 0, 0);
+            Thing_Remove(MonsterTID);
             return;
         }
 
-        SetActorPropertyString(0, APROP_Species, "Player");
-        GiveInventory("DRPGFriendlyReviveMonster", 1);
-        MonsterFriendlyTeleport(true);
+        // Set property and handlers
+        SetActorProperty(MonsterTID, APROP_Friendly, true);
+        SetActorPropertyString(MonsterTID, APROP_Species, "Player");
+        GiveActorInventory(MonsterTID, "DRPGFriendlyBooster", 1);
+        MonsterFriendlyTeleport(false);
+
+        // Add summon to your summon array
+        for (int h = 0; h < MAX_SUMMONS; h++)
+            if (Players(PlayerNumber).SummonTID[h] == 0)
+            {
+                Players(PlayerNumber).SummonTID[h] = MonsterTID;
+                Players(PlayerNumber).Summons++;
+                break;
+            }
+
+        // Set stats
+        Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(MonsterTID)]);
+        Stats->Flags |= MF_NOXP;
+        Stats->Flags |= MF_NODROPS;
+        Stats->NeedReinit = true;
     }
     else
         SetActorPropertyString(0, APROP_Species, "None");
@@ -3230,12 +3367,6 @@ NamedScript void MonsterDeath()
     // [SW] 10/22/2018 - This is an option now, yee.
     if (GetCVar("drpg_aura_removeondeath"))
         RemoveMonsterAura(Stats);
-
-    if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGFriendlyReviveMonster") && GetActorProperty(0, APROP_Health) <= 0)
-    {
-        SpawnForced("TeleportFog", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-        Thing_Remove(0);
-    }
 
     // Corpses cleanup
     if (GetCVar("drpg_corpses_cleanup") > 0)
