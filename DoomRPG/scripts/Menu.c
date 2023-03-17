@@ -1338,9 +1338,9 @@ void DrawAugsMenu()
 ItemInfoPtr GetIncreaseSkillAddItem(int SkillCategory, int SkillIndex, int SkillLevel)
 {
     // Get additional item for Summoning category
-    if (Player.SkillPage == 4)
+    if (SkillCategory == 4)
     {
-        if (Player.MenuIndex > 0) return FindItem("DRPGLootDemonArtifact"); // For Demons
+        if (SkillIndex > 0) return FindItem("DRPGLootDemonArtifact"); // For Demons
     }
 }
 
@@ -1349,24 +1349,24 @@ int GetIncreaseSkillAddCost(int SkillCategory, int SkillIndex, int SkillLevel)
     int Amount;
 
     // Get ammount additional items for Summoning category
-    if (Player.SkillPage == 4)
+    if (SkillCategory == 4)
     {
-        if (Player.MenuIndex == 1) Amount = 1;   // For Former Human
-        if (Player.MenuIndex == 2) Amount = 1;   // For Sergeant
-        if (Player.MenuIndex == 3) Amount = 2;   // For Commando
-        if (Player.MenuIndex == 4) Amount = 2;   // For Imp
-        if (Player.MenuIndex == 5) Amount = 2;   // For Demon
-        if (Player.MenuIndex == 6) Amount = 3;   // For Cacodemon
-        if (Player.MenuIndex == 7) Amount = 3;   // For Hell Knight
-        if (Player.MenuIndex == 8) Amount = 5;   // For Baron of Hell
-        if (Player.MenuIndex == 9) Amount = 1;   // For Loast Soul
-        if (Player.MenuIndex == 10) Amount = 5;  // For Pain Elemental
-        if (Player.MenuIndex == 11) Amount = 5;  // For Revenant
-        if (Player.MenuIndex == 12) Amount = 7;  // For Mancubus
-        if (Player.MenuIndex == 13) Amount = 7;  // For Arachnotron
-        if (Player.MenuIndex == 14) Amount = 10; // For Archvile
-        if (Player.MenuIndex == 15) Amount = 15; // For Cyberdemon
-        if (Player.MenuIndex == 16) Amount = 20; // For Spider Mastermind
+        if (SkillIndex == 1) Amount = 1;   // For Former Human
+        if (SkillIndex == 2) Amount = 1;   // For Sergeant
+        if (SkillIndex == 3) Amount = 2;   // For Commando
+        if (SkillIndex == 4) Amount = 2;   // For Imp
+        if (SkillIndex == 5) Amount = 2;   // For Demon
+        if (SkillIndex == 6) Amount = 3;   // For Cacodemon
+        if (SkillIndex == 7) Amount = 3;   // For Hell Knight
+        if (SkillIndex == 8) Amount = 5;   // For Baron of Hell
+        if (SkillIndex == 9) Amount = 1;   // For Loast Soul
+        if (SkillIndex == 10) Amount = 5;  // For Pain Elemental
+        if (SkillIndex == 11) Amount = 5;  // For Revenant
+        if (SkillIndex == 12) Amount = 7;  // For Mancubus
+        if (SkillIndex == 13) Amount = 7;  // For Arachnotron
+        if (SkillIndex == 14) Amount = 10; // For Archvile
+        if (SkillIndex == 15) Amount = 15; // For Cyberdemon
+        if (SkillIndex == 16) Amount = 20; // For Spider Mastermind
     }
 
     return Amount * (SkillLevel + 1);
@@ -2435,7 +2435,7 @@ void MenuInput()
             }
         }
         if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
-            IncreaseSkill(Player.SkillPage, Player.MenuIndex);
+            IncreaseSkill(Player.SkillPage, Player.MenuIndex, false);
         if (CheckInput(BT_ATTACK, KEY_ONLYPRESSED, false, PlayerNumber()))
             UseSkill(0);
     }
@@ -2681,13 +2681,13 @@ void IncreaseStat(int Stat)
     TakeInventory("DRPGModule", Cost);
 }
 
-void IncreaseSkill(int Category, int Index)
+void IncreaseSkill(int Category, int Index, bool UsingOverdrive)
 {
     SkillPtr CurrentSkill = &Skills[Category][Index];
     SkillLevelInfo *SkillLevel = &Player.SkillLevel[Category][Index];
     int Cost = (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor"));
 
-    // New
+    // Get information about additional items
     ItemInfoPtr  AdditionalItem = GetIncreaseSkillAddItem(Category, Index, SkillLevel->Level);
     int AdditionalItemAmount = GetIncreaseSkillAddCost(Category, Index, SkillLevel->Level);
 
@@ -2712,7 +2712,13 @@ void IncreaseSkill(int Category, int Index)
             SkillLevel->CurrentLevel++;
             TakeInventory("DRPGModule", Cost);
             TakeInventory(AdditionalItem->Actor, AdditionalItemAmount);
-            ActivatorSound("menu/move", 127);
+            if (!UsingOverdrive)
+                ActivatorSound("menu/move", 127);
+            else
+            {
+                FadeRange(0, 255, 255, 0.5, 0, 255, 255, 0.0, 0.5);
+                ActivatorSound("health/epcapsule", 127);
+            }
         }
     }
 }
