@@ -357,7 +357,7 @@ NamedScript void BuildItemData()
     // Generic Loot
     ITEMDATA_CATEGORY(7, "\CfLoot", CF_NOBUY | CF_NODROP);
     ITEMDATA_DEF("DRPGLootMedicalSupplies",     "Medical Supplies",     100, 0, -1, "LT01A0",  7, 15);
-    ITEMDATA_DEF("DRPGLootChemicals",           "Chemicals",            250, 0, -1, "LT02A0", 11, 34);
+    ITEMDATA_DEF("DRPGLootChemicals",           "Chemicals",            250, 0, -1, "LT02CH",  7, 23);
     ITEMDATA_DEF("DRPGLootHazardousMaterials",  "Hazardous Materials",  250, 0, -1, "LT03A0", 14, 19);
     ITEMDATA_DEF("DRPGLootAnomalousMaterials",  "Anomalous Materials",  250, 0, -1, "LT04A0",  5, 20);
     ITEMDATA_DEF("DRPGLootBriefcase",           "Briefcase Data",       500, 0, -1, "LT05A0", 14, 18);

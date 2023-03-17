@@ -3552,8 +3552,8 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentIndexBasic = -1;
                                 CurrentTypeDetails1 =  12;
                                 CurrentTypeDetails2 =  8;
-                                CurrentAmountDetails1 = 60;
-                                CurrentAmountDetails2 = 40;
+                                CurrentAmountDetails1 = 40;
+                                CurrentAmountDetails2 = 20;
                                 CurrentAmountDetails3 = 20;
                             }
                             // For Plasma Redirection Cannon
