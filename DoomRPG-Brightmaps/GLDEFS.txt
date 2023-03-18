@@ -19,6 +19,9 @@ brightmap sprite EPUPG0 { map "brightmaps/doomrpg/EPUPA0.png" disablefullbright 
 brightmap sprite EPUPH0 { map "brightmaps/doomrpg/EPUPA0.png" disablefullbright }
 brightmap sprite EPUPI0 { map "brightmaps/doomrpg/EPUPA0.png" disablefullbright }
 
+// Berserk
+brightmap sprite PSTRA0 { map "brightmaps/doomrpg/PSTRA0.png" disablefullbright }
+
 //Ammo
 brightmap sprite CELLA0 { map "brightmaps/doom/CELLA0.png" }
 brightmap sprite CELPA0 { map "brightmaps/doom/CELPA0.png" }
