@@ -628,7 +628,7 @@ NamedScript DECORATE int ShieldDamage(int DamageTaken)
         Player.Shield.Charge -= DamageTaken;
         Player.Shield.Full = false;
 
-        if (GetCVar("drpg_shield_effect_hit_enable"))
+        if (GetActivatorCVar("drpg_shield_effect_hit_enable"))
         {
             FadeRange(0, 100, 255, 0.25, 0, 100, 255, 0, 0.25);
             PlaySound(0, "shield/hit", 5, 1.0, false, 1.0);
@@ -646,7 +646,7 @@ NamedScript DECORATE int ShieldDamage(int DamageTaken)
             else
                 DamageTaken = 0;
 
-            if (GetCVar("drpg_shield_sound_empty_enable"))
+            if (GetActivatorCVar("drpg_shield_sound_empty_enable"))
                 PlaySound(0, "shield/empty", 5, 1.0, false, 1.0);
 
             if (Player.Shield.Accessory && Player.Shield.Accessory->Break)
