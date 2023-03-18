@@ -132,7 +132,7 @@ actor LDInvulnerabilityChargeRPG : CustomInventory
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "You picked up an invulnerability charge.""
+    Inventory.PickupMessage "You picked up an invulnerability charge."
     Inventory.PickupSound "powerups/protect"
     Inventory.UseSound "powerups/protect"
     Inventory.Icon "CRG2"

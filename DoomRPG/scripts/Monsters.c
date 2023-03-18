@@ -3234,10 +3234,14 @@ NamedScript void MonsterDeath()
 
         Delay(1);
 
+        // Compatibility Handling - LegenDoom
         // LegenDoom monster drops
-        if (CheckInventory("LDLegendaryMonsterToken") && GetCVar("LD_droptype") == 1)
+        if (CompatMode == COMPAT_LEGENDOOM || CompatModeLite == COMPAT_LEGENDOOMLITE)
         {
-            DropMonsterItem(Killer, 0, "DRPGLuckDropper", 256);
+            if (CheckInventory("LDLegendaryMonsterToken") && GetCVar("LD_droptype") == 1)
+            {
+                DropMonsterItem(Killer, 0, "DRPGLuckDropper", 256);
+            }
         }
 
         // Boss Drops
@@ -3694,15 +3698,19 @@ int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)
 
     Health += HealthAddition + HealthBoost;
 
-    // LegenDoom: Add Health For Legendary Monsters
-    if (CheckInventory("LDLegendaryMonsterToken"))
+    // Compatibility Handling - LegenDoom
+    // Add health for Legendary monsters
+    if (CompatMode == COMPAT_LEGENDOOM || CompatModeLite == COMPAT_LEGENDOOMLITE)
     {
-        if (CheckFlag(0, "BOSS"))
-            Health *= GetCVar("LD_legendaryhealthboss") / 100;
-        else
-            Health *= GetCVar("LD_legendaryhealth") / 100;
+        if (CheckInventory("LDLegendaryMonsterToken"))
+        {
+            if (CheckFlag(0, "BOSS"))
+                Health *= GetCVar("LD_legendaryhealthboss") / 100;
+            else
+                Health *= GetCVar("LD_legendaryhealth") / 100;
 
-        GiveInventory("DRPGLegenDoomMonsterInit", 1);
+            GiveInventory("DRPGLegenDoomMonsterInit", 1);
+        }
     }
 
     return Health;

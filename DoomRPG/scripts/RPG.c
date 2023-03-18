@@ -25,6 +25,7 @@ bool Transported;
 bool GlobalsInitialized;
 int CompatMode;
 int CompatModeEx;
+int CompatModeLite;
 int CompatMonMode;
 bool MapPacks;
 
@@ -931,8 +932,10 @@ NamedScript void WeaponSpeed()
 
 Start:
 
-    while (CheckInventory("RLWeaponDrop"))
-        Delay(35);
+    // Compatibility Handling - DoomRL Arsenal
+    if (CompatMode == COMPAT_DRLA)
+        while (CheckInventory("RLWeaponDrop"))
+            Delay(35);
 
     if (Player.Stim.PowerupTimer[STIM_RAGE] > 0 || Player.WeaponSpeed >= 100 || Player.WeaponSpeed <= 0)
         Time = 4;
@@ -1528,26 +1531,29 @@ NamedScript OptionalArgs(1) void DynamicLootGenerator(str Actor, int MaxItems)
                     if (!Visible && Spawn(SpawnMonster, X, Y, Z, TID, A))
                         Items++;
 
-                    // LegenDoom(Lite) roll
-                    if (CheckClass("LDLegendaryMonsterPickupEasy"))
+                    // Compatibility Handling - LegenDoom
+                    if (CompatMode == COMPAT_LEGENDOOM || CompatModeLite == COMPAT_LEGENDOOMLITE)
                     {
-                        switch (GameSkill())
+                        if (CheckClass("LDLegendaryMonsterPickupEasy"))
                         {
-                        case 0:
-                            GiveActorInventory(TID, "LDLegendaryMonsterPickupEasy", 1);
-                            break;
-                        case 1:
-                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNormal", 1);
-                            break;
-                        case 2:
-                            GiveActorInventory(TID, "LDLegendaryMonsterPickupHard", 1);
-                            break;
-                        case 3:
-                            GiveActorInventory(TID, "LDLegendaryMonsterPickupUV", 1);
-                            break;
-                        default:
-                            GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
-                            break;
+                            switch (GameSkill())
+                            {
+                            case 0:
+                                GiveActorInventory(TID, "LDLegendaryMonsterPickupEasy", 1);
+                                break;
+                            case 1:
+                                GiveActorInventory(TID, "LDLegendaryMonsterPickupNormal", 1);
+                                break;
+                            case 2:
+                                GiveActorInventory(TID, "LDLegendaryMonsterPickupHard", 1);
+                                break;
+                            case 3:
+                                GiveActorInventory(TID, "LDLegendaryMonsterPickupUV", 1);
+                                break;
+                            default:
+                                GiveActorInventory(TID, "LDLegendaryMonsterPickupNightmare", 1);
+                                break;
+                            }
                         }
                     }
                 }
@@ -2448,6 +2454,7 @@ void CheckCompatibility()
 
     CompatMode = COMPAT_NONE;
     CompatModeEx = COMPAT_NONE;
+    CompatModeLite = COMPAT_NONE;
     CompatMonMode = COMPAT_NONE;
 
     MonsterData = MonsterDataDF;
@@ -2508,6 +2515,17 @@ void CheckCompatibility()
         CompatMode = COMPAT_LEGENDOOM;
         CompatMonMode = COMPAT_LEGENDOOM;
         MonsterData = MonsterDataLD;
+        Thing_Remove(TID);
+    }
+
+    // LegenDoomLite
+    Success = SpawnForced("DRPGLegenDoomLiteActive", 0, 0, 0, TID, 0);
+    if (Success)
+    {
+        if (DebugLog)
+            Log("\CdDEBUG: \CdLegenDoomLite\C- detected");
+
+        CompatModeLite = COMPAT_LEGENDOOMLITE;
         Thing_Remove(TID);
     }
 

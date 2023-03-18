@@ -926,7 +926,7 @@ NamedScript KeyBind void UseSkill(int Key)
 
     // Can't use skill if it requires more EP than overdrive limit allows (1000% means no limit)
     if (GetCVar("drpg_overdrive_limit") < 1000)
-        if (Player.EP + Player.EPMax * GetCVar("drpg_overdrive_limit") / 100 < EPCost)
+        if (Player.EPMax * GetCVar("drpg_overdrive_limit") / 100 < EPCost)
         {
             SetFont("BIGFONT");
             PrintError("You are not powerful enough");
