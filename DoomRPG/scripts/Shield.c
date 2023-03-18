@@ -1260,9 +1260,9 @@ NamedScript void ShieldTimer()
 
                 if (ChargeRate && (!Player.Shield.Accessory || Player.Shield.Accessory->PassiveEffect != SHIELD_PASS_KILLSCHARGE))
                 {
-                    if (GetCVar("drpg_shield_sound_charge_enable") && Player.Shield.Charge < 1)
+                    if (GetActivatorCVar("drpg_shield_sound_charge_enable") && Player.Shield.Charge < 1)
                         PlaySound(0, "shield/restart", 5, 1.0, false, 1.0);
-                    else if (GetCVar("drpg_shield_sound_charge_enable") && Player.Shield.Charge < Player.Shield.Capacity)
+                    else if (GetActivatorCVar("drpg_shield_sound_charge_enable") && Player.Shield.Charge < Player.Shield.Capacity)
                         PlaySound(0, "shield/charge", 5, 0.25, false, 2.0);
                     Player.Shield.Charge += ChargeRate;
                 }
@@ -1275,7 +1275,7 @@ NamedScript void ShieldTimer()
                     if (!Player.Shield.Full)
                     {
                         Player.Shield.Full = true;
-                        if (GetCVar("drpg_shield_sound_full_enable"))
+                        if (GetActivatorCVar("drpg_shield_sound_full_enable"))
                             PlaySound(0, "shield/full", 5, 1.0, false, 1.0);
                         if (Player.Shield.Accessory && Player.Shield.Accessory->FullCharge)
                             Player.Shield.Accessory->FullCharge();
@@ -1434,7 +1434,7 @@ void CheckShields()
             DeactivateShield();
 
     // EP -> Shield Charging
-    if (Player.Shield.Active && (!Player.InMenu && !Player.InShop) && CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()) && Player.Shield.Charge < Player.Shield.Capacity)
+    if (GetActivatorCVar("drpg_shield_charging_enable") && Player.Shield.Active && (!Player.InMenu && !Player.InShop) && CheckInput(BT_SPEED, KEY_HELD, false, PlayerNumber()) && CheckInput(BT_USE, KEY_HELD, false, PlayerNumber()) && Player.Shield.Charge < Player.Shield.Capacity)
     {
         bool SkipEPCharge = false;
 

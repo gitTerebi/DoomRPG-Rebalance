@@ -503,6 +503,7 @@ OptionMenu "DoomRPGStats"
     Option "Inventory Capacity System", "drpg_inv_capacity", "OnOff"
     StaticText ""
     
+    Option "Skill Overdrive Enable", "drpg_overdrive_enable", "OnOff"
     Slider "Skill Overdrive % Limit", "drpg_overdrive_limit", 100, 1000, 1
     StaticText ""
 
@@ -800,6 +801,7 @@ OptionMenu "DoomRPGMisc"
     Slider "Minimum Distance For Teleport", "drpg_monster_friendly_teleport_distance", 0, 10, 1
     StaticText ""
 
+    Option "Shield Charging Enable", "drpg_shield_charging_enable", "OnOff"
     Option "Sound Empty Energy Shield", "drpg_shield_sound_empty_enable", "OnOff"
     Option "Sound Charging Energy Shield", "drpg_shield_sound_charge_enable", "OnOff"
     Option "Sound Full Energy Shield", "drpg_shield_sound_full_enable", "OnOff"
