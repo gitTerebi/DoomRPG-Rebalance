@@ -1560,9 +1560,9 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
 
     str ActorToSpawn;
     bool ItemSpawned;
-    int ItemCategory = 0;
+    int ItemCategory;
     int RarityMin;
-    int RarityMax = 5;
+    int RarityMax = 4;
     int Modifier;
     int Amount;
     int Index;
@@ -1583,10 +1583,10 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
     for (int i = RarityMax; i < 10; i++)
         if (Random(0, Random(3, 7) + RarityMax - Modifier) <= 0)
             RarityMax++;
-    if (RarityMax < 5) // Make sure the Rarity still isn't -1, or else bad things will happen
-        RarityMax = 5;
-    if (RarityMax > 5 + RoundInt(5.0 * MapLevelModifier))
-        RarityMax = 5 + RoundInt(5.0 * MapLevelModifier);
+    if (RarityMax > 1 + RoundInt(10.0 * MapLevelModifier))
+        RarityMax = 1 + RoundInt(10.0 * MapLevelModifier);
+    if (RarityMax < 4) // Make sure the Rarity still at least 4, or else bad things will happen
+        RarityMax = 4;
     if (RarityMax > 10)
         RarityMax = 10;
 
