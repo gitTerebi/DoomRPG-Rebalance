@@ -2261,25 +2261,27 @@ Class DRLAX_WeaponRecyclerRPG : DRLAX_GizmoObject
             {
                 if(rng)
                 {
-                    Spawn("DRPGCraftPartsUnique", pos + (0,0,32));
+                    Spawn("DRPGCraftPartsUnique", pos + (0,16,32));
                 }
                 else
                 {
                     if (Random(0, 3) == 0)
-                        Spawn("DRPGCraftPartsExotic", pos + (0,0,32));
+                        Spawn("DRPGCraftPartsExotic", pos + (0,16,32));
                     else
                     {
-                        int parts = random(3,6);
+                        int parts = random(4,8);
                         while (parts--)
                         {
                             if (Random(0, 1) == 0)
-                                Spawn("DRPGLootGunParts", pos + (0,0,32));
+                                Spawn("DRPGLootGunParts", pos + (0,16,32));
                             if (Random(0, 1) == 0)
-                                Spawn("DRPGLootAmmoCasings", pos + (0,0,32));
+                                Spawn("DRPGLootAmmoCasings", pos + (0,16,32));
                         }
                     }
                 }
             }
+            Spawn("DRLAX_WeaponRecyclerRPG", pos);
+            Destroy();
         }
         stop;
 	}
@@ -2350,12 +2352,6 @@ Class DRLAX_WeaponRecyclerRPG : DRLAX_GizmoObject
 
     override bool Used(Actor user)
 	{
-        if(wepcount == 3)
-        {
-            user.A_StartSound("hud/error", flags:CHANF_LOCAL);
-            user.A_Print("This device is no longer usable.", 5);
-            return true;
-        }
         user.A_Print("\cq- Weapon Fabricator (Outpost) -\n\n\c-Offer 3 weapons of \ctExotic\c- rarity or higher to create a craft parts (25% chance).\n\n\cf" .. 3 - wepcount .. " weapons remain.", 5);
         return true;
     }
