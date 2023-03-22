@@ -112,13 +112,13 @@ NamedScript MapSpecial void EnterOutpost()
     {
         // Spawn DoomRL Arsenal Extended Objects
         if (AveragePlayerRank() >= 2)
-            SpawnSpotForced("DRLAX_DimensionalBox", 40, UniqueTID(), 0);
+            SpawnSpotForced("DRLAX_DimensionalBoxRPG", 40, UniqueTID(), 0);
         if (AveragePlayerRank() >= 4)
             SpawnSpotForced("DRLAX_WeaponRecyclerRPG", 41, UniqueTID(), 0);
         if (AveragePlayerRank() >= 6)
-            SpawnSpotForced("DRLAX_ModReviser", 42, UniqueTID(), 0);
+            SpawnSpotForced("DRLAX_ModReviserRPG", 42, UniqueTID(), 0);
         if (AveragePlayerRank() >= 8)
-            SpawnSpotForced("DRLAX_AppraiserObject", 43, UniqueTID(), 0);
+            SpawnSpotForced("DRLAX_AppraiserObjectRPG", 43, UniqueTID(), 0);
         if (AveragePlayerRank() >= 10)
             SpawnSpotForced("DRLAX_SkullShrineObjectRPG", 52, UniqueTID(), 0);
     }
