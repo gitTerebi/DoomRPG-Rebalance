@@ -2232,6 +2232,108 @@ class DRLAX_SkullShrineObject : DRLAX_GizmoObject
 // DOOMRPG COMPATIBILITY
 // --------------------------------------------------
 
+Class DRLAX_DimensionalBoxRPG : DRLAX_GizmoObject
+{
+	Default
+	{
+		-SOLID;
+		scale 1.5;
+	}
+
+	states
+	{
+		Spawn:
+		GIZM A -1;
+		stop;
+	}
+
+    void StoreItem(CustomInventory b)
+    {
+                String s = b.GetClassName();
+
+				for(inventory item=b.inv; item!=null; item=item.inv)
+                {
+					//Console.Printf(item.GetClassName());
+					for(int i = 0; i<b.CountInv(item.GetClassName()); i++)
+					{
+						s = s .. "|" .. item.GetClassName();
+					}
+				}
+
+				String n = b.GetTag();
+				n.Replace(" [Pickup]", "");
+				b.master.A_Print("You stored your \c-" ..  n);
+				b.Destroy();
+
+				//Console.Printf("" .. s);
+
+				Cvar.GetCvar("DRLAX_dimensionbox").SetString(s);
+				A_StartSound("gizmos/dimensionalbox");
+    }
+
+	override void Tick()
+	{
+		bool c = (Cvar.GetCvar("DRLAX_dimensionbox").GetString() == "");
+		frame = !c;
+		bBRIGHT = !c;
+
+		if(!CheckRange(350, true) && c)
+		{
+            let b = FindDroppedWeapon();
+
+            if(b)
+            {
+				StoreItem(b);
+                Super.Tick();
+                return;
+            }
+
+            b = FindDroppedArmor();
+            if(b)
+            {
+				StoreItem(b);
+            }
+		}
+		
+		Super.Tick();
+	}
+
+	override bool Used(Actor user)
+	{
+		String s = Cvar.GetCvar("DRLAX_dimensionbox").GetString();
+
+		//Console.Printf("" .. s);
+
+		if(s == "")
+		{
+			user.A_Print("\ct- Dimensional Box (Outpost) -\n\n\c-Weapons and Armors dropped into this container can be recclaimed in the future\nfrom any universe or dimension...", 5);
+		}
+		else
+		{
+			A_Face(user);
+			Array<String> output;
+
+			s.Split(output, "|");
+
+			bool spawned;
+            Actor act;
+		    [spawned, act] = A_SpawnItemEx(output[0], 0, 0, 32, 5, 0, 3, flags:SXF_NOCHECKPOSITION);
+
+			if(act && spawned)
+			{
+				for(int i = 1; i<output.Size(); i++)
+				{
+					act.GiveInventory(output[i], 1);
+				}
+			}
+
+			Cvar.GetCvar("DRLAX_dimensionbox").SetString("");
+			A_StartSound("crate/open");
+		}
+		return true;
+	}
+}
+
 Class DRLAX_WeaponRecyclerRPG : DRLAX_GizmoObject
 {
     Default
@@ -2356,6 +2458,390 @@ Class DRLAX_WeaponRecyclerRPG : DRLAX_GizmoObject
         return true;
     }
     
+}
+
+Class DRLAX_AppraiserObjectRPG : DRLAX_GizmoObject
+{
+    Default
+	{
+		-SOLID;
+        +THRUACTORS;
+		scale 1.35;
+	}
+
+    Class<Actor> chosenwep;
+    Actor holdingwep;
+    String familiarreward;
+    Actor crafter;
+
+	states
+	{
+		Spawn:
+		GIZM L 1 ReadyForWep();
+		loop;
+        Activate:
+        TNT1 A 0 A_StartSound("weapons/laserminigunpowerup");
+        GIZM LMLMLMLMLMLMLMLMLMLMLMLML 2;
+        GIZM M 50
+        {
+            Spawn("TeleportFog", pos + (0,0,32));
+            holdingwep.Destroy();
+
+            for(int i; i<CanHack()+1; i++)
+            {
+                Actor act;
+                bool spawned;
+                [spawned, act] = A_SpawnItemEx("DRLAX_FamiliarBall", 32, 0, 16);
+                if(act && spawned)
+                {
+                    DRLAX_FamiliarBall f = DRLAX_FamiliarBall(act);
+                    if(f)
+                    {
+                        f.Init(familiarreward);
+                        DRLAX_UnlockThinker.WriteUnlock(familiarreward);
+                    }
+                }
+            }
+
+            ThinkerIterator ti = ThinkerIterator.Create("DRLAX_QuestManager", STAT_STATIC);
+            DRLAX_QuestManager quest;
+
+            if(quest = DRLAX_QuestManager(ti.Next()))
+            {
+                quest.PickRandomWeapon();
+            }
+
+            familiarreward = "";
+        }
+        Death:
+        GIZM L -1
+        {
+            Spawn("DRLAX_AppraiserObjectRPG", pos);
+            Destroy();
+        }
+        stop;
+	}
+
+    Void ReadyForWep()
+    {
+        if(!CheckRange(350, true))
+		{
+            let b = FindDroppedWeapon();            
+
+            if(b)
+            {
+                String wep = chosenwep.GetClassName() .. "Pickup";
+                String s = b.GetClassName();
+
+                if(wep ~== s || wep .. "Modded" ~== s)
+                {
+                    /*
+                    DRLAX_QuestManagerResult r = DRLAX_QuestManagerResult(Spawn("DRLAX_QuestManagerResult", pos + (0, 0, 32)));
+                    r.sprite = b.sprite;
+                    r.frame = b.frame;
+                    r.A_SetScale(b.scale.x, b.scale.y);
+                    r.A_SetTranslation("CMMDRLA_Greyscale");
+                    */
+                    SetStateLabel("Activate");
+                    crafter = b.master;
+                    //b.Destroy();
+                    holdingwep = b;
+                    holdingwep.bNOGRAVITY = true;
+                    holdingwep = b;
+                    holdingwep.bTHRUACTORS = true;
+                    chosenwep = null;
+                    return;
+                }
+            }
+        }
+    }
+
+    override void Tick()
+    {
+        if(holdingwep)
+        {
+            holdingwep.SetOrigin(pos + (0, 0, 32), true);
+        }
+        Super.Tick();
+    }
+
+    override bool Used(Actor user)
+	{
+        if(!chosenwep)
+        {
+            if(familiarreward == "")
+            {
+                user.A_StartSound("hud/error", flags:CHANF_LOCAL);
+                user.A_Print("This device is no longer usable.", 5);
+            }
+            return false;
+        }
+        String wepname = GetDefaultByType(chosenwep).GetTag();
+		wepname.Replace(" [Pickup]", "");
+
+        user.A_Print("\cv- Arms Sacrificer (Outpost) -\n\n\c-Sacrifice an assembled \cf" .. wepname .. "\c- to unlock and recieve a random monster familiar.", 5);
+        return true;
+    }
+
+    override void PostBeginPlay()
+    {
+        ThinkerIterator ti = ThinkerIterator.Create("DRLAX_QuestManager", STAT_STATIC);
+        DRLAX_QuestManager quest;
+
+        if(quest = DRLAX_QuestManager(ti.Next()))
+        {
+            chosenwep = quest.weapon;
+        }
+
+        familiarreward = GetRandomFamiliar();
+    }
+
+    static string GetRandomFamiliar()
+    {
+        Array<String> fams;
+
+        fams.Push("ShotgunGuy");
+        fams.Push("ChaingunGuy");
+        fams.Push("Imp");
+        fams.Push("Demon");
+        fams.Push("Spectre");
+        fams.Push("LostSoul");
+        fams.Push("Cacodemon");
+        fams.Push("HellKnight");
+        fams.Push("BaronOfHell");
+        fams.Push("Revenant");
+        fams.Push("Mancubus");
+        fams.Push("PainElemental");
+        fams.Push("Arachnotron");
+        fams.Push("Archvile");
+        fams.Push("SpiderMastermind");
+        fams.Push("Cyberdemon");
+
+        Array<String> possiblefams;
+        Array<String> unlockedfams;
+
+        possiblefams.Copy(fams);
+
+        DRLAX_UnlockFunctions.ParseUnlocks(unlockedfams);
+        int r = random(0, possiblefams.Size() - 1);
+
+        while(possiblefams.Size() > 0)
+        {
+            r = random(0, possiblefams.Size() - 1);
+            bool retry = false;
+
+            for(int i = 0; i<unlockedfams.Size(); i++)
+            {
+                if(unlockedfams[i] ~== possiblefams[r])
+                {
+                    retry = true;
+                    //Console.Printf("already unlocked " .. possiblefams[r]);
+                    possiblefams.Delete(r);
+                    break;
+                }
+            }
+
+            if(!retry)
+            {
+                break;
+            }
+        }
+
+        if(possiblefams.Size() == 0)
+        {
+            return fams[random(0, fams.Size() - 1)];
+        }
+        else
+        {
+            return possiblefams[r];
+        }
+    }
+}
+
+Class DRLAX_ModReviserRPG : DRLAX_GizmoObject
+{
+    Default
+	{
+		-SOLID;
+		scale 1.5;
+	}
+
+    Actor crafter;
+
+	states
+	{
+		Spawn:
+		GIZM G 1 ReadyForWep();
+		loop;
+        Trigger:
+        GIZM G 35;
+        GIZM G 0 A_StartSound("sarge/wepget");
+        GIZM HI 4;
+        GIZM C 35;
+        GIZM C 35 DropModItem();
+        GIZM C 0 
+        {
+            if(iteration == 24)
+            {
+                SetStateLabel("Death");
+            }
+        }
+        Goto Spawn;
+        Death:
+        GIZM C -1;
+        stop;
+	}
+
+    override void PostBeginPlay()
+    {
+        for(int i; i<25-1; i++)
+        {
+            rngtable[i] = random(0, 1000);
+        }
+    }
+
+    uint iteration;
+    int rngtable[25];
+    bool blacklistpacks[8];
+    Array<String> modpacks;
+    uint count;
+
+    void AddPacks(String itemname, int amount, int slot)
+    {
+        if(blacklistpacks[slot])
+        {
+            return;
+        }
+        for(int i; i<amount; i++)
+        {
+            modpacks.Push(itemname);
+        }
+    }
+
+    Void ReadyForWep()
+    {
+        frame = 2 + count;
+        if(!CheckRange(350, true))
+		{
+            let b = FindDroppedMod();
+
+            if(b)
+            {
+                
+                count++;
+                if(count == 4)
+                {
+                    SetStateLabel("Trigger");
+                }
+                A_StartSound("misc/modpackpickup");
+                b.Destroy();
+            }
+        }
+    }
+
+    void DropModItem()
+    {
+        modpacks.Clear();
+
+        AddPacks("RLBulkModItem", 200, 0);
+        AddPacks("RLPowerModItem", 200, 1);
+        AddPacks("RLAgilityModItem", 200, 2);
+        AddPacks("RLTechnicalModItem", 200, 3);
+                
+        AddPacks("RLNanoModItem", 50, 4);
+        AddPacks("RLFirestormModItem", 50, 5);
+        AddPacks("RLSniperModItem", 50, 6);
+        //AddPacks("RLOnyxModItem", 50, 7);
+
+        int i = 0;
+        int u = 0;
+
+        while(u < rngtable[iteration])
+        {
+            i++;
+            u++;
+
+            if(i > modpacks.Size()-1)
+            {
+                i = 0;
+            }
+        }
+
+        for(int h; h<CanHack()+1; h++)
+        {
+            Spawn(modpacks[i], pos + (32,0,32));
+        }
+
+        iteration++;
+
+        for(int b; b<blacklistpacks.Size(); b++)
+        {
+            blacklistpacks[b] = false;
+        }
+
+        modpacks.Clear();
+        count = 0;
+    }
+
+    override bool Used(Actor user)
+	{
+        if(count >= 4)
+        {
+            return false;
+        }
+
+        String offerstring = "";
+
+        if(blacklistpacks[0]){offerstring = offerstring .. "\chB";}
+        if(blacklistpacks[1]){offerstring = offerstring .. "\cgP";}
+        if(blacklistpacks[2]){offerstring = offerstring .. "\cdA";}
+        if(blacklistpacks[3]){offerstring = offerstring .. "\cfT";}
+        if(blacklistpacks[4]){offerstring = offerstring .. "\cjN";}
+        if(blacklistpacks[5]){offerstring = offerstring .. "\ciF";}
+        if(blacklistpacks[6]){offerstring = offerstring .. "\ctS";}
+        if(blacklistpacks[7]){offerstring = offerstring .. "\cuO";}
+        if(offerstring != "")
+        {
+            offerstring = "\n\nMod Packs already inserted: " .. offerstring;
+        }
+
+        user.A_Print("\cf- Mod Pack Reviser (Outpost) -\n\n\c-Offer 4 Weapon Mod Packs of any type to obtain a new random Mod Pack.\nThe new Mod Pack will not be one of the 4 types already offered." .. offerstring, 5);
+        return true;
+    }
+
+    Actor FindDroppedMod()
+	{
+		ThinkerIterator ti = ThinkerIterator.Create("Actor");
+        Actor b;
+
+        while(b = Actor(ti.Next()))
+        {
+			if(b && b.GetAge() > 3 && Distance3D(b) < 40)
+			{
+                String modnames[] = {
+                    "DroppedRLBulkMod",
+                    "DroppedRLPowerMod",
+                    "DroppedRLAgilityMod",
+                    "DroppedRLTechnicalMod",
+                    "DroppedRLNanoMod",
+                    "DroppedRLFirestormMod",
+                    "DroppedRLSniperMod",
+                    "DroppedRLOnyxMod"
+                };
+
+                for(int i; i<modnames.Size(); i++)
+                {
+                    if(modnames[i] == b.GetClassName())
+                    {
+                        blacklistpacks[i] = true;
+                        return b;
+                    }
+                }
+			}
+		}
+
+        return null;
+	}   
 }
 
 class DRLAX_SkullShrineObjectRPG : DRLAX_GizmoObject
