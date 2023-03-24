@@ -850,7 +850,7 @@ NamedScript void GiveTip()
         { "\CdMissions",                        "You can accept different missions in the Outpost in order to gain XP, rank, credits, modules, and items. There are several different types of missions at varying difficulty levels you can undertake. The list of available missions will refresh each time you visit the Outpost.", },
         { "\CdCollection Missions",             "You must collect a specific number of a specified item to complete the mission. These items are scattered around the world.", },
         { "\CaKill Missions",                   "You must kill a given number of enemies of the same type to complete the mission.", },
-        { "\CaKill Auras Missions",             "You must kill a given amount of enemies who have at least one aura to complete the mission.", },
+        { "\CaKill Auras Missions",             "You must kill a given number of enemies who have at least one aura to complete the mission.", },
         { "\CaKill Reinforcements Missions",    "While in the field, monsters will spawn around you. You must kill a given number of them to complete the mission.", },
         { "\CgAssassination Missions",          "You must eliminate the specified shadow enemy, located somewhere in the level, to complete the mission.", },
         { "\CkFind Secrets Missions",           "You must find the given number of unique secrets to complete the mission.", },
