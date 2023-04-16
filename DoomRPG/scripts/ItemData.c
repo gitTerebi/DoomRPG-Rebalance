@@ -1453,7 +1453,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
 
                 if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
                 {
-                    if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Spawned * 4)) <= 50)
+                    if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, (ItemData[ItemCategory][j].Spawned * 2) * 100) <= 50)
                     {
                         // Set weapon index
                         Index = j;
@@ -1600,7 +1600,7 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
         {
             if (!ItemSpawned && StrMid(ItemData[ItemCategory][i].Name, StrLen(ItemData[ItemCategory][i].Name) - 9, 6) == "Unique" && ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
             {
-                if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][i].Spawned * 4)) <= 50)
+                if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, (ItemData[ItemCategory][i].Spawned * 2) * 100) <= 50)
                 {
                     // Set weapon index
                     Index = i;
@@ -1742,7 +1742,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
 
                 if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
                 {
-                    if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Spawned * 4)) <= 50)
+                    if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, (ItemData[ItemCategory][j].Spawned * 2) * 100) <= 50)
                     {
                         // Set armor index
                         Index = j;
@@ -1919,7 +1919,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
         {
             if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
             {
-                if (Random(0, (100 + (25 * Amount)) * (1 + ItemData[ItemCategory][j].Spawned * 4)) <= 50)
+                if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, (ItemData[ItemCategory][j].Spawned * 2) * 100) <= 50)
                 {
                     // Set shield part index
                     Index = j;

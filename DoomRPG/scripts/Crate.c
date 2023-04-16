@@ -625,7 +625,7 @@ void GenerateCrate(int ID, int Amount)
                 OldItemCategory = Crates[ID].Item[j]->Category;
 
                 //  Item check fails if the item was spawned before the crate was opened
-                if (NewItemSpawned > 0 && Random(0, (NewItemSpawned * 2) * 25) > 25)
+                if (NewItemSpawned > 0 && Random(0, (NewItemSpawned * 2) * 100) > 50)
                 {
                     NewItemSelected = false;
                     break;
