@@ -3400,12 +3400,14 @@ NamedScript MapSpecial void DisassemblingDevice()
                                 CurrentIndexBasic = 1;
                                 CurrentTypeDetails2 =  10;
                                 CurrentTypeDetails6 =  29;
+                                CurrentAmountDetails1 = 10;
                                 CurrentAmountDetails6 = 2;
                             }
                             // For Combat Pistol
                             if (ItemData[0][CurrentItem].Actor == "RLCombatPistol")
                             {
                                 CurrentIndexBasic = 1;
+                                CurrentAmountDetails1 = 10;
                             }
                             // For Handcannon
                             if (ItemData[0][CurrentItem].Actor == "RLHandCannon")

@@ -487,6 +487,7 @@ void GenerateCrate(int ID, int Amount)
     int NewItemIndex;
     int NewItemCategory;
     int NewItemSpawned;
+    int NewItemPenalty;
     bool NewItemSelected;
     bool NewItemIsAdditional;
 
@@ -616,6 +617,12 @@ void GenerateCrate(int ID, int Amount)
             NewItemCategory = NewItem->Category;
             NewItemSpawned = NewItem->Spawned;
 
+            // Set penalty for an item already spawned
+            if (NewItemSpawned < 5)
+                NewItemPenalty = NewItemSpawned;
+            else
+                NewItemPenalty = 5;
+
             // Check the item
             for (int j = 0; j < i; j++)
             {
@@ -625,7 +632,7 @@ void GenerateCrate(int ID, int Amount)
                 OldItemCategory = Crates[ID].Item[j]->Category;
 
                 //  Item check fails if the item was spawned before the crate was opened
-                if (NewItemSpawned > 0 && Random(0, (NewItemSpawned * 2) * 100) > 50)
+                if (NewItemSpawned > 0 && Random(0, NewItemPenalty * (200 - NewItemPenalty * 20)) > 50)
                 {
                     NewItemSelected = false;
                     break;
