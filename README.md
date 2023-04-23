@@ -59,7 +59,7 @@ Use the following load order:
 
 If you want to help this project:
 
-BTC: bc1qenxqtz0rn2tpeczg9dtqy0j7vlaew2a3cg392v
-ETH: 0x3aBee6C1dAD4C2f9c419c88bcab0F63B8dD802BE
-LTC: ltc1q0gj547xe9ltpd5dfxvdw8gvha85n2sqmrv07h8
-DOGE: DJQMZyphTkUhtyJ4DDHjskaphCfDZusu5b
+- BTC: bc1qenxqtz0rn2tpeczg9dtqy0j7vlaew2a3cg392v
+- ETH: 0x3aBee6C1dAD4C2f9c419c88bcab0F63B8dD802BE
+- LTC: ltc1q0gj547xe9ltpd5dfxvdw8gvha85n2sqmrv07h8
+- DOGE: DJQMZyphTkUhtyJ4DDHjskaphCfDZusu5b
