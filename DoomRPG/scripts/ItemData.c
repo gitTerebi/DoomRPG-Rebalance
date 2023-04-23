@@ -1365,6 +1365,7 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
     int RarityMax;
     int Modifier;
     int Amount;
+    int Penalty;
     int Index;
     int Iterations;
 
@@ -1453,7 +1454,13 @@ NamedScript DECORATE void DRPGWeaponSpawner(int Weapon)
 
                 if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
                 {
-                    if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, (ItemData[ItemCategory][j].Spawned * 2) * 100) <= 50)
+                    // Set penalty for an item already spawned
+                    if (ItemData[ItemCategory][j].Spawned < 5)
+                        Penalty = ItemData[ItemCategory][j].Spawned;
+                    else
+                        Penalty = 5;
+
+                    if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, Penalty * (200 - Penalty * 20)) <= 50)
                     {
                         // Set weapon index
                         Index = j;
@@ -1565,7 +1572,9 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
     int RarityMax = 4;
     int Modifier;
     int Amount;
+    int Penalty;
     int Index;
+    int Iterations;
 
     // Calculate Modifier
     if (GetCVar("drpg_loot_type") == 0)
@@ -1600,7 +1609,13 @@ NamedScript DECORATE void DRPGWeaponUniqueSpawner()
         {
             if (!ItemSpawned && StrMid(ItemData[ItemCategory][i].Name, StrLen(ItemData[ItemCategory][i].Name) - 9, 6) == "Unique" && ItemData[ItemCategory][i].Rarity >= RarityMin && ItemData[ItemCategory][i].Rarity <= RarityMax)
             {
-                if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, (ItemData[ItemCategory][i].Spawned * 2) * 100) <= 50)
+                // Set penalty for an item already spawned
+                if (ItemData[ItemCategory][i].Spawned < 5)
+                    Penalty = ItemData[ItemCategory][i].Spawned;
+                else
+                    Penalty = 5;
+
+                if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, Penalty * (200 - Penalty * 20)) <= 50)
                 {
                     // Set weapon index
                     Index = i;
@@ -1636,6 +1651,7 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
     int RarityMax;
     int Modifier;
     int Amount;
+    int Penalty;
     int Index;
     int Iterations;
 
@@ -1742,7 +1758,13 @@ NamedScript DECORATE void DRPGArmorSpawner(int Armor)
 
                 if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
                 {
-                    if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, (ItemData[ItemCategory][j].Spawned * 2) * 100) <= 50)
+                    // Set penalty for an item already spawned
+                    if (ItemData[ItemCategory][j].Spawned < 5)
+                        Penalty = ItemData[ItemCategory][j].Spawned;
+                    else
+                        Penalty = 5;
+
+                    if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, Penalty * (200 - Penalty * 20)) <= 50)
                     {
                         // Set armor index
                         Index = j;
@@ -1862,6 +1884,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
     int RarityMax;
     int Modifier;
     int Amount;
+    int Penalty;
     int Index;
     int Iterations;
     int ShieldPartsMin;
@@ -1919,7 +1942,13 @@ NamedScript DECORATE void DRPGShieldSpawner()
         {
             if (!ItemSpawned && ItemData[ItemCategory][j].Rarity >= RarityMin && ItemData[ItemCategory][j].Rarity <= RarityMax)
             {
-                if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, (ItemData[ItemCategory][j].Spawned * 2) * 100) <= 50)
+                // Set penalty for an item already spawned
+                if (ItemData[ItemCategory][j].Spawned < 5)
+                    Penalty = ItemData[ItemCategory][j].Spawned;
+                else
+                    Penalty = 5;
+
+                if (Random(0, 100 + (25 * Amount)) <= 50 && Random(0, Penalty * (200 - Penalty * 20)) <= 50)
                 {
                     // Set shield part index
                     Index = j;
@@ -1934,7 +1963,7 @@ NamedScript DECORATE void DRPGShieldSpawner()
         Amount = 0;
         Iterations++;
 
-        if (!ItemSpawned && Iterations >= 9)
+        if (!ItemSpawned && Iterations >= 30)
             switch (Random(0,2))
             {
             case 0:

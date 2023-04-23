@@ -54,3 +54,12 @@ Use the following load order:
 - [Dehacked Attack v4.0](https://forum.zdoom.org/viewtopic.php?f=43&t=72362);
 - [Pandemonia Monsters v2.2](https://forum.zdoom.org/viewtopic.php?t=60984);
 - Custom version of Jimmy's Jukebox Instant Randomizer has been included which allows DRPG's map events and Outpost music to play.
+
+## Donate
+
+If you want to help this project:
+
+BTC: bc1qenxqtz0rn2tpeczg9dtqy0j7vlaew2a3cg392v
+ETH: 0x3aBee6C1dAD4C2f9c419c88bcab0F63B8dD802BE
+LTC: ltc1q0gj547xe9ltpd5dfxvdw8gvha85n2sqmrv07h8
+DOGE: DJQMZyphTkUhtyJ4DDHjskaphCfDZusu5b

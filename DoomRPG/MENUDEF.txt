@@ -186,12 +186,7 @@ OptionValue "ExtraMapChallenges"
 
 OptionString "OutpostStartLevel"
 {
-    "E1M1",    "E1M1 (Doom)"
-    "E2M1",    "E2M1 (Doom)"
-    "E3M1",    "E3M1 (Doom)"
-    "E4M1",    "E4M1 (Ultimate Doom)"
     "MAP01",   "MAP01 (Doom II)"
-    "LEVEL01", "LEVEL01 (Doom II BFG)"
 }
 
 OptionValue "LootTypes"
@@ -860,6 +855,7 @@ OptionMenu "DoomRPGStart"
     StaticText "Outpost Start", 1
     StaticText "You only need these options set if you"
     StaticText "are starting from the default Outpost."
+	StaticText "Add a Starting Map to the Teleport."
     Option "Starting Map", "drpg_startmap", "OutpostStartLevel"
     Option "Add Starting Map", "drpg_addstartmap", "YesNo"
     StaticText ""
