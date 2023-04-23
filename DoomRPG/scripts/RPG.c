@@ -2465,6 +2465,10 @@ void CheckCompatibility()
 
     MapPacks = false;
 
+    // Starting Map
+    if (!InTitle && CurrentLevel->UACBase && GetCVar("drpg_addstartmap"))
+        MapPacks = true;
+
     // WadSmoosh
     Success = SpawnForced("DRPGWadSmooshActive", 0, 0, 0, TID, 0);
     if (Success)

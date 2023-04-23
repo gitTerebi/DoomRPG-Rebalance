@@ -3845,6 +3845,9 @@ NamedScript void InitMapPacks()
     for (i = 0; i < MAX_MAPPACKS; i++)
     {
         MapPackActive[i] = GetCVar(CvarNames[i]); //find which iwads user says they have
+
+        if (GetCVar("drpg_addstartmap") && LumpNames[i] == GetCVarString("drpg_startmap"))
+            MapPackActive[i] = true; //activate the iwad if it is a starter map
     };
 
     bool StartedOnMap = KnownLevels->Position > 1;
