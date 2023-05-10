@@ -690,7 +690,7 @@ class DRLAX_TrappedMegaSphere : DRLAX_TrappedSoulBase
 
 	override void Init()
 	{
-		powerupitem = "RLMegaSphere";
+		powerupitem = "Megasphere2";
 	}
 }
 

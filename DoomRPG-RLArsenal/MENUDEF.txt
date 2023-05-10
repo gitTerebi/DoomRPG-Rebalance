@@ -18,10 +18,10 @@ OptionValue "ShopSpecialCategories"
 
 OptionValue "LootTypes"
 {
-    0, "Adaptive"
+    0, "Map + Luck Level"
     1, "\caMap Level"
     2, "\cfLuck Level"
-    3, "\ciDoomRL Arsenal"
+    3, "\ciRandom"
 }
 
 OptionMenu "OptionsMenu"

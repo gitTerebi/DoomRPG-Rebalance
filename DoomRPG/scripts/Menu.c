@@ -789,8 +789,16 @@ void DrawStatsMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "Brick",              30.1,   136.0,  0.05);
         HudMessage("EP Timer: %.2k Sec", (fixed)(Player.EPTime / 35.0K));
         EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue",          30.1,   144.0,  0.05);
-        HudMessage("Regen Sphere: %d Sec", (int)(15 + (Player.RegenerationTotal / 2)));
-        EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
+        if (GetCVar("drpg_levelup_natural"))
+        {
+            HudMessage("Regen Sphere: %d Sec", (int)(40 + Player.RegenerationTotal));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
+        }
+        else
+        {
+            HudMessage("Regen Sphere: %d Sec", (int)(40 + Player.RegenerationTotal * 2));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Purple",             30.1,   152.0,  0.05);
+        }
         HudMessage("Toxicity Regen: %d Sec", 30 - Player.ToxicityRegenBonus);
         EndHudMessage(HUDMSG_PLAIN, 0, "Green",              30.1,   160.0,  0.05);
         HudMessage("Speed: %.2k", Player.Speed);
@@ -1421,6 +1429,43 @@ void DrawAugsMenu()
         }
 }
 
+ItemInfoPtr GetIncreaseSkillAddItem(int SkillCategory, int SkillIndex, int SkillLevel)
+{
+    // Get additional item for Summoning category
+    if (SkillCategory == 4)
+    {
+        if (SkillIndex > 0) return FindItem("DRPGLootDemonArtifact"); // For Demons
+    }
+}
+
+int GetIncreaseSkillAddCost(int SkillCategory, int SkillIndex, int SkillLevel)
+{
+    int Amount;
+
+    // Get ammount additional items for Summoning category
+    if (SkillCategory == 4)
+    {
+        if (SkillIndex == 1) Amount = 1;   // For Former Human
+        if (SkillIndex == 2) Amount = 1;   // For Sergeant
+        if (SkillIndex == 3) Amount = 2;   // For Commando
+        if (SkillIndex == 4) Amount = 2;   // For Imp
+        if (SkillIndex == 5) Amount = 2;   // For Demon
+        if (SkillIndex == 6) Amount = 3;   // For Cacodemon
+        if (SkillIndex == 7) Amount = 3;   // For Hell Knight
+        if (SkillIndex == 8) Amount = 5;   // For Baron of Hell
+        if (SkillIndex == 9) Amount = 1;   // For Loast Soul
+        if (SkillIndex == 10) Amount = 5;  // For Pain Elemental
+        if (SkillIndex == 11) Amount = 5;  // For Revenant
+        if (SkillIndex == 12) Amount = 7;  // For Mancubus
+        if (SkillIndex == 13) Amount = 7;  // For Arachnotron
+        if (SkillIndex == 14) Amount = 10; // For Archvile
+        if (SkillIndex == 15) Amount = 15; // For Cyberdemon
+        if (SkillIndex == 16) Amount = 20; // For Spider Mastermind
+    }
+
+    return Amount * (SkillLevel + 1);
+}
+
 void DrawSkillMenu()
 {
     // Skill Catagories
@@ -1434,10 +1479,15 @@ void DrawSkillMenu()
         "\CcUtility"
     };
 
+    fixed YOffset;
     SkillPtr CurrentSkill = &Skills[Player.SkillPage][Player.MenuIndex];
     SkillLevelInfo *SkillLevel = &Player.SkillLevel[Player.SkillPage][Player.MenuIndex];
     int SkillCost = ScaleEPCost(CurrentSkill->Cost * SkillLevel->CurrentLevel);
     int SkillCostNext = ScaleEPCost(CurrentSkill->Cost * (SkillLevel->CurrentLevel + 1));
+
+    // Set variables for an additional item
+    ItemInfoPtr  AdditionalItem = GetIncreaseSkillAddItem(Player.SkillPage, Player.MenuIndex, SkillLevel->Level);
+    int AdditionalItemAmount = GetIncreaseSkillAddCost(Player.SkillPage, Player.MenuIndex, SkillLevel->Level);
 
     // Hold EP cost of skill "Magnetize"
     if (CurrentSkill->Name == "Magnetize")
@@ -1453,55 +1503,53 @@ void DrawSkillMenu()
     EndHudMessage(HUDMSG_PLAIN, 0, "White", 0.1, 25.0, 0.05);
 
     // Upgrade Modules
-
-    PrintSprite("CREDA0", 0, 232.1, 64.1, 0.05);
-    //PrintSprite("UMODA0", 0, 232.1, 64.1, 0.05);
-    SetFont("BIGFONT");
     if (SkillLevel->Level < CurrentSkill->MaxLevel)
     {
         HudMessage("%d \Cg(-%d)", CheckInventory("DRPGCredits"), (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor")));
         // HudMessage("%d \Cg(-%d)", CheckInventory("DRPGModule"), (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor")));
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 256.1, 54.0, 0.05);
     }
-    else
+
+    // Additional items
+    if (SkillLevel->Level < CurrentSkill->MaxLevel && AdditionalItemAmount > 0)
     {
         HudMessage("%d", CheckInventory("DRPGCredits"));
         EndHudMessage(HUDMSG_PLAIN, 0, "Green", 256.1, 54.0, 0.05);
     }
 
     // Skill Cost/Next Level Cost
-    PrintSprite("EPUPA0", 0, 248.0, 88.1, 0.05);
+    PrintSprite("EPUPA0", 0, 248.0, 56.1 + YOffset, 0.05);
     SetFont("BIGFONT");
     if (SkillLevel->Level == 0)
     {
         HudMessage("Skill Cost: %d", SkillCostNext);
-        EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 74.1, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 42.1 + YOffset, 0.05);
     }
     else if (SkillLevel->Level < CurrentSkill->MaxLevel)
     {
         HudMessage("Skill Cost: %d\nNext Level: %d", SkillCost, SkillCostNext);
-        EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 74.1, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 42.1 + YOffset, 0.05);
     }
     else
     {
         HudMessage("Skill Cost: %d", SkillCost);
-        EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 74.1, 0.05);
+        EndHudMessage(HUDMSG_PLAIN, 0, "LightBlue", 256.1, 42.1 + YOffset, 0.05);
     }
 
     // Skill Cost Multiplier/Refund
     if (Player.SkillCostMult > 0 || Player.SkillRefundMult > 0)
     {
-        PrintSpritePulse("Aura", 0, 232.0, 111.0, 0.75, 64.0, 0.25);
+        PrintSpritePulse("Aura", 0, 232.0, 111.0 + YOffset, 0.75, 32.0, 0.25);
         SetFont("BIGFONT");
         if (Player.SkillRefundMult > 0)
         {
             HudMessage("+%d%% Skill Cost\n%d%% Cost Refund", Player.SkillCostMult, RoundInt(Player.SkillRefundMult * 100));
-            EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 256.1, 122.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 256.1, 90.0 + YOffset, 0.05);
         }
         else
         {
             HudMessage("+%d%% Skill Cost", Player.SkillCostMult);
-            EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 256.1, 114.0, 0.05);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Cyan", 256.1, 82.0 + YOffset, 0.05);
         }
     }
 
@@ -1525,10 +1573,10 @@ void DrawSkillMenu()
         for (int i = 0; i < AURA_MAX; i++)
             if (Player.Aura.Type[i].Active)
             {
-                PrintSpritePulse(AuraIcons[i], 0, 232.0 + (i * 24.0), 176.0, 0.75, 64.0, 0.25);
+                PrintSpritePulse(AuraIcons[i], 0, 232.0 + (i * 24.0), 144.0 + YOffset, 0.75, 64.0, 0.25);
                 SetFont("BIGFONT");
                 HudMessage("%d", Player.Aura.Type[i].Level);
-                EndHudMessage(HUDMSG_PLAIN, 0, AuraColors[i], 232.0 + (i * 24.0), 160.0, 0.05);
+                EndHudMessage(HUDMSG_PLAIN, 0, AuraColors[i], 232.0 + (i * 24.0), 128.0 + YOffset, 0.05);
             }
     }
 
@@ -1603,6 +1651,7 @@ void DrawSkillMenu()
         EndHudMessage(HUDMSG_PLAIN, 0, "DarkGray", 0.1, 168.1, 0.05);
     }
 }
+
 void DrawShieldMenu()
 {
     str const PageTitles[4] =
@@ -2112,16 +2161,24 @@ void DrawTurretInfo(fixed X, fixed Y, int Index)
         Info = StrParam("\Ca%d", Player.Turret.HealthMax);
         break;
     case TU_ARMOR_PLATING_MELEE:
-        Info = StrParam("\Cc%d%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] * 5);
+        Info = StrParam("\Cc%.1k%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] * 5.0);
+        if (Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] > 10)
+            Info = StrParam("\Cc%.1k%%", 50.0 + (Player.Turret.Upgrade[TU_ARMOR_PLATING_MELEE] - 10) * 2.5);
         break;
     case TU_ARMOR_PLATING_BULLET:
-        Info = StrParam("\Cj%d%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] * 5);
+        Info = StrParam("\Cj%.1k%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] * 5.0);
+        if (Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] > 10)
+            Info = StrParam("\Cj%.1k%%", 50.0 + (Player.Turret.Upgrade[TU_ARMOR_PLATING_BULLET] - 10) * 2.5);
         break;
     case TU_ARMOR_PLATING_FIRE:
-        Info = StrParam("\Cg%d%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_FIRE] * 5);
+        Info = StrParam("\Cg%.1k%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_FIRE] * 5.0);
+        if (Player.Turret.Upgrade[TU_ARMOR_PLATING_FIRE] > 10)
+            Info = StrParam("\Cg%.1k%%", 50.0 + (Player.Turret.Upgrade[TU_ARMOR_PLATING_FIRE] - 10) * 2.5);
         break;
     case TU_ARMOR_PLATING_PLASMA:
-        Info = StrParam("\Cn%d%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_PLASMA] * 5);
+        Info = StrParam("\Cn%.1k%%", Player.Turret.Upgrade[TU_ARMOR_PLATING_PLASMA] * 5.0);
+        if (Player.Turret.Upgrade[TU_ARMOR_PLATING_PLASMA] > 10)
+            Info = StrParam("\Cn%.1k%%", 50.0 + (Player.Turret.Upgrade[TU_ARMOR_PLATING_PLASMA] - 10) * 2.5);
         break;
     case TU_ARMOR_MODULE_PHASE:
         Y -= 4.0;
@@ -2466,7 +2523,7 @@ void MenuInput()
             }
         }
         if (CheckInput(BT_USE, KEY_PRESSED, false, PlayerNumber()))
-            IncreaseSkill(Player.SkillPage, Player.MenuIndex);
+            IncreaseSkill(Player.SkillPage, Player.MenuIndex, false);
         if (CheckInput(BT_ATTACK, KEY_ONLYPRESSED, false, PlayerNumber()))
             UseSkill(0);
     }
@@ -2708,15 +2765,32 @@ void IncreaseStat(int Stat)
     TakeInventory("DRPGCredits", Cost);
 }
 
-void IncreaseSkill(int Category, int Index)
+void IncreaseSkill(int Category, int Index, bool UsingOverdrive)
 {
     SkillPtr CurrentSkill = &Skills[Category][Index];
     SkillLevelInfo *SkillLevel = &Player.SkillLevel[Category][Index];
     int Cost = (int)((((fixed)SkillLevel->Level + 1) * (fixed)MODULE_SKILL_MULT) * GetCVarFixed("drpg_module_skillfactor"));
 
-    if (CheckInventory("DRPGCredits") >= Cost)
+    // Get information about additional items
+    ItemInfoPtr  AdditionalItem = GetIncreaseSkillAddItem(Category, Index, SkillLevel->Level);
+    int AdditionalItemAmount = GetIncreaseSkillAddCost(Category, Index, SkillLevel->Level);
+
+    if (SkillLevel->Level < CurrentSkill->MaxLevel)
     {
-        if (SkillLevel->Level < CurrentSkill->MaxLevel && CheckInventory("DRPGCredits") >= Cost)
+        if (CheckInventory("DRPGModule") < Cost)
+        {
+            PrintError("You don't have enough Modules");
+            ActivatorSound("menu/error", 127);
+        }
+        else if (AdditionalItemAmount > 0 && CheckInventory(AdditionalItem->Actor) < AdditionalItemAmount)
+        {
+            SetHudSize(0, 0, false);
+            SetFont("BIGFONT");
+            HudMessage("You don't have enough %S", AdditionalItem->Name);
+            EndHudMessage(HUDMSG_FADEOUT, 0, "Red", 0.5, 0.5, 2.0, 1.0);
+            ActivatorSound("menu/error", 127);
+        }
+        else
         {
             SkillLevel->Level++;
             SkillLevel->CurrentLevel++;
@@ -2977,6 +3051,15 @@ void MenuHelp()
                     HudMessage("Select Level: \Cd%jS/%jS/%jS/%jS\C-\nTeleport to Level: \Cd%jS\C-\nExit: \Cd%jS\C-",
                                "+forward", "+back", "+moveleft", "+moveright", "+use", "drpg_menu");
             }
+            EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
+            break;
+        case OMENU_ARENATRANSPORT:
+            if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
+                HudMessage("Select Arena: \Cd%S/%S\C-\nTeleport to Arena: \Cd%S\C-\nExit: \Cd%S\C-",
+                           "Left", "Right", "Use", "Menu");
+            else
+                HudMessage("Select Arena: \Cd%jS/%jS\C-\nTeleport to Arena: \Cd%jS\C-\nExit: \Cd%jS\C-",
+                           "+moveleft", "+moveright", "+use", "drpg_menu");
             EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             break;
         case OMENU_SKILLCOMPUTER:

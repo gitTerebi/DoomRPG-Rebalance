@@ -489,6 +489,7 @@ typedef enum
 typedef enum
 {
     OMENU_LEVELTRANSPORT = 1,
+    OMENU_ARENATRANSPORT,
     OMENU_SKILLCOMPUTER,
     OMENU_MODULECONVERTER,
     OMENU_WAVESELECTOR,
@@ -578,6 +579,7 @@ typedef enum
     COMPAT_NONE,
     COMPAT_EXTRAS,
     COMPAT_LEGENDOOM,
+    COMPAT_LEGENDOOMLITE,
     COMPAT_DRLA,
     COMPAT_DRLAX,
     COMPAT_CH,
@@ -668,6 +670,7 @@ typedef enum
 #define MAX_SKILLS              17
 #define MAX_LEVELS              16
 #define MAX_SUMMONS             10
+#define MAX_FAMILIARS           5
 #define MAX_SKILLKEYS           8
 
 typedef enum
@@ -754,9 +757,9 @@ typedef enum
 #define LUCK_SHIELDINC          0.0005
 #define LUCK_AUGINC             0.00025
 
-#define AURA_CALCTIME           (((GetCVar("drpg_levelup_natural")) ? ((35 * 100) + (35 * Player.EnergyTotal * 2)) : ((35 * 80) + (35 * Player.EnergyTotal * 4))) * (1.0 + Player.AuraBonus * 0.5))
-#define DRLA_WEAPON_MAX         (int)fmin((CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 9 ? 2 : 4) + (Player.CapacityTotal / 10) , 12)
-#define DRLA_ARMOR_MAX          3 + ((GetCVar("drpg_levelup_natural")) ? (Player.CapacityTotal / 50) : (Player.CapacityTotal / 25))
+#define AURA_CALCTIME           (((GetCVar("drpg_levelup_natural")) ? ((35 * 100) + (35 * Player.EnergyTotal * 2)) : ((35 * 80) + (35 * Player.EnergyTotal * 4))) * (long fixed)(1.0 + Player.AuraBonus * 0.5))
+#define DRLA_WEAPON_MAX         (CompatModeEx == COMPAT_DRLAX && PlayerClass(PlayerNumber()) == 9 ? 4 : 6)
+#define DRLA_ARMOR_MAX          2 + ((GetCVar("drpg_levelup_natural")) ? (Player.CapacityTotal / 50) : (Player.CapacityTotal / 25))
 #define DRLA_SKULL_MAX          DRLA_ARMOR_MAX
 #define DRLA_DEVICE_MAX         4 + (Player.CapacityTotal / 50)
 #define DRLA_MODPACKS_MAX       (int)fmin( (CompatMode == COMPAT_DRLA && PlayerClass(PlayerNumber()) == 2 ? 8 : 6) + (Player.CapacityTotal / 10) , 99)

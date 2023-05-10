@@ -239,3 +239,39 @@ ACTOR BlackMind2RPG : BlackMind2 Replaces BlackMind2
 		Goto Super::See
 	}
 }
+
+// White Mastermind
+ACTOR WhiteMind2RPG : WhiteMind2 Replaces WhiteMind2
+{
+	Tag "Old God"
+
+    DropItem "DRPGEmpty"
+
+	States
+	{
+	Spawn:
+		ARNQ A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NOAURA)
+		Goto Super::Spawn
+	See:
+		ARNQ A 0 ACS_NamedExecuteAlways("MonsterInit", 0, MF_BOSS | MF_NOAURA)
+		Goto Super::See
+	}
+}
+
+// Mini Sentinel Spider
+ACTOR MiniSentinelSpiderRPG : MiniSentinelSpider Replaces MiniSentinelSpider
+{
+	Tag "Mini Sentinel Spider"
+
+    DropItem "DRPGEmpty"
+
+	States
+	{
+	Spawn:
+		HEAD A 0 NoDelay ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::Spawn
+	See:
+		HEAD A 0 ACS_NamedExecuteAlways("MonsterInit", 0)
+		Goto Super::See
+	}
+}

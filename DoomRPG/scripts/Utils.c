@@ -267,12 +267,12 @@ NamedScript DECORATE int CheckInventoryMax()
     int MaxItems;
 
     if (GetCVar("drpg_levelup_natural"))
-        MaxItems = 9 + Player.CapacityTotal / 6;
+        MaxItems = 5 + Player.CapacityTotal / 8;
     else
-        MaxItems = 7 + Player.CapacityTotal / 3;
+        MaxItems = 4 + Player.CapacityTotal / 5;
 
-    if (MaxItems > 50)
-        MaxItems = 50;
+    if (MaxItems > 25)
+        MaxItems = 25;
 
     return MaxItems;
 }
@@ -298,9 +298,15 @@ NamedScript DECORATE int CheckCapacity()
         if (CompatMode == COMPAT_DRLA)
         {
             // Calculate capacity usage per category in DRLA, excluding weapons and modpacks
+            int AddCapacityXP;
             int DRLAItems = CheckInventory("RLArmorInInventory") + CheckInventory("RLSkullLimit") + CheckInventory("RLPhaseDeviceLimit") + (IsTechnician ? CheckInventory("RLScavengerModLimit") : CheckInventory("RLModLimit"));
             int DRLAMaxItems = DRLA_ARMOR_MAX + DRLA_SKULL_MAX + DRLA_DEVICE_MAX + DRLA_MODPACKS_MAX;
-            Player.CapacityXP += (RoundInt)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 5.0);
+            AddCapacityXP = (RoundInt)((DRLAItems + Player.InvItems) * Scale / (DRLAMaxItems + MaxItems) * 5.0);
+
+            if (AddCapacityXP > 0)
+                Player.CapacityXP += AddCapacityXP;
+            else if (DRLAItems + Player.InvItems >= 3 && (Timer() % 35) == 0)
+                Player.CapacityXP += (DRLAItems + Player.InvItems) / 3;
         }
         else
             Player.CapacityXP += (RoundInt)(Player.InvItems * Scale / MaxItems * 5.0);
@@ -753,6 +759,30 @@ int DropMonsterItem(int Killer, int TID, str Item, int Chance, fixed XAdd, fixed
     return ItemTID;
 }
 
+// Find out if the monster sees its target
+bool MonsterSeeTarget(int MonsterTID)
+{
+    SetActivatorToTarget(MonsterTID);
+
+    if (!CheckSight(MonsterTID, 0, CSF_NOBLOCKALL))
+    {
+        SetActivator(MonsterTID);
+        return false;
+    }
+
+    SetActivator(MonsterTID);
+    return true;
+}
+
+// Get the distance to the monster's target
+fixed MonsterDistanceTarget(int MonsterTID)
+{
+    SetActivatorToTarget(MonsterTID);
+    int MonsterDistanceTarget = Distance(MonsterTID, 0);
+    SetActivator(MonsterTID);
+    return MonsterDistanceTarget;
+}
+
 // Use for while if you want to make a delay when the monster sees the players
 bool ActorSeePlayers(int MonsterTID, int Dist)
 {
@@ -890,7 +920,19 @@ NamedScript DECORATE void CorpsesCleanup()
 // Used by the RegenSphere to temporarily increase regen rates
 NamedScript DECORATE void RegenBoost()
 {
-    Player.RegenBoostTimer += (35 * 15) + ((Player.RegenerationTotal / 2) * 35);
+    int AddBoostTimer;
+
+    if (GetCVar("drpg_levelup_natural"))
+        AddBoostTimer = (int)(40 + Player.RegenerationTotal);
+    else
+        AddBoostTimer = (int)(40 + Player.RegenerationTotal * 2);
+
+    if (AddBoostTimer > 180) AddBoostTimer = 180;
+
+    Player.RegenBoostTimer += AddBoostTimer * 35;
+
+    if (Player.RegenBoostTimer > 35 * 60 * GetCVar("drpg_skill_auratimercap"))
+        Player.RegenBoostTimer = 35 * 60 * GetCVar("drpg_skill_auratimercap");
 }
 
 // Set Skill Level during the game
@@ -1344,10 +1386,8 @@ fixed StatsNatMod()
         // Skip player if they're not ingame
         if (!PlayerInGame(i)) continue;
 
-        PlayerLevel = Players(i).Level;
-        if (PlayerLevel <= 0) PlayerLevel = 1;
         StatsNat = Players(i).StrengthNat + Players(i).DefenseNat + Players(i).VitalityNat + Players(i).EnergyNat + Players(i).RegenerationNat + Players(i).AgilityNat + Players(i).CapacityNat + Players(i).LuckNat;
-        Modifier += ((fixed)StatsNat / ((fixed)PlayerLevel * 8.0) > 1.0 ? 1.0 : (fixed)StatsNat / ((fixed)PlayerLevel * 8.0));
+        Modifier += (fixed)StatsNat / 800.0 > 1.0 ? 1.0 : (fixed)StatsNat / 800.0;
         NumPlayers++;
     }
 
@@ -3912,7 +3952,37 @@ NamedScript void Silly()
     SetMusic("Credits2");
 }
 
+/*
 NamedScript Console void Test()
 {
-    Log("Test is work!");
+    // For test the drop system
+    if (DebugLog)
+    {
+        Log("------------------------------------");
+        Log("Weapons spawned:");
+        for (int i = 0; i < ItemMax[0]; i++)
+            if (ItemData[0][i].Spawned > 0)
+                Log("Item #%d. %S - %d spawned", i, ItemData[0][i].Name, ItemData[0][i].Spawned);
+
+        Log("------------------------------------");
+        Log("Armors spawned:");
+        for (int j = 0; j < ItemMax[3]; j++)
+            if (ItemData[3][j].Spawned > 0)
+                Log("Item #%d. %S - %d spawned", j, ItemData[3][j].Name, ItemData[3][j].Spawned);
+
+        Log("------------------------------------");
+        Log("Boots spawned:");
+        for (int k = 0; k < ItemMax[9]; k++)
+            if (ItemData[9][k].Spawned > 0)
+                Log("Item #%d. %S - %d spawned", k, ItemData[9][k].Name, ItemData[9][k].Spawned);
+
+        Log("------------------------------------");
+        Log("Shield parts spawned:");
+        for (int h = 0; h < ItemMax[5]; h++)
+            if (ItemData[5][h].Spawned > 0)
+                Log("Item #%d. %S - %d spawned", h, ItemData[5][h].Name, ItemData[5][h].Spawned);
+
+        Log("------------------------------------");
+    }
 }
+*/

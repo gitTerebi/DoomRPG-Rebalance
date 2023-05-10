@@ -15,9 +15,9 @@ Actor DRPGCraftPartsExotic : DRPGCraftParts
 {
     Scale 0.75
 
-    Tag "Craft Parts (Exotic) - Use for crafting Exotic items"
+    Tag "Craft parts (exotic) (use for crafting exotic items)"
 
-    Inventory.PickupMessage "Got Craft Parts (Exotic)."
+    Inventory.PickupMessage "You picked up craft parts (exotic)."
     Inventory.Icon "EXCRE"
 	
     States
@@ -43,9 +43,9 @@ Actor DRPGCraftPartsUnique : DRPGCraftParts
 {
     Scale 0.75
 
-    Tag "Craft Parts (Unique) - Use for crafting Unique items"
+    Tag "Craft parts (unique) (use for crafting unique items)"
 
-    Inventory.PickupMessage "Got Craft Parts (Unique)."
+    Inventory.PickupMessage "You picked up craft parts (unique)."
     Inventory.Icon "UNCRE"
 	
     States

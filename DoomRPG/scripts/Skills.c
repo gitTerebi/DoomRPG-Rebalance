@@ -839,6 +839,8 @@ NamedScript KeyBind void UseSkill(int Key)
 {
     // Current Skill
     int Index = (Player.InMenu && Player.Menu == 3 ? -1 : Player.SkillSelected);
+    int SkillIndex;
+    int SkillCategory;
     SkillPtr CurrentSkill;
     SkillLevelInfo *SkillLevel;
 
@@ -847,11 +849,15 @@ NamedScript KeyBind void UseSkill(int Key)
     {
         CurrentSkill = &Skills[Player.SkillCategory[Key - 1]][Player.SkillIndex[Key - 1]];
         SkillLevel = &Player.SkillLevel[Player.SkillCategory[Key - 1]][Player.SkillIndex[Key - 1]];
+        SkillIndex = Player.SkillIndex[Key - 1];
+        SkillCategory = Player.SkillCategory[Key - 1];
     }
     else
     {
         CurrentSkill = &Skills[Player.SkillCategory[Index]][Player.SkillIndex[Index]];
         SkillLevel = &Player.SkillLevel[Player.SkillCategory[Index]][Player.SkillIndex[Index]];
+        SkillIndex = Player.SkillIndex[Index];
+        SkillCategory = Player.SkillCategory[Index];
     }
 
     // If you're dead, terminate
@@ -881,6 +887,8 @@ NamedScript KeyBind void UseSkill(int Key)
     {
         CurrentSkill = &Skills[Player.SkillPage][Player.MenuIndex];
         SkillLevel = &Player.SkillLevel[Player.SkillPage][Player.MenuIndex];
+        SkillIndex = Player.MenuIndex;
+        SkillCategory = Player.SkillPage;
     }
 
     int EPCost = ScaleEPCost(CurrentSkill->Cost * SkillLevel->CurrentLevel);
@@ -892,13 +900,9 @@ NamedScript KeyBind void UseSkill(int Key)
         Player.Overdrive = true;
 
     // Overdriving an unlearnt skill will learn it
-    if (Player.Overdrive && CheckInventory("DRPGModule") >= MODULE_SKILL_MULT && SkillLevel->Level == 0)
+    if (Player.Overdrive && SkillLevel->Level == 0)
     {
-        SkillLevel->Level++;
-        SkillLevel->CurrentLevel++;
-        TakeInventory("DRPGModule", MODULE_SKILL_MULT);
-        FadeRange(0, 255, 255, 0.5, 0, 255, 255, 0.0, 0.5);
-        ActivatorSound("health/epcapsule", 127);
+        IncreaseSkill(SkillCategory, SkillIndex, true);
         return;
     }
 
@@ -921,8 +925,8 @@ NamedScript KeyBind void UseSkill(int Key)
     }
 
     // Can't use skill if it requires more EP than overdrive limit allows (1000% means no limit)
-    if (GetCVar("drpg_overdrive_limit") < 1000)
-        if (Player.EP + Player.EPMax * GetCVar("drpg_overdrive_limit") / 100 < EPCost)
+    if (GetCVar("drpg_overdrive_enable") && GetCVar("drpg_overdrive_limit") < 1000)
+        if (Player.EPMax * GetCVar("drpg_overdrive_limit") / 100 < EPCost)
         {
             SetFont("BIGFONT");
             PrintError("You are not powerful enough");
@@ -931,7 +935,7 @@ NamedScript KeyBind void UseSkill(int Key)
         }
 
     // Use the Skill
-    if (Player.EP >= EPCost || Player.Overdrive)
+    if (Player.EP >= EPCost || (GetCVar("drpg_overdrive_enable") && Player.Overdrive))
     {
         // Data to pass to the script pointer
         void *Data = NULL;
@@ -2330,40 +2334,6 @@ NamedScript Console bool Summon(SkillLevelInfo *SkillLevel, void *Data)
         // Setup Stats
         Delay(4); // We need this initial delay to make sure the ID is valid
         MonsterStatsPtr Stats = &Monsters[GetMonsterID(NewID)];
-
-        if (Player.Augs.Active[AUG_SUMMONER])
-        {
-            fixed AugSummonerModifier;
-
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 5)
-                AugSummonerModifier = 0.10;
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 6)
-                AugSummonerModifier = 0.15;
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] == 7)
-                AugSummonerModifier = 0.20;
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 8)
-                AugSummonerModifier = 0.25;
-
-            Stats->LevelAdd += RandomFixed(0.0, (fixed)Stats->Level * (1.0 + AugSummonerModifier) - (fixed)Stats->Level + 0.5);
-
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 5) Delay (1 * 35);
-
-            fixed BaseStatePoint = (40.0 + 5.0 * (fixed)Stats->Level) / 8.0;
-
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 1)
-                Stats->Vitality += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 2)
-                Stats->Defense += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 3)
-                Stats->Strength += 20 + RoundInt(BaseStatePoint * ((fixed)Player.EnergyTotal * (0.5 - (fixed)Player.EnergyTotal * 0.0025)) / 100.0);
-            if (Player.Augs.CurrentLevel[AUG_SUMMONER] >= 4)
-            {
-                GiveActorInventory(NewID, "DRPGSummonedRegenerationBoosterToken", 1);
-            }
-
-            SetActorInventory(NewID, "DRPGAugTokenSummoner", 1);
-        }
-
         Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(NewID)]);
         Stats->Flags |= MF_NOXP;
         Stats->Flags |= MF_NODROPS;
@@ -2496,6 +2466,28 @@ NamedScript Console bool Rally(SkillLevelInfo *SkillLevel, void *Data)
 
 NamedScript Console bool Unsummon(SkillLevelInfo *SkillLevel, void *Data)
 {
+    // Compatibility Handling - DoomRL Arsenal Extended
+    if (CompatModeEx == COMPAT_DRLAX && Player.Overdrive)
+    {
+        // Fail if you have no familiars active
+        if (!Player.Familiars)
+        {
+            PrintError("You have no familiars");
+            ActivatorSound("menu/error", 127);
+            return false;
+        }
+
+        // Remove familiars
+        for (int j = 0; j < MAX_FAMILIARS; j++)
+            ScriptCall("DRLAX_FamiliarManager", "DRPGRemoveFamiliar", PlayerNumber(), j);
+
+        Player.Familiars = false;
+
+        FadeRange(192, 0, 0, 0.5, 192, 0, 0, 0.0, 1.0);
+        ActivatorSound("skills/unsummon", 127);
+        return true;
+    }
+
     int EPAdd;
 
     // Fail if you have no summons active
@@ -2525,10 +2517,11 @@ NamedScript Console bool Unsummon(SkillLevelInfo *SkillLevel, void *Data)
         Player.SummonTID[i] = 0;
     }
 
-
-    Log("EPAdd: %d", EPAdd);
     if (SkillLevel->CurrentLevel == 2)
+    {
         Player.EP += EPAdd;
+        Log("EPAdd: %d", EPAdd);
+    }
 
     Player.Summons = 0;
 
@@ -3381,6 +3374,7 @@ void CheckSkills()
     else
         Skills[5][5].Cost = 25;
 
+    // Compatibility Handling - DoomRL Arsenal
     // Summoning Skills - Marines Descriptions
     if (CompatMode == COMPAT_DRLA)
     {
@@ -3477,6 +3471,13 @@ void CheckSkills()
         {
             Skills[4][0].Description[7] = "BFG 10000";
         }
+    }
+
+    // Compatibility Handling - DoomRL Arsenal Extended
+    if (CompatModeEx == COMPAT_DRLAX)
+    {
+        Skills[5][3].Description[0] = "Banishes all of the friendly creatures under your control\n\n\CiOverdrive\C-:\nBanishes all of the familiars under your control";
+        Skills[5][3].Description[1] = "Banishes all of the friendly creatures under your control\nEach creature banished restores \Cn1% EP\C-\n\n\CiOverdrive\C-:\nBanishes all of the familiars under your control";
     }
 
     // Reset the Skill refund multiplier from the Blue Aura and Energy Augmentation

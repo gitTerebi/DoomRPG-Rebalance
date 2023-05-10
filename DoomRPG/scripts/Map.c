@@ -37,7 +37,7 @@ static int PassingEventTimer;
 static bool DisableEvent;
 static int LevelSectorCount;
 
-//MapPacks Local
+// MapPacks Local
 static bool MapPacksInitialized;
 
 // Map Init Script
@@ -47,7 +47,8 @@ NamedScript Type_OPEN void MapInit()
     fixed StartX, StartY, StartZ;
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
-        if (!PlayerInGame(i)) continue;
+        if (!PlayerInGame(i))
+            continue;
 
         StartX = GetActorX(Players(i).TID);
         StartY = GetActorY(Players(i).TID);
@@ -192,7 +193,7 @@ NamedScript Type_OPEN void MapInit()
             }
 
             if (DebugLog)
-                Log ("\CdDEBUG: \CjLevel number: \Cd%d", CurrentLevel->LevelNum);
+                Log("\CdDEBUG: \CjLevel number: \Cd%d", CurrentLevel->LevelNum);
 
             CurrentLevel->LumpName = StrParam("%tS", PRINTNAME_LEVEL);
             CurrentLevel->NiceName = StrParam("%tS", PRINTNAME_LEVELNAME);
@@ -252,11 +253,13 @@ NamedScript Type_OPEN void MapInit()
             // [KS] If the player wants to warp back to the outpost on a new map, do so now
             bool AllowTransport = true;
 
-            if (DisableEvent || Transported) AllowTransport = false;
+            if (DisableEvent || Transported)
+                AllowTransport = false;
 
             for (int i = 0; i < MAX_PLAYERS; i++)
             {
-                if (!PlayerInGame(i)) continue;
+                if (!PlayerInGame(i))
+                    continue;
 
                 SetActivator(0, AAPTR_PLAYER1 << i);
                 if (CheckInventory("DRPGDisallowTransport"))
@@ -338,16 +341,19 @@ NamedScript Type_OPEN void MapInit()
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
         // Player is not in-game
-        if (!PlayerInGame(i)) continue;
+        if (!PlayerInGame(i))
+            continue;
 
         // Player has the tips CVAR disabled
-        if (!GetUserCVar(i, "drpg_tips")) continue;
+        if (!GetUserCVar(i, "drpg_tips"))
+            continue;
 
         // Give a tip for events instead if they're new to the player
         if (CurrentLevel->Event != MAPEVENT_NONE)
         {
             // Player has seen this event before
-            if (Players(i).SeenEventTip[CurrentLevel->Event]) continue;
+            if (Players(i).SeenEventTip[CurrentLevel->Event])
+                continue;
 
             SetActivator(Players(i).TID);
         }
@@ -364,8 +370,11 @@ NamedScript Type_OPEN void MapInit()
     {
         DynamicLootGenerator("DRPGLuckDropper");
 
-        // guarentee at least 4 mods 99% of time
+        // drop at least 4 mods 99% of time
         DynamicLootGenerator("DRPGRlaMods", 2 * GetCVarFixed("drpg_lootgen_factor"));
+
+        // drop some weapons too
+        DynamicLootGenerator("DRPGWeaponDropper", 2 * GetCVarFixed("drpg_lootgen_factor"));
     }
 
     AddAdditionalMonsters();
@@ -377,7 +386,7 @@ NamedScript Type_OPEN void MapInit()
 
     DisableEvent = false;
     // WaitingForReplacements should be left alone here as these events manage it themselves
-    switch(CurrentLevel->Event)
+    switch (CurrentLevel->Event)
     {
     case MAPEVENT_MEGABOSS:
         break;
@@ -490,7 +499,8 @@ NamedScript void SetupMapMissions()
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
         // Player is currently not in-game
-        if (!PlayerInGame(i)) continue;
+        if (!PlayerInGame(i))
+            continue;
 
         // Kill
         if (Players(i).Mission.Active && Players(i).Mission.Type == MT_KILL && !CurrentLevel->BadMap && CurrentLevel->Event != MAPEVENT_MEGABOSS)
@@ -729,8 +739,10 @@ int LevelSort(void const *Left, void const *Right)
     int LeftScore = LeftLevel.LevelNum + (LeftLevel.SecretMap ? 1000 : 0) + (LeftLevel.UACBase ? -2000 : 0) + (LeftLevel.UACArena ? -1000 : 0);
     int RightScore = RightLevel.LevelNum + (RightLevel.SecretMap ? 1000 : 0) + (RightLevel.UACBase ? -2000 : 0) + (RightLevel.UACArena ? -1000 : 0);
 
-    if (LeftScore < RightScore) return -1;
-    if (LeftScore > RightScore) return 1;
+    if (LeftScore < RightScore)
+        return -1;
+    if (LeftScore > RightScore)
+        return 1;
 
     return 0;
 }
@@ -867,7 +879,8 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
     {
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            if (!PlayerInGame(i)) continue;
+            if (!PlayerInGame(i))
+                continue;
 
             SetActivator(Players(i).TID);
 
@@ -907,7 +920,8 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
     {
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            if (!PlayerInGame(i)) continue;
+            if (!PlayerInGame(i))
+                continue;
 
             // Increased Luck Stat for Nomad Players
             if (PlayerClass(i) == 7 && Players(i).NomadLuckBonus < 100 * MapLevelModifier)
@@ -941,7 +955,8 @@ NumberedScript(MAP_EXIT_SCRIPTNUM) MapSpecial void MapExit(bool Secret, bool Tel
 // Non-mission version of Assassination
 NamedScript void AddMiniboss()
 {
-    if (MonsterID <= 1) return; // No monsters, no miniboss.
+    if (MonsterID <= 1)
+        return; // No monsters, no miniboss.
 
     int Chosen = Random(1, MonsterID - 1);
     while (!Monsters[Chosen].Init)
@@ -1016,7 +1031,7 @@ NamedScript void HellSkillTransport(int player)
         }
     }
 
-    //Log("%d monsters", MonsterListLength);
+    // Log("%d monsters", MonsterListLength);
 
     fixed X, Y, Z;
     fixed SpawnX;
@@ -1031,7 +1046,8 @@ NamedScript void HellSkillTransport(int player)
         Z = GetActorZ(0);
 
         // Stop spawning if time is frozen
-        while (IsTimeFrozen()) Delay(1);
+        while (IsTimeFrozen())
+            Delay(1);
 
         TID = UniqueTID();
         Success = false;
@@ -1059,7 +1075,7 @@ NamedScript void HellSkillTransport(int player)
             if (Success)
                 Success = CheckSight(0, TID, 0) && Distance(0, TID) > RadiusMin;
             if (Success)
-                Success = !IsBoss || (!Random (0, 3) && BossesSpawned < 3);
+                Success = !IsBoss || (!Random(0, 3) && BossesSpawned < 3);
 
             if (!Success)
             {
@@ -1081,7 +1097,7 @@ NamedScript void HellSkillTransport(int player)
 
         if (Success)
         {
-            //Log("Spawned %S", MonsterList[MonsterIndex]->Name);
+            // Log("Spawned %S", MonsterList[MonsterIndex]->Name);
             Thing_Hate(TID, Player.TID);
             Thing_ChangeTID(TID, 0); // Get rid of the ID
             Spawn("TeleportFog", X + SpawnX, Y + SpawnY, Z, 0, 0);
@@ -1163,10 +1179,10 @@ bool CheckMapEvent(int Event, LevelInfo *TargetLevel)
                 MapLevelModifier >= 0.40 && !Random(0, 15));
 
     case MAPEVENT_SKILL_TECHNOPHOBIA:
-        return  (CompatMonMode == COMPAT_DRLA &&
-                 GetCVar("drpg_mapevent_skill_technophobia") &&
-                 MapLevelModifier >= 0.50 &&
-                 CurrentSkill != 6);
+        return (CompatMonMode == COMPAT_DRLA &&
+                GetCVar("drpg_mapevent_skill_technophobia") &&
+                MapLevelModifier >= 0.50 &&
+                CurrentSkill != 6);
 
     case MAPEVENT_SKILL_ARMAGEDDON:
         return (CompatMonMode == COMPAT_DRLA &&
@@ -1189,7 +1205,8 @@ void MapEventReward()
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
         // Player is not in-game
-        if (!PlayerInGame(i)) continue;
+        if (!PlayerInGame(i))
+            continue;
 
         SetActivator(Players(i).TID);
 
@@ -1219,7 +1236,7 @@ void MapEventReward()
             PrintMessage(Message, 1, -32);
 
             long int XPBonus = Player.Level * 200;
-            GiveInventory("DRPGCredits",  XPBonus);
+            GiveInventory("DRPGCredits", XPBonus);
 
             PrintMessage(StrParam("\CfBonus:\C- %d Credits and Crate", XPBonus), 2, 0);
 
@@ -1230,7 +1247,7 @@ void MapEventReward()
 
 NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
 {
-    if(DisableEvent)
+    if (DisableEvent)
     {
         TargetLevel->Event = MAPEVENT_NONE;
         return;
@@ -1387,7 +1404,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
             return;
         }
 
-        if(DisableEvent)
+        if (DisableEvent)
         {
             TargetLevel->Event = MAPEVENT_NONE;
             return;
@@ -1418,7 +1435,7 @@ NamedScript void DecideMapEvent(LevelInfo *TargetLevel, bool FakeIt)
         Log("\CdDEBUG: Special Event on \Cc%S\Cd: \Cg%S", TargetLevel->NiceName, EventNames[TargetLevel->Event]);
 
     // Initialize some basic info for the chosen event
-    switch(TargetLevel->Event)
+    switch (TargetLevel->Event)
     {
     case MAPEVENT_MEGABOSS:
     {
@@ -1523,7 +1540,7 @@ NamedScript Type_OPEN void PassingEvents()
                 DecideMapEvent(ThisLevel);
             }
 
-            PassingEventTimer = GetCVar ("drpg_mapevent_eventtime") * 35 * 60;
+            PassingEventTimer = GetCVar("drpg_mapevent_eventtime") * 35 * 60;
         }
     }
 }
@@ -1832,7 +1849,7 @@ NamedScript void MegaBossEvent()
         // Defeated
         if (GetActorProperty(TID, APROP_Health) <= 0)
         {
-            SetMusic("*"); // TODO: Some sort of victory fanfare thingy here?
+            SetMusic("*");  // TODO: Some sort of victory fanfare thingy here?
             Delay(35 * 60); // Let the players pick up the loot
             CurrentLevel->EventCompleted = true;
             return;
@@ -1945,9 +1962,9 @@ NamedScript void EnvironmentalHazardSetColors()
         return;
     }
 
-    int FadeR = (63  * CurrentLevel->HazardLevel) / 5;
+    int FadeR = (63 * CurrentLevel->HazardLevel) / 5;
     int FadeG = (131 * CurrentLevel->HazardLevel) / 5;
-    int FadeB = (47  * CurrentLevel->HazardLevel) / 5;
+    int FadeB = (47 * CurrentLevel->HazardLevel) / 5;
 
     int ColorR = 255 - ((192 * CurrentLevel->HazardLevel) / 5);
     int ColorG = 255 - ((124 * CurrentLevel->HazardLevel) / 5);
@@ -1982,10 +1999,12 @@ NamedScript void EnvironmentalHazardDamage()
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
             // Player is not in-game
-            if (!PlayerInGame(i)) continue;
+            if (!PlayerInGame(i))
+                continue;
 
             // Don't have a turret or it isn't out
-            if (!Players(i).Turret.Upgrade[TU_BUILD] || !Players(i).Turret.Active) continue;
+            if (!Players(i).Turret.Upgrade[TU_BUILD] || !Players(i).Turret.Active)
+                continue;
 
             Thing_Damage2(Players(i).Turret.TID, Damage, "Radiation");
             SetUserVariable(Players(i).Turret.TID, "user_damage_type", DT_RADIATION);
@@ -2198,7 +2217,8 @@ NamedScript void ThermonuclearBombAnnounce(int Time)
     bool ValidSeconds = (Seconds == 0 || Seconds == 1 || Seconds == 2 || Seconds == 3 || Seconds == 4 || Seconds == 5 || Seconds == 10 || Seconds == 20 || Seconds == 30);
 
     // Return if there is currently an announcement playing
-    if (CurrentLevel->BombAnnouncing) return;
+    if (CurrentLevel->BombAnnouncing)
+        return;
 
     if (ValidMinutes || ValidSeconds)
     {
@@ -2238,7 +2258,8 @@ NamedScript DECORATE void ThermonuclearBombActivate()
 
     for (int i = 0; i < MAX_NUKE_KEYS; i++)
     {
-        if (!CurrentLevel->BombKeyActive[i]) continue;
+        if (!CurrentLevel->BombKeyActive[i])
+            continue;
 
         if (!CurrentLevel->BombKeyDisarming[i])
         {
@@ -2387,7 +2408,7 @@ Start:
     while (CurrentLevel->HellUnleashedActive >= 2)
     {
         fixed ParTime = (fixed)GetLevelInfo(LEVELINFO_PAR_TIME);
-        if (ParTime <= 0) // Assign a default value to prevent divide-by-zero
+        if (ParTime <= 0)                                       // Assign a default value to prevent divide-by-zero
             ParTime = 35 * GetCVar("drpg_default_par_seconds"); // Default Par
         fixed AddMult = 0.1 / ParTime;
 
@@ -2427,7 +2448,8 @@ NamedScript DECORATE void HellUnleashedStart()
     // Spit out a rare item for each player
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
-        if (!PlayerInGame(i)) continue;
+        if (!PlayerInGame(i))
+            continue;
 
         int Rarity = (CompatMode == COMPAT_DRLA ? MAX_DIFFICULTIES + 1 : MAX_DIFFICULTIES - 1);
         ItemInfoPtr Item = GetRewardItem(Rarity);
@@ -2467,7 +2489,8 @@ NamedScript void HellUnleashedSpawnMonsters()
     {
         TID = UniqueTID();
         Success = false;
-        Position *CurrentPosition = &((Position *)CurrentLevel->MonsterPositions.Data)[i];; // Totally leaving this typo here because IT'S CRYING OKAY, I AM TOO
+        Position *CurrentPosition = &((Position *)CurrentLevel->MonsterPositions.Data)[i];
+        ; // Totally leaving this typo here because IT'S CRYING OKAY, I AM TOO
 
         // Determine a monster
         MonsterInfoPtr Monster = &MonsterData[Random(0, MonsterDataAmount - 1)];
@@ -2587,13 +2610,14 @@ NamedScript void TeleportCracksEvent()
     {
         for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            if (!PlayerInGame(i)) continue;
+            if (!PlayerInGame(i))
+                continue;
 
             // Quake
             Radius_Quake2(Players(i).TID, 4, 20, 0, 16, "world/quake");
 
             // View Fuckery (disabled)
-            //if (!Random(0, 3))
+            // if (!Random(0, 3))
             //    TeleporterCrackView(i);
         }
 
@@ -2614,7 +2638,8 @@ NamedScript void TeleporterCrackView(int PlayerID)
 
 Start:
 
-    if (ViewTime >= ViewTimeMax) return;
+    if (ViewTime >= ViewTimeMax)
+        return;
 
     SetHudSize(640, 480, true);
     SetFont(StrParam("P%iVIEW", PlayerID + 1));
@@ -2734,7 +2759,7 @@ NamedScript void DoomsdayEvent()
     {
         if (CurrentLevel->DoomTime == (GetLevelInfo(LEVELINFO_PAR_TIME) ? GetLevelInfo(LEVELINFO_PAR_TIME) : GetCVar("drpg_default_par_seconds")) * 35)
         {
-            AmbientSound ("doomsday/doombell", 127);
+            AmbientSound("doomsday/doombell", 127);
 
             SetHudSize(640, 480, false);
             SetFont("BIGFONT");
@@ -2950,7 +2975,7 @@ NamedScript void SinstormEvent()
     SetFont("BIGFONT");
     HudMessage("The Icon of Sin senses your approach.");
     EndHudMessageBold(HUDMSG_TYPEON, 0, "Red", 320.4, 160.0, 3.0, 0.03, 0.5);
-    AmbientSound ("doomsday/doombell", 127);
+    AmbientSound("doomsday/doombell", 127);
     SetHudSize(0, 0, false);
 
     Delay(35 * 4);
@@ -3044,7 +3069,7 @@ NamedScript void FeedingFrenzyEvent()
     str const RewardItems[8] =
     {
         // Monster-wielded weapons
-        "RLRevenantsLauncherPickup", // Revenant
+        "RLRevenantsLauncherPickup",       // Revenant
         "RLPlasmaRedirectionCannonPickup", // Nightmare Cyberdemon
 
         // Demonic armor set
@@ -3233,7 +3258,7 @@ NamedScript void WhispersofDarknessEvent()
             Delay(1);
             MonsterIndex = GetMonsterID(TID);
 
-//          Monsters[MonsterIndex].LevelAdd += ((250 / 8) * PlayerCount());
+            //          Monsters[MonsterIndex].LevelAdd += ((250 / 8) * PlayerCount());
             Monsters[MonsterIndex].NeedReinit = true;
 
             // Shadow Aura
@@ -3484,12 +3509,14 @@ Start:
     }
 
     Angle -= 1.0 / 350;
-    if (Angle < 0.0) Angle = 1.0 + Angle;
+    if (Angle < 0.0)
+        Angle = 1.0 + Angle;
     Red = 128 + (Sin(Angle) * 128.0);
     Green = 128 + (Sin(Angle + 0.33) * 128.0);
     Blue = 128 + (Sin(Angle + 0.67) * 128.0);
 
-    for (int i = 0; i < LevelSectorCount; Sector_SetColor(i++, Red, Green, Blue, 128));
+    for (int i = 0; i < LevelSectorCount; Sector_SetColor(i++, Red, Green, Blue, 128))
+        ;
 
     Delay(1);
     goto Start;
@@ -3500,14 +3527,14 @@ NamedScript void InitMapPacks()
 {
     str CvarNames[MAX_MAPPACKS] =
     {
-        "drpg_ws_doom1",      // WadSmoosh
+        "drpg_ws_doom1", // WadSmoosh
         "drpg_ws_sigil",
         "drpg_ws_doom2",
         "drpg_ws_nerve",
         "drpg_ws_master",
         "drpg_ws_tnt",
         "drpg_ws_plut",
-        "drpg_lex_vr",        // Lexicon
+        "drpg_lex_vr", // Lexicon
         "drpg_lex_aa1",
         "drpg_lex_aaa1",
         "drpg_lex_aaa2",
@@ -3578,7 +3605,7 @@ NamedScript void InitMapPacks()
         "drpg_lex_wos",
         "drpg_lex_zth",
         "drpg_lex_zof",
-        "drpg_comp_hubmap",   // Compendium
+        "drpg_comp_hubmap", // Compendium
         "drpg_comp_mm101",
         "drpg_comp_mm201",
         "drpg_comp_req01",
@@ -3642,14 +3669,14 @@ NamedScript void InitMapPacks()
 
     str LumpNames[MAX_MAPPACKS] =
     {
-        "E1M1",      // WadSmoosh
+        "E1M1", // WadSmoosh
         "E5M1",
         "MAP01",
         "NV_MAP01",
         "ML_MAP01",
         "TN_MAP01",
         "PL_MAP01",
-        "VR",        // Lexicon
+        "VR", // Lexicon
         "AA101",
         "AAA01",
         "AAA02",
@@ -3720,7 +3747,7 @@ NamedScript void InitMapPacks()
         "WOS01",
         "ZTH01",
         "ZOF01",
-        "HUBMAP",    // Compendium
+        "HUBMAP", // Compendium
         "MM101",
         "MM201",
         "REQ01",
@@ -3784,22 +3811,26 @@ NamedScript void InitMapPacks()
     int i;
     bool BlankStart;
 
-    Delay(10); //Give a chance for data to load
+    Delay(10); // Give a chance for data to load
 
-    if (CurrentLevel->LumpName == "TITLEMAP") //don't need to run on title screen
+    if (CurrentLevel->LumpName == "TITLEMAP") // don't need to run on title screen
         return;
 
-    if (!MapPacks || MapPacksInitialized) return; //let's be safe
+    if (!MapPacks || MapPacksInitialized)
+        return; // let's be safe
     LogMessage("\CdStarting Map Packs Initialization", LOG_DEBUG);
 
     for (i = 0; i < MAX_MAPPACKS; i++)
     {
-        MapPackActive[i] = GetCVar(CvarNames[i]); //find which iwads user says they have
+        MapPackActive[i] = GetCVar(CvarNames[i]); // find which iwads user says they have
+
+        if (GetCVar("drpg_addstartmap") && LumpNames[i] == GetCVarString("drpg_startmap"))
+            MapPackActive[i] = true; // activate the iwad if it is a starter map
     };
 
     bool StartedOnMap = KnownLevels->Position > 1;
 
-    if (!StartedOnMap) //we started in the outpost and map arrays are empty - lets add one
+    if (!StartedOnMap) // we started in the outpost and map arrays are empty - lets add one
     {
         for (i = 0; i < MAX_MAPPACKS; i++)
         {
@@ -3827,8 +3858,7 @@ NamedScript void InitMapPacks()
     }
     str Lump = ((LevelInfo *)ExtraMapPacks[WS_DOOM1].Data)[1].LumpName;
 
-
-    if (Lump != "E1M1") //we didn't start with doom 1 or started on outpost with add unknown map not set to doom 1
+    if (Lump != "E1M1") // we didn't start with doom 1 or started on outpost with add unknown map not set to doom 1
     {
         LogMessage(StrParam("\Cgnot E1M1!!!\C- - Lump is: %S", Lump), LOG_DEBUG);
 
@@ -3836,38 +3866,38 @@ NamedScript void InitMapPacks()
 
         for (i = 1; i < MAX_MAPPACKS; i++)
         {
-            if (Lump == LumpNames[i])    //get which iwad was loaded
+            if (Lump == LumpNames[i]) // get which iwad was loaded
                 break;
         }
 
         LogMessage("Swapping Array positions", LOG_DEBUG);
-        Temp = ExtraMapPacks[i];   //store current data of correct location
-        LogMessage(StrParam("Swapping %p with %p",&ExtraMapPacks[i], &ExtraMapPacks[WS_DOOM1]), LOG_DEBUG);
-        ExtraMapPacks[i] = ExtraMapPacks[WS_DOOM1]; //move map data to correct position
-        ExtraMapPacks[WS_DOOM1] = Temp; //place replaced data in the outdated doom 1 slot
+        Temp = ExtraMapPacks[i]; // store current data of correct location
+        LogMessage(StrParam("Swapping %p with %p", &ExtraMapPacks[i], &ExtraMapPacks[WS_DOOM1]), LOG_DEBUG);
+        ExtraMapPacks[i] = ExtraMapPacks[WS_DOOM1]; // move map data to correct position
+        ExtraMapPacks[WS_DOOM1] = Temp;             // place replaced data in the outdated doom 1 slot
 
-        KnownLevels = &ExtraMapPacks[i];   //update pointer to the new location
+        KnownLevels = &ExtraMapPacks[i]; // update pointer to the new location
     }
 
-    //we need to do this again to update i, just in case
-    //it's possible to get here if data is already initialised and this would
-    //mess up the current map pack pointer if we didn't recheck
+    // we need to do this again to update i, just in case
+    // it's possible to get here if data is already initialised and this would
+    // mess up the current map pack pointer if we didn't recheck
     Lump = ((LevelInfo *)KnownLevels->Data)[1].LumpName;
     for (i = 0; i < MAX_MAPPACKS; i++)
     {
-        if (Lump == LumpNames[i])    //get which iwad was loaded
+        if (Lump == LumpNames[i]) // get which iwad was loaded
             break;
     }
 
-    for (int j = 0; j < MAX_MAPPACKS; j++) //loop through all map packs
+    for (int j = 0; j < MAX_MAPPACKS; j++) // loop through all map packs
     {
-        if (j != i && MapPackActive[j]) //the "current" pack already has data so ignore it, also make sure the iwad is marked active
+        if (j != i && MapPackActive[j]) // the "current" pack already has data so ignore it, also make sure the iwad is marked active
         {
-            KnownLevels = &ExtraMapPacks[j]; //move pointer for this operation
+            KnownLevels = &ExtraMapPacks[j]; // move pointer for this operation
             if (KnownLevels->Data == NULL)
-                ArrayCreate(KnownLevels, "Levels", 32, sizeof(LevelInfo)); //allocate memory
+                ArrayCreate(KnownLevels, "Levels", 32, sizeof(LevelInfo)); // allocate memory
 
-            //we need to add the outpost to each array
+            // we need to add the outpost to each array
             LevelInfo *OutpostMap = &((LevelInfo *)KnownLevels->Data)[KnownLevels->Position++];
             OutpostMap->LevelNum = 0;
             OutpostMap->LumpName = "OUTPOST";
@@ -3877,7 +3907,7 @@ NamedScript void InitMapPacks()
             OutpostMap->UACArena = false;
             OutpostMap->NeedsRealInfo = false;
 
-            //we add our maps manually because AddUnknownMap is expected to run on outpost load
+            // we add our maps manually because AddUnknownMap is expected to run on outpost load
             LevelInfo *NewMap = &((LevelInfo *)KnownLevels->Data)[KnownLevels->Position++];
             NewMap->LumpName = LumpNames[j];
             NewMap->NiceName = "Unknown Area";
@@ -3890,12 +3920,13 @@ NamedScript void InitMapPacks()
             NewMap->NeedsRealInfo = true;
             LogMessage(StrParam("Added Lump %S to Array %p", ((LevelInfo *)KnownLevels->Data)[1].LumpName, KnownLevels), LOG_DEBUG);
 
-            if(j > 80) Delay(1);
+            if (j > 80)
+                Delay(1);
         }
     }
 
-    KnownLevels = &ExtraMapPacks[i]; //move pointer back to current mappack
-    CurrentLevel = FindLevelInfo(); //the CurrentLevel pointer is invalidated and needs to be reset
+    KnownLevels = &ExtraMapPacks[i]; // move pointer back to current mappack
+    CurrentLevel = FindLevelInfo();  // the CurrentLevel pointer is invalidated and needs to be reset
     Player.SelectedMapPack = i;
 
     MapPacksInitialized = true;

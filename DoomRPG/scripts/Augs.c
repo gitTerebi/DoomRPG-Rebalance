@@ -219,7 +219,10 @@ NamedScript DECORATE void AddBattery(int Amount)
     Player.Augs.Battery += Amount;
 
     if (Player.Augs.Battery > Player.Augs.BatteryMax)
+    {
         Player.Augs.Battery = Player.Augs.BatteryMax;
+        DrawBattery();
+    }
 
     if (PrevBattery != Player.Augs.Battery)
         DrawBattery();

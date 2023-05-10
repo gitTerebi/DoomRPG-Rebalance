@@ -11,17 +11,17 @@ class DRLAX_ZombieManFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        POSS ABCD 8 FamiliarIdle();
+        ZHRF ABCD 8 FamiliarIdle();
         loop;
         Missile:
-        POSS E 8 A_FaceTracer(0, 0);
-        POSS F 0 A_StartSound(attacksound);
-		POSS F 8 
+        ZHRF E 8 A_FaceTracer(0, 0);
+        ZHRF F 0 A_StartSound(attacksound);
+		ZHRF F 8 
         {
             A_FaceTracer(0, 0);
             FamiliarLineAttack(angle, pitch, random(20,40) * (extradamage + 1), "Bullet", "RLBulletPuff", 0);
         }//A_CustomBulletAttack(22.5, 0, 1, random(1,5)*3, "RLBulletPuff", 0, CBAF_NORANDOM);
-        POSS F 0
+        ZHRF F 0
         {
             if(CountInv("DRLAX_FamiliarKill") > 0)
             {
@@ -38,7 +38,7 @@ class DRLAX_ZombieManFamiliar : DRLAX_FamiliarBase
             extradamage = 0;
             TakeInventory("DRLAX_FamiliarKill", 9999);
         }
-        POSS E 8 A_FaceTracer;
+        ZHRF E 8 A_FaceTracer;
 		Goto Spawn;
     }
 
@@ -69,10 +69,10 @@ class DRLAX_ShotgunGuyFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        SPOS ABCD 8 FamiliarIdle();
+        ZSSH ABCD 8 FamiliarIdle();
         loop;
         Missile:
-        SPOS E 0
+        ZSSH E 0
         {
             if(playeractor && plat && Distance2D(playeractor) > 128)
             {
@@ -80,16 +80,16 @@ class DRLAX_ShotgunGuyFamiliar : DRLAX_FamiliarBase
                 SetOrigin(plat.pos, false);
             }
         }
-        SPOS E 10 A_FaceTracer(0, 0);
-        SPOS F 0 A_StartSound(attacksound);
-		SPOS F 10 
+        ZSSH E 10 A_FaceTracer(0, 0);
+        ZSSH F 0 A_StartSound(attacksound);
+		ZSSH F 10 
         {
             for(int i; i<3; i++)
             {
                 ShotgunAttack(angle, pitch, random(10,30), "Bullet", "RLBulletPuff");
             }
         }//A_CustomBulletAttack(22.5, 0, 1, random(1,5)*3, "RLBulletPuff", 0, CBAF_NORANDOM);
-        SPOS E 10 A_FaceTracer;
+        ZSSH E 10 A_FaceTracer;
 		Goto Spawn;
     }
 
@@ -132,11 +132,11 @@ class DRLAX_ChaingunGuyFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        CPOS ABCD 8 FamiliarIdle();
+        ZCCH ABCD 8 FamiliarIdle();
         loop;
         Missile:
         ReMissile:
-        CPOS FE 4 BRIGHT 
+        ZCCH FE 4 BRIGHT 
         {
             A_FaceTracer(0,0);
             A_StartSound(attacksound);
@@ -144,7 +144,7 @@ class DRLAX_ChaingunGuyFamiliar : DRLAX_FamiliarBase
             FamiliarLineAttack(angle + frandom(-12.5, 12.5), pitch, random(4,8), "Bullet", "RLBulletPuff", true);
             //A_SpawnProjectile("DRLAX_ArachnotronFamiliarBall", 8, ptr:AAPTR_TRACER);
         }
-		CPOS F 1
+		ZCCH F 1
         {
             if(attackcooldown >= 400)
             {
@@ -186,11 +186,11 @@ class DRLAX_ImpFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        TROO ABCD 8 FamiliarIdle();
+        IMP0 ABCD 8 FamiliarIdle();
         loop;
         Missile:
-        TROO EF 8 A_FaceTracer;
-		TROO G 6 A_SpawnProjectile("DRLAX_ImpFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
+        IMP0 EF 8 A_FaceTracer;
+		IMP0 G 6 A_SpawnProjectile("DRLAX_ImpFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
 		Goto Spawn;
     }
 
@@ -226,6 +226,7 @@ class DRLAX_ImpFamiliarPassive : DRLAX_FamiliarPassive
         if(!passive && damage > 0 && damageType == "Fire")
         {
             newdamage = damage * (1.0 + ((power + 1) * (0.10)));
+            //Console.Printf("" .. power);
         }
     }
 }
@@ -268,21 +269,21 @@ class DRLAX_DemonFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        SARG ABCD 4 FamiliarIdle();
+        PDEM ABCD 4 FamiliarIdle();
         loop;
         Missile:
-        SARG E 0 
+        PDEM E 0 
         {
             diving = true;
             A_FaceTracer(0, 0);
             A_StartSound(attacksound);
             Vel3DFromAngle(30, angle, pitch);
         }
-        SARG EF 8; //A_FaceTracer;
-		SARG G 4; //A_SpawnProjectile("DRLAX_ImpFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
-        SARG G 4 A_Explode(BiteDamage(), 64, 0, 0, BiteDamage());
-        SARG D 2;
-        SARG D 0
+        PDEM EF 8; //A_FaceTracer;
+		PDEM G 4; //A_SpawnProjectile("DRLAX_ImpFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
+        PDEM G 4 A_Explode(BiteDamage(), 64, 0, 0, BiteDamage());
+        PDEM D 2;
+        PDEM D 0
         {
             diving = false;
         }
@@ -420,10 +421,10 @@ class DRLAX_LostSoulFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        SKUL AABB 4 FamiliarIdle();
+        LSOL AABB 4 FamiliarIdle();
         loop;
         Missile:
-        SKUL C 0 
+        LSOL C 0 
         {
             diving = true;
             angle = targetangle;
@@ -434,7 +435,7 @@ class DRLAX_LostSoulFamiliar : DRLAX_FamiliarBase
             playeractor.A_AlertMonsters();
         }
         Charging:
-        SKUL CCCCDDDD 1 
+        LSOL CCCCDDDD 1 
         {
             FLineTraceData RemoteRay;
             bool hit = LineTrace(
@@ -474,8 +475,8 @@ class DRLAX_LostSoulFamiliar : DRLAX_FamiliarBase
         TNT1 A 0 A_SpawnItemEx("DRLAX_LostSoulFamiliarTrail", 0, 0, 4, xspeed, 0, 0, 180, flags:SXF_NOCHECKPOSITION);
         loop;
         End:
-        SKUL ABAB 8;
-        SKUL A 0
+        LSOL ABAB 8;
+        LSOL A 0
         {
             diving = false;
             attackcooldown = 35*6;
@@ -580,11 +581,11 @@ class DRLAX_CacodemonFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        HEAD A 8 FamiliarIdle();
+        CACO A 8 FamiliarIdle();
         loop;
         Missile:
-        HEAD BC 5 A_FaceTracer;
-		HEAD D 5 bright A_SpawnProjectile("DRLAX_CacodemonFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
+        CACO BC 5 A_FaceTracer;
+		CACO D 5 bright A_SpawnProjectile("DRLAX_CacodemonFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
 		Goto Spawn;
     }
 
@@ -645,11 +646,11 @@ class DRLAX_HellKnightFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        BOS2 ABCD 8 FamiliarIdle();
+        HKNI ABCD 8 FamiliarIdle();
         loop;
         Missile:
-        BOS2 EF 8 A_FaceTracer;
-		BOS2 G 8 A_SpawnProjectile("DRLAX_HellKnightFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
+        HKNI EF 8 A_FaceTracer;
+		HKNI G 8 A_SpawnProjectile("DRLAX_HellKnightFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
 		Goto Spawn;
     }
 
@@ -666,7 +667,7 @@ class DRLAX_HellKnightFamiliar : DRLAX_FamiliarBase
     {
         MoveToPlatform();
 
-        if(level.Time % 10 == 0)
+        if((level.Time % 10) == 0)
         {
             ThinkerIterator ti = ThinkerIterator.Create("Powerup");
             Powerup p;
@@ -676,17 +677,14 @@ class DRLAX_HellKnightFamiliar : DRLAX_FamiliarBase
                 {
                     String c = p.GetClassName();
 
-                    if(c.Left(7) == "PowerRL")
+                    if(c.Left(7) == "PowerRL" && c.Mid(c.Length()-8, 8) == "Cooldown")
                     {
-		        if(c.Mid(c.Length()-8, 8) == "Cooldown")
-			{
-                            p.effecttics-=5;
+                        p.effecttics-=5;
 
-                            if(p.effecttics < 0)
-                            {
-                                p.Destroy();
-                                continue;
-                            }
+                        if(p.effecttics < 0)
+                        {
+                            p.Destroy();
+                            continue;
                         }
                     }
                 }
@@ -728,11 +726,11 @@ class DRLAX_BaronOfHellFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        BOSS ABCD 8 FamiliarIdle();
+        BARO ABCD 8 FamiliarIdle();
         loop;
         Missile:
-        BOSS EF 8 A_FaceTracer;
-		BOSS G 6 A_SpawnProjectile("DRLAX_HellKnightFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
+        BARO EF 8 A_FaceTracer;
+		BARO G 6 A_SpawnProjectile("DRLAX_HellKnightFamiliarBall", 8, ptr:AAPTR_TRACER); //A_TroopAttack;
 		Goto Spawn;
     }
 
@@ -783,12 +781,12 @@ class DRLAX_RevenantFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        SKEL ABCDEF 6 FamiliarIdle();
+        REVE ABCDEF 6 FamiliarIdle();
         loop;
         Missile:
-        SKEL J 10 BRIGHT A_FaceTracer;
-		SKEL K 10 A_SpawnProjectile("DRLAX_RevnantFamiliarMissile", 12, ptr:AAPTR_TRACER);
-        SKEL K 10 A_FaceTracer; //A_TroopAttack;
+        REVE J 10 BRIGHT A_FaceTracer;
+		REVE K 10 A_SpawnProjectile("DRLAX_RevnantFamiliarMissile", 12, ptr:AAPTR_TRACER);
+        REVE K 10 A_FaceTracer; //A_TroopAttack;
 		Goto Spawn;
     }
 
@@ -855,17 +853,17 @@ class DRLAX_PainElementalFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        PAIN ABC 8 FamiliarIdle();
+        PELE ABC 8 FamiliarIdle();
         loop;
         Missile:
-        PAIN DE 5 BRIGHT
+        PELE DE 5 BRIGHT
         {
             if(playeractor)
             {
                 A_Face(playeractor);
             }
         }
-		PAIN FFF 8 BRIGHT
+		PELE FFF 8 BRIGHT
         {
             if(!playeractor || playeractor.health == 0)
             {
@@ -919,7 +917,7 @@ class DRLAX_PainElementalShieldFX : Actor
     states
     {
         Spawn:
-        SKUL CCCCDDDD 1 BRIGHT
+        LSOL CCCCDDDD 1 BRIGHT
         {
             A_SeekerMissile(90, 90, SMF_PRECISE);
             A_CountDown();
@@ -932,12 +930,12 @@ class DRLAX_PainElementalShieldFX : Actor
         }
         loop;
         Death:
-        SKUL F 6 BRIGHT A_Stop;
-		SKUL G 6 BRIGHT;
-		SKUL H 6 BRIGHT;
-		SKUL I 6 BRIGHT;
-		SKUL J 6;
-		SKUL K 6;
+        LSOL F 6 BRIGHT A_Stop;
+		LSOL G 6 BRIGHT;
+		LSOL H 6 BRIGHT;
+		LSOL I 6 BRIGHT;
+		LSOL J 6;
+		LSOL K 6;
 		Stop;
     }
 }
@@ -1043,7 +1041,7 @@ class DRLAX_PainElementalShieldSoul : Actor
     states
     {
         Spawn:
-        SKUL AAAAAAAAAABBBBBBBBBB 1 BRIGHT
+        LSOL AAAAAAAAAABBBBBBBBBB 1 BRIGHT
         {
             if(!tracer)
             {
@@ -1052,17 +1050,17 @@ class DRLAX_PainElementalShieldSoul : Actor
         }
         loop;
         Death:
-        SKUL F 0 
+        LSOL F 0 
         {
             A_StartSound(deathsound);
             bNOGRAVITY = true;
         }
-        SKUL F 6 BRIGHT;
-		SKUL G 6 BRIGHT;
-		SKUL H 6 BRIGHT;
-		SKUL I 6 BRIGHT;
-		SKUL J 6;
-		SKUL K 6;
+        LSOL F 6 BRIGHT;
+		LSOL G 6 BRIGHT;
+		LSOL H 6 BRIGHT;
+		LSOL I 6 BRIGHT;
+		LSOL J 6;
+		LSOL K 6;
 		Stop;
     }   
 }
@@ -1078,33 +1076,33 @@ class DRLAX_MancubusFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        FATT ABCDEF 10 FamiliarIdle();
+        MANC ABCDEF 10 FamiliarIdle();
         loop;
         Missile:
-        FATT G 20 
+        MANC G 20 
         {
             A_FaceTracer();
             A_StartSound("fatso/raiseguns", CHAN_VOICE);
             A_SoundPitch(CHAN_VOICE, 1.5);
         }
-		FATT H 10 BRIGHT 
+		MANC H 10 BRIGHT 
         {
             A_SpawnProjectile("DRLAX_FatsoFamiliarShot", 8, 0, 0, ptr:AAPTR_TRACER);
             A_SpawnProjectile("DRLAX_FatsoFamiliarShot", 8, 0, -11.25, ptr:AAPTR_TRACER);
         }
-		FATT IG 5 A_FaceTracer();
-		FATT H 10 BRIGHT 
+		MANC IG 5 A_FaceTracer();
+		MANC H 10 BRIGHT 
         {
             A_SpawnProjectile("DRLAX_FatsoFamiliarShot", 8, 0, 0, ptr:AAPTR_TRACER);
             A_SpawnProjectile("DRLAX_FatsoFamiliarShot", 8, 0, 11.25, ptr:AAPTR_TRACER);
         }
-		FATT IG 5 A_FaceTracer();
-		FATT H 10 BRIGHT 
+		MANC IG 5 A_FaceTracer();
+		MANC H 10 BRIGHT 
         {
             A_SpawnProjectile("DRLAX_FatsoFamiliarShot", 8, 0, 5.625, ptr:AAPTR_TRACER);
             A_SpawnProjectile("DRLAX_FatsoFamiliarShot", 8, 0, 5.625, ptr:AAPTR_TRACER);
         }
-		FATT IG 5 A_FaceTracer;
+		MANC IG 5 A_FaceTracer;
 		Goto Spawn;
     }
 
@@ -1176,16 +1174,17 @@ class DRLAX_ArachnotronFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        BSPI AABBCCDDEEFF 6 FamiliarIdle();
+        ARAC AABBCCDDEEFF 6 FamiliarIdle();
         loop;
+        ReMissile:
         Missile:
-        BSPI G 4 BRIGHT 
+        ARAC G 4 BRIGHT 
         {
             A_FaceTracer();
             A_SpawnProjectile("DRLAX_ArachnotronFamiliarBall", 8, ptr:AAPTR_TRACER);
         }
-		BSPI H 4 BRIGHT;
-		BSPI H 1 BRIGHT 
+		ARAC H 4 BRIGHT;
+		ARAC H 1 BRIGHT 
         {
             if(attackcooldown >= 500)
             {
@@ -1203,7 +1202,7 @@ class DRLAX_ArachnotronFamiliar : DRLAX_FamiliarBase
 
             if(tracer && !tracer.player)
             {
-                SetStateLabel("Missile");
+                SetStateLabel("ReMissile");
                 return;
             }
         }
@@ -1473,15 +1472,15 @@ class DRLAX_CyberdemonFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        CYBR ABCD 8 FamiliarIdle();
+        VCYB ABCD 8 FamiliarIdle();
         loop;
         Missile:
-        CYBR E 8 A_FaceTracer;
-		CYBR F 12 A_SpawnProjectile("DRLAX_CyberdemonFamiliarRocket", 10, ptr:AAPTR_TRACER);
-        CYBR E 12 A_FaceTracer;
-		CYBR F 12 A_SpawnProjectile("DRLAX_CyberdemonFamiliarRocket", 10, ptr:AAPTR_TRACER);
-        CYBR E 12 A_FaceTracer;
-		CYBR F 12 A_SpawnProjectile("DRLAX_CyberdemonFamiliarRocket", 10, ptr:AAPTR_TRACER);
+        VCYB E 8 A_FaceTracer;
+		VCYB F 12 A_SpawnProjectile("DRLAX_CyberdemonFamiliarRocket", 10, ptr:AAPTR_TRACER);
+        VCYB E 12 A_FaceTracer;
+		VCYB F 12 A_SpawnProjectile("DRLAX_CyberdemonFamiliarRocket", 10, ptr:AAPTR_TRACER);
+        VCYB E 12 A_FaceTracer;
+		VCYB F 12 A_SpawnProjectile("DRLAX_CyberdemonFamiliarRocket", 10, ptr:AAPTR_TRACER);
 		Goto Spawn;
     }
 
@@ -1548,15 +1547,15 @@ class DRLAX_SpiderMastermindFamiliar : DRLAX_FamiliarBase
     states
     {
         Spawn:
-        SPID AABBCCDDEEFF 6 FamiliarIdle();
+        SMAS AABBCCDDEEFF 6 FamiliarIdle();
         loop;
         Missile:
-        SPID G 0
+        SMAS G 0
         {
             attackspd = 6;
         }
         ReMissile:
-        SPID G 6 BRIGHT 
+        SMAS G 6 BRIGHT 
         {
             float totals = Level.Total_Items + Level.Total_Monsters + Level.Total_Secrets;
             float value = Level.Found_Items + Level.Killed_Monsters + Level.Found_Secrets;
@@ -1579,11 +1578,11 @@ class DRLAX_SpiderMastermindFamiliar : DRLAX_FamiliarBase
             }
             //A_SpawnProjectile("DRLAX_ArachnotronFamiliarBall", 8, ptr:AAPTR_TRACER);
         }
-		SPID H 6 BRIGHT
+		SMAS H 6 BRIGHT
         {
             A_SetTics(attackspd);
         }
-		SPID H 1 BRIGHT 
+		SMAS H 1 BRIGHT 
         {
             if(attackcooldown >= 500)
             {

@@ -67,13 +67,13 @@ class DRPGZEHandler : EventHandler
             Sector CurrSec = level.Sectors[i];
             secplane Floor = CurrSec.floorplane;
             secplane Ceiling = CurrSec.ceilingplane;
-            int ceilingZ = int(Ceiling.ZAtPoint((CurrSec.CenterSpot.x, CurrSec.CenterSpot.y)));
-            int floorZ = int(Floor.ZAtPoint((CurrSec.CenterSpot.x, CurrSec.CenterSpot.y)));
-            int centerHeight = ceilingZ - floorZ;
+            int CeilingZ = int(Ceiling.ZAtPoint((CurrSec.CenterSpot.x, CurrSec.CenterSpot.y)));
+            int FloorZ = int(Floor.ZAtPoint((CurrSec.CenterSpot.x, CurrSec.CenterSpot.y)));
+            int CenterHeight = CeilingZ - FloorZ;
             vector3 SpawnPos = (CurrSec.CenterSpot.x + random(-16, 16), CurrSec.CenterSpot.y + random(-16, 16), Floor.ZAtPoint(CurrSec.CenterSpot));
 
-            // Spawn Crate in a secret with a 20% chance, only if secret's sector is not a door (looking at you, Doom 1)
-            if (CurrSec.IsSecret() && centerHeight > 0)
+            // Spawn Crate in a secret with a certain chance, only if secret's sector is not a door (looking at you, Doom 1)
+            if (CurrSec.IsSecret() && CenterHeight > 0)
             {
                 Actor.Spawn("DRPGSecretSpawner", SpawnPos);
             }

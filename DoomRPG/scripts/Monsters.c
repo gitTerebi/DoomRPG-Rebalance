@@ -23,6 +23,8 @@ int MegaBossesAmount;
 
 NoInit MonsterStats RPGMap Monsters[MAX_MONSTERS];
 
+int TotalBosses;
+
 MonsterInfo const MonsterDataDF[MAX_DEF_MONSTERS_DF] =
 {
     { "ZombieMan",                          "Former Human",                      1,      0, false, "You hear shuffling footsteps and moans!" },
@@ -706,6 +708,10 @@ NamedScript DECORATE void MonsterInit(int Flags)
     // Store Monster Flags
     Stats->Flags = Flags;
 
+    // Calculate Total Bosses
+    if (Stats->Flags & MF_BOSS)
+        TotalBosses++;
+
     // Set the Height and Radius
     Stats->Height = GetActorPropertyFixed(0, APROP_Height);
     Stats->Radius = GetActorPropertyFixed(0, APROP_Radius);
@@ -744,7 +750,7 @@ NamedScript DECORATE void MonsterInit(int Flags)
     MonsterAggressionHandler();
 
     // Friendly Monsters Teleport To The Player Handling
-    MonsterFriendlyTeleport();
+    MonsterFriendlyTeleport(false);
 
     // Death Handler
     // Handled via ZScript
@@ -1397,6 +1403,9 @@ NamedScript void MonsterAggressionHandler()
     // Pointer
     MonsterStatsPtr Stats = &Monsters[GetMonsterID(0)];
 
+    // Get Monster TID
+    int MonsterTID = Stats->TID;
+
     // Init Toaster Mode
     bool ToasterMod = GetCVar("drpg_toaster");
 
@@ -1414,7 +1423,10 @@ Start:
         return;
 
     if (GetActorProperty(0, APROP_Health) <= 0)
+    {
+        TakeInventory("DRPGMonsterAggressionHandler", 1);
         return;
+    }
 
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
@@ -1423,100 +1435,149 @@ Start:
     if (ToasterMod)
         while (ActorNotSeePlayers(0, 0, true)) Delay(35);
 
-    // Changing the AI of monsters in case if there are summoned monsters
+    // Changing the AI of monsters in case if there are summoned monsters or turrets
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
-        if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
+        if (!PlayerInGame(i)) continue;
 
-        for (int j = 0; j < Players(i).Summons; j++)
+        // Changing the AI of monsters in case if there are summoned monsters
+        if (Players(i).Summons > 0)
         {
-            if (!GetActorProperty(0, APROP_Friendly))
+            for (int j = 0; j < Players(i).Summons; j++)
             {
-                // If the enemy has no target and the summoned monster is in his field of vision he immediately becomes aggressive towards summoned monster
-                if (!MonsterHasTarget() && Distance(0, Players(i).SummonTID[j]) <= 1536 && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
+                if (!GetActorProperty(0, APROP_Friendly))
                 {
-                    Thing_Hate (0, Players(i).SummonTID[j], 3);
+                    // If the enemy has no target and the summoned monster is in his field of vision he immediately becomes aggressive towards summoned monster
+                    if (!MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) <= 1536 && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
+                    {
+                        Thing_Hate (0, Players(i).SummonTID[j], 3);
+                        Delay(DelayTime);
+                    }
+
+                    // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
+                    if (MonsterHasTarget() && !MonsterSeeTarget(MonsterTID) && Random(0, 100) <= 15)
+                    {
+                        if (CheckSight(0, Players(i).SummonTID[j], 0))
+                        {
+                            GiveInventory("DRPGEnemyClearTarget1", 1);
+                            Delay(DelayTime);
+                        }
+                        else
+                        {
+                            GiveInventory("DRPGEnemyClearTarget2", 1);
+                            Delay(DelayTime);
+                        }
+                    }
+
+                    // Switch to another target if it is closer than the current target
+                    if (MonsterHasTarget() && MonsterSeeTarget(MonsterTID) && MonsterDistanceTarget(MonsterTID) > Random(256, 512) && Random(0, 100) <= 15)
+                    {
+                        if (CheckSight(0, Players(i).SummonTID[j], 0) && Distance(0, Players(i).SummonTID[j]) < Distance(0, Players(i).TID))
+                        {
+                            if (Distance(0, Players(i).SummonTID[j]) < MonsterDistanceTarget(MonsterTID))
+                            {
+                                Thing_Hate (0, Players(i).SummonTID[j], 4);
+                                Delay(DelayTime);
+                            }
+                        }
+                        else if (CheckSight(0, Players(i).TID, 0) && Distance(0, Players(i).TID) < Distance(0, Players(i).SummonTID[j]))
+                        {
+                            if (Distance(0, Players(i).TID) < MonsterDistanceTarget(MonsterTID))
+                            {
+                                Thing_Hate (0, Players(i).TID, 4);
+                                Delay(DelayTime);
+                            }
+                        }
+                    }
+
+                    // Summons switch to another target if it is closer than the current target
+                    if (MonsterHasTarget() && CheckSight(Players(i).SummonTID[j], MonsterTID, 0) && Distance(Players(i).SummonTID[j], MonsterTID) <= 256 && Random(0, 100) <= 15)
+                    {
+                        if (MonsterSeeTarget(Players(i).SummonTID[j]) && MonsterDistanceTarget(Players(i).SummonTID[j]) > Random(256, 512))
+                        {
+                            if (Distance(Players(i).SummonTID[j], MonsterTID) < MonsterDistanceTarget(Players(i).SummonTID[j]))
+                            {
+                                Thing_Hate (Players(i).SummonTID[j], MonsterTID);
+                                Delay(DelayTime);
+                            }
+                        }
+                        else if (!MonsterSeeTarget(Players(i).SummonTID[j]))
+                        {
+                            Thing_Hate (Players(i).SummonTID[j], MonsterTID);
+                            Delay(DelayTime);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Changing the AI of enemy monsters in case if there are turret
+        if (!GetActorProperty(0, APROP_Friendly) && Players(i).Turret.Active)
+        {
+            // If the enemy has no target and the turret is in his field of vision he immediately becomes aggressive towards turret
+            if (!MonsterHasTarget() && Distance(0, Players(i).Turret.TID) <= 1536 && CheckSight(0, Players(i).Turret.TID, 0) && Distance(0, Players(i).Turret.TID) < Distance(0, Players(i).TID))
+            {
+                Thing_Hate (0, Players(i).Turret.TID, 3);
+                Delay(DelayTime);
+            }
+
+            // Clearing enemy target in case a turret is nearby and the player is out of sight (or vice versa)
+            if (MonsterHasTarget() && !MonsterSeeTarget(MonsterTID) && Random(0, 100) <= 15)
+            {
+                if (CheckSight(0, Players(i).Turret.TID, 0))
+                {
+                    GiveInventory("DRPGEnemyClearTarget1", 1);
                     Delay(DelayTime);
                 }
-
-                // Clearing enemy target in case a summoned monster is nearby and the player is out of sight (or vice versa)
-                if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && Random(0, 100) <= 15 || MonsterHasTarget() && CheckSight(0, Players(i).TID, 0) && Random(0, 100) <= 15)
+                else
                 {
-                    if (CheckSight(0, Players(i).SummonTID[j], 0))
+                    GiveInventory("DRPGEnemyClearTarget2", 1);
+                    Delay(DelayTime);
+                }
+            }
+
+            // Switch to another target if it is closer than the current target
+            if (MonsterHasTarget() && MonsterSeeTarget(MonsterTID) && MonsterDistanceTarget(MonsterTID) > Random(256, 512) && Random(0, 100) <= 15)
+            {
+                if (CheckSight(0, Players(i).Turret.TID, 0) && Distance(0, Players(i).Turret.TID) < Distance(0, Players(i).TID))
+                {
+                    if (Distance(0, Players(i).Turret.TID) < MonsterDistanceTarget(MonsterTID))
                     {
-                        GiveInventory("DRPGEnemyClearTarget1", 1);
-                        Delay(DelayTime);
-                    }
-                    else
-                    {
-                        GiveInventory("DRPGEnemyClearTarget2", 1);
+                        Thing_Hate (0, Players(i).Turret.TID, 4);
                         Delay(DelayTime);
                     }
                 }
-
-                // Switch to another target if it is closer than the current target
-                if (MonsterHasTarget() && CheckSight(0, Players(i).SummonTID[j], 0) && CheckSight(0, Players(i).TID, 0) && Distance(0, AAPTR_TARGET) > Random(256, 512) && Random(0, 100) <= 15)
+                else if (CheckSight(0, Players(i).TID, 0) && Distance(0, Players(i).TID) < Distance(0, Players(i).Turret.TID))
                 {
-                    if (Distance(0, Players(i).SummonTID[j]) <= Random(64, 256) && Distance(0, Players(i).SummonTID[j]) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
-                    {
-                        Thing_Hate (0, Players(i).SummonTID[j], 4);
-                        Delay(DelayTime);
-                    }
-
-                    if (Distance(0, Players(i).TID) <= Random(64, 256) && Distance(0, Players(i).TID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
+                    if (Distance(0, Players(i).TID) < MonsterDistanceTarget(MonsterTID))
                     {
                         Thing_Hate (0, Players(i).TID, 4);
                         Delay(DelayTime);
                     }
                 }
+            }
+        }
 
-                // Summons switch to another target if it is closer than the current target
-                if (CheckSight(Players(i).SummonTID[j], 0, 0) && Distance(0, Players(i).SummonTID[j]) <= 256 && Random(0, 100) <= 15)
-                {
-                    int EnemyMonsterTID = Stats->TID;
-
-                    SetActivator(Players(i).SummonTID[j]);
-
-                    if (MonsterHasTarget() && CheckSight(0, AAPTR_TARGET, 0) && Distance(0, AAPTR_TARGET) > Random(256, 512))
-                    {
-                        if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= Random(64, 256) && Distance(0, EnemyMonsterTID) < (Distance(0, AAPTR_TARGET) + Random(64, 256)))
-                        {
-                            Thing_Hate (0, EnemyMonsterTID);
-                            Delay(DelayTime);
-                        }
-                    }
-
-                    if (MonsterHasTarget() && !CheckSight(0, AAPTR_TARGET, 0))
-                    {
-                        if (CheckSight(0, EnemyMonsterTID, 0) && Distance(0, EnemyMonsterTID) <= 256)
-                        {
-                            Thing_Hate (0, EnemyMonsterTID);
-                            Delay(DelayTime);
-                        }
-                    }
-                }
+        // Changing the AI for friendly monsters
+        if (GetActorProperty(0, APROP_Friendly))
+        {
+            // Clearing a friendly monster's target in case the enemy is out of sight
+            if (MonsterHasTarget() && !MonsterSeeTarget(MonsterTID) && Random(0, 100) <= 15)
+            {
+                GiveInventory("DRPGFriendlyClearTarget", 1);
+                Delay(DelayTime);
             }
 
-            if (GetActorProperty(0, APROP_Friendly))
+            // More enemies aggression to summoned monsters
+            if (MonsterHasTarget() && MonsterSeeTarget(MonsterTID) && Random(0, 100) <= 15)
             {
-                // Clearing a friendly monster's target in case the enemy is out of sight
-                if (MonsterHasTarget() && Random(0, 100) <= 15)
-                {
-                    GiveInventory("DRPGFriendlyClearTarget", 1);
-                    Delay(DelayTime);
-                }
-
-                // More enemies aggression to summoned monsters
-                if (MonsterHasTarget() && Random(0, 100) <= 15)
-                {
-                    GiveInventory("DRPGFriendlyAlertMonsters", 1);
-                    Delay(DelayTime);
-                }
+                GiveInventory("DRPGFriendlyAlertMonsters", 1);
+                Delay(DelayTime);
             }
 
-            if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGMarineSummonedToken"))
+            // Used to change the AI of friendly marines
+            if (CheckInventory("DRPGMarineSummonedToken"))
             {
-                // Used to change the AI of friendly marines
                 if (!MonsterHasTarget() && Distance(0, Players(i).TID) <= 200 && Random(0, 100) <= 25)
                 {
                     Thing_Hate(0, Players(i).TID);
@@ -1553,7 +1614,7 @@ Start:
     goto Start;
 }
 
-NamedScript void MonsterFriendlyTeleport()
+NamedScript void MonsterFriendlyTeleport(bool SpecialMonster)
 {
     if (!GetActorProperty(0, APROP_Friendly) || CurrentLevel->UACBase)
         return;
@@ -1561,6 +1622,8 @@ NamedScript void MonsterFriendlyTeleport()
     // Check class
     if (GetActorClass(0) == "DRPGForceWall" || GetActorClass(0) == "DRPGPortableTurret")
         return;
+    if (GetActorClass(0) == "RLDRPGSummonedLostSoulPE" || GetActorClass(0) == "RLDRPGSummonedLostSoulNPE" || GetActorClass(0) == "RLDRPGSummonedNightmareLostSoulNPE")
+        SpecialMonster = true;
 
     // Delay Stagger
     Delay(35 + (GetMonsterID(0) % 4));
@@ -1579,15 +1642,27 @@ NamedScript void MonsterFriendlyTeleport()
     int PlayerTID;
     int PlayerNumber;
     int MonsterTID = Stats->TID;
+    int MasterTID = GetActorProperty(0, APROP_MasterTID);
     int TeleportDistance;
 
     for (int i = 0; i < MAX_PLAYERS; i++)
     {
-        if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
+        if (!PlayerInGame(i)) continue;
 
+        // Checking if a player is monster's master
+        if (SpecialMonster && MasterTID == Players(i).TID)
+        {
+            PlayerTID = Players(i).TID;
+            PlayerNumber = i;
+            break;
+        }
+
+        if (Players(i).Summons == 0) continue;
+
+        // Checking if a monster is summoned by a player
         for (int j = 0; j < Players(i).Summons; j++)
         {
-            if (Players(i).SummonTID[j] == MonsterTID)
+            if (MonsterTID == Players(i).SummonTID[j])
             {
                 PlayerTID = Players(i).TID;
                 PlayerNumber = i;
@@ -1672,6 +1747,7 @@ NamedScript void MonsterStatsHandler()
     if (ToasterMod)
         DelayTime = 15;
 
+    // Set standart variables
     int OldStrength;
     int OldDefense;
     int OldCapacity;
@@ -1689,6 +1765,21 @@ NamedScript void MonsterStatsHandler()
     bool MonsterWasDisrupted = false;
     bool HasDamageNumbers = false;
     bool Friendly = GetActorProperty(0, APROP_Friendly); // Sanity check for when APROP_Friendly gets removed from summons
+
+    // Set variables for summons (for AUG)
+    int MonsterTID = Stats->TID;
+    int MasterTID = GetActorProperty(0, APROP_MasterTID);
+    int PlayerTID;
+    int PlayerNumber;
+    int OldAugStatus;
+    int OldStrengthAug = Stats->Strength;
+    int OldDefenseAug = Stats->Defense;
+    int OldCapacityAug = Stats->Capacity;
+    int OldVitalityAug = Stats->Vitality;
+    int OldAgilityAug = Stats->Agility;
+    int OldRegenerationAug = Stats->Regeneration;
+    int OldEnergyAug = Stats->Energy;
+    int OldLuckAug = Stats->Luck;
 
 Start:
 
@@ -1708,6 +1799,7 @@ Start:
             OldEnergy = 0;
             OldLuck = 0;
         }
+        TakeInventory("DRPGMonsterStatsHandler", 1);
         return;
     }
 
@@ -1894,32 +1986,120 @@ Start:
         }
     }
 
-    if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGAugTokenSummoner"))
+    if (Friendly && !CurrentLevel->UACBase)
     {
-        for (int i = 0; i < MAX_PLAYERS; i++)
+        // Find master player
+        if (PlayerTID == 0)
         {
-            if (!PlayerInGame(i) || Players(i).Summons == 0) continue;
-
-            for (int j = 0; j < Players(i).Summons; j++)
+            for (int i = 0; i < MAX_PLAYERS; i++)
             {
-                if (Players(i).SummonTID[j] == Stats->TID)
+                if (!PlayerInGame(i)) continue;
+
+                // Checking if a player is monster's master
+                if (MasterTID == Players(i).TID)
                 {
-                    if (!Players(i).Augs.Active[AUG_SUMMONER])
+                    PlayerTID = Players(i).TID;
+                    PlayerNumber = i;
+                    break;
+                }
+
+                if (Players(i).Summons == 0) continue;
+
+                // Checking if a monster is summoned by a player
+                for (int j = 0; j < Players(i).Summons; j++)
+                {
+                    if (MonsterTID == Players(i).SummonTID[j])
                     {
-                        int Health = GetActorProperty(0, APROP_Health);
-
-                        MonsterInitStats();
-
-                        if (Health > Stats->HealthMax)
-                            SetActorProperty(0, APROP_Health, Stats->HealthMax);
-                        else
-                            SetActorProperty(0, APROP_Health, Health);
-
-                        SetInventory("DRPGSummonedRegenerationBoosterToken", 0);
-                        SetInventory("DRPGAugTokenSummoner", 0);
+                        PlayerTID = Players(i).TID;
+                        PlayerNumber = i;
+                        break;
                     }
                 }
             }
+        }
+
+        // Check AUG Summoner status for master player
+        if (Players(PlayerNumber).Augs.Active[AUG_SUMMONER] * Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] != OldAugStatus)
+        {
+            if (Players(PlayerNumber).Augs.Active[AUG_SUMMONER])
+            {
+                fixed BaseStatePoint = (40.0 + 5.0 * (fixed)Stats->Level) / 8.0;
+                fixed AugSummonerModifier;
+                int AddStrength;
+                int AddDefense;
+                int AddCapacity;
+                int AddVitality;
+                int AddAgility;
+                int AddRegeneration;
+                int AddEnergy;
+                int AddLuck;
+
+                // Calculate add stats
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 1)
+                    AddVitality = 20 + RoundInt(BaseStatePoint * ((fixed)Players(PlayerNumber).EnergyTotal * (0.5 - (fixed)Players(PlayerNumber).EnergyTotal * 0.0025)) / 100.0);
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 2)
+                    AddDefense = 20 + RoundInt(BaseStatePoint * ((fixed)Players(PlayerNumber).EnergyTotal * (0.5 - (fixed)Players(PlayerNumber).EnergyTotal * 0.0025)) / 100.0);
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 3)
+                    AddStrength = 20 + RoundInt(BaseStatePoint * ((fixed)Players(PlayerNumber).EnergyTotal * (0.5 - (fixed)Players(PlayerNumber).EnergyTotal * 0.0025)) / 100.0);
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 4)
+                    SetActorInventory(MonsterTID, "DRPGSummonedRegenerationBoosterToken", 1);
+
+                // Calculate add level
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] == 5)
+                    AugSummonerModifier = 0.10;
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] == 6)
+                    AugSummonerModifier = 0.15;
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] == 7)
+                    AugSummonerModifier = 0.20;
+                if (Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER] >= 8)
+                    AugSummonerModifier = 0.25;
+                if (AugSummonerModifier > 0)
+                {
+                    AddStrength += Stats->Strength * AugSummonerModifier;
+                    AddDefense += Stats->Defense * AugSummonerModifier;
+                    AddCapacity += Stats->Capacity * AugSummonerModifier;
+                    AddVitality += Stats->Vitality * AugSummonerModifier;
+                    AddAgility += Stats->Agility * AugSummonerModifier;
+                    AddRegeneration += Stats->Regeneration * AugSummonerModifier;
+                    AddEnergy += Stats->Energy * AugSummonerModifier;
+                    AddLuck += Stats->Luck * AugSummonerModifier;
+                }
+
+                // Set actual stats
+                Stats->Strength = OldStrengthAug + AddStrength;
+                Stats->Defense = OldDefenseAug + AddDefense;
+                Stats->Capacity = OldCapacityAug + AddCapacity;
+                Stats->Vitality = OldVitalityAug + AddVitality;
+                Stats->Agility = OldAgilityAug + AddAgility;
+                Stats->Regeneration = OldRegenerationAug + AddRegeneration;
+                Stats->Energy = OldEnergyAug + AddEnergy;
+                Stats->Luck = OldLuckAug + AddLuck;
+            }
+            else if (!Players(PlayerNumber).Augs.Active[AUG_SUMMONER])
+            {
+                // Set actual stats if AUG is off
+                Stats->Strength = OldStrengthAug;
+                Stats->Defense = OldDefenseAug;
+                Stats->Capacity = OldCapacityAug;
+                Stats->Vitality = OldVitalityAug;
+                Stats->Agility = OldAgilityAug;
+                Stats->Regeneration = OldRegenerationAug;
+                Stats->Energy = OldEnergyAug;
+                Stats->Luck = OldLuckAug;
+                SetActorInventory(MonsterTID, "DRPGSummonedRegenerationBoosterToken", 0);
+            }
+
+            // Set actual health
+            int Health = GetActorProperty(0, APROP_Health);
+            if (Health > Stats->HealthMax)
+                SetActorProperty(0, APROP_Health, Stats->HealthMax);
+            else
+                SetActorProperty(0, APROP_Health, Health);
+
+            // Re-calculate threat level
+            Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(MonsterTID)]);
+
+            OldAugStatus = Players(PlayerNumber).Augs.Active[AUG_SUMMONER] * Players(PlayerNumber).Augs.CurrentLevel[AUG_SUMMONER];
         }
     }
 
@@ -2140,7 +2320,10 @@ NamedScript void MonsterRegenerationHandler()
 Start:
 
     if (GetActorProperty(0, APROP_Health) <= 0)
+    {
+        TakeInventory("DRPGMonsterRegenerationHandler", 1);
         return;
+    }
 
     if (ClassifyActor(0) & ACTOR_WORLD)
         return;
@@ -2620,56 +2803,89 @@ NamedScript DECORATE void MonsterRevive()
     // Account for monsters revived by friendly Archvile
     if (GetActorProperty(0, APROP_Friendly))
     {
-        if (Random(0, 100) <= 80)
+        int MonsterTID = Stats->TID;
+        int MasterTID = GetActorProperty(MonsterTID, APROP_MasterTID);
+        int PlayerNumber;
+
+        for (int i = 0; i < MAX_PLAYERS; i++)
         {
-            switch (Random(1, 8))
+            if (!PlayerInGame(i)) continue;
+
+            // Checking if a player is monster's master
+            if (MasterTID == Players(i).TID)
             {
-            case 1:
-                if (Random(0, 100) <= 15) Spawn("DRPGMoneyDropper", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                PlayerNumber = i;
                 break;
-            case 2:
-                if (Random(0, 100) <= 15) Spawn("DRPGStimpack", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 3:
-                if (Random(0, 100) <= 15) Spawn("DRPGClip", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 4:
-                if (Random(0, 100) <= 15) Spawn("DRPGShell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 5:
-                if (Random(0, 100) <= 15)
+            }
+        }
+
+        // If summons more than the maximum number or failure - the corpse is burned
+        if (Players(PlayerNumber).Summons >= MAX_SUMMONS || Random(0, 100) <= 80)
+        {
+            // Chance 10% for get stuff from corpse
+            if (Random(0, 100) <= 10)
+            {
+                switch (Random(1, 8))
                 {
+                case 1:
+                    Spawn("DRPGMoneyDropper", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 2:
+                    Spawn("DRPGStimpack", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 3:
+                    Spawn("DRPGClip", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 4:
+                    Spawn("DRPGShell", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 5:
                     if (CompatMode == COMPAT_DRLA)
                     {
-                        Spawn("RLArmorBonusPickup", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                        Spawn("RLArmorBonusPickup", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
                     }
                     else
-                        Spawn("DRPGArmorBonus", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
+                        Spawn("DRPGArmorBonus", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 6:
+                    Spawn("DRPGEPCapsule", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 7:
+                    Spawn("DRPGRocketAmmo", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
+                case 8:
+                    Spawn("DRPGCell", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID) + 48, 0, 0);
+                    break;
                 }
-                break;
-            case 6:
-                if (Random(0, 100) <= 15) Spawn("DRPGEPCapsule", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 7:
-                if (Random(0, 100) <= 15) Spawn("DRPGRocketAmmo", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-            case 8:
-                if (Random(0, 100) <= 15) Spawn("DRPGCell", GetActorX(0), GetActorY(0), GetActorZ(0) + 48, 0, 0);
-                break;
-
             }
 
             ActivatorSound("vile/firestrt", 127);
-            SpawnForced("SpawnFire", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-            SpawnForced("DRPGBurnedCorpse", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-            Thing_Remove(0);
-
+            SpawnForced("SpawnFire", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID), 0, 0);
+            SpawnForced("DRPGBurnedCorpse", GetActorX(MonsterTID), GetActorY(MonsterTID), GetActorZ(MonsterTID), 0, 0);
+            Thing_Remove(MonsterTID);
             return;
         }
 
-        SetActorPropertyString(0, APROP_Species, "Player");
-        GiveInventory("DRPGFriendlyReviveMonster", 1);
-        MonsterFriendlyTeleport();
+        // Set property and handlers
+        SetActorProperty(MonsterTID, APROP_Friendly, true);
+        SetActorPropertyString(MonsterTID, APROP_Species, "Player");
+        GiveActorInventory(MonsterTID, "DRPGFriendlyBooster", 1);
+        MonsterFriendlyTeleport(false);
+
+        // Add summon to your summon array
+        for (int h = 0; h < MAX_SUMMONS; h++)
+            if (Players(PlayerNumber).SummonTID[h] == 0)
+            {
+                Players(PlayerNumber).SummonTID[h] = MonsterTID;
+                Players(PlayerNumber).Summons++;
+                break;
+            }
+
+        // Set stats
+        Stats->Threat = CalculateMonsterThreatLevel(&Monsters[GetMonsterID(MonsterTID)]);
+        Stats->Flags |= MF_NOXP;
+        Stats->Flags |= MF_NODROPS;
+        Stats->NeedReinit = true;
     }
     else
         SetActorPropertyString(0, APROP_Species, "None");
@@ -2700,7 +2916,7 @@ NamedScript DECORATE void PropDeathCheck(int PropType)
             switch(PropType)
             {
             case 1: // tech
-                DropMonsterItem(Killer, 0, "DRPGLootScrapMetals",      37); // ~30%
+                DropMonsterItem(Killer, 0, "DRPGLootScrapMetals2",     37); // ~30%
                 DropMonsterItem(Killer, 0, "DRPGTurretPart",           25); // ~20%
                 DropMonsterItem(Killer, 0, "DRPGBatterySmall",         10); // ~4%
                 break;
@@ -2713,7 +2929,7 @@ NamedScript DECORATE void PropDeathCheck(int PropType)
                 break;
 
             case 3: // barrels
-                DropMonsterItem(Killer, 0, "DRPGLootChemicals",        12); // ~10%
+                DropMonsterItem(Killer, 0, "DRPGLootChemicals2",       12); // ~10%
                 break;
             }
         }
@@ -2728,9 +2944,9 @@ OptionalArgs(1) NamedScript void CalculateMonsterCredits(MonsterStatsPtr Stats, 
     if(StolenCredits)
         Amount = Stats->Capacity + StolenCredits;
 
-    if (GetCVar("drpg_ws_use_wads") < 6)
+    if (GetCVar("drpg_ws_use_wads") < 4)
     {
-        fixed Modifier = 6.0 / GetCVar("drpg_ws_use_wads") * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
+        fixed Modifier = 4.0 / GetCVar("drpg_ws_use_wads") * PowFixed(MapLevelModifier, GetCVar("drpg_ws_use_wads") / 2);
 
         if (Modifier < 1.0)
             Modifier = 1.0;
@@ -2976,82 +3192,91 @@ NamedScript void MonsterDeath()
     // Drops
     if (!(Stats->Flags & MF_NODROPS) && !GetActorProperty(0, APROP_Friendly) && !GetCVar("drpg_monster_shadows"))
     {
+        // Calculate current map total monsters modifier
+        fixed DropMonsterModifier = MapTotalMonstersMod();
+
         // Auras have a chance of rare vial drops
         for (int i = 0; i < AURA_MAX; i++)
             if (Stats->Aura.Type[i].Active)
-                DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 8);
+                DropMonsterItem(Killer, 0, "DRPGVialDropperRare", 16 * DropMonsterModifier);
 
         // Aura Drops
         if (Stats->Aura.Type[AURA_RED].Active) // Red Aura - Strength
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_GREEN].Active) // Green Aura - Defense
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_WHITE].Active) // White Aura - XP
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_PINK].Active) // Pink Aura - Vitality
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_BLUE].Active) // Blue Aura - Energy
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_PURPLE].Active) // Purple Aura - Regeneration
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_ORANGE].Active) // Orange Aura - Agility
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_DARKBLUE].Active) // Dark Blue Aura - Capacity
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
         if (Stats->Aura.Type[AURA_YELLOW].Active) // Yellow Aura - Luck
         {
-            DropMonsterItem(Killer, 0, "DRPGVialDropper", 32);
-            DropMonsterItem(Killer, 0, "DRPGChipDropper", 32);
+            DropMonsterItem(Killer, 0, "DRPGVialDropper", 64 * DropMonsterModifier);
+            DropMonsterItem(Killer, 0, "DRPGChipDropper", 64 * DropMonsterModifier);
         }
 
         // Luck-based Drops
         if (Killer > -1 && !(Stats->Flags & MF_MEGABOSS))
         {
-            if (Players(Killer).HealthDrop && RandomFixed(0.0, 100.0) < Players(Killer).HealthChance)    DropMonsterItem(Killer, 0, "DRPGHealthMonsterDropper", 256);
-            if (Players(Killer).EPDrop && RandomFixed(0.0, 100.0) < Players(Killer).EPChance)            DropMonsterItem(Killer, 0, "DRPGEPMonsterDropper", 256);
-            if (Players(Killer).AmmoDrop && RandomFixed(0.0, 100.0) < Players(Killer).AmmoChance)        DropMonsterItem(Killer, 0, "DRPGAmmoMonsterDropper", 256);
-            if (Players(Killer).TurretDrop && RandomFixed(0.0, 100.0) < Players(Killer).TurretChance)    DropMonsterItem(Killer, 0, "DRPGTurretMonsterDropper", 256);
-            if (Players(Killer).ModuleDrop && RandomFixed(0.0, 100.0) < Players(Killer).ModuleChance)    DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256);
-            if (Players(Killer).ArmorDrop && RandomFixed(0.0, 100.0) < Players(Killer).ArmorChance)      DropMonsterItem(Killer, 0, "DRPGArmorDropper", 256);
-            if (Players(Killer).WeaponDrop && RandomFixed(0.0, 100.0) < Players(Killer).WeaponChance)    DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 256);
-            if (Players(Killer).ShieldDrop && RandomFixed(0.0, 100.0) < Players(Killer).ShieldChance)    DropMonsterItem(Killer, 0, "DRPGShieldDropper", 256);
-            if (Players(Killer).AugDrop && RandomFixed(0.0, 100.0) < Players(Killer).AugChance)          DropMonsterItem(Killer, 0, "DRPGAugDropper", 256);
+            if (Players(Killer).HealthDrop && RandomFixed(0.0, 100.0) < Players(Killer).HealthChance)    DropMonsterItem(Killer, 0, "DRPGHealthMonsterDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).EPDrop && RandomFixed(0.0, 100.0) < Players(Killer).EPChance)            DropMonsterItem(Killer, 0, "DRPGEPMonsterDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).AmmoDrop && RandomFixed(0.0, 100.0) < Players(Killer).AmmoChance)        DropMonsterItem(Killer, 0, "DRPGAmmoMonsterDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).TurretDrop && RandomFixed(0.0, 100.0) < Players(Killer).TurretChance)    DropMonsterItem(Killer, 0, "DRPGTurretMonsterDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).ModuleDrop && RandomFixed(0.0, 100.0) < Players(Killer).ModuleChance)    DropMonsterItem(Killer, 0, "DRPGModuleDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).ArmorDrop && RandomFixed(0.0, 100.0) < Players(Killer).ArmorChance)      DropMonsterItem(Killer, 0, "DRPGArmorDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).WeaponDrop && RandomFixed(0.0, 100.0) < Players(Killer).WeaponChance)    DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).ShieldDrop && RandomFixed(0.0, 100.0) < Players(Killer).ShieldChance)    DropMonsterItem(Killer, 0, "DRPGShieldDropper", 256 * DropMonsterModifier);
+            if (Players(Killer).AugDrop && RandomFixed(0.0, 100.0) < Players(Killer).AugChance)          DropMonsterItem(Killer, 0, "DRPGAugDropper", 256 * DropMonsterModifier);
         }
 
         Delay(1);
 
+        // Compatibility Handling - LegenDoom
         // LegenDoom monster drops
-        if (CheckInventory("LDLegendaryMonsterToken") && GetCVar("LD_droptype") == 1)
+        if (CompatMode == COMPAT_LEGENDOOM || CompatModeLite == COMPAT_LEGENDOOMLITE)
         {
-            DropMonsterItem(Killer, 0, "DRPGLuckDropper", 256);
+            if (CheckInventory("LDLegendaryMonsterToken") && GetCVar("LD_droptype") == 1)
+            {
+                DropMonsterItem(Killer, 0, "DRPGLuckDropper", 256);
+            }
         }
 
         // Boss Drops
         if (Stats->Flags & MF_BOSS)
         {
-            DropMonsterItem(Killer, 0, "DRPGCredits250", 200);
-            DropMonsterItem(Killer, 0, "DRPGCredits500", 170);
-            DropMonsterItem(Killer, 0, "DRPGCredits1000", 256);
-            DropMonsterItem(Killer, 0, "DRPGSoulsphereRandomizer", 256);
-            DropMonsterItem(Killer, 0, "DRPGLifeDropper", 96);
-            DropMonsterItem(Killer, 0, "DRPGModulePickup", 256);
-            DropMonsterItem(Killer, 0, "DRPGAugDropper", 96);
-            DropMonsterItem(Killer, 0, "DRPGUACCard", (40 / (Players(Killer).ShopCard + 1)));
-            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 48);
-            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 24);
-            DropMonsterItem(Killer, 0, "DRPGShieldSpawner", 48);
-            DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32);
-            DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16);
-            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 32);
+            fixed DropBossModifier = MapTotalBossesMod();
+
+            DropMonsterItem(Killer, 0, "DRPGCredits250", 200 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGCredits500", 170 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGCredits1000", 256 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGSoulsphereRandomizer", 256 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGLifeDropper", 96 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGModulePickup", 256 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGAugDropper", 96 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGUACCard", (40 / (Players(Killer).ShopCard + 1)) * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGStimPackageStat", 48 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGStimPackagePowerup", 24 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGShieldSpawner", 48 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGArmorDropper", 32 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGWeaponDropper", 16 * DropBossModifier);
+            DropMonsterItem(Killer, 0, "DRPGImmunityCrystalDropper", 32 * DropBossModifier);
 
             if (CompatMode == COMPAT_DRLA)
             {
-                DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 32);
+                DropMonsterItem(Killer, 0, "DRPGCraftPartsExotic", 32 * DropBossModifier);
                 if (MapLevelModifier > 0.25)
-                    DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 16);
-                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 32);
-                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 16);
-                DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 8);
+                    DropMonsterItem(Killer, 0, "DRPGCraftPartsUnique", 16 * DropBossModifier);
+                DropMonsterItem(Killer, 0, "RLBlueprintComputer", 32 * DropBossModifier);
+                DropMonsterItem(Killer, 0, "RLBasicModPackSpawner", 16 * DropBossModifier);
+                DropMonsterItem(Killer, 0, "RLExoticModPackSpawner", 8 * DropBossModifier);
             }
         }
 
@@ -3151,12 +3376,6 @@ NamedScript void MonsterDeath()
     // [SW] 10/22/2018 - This is an option now, yee.
     if (GetCVar("drpg_aura_removeondeath"))
         RemoveMonsterAura(Stats);
-
-    if (GetActorProperty(0, APROP_Friendly) && CheckInventory("DRPGFriendlyReviveMonster") && GetActorProperty(0, APROP_Health) <= 0)
-    {
-        SpawnForced("TeleportFog", GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
-        Thing_Remove(0);
-    }
 
     // Corpses cleanup
     if (GetCVar("drpg_corpses_cleanup") > 0)
@@ -3484,15 +3703,19 @@ int CalculateMonsterMaxHealth(MonsterStatsPtr Stats)
 
     Health += HealthAddition + HealthBoost;
 
-    // LegenDoom: Add Health For Legendary Monsters
-    if (CheckInventory("LDLegendaryMonsterToken"))
+    // Compatibility Handling - LegenDoom
+    // Add health for Legendary monsters
+    if (CompatMode == COMPAT_LEGENDOOM || CompatModeLite == COMPAT_LEGENDOOMLITE)
     {
-        if (CheckFlag(0, "BOSS"))
-            Health *= GetCVar("LD_legendaryhealthboss") / 100;
-        else
-            Health *= GetCVar("LD_legendaryhealth") / 100;
+        if (CheckInventory("LDLegendaryMonsterToken"))
+        {
+            if (CheckFlag(0, "BOSS"))
+                Health *= GetCVar("LD_legendaryhealthboss") / 100;
+            else
+                Health *= GetCVar("LD_legendaryhealth") / 100;
 
-        GiveInventory("DRPGLegenDoomMonsterInit", 1);
+            GiveInventory("DRPGLegenDoomMonsterInit", 1);
+        }
     }
 
     // Scale monster health
@@ -3769,6 +3992,54 @@ NamedScript Console void MonsterDamaged(int SourceTID, int Damage)
         SetActivator(GetActorProperty(0, APROP_MasterTID));
         Stats->DamageTable[PlayerNumber()] += (Damage * GetCVar("drpg_xp_summon_percent")) / 100;
     }
+}
+
+// Calculate current map total monsters modifier
+fixed MapTotalMonstersMod()
+{
+    fixed MapTotalMonstersMod = 1.0;
+    int TotalMonsters = GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
+
+    if (TotalMonsters > 256)
+        MapTotalMonstersMod = 256.0 / TotalMonsters;
+    if (MapTotalMonstersMod < 0.25)
+        MapTotalMonstersMod = 0.25;
+
+    return MapTotalMonstersMod;
+}
+
+// Calculate current map total bosses modifier
+fixed MapTotalBossesMod()
+{
+    fixed MapTotalBossesMod = 1.0;
+
+    if (TotalBosses > 2)
+        MapTotalBossesMod = 2.0 / TotalBosses;
+    if (MapTotalBossesMod < 0.25)
+        MapTotalBossesMod = 0.25;
+
+    return MapTotalBossesMod;
+}
+
+// Compatibility Handling - DoomRL Arsenal Extended
+// Familiar Init Script
+NamedScript DECORATE void FamiliarInit(int PlayerNum, int Slot)
+{
+    // Get a new ID for the familiar
+    if (GetMonsterID(0) == 0)
+        SetMonsterID(0, NewMonsterID());
+
+    // Store TID
+    if (ActivatorTID() == 0)
+    {
+        int TID = UniqueTID();
+        Thing_ChangeTID(0, TID);
+        Players(PlayerNum).FamiliarTID[Slot] = TID;
+    }
+    else
+        Players(PlayerNum).FamiliarTID[Slot] = ActivatorTID();
+
+    Players(PlayerNum).Familiars = true;
 }
 
 NamedScript DECORATE int GetMonsterHealthMax()

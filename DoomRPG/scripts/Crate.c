@@ -11,8 +11,8 @@ str const CrateRarityNames[MAX_DIFFICULTIES] =
 {
     "\CcBasic",
     "\CjCommon",
-    "\CdUncommon",
-    "\CdSuperior",
+    "\CqUncommon",
+    "\CiSuperior",
     "\CnRare",
     "\CnVery Rare",
     "\CiElite",
@@ -477,14 +477,33 @@ void GenerateCrate(int ID, int Amount)
     int i;
     int Firewalls;
     int NumPlayers = PlayerCount();
+    fixed Modifier;
     fixed ShieldPartChance = GetCVarFixed("drpg_loot_crate_spc");
-    ItemInfoPtr Item;
+
+    // Set variables for new item
+    ItemInfoPtr NewItem;
+    str NewItemName;
+    str NewItemActor;
+    int NewItemIndex;
+    int NewItemCategory;
+    int NewItemSpawned;
+    int NewItemPenalty;
+    bool NewItemSelected;
+    bool NewItemIsAdditional;
+
+    // Set variables for old item
+    ItemInfoPtr OldItem;
+    str OldItemActor;
+    int OldItemCategory;
+
+    // Calculate Modifier
+    Modifier = (fixed)Crates[ID].Rarity / ((fixed)MAX_DIFFICULTIES - 1.0);
 
     if (Crates[ID].SupplyDrop)
     {
-        Item = FindItem("DRPGBigBackpack");
+        NewItem = FindItem("DRPGBigBackpack");
 
-        if (Item == GetBlankItem())
+        if (NewItem == GetBlankItem())
         {
             Log("\CgWARNING: Couldn't find the backpack item!");
         }
@@ -493,13 +512,50 @@ void GenerateCrate(int ID, int Amount)
         for (int j = 0; j < NumPlayers; j++)
         {
             Crates[ID].Active[i] = true;
-            Crates[ID].Item[i] = Item;
+            Crates[ID].Item[i] = NewItem;
             i++;
         }
     }
 
     // Get items for crate
     int Rarity = Crates[ID].Rarity;
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Set variables for Common/Exotic/Superior/Unique/Demonic/Legendary items
+    // For weapons
+    bool WeaponExoticChance;
+    bool WeaponSuperiorChance;
+    bool WeaponUniqueChance;
+    bool WeaponDemonicChance;
+    bool WeaponLegendaryChance;
+
+    // For armors and boots
+    bool ArmorAssembledChance;
+    bool ArmorExoticChance;
+    bool ArmorSuperiorChance;
+    bool ArmorUniqueChance;
+    bool ArmorDemonicChance;
+    bool ArmorLegendaryChance;
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Calculate the chances for Common/Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    if (CompatMode == COMPAT_DRLA)
+    {
+        // For weapon
+        WeaponExoticChance = RandomFixed(0.0, 100.0) <= Player.WeaponExoticChance;
+        WeaponSuperiorChance = RandomFixed(0.0, 100.0) <= Player.WeaponSuperiorChance;
+        WeaponUniqueChance = RandomFixed(0.0, 100.0) <= Player.WeaponUniqueChance;
+        WeaponDemonicChance = RandomFixed(0.0, 100.0) <= Player.WeaponDemonicChance;
+        WeaponLegendaryChance = RandomFixed(0.0, 100.0) <= Player.WeaponLegendaryChance;
+
+        // For armor
+        ArmorAssembledChance = RandomFixed(0.0, 100.0) <= Player.ArmorAssembledChance;
+        ArmorExoticChance = RandomFixed(0.0, 100.0) <= Player.ArmorExoticChance;
+        ArmorSuperiorChance = RandomFixed(0.0, 100.0) <= Player.ArmorSuperiorChance;
+        ArmorUniqueChance = RandomFixed(0.0, 100.0) <= Player.ArmorUniqueChance;
+        ArmorDemonicChance = RandomFixed(0.0, 100.0) <= Player.ArmorDemonicChance;
+        ArmorLegendaryChance = RandomFixed(0.0, 100.0) <= Player.ArmorLegendaryChance;
+    }
 
     for (bool SkipShieldPart = true; i < Amount; i++)
     {
@@ -508,26 +564,226 @@ void GenerateCrate(int ID, int Amount)
         else
             SkipShieldPart = false;
 
-        Item = GetRewardItem(Rarity, SkipShieldPart);
-
-        if (Item == GetBlankItem())
+        while (!NewItemSelected)
         {
-            i--;
-            continue;
-        }
+            NewItem = GetRewardItem(Rarity, SkipShieldPart);
 
-        Crates[ID].Active[i] = true;
-        Crates[ID].Item[i] = Item;
+            Crates[ID].Active[i] = true;
 
-        // Reget the item in case of repetition
-        for (int j = 0; j < i; j++)
-        {
-            if (Crates[ID].Item[i] == Crates[ID].Item[j])
+            if (NewItem == GetBlankItem())
+                NewItemSelected = false;
+            else
+                NewItemSelected = true;
+
+            // Add items for random if item categories is Misc (chance is 35%)
+            if (NewItem->Category == ItemCategories && Random(0, 100) > 65)
             {
-                Crates[ID].Item[i] = &ItemData[ItemCategories][Random(1, 22)];
-                break;
+                int AddItemCategory;
+                int IndexMin;
+                int IndexMax;
+
+                switch (Random(0, 2))
+                {
+                // Credits
+                case 0:
+                    AddItemCategory = 10;
+                    IndexMin = ItemMax[AddItemCategory] - (8 - RoundInt(4.0 * Modifier));
+                    IndexMax = ItemMax[AddItemCategory] - (7 - RoundInt(6.0 * Modifier));
+                    NewItemIsAdditional = true;
+                    break;
+                // Ammo
+                case 1:
+                    AddItemCategory = 1;
+                    IndexMin = 0;
+                    IndexMax = ItemMax[AddItemCategory] - 4;
+                    NewItemIsAdditional = true;
+                    break;
+                // Loot
+                case 2:
+                    AddItemCategory = 7;
+                    IndexMin = 0;
+                    IndexMax = ItemMax[AddItemCategory] - 1;
+                    NewItemIsAdditional = true;
+                    break;
+                }
+
+                NewItem = &ItemData[AddItemCategory][Random(IndexMin, IndexMax)];
             }
+
+            // Get info for new item
+            NewItemName = NewItem->Name;
+            NewItemActor = NewItem->Actor;
+            NewItemIndex = NewItem->Index;
+            NewItemCategory = NewItem->Category;
+            NewItemSpawned = NewItem->Spawned;
+
+            // Set penalty for an item already spawned
+            if (NewItemSpawned < 5)
+                NewItemPenalty = NewItemSpawned;
+            else
+                NewItemPenalty = 5;
+
+            // Check the item
+            for (int j = 0; j < i; j++)
+            {
+                // Get info for old item
+                OldItem = Crates[ID].Item[j];
+                OldItemActor = Crates[ID].Item[j]->Actor;
+                OldItemCategory = Crates[ID].Item[j]->Category;
+
+                //  Item check fails if the item was spawned before the crate was opened
+                if (NewItemSpawned > 0 && Random(0, NewItemPenalty * (200 - NewItemPenalty * 20)) > 50)
+                {
+                    NewItemSelected = false;
+                    break;
+                }
+                //  Item check fails if the item repetition in crate
+                else if (NewItemActor == OldItemActor && !NewItemIsAdditional)
+                {
+                    NewItemSelected = false;
+                    break;
+                }
+                //  Item check fails if the category repetition in crate
+                else if (NewItemCategory == OldItemCategory && (NewItemCategory != 1 && NewItemCategory != 6 && NewItemCategory != 7 && NewItemCategory != ItemCategories))
+                {
+                    NewItemSelected = false;
+                    break;
+                }
+                //  Item check fails if the small ammo appear in rare crates
+                else if (NewItemCategory == 1 && Rarity > 1 && (NewItemIndex == 0 || NewItemIndex == 2 || NewItemIndex == 4 || NewItemIndex == 6))
+                {
+                    NewItemSelected = false;
+                    break;
+                }
+                //  Item check fails if the weapons, armor and boots together in crate
+                else if ((NewItemCategory == 0 && (OldItemCategory == 3 || OldItemCategory == 9))
+                         || (NewItemCategory == 3 && (OldItemCategory == 0 || OldItemCategory == 9))
+                         || (NewItemCategory == 9 && (OldItemCategory == 0 || OldItemCategory == 3)))
+                {
+                    NewItemSelected = false;
+                    break;
+                }
+            }
+
+            // Compatibility Handling - DoomRL Arsenal
+            // Check chances spawn for the Assembled/Exotic/Superior/Unique/Demonic/Legendary weapons and armor
+            if (NewItemSelected && CompatMode == COMPAT_DRLA)
+            {
+                // For weapon
+                if (NewItemCategory == 0)
+                {
+                    if (!WeaponExoticChance && StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Exotic") NewItemSelected = false;
+                    else if (!WeaponSuperiorChance && StrMid(NewItemName, StrLen(NewItemName) - 11, 8) == "Superior") NewItemSelected = false;
+                    else if (!WeaponUniqueChance && StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Unique") NewItemSelected = false;
+                    else if (!WeaponDemonicChance && StrMid(NewItemName, StrLen(NewItemName) - 10, 7) == "Demonic") NewItemSelected = false;
+                    else if (!WeaponLegendaryChance && StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Legendary") NewItemSelected = false;
+                }
+                // For armor and boots
+                else if (NewItemCategory == 3 || NewItemCategory == 9)
+                {
+                    if (!ArmorAssembledChance && StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Assembled") NewItemSelected = false;
+                    else if (!ArmorExoticChance && StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Exotic") NewItemSelected = false;
+                    else if (!ArmorSuperiorChance && StrMid(NewItemName, StrLen(NewItemName) - 11, 8) == "Superior") NewItemSelected = false;
+                    else if (!ArmorUniqueChance && StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Unique") NewItemSelected = false;
+                    else if (!ArmorDemonicChance && StrMid(NewItemName, StrLen(NewItemName) - 10, 7) == "Demonic") NewItemSelected = false;
+                    else if (!ArmorLegendaryChance && StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Legendary") NewItemSelected = false;
+                }
+
+                // Special chance check for boots (standard 10% chance from DoomRL Arsenal)
+                if (NewItemCategory == 9 && Random(0, 100) < 90)  NewItemSelected = false;
+            }
+
+            // Set a new item for crate, if it has been selected
+            if (NewItemSelected)
+                Crates[ID].Item[i] = NewItem;
         }
+
+        // Add to the spawned counter if the item is shield parts
+        if (NewItemCategory == 5)
+        {
+            for (int k = 0; k < ItemMax[NewItemCategory]; k++)
+                if (NewItemActor == ItemData[NewItemCategory][k].Actor)
+                    ItemData[NewItemCategory][k].Spawned++;
+        }
+
+        // Compatibility Handling - DoomRL Arsenal
+        // Set chances and add to the spawned counter for Assembled/Exotic/Superior/Unique/Demonic/Legendary weapons and armor
+        if (CompatMode == COMPAT_DRLA)
+        {
+            // Set chances for weapons
+            if (NewItemCategory == 0)
+            {
+                // For Exotic
+                if (StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Exotic")
+                    Player.WeaponExoticChance = 0;
+                else
+                    Player.WeaponExoticChance += 15.0 * Modifier / 15.0;
+                // For Superior
+                if (StrMid(NewItemName, StrLen(NewItemName) - 11, 8) == "Superior")
+                    Player.WeaponSuperiorChance = 0;
+                else
+                    Player.WeaponSuperiorChance += 0.5 * Modifier / 15.0;
+                // For Unique
+                if (StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Unique")
+                    Player.WeaponUniqueChance = 0;
+                else
+                    Player.WeaponUniqueChance += 2.5 * Modifier / 15.0;
+                // For Demonic
+                if (StrMid(NewItemName, StrLen(NewItemName) - 10, 7) == "Demonic")
+                    Player.WeaponDemonicChance = 0;
+                else
+                    Player.WeaponDemonicChance += 0.3 * Modifier / 15.0;
+                // For Legendary
+                if (StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Legendary")
+                    Player.WeaponLegendaryChance = 0;
+                else
+                    Player.WeaponLegendaryChance += 0.2 * Modifier / 15.0;
+            }
+            // Set chances for armors and boots
+            if (NewItemCategory == 3 || NewItemCategory == 9)
+            {
+                // For Assembled
+                if (StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Assembled")
+                    Player.ArmorAssembledChance = 0;
+                else
+                    Player.ArmorAssembledChance += 50.0 * Modifier / 15.0;
+                // For Exotic
+                if (StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Exotic")
+                    Player.ArmorExoticChance = 0;
+                else
+                    Player.ArmorExoticChance += 15.0 * Modifier / 15.0;
+                // For Superior
+                if (StrMid(NewItemName, StrLen(NewItemName) - 11, 8) == "Superior")
+                    Player.ArmorSuperiorChance = 0;
+                else if (NewItemCategory == 3)
+                    Player.ArmorSuperiorChance += 0.5 * Modifier / 15.0;
+                // For Unique
+                if (StrMid(NewItemName, StrLen(NewItemName) - 9, 6) == "Unique")
+                    Player.ArmorUniqueChance = 0;
+                else
+                    Player.ArmorUniqueChance += 2.5 * Modifier / 15.0;
+                // For Demonic
+                if (StrMid(NewItemName, StrLen(NewItemName) - 10, 7) == "Demonic")
+                    Player.ArmorDemonicChance = 0;
+                else
+                    Player.ArmorDemonicChance += 0.3 * Modifier / 15.0;
+                // For Legendary
+                if (StrMid(NewItemName, StrLen(NewItemName) - 12, 9) == "Legendary")
+                    Player.ArmorLegendaryChance = 0;
+                else
+                    Player.ArmorLegendaryChance += 0.2 * Modifier / 15.0;
+            }
+
+            // Add to the spawned counter for Assembled/Exotic/Superior/Unique/Demonic/Legendary weapons and armor
+            if ((NewItemCategory == 0 || NewItemCategory == 3 || NewItemCategory == 9) && StrMid(NewItemName, StrLen(NewItemName) - 9, 6) != "Common")
+                for (int h = 0; h < ItemMax[NewItemCategory]; h++)
+                    if (NewItemActor == ItemData[NewItemCategory][h].Actor)
+                        ItemData[NewItemCategory][h].Spawned++;
+        }
+
+        // Reset the variables for next cycle
+        NewItemSelected = false;
+        NewItemIsAdditional = false;
 
         if (Random(0, MAX_DIFFICULTIES - Rarity) <= 0) Rarity--;
         if (Rarity < 0) Rarity = 0;
@@ -736,7 +992,7 @@ void GenerateCrate(int ID, int Amount)
                 for (int j = 0; SetItems[i].Items[j].Name != NULL; j++)
                 {
                     str PickupItemName = StrParam("%SPickup", SetItems[i].Items[j].Name);
-                    Item = FindItem(PickupItemName);
+                    NewItem = FindItem(PickupItemName);
                     fixed Chance = SetItems[i].Items[j].Chance * (1.0 + (Crates[ID].Rarity * 0.125));
                     fixed Pick = RandomFixed(0.0, 100.0);
 
@@ -757,10 +1013,10 @@ void GenerateCrate(int ID, int Amount)
                     if (Pick <= Chance)
                     {
                         // Couldn't find the item
-                        if (Item == GetBlankItem()) continue;
+                        if (NewItem == GetBlankItem()) continue;
 
                         Crates[ID].Active[SetAmount] = true;
-                        Crates[ID].Item[SetAmount] = Item;
+                        Crates[ID].Item[SetAmount] = NewItem;
 
                         if (DebugLog)
                             Log("\CdDEBUG: \CfSet Item Spawned!");
@@ -775,7 +1031,48 @@ void GenerateCrate(int ID, int Amount)
 
 void CrateTakeItem()
 {
-    bool Spawned = SpawnForced(Crates[Player.CrateID].Item[Player.CrateIndex]->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+    str ActorToSpawn = Crates[Player.CrateID].Item[Player.CrateIndex]->Actor;
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Set actors
+    if (CompatMode == COMPAT_DRLA)
+    {
+        str ItemName = Crates[Player.CrateID].Item[Player.CrateIndex]->Name;
+        int ItemCategory = Crates[Player.CrateID].Item[Player.CrateIndex]->Category;
+
+        // For weapons
+        if (ItemCategory == 0)
+        {
+            if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Common")
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Exotic")
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 11, 8) == "Superior")
+                ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+            if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+        }
+
+        // For armors and boots
+        if (ItemCategory == 3 || ItemCategory == 9)
+        {
+            if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Assembled")
+                if ((ItemCategory == 3 && (ActorToSpawn == "RLCerberusArmorPickup" || ActorToSpawn == "RLCyberNanoGreenArmorPickup" || ActorToSpawn == "RLCyberNanoBlueArmorPickup" || ActorToSpawn == "RLCyberNanoRedArmorPickup")) || (ItemCategory == 9 && ActorToSpawn == "RLCerberusBootsPickup"))
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+        }
+    }
+
+    bool Spawned = SpawnForced(ActorToSpawn, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
 
     if (Spawned)
     {
@@ -793,7 +1090,48 @@ void CrateTakeAll()
 
     for (Player.CrateIndex = 0; Player.CrateIndex < Crates[Player.CrateID].Amount; Player.CrateIndex++)
     {
-        bool Spawned = SpawnForced(Crates[Player.CrateID].Item[Player.CrateIndex]->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+        str ActorToSpawn = Crates[Player.CrateID].Item[Player.CrateIndex]->Actor;
+
+        // Compatibility Handling - DoomRL Arsenal
+        // Set actors
+        if (CompatMode == COMPAT_DRLA)
+        {
+            str ItemName = Crates[Player.CrateID].Item[Player.CrateIndex]->Name;
+            int ItemCategory = Crates[Player.CrateID].Item[Player.CrateIndex]->Category;
+
+            // For weapons
+            if (ItemCategory == 0)
+            {
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Common")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Exotic")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 11, 8) == "Superior")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+            }
+
+            // For armors and boots
+            if (ItemCategory == 3 || ItemCategory == 9)
+            {
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Assembled")
+                    if ((ItemCategory == 3 && (ActorToSpawn == "RLCerberusArmorPickup" || ActorToSpawn == "RLCyberNanoGreenArmorPickup" || ActorToSpawn == "RLCyberNanoBlueArmorPickup" || ActorToSpawn == "RLCyberNanoRedArmorPickup")) || (ItemCategory == 9 && ActorToSpawn == "RLCerberusBootsPickup"))
+                        ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            }
+        }
+
+        bool Spawned = SpawnForced(ActorToSpawn, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
 
         if (Spawned)
         {
@@ -802,7 +1140,6 @@ void CrateTakeAll()
             Crates[Player.CrateID].Active[Player.CrateIndex] = false;
             Crates[Player.CrateID].Item[Player.CrateIndex] = NULL;
         }
-
     }
 
     // Restore index.

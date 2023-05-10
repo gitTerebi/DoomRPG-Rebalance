@@ -116,8 +116,15 @@ struct CharSaveInfo_S
 
     // ----- COMPATIBILITY EXTENSIONS -----
 
+    // Compatibility Handling - DoomRL Arsenal
     // DRLA Tokens
     bool DRLATokens[DRLA_MAX_TOKENS];
+
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    int ArmorChances[6];
+
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
+    int WeaponsChances[5];
 
     // ------------------------------------
 
@@ -156,6 +163,8 @@ struct ItemInfo_S
     unsigned int CompatMods;
     int Category;
     int Index;
+
+    int Spawned;
 };
 
 // Crates
@@ -708,6 +717,19 @@ struct PlayerData_S
     fixed ShieldChance;
     fixed AugChance;
 
+    // Compatibility Handling - DoomRL Arsenal
+    fixed ArmorAssembledChance;
+    fixed ArmorExoticChance;
+    fixed ArmorSuperiorChance;
+    fixed ArmorUniqueChance;
+    fixed ArmorDemonicChance;
+    fixed ArmorLegendaryChance;
+    fixed WeaponExoticChance;
+    fixed WeaponSuperiorChance;
+    fixed WeaponUniqueChance;
+    fixed WeaponDemonicChance;
+    fixed WeaponLegendaryChance;
+
     // Menu Data
     bool MenuBlock;
     int Menu;
@@ -813,6 +835,10 @@ struct PlayerData_S
     int ShopCard;
     bool AutosaveTimerReset;
     bool SeenEventTip[MAPEVENT_MAX];
+
+    // Familiars
+    bool Familiars;
+    int FamiliarTID[MAX_FAMILIARS];
 
     // Nomad
     str NomadBasicItems[30];

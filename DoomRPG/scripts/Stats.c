@@ -107,7 +107,7 @@ NamedScript void AddXP(int PlayerNum, long int XP, long int Rank)
 {
     // Scale XP/Rank Gains using the XP Scaling Option
     // Don't forget to remove stupid fixed-point avoidance code after migration (if it happens)
-    XP = (XP * (int)(GetCVarFixed("drpg_scalexp") * 100)) / 100;
+    XP = (XP * (long int)(GetCVarFixed("drpg_scalexp") * 100l)) / 100l;
 
     // Don't caps XP gain
     // if (XP > Players(PlayerNum).XPNext / 2l) XP = Players(PlayerNum).XPNext / 2l;
@@ -546,22 +546,46 @@ void CheckStats()
     Player.ToxicityRegenBonus = Player.RegenerationTotal / 10;
     Player.JumpHeight = 8.0 + (8.0 * ((fixed)Player.AgilityTotal / 100));
     Player.WeaponSpeed = Player.AgilityTotal / 2;
-    SetAmmoCapacity("Clip", (int)(30 + Player.CapacityTotal * 7.5) / 10 * 10);
-    SetAmmoCapacity("Shell", 10 + Player.CapacityTotal * 2);
-    SetAmmoCapacity("RocketAmmo", 2 + Player.CapacityTotal * 0.6);
-    SetAmmoCapacity("Cell", (50 + Player.CapacityTotal * 5) / 10 * 10);
-    Player.Stim.VialMax = Player.CapacityTotal * 2.5;
-    Player.SurvivalBonus = Player.AgilityTotal / 5;
-    if (CompatMode == COMPAT_DRLA) // DRLA - Total Armors/Boots, Skulls
+
+    // Calculate Ammo Capacity
+    if (GetCVar("drpg_levelup_natural"))
     {
+        SetAmmoCapacity("Clip", (int)(20 + Player.CapacityTotal * 5.0) / 10 * 10);
+        SetAmmoCapacity("Shell", (int)(10 + Player.CapacityTotal * 1.4) / 2 * 2);
+        SetAmmoCapacity("RocketAmmo", (int)(2 + Player.CapacityTotal * 0.4));
+        SetAmmoCapacity("Cell", (int)(50 + Player.CapacityTotal * 3.4) / 10 * 10);
+        Player.Stim.VialMax = (int)(8 + Player.CapacityTotal * 1.8) / 5 * 5;
+        Player.MedkitMax = (int)(16 + Player.CapacityTotal * 3.5) / 5 * 5;
+    }
+    else
+    {
+        SetAmmoCapacity("Clip", (int)(20 + Player.CapacityTotal * 7.5) / 10 * 10);
+        SetAmmoCapacity("Shell", (int)(10 + Player.CapacityTotal * 2));
+        SetAmmoCapacity("RocketAmmo", (int)(2 + Player.CapacityTotal * 0.6));
+        SetAmmoCapacity("Cell", (int)(50 + Player.CapacityTotal * 5) / 10 * 10);
+        Player.Stim.VialMax = (int)(Player.CapacityTotal * 2.5) / 5 * 5;
+        Player.MedkitMax = Player.CapacityTotal * 5;
+    }
+
+    Player.SurvivalBonus = Player.AgilityTotal / 5;
+
+    // Compatibility Handling - DoomRL Arsenal
+    if (CompatMode == COMPAT_DRLA)
+    {
+        // Total Armors/Boots, Skulls
         SetAmmoCapacity("RLArmorInInventory", DRLA_ARMOR_MAX);
         SetAmmoCapacity("RLSkullLimit", DRLA_SKULL_MAX);
         SetAmmoCapacity("RLPhaseDeviceLimit", DRLA_DEVICE_MAX);
         SetAmmoCapacity("RLModLimit", DRLA_MODPACKS_MAX);
         SetAmmoCapacity("RLWeaponLimit", DRLA_WEAPON_MAX);
-    }
 
-    Player.MedkitMax = Player.CapacityTotal * 5;
+        // Increasing Rocket Ammo capacity for Demolitionist
+        if (PlayerClass(PlayerNumber()) == 4)
+            if (GetCVar("drpg_levelup_natural"))
+                SetAmmoCapacity("RocketAmmo", (int)(9 + Player.CapacityTotal * 1.2));
+            else
+                SetAmmoCapacity("RocketAmmo", (int)(13 + Player.CapacityTotal * 0.8));
+    }
 
     // Determine current stat cap
     Player.StatCap = GetCVar("drpg_hard_stat_cap");
@@ -819,8 +843,18 @@ void DoRegen()
         int Angle = GetActorAngle(0) * 256;
         SpawnForced("DRPGRegenSphereEffect", X, Y, Z + 32.0, AuraTID, Angle);
 
-        Player.HPRate += 1.0 + (fixed)Player.RegenerationTotal / (2.0 + (fixed)Player.RegenerationTotal / 30.0);
-        Player.EPRate += 1.0 + (fixed)Player.RegenerationTotal / (2.0 + (fixed)Player.RegenerationTotal / 30.0);
+        int HPTimeMod = (1.0 / Player.HPAmount) * 25.0;
+        if (HPTimeMod < 2.0) HPTimeMod = 2.0;
+
+        int EPTimeMod = (1.0 / Player.EPAmount) * 25.0;
+        if (EPTimeMod < 2.0) EPTimeMod = 2.0;
+
+        if (Timer() % (int)(Player.HPTime / HPTimeMod) == 0)
+            Player.HPRate += (fixed)(Player.HPTime - Player.HPRate);
+
+        if (Timer() % (int)(Player.EPTime / EPTimeMod) == 0)
+            Player.EPRate += (fixed)(Player.EPTime - Player.EPRate);
+
         Player.RegenBoostTimer--;
 
         // Pass Radius and Height to the Auras for DECORATE usage

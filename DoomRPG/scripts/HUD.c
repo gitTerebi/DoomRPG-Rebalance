@@ -1879,8 +1879,9 @@ NamedScript void DamageHUD(int Amount, bool Critical)
 
 NamedScript Type_ENTER void DRLAHUD()
 {
-    str const RaritySuffix[6] =
+    str const RaritySuffix[7] =
     {
+        " \Cc[Common]\C-",
         " \Ct[Exotic]\C-",
         " \Ci[Superior]\C-",
         " \Cv[Assembled]\C-",
@@ -2077,42 +2078,43 @@ Start:
             // Determine total modpacks and the color char to use
             if (CheckInventory("RLStandardWeaponToken"))
             {
+                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[0]));
                 Color = "\Cj";
                 TotalMax = 4;
             }
             else if (CheckInventory("RLExoticWeaponToken"))
             {
-                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[0]));
+                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[1]));
                 Color = "\Ct";
                 TotalMax = 4;
             }
             else if (CheckInventory("RLSuperiorWeaponToken"))
             {
-                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[1]));
+                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[2]));
                 Color = "\Ci";
                 TotalMax = 2;
             }
             else if (CheckInventory("RLAssembledWeaponToken"))
             {
-                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[2]));
+                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[3]));
                 Color = "\Cv";
                 TotalMax = 2;
             }
             else if (CheckInventory("RLUniqueWeaponToken"))
             {
-                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[3]));
+                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[4]));
                 Color = "\Cd";
                 TotalMax = 1;
             }
             else if (CheckInventory("RLDemonicWeaponToken"))
             {
-                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[4]));
+                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[5]));
                 Color = "\Cg";
                 TotalMax = 1;
             }
             else if (CheckInventory("RLLegendaryWeaponToken"))
             {
-                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[5]));
+                Name = StrLeft(Name, StrLen(Name) - StrLen(RaritySuffix[6]));
                 Color = "\Cf";
                 TotalMax = 1;
             }
@@ -2315,8 +2317,8 @@ Start:
             {
                 if (CheckWeapon("RLAntiFreakJackal") && CheckInventory("RLAntiFreakJackalDemonArtifacts")) // Jackal/Casull
                 {
-                    JackelItem = &ItemData[0][42]; // Should probably come up with a better way to reference these?
-                    CasullItem = &ItemData[0][43];
+                    JackelItem = &ItemData[0][54]; // Should probably come up with a better way to reference these?
+                    CasullItem = &ItemData[0][42];
 
                     PrintSprite(JackelItem->Sprite.Name, 0, X + JackelItem->Sprite.XOff, Y + JackelItem->Sprite.YOff + (int)(Sin((fixed)Timer() / 128.0) * 4.0), 0.05);
                     PrintSprite(CasullItem->Sprite.Name, 0, X + CasullItem->Sprite.XOff + 32.0, Y + CasullItem->Sprite.YOff + (int)(Cos((fixed)Timer() / 128.0) * 4.0), 0.05);
@@ -2346,7 +2348,7 @@ Start:
     // Stamina Bar
     for (int i = 0; i < 15; i++)
     {
-        if (i * 6.66 > CheckInventory("RLStamina") || !GetCVar("drpg_drla_hud_staminabar"))
+        if (i * 6.66 > CheckInventory("RLStamina") || !GetActivatorCVar("drpg_drla_hud_staminabar"))
             break;
 
         if (i >= 0 && i <= 2)

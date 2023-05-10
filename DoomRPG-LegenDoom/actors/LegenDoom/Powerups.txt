@@ -5,9 +5,9 @@ Actor DRPGInvulnerabilityPowerLD : DRPGInvulnerabilityPower
 
 ACTOR LDInvulnerabilitySpherePickupRPG : LDInvulnerabilitySpherePickup replaces DRPGInvulnerabilitySphere
 {
-    Tag "Invulnerability Sphere"
+    Tag "Invulnerability sphere (gives invulnerability for 30 seconds)"
     
-    Inventory.PickupMessage "You got an Invulnerability Sphere!"
+    Inventory.PickupMessage "You picked up an invulnerability sphere."
     Inventory.PickupSound "powerups/protect"
     
     -COUNTITEM
@@ -128,11 +128,11 @@ actor LDInvulnerabilityChargeRPG : CustomInventory
 {
     +INVBAR
 
-    Tag "Invulnerability Charge - Reflective Invulnerability for 30 seconds"
+    Tag "Invulnerability charge (grants reflective invulnerability for 30 seconds)"
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "You got an Invulnerability Charge!"
+    Inventory.PickupMessage "You picked up an invulnerability charge."
     Inventory.PickupSound "powerups/protect"
     Inventory.UseSound "powerups/protect"
     Inventory.Icon "CRG2"
@@ -163,13 +163,13 @@ Actor DRPGInvisibilityPowerLD : DRPGInvisibilityPower
 
 ACTOR LDBlurSpherePickupRPG : LDBlurSpherePickup replaces DRPGBlurSphere
 {
-    Tag "Blur Sphere"
+    Tag "Invisibility sphere (provides partial invisibility for 60 seconds)"
     
     +VISIBILITYPULSE
     +FLOATBOB
     -COUNTITEM
     
-    Inventory.PickupMessage "You got an Invisibility Sphere!"
+    Inventory.PickupMessage "You picked up an invisibility sphere."
     Inventory.PickupSound "powerups/invis"
     
     RenderStyle Translucent
@@ -290,11 +290,11 @@ actor LDInvisibilityChargeRPG : CustomInventory
 {
     +INVBAR
 
-    Tag "Invisibility Charge - Complete Invisibility for 60 seconds"
+    Tag "Invisibility charge (bestows complete invisibility for 60 seconds)"
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "You got an Invisibility Charge!"
+    Inventory.PickupMessage "You picked up an invisibility charge."
     Inventory.PickupSound "powerups/invis"
     Inventory.UseSound "powerups/invis"
     Inventory.Icon "CRG1"
@@ -325,7 +325,7 @@ Actor DRPGRadSuitPowerLD : DRPGRadSuitPower
 
 ACTOR LDRadsuitPickupRPG : LDRadsuitPickup replaces DRPGRadSuit
 {
-    Tag "Radiation Suit"
+    Tag "Radiation suit (protects against damaging environments for 60 seconds)"
 
     +INVBAR
     -COUNTITEM
@@ -333,7 +333,7 @@ ACTOR LDRadsuitPickupRPG : LDRadsuitPickup replaces DRPGRadSuit
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "You got a Radiation Suit!"
+    Inventory.PickupMessage "You picked up a radiation suit."
     Inventory.PickupSound "powerups/suit"
     Inventory.UseSound "powerups/suit"
     Inventory.Icon "SUIT"
@@ -456,7 +456,7 @@ Actor DRPGInfraredPowerLD : DRPGInfraredPower
 
 ACTOR LDInfraredPickupRPG : LDInfraredPickup Replaces DRPGInfrared
 {
-    Tag "Night-Vision Goggles"
+    Tag "Night vision goggles (enables night vision for 120 seconds)"
     
     +INVBAR
     -COUNTITEM
@@ -464,7 +464,7 @@ ACTOR LDInfraredPickupRPG : LDInfraredPickup Replaces DRPGInfrared
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "You got a pair of Infrared Goggles!"
+    Inventory.PickupMessage "You picked up night vision goggles."
     Inventory.PickupSound "powerups/light"
     Inventory.UseSound "powerups/light" 
     Inventory.Icon "PVIS"
@@ -582,7 +582,7 @@ actor LDShamanInfraredEffectDRPG : LDShamanInfraredEffect replaces LDShamanInfra
 
 actor LDAllMapPickupRPG : LDAllMapPickup Replaces DRPGAllMap
 {
-    Tag "Computer Area Map"
+    Tag "Computer map (reveals auto map until map leave)"
     
     +INVBAR
     -COUNTITEM
@@ -592,7 +592,7 @@ actor LDAllMapPickupRPG : LDAllMapPickup Replaces DRPGAllMap
 
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "You got a Computer Area Map!"
+    Inventory.PickupMessage "You picked up a computer map."
     Inventory.PickupSound "powerups/map"
     Inventory.UseSound "powerups/map" 
     Inventory.Icon "PMAP"
@@ -612,7 +612,7 @@ actor LDAllMapPickupRPG : LDAllMapPickup Replaces DRPGAllMap
 
 actor LDBerserkPickupRPG : LDBerserkPickup Replaces DRPGBerserk
 {
-    Tag "Berserk Pack"
+    Tag "Berserk pack (heals fully plus increases melee damage until map leave)"
     
     +INVBAR
     -INVENTORY.AUTOACTIVATE
@@ -620,7 +620,7 @@ actor LDBerserkPickupRPG : LDBerserkPickup Replaces DRPGBerserk
     
     Inventory.DefMaxAmount
     Inventory.InterHubAmount 1000
-    Inventory.PickupMessage "You got a Berserk Pack!"
+    Inventory.PickupMessage "You picked up a berserk pack."
     Inventory.PickupSound "powerups/berserk"
     Inventory.UseSound "powerups/berserk"
     Inventory.Icon "PSTR"
@@ -648,7 +648,7 @@ ACTOR LDMegaspherePickupRPG : LDMegaspherePickup Replaces DRPGMegasphere
 {
     RenderStyle Add
     
-    Inventory.PickupMessage "You got a Megasphere!"
+    Inventory.PickupMessage "You picked up a mega sphere."
     Inventory.PickupSound "powerups/megasphere"
     
     -COUNTITEM

@@ -40,6 +40,10 @@ class DRPGZInputHandler : EventHandler
     int tics;
     override void WorldTick()
     {
+        // This input code is for singleplayer only due to desync caused by CallACS(?)
+        if (multiplayer)
+            return;
+
         if (tics < 20)
         {
             tics++;
@@ -395,6 +399,7 @@ class DRPGZUtilities
             "drpg_maxspeed",
             "drpg_maxjump",
             "drpg_inv_capacity",
+            "drpg_overdrive_enable",
             "drpg_overdrive_limit",
             "drpg_levelup_natural",
             "drpg_allow_spec",
@@ -529,6 +534,7 @@ class DRPGZUtilities
             "drpg_give_quickinventory",
             "drpg_monster_friendly_teleport_enable",
             "drpg_monster_friendly_teleport_distance",
+            "drpg_shield_charging_enable",
             "drpg_shield_sound_empty_enable",
             "drpg_shield_sound_charge_enable",
             "drpg_shield_sound_full_enable",

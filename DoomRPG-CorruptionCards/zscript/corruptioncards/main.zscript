@@ -38,6 +38,9 @@ Class CCards_Global : Thinker
 
 	uint scoreneeded;
 	uint wildscore;
+	bool allowextremewildcards;
+
+	int systemtime;
 	
 	CCards_Deck GetChosenDeck()
 	{
@@ -62,7 +65,7 @@ Class CCards_Global : Thinker
 		vc.Init();		
 		rules = new ("CCards_Rules");
 		rules.global = self;
-		ccversion = "4.3";
+		ccversion = "4.5a";
 		scoreneeded = random(4, 8);
 		return self;
 	}
@@ -186,15 +189,35 @@ Class CCards_Game : EventHandler
 	{
 		CCards_Game g = CCards_Functions.GetGame();
 
+		if(e.name == "dailyseed")
+		{
+			Console.Printf(CCards_Functions.GetDailyDeck(e.args[0]).deckname .. "");
+			//Console.Printf("wild card score: " .. g.global.wildscore);
+		}
+		
 		if(e.name == "wildstreak")
 		{
 			//Console.Printf("wild card score: " .. g.global.wildscore);
+		}
+
+		if(e.name == "cardtags")
+		{
+			for(int i; i<global.vc.allcards.Size(); i++)
+			{
+				String s = global.vc.allcards[i].GetClassName() .. " - ";
+				for(int t = 0; t < global.vc.allcards[i].tags.Size(); t++)
+				{
+					s = s .. global.vc.allcards[i].tags[t] .. "|";
+				}
+				Console.Printf(s);
+			}
+
 		}
 	}
 
 	override void WorldTick()
 	{
-		String c = Cvar.GetCvar("ccards_disablecard", Players[0]).GetString();
+		String c = Cvar.GetCvar("ccards_disablecard", players[Net_Arbitrator]).GetString();
 		if(c != "")
 		{
 			c.ToUpper();
@@ -218,8 +241,23 @@ Class CCards_Game : EventHandler
 				}
 			}
 
-			Cvar.GetCvar("ccards_disablecard", Players[0]).SetString("");
+			Cvar.GetCvar("ccards_disablecard", players[Net_Arbitrator]).SetString("");
 		}
+		/*
+		if(Level.Time == 35*2)
+		{
+			let game = CCards_Functions.GetGame();
+
+			if(game && !game.isStarted && game.global)
+			{
+				let d = CCards_Functions.GetDailyDeck(game.global.dailyseed);
+				if(d && d.cards.Size() > 0)
+				{
+					Console.Printf("Today's daily challenge  - " .. d.deckname.Filter());
+				}
+			}			
+		}
+		*/
 	}
 
 	void ChooseCard(int cardno)
@@ -352,6 +390,8 @@ Class CCards_Game : EventHandler
 		
 		for(int i; i<publicdeck.Size(); i++)
 		{
+			publicdeck[i].game = CCards_Functions.GetGame();
+			
 			if(!publicdeck[i].started)
 			{
 				publicdeck[i].PreGameStart();
@@ -401,6 +441,8 @@ Class CCards_Game : EventHandler
 			if(gen.wildcardoffered)
 			{
 				global.wildscore = global.scoreneeded = 1;
+				
+				global.allowextremewildcards = true;
 				//Console.Printf("YOU DIDNT PICK ONE AAAAAA");
 			}
 			gen.Destroy();
@@ -493,7 +535,7 @@ Class CCards_Game : EventHandler
 
 	void SetupSeed(void)
 	{
-		CVar seedcvar = CVar.GetCvar('ccards_seed', Players[0]);
+		CVar seedcvar = CVar.GetCvar('ccards_seed', players[Net_Arbitrator]);
 		
 		if(seedcvar.GetInt()<1 || seedcvar.GetInt()>9999)
 		{
@@ -529,7 +571,7 @@ Class CCards_Game : EventHandler
 	
 	void NextPlayer()
 	{
-		if(Cvar.GetCvar("ccards_choiceoption", players[0]).GetInt() == 1)
+		if(Cvar.GetCvar("ccards_choiceoption", players[Net_Arbitrator]).GetInt() == 1)
 		{
 			global.player = 0;
 			return;
@@ -871,6 +913,59 @@ Class CCards_Game : EventHandler
 		}
 	}
 
+	static const int doorspecials[] = {
+		7, 8, 10, 11, 12, 13, 105, 106, 202, 249
+	};
+
+	int get_sector_tag(sector s)
+    {
+		if(!s)
+		{
+			return 0;
+		}
+
+        int sector_tag = -15;
+        for(int i = 1; i < 100/*or what maximum tags index are?*/; i++)
+        {
+            SectorTagIterator sec_tags = level.CreateSectorTagIterator(i);
+            
+            int sector_id = -15;
+            while( sector_id = sec_tags.next() )
+            {
+                if(sector_id < 0)
+                    break;
+                if(sector_id == s.index())
+                {
+                    //console.printf("sector found");
+                    sector_tag = i;
+                    break;
+                }
+                
+            }
+            if(sector_tag >= 0)
+                break;
+        }
+        return sector_tag;
+    }
+
+	override void WorldLineActivated (WorldEvent e) 
+	{
+		if(e.Thing && e.Thing.player && e.ActivationType == SPAC_Use)
+		{
+			if(e.ActivatedLine.args[0] == 0 || e.ActivatedLine.args[0] == get_sector_tag(e.ActivatedLine.BackSector))
+			{
+				return;
+			}
+
+			CCard_SpecialSwitches sws = CCard_SpecialSwitches(CCards_Functions.FindCardByName("CCard_SpecialSwitches"));
+
+			if(sws)
+			{
+				sws.Trigger(e.ActivatedLine, e.Thing);
+			}
+		}
+	}
+
 	override void WorldLinePreActivated (WorldEvent e) 
 	{
 		if(e.Thing && e.Thing.bISMONSTER && e.ShouldActivate && e.Thing.CountInv("CCards_Actor_Breach") > 0)
@@ -937,7 +1032,7 @@ Class CCards_Rules
 	uint minTierIncrease;
 	
 	int forcedseed;
-	bool useBundles;
+	uint dailydeck;
 	bool draft;
 	bool concealed;
 
@@ -945,6 +1040,8 @@ Class CCards_Rules
 
 	bool nowildcards;
 	bool nopermawildcards;
+	bool extremewildcardprotection;
+	bool usedaily;
 	uint forcedwildcard;
 
 	CCards_Global global;
@@ -976,6 +1073,7 @@ Class CCards_Rules
 		maxTierIncrease = 3;
 		minTierIncrease = 10;
 		nopermawildcards = true;
+		extremewildcardprotection = true;
 	}
 	
 	void SetHardcoreRules()
@@ -987,7 +1085,7 @@ Class CCards_Rules
 		handsize = 3;
 		cardamount = 1;
 		minTierIncrease = 8;
-		nopermawildcards = true;
+		extremewildcardprotection = true;
 	}
 	
 	void SetChaosRules()
@@ -998,6 +1096,7 @@ Class CCards_Rules
 		permaProgression = 0;
 		handsize = 1;
 		cardamount = 1;
+		extremewildcardprotection = true;
 	}
 	
 	void SetCustomRules()
@@ -1026,20 +1125,21 @@ Class CCards_Rules
 		cvarname = "ccards_dailybest";
 		SetTiers(1, 5);
 		permaProgression = 0;
-		handsize = 1;
+		handsize = 3;
 		cardamount = 1;
     	forcedseed = global.dailyseed;
+		usedaily = true;
 
-		if(forcedseed % 3 == 0)
+		//dailydeck = 1;
+
+		if(forcedseed % 6 == 0)
 		{
-			cardamount++;
-			handsize++;
+			handsize = 2;
 		}
 
-		if(forcedseed % 5 == 0)
+		if(forcedseed % 8 == 0)
 		{
-			cardamount++;
-			handsize++;
+			handsize = 1;
 		}
 
 		maxTierIncrease = 3;

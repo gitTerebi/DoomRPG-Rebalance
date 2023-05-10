@@ -369,6 +369,47 @@ void CheckMission()
     // Mission Complete!
     if (Complete)
     {
+        str ActorToSpawn = Player.Mission.RewardItem->Actor;
+
+        // Compatibility Handling - DoomRL Arsenal
+        // Set actors
+        if (CompatMode == COMPAT_DRLA)
+        {
+            str ItemName = Player.Mission.RewardItem->Name;
+            int ItemCategory = Player.Mission.RewardItem->Category;
+
+            // For weapons
+            if (ItemCategory == 0)
+            {
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Common")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Exotic")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 11, 8) == "Superior")
+                    ActorToSpawn = StrParam("%SPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", ActorToSpawn);
+            }
+
+            // For armors and boots
+            if (ItemCategory == 3 || ItemCategory == 9)
+            {
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Assembled")
+                    if ((ItemCategory == 3 && (ActorToSpawn == "RLCerberusArmorPickup" || ActorToSpawn == "RLCyberNanoGreenArmorPickup" || ActorToSpawn == "RLCyberNanoBlueArmorPickup" || ActorToSpawn == "RLCyberNanoRedArmorPickup")) || (ItemCategory == 9 && ActorToSpawn == "RLCerberusBootsPickup"))
+                        ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 9, 6) == "Unique")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 10, 7) == "Demonic")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+                if (StrMid(ItemName, StrLen(ItemName) - 12, 9) == "Legendary")
+                    ActorToSpawn = StrParam("%SWorldSpawnPickup", StrLeft(ActorToSpawn, StrLen(ActorToSpawn) - 6));
+            }
+        }
+
         // Message
         ActivatorSound("mission/complete", 127);
         SetFont("BIGFONT");
@@ -392,7 +433,7 @@ void CheckMission()
         // GiveInventory("DRPGModule", Player.Mission.RewardModules);
 
         // Spawn Item and try to pick it up
-        SpawnForced(Player.Mission.RewardItem->Actor, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
+        SpawnForced(ActorToSpawn, GetActorX(0), GetActorY(0), GetActorZ(0), 0, 0);
         SetActorVelocity(Player.TID, 0.01, 0.01, 0, true, false);
 
         // Clear the Mission

@@ -613,11 +613,29 @@ NamedScript MenuEntry void LoadCharacter()
 
     // ----- COMPATIBILITY EXTENSIONS -----
 
+    // Compatibility Handling - DoomRL Arsenal
     // DRLA Tokens
     if (CompatMode == COMPAT_DRLA)
         for (int i = 0; i < DRLA_MAX_TOKENS; i++)
             if (Info.DRLATokens[i])
                 SetInventory(DRLATokens[i], 1);
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    Player.ArmorAssembledChance = Info.ArmorChances[0];
+    Player.ArmorExoticChance = Info.ArmorChances[1];
+    Player.ArmorSuperiorChance = Info.ArmorChances[2];
+    Player.ArmorUniqueChance = Info.ArmorChances[3];
+    Player.ArmorDemonicChance = Info.ArmorChances[4];
+    Player.ArmorLegendaryChance = Info.ArmorChances[5];
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
+    Player.WeaponExoticChance = Info.WeaponsChances[0];
+    Player.WeaponSuperiorChance = Info.WeaponsChances[1];
+    Player.WeaponUniqueChance = Info.WeaponsChances[2];
+    Player.WeaponDemonicChance = Info.WeaponsChances[3];
+    Player.WeaponLegendaryChance = Info.WeaponsChances[4];
 
     // Set Health and EP to their proper max values
     Player.ActualHealth = Player.HealthMax;
@@ -848,11 +866,29 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
 
     // ----- COMPATIBILITY EXTENSIONS -----
 
+    // Compatibility Handling - DoomRL Arsenal
     // DRLA Tokens
     if (CompatMode == COMPAT_DRLA)
         for (int i = 0; i < DRLA_MAX_TOKENS; i++)
             if (CheckInventory(DRLATokens[i]))
                 Info->DRLATokens[i] = true;
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    Info->ArmorChances[0] = Player.ArmorAssembledChance;
+    Info->ArmorChances[1] = Player.ArmorExoticChance;
+    Info->ArmorChances[2] = Player.ArmorSuperiorChance;
+    Info->ArmorChances[3] = Player.ArmorUniqueChance;
+    Info->ArmorChances[4] = Player.ArmorDemonicChance;
+    Info->ArmorChances[5] = Player.ArmorLegendaryChance;
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
+    Info->WeaponsChances[0] = Player.WeaponExoticChance;
+    Info->WeaponsChances[1] = Player.WeaponSuperiorChance;
+    Info->WeaponsChances[2] = Player.WeaponUniqueChance;
+    Info->WeaponsChances[3] = Player.WeaponDemonicChance;
+    Info->WeaponsChances[4] = Player.WeaponLegendaryChance;
 }
 
 NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
@@ -1001,11 +1037,28 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
 
     // ----- COMPATIBILITY EXTENSIONS -----
 
+    // Compatibility Handling - DoomRL Arsenal
     // DRLA Tokens
     for (int i = 0; i < DRLA_MAX_TOKENS; i++)
     {
         Info->DRLATokens[i] = HexToInteger(String + StringPos, 1);
         StringPos += 1;
+    }
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    for (int i = 0; i < 6; i++)
+    {
+        Info->ArmorChances[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
+    }
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
+    for (int i = 0; i < 5; i++)
+    {
+        Info->WeaponsChances[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
     }
 
     // Verify Checksum
@@ -1236,11 +1289,30 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
 
     // ----- COMPATIBILITY EXTENSIONS -----
 
+    // Compatibility Handling - DoomRL Arsenal
     // DRLA Tokens
     for (int i = 0; i < DRLA_MAX_TOKENS; i++)
     {
         SaveString[pos + 0] = ToHexChar(Info->DRLATokens[i]);
         pos += 1;
+    }
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Chances for Assembled/Exotic/Superior/Unique/Demonic/Legendary armor and boots
+    for (int i = 0; i < 6; i++)
+    {
+        SaveString[pos + 1] = ToHexChar(Info->ArmorChances[i]);
+        SaveString[pos + 0] = ToHexChar(Info->ArmorChances[i] >> 4);
+        pos += 2;
+    }
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
+    for (int i = 0; i < 5; i++)
+    {
+        SaveString[pos + 1] = ToHexChar(Info->WeaponsChances[i]);
+        SaveString[pos + 0] = ToHexChar(Info->WeaponsChances[i] >> 4);
+        pos += 2;
     }
 
     Info->Checksum = (unsigned int)(crc(SaveString, pos));

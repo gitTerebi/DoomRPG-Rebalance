@@ -186,20 +186,15 @@ OptionValue "ExtraMapChallenges"
 
 OptionString "OutpostStartLevel"
 {
-    "E1M1",    "E1M1 (Doom)"
-    "E2M1",    "E2M1 (Doom)"
-    "E3M1",    "E3M1 (Doom)"
-    "E4M1",    "E4M1 (Ultimate Doom)"
     "MAP01",   "MAP01 (Doom II)"
-    "LEVEL01", "LEVEL01 (Doom II BFG)"
 }
 
 OptionValue "LootTypes"
 {
-    0, "Adaptive"
+    0, "Map + Luck Level"
     1, "\caMap Level"
     2, "\cfLuck Level"
-    3, "\ciRoguelike"
+    3, "\ciRandom"
 }
 
 OptionValue "XPBarTypes"
@@ -505,7 +500,8 @@ OptionMenu "DoomRPGStats"
     Option "Inventory Capacity System", "drpg_inv_capacity", "OnOff"
     StaticText ""
     
-    Slider "Skill Overdrive % Limit", "drpg_overdrive_limit", 0, 1000, 1
+    Option "Skill Overdrive Enable", "drpg_overdrive_enable", "OnOff"
+    Slider "Skill Overdrive % Limit", "drpg_overdrive_limit", 100, 1000, 1
     StaticText ""
 
     Option "Disable Luck perk", "drpg_disable_luck_perk", "YesNo"
@@ -809,6 +805,7 @@ OptionMenu "DoomRPGMisc"
     Slider "Minimum Distance For Teleport", "drpg_monster_friendly_teleport_distance", 0, 10, 1
     StaticText ""
 
+    Option "Shield Charging Enable", "drpg_shield_charging_enable", "OnOff"
     Option "Sound Empty Energy Shield", "drpg_shield_sound_empty_enable", "OnOff"
     Option "Sound Charging Energy Shield", "drpg_shield_sound_charge_enable", "OnOff"
     Option "Sound Full Energy Shield", "drpg_shield_sound_full_enable", "OnOff"
@@ -867,6 +864,7 @@ OptionMenu "DoomRPGStart"
     StaticText "Outpost Start", 1
     StaticText "You only need these options set if you"
     StaticText "are starting from the default Outpost."
+	StaticText "Add a Starting Map to the Teleport."
     Option "Starting Map", "drpg_startmap", "OutpostStartLevel"
     Option "Add Starting Map", "drpg_addstartmap", "YesNo"
     StaticText ""

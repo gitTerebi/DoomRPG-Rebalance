@@ -18,3 +18,14 @@ OptionMenu "WadSmoosh"
     Option "TNT: Evilution", "drpg_ws_tnt", "OnOff"
     Option "The Plutonia Experiment", "drpg_ws_plut", "OnOff"
 }
+
+OptionString "OutpostStartLevel"
+{
+    "E1M1",    "E1M1 (Doom)"
+    "E5M1",    "E5M1 (Sigil)"
+    "MAP01",   "MAP01 (Doom II)"
+    "NV_MAP01", "NV_MAP01 (No Rest For The Living)"
+    "ML_MAP01", "ML_MAP01 (Master Levels)"
+    "TN_MAP01", "TN_MAP01 (TNT: Evilution)"
+    "PL_MAP01", "PL_MAP01 (The Plutonia Experiment)"
+}

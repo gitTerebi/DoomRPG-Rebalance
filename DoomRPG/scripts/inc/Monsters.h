@@ -33,7 +33,7 @@ OptionalArgs(1) NamedScript void MonsterInitStats(int);
 NamedScript void MonsterStatsHandler();
 NamedScript void MonsterAuraDisplayHandler();
 NamedScript void MonsterAggressionHandler();
-NamedScript void MonsterFriendlyTeleport();
+NamedScript void MonsterFriendlyTeleport(bool);
 NamedScript void MonsterLevelupHandler();
 NamedScript void MonsterEPDrainHandler();
 NamedScript void MonsterRegenerationHandler();
@@ -72,7 +72,11 @@ NamedScript void MonsterOrangeAuraCheck(bool);
 //NamedScript void MonsterDarkBlueAuraCheck(bool);
 //NamedScript void MonsterYellowBlueAuraCheck(bool);
 
+fixed MapTotalMonstersMod();
+fixed MapTotalBossesMod();
+
+// Compatibility/Extensions
+NamedScript DECORATE void FamiliarInit(int, int);
 NamedScript DECORATE int GetMonsterHealthMax();
 NamedScript DECORATE int GetMonsterLevel();
-
 #endif

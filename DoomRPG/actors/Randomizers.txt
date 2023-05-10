@@ -500,6 +500,7 @@ actor DRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
 {
     DropItem "DRPGSoulsphere"   255 70
     DropItem "DRPGSoulsphere2"  255 20
+    DropItem "DRPGRegenSphere"  255 10
     DropItem "DRPGSoulsphere3"  255 9
     DropItem "DRPGLifeDropper"  255 1
 }
@@ -550,6 +551,7 @@ actor DRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces Invulnerabili
 actor DRPGBlurSphereRandomizer : RandomSpawner Replaces BlurSphere
 {
     DropItem "DRPGBlurSphere"               255 100
+    DropItem "DRPGTimeSphere"               255 1
 //  DropItem "DRPGCrate"                    255 1
 }
 
