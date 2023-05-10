@@ -372,8 +372,6 @@ NamedScript Type_OPEN void MapInit()
 
         // drop at least 4 mods 99% of time
         DynamicLootGenerator("DRPGRlaMods", 2 * GetCVarFixed("drpg_lootgen_factor"));
-
-        // drop some weapons too
         DynamicLootGenerator("DRPGWeaponDropper", 2 * GetCVarFixed("drpg_lootgen_factor"));
     }
 
