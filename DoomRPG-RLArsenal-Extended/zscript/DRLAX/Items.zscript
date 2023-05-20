@@ -573,7 +573,7 @@ class DRLAX_TrappedInvulnerabilitySphere : DRLAX_TrappedSoulBase
 
 	override void Init()
 	{
-		powerupitem = "RLInvulnerabilitySphere";
+		powerupitem = "InvulnerabilitySphere2";
 	}
 }
 
@@ -596,7 +596,7 @@ class DRLAX_TrappedInvisibilitySphere : DRLAX_TrappedSoulBase
 
 	override void Init()
 	{
-		powerupitem = "RLBlurSphere";
+		powerupitem = "BlurSphere2";
 	}
 }
 
