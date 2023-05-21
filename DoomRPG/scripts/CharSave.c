@@ -646,13 +646,13 @@ NamedScript MenuEntry void LoadCharacter()
     // Compatibility Handling - DoomRL Arsenal
     // Weapons/Armors/Boots/Shield parts spawned values
     for (int i = 0; i < ItemMax[0]; i++)
-       ItemData[0][i].Spawned = Info.WeaponsSpawned[i];
+        ItemData[0][i].Spawned = Info.WeaponsSpawned[i];
     for (int i = 0; i < ItemMax[3]; i++)
-       ItemData[3][i].Spawned = Info.ArmorsSpawned[i];
+        ItemData[3][i].Spawned = Info.ArmorsSpawned[i];
     for (int i = 0; i < ItemMax[9]; i++)
-       ItemData[9][i].Spawned = Info.BootsSpawned[i];
+        ItemData[9][i].Spawned = Info.BootsSpawned[i];
     for (int i = 0; i < ItemMax[5]; i++)
-       ItemData[5][i].Spawned = Info.ShieldsSpawned[i];
+        ItemData[5][i].Spawned = Info.ShieldsSpawned[i];
 
     // Set Health and EP to their proper max values
     Player.ActualHealth = Player.HealthMax;
@@ -1093,23 +1093,23 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     // Weapons/Armors/Boots/Shield parts spawned values
     for (int i = 0; i < ItemMax[0]; i++)
     {
-        Info->WeaponsSpawned[i] = HexToInteger(String + StringPos, 1);
-        StringPos += 1;
+        Info->WeaponsSpawned[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
     }
     for (int i = 0; i < ItemMax[3]; i++)
     {
-        Info->ArmorsSpawned[i] = HexToInteger(String + StringPos, 1);
-        StringPos += 1;
+        Info->ArmorsSpawned[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
     }
     for (int i = 0; i < ItemMax[9]; i++)
     {
-        Info->BootsSpawned[i] = HexToInteger(String + StringPos, 1);
-        StringPos += 1;
+        Info->BootsSpawned[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
     }
     for (int i = 0; i < ItemMax[5]; i++)
     {
-        Info->ShieldsSpawned[i] = HexToInteger(String + StringPos, 1);
-        StringPos += 1;
+        Info->ShieldsSpawned[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
     }
 
     // Verify Checksum
@@ -1370,23 +1370,27 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
     // Weapons/Armors/Boots/Shield parts spawned values
     for (int i = 0; i < ItemMax[0]; i++)
     {
-        SaveString[pos + 0] = ToHexChar(Info->WeaponsSpawned[i]);
-        pos += 1;
+        SaveString[pos + 1] = ToHexChar(Info->WeaponsSpawned[i]);
+        SaveString[pos + 0] = ToHexChar(Info->WeaponsSpawned[i] >> 4);
+        pos += 2;
     }
     for (int i = 0; i < ItemMax[3]; i++)
     {
-        SaveString[pos + 0] = ToHexChar(Info->ArmorsSpawned[i]);
-        pos += 1;
+        SaveString[pos + 1] = ToHexChar(Info->ArmorsSpawned[i]);
+        SaveString[pos + 0] = ToHexChar(Info->ArmorsSpawned[i] >> 4);
+        pos += 2;
     }
     for (int i = 0; i < ItemMax[9]; i++)
     {
-        SaveString[pos + 0] = ToHexChar(Info->BootsSpawned[i]);
-        pos += 1;
+        SaveString[pos + 1] = ToHexChar(Info->BootsSpawned[i]);
+        SaveString[pos + 0] = ToHexChar(Info->BootsSpawned[i] >> 4);
+        pos += 2;
     }
     for (int i = 0; i < ItemMax[5]; i++)
     {
-        SaveString[pos + 0] = ToHexChar(Info->ShieldsSpawned[i]);
-        pos += 1;
+        SaveString[pos + 1] = ToHexChar(Info->ShieldsSpawned[i]);
+        SaveString[pos + 0] = ToHexChar(Info->ShieldsSpawned[i] >> 4);
+        pos += 2;
     }
 
     Info->Checksum = (unsigned int)(crc(SaveString, pos));
