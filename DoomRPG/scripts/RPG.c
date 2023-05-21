@@ -956,7 +956,7 @@ Start:
 
     if (GetActivatorCVar("drpg_auto_spend"))
     {
-        while (CheckInventory("DRPGModule") > 0 && !StatsCapped())
+        while (CheckInventory("DRPGModule") > ((250 + Player.Level * 25) / 250 * 250) && !StatsCapped())
         {
             // Select Preferred Stat
             if (Random(1, 2) == 1 && GetActivatorCVar("drpg_auto_spend_pref") >= 0)
@@ -964,11 +964,11 @@ Start:
             else // Select Random Stat
                 IncreaseStat(Random(0, STAT_MAX - 1));
 
-            Delay(1);
+            Delay(4);
         }
     }
 
-    Delay(1);
+    Delay(4);
     goto Start;
 }
 
