@@ -126,6 +126,12 @@ struct CharSaveInfo_S
     // Chances for Exotic/Superior/Unique/Demonic/Legendary weapon
     int WeaponsChances[5];
 
+    // Items spawned values
+    int WeaponsSpawned[ITEM_MAX];
+    int ArmorsSpawned[ITEM_MAX];
+    int BootsSpawned[ITEM_MAX];
+    int ShieldsSpawned[ITEM_MAX];
+
     // ------------------------------------
 
     // Checksum
