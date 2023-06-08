@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "*.zs": "c",
-        "*.acs": "c"
+        "*.acs": "c",
+        "rpg.h": "c"
     }
 }

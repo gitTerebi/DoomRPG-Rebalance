@@ -8,7 +8,9 @@
 ACTOR DEHZombiemanRPG : DEHZombieman Replaces DEHZombieman
 {
     Tag "Former Human"
-
+    //BloodColor "Black"
+	//BloodType "Black_Blood"
+	//Accuracy 997
     DropItem "DRPGClipSpawner"
 
 	States
