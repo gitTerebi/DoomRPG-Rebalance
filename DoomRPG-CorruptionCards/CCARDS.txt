@@ -3,6 +3,3 @@ excludemap OUTPOST
 
 // Exclude actors
 excludeactor DRPGPracticeTarget
-
-// Exclude cards
-removecard CCard_AdaptableFoe

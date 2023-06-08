@@ -637,6 +637,17 @@ NamedScript MenuEntry void LoadCharacter()
     Player.WeaponDemonicChance = Info.WeaponsChances[3];
     Player.WeaponLegendaryChance = Info.WeaponsChances[4];
 
+    // Compatibility Handling - DoomRL Arsenal
+    // Weapons/Armors/Boots/Shield parts spawned values
+    for (int i = 0; i < ItemMax[0]; i++)
+        ItemData[0][i].Spawned = Info.WeaponsSpawned[i];
+    for (int i = 0; i < ItemMax[3]; i++)
+        ItemData[3][i].Spawned = Info.ArmorsSpawned[i];
+    for (int i = 0; i < ItemMax[9]; i++)
+        ItemData[9][i].Spawned = Info.BootsSpawned[i];
+    for (int i = 0; i < ItemMax[5]; i++)
+        ItemData[5][i].Spawned = Info.ShieldsSpawned[i];
+
     // Set Health and EP to their proper max values
     Player.ActualHealth = Player.HealthMax;
     Player.EP = Player.EPMax;
@@ -889,6 +900,17 @@ NamedScript void PopulateCharData(CharSaveInfo *Info)
     Info->WeaponsChances[2] = Player.WeaponUniqueChance;
     Info->WeaponsChances[3] = Player.WeaponDemonicChance;
     Info->WeaponsChances[4] = Player.WeaponLegendaryChance;
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Weapons/Armors/Boots/Shield parts spawned values
+    for (int i = 0; i < ItemMax[0]; i++)
+        Info->WeaponsSpawned[i] = ItemData[0][i].Spawned;
+    for (int i = 0; i < ItemMax[3]; i++)
+        Info->ArmorsSpawned[i] = ItemData[3][i].Spawned;
+    for (int i = 0; i < ItemMax[9]; i++)
+        Info->BootsSpawned[i] = ItemData[9][i].Spawned;
+    for (int i = 0; i < ItemMax[5]; i++)
+        Info->ShieldsSpawned[i] = ItemData[5][i].Spawned;
 }
 
 NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
@@ -1058,6 +1080,29 @@ NamedScript void LoadCharDataFromString(CharSaveInfo *Info, char const *String)
     for (int i = 0; i < 5; i++)
     {
         Info->WeaponsChances[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
+    }
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Weapons/Armors/Boots/Shield parts spawned values
+    for (int i = 0; i < ItemMax[0]; i++)
+    {
+        Info->WeaponsSpawned[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
+    }
+    for (int i = 0; i < ItemMax[3]; i++)
+    {
+        Info->ArmorsSpawned[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
+    }
+    for (int i = 0; i < ItemMax[9]; i++)
+    {
+        Info->BootsSpawned[i] = HexToInteger(String + StringPos, 2);
+        StringPos += 2;
+    }
+    for (int i = 0; i < ItemMax[5]; i++)
+    {
+        Info->ShieldsSpawned[i] = HexToInteger(String + StringPos, 2);
         StringPos += 2;
     }
 
@@ -1312,6 +1357,33 @@ NamedScript char const *MakeSaveString(CharSaveInfo *Info)
     {
         SaveString[pos + 1] = ToHexChar(Info->WeaponsChances[i]);
         SaveString[pos + 0] = ToHexChar(Info->WeaponsChances[i] >> 4);
+        pos += 2;
+    }
+
+    // Compatibility Handling - DoomRL Arsenal
+    // Weapons/Armors/Boots/Shield parts spawned values
+    for (int i = 0; i < ItemMax[0]; i++)
+    {
+        SaveString[pos + 1] = ToHexChar(Info->WeaponsSpawned[i]);
+        SaveString[pos + 0] = ToHexChar(Info->WeaponsSpawned[i] >> 4);
+        pos += 2;
+    }
+    for (int i = 0; i < ItemMax[3]; i++)
+    {
+        SaveString[pos + 1] = ToHexChar(Info->ArmorsSpawned[i]);
+        SaveString[pos + 0] = ToHexChar(Info->ArmorsSpawned[i] >> 4);
+        pos += 2;
+    }
+    for (int i = 0; i < ItemMax[9]; i++)
+    {
+        SaveString[pos + 1] = ToHexChar(Info->BootsSpawned[i]);
+        SaveString[pos + 0] = ToHexChar(Info->BootsSpawned[i] >> 4);
+        pos += 2;
+    }
+    for (int i = 0; i < ItemMax[5]; i++)
+    {
+        SaveString[pos + 1] = ToHexChar(Info->ShieldsSpawned[i]);
+        SaveString[pos + 0] = ToHexChar(Info->ShieldsSpawned[i] >> 4);
         pos += 2;
     }
 

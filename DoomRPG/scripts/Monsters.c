@@ -3157,7 +3157,7 @@ NamedScript void MonsterDeath()
             Stats->DamageTable[i] = Clamp(0, Stats->DamageTable[i], Stats->HealthMax);
 
             long fixed mult = 1.0;
-            if (InMultiplayer && !GetCVar("drpg_multi_sharexp"))
+            if (InMultiplayer && !GetCVar("drpg_multi_sharexp") && (long fixed)Stats->HealthMax > 0)
                 mult = (long fixed)Stats->DamageTable[i] / (long fixed)Stats->HealthMax;
             else if (Killer < 0)
                 mult = 0;

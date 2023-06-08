@@ -573,13 +573,16 @@ void DrawStatsMenu()
         // int Cost = (fixed)MODULE_STAT_MULT * GetCVarFixed("drpg_module_statfactor");
 
         // Upgrade Modules
-        PrintSprite("CREDA0", 0, 16.1, 314.1, 0.05);
-        // PrintSprite("UMODA0", 0, 16.1, 304.1, 0.05);
-        SetFont("BIGFONT");
-        HudMessage("%d", CheckInventory("DRPGCredits"));
-        EndHudMessage(HUDMSG_PLAIN, 0, "Green", 40.1, 298.1, 0.05);
-        HudMessage("-%d", Cost);
-        EndHudMessage(HUDMSG_PLAIN, 0, "Red", 40.1, 312.1, 0.05);
+        if (!GetActivatorCVar("drpg_auto_spend"))
+        {
+            PrintSprite("CREDA0", 0, 16.1, 314.1, 0.05);
+            // PrintSprite("UMODA0", 0, 16.1, 304.1, 0.05);
+            SetFont("BIGFONT");
+            HudMessage("%d", CheckInventory("DRPGCredits"));
+            EndHudMessage(HUDMSG_PLAIN, 0, "Green", 40.1, 298.1, 0.05);
+            HudMessage("-%d", Cost);
+            EndHudMessage(HUDMSG_PLAIN, 0, "Red", 40.1, 312.1, 0.05);
+        }
 
         SetFont("BIGFONT");
         switch(Player.MenuIndex)
@@ -2376,7 +2379,7 @@ void MenuInput()
             }
         }
         if (CheckInput(BT_USE, KEY_REPEAT, false, PlayerNumber()))
-            if (Player.StatPage == STATPAGE_STATS)
+            if (Player.StatPage == STATPAGE_STATS && !GetActivatorCVar("drpg_auto_spend"))
                 IncreaseStat(Player.MenuIndex);
             else if (Player.StatPage == STATPAGE_TEAM && Player.MenuIndex != PlayerNumber())
             {
@@ -2739,6 +2742,9 @@ void IncreaseStat(int Stat)
     else if (Cost == 0)
         Cost = (int)((1 * (fixed)MODULE_STAT_MULT) * GetCVarFixed("drpg_module_statfactor"));
 
+    // Check the minimum number of modules if Stat Randomizer is enabled
+    if (GetActivatorCVar("drpg_auto_spend") && (CheckInventory("DRPGCredits") - Cost < ((250 + Player.Level * 25) / 250 * 250))) return;
+
     // Make sure you have enough money
     if (CheckInventory("DRPGCredits") < Cost && (Player.InMenu || Player.GUI.Open))
     {
@@ -2755,7 +2761,8 @@ void IncreaseStat(int Stat)
         (*Stats[Stat])++;
     else
     {
-        PrintStatError();
+        if (!GetActivatorCVar("drpg_auto_spend")) // From the menu
+            PrintStatError();
         return;
     }
 
@@ -2898,12 +2905,24 @@ void MenuHelp()
         case MENUPAGE_STATS:
             if (Player.StatPage == STATPAGE_STATS)
             {
-                if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
-                    HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch pages: \Cd%S + %S/%S\C-\nIncrease Stat: \Cd%S\C-",
-                               "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use");
+                if (GetActivatorCVar("drpg_auto_spend"))
+                {
+                    if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
+                        HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch pages: \Cd%S + %S/%S\C-",
+                                   "Up", "Down", "Left", "Right", "Run", "Left", "Right");
+                    else
+                        HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch pages: \Cd%jS + %jS/%jS\C-",
+                                   "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright");
+                }
                 else
-                    HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch pages: \Cd%jS + %jS/%jS\C-\nIncrease Stat: \Cd%jS\C-",
-                               "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use");
+                {
+                    if (GetCVar("use_joystick") || GetActivatorCVar("drpg_deltatouch"))
+                        HudMessage("Navigate: \Cd%S/%S/%S/%S\C-\nSwitch pages: \Cd%S + %S/%S\C-\nIncrease Stat: \Cd%S\C-",
+                                   "Up", "Down", "Left", "Right", "Run", "Left", "Right", "Use");
+                    else
+                        HudMessage("Navigate: \Cd%jS/%jS/%jS/%jS\C-\nSwitch pages: \Cd%jS + %jS/%jS\C-\nIncrease Stat: \Cd%jS\C-",
+                                   "+forward", "+back", "+moveleft", "+moveright", "+speed", "+moveleft", "+moveright", "+use");
+                }
                 EndHudMessage(HUDMSG_PLAIN, 0, "White", X, Y, 0.05);
             }
             else if (Player.StatPage == STATPAGE_STATXP || Player.StatPage == STATPAGE_PERKS)

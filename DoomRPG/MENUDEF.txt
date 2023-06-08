@@ -483,7 +483,12 @@ OptionMenu "DoomRPGStats"
     Slider "Skill Cost Multiplier", "drpg_module_skillfactor", 1.0, 10.0, 0.1
     StaticText ""
 
-    Slider "Hard Stat Cap", "drpg_hard_stat_cap", 1, 400, 1
+    Slider "Hard Stat Cap", "drpg_hard_stat_cap", 1, 10000, 1
+    Slider "Soft Stat Cap Multiplier", "drpg_soft_stat_cap_mult", 1, 100, 1
+    StaticText ""
+
+    Option "Stat Randomizer", "drpg_auto_spend", "OnOff"
+    Option "Stat Preference", "drpg_auto_spend_pref", "StatPreference"
     StaticText ""
 
     Option "Auto Healing", "drpg_auto_heal", "OnOff"

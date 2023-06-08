@@ -582,9 +582,9 @@ void CheckStats()
         // Increasing Rocket Ammo capacity for Demolitionist
         if (PlayerClass(PlayerNumber()) == 4)
             if (GetCVar("drpg_levelup_natural"))
-                SetAmmoCapacity("RocketAmmo", (int)(9 + Player.CapacityTotal * 1.2));
-            else
                 SetAmmoCapacity("RocketAmmo", (int)(13 + Player.CapacityTotal * 0.8));
+            else
+                SetAmmoCapacity("RocketAmmo", (int)(9 + Player.CapacityTotal * 1.2));
     }
 
     // Determine current stat cap

@@ -16,6 +16,8 @@ Class CCards_Global : Thinker
 
 	Array<String> cardslearning;
 	Array<String> donemaps;
+
+	Array<PreloadCard> preloadedcards;
 	
 	uint setupdelay;
 
@@ -65,7 +67,7 @@ Class CCards_Global : Thinker
 		vc.Init();		
 		rules = new ("CCards_Rules");
 		rules.global = self;
-		ccversion = "4.5a";
+		ccversion = "4.6c";
 		scoreneeded = random(4, 8);
 		return self;
 	}
@@ -212,6 +214,15 @@ Class CCards_Game : EventHandler
 				Console.Printf(s);
 			}
 
+		}
+
+		if(e.name == "preloadtest")
+		{
+			let p = PreloadCard.Create(e.args[0], e.args[1], "");
+
+			Console.Printf(p.chosencard.GetClassName());
+
+			g.global.preloadedcards.Push(p);
 		}
 	}
 
@@ -790,8 +801,10 @@ Class CCards_Game : EventHandler
 		gen.game = self;
 
 		//global.collection.Clear()
+		gen.GenerateHand();
+		gen.PreloadCards();
 
-		if(!gen.GenerateHand())
+		if(gen.hand.Size() == 0)
 		{
 			Start();
 			return;
@@ -948,6 +961,8 @@ Class CCards_Game : EventHandler
         return sector_tag;
     }
 
+	static const int teleportspecials[] = {70, 71, 154, 215};
+
 	override void WorldLineActivated (WorldEvent e) 
 	{
 		if(e.Thing && e.Thing.player && e.ActivationType == SPAC_Use)
@@ -962,6 +977,22 @@ Class CCards_Game : EventHandler
 			if(sws)
 			{
 				sws.Trigger(e.ActivatedLine, e.Thing);
+			}
+		}
+
+		if(e.Thing)
+		{
+			CCard_TeleportShock ts = CCard_TeleportShock(CCards_Functions.FindCardByName("CCard_TeleportShock"));
+
+			if(ts)
+			{
+				for(int i = 0; i < teleportspecials.Size(); i++)
+				{
+					if(e.ActivatedLine.special == teleportspecials[i])
+					{
+						ts.Trigger(e.Thing);
+					}
+				}
 			}
 		}
 	}
@@ -1013,6 +1044,21 @@ Class CCards_Game : EventHandler
 		}
 	}
 }
+/*
+class cybertest : Cyberdemon
+{
+	states
+	{
+		Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_GiveInventory("CCards_Actor_HalfProjectileZOff", 1);
+		Missile:
+		CYBR E 2 A_FaceTarget;
+		CYBR F 2 A_CyberAttack;
+		loop;
+		
+	}
+}*/
 
 class CCards_Token_Crushed : CCards_Token
 {
