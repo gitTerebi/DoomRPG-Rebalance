@@ -146,7 +146,7 @@ AugInfo RPGMap AugData[AUG_MAX] =
         {
             "Increase Vitality of Summoned (depending on your Energy)",
             "Increase Defense of Summoned (depending on your Energy)",
-            "Increase Strenght of Summoned (depending on your Energy)",
+            "Increase Strength of Summoned (depending on your Energy)",
             "Increase Life Regeneration of Summoned",
             "+10% Extra Power of Summoned and +10% Reduces Cost for Summoning",
             "+15% Extra Power of Summoned and +15% Reduces Cost for Summoning",

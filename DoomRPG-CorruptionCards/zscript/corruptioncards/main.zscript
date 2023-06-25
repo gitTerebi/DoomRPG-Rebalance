@@ -67,7 +67,7 @@ Class CCards_Global : Thinker
 		vc.Init();		
 		rules = new ("CCards_Rules");
 		rules.global = self;
-		ccversion = "4.6c";
+		ccversion = "5.0";
 		scoreneeded = random(4, 8);
 		return self;
 	}
@@ -190,6 +190,49 @@ Class CCards_Game : EventHandler
 	override void NetworkProcess(ConsoleEvent e)
 	{
 		CCards_Game g = CCards_Functions.GetGame();
+
+		/*if(e.name == "test")
+		{
+			Actor spawner = players[e.player].mo;
+			for(int i=0; i<2; i++)
+			{
+				FLineTraceData RemoteRay;
+				bool hit = spawner.LineTrace(
+				spawner.angle,
+				300,
+				0,
+				offsetz: 40,
+				offsetside: -14 + (i*28),
+				data: RemoteRay
+				);
+
+				Actor.Spawn("HealthBonus", RemoteRay.HitLocation);
+				if (RemoteRay.HitType != TRACE_HitWall || RemoteRay.Distance < 64)
+				{
+					
+					Console.Printf("NO!");
+					//return;
+				}
+							
+				hit = spawner.LineTrace(
+				spawner.angle + 180,
+				300,
+				0,
+				offsetz: 40,
+				offsetside: -14 + (i*28),
+				data: RemoteRay
+				);
+
+				
+				Actor.Spawn("HealthBonus", RemoteRay.HitLocation);
+
+				if (RemoteRay.HitType != TRACE_HitWall || RemoteRay.Distance < 64)
+				{
+					Console.Printf("NO!");
+					//return;
+				}
+			}
+		}*/
 
 		if(e.name == "dailyseed")
 		{
@@ -982,18 +1025,14 @@ Class CCards_Game : EventHandler
 
 		if(e.Thing)
 		{
-			CCard_TeleportShock ts = CCard_TeleportShock(CCards_Functions.FindCardByName("CCard_TeleportShock"));
-
-			if(ts)
+			for(int i = 0; i < teleportspecials.Size(); i++)
 			{
-				for(int i = 0; i < teleportspecials.Size(); i++)
+				if(e.ActivatedLine.special == teleportspecials[i])
 				{
-					if(e.ActivatedLine.special == teleportspecials[i])
-					{
-						ts.Trigger(e.Thing);
-					}
+					CCards_Functions.TriggerTeleportCards(e.Thing);
 				}
 			}
+			
 		}
 	}
 
