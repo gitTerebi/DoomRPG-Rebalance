@@ -43,7 +43,7 @@ actor DRPGStimDetox : CustomInventory
 {
     Scale 0.5
     
-    Tag "Detox hypospray (removes all toxicity, status effects, energy burnout, and stims immunity)"
+    Tag "Detox hypospray (removes all toxicity, status effects, and energy burnout)"
     
     +INVBAR
 
