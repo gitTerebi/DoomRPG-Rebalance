@@ -3,4 +3,4 @@ Conflicts=DoomRL Arsenal - Monster Pack
 Conflicts=Colourful Hell
 Conflicts=Dehacked Attack
 Conflicts=Pandemonia - Monster Pack
-Mods=Rampancy_1.3.pk3
+Mods=Rampancy_2.0.pk3

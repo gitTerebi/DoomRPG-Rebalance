@@ -2594,6 +2594,7 @@ void CheckCompatibility()
 
         CompatMonMode = COMPAT_RAMPANCY;
         MonsterData = MonsterDataRAMPANCY;
+        MonsterDataAmount = MAX_DEF_MONSTERS_RM;
         Thing_Remove(TID);
     }
 
