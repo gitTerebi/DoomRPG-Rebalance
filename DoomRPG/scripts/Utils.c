@@ -2823,7 +2823,16 @@ NamedScript DECORATE void PhaseSistersShieldPartsLoad()
 
         // Activate Shield
         if (Player.PortiaShield.Active)
+        {
             ActivateShield();
+
+            // [YuNoGuy123]: Quick fix to prevent a bug where shields wouldn't work after switching sisters
+            Delay(1);
+            if (!CheckInventory("DRPGZShieldDamageHandler"))
+            {
+                GiveInventory("DRPGZShieldDamageHandler", 1);
+            }
+        }
     }
 
     // Load Energy Shield for Terri
@@ -2860,7 +2869,16 @@ NamedScript DECORATE void PhaseSistersShieldPartsLoad()
 
         // Activate Shield
         if (Player.TerriShield.Active)
+        {
             ActivateShield();
+
+            // [YuNoGuy123]: Quick fix to prevent a bug where shields wouldn't work after switching sisters
+            Delay(1);
+            if (!CheckInventory("DRPGZShieldDamageHandler"))
+            {
+                GiveInventory("DRPGZShieldDamageHandler", 1);
+            }
+        }
     }
 }
 
