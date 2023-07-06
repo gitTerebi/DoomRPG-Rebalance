@@ -1338,7 +1338,7 @@ NamedScript bool ActivateShield()
     if (Player.Shield.Accessory && Player.Shield.Accessory->Equip)
         Player.Shield.Accessory->Equip();
 
-    GiveInventory("DRPGZShieldDamageHandler", 1);
+    SetInventory("DRPGZShieldDamageHandler", 1);
     PlaySound(0, "shield/on", 5, 1.0, false, 1.0);
     Player.Shield.Active = true;
     ShieldTimerReset();
@@ -1356,7 +1356,7 @@ NamedScript bool DeactivateShield()
     if (Player.Shield.Accessory && Player.Shield.Accessory->Unequip)
         Player.Shield.Accessory->Unequip(Player.StatusType[SE_EMP]);
 
-    TakeInventory("DRPGZShieldDamageHandler", 1);
+    SetInventory("DRPGZShieldDamageHandler", 0);
     PlaySound(0, "shield/off", 5, 1.0, false, 1.0);
     Player.Shield.Active = false;
     Player.Shield.AccessoryBattery = 0;
