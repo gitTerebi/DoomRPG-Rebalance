@@ -2830,7 +2830,7 @@ NamedScript DECORATE void PhaseSistersShieldPartsLoad()
             Delay(1);
             if (!CheckInventory("DRPGZShieldDamageHandler"))
             {
-                GiveInventory("DRPGZShieldDamageHandler", 1);
+                SetInventory("DRPGZShieldDamageHandler", 1);
             }
         }
     }
@@ -2876,7 +2876,7 @@ NamedScript DECORATE void PhaseSistersShieldPartsLoad()
             Delay(1);
             if (!CheckInventory("DRPGZShieldDamageHandler"))
             {
-                GiveInventory("DRPGZShieldDamageHandler", 1);
+                SetInventory("DRPGZShieldDamageHandler", 1);
             }
         }
     }
