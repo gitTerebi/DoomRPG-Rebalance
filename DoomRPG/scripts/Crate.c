@@ -992,7 +992,22 @@ void GenerateCrate(int ID, int Amount)
                 for (int j = 0; SetItems[i].Items[j].Name != NULL; j++)
                 {
                     str PickupItemName = StrParam("%SPickup", SetItems[i].Items[j].Name);
+
+                    // Get info for new item
                     NewItem = FindItem(PickupItemName);
+                    NewItemName = NewItem->Name;
+                    NewItemActor = NewItem->Actor;
+                    NewItemIndex = NewItem->Index;
+                    NewItemCategory = NewItem->Category;
+                    NewItemSpawned = NewItem->Spawned;
+                    NewItemPenalty = 0;
+
+                    // Set penalty for an item already spawned
+                    if (NewItemSpawned < 5)
+                        NewItemPenalty = NewItemSpawned;
+                    else
+                        NewItemPenalty = 5;
+
                     fixed Chance = SetItems[i].Items[j].Chance * (1.0 + (Crates[ID].Rarity * 0.125));
                     fixed Pick = RandomFixed(0.0, 100.0);
 
@@ -1010,7 +1025,7 @@ void GenerateCrate(int ID, int Amount)
                     if (DebugLog)
                         Log("\CdDEBUG: \C-Set \Cd%d \C-Item \Cd%d\C-: \Cd%S \C-(Chance: \Cf%.2k%% \C-/ Pick: \Cf%.2k%%\C-)", i + 1, j + 1, SetItems[i].Items[j].Name, Chance, Pick);
 
-                    if (Pick <= Chance)
+                    if (Pick <= Chance && Random(0, NewItemPenalty * (200 - NewItemPenalty * 20)) <= 50)
                     {
                         // Couldn't find the item
                         if (NewItem == GetBlankItem()) continue;
@@ -1022,6 +1037,12 @@ void GenerateCrate(int ID, int Amount)
                             Log("\CdDEBUG: \CfSet Item Spawned!");
 
                         SetAmount++;
+
+                        // Add to the spawned counter for Assembled/Exotic/Superior/Unique/Demonic/Legendary weapons and armor
+                        if ((NewItemCategory == 0 || NewItemCategory == 3 || NewItemCategory == 9) && StrMid(NewItemName, StrLen(NewItemName) - 9, 6) != "Common")
+                            for (int h = 0; h < ItemMax[NewItemCategory]; h++)
+                                if (NewItemActor == ItemData[NewItemCategory][h].Actor)
+                                    ItemData[NewItemCategory][h].Spawned++;
                     }
                 }
             }

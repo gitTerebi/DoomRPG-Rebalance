@@ -19,12 +19,12 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 6,
         .Description =
         {
-            "+10% Damage",
-            "+15% Damage",
-            "+20% Damage",
-            "+30% Damage",
-            "+40% Damage",
-            "+50% Damage"
+            "+10% Total Damage",
+            "+15% Total Damage",
+            "+20% Total Damage",
+            "+30% Total Damage",
+            "+40% Total Damage",
+            "+50% Total Damage"
         },
         .TokenActor = "DRPGAugTokenStrength"
     },
@@ -33,11 +33,11 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 5,
         .Description =
         {
-            "5% Damage Reduction",
-            "10% Damage Reduction",
-            "15% Damage Reduction",
-            "20% Damage Reduction",
-            "25% Damage Reduction"
+            "+5% Total Damage Reduction",
+            "+10% Total Damage Reduction",
+            "+15% Total Damage Reduction",
+            "+20% Total Damage Reduction",
+            "+25% Total Damage Reduction"
         },
         .TokenActor = "DRPGAugTokenDefense"
     },
@@ -46,9 +46,9 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 6,
         .Description =
         {
-            "+50% HP Regen Amounts",
-            "+25% Max HP Amounts",
-            "+50% Max HP Amounts",
+            "+50% HP Regen Amount",
+            "+25% Max HP Amount",
+            "+50% Max HP Amount",
             "+15% Status Effect Resist",
             "+20% Status Effect Resist",
             "+25% Status Effect Resist"
@@ -56,14 +56,14 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .TokenActor = "DRPGAugTokenVitality"
     },
     {
-        .Name = "Psi Projector",
+        .Name = "PSI Projector",
         .MaxLevel = 8,
         .Description =
         {
-            "+50% EP Regen Amounts",
-            "+25% Max EP Amounts",
-            "+50% Max EP Amounts",
-            "+50% Aura Timer and +1 Aura Max Stack",
+            "+50% EP Regen Amount",
+            "+25% Max EP Amount",
+            "+50% Max EP Amount",
+            "+50% Aura Timer, +1 Aura Max Stack",
             "+10% Skill Cost Refund",
             "+15% Skill Cost Refund",
             "+20% Skill Cost Refund",
@@ -76,14 +76,14 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 8,
         .Description =
         {
-            "+25% HP Regen Speed",
-            "+25% EP Regen Speed",
-            "+50% HP Regen Amounts",
-            "+50% EP Regen Amounts",
-            "-5 Seconds Toxicity Timer and -10% Reduce Toxicity from Stims",
-            "-10 Seconds Toxicity Timer and -15% Reduce Toxicity from Stims",
-            "-15 Seconds Toxicity Timer and -20% Reduce Toxicity from Stims",
-            "-20 Seconds Toxicity Timer and -30% Reduce Toxicity from Stims"
+            "+25% HP Regen Rate",
+            "+25% EP Regen Rate",
+            "+50% HP Regen Amount",
+            "+50% EP Regen Amount",
+            "-5 Seconds Toxicity Timer, -10% Stims Toxicity",
+            "-10 Seconds Toxicity Timer, -15% Stims Toxicity",
+            "-15 Seconds Toxicity Timer, -20% Stims Toxicity",
+            "-20 Seconds Toxicity Timer, -30% Stims Toxicity"
         },
         .TokenActor = "DRPGAugTokenRegen"
     },
@@ -92,11 +92,11 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .MaxLevel = 5,
         .Description =
         {
-            "+5% Weapon Speed and +2% Survival Chance",
-            "+10% Weapon Speed and +4% Survival Chance",
-            "+15% Weapon Speed and +6% Survival Chance",
-            "+20% Weapon Speed and +8% Survival Chance",
-            "+25% Weapon Speed and +10% Survival Chance"
+            "+5% Weapon Speed, +2% Survival Bonus",
+            "+10% Weapon Speed, +4% Survival Bonus",
+            "+15% Weapon Speed, +6% Survival Bonus",
+            "+20% Weapon Speed, +8% Survival Bonus",
+            "+25% Weapon Speed, +10% Survival Bonus"
         },
         .TokenActor = "DRPGAugTokenAgility"
     },
@@ -124,34 +124,34 @@ AugInfo RPGMap AugData[AUG_MAX] =
         .TokenActor = "DRPGAugTokenLuck"
     },
     {
-        .Name = "AUG Battery",
+        .Name = "Enhanced Battery",
         .MaxLevel = 8,
         .Description =
         {
-            "Capacity +25%  and Recharge Rate +5%",
-            "Capacity +50%  and Recharge Rate +10%",
-            "Capacity +75%  and Recharge Rate +20%",
-            "Capacity +100% and Recharge Rate +30%",
-            "Capacity +125% and Recharge Rate +40%",
-            "Capacity +150% and Recharge Rate +50%",
-            "Capacity +175% and Recharge Rate +75%",
-            "Capacity +200% and Recharge Rate +100%"
+            "Capacity +25%, Self Recharge Rate +0.05/s",
+            "Capacity +50%, Self Recharge Rate +0.1/s",
+            "Capacity +75%, Self Recharge Rate +0.2/s",
+            "Capacity +100%, Self Recharge Rate +0.3/s",
+            "Capacity +125%, Self Recharge Rate +0.4/s",
+            "Capacity +150%, Self Recharge Rate +0.5/s",
+            "Capacity +175%, Self Recharge Rate +0.75/s",
+            "Capacity +200%, Self Recharge Rate +1/s"
         },
         .TokenActor = "DRPGAugTokenBattery"
     },
     {
-        .Name = "Telepathic synchronizer",
+        .Name = "Telepathic Synchronizer",
         .MaxLevel = 8,
         .Description =
         {
-            "Increase Vitality of Summoned (depending on your Energy)",
-            "Increase Defense of Summoned (depending on your Energy)",
-            "Increase Strenght of Summoned (depending on your Energy)",
-            "Increase Life Regeneration of Summoned",
-            "+10% Extra Power of Summoned and +10% Reduces Cost for Summoning",
-            "+15% Extra Power of Summoned and +15% Reduces Cost for Summoning",
-            "+20% Extra Power of Summoned and +20% Reduces Cost for Summoning",
-            "+25% Extra Power of Summoned and +25% Reduces Cost for Summoning"
+            "Summoned Increased Vitality (depending on your Energy)",
+            "Summoned Increased Defense (depending on your Energy)",
+            "Summoned Increased Strength (depending on your Energy)",
+            "Summoned Increased HP Regen Rate",
+            "+10% Summoned Extra Power, -10% Summoning Reduced Cost",
+            "+15% Summoned Extra Power, -15% Summoning Reduced Cost",
+            "+20% Summoned Extra Power, -20% Summoning Reduced Cost",
+            "+25% Summoned Extra Power, -25% Summoning Reduced Cost"
         },
         .TokenActor = "DRPGAugTokenSummoner"
     }
@@ -552,7 +552,7 @@ void EquipAug(int Aug)
     // If you don't have this aug yet, return
     if (Player.Augs.Level[Aug] == 0 || Player.Augs.CurrentLevel[Aug] == 0)
     {
-        PrintError("This aug has not been activated yet");
+        PrintError("This augmentation has\nnot been activated yet");
         ActivatorSound("menu/error", 127);
         return;
     }
@@ -560,7 +560,7 @@ void EquipAug(int Aug)
     // If battery is dead, return
     if (Player.Augs.Battery <= 0)
     {
-        PrintError("Your aug battery is depleted");
+        PrintError("Your augmentation\nbattery is depleted");
         ActivatorSound("menu/error", 127);
         return;
     }
@@ -579,7 +579,7 @@ void EquipAug(int Aug)
 
             if (Player.Augs.SlotsUsed > Player.Augs.Slots)
             {
-                PrintError("You are already using all of your aug slots");
+                PrintError("You are already using all\nof your augmentation slots");
                 ActivatorSound("menu/error", 127);
                 Player.Augs.SlotsUsed--;
             }
@@ -622,7 +622,7 @@ void LevelUpAug(int AugIndex)
 
         if (!CanLevel)
         {
-            PrintError("You cannot upgrade this aug");
+            PrintError("You cannot upgrade\nthis augmentation");
             ActivatorSound("menu/error", 127);
             return;
         }

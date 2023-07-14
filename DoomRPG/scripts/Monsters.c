@@ -67,8 +67,9 @@ MonsterInfo const MonsterDataLD[MAX_DEF_MONSTERS_DF] =
     { "LDSpiderMastermind",                   "Spider Mastermind",               95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
 };
 
-MonsterInfo const MonsterDataRAMPANCY[MAX_DEF_MONSTERS_DF] =
+MonsterInfo const MonsterDataRAMPANCY[MAX_DEF_MONSTERS_RM] =
 {
+//  Normal Enemies
     { "Robot_SentryBot",                      "Sentry Bot",                      1,      0, false, "You hear shuffling footsteps and moans!" },
     { "Robot_DefenderBot",                    "Defender Bot",                    2,      0, false, "You hear the sound of shotguns pumping!" },
     { "Robot_SecurityBotSmall",               "Security Bot Small",              5,      0, false, "Quiet mutters and whirring set you on edge!" },
@@ -76,16 +77,39 @@ MonsterInfo const MonsterDataRAMPANCY[MAX_DEF_MONSTERS_DF] =
     { "Robot_SpiderBotSmall",                 "Spider Bot Small",                3,      0, false, "Hungry growls echo around you!" },
     { "Robot_StealthDroid",                   "Stealth Droid",                   3,      0, false, "It's dark, you are likely to be eaten by a... Spectre?" },
     { "Robot_ScoutDrone",                     "Scout Drone",                     3,      0, false, "The sound of many flames echo about!" },
+    { "Robot_MarauderDrone",                  "Marauder Drone",                  5,      0, false, "The sound of many flames echo about!" },
+    { "Robot_AssassinDrone",                  "Assassin Drone",                  8,      0, false, "The sound of many flames echo about!" },
+    //  Battleroids
+    { "Robot_Battleroid",                     "Battleroid",                      6,      0, false, "The walls are scratched and flame-scorched!" },
+    { "Robot_BattleroidBlue",                 "Battleroid Type-2",               8,      0, false, "The walls are scratched and flame-scorched!" },
+    { "Robot_BattleroidRed",                  "Battleroid Type-3",               10,      0, false, "The walls are scratched and flame-scorched!" },
+    { "Robot_BattleroidBlack",                "Battleroid Type-4",               12,      0, false, "The walls are scratched and flame-scorched!" },
+    { "Robot_BattleroidBrown",                "Battleroid Type-5",               14,      0, false, "The walls are scratched and flame-scorched!" },
+    { "Robot_BattleroidSilver",               "Battleroid Type-6",               16,     0, false, "The walls are scratched and flame-scorched!" },
     { "Robot_AssaultDrone",                   "Assault Drone",                   10,     0, false, "Screeches drown out all other sound!" },
+    { "Robot_HunterKiller",                   "Hunter-Killer",                   22,     0, false, "Screeches drown out all other sound!" },
     { "Robot_SecurityBot",                    "Security Bot",                    20,     0, false, "A battle cry chants in the distance!" },
+    { "Robot_HeavySecBot",                    "Heavy Security Bot Type-1",       30,     0, false, "A battle cry chants in the distance!" },
+    { "Robot_HeavySecBotMilitary",            "Heavy Security Bot Type-2",       30,     0, false, "A battle cry chants in the distance!" },
     { "Robot_DreadnoughtBot",                 "Dreadnought Bot",                 30,     0, false, "Seems you've found Hell's nobility!" },
+    { "Robot_HEATDrone",                      "HEAT Drone",                      35,     0, false, "Seems you've found Hell's nobility!" },
+    { "Robot_HeavyWarBot",                    "Heavy War Bot",                   40,     0, false, "Seems you've found Hell's nobility!" },
+    { "Robot_AHRA",                           "AHRA",                            50,     0, false, "Seems you've found Hell's nobility!" },
     { "Robot_FabricationNode",                "Fabrication Node",                40,     0, false, "You feel you are being watched!" },
     { "Robot_RollerDroid",                    "Roller Droid",                    50,     0, false, "Bones clatter all around you!" },
     { "Robot_MaintenanceBot",                 "Maintenance Bot",                 60,     0, false, "You hear deep, guttural noises!" },
     { "Robot_SpiderBot",                      "Spider Bot",                      60,     0, false, "Leg servos squeak and whirr nearby!" },
-    { "Robot_RepairBot",                      "Repair Bot",                      70,     0, false, "You hear crackling flames!" },
+    { "Robot_GunTurret",                      "Gun Turret",                      60,     0, false, "Leg servos squeak and whirr nearby!" },
+    { "Robot_SecurityTurret",                 "Security Turret",                 65,     0, false, "Leg servos squeak and whirr nearby!" },
+    { "Robot_RepairBot",                      "Repair Bot",                      50,     0, false, "You hear crackling flames!" },
+//  Boss Enemies.
     { "Robot_MilitaryBot",                    "Military Bot",                    85,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
-    { "Robot_LoaderBot",                      "Loader Bot",                      95,     0, true,  "You've stumbled into a hive of the deadliest kind!" }
+    { "Robot_MilitaryBotBoss",                "Military Bot",                    105,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
+    { "Robot_LoaderBot",                      "Loader Bot",                      95,     0, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "Robot_LoaderBotBoss",                  "Loader Bot",                      115,     0, true,  "You've stumbled into a hive of the deadliest kind!" },
+    { "Robot_SpiderTank",                     "Spider Tank",                     100,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
+    { "Robot_Deathwalker",                    "Deathwalker",                     120,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" },
+    { "Robot_SiegeDroid",                     "Siege Droid",                     125,     0, true,  "Suddenly you have a great urge to turn back! You scream in TERROR!" }
 };
 
 MonsterInfo const MonsterDataDEHACKED[MAX_DEF_MONSTERS_DF] =
